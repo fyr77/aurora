@@ -5,24 +5,39 @@
  */
 package ru.game.aurora.world;
 
-import jgame.JGColor;
 import jgame.JGObject;
 import jgame.platform.JGEngine;
 
 public class Ship extends JGObject implements GameObject
 {
+
+    private int hull;
+
+    private int maxHull;
+
     public Ship(String name, boolean unique_id, double x, double y, int collisionid, String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
+        hull = maxHull = 100;
     }
 
     @Override
     public void update(JGEngine engine) {
+    }
 
+    public void setHull(int hull) {
+        this.hull = hull;
+    }
+
+    public int getHull() {
+        return hull;
+    }
+
+    public int getMaxHull() {
+        return maxHull;
     }
 
     @Override
     public void draw(JGEngine engine) {
-        engine.setColor(JGColor.yellow);
-        engine.drawOval(x,y,16,16,true,true);
+        engine.drawImage(x, y, "aurora");
     }
 }

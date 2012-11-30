@@ -29,14 +29,17 @@ public class AuroraGame extends JGEngine
         initEngineApplet();
     }
 
+    @Override
 	public void initCanvas() {
 		// we set the background colour to same colour as the splash background
-		setCanvasSettings(20,15,16,16, JGColor.black,new JGColor(255,246,199),null);
+		setCanvasSettings(20,15,64,64, JGColor.black,new JGColor(255,246,199),null);
 	}
 
     @Override
     public void initGame() {
         setFrameRate(30,2);
+        defineMedia("sprites.tbl");
+        GameLogger.init(this);
         world = new World();
         setBGColor(JGColor.black);
     }

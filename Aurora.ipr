@@ -17,6 +17,7 @@
       <entry name="?*.dtd" />
       <entry name="?*.tld" />
       <entry name="?*.ftl" />
+      <entry name="*.tbl" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>
@@ -31,6 +32,48 @@
     <entry_points version="2.0" />
   </component>
   <component name="IdProvider" IDEtalkID="7A56E1095D1C41CCD93437A9CB7C3E74" />
+  <component name="InspectionProjectProfileManager">
+    <profiles>
+      <profile version="1.0" is_locked="false">
+        <option name="myName" value="Project Default" />
+        <option name="myLocal" value="false" />
+        <inspection_tool class="JavaDoc" enabled="false" level="WARNING" enabled_by_default="false">
+          <option name="TOP_LEVEL_CLASS_OPTIONS">
+            <value>
+              <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+              <option name="REQUIRED_TAGS" value="" />
+            </value>
+          </option>
+          <option name="INNER_CLASS_OPTIONS">
+            <value>
+              <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+              <option name="REQUIRED_TAGS" value="" />
+            </value>
+          </option>
+          <option name="METHOD_OPTIONS">
+            <value>
+              <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+              <option name="REQUIRED_TAGS" value="@return@param@throws or @exception" />
+            </value>
+          </option>
+          <option name="FIELD_OPTIONS">
+            <value>
+              <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+              <option name="REQUIRED_TAGS" value="" />
+            </value>
+          </option>
+          <option name="IGNORE_DEPRECATED" value="false" />
+          <option name="IGNORE_JAVADOC_PERIOD" value="true" />
+          <option name="IGNORE_DUPLICATED_THROWS" value="false" />
+          <option name="IGNORE_POINT_TO_ITSELF" value="false" />
+          <option name="myAdditionalJavadocTags" value="" />
+        </inspection_tool>
+      </profile>
+    </profiles>
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_PROFILE" value="true" />
+    <version value="1.0" />
+  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
     <option name="OPTION_SCOPE" value="protected" />
@@ -178,6 +221,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Aurora.iml" filepath="$PROJECT_DIR$/Aurora.iml" />
     </modules>
+  </component>
+  <component name="ProjectResources">
+    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

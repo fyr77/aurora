@@ -3,7 +3,7 @@
  * Date: 29.11.12
  * Time: 20:44
  */
-package ru.game.aurora.world.rooms;
+package ru.game.aurora.world.space;
 
 import jgame.impl.JGEngineInterface;
 import jgame.platform.JGEngine;
