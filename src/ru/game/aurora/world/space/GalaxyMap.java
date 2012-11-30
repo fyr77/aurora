@@ -5,10 +5,13 @@
  */
 package ru.game.aurora.world.space;
 
+import jgame.JGColor;
+import jgame.JGPoint;
 import jgame.platform.JGEngine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Galaxy map.
@@ -26,6 +29,10 @@ public class GalaxyMap extends BaseSpaceRoom
 
     private int tilesY;
 
+    public static final int maxStars = 5;
+
+    private Random r = new Random();
+
     public GalaxyMap(int tilesX, int tilesY)
     {
         this.tilesX = tilesX;
@@ -40,12 +47,38 @@ public class GalaxyMap extends BaseSpaceRoom
         // adding special objects that exist only in single instance, but are used frequently.
         // 0 is Nebula
         objects.add(new Nebula());
+
+        // now generate random star systems
+        for (int i = 0; i < maxStars; ++i) {
+            final int idx = objects.size();
+            objects.add(generateRandomStarSystem());
+
+            int x;
+            int y;
+            do {
+                x = r.nextInt(tilesX);
+                y = r.nextInt(tilesY);
+            } while (map[y][x] != -1);
+            map[y][x] = idx;
+        }
+    }
+
+    private StarSystem generateRandomStarSystem()
+    {
+        int size = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
+        JGColor starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
+        return new StarSystem(new StarSystem.Star(size, starColor));
     }
 
 
     @Override
     public void update(JGEngine engine) {
         super.update(engine);
+        JGPoint point = engine.getTileIndex(player.getShip().getLastX(),  player.getShip().getLastY());
+        int idx = map[point.y][point.x];
+        if (idx != -1) {
+            objects.get(idx).processCollision(engine, player);
+        }
     }
 
     @Override

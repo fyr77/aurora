@@ -40,7 +40,7 @@ public class AuroraGame extends JGEngine
         setFrameRate(30,2);
         defineMedia("sprites.tbl");
         GameLogger.init(this);
-        world = new World();
+        world = new World(pfTilesX(), pfTilesY());
         setBGColor(JGColor.black);
     }
 
@@ -54,6 +54,7 @@ public class AuroraGame extends JGEngine
     public void paintFrame()
     {
         world.draw(this);
+        GameLogger.getInstance().draw(this);
     }
 
     public static void main(String[] args)

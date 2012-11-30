@@ -15,9 +15,9 @@ public class World implements GameObject
 
     private Player player;
 
-    public World() {
+    public World(int sizeX, int sizeY) {
         player = new Player();
-        currentRoom = new GalaxyMap(100, 100);
+        currentRoom = new GalaxyMap(sizeX, sizeY);
         currentRoom.enter(player);
     }
 
