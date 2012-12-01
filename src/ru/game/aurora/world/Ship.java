@@ -21,7 +21,7 @@ public class Ship extends JGObject implements GameObject
     }
 
     @Override
-    public void update(JGEngine engine) {
+    public void update(JGEngine engine, World world) {
     }
 
     public void setHull(int hull) {
@@ -38,6 +38,6 @@ public class Ship extends JGObject implements GameObject
 
     @Override
     public void draw(JGEngine engine) {
-        engine.drawImage(x, y, "aurora");
+        engine.drawImage(x * engine.tileWidth(), y * engine.tileHeight(), "aurora");
     }
 }

@@ -50,7 +50,8 @@ public class GameLogger
         engine.setColor(JGColor.white);
         int i = 0;
         for (String m : messages) {
-            engine.drawString(m, 10, engine.getHeight() - 10 - 20 * i, 1);
+            engine.drawString(m, 10, engine.getHeight() - 10 - 20 * i, -1);
+            ++i;
         }
     }
 

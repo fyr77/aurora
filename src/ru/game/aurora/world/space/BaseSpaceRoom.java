@@ -9,6 +9,7 @@ import jgame.impl.JGEngineInterface;
 import jgame.platform.JGEngine;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.Room;
+import ru.game.aurora.world.World;
 
 public class BaseSpaceRoom implements Room
 {
@@ -20,22 +21,26 @@ public class BaseSpaceRoom implements Room
     }
 
     @Override
-    public void update(JGEngine engine) {
+    public void update(JGEngine engine, World world) {
         double x = player.getShip().getLastX();
         double y = player.getShip().getLastY();
 
         if (engine.getKey(JGEngineInterface.KeyUp) && y > 0) {
-            y-= engine.tileHeight();
+            y--;
+            world.setUpdatedThisFrame(true);
         }
         if (engine.getKey(JGEngineInterface.KeyDown) && y < engine.getHeight()) {
-            y += engine.tileHeight();
+            y ++;
+            world.setUpdatedThisFrame(true);
         }
 
         if (engine.getKey(JGEngineInterface.KeyLeft) && x > 0) {
-            x -= engine.tileWidth();
+            x--;
+            world.setUpdatedThisFrame(true);
         }
         if (engine.getKey(JGEngineInterface.KeyRight) && x < engine.getWidth()) {
-            x += engine.tileWidth();
+            x++;
+            world.setUpdatedThisFrame(true);
         }
 
         player.getShip().setPos(x, y);

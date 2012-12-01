@@ -6,8 +6,9 @@
 package ru.game.aurora.world.space;
 
 import jgame.JGColor;
-import jgame.JGPoint;
 import jgame.platform.JGEngine;
+import ru.game.aurora.world.Room;
+import ru.game.aurora.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,34 +51,40 @@ public class GalaxyMap extends BaseSpaceRoom
 
         // now generate random star systems
         for (int i = 0; i < maxStars; ++i) {
-            final int idx = objects.size();
-            objects.add(generateRandomStarSystem());
-
             int x;
             int y;
             do {
                 x = r.nextInt(tilesX);
                 y = r.nextInt(tilesY);
             } while (map[y][x] != -1);
+            final int idx = objects.size();
+            objects.add(generateRandomStarSystem(x, y));
             map[y][x] = idx;
         }
     }
 
-    private StarSystem generateRandomStarSystem()
+    private StarSystem generateRandomStarSystem(int x, int y)
     {
         int size = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
         JGColor starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
-        return new StarSystem(new StarSystem.Star(size, starColor));
+        return new StarSystem(new StarSystem.Star(size, starColor), x, y);
     }
 
 
     @Override
-    public void update(JGEngine engine) {
-        super.update(engine);
-        JGPoint point = engine.getTileIndex(player.getShip().getLastX(),  player.getShip().getLastY());
-        int idx = map[point.y][point.x];
+    public void update(JGEngine engine, World world) {
+        super.update(engine, world);
+        int idx = map[((int) player.getShip().getLastY())][((int) player.getShip().getLastX())];
         if (idx != -1) {
-            objects.get(idx).processCollision(engine, player);
+            if (world.isUpdatedThisFrame()) {
+                objects.get(idx).processCollision(engine, player);
+            }
+            if (objects.get(idx).canBeEntered() && engine.getKey(JGEngine.KeyEnter)) {
+                Room r = (Room)objects.get(idx);
+                world.setCurrentRoom(r);
+                r.enter(world.getPlayer());
+                world.setUpdatedThisFrame(true);
+            }
         }
     }
 

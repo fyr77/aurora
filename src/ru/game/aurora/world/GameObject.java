@@ -9,7 +9,7 @@ import jgame.platform.JGEngine;
 
 public interface GameObject
 {
-    public void update(JGEngine engine);
+    public void update(JGEngine engine, World world);
 
     public void draw(JGEngine engine);
 }

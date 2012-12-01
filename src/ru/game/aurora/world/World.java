@@ -9,25 +9,53 @@ import jgame.platform.JGEngine;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.space.GalaxyMap;
 
-public class World implements GameObject
+public class World
 {
     private Room currentRoom;
 
+    private GalaxyMap galaxyMap;
+
     private Player player;
+
+    private boolean updatedThisFrame;
 
     public World(int sizeX, int sizeY) {
         player = new Player();
-        currentRoom = new GalaxyMap(sizeX, sizeY);
+        currentRoom = galaxyMap = new GalaxyMap(sizeX, sizeY);
         currentRoom.enter(player);
+        updatedThisFrame = false;
     }
 
-    @Override
     public void update(JGEngine engine) {
-        currentRoom.update(engine);
+        updatedThisFrame = false;
+        currentRoom.update(engine, this);
     }
 
-    @Override
     public void draw(JGEngine engine) {
         currentRoom.draw(engine);
+    }
+
+    public boolean isUpdatedThisFrame() {
+        return updatedThisFrame;
+    }
+
+    public void setUpdatedThisFrame(boolean updatedThisFrame) {
+        this.updatedThisFrame = updatedThisFrame;
+    }
+
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public GalaxyMap getGalaxyMap() {
+        return galaxyMap;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
     }
 }
