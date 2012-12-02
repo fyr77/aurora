@@ -7,8 +7,11 @@ package ru.game.aurora.world.space;
 
 import jgame.JGColor;
 import jgame.platform.JGEngine;
+import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +70,15 @@ public class GalaxyMap extends BaseSpaceRoom
     {
         int size = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
         JGColor starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
-        return new StarSystem(new StarSystem.Star(size, starColor), x, y);
+        final int planetCount = r.nextInt(5);
+        Planet[] planets = new Planet[planetCount];
+        StarSystem ss = new StarSystem(new StarSystem.Star(size, starColor), x, y);
+        for (int i = 0; i < planetCount; ++i) {
+            //todo: planet coordinate generation
+            planets[i] = new Planet(ss, CollectionUtils.selectRandomElement(PlanetCategory.values()), r.nextInt(3) + 1, r.nextInt(25), r.nextInt(20));
+        }
+        ss.setPlanets(planets);
+        return ss;
     }
 
 

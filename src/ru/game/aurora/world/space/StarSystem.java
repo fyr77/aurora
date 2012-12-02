@@ -11,6 +11,8 @@ import jgame.platform.JGEngine;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.LandingParty;
+import ru.game.aurora.world.planet.Planet;
 
 public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject
 {
@@ -32,6 +34,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject
 
     private Star star;
 
+    private Planet[] planets;
+
     private int globalMapX;
 
     private int globalMapY;
@@ -40,6 +44,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject
         this.star = star;
         this.globalMapX = globalMapX;
         this.globalMapY = globalMapY;
+    }
+
+    public void setPlanets(Planet[] planets) {
+        this.planets = planets;
     }
 
     @Override
@@ -73,6 +81,24 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject
             world.setCurrentRoom(world.getGalaxyMap());
             player.getShip().setPos(globalMapX, globalMapY);
         }
+
+        if (world.isUpdatedThisFrame() || engine.getKey(JGEngineInterface.KeyEnter)) {
+            for (Planet p : planets) {
+                if (x == p.getGlobalX() && y == p.getGlobalY()) {
+                    if (engine.getKey(JGEngineInterface.KeyEnter)) {
+                        GameLogger.getInstance().logMessage("Descending to surface...");
+                        world.getPlayer().setLandingParty(new LandingParty(0, 0, 1, 1, 1));
+                        p.enter(world.getPlayer());
+                        world.setCurrentRoom(p);
+                        engine.clearKey(JGEngineInterface.KeyEnter);
+                        break;
+                    } else {
+                        p.processCollision(engine, world.getPlayer());
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -87,6 +113,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject
         engine.setColor(star.color);
 
         engine.drawOval(engine.pfTilesX() / 2 * engine.tileWidth() + (engine.tileWidth() / 2), engine.pfTilesY() / 2* engine.tileHeight() + engine.tileWidth() / 2, engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
-
+        for (Planet p : planets) {
+            p.drawOnGlobalMap(engine, 0, 0);
+        }
     }
 }
