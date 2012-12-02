@@ -50,6 +50,6 @@ public class LandingParty implements GameObject
 
     @Override
     public void draw(JGEngine engine) {
-
+         engine.drawImage(x * engine.tileWidth(), y * engine.tileHeight(), "awayteam");
     }
 }

@@ -157,6 +157,7 @@ public class Planet implements Room, GalaxyMapObject
             if (engine.getKey(JGEngine.KeyEnter)) {
                 GameLogger.getInstance().logMessage("Launching shuttle to orbit...");
                 world.setCurrentRoom(owner);
+                engine.clearKey(JGEngine.KeyEnter);
             }
         }
         world.getPlayer().getLandingParty().setPos(x, y);
@@ -187,6 +188,7 @@ public class Planet implements Room, GalaxyMapObject
             }
         }
         landingParty.draw(engine);
+        engine.drawImage("shuttle", shuttlePosition.x * engine.tileWidth(), shuttlePosition.y * engine.tileHeight());
     }
 
     @Override
