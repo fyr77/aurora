@@ -150,7 +150,7 @@ public class Planet implements Room, GalaxyMapObject {
 
         if (x == shuttlePosition.x && y == shuttlePosition.y) {
             if (world.isUpdatedThisFrame()) {
-                GameLogger.getInstance().logMessage("Press <enter> to leave planet surface");
+                GameLogger.getInstance().addStatusString("Press <enter> to leave planet surface");
             }
             if (engine.getKey(JGEngine.KeyEnter)) {
                 GameLogger.getInstance().logMessage("Launching shuttle to orbit...");
@@ -238,6 +238,6 @@ public class Planet implements Room, GalaxyMapObject {
 
     @Override
     public void processCollision(JGEngine engine, Player player) {
-        GameLogger.getInstance().logMessage("Approaching planet, press <enter> to launch surface party");
+        GameLogger.getInstance().addStatusString("Approaching planet, press <enter> to launch surface party");
     }
 }

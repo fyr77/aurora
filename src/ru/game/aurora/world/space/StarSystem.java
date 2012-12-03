@@ -65,7 +65,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     @Override
     public void processCollision(JGEngine engine, Player player) {
-        GameLogger.getInstance().logMessage("Approaching star system. Press <enter> to enter.");
+        GameLogger.getInstance().addStatusString("Approaching star system. Press <enter> to enter.");
     }
 
     @Override
