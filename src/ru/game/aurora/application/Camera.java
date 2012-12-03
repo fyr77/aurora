@@ -77,4 +77,11 @@ public class Camera {
         return engine.pfTilesY();
     }
 
+    public Positionable getTarget() {
+        return target;
+    }
+
+    public boolean isInViewport(int tileX, int tileY) {
+        return Math.abs(target.getX() - tileX) <= engine.pfTilesX() / 2 && Math.abs(target.getY() - tileY) <= engine.pfTilesY() / 2;
+    }
 }

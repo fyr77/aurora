@@ -165,11 +165,11 @@ public class Planet implements Room, GalaxyMapObject {
 
     @Override
     public void draw(JGEngine engine, Camera camera) {
-        for (int i = 0; i < height; ++i) {
-            for (int j = 0; j < width; ++j) {
+        for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
+            for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; ++j) {
                 JGColor color = JGColor.black;
 
-                switch (surface[i][j]) {
+                switch (surface[wrapY(i)][wrapX(j)]) {
                     case SurfaceTypes.DIRT:
                         color = JGColor.orange;
                         break;
@@ -188,7 +188,19 @@ public class Planet implements Room, GalaxyMapObject {
             }
         }
         landingParty.draw(engine, camera);
-        engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x), camera.getYCoord(shuttlePosition.y));
+
+        //todo: better wrapping of objects
+        if (camera.isInViewport(shuttlePosition.x, shuttlePosition.y)) {
+            engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x), camera.getYCoord(shuttlePosition.y));
+        } else if (camera.isInViewport(shuttlePosition.x + width, shuttlePosition.y)) {
+            engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x + width), camera.getYCoord(shuttlePosition.y));
+        } else if (camera.isInViewport(shuttlePosition.x + width, shuttlePosition.y + height)) {
+            engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x + width), camera.getYCoord(shuttlePosition.y + height));
+        } else if (camera.isInViewport(shuttlePosition.x, shuttlePosition.y + height)) {
+            engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x), camera.getYCoord(shuttlePosition.y + height));
+        }
+
+
     }
 
     @Override
