@@ -52,7 +52,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     @Override
     public void drawOnGlobalMap(JGEngine engine, Camera camera, int tileX, int tileY) {
         engine.setColor(star.color);
-        engine.drawOval(camera.getXCoord(tileX), camera.getYCoord(tileY), engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
+        engine.drawOval(camera.getXCoord(tileX) + engine.tileWidth() / 2, camera.getYCoord(tileY) + engine.tileHeight() / 2, engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
     }
 
     @Override

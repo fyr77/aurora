@@ -156,6 +156,7 @@ public class Planet implements Room, GalaxyMapObject {
                 GameLogger.getInstance().logMessage("Launching shuttle to orbit...");
                 world.setCurrentRoom(owner);
                 owner.enter(world);
+                world.getPlayer().getShip().setPos(globalX, globalY);
                 engine.clearKey(JGEngine.KeyEnter);
             }
         }
