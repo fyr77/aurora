@@ -5,18 +5,22 @@
  */
 package ru.game.aurora.world;
 
-import jgame.JGObject;
 import jgame.platform.JGEngine;
+import ru.game.aurora.application.Camera;
 
-public class Ship extends JGObject implements GameObject
-{
+public class Ship implements GameObject, Positionable {
+
+    private int x;
+
+    private int y;
 
     private int hull;
 
     private int maxHull;
 
-    public Ship(String name, boolean unique_id, double x, double y, int collisionid, String gfxname) {
-        super(name, unique_id, x, y, collisionid, gfxname);
+    public Ship(int x, int y) {
+        this.x = x;
+        this.y = y;
         hull = maxHull = 100;
     }
 
@@ -37,7 +41,23 @@ public class Ship extends JGObject implements GameObject
     }
 
     @Override
-    public void draw(JGEngine engine) {
-        engine.drawImage(x * engine.tileWidth(), y * engine.tileHeight(), "aurora");
+    public void draw(JGEngine engine, Camera camera) {
+        engine.drawImage(camera.getXCoord(x), camera.getYCoord(y), "aurora");
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public void setPos(int newX, int newY) {
+        this.x = newX;
+        this.y = newY;
     }
 }

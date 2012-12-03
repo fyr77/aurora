@@ -8,14 +8,13 @@ package ru.game.aurora.player;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.planet.LandingParty;
 
-public class Player
-{
+public class Player {
     private Ship ship;
 
     private LandingParty landingParty;
 
     public Player() {
-        ship = new Ship("Ship", true, 32, 32, 0, null);
+        ship = new Ship(10, 10);
     }
 
     public Ship getShip() {

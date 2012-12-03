@@ -7,30 +7,30 @@ package ru.game.aurora.world.space;
 
 import jgame.impl.JGEngineInterface;
 import jgame.platform.JGEngine;
+import ru.game.aurora.application.Camera;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
-public class BaseSpaceRoom implements Room
-{
+public class BaseSpaceRoom implements Room {
     protected Player player;
 
     @Override
-    public void enter(Player player) {
-        this.player = player;
+    public void enter(World world) {
+        this.player = world.getPlayer();
     }
 
     @Override
     public void update(JGEngine engine, World world) {
-        double x = player.getShip().getLastX();
-        double y = player.getShip().getLastY();
+        int x = player.getShip().getX();
+        int y = player.getShip().getY();
 
         if (engine.getKey(JGEngineInterface.KeyUp) && y > 0) {
             y--;
             world.setUpdatedThisFrame(true);
         }
         if (engine.getKey(JGEngineInterface.KeyDown) && y < engine.getHeight()) {
-            y ++;
+            y++;
             world.setUpdatedThisFrame(true);
         }
 
@@ -47,7 +47,7 @@ public class BaseSpaceRoom implements Room
     }
 
     @Override
-    public void draw(JGEngine engine) {
-        player.getShip().draw(engine);
+    public void draw(JGEngine engine, Camera camera) {
+        player.getShip().draw(engine, camera);
     }
 }

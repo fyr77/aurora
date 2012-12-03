@@ -9,6 +9,7 @@ import jgame.JGColor;
 import jgame.JGPoint;
 import jgame.impl.JGEngineInterface;
 import jgame.platform.JGEngine;
+import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.Room;
@@ -18,8 +19,7 @@ import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Random;
 
-public class Planet implements Room, GalaxyMapObject
-{
+public class Planet implements Room, GalaxyMapObject {
     private StarSystem owner;
 
     private PlanetCategory category;
@@ -42,8 +42,7 @@ public class Planet implements Room, GalaxyMapObject
 
     private int globalY;
 
-    public Planet(StarSystem owner, PlanetCategory cat, int size, int x, int y)
-    {
+    public Planet(StarSystem owner, PlanetCategory cat, int size, int x, int y) {
         this.owner = owner;
         this.category = cat;
         this.size = size;
@@ -73,21 +72,21 @@ public class Planet implements Room, GalaxyMapObject
         surface = new byte[height][width];
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {
-                surface[i][j] = (byte)(- category.availableSurfaces[r.nextInt(category.availableSurfaces.length)]);
+                surface[i][j] = (byte) (-category.availableSurfaces[r.nextInt(category.availableSurfaces.length)]);
             }
         }
     }
 
 
     @Override
-    public void enter(Player player) {
-        landingParty = player.getLandingParty();
+    public void enter(World world) {
+        landingParty = world.getPlayer().getLandingParty();
+        world.getCamera().setTarget(landingParty);
         shuttlePosition = new JGPoint(landingParty.getX(), landingParty.getY());
         updateVisibility(landingParty.getX(), landingParty.getY(), 5);
     }
 
-    private int wrapX(int x)
-    {
+    private int wrapX(int x) {
         if (x < 0) {
             return width + x;
         } else if (x >= width) {
@@ -96,8 +95,7 @@ public class Planet implements Room, GalaxyMapObject
         return x;
     }
 
-    private int wrapY(int y)
-    {
+    private int wrapY(int y) {
         if (y < 0) {
             return height + y;
         } else if (y >= height) {
@@ -108,11 +106,11 @@ public class Planet implements Room, GalaxyMapObject
 
     /**
      * Updates planet map. Makes tile visible in given range from given point
+     *
      * @param x
      * @param y
      */
-    private void updateVisibility(int x, int y, int range)
-    {
+    private void updateVisibility(int x, int y, int range) {
         for (int i = y - range; i <= y + range; ++i) {
             for (int j = x - range; j <= x + range; ++j) {
                 int pointX = wrapX(j);
@@ -134,7 +132,7 @@ public class Planet implements Room, GalaxyMapObject
             world.setUpdatedThisFrame(true);
         }
         if (engine.getKey(JGEngineInterface.KeyDown)) {
-            y ++;
+            y++;
             world.setUpdatedThisFrame(true);
         }
 
@@ -157,6 +155,7 @@ public class Planet implements Room, GalaxyMapObject
             if (engine.getKey(JGEngine.KeyEnter)) {
                 GameLogger.getInstance().logMessage("Launching shuttle to orbit...");
                 world.setCurrentRoom(owner);
+                owner.enter(world);
                 engine.clearKey(JGEngine.KeyEnter);
             }
         }
@@ -164,7 +163,7 @@ public class Planet implements Room, GalaxyMapObject
     }
 
     @Override
-    public void draw(JGEngine engine) {
+    public void draw(JGEngine engine, Camera camera) {
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {
                 JGColor color = JGColor.black;
@@ -184,15 +183,15 @@ public class Planet implements Room, GalaxyMapObject
                         break;
                 }
                 engine.setColor(color);
-                engine.drawRect(j * engine.tileWidth(), i * engine.tileHeight(), engine.tileWidth(), engine.tileHeight(), true, false);
+                engine.drawRect(camera.getXCoord(j), camera.getYCoord(i), engine.tileWidth(), engine.tileHeight(), true, false);
             }
         }
-        landingParty.draw(engine);
-        engine.drawImage("shuttle", shuttlePosition.x * engine.tileWidth(), shuttlePosition.y * engine.tileHeight());
+        landingParty.draw(engine, camera);
+        engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x), camera.getYCoord(shuttlePosition.y));
     }
 
     @Override
-    public void drawOnGlobalMap(JGEngine engine, int tileX, int tileY) {
+    public void drawOnGlobalMap(JGEngine engine, Camera camera, int tileX, int tileY) {
         JGColor color;
         switch (category) {
             case PLANET_ROCK:
@@ -205,7 +204,7 @@ public class Planet implements Room, GalaxyMapObject
                 color = JGColor.grey;
         }
         engine.setColor(color);
-        engine.drawOval(globalX * engine.tileWidth() + (engine.tileWidth() / 2), globalY * engine.tileHeight() + engine.tileWidth() / 2, engine.tileWidth() / size, engine.tileHeight() / size, true, true);
+        engine.drawOval(camera.getXCoord(globalX) + (engine.tileWidth() / 2), camera.getYCoord(globalY) + engine.tileWidth() / 2, engine.tileWidth() / size, engine.tileHeight() / size, true, true);
     }
 
     public int getGlobalX() {

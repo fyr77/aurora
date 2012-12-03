@@ -5,11 +5,8 @@
  */
 package ru.game.aurora.world;
 
-import ru.game.aurora.player.Player;
+public interface Room extends GameObject {
 
-public interface Room extends GameObject
-{
-
-    public void enter(Player player);
+    public void enter(World world);
 
 }

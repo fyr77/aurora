@@ -6,10 +6,10 @@
 package ru.game.aurora.world;
 
 import jgame.platform.JGEngine;
+import ru.game.aurora.application.Camera;
 
-public interface GameObject
-{
+public interface GameObject {
     public void update(JGEngine engine, World world);
 
-    public void draw(JGEngine engine);
+    public void draw(JGEngine engine, Camera camera);
 }

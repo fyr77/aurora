@@ -6,11 +6,12 @@
 package ru.game.aurora.world.planet;
 
 import jgame.platform.JGEngine;
+import ru.game.aurora.application.Camera;
 import ru.game.aurora.world.GameObject;
+import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 
-public class LandingParty implements GameObject
-{
+public class LandingParty implements GameObject, Positionable {
     private int x;
 
     private int y;
@@ -29,16 +30,18 @@ public class LandingParty implements GameObject
         this.engineers = engineers;
     }
 
+    @Override
     public int getX() {
         return x;
     }
 
+    @Override
     public int getY() {
         return y;
     }
 
-    public void setPos(int x, int y)
-    {
+    @Override
+    public void setPos(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -49,7 +52,7 @@ public class LandingParty implements GameObject
     }
 
     @Override
-    public void draw(JGEngine engine) {
-         engine.drawImage(x * engine.tileWidth(), y * engine.tileHeight(), "awayteam");
+    public void draw(JGEngine engine, Camera camera) {
+        engine.drawImage(camera.getXCoord(x), camera.getYCoord(y), "awayteam");
     }
 }

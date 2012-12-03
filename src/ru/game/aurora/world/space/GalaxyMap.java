@@ -7,6 +7,7 @@ package ru.game.aurora.world.space;
 
 import jgame.JGColor;
 import jgame.platform.JGEngine;
+import ru.game.aurora.application.Camera;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -22,8 +23,7 @@ import java.util.Random;
  * Map is represented as a list of all static objects (like star systems), and a 2d array of cells, where each cell is either -1
  * (empty sector of space) or index of an element in this array.
  */
-public class GalaxyMap extends BaseSpaceRoom
-{
+public class GalaxyMap extends BaseSpaceRoom {
 
     private List<GalaxyMapObject> objects = new ArrayList<GalaxyMapObject>();
 
@@ -37,8 +37,7 @@ public class GalaxyMap extends BaseSpaceRoom
 
     private Random r = new Random();
 
-    public GalaxyMap(int tilesX, int tilesY)
-    {
+    public GalaxyMap(int tilesX, int tilesY) {
         this.tilesX = tilesX;
         this.tilesY = tilesY;
         map = new int[tilesY][tilesX];
@@ -66,8 +65,13 @@ public class GalaxyMap extends BaseSpaceRoom
         }
     }
 
-    private StarSystem generateRandomStarSystem(int x, int y)
-    {
+    @Override
+    public void enter(World world) {
+        super.enter(world);
+        world.getCamera().setTarget(player.getShip());
+    }
+
+    private StarSystem generateRandomStarSystem(int x, int y) {
         int size = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
         JGColor starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
         final int planetCount = r.nextInt(5);
@@ -85,27 +89,27 @@ public class GalaxyMap extends BaseSpaceRoom
     @Override
     public void update(JGEngine engine, World world) {
         super.update(engine, world);
-        int idx = map[((int) player.getShip().getLastY())][((int) player.getShip().getLastX())];
+        int idx = map[player.getShip().getY()][player.getShip().getX()];
         if (idx != -1) {
             if (world.isUpdatedThisFrame()) {
                 objects.get(idx).processCollision(engine, player);
             }
             if (objects.get(idx).canBeEntered() && engine.getKey(JGEngine.KeyEnter)) {
-                Room r = (Room)objects.get(idx);
+                Room r = (Room) objects.get(idx);
                 world.setCurrentRoom(r);
-                r.enter(world.getPlayer());
+                r.enter(world);
                 world.setUpdatedThisFrame(true);
             }
         }
     }
 
     @Override
-    public void draw(JGEngine engine) {
-        super.draw(engine);
+    public void draw(JGEngine engine, Camera camera) {
+        super.draw(engine, camera);
         for (int i = 0; i < tilesY; ++i) {
             for (int j = 0; j < tilesX; ++j) {
                 if (map[i][j] != -1) {
-                    objects.get(map[i][j]).drawOnGlobalMap(engine, j, i);
+                    objects.get(map[i][j]).drawOnGlobalMap(engine, camera, j, i);
                 }
             }
         }

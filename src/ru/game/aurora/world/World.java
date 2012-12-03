@@ -6,11 +6,13 @@
 package ru.game.aurora.world;
 
 import jgame.platform.JGEngine;
+import ru.game.aurora.application.Camera;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.space.GalaxyMap;
 
-public class World
-{
+public class World {
+    private Camera camera;
+
     private Room currentRoom;
 
     private GalaxyMap galaxyMap;
@@ -19,10 +21,12 @@ public class World
 
     private boolean updatedThisFrame;
 
-    public World(int sizeX, int sizeY) {
+    public World(JGEngine engine, int sizeX, int sizeY) {
         player = new Player();
+        camera = new Camera(engine);
+        camera.setTarget(player.getShip());
         currentRoom = galaxyMap = new GalaxyMap(sizeX, sizeY);
-        currentRoom.enter(player);
+        currentRoom.enter(this);
         updatedThisFrame = false;
     }
 
@@ -32,7 +36,11 @@ public class World
     }
 
     public void draw(JGEngine engine) {
-        currentRoom.draw(engine);
+        currentRoom.draw(engine, camera);
+    }
+
+    public Camera getCamera() {
+        return camera;
     }
 
     public boolean isUpdatedThisFrame() {
