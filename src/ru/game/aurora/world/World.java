@@ -21,9 +21,9 @@ public class World {
 
     private boolean updatedThisFrame;
 
-    public World(JGEngine engine, int sizeX, int sizeY) {
+    public World(JGEngine engine, Camera camera, int sizeX, int sizeY) {
         player = new Player();
-        camera = new Camera(engine);
+        this.camera = camera;
         camera.setTarget(player.getShip());
         currentRoom = galaxyMap = new GalaxyMap(sizeX, sizeY);
         currentRoom.enter(this);

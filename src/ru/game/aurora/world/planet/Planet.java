@@ -205,6 +205,9 @@ public class Planet implements Room, GalaxyMapObject {
 
     @Override
     public void drawOnGlobalMap(JGEngine engine, Camera camera, int tileX, int tileY) {
+        if (!camera.isInViewport(globalX, globalY)) {
+            return;
+        }
         JGColor color;
         switch (category) {
             case PLANET_ROCK:

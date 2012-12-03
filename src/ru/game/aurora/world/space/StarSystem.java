@@ -51,6 +51,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     @Override
     public void drawOnGlobalMap(JGEngine engine, Camera camera, int tileX, int tileY) {
+        if (!camera.isInViewport(tileX, tileY)) {
+            return;
+        }
         engine.setColor(star.color);
         engine.drawOval(camera.getXCoord(tileX) + engine.tileWidth() / 2, camera.getYCoord(tileY) + engine.tileHeight() / 2, engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
     }
@@ -115,7 +118,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         player.getShip().draw(engine, camera);
         engine.setColor(star.color);
 
-        engine.drawOval(engine.pfTilesX() / 2 * engine.tileWidth() + (engine.tileWidth() / 2), engine.pfTilesY() / 2 * engine.tileHeight() + engine.tileWidth() / 2, engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
+        engine.drawOval(camera.getNumTilesX() / 2 * engine.tileWidth() + (engine.tileWidth() / 2), camera.getNumTilesY() / 2 * engine.tileHeight() + engine.tileWidth() / 2, engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
         for (Planet p : planets) {
             p.drawOnGlobalMap(engine, camera, 0, 0);
         }

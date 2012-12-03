@@ -11,33 +11,23 @@ import jgame.platform.JGEngine;
 import java.util.LinkedList;
 import java.util.List;
 
-public class GameLogger
-{
-
-    private JGEngine engine;
+public class GameLogger {
 
     private static final int maxLogSize = 10;
 
     private List<String> messages = new LinkedList<String>();
 
-    public GameLogger(JGEngine engine) {
-        this.engine = engine;
-    }
-
     private static GameLogger instance = null;
 
-    public static void init(JGEngine engine)
-    {
-        instance = new GameLogger(engine);
+    public static void init() {
+        instance = new GameLogger();
     }
 
-    public static GameLogger getInstance()
-    {
+    public static GameLogger getInstance() {
         return instance;
     }
 
-    public void logMessage(String message)
-    {
+    public void logMessage(String message) {
         messages.add(message);
         if (messages.size() > maxLogSize) {
             messages.remove(0);
@@ -45,8 +35,7 @@ public class GameLogger
 
     }
 
-    public void draw(JGEngine engine)
-    {
+    public void draw(JGEngine engine) {
         engine.setColor(JGColor.white);
         int i = 0;
         for (String m : messages) {
