@@ -37,7 +37,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private int tilesY;
 
-    public static final int maxStars = 5;
+    public static final int maxStars = 15;
 
     private Random r = new Random();
 

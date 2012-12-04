@@ -49,6 +49,7 @@ public class AuroraGame extends JGEngine {
     @Override
     public void doFrame() {
         world.update(this);
+        clearLastKey();
     }
 
     @Override

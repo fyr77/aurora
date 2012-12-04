@@ -203,59 +203,77 @@ public class Planet implements Room, GalaxyMapObject {
         }
     }
 
-    @Override
-    public void draw(JGEngine engine, Camera camera) {
-
+    public void printPlanetStatus()
+    {
         GameLogger.getInstance().addStatusMessage("Planet info:");
         GameLogger.getInstance().addStatusMessage(String.format("Size: [%d, %d]", width, height));
         GameLogger.getInstance().addStatusMessage("Atmosphere: " + atmosphere);
         GameLogger.getInstance().addStatusMessage("=====================================");
+    }
 
+    public void drawLandscape(JGEngine engine, Camera camera)
+    {
         for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
-            for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; ++j) {
-                JGColor color = JGColor.black;
+                    for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; ++j) {
+                        JGColor color = JGColor.black;
 
-                switch (surface[wrapY(i)][wrapX(j)]) {
-                    case SurfaceTypes.DIRT:
-                        color = JGColor.orange;
-                        break;
-                    case SurfaceTypes.ICE:
-                        color = JGColor.white;
-                        break;
-                    case SurfaceTypes.ROCKS:
-                        color = JGColor.grey;
-                        break;
-                    case SurfaceTypes.WATER:
-                        color = JGColor.blue;
-                        break;
+                        switch (surface[wrapY(i)][wrapX(j)]) {
+                            case SurfaceTypes.DIRT:
+                                color = JGColor.orange;
+                                break;
+                            case SurfaceTypes.ICE:
+                                color = JGColor.white;
+                                break;
+                            case SurfaceTypes.ROCKS:
+                                color = JGColor.grey;
+                                break;
+                            case SurfaceTypes.WATER:
+                                color = JGColor.blue;
+                                break;
+                        }
+                        engine.setColor(color);
+                        engine.drawRect(camera.getXCoord(j), camera.getYCoord(i), engine.tileWidth(), engine.tileHeight(), true, false);
+                    }
                 }
-                engine.setColor(color);
-                engine.drawRect(camera.getXCoord(j), camera.getYCoord(i), engine.tileWidth(), engine.tileHeight(), true, false);
+
+    }
+
+    public void drawObjects(JGEngine engine, Camera camera)
+    {
+        // this part (monsters, shuttle, landing party) is drawn only when landing party is on surface
+        if (landingParty != null) {
+            landingParty.draw(engine, camera);
+
+
+            //todo: better wrapping of objects
+            if (camera.isInViewport(shuttlePosition.x, shuttlePosition.y)) {
+                engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x), camera.getYCoord(shuttlePosition.y));
+            } else if (camera.isInViewport(shuttlePosition.x + width, shuttlePosition.y)) {
+                engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x + width), camera.getYCoord(shuttlePosition.y));
+            } else if (camera.isInViewport(shuttlePosition.x + width, shuttlePosition.y + height)) {
+                engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x + width), camera.getYCoord(shuttlePosition.y + height));
+            } else if (camera.isInViewport(shuttlePosition.x, shuttlePosition.y + height)) {
+                engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x), camera.getYCoord(shuttlePosition.y + height));
+            }
+
+            if (landingParty.getX() == shuttlePosition.x && landingParty.getY() == shuttlePosition.y) {
+                GameLogger.getInstance().addStatusMessage("Press <enter> to return to orbit");
+            }
+
+            for (Animal a : animals) {
+                // draw only if tile under this animal is visible
+                if (surface[a.getY()][a.getX()] >= 0) {
+                    a.draw(engine, camera);
+                }
             }
         }
-        landingParty.draw(engine, camera);
+    }
 
-        //todo: better wrapping of objects
-        if (camera.isInViewport(shuttlePosition.x, shuttlePosition.y)) {
-            engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x), camera.getYCoord(shuttlePosition.y));
-        } else if (camera.isInViewport(shuttlePosition.x + width, shuttlePosition.y)) {
-            engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x + width), camera.getYCoord(shuttlePosition.y));
-        } else if (camera.isInViewport(shuttlePosition.x + width, shuttlePosition.y + height)) {
-            engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x + width), camera.getYCoord(shuttlePosition.y + height));
-        } else if (camera.isInViewport(shuttlePosition.x, shuttlePosition.y + height)) {
-            engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x), camera.getYCoord(shuttlePosition.y + height));
-        }
-
-        if (landingParty.getX() == shuttlePosition.x && landingParty.getY() == shuttlePosition.y) {
-            GameLogger.getInstance().addStatusMessage("Press <enter> to return to orbit");
-        }
-
-        for (Animal a : animals) {
-            // draw only if tile under this animal is visible
-            if (surface[a.getY()][a.getX()] >= 0) {
-                a.draw(engine, camera);
-            }
-        }
+    @Override
+    public void draw(JGEngine engine, Camera camera) {
+        printPlanetStatus();
+        drawLandscape(engine, camera);
+        drawObjects(engine, camera);
     }
 
     @Override

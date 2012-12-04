@@ -14,6 +14,7 @@ import ru.game.aurora.player.Player;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetScanScreen;
 
 public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     public static final JGColor[] possibleColors = {JGColor.red, JGColor.white, JGColor.yellow, JGColor.blue};
@@ -84,23 +85,29 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             player.getShip().setPos(globalMapX, globalMapY);
         }
 
-        if (world.isUpdatedThisFrame() || engine.getKey(JGEngineInterface.KeyEnter)) {
-            for (Planet p : planets) {
-                if (x == p.getGlobalX() && y == p.getGlobalY()) {
-                    if (engine.getKey(JGEngineInterface.KeyEnter)) {
-                        GameLogger.getInstance().logMessage("Descending to surface...");
-                        world.getPlayer().setLandingParty(new LandingParty(0, 0, 1, 1, 1));
-                        p.enter(world);
-                        world.setCurrentRoom(p);
-                        engine.clearKey(JGEngineInterface.KeyEnter);
-                        break;
-                    } else {
-                        p.processCollision(engine, world.getPlayer());
-                        break;
-                    }
+
+        for (Planet p : planets) {
+            if (x == p.getGlobalX() && y == p.getGlobalY()) {
+                if (engine.getKey(JGEngineInterface.KeyEnter)) {
+                    GameLogger.getInstance().logMessage("Descending to surface...");
+                    world.getPlayer().setLandingParty(new LandingParty(0, 0, 1, 1, 1));
+                    p.enter(world);
+                    world.setCurrentRoom(p);
+                    engine.clearKey(JGEngineInterface.KeyEnter);
+                    break;
+                } else if (engine.getLastKeyChar() == 's') {
+                    PlanetScanScreen s = new PlanetScanScreen(this, p);
+                    s.enter(world);
+                    world.setCurrentRoom(s);
+                    return;
+                } else if (world.isUpdatedThisFrame()) {
+                    p.processCollision(engine, world.getPlayer());
+                    break;
                 }
             }
         }
+
+
     }
 
     @Override
@@ -120,7 +127,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         engine.drawOval(camera.getNumTilesX() / 2 * engine.tileWidth() + (engine.tileWidth() / 2), camera.getNumTilesY() / 2 * engine.tileHeight() + engine.tileWidth() / 2, engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
         for (Planet p : planets) {
             if (p.getGlobalX() == player.getShip().getX() && p.getGlobalY() == player.getShip().getY()) {
-                GameLogger.getInstance().addStatusMessage("Approaching planet, press <enter> to launch surface party");
+                GameLogger.getInstance().addStatusMessage("Approaching planet: ");
+                GameLogger.getInstance().addStatusMessage("Press <S> to scan");
+                GameLogger.getInstance().addStatusMessage("Press <enter> to launch surface party");
+
             }
             p.drawOnGlobalMap(engine, camera, 0, 0);
         }
