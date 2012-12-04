@@ -8,10 +8,12 @@ package ru.game.aurora.world.space;
 import jgame.JGColor;
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 
 import java.util.ArrayList;
@@ -79,7 +81,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         StarSystem ss = new StarSystem(new StarSystem.Star(size, starColor), x, y);
         for (int i = 0; i < planetCount; ++i) {
             //todo: planet coordinate generation
-            planets[i] = new Planet(ss, CollectionUtils.selectRandomElement(PlanetCategory.values()), r.nextInt(3) + 1, r.nextInt(25), r.nextInt(20));
+            planets[i] = new Planet(ss, CollectionUtils.selectRandomElement(PlanetCategory.values()), CollectionUtils.selectRandomElement(PlanetAtmosphere.values()), r.nextInt(3) + 1, r.nextInt(25), r.nextInt(20));
         }
         ss.setPlanets(planets);
         return ss;
@@ -109,7 +111,11 @@ public class GalaxyMap extends BaseSpaceRoom {
         for (int i = 0; i < tilesY; ++i) {
             for (int j = 0; j < tilesX; ++j) {
                 if (map[i][j] != -1) {
-                    objects.get(map[i][j]).drawOnGlobalMap(engine, camera, j, i);
+                    GalaxyMapObject obj = objects.get(map[i][j]);
+                    if (j == player.getShip().getX() && i == player.getShip().getY() && obj.canBeEntered()) {
+                        GameLogger.getInstance().addStatusMessage("Press <enter> to enter location");
+                    }
+                    obj.drawOnGlobalMap(engine, camera, j, i);
                 }
             }
         }

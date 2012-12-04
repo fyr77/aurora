@@ -24,6 +24,8 @@ public class Planet implements Room, GalaxyMapObject {
 
     private PlanetCategory category;
 
+    private PlanetAtmosphere atmosphere;
+
     private int size;
 
     private byte[][] surface;
@@ -42,9 +44,10 @@ public class Planet implements Room, GalaxyMapObject {
 
     private int globalY;
 
-    public Planet(StarSystem owner, PlanetCategory cat, int size, int x, int y) {
+    public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
         this.owner = owner;
         this.category = cat;
+        this.atmosphere = atmosphere;
         this.size = size;
         this.globalX = x;
         this.globalY = y;
@@ -148,9 +151,15 @@ public class Planet implements Room, GalaxyMapObject {
         y = wrapY(y);
         updateVisibility(x, y, 1);
 
+        if (atmosphere != PlanetAtmosphere.BREATHABLE_ATMOSPHERE && world.isUpdatedThisFrame()) {
+            world.getPlayer().getLandingParty().consumeOxygen();
+        }
+
         if (x == shuttlePosition.x && y == shuttlePosition.y) {
+
             if (world.isUpdatedThisFrame()) {
-                GameLogger.getInstance().addStatusString("Press <enter> to leave planet surface");
+                GameLogger.getInstance().logMessage("Refilling oxygen");
+                world.getPlayer().getLandingParty().refillOxygen();
             }
             if (engine.getKey(JGEngine.KeyEnter)) {
                 GameLogger.getInstance().logMessage("Launching shuttle to orbit...");
@@ -161,10 +170,24 @@ public class Planet implements Room, GalaxyMapObject {
             }
         }
         world.getPlayer().getLandingParty().setPos(x, y);
+
+        if (world.getPlayer().getLandingParty().getOxygen() < 0) {
+            GameLogger.getInstance().logMessage("Lost connection with landing party");
+            world.setCurrentRoom(owner);
+            owner.enter(world);
+            world.getPlayer().getShip().setPos(globalX, globalY);
+            engine.clearKey(JGEngine.KeyEnter);
+        }
     }
 
     @Override
     public void draw(JGEngine engine, Camera camera) {
+
+        GameLogger.getInstance().addStatusMessage("Planet info:");
+        GameLogger.getInstance().addStatusMessage(String.format("Size: [%d, %d]", width, height));
+        GameLogger.getInstance().addStatusMessage("Atmosphere: " + atmosphere);
+        GameLogger.getInstance().addStatusMessage("=====================================");
+
         for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
             for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; ++j) {
                 JGColor color = JGColor.black;
@@ -200,7 +223,9 @@ public class Planet implements Room, GalaxyMapObject {
             engine.drawImage("shuttle", camera.getXCoord(shuttlePosition.x), camera.getYCoord(shuttlePosition.y + height));
         }
 
-
+        if (landingParty.getX() == shuttlePosition.x && landingParty.getY() == shuttlePosition.y) {
+            GameLogger.getInstance().addStatusMessage("Press <enter> to return to orbit");
+        }
     }
 
     @Override
@@ -238,6 +263,5 @@ public class Planet implements Room, GalaxyMapObject {
 
     @Override
     public void processCollision(JGEngine engine, Player player) {
-        GameLogger.getInstance().addStatusString("Approaching planet, press <enter> to launch surface party");
     }
 }

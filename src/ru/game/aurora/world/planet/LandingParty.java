@@ -52,16 +52,40 @@ public class LandingParty implements GameObject, Positionable {
 
     @Override
     public void update(JGEngine engine, World world) {
-        StringBuilder sb = new StringBuilder("Landing team status:\n");
-        sb.append("    Science: ").append(science).append('\n');
-        sb.append("    Engineers: ").append(engineers).append('\n');
-        sb.append("    Military: ").append(military).append('\n');
-        sb.append("Remaining oxygen: ").append(oxygen).append('\n');
-        GameLogger.getInstance().addStatusString(sb.toString());
+
     }
 
     @Override
     public void draw(JGEngine engine, Camera camera) {
         engine.drawImage(camera.getXCoord(x), camera.getYCoord(y), "awayteam");
+        //JGRectangle rect = GameLogger.getInstance().getStatusMessagesRect();
+
+        //final JGFont font = GameLogger.getInstance().getFont();
+        /*engine.drawString("Landing team status:", rect.x, rect.y, -1, font, JGColor.white);
+        engine.drawString("scientists: " + science, rect.x, rect.y + font.getSize(), -1, font, JGColor.white);
+        engine.drawString("engineers: " + engineers, rect.x, rect.y + font.getSize() * 2, -1, font, JGColor.white);
+        engine.drawString("military: " + military, rect.x, rect.y + font.getSize() * 3, -1, font, JGColor.white);
+        engine.drawString("Remaining oxygen: " + oxygen, rect.x, rect.y + font.getSize() * 4, -1, font, JGColor.white);
+
+        engine.drawString(String.format("Coordinates : (%d, %d)", x, y), rect.x, rect.y + font.getSize() * 5, -1, font, JGColor.white);*/
+        GameLogger.getInstance().addStatusMessage("Landing team status:");
+        GameLogger.getInstance().addStatusMessage("scientists: " + science);
+        GameLogger.getInstance().addStatusMessage("engineers: " + engineers);
+        GameLogger.getInstance().addStatusMessage("military: " + military);
+        GameLogger.getInstance().addStatusMessage("Remaining oxygen: " + oxygen);
+        GameLogger.getInstance().addStatusMessage(String.format("Current coordinates (%d, %d)", x, y));
+    }
+
+    public void consumeOxygen() {
+        //todo: depend on team size?
+        oxygen--;
+    }
+
+    public void refillOxygen() {
+        oxygen = 100;
+    }
+
+    public int getOxygen() {
+        return oxygen;
     }
 }

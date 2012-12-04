@@ -19,7 +19,7 @@ public class GameLogger {
 
     private List<String> messages = new LinkedList<String>();
 
-    private List<String> statusStrings = new LinkedList<String>();
+    private List<String> statusMessages = new LinkedList<String>();
 
     private JGRectangle statusMessagesRect;
 
@@ -51,25 +51,34 @@ public class GameLogger {
 
     }
 
-    public void addStatusString(String str) {
-        statusStrings.add(str);
+    public void addStatusMessage(String message) {
+        statusMessages.add(message);
     }
 
     public void draw(JGEngine engine) {
         engine.setColor(JGColor.white);
         int i = 0;
         for (String m : messages) {
-            engine.drawString(m, logRect.x, logRect.y + i * 25, -1, font, JGColor.white);
+            engine.drawString(m, logRect.x, logRect.y + i * font.getSize(), -1, font, JGColor.white);
             ++i;
         }
 
-        for (String m : statusStrings) {
-            engine.drawString(m, statusMessagesRect.x, statusMessagesRect.y + i * 25, -1, font, JGColor.white);
+        i = 0;
+        for (String m : statusMessages) {
+            engine.drawString(m, statusMessagesRect.x, statusMessagesRect.y + i * font.getSize(), -1, font, JGColor.white);
             ++i;
         }
     }
 
-    public void clearStatusStrings() {
-        statusStrings.clear();
+    public JGRectangle getStatusMessagesRect() {
+        return statusMessagesRect;
+    }
+
+    public JGFont getFont() {
+        return font;
+    }
+
+    public void clearStatusMessages() {
+        statusMessages.clear();
     }
 }

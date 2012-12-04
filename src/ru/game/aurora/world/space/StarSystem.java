@@ -65,7 +65,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     @Override
     public void processCollision(JGEngine engine, Player player) {
-        GameLogger.getInstance().addStatusString("Approaching star system. Press <enter> to enter.");
     }
 
     @Override
@@ -75,10 +74,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         int y = world.getPlayer().getShip().getY();
         int x = world.getPlayer().getShip().getX();
 
-        if ((engine.getKey(JGEngineInterface.KeyUp) && y == 0)
-                || (engine.getKey(JGEngineInterface.KeyDown) && y == engine.pfTilesY() - 1)
-                || (engine.getKey(JGEngineInterface.KeyLeft) && x == 0)
-                || (engine.getKey(JGEngineInterface.KeyRight) && x == engine.pfTilesX() - 1)) {
+        if ((engine.getKey(JGEngineInterface.KeyUp) && y == -1)
+                || (engine.getKey(JGEngineInterface.KeyDown) && y == world.getCamera().getNumTilesY())
+                || (engine.getKey(JGEngineInterface.KeyLeft) && x == -1)
+                || (engine.getKey(JGEngineInterface.KeyRight) && x == world.getCamera().getNumTilesX())) {
             GameLogger.getInstance().logMessage("Leaving star system...");
             world.setCurrentRoom(world.getGalaxyMap());
             world.getGalaxyMap().enter(world);
@@ -120,6 +119,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         engine.drawOval(camera.getNumTilesX() / 2 * engine.tileWidth() + (engine.tileWidth() / 2), camera.getNumTilesY() / 2 * engine.tileHeight() + engine.tileWidth() / 2, engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
         for (Planet p : planets) {
+            if (p.getGlobalX() == player.getShip().getX() && p.getGlobalY() == player.getShip().getY()) {
+                GameLogger.getInstance().addStatusMessage("Approaching planet, press <enter> to launch surface party");
+            }
             p.drawOnGlobalMap(engine, camera, 0, 0);
         }
     }
