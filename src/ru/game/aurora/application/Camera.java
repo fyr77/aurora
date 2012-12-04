@@ -23,6 +23,10 @@ public class Camera {
 
     private int viewportY;
 
+    private int tileWidth;
+
+    private int tileHeight;
+
     /**
      * Number of tiles that are actually drawn
      */
@@ -61,6 +65,18 @@ public class Camera {
         this.viewportTilesX = vieportWidth;
         this.viewportTilesY = viewportHeight;
         this.engine = engine;
+        this.tileHeight = engine.tileHeight();
+        this.tileWidth = engine.tileWidth();
+    }
+
+    public Camera(int viewportX, int viewportY, int tileWidth, int tileHeight, int viewportTilesX, int viewportTilesY, JGEngine engine) {
+        this.viewportX = viewportX;
+        this.viewportY = viewportY;
+        this.tileWidth = tileWidth;
+        this.tileHeight = tileHeight;
+        this.viewportTilesX = viewportTilesX;
+        this.viewportTilesY = viewportTilesY;
+        this.engine = engine;
     }
 
     private JGEngine engine;
@@ -81,11 +97,11 @@ public class Camera {
      * @return Absolute screen x coordinate for this tile
      */
     public int getXCoord(int globalTileX) {
-        return viewportX + engine.tileWidth() * (viewportTilesX / 2 + (globalTileX - target.getX()));
+        return viewportX + tileWidth * (viewportTilesX / 2 + (globalTileX - target.getX()));
     }
 
     public int getYCoord(int globalTileY) {
-        return viewportTilesY + engine.tileHeight() * (viewportTilesY / 2 + (globalTileY - target.getY()));
+        return viewportTilesY + tileHeight * (viewportTilesY / 2 + (globalTileY - target.getY()));
     }
 
     public int getNumTilesX() {
@@ -94,6 +110,14 @@ public class Camera {
 
     public int getNumTilesY() {
         return viewportTilesY;
+    }
+
+    public int getTileWidth() {
+        return engine.tileWidth();
+    }
+
+    public int getTileHeight() {
+        return engine.tileHeight();
     }
 
     public Positionable getTarget() {
@@ -106,6 +130,27 @@ public class Camera {
 
     public void drawBound() {
         engine.setColor(JGColor.blue);
-        engine.drawRect(viewportX, viewportY, viewportTilesX * engine.tileWidth(), viewportTilesY * engine.tileHeight(), false, false);
+        engine.drawRect(viewportX, viewportY, viewportTilesX * tileWidth, viewportTilesY * tileHeight, false, false);
     }
+
+    public int getViewportX() {
+        return viewportX;
+    }
+
+    public int getViewportY() {
+        return viewportY;
+    }
+
+    public int getViewportTilesX() {
+        return viewportTilesX;
+    }
+
+    public int getViewportTilesY() {
+        return viewportTilesY;
+    }
+
+    public JGEngine getEngine() {
+        return engine;
+    }
+
 }

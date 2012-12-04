@@ -55,7 +55,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             return;
         }
         engine.setColor(star.color);
-        engine.drawOval(camera.getXCoord(tileX) + engine.tileWidth() / 2, camera.getYCoord(tileY) + engine.tileHeight() / 2, engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
+        engine.drawOval(camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, camera.getTileWidth() / star.size, camera.getTileHeight() / star.size, true, true);
     }
 
     @Override
@@ -74,9 +74,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         int y = world.getPlayer().getShip().getY();
         int x = world.getPlayer().getShip().getX();
 
-        if ((engine.getKey(JGEngineInterface.KeyUp) && y == -1)
+        if ((engine.getKey(JGEngineInterface.KeyUp) && y == 0)
                 || (engine.getKey(JGEngineInterface.KeyDown) && y == world.getCamera().getNumTilesY())
-                || (engine.getKey(JGEngineInterface.KeyLeft) && x == -1)
+                || (engine.getKey(JGEngineInterface.KeyLeft) && x == 0)
                 || (engine.getKey(JGEngineInterface.KeyRight) && x == world.getCamera().getNumTilesX())) {
             GameLogger.getInstance().logMessage("Leaving star system...");
             world.setCurrentRoom(world.getGalaxyMap());

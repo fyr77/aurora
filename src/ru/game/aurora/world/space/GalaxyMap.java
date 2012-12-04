@@ -29,6 +29,8 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private List<GalaxyMapObject> objects = new ArrayList<GalaxyMapObject>();
 
+    private GalaxyMapScreen fullMapScreen = new GalaxyMapScreen();
+
     private int[][] map;
 
     private int tilesX;
@@ -67,6 +69,18 @@ public class GalaxyMap extends BaseSpaceRoom {
         }
     }
 
+    public int[][] getMap() {
+        return map;
+    }
+
+    public int getTilesX() {
+        return tilesX;
+    }
+
+    public int getTilesY() {
+        return tilesY;
+    }
+
     @Override
     public void enter(World world) {
         super.enter(world);
@@ -87,9 +101,23 @@ public class GalaxyMap extends BaseSpaceRoom {
         return ss;
     }
 
+    public GalaxyMapObject getObjectAt(int x, int y) {
+        final int idx = map[y][x];
+        if (idx != -1) {
+            return objects.get(idx);
+        }
+        return null;
+    }
+
 
     @Override
     public void update(JGEngine engine, World world) {
+        if (engine.getLastKeyChar() == 'm') {
+            world.setCurrentRoom(fullMapScreen);
+            fullMapScreen.enter(world);
+            engine.clearLastKey();
+            return;
+        }
         super.update(engine, world);
         int idx = map[player.getShip().getY()][player.getShip().getX()];
         if (idx != -1) {
