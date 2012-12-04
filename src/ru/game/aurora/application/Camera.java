@@ -104,6 +104,33 @@ public class Camera {
         return viewportTilesY + tileHeight * (viewportTilesY / 2 + (globalTileY - target.getY()));
     }
 
+    public int getXCoordWrapped(int tileX, int totalTilesX) {
+        final int targetX = target.getX();
+        if (totalTilesX - Math.abs(targetX - tileX) > viewportTilesX / 2) {
+            return getXCoord(tileX);
+        }
+
+        if (targetX < tileX) {
+            return getXCoord(-totalTilesX + tileX);
+        } else {
+            return getXCoord(tileX + totalTilesX);
+        }
+    }
+
+    public int getYCoordWrapped(int tileY, int totalTilesY) {
+        final int targetY = target.getY();
+        if (totalTilesY - Math.abs(targetY - tileY) > viewportTilesY / 2) {
+            return getYCoord(tileY);
+        }
+
+        if (targetY < tileY) {
+            return getYCoord(-totalTilesY + tileY);
+        } else {
+            return getYCoord(tileY + totalTilesY);
+        }
+
+    }
+
     public int getNumTilesX() {
         return viewportTilesX;
     }

@@ -95,7 +95,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         StarSystem ss = new StarSystem(new StarSystem.Star(size, starColor), x, y);
         for (int i = 0; i < planetCount; ++i) {
             //todo: planet coordinate generation
-            planets[i] = new Planet(ss, CollectionUtils.selectRandomElement(PlanetCategory.values()), CollectionUtils.selectRandomElement(PlanetAtmosphere.values()), r.nextInt(3) + 1, r.nextInt(25), r.nextInt(20));
+            planets[i] = new Planet(ss, CollectionUtils.selectRandomElement(PlanetCategory.values()), CollectionUtils.selectRandomElement(PlanetAtmosphere.values()), r.nextInt(3) + 1, r.nextInt(25), r.nextInt(20), true);
         }
         ss.setPlanets(planets);
         return ss;

@@ -14,9 +14,13 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.nature.Animal;
+import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Planet implements Room, GalaxyMapObject {
@@ -34,7 +38,7 @@ public class Planet implements Room, GalaxyMapObject {
 
     private int height;
 
-    private Random r = new Random();
+    private static final Random r = new Random();
 
     private LandingParty landingParty;
 
@@ -44,7 +48,11 @@ public class Planet implements Room, GalaxyMapObject {
 
     private int globalY;
 
-    public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
+    private AnimalSpeciesDesc[] animalSpecies;
+
+    private List<Animal> animals = new ArrayList<Animal>();
+
+    public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
         this.owner = owner;
         this.category = cat;
         this.atmosphere = atmosphere;
@@ -78,6 +86,17 @@ public class Planet implements Room, GalaxyMapObject {
                 surface[i][j] = (byte) (-category.availableSurfaces[r.nextInt(category.availableSurfaces.length)]);
             }
         }
+
+        if (hasLife) {
+            // generate random species descs. Currently only one
+            animalSpecies = new AnimalSpeciesDesc[1];
+            animalSpecies[0] = new AnimalSpeciesDesc(this, "mammal_large_1", false, true, 10, 0, AnimalSpeciesDesc.Behaviour.PASSIVE);
+
+            final int animalCount = r.nextInt(10) + 5;
+            for (int i = 0; i < animalCount; ++i) {
+                animals.add(new Animal(this, r.nextInt(/*width*/10), r.nextInt(/*height*/10), animalSpecies[0]));
+            }
+        }
     }
 
 
@@ -89,7 +108,7 @@ public class Planet implements Room, GalaxyMapObject {
         updateVisibility(landingParty.getX(), landingParty.getY(), 5);
     }
 
-    private int wrapX(int x) {
+    public int wrapX(int x) {
         if (x < 0) {
             return width + x;
         } else if (x >= width) {
@@ -98,7 +117,7 @@ public class Planet implements Room, GalaxyMapObject {
         return x;
     }
 
-    private int wrapY(int y) {
+    public int wrapY(int y) {
         if (y < 0) {
             return height + y;
         } else if (y >= height) {
@@ -178,6 +197,10 @@ public class Planet implements Room, GalaxyMapObject {
             world.getPlayer().getShip().setPos(globalX, globalY);
             engine.clearKey(JGEngine.KeyEnter);
         }
+
+        for (Animal a : animals) {
+            a.update(engine, world);
+        }
     }
 
     @Override
@@ -226,6 +249,13 @@ public class Planet implements Room, GalaxyMapObject {
         if (landingParty.getX() == shuttlePosition.x && landingParty.getY() == shuttlePosition.y) {
             GameLogger.getInstance().addStatusMessage("Press <enter> to return to orbit");
         }
+
+        for (Animal a : animals) {
+            // draw only if tile under this animal is visible
+            if (surface[a.getY()][a.getX()] >= 0) {
+                a.draw(engine, camera);
+            }
+        }
     }
 
     @Override
@@ -263,5 +293,13 @@ public class Planet implements Room, GalaxyMapObject {
 
     @Override
     public void processCollision(JGEngine engine, Player player) {
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
