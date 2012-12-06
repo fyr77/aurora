@@ -49,7 +49,8 @@ public class ResearchScreen implements Room {
 
         if (!researchState.getCurrentProjects().isEmpty()) {
             engine.setColor(JGColor.white);
-            JGEngineUtils.drawString(engine, researchState.getCurrentProjects().get(currentIdx).desc.getDescription(), 250, 50, 600);
+            final ResearchProjectState researchProjectState = researchState.getCurrentProjects().get(currentIdx);
+            JGEngineUtils.drawString(engine, researchProjectState.desc.getDescription() + "\n"  + researchProjectState.desc.getStatusString(world.getPlayer(), researchProjectState.scientists), 250, 50, 600);
         }
         GameLogger.getInstance().addStatusMessage("Available scientists: " + researchState.getIdleScientists());
     }

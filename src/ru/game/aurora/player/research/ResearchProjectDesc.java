@@ -40,4 +40,13 @@ public abstract class ResearchProjectDesc {
      * @return A string describing current status of this research
      */
     public abstract String getStatusString(Player player, int scientists);
+
+    public abstract boolean isCompleted();
+
+    /**
+     * Returns true if this is a repeatable project (like converting raw data into processed)
+     * Such projects are always available and are not added to list of completed projects
+     */
+    public abstract boolean isRepeatable();
+
 }

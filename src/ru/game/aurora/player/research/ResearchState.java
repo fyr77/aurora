@@ -6,9 +6,11 @@
  */
 package ru.game.aurora.player.research;
 
-import ru.game.aurora.player.research.projects.Cartography;
+import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.world.World;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -28,7 +30,6 @@ public class ResearchState {
 
     public ResearchState(int idleScientists) {
         this.idleScientists = idleScientists;
-        availableProjects.add(new Cartography(geodata));
     }
 
     public Geodata getGeodata() {
@@ -53,5 +54,27 @@ public class ResearchState {
 
     public void setIdleScientists(int idleScientists) {
         this.idleScientists = idleScientists;
+    }
+
+    /**
+     * Called when turn passes.
+     * Updates research progress for current projects
+     */
+    public void update(World world)
+    {
+        for (Iterator<ResearchProjectState> iter = currentProjects.iterator(); iter.hasNext();) {
+            ResearchProjectState state = iter.next();
+            state.desc.update(world.getPlayer(), state.scientists);
+            if (state.desc.isCompleted()) {
+                iter.remove();
+                if (!state.desc.isRepeatable()) {
+                    completedProjects.add(state.desc);
+                } else {
+                    availableProjects.add(state.desc);
+                }
+                idleScientists += state.scientists;
+                GameLogger.getInstance().logMessage("Research project " + state.desc.name + " completed");
+            }
+        }
     }
 }

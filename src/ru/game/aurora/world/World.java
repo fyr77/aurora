@@ -41,6 +41,9 @@ public class World {
             return;
         }
         currentRoom.update(engine, this);
+        if (isUpdatedThisFrame()) {
+            player.getResearchState().update(this);
+        }
     }
 
     public void draw(JGEngine engine) {

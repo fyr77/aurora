@@ -30,6 +30,16 @@ public class Cartography extends ResearchProjectDesc {
 
     @Override
     public String getStatusString(Player player, int scientists) {
-        return String.format("Remaining raw geodata: %d, est. %d days left", geodata.getRaw(), geodata.getRaw() / scientists);
+        return String.format("Remaining raw geodata: %d, est. %s days left", geodata.getRaw(), scientists != 0 ? Integer.toString(geodata.getRaw() / scientists) : "<inf>");
+    }
+
+    @Override
+    public boolean isCompleted() {
+        return geodata.getRaw() == 0;
+    }
+
+    @Override
+    public boolean isRepeatable() {
+        return true;
     }
 }
