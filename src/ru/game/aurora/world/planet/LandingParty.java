@@ -11,6 +11,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.equip.LandingPartyWeapon;
 
 public class LandingParty implements GameObject, Positionable {
     private int x;
@@ -25,12 +26,15 @@ public class LandingParty implements GameObject, Positionable {
 
     private int oxygen;
 
-    public LandingParty(int x, int y, int military, int science, int engineers) {
+    private LandingPartyWeapon weapon;
+
+    public LandingParty(int x, int y, LandingPartyWeapon weapon, int military, int science, int engineers) {
         this.x = x;
         this.y = y;
         this.military = military;
         this.science = science;
         this.engineers = engineers;
+        this.weapon = weapon;
         oxygen = 100;
     }
 
@@ -58,16 +62,7 @@ public class LandingParty implements GameObject, Positionable {
     @Override
     public void draw(JGEngine engine, Camera camera) {
         engine.drawImage(camera.getXCoord(x), camera.getYCoord(y), "awayteam");
-        //JGRectangle rect = GameLogger.getInstance().getStatusMessagesRect();
 
-        //final JGFont font = GameLogger.getInstance().getFont();
-        /*engine.drawString("Landing team status:", rect.x, rect.y, -1, font, JGColor.white);
-        engine.drawString("scientists: " + science, rect.x, rect.y + font.getSize(), -1, font, JGColor.white);
-        engine.drawString("engineers: " + engineers, rect.x, rect.y + font.getSize() * 2, -1, font, JGColor.white);
-        engine.drawString("military: " + military, rect.x, rect.y + font.getSize() * 3, -1, font, JGColor.white);
-        engine.drawString("Remaining oxygen: " + oxygen, rect.x, rect.y + font.getSize() * 4, -1, font, JGColor.white);
-
-        engine.drawString(String.format("Coordinates : (%d, %d)", x, y), rect.x, rect.y + font.getSize() * 5, -1, font, JGColor.white);*/
         GameLogger.getInstance().addStatusMessage("Landing team status:");
         GameLogger.getInstance().addStatusMessage("scientists: " + science);
         GameLogger.getInstance().addStatusMessage("engineers: " + engineers);
@@ -87,5 +82,13 @@ public class LandingParty implements GameObject, Positionable {
 
     public int getOxygen() {
         return oxygen;
+    }
+
+    public LandingPartyWeapon getWeapon() {
+        return weapon;
+    }
+
+    public int calcDamage() {
+        return (int) (weapon.getDamage() * (1.0 / 3 * (science + engineers) + military));
     }
 }

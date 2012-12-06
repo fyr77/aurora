@@ -12,6 +12,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetScanScreen;
@@ -90,7 +91,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             if (x == p.getGlobalX() && y == p.getGlobalY()) {
                 if (engine.getKey(JGEngineInterface.KeyEnter)) {
                     GameLogger.getInstance().logMessage("Descending to surface...");
-                    world.getPlayer().setLandingParty(new LandingParty(0, 0, 1, 1, 1));
+                    world.getPlayer().setLandingParty(new LandingParty(0, 0, new LandingPartyWeapon(1, 3, "Assault rifles"), 1, 1, 1));
                     p.enter(world);
                     world.setCurrentRoom(p);
                     engine.clearKey(JGEngineInterface.KeyEnter);

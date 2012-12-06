@@ -20,6 +20,8 @@ public class Animal implements GameObject, Positionable {
 
     private int y;
 
+    private int hp;
+
     private AnimalSpeciesDesc desc;
 
     private Planet myPlanet;
@@ -31,6 +33,7 @@ public class Animal implements GameObject, Positionable {
         this.y = y;
         this.desc = desc;
         this.myPlanet = p;
+        this.hp = desc.getHp();
     }
 
     @Override
@@ -63,5 +66,17 @@ public class Animal implements GameObject, Positionable {
     public void setPos(int newX, int newY) {
         x = newX;
         y = newY;
+    }
+
+    public AnimalSpeciesDesc getDesc() {
+        return desc;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 }

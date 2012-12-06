@@ -33,13 +33,6 @@ public class World {
     public void update(JGEngine engine) {
         updatedThisFrame = false;
         currentRoom.update(engine, this);
-        if (updatedThisFrame) {
-            engine.clearKey(JGEngine.KeyUp);
-            engine.clearKey(JGEngine.KeyDown);
-            engine.clearKey(JGEngine.KeyLeft);
-            engine.clearKey(JGEngine.KeyRight);
-            engine.clearKey(JGEngine.KeyEnter);
-        }
     }
 
     public void draw(JGEngine engine) {

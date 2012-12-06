@@ -49,7 +49,14 @@ public class AuroraGame extends JGEngine {
     @Override
     public void doFrame() {
         world.update(this);
+
+        // clear key states
         clearLastKey();
+        clearKey(JGEngine.KeyUp);
+        clearKey(JGEngine.KeyDown);
+        clearKey(JGEngine.KeyLeft);
+        clearKey(JGEngine.KeyRight);
+        clearKey(JGEngine.KeyEnter);
     }
 
     @Override
