@@ -154,7 +154,8 @@ public class Planet implements Room, GalaxyMapObject {
         landingParty = world.getPlayer().getLandingParty();
         world.getCamera().setTarget(landingParty);
         shuttlePosition = new JGPoint(landingParty.getX(), landingParty.getY());
-        updateVisibility(landingParty.getX(), landingParty.getY(), 5);
+        int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
+        landingParty.addCollectedGeodata(openedTiles);
     }
 
     public int wrapX(int x) {
@@ -177,17 +178,22 @@ public class Planet implements Room, GalaxyMapObject {
 
     /**
      * Updates planet map. Makes tiles visible in given range from given point
+     *
+     * @return Amount of tiles opened
      */
-    private void updateVisibility(int x, int y, int range) {
+    private int updateVisibility(int x, int y, int range) {
+        int rz = 0;
         for (int i = y - range; i <= y + range; ++i) {
             for (int j = x - range; j <= x + range; ++j) {
                 int pointX = wrapX(j);
                 int pointY = wrapY(i);
                 if (surface[pointY][pointX] < 0) {
                     surface[pointY][pointX] *= -1;
+                    ++rz;
                 }
             }
         }
+        return rz;
     }
 
     /**
@@ -216,8 +222,8 @@ public class Planet implements Room, GalaxyMapObject {
         }
         x = wrapX(x);
         y = wrapY(y);
-        updateVisibility(x, y, 1);
-
+        int tilesExplored = updateVisibility(x, y, 1);
+        landingParty.addCollectedGeodata(tilesExplored);
 
         if (x == shuttlePosition.x && y == shuttlePosition.y) {
 
@@ -231,6 +237,11 @@ public class Planet implements Room, GalaxyMapObject {
                 owner.enter(world);
                 world.getPlayer().getShip().setPos(globalX, globalY);
                 engine.clearKey(JGEngine.KeyEnter);
+                if (landingParty.getCollectedGeodata() > 0) {
+                    GameLogger.getInstance().logMessage("Adding " + landingParty.getCollectedGeodata() + " pieces of raw geodata");
+                }
+                world.getPlayer().getResearchState().getGeodata().addRawData(landingParty.getCollectedGeodata());
+                landingParty.setCollectedGeodata(0);
             }
         }
         world.getPlayer().getLandingParty().setPos(x, y);

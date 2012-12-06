@@ -28,6 +28,8 @@ public class LandingParty implements GameObject, Positionable {
 
     private LandingPartyWeapon weapon;
 
+    private int collectedGeodata = 0;
+
     public LandingParty(int x, int y, LandingPartyWeapon weapon, int military, int science, int engineers) {
         this.x = x;
         this.y = y;
@@ -91,5 +93,17 @@ public class LandingParty implements GameObject, Positionable {
 
     public int calcDamage() {
         return (int) (weapon.getDamage() * (1.0 / 3 * (science + engineers) + military));
+    }
+
+    public void addCollectedGeodata(int amount) {
+        collectedGeodata += amount;
+    }
+
+    public int getCollectedGeodata() {
+        return collectedGeodata;
+    }
+
+    public void setCollectedGeodata(int collectedGeodata) {
+        this.collectedGeodata = collectedGeodata;
     }
 }
