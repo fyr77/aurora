@@ -26,7 +26,7 @@ public class World {
         player = new Player();
         this.camera = camera;
         camera.setTarget(player.getShip());
-        currentRoom = galaxyMap = new GalaxyMap(sizeX, sizeY);
+        currentRoom = galaxyMap = new GalaxyMap(sizeX, sizeY, camera.getNumTilesX(), camera.getNumTilesY());
         currentRoom.enter(this);
         updatedThisFrame = false;
     }

@@ -125,7 +125,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         player.getShip().draw(engine, camera);
         engine.setColor(star.color);
 
-        engine.drawOval(camera.getNumTilesX() / 2 * engine.tileWidth() + (engine.tileWidth() / 2), camera.getNumTilesY() / 2 * engine.tileHeight() + engine.tileWidth() / 2, engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
+        final int starX = camera.getNumTilesX() / 2 * camera.getTileWidth() + (camera.getTileWidth() / 2);
+        final int starY = camera.getNumTilesY() / 2 * camera.getTileHeight() + camera.getTileHeight() / 2;
+        engine.drawOval(starX, starY, engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
         for (Planet p : planets) {
             if (p.getGlobalX() == player.getShip().getX() && p.getGlobalY() == player.getShip().getY()) {
                 GameLogger.getInstance().addStatusMessage("Approaching planet: ");
@@ -133,7 +135,14 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 GameLogger.getInstance().addStatusMessage("Press <enter> to launch surface party");
 
             }
+
+            int planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);
+            int planetY = camera.getYCoord(p.getGlobalY()) + camera.getTileWidth() / 2;
+            double size = Math.sqrt(Math.pow((planetX - starX), 2) + Math.pow((planetY - starY), 2)) * 2;
+
+            engine.drawOval(starX, starY, size, size, false, true, 1, JGColor.grey);
             p.drawOnGlobalMap(engine, camera, 0, 0);
+
         }
     }
 }

@@ -41,7 +41,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private Random r = new Random();
 
-    public GalaxyMap(int tilesX, int tilesY) {
+    public GalaxyMap(int tilesX, int tilesY, int systemSizeX, int systemSizeY) {
         this.tilesX = tilesX;
         this.tilesY = tilesY;
         map = new int[tilesY][tilesX];
@@ -64,7 +64,7 @@ public class GalaxyMap extends BaseSpaceRoom {
                 y = r.nextInt(tilesY);
             } while (map[y][x] != -1);
             final int idx = objects.size();
-            objects.add(generateRandomStarSystem(x, y));
+            objects.add(generateRandomStarSystem(x, y, systemSizeX, systemSizeY));
             map[y][x] = idx;
         }
     }
@@ -87,7 +87,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         world.getCamera().setTarget(player.getShip());
     }
 
-    private StarSystem generateRandomStarSystem(int x, int y) {
+    private StarSystem generateRandomStarSystem(int x, int y, int maxSizeX, int maxSizeY) {
         int size = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
         JGColor starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
         final int planetCount = r.nextInt(5);
@@ -95,7 +95,21 @@ public class GalaxyMap extends BaseSpaceRoom {
         StarSystem ss = new StarSystem(new StarSystem.Star(size, starColor), x, y);
         for (int i = 0; i < planetCount; ++i) {
             //todo: planet coordinate generation
-            planets[i] = new Planet(ss, CollectionUtils.selectRandomElement(PlanetCategory.values()), CollectionUtils.selectRandomElement(PlanetAtmosphere.values()), r.nextInt(3) + 1, r.nextInt(25), r.nextInt(20), true);
+
+            int radius = r.nextInt(5) + 1;
+
+            int planetX = r.nextInt(2 * radius) - radius;
+
+            int planetY = (int) (Math.sqrt(radius * radius - planetX * planetX) * (r.nextBoolean() ? -1 : 1));
+
+            planets[i] = new Planet(
+                    ss
+                    , CollectionUtils.selectRandomElement(PlanetCategory.values())
+                    , CollectionUtils.selectRandomElement(PlanetAtmosphere.values())
+                    , r.nextInt(3) + 1
+                    , maxSizeX / 2 + planetX
+                    , maxSizeY / 2 + planetY
+                    , true);
         }
         ss.setPlanets(planets);
         return ss;
