@@ -69,6 +69,7 @@ public class LandingParty implements GameObject, Positionable {
         GameLogger.getInstance().addStatusMessage("military: " + military);
         GameLogger.getInstance().addStatusMessage("Remaining oxygen: " + oxygen);
         GameLogger.getInstance().addStatusMessage(String.format("Current coordinates (%d, %d)", x, y));
+        GameLogger.getInstance().addStatusMessage(String.format("Weapons: %s, %d rng, %d dmg", weapon.getName(), weapon.getRange(), weapon.getDamage()));
     }
 
     public void consumeOxygen() {
