@@ -18,7 +18,7 @@ public class Player {
 
     public Player() {
         ship = new Ship(10, 10);
-        researchState = new ResearchState();
+        researchState = new ResearchState(10);
     }
 
     public Ship getShip() {

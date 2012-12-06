@@ -57,6 +57,7 @@ public class AuroraGame extends JGEngine {
         clearKey(JGEngine.KeyLeft);
         clearKey(JGEngine.KeyRight);
         clearKey(JGEngine.KeyEnter);
+        clearKey(JGEngine.KeyTab);
     }
 
     @Override

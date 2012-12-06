@@ -8,6 +8,7 @@ package ru.game.aurora.world;
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.player.Player;
+import ru.game.aurora.player.research.ResearchScreen;
 import ru.game.aurora.world.space.GalaxyMap;
 
 public class World {
@@ -32,6 +33,13 @@ public class World {
 
     public void update(JGEngine engine) {
         updatedThisFrame = false;
+        if (engine.getLastKeyChar() == 'r') {
+            // open research screen
+            ResearchScreen researchScreen = new ResearchScreen();
+            researchScreen.enter(this);
+            currentRoom = researchScreen;
+            return;
+        }
         currentRoom.update(engine, this);
     }
 

@@ -12,6 +12,8 @@ import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
+import ru.game.aurora.player.research.ResearchState;
+import ru.game.aurora.player.research.projects.Cartography;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -239,9 +241,14 @@ public class Planet implements Room, GalaxyMapObject {
                 engine.clearKey(JGEngine.KeyEnter);
                 if (landingParty.getCollectedGeodata() > 0) {
                     GameLogger.getInstance().logMessage("Adding " + landingParty.getCollectedGeodata() + " pieces of raw geodata");
+                    final ResearchState researchState = world.getPlayer().getResearchState();
+                    if (researchState.getGeodata().getRaw() == 0) {
+                        GameLogger.getInstance().logMessage("Cartography research is now available");
+                        researchState.getAvailableProjects().add(new Cartography(researchState.getGeodata()));
+                    }
+                    researchState.getGeodata().addRawData(landingParty.getCollectedGeodata());
+                    landingParty.setCollectedGeodata(0);
                 }
-                world.getPlayer().getResearchState().getGeodata().addRawData(landingParty.getCollectedGeodata());
-                landingParty.setCollectedGeodata(0);
             }
         }
         world.getPlayer().getLandingParty().setPos(x, y);
