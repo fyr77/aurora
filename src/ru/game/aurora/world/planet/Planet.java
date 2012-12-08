@@ -12,8 +12,6 @@ import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
-import ru.game.aurora.player.research.ResearchState;
-import ru.game.aurora.player.research.projects.Cartography;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -23,6 +21,7 @@ import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -96,12 +95,12 @@ public class Planet implements Room, GalaxyMapObject {
     /**
      * Animals that are located on planet surface.
      */
-    private List<Animal> animals = new ArrayList<Animal>();
+    private List<PlanetObject> planetObjects = new ArrayList<PlanetObject>();
 
     /**
      * When in fire mode, this is currently selected target
      */
-    private Animal target = null;
+    private PlanetObject target = null;
 
     public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
         this.owner = owner;
@@ -141,11 +140,11 @@ public class Planet implements Room, GalaxyMapObject {
         if (hasLife) {
             // generate random species descs. Currently only one
             animalSpecies = new AnimalSpeciesDesc[1];
-            animalSpecies[0] = new AnimalSpeciesDesc(this, "Alien mammoth", "mammal_large_1", false, true, 3, 0, AnimalSpeciesDesc.Behaviour.PASSIVE);
+            animalSpecies[0] = new AnimalSpeciesDesc(this, "Alien mammoth", "mammal_large_1", "mammal_large_1_dead", false, true, 3, 0, AnimalSpeciesDesc.Behaviour.PASSIVE);
 
             final int animalCount = r.nextInt(10) + 5;
             for (int i = 0; i < animalCount; ++i) {
-                animals.add(new Animal(this, r.nextInt(/*width*/10), r.nextInt(/*height*/10), animalSpecies[0]));
+                planetObjects.add(new Animal(this, r.nextInt(/*width*/10), r.nextInt(/*height*/10), animalSpecies[0]));
             }
         }
     }
@@ -222,8 +221,32 @@ public class Planet implements Room, GalaxyMapObject {
             x++;
             world.setUpdatedThisFrame(true);
         }
+
         x = wrapX(x);
         y = wrapY(y);
+
+        if (engine.getKey(JGEngineInterface.KeyEnter)) {
+            // check if can pick up smth
+            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext();) {
+                PlanetObject p = iter.next();
+
+                if (!p.canBePickedUp()) {
+                    continue;
+                }
+
+                if (p.getX() != x || p.getY() != y) {
+                    continue;
+                }
+                GameLogger.getInstance().logMessage("Picked up " + p.getName());
+                landingParty.pickUp(world, p);
+                // some items (like ore deposits) can be picked up more than once, do not remove them in this case
+                if (!p.isAlive()) {
+                    iter.remove();
+                }
+            }
+        }
+
+
         int tilesExplored = updateVisibility(x, y, 1);
         landingParty.addCollectedGeodata(tilesExplored);
 
@@ -239,16 +262,7 @@ public class Planet implements Room, GalaxyMapObject {
                 owner.enter(world);
                 world.getPlayer().getShip().setPos(globalX, globalY);
                 engine.clearKey(JGEngine.KeyEnter);
-                if (landingParty.getCollectedGeodata() > 0) {
-                    GameLogger.getInstance().logMessage("Adding " + landingParty.getCollectedGeodata() + " pieces of raw geodata");
-                    final ResearchState researchState = world.getPlayer().getResearchState();
-                    if (researchState.getGeodata().getRaw() == 0) {
-                        GameLogger.getInstance().logMessage("Cartography research is now available");
-                        researchState.getAvailableProjects().add(new Cartography(researchState.getGeodata()));
-                    }
-                    researchState.getGeodata().addRawData(landingParty.getCollectedGeodata());
-                    landingParty.setCollectedGeodata(0);
-                }
+                landingParty.onReturnToShip(world);
             }
         }
         world.getPlayer().getLandingParty().setPos(x, y);
@@ -272,29 +286,32 @@ public class Planet implements Room, GalaxyMapObject {
      * This update method is used in FIRE mode. Selecting targets and shooting.
      */
     private void updateShoot(JGEngine engine, World world) {
-        if (animals.isEmpty()) {
+        if (planetObjects.isEmpty()) {
             return;
         }
         int targetIdx = 0;
-        List<Animal> availableTargets = new ArrayList<Animal>();
+        List<PlanetObject> availableTargets = new ArrayList<PlanetObject>();
 
         if (target != null && getRange(landingParty, target) > landingParty.getWeapon().getRange()) {
             // target moved out of range
             target = null;
         }
 
-        for (Animal animal : animals) {
-            if (surface[animal.getY()][animal.getX()] < 0) {
+        for (PlanetObject planetObject : planetObjects) {
+            if (!planetObject.canBeShotAt()) {
+                continue;
+            }
+            if (surface[planetObject.getY()][planetObject.getX()] < 0) {
                 // do not target animals on unexplored tiles
                 continue;
             }
-            if (landingParty.getWeapon().getRange() >= getRange(landingParty, animal)) {
-                availableTargets.add(animal);
+            if (landingParty.getWeapon().getRange() >= getRange(landingParty, planetObject)) {
+                availableTargets.add(planetObject);
                 if (target == null) {
-                    target = animal;
+                    target = planetObject;
                 }
 
-                if (target == animal) {
+                if (target == planetObject) {
                     targetIdx = availableTargets.size() - 1;
                 }
             }
@@ -323,11 +340,11 @@ public class Planet implements Room, GalaxyMapObject {
         if (engine.getLastKeyChar() == 'f' || engine.getKey(JGEngine.KeyEnter)) {
             // firing
             final int damage = landingParty.calcDamage();
-            target.setHp(target.getHp() - damage);
-            GameLogger.getInstance().logMessage("Bang! Dealt " + damage + " damage to " + target.getDesc().getName());
-            if (target.getHp() <= 0) {
-                GameLogger.getInstance().logMessage(target.getDesc().getName() + " killed");
-                animals.remove(target);
+            target.onShotAt(damage);
+            GameLogger.getInstance().logMessage("Bang! Dealt " + damage + " damage to " + target.getName());
+            if (!target.isAlive()) {
+                GameLogger.getInstance().logMessage(target.getName() + " killed");
+                planetObjects.remove(target);
                 target = null;
             }
             world.setUpdatedThisFrame(true);
@@ -371,7 +388,7 @@ public class Planet implements Room, GalaxyMapObject {
             engine.clearKey(JGEngine.KeyEnter);
         }
 
-        for (Animal a : animals) {
+        for (PlanetObject a : planetObjects) {
             a.update(engine, world);
         }
     }
@@ -428,13 +445,13 @@ public class Planet implements Room, GalaxyMapObject {
             }
 
             engine.setColor(JGColor.red);
-            for (Animal a : animals) {
+            for (PlanetObject a : planetObjects) {
                 // draw only if tile under this animal is visible
                 if (surface[a.getY()][a.getX()] >= 0) {
                     a.draw(engine, camera);
 
                     // in shoot mode, all available targets are surrounded with red square
-                    if (mode == MODE_SHOOT && getRange(landingParty, a) < landingParty.getWeapon().getRange()) {
+                    if (mode == MODE_SHOOT && a.canBeShotAt() && getRange(landingParty, a) < landingParty.getWeapon().getRange()) {
                         engine.drawRect(camera.getXCoordWrapped(a.getX(), width), camera.getYCoordWrapped(a.getY(), height), camera.getTileWidth(), camera.getTileHeight(), false, false);
                     }
                 }

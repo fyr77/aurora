@@ -20,6 +20,8 @@ public class AnimalSpeciesDesc {
 
     private String spriteName;
 
+    private String deadSpriteName;
+
     private boolean isCarnivorous;
 
     private boolean isHerbivorous;
@@ -58,9 +60,10 @@ public class AnimalSpeciesDesc {
      */
     private boolean outopsyMade = false;
 
-    public AnimalSpeciesDesc(Planet homePlanet, String name, String spriteName, boolean carnivorous, boolean herbivorous, int hp, int damage, Behaviour behaviour) {
+    public AnimalSpeciesDesc(Planet homePlanet, String name, String spriteName, String deadSpriteName, boolean carnivorous, boolean herbivorous, int hp, int damage, Behaviour behaviour) {
         this.homePlanet = homePlanet;
         this.name = name;
+        this.deadSpriteName = deadSpriteName;
         this.spriteName = spriteName;
         isCarnivorous = carnivorous;
         isHerbivorous = herbivorous;
@@ -73,6 +76,10 @@ public class AnimalSpeciesDesc {
         return spriteName;
     }
 
+    public String getDeadSpriteName() {
+        return deadSpriteName;
+    }
+
     public Behaviour getBehaviour() {
         return behaviour;
     }
@@ -83,5 +90,9 @@ public class AnimalSpeciesDesc {
 
     public int getHp() {
         return hp;
+    }
+
+    public boolean isOutopsyMade() {
+        return outopsyMade;
     }
 }

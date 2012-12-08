@@ -4,6 +4,7 @@ awayteam	-	0	sprites/ships/Awayteam.png	-
 shuttle	-	0	sprites/ships/shuttle.png	-
 // animals and alien lifeforms
 mammal_large_1	-	0	sprites/animals/mammal_large_1.png	-
+mammal_large_1_dead	-	0	sprites/animals/mammal_large_1_dead.png	-
 
 // gui
 target	-	0	sprites/gui/target.png	-

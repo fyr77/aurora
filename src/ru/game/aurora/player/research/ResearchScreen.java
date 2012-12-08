@@ -138,6 +138,7 @@ public class ResearchScreen implements Room {
                     GameLogger.getInstance().logMessage("Starting research " + researchState.getAvailableProjects().get(currentIdx).getName());
                     ResearchProjectDesc desc = researchState.getAvailableProjects().remove(currentIdx);
                     researchState.getCurrentProjects().add(new ResearchProjectState(desc, 0));
+                    currentIdx--;
                 }
                 break;
             case COMPLETED_TAB:

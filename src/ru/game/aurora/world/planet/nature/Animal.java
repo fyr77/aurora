@@ -2,10 +2,9 @@ package ru.game.aurora.world.planet.nature;
 
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
-import ru.game.aurora.world.GameObject;
-import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetObject;
 
 import java.util.Random;
 
@@ -15,7 +14,7 @@ import java.util.Random;
  * Date: 04.12.12
  * Time: 17:00
  */
-public class Animal implements GameObject, Positionable {
+public class Animal implements PlanetObject {
     private int x;
 
     private int y;
@@ -28,6 +27,8 @@ public class Animal implements GameObject, Positionable {
 
     private static final Random r = new Random();
 
+    private boolean pickedUp = false;
+
     public Animal(Planet p, int x, int y, AnimalSpeciesDesc desc) {
         this.x = x;
         this.y = y;
@@ -38,6 +39,9 @@ public class Animal implements GameObject, Positionable {
 
     @Override
     public void update(JGEngine engine, World world) {
+        if (hp <= 0) {
+            return;
+        }
         if (!world.isUpdatedThisFrame()) {
             return;
         }
@@ -51,7 +55,8 @@ public class Animal implements GameObject, Positionable {
 
     @Override
     public void draw(JGEngine engine, Camera camera) {
-        engine.drawImage(desc.getSpriteName(), camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
+        final String spriteName = hp > 0 ? desc.getSpriteName() : desc.getDeadSpriteName();
+        engine.drawImage(spriteName, camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
     }
 
     public int getX() {
@@ -78,5 +83,40 @@ public class Animal implements GameObject, Positionable {
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    @Override
+    public boolean canBePickedUp() {
+        return hp <= 0;
+    }
+
+    @Override
+    public boolean canBeShotAt() {
+        return hp > 0;
+    }
+
+    @Override
+    public void onShotAt(int damage) {
+        hp -= damage;
+    }
+
+    @Override
+    public void onPickedUp(World world) {
+        pickedUp = true;
+    }
+
+    @Override
+    public boolean isAlive() {
+        // object is alive untill picked up, even if animal is actually dead
+        return !pickedUp;
+    }
+
+    @Override
+    public String getName() {
+        if (hp > 0) {
+            return desc.getName();
+        } else {
+            return desc.getName() + " corpse";
+        }
     }
 }
