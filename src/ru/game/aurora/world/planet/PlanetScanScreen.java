@@ -53,7 +53,7 @@ public class PlanetScanScreen implements Room
     @Override
     public void draw(JGEngine engine, Camera camera) {
         planet.printPlanetStatus();
-        planet.drawLandscape(engine, myCamera);
+        planet.drawLandscape(engine, myCamera, false);
         GameLogger.getInstance().addStatusMessage("Press <enter>, <esc> or <S> to return");
     }
 }

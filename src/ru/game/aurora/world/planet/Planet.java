@@ -383,31 +383,37 @@ public class Planet implements Room, GalaxyMapObject {
         GameLogger.getInstance().addStatusMessage("=====================================");
     }
 
-    public void drawLandscape(JGEngine engine, Camera camera) {
+    public void drawLandscape(JGEngine engine, Camera camera, boolean detailed) {
         for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
             for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; ++j) {
-                JGColor color = JGColor.black;
 
-                switch (surface[wrapY(i)][wrapX(j)]) {
-                    case SurfaceTypes.DIRT:
-                        color = JGColor.orange;
-                        break;
-                    case SurfaceTypes.ICE:
-                        color = JGColor.white;
-                        break;
-                    case SurfaceTypes.ROCKS:
-                        color = JGColor.grey;
-                        break;
-                    case SurfaceTypes.WATER:
-                        color = JGColor.blue;
-                        break;
+                final byte type = surface[wrapY(i)][wrapX(j)];
+                if (type < 0) {
+                    continue;
                 }
-                engine.setColor(color);
-                engine.drawRect(camera.getXCoord(j), camera.getYCoord(i), engine.tileWidth(), engine.tileHeight(), true, false);
+                if (detailed) {
+                    SurfaceTypes.drawDetailed(
+                            type
+                            , camera.getXCoord(j)
+                            , camera.getYCoord(i)
+                            , camera.getTileWidth()
+                            , camera.getTileHeight()
+                            , engine);
+                } else {
+                    SurfaceTypes.drawSimple(
+                            type
+                            , camera.getXCoord(j)
+                            , camera.getYCoord(i)
+                            , camera.getTileWidth()
+                            , camera.getTileHeight()
+                            , engine);
+                }
             }
-        }
 
+        }
     }
+
+
 
     public void drawObjects(JGEngine engine, Camera camera) {
         // this part (monsters, shuttle, landing party) is drawn only when landing party is on surface
@@ -445,7 +451,7 @@ public class Planet implements Room, GalaxyMapObject {
     @Override
     public void draw(JGEngine engine, Camera camera) {
         printPlanetStatus();
-        drawLandscape(engine, camera);
+        drawLandscape(engine, camera, true);
         drawObjects(engine, camera);
     }
 
