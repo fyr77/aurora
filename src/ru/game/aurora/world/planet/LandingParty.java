@@ -89,6 +89,11 @@ public class LandingParty implements GameObject, Positionable {
     public void consumeOxygen() {
         //todo: depend on team size?
         oxygen--;
+        if (oxygen == 50) {
+            GameLogger.getInstance().logMessage("Oxygen tank is half empty");
+        } else if (oxygen == 20) {
+            GameLogger.getInstance().logMessage("Warning, low on oxygen");
+        }
     }
 
     public void refillOxygen() {
