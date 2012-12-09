@@ -8,6 +8,7 @@ package ru.game.aurora.world.planet;
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.StarSystem;
@@ -35,7 +36,7 @@ public class PlanetScanScreen implements Room
         final int newTileWidth = oldCamera.getNumTilesX() * oldCamera.getTileWidth() / planet.getWidth();
         final int newTileHeight = oldCamera.getNumTilesY() * oldCamera.getTileHeight() / planet.getHeight();
         myCamera = new Camera(0, 0, newTileWidth, newTileHeight, planet.getWidth(), planet.getHeight(), world.getCamera().getEngine());
-        myCamera.setTarget(new Camera.FixedPosition(planet.getWidth() / 2, planet.getHeight() / 2));
+        myCamera.setTarget(new BasePositionable(planet.getWidth() / 2, planet.getHeight() / 2));
     }
 
     @Override

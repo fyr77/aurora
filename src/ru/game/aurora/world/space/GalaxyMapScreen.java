@@ -10,6 +10,7 @@ package ru.game.aurora.world.space;
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
@@ -34,7 +35,7 @@ public class GalaxyMapScreen implements Room {
         final int newTileWidth = oldCamera.getNumTilesX() * oldCamera.getTileWidth() / galaxyMap.getTilesX();
         final int newTileHeight = oldCamera.getNumTilesY() * oldCamera.getTileHeight() / galaxyMap.getTilesY();
         myCamera = new Camera(0, 0, newTileWidth, newTileHeight, galaxyMap.getTilesX(), galaxyMap.getTilesY(), world.getCamera().getEngine());
-        myCamera.setTarget(new Camera.FixedPosition(galaxyMap.getTilesX() / 2, galaxyMap.getTilesY() / 2));
+        myCamera.setTarget(new BasePositionable(galaxyMap.getTilesX() / 2, galaxyMap.getTilesY() / 2));
         ship = world.getPlayer().getShip();
     }
 

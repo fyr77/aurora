@@ -12,6 +12,7 @@ import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
+import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -137,6 +138,11 @@ public class Planet implements Room, GalaxyMapObject {
             }
         }
 
+        final int resourceDeposits = r.nextInt(40 / size);
+        for (int i = 0; i < resourceDeposits; ++i) {
+            planetObjects.add(new OreDeposit(this, r.nextInt(10), r.nextInt(10), CollectionUtils.selectRandomElement(OreDeposit.OreType.values()), r.nextInt(3) + 1));
+        }
+
         if (hasLife) {
             // generate random species descs. Currently only one
             animalSpecies = new AnimalSpeciesDesc[1];
@@ -237,8 +243,8 @@ public class Planet implements Room, GalaxyMapObject {
                 if (p.getX() != x || p.getY() != y) {
                     continue;
                 }
-                GameLogger.getInstance().logMessage("Picked up " + p.getName());
-                landingParty.pickUp(world, p);
+                p.onPickedUp(world);
+                world.setUpdatedThisFrame(true);
                 // some items (like ore deposits) can be picked up more than once, do not remove them in this case
                 if (!p.isAlive()) {
                     iter.remove();

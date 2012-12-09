@@ -11,6 +11,7 @@ import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.LandingParty;
@@ -117,7 +118,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         player = world.getPlayer();
         player.getShip().setPos(0, 0);
         // in star system camera is always fixed on center
-        world.getCamera().setTarget(new Camera.FixedPosition(world.getCamera().getNumTilesX() / 2, world.getCamera().getNumTilesY() / 2));
+        world.getCamera().setTarget(new BasePositionable(world.getCamera().getNumTilesX() / 2, world.getCamera().getNumTilesY() / 2));
     }
 
     @Override
@@ -144,5 +145,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             p.drawOnGlobalMap(engine, camera, 0, 0);
 
         }
+        player.addGlobalStatus();
     }
 }

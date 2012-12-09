@@ -34,31 +34,6 @@ public class Camera {
 
     private int viewportTilesY;
 
-    public static class FixedPosition implements Positionable {
-        private final int x;
-        private final int y;
-
-        public FixedPosition(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public int getX() {
-            return x;
-        }
-
-        @Override
-        public int getY() {
-            return y;
-        }
-
-        @Override
-        public void setPos(int newX, int newY) {
-            // empty
-        }
-    }
-
     public Camera(int viewportX, int viewportY, int vieportWidth, int viewportHeight, JGEngine engine) {
         this.viewportX = viewportX;
         this.viewportY = viewportY;

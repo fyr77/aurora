@@ -14,3 +14,7 @@ rock_tile_1	-	0	sprites/tiles/rock-1.png	-
 sand_tile_1	-	0	sprites/tiles/sand-1.png	-
 snow_tile_1	-	0	sprites/tiles/snow-1.png	-
 water_tile_1	-	0	sprites/tiles/water-1.png	-
+
+// ore
+iron_deposit	-	0	sprites/tiles/iron_deposit.png	-
+gold_deposit	-	0	sprites/tiles/gold_deposit.png	-

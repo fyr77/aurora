@@ -18,6 +18,12 @@ public class Ship implements GameObject, Positionable {
 
     private int maxHull;
 
+    private int scientists = 10;
+
+    private int engineers = 5;
+
+    private int military = 5;
+
     public Ship(int x, int y) {
         this.x = x;
         this.y = y;
@@ -59,5 +65,29 @@ public class Ship implements GameObject, Positionable {
     public void setPos(int newX, int newY) {
         this.x = newX;
         this.y = newY;
+    }
+
+    public int getScientists() {
+        return scientists;
+    }
+
+    public void setScientists(int scientists) {
+        this.scientists = scientists;
+    }
+
+    public int getEngineers() {
+        return engineers;
+    }
+
+    public void setEngineers(int engineers) {
+        this.engineers = engineers;
+    }
+
+    public int getMilitary() {
+        return military;
+    }
+
+    public void setMilitary(int military) {
+        this.military = military;
     }
 }

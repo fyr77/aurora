@@ -9,17 +9,14 @@ import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.research.ResearchState;
-import ru.game.aurora.player.research.projects.AnimalResearch;
 import ru.game.aurora.player.research.projects.Cartography;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
-import ru.game.aurora.world.planet.nature.Animal;
-import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LandingParty implements GameObject, Positionable {
     private int x;
@@ -38,7 +35,7 @@ public class LandingParty implements GameObject, Positionable {
 
     private int collectedGeodata = 0;
 
-    private List<PlanetObject> inventory = new LinkedList<PlanetObject>();
+    private Map<InventoryItem, Integer> inventory = new HashMap<InventoryItem, Integer>();
 
     public LandingParty(int x, int y, LandingPartyWeapon weapon, int military, int science, int engineers) {
         this.x = x;
@@ -83,8 +80,8 @@ public class LandingParty implements GameObject, Positionable {
         GameLogger.getInstance().addStatusMessage(String.format("Current coordinates (%d, %d)", x, y));
         GameLogger.getInstance().addStatusMessage(String.format("Weapons: %s, %d rng, %d dmg", weapon.getName(), weapon.getRange(), weapon.getDamage()));
         GameLogger.getInstance().addStatusMessage("============= Inventory: ================");
-        for (PlanetObject po : inventory) {
-            GameLogger.getInstance().addStatusMessage(po.getName());
+        for (Map.Entry<InventoryItem, Integer> po : inventory.entrySet()) {
+            GameLogger.getInstance().addStatusMessage(po.getKey().getName() + ": " + po.getValue());
         }
         GameLogger.getInstance().addStatusMessage("=========================================");
     }
@@ -110,6 +107,10 @@ public class LandingParty implements GameObject, Positionable {
         return (int) (weapon.getDamage() * (1.0 / 3 * (science + engineers) + military));
     }
 
+    public int calcMiningPower() {
+        return (int) (1.0 / 3 * (science + military) + engineers);
+    }
+
     public void addCollectedGeodata(int amount) {
         collectedGeodata += amount;
     }
@@ -122,10 +123,13 @@ public class LandingParty implements GameObject, Positionable {
         this.collectedGeodata = collectedGeodata;
     }
 
-    public void pickUp(World world, PlanetObject o)
+    public void pickUp(World world, InventoryItem o)
     {
-        inventory.add(o);
-        o.onPickedUp(world);
+        Integer i = inventory.get(o);
+        if (i == null) {
+            i = 0;
+        }
+        inventory.put(o, i + 1);
     }
 
     public void onReturnToShip(World world)
@@ -141,16 +145,8 @@ public class LandingParty implements GameObject, Positionable {
             setCollectedGeodata(0);
         }
 
-        for (PlanetObject o : inventory) {
-            if (o instanceof Animal) {
-                AnimalSpeciesDesc desc = ((Animal) o).getDesc();
-
-                if (!desc.isOutopsyMade() && !world.getPlayer().getResearchState().containsResearchFor(desc)) {
-                    // this type of alien animal has never been seen before, add new research
-                    GameLogger.getInstance().logMessage("Added biology research for new alien animal species " + desc.getName());
-                    world.getPlayer().getResearchState().getAvailableProjects().add(new AnimalResearch(desc));
-                }
-            }
+        for (Map.Entry<InventoryItem, Integer> o : inventory.entrySet()) {
+            o.getKey().onReturnToShip(world, o.getValue());
         }
     }
 }

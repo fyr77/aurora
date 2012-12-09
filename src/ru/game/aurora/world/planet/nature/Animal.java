@@ -2,7 +2,10 @@ package ru.game.aurora.world.planet.nature;
 
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.player.research.projects.AnimalResearch;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetObject;
 
@@ -15,6 +18,47 @@ import java.util.Random;
  * Time: 17:00
  */
 public class Animal implements PlanetObject {
+
+    public static class AnimalCorpseItem implements InventoryItem
+    {
+        AnimalSpeciesDesc desc;
+
+        public AnimalCorpseItem(AnimalSpeciesDesc desc) {
+            this.desc = desc;
+        }
+
+        @Override
+        public String getName() {
+            return desc.getName();
+        }
+
+        @Override
+        public void onReturnToShip(World world, int amount) {
+             if (!desc.isOutopsyMade() && !world.getPlayer().getResearchState().containsResearchFor(desc)) {
+                    // this type of alien animal has never been seen before, add new research
+                    GameLogger.getInstance().logMessage("Added biology research for new alien animal species " + desc.getName());
+                    world.getPlayer().getResearchState().getAvailableProjects().add(new AnimalResearch(desc));
+                }
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            AnimalCorpseItem that = (AnimalCorpseItem) o;
+
+            if (desc != null ? !desc.equals(that.desc) : that.desc != null) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            return desc != null ? desc.hashCode() : 0;
+        }
+    }
+
     private int x;
 
     private int y;
@@ -103,6 +147,8 @@ public class Animal implements PlanetObject {
     @Override
     public void onPickedUp(World world) {
         pickedUp = true;
+        GameLogger.getInstance().logMessage("Picked up " + getName());
+        world.getPlayer().getLandingParty().pickUp(world, new AnimalCorpseItem(desc));
     }
 
     @Override
