@@ -19,7 +19,7 @@ import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetScanScreen;
 
 public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
-    public static final JGColor[] possibleColors = {JGColor.red, JGColor.white, JGColor.yellow, JGColor.blue};
+    public static final JGColor[] possibleColors = {JGColor.red, JGColor.white, JGColor.yellow, new JGColor(122, 155, 243)};
 
     public static final int[] possibleSizes = {1, 2, 3, 4};
 
