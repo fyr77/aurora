@@ -18,3 +18,9 @@ water_tile_1	-	0	sprites/tiles/water-1.png	-
 // ore
 iron_deposit	-	0	sprites/tiles/iron_deposit.png	-
 gold_deposit	-	0	sprites/tiles/gold_deposit.png	-
+
+// races
+
+// gardeners
+gardener_ship	-	0	sprites/ships/tree_ship.png	-
+gardener_dialog	-	0	sprites/dialogs/gardener.png	-

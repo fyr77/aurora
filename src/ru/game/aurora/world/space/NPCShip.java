@@ -13,8 +13,7 @@ import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 
-public class NPCShip extends BasePositionable implements GameObject
-{
+public class NPCShip extends BasePositionable implements GameObject {
     private String sprite;
 
     private AlienRace race;
@@ -33,9 +32,11 @@ public class NPCShip extends BasePositionable implements GameObject
 
     @Override
     public void update(JGEngine engine, World world) {
+        // do nothing currently
     }
 
     @Override
     public void draw(JGEngine engine, Camera camera) {
+        engine.drawImage(sprite, camera.getXCoord(x), camera.getYCoord(y));
     }
 }

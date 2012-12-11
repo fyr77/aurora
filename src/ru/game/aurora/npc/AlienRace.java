@@ -5,8 +5,9 @@
  */
 package ru.game.aurora.npc;
 
-public class AlienRace
-{
+import ru.game.aurora.world.space.StarSystem;
+
+public class AlienRace {
     private String name;
 
     /**
@@ -16,4 +17,36 @@ public class AlienRace
      * 10-12 - like: will help and easily share information
      */
     private int relationToPlayer;
+
+    private StarSystem homeworld;
+
+    public AlienRace(String name, int relationToPlayer, StarSystem homeworld) {
+        this.name = name;
+        this.relationToPlayer = relationToPlayer;
+        this.homeworld = homeworld;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getRelationToPlayer() {
+        return relationToPlayer;
+    }
+
+    public void setRelationToPlayer(int relationToPlayer) {
+        this.relationToPlayer = relationToPlayer;
+    }
+
+    public StarSystem getHomeworld() {
+        return homeworld;
+    }
+
+    public void setHomeworld(StarSystem homeworld) {
+        this.homeworld = homeworld;
+    }
 }
