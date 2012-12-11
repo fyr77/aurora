@@ -39,7 +39,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     public static final int maxStars = 15;
 
-    private Random r = new Random();
+    private static final Random r = new Random();
 
     public GalaxyMap(int tilesX, int tilesY, int systemSizeX, int systemSizeY) {
         this.tilesX = tilesX;
@@ -54,6 +54,10 @@ public class GalaxyMap extends BaseSpaceRoom {
         // adding special objects that exist only in single instance, but are used frequently.
         // 0 is Nebula
         objects.add(new Nebula());
+
+        objects.add(HomeworldGenerator.generateGardenerHomeworld(5, 5, systemSizeX, systemSizeY, null));
+        map[5][5] = objects.size() - 1;
+
 
         // now generate random star systems
         for (int i = 0; i < maxStars; ++i) {
@@ -87,7 +91,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         world.getCamera().setTarget(player.getShip());
     }
 
-    private StarSystem generateRandomStarSystem(int x, int y, int maxSizeX, int maxSizeY) {
+    public static StarSystem generateRandomStarSystem(int x, int y, int maxSizeX, int maxSizeY) {
         int size = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
         JGColor starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
         final int planetCount = r.nextInt(5);

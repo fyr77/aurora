@@ -18,6 +18,9 @@ import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetScanScreen;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     public static final JGColor[] possibleColors = {JGColor.red, JGColor.white, JGColor.yellow, new JGColor(122, 155, 243)};
 
@@ -41,6 +44,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     private int globalMapX;
 
     private int globalMapY;
+
+    private List<NPCShip> ships = new ArrayList<NPCShip>();
 
     public StarSystem(Star star, int globalMapX, int globalMapY) {
         this.star = star;
@@ -110,6 +115,17 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
 
+        for (NPCShip ship : ships) {
+            if (ship.getX() == x && ship.getY() == y) {
+                if (!ship.isHostile()) {
+                    //GameLogger.getInstance().addStatusMessage("Press <enter> to hail ship");
+                }
+            }
+            if (world.isUpdatedThisFrame()) {
+                ship.update(engine, world);
+            }
+        }
+
     }
 
     @Override
@@ -124,6 +140,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     @Override
     public void draw(JGEngine engine, Camera camera) {
         player.getShip().draw(engine, camera);
+        player.addGlobalStatus();
+        GameLogger.getInstance().addStatusMessage("==========================");
         engine.setColor(star.color);
 
         final int starX = camera.getNumTilesX() / 2 * camera.getTileWidth() + (camera.getTileWidth() / 2);
@@ -145,6 +163,18 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             p.drawOnGlobalMap(engine, camera, 0, 0);
 
         }
-        player.addGlobalStatus();
+        for (NPCShip ship : ships) {
+            ship.draw(engine, camera);
+            if (ship.getX() == player.getShip().getX() && ship.getY() == player.getShip().getY()) {
+                if (!ship.isHostile()) {
+                    GameLogger.getInstance().addStatusMessage("Press <enter> to hail ship");
+                }
+            }
+        }
+
+    }
+
+    public List<NPCShip> getShips() {
+        return ships;
     }
 }

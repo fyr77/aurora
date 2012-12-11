@@ -23,4 +23,4 @@ gold_deposit	-	0	sprites/tiles/gold_deposit.png	-
 
 // gardeners
 gardener_ship	-	0	sprites/ships/tree_ship.png	-
-gardener_dialog	-	0	sprites/dialogs/gardener.png	-
+gardener_dialog	-	0	sprites/portraits/gardener.png	-

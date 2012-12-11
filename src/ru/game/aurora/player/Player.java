@@ -51,9 +51,10 @@ public class Player {
     public void addGlobalStatus()
     {
         GameLogger.getInstance().addStatusMessage("Ship status:");
-        GameLogger.getInstance().addStatusMessage("Scientists: " + ship.getScientists());
-        GameLogger.getInstance().addStatusMessage("Engineers: " + ship.getEngineers());
-        GameLogger.getInstance().addStatusMessage("Military: " + ship.getMilitary());
-        GameLogger.getInstance().addStatusMessage("Resources: " + resourceUnits);
+        GameLogger.getInstance().addStatusMessage("\tScientists: " + ship.getScientists());
+        GameLogger.getInstance().addStatusMessage("\tEngineers: " + ship.getEngineers());
+        GameLogger.getInstance().addStatusMessage("\tMilitary: " + ship.getMilitary());
+        GameLogger.getInstance().addStatusMessage("\tResources: " + resourceUnits);
+        GameLogger.getInstance().addStatusMessage(String.format("Ship coordinates: [%d, %d]", ship.getX(), ship.getY()));
     }
 }

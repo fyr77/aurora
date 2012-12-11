@@ -39,4 +39,13 @@ public class NPCShip extends BasePositionable implements GameObject {
     public void draw(JGEngine engine, Camera camera) {
         engine.drawImage(sprite, camera.getXCoord(x), camera.getYCoord(y));
     }
+
+    /**
+     * Returns true if this ship is hostile to player
+     * Hostile ships can not be hailed
+     */
+    public boolean isHostile()
+    {
+        return false;
+    }
 }
