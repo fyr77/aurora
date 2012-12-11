@@ -1,0 +1,108 @@
+/**
+ * User: jedi-philosopher
+ * Date: 11.12.12
+ * Time: 22:20
+ */
+package ru.game.aurora.npc;
+
+import jgame.JGColor;
+import jgame.platform.JGEngine;
+import ru.game.aurora.application.Camera;
+import ru.game.aurora.util.JGEngineUtils;
+import ru.game.aurora.world.Room;
+import ru.game.aurora.world.World;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Dialog implements Room
+{
+
+    public static class Statement
+    {
+        public final int id;
+
+        public final String npcText;
+
+        public final Reply[] replies;
+
+        public Statement(int id, String npcText, Reply... replies)
+        {
+            this.id = id;
+            this.npcText = npcText;
+            this.replies = replies;
+        }
+    }
+
+    public static class Reply
+    {
+        public final int targetStatementId;
+
+        public final String replyText;
+
+        public Reply(int targetStatementId, String replyText) {
+            this.targetStatementId = targetStatementId;
+            this.replyText = replyText;
+        }
+    }
+
+    private String iconName;
+
+    private Map<Integer, Statement> statements = new HashMap<Integer, Statement>();
+
+    private Statement currentStatement;
+
+    public Dialog(String iconName, Statement... statements)
+    {
+        this.iconName = iconName;
+        for (Statement s : statements) {
+            this.statements.put(s.id, s);
+        }
+    }
+
+    public Dialog(String iconName, Map<Integer, Statement> statements) {
+        this.iconName = iconName;
+        this.statements = statements;
+    }
+
+    @Override
+    public void enter(World world) {
+        currentStatement = statements.get(0);
+    }
+
+    @Override
+    public void update(JGEngine engine, World world) {
+        if (currentStatement == null) {
+            return;
+        }
+        char c = engine.getLastKeyChar();
+        int idx = c + 1 - '1';
+        if (idx >= currentStatement.replies.length) {
+            return;
+        }
+
+        currentStatement = statements.get(currentStatement.replies[idx].targetStatementId);
+    }
+
+    @Override
+    public void draw(JGEngine engine, Camera camera) {
+        engine.drawImage(iconName, camera.getXCoord(3), camera.getYCoord(3));
+        engine.setColor(JGColor.blue);
+        engine.drawRect(camera.getXCoord(7), camera.getYCoord(3), camera.getTileWidth() * 5, camera.getTileHeight() * 3, true, false);
+        engine.drawRect(camera.getXCoord(3), camera.getYCoord(7), camera.getTileWidth() * 10, camera.getTileHeight() * 5, true, false);
+
+        engine.setColor(JGColor.white);
+
+        JGEngineUtils.drawString(engine, currentStatement.npcText, camera.getXCoord(7), camera.getYCoord(3), camera.getTileWidth() * 5);
+        int i = 1;
+        for (Reply r : currentStatement.replies) {
+            engine.drawString(i + ": " + r.replyText, camera.getXCoord(3), camera.getYCoord(7), -1);
+        }
+    }
+
+    public boolean isOver()
+    {
+        return currentStatement == null;
+    }
+
+}

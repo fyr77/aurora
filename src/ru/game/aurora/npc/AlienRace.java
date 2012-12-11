@@ -20,10 +20,20 @@ public class AlienRace {
 
     private StarSystem homeworld;
 
-    public AlienRace(String name, int relationToPlayer, StarSystem homeworld) {
+    /**
+     * Default dialog is used when hailing random encounter ship of this race
+     */
+    private Dialog defaultDialog;
+
+    public AlienRace(String name, int relationToPlayer, StarSystem homeworld, Dialog defaultDialog) {
         this.name = name;
         this.relationToPlayer = relationToPlayer;
         this.homeworld = homeworld;
+        this.defaultDialog = defaultDialog;
+    }
+
+    public Dialog getDefaultDialog() {
+        return defaultDialog;
     }
 
     public String getName() {
