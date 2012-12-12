@@ -7,18 +7,22 @@
 package ru.game.aurora.util;
 
 import jgame.JGColor;
+import jgame.JGFont;
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.GameLogger;
 
 
 public class JGEngineUtils {
+    public static void drawString(JGEngine g, String s, int x, int y, int width) {
+        drawString(g, s, x, y, width, GameLogger.getInstance().getFont(), JGColor.white);
+    }
 
     /**
      * Draws string at given coord, wrapping it if necessary (if it exceeds width pixels)
      */
-    public static void drawString(JGEngine g, String s, int x, int y, int width) {
+    public static void drawString(JGEngine g, String s, int x, int y, int width, JGFont font, JGColor color) {
 
-        int lineHeight = GameLogger.getInstance().getFont().getSize();
+        int lineHeight = font.getSize();
 
         int curX = x;
         int curY = y;
@@ -35,7 +39,7 @@ public class JGEngineUtils {
                 curX = x;
             }
 
-            g.drawString(word, curX, curY, -1, GameLogger.getInstance().getFont(), JGColor.white);
+            g.drawString(word, curX, curY, -1, font, color);
 
             // Move over to the right for next word.
             curX += wordWidth;

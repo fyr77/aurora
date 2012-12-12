@@ -9,6 +9,8 @@ import jgame.JGColor;
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -55,7 +57,17 @@ public class GalaxyMap extends BaseSpaceRoom {
         // 0 is Nebula
         objects.add(new Nebula());
 
-        objects.add(HomeworldGenerator.generateGardenerHomeworld(5, 5, systemSizeX, systemSizeY, null));
+        AlienRace gardenerRace = new AlienRace("Gardeners", 8, null, new Dialog("gardener_dialog"
+                , new Dialog.Statement(0, "Greetings, human",
+                        new Dialog.Reply(1, "You speak our language and know who we are? How?")
+                        , new Dialog.Reply(2, "Greetings. We represent Alliance of Humanity, and who are you?"))
+                , new Dialog.Statement(1, "I have met your species before. We are always curious about new civilizations, so we always try to communicate newcomers",
+                        new Dialog.Reply(-1, "Ok"))
+                , new Dialog.Statement(2, "Others call as Gardeners. Mostlty because we fly these tree-ships, but also our ways have some similarity with gardener work",
+                        new Dialog.Reply(-1, "Ok"))
+        ));
+
+        objects.add(HomeworldGenerator.generateGardenerHomeworld(5, 5, systemSizeX, systemSizeY, gardenerRace));
         map[5][5] = objects.size() - 1;
 
 
@@ -98,8 +110,6 @@ public class GalaxyMap extends BaseSpaceRoom {
         Planet[] planets = new Planet[planetCount];
         StarSystem ss = new StarSystem(new StarSystem.Star(size, starColor), x, y);
         for (int i = 0; i < planetCount; ++i) {
-            //todo: planet coordinate generation
-
             int radius = r.nextInt(5) + 1;
 
             int planetX = r.nextInt(2 * radius) - radius;

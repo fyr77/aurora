@@ -6,6 +6,7 @@
 package ru.game.aurora.npc;
 
 import jgame.JGColor;
+import jgame.JGFont;
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.util.JGEngineUtils;
@@ -46,6 +47,8 @@ public class Dialog implements Room
         }
     }
 
+    private static final JGFont dialogFont = new JGFont("arial", JGFont.BOLD, 16);
+
     private String iconName;
 
     private Map<Integer, Statement> statements = new HashMap<Integer, Statement>();
@@ -76,8 +79,8 @@ public class Dialog implements Room
             return;
         }
         char c = engine.getLastKeyChar();
-        int idx = c + 1 - '1';
-        if (idx >= currentStatement.replies.length) {
+        int idx = c - '1';
+        if (idx >= currentStatement.replies.length || idx < 0) {
             return;
         }
 
@@ -87,16 +90,21 @@ public class Dialog implements Room
     @Override
     public void draw(JGEngine engine, Camera camera) {
         engine.drawImage(iconName, camera.getXCoord(3), camera.getYCoord(3));
-        engine.setColor(JGColor.blue);
-        engine.drawRect(camera.getXCoord(7), camera.getYCoord(3), camera.getTileWidth() * 5, camera.getTileHeight() * 3, true, false);
-        engine.drawRect(camera.getXCoord(3), camera.getYCoord(7), camera.getTileWidth() * 10, camera.getTileHeight() * 5, true, false);
+        engine.setColor(new JGColor(4,  7, 125));
+        engine.drawRect(camera.getXCoord(6), camera.getYCoord(3), camera.getTileWidth() * 7, camera.getTileHeight() * 2, true, false);
+        engine.drawRect(camera.getXCoord(3), camera.getYCoord(6), camera.getTileWidth() * 10, camera.getTileHeight() * 5, true, false);
+
+        engine.setColor(JGColor.yellow);
+        engine.drawRect(camera.getXCoord(6) - 1, camera.getYCoord(3) - 1, camera.getTileWidth() * 7 + 2, camera.getTileHeight() * 2 + 2, false, false);
+        engine.drawRect(camera.getXCoord(3) - 1, camera.getYCoord(6) - 1, camera.getTileWidth() * 10 + 2, camera.getTileHeight() * 5 + 2, false, false);
+
 
         engine.setColor(JGColor.white);
 
-        JGEngineUtils.drawString(engine, currentStatement.npcText, camera.getXCoord(7), camera.getYCoord(3), camera.getTileWidth() * 5);
-        int i = 1;
+        JGEngineUtils.drawString(engine, currentStatement.npcText, camera.getXCoord(6) + camera.getTileWidth() / 2, camera.getYCoord(3) + camera.getTileHeight() / 2, camera.getTileWidth() * 5, dialogFont, JGColor.yellow);
+        int i = 0;
         for (Reply r : currentStatement.replies) {
-            engine.drawString(i + ": " + r.replyText, camera.getXCoord(3), camera.getYCoord(7), -1);
+            engine.drawString((i + 1)  + ": " + r.replyText, camera.getXCoord(3) + camera.getTileWidth() / 2, camera.getYCoord(6 + (i++)) + camera.getTileHeight() / 2, -1, dialogFont, JGColor.yellow);
         }
     }
 

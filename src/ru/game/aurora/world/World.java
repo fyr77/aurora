@@ -7,6 +7,7 @@ package ru.game.aurora.world;
 
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.ResearchScreen;
 import ru.game.aurora.world.space.GalaxyMap;
@@ -22,6 +23,8 @@ public class World {
 
     private boolean updatedThisFrame;
 
+    private Dialog currentDialog;
+
     public World(JGEngine engine, Camera camera, int sizeX, int sizeY) {
         player = new Player();
         this.camera = camera;
@@ -33,6 +36,14 @@ public class World {
 
     public void update(JGEngine engine) {
         updatedThisFrame = false;
+
+        if (currentDialog != null) {
+            currentDialog.update(engine, this);
+            if (currentDialog.isOver()) {
+                currentDialog = null;
+            }
+            return;
+        }
         if (engine.getLastKeyChar() == 'r') {
             // open research screen
             ResearchScreen researchScreen = new ResearchScreen();
@@ -48,6 +59,9 @@ public class World {
 
     public void draw(JGEngine engine) {
         currentRoom.draw(engine, camera);
+        if (currentDialog != null) {
+            currentDialog.draw(engine, camera);
+        }
     }
 
     public Camera getCamera() {
@@ -76,5 +90,10 @@ public class World {
 
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
+    }
+
+    public void setCurrentDialog(Dialog currentDialog) {
+        this.currentDialog = currentDialog;
+        currentDialog.enter(this);
     }
 }

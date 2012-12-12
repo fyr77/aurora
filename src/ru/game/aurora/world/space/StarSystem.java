@@ -117,8 +117,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         for (NPCShip ship : ships) {
             if (ship.getX() == x && ship.getY() == y) {
-                if (!ship.isHostile()) {
-                    //GameLogger.getInstance().addStatusMessage("Press <enter> to hail ship");
+                if (!ship.isHostile() && engine.getKey(JGEngineInterface.KeyEnter)) {
+                    world.setCurrentDialog(ship.getRace().getDefaultDialog());
                 }
             }
             if (world.isUpdatedThisFrame()) {

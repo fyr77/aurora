@@ -48,4 +48,8 @@ public class NPCShip extends BasePositionable implements GameObject {
     {
         return false;
     }
+
+    public AlienRace getRace() {
+        return race;
+    }
 }
