@@ -87,6 +87,8 @@ public class Dialog implements Room {
     private static final JGRectangle npcStatementRectangle = new JGRectangle(8, 3, 4, 4);
     private static final JGRectangle replyRectangle = new JGRectangle(3, 8, 9, 5);
 
+    private static final JGColor backgroundColor = new JGColor(4, 7, 125);
+
     private void drawRect(JGEngine engine, JGRectangle rectangle, Camera camera, boolean filled) {
         engine.drawRect(camera.getXCoord(rectangle.x), camera.getYCoord(rectangle.y), rectangle.width * camera.getTileWidth(), rectangle.height * camera.getTileHeight(), filled, false);
     }
@@ -95,7 +97,7 @@ public class Dialog implements Room {
     public void draw(JGEngine engine, Camera camera) {
 
         engine.drawImage(iconName, camera.getXCoord(iconRectangle.x), camera.getYCoord(iconRectangle.y));
-        engine.setColor(new JGColor(4, 7, 125));
+        engine.setColor(backgroundColor);
         drawRect(engine, npcStatementRectangle, camera, true);
         drawRect(engine, replyRectangle, camera, true);
 

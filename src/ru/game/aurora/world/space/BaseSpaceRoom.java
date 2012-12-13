@@ -25,20 +25,20 @@ public class BaseSpaceRoom implements Room {
         int x = player.getShip().getX();
         int y = player.getShip().getY();
 
-        if (engine.getKey(JGEngineInterface.KeyUp) && y > 0) {
+        if (engine.getKey(JGEngineInterface.KeyUp)) {
             y--;
             world.setUpdatedThisFrame(true);
         }
-        if (engine.getKey(JGEngineInterface.KeyDown) && y < engine.getHeight()) {
+        if (engine.getKey(JGEngineInterface.KeyDown)) {
             y++;
             world.setUpdatedThisFrame(true);
         }
 
-        if (engine.getKey(JGEngineInterface.KeyLeft) && x > 0) {
+        if (engine.getKey(JGEngineInterface.KeyLeft)) {
             x--;
             world.setUpdatedThisFrame(true);
         }
-        if (engine.getKey(JGEngineInterface.KeyRight) && x < engine.getWidth()) {
+        if (engine.getKey(JGEngineInterface.KeyRight)) {
             x++;
             world.setUpdatedThisFrame(true);
         }

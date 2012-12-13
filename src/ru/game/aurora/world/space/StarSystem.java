@@ -11,7 +11,6 @@ import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
-import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.LandingParty;
@@ -45,6 +44,17 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private int globalMapY;
 
+    /**
+     * Relation between tile size and max planet size
+     * 3 means max planet will have radius of 3 tiles
+     */
+    public final static int PLANET_SCALE_FACTOR = 2;
+
+    public final static int STAR_SCALE_FACTOR = 5;
+
+    // size of star system. moving out of radius from the star initiates return to global map
+    private int radius;
+
     private List<NPCShip> ships = new ArrayList<NPCShip>();
 
     public StarSystem(Star star, int globalMapX, int globalMapY) {
@@ -55,6 +65,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public void setPlanets(Planet[] planets) {
         this.planets = planets;
+    }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
     }
 
     @Override
@@ -82,10 +96,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         int y = world.getPlayer().getShip().getY();
         int x = world.getPlayer().getShip().getX();
 
-        if ((engine.getKey(JGEngineInterface.KeyUp) && y == 0)
-                || (engine.getKey(JGEngineInterface.KeyDown) && y == world.getCamera().getNumTilesY())
-                || (engine.getKey(JGEngineInterface.KeyLeft) && x == 0)
-                || (engine.getKey(JGEngineInterface.KeyRight) && x == world.getCamera().getNumTilesX())) {
+        if ((engine.getKey(JGEngineInterface.KeyUp) && y <= -radius)
+                || (engine.getKey(JGEngineInterface.KeyDown) && y >= radius)
+                || (engine.getKey(JGEngineInterface.KeyLeft) && x <= -radius)
+                || (engine.getKey(JGEngineInterface.KeyRight) && x >= radius)) {
             GameLogger.getInstance().logMessage("Leaving star system...");
             world.setCurrentRoom(world.getGalaxyMap());
             world.getGalaxyMap().enter(world);
@@ -132,9 +146,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     public void enter(World world) {
         super.enter(world);
         player = world.getPlayer();
-        player.getShip().setPos(0, 0);
+        player.getShip().setPos(-radius + 1, 0);
         // in star system camera is always fixed on center
-        world.getCamera().setTarget(new BasePositionable(world.getCamera().getNumTilesX() / 2, world.getCamera().getNumTilesY() / 2));
+        //world.getCamera().setTarget(new BasePositionable(world.getCamera().getNumTilesX() / 2, world.getCamera().getNumTilesY() / 2));
+        world.getCamera().setTarget(player.getShip());
     }
 
     @Override
@@ -144,15 +159,17 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         GameLogger.getInstance().addStatusMessage("==========================");
         engine.setColor(star.color);
 
-        final int starX = camera.getNumTilesX() / 2 * camera.getTileWidth() + (camera.getTileWidth() / 2);
-        final int starY = camera.getNumTilesY() / 2 * camera.getTileHeight() + camera.getTileHeight() / 2;
-        engine.drawOval(starX, starY, engine.tileWidth() / star.size, engine.tileHeight() / star.size, true, true);
+        final int starX = camera.getXCoord(0) + (camera.getTileWidth() / 2);
+        final int starY = camera.getYCoord(0) + camera.getTileHeight() / 2;
+        if (camera.isInViewport(0, 0)) {
+            engine.drawOval(starX, starY, engine.tileWidth() * STAR_SCALE_FACTOR / star.size, engine.tileHeight() * STAR_SCALE_FACTOR / star.size, true, true);
+        }
+
         for (Planet p : planets) {
             if (p.getGlobalX() == player.getShip().getX() && p.getGlobalY() == player.getShip().getY()) {
                 GameLogger.getInstance().addStatusMessage("Approaching planet: ");
                 GameLogger.getInstance().addStatusMessage("Press <S> to scan");
                 GameLogger.getInstance().addStatusMessage("Press <enter> to launch surface party");
-
             }
 
             int planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);

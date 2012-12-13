@@ -233,7 +233,7 @@ public class Planet implements Room, GalaxyMapObject {
 
         if (engine.getKey(JGEngineInterface.KeyEnter)) {
             // check if can pick up smth
-            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext();) {
+            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext(); ) {
                 PlanetObject p = iter.next();
 
                 if (!p.canBePickedUp()) {
@@ -437,7 +437,6 @@ public class Planet implements Room, GalaxyMapObject {
     }
 
 
-
     public void drawObjects(JGEngine engine, Camera camera) {
         // this part (monsters, shuttle, landing party) is drawn only when landing party is on surface
         if (landingParty != null) {
@@ -495,7 +494,13 @@ public class Planet implements Room, GalaxyMapObject {
                 color = JGColor.grey;
         }
         engine.setColor(color);
-        engine.drawOval(camera.getXCoord(globalX) + (engine.tileWidth() / 2), camera.getYCoord(globalY) + engine.tileWidth() / 2, engine.tileWidth() / size, engine.tileHeight() / size, true, true);
+        engine.drawOval(
+                camera.getXCoord(globalX) + (engine.tileWidth() / 2)
+                , camera.getYCoord(globalY) + engine.tileWidth() / 2
+                , StarSystem.PLANET_SCALE_FACTOR * engine.tileWidth() / size
+                , StarSystem.PLANET_SCALE_FACTOR * engine.tileHeight() / size
+                , true
+                , true);
     }
 
     public int getGlobalX() {

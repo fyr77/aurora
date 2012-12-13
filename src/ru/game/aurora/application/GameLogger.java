@@ -29,6 +29,10 @@ public class GameLogger {
 
     private JGFont font;
 
+    public static final byte TEXT_OFFSET = 10;
+
+    private static final JGColor backgroundColor = new JGColor(4, 7, 125);
+
     public GameLogger(JGRectangle statusMessagesRect, JGRectangle logRect) {
         this.statusMessagesRect = statusMessagesRect;
         this.logRect = logRect;
@@ -56,16 +60,24 @@ public class GameLogger {
     }
 
     public void draw(JGEngine engine) {
+        engine.setColor(backgroundColor);
+        engine.drawRect(statusMessagesRect.x, statusMessagesRect.y, statusMessagesRect.width, statusMessagesRect.height, true, false);
+        engine.drawRect(logRect.x, logRect.y, logRect.width, logRect.height, true, false);
+        engine.setColor(JGColor.yellow);
+
+        engine.drawRect(statusMessagesRect.x, statusMessagesRect.y, statusMessagesRect.width, statusMessagesRect.height, false, false);
+        engine.drawRect(logRect.x, logRect.y, logRect.width, logRect.height, false, false);
+
         engine.setColor(JGColor.white);
         int i = 0;
         for (String m : messages) {
-            engine.drawString(m, logRect.x, logRect.y + i * font.getSize(), -1, font, JGColor.white);
+            engine.drawString(m, logRect.x + TEXT_OFFSET, logRect.y + TEXT_OFFSET + i * font.getSize(), -1, font, JGColor.white);
             ++i;
         }
 
         i = 0;
         for (String m : statusMessages) {
-            engine.drawString(m, statusMessagesRect.x, statusMessagesRect.y + i * font.getSize(), -1, font, JGColor.white);
+            engine.drawString(m, statusMessagesRect.x + TEXT_OFFSET, statusMessagesRect.y + TEXT_OFFSET + i * font.getSize(), -1, font, JGColor.white);
             ++i;
         }
     }
