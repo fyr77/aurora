@@ -44,13 +44,15 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private int globalMapY;
 
+    private ParallaxBackground background;
+
     /**
      * Relation between tile size and max planet size
      * 3 means max planet will have radius of 3 tiles
      */
     public final static int PLANET_SCALE_FACTOR = 2;
 
-    public final static int STAR_SCALE_FACTOR = 5;
+    public final static int STAR_SCALE_FACTOR = 4;
 
     // size of star system. moving out of radius from the star initiates return to global map
     private int radius;
@@ -104,6 +106,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             world.setCurrentRoom(world.getGalaxyMap());
             world.getGalaxyMap().enter(world);
             player.getShip().setPos(globalMapX, globalMapY);
+            // do not keep background
+            background = null;
         }
 
 
@@ -150,10 +154,14 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         // in star system camera is always fixed on center
         //world.getCamera().setTarget(new BasePositionable(world.getCamera().getNumTilesX() / 2, world.getCamera().getNumTilesY() / 2));
         world.getCamera().setTarget(player.getShip());
+        if (background == null) {
+            background = new ParallaxBackground(radius * world.getCamera().getTileWidth(), planets.length);
+        }
     }
 
     @Override
     public void draw(JGEngine engine, Camera camera) {
+        background.draw(engine, camera);
         player.getShip().draw(engine, camera);
         player.addGlobalStatus();
         GameLogger.getInstance().addStatusMessage("==========================");

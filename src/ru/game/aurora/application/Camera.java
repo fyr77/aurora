@@ -79,6 +79,15 @@ public class Camera {
         return viewportTilesY + tileHeight * (viewportTilesY / 2 + (globalTileY - target.getY()));
     }
 
+    // same but for absolute coordinate (not tile)
+    public int getXCoordPoint(int pointX) {
+        return pointX - (target.getX() - viewportTilesX / 2) * tileWidth;
+    }
+
+    public int getYCoordPoint(int pointY) {
+        return pointY - (target.getY() - viewportTilesY / 2) * tileHeight;
+    }
+
     public int getXCoordWrapped(int tileX, int totalTilesX) {
         final int targetX = target.getX();
         if (totalTilesX - Math.abs(targetX - tileX) > viewportTilesX / 2) {

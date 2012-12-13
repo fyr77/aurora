@@ -111,7 +111,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         int maxRadius = 0;
         StarSystem ss = new StarSystem(new StarSystem.Star(size, starColor), x, y);
         for (int i = 0; i < planetCount; ++i) {
-            int radius = r.nextInt(planetCount * StarSystem.STAR_SCALE_FACTOR) + StarSystem.STAR_SCALE_FACTOR + 1;
+            int radius = r.nextInt(planetCount * StarSystem.PLANET_SCALE_FACTOR) + StarSystem.STAR_SCALE_FACTOR;
             maxRadius = Math.max(radius, maxRadius);
             int planetX = r.nextInt(2 * radius) - radius;
 
