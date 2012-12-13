@@ -7,6 +7,7 @@ package ru.game.aurora.npc;
 
 import jgame.JGColor;
 import jgame.JGFont;
+import jgame.JGRectangle;
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.util.JGEngineUtils;
@@ -16,27 +17,23 @@ import ru.game.aurora.world.World;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Dialog implements Room
-{
+public class Dialog implements Room {
 
-    public static class Statement
-    {
+    public static class Statement {
         public final int id;
 
         public final String npcText;
 
         public final Reply[] replies;
 
-        public Statement(int id, String npcText, Reply... replies)
-        {
+        public Statement(int id, String npcText, Reply... replies) {
             this.id = id;
             this.npcText = npcText;
             this.replies = replies;
         }
     }
 
-    public static class Reply
-    {
+    public static class Reply {
         public final int targetStatementId;
 
         public final String replyText;
@@ -55,8 +52,7 @@ public class Dialog implements Room
 
     private Statement currentStatement;
 
-    public Dialog(String iconName, Statement... statements)
-    {
+    public Dialog(String iconName, Statement... statements) {
         this.iconName = iconName;
         for (Statement s : statements) {
             this.statements.put(s.id, s);
@@ -87,29 +83,50 @@ public class Dialog implements Room
         currentStatement = statements.get(currentStatement.replies[idx].targetStatementId);
     }
 
+    private static final JGRectangle iconRectangle = new JGRectangle(3, 3, 4, 4);
+    private static final JGRectangle npcStatementRectangle = new JGRectangle(8, 3, 4, 4);
+    private static final JGRectangle replyRectangle = new JGRectangle(3, 8, 9, 5);
+
+    private void drawRect(JGEngine engine, JGRectangle rectangle, Camera camera, boolean filled) {
+        engine.drawRect(camera.getXCoord(rectangle.x), camera.getYCoord(rectangle.y), rectangle.width * camera.getTileWidth(), rectangle.height * camera.getTileHeight(), filled, false);
+    }
+
     @Override
     public void draw(JGEngine engine, Camera camera) {
-        engine.drawImage(iconName, camera.getXCoord(3), camera.getYCoord(3));
-        engine.setColor(new JGColor(4,  7, 125));
-        engine.drawRect(camera.getXCoord(6), camera.getYCoord(3), camera.getTileWidth() * 7, camera.getTileHeight() * 2, true, false);
-        engine.drawRect(camera.getXCoord(3), camera.getYCoord(6), camera.getTileWidth() * 10, camera.getTileHeight() * 5, true, false);
+
+        engine.drawImage(iconName, camera.getXCoord(iconRectangle.x), camera.getYCoord(iconRectangle.y));
+        engine.setColor(new JGColor(4, 7, 125));
+        drawRect(engine, npcStatementRectangle, camera, true);
+        drawRect(engine, replyRectangle, camera, true);
 
         engine.setColor(JGColor.yellow);
-        engine.drawRect(camera.getXCoord(6) - 1, camera.getYCoord(3) - 1, camera.getTileWidth() * 7 + 2, camera.getTileHeight() * 2 + 2, false, false);
-        engine.drawRect(camera.getXCoord(3) - 1, camera.getYCoord(6) - 1, camera.getTileWidth() * 10 + 2, camera.getTileHeight() * 5 + 2, false, false);
 
+        drawRect(engine, iconRectangle, camera, false);
+        drawRect(engine, npcStatementRectangle, camera, false);
+        drawRect(engine, replyRectangle, camera, false);
 
-        engine.setColor(JGColor.white);
+        JGEngineUtils.drawString(
+                engine
+                , currentStatement.npcText
+                , camera.getXCoord(npcStatementRectangle.x) + camera.getTileWidth() / 2
+                , camera.getYCoord(npcStatementRectangle.y) + camera.getTileHeight() / 2
+                , camera.getTileWidth() * (npcStatementRectangle.width - 1)
+                , dialogFont
+                , JGColor.yellow);
 
-        JGEngineUtils.drawString(engine, currentStatement.npcText, camera.getXCoord(6) + camera.getTileWidth() / 2, camera.getYCoord(3) + camera.getTileHeight() / 2, camera.getTileWidth() * 5, dialogFont, JGColor.yellow);
         int i = 0;
         for (Reply r : currentStatement.replies) {
-            engine.drawString((i + 1)  + ": " + r.replyText, camera.getXCoord(3) + camera.getTileWidth() / 2, camera.getYCoord(6 + (i++)) + camera.getTileHeight() / 2, -1, dialogFont, JGColor.yellow);
+            engine.drawString(
+                    (i + 1) + ": " + r.replyText
+                    , camera.getXCoord(replyRectangle.x) + camera.getTileWidth() / 2
+                    , camera.getYCoord(replyRectangle.y + (i++)) + camera.getTileHeight() / 2
+                    ,
+                    -1
+                    , dialogFont, JGColor.yellow);
         }
     }
 
-    public boolean isOver()
-    {
+    public boolean isOver() {
         return currentStatement == null;
     }
 
