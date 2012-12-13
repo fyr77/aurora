@@ -56,11 +56,11 @@ public class ParallaxBackground {
 
     // same but for absolute coordinate (not tile)
     public double getXCoordPoint(Camera camera, int pointX, int planeNumber) {
-        return (pointX - 1.0 / (planeNumber + 3) * (camera.getTarget().getX() - camera.getViewportTilesX() / 2) * camera.getTileWidth());
+        return (pointX - 1.0 / (planeNumber * 2 + 5) * (camera.getTarget().getX() - camera.getViewportTilesX() / 2) * camera.getTileWidth());
     }
 
     public double getYCoordPoint(Camera camera, int pointY, int planeNumber) {
-        return (pointY - 1.0 / (planeNumber + 3) * (camera.getTarget().getY() - camera.getViewportTilesY() / 2) * camera.getTileHeight());
+        return (pointY - 1.0 / (planeNumber * 2 + 5) * (camera.getTarget().getY() - camera.getViewportTilesY() / 2) * camera.getTileHeight());
     }
 
     public void draw(JGEngine engine, Camera camera) {

@@ -197,6 +197,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
+        engine.setColor(JGColor.red);
+        engine.drawRect(camera.getXCoord(-radius), camera.getYCoord(-radius), 2 * radius * camera.getTileWidth(), 2 * radius * camera.getTileHeight(), false, false);
     }
 
     public List<NPCShip> getShips() {
