@@ -30,14 +30,15 @@ public class JGEngineUtils {
         engine.drawRect(camera.getRelativeX(rectangle.x), camera.getRelativeY(rectangle.y), rectangle.width * camera.getTileWidth(), rectangle.height * camera.getTileHeight(), filled, false);
     }
 
-    public static void drawString(JGEngine g, String s, int x, int y, int width) {
-        drawString(g, s, x, y, width, GameLogger.getInstance().getFont(), JGColor.white);
+    public static int drawString(JGEngine g, String s, int x, int y, int width) {
+        return drawString(g, s, x, y, width, GameLogger.getInstance().getFont(), JGColor.white);
     }
 
     /**
      * Draws string at given coord, wrapping it if necessary (if it exceeds width pixels)
+     * Returns nubmer of lines actually printed
      */
-    public static void drawString(JGEngine g, String s, int x, int y, int width, JGFont font, JGColor color) {
+    public static int drawString(JGEngine g, String s, int x, int y, int width, JGFont font, JGColor color) {
 
         int lineHeight = font.getSize();
 
@@ -45,22 +46,25 @@ public class JGEngineUtils {
         int curY = y;
 
         String[] words = s.split(" ");
+        int lines = 1;
 
         for (String word : words) {
             // Find out thw width of the word.
             int wordWidth = (word.length() + 1) * lineHeight / 2;
 
             // If text exceeds the width, then move to next line.
-            if (curX + wordWidth >= x + width) {
+            if (word.contains("\n") || curX + wordWidth >= x + width) {
                 curY += lineHeight;
                 curX = x;
+                lines++;
             }
 
             g.drawString(word, curX, curY, -1, font, color);
 
             // Move over to the right for next word.
-            curX += wordWidth;
+            curX += wordWidth + 1;
         }
+        return lines;
     }
 
 }

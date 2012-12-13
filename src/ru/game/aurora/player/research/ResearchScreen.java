@@ -96,7 +96,7 @@ public class ResearchScreen implements Room {
             engine.setColor(JGColor.white);
             final ResearchProjectState researchProjectState = researchState.getCurrentProjects().get(currentIdx);
             iconName = "cartography_research";
-            descr = researchProjectState.desc.getDescription() + "\n" + researchProjectState.desc.getStatusString(world.getPlayer(), researchProjectState.scientists);
+            descr = researchProjectState.desc.getDescription() + " \n" + researchProjectState.desc.getStatusString(world.getPlayer(), researchProjectState.scientists);
         }
 
         drawTab(engine, camera, "Active projects", iconName, descr);
@@ -193,7 +193,9 @@ public class ResearchScreen implements Room {
                     GameLogger.getInstance().logMessage("Starting research " + researchState.getAvailableProjects().get(currentIdx).getName());
                     ResearchProjectDesc desc = researchState.getAvailableProjects().remove(currentIdx);
                     researchState.getCurrentProjects().add(new ResearchProjectState(desc, 0));
-                    currentIdx--;
+                    if (currentIdx > 0) {
+                        currentIdx--;
+                    }
                 }
                 break;
             case COMPLETED_TAB:

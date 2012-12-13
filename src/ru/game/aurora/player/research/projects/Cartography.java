@@ -19,7 +19,7 @@ public class Cartography extends ResearchProjectDesc {
     private Geodata geodata;
 
     public Cartography(Geodata geodata) {
-        super("Cartography", "Processing of raw geological data received \n from sensors and scanning and converting it into its final \n and usable form, such as terrain maps");
+        super("Cartography", "Processing of raw geological data received from sensors and converting it into its final and usable form, such as terrain maps");
         this.geodata = geodata;
     }
 
