@@ -18,6 +18,7 @@
       <entry name="?*.tld" />
       <entry name="?*.ftl" />
       <entry name="*.tbl" />
+      <entry name="*.json" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>
@@ -233,6 +234,13 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
+    <library name="gson-2.2.2">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/third-party/gson-2.2.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="jgame">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/../JGame-20120810/jars/jgame-jre.jar!/" />

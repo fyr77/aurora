@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.npc;
 
+import com.google.gson.Gson;
 import jgame.JGColor;
 import jgame.JGFont;
 import jgame.JGRectangle;
@@ -14,6 +15,10 @@ import ru.game.aurora.util.JGEngineUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +56,10 @@ public class Dialog implements Room {
     private Map<Integer, Statement> statements = new HashMap<Integer, Statement>();
 
     private Statement currentStatement;
+
+    public Dialog() {
+        // for gson
+    }
 
     public Dialog(String iconName, Statement... statements) {
         this.iconName = iconName;
@@ -90,13 +99,13 @@ public class Dialog implements Room {
     private static final JGColor backgroundColor = new JGColor(4, 7, 125);
 
     private void drawRect(JGEngine engine, JGRectangle rectangle, Camera camera, boolean filled) {
-        engine.drawRect(camera.getXCoord(rectangle.x), camera.getYCoord(rectangle.y), rectangle.width * camera.getTileWidth(), rectangle.height * camera.getTileHeight(), filled, false);
+        engine.drawRect(camera.getRelativeX(rectangle.x), camera.getRelativeY(rectangle.y), rectangle.width * camera.getTileWidth(), rectangle.height * camera.getTileHeight(), filled, false);
     }
 
     @Override
     public void draw(JGEngine engine, Camera camera) {
 
-        engine.drawImage(iconName, camera.getXCoord(iconRectangle.x), camera.getYCoord(iconRectangle.y));
+        engine.drawImage(iconName, camera.getRelativeX(iconRectangle.x), camera.getRelativeY(iconRectangle.y));
         engine.setColor(backgroundColor);
         drawRect(engine, npcStatementRectangle, camera, true);
         drawRect(engine, replyRectangle, camera, true);
@@ -110,8 +119,8 @@ public class Dialog implements Room {
         JGEngineUtils.drawString(
                 engine
                 , currentStatement.npcText
-                , camera.getXCoord(npcStatementRectangle.x) + camera.getTileWidth() / 2
-                , camera.getYCoord(npcStatementRectangle.y) + camera.getTileHeight() / 2
+                , camera.getRelativeX(npcStatementRectangle.x) + camera.getTileWidth() / 2
+                , camera.getRelativeY(npcStatementRectangle.y) + camera.getTileHeight() / 2
                 , camera.getTileWidth() * (npcStatementRectangle.width - 1)
                 , dialogFont
                 , JGColor.yellow);
@@ -120,8 +129,8 @@ public class Dialog implements Room {
         for (Reply r : currentStatement.replies) {
             engine.drawString(
                     (i + 1) + ": " + r.replyText
-                    , camera.getXCoord(replyRectangle.x) + camera.getTileWidth() / 2
-                    , camera.getYCoord(replyRectangle.y + (i++)) + camera.getTileHeight() / 2
+                    , camera.getRelativeX(replyRectangle.x) + camera.getTileWidth() / 2
+                    , camera.getRelativeY(replyRectangle.y + (i++)) + camera.getTileHeight() / 2
                     ,
                     -1
                     , dialogFont, JGColor.yellow);
@@ -130,6 +139,14 @@ public class Dialog implements Room {
 
     public boolean isOver() {
         return currentStatement == null;
+    }
+
+    public static Dialog loadFromFile(InputStream is) throws IOException {
+        Gson gson = new Gson();
+        Reader reader = new InputStreamReader(is);
+        Dialog d = gson.fromJson(reader, Dialog.class);
+        reader.close();
+        return d;
     }
 
 }

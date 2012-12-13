@@ -18,6 +18,7 @@ import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -57,15 +58,12 @@ public class GalaxyMap extends BaseSpaceRoom {
         // 0 is Nebula
         objects.add(new Nebula());
 
-        AlienRace gardenerRace = new AlienRace("Gardeners", 8, null, new Dialog("gardener_dialog"
-                , new Dialog.Statement(0, "Greetings, human",
-                new Dialog.Reply(1, "You speak our language and know who we are? How?")
-                , new Dialog.Reply(2, "Greetings. We represent Alliance of Humanity, and who are you?"))
-                , new Dialog.Statement(1, "I have met your species before. We are always curious about new civilizations, so we always try to communicate newcomers",
-                new Dialog.Reply(-1, "Ok"))
-                , new Dialog.Statement(2, "Others call as Gardeners. Mostlty because we fly these tree-ships, but also our ways have some similarity with gardener work",
-                new Dialog.Reply(-1, "Ok"))
-        ));
+        AlienRace gardenerRace = null;
+        try {
+            gardenerRace = new AlienRace("Gardeners", 8, null, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         objects.add(HomeworldGenerator.generateGardenerHomeworld(5, 5, systemSizeX, systemSizeY, gardenerRace));
         map[5][5] = objects.size() - 1;

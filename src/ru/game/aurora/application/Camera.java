@@ -88,6 +88,17 @@ public class Camera {
         return pointY - (target.getY() - viewportTilesY / 2) * tileHeight;
     }
 
+    /**
+     * Return coordinates of given tile on screen
+     */
+    public int getRelativeX(int tileX) {
+        return viewportTilesX + tileWidth * tileX;
+    }
+
+    public int getRelativeY(int tileY) {
+        return viewportTilesY + tileHeight * tileY;
+    }
+
     public int getXCoordWrapped(int tileX, int totalTilesX) {
         final int targetX = target.getX();
         if (totalTilesX - Math.abs(targetX - tileX) > viewportTilesX / 2) {

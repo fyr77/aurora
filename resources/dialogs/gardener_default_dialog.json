@@ -1,0 +1,39 @@
+{
+    "iconName":"gardener_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "npcText":"Greetings, human",
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"You speak our language and know who we are? How?"
+                },
+                {
+                    "targetStatementId":2,
+                    "replyText":"Greetings. We represent Alliance of Humanity, and who are you?"
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "npcText":"I have met your species before. We are always curious about new civilizations, so we always try to communicate newcomers",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"Ok"
+                }
+            ]
+        },
+        "2":{
+            "id":2,
+            "npcText":"Others call us Gardeners. Mostlty because we fly these tree-ships, but also our ways have some similarity with gardener work",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"Ok"
+                }
+            ]
+        }
+    }
+}
