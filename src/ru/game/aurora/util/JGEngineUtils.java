@@ -8,11 +8,28 @@ package ru.game.aurora.util;
 
 import jgame.JGColor;
 import jgame.JGFont;
+import jgame.JGRectangle;
 import jgame.platform.JGEngine;
+import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 
 
 public class JGEngineUtils {
+
+    public static void drawRectWithBorder(JGEngine engine, JGRectangle rectangle, Camera camera, JGColor borderColor, JGColor fillColor) {
+        engine.setColor(fillColor);
+        drawRect(engine, rectangle, camera, true);
+        engine.setColor(borderColor);
+        drawRect(engine, rectangle, camera, false);
+    }
+
+    /**
+     * Draws a rect specified by tile coordinates
+     */
+    public static void drawRect(JGEngine engine, JGRectangle rectangle, Camera camera, boolean filled) {
+        engine.drawRect(camera.getRelativeX(rectangle.x), camera.getRelativeY(rectangle.y), rectangle.width * camera.getTileWidth(), rectangle.height * camera.getTileHeight(), filled, false);
+    }
+
     public static void drawString(JGEngine g, String s, int x, int y, int width) {
         drawString(g, s, x, y, width, GameLogger.getInstance().getFont(), JGColor.white);
     }

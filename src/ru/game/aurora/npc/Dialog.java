@@ -7,10 +7,10 @@ package ru.game.aurora.npc;
 
 import com.google.gson.Gson;
 import jgame.JGColor;
-import jgame.JGFont;
 import jgame.JGRectangle;
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.util.JGEngineUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -48,8 +48,6 @@ public class Dialog implements Room {
             this.replyText = replyText;
         }
     }
-
-    private static final JGFont dialogFont = new JGFont("arial", JGFont.BOLD, 16);
 
     private String iconName;
 
@@ -98,23 +96,17 @@ public class Dialog implements Room {
 
     private static final JGColor backgroundColor = new JGColor(4, 7, 125);
 
-    private void drawRect(JGEngine engine, JGRectangle rectangle, Camera camera, boolean filled) {
-        engine.drawRect(camera.getRelativeX(rectangle.x), camera.getRelativeY(rectangle.y), rectangle.width * camera.getTileWidth(), rectangle.height * camera.getTileHeight(), filled, false);
-    }
-
     @Override
     public void draw(JGEngine engine, Camera camera) {
 
         engine.drawImage(iconName, camera.getRelativeX(iconRectangle.x), camera.getRelativeY(iconRectangle.y));
         engine.setColor(backgroundColor);
-        drawRect(engine, npcStatementRectangle, camera, true);
-        drawRect(engine, replyRectangle, camera, true);
+        JGEngineUtils.drawRectWithBorder(engine, npcStatementRectangle, camera, JGColor.yellow, backgroundColor);
+        JGEngineUtils.drawRectWithBorder(engine, replyRectangle, camera, JGColor.yellow, backgroundColor);
 
         engine.setColor(JGColor.yellow);
 
-        drawRect(engine, iconRectangle, camera, false);
-        drawRect(engine, npcStatementRectangle, camera, false);
-        drawRect(engine, replyRectangle, camera, false);
+        JGEngineUtils.drawRect(engine, iconRectangle, camera, false);
 
         JGEngineUtils.drawString(
                 engine
@@ -122,7 +114,7 @@ public class Dialog implements Room {
                 , camera.getRelativeX(npcStatementRectangle.x) + camera.getTileWidth() / 2
                 , camera.getRelativeY(npcStatementRectangle.y) + camera.getTileHeight() / 2
                 , camera.getTileWidth() * (npcStatementRectangle.width - 1)
-                , dialogFont
+                , GUIConstants.dialogFont
                 , JGColor.yellow);
 
         int i = 0;
@@ -133,7 +125,7 @@ public class Dialog implements Room {
                     , camera.getRelativeY(replyRectangle.y + (i++)) + camera.getTileHeight() / 2
                     ,
                     -1
-                    , dialogFont, JGColor.yellow);
+                    , GUIConstants.dialogFont, JGColor.yellow);
         }
     }
 
