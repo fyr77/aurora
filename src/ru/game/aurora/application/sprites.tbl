@@ -1,7 +1,7 @@
 // player ship sprite
 aurora	-	0	sprites/ships/Aurora.png	-
-awayteam	-	0	sprites/ships/Awayteam.png	-
-shuttle	-	0	sprites/ships/shuttle.png	-
+awayteam	-	0	sprites/ships/AwayTeam.png	-
+shuttle	-	0	sprites/ships/Shuttle.png	-
 // animals and alien lifeforms
 mammal_large_1	-	0	sprites/animals/mammal_large_1.png	-
 mammal_large_1_dead	-	0	sprites/animals/mammal_large_1_dead.png	-

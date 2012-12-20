@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactManager">
+    <artifact type="jar" name="Aurora:jar">
+      <output-path>$PROJECT_DIR$/out/artifacts/Aurora_jar</output-path>
+      <root id="archive" name="Aurora.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="Aurora" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/third-party/gson-2.2.2.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/../JGame-20120810/jars/jgame-jre.jar" path-in-jar="/" />
+        <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+      </root>
+    </artifact>
+  </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
     <resourceExtensions>
