@@ -1,0 +1,3 @@
+glob:*Thumbs.db
+glob:out/*
+glob:Aurora.iws
