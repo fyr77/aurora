@@ -85,9 +85,9 @@ public class Planet implements Room, GalaxyMapObject {
     /**
      * Position of planet in star system
      */
-    private int globalX;
+    protected int globalX;
 
-    private int globalY;
+    protected int globalY;
 
     /**
      * Available animal species descriptions, if any.
@@ -572,5 +572,13 @@ public class Planet implements Room, GalaxyMapObject {
 
     public int getHeight() {
         return height;
+    }
+
+    public void setGlobalY(int globalY) {
+        this.globalY = globalY;
+    }
+
+    public void setGlobalX(int globalX) {
+        this.globalX = globalX;
     }
 }

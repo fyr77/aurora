@@ -17,6 +17,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
+import ru.game.aurora.world.space.earth.SolarSystemBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,6 +68,11 @@ public class GalaxyMap extends BaseSpaceRoom {
 
         objects.add(HomeworldGenerator.generateGardenerHomeworld(5, 5, systemSizeX, systemSizeY, gardenerRace));
         map[5][5] = objects.size() - 1;
+
+        // earth
+        StarSystem solarSystem = SolarSystemBuilder.createSolarSystem();
+        objects.add(solarSystem);
+        map[9][9] = objects.size() - 1;
 
 
         // now generate random star systems
@@ -147,7 +153,15 @@ public class GalaxyMap extends BaseSpaceRoom {
             return;
         }
         super.update(engine, world);
-        int idx = map[player.getShip().getY()][player.getShip().getX()];
+        final int y = player.getShip().getY();
+        final int x = player.getShip().getX();
+
+        int idx;
+        if (y >= 0 && x >= 0 && y < tilesY && y < tilesX) {
+            idx = map[y][x];
+        } else {
+            idx = -1;
+        }
         if (idx != -1) {
             if (world.isUpdatedThisFrame()) {
                 objects.get(idx).processCollision(engine, player);
