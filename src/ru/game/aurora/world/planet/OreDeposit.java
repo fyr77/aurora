@@ -11,11 +11,9 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 
-public class OreDeposit extends BasePositionable implements PlanetObject
-{
+public class OreDeposit extends BasePositionable implements PlanetObject {
 
-    public static class OreUnit implements InventoryItem
-    {
+    public static class OreUnit implements InventoryItem {
         private OreType type;
 
         public OreUnit(OreType type) {
@@ -52,10 +50,9 @@ public class OreDeposit extends BasePositionable implements PlanetObject
         }
     }
 
-    public static enum OreType
-    {
-        IRON (1, 3, "iron_deposit"),
-        GOLD (3, 3, "gold_deposit");
+    public static enum OreType {
+        IRON(1, 3, "iron_deposit"),
+        GOLD(3, 3, "gold_deposit");
 
         private final int resCountForUnit;
 
@@ -143,12 +140,17 @@ public class OreDeposit extends BasePositionable implements PlanetObject
     }
 
     @Override
+    public void printStatusInfo() {
+        GameLogger.getInstance().addStatusMessage("Press <enter> to mine " + type.name());
+    }
+
+    @Override
     public void update(JGEngine engine, World world) {
 
     }
 
     @Override
     public void draw(JGEngine engine, Camera camera) {
-         engine.drawImage(type.getSpriteName(), camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
+        engine.drawImage(type.getSpriteName(), camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
     }
 }

@@ -460,6 +460,11 @@ public class Planet implements Room, GalaxyMapObject {
                         engine.drawRect(camera.getXCoordWrapped(a.getX(), width), camera.getYCoordWrapped(a.getY(), height), camera.getTileWidth(), camera.getTileHeight(), false, false);
                     }
                 }
+
+                if (a.getX() == landingParty.getX() && a.getY() == landingParty.getY()) {
+                    a.printStatusInfo();
+                }
+
             }
 
             if (mode == MODE_SHOOT && target != null) {

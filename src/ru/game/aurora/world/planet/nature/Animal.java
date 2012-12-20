@@ -19,8 +19,7 @@ import java.util.Random;
  */
 public class Animal implements PlanetObject {
 
-    public static class AnimalCorpseItem implements InventoryItem
-    {
+    public static class AnimalCorpseItem implements InventoryItem {
         AnimalSpeciesDesc desc;
 
         public AnimalCorpseItem(AnimalSpeciesDesc desc) {
@@ -34,11 +33,11 @@ public class Animal implements PlanetObject {
 
         @Override
         public void onReturnToShip(World world, int amount) {
-             if (!desc.isOutopsyMade() && !world.getPlayer().getResearchState().containsResearchFor(desc)) {
-                    // this type of alien animal has never been seen before, add new research
-                    GameLogger.getInstance().logMessage("Added biology research for new alien animal species " + desc.getName());
-                    world.getPlayer().getResearchState().getAvailableProjects().add(new AnimalResearch(desc));
-                }
+            if (!desc.isOutopsyMade() && !world.getPlayer().getResearchState().containsResearchFor(desc)) {
+                // this type of alien animal has never been seen before, add new research
+                GameLogger.getInstance().logMessage("Added biology research for new alien animal species " + desc.getName());
+                world.getPlayer().getResearchState().getAvailableProjects().add(new AnimalResearch(desc));
+            }
         }
 
         @Override
@@ -163,6 +162,13 @@ public class Animal implements PlanetObject {
             return desc.getName();
         } else {
             return desc.getName() + " corpse";
+        }
+    }
+
+    @Override
+    public void printStatusInfo() {
+        if (hp <= 0) {
+            GameLogger.getInstance().addStatusMessage("Press <enter> to pick up " + getName());
         }
     }
 }
