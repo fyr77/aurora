@@ -9,14 +9,13 @@ import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 
-public class AnimalResearch extends ResearchProjectDesc
-{
+public class AnimalResearch extends ResearchProjectDesc {
     private AnimalSpeciesDesc desc;
 
     private int progress = 100;
 
     public AnimalResearch(AnimalSpeciesDesc desc) {
-        super("Biology research for '" + desc.getName() + "'", "A set of tasks for researching alien animal. Outopsy, chemical and biological tests etc. ");
+        super("Biology research for '" + desc.getName() + "'", "A set of tasks for researching alien animal. Outopsy, chemical and biological tests etc. ", "outopsy_research");
         this.desc = desc;
     }
 

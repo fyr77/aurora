@@ -16,9 +16,12 @@ public abstract class ResearchProjectDesc {
 
     protected String description;
 
-    protected ResearchProjectDesc(String name, String description) {
+    protected String icon;
+
+    protected ResearchProjectDesc(String name, String description, String icon) {
         this.name = name;
         this.description = description;
+        this.icon = icon;
     }
 
     public String getName() {
@@ -27,6 +30,10 @@ public abstract class ResearchProjectDesc {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getIcon() {
+        return icon;
     }
 
     /**

@@ -29,3 +29,7 @@ gardener_dialog	-	0	sprites/portraits/gardener2.png	-
 
 // research icons
 cartography_research	-	0	sprites/research_icons/cartography.png	-
+outopsy_research	-	0	sprites/research_icons/outopsy.png	-
+
+// planets
+earth	-	0	sprites/planets/earth.png	-

@@ -113,7 +113,7 @@ public class ResearchScreen implements Room {
         String descr = null;
         if (!researchState.getAvailableProjects().isEmpty()) {
             ResearchProjectDesc desc = researchState.getAvailableProjects().get(currentIdx);
-            icon = "cartography_research";
+            icon = desc.getIcon();
             descr = desc.getDescription();
         }
 
@@ -131,7 +131,7 @@ public class ResearchScreen implements Room {
         String descr = null;
         if (!researchState.getCompletedProjects().isEmpty()) {
             ResearchProjectDesc desc = researchState.getCompletedProjects().get(currentIdx);
-            icon = "cartography_research";
+            icon = desc.getIcon();
             descr = desc.getDescription();
         }
 
