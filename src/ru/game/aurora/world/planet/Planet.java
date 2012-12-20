@@ -185,8 +185,8 @@ public class Planet implements Room, GalaxyMapObject {
         int y = landingParty.getY();
 
         while (!SurfaceTypes.isPassible(landingParty, surface[y][x])) {
-            x++;
-            y += r.nextInt(2) - 1;
+            x = wrapX(x + 1);
+            y = wrapY(y + r.nextInt(2) - 1);
         }
         landingParty.setPos(x, y);
 

@@ -92,6 +92,9 @@ public class SurfaceTypes {
     }
 
     public static boolean isPassible(byte tileType) {
+        if (tileType < 0) {
+            tileType *= -1;
+        }
         return tileType != MOUNTAINS;
     }
 }

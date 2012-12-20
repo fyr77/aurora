@@ -114,15 +114,15 @@ public class GalaxyMap extends BaseSpaceRoom {
             int planetX = r.nextInt(2 * radius) - radius;
 
             int planetY = (int) (Math.sqrt(radius * radius - planetX * planetX) * (r.nextBoolean() ? -1 : 1));
-
+            PlanetAtmosphere atmosphere = CollectionUtils.selectRandomElement(PlanetAtmosphere.values());
             planets[i] = new Planet(
                     ss
                     , CollectionUtils.selectRandomElement(PlanetCategory.values())
-                    , CollectionUtils.selectRandomElement(PlanetAtmosphere.values())
+                    , atmosphere
                     , r.nextInt(3) + 1
                     , planetX
                     , planetY
-                    , true);
+                    , atmosphere != PlanetAtmosphere.NO_ATMOSPHERE);
         }
         ss.setPlanets(planets);
         ss.setRadius(Math.max((int) (maxRadius * 1.5), 10));
