@@ -50,7 +50,7 @@ public class Planet implements Room, GalaxyMapObject {
      */
     private int mode = MODE_MOVE;
 
-    private StarSystem owner;
+    protected StarSystem owner;
 
     private PlanetCategory category;
 

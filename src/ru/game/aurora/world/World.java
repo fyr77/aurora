@@ -25,6 +25,8 @@ public class World {
 
     private Dialog currentDialog;
 
+    private int turnCount = 0;
+
     public World(JGEngine engine, Camera camera, int sizeX, int sizeY) {
         player = new Player();
         this.camera = camera;
@@ -54,6 +56,7 @@ public class World {
         currentRoom.update(engine, this);
         if (isUpdatedThisFrame()) {
             player.getResearchState().update(this);
+            turnCount++;
         }
     }
 
@@ -95,5 +98,9 @@ public class World {
     public void setCurrentDialog(Dialog currentDialog) {
         this.currentDialog = currentDialog;
         currentDialog.enter(this);
+    }
+
+    public int getTurnCount() {
+        return turnCount;
     }
 }

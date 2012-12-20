@@ -26,6 +26,8 @@ gold_deposit	-	0	sprites/tiles/gold_deposit.png	-
 gardener_ship	-	0	sprites/ships/tree_ship.png	-
 gardener_dialog	-	0	sprites/portraits/gardener2.png	-
 
+// earth
+earth_dialog	-	0	sprites/portraits/earth-1.png	-
 
 // research icons
 cartography_research	-	0	sprites/research_icons/cartography.png	-

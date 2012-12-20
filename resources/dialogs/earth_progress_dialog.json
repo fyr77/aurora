@@ -1,0 +1,46 @@
+{
+    "iconName":"earth_dialog",
+    "statements":{
+
+        "1":{
+            "id":1,
+            "npcText":"The Earth Alliance is pleased with your research progress, captain. Carry on, all people of all nations from Earth rely on you",
+            "replies":[
+                {
+                    "returnValue":1,
+                    "targetStatementId":-1,
+                    "replyText":"I will do my best"
+                }
+            ]
+        },
+
+        "2":{
+            "id":2,
+            "npcText":"We are concerned about how little scientific data you have brought from recent expeditions. If you will not increase your efficiency, we will have to release you from this duty",
+            "replies":[
+                {
+                    "returnValue":0,
+                    "targetStatementId":-1,
+                    "replyText":"Ok, I will try to perform better"
+                },
+                {
+                    "returnValue":0,
+                    "targetStatementId":-1,
+                    "replyText":"Scouting outer space is not as simple as you here, on Earth, think. No one could have done it better"
+                }
+            ]
+        },
+
+        "3":{
+            "id":3,
+            "npcText":"It's a pity, but we have to remove you from command of your ship. We can not afford such an expensive thing to be used so ineffectively. You will receive your new assignment soon.",
+            "replies":[
+                {
+                    "returnValue":-1,
+                    "targetStatementId":-1,
+                    "replyText":"=Game over="
+                }
+            ]
+        }
+    }
+}

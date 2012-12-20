@@ -1,0 +1,30 @@
+{
+    "iconName":"earth_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "npcText":"Welcome back home, captain. What can we do for you?",
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"We have brought new science data and stories from outer space"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"No, nothing, we were just passing by"
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "npcText":"Excellent! We are now sending shuttle to you to collect your findings. Prepare your docking bay.",
+            "replies":[
+                {
+                    "returnValue":1,
+                    "targetStatementId":-1,
+                    "replyText":"Ok"
+                }
+            ]
+        }
+    }
+}

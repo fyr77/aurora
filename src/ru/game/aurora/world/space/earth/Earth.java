@@ -16,11 +16,24 @@ import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.io.IOException;
+
 public class Earth extends Planet {
+
     private Dialog earthDialog;
+
+    private Dialog progressDialog;
+
+    private int lastVisitTurn = 0;
 
     public Earth(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
         super(owner, cat, atmosphere, size, x, y, hasLife);
+        try {
+            earthDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_dialog.json"));
+            progressDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_progress_dialog.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -49,11 +62,38 @@ public class Earth extends Planet {
 
     @Override
     public void update(JGEngine engine, World world) {
+        if (earthDialog.isOver()) {
+            if (earthDialog.getReturnValue() == 1) {
+                // player has chosen to dump research info
+                int totalScore = dumpResearch(world);
+                double scorePerTurn = (double) totalScore / (world.getTurnCount() - lastVisitTurn);
+
+                Dialog.Statement stmt = new Dialog.Statement(0, String.format("Let us see. You have brought us new %d points of data, giving %f points/day", totalScore, scorePerTurn), new Dialog.Reply(0, 0, ""));
+
+                if (scorePerTurn < 0.001) {
+                    // unsatisfactory
+                    stmt.replies[0] = new Dialog.Reply(0, 3, "=continue=");
+                } else if (scorePerTurn < 0.01) {
+                    // poor
+                    stmt.replies[0] = new Dialog.Reply(0, 2, "=continue=");
+                } else {
+                    // ok
+                    stmt.replies[0] = new Dialog.Reply(0, 1, "=continue=");
+                }
+                progressDialog.putStatement(stmt);
+                world.setCurrentDialog(progressDialog);
+            }
+            world.setCurrentRoom(owner);
+        }
 
     }
 
     @Override
     public void draw(JGEngine engine, Camera camera) {
 
+    }
+
+    private int dumpResearch(World world) {
+        return 10;
     }
 }

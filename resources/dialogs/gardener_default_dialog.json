@@ -27,7 +27,7 @@
         },
         "2":{
             "id":2,
-            "npcText":"Others call us Gardeners. Mostlty because we fly these tree-ships, but also our ways have some similarity with gardener work",
+            "npcText":"Others call us Gardeners. Mostly because we fly these tree-ships, but also our ways have some similarity with gardener work",
             "replies":[
                 {
                     "targetStatementId":-1,

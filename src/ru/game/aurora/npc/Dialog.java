@@ -39,11 +39,18 @@ public class Dialog implements Room {
     }
 
     public static class Reply {
+
+        /**
+         * If this reply will be the last action of the dialog, this will be that dialog's return value
+         */
+        public final int returnValue;
+
         public final int targetStatementId;
 
         public final String replyText;
 
-        public Reply(int targetStatementId, String replyText) {
+        public Reply(int returnValue, int targetStatementId, String replyText) {
+            this.returnValue = returnValue;
             this.targetStatementId = targetStatementId;
             this.replyText = replyText;
         }
@@ -54,6 +61,8 @@ public class Dialog implements Room {
     private Map<Integer, Statement> statements = new HashMap<Integer, Statement>();
 
     private Statement currentStatement;
+
+    private int returnValue = 0;
 
     public Dialog() {
         // for gson
@@ -74,6 +83,7 @@ public class Dialog implements Room {
     @Override
     public void enter(World world) {
         currentStatement = statements.get(0);
+        returnValue = 0;
     }
 
     @Override
@@ -86,8 +96,9 @@ public class Dialog implements Room {
         if (idx >= currentStatement.replies.length || idx < 0) {
             return;
         }
-
-        currentStatement = statements.get(currentStatement.replies[idx].targetStatementId);
+        Reply selectedReply = currentStatement.replies[idx];
+        currentStatement = statements.get(selectedReply.targetStatementId);
+        returnValue = selectedReply.returnValue;
     }
 
     private static final JGRectangle iconRectangle = new JGRectangle(3, 3, 4, 4);
@@ -141,4 +152,11 @@ public class Dialog implements Room {
         return d;
     }
 
+    public int getReturnValue() {
+        return returnValue;
+    }
+
+    public void putStatement(Statement stmt) {
+        this.statements.put(stmt.id, stmt);
+    }
 }

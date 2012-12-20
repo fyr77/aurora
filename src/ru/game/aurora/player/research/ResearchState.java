@@ -62,9 +62,8 @@ public class ResearchState {
      * Called when turn passes.
      * Updates research progress for current projects
      */
-    public void update(World world)
-    {
-        for (Iterator<ResearchProjectState> iter = currentProjects.iterator(); iter.hasNext();) {
+    public void update(World world) {
+        for (Iterator<ResearchProjectState> iter = currentProjects.iterator(); iter.hasNext(); ) {
             ResearchProjectState state = iter.next();
             state.desc.update(world.getPlayer(), state.scientists);
             if (state.desc.isCompleted()) {
@@ -80,8 +79,7 @@ public class ResearchState {
         }
     }
 
-    public boolean containsResearchFor(AnimalSpeciesDesc animalSpeciesDesc)
-    {
+    public boolean containsResearchFor(AnimalSpeciesDesc animalSpeciesDesc) {
         for (ResearchProjectState c : currentProjects) {
             if (c.desc instanceof AnimalResearch && ((AnimalResearch) c.desc).getDesc() == animalSpeciesDesc) {
                 return true;
@@ -102,4 +100,5 @@ public class ResearchState {
 
         return false;
     }
+
 }
