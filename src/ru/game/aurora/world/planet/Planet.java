@@ -64,8 +64,15 @@ public class Planet implements Room, GalaxyMapObject {
 
     /**
      * Tiles with planet surface.
-     * Absolute value of each element is tile type
-     * If value is negative, this means this tile is not yet explored, it is shown as black square
+     * Actual contents are encoded by bits
+     *
+     * vpm0tttt
+     *
+     * v - visibility bit, 1 means tile is not explored, 0 is for explored
+     * p - bit shows if tile can be passed on foot (1)
+     * m - mountains
+     * 0 - reserved
+     * tttt - tile type
      */
     private byte[][] surface;
 
@@ -132,6 +139,7 @@ public class Planet implements Room, GalaxyMapObject {
                 throw new IllegalArgumentException("Unsupported planet size value");
         }
         // different planets will have different probabilities for tiles
+        int mountainProbability = r.nextInt(5) + 2;
         ProbabilitySet<Byte> ps = new ProbabilitySet<Byte>();
         for (byte b : category.availableSurfaces) {
             ps.put(b, r.nextDouble() * (r.nextInt(5) + 1));
@@ -140,7 +148,10 @@ public class Planet implements Room, GalaxyMapObject {
         surface = new byte[height][width];
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {
-                surface[i][j] = (byte) -ps.getRandom();
+                surface[i][j] = ps.getRandom();
+                if (r.nextInt(mountainProbability) == 0) {
+                    surface[i][j] |= SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
+                }
             }
         }
 
@@ -225,8 +236,8 @@ public class Planet implements Room, GalaxyMapObject {
             for (int j = x - range; j <= x + range; ++j) {
                 int pointX = wrapX(j);
                 int pointY = wrapY(i);
-                if (surface[pointY][pointX] < 0) {
-                    surface[pointY][pointX] *= -1;
+                if (0 == (SurfaceTypes.VISIBILITY_MASK & surface[pointY][pointX]) ) {
+                    surface[pointY][pointX] |= SurfaceTypes.VISIBILITY_MASK;
                     ++rz;
                 }
             }
@@ -344,7 +355,7 @@ public class Planet implements Room, GalaxyMapObject {
             if (!planetObject.canBeShotAt()) {
                 continue;
             }
-            if (surface[planetObject.getY()][planetObject.getX()] < 0) {
+            if ((surface[planetObject.getY()][planetObject.getX()] & SurfaceTypes.VISIBILITY_MASK )== 0) {
                 // do not target animals on unexplored tiles
                 continue;
             }
@@ -448,7 +459,7 @@ public class Planet implements Room, GalaxyMapObject {
             for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; ++j) {
 
                 final byte type = surface[wrapY(i)][wrapX(j)];
-                if (type < 0) {
+                if ((type & SurfaceTypes.VISIBILITY_MASK) == 0) {
                     continue;
                 }
                 if (detailed) {
@@ -489,7 +500,7 @@ public class Planet implements Room, GalaxyMapObject {
             engine.setColor(JGColor.red);
             for (PlanetObject a : planetObjects) {
                 // draw only if tile under this animal is visible
-                if (surface[a.getY()][a.getX()] >= 0) {
+                if ((surface[a.getY()][a.getX()] & SurfaceTypes.VISIBILITY_MASK) != 0) {
                     a.draw(engine, camera);
 
                     // in shoot mode, all available targets are surrounded with red square
@@ -514,6 +525,16 @@ public class Planet implements Room, GalaxyMapObject {
 
     public byte getTileTypeAt(int x, int y) {
         return surface[y][x];
+    }
+
+    public void setTileTypeAt(int x, int y, byte val)
+    {
+        surface[y][x] = val;
+    }
+
+    public void xorMaskAt(int x, int y, byte mask)
+    {
+        surface[y][x] ^= mask;
     }
 
     @Override

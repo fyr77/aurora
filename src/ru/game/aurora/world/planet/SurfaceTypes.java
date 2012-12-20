@@ -13,22 +13,26 @@ public class SurfaceTypes {
 
     // constants for surface tiles
     // negative number means tile was not yet seen
-    public static final byte DIRT = 1;
+    public static final byte DIRT = 0x01;
 
-    public static final byte ROCKS = 2;
+    public static final byte ROCKS = 0x02;
 
-    public static final byte WATER = 3;
+    public static final byte WATER = 0x04;
 
-    public static final byte ICE = 4;
+    public static final byte ICE = 0x08;
 
-    public static final byte MOUNTAINS = 5;
+    public static final byte OBSTACLE_MASK = 0x40;
+
+    public static final byte MOUNTAINS_MASK = 0x20;
+
+    public static final byte VISIBILITY_MASK = (byte) 0x80;
 
     /**
      * Draws surface tiles in simple form - no sprites, just a square of corresponding color. Used in map screen
      */
     public static void drawSimple(byte type, int screenX, int screenY, int width, int heght, JGEngine engine) {
         JGColor color;
-        switch (type) {
+        switch (type & 0x0F) {
             case SurfaceTypes.DIRT:
                 color = JGColor.orange;
                 break;
@@ -41,15 +45,12 @@ public class SurfaceTypes {
             case SurfaceTypes.WATER:
                 color = JGColor.blue;
                 break;
-            case SurfaceTypes.MOUNTAINS:
-                color = JGColor.gray;
-                break;
             default:
                 throw new IllegalArgumentException("Unsupported surface tile type " + type);
         }
         engine.setColor(color);
         engine.drawRect(screenX, screenY, width, heght, true, false);
-        if (type == SurfaceTypes.MOUNTAINS) {
+        if ((type & SurfaceTypes.MOUNTAINS_MASK) != 0) {
             engine.setColor(JGColor.black);
             engine.drawLine(screenX, screenY + heght, screenX + width / 2, screenY);
             engine.drawLine(screenX + width, screenY + heght, screenX + width / 2, screenY);
@@ -61,7 +62,7 @@ public class SurfaceTypes {
      */
     public static void drawDetailed(byte type, int screenX, int screenY, int width, int heght, JGEngine engine) {
         String spriteName;
-        switch (type) {
+        switch (type & 0x0F) {
             case SurfaceTypes.DIRT:
                 spriteName = "sand_tile_1";
                 break;
@@ -74,13 +75,14 @@ public class SurfaceTypes {
             case SurfaceTypes.WATER:
                 spriteName = "water_tile_1";
                 break;
-            case SurfaceTypes.MOUNTAINS:
-                spriteName = "mountains_tile_1";
-                break;
             default:
                 throw new IllegalArgumentException("Unsupported surface tile type " + type);
         }
+
         engine.drawImage(spriteName, screenX, screenY);
+        if ((type & SurfaceTypes.MOUNTAINS_MASK) != 0) {
+            engine.drawImage("mountains_tile_1", screenX, screenY);
+        }
     }
 
     public static boolean isPassible(LandingParty party, byte tileType) {
@@ -92,9 +94,6 @@ public class SurfaceTypes {
     }
 
     public static boolean isPassible(byte tileType) {
-        if (tileType < 0) {
-            tileType *= -1;
-        }
-        return tileType != MOUNTAINS;
+        return (tileType & OBSTACLE_MASK) == 0;
     }
 }

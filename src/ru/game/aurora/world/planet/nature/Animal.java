@@ -96,8 +96,11 @@ public class Animal implements PlanetObject {
             newY = myPlanet.wrapY(newY);
 
             if (SurfaceTypes.isPassible(this, myPlanet.getTileTypeAt(newX, newY))) {
+                // change position, reset 'passible' flag on old tile and set on new one
+                myPlanet.setTileTypeAt(x, y, (byte) ((~SurfaceTypes.OBSTACLE_MASK) & myPlanet.getTileTypeAt(x, y)));
                 x = newX;
                 y = newY;
+                myPlanet.setTileTypeAt(x, y, (byte) (myPlanet.getTileTypeAt(x, y) | SurfaceTypes.OBSTACLE_MASK));
             }
         }
     }
@@ -147,6 +150,10 @@ public class Animal implements PlanetObject {
     @Override
     public void onShotAt(int damage) {
         hp -= damage;
+        if (hp <= 0) {
+            // clean obstacle flag
+            myPlanet.setTileTypeAt(x, y, (byte) ((~SurfaceTypes.OBSTACLE_MASK) & myPlanet.getTileTypeAt(x, y)));
+        }
     }
 
     @Override
