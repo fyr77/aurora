@@ -13,6 +13,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.CollectionUtils;
+import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -130,17 +131,30 @@ public class Planet implements Room, GalaxyMapObject {
             default:
                 throw new IllegalArgumentException("Unsupported planet size value");
         }
+        // different planets will have different probabilities for tiles
+        ProbabilitySet<Byte> ps = new ProbabilitySet<Byte>();
+        for (byte b : category.availableSurfaces) {
+            ps.put(b, r.nextDouble() * (r.nextInt(5) + 1));
+        }
 
         surface = new byte[height][width];
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {
-                surface[i][j] = (byte) (-category.availableSurfaces[r.nextInt(category.availableSurfaces.length)]);
+                surface[i][j] = (byte) -ps.getRandom();
             }
         }
 
         final int resourceDeposits = r.nextInt(40 / size);
         for (int i = 0; i < resourceDeposits; ++i) {
-            planetObjects.add(new OreDeposit(this, r.nextInt(10), r.nextInt(10), CollectionUtils.selectRandomElement(OreDeposit.OreType.values()), r.nextInt(3) + 1));
+            OreDeposit d = new OreDeposit(this, r.nextInt(10), r.nextInt(10), CollectionUtils.selectRandomElement(OreDeposit.OreType.values()), r.nextInt(3) + 1);
+            int oreX;
+            int oreY;
+            do {
+                oreX = r.nextInt(10);
+                oreY = r.nextInt(10);
+            } while (!SurfaceTypes.isPassible(surface[oreY][oreX]));
+            d.setPos(oreX, oreY);
+            planetObjects.add(d);
         }
 
         if (hasLife) {
@@ -150,7 +164,15 @@ public class Planet implements Room, GalaxyMapObject {
 
             final int animalCount = r.nextInt(10) + 5;
             for (int i = 0; i < animalCount; ++i) {
-                planetObjects.add(new Animal(this, r.nextInt(/*width*/10), r.nextInt(/*height*/10), animalSpecies[0]));
+                Animal a = new Animal(this, 0, 0, animalSpecies[0]);
+                int animalX;
+                int animalY;
+                do {
+                    animalX = r.nextInt(10);
+                    animalY = r.nextInt(10);
+                } while (!SurfaceTypes.isPassible(a, surface[animalY][animalX]));
+                a.setPos(animalX, animalY);
+                planetObjects.add(a);
             }
         }
     }
@@ -159,6 +181,15 @@ public class Planet implements Room, GalaxyMapObject {
     @Override
     public void enter(World world) {
         landingParty = world.getPlayer().getLandingParty();
+        int x = landingParty.getX();
+        int y = landingParty.getY();
+
+        while (!SurfaceTypes.isPassible(landingParty, surface[y][x])) {
+            x++;
+            y += r.nextInt(2) - 1;
+        }
+        landingParty.setPos(x, y);
+
         world.getCamera().setTarget(landingParty);
         shuttlePosition = new JGPoint(landingParty.getX(), landingParty.getY());
         int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
@@ -230,6 +261,12 @@ public class Planet implements Room, GalaxyMapObject {
 
         x = wrapX(x);
         y = wrapY(y);
+
+        if (!SurfaceTypes.isPassible(landingParty, surface[y][x])) {
+            world.setUpdatedThisFrame(false);
+            x = world.getPlayer().getLandingParty().getX();
+            y = world.getPlayer().getLandingParty().getY();
+        }
 
         if (engine.getKey(JGEngineInterface.KeyEnter)) {
             // check if can pick up smth
@@ -473,6 +510,10 @@ public class Planet implements Room, GalaxyMapObject {
             }
             GameLogger.getInstance().addStatusMessage(mode == MODE_MOVE ? "MOVE" : "SHOOT");
         }
+    }
+
+    public byte getTileTypeAt(int x, int y) {
+        return surface[y][x];
     }
 
     @Override

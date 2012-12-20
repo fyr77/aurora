@@ -8,6 +8,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetObject;
+import ru.game.aurora.world.planet.SurfaceTypes;
 
 import java.util.Random;
 
@@ -89,10 +90,15 @@ public class Animal implements PlanetObject {
             return;
         }
         if (r.nextInt(5) == 0) {
-            x += r.nextInt(2) - 1;
-            y += r.nextInt(2) - 1;
-            x = myPlanet.wrapX(x);
-            y = myPlanet.wrapY(y);
+            int newX = x + r.nextInt(2) - 1;
+            int newY = y + r.nextInt(2) - 1;
+            newX = myPlanet.wrapX(newX);
+            newY = myPlanet.wrapY(newY);
+
+            if (SurfaceTypes.isPassible(this, myPlanet.getTileTypeAt(newX, newY))) {
+                x = newX;
+                y = newY;
+            }
         }
     }
 
