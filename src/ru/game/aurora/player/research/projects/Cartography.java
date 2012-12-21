@@ -42,4 +42,12 @@ public class Cartography extends ResearchProjectDesc {
     public boolean isRepeatable() {
         return true;
     }
+
+    /*
+     * Score for cartography is calculated by Geodata class
+     */
+    @Override
+    public int getScore() {
+        return 0;
+    }
 }

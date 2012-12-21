@@ -56,4 +56,10 @@ public abstract class ResearchProjectDesc {
      */
     public abstract boolean isRepeatable();
 
+    /**
+     * Get resulting score for this research
+     */
+    public abstract int getScore();
+
+
 }

@@ -51,6 +51,11 @@ public class AnimalResearch extends ResearchProjectDesc {
         return false;
     }
 
+    @Override
+    public int getScore() {
+        return 50;
+    }
+
     public AnimalSpeciesDesc getDesc() {
         return desc;
     }

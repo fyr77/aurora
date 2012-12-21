@@ -176,6 +176,9 @@ public class ResearchScreen implements Room {
                 if (maxIdx == 0) {
                     break;
                 }
+                if (currentIdx >= maxIdx) {
+                    currentIdx = 0;
+                }
                 ResearchProjectState state = researchState.getCurrentProjects().get(currentIdx);
                 if (engine.getKey(JGEngineInterface.KeyLeft) && state.scientists > 0) {
                     state.scientists--;
