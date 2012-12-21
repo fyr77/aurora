@@ -118,6 +118,9 @@ public class GalaxyMap extends BaseSpaceRoom {
         Planet[] planets = new Planet[planetCount];
         int maxRadius = 0;
         StarSystem ss = new StarSystem(new StarSystem.Star(size, starColor), x, y);
+
+        int astroData = 20 * size;
+
         for (int i = 0; i < planetCount; ++i) {
             int radius = r.nextInt(planetCount * StarSystem.PLANET_SCALE_FACTOR) + StarSystem.STAR_SCALE_FACTOR;
             maxRadius = Math.max(radius, maxRadius);
@@ -125,16 +128,20 @@ public class GalaxyMap extends BaseSpaceRoom {
 
             int planetY = (int) (Math.sqrt(radius * radius - planetX * planetX) * (r.nextBoolean() ? -1 : 1));
             PlanetAtmosphere atmosphere = CollectionUtils.selectRandomElement(PlanetAtmosphere.values());
+            final int planetSize = r.nextInt(3) + 1;
             planets[i] = new Planet(
                     ss
                     , CollectionUtils.selectRandomElement(PlanetCategory.values())
                     , atmosphere
-                    , r.nextInt(3) + 1
+                    , planetSize
                     , planetX
                     , planetY
                     , atmosphere != PlanetAtmosphere.NO_ATMOSPHERE);
+            astroData += 10 * planetSize;
         }
         ss.setPlanets(planets);
+        astroData += r.nextInt(30);
+        ss.setAstronomyData(astroData);
         ss.setRadius(Math.max((int) (maxRadius * 1.5), 10));
         return ss;
     }

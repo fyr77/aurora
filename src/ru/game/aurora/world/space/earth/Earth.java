@@ -118,6 +118,7 @@ public class Earth extends Planet {
             result += desc.getScore();
         }
         researchState.getCompletedProjects().clear();
+        result += researchState.dumpAstroData();
         return result;
     }
 }

@@ -7,9 +7,9 @@
 
 package ru.game.aurora.player.research.projects;
 
-import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.Geodata;
 import ru.game.aurora.player.research.ResearchProjectDesc;
+import ru.game.aurora.world.World;
 
 /**
  * Cartography project converts Raw Geodata into Processed Geodata.
@@ -24,12 +24,12 @@ public class Cartography extends ResearchProjectDesc {
     }
 
     @Override
-    public void update(Player player, int scientists) {
+    public void update(World world, int scientists) {
         geodata.process(scientists);
     }
 
     @Override
-    public String getStatusString(Player player, int scientists) {
+    public String getStatusString(World world, int scientists) {
         return String.format("Remaining raw geodata: %d, est. %s days left", geodata.getRaw(), scientists != 0 ? Integer.toString(geodata.getRaw() / scientists) : "<inf>");
     }
 

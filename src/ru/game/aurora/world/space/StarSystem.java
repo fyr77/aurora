@@ -59,6 +59,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private List<NPCShip> ships = new ArrayList<NPCShip>();
 
+    /**
+     * How many unexplored data for Astronomy research this star system contains
+     */
+    private int astronomyData;
+
     public StarSystem(Star star, int globalMapX, int globalMapY) {
         this.star = star;
         this.globalMapX = globalMapX;
@@ -208,5 +213,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public List<NPCShip> getShips() {
         return ships;
+    }
+
+    public int getAstronomyData() {
+        return astronomyData;
+    }
+
+    public void setAstronomyData(int astronomyData) {
+        this.astronomyData = astronomyData;
     }
 }

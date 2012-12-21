@@ -32,6 +32,7 @@ earth_dialog	-	0	sprites/portraits/earth-1.png	-
 // research icons
 cartography_research	-	0	sprites/research_icons/cartography.png	-
 outopsy_research	-	0	sprites/research_icons/outopsy.png	-
+astronomy_research	-	0	sprites/research_icons/astronomy.png	-
 
 // planets
 earth	-	0	sprites/planets/earth.png	-

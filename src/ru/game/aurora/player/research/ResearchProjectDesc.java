@@ -6,7 +6,7 @@
  */
 package ru.game.aurora.player.research;
 
-import ru.game.aurora.player.Player;
+import ru.game.aurora.world.World;
 
 /**
  * Base class for research projects
@@ -41,12 +41,12 @@ public abstract class ResearchProjectDesc {
      *
      * @param scientists How many scientists are currently working on this project
      */
-    public abstract void update(Player player, int scientists);
+    public abstract void update(World world, int scientists);
 
     /**
      * @return A string describing current status of this research
      */
-    public abstract String getStatusString(Player player, int scientists);
+    public abstract String getStatusString(World world, int scientists);
 
     public abstract boolean isCompleted();
 

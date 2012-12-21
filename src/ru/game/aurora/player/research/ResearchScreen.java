@@ -95,8 +95,8 @@ public class ResearchScreen implements Room {
         if (!researchState.getCurrentProjects().isEmpty()) {
             engine.setColor(JGColor.white);
             final ResearchProjectState researchProjectState = researchState.getCurrentProjects().get(currentIdx);
-            iconName = "cartography_research";
-            descr = researchProjectState.desc.getDescription() + " \n" + researchProjectState.desc.getStatusString(world.getPlayer(), researchProjectState.scientists);
+            iconName = researchProjectState.desc.getIcon();
+            descr = researchProjectState.desc.getDescription() + " \n" + researchProjectState.desc.getStatusString(world, researchProjectState.scientists);
         }
 
         drawTab(engine, camera, "Active projects", iconName, descr);
@@ -223,5 +223,9 @@ public class ResearchScreen implements Room {
             world.setCurrentRoom(previousRoom);
             //previousRoom.enter(world); do not call here, as it is not reall room entry
         }
+    }
+
+    public Room getPreviousRoom() {
+        return previousRoom;
     }
 }

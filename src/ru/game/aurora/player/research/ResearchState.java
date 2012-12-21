@@ -8,6 +8,7 @@ package ru.game.aurora.player.research;
 
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.research.projects.AnimalResearch;
+import ru.game.aurora.player.research.projects.AstronomyResearch;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 
@@ -30,8 +31,11 @@ public class ResearchState {
 
     private Geodata geodata = new Geodata();
 
+    private int processedAstroData;
+
     public ResearchState(int idleScientists) {
         this.idleScientists = idleScientists;
+        availableProjects.add(new AstronomyResearch());
     }
 
     public Geodata getGeodata() {
@@ -65,7 +69,7 @@ public class ResearchState {
     public void update(World world) {
         for (Iterator<ResearchProjectState> iter = currentProjects.iterator(); iter.hasNext(); ) {
             ResearchProjectState state = iter.next();
-            state.desc.update(world.getPlayer(), state.scientists);
+            state.desc.update(world, state.scientists);
             if (state.desc.isCompleted()) {
                 iter.remove();
                 if (!state.desc.isRepeatable()) {
@@ -99,6 +103,16 @@ public class ResearchState {
         }
 
         return false;
+    }
+
+    public void addProcessedAstroData(int value) {
+        processedAstroData += value;
+    }
+
+    public int dumpAstroData() {
+        int rz = processedAstroData;
+        processedAstroData = 0;
+        return rz;
     }
 
 }

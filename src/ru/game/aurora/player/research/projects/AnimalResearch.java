@@ -5,8 +5,8 @@
  */
 package ru.game.aurora.player.research.projects;
 
-import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.ResearchProjectDesc;
+import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 
 public class AnimalResearch extends ResearchProjectDesc {
@@ -20,12 +20,12 @@ public class AnimalResearch extends ResearchProjectDesc {
     }
 
     @Override
-    public void update(Player player, int scientists) {
+    public void update(World world, int scientists) {
         progress -= scientists;
     }
 
     @Override
-    public String getStatusString(Player player, int scientists) {
+    public String getStatusString(World world, int scientists) {
         if (progress > 60) {
             return "Poor";
         }
