@@ -222,4 +222,16 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     public void setAstronomyData(int astronomyData) {
         this.astronomyData = astronomyData;
     }
+
+    public int getGlobalMapX() {
+        return globalMapX;
+    }
+
+    public int getGlobalMapY() {
+        return globalMapY;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
 }

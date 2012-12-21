@@ -25,9 +25,12 @@ public class AlienRace {
      */
     private Dialog defaultDialog;
 
-    public AlienRace(String name, int relationToPlayer, StarSystem homeworld, Dialog defaultDialog) {
+    private String shipSprite;
+
+    public AlienRace(String name, String shipSprite, int relationToPlayer, StarSystem homeworld, Dialog defaultDialog) {
         this.name = name;
         this.relationToPlayer = relationToPlayer;
+        this.shipSprite = shipSprite;
         this.homeworld = homeworld;
         this.defaultDialog = defaultDialog;
     }
@@ -56,8 +59,18 @@ public class AlienRace {
         return homeworld;
     }
 
+    /**
+     * How many tiles away from main homeworld system player can meet ships of this race
+     */
+    public int getTravelDistance() {
+        return 10;
+    }
+
     public void setHomeworld(StarSystem homeworld) {
         this.homeworld = homeworld;
     }
 
+    public String getShipSprite() {
+        return shipSprite;
+    }
 }

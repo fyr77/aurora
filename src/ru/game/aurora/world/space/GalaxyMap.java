@@ -65,7 +65,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
         AlienRace gardenerRace = null;
         try {
-            gardenerRace = new AlienRace("Gardeners", 8, null, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));
+            gardenerRace = new AlienRace("Gardeners", "gardener_ship", 8, null, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -202,5 +202,9 @@ public class GalaxyMap extends BaseSpaceRoom {
             }
         }
         player.addGlobalStatus();
+    }
+
+    public static double getDistance(StarSystem first, StarSystem second) {
+        return Math.sqrt(Math.pow(first.getGlobalMapX() - second.getGlobalMapX(), 2) + Math.pow(first.getGlobalMapY() - second.getGlobalMapY(), 2));
     }
 }
