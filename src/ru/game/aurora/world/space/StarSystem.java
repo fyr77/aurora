@@ -155,7 +155,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         //world.getCamera().setTarget(new BasePositionable(world.getCamera().getNumTilesX() / 2, world.getCamera().getNumTilesY() / 2));
         world.getCamera().setTarget(player.getShip());
         if (background == null) {
-            background = new ParallaxBackground(radius * world.getCamera().getTileWidth(), planets.length);
+            background = new ParallaxBackground(
+                    radius * 3 * world.getCamera().getTileWidth()
+                    , radius * 3 * world.getCamera().getTileHeight()
+                    , 0//planets.length * world.getCamera().getTileWidth()
+                    , 0//planets.length * world.getCamera().getTileHeight()
+                    , planets.length);
         }
     }
 

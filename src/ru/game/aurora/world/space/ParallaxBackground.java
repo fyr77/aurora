@@ -40,8 +40,9 @@ public class ParallaxBackground {
 
     private static final Random r = new Random();
 
-    public ParallaxBackground(int radius, int density) {
-        radius *= 2;
+    private float baseWidth = 6;
+
+    public ParallaxBackground(int width, int height, int centerX, int centerY, int density) {
         if (density == 0) {
             density = 1;
         }
@@ -49,7 +50,7 @@ public class ParallaxBackground {
         stars = new Star[PLANES_COUNT][starsPerPlane];
         for (int i = 0; i < PLANES_COUNT; ++i) {
             for (int j = 0; j < starsPerPlane; ++j) {
-                stars[i][j] = new Star(r.nextInt(2 * radius) - radius, r.nextInt(2 * radius) - radius, CollectionUtils.selectRandomElement(StarSystem.possibleColors));
+                stars[i][j] = new Star(r.nextInt(2 * width) - centerX - width, r.nextInt(2 * height) - centerY - height, CollectionUtils.selectRandomElement(StarSystem.possibleColors));
             }
         }
     }
@@ -68,8 +69,18 @@ public class ParallaxBackground {
             for (int j = 0; j < starsPerPlane; ++j) {
                 Star s = stars[i][j];
                 engine.setColor(s.color);
-                engine.drawOval(getXCoordPoint(camera, s.x, i), getYCoordPoint(camera, s.y, i), 9 / (2 * i + 1), 9 / (2 * i + 1), true, true);
+
+                double radius = Math.ceil(baseWidth / (2 * i + 1));
+                if (radius < 3.0) {
+                    // jgame does not draw oval with radius smaller than 3
+                    radius = 3.0;
+                }
+                engine.drawOval(getXCoordPoint(camera, s.x, i), getYCoordPoint(camera, s.y, i), radius, radius, true, true);
             }
         }
+    }
+
+    public void setBaseWidth(float baseWidth) {
+        this.baseWidth = baseWidth;
     }
 }

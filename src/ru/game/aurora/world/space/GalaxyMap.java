@@ -31,6 +31,8 @@ import java.util.Random;
  */
 public class GalaxyMap extends BaseSpaceRoom {
 
+    private ParallaxBackground background;
+
     private List<GalaxyMapObject> objects = new ArrayList<GalaxyMapObject>();
 
     private GalaxyMapScreen fullMapScreen = new GalaxyMapScreen();
@@ -45,9 +47,11 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private static final Random r = new Random();
 
-    public GalaxyMap(int tilesX, int tilesY, int systemSizeX, int systemSizeY) {
+    public GalaxyMap(Camera cam, int tilesX, int tilesY, int systemSizeX, int systemSizeY) {
         this.tilesX = tilesX;
         this.tilesY = tilesY;
+        background = new ParallaxBackground(tilesX * cam.getTileWidth(), tilesY * cam.getTileHeight(), tilesX / 2, tilesY / 2, 1);
+        background.setBaseWidth(4);
         map = new int[tilesY][tilesX];
         for (int i = 0; i < tilesY; ++i) {
             for (int j = 0; j < tilesX; ++j) {
@@ -157,7 +161,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         final int x = player.getShip().getX();
 
         int idx;
-        if (y >= 0 && x >= 0 && y < tilesY && y < tilesX) {
+        if (y >= 0 && x >= 0 && y < tilesY && x < tilesX) {
             idx = map[y][x];
         } else {
             idx = -1;
@@ -178,6 +182,7 @@ public class GalaxyMap extends BaseSpaceRoom {
     @Override
     public void draw(JGEngine engine, Camera camera) {
         super.draw(engine, camera);
+        background.draw(engine, camera);
         for (int i = 0; i < tilesY; ++i) {
             for (int j = 0; j < tilesX; ++j) {
                 if (map[i][j] != -1) {
