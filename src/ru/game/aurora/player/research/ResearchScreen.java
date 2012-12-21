@@ -192,6 +192,9 @@ public class ResearchScreen implements Room {
                 break;
             case AVAILABLE_TAB:
                 maxIdx = researchState.getAvailableProjects().size();
+                if (currentIdx >= maxIdx) {
+                    currentIdx = 0;
+                }
                 if (engine.getKey(JGEngineInterface.KeyEnter)) {
                     GameLogger.getInstance().logMessage("Starting research " + researchState.getAvailableProjects().get(currentIdx).getName());
                     ResearchProjectDesc desc = researchState.getAvailableProjects().remove(currentIdx);
@@ -203,6 +206,10 @@ public class ResearchScreen implements Room {
                 break;
             case COMPLETED_TAB:
                 maxIdx = researchState.getCompletedProjects().size();
+                if (currentIdx >= maxIdx) {
+                    currentIdx = 0;
+                }
+                break;
         }
 
         if (engine.getKey(JGEngine.KeyUp)) {
