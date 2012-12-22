@@ -107,7 +107,7 @@ public class Earth extends Planet {
 
     @Override
     public void draw(JGEngine engine, Camera camera) {
-
+        owner.draw(engine, camera);
     }
 
     private int dumpResearch(World world) {
