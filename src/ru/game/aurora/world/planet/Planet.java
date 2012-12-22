@@ -65,9 +65,9 @@ public class Planet implements Room, GalaxyMapObject {
     /**
      * Tiles with planet surface.
      * Actual contents are encoded by bits
-     *
+     * <p/>
      * vpm0tttt
-     *
+     * <p/>
      * v - visibility bit, 1 means tile is not explored, 0 is for explored
      * p - bit shows if tile can be passed on foot (1)
      * m - mountains
@@ -170,12 +170,13 @@ public class Planet implements Room, GalaxyMapObject {
 
         if (hasLife) {
             // generate random species descs. Currently only one
-            animalSpecies = new AnimalSpeciesDesc[1];
-            animalSpecies[0] = new AnimalSpeciesDesc(this, "Alien mammoth", "mammal_large_1", "mammal_large_1_dead", false, true, 3, 0, AnimalSpeciesDesc.Behaviour.PASSIVE);
+            animalSpecies = new AnimalSpeciesDesc[2];
+            animalSpecies[0] = new AnimalSpeciesDesc(this, "Alien mammoth", "mammal_large_1", "mammal_large_1_dead", false, true, 3, 0, 5, AnimalSpeciesDesc.Behaviour.PASSIVE);
+            animalSpecies[1] = new AnimalSpeciesDesc(this, "Alien boar", "boar_1", "boar_1_dead", true, true, 5, 1, 2, AnimalSpeciesDesc.Behaviour.AGGRESSIVE);
 
             final int animalCount = r.nextInt(10) + 5;
             for (int i = 0; i < animalCount; ++i) {
-                Animal a = new Animal(this, 0, 0, animalSpecies[0]);
+                Animal a = new Animal(this, 0, 0, animalSpecies[r.nextInt(animalSpecies.length)]);
                 int animalX;
                 int animalY;
                 do {
@@ -236,7 +237,7 @@ public class Planet implements Room, GalaxyMapObject {
             for (int j = x - range; j <= x + range; ++j) {
                 int pointX = wrapX(j);
                 int pointY = wrapY(i);
-                if (0 == (SurfaceTypes.VISIBILITY_MASK & surface[pointY][pointX]) ) {
+                if (0 == (SurfaceTypes.VISIBILITY_MASK & surface[pointY][pointX])) {
                     surface[pointY][pointX] |= SurfaceTypes.VISIBILITY_MASK;
                     ++rz;
                 }
@@ -281,7 +282,7 @@ public class Planet implements Room, GalaxyMapObject {
 
         if (engine.getKey(JGEngineInterface.KeyEnter)) {
             // check if can pick up smth
-            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext(); ) {
+            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext();) {
                 PlanetObject p = iter.next();
 
                 if (!p.canBePickedUp()) {
@@ -355,7 +356,7 @@ public class Planet implements Room, GalaxyMapObject {
             if (!planetObject.canBeShotAt()) {
                 continue;
             }
-            if ((surface[planetObject.getY()][planetObject.getX()] & SurfaceTypes.VISIBILITY_MASK )== 0) {
+            if ((surface[planetObject.getY()][planetObject.getX()] & SurfaceTypes.VISIBILITY_MASK) == 0) {
                 // do not target animals on unexplored tiles
                 continue;
             }
@@ -527,13 +528,11 @@ public class Planet implements Room, GalaxyMapObject {
         return surface[y][x];
     }
 
-    public void setTileTypeAt(int x, int y, byte val)
-    {
+    public void setTileTypeAt(int x, int y, byte val) {
         surface[y][x] = val;
     }
 
-    public void xorMaskAt(int x, int y, byte mask)
-    {
+    public void xorMaskAt(int x, int y, byte mask) {
         surface[y][x] ^= mask;
     }
 

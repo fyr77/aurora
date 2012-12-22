@@ -28,6 +28,11 @@ public class AnimalSpeciesDesc {
 
     private int hp;
 
+    /**
+     * Turns between animal moves
+     */
+    private int speed;
+
     private int damage;
 
     public static enum Behaviour {
@@ -60,7 +65,7 @@ public class AnimalSpeciesDesc {
      */
     private boolean outopsyMade = false;
 
-    public AnimalSpeciesDesc(Planet homePlanet, String name, String spriteName, String deadSpriteName, boolean carnivorous, boolean herbivorous, int hp, int damage, Behaviour behaviour) {
+    public AnimalSpeciesDesc(Planet homePlanet, String name, String spriteName, String deadSpriteName, boolean carnivorous, boolean herbivorous, int hp, int damage, int speed, Behaviour behaviour) {
         this.homePlanet = homePlanet;
         this.name = name;
         this.deadSpriteName = deadSpriteName;
@@ -69,6 +74,7 @@ public class AnimalSpeciesDesc {
         isHerbivorous = herbivorous;
         this.hp = hp;
         this.damage = damage;
+        this.speed = speed;
         this.behaviour = behaviour;
     }
 
@@ -94,5 +100,9 @@ public class AnimalSpeciesDesc {
 
     public boolean isOutopsyMade() {
         return outopsyMade;
+    }
+
+    public int getSpeed() {
+        return speed;
     }
 }

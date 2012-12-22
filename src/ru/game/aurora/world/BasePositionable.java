@@ -29,4 +29,8 @@ public class BasePositionable implements Positionable {
         x = newX;
         y = newY;
     }
+
+    public double getDistance(Positionable other) {
+        return Math.sqrt(Math.pow(x - other.getX(), 2) + Math.pow(y - other.getY(), 2));
+    }
 }

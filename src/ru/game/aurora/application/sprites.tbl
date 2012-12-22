@@ -5,6 +5,8 @@ shuttle	-	0	sprites/ships/Shuttle.png	-
 // animals and alien lifeforms
 mammal_large_1	-	0	sprites/animals/mammal_large_1.png	-
 mammal_large_1_dead	-	0	sprites/animals/mammal_large_1_dead.png	-
+boar_1	-	0	sprites/animals/boar_1.png	-
+boar_1_dead	-	0	sprites/animals/boar_1_dead.png	-
 
 // gui
 target	-	0	sprites/gui/target.png	-

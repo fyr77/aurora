@@ -4,11 +4,9 @@ import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.research.projects.AnimalResearch;
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.InventoryItem;
-import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.PlanetObject;
-import ru.game.aurora.world.planet.SurfaceTypes;
+import ru.game.aurora.world.planet.*;
 
 import java.util.Random;
 
@@ -18,7 +16,7 @@ import java.util.Random;
  * Date: 04.12.12
  * Time: 17:00
  */
-public class Animal implements PlanetObject {
+public class Animal extends BasePositionable implements PlanetObject {
 
     public static class AnimalCorpseItem implements InventoryItem {
         AnimalSpeciesDesc desc;
@@ -59,10 +57,6 @@ public class Animal implements PlanetObject {
         }
     }
 
-    private int x;
-
-    private int y;
-
     private int hp;
 
     private AnimalSpeciesDesc desc;
@@ -73,12 +67,14 @@ public class Animal implements PlanetObject {
 
     private boolean pickedUp = false;
 
+    private int turnsBeforeMove;
+
     public Animal(Planet p, int x, int y, AnimalSpeciesDesc desc) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.desc = desc;
         this.myPlanet = p;
         this.hp = desc.getHp();
+        turnsBeforeMove = desc.getSpeed();
     }
 
     @Override
@@ -89,9 +85,36 @@ public class Animal implements PlanetObject {
         if (!world.isUpdatedThisFrame()) {
             return;
         }
-        if (r.nextInt(5) == 0) {
+        if (--turnsBeforeMove == 0) {
+            turnsBeforeMove = desc.getSpeed();
             int newX = x + r.nextInt(2) - 1;
             int newY = y + r.nextInt(2) - 1;
+            // if we want to attack landing party and it is close enough, move closer
+            if (desc.getBehaviour() == AnimalSpeciesDesc.Behaviour.AGGRESSIVE) {
+                LandingParty party = world.getPlayer().getLandingParty();
+
+
+                final double distance = this.getDistance(party);
+                if (distance < 1.5) { //1.5 because of diagonal cells
+                    GameLogger.getInstance().logMessage(getName() + " attacks!");
+                    newX = x;
+                    newY = y;
+                } else if (distance < 5) {
+                    if (x < party.getX() - 1) {
+                        newX = x + 1;
+                    } else if (x > party.getX() + 1) {
+                        newX = x - 1;
+                    }
+
+                    if (y < party.getY() - 1) {
+                        newY = y + 1;
+                    } else if (y > party.getY() + 1) {
+                        newY = y - 1;
+                    }
+                }
+            }
+
+
             newX = myPlanet.wrapX(newX);
             newY = myPlanet.wrapY(newY);
 
@@ -184,4 +207,6 @@ public class Animal implements PlanetObject {
             GameLogger.getInstance().addStatusMessage("Press <enter> to pick up " + getName());
         }
     }
+
+
 }
