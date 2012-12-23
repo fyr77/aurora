@@ -11,6 +11,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Dialog;
+import ru.game.aurora.npc.StandartAlienShipEvent;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -47,7 +48,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private static final Random r = new Random();
 
-    public GalaxyMap(Camera cam, int tilesX, int tilesY, int systemSizeX, int systemSizeY) {
+    public GalaxyMap(World world, Camera cam, int tilesX, int tilesY, int systemSizeX, int systemSizeY) {
         this.tilesX = tilesX;
         this.tilesY = tilesY;
         background = new ParallaxBackground(tilesX * cam.getTileWidth(), tilesY * cam.getTileHeight(), tilesX / 2, tilesY / 2, 1);
@@ -63,14 +64,18 @@ public class GalaxyMap extends BaseSpaceRoom {
         // 0 is Nebula
         objects.add(new Nebula());
 
+        StarSystem gardenerHomeworld = HomeworldGenerator.generateGardenerHomeworld(5, 5, systemSizeX, systemSizeY);
         AlienRace gardenerRace = null;
         try {
-            gardenerRace = new AlienRace("Gardeners", "gardener_ship", 8, null, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));
+            gardenerRace = new AlienRace("Gardeners", "gardener_ship", 8, gardenerHomeworld, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        objects.add(HomeworldGenerator.generateGardenerHomeworld(5, 5, systemSizeX, systemSizeY, gardenerRace));
+        world.addListener(new StandartAlienShipEvent(gardenerRace));
+
+
+        objects.add(gardenerHomeworld);
         map[5][5] = objects.size() - 1;
 
         // earth

@@ -11,6 +11,11 @@ import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.ResearchScreen;
 import ru.game.aurora.world.space.GalaxyMap;
+import ru.game.aurora.world.space.StarSystem;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class World {
     private Camera camera;
@@ -27,11 +32,13 @@ public class World {
 
     private int turnCount = 0;
 
+    private List<GameEventListener> listeners = new LinkedList<GameEventListener>();
+
     public World(JGEngine engine, Camera camera, int sizeX, int sizeY) {
         player = new Player();
         this.camera = camera;
         camera.setTarget(player.getShip());
-        currentRoom = galaxyMap = new GalaxyMap(camera, sizeX, sizeY, camera.getNumTilesX(), camera.getNumTilesY());
+        currentRoom = galaxyMap = new GalaxyMap(this, camera, sizeX, sizeY, camera.getNumTilesX(), camera.getNumTilesY());
         currentRoom.enter(this);
         updatedThisFrame = false;
     }
@@ -57,6 +64,13 @@ public class World {
         if (isUpdatedThisFrame()) {
             player.getResearchState().update(this);
             turnCount++;
+        }
+
+        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext();) {
+            GameEventListener l = listenerIterator.next();
+            if (!l.isAlive()) {
+                listenerIterator.remove();
+            }
         }
     }
 
@@ -102,5 +116,15 @@ public class World {
 
     public int getTurnCount() {
         return turnCount;
+    }
+
+    public void onPlayerEnteredSystem(StarSystem ss) {
+        for (GameEventListener l : listeners) {
+            l.onPlayerEnterStarSystem(this, ss);
+        }
+    }
+
+    public void addListener(GameEventListener listener) {
+        listeners.add(listener);
     }
 }

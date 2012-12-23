@@ -6,7 +6,7 @@
  */
 package ru.game.aurora.npc;
 
-import ru.game.aurora.world.GameEvent;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.NPCShip;
@@ -17,7 +17,7 @@ import java.util.Random;
 /**
  * When player enters some star system that is close to some alien race homeworld, he has a chance of meeting that race's ship
  */
-public class StandartAlienShipEvent implements GameEvent {
+public class StandartAlienShipEvent implements GameEventListener {
     private AlienRace race;
 
     private static final Random r = new Random();
@@ -28,7 +28,7 @@ public class StandartAlienShipEvent implements GameEvent {
 
     @Override
     public void onPlayerEnterStarSystem(World world, StarSystem ss) {
-        double probability = race.getTravelDistance() / (race.getTravelDistance() - GalaxyMap.getDistance(ss, race.getHomeworld()));
+        double probability = 1 - GalaxyMap.getDistance(ss, race.getHomeworld()) / race.getTravelDistance();
         if (probability < 0) {
             return;
         }

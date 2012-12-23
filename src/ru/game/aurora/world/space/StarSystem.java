@@ -167,6 +167,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     , 0//planets.length * world.getCamera().getTileHeight()
                     , planets.length);
         }
+        world.onPlayerEnteredSystem(this);
     }
 
     @Override

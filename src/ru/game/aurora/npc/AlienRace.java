@@ -63,7 +63,7 @@ public class AlienRace {
      * How many tiles away from main homeworld system player can meet ships of this race
      */
     public int getTravelDistance() {
-        return 10;
+        return 5;
     }
 
     public void setHomeworld(StarSystem homeworld) {
