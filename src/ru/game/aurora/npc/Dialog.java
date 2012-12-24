@@ -144,12 +144,20 @@ public class Dialog implements Room {
         return currentStatement == null;
     }
 
-    public static Dialog loadFromFile(InputStream is) throws IOException {
+    public static Dialog loadFromFile(InputStream is) {
         Gson gson = new Gson();
         Reader reader = new InputStreamReader(is);
         Dialog d = gson.fromJson(reader, Dialog.class);
-        reader.close();
+        try {
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return d;
+    }
+
+    public static Dialog loadFromFile(String path) {
+        return loadFromFile(Dialog.class.getClassLoader().getResourceAsStream(path));
     }
 
     public int getReturnValue() {

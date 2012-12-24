@@ -19,9 +19,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
-import ru.game.aurora.world.space.earth.SolarSystemBuilder;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -65,16 +63,14 @@ public class GalaxyMap extends BaseSpaceRoom {
         // 0 is Nebula
         objects.add(new Nebula());
 
-        StarSystem kliskHomeworld = HomeworldGenerator.generateKliskHomeworld(5, 5, systemSizeX, systemSizeY);
 
         AlienRace gardenerRace = null;
         AlienRace kliskRace = null;
-        try {
-            gardenerRace = new AlienRace("Gardeners", "gardener_ship", 8, null, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));
-            kliskRace = new AlienRace("Klisk", "klisk_ship", 8, kliskHomeworld, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/klisk_default_dialog.json")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        gardenerRace = new AlienRace("Gardeners", "gardener_ship", 8, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));
+        kliskRace = new AlienRace("Klisk", "klisk_ship", 8, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/klisk_default_dialog.json")));
+        StarSystem kliskHomeworld = HomeworldGenerator.generateKliskHomeworld(5, 5, kliskRace);
+        kliskRace.setHomeworld(kliskHomeworld);
 
         world.addListener(new SingleShipEvent(0.9, new NPCShip(0, 0, gardenerRace.getShipSprite(), gardenerRace, null, null)));
         world.addListener(new StandartAlienShipEvent(kliskRace));
@@ -83,7 +79,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         map[5][5] = objects.size() - 1;
 
         // earth
-        StarSystem solarSystem = SolarSystemBuilder.createSolarSystem();
+        StarSystem solarSystem = HomeworldGenerator.createSolarSystem();
         objects.add(solarSystem);
         map[9][9] = objects.size() - 1;
 

@@ -27,7 +27,7 @@ public class AlienRace {
 
     private String shipSprite;
 
-    public AlienRace(String name, String shipSprite, int relationToPlayer, StarSystem homeworld, Dialog defaultDialog) {
+    public AlienRace(String name, String shipSprite, int relationToPlayer, Dialog defaultDialog) {
         this.name = name;
         this.relationToPlayer = relationToPlayer;
         this.shipSprite = shipSprite;

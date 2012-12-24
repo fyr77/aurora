@@ -7,7 +7,7 @@
 package ru.game.aurora.world.planet.nature;
 
 
-import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.BasePlanet;
 
 /**
  * Represents common data about animal species: its name, look, behaviour, home planet, research progress for this animal etc
@@ -16,7 +16,7 @@ public class AnimalSpeciesDesc {
 
     private String name;
 
-    private Planet homePlanet;
+    private BasePlanet homePlanet;
 
     private String spriteName;
 
@@ -65,7 +65,7 @@ public class AnimalSpeciesDesc {
      */
     private boolean outopsyMade = false;
 
-    public AnimalSpeciesDesc(Planet homePlanet, String name, String spriteName, String deadSpriteName, boolean carnivorous, boolean herbivorous, int hp, int damage, int speed, Behaviour behaviour) {
+    public AnimalSpeciesDesc(BasePlanet homePlanet, String name, String spriteName, String deadSpriteName, boolean carnivorous, boolean herbivorous, int hp, int damage, int speed, Behaviour behaviour) {
         this.homePlanet = homePlanet;
         this.name = name;
         this.deadSpriteName = deadSpriteName;

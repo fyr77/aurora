@@ -11,15 +11,12 @@ import jgame.impl.JGEngineInterface;
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.player.Player;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.Positionable;
-import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.Animal;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
-import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.ArrayList;
@@ -33,7 +30,7 @@ import java.util.Random;
  * Contains planetary data - atmosphere, size, flora and fauna (if any)
  * Contains Room - planet surface, with logic for landing party movement.
  */
-public class Planet implements Room, GalaxyMapObject {
+public class Planet extends BasePlanet {
 
     /**
      * Mode for moving. Arrows control landing party movement.
@@ -49,18 +46,6 @@ public class Planet implements Room, GalaxyMapObject {
      * Current mode
      */
     private int mode = MODE_MOVE;
-
-    protected StarSystem owner;
-
-    private PlanetCategory category;
-
-    private PlanetAtmosphere atmosphere;
-
-    /**
-     * Planet size type. 1 is largest, 4 is smallest.
-     * Planet image size on global map and dimensions of planet surface depends on it.
-     */
-    private int size;
 
     /**
      * Tiles with planet surface.
@@ -90,13 +75,6 @@ public class Planet implements Room, GalaxyMapObject {
     private JGPoint shuttlePosition;
 
     /**
-     * Position of planet in star system
-     */
-    protected int globalX;
-
-    protected int globalY;
-
-    /**
      * Available animal species descriptions, if any.
      */
     private AnimalSpeciesDesc[] animalSpecies;
@@ -112,12 +90,7 @@ public class Planet implements Room, GalaxyMapObject {
     private PlanetObject target = null;
 
     public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
-        this.owner = owner;
-        this.category = cat;
-        this.atmosphere = atmosphere;
-        this.size = size;
-        this.globalX = x;
-        this.globalY = y;
+        super(size, y, owner, atmosphere, x, cat);
         switch (size) {
             case 1:
                 this.width = 500;
@@ -282,7 +255,7 @@ public class Planet implements Room, GalaxyMapObject {
 
         if (engine.getKey(JGEngineInterface.KeyEnter)) {
             // check if can pick up smth
-            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext();) {
+            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext(); ) {
                 PlanetObject p = iter.next();
 
                 if (!p.canBePickedUp()) {
@@ -569,23 +542,6 @@ public class Planet implements Room, GalaxyMapObject {
                 , true);
     }
 
-    public int getGlobalX() {
-        return globalX;
-    }
-
-    public int getGlobalY() {
-        return globalY;
-    }
-
-    @Override
-    public boolean canBeEntered() {
-        return true;
-    }
-
-    @Override
-    public void processCollision(JGEngine engine, Player player) {
-    }
-
     public int getWidth() {
         return width;
     }
@@ -594,11 +550,4 @@ public class Planet implements Room, GalaxyMapObject {
         return height;
     }
 
-    public void setGlobalY(int globalY) {
-        this.globalY = globalY;
-    }
-
-    public void setGlobalX(int globalX) {
-        this.globalX = globalX;
-    }
 }

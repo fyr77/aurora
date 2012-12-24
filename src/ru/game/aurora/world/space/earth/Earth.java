@@ -18,8 +18,6 @@ import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.StarSystem;
 
-import java.io.IOException;
-
 public class Earth extends Planet {
 
     private Dialog earthDialog;
@@ -30,12 +28,8 @@ public class Earth extends Planet {
 
     public Earth(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
         super(owner, cat, atmosphere, size, x, y, hasLife);
-        try {
-            earthDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_dialog.json"));
-            progressDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_progress_dialog.json"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        earthDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_dialog.json"));
+        progressDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_progress_dialog.json"));
     }
 
     @Override

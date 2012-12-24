@@ -30,6 +30,7 @@ public class SingleShipEvent implements GameEventListener {
     @Override
     public void onPlayerEnterStarSystem(World world, StarSystem ss) {
         if (CommonRandom.getRandom().nextDouble() < chance) {
+            ship.setPos(CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius(), CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius());
             ss.getShips().add(ship);
             ship = null;
         }

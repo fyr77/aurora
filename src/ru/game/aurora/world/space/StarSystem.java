@@ -13,6 +13,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetScanScreen;
@@ -38,7 +39,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private Star star;
 
-    private Planet[] planets;
+    private BasePlanet[] planets;
 
     private int globalMapX;
 
@@ -70,7 +71,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         this.globalMapY = globalMapY;
     }
 
-    public void setPlanets(Planet[] planets) {
+    public void setPlanets(BasePlanet[] planets) {
         this.planets = planets;
     }
 
@@ -116,7 +117,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
 
-        for (Planet p : planets) {
+        for (BasePlanet p : planets) {
             if (x == p.getGlobalX() && y == p.getGlobalY()) {
                 if (engine.getKey(JGEngineInterface.KeyEnter)) {
                     GameLogger.getInstance().logMessage("Descending to surface...");
@@ -126,7 +127,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     engine.clearKey(JGEngineInterface.KeyEnter);
                     break;
                 } else if (engine.getLastKeyChar() == 's') {
-                    PlanetScanScreen s = new PlanetScanScreen(this, p);
+                    if (!(p instanceof Planet)) {
+                        GameLogger.getInstance().logMessage("Can not scan this planet");
+                        return;
+                    }
+                    PlanetScanScreen s = new PlanetScanScreen(this, (Planet) p);
                     s.enter(world);
                     world.setCurrentRoom(s);
                     return;
@@ -184,7 +189,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             engine.drawOval(starX, starY, engine.tileWidth() * STAR_SCALE_FACTOR / star.size, engine.tileHeight() * STAR_SCALE_FACTOR / star.size, true, true);
         }
 
-        for (Planet p : planets) {
+        for (BasePlanet p : planets) {
             if (p.getGlobalX() == player.getShip().getX() && p.getGlobalY() == player.getShip().getY()) {
                 GameLogger.getInstance().addStatusMessage("Approaching planet: ");
                 GameLogger.getInstance().addStatusMessage("Press <S> to scan");
