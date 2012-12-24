@@ -11,6 +11,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Dialog;
+import ru.game.aurora.npc.SingleShipEvent;
 import ru.game.aurora.npc.StandartAlienShipEvent;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.Room;
@@ -64,18 +65,21 @@ public class GalaxyMap extends BaseSpaceRoom {
         // 0 is Nebula
         objects.add(new Nebula());
 
-        StarSystem gardenerHomeworld = HomeworldGenerator.generateGardenerHomeworld(5, 5, systemSizeX, systemSizeY);
+        StarSystem kliskHomeworld = HomeworldGenerator.generateKliskHomeworld(5, 5, systemSizeX, systemSizeY);
+
         AlienRace gardenerRace = null;
+        AlienRace kliskRace = null;
         try {
-            gardenerRace = new AlienRace("Gardeners", "gardener_ship", 8, gardenerHomeworld, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));
+            gardenerRace = new AlienRace("Gardeners", "gardener_ship", 8, null, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));
+            kliskRace = new AlienRace("Klisk", "klisk_ship", 8, kliskHomeworld, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/klisk_default_dialog.json")));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        world.addListener(new StandartAlienShipEvent(gardenerRace));
+        world.addListener(new SingleShipEvent(0.9, new NPCShip(0, 0, gardenerRace.getShipSprite(), gardenerRace, null, null)));
+        world.addListener(new StandartAlienShipEvent(kliskRace));
 
-
-        objects.add(gardenerHomeworld);
+        objects.add(kliskHomeworld);
         map[5][5] = objects.size() - 1;
 
         // earth

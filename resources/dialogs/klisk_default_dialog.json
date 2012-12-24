@@ -1,0 +1,39 @@
+{
+    "iconName":"klisk_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "npcText":"We listen",
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"Who are you?"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"Oops, sorry, pushed wrong button. Bye."
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "npcText":"We are Klisk",
+            "replies":[
+                {
+                    "targetStatementId":2,
+                    "replyText":"Oh, I know, you are the famous interstellar traders?"
+                }
+            ]
+        },
+        "2":{
+            "id":2,
+            "npcText":"We are pleased Klisk are known. We make trade now?",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"No, thanks, we don't have anything to trade right now"
+                }
+            ]
+        }
+    }
+}

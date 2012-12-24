@@ -28,6 +28,9 @@ gold_deposit	-	0	sprites/tiles/gold_deposit.png	-
 gardener_ship	-	0	sprites/ships/tree_ship.png	-
 gardener_dialog	-	0	sprites/portraits/gardener2.png	-
 
+klisk_ship	-	0	sprites/ships/klisk_ship.png	-
+klisk_dialog	-	0	sprites/portraits/klisk.png	-
+
 // earth
 earth_dialog	-	0	sprites/portraits/earth-1.png	-
 
