@@ -128,8 +128,7 @@ public class LandingParty implements GameObject, Positionable {
         this.collectedGeodata = collectedGeodata;
     }
 
-    public void pickUp(World world, InventoryItem o)
-    {
+    public void pickUp(World world, InventoryItem o) {
         Integer i = inventory.get(o);
         if (i == null) {
             i = 0;
@@ -137,8 +136,7 @@ public class LandingParty implements GameObject, Positionable {
         inventory.put(o, i + 1);
     }
 
-    public void onReturnToShip(World world)
-    {
+    public void onReturnToShip(World world) {
         if (collectedGeodata > 0) {
             GameLogger.getInstance().logMessage("Adding " + getCollectedGeodata() + " pieces of raw geodata");
             final ResearchState researchState = world.getPlayer().getResearchState();
@@ -153,5 +151,41 @@ public class LandingParty implements GameObject, Positionable {
         for (Map.Entry<InventoryItem, Integer> o : inventory.entrySet()) {
             o.getKey().onReturnToShip(world, o.getValue());
         }
+    }
+
+    public int getTotalMembers() {
+        return military + science + engineers;
+    }
+
+    public int getMilitary() {
+        return military;
+    }
+
+    public void setMilitary(int military) {
+        this.military = military;
+    }
+
+    public int getScience() {
+        return science;
+    }
+
+    public void setScience(int science) {
+        this.science = science;
+    }
+
+    public int getEngineers() {
+        return engineers;
+    }
+
+    public void setEngineers(int engineers) {
+        this.engineers = engineers;
+    }
+
+    public Map<InventoryItem, Integer> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Map<InventoryItem, Integer> inventory) {
+        this.inventory = inventory;
     }
 }

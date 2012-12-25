@@ -12,9 +12,8 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.BasePlanet;
-import ru.game.aurora.world.planet.LandingParty;
+import ru.game.aurora.world.planet.LandingPartyEquipScreen;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetScanScreen;
 
@@ -104,6 +103,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         int y = world.getPlayer().getShip().getY();
         int x = world.getPlayer().getShip().getX();
 
+        if (engine.getLastKeyChar() == 'e') {
+            LandingPartyEquipScreen screen = new LandingPartyEquipScreen(false);
+            screen.enter(world);
+            world.setCurrentRoom(screen);
+            return;
+        }
+
         if ((engine.getKey(JGEngineInterface.KeyUp) && y <= -radius)
                 || (engine.getKey(JGEngineInterface.KeyDown) && y >= radius)
                 || (engine.getKey(JGEngineInterface.KeyLeft) && x <= -radius)
@@ -121,10 +127,18 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             if (x == p.getGlobalX() && y == p.getGlobalY()) {
                 if (engine.getKey(JGEngineInterface.KeyEnter)) {
                     GameLogger.getInstance().logMessage("Descending to surface...");
-                    world.getPlayer().setLandingParty(new LandingParty(0, 0, new LandingPartyWeapon(1, 3, "Assault rifles"), 1, 1, 1));
-                    p.enter(world);
+
                     world.setCurrentRoom(p);
                     engine.clearKey(JGEngineInterface.KeyEnter);
+
+                    if (world.getPlayer().getLandingParty() == null) {
+                        // first landing, show 'Landing party equipment' screen
+                        LandingPartyEquipScreen screen = new LandingPartyEquipScreen(true);
+                        screen.enter(world);
+                        world.setCurrentRoom(screen);
+                    } else {
+                        p.enter(world);
+                    }
                     break;
                 } else if (engine.getLastKeyChar() == 's') {
                     if (!(p instanceof Planet)) {

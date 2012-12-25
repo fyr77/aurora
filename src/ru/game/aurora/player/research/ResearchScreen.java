@@ -8,20 +8,15 @@
 package ru.game.aurora.player.research;
 
 import jgame.JGColor;
-import jgame.JGRectangle;
 import jgame.impl.JGEngineInterface;
 import jgame.platform.JGEngine;
 import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.util.JGEngineUtils;
+import ru.game.aurora.ui.ListWithIconAndDescrScreen;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ResearchScreen implements Room {
+public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
     private static final int ACTIVE_TAB = 0;
     private static final int AVAILABLE_TAB = 1;
     private static final int COMPLETED_TAB = 2;
@@ -30,58 +25,13 @@ public class ResearchScreen implements Room {
 
     private int currentIdx;
 
-    private World world;
-
     private ResearchState researchState;
-
-    private Room previousRoom;
-
-    private List<String> strings = new ArrayList<String>(24);
-
-    private static final JGRectangle captionRect = new JGRectangle(1, 1, 12, 1);
-
-    private static final JGRectangle listRect = new JGRectangle(1, 3, 7, 10);
-
-    private static final JGRectangle imageRect = new JGRectangle(9, 3, 4, 4);
-
-    private static final JGRectangle descriptionRect = new JGRectangle(9, 8, 4, 5);
-
-    private static final JGColor backgroundColor = new JGColor(4, 7, 125);
 
     @Override
     public void enter(World world) {
-        this.world = world;
-        this.previousRoom = world.getCurrentRoom();
+        super.enter(world);
         researchState = world.getPlayer().getResearchState();
     }
-
-
-    private void drawTab(JGEngine engine, Camera camera, String caption, String image, String description) {
-        JGEngineUtils.drawRectWithBorder(engine, captionRect, camera, JGColor.yellow, backgroundColor);
-        JGEngineUtils.drawRectWithBorder(engine, listRect, camera, JGColor.yellow, backgroundColor);
-        JGEngineUtils.drawRectWithBorder(engine, imageRect, camera, JGColor.yellow, backgroundColor);
-        JGEngineUtils.drawRectWithBorder(engine, descriptionRect, camera, JGColor.yellow, backgroundColor);
-
-        engine.drawString(caption, camera.getRelativeX(captionRect.x) + 200, camera.getRelativeY(captionRect.y) + 20, -1, GUIConstants.dialogFont, JGColor.yellow);
-
-        if (image != null) {
-            engine.drawImage(image, camera.getRelativeX(imageRect.x), camera.getRelativeY(imageRect.y));
-        }
-
-        if (description == null) {
-            description = "<Select a research project>";
-        }
-        JGEngineUtils.drawString(engine, description, camera.getRelativeX(descriptionRect.x) + 10, camera.getRelativeY(descriptionRect.y) + 10, camera.getTileWidth() * descriptionRect.width - 20, GUIConstants.dialogFont, JGColor.yellow);
-
-        if (strings.isEmpty()) {
-            engine.drawString("<No projects in this category>", camera.getRelativeX(listRect.x) + 10, camera.getRelativeY(listRect.y) + 10, -1, GUIConstants.dialogFont, JGColor.yellow);
-        } else {
-            for (int i = 0; i < strings.size(); ++i) {
-                engine.drawString(strings.get(i), camera.getRelativeX(listRect.x) + 20, camera.getRelativeY(listRect.y + i) + 20, -1, GUIConstants.dialogFont, i == currentIdx ? JGColor.green : JGColor.yellow);
-            }
-        }
-    }
-
 
     private void drawActiveTasksTab(JGEngine engine, Camera camera) {
         strings.clear();
@@ -99,7 +49,7 @@ public class ResearchScreen implements Room {
             descr = researchProjectState.desc.getDescription() + " \n" + researchProjectState.desc.getStatusString(world, researchProjectState.scientists);
         }
 
-        drawTab(engine, camera, "Active projects", iconName, descr);
+        draw(engine, camera, "Active projects", iconName, descr);
         GameLogger.getInstance().addStatusMessage("Available scientists: " + researchState.getIdleScientists());
     }
 
@@ -117,7 +67,7 @@ public class ResearchScreen implements Room {
             descr = desc.getDescription();
         }
 
-        drawTab(engine, camera, "Available research projects", icon, descr);
+        draw(engine, camera, "Available research projects", icon, descr);
         GameLogger.getInstance().addStatusMessage("Press <enter> to start selected research");
     }
 
@@ -135,7 +85,7 @@ public class ResearchScreen implements Room {
             descr = desc.getDescription();
         }
 
-        drawTab(engine, camera, "Completed research projects", icon, descr);
+        draw(engine, camera, "Completed research projects", icon, descr);
     }
 
 
@@ -228,7 +178,7 @@ public class ResearchScreen implements Room {
 
         if (engine.getKey(JGEngine.KeyEsc)) {
             world.setCurrentRoom(previousRoom);
-            //previousRoom.enter(world); do not call here, as it is not reall room entry
+            //previousRoom.enter(world); do not call here, as it is not real room entry
         }
     }
 
