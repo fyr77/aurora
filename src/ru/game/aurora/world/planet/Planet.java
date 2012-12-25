@@ -166,6 +166,8 @@ public class Planet extends BasePlanet {
     @Override
     public void enter(World world) {
         landingParty = world.getPlayer().getLandingParty();
+        landingParty.onLaunch(world);
+        landingParty.refillOxygen();
         int x = landingParty.getX();
         int y = landingParty.getY();
 
@@ -408,7 +410,7 @@ public class Planet extends BasePlanet {
             world.getPlayer().getLandingParty().consumeOxygen();
         }
 
-        if (world.getPlayer().getLandingParty().getOxygen() < 0) {
+        if (world.getPlayer().getLandingParty().getOxygen() < 0 || world.getPlayer().getLandingParty().getTotalMembers() == 0) {
             GameLogger.getInstance().logMessage("Lost connection with landing party");
             world.setCurrentRoom(owner);
             owner.enter(world);

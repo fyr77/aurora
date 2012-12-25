@@ -105,4 +105,8 @@ public class AnimalSpeciesDesc {
     public int getSpeed() {
         return speed;
     }
+
+    public int getDamage() {
+        return damage;
+    }
 }

@@ -12,6 +12,7 @@ import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.player.research.projects.Cartography;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Positionable;
+import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 
@@ -36,6 +37,8 @@ public class LandingParty implements GameObject, Positionable {
     private int collectedGeodata = 0;
 
     private Map<InventoryItem, Integer> inventory = new HashMap<InventoryItem, Integer>();
+
+    private int hp = 3;
 
     public LandingParty(int x, int y, LandingPartyWeapon weapon, int military, int science, int engineers) {
         this.x = x;
@@ -136,6 +139,21 @@ public class LandingParty implements GameObject, Positionable {
         inventory.put(o, i + 1);
     }
 
+    /**
+     * Returns false if since last party configuration smth has changed and new 'Landing party screen' must be shown
+     */
+    public boolean canBeLaunched(World world) {
+        Ship ship = world.getPlayer().getShip();
+        return military <= ship.getMilitary() && science <= ship.getScientists() && engineers <= ship.getEngineers() && getTotalMembers() > 0;
+    }
+
+    public void onLaunch(World world) {
+        Ship ship = world.getPlayer().getShip();
+        ship.setMilitary(ship.getMilitary() - military);
+        ship.setScientists(ship.getScientists() - science);
+        ship.setEngineers(ship.getEngineers() - engineers);
+    }
+
     public void onReturnToShip(World world) {
         if (collectedGeodata > 0) {
             GameLogger.getInstance().logMessage("Adding " + getCollectedGeodata() + " pieces of raw geodata");
@@ -151,6 +169,11 @@ public class LandingParty implements GameObject, Positionable {
         for (Map.Entry<InventoryItem, Integer> o : inventory.entrySet()) {
             o.getKey().onReturnToShip(world, o.getValue());
         }
+
+        Ship ship = world.getPlayer().getShip();
+        ship.setMilitary(ship.getMilitary() + military);
+        ship.setMilitary(ship.getScientists() + science);
+        ship.setMilitary(ship.getEngineers() + engineers);
     }
 
     public int getTotalMembers() {
@@ -187,5 +210,35 @@ public class LandingParty implements GameObject, Positionable {
 
     public void setInventory(Map<InventoryItem, Integer> inventory) {
         this.inventory = inventory;
+    }
+
+    public void resetHp() {
+        hp = 3;
+    }
+
+    public void subtractHp(int amount) {
+        while (amount > 0) {
+            int amountToSubtract = Math.min(hp, amount);
+            hp -= amountToSubtract;
+            if (hp == 0) {
+                // landing party member killed
+                GameLogger.getInstance().logMessage("Party member killed");
+                if (military > 0) {
+                    military--;
+                } else if (engineers > 0) {
+                    engineers--;
+                } else {
+                    science--;
+                }
+                if (getTotalMembers() > 0) {
+                    resetHp();
+                }
+            }
+            amount -= amountToSubtract;
+        }
+    }
+
+    public int getHp() {
+        return hp;
     }
 }

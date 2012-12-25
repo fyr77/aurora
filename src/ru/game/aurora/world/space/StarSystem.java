@@ -12,10 +12,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.BasePlanet;
-import ru.game.aurora.world.planet.LandingPartyEquipScreen;
-import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.PlanetScanScreen;
+import ru.game.aurora.world.planet.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +128,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     world.setCurrentRoom(p);
                     engine.clearKey(JGEngineInterface.KeyEnter);
 
-                    if (world.getPlayer().getLandingParty() == null) {
+                    final LandingParty landingParty = world.getPlayer().getLandingParty();
+                    if (landingParty == null || !landingParty.canBeLaunched(world)) {
                         // first landing, show 'Landing party equipment' screen
                         LandingPartyEquipScreen screen = new LandingPartyEquipScreen(true);
                         screen.enter(world);

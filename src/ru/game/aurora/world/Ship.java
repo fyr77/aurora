@@ -90,4 +90,8 @@ public class Ship implements GameObject, Positionable {
     public void setMilitary(int military) {
         this.military = military;
     }
+
+    public int getTotalCrew() {
+        return scientists + engineers + military;
+    }
 }

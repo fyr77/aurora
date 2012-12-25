@@ -10,6 +10,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.ResearchScreen;
+import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -66,10 +67,16 @@ public class World {
             turnCount++;
         }
 
-        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext();) {
+        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext(); ) {
             GameEventListener l = listenerIterator.next();
             if (!l.isAlive()) {
                 listenerIterator.remove();
+            }
+        }
+
+        if (player.getShip().getTotalCrew() <= 0) {
+            if (currentRoom instanceof Planet && player.getLandingParty().getTotalMembers() <= 0) {
+                engine.exitEngine("All crew members are dead");
             }
         }
     }
