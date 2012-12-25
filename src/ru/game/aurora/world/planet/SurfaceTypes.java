@@ -80,9 +80,7 @@ public class SurfaceTypes {
         }
 
         engine.drawImage(spriteName, screenX, screenY);
-        if ((type & SurfaceTypes.MOUNTAINS_MASK) != 0) {
-            engine.drawImage("mountains_tile_1", screenX, screenY);
-        }
+
     }
 
     public static boolean isPassible(LandingParty party, byte tileType) {

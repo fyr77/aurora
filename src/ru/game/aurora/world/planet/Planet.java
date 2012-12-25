@@ -118,15 +118,7 @@ public class Planet extends BasePlanet {
             ps.put(b, r.nextDouble() * (r.nextInt(5) + 1));
         }
 
-        surface = new byte[height][width];
-        for (int i = 0; i < height; ++i) {
-            for (int j = 0; j < width; ++j) {
-                surface[i][j] = ps.getRandom();
-                if (r.nextInt(mountainProbability) == 0) {
-                    surface[i][j] |= SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
-                }
-            }
-        }
+        surface = LandscapeGenerator.generateLandscape(cat, width, height);
 
         final int resourceDeposits = r.nextInt(40 / size);
         for (int i = 0; i < resourceDeposits; ++i) {
@@ -457,6 +449,41 @@ public class Planet extends BasePlanet {
                 }
             }
 
+        }
+
+        // after all draw mountains
+        if (detailed) {
+            for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
+                // first even columns
+                for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; j++) {
+
+                    final byte type = surface[wrapY(i)][wrapX(j)];
+                    if ((type & SurfaceTypes.VISIBILITY_MASK) == 0) {
+                        continue;
+                    }
+                    if ((type & SurfaceTypes.MOUNTAINS_MASK) != 0) {
+
+                        int mountainCount = 0;
+                        for (int ii = -1; ii <= 1; ++ii) {
+                            for (int jj = -1; jj <= 1; ++jj) {
+                                if ((surface[wrapY(i + ii)][wrapX(j + jj)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {
+                                    mountainCount++;
+                                }
+                            }
+
+                        }
+
+                        if (mountainCount < 3) {
+                            engine.drawImage("mountains_tile_1", camera.getXCoord(j), camera.getYCoord(i));
+                        } else {
+                            engine.drawImage("mountains_tile_2", camera.getXCoord(j), camera.getYCoord(i));
+                        }
+
+                    }
+                }
+
+
+            }
         }
     }
 
