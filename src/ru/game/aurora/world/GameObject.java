@@ -5,11 +5,14 @@
  */
 package ru.game.aurora.world;
 
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 
 public interface GameObject {
-    public void update(JGEngine engine, World world);
 
-    public void draw(JGEngine engine, Camera camera);
+    public void update(GameContainer container, World world);
+
+    public void draw(GameContainer container, Graphics graphics, Camera camera);
+
 }

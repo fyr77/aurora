@@ -42,7 +42,7 @@ public class AuroraGame extends JGEngine {
         setFrameRate(30, 2);
         defineMedia("sprites.tbl");
         GameLogger.init(new JGRectangle(15 * 64, 0, 5 * 64, 10 * 64), new JGRectangle(15 * 64, 10 * 64, 5 * 64, 5 * 64));
-        world = new World(this, new Camera(0, 0, 15, 15, this), 40, 20);
+        world = new World(new Camera(0, 0, 15, 15, this), 40, 20);
         setBGColor(JGColor.black);
     }
 

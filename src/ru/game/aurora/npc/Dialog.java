@@ -8,7 +8,9 @@ package ru.game.aurora.npc;
 import com.google.gson.Gson;
 import jgame.JGColor;
 import jgame.JGRectangle;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.util.JGEngineUtils;
@@ -87,12 +89,19 @@ public class Dialog implements Room {
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
+    public void update(GameContainer container, World world) {
         if (currentStatement == null) {
             return;
         }
-        char c = engine.getLastKeyChar();
-        int idx = c - '1';
+
+        int idx = -1;
+        for (int i = Input.KEY_1; i < Input.KEY_9; ++i) {
+            if (container.getInput().isKeyDown(i)) {
+                idx = i - 1;
+                break;
+            }
+        }
+
         if (idx >= currentStatement.replies.length || idx < 0) {
             return;
         }
@@ -108,9 +117,9 @@ public class Dialog implements Room {
     private static final JGColor backgroundColor = new JGColor(4, 7, 125);
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera) {
 
-        engine.drawImage(iconName, camera.getRelativeX(iconRectangle.x), camera.getRelativeY(iconRectangle.y));
+        graphics.drawImage(iconName, camera.getRelativeX(iconRectangle.x), camera.getRelativeY(iconRectangle.y));
         engine.setColor(backgroundColor);
         JGEngineUtils.drawRectWithBorder(engine, npcStatementRectangle, camera, JGColor.yellow, backgroundColor);
         JGEngineUtils.drawRectWithBorder(engine, replyRectangle, camera, JGColor.yellow, backgroundColor);

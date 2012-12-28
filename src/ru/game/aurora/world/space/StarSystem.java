@@ -5,9 +5,10 @@
  */
 package ru.game.aurora.world.space;
 
-import jgame.JGColor;
-import jgame.impl.JGEngineInterface;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
@@ -18,16 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
-    public static final JGColor[] possibleColors = {JGColor.red, JGColor.white, JGColor.yellow, new JGColor(122, 155, 243)};
+    public static final Color[] possibleColors = {Color.red, Color.white, Color.yellow, new Color(122, 155, 243)};
 
     public static final int[] possibleSizes = {1, 2, 3, 4};
 
     public static class Star {
         // 1 is largest star, 4 is smallest
         public final int size;
-        public final JGColor color;
+        public final Color color;
 
-        public Star(int size, JGColor color) {
+        public Star(int size, Color color) {
             this.size = size;
             this.color = color;
         }
@@ -76,12 +77,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     }
 
     @Override
-    public void drawOnGlobalMap(JGEngine engine, Camera camera, int tileX, int tileY) {
+    public void drawOnGlobalMap(GameContainer container, Graphics g, Camera camera, int tileX, int tileY) {
         if (!camera.isInViewport(tileX, tileY)) {
             return;
         }
-        engine.setColor(star.color);
-        engine.drawOval(camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, camera.getTileWidth() / star.size, camera.getTileHeight() / star.size, true, true);
+        g.setColor(star.color);
+        g.fillOval(camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, camera.getTileWidth() / star.size, camera.getTileHeight() / star.size);
     }
 
     @Override
@@ -90,27 +91,27 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     }
 
     @Override
-    public void processCollision(JGEngine engine, Player player) {
+    public void processCollision(GameContainer container, Player player) {
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
-        super.update(engine, world);
+    public void update(GameContainer container, World world) {
+        super.update(container, world);
 
         int y = world.getPlayer().getShip().getY();
         int x = world.getPlayer().getShip().getX();
 
-        if (engine.getLastKeyChar() == 'e') {
+        if (container.getInput().isKeyDown(Input.KEY_E)) {
             LandingPartyEquipScreen screen = new LandingPartyEquipScreen(false);
             screen.enter(world);
             world.setCurrentRoom(screen);
             return;
         }
 
-        if ((engine.getKey(JGEngineInterface.KeyUp) && y <= -radius)
-                || (engine.getKey(JGEngineInterface.KeyDown) && y >= radius)
-                || (engine.getKey(JGEngineInterface.KeyLeft) && x <= -radius)
-                || (engine.getKey(JGEngineInterface.KeyRight) && x >= radius)) {
+        if ((container.getInput().isKeyDown(Input.KEY_UP) && y <= -radius)
+                || (container.getInput().isKeyDown(Input.KEY_DOWN) && y >= radius)
+                || (container.getInput().isKeyDown(Input.KEY_LEFT) && x <= -radius)
+                || (container.getInput().isKeyDown(Input.KEY_RIGHT) && x >= radius)) {
             GameLogger.getInstance().logMessage("Leaving star system...");
             world.setCurrentRoom(world.getGalaxyMap());
             world.getGalaxyMap().enter(world);
@@ -122,11 +123,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         for (BasePlanet p : planets) {
             if (x == p.getGlobalX() && y == p.getGlobalY()) {
-                if (engine.getKey(JGEngineInterface.KeyEnter)) {
+                if (container.getInput().isKeyDown(Input.KEY_ENTER)) {
                     GameLogger.getInstance().logMessage("Descending to surface...");
 
                     world.setCurrentRoom(p);
-                    engine.clearKey(JGEngineInterface.KeyEnter);
 
                     final LandingParty landingParty = world.getPlayer().getLandingParty();
                     if (landingParty == null || !landingParty.canBeLaunched(world)) {
@@ -138,7 +138,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                         p.enter(world);
                     }
                     break;
-                } else if (engine.getLastKeyChar() == 's') {
+                } else if (container.getInput().isKeyDown(Input.KEY_S)) {
                     if (!(p instanceof Planet)) {
                         GameLogger.getInstance().logMessage("Can not scan this planet");
                         return;
@@ -148,7 +148,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     world.setCurrentRoom(s);
                     return;
                 } else if (world.isUpdatedThisFrame()) {
-                    p.processCollision(engine, world.getPlayer());
+                    p.processCollision(container, world.getPlayer());
                     break;
                 }
             }
@@ -157,12 +157,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         for (NPCShip ship : ships) {
             if (ship.getX() == x && ship.getY() == y) {
-                if (!ship.isHostile() && engine.getKey(JGEngineInterface.KeyEnter)) {
+                if (!ship.isHostile() && container.getInput().isKeyDown(Input.KEY_ENTER)) {
                     world.setCurrentDialog(ship.getRace().getDefaultDialog());
                 }
             }
             if (world.isUpdatedThisFrame()) {
-                ship.update(engine, world);
+                ship.update(container, world);
             }
         }
 
@@ -188,17 +188,17 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
-        background.draw(engine, camera);
-        player.getShip().draw(engine, camera);
+    public void draw(GameContainer container, Graphics g, Camera camera) {
+        background.draw(g, camera);
+        player.getShip().draw(container, g, camera);
         player.addGlobalStatus();
         GameLogger.getInstance().addStatusMessage("==========================");
-        engine.setColor(star.color);
+        g.setColor(star.color);
 
         final int starX = camera.getXCoord(0) + (camera.getTileWidth() / 2);
         final int starY = camera.getYCoord(0) + camera.getTileHeight() / 2;
         if (camera.isInViewport(0, 0)) {
-            engine.drawOval(starX, starY, engine.tileWidth() * STAR_SCALE_FACTOR / star.size, engine.tileHeight() * STAR_SCALE_FACTOR / star.size, true, true);
+            g.fillOval(starX, starY, camera.getTileWidth() * STAR_SCALE_FACTOR / star.size, camera.getTileHeight() * STAR_SCALE_FACTOR / star.size);
         }
 
         for (BasePlanet p : planets) {
@@ -210,14 +210,15 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
             int planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);
             int planetY = camera.getYCoord(p.getGlobalY()) + camera.getTileWidth() / 2;
-            double size = Math.sqrt(Math.pow((planetX - starX), 2) + Math.pow((planetY - starY), 2)) * 2;
+            float size = (float) (Math.sqrt(Math.pow((planetX - starX), 2) + Math.pow((planetY - starY), 2)) * 2);
 
-            engine.drawOval(starX, starY, size, size, false, true, 1, JGColor.grey);
-            p.drawOnGlobalMap(engine, camera, 0, 0);
+            g.setColor(Color.gray);
+            g.drawOval(starX, starY, size, size);
+            p.drawOnGlobalMap(container, g, camera, 0, 0);
 
         }
         for (NPCShip ship : ships) {
-            ship.draw(engine, camera);
+            ship.draw(container, g, camera);
             if (ship.getX() == player.getShip().getX() && ship.getY() == player.getShip().getY()) {
                 if (!ship.isHostile()) {
                     GameLogger.getInstance().addStatusMessage("Press <enter> to hail ship");
@@ -225,8 +226,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
-        engine.setColor(JGColor.red);
-        engine.drawRect(camera.getXCoord(-radius), camera.getYCoord(-radius), 2 * radius * camera.getTileWidth(), 2 * radius * camera.getTileHeight(), false, false);
+        g.setColor(Color.red);
+        g.drawRect(camera.getXCoord(-radius), camera.getYCoord(-radius), 2 * radius * camera.getTileWidth(), 2 * radius * camera.getTileHeight());
     }
 
     public List<NPCShip> getShips() {

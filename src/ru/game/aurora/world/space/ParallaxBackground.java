@@ -7,8 +7,8 @@ package ru.game.aurora.world.space;
  * Time: 15:07
  */
 
-import jgame.JGColor;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.util.CollectionUtils;
 
@@ -22,9 +22,9 @@ public class ParallaxBackground {
     private static class Star {
         public int x;
         public int y;
-        public JGColor color;
+        public Color color;
 
-        private Star(int x, int y, JGColor color) {
+        private Star(int x, int y, Color color) {
             this.x = x;
             this.y = y;
             this.color = color;
@@ -56,31 +56,31 @@ public class ParallaxBackground {
     }
 
     // same but for absolute coordinate (not tile)
-    public double getXCoordPoint(Camera camera, int pointX, int planeNumber) {
-        return (pointX - 1.0 / (planeNumber * 2 + 5) * (camera.getTarget().getX() - camera.getViewportTilesX() / 2) * camera.getTileWidth());
+    public float getXCoordPoint(Camera camera, int pointX, int planeNumber) {
+        return (pointX - 1.0f / (planeNumber * 2 + 5) * (camera.getTarget().getX() - camera.getViewportTilesX() / 2) * camera.getTileWidth());
     }
 
-    public double getYCoordPoint(Camera camera, int pointY, int planeNumber) {
-        return (pointY - 1.0 / (planeNumber * 2 + 5) * (camera.getTarget().getY() - camera.getViewportTilesY() / 2) * camera.getTileHeight());
-    }
-
-    public void draw(JGEngine engine, Camera camera) {
-        for (int i = 0; i < PLANES_COUNT; ++i) {
-            for (int j = 0; j < starsPerPlane; ++j) {
-                Star s = stars[i][j];
-                engine.setColor(s.color);
-
-                double radius = Math.ceil(baseWidth / (2 * i + 1));
-                if (radius < 3.0) {
-                    // jgame does not draw oval with radius smaller than 3
-                    radius = 3.0;
-                }
-                engine.drawOval(getXCoordPoint(camera, s.x, i), getYCoordPoint(camera, s.y, i), radius, radius, true, true);
-            }
-        }
+    public float getYCoordPoint(Camera camera, int pointY, int planeNumber) {
+        return (pointY - 1.0f / (planeNumber * 2 + 5) * (camera.getTarget().getY() - camera.getViewportTilesY() / 2) * camera.getTileHeight());
     }
 
     public void setBaseWidth(float baseWidth) {
         this.baseWidth = baseWidth;
+    }
+
+    public void draw(Graphics graphics, Camera camera) {
+        for (int i = 0; i < PLANES_COUNT; ++i) {
+            for (int j = 0; j < starsPerPlane; ++j) {
+                Star s = stars[i][j];
+                graphics.setColor(s.color);
+
+                float radius = (float) Math.ceil(baseWidth / (2 * i + 1));
+                if (radius < 3.0f) {
+                    // jgame does not draw oval with radius smaller than 3
+                    radius = 3.0f;
+                }
+                graphics.drawOval(getXCoordPoint(camera, s.x, i), getYCoordPoint(camera, s.y, i), radius, radius);
+            }
+        }
     }
 }

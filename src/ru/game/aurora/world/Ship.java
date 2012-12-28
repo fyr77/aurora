@@ -5,8 +5,10 @@
  */
 package ru.game.aurora.world;
 
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.ResourceManager;
 
 public class Ship implements GameObject, Positionable {
 
@@ -31,7 +33,7 @@ public class Ship implements GameObject, Positionable {
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
+    public void update(GameContainer container, World world) {
     }
 
     public void setHull(int hull) {
@@ -47,8 +49,8 @@ public class Ship implements GameObject, Positionable {
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
-        engine.drawImage(camera.getXCoord(x), camera.getYCoord(y), "aurora");
+    public void draw(GameContainer container, Graphics g, Camera camera) {
+        g.drawImage(ResourceManager.getImage("aurora"), camera.getXCoord(x), camera.getYCoord(y), null);
     }
 
     @Override

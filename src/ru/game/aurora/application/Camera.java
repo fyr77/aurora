@@ -6,8 +6,6 @@
  */
 package ru.game.aurora.application;
 
-import jgame.JGColor;
-import jgame.platform.JGEngine;
 import ru.game.aurora.world.Positionable;
 
 /**
@@ -34,27 +32,14 @@ public class Camera {
 
     private int viewportTilesY;
 
-    public Camera(int viewportX, int viewportY, int vieportWidth, int viewportHeight, JGEngine engine) {
+    public Camera(int viewportX, int viewportY, int vieportWidth, int viewportHeight, int tileWidth, int tileHeight) {
         this.viewportX = viewportX;
         this.viewportY = viewportY;
         this.viewportTilesX = vieportWidth;
         this.viewportTilesY = viewportHeight;
-        this.engine = engine;
-        this.tileHeight = engine.tileHeight();
-        this.tileWidth = engine.tileWidth();
-    }
-
-    public Camera(int viewportX, int viewportY, int tileWidth, int tileHeight, int viewportTilesX, int viewportTilesY, JGEngine engine) {
-        this.viewportX = viewportX;
-        this.viewportY = viewportY;
-        this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
-        this.viewportTilesX = viewportTilesX;
-        this.viewportTilesY = viewportTilesY;
-        this.engine = engine;
+        this.tileWidth = tileWidth;
     }
-
-    private JGEngine engine;
 
     /**
      * Object camera is following
@@ -135,11 +120,11 @@ public class Camera {
     }
 
     public int getTileWidth() {
-        return engine.tileWidth();
+        return tileWidth;
     }
 
     public int getTileHeight() {
-        return engine.tileHeight();
+        return tileHeight;
     }
 
     public Positionable getTarget() {
@@ -151,8 +136,8 @@ public class Camera {
     }
 
     public void drawBound() {
-        engine.setColor(JGColor.blue);
-        engine.drawRect(viewportX, viewportY, viewportTilesX * tileWidth, viewportTilesY * tileHeight, false, false);
+        //engine.setColor(JGColor.blue);
+        //engine.drawRect(viewportX, viewportY, viewportTilesX * tileWidth, viewportTilesY * tileHeight, false, false);
     }
 
     public int getViewportX() {
@@ -169,10 +154,6 @@ public class Camera {
 
     public int getViewportTilesY() {
         return viewportTilesY;
-    }
-
-    public JGEngine getEngine() {
-        return engine;
     }
 
 }

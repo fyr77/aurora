@@ -5,9 +5,11 @@
  */
 package ru.game.aurora.world.planet;
 
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.player.research.projects.Cartography;
 import ru.game.aurora.world.GameObject;
@@ -67,13 +69,13 @@ public class LandingParty implements GameObject, Positionable {
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
+    public void update(GameContainer container, World world) {
 
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
-        engine.drawImage(camera.getXCoord(x), camera.getYCoord(y), "awayteam");
+    public void draw(GameContainer container, Graphics g, Camera camera) {
+        g.drawImage(ResourceManager.getImage("awayteam"), camera.getXCoord(x), camera.getYCoord(y));
 
         GameLogger.getInstance().addStatusMessage("Landing team status:");
         GameLogger.getInstance().addStatusMessage("scientists: " + science);

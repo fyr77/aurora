@@ -6,7 +6,9 @@
 package ru.game.aurora.world.space;
 
 import jgame.JGColor;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.npc.AlienRace;
@@ -161,14 +163,13 @@ public class GalaxyMap extends BaseSpaceRoom {
 
 
     @Override
-    public void update(JGEngine engine, World world) {
-        if (engine.getLastKeyChar() == 'm') {
+    public void update(GameContainer container, World world) {
+        if (container.getInput().isKeyDown(Input.KEY_M)) {
             world.setCurrentRoom(fullMapScreen);
             fullMapScreen.enter(world);
-            engine.clearLastKey();
             return;
         }
-        super.update(engine, world);
+        super.update(container, world);
         final int y = player.getShip().getY();
         final int x = player.getShip().getX();
 
@@ -180,9 +181,9 @@ public class GalaxyMap extends BaseSpaceRoom {
         }
         if (idx != -1) {
             if (world.isUpdatedThisFrame()) {
-                objects.get(idx).processCollision(engine, player);
+                objects.get(idx).processCollision(container, player);
             }
-            if (objects.get(idx).canBeEntered() && engine.getKey(JGEngine.KeyEnter)) {
+            if (objects.get(idx).canBeEntered() && container.getInput().isKeyDown(Input.KEY_ENTER)) {
                 Room r = (Room) objects.get(idx);
                 world.setCurrentRoom(r);
                 r.enter(world);
@@ -192,9 +193,9 @@ public class GalaxyMap extends BaseSpaceRoom {
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
-        super.draw(engine, camera);
-        background.draw(engine, camera);
+    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+        super.draw(container, graphics, camera);
+        background.draw(graphics, camera);
         for (int i = 0; i < tilesY; ++i) {
             for (int j = 0; j < tilesX; ++j) {
                 if (map[i][j] != -1) {
@@ -202,7 +203,7 @@ public class GalaxyMap extends BaseSpaceRoom {
                     if (j == player.getShip().getX() && i == player.getShip().getY() && obj.canBeEntered()) {
                         GameLogger.getInstance().addStatusMessage("Press <enter> to enter location");
                     }
-                    obj.drawOnGlobalMap(engine, camera, j, i);
+                    obj.drawOnGlobalMap(container, graphics, camera, j, i);
                 }
             }
         }

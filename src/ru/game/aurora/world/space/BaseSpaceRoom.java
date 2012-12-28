@@ -5,8 +5,9 @@
  */
 package ru.game.aurora.world.space;
 
-import jgame.impl.JGEngineInterface;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.Room;
@@ -21,24 +22,24 @@ public class BaseSpaceRoom implements Room {
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
+    public void update(GameContainer container, World world) {
         int x = player.getShip().getX();
         int y = player.getShip().getY();
 
-        if (engine.getKey(JGEngineInterface.KeyUp)) {
+        if (container.getInput().isKeyDown(Input.KEY_UP)) {
             y--;
             world.setUpdatedThisFrame(true);
         }
-        if (engine.getKey(JGEngineInterface.KeyDown)) {
+        if (container.getInput().isKeyDown(Input.KEY_DOWN)) {
             y++;
             world.setUpdatedThisFrame(true);
         }
 
-        if (engine.getKey(JGEngineInterface.KeyLeft)) {
+        if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
             x--;
             world.setUpdatedThisFrame(true);
         }
-        if (engine.getKey(JGEngineInterface.KeyRight)) {
+        if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
             x++;
             world.setUpdatedThisFrame(true);
         }
@@ -47,7 +48,7 @@ public class BaseSpaceRoom implements Room {
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
-        player.getShip().draw(engine, camera);
+    public void draw(GameContainer container, Graphics g, Camera camera) {
+        player.getShip().draw(container, g, camera);
     }
 }

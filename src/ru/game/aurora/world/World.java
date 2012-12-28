@@ -5,7 +5,9 @@
  */
 package ru.game.aurora.world;
 
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.player.Player;
@@ -35,7 +37,7 @@ public class World {
 
     private List<GameEventListener> listeners = new LinkedList<GameEventListener>();
 
-    public World(JGEngine engine, Camera camera, int sizeX, int sizeY) {
+    public World(Camera camera, int sizeX, int sizeY) {
         player = new Player();
         this.camera = camera;
         camera.setTarget(player.getShip());
@@ -44,24 +46,24 @@ public class World {
         updatedThisFrame = false;
     }
 
-    public void update(JGEngine engine) {
+    public void update(GameContainer container) {
         updatedThisFrame = false;
 
         if (currentDialog != null) {
-            currentDialog.update(engine, this);
+            currentDialog.update(container, this);
             if (currentDialog.isOver()) {
                 currentDialog = null;
             }
             return;
         }
-        if (engine.getLastKeyChar() == 'r') {
+        if (container.getInput().isKeyDown(Input.KEY_R)) {
             // open research screen
             ResearchScreen researchScreen = new ResearchScreen();
             researchScreen.enter(this);
             currentRoom = researchScreen;
             return;
         }
-        currentRoom.update(engine, this);
+        currentRoom.update(container, this);
         if (isUpdatedThisFrame()) {
             player.getResearchState().update(this);
             turnCount++;
@@ -76,15 +78,15 @@ public class World {
 
         if (player.getShip().getTotalCrew() <= 0) {
             if (currentRoom instanceof Planet && player.getLandingParty().getTotalMembers() <= 0) {
-                engine.exitEngine("All crew members are dead");
+                container.exit();
             }
         }
     }
 
-    public void draw(JGEngine engine) {
-        currentRoom.draw(engine, camera);
+    public void draw(GameContainer container, Graphics graphics) {
+        currentRoom.draw(container, graphics, camera);
         if (currentDialog != null) {
-            currentDialog.draw(engine, camera);
+            currentDialog.draw(container, graphics, camera);
         }
     }
 

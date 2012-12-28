@@ -266,6 +266,13 @@
         <root url="file://$PROJECT_DIR$/../JGame-20120810/src-base" />
       </SOURCES>
     </library>
+    <library name="slick">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/third-party/slick.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">

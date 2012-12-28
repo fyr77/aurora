@@ -5,8 +5,10 @@
  */
 package ru.game.aurora.world.space;
 
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.world.BasePositionable;
@@ -31,21 +33,20 @@ public class NPCShip extends BasePositionable implements GameObject {
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
+    public void update(GameContainer container, World world) {
         // do nothing currently
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
-        engine.drawImage(sprite, camera.getXCoord(x), camera.getYCoord(y));
+    public void draw(GameContainer container, Graphics g, Camera camera) {
+        g.drawImage(ResourceManager.getImage(sprite), camera.getXCoord(x), camera.getYCoord(y));
     }
 
     /**
      * Returns true if this ship is hostile to player
      * Hostile ships can not be hailed
      */
-    public boolean isHostile()
-    {
+    public boolean isHostile() {
         return false;
     }
 

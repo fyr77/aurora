@@ -5,7 +5,8 @@
  */
 package ru.game.aurora.world.space;
 
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.player.Player;
 
@@ -13,7 +14,7 @@ public interface GalaxyMapObject {
     /**
      * Draws tile for this object on global map
      */
-    public void drawOnGlobalMap(JGEngine engine, Camera camera, int tileX, int tileY);
+    public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY);
 
     /**
      * Returns true if this galaxy map object is a room and can be entered
@@ -23,5 +24,5 @@ public interface GalaxyMapObject {
     /**
      * Processes player ship entering this tile
      */
-    public void processCollision(JGEngine engine, Player player);
+    public void processCollision(GameContainer container, Player player);
 }

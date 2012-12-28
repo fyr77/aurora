@@ -6,7 +6,7 @@
  */
 package ru.game.aurora.world.planet;
 
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.space.GalaxyMapObject;
@@ -51,7 +51,7 @@ public abstract class BasePlanet implements Room, GalaxyMapObject {
     }
 
     @Override
-    public void processCollision(JGEngine engine, Player player) {
+    public void processCollision(GameContainer container, Player player) {
     }
 
     public void setGlobalY(int globalY) {
