@@ -23,8 +23,6 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
 
     private int currentTab;
 
-    private int currentIdx;
-
     private ResearchState researchState;
 
     @Override

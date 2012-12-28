@@ -119,6 +119,10 @@ public class LandingParty implements GameObject, Positionable {
         return (int) (1.0 / 3 * (science + military) + engineers);
     }
 
+    public int calcResearchPower() {
+        return (int) ((2 * engineers + military) / 3.0 + science);
+    }
+
     public void addCollectedGeodata(int amount) {
         collectedGeodata += amount;
     }

@@ -23,6 +23,9 @@ mountains_tile_2	-	0	sprites/tiles/mountains-3.png	-
 iron_deposit	-	0	sprites/tiles/iron_deposit.png	-
 gold_deposit	-	0	sprites/tiles/gold_deposit.png	-
 
+// artifacts
+small_artifact	-	0	sprites/planet_objects/small_artifact.png	-
+
 // races
 
 // gardeners
@@ -39,6 +42,7 @@ earth_dialog	-	0	sprites/portraits/earth-1.png	-
 cartography_research	-	0	sprites/research_icons/cartography.png	-
 outopsy_research	-	0	sprites/research_icons/outopsy.png	-
 astronomy_research	-	0	sprites/research_icons/astronomy.png	-
+artifact_research	-	0	sprites/research_icons/artifact.png	-
 
 // planets
 earth	-	0	sprites/planets/earth.png	-

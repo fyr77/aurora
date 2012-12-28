@@ -154,6 +154,18 @@ public class Planet extends BasePlanet {
         }
     }
 
+    public void setNearestFreePoint(Positionable p, int x, int y) {
+        while (!SurfaceTypes.isPassible(surface[y][wrapX(x)])) {
+            x++;
+        }
+
+        p.setPos(x, y);
+    }
+
+
+    public List<PlanetObject> getPlanetObjects() {
+        return planetObjects;
+    }
 
     @Override
     public void enter(World world) {

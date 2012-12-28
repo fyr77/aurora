@@ -9,10 +9,8 @@ import jgame.JGColor;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Dialog;
-import ru.game.aurora.world.planet.BasePlanet;
-import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.PlanetAtmosphere;
-import ru.game.aurora.world.planet.PlanetCategory;
+import ru.game.aurora.player.research.projects.ArtifactResearch;
+import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.earth.Earth;
 
 public class HomeworldGenerator {
@@ -68,7 +66,11 @@ public class HomeworldGenerator {
         setCoord(planets[1], 3);
 
         planets[2] = new Planet(ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0, false);
-        setCoord(planets[1], 5);
+        setCoord(planets[2], 5);
+
+        AlienArtifact a = new AlienArtifact(3, 4, "small_artifact", new ArtifactResearch());
+        ((Planet) planets[2]).setNearestFreePoint(a, 2, 2);
+        ((Planet) planets[2]).getPlanetObjects().add(a);
 
         ss.setPlanets(planets);
 
