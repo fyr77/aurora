@@ -5,7 +5,7 @@
  */
 package ru.game.aurora.world.space;
 
-import jgame.JGColor;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -61,11 +61,6 @@ public class GalaxyMap extends BaseSpaceRoom {
             }
         }
 
-        // adding special objects that exist only in single instance, but are used frequently.
-        // 0 is Nebula
-        objects.add(new Nebula());
-
-
         AlienRace gardenerRace = null;
         AlienRace kliskRace = null;
 
@@ -120,7 +115,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     public static StarSystem generateRandomStarSystem(int x, int y, int maxSizeX, int maxSizeY) {
         int size = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
-        JGColor starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
+        Color starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
         final int planetCount = r.nextInt(5);
         Planet[] planets = new Planet[planetCount];
         int maxRadius = 0;

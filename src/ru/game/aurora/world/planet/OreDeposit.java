@@ -5,9 +5,11 @@
  */
 package ru.game.aurora.world.planet;
 
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 
@@ -145,12 +147,12 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
+    public void update(GameContainer container, World world) {
 
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
-        engine.drawImage(type.getSpriteName(), camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
+    public void draw(GameContainer container, Graphics g, Camera camera) {
+        g.drawImage(ResourceManager.getInstance().getImage(type.getSpriteName()), camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
     }
 }

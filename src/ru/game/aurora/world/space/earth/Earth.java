@@ -6,10 +6,11 @@
  */
 package ru.game.aurora.world.space.earth;
 
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.Dialog;
-import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.World;
@@ -33,12 +34,12 @@ public class Earth extends Planet {
     }
 
     @Override
-    public void drawOnGlobalMap(JGEngine engine, Camera camera, int tileX, int tileY) {
+    public void drawOnGlobalMap(GameContainer container, Graphics g, Camera camera, int tileX, int tileY) {
         if (!camera.isInViewport(globalX, globalY)) {
             return;
         }
 
-        engine.drawImage("earth", camera.getXCoord(globalX), camera.getYCoord(globalY));
+        g.drawImage(ResourceManager.getInstance().getImage("earth"), camera.getXCoord(globalX), camera.getYCoord(globalY));
     }
 
     @Override
@@ -47,17 +48,12 @@ public class Earth extends Planet {
     }
 
     @Override
-    public void processCollision(JGEngine engine, Player player) {
-
-    }
-
-    @Override
     public void enter(World world) {
         world.setCurrentDialog(earthDialog);
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
+    public void update(GameContainer container, World world) {
         if (earthDialog.isOver()) {
             if (earthDialog.getReturnValue() == 1) {
                 // player has chosen to dump research info
@@ -92,7 +88,7 @@ public class Earth extends Planet {
         }
         if (progressDialog.isOver()) {
             if (progressDialog.getReturnValue() == -1) {
-                engine.exitEngine("Sorry, but your career as a captain is over");
+                container.exit();
             }
             world.setCurrentRoom(owner);
         }
@@ -100,8 +96,8 @@ public class Earth extends Planet {
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
-        owner.draw(engine, camera);
+    public void draw(GameContainer container, Graphics g, Camera camera) {
+        owner.draw(container, g, camera);
     }
 
     private int dumpResearch(World world) {

@@ -50,7 +50,7 @@ public class Ship implements GameObject, Positionable {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        g.drawImage(ResourceManager.getImage("aurora"), camera.getXCoord(x), camera.getYCoord(y), null);
+        g.drawImage(ResourceManager.getInstance().getImage("aurora"), camera.getXCoord(x), camera.getYCoord(y), null);
     }
 
     @Override

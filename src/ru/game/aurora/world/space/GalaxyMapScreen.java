@@ -7,9 +7,12 @@
 package ru.game.aurora.world.space;
 
 
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.Ship;
@@ -34,31 +37,30 @@ public class GalaxyMapScreen implements Room {
         final Camera oldCamera = world.getCamera();
         final int newTileWidth = oldCamera.getNumTilesX() * oldCamera.getTileWidth() / galaxyMap.getTilesX();
         final int newTileHeight = oldCamera.getNumTilesY() * oldCamera.getTileHeight() / galaxyMap.getTilesY();
-        myCamera = new Camera(0, 0, newTileWidth, newTileHeight, galaxyMap.getTilesX(), galaxyMap.getTilesY(), world.getCamera().getEngine());
+        myCamera = new Camera(0, 0, newTileWidth, newTileHeight, galaxyMap.getTilesX(), galaxyMap.getTilesY());
         myCamera.setTarget(new BasePositionable(galaxyMap.getTilesX() / 2, galaxyMap.getTilesY() / 2));
         ship = world.getPlayer().getShip();
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
-        if (engine.getKey(JGEngine.KeyEnter) || engine.getKey(JGEngine.KeyEsc) || engine.getLastKeyChar() == 'm') {
+    public void update(GameContainer container, World world) {
+        if (container.getInput().isKeyDown(Input.KEY_ENTER) || container.getInput().isKeyDown(Input.KEY_ESCAPE) || container.getInput().isKeyDown(Input.KEY_M)) {
             world.setCurrentRoom(world.getGalaxyMap());
-            engine.clearLastKey();
         }
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
+    public void draw(GameContainer container, Graphics g, Camera camera) {
         for (int i = 0; i < galaxyMap.getTilesY(); ++i) {
             for (int j = 0; j < galaxyMap.getTilesX(); ++j) {
                 GalaxyMapObject obj = galaxyMap.getObjectAt(j, i);
                 if (obj != null) {
-                    obj.drawOnGlobalMap(engine, myCamera, j, i);
+                    obj.drawOnGlobalMap(container, g, myCamera, j, i);
                 }
             }
         }
 
-        engine.drawImage(myCamera.getXCoord(ship.getX()), myCamera.getYCoord(ship.getY()), "aurora");
+        g.drawImage(ResourceManager.getInstance().getImage("aurora"), myCamera.getXCoord(ship.getX()), myCamera.getYCoord(ship.getY()));
         GameLogger.getInstance().addStatusMessage("Press <enter>, <m> or <esc> to close Galaxy map");
     }
 }

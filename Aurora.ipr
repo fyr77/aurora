@@ -255,16 +255,13 @@
       <JAVADOC />
       <SOURCES />
     </library>
-    <library name="jgame">
+    <library name="lwjgl">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/../JGame-20120810/jars/jgame-jre.jar!/" />
+        <root url="jar://$PROJECT_DIR$/third-party/lwjgl.jar!/" />
+        <root url="jar://$PROJECT_DIR$/third-party/jinput.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES>
-        <root url="file://$PROJECT_DIR$/../JGame-20120810/classes-jre" />
-        <root url="file://$PROJECT_DIR$/../JGame-20120810/src-jre" />
-        <root url="file://$PROJECT_DIR$/../JGame-20120810/src-base" />
-      </SOURCES>
+      <SOURCES />
     </library>
     <library name="slick">
       <CLASSES>

@@ -6,13 +6,14 @@
 package ru.game.aurora.npc;
 
 import com.google.gson.Gson;
-import jgame.JGColor;
-import jgame.JGRectangle;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.JGEngineUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -110,42 +111,40 @@ public class Dialog implements Room {
         returnValue = selectedReply.returnValue;
     }
 
-    private static final JGRectangle iconRectangle = new JGRectangle(3, 3, 4, 4);
-    private static final JGRectangle npcStatementRectangle = new JGRectangle(8, 3, 4, 4);
-    private static final JGRectangle replyRectangle = new JGRectangle(3, 8, 9, 5);
+    private static final Rectangle iconRectangle = new Rectangle(3, 3, 4, 4);
+    private static final Rectangle npcStatementRectangle = new Rectangle(8, 3, 4, 4);
+    private static final Rectangle replyRectangle = new Rectangle(3, 8, 9, 5);
 
-    private static final JGColor backgroundColor = new JGColor(4, 7, 125);
+    private static final Color backgroundColor = new Color(4, 7, 125);
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
 
-        graphics.drawImage(iconName, camera.getRelativeX(iconRectangle.x), camera.getRelativeY(iconRectangle.y));
-        engine.setColor(backgroundColor);
-        JGEngineUtils.drawRectWithBorder(engine, npcStatementRectangle, camera, JGColor.yellow, backgroundColor);
-        JGEngineUtils.drawRectWithBorder(engine, replyRectangle, camera, JGColor.yellow, backgroundColor);
+        graphics.drawImage(ResourceManager.getInstance().getImage(iconName), camera.getRelativeX((int) iconRectangle.getX()), camera.getRelativeY((int) iconRectangle.getY()));
+        graphics.setColor(backgroundColor);
+        JGEngineUtils.drawRectWithBorder(graphics, npcStatementRectangle, camera, Color.yellow, backgroundColor);
+        JGEngineUtils.drawRectWithBorder(graphics, replyRectangle, camera, Color.yellow, backgroundColor);
 
-        engine.setColor(JGColor.yellow);
+        graphics.setColor(Color.yellow);
 
-        JGEngineUtils.drawRect(engine, iconRectangle, camera, false);
+        JGEngineUtils.drawRect(graphics, iconRectangle, camera, false);
 
         JGEngineUtils.drawString(
-                engine
+                graphics
                 , currentStatement.npcText
-                , camera.getRelativeX(npcStatementRectangle.x) + camera.getTileWidth() / 2
-                , camera.getRelativeY(npcStatementRectangle.y) + camera.getTileHeight() / 2
-                , camera.getTileWidth() * (npcStatementRectangle.width - 1)
+                , camera.getRelativeX((int) npcStatementRectangle.getX()) + camera.getTileWidth() / 2
+                , camera.getRelativeY((int) npcStatementRectangle.getY()) + camera.getTileHeight() / 2
+                , camera.getTileWidth() * ((int) npcStatementRectangle.getWidth() - 1)
                 , GUIConstants.dialogFont
-                , JGColor.yellow);
+                , Color.yellow);
 
         int i = 0;
         for (Reply r : currentStatement.replies) {
-            engine.drawString(
+            graphics.drawString(
                     (i + 1) + ": " + r.replyText
-                    , camera.getRelativeX(replyRectangle.x) + camera.getTileWidth() / 2
-                    , camera.getRelativeY(replyRectangle.y + (i++)) + camera.getTileHeight() / 2
-                    ,
-                    -1
-                    , GUIConstants.dialogFont, JGColor.yellow);
+                    , camera.getRelativeX((int) replyRectangle.getX()) + camera.getTileWidth() / 2
+                    , camera.getRelativeY((int) (replyRectangle.getY() + (i++))) + camera.getTileHeight() / 2
+            );
         }
     }
 

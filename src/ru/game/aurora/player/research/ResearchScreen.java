@@ -7,9 +7,10 @@
 
 package ru.game.aurora.player.research;
 
-import jgame.JGColor;
-import jgame.impl.JGEngineInterface;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.ui.ListWithIconAndDescrScreen;
@@ -31,7 +32,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
         researchState = world.getPlayer().getResearchState();
     }
 
-    private void drawActiveTasksTab(JGEngine engine, Camera camera) {
+    private void drawActiveTasksTab(Graphics graphics, Camera camera) {
         strings.clear();
 
         for (ResearchProjectState res : researchState.getCurrentProjects()) {
@@ -41,17 +42,17 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
         String iconName = null;
         String descr = null;
         if (!researchState.getCurrentProjects().isEmpty()) {
-            engine.setColor(JGColor.white);
+            graphics.setColor(Color.white);
             final ResearchProjectState researchProjectState = researchState.getCurrentProjects().get(currentIdx);
             iconName = researchProjectState.desc.getIcon();
             descr = researchProjectState.desc.getDescription() + " \n" + researchProjectState.desc.getStatusString(world, researchProjectState.scientists);
         }
 
-        draw(engine, camera, "Active projects", iconName, descr);
+        draw(graphics, camera, "Active projects", iconName, descr);
         GameLogger.getInstance().addStatusMessage("Available scientists: " + researchState.getIdleScientists());
     }
 
-    private void drawAvailableTasksTab(JGEngine engine, Camera camera) {
+    private void drawAvailableTasksTab(Graphics graphics, Camera camera) {
         strings.clear();
         for (ResearchProjectDesc res : researchState.getAvailableProjects()) {
             strings.add(res.name);
@@ -65,11 +66,11 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
             descr = desc.getDescription();
         }
 
-        draw(engine, camera, "Available research projects", icon, descr);
+        draw(graphics, camera, "Available research projects", icon, descr);
         GameLogger.getInstance().addStatusMessage("Press <enter> to start selected research");
     }
 
-    private void drawCompletedTasksTab(JGEngine engine, Camera camera) {
+    private void drawCompletedTasksTab(Graphics graphics, Camera camera) {
         strings.clear();
         for (ResearchProjectDesc res : researchState.getCompletedProjects()) {
             strings.add(res.name);
@@ -83,33 +84,33 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
             descr = desc.getDescription();
         }
 
-        draw(engine, camera, "Completed research projects", icon, descr);
+        draw(graphics, camera, "Completed research projects", icon, descr);
     }
 
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera) {
         switch (currentTab) {
             case ACTIVE_TAB:
-                drawActiveTasksTab(engine, camera);
+                drawActiveTasksTab(graphics, camera);
                 break;
             case AVAILABLE_TAB:
-                drawAvailableTasksTab(engine, camera);
+                drawAvailableTasksTab(graphics, camera);
                 break;
             case COMPLETED_TAB:
-                drawCompletedTasksTab(engine, camera);
+                drawCompletedTasksTab(graphics, camera);
                 break;
         }
 
         GameLogger.getInstance().addStatusMessage("Up/down to select research project");
         GameLogger.getInstance().addStatusMessage("Left/right to change number of assigned scientists");
-        GameLogger.getInstance().addStatusMessage("Space to switch tabs (active > available > completed)");
+        GameLogger.getInstance().addStatusMessage("TAB to switch tabs (active > available > completed)");
     }
 
 
     @Override
-    public void update(JGEngine engine, World world) {
-        if (engine.getLastKeyChar() == ' ') {
+    public void update(GameContainer container, World world) {
+        if (container.getInput().isKeyDown(Input.KEY_TAB)) {
             currentTab++;
             if (currentTab > COMPLETED_TAB) {
                 currentTab = 0;
@@ -128,12 +129,12 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
                     currentIdx = 0;
                 }
                 ResearchProjectState state = researchState.getCurrentProjects().get(currentIdx);
-                if (engine.getKey(JGEngineInterface.KeyLeft) && state.scientists > 0) {
+                if (container.getInput().isKeyDown(Input.KEY_LEFT) && state.scientists > 0) {
                     state.scientists--;
                     researchState.setIdleScientists(researchState.getIdleScientists() + 1);
                 }
 
-                if (engine.getKey(JGEngineInterface.KeyRight) && researchState.getIdleScientists() > 0) {
+                if (container.getInput().isKeyDown(Input.KEY_RIGHT) && researchState.getIdleScientists() > 0) {
                     state.scientists++;
                     researchState.setIdleScientists(researchState.getIdleScientists() - 1);
                 }
@@ -143,7 +144,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
                 if (currentIdx >= maxIdx) {
                     currentIdx = 0;
                 }
-                if (engine.getKey(JGEngineInterface.KeyEnter)) {
+                if (container.getInput().isKeyDown(Input.KEY_ENTER)) {
                     GameLogger.getInstance().logMessage("Starting research " + researchState.getAvailableProjects().get(currentIdx).getName());
                     ResearchProjectDesc desc = researchState.getAvailableProjects().remove(currentIdx);
                     researchState.getCurrentProjects().add(new ResearchProjectState(desc, 0));
@@ -160,21 +161,21 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
                 break;
         }
 
-        if (engine.getKey(JGEngine.KeyUp)) {
+        if (container.getInput().isKeyDown(Input.KEY_UP)) {
             currentIdx--;
             if (currentIdx < 0) {
                 currentIdx = maxIdx - 1;
             }
         }
 
-        if (engine.getKey(JGEngine.KeyDown)) {
+        if (container.getInput().isKeyDown(Input.KEY_DOWN)) {
             currentIdx++;
             if (currentIdx == maxIdx) {
                 currentIdx = 0;
             }
         }
 
-        if (engine.getKey(JGEngine.KeyEsc)) {
+        if (container.getInput().isKeyDown(Input.KEY_ESCAPE)) {
             world.setCurrentRoom(previousRoom);
             //previousRoom.enter(world); do not call here, as it is not real room entry
         }

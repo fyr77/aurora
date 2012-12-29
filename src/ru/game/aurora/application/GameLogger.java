@@ -5,10 +5,11 @@
  */
 package ru.game.aurora.application;
 
-import jgame.JGColor;
-import jgame.JGFont;
-import jgame.JGRectangle;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.geom.Rectangle;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,25 +22,24 @@ public class GameLogger {
 
     private List<String> statusMessages = new LinkedList<String>();
 
-    private JGRectangle statusMessagesRect;
+    private Rectangle statusMessagesRect;
 
-    private JGRectangle logRect;
+    private Rectangle logRect;
 
     private static GameLogger instance = null;
 
-    private JGFont font;
+    private Font font;
 
     public static final byte TEXT_OFFSET = 10;
 
-    private static final JGColor backgroundColor = new JGColor(4, 7, 125);
-
-    public GameLogger(JGRectangle statusMessagesRect, JGRectangle logRect) {
+    public GameLogger(Rectangle statusMessagesRect, Rectangle logRect) {
         this.statusMessagesRect = statusMessagesRect;
         this.logRect = logRect;
-        font = new JGFont("arial", 0, 15);
+        java.awt.Font f = new java.awt.Font("Arial", java.awt.Font.BOLD, 18);
+        font = new UnicodeFont(f);
     }
 
-    public static void init(JGRectangle statusMessagesRect, JGRectangle logRect) {
+    public static void init(Rectangle statusMessagesRect, Rectangle logRect) {
         instance = new GameLogger(statusMessagesRect, logRect);
     }
 
@@ -59,34 +59,35 @@ public class GameLogger {
         statusMessages.add(message);
     }
 
-    public void draw(JGEngine engine) {
-        engine.setColor(backgroundColor);
-        engine.drawRect(statusMessagesRect.x, statusMessagesRect.y, statusMessagesRect.width, statusMessagesRect.height, true, false);
-        engine.drawRect(logRect.x, logRect.y, logRect.width, logRect.height, true, false);
-        engine.setColor(JGColor.yellow);
+    public void draw(Graphics graphics) {
+        graphics.setColor(GUIConstants.backgroundColor);
+        graphics.fillRect(statusMessagesRect.getX(), statusMessagesRect.getY(), statusMessagesRect.getWidth(), statusMessagesRect.getHeight());
+        graphics.fillRect(logRect.getX(), logRect.getY(), logRect.getWidth(), logRect.getHeight());
+        graphics.setColor(Color.yellow);
 
-        engine.drawRect(statusMessagesRect.x, statusMessagesRect.y, statusMessagesRect.width, statusMessagesRect.height, false, false);
-        engine.drawRect(logRect.x, logRect.y, logRect.width, logRect.height, false, false);
+        graphics.drawRect(statusMessagesRect.getX(), statusMessagesRect.getY(), statusMessagesRect.getWidth(), statusMessagesRect.getHeight());
+        graphics.drawRect(logRect.getX(), logRect.getY(), logRect.getWidth(), logRect.getHeight());
 
-        engine.setColor(JGColor.white);
+        graphics.setColor(Color.white);
+        graphics.setFont(font);
         int i = 0;
         for (String m : messages) {
-            engine.drawString(m, logRect.x + TEXT_OFFSET, logRect.y + TEXT_OFFSET + i * font.getSize(), -1, font, JGColor.white);
+            graphics.drawString(m, logRect.getX() + TEXT_OFFSET, logRect.getY() + TEXT_OFFSET + i * font.getLineHeight());
             ++i;
         }
 
         i = 0;
         for (String m : statusMessages) {
-            engine.drawString(m, statusMessagesRect.x + TEXT_OFFSET, statusMessagesRect.y + TEXT_OFFSET + i * font.getSize(), -1, font, JGColor.white);
+            graphics.drawString(m, statusMessagesRect.getX() + TEXT_OFFSET, statusMessagesRect.getY() + TEXT_OFFSET + i * font.getLineHeight());
             ++i;
         }
     }
 
-    public JGRectangle getStatusMessagesRect() {
+    public Rectangle getStatusMessagesRect() {
         return statusMessagesRect;
     }
 
-    public JGFont getFont() {
+    public Font getFont() {
         return font;
     }
 

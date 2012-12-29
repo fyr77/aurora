@@ -6,9 +6,11 @@
  */
 package ru.game.aurora.world.space;
 
-import jgame.JGRectangle;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.world.World;
@@ -37,12 +39,12 @@ public class AlienHomeworld extends BasePlanet {
 
 
     @Override
-    public void drawOnGlobalMap(JGEngine engine, Camera camera, int tileX, int tileY) {
+    public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
         if (!camera.isInViewport(globalX, globalY)) {
             return;
         }
-        JGRectangle rect = engine.getImageBBox(spriteName);
-        engine.drawImage(spriteName, camera.getXCoord(globalX) - rect.width / 2 + camera.getTileWidth() / 2, camera.getYCoord(globalY) - rect.height / 2 + camera.getTileHeight() / 2);
+        Image img = ResourceManager.getInstance().getImage(spriteName);
+        graphics.drawImage(img, camera.getXCoord(globalX) - img.getWidth() / 2 + camera.getTileWidth() / 2, camera.getYCoord(globalY) - img.getHeight() / 2 + camera.getTileHeight() / 2);
     }
 
     @Override
@@ -51,12 +53,12 @@ public class AlienHomeworld extends BasePlanet {
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
+    public void update(GameContainer container, World world) {
         world.setCurrentRoom(owner);
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera) {
         // nothing
     }
 

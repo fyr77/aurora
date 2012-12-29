@@ -6,11 +6,14 @@
  */
 package ru.game.aurora.ui;
 
-import jgame.JGColor;
-import jgame.JGRectangle;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.JGEngineUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -25,15 +28,15 @@ public abstract class ListWithIconAndDescrScreen implements Room {
 
     protected List<String> strings = new ArrayList<String>(24);
 
-    protected static final JGRectangle captionRect = new JGRectangle(1, 1, 12, 1);
+    protected static final Rectangle captionRect = new Rectangle(1, 1, 12, 1);
 
-    protected static final JGRectangle listRect = new JGRectangle(1, 3, 7, 10);
+    protected static final Rectangle listRect = new Rectangle(1, 3, 7, 10);
 
-    protected static final JGRectangle imageRect = new JGRectangle(9, 3, 4, 4);
+    protected static final Rectangle imageRect = new Rectangle(9, 3, 4, 4);
 
-    protected static final JGRectangle descriptionRect = new JGRectangle(9, 8, 4, 5);
+    protected static final Rectangle descriptionRect = new Rectangle(9, 8, 4, 5);
 
-    protected static final JGColor backgroundColor = new JGColor(4, 7, 125);
+    protected static final Color backgroundColor = new Color(4, 7, 125);
 
     protected int currentIdx;
 
@@ -49,49 +52,52 @@ public abstract class ListWithIconAndDescrScreen implements Room {
         this.previousRoom = world.getCurrentRoom();
     }
 
-    public void draw(JGEngine engine, Camera camera, String caption, String image, String description) {
-        JGEngineUtils.drawRectWithBorder(engine, captionRect, camera, JGColor.yellow, backgroundColor);
-        JGEngineUtils.drawRectWithBorder(engine, listRect, camera, JGColor.yellow, backgroundColor);
-        JGEngineUtils.drawRectWithBorder(engine, imageRect, camera, JGColor.yellow, backgroundColor);
-        JGEngineUtils.drawRectWithBorder(engine, descriptionRect, camera, JGColor.yellow, backgroundColor);
+    public void draw(Graphics graphics, Camera camera, String caption, String image, String description) {
+        JGEngineUtils.drawRectWithBorder(graphics, captionRect, camera, Color.yellow, backgroundColor);
+        JGEngineUtils.drawRectWithBorder(graphics, listRect, camera, Color.yellow, backgroundColor);
+        JGEngineUtils.drawRectWithBorder(graphics, imageRect, camera, Color.yellow, backgroundColor);
+        JGEngineUtils.drawRectWithBorder(graphics, descriptionRect, camera, Color.yellow, backgroundColor);
 
-        engine.drawString(caption, camera.getRelativeX(captionRect.x) + 200, camera.getRelativeY(captionRect.y) + 20, -1, GUIConstants.dialogFont, JGColor.yellow);
+        graphics.setFont(GUIConstants.dialogFont);
+        graphics.setColor(Color.yellow);
+        graphics.drawString(caption, camera.getRelativeX((int) captionRect.getX()) + 200, camera.getRelativeY((int) captionRect.getY()) + 20);
 
         if (image != null) {
-            engine.drawImage(image, camera.getRelativeX(imageRect.x), camera.getRelativeY(imageRect.y));
+            graphics.drawImage(ResourceManager.getInstance().getImage(image), camera.getRelativeX((int) imageRect.getX()), camera.getRelativeY((int) imageRect.getY()));
         }
 
         if (description == null) {
             description = "<Select a research project>";
         }
-        JGEngineUtils.drawString(engine, description, camera.getRelativeX(descriptionRect.x) + 10, camera.getRelativeY(descriptionRect.y) + 10, camera.getTileWidth() * descriptionRect.width - 20, GUIConstants.dialogFont, JGColor.yellow);
+        JGEngineUtils.drawString(graphics, description, camera.getRelativeX((int) descriptionRect.getX()) + 10, camera.getRelativeY((int) descriptionRect.getY()) + 10, camera.getTileWidth() * (int) descriptionRect.getWidth() - 20, GUIConstants.dialogFont, Color.yellow);
 
         if (strings.isEmpty()) {
-            engine.drawString("<No projects in this category>", camera.getRelativeX(listRect.x) + 10, camera.getRelativeY(listRect.y) + 10, -1, GUIConstants.dialogFont, JGColor.yellow);
+            graphics.drawString("<No projects in this category>", camera.getRelativeX((int) listRect.getX()) + 10, camera.getRelativeY((int) listRect.getY()) + 10);
         } else {
             for (int i = 0; i < strings.size(); ++i) {
-                engine.drawString(strings.get(i), camera.getRelativeX(listRect.x) + 20, camera.getRelativeY(listRect.y + i) + 20, -1, GUIConstants.dialogFont, i == currentIdx ? JGColor.green : JGColor.yellow);
+                graphics.setColor(i == currentIdx ? Color.green : Color.yellow);
+                graphics.drawString(strings.get(i), camera.getRelativeX((int) listRect.getX()) + 20, camera.getRelativeY((int) (listRect.getY() + i)) + 20);
             }
         }
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
-        if (engine.getKey(JGEngine.KeyUp)) {
+    public void update(GameContainer container, World world) {
+        if (container.getInput().isKeyDown(Input.KEY_UP)) {
             currentIdx--;
             if (currentIdx < 0) {
                 currentIdx = maxIdx - 1;
             }
         }
 
-        if (engine.getKey(JGEngine.KeyDown)) {
+        if (container.getInput().isKeyDown(Input.KEY_DOWN)) {
             currentIdx++;
             if (currentIdx == maxIdx) {
                 currentIdx = 0;
             }
         }
 
-        if (engine.getKey(JGEngine.KeyEsc)) {
+        if (container.getInput().isKeyDown(Input.KEY_ESCAPE)) {
             world.setCurrentRoom(previousRoom);
         }
     }

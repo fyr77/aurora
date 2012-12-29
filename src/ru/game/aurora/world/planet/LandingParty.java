@@ -75,7 +75,7 @@ public class LandingParty implements GameObject, Positionable {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        g.drawImage(ResourceManager.getImage("awayteam"), camera.getXCoord(x), camera.getYCoord(y));
+        g.drawImage(ResourceManager.getInstance().getImage("awayteam"), camera.getXCoord(x), camera.getYCoord(y));
 
         GameLogger.getInstance().addStatusMessage("Landing team status:");
         GameLogger.getInstance().addStatusMessage("scientists: " + science);

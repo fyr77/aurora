@@ -6,8 +6,9 @@
  */
 package ru.game.aurora.world.planet;
 
-import jgame.impl.JGEngineInterface;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.ui.ListWithIconAndDescrScreen;
@@ -32,22 +33,22 @@ public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
-        super.update(engine, world);
+    public void update(GameContainer container, World world) {
+        super.update(container, world);
 
         final Ship ship = world.getPlayer().getShip();
         final LandingParty party = world.getPlayer().getLandingParty();
 
         final int maxCapacity = 10;
 
-        if (engine.getKey(JGEngine.KeyEnter)) {
+        if (container.getInput().isKeyDown(Input.KEY_ENTER)) {
             world.setCurrentRoom(previousRoom);
             if (isBeforeLanding) {
                 previousRoom.enter(world);
             }
         }
 
-        if (engine.getKey(JGEngineInterface.KeyRight)) {
+        if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
             switch (currentIdx) {
                 case 0:
                     if (party.getMilitary() < ship.getMilitary() && party.getTotalMembers() < maxCapacity) {
@@ -67,7 +68,7 @@ public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
             }
         }
 
-        if (engine.getKey(JGEngineInterface.KeyLeft)) {
+        if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
             switch (currentIdx) {
                 case 0:
                     if (party.getMilitary() > 0 && party.getTotalMembers() > 1) {
@@ -89,7 +90,7 @@ public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera) {
         GameLogger.getInstance().addStatusMessage("Up/down to scroll list");
         GameLogger.getInstance().addStatusMessage("Left/right to change selected item");
         GameLogger.getInstance().addStatusMessage("Enter to quit");
@@ -123,6 +124,6 @@ public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
                 break;
         }
 
-        draw(engine, camera, "Landing party status", icon, text);
+        draw(graphics, camera, "Landing party status", icon, text);
     }
 }

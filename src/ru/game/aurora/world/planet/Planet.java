@@ -5,12 +5,14 @@
  */
 package ru.game.aurora.world.planet;
 
-import jgame.JGColor;
-import jgame.JGPoint;
-import jgame.impl.JGEngineInterface;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.geom.Point;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.Positionable;
@@ -72,7 +74,7 @@ public class Planet extends BasePlanet {
     /**
      * Where landing shuttle is located. Launching to orbit and refilling oxygen is available at shuttle
      */
-    private JGPoint shuttlePosition;
+    private Point shuttlePosition;
 
     /**
      * Available animal species descriptions, if any.
@@ -182,7 +184,7 @@ public class Planet extends BasePlanet {
         landingParty.setPos(x, y);
 
         world.getCamera().setTarget(landingParty);
-        shuttlePosition = new JGPoint(landingParty.getX(), landingParty.getY());
+        shuttlePosition = new Point(landingParty.getX(), landingParty.getY());
         int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
         landingParty.addCollectedGeodata(openedTiles);
     }
@@ -228,24 +230,24 @@ public class Planet extends BasePlanet {
     /**
      * This update is used in MOVE mode. Moving landing party around.
      */
-    private void updateMove(JGEngine engine, World world) {
+    private void updateMove(GameContainer container, World world) {
         int x = world.getPlayer().getLandingParty().getX();
         int y = world.getPlayer().getLandingParty().getY();
 
-        if (engine.getKey(JGEngineInterface.KeyUp)) {
+        if (container.getInput().isKeyDown(Input.KEY_UP)) {
             y--;
             world.setUpdatedThisFrame(true);
         }
-        if (engine.getKey(JGEngineInterface.KeyDown)) {
+        if (container.getInput().isKeyDown(Input.KEY_DOWN)) {
             y++;
             world.setUpdatedThisFrame(true);
         }
 
-        if (engine.getKey(JGEngineInterface.KeyLeft)) {
+        if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
             x--;
             world.setUpdatedThisFrame(true);
         }
-        if (engine.getKey(JGEngineInterface.KeyRight) && x < engine.getWidth()) {
+        if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
             x++;
             world.setUpdatedThisFrame(true);
         }
@@ -259,7 +261,7 @@ public class Planet extends BasePlanet {
             y = world.getPlayer().getLandingParty().getY();
         }
 
-        if (engine.getKey(JGEngineInterface.KeyEnter)) {
+        if (container.getInput().isKeyDown(Input.KEY_ENTER)) {
             // check if can pick up smth
             for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext(); ) {
                 PlanetObject p = iter.next();
@@ -284,18 +286,17 @@ public class Planet extends BasePlanet {
         int tilesExplored = updateVisibility(x, y, 1);
         landingParty.addCollectedGeodata(tilesExplored);
 
-        if (x == shuttlePosition.x && y == shuttlePosition.y) {
+        if (x == (int) shuttlePosition.getX() && y == (int) shuttlePosition.getY()) {
 
             if (world.isUpdatedThisFrame()) {
                 GameLogger.getInstance().logMessage("Refilling oxygen");
                 world.getPlayer().getLandingParty().refillOxygen();
             }
-            if (engine.getKey(JGEngine.KeyEnter)) {
+            if (container.getInput().isKeyDown(Input.KEY_ENTER)) {
                 GameLogger.getInstance().logMessage("Launching shuttle to orbit...");
                 world.setCurrentRoom(owner);
                 owner.enter(world);
                 world.getPlayer().getShip().setPos(globalX, globalY);
-                engine.clearKey(JGEngine.KeyEnter);
                 landingParty.onReturnToShip(world);
             }
         }
@@ -319,7 +320,7 @@ public class Planet extends BasePlanet {
     /**
      * This update method is used in FIRE mode. Selecting targets and shooting.
      */
-    private void updateShoot(JGEngine engine, World world) {
+    private void updateShoot(GameContainer container, World world) {
         if (planetObjects.isEmpty()) {
             return;
         }
@@ -357,12 +358,12 @@ public class Planet extends BasePlanet {
             return;
         }
 
-        if (engine.getKey(JGEngine.KeyUp) || engine.getKey(JGEngine.KeyRight)) {
+        if (container.getInput().isKeyDown(Input.KEY_UP) || container.getInput().isKeyDown(Input.KEY_RIGHT)) {
             targetIdx++;
             if (targetIdx >= availableTargets.size()) {
                 targetIdx = 0;
             }
-        } else if (engine.getKey(JGEngine.KeyDown) || engine.getKey(JGEngine.KeyLeft)) {
+        } else if (container.getInput().isKeyDown(Input.KEY_DOWN) || container.getInput().isKeyDown(Input.KEY_LEFT)) {
             targetIdx--;
             if (targetIdx < 0) {
                 targetIdx = availableTargets.size() - 1;
@@ -371,7 +372,7 @@ public class Planet extends BasePlanet {
 
         target = availableTargets.get(targetIdx);
 
-        if (engine.getLastKeyChar() == 'f' || engine.getKey(JGEngine.KeyEnter)) {
+        if (container.getInput().isKeyDown(Input.KEY_F) || container.getInput().isKeyDown(Input.KEY_ENTER)) {
             // firing
             final int damage = landingParty.calcDamage();
             target.onShotAt(damage);
@@ -387,23 +388,21 @@ public class Planet extends BasePlanet {
     }
 
     @Override
-    public void update(JGEngine engine, World world) {
-        char c = engine.getLastKeyChar();
-
+    public void update(GameContainer container, World world) {
         switch (mode) {
             case MODE_MOVE:
-                if (c == 'f') {
+                if (container.getInput().isKeyDown(Input.KEY_F)) {
                     mode = MODE_SHOOT;
                     return;
                 }
-                updateMove(engine, world);
+                updateMove(container, world);
                 break;
             case MODE_SHOOT:
-                if (engine.getKey(JGEngine.KeyEsc)) {
+                if (container.getInput().isKeyDown(Input.KEY_ESCAPE)) {
                     mode = MODE_MOVE;
                     return;
                 }
-                updateShoot(engine, world);
+                updateShoot(container, world);
                 break;
             default:
                 throw new IllegalStateException("Unknown planet update type " + mode);
@@ -419,11 +418,10 @@ public class Planet extends BasePlanet {
             world.setCurrentRoom(owner);
             owner.enter(world);
             world.getPlayer().getShip().setPos(globalX, globalY);
-            engine.clearKey(JGEngine.KeyEnter);
         }
 
         for (PlanetObject a : planetObjects) {
-            a.update(engine, world);
+            a.update(container, world);
         }
     }
 
@@ -434,7 +432,7 @@ public class Planet extends BasePlanet {
         GameLogger.getInstance().addStatusMessage("=====================================");
     }
 
-    public void drawLandscape(JGEngine engine, Camera camera, boolean detailed) {
+    public void drawLandscape(GameContainer container, Graphics graphics, Camera camera, boolean detailed) {
         for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
             for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; ++j) {
 
@@ -449,7 +447,7 @@ public class Planet extends BasePlanet {
                             , camera.getYCoord(i)
                             , camera.getTileWidth()
                             , camera.getTileHeight()
-                            , engine);
+                            , graphics);
                 } else {
                     SurfaceTypes.drawSimple(
                             type
@@ -457,7 +455,7 @@ public class Planet extends BasePlanet {
                             , camera.getYCoord(i)
                             , camera.getTileWidth()
                             , camera.getTileHeight()
-                            , engine);
+                            , graphics);
                 }
             }
 
@@ -486,9 +484,9 @@ public class Planet extends BasePlanet {
                         }
 
                         if (mountainCount < 3) {
-                            engine.drawImage("mountains_tile_1", camera.getXCoord(j), camera.getYCoord(i));
+                            graphics.drawImage(ResourceManager.getInstance().getImage("mountains_tile_1"), camera.getXCoord(j), camera.getYCoord(i));
                         } else {
-                            engine.drawImage("mountains_tile_2", camera.getXCoord(j), camera.getYCoord(i));
+                            graphics.drawImage(ResourceManager.getInstance().getImage("mountains_tile_2"), camera.getXCoord(j), camera.getYCoord(i));
                         }
 
                     }
@@ -500,27 +498,27 @@ public class Planet extends BasePlanet {
     }
 
 
-    public void drawObjects(JGEngine engine, Camera camera) {
+    public void drawObjects(GameContainer container, Graphics graphics, Camera camera) {
         // this part (monsters, shuttle, landing party) is drawn only when landing party is on surface
         if (landingParty != null) {
-            landingParty.draw(engine, camera);
+            landingParty.draw(container, graphics, camera);
 
 
-            engine.drawImage("shuttle", camera.getXCoordWrapped(shuttlePosition.x, width), camera.getYCoordWrapped(shuttlePosition.y, height));
+            graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped((int) shuttlePosition.getX(), width), camera.getYCoordWrapped((int) shuttlePosition.getY(), height));
 
-            if (landingParty.getX() == shuttlePosition.x && landingParty.getY() == shuttlePosition.y) {
+            if (landingParty.getX() == (int) shuttlePosition.getX() && landingParty.getY() == (int) shuttlePosition.getY()) {
                 GameLogger.getInstance().addStatusMessage("Press <enter> to return to orbit");
             }
 
-            engine.setColor(JGColor.red);
+            graphics.setColor(Color.red);
             for (PlanetObject a : planetObjects) {
                 // draw only if tile under this animal is visible
                 if ((surface[a.getY()][a.getX()] & SurfaceTypes.VISIBILITY_MASK) != 0) {
-                    a.draw(engine, camera);
+                    a.draw(container, graphics, camera);
 
                     // in shoot mode, all available targets are surrounded with red square
                     if (mode == MODE_SHOOT && a.canBeShotAt() && getRange(landingParty, a) < landingParty.getWeapon().getRange()) {
-                        engine.drawRect(camera.getXCoordWrapped(a.getX(), width), camera.getYCoordWrapped(a.getY(), height), camera.getTileWidth(), camera.getTileHeight(), false, false);
+                        graphics.drawRect(camera.getXCoordWrapped(a.getX(), width), camera.getYCoordWrapped(a.getY(), height), camera.getTileWidth(), camera.getTileHeight());
                     }
                 }
 
@@ -532,7 +530,7 @@ public class Planet extends BasePlanet {
 
             if (mode == MODE_SHOOT && target != null) {
                 // draw target mark
-                engine.drawImage(camera.getXCoordWrapped(target.getX(), width), camera.getYCoordWrapped(target.getY(), height), "target");
+                graphics.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoordWrapped(target.getX(), width), camera.getYCoordWrapped(target.getY(), height));
             }
             GameLogger.getInstance().addStatusMessage(mode == MODE_MOVE ? "MOVE" : "SHOOT");
         }
@@ -551,36 +549,33 @@ public class Planet extends BasePlanet {
     }
 
     @Override
-    public void draw(JGEngine engine, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera) {
         printPlanetStatus();
-        drawLandscape(engine, camera, true);
-        drawObjects(engine, camera);
+        drawLandscape(container, graphics, camera, true);
+        drawObjects(container, graphics, camera);
     }
 
     @Override
-    public void drawOnGlobalMap(JGEngine engine, Camera camera, int tileX, int tileY) {
+    public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
         if (!camera.isInViewport(globalX, globalY)) {
             return;
         }
-        JGColor color;
+        Color color;
         switch (category) {
             case PLANET_ROCK:
-                color = JGColor.grey;
+                color = Color.gray;
                 break;
             case PLANET_ICE:
-                color = JGColor.white;
+                color = Color.white;
                 break;
             default:
-                color = JGColor.grey;
+                color = Color.gray;
         }
-        engine.setColor(color);
-        engine.drawOval(
-                camera.getXCoord(globalX) + (engine.tileWidth() / 2)
-                , camera.getYCoord(globalY) + engine.tileWidth() / 2
-                , StarSystem.PLANET_SCALE_FACTOR * engine.tileWidth() / size
-                , StarSystem.PLANET_SCALE_FACTOR * engine.tileHeight() / size
-                , true
-                , true);
+        graphics.setColor(color);
+        graphics.fillOval(camera.getXCoord(globalX) + (camera.getTileWidth() / 2)
+                , camera.getYCoord(globalY) + camera.getTileHeight() / 2
+                , StarSystem.PLANET_SCALE_FACTOR * camera.getTileWidth() / size
+                , StarSystem.PLANET_SCALE_FACTOR * camera.getTileHeight() / size);
     }
 
     public int getWidth() {

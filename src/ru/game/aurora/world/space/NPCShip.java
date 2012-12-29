@@ -39,7 +39,7 @@ public class NPCShip extends BasePositionable implements GameObject {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        g.drawImage(ResourceManager.getImage(sprite), camera.getXCoord(x), camera.getYCoord(y));
+        g.drawImage(ResourceManager.getInstance().getImage(sprite), camera.getXCoord(x), camera.getYCoord(y));
     }
 
     /**

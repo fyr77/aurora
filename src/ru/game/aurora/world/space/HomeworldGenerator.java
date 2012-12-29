@@ -5,7 +5,7 @@
  */
 package ru.game.aurora.world.space;
 
-import jgame.JGColor;
+import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Dialog;
@@ -28,7 +28,7 @@ public class HomeworldGenerator {
         // todo: gas giants and other planets
 
         Planet[] planets = new Planet[4];
-        StarSystem ss = new StarSystem(new StarSystem.Star(2, JGColor.yellow), 9, 9);
+        StarSystem ss = new StarSystem(new StarSystem.Star(2, Color.yellow), 9, 9);
 
         // mercury
         planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0, false);
@@ -57,7 +57,7 @@ public class HomeworldGenerator {
 
     public static StarSystem generateKliskHomeworld(int x, int y, AlienRace kliskRace) {
         BasePlanet[] planets = new BasePlanet[3];
-        StarSystem ss = new StarSystem(new StarSystem.Star(2, JGColor.yellow), x, y);
+        StarSystem ss = new StarSystem(new StarSystem.Star(2, Color.yellow), x, y);
 
         planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0, false);
         setCoord(planets[0], 2);

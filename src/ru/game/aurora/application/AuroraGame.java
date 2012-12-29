@@ -1,74 +1,47 @@
 /**
- * User: jedi-philosopher
- * Date: 29.11.12
- * Time: 20:05
+ * Created with IntelliJ IDEA.
+ * User: Egor.Smirnov
+ * Date: 28.12.12
+ * Time: 16:06
  */
 package ru.game.aurora.application;
 
-import jgame.JGColor;
-import jgame.JGPoint;
-import jgame.JGRectangle;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.world.World;
 
-public class AuroraGame extends JGEngine {
 
+public class AuroraGame extends BasicGame {
     private World world;
 
-    /**
-     * Application constructor.
-     *
-     * @param size window size
-     */
-    public AuroraGame(JGPoint size) {
-        initEngine(size.x, size.y);
-    }
-
-    /**
-     * Applet constructor.
-     */
     public AuroraGame() {
-        initEngineApplet();
+        super("Aurora");
     }
 
     @Override
-    public void initCanvas() {
-        // we set the background colour to same colour as the splash background
-        setCanvasSettings(20, 15, 64, 64, JGColor.black, new JGColor(255, 246, 199), null);
+    public void init(GameContainer gameContainer) throws SlickException {
+        world = new World(new Camera(0, 0, 64, 64, gameContainer.getWidth() / 64, gameContainer.getHeight() / 64), 100, 100);
+        GameLogger.init(new Rectangle(15 * 64, 0, 5 * 64, 10 * 64), new Rectangle(15 * 64, 10 * 64, 5 * 64, 5 * 64));
     }
 
     @Override
-    public void initGame() {
-        setFrameRate(30, 2);
-        defineMedia("sprites.tbl");
-        GameLogger.init(new JGRectangle(15 * 64, 0, 5 * 64, 10 * 64), new JGRectangle(15 * 64, 10 * 64, 5 * 64, 5 * 64));
-        world = new World(new Camera(0, 0, 15, 15, this), 40, 20);
-        setBGColor(JGColor.black);
+    public void update(GameContainer gameContainer, int i) throws SlickException {
+        world.update(gameContainer);
+        gameContainer.getInput().clearKeyPressedRecord();
     }
 
     @Override
-    public void doFrame() {
-        world.update(this);
-
-        // clear key states
-        clearLastKey();
-        clearKey(JGEngine.KeyUp);
-        clearKey(JGEngine.KeyDown);
-        clearKey(JGEngine.KeyLeft);
-        clearKey(JGEngine.KeyRight);
-        clearKey(JGEngine.KeyEnter);
-        clearKey(JGEngine.KeyTab);
-    }
-
-    @Override
-    public void paintFrame() {
-        world.draw(this);
+    public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+        world.draw(gameContainer, graphics);
         world.getCamera().drawBound();
-        GameLogger.getInstance().draw(this);
+        GameLogger.getInstance().draw(graphics);
         GameLogger.getInstance().clearStatusMessages();
     }
 
-    public static void main(String[] args) {
-        new AuroraGame(new JGPoint(1024, 768));
+    public static void main(String[] args) throws SlickException {
+
+        AppGameContainer app = new AppGameContainer(new AuroraGame());
+        app.setDisplayMode(1024, 768, false);
+        app.start();
     }
 }

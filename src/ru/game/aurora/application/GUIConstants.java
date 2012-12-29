@@ -1,7 +1,8 @@
 package ru.game.aurora.application;
 
-import jgame.JGColor;
-import jgame.JGFont;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
+import org.newdawn.slick.TrueTypeFont;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +12,7 @@ import jgame.JGFont;
  * To change this template use File | Settings | File Templates.
  */
 public class GUIConstants {
-    public static final JGColor backgroundColor = new JGColor(4, 7, 125);
+    public static final Color backgroundColor = new Color(4, 7, 125);
 
-    public static final JGFont dialogFont = new JGFont("arial", JGFont.BOLD, 16);
+    public static final Font dialogFont = new TrueTypeFont(java.awt.Font.getFont("arial"), false);
 }

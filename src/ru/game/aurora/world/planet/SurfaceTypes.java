@@ -5,8 +5,9 @@
  */
 package ru.game.aurora.world.planet;
 
-import jgame.JGColor;
-import jgame.platform.JGEngine;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.planet.nature.Animal;
 
 public class SurfaceTypes {
@@ -30,37 +31,37 @@ public class SurfaceTypes {
     /**
      * Draws surface tiles in simple form - no sprites, just a square of corresponding color. Used in map screen
      */
-    public static void drawSimple(byte type, int screenX, int screenY, int width, int heght, JGEngine engine) {
-        JGColor color;
+    public static void drawSimple(byte type, int screenX, int screenY, int width, int heght, Graphics graphics) {
+        Color color;
         switch (type & 0x0F) {
             case SurfaceTypes.DIRT:
-                color = JGColor.orange;
+                color = Color.orange;
                 break;
             case SurfaceTypes.ICE:
-                color = JGColor.white;
+                color = Color.white;
                 break;
             case SurfaceTypes.ROCKS:
-                color = JGColor.grey;
+                color = Color.gray;
                 break;
             case SurfaceTypes.WATER:
-                color = JGColor.blue;
+                color = Color.blue;
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported surface tile type " + type);
         }
-        engine.setColor(color);
-        engine.drawRect(screenX, screenY, width, heght, true, false);
+        graphics.setColor(color);
+        graphics.fillRect(screenX, screenY, width, heght);
         if ((type & SurfaceTypes.MOUNTAINS_MASK) != 0) {
-            engine.setColor(JGColor.black);
-            engine.drawLine(screenX, screenY + heght, screenX + width / 2, screenY);
-            engine.drawLine(screenX + width, screenY + heght, screenX + width / 2, screenY);
+            graphics.setColor(Color.black);
+            graphics.drawLine(screenX, screenY + heght, screenX + width / 2, screenY);
+            graphics.drawLine(screenX + width, screenY + heght, screenX + width / 2, screenY);
         }
     }
 
     /**
      * Draws surface tiles in simple form - no sprites, just a square of corresponding color. Used in map screen
      */
-    public static void drawDetailed(byte type, int screenX, int screenY, int width, int heght, JGEngine engine) {
+    public static void drawDetailed(byte type, int screenX, int screenY, int width, int heght, Graphics graphics) {
         String spriteName;
         switch (type & 0x0F) {
             case SurfaceTypes.DIRT:
@@ -79,7 +80,7 @@ public class SurfaceTypes {
                 throw new IllegalArgumentException("Unsupported surface tile type " + type);
         }
 
-        engine.drawImage(spriteName, screenX, screenY);
+        graphics.drawImage(ResourceManager.getInstance().getImage(spriteName), screenX, screenY);
 
     }
 
