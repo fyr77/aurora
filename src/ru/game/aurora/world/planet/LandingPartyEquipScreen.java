@@ -41,14 +41,14 @@ public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
 
         final int maxCapacity = 10;
 
-        if (container.getInput().isKeyDown(Input.KEY_ENTER)) {
+        if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
             world.setCurrentRoom(previousRoom);
             if (isBeforeLanding) {
                 previousRoom.enter(world);
             }
         }
 
-        if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
+        if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
             switch (currentIdx) {
                 case 0:
                     if (party.getMilitary() < ship.getMilitary() && party.getTotalMembers() < maxCapacity) {
@@ -68,7 +68,7 @@ public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
             }
         }
 
-        if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
+        if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
             switch (currentIdx) {
                 case 0:
                     if (party.getMilitary() > 0 && party.getTotalMembers() > 1) {

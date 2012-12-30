@@ -14,21 +14,28 @@ import ru.game.aurora.world.World;
 public class AuroraGame extends BasicGame {
     private World world;
 
+    private static final int tileSize = 64;
+
+    private static final int tilesX = 20;
+
+    private static final int tilesY = 15;
+
+
     public AuroraGame() {
         super("Aurora");
     }
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
-        world = new World(new Camera(0, 0, 64, 64, gameContainer.getWidth() / 64, gameContainer.getHeight() / 64), 100, 100);
-        GameLogger.init(new Rectangle(15 * 64, 0, 5 * 64, 10 * 64), new Rectangle(15 * 64, 10 * 64, 5 * 64, 5 * 64));
+        world = new World(new Camera(0, 0, tilesX, tilesY, tileSize, tileSize), 100, 100);
+        GameLogger.init(new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 10 * tileSize), new Rectangle((tilesX - 5) * tileSize, 10 * tileSize, 5 * tileSize, 5 * tileSize));
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
+        gameContainer.getInput().enableKeyRepeat();
     }
 
     @Override
     public void update(GameContainer gameContainer, int i) throws SlickException {
         world.update(gameContainer);
-        gameContainer.getInput().clearKeyPressedRecord();
     }
 
     @Override
@@ -42,7 +49,7 @@ public class AuroraGame extends BasicGame {
     public static void main(String[] args) throws SlickException {
 
         AppGameContainer app = new AppGameContainer(new AuroraGame());
-        app.setDisplayMode(1024, 768, false);
+        app.setDisplayMode(tilesX * tileSize, tilesY * tileSize, false);
         app.start();
     }
 }

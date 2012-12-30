@@ -12,6 +12,7 @@ import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.*;
 
@@ -82,7 +83,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             return;
         }
         g.setColor(star.color);
-        g.fillOval(camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, camera.getTileWidth() / star.size, camera.getTileHeight() / star.size);
+        EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, camera.getTileWidth() / (2 * star.size), star.color, true);
     }
 
     @Override
@@ -101,7 +102,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         int y = world.getPlayer().getShip().getY();
         int x = world.getPlayer().getShip().getX();
 
-        if (container.getInput().isKeyDown(Input.KEY_E)) {
+        if (container.getInput().isKeyPressed(Input.KEY_E)) {
             LandingPartyEquipScreen screen = new LandingPartyEquipScreen(false);
             screen.enter(world);
             world.setCurrentRoom(screen);
@@ -123,7 +124,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         for (BasePlanet p : planets) {
             if (x == p.getGlobalX() && y == p.getGlobalY()) {
-                if (container.getInput().isKeyDown(Input.KEY_ENTER)) {
+                if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
                     GameLogger.getInstance().logMessage("Descending to surface...");
 
                     world.setCurrentRoom(p);
@@ -138,7 +139,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                         p.enter(world);
                     }
                     break;
-                } else if (container.getInput().isKeyDown(Input.KEY_S)) {
+                } else if (container.getInput().isKeyPressed(Input.KEY_S)) {
                     if (!(p instanceof Planet)) {
                         GameLogger.getInstance().logMessage("Can not scan this planet");
                         return;
@@ -157,7 +158,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         for (NPCShip ship : ships) {
             if (ship.getX() == x && ship.getY() == y) {
-                if (!ship.isHostile() && container.getInput().isKeyDown(Input.KEY_ENTER)) {
+                if (!ship.isHostile() && container.getInput().isKeyPressed(Input.KEY_ENTER)) {
                     world.setCurrentDialog(ship.getRace().getDefaultDialog());
                 }
             }
@@ -198,7 +199,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         final int starX = camera.getXCoord(0) + (camera.getTileWidth() / 2);
         final int starY = camera.getYCoord(0) + camera.getTileHeight() / 2;
         if (camera.isInViewport(0, 0)) {
-            g.fillOval(starX, starY, camera.getTileWidth() * STAR_SCALE_FACTOR / star.size, camera.getTileHeight() * STAR_SCALE_FACTOR / star.size);
+            //g.fillOval(starX, starY, camera.getTileWidth() * STAR_SCALE_FACTOR / star.size, camera.getTileHeight() * STAR_SCALE_FACTOR / star.size);
+            EngineUtils.drawCircleCentered(g, starX, starY, camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size), star.color, true);
         }
 
         for (BasePlanet p : planets) {
@@ -210,10 +212,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
             int planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);
             int planetY = camera.getYCoord(p.getGlobalY()) + camera.getTileWidth() / 2;
-            float size = (float) (Math.sqrt(Math.pow((planetX - starX), 2) + Math.pow((planetY - starY), 2)) * 2);
-
-            g.setColor(Color.gray);
-            g.drawOval(starX, starY, size, size);
+            int radius = (int) Math.sqrt(Math.pow((planetX - starX), 2) + Math.pow((planetY - starY), 2));
+            EngineUtils.drawCircleCentered(g, starX, starY, (int) radius, Color.gray, false);
             p.drawOnGlobalMap(container, g, camera, 0, 0);
 
         }

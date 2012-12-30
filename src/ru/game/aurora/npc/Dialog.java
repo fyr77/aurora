@@ -14,7 +14,7 @@ import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.util.JGEngineUtils;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
@@ -97,8 +97,8 @@ public class Dialog implements Room {
 
         int idx = -1;
         for (int i = Input.KEY_1; i < Input.KEY_9; ++i) {
-            if (container.getInput().isKeyDown(i)) {
-                idx = i - 1;
+            if (container.getInput().isKeyPressed(i)) {
+                idx = i - Input.KEY_1;
                 break;
             }
         }
@@ -122,14 +122,14 @@ public class Dialog implements Room {
 
         graphics.drawImage(ResourceManager.getInstance().getImage(iconName), camera.getRelativeX((int) iconRectangle.getX()), camera.getRelativeY((int) iconRectangle.getY()));
         graphics.setColor(backgroundColor);
-        JGEngineUtils.drawRectWithBorder(graphics, npcStatementRectangle, camera, Color.yellow, backgroundColor);
-        JGEngineUtils.drawRectWithBorder(graphics, replyRectangle, camera, Color.yellow, backgroundColor);
+        EngineUtils.drawRectWithBorder(graphics, npcStatementRectangle, camera, Color.yellow, backgroundColor);
+        EngineUtils.drawRectWithBorder(graphics, replyRectangle, camera, Color.yellow, backgroundColor);
 
         graphics.setColor(Color.yellow);
 
-        JGEngineUtils.drawRect(graphics, iconRectangle, camera, false);
+        EngineUtils.drawRect(graphics, iconRectangle, camera, false);
 
-        JGEngineUtils.drawString(
+        EngineUtils.drawString(
                 graphics
                 , currentStatement.npcText
                 , camera.getRelativeX((int) npcStatementRectangle.getX()) + camera.getTileWidth() / 2

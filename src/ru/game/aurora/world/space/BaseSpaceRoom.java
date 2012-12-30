@@ -26,20 +26,20 @@ public class BaseSpaceRoom implements Room {
         int x = player.getShip().getX();
         int y = player.getShip().getY();
 
-        if (container.getInput().isKeyDown(Input.KEY_UP)) {
+        if (container.getInput().isKeyPressed(Input.KEY_UP)) {
             y--;
             world.setUpdatedThisFrame(true);
         }
-        if (container.getInput().isKeyDown(Input.KEY_DOWN)) {
+        if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
             y++;
             world.setUpdatedThisFrame(true);
         }
 
-        if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
+        if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
             x--;
             world.setUpdatedThisFrame(true);
         }
-        if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
+        if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
             x++;
             world.setUpdatedThisFrame(true);
         }

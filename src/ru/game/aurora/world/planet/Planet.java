@@ -14,6 +14,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.CollectionUtils;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
@@ -234,20 +235,20 @@ public class Planet extends BasePlanet {
         int x = world.getPlayer().getLandingParty().getX();
         int y = world.getPlayer().getLandingParty().getY();
 
-        if (container.getInput().isKeyDown(Input.KEY_UP)) {
+        if (container.getInput().isKeyPressed(Input.KEY_UP)) {
             y--;
             world.setUpdatedThisFrame(true);
         }
-        if (container.getInput().isKeyDown(Input.KEY_DOWN)) {
+        if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
             y++;
             world.setUpdatedThisFrame(true);
         }
 
-        if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
+        if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
             x--;
             world.setUpdatedThisFrame(true);
         }
-        if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
+        if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
             x++;
             world.setUpdatedThisFrame(true);
         }
@@ -261,9 +262,10 @@ public class Planet extends BasePlanet {
             y = world.getPlayer().getLandingParty().getY();
         }
 
-        if (container.getInput().isKeyDown(Input.KEY_ENTER)) {
+        final boolean enterPressed = container.getInput().isKeyPressed(Input.KEY_ENTER);
+        if (enterPressed) {
             // check if can pick up smth
-            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext(); ) {
+            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext();) {
                 PlanetObject p = iter.next();
 
                 if (!p.canBePickedUp()) {
@@ -292,7 +294,7 @@ public class Planet extends BasePlanet {
                 GameLogger.getInstance().logMessage("Refilling oxygen");
                 world.getPlayer().getLandingParty().refillOxygen();
             }
-            if (container.getInput().isKeyDown(Input.KEY_ENTER)) {
+            if (enterPressed) {
                 GameLogger.getInstance().logMessage("Launching shuttle to orbit...");
                 world.setCurrentRoom(owner);
                 owner.enter(world);
@@ -358,12 +360,12 @@ public class Planet extends BasePlanet {
             return;
         }
 
-        if (container.getInput().isKeyDown(Input.KEY_UP) || container.getInput().isKeyDown(Input.KEY_RIGHT)) {
+        if (container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
             targetIdx++;
             if (targetIdx >= availableTargets.size()) {
                 targetIdx = 0;
             }
-        } else if (container.getInput().isKeyDown(Input.KEY_DOWN) || container.getInput().isKeyDown(Input.KEY_LEFT)) {
+        } else if (container.getInput().isKeyPressed(Input.KEY_DOWN) || container.getInput().isKeyPressed(Input.KEY_LEFT)) {
             targetIdx--;
             if (targetIdx < 0) {
                 targetIdx = availableTargets.size() - 1;
@@ -372,7 +374,7 @@ public class Planet extends BasePlanet {
 
         target = availableTargets.get(targetIdx);
 
-        if (container.getInput().isKeyDown(Input.KEY_F) || container.getInput().isKeyDown(Input.KEY_ENTER)) {
+        if (container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER)) {
             // firing
             final int damage = landingParty.calcDamage();
             target.onShotAt(damage);
@@ -391,14 +393,14 @@ public class Planet extends BasePlanet {
     public void update(GameContainer container, World world) {
         switch (mode) {
             case MODE_MOVE:
-                if (container.getInput().isKeyDown(Input.KEY_F)) {
+                if (container.getInput().isKeyPressed(Input.KEY_F)) {
                     mode = MODE_SHOOT;
                     return;
                 }
                 updateMove(container, world);
                 break;
             case MODE_SHOOT:
-                if (container.getInput().isKeyDown(Input.KEY_ESCAPE)) {
+                if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
                     mode = MODE_MOVE;
                     return;
                 }
@@ -571,11 +573,8 @@ public class Planet extends BasePlanet {
             default:
                 color = Color.gray;
         }
-        graphics.setColor(color);
-        graphics.fillOval(camera.getXCoord(globalX) + (camera.getTileWidth() / 2)
-                , camera.getYCoord(globalY) + camera.getTileHeight() / 2
-                , StarSystem.PLANET_SCALE_FACTOR * camera.getTileWidth() / size
-                , StarSystem.PLANET_SCALE_FACTOR * camera.getTileHeight() / size);
+        EngineUtils.drawCircleCentered(graphics, camera.getXCoord(globalX) + (camera.getTileWidth() / 2)
+                , camera.getYCoord(globalY) + camera.getTileHeight() / 2, StarSystem.PLANET_SCALE_FACTOR * camera.getTileWidth() / (2 * size), color, true);
     }
 
     public int getWidth() {

@@ -8,7 +8,6 @@ package ru.game.aurora.application;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.geom.Rectangle;
 
 import java.util.LinkedList;
@@ -35,8 +34,8 @@ public class GameLogger {
     public GameLogger(Rectangle statusMessagesRect, Rectangle logRect) {
         this.statusMessagesRect = statusMessagesRect;
         this.logRect = logRect;
-        java.awt.Font f = new java.awt.Font("Arial", java.awt.Font.BOLD, 18);
-        font = new UnicodeFont(f);
+        java.awt.Font f = new java.awt.Font("Arial", java.awt.Font.PLAIN, 18);
+        font = new org.newdawn.slick.TrueTypeFont(f, false);
     }
 
     public static void init(Rectangle statusMessagesRect, Rectangle logRect) {

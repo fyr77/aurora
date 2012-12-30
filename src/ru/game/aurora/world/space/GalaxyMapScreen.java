@@ -37,14 +37,14 @@ public class GalaxyMapScreen implements Room {
         final Camera oldCamera = world.getCamera();
         final int newTileWidth = oldCamera.getNumTilesX() * oldCamera.getTileWidth() / galaxyMap.getTilesX();
         final int newTileHeight = oldCamera.getNumTilesY() * oldCamera.getTileHeight() / galaxyMap.getTilesY();
-        myCamera = new Camera(0, 0, newTileWidth, newTileHeight, galaxyMap.getTilesX(), galaxyMap.getTilesY());
+        myCamera = new Camera(0, 0, galaxyMap.getTilesX(), galaxyMap.getTilesY(), newTileWidth, newTileHeight);
         myCamera.setTarget(new BasePositionable(galaxyMap.getTilesX() / 2, galaxyMap.getTilesY() / 2));
         ship = world.getPlayer().getShip();
     }
 
     @Override
     public void update(GameContainer container, World world) {
-        if (container.getInput().isKeyDown(Input.KEY_ENTER) || container.getInput().isKeyDown(Input.KEY_ESCAPE) || container.getInput().isKeyDown(Input.KEY_M)) {
+        if (container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(Input.KEY_ESCAPE) || container.getInput().isKeyPressed(Input.KEY_M)) {
             world.setCurrentRoom(world.getGalaxyMap());
         }
     }

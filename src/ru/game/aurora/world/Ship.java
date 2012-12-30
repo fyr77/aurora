@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
@@ -50,6 +51,7 @@ public class Ship implements GameObject, Positionable {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
+        g.setColor(Color.white);
         g.drawImage(ResourceManager.getInstance().getImage("aurora"), camera.getXCoord(x), camera.getYCoord(y), null);
     }
 

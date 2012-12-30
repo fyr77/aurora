@@ -110,7 +110,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
 
     @Override
     public void update(GameContainer container, World world) {
-        if (container.getInput().isKeyDown(Input.KEY_TAB)) {
+        if (container.getInput().isKeyPressed(Input.KEY_TAB)) {
             currentTab++;
             if (currentTab > COMPLETED_TAB) {
                 currentTab = 0;
@@ -129,12 +129,12 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
                     currentIdx = 0;
                 }
                 ResearchProjectState state = researchState.getCurrentProjects().get(currentIdx);
-                if (container.getInput().isKeyDown(Input.KEY_LEFT) && state.scientists > 0) {
+                if (container.getInput().isKeyPressed(Input.KEY_LEFT) && state.scientists > 0) {
                     state.scientists--;
                     researchState.setIdleScientists(researchState.getIdleScientists() + 1);
                 }
 
-                if (container.getInput().isKeyDown(Input.KEY_RIGHT) && researchState.getIdleScientists() > 0) {
+                if (container.getInput().isKeyPressed(Input.KEY_RIGHT) && researchState.getIdleScientists() > 0) {
                     state.scientists++;
                     researchState.setIdleScientists(researchState.getIdleScientists() - 1);
                 }
@@ -144,7 +144,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
                 if (currentIdx >= maxIdx) {
                     currentIdx = 0;
                 }
-                if (container.getInput().isKeyDown(Input.KEY_ENTER)) {
+                if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
                     GameLogger.getInstance().logMessage("Starting research " + researchState.getAvailableProjects().get(currentIdx).getName());
                     ResearchProjectDesc desc = researchState.getAvailableProjects().remove(currentIdx);
                     researchState.getCurrentProjects().add(new ResearchProjectState(desc, 0));
@@ -161,21 +161,21 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
                 break;
         }
 
-        if (container.getInput().isKeyDown(Input.KEY_UP)) {
+        if (container.getInput().isKeyPressed(Input.KEY_UP)) {
             currentIdx--;
             if (currentIdx < 0) {
                 currentIdx = maxIdx - 1;
             }
         }
 
-        if (container.getInput().isKeyDown(Input.KEY_DOWN)) {
+        if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
             currentIdx++;
             if (currentIdx == maxIdx) {
                 currentIdx = 0;
             }
         }
 
-        if (container.getInput().isKeyDown(Input.KEY_ESCAPE)) {
+        if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
             world.setCurrentRoom(previousRoom);
             //previousRoom.enter(world); do not call here, as it is not real room entry
         }

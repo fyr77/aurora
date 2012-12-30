@@ -52,7 +52,7 @@ public class GalaxyMap extends BaseSpaceRoom {
     public GalaxyMap(World world, Camera cam, int tilesX, int tilesY, int systemSizeX, int systemSizeY) {
         this.tilesX = tilesX;
         this.tilesY = tilesY;
-        background = new ParallaxBackground(tilesX * cam.getTileWidth(), tilesY * cam.getTileHeight(), tilesX / 2, tilesY / 2, 1);
+        background = new ParallaxBackground(tilesX * cam.getTileWidth(), tilesY * cam.getTileHeight(), cam.getTileWidth() * tilesX / 2, cam.getTileHeight() * tilesY / 2, 4);
         background.setBaseWidth(4);
         map = new int[tilesY][tilesX];
         for (int i = 0; i < tilesY; ++i) {
@@ -159,7 +159,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     @Override
     public void update(GameContainer container, World world) {
-        if (container.getInput().isKeyDown(Input.KEY_M)) {
+        if (container.getInput().isKeyPressed(Input.KEY_M)) {
             world.setCurrentRoom(fullMapScreen);
             fullMapScreen.enter(world);
             return;
@@ -178,7 +178,7 @@ public class GalaxyMap extends BaseSpaceRoom {
             if (world.isUpdatedThisFrame()) {
                 objects.get(idx).processCollision(container, player);
             }
-            if (objects.get(idx).canBeEntered() && container.getInput().isKeyDown(Input.KEY_ENTER)) {
+            if (objects.get(idx).canBeEntered() && container.getInput().isKeyPressed(Input.KEY_ENTER)) {
                 Room r = (Room) objects.get(idx);
                 world.setCurrentRoom(r);
                 r.enter(world);

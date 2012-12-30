@@ -56,7 +56,7 @@ public class World {
             }
             return;
         }
-        if (container.getInput().isKeyDown(Input.KEY_R)) {
+        if (container.getInput().isKeyPressed(Input.KEY_R)) {
             // open research screen
             ResearchScreen researchScreen = new ResearchScreen();
             researchScreen.enter(this);
@@ -69,7 +69,7 @@ public class World {
             turnCount++;
         }
 
-        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext(); ) {
+        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext();) {
             GameEventListener l = listenerIterator.next();
             if (!l.isAlive()) {
                 listenerIterator.remove();

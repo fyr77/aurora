@@ -14,7 +14,16 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 
 
-public class JGEngineUtils {
+public class EngineUtils {
+
+    public static void drawCircleCentered(Graphics graphics, int x, int y, int radius, Color c, boolean filled) {
+        graphics.setColor(c);
+        if (filled) {
+            graphics.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
+        } else {
+            graphics.drawOval(x - radius, y - radius, 2 * radius, 2 * radius);
+        }
+    }
 
     public static void drawRectWithBorder(Graphics graphics, Rectangle rectangle, Camera camera, Color borderColor, Color fillColor) {
         graphics.setColor(fillColor);

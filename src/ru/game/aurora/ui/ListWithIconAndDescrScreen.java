@@ -14,7 +14,7 @@ import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.util.JGEngineUtils;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
@@ -53,10 +53,10 @@ public abstract class ListWithIconAndDescrScreen implements Room {
     }
 
     public void draw(Graphics graphics, Camera camera, String caption, String image, String description) {
-        JGEngineUtils.drawRectWithBorder(graphics, captionRect, camera, Color.yellow, backgroundColor);
-        JGEngineUtils.drawRectWithBorder(graphics, listRect, camera, Color.yellow, backgroundColor);
-        JGEngineUtils.drawRectWithBorder(graphics, imageRect, camera, Color.yellow, backgroundColor);
-        JGEngineUtils.drawRectWithBorder(graphics, descriptionRect, camera, Color.yellow, backgroundColor);
+        EngineUtils.drawRectWithBorder(graphics, captionRect, camera, Color.yellow, backgroundColor);
+        EngineUtils.drawRectWithBorder(graphics, listRect, camera, Color.yellow, backgroundColor);
+        EngineUtils.drawRectWithBorder(graphics, imageRect, camera, Color.yellow, backgroundColor);
+        EngineUtils.drawRectWithBorder(graphics, descriptionRect, camera, Color.yellow, backgroundColor);
 
         graphics.setFont(GUIConstants.dialogFont);
         graphics.setColor(Color.yellow);
@@ -69,7 +69,7 @@ public abstract class ListWithIconAndDescrScreen implements Room {
         if (description == null) {
             description = "<Select a research project>";
         }
-        JGEngineUtils.drawString(graphics, description, camera.getRelativeX((int) descriptionRect.getX()) + 10, camera.getRelativeY((int) descriptionRect.getY()) + 10, camera.getTileWidth() * (int) descriptionRect.getWidth() - 20, GUIConstants.dialogFont, Color.yellow);
+        EngineUtils.drawString(graphics, description, camera.getRelativeX((int) descriptionRect.getX()) + 10, camera.getRelativeY((int) descriptionRect.getY()) + 10, camera.getTileWidth() * (int) descriptionRect.getWidth() - 20, GUIConstants.dialogFont, Color.yellow);
 
         if (strings.isEmpty()) {
             graphics.drawString("<No projects in this category>", camera.getRelativeX((int) listRect.getX()) + 10, camera.getRelativeY((int) listRect.getY()) + 10);
@@ -83,21 +83,21 @@ public abstract class ListWithIconAndDescrScreen implements Room {
 
     @Override
     public void update(GameContainer container, World world) {
-        if (container.getInput().isKeyDown(Input.KEY_UP)) {
+        if (container.getInput().isKeyPressed(Input.KEY_UP)) {
             currentIdx--;
             if (currentIdx < 0) {
                 currentIdx = maxIdx - 1;
             }
         }
 
-        if (container.getInput().isKeyDown(Input.KEY_DOWN)) {
+        if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
             currentIdx++;
             if (currentIdx == maxIdx) {
                 currentIdx = 0;
             }
         }
 
-        if (container.getInput().isKeyDown(Input.KEY_ESCAPE)) {
+        if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
             world.setCurrentRoom(previousRoom);
         }
     }

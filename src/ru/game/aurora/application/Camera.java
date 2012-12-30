@@ -131,8 +131,15 @@ public class Camera {
         return target;
     }
 
+    /**
+     * Check that center of given tile is now on screen
+     */
     public boolean isInViewport(int tileX, int tileY) {
         return Math.abs(target.getX() - tileX) <= getNumTilesX() / 2 && Math.abs(target.getY() - tileY) <= getNumTilesY() / 2;
+    }
+
+    public boolean isInViewportAbs(int absX, int absY) {
+        return isInViewport(absX / tileWidth, absY / tileHeight);
     }
 
     public void drawBound() {
