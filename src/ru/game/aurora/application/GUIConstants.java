@@ -14,5 +14,5 @@ import org.newdawn.slick.TrueTypeFont;
 public class GUIConstants {
     public static final Color backgroundColor = new Color(4, 7, 125);
 
-    public static final Font dialogFont = new TrueTypeFont(java.awt.Font.getFont("arial"), false);
+    public static final Font dialogFont = new TrueTypeFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18), false);
 }
