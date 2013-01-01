@@ -466,7 +466,7 @@ public class Planet extends BasePlanet {
         // after all draw mountains
         if (detailed) {
             for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
-                // first even columns
+                // first draw outer mountains (that have only one neighbour on X)
                 for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; j++) {
 
                     final byte type = surface[wrapY(i)][wrapX(j)];
@@ -475,22 +475,30 @@ public class Planet extends BasePlanet {
                     }
                     if ((type & SurfaceTypes.MOUNTAINS_MASK) != 0) {
 
-                        int mountainCount = 0;
-                        for (int ii = -1; ii <= 1; ++ii) {
-                            for (int jj = -1; jj <= 1; ++jj) {
-                                if ((surface[wrapY(i + ii)][wrapX(j + jj)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {
-                                    mountainCount++;
-                                }
-                            }
+                        byte leftNeighbour = surface[wrapY(i)][wrapX(j - 1)];
+                        byte rightNeighbour = surface[wrapY(i)][wrapX(j + 1)];
+
+                        if (((leftNeighbour & SurfaceTypes.MOUNTAINS_MASK) == 0) || ((rightNeighbour & SurfaceTypes.MOUNTAINS_MASK) == 0)) {
+                            graphics.drawImage(ResourceManager.getInstance().getImage("mountains_tile_1"), camera.getXCoord(j), camera.getYCoord(i));
 
                         }
+                    }
+                }
 
-                        if (mountainCount < 3) {
-                            graphics.drawImage(ResourceManager.getInstance().getImage("mountains_tile_1"), camera.getXCoord(j), camera.getYCoord(i));
-                        } else {
+                for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; j++) {
+
+                    final byte type = surface[wrapY(i)][wrapX(j)];
+                    if ((type & SurfaceTypes.VISIBILITY_MASK) == 0) {
+                        continue;
+                    }
+                    if ((type & SurfaceTypes.MOUNTAINS_MASK) != 0) {
+
+                        byte leftNeighbour = surface[wrapY(i)][wrapX(j - 1)];
+                        byte rightNeighbour = surface[wrapY(i)][wrapX(j + 1)];
+
+                        if (((leftNeighbour & SurfaceTypes.MOUNTAINS_MASK) != 0) && ((rightNeighbour & SurfaceTypes.MOUNTAINS_MASK) != 0)) {
                             graphics.drawImage(ResourceManager.getInstance().getImage("mountains_tile_2"), camera.getXCoord(j), camera.getYCoord(i));
                         }
-
                     }
                 }
 
