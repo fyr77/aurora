@@ -11,6 +11,7 @@
     <orderEntry type="library" name="gson-2.2.2" level="project" />
     <orderEntry type="library" name="slick" level="project" />
     <orderEntry type="library" name="lwjgl" level="project" />
+    <orderEntry type="library" name="Twl" level="project" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">

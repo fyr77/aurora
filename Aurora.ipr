@@ -33,6 +33,7 @@
       <entry name="?*.ftl" />
       <entry name="*.tbl" />
       <entry name="*.json" />
+      <entry name="*.fnt" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>
@@ -266,6 +267,14 @@
     <library name="slick">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/third-party/slick.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Twl">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/third-party/xpp3-1.1.4c.jar!/" />
+        <root url="jar://$PROJECT_DIR$/third-party/TWL.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

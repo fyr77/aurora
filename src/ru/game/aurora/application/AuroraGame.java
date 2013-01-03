@@ -8,10 +8,13 @@ package ru.game.aurora.application;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
+import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.GalaxyMapWidget;
 import ru.game.aurora.world.World;
 
 
 public class AuroraGame extends BasicGame {
+
     private World world;
 
     private static final int tileSize = 64;
@@ -31,23 +34,27 @@ public class AuroraGame extends BasicGame {
         GameLogger.init(new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 10 * tileSize), new Rectangle((tilesX - 5) * tileSize, 10 * tileSize, 5 * tileSize, 5 * tileSize));
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
         gameContainer.getInput().enableKeyRepeat();
+
+        GUI.init(gameContainer);
+        GUI.getInstance().setCurrentScreen(new GalaxyMapWidget(world));
     }
 
     @Override
     public void update(GameContainer gameContainer, int i) throws SlickException {
         world.update(gameContainer);
+        GUI.getInstance().update(gameContainer);
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         world.draw(gameContainer, graphics);
         world.getCamera().drawBound();
+        GUI.getInstance().draw(gameContainer, graphics);
         GameLogger.getInstance().draw(graphics);
         GameLogger.getInstance().clearStatusMessages();
     }
 
     public static void main(String[] args) throws SlickException {
-
         AppGameContainer app = new AppGameContainer(new AuroraGame());
         app.setDisplayMode(tilesX * tileSize, tilesY * tileSize, false);
         app.start();
