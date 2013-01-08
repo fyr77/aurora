@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world.planet;
 
+import de.matthiasmann.twl.Widget;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -188,6 +189,11 @@ public class Planet extends BasePlanet {
         shuttlePosition = new Point(landingParty.getX(), landingParty.getY());
         int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
         landingParty.addCollectedGeodata(openedTiles);
+    }
+
+    @Override
+    public Widget getGUI() {
+        return null;
     }
 
     public int wrapX(int x) {

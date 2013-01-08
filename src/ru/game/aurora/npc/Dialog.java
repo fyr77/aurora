@@ -6,6 +6,7 @@
 package ru.game.aurora.npc;
 
 import com.google.gson.Gson;
+import de.matthiasmann.twl.Widget;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -87,6 +88,11 @@ public class Dialog implements Room {
     public void enter(World world) {
         currentStatement = statements.get(0);
         returnValue = 0;
+    }
+
+    @Override
+    public Widget getGUI() {
+        return null;
     }
 
     @Override

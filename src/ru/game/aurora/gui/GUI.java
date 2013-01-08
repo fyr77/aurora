@@ -5,7 +5,6 @@
  */
 package ru.game.aurora.gui;
 
-import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
@@ -13,6 +12,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.TWLInputAdapter;
 
 import java.io.IOException;
@@ -24,11 +24,14 @@ public class GUI extends Widget {
 
     private static GUI instance;
 
-    public static void init(GameContainer gc) {
-        instance = new GUI(gc);
+    public static void init(GameContainer gc, Rectangle sidePanel) {
+        instance = new GUI(gc, sidePanel);
     }
 
-    private GUI(GameContainer gc) {
+    private Rectangle sidePanelRect;
+
+    private GUI(GameContainer gc, Rectangle sidePanel) {
+        this.sidePanelRect = sidePanel;
         setTheme("");
         // save Slick's GL state while loading the theme
         GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
@@ -51,12 +54,6 @@ public class GUI extends Widget {
         twlInputAdapter = new TWLInputAdapter(gui, gc.getInput());
         gc.getInput().addPrimaryListener(twlInputAdapter);
 
-        Button button = new Button("BBB");
-        button.setTheme("button");
-        button.setMinSize(30, 10);
-        button.setPosition(50, 90);
-        button.adjustSize();
-        add(button);
     }
 
     public static GUI getInstance() {
@@ -72,6 +69,14 @@ public class GUI extends Widget {
     }
 
     public void setCurrentScreen(Widget widget) {
-        gui.setRootPane(widget);
+        if (widget != null) {
+            gui.setRootPane(widget);
+        } else {
+            gui.setRootPane(this);
+        }
+    }
+
+    public Rectangle getSidePanelRect() {
+        return sidePanelRect;
     }
 }

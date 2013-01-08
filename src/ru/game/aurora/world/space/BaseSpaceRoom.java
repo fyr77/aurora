@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world.space;
 
+import de.matthiasmann.twl.Widget;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -19,6 +20,11 @@ public class BaseSpaceRoom implements Room {
     @Override
     public void enter(World world) {
         this.player = world.getPlayer();
+    }
+
+    @Override
+    public Widget getGUI() {
+        return null;
     }
 
     @Override

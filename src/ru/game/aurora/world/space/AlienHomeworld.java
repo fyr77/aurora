@@ -6,6 +6,7 @@
  */
 package ru.game.aurora.world.space;
 
+import de.matthiasmann.twl.Widget;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -50,6 +51,11 @@ public class AlienHomeworld extends BasePlanet {
     @Override
     public void enter(World world) {
         world.setCurrentDialog(dialog);
+    }
+
+    @Override
+    public Widget getGUI() {
+        return null;
     }
 
     @Override

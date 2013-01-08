@@ -82,4 +82,28 @@
             <int>5</int>
         </param>
     </theme>
+    <theme name="textarea" ref="-defaults">
+        <param name="fonts">
+            <map>
+                <param name="default">
+                    <string>normal</string>
+                </param>
+            </map>
+        </param>
+        <param name="font">
+            <font>normal</font>
+        </param>
+    </theme>
+    <theme name="scrollpane">
+        <theme name="hscrollbar" ref="-defaults"/>
+        <theme name="vscrollbar" ref="-defaults"/>
+        <param name="hasDragButton">
+            <bool>false</bool>
+        </param>
+    </theme>
+    <theme name="hscrollbar" ref="-defaults">
+        <param name="scaleThumb">
+            <bool>false</bool>
+        </param>
+    </theme>
 </themes>

@@ -35,7 +35,7 @@ public class AuroraGame extends BasicGame {
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
         gameContainer.getInput().enableKeyRepeat();
 
-        GUI.init(gameContainer);
+        GUI.init(gameContainer, new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 15 * tileSize));
         GUI.getInstance().setCurrentScreen(new GalaxyMapWidget(world));
     }
 
@@ -49,8 +49,8 @@ public class AuroraGame extends BasicGame {
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         world.draw(gameContainer, graphics);
         world.getCamera().drawBound();
-        GUI.getInstance().draw(gameContainer, graphics);
         GameLogger.getInstance().draw(graphics);
+        GUI.getInstance().draw(gameContainer, graphics);
         GameLogger.getInstance().clearStatusMessages();
     }
 

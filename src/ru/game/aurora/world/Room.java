@@ -5,8 +5,12 @@
  */
 package ru.game.aurora.world;
 
+import de.matthiasmann.twl.Widget;
+
 public interface Room extends GameObject {
 
     public void enter(World world);
 
+
+    public Widget getGUI();
 }

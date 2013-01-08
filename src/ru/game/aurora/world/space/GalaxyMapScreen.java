@@ -7,6 +7,7 @@
 package ru.game.aurora.world.space;
 
 
+import de.matthiasmann.twl.Widget;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -31,8 +32,11 @@ public class GalaxyMapScreen implements Room {
 
     private GalaxyMap galaxyMap;
 
+    private World world;
+
     @Override
     public void enter(World world) {
+        this.world = world;
         galaxyMap = world.getGalaxyMap();
         final Camera oldCamera = world.getCamera();
         final int newTileWidth = oldCamera.getNumTilesX() * oldCamera.getTileWidth() / galaxyMap.getTilesX();
@@ -40,6 +44,11 @@ public class GalaxyMapScreen implements Room {
         myCamera = new Camera(0, 0, galaxyMap.getTilesX(), galaxyMap.getTilesY(), newTileWidth, newTileHeight);
         myCamera.setTarget(new BasePositionable(galaxyMap.getTilesX() / 2, galaxyMap.getTilesY() / 2));
         ship = world.getPlayer().getShip();
+    }
+
+    @Override
+    public Widget getGUI() {
+        return null;
     }
 
     @Override

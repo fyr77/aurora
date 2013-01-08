@@ -7,6 +7,7 @@
 
 package ru.game.aurora.player.research;
 
+import de.matthiasmann.twl.Widget;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -30,6 +31,11 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
     public void enter(World world) {
         super.enter(world);
         researchState = world.getPlayer().getResearchState();
+    }
+
+    @Override
+    public Widget getGUI() {
+        return null;
     }
 
     private void drawActiveTasksTab(Graphics graphics, Camera camera) {

@@ -5,12 +5,15 @@
  */
 package ru.game.aurora.world.space;
 
+import de.matthiasmann.twl.Widget;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.gui.GalaxyMapWidget;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.npc.SingleShipEvent;
@@ -45,11 +48,15 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private int tilesY;
 
+    private World world;
+
     public static final int maxStars = 15;
 
-    private static final Random r = new Random();
+    private GalaxyMapWidget myGui;
 
     public GalaxyMap(World world, Camera cam, int tilesX, int tilesY, int systemSizeX, int systemSizeY) {
+        this.world = world;
+        this.myGui = new GalaxyMapWidget(world);
         this.tilesX = tilesX;
         this.tilesY = tilesY;
         background = new ParallaxBackground(tilesX * cam.getTileWidth(), tilesY * cam.getTileHeight(), cam.getTileWidth() * tilesX / 2, cam.getTileHeight() * tilesY / 2, 4);
@@ -86,13 +93,18 @@ public class GalaxyMap extends BaseSpaceRoom {
             int x;
             int y;
             do {
-                x = r.nextInt(tilesX);
-                y = r.nextInt(tilesY);
+                x = CommonRandom.getRandom().nextInt(tilesX);
+                y = CommonRandom.getRandom().nextInt(tilesY);
             } while (map[y][x] != -1);
             final int idx = objects.size();
             objects.add(generateRandomStarSystem(x, y, systemSizeX, systemSizeY));
             map[y][x] = idx;
         }
+    }
+
+    @Override
+    public Widget getGUI() {
+        return new GalaxyMapWidget(world);
     }
 
     public int[][] getMap() {
@@ -114,6 +126,8 @@ public class GalaxyMap extends BaseSpaceRoom {
     }
 
     public static StarSystem generateRandomStarSystem(int x, int y, int maxSizeX, int maxSizeY) {
+        final Random r = CommonRandom.getRandom();
+
         int size = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
         Color starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
         final int planetCount = r.nextInt(5);

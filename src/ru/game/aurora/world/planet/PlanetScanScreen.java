@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world.planet;
 
+import de.matthiasmann.twl.Widget;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -38,6 +39,11 @@ public class PlanetScanScreen implements Room {
         final int newTileHeight = oldCamera.getNumTilesY() * oldCamera.getTileHeight() / planet.getHeight();
         myCamera = new Camera(0, 0, planet.getWidth(), planet.getHeight(), newTileWidth, newTileHeight);
         myCamera.setTarget(new BasePositionable(planet.getWidth() / 2, planet.getHeight() / 2));
+    }
+
+    @Override
+    public Widget getGUI() {
+        return null;
     }
 
     @Override

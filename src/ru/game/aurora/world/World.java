@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.ResearchScreen;
@@ -116,6 +117,7 @@ public class World {
 
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
+        GUI.getInstance().setCurrentScreen(currentRoom.getGUI());
     }
 
     public void setCurrentDialog(Dialog currentDialog) {
