@@ -11,6 +11,8 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
+import ru.game.aurora.npc.shipai.LeaveSystemAI;
+import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
@@ -24,17 +26,27 @@ public class NPCShip extends BasePositionable implements GameObject {
 
     private String name;
 
+    private NPCShipAI ai;
+
     public NPCShip(int x, int y, String sprite, AlienRace race, NPC capitain, String name) {
         super(x, y);
         this.sprite = sprite;
         this.race = race;
         this.capitain = capitain;
         this.name = name;
+
+        ai = new LeaveSystemAI();
+    }
+
+    public void setAi(NPCShipAI ai) {
+        this.ai = ai;
     }
 
     @Override
     public void update(GameContainer container, World world) {
-        // do nothing currently
+        if (ai != null) {
+            ai.update(this, world);
+        }
     }
 
     @Override

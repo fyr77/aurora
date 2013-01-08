@@ -76,7 +76,9 @@ public class GalaxyMap extends BaseSpaceRoom {
         StarSystem kliskHomeworld = HomeworldGenerator.generateKliskHomeworld(5, 5, kliskRace);
         kliskRace.setHomeworld(kliskHomeworld);
 
-        world.addListener(new SingleShipEvent(0.9, new NPCShip(0, 0, gardenerRace.getShipSprite(), gardenerRace, null, null)));
+        NPCShip gardenerShip = new NPCShip(0, 0, gardenerRace.getShipSprite(), gardenerRace, null, null);
+        gardenerShip.setAi(null);
+        world.addListener(new SingleShipEvent(0.9, gardenerShip));
         world.addListener(new StandartAlienShipEvent(kliskRace));
 
         objects.add(kliskHomeworld);
