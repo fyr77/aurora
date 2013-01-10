@@ -65,6 +65,7 @@
             <alias ref="button_area" if="pressed" inset="2,2,-2,-2"/>
             <alias ref="button_area"/>
         </select>
+        <area name="scrollbar_area" xywh="68,0,30,113"/>
     </images>
     <theme name="button" ref="-defaults">
         <param name="background">
@@ -82,6 +83,77 @@
             <int>5</int>
         </param>
     </theme>
+    <theme name="hscrollbar" ref="-defaults">
+        <param name="scaleThumb">
+            <bool>false</bool>
+        </param>
+        <theme name="leftbutton" ref="-defaults">
+            <param name="background">
+                <image>button.background</image>
+            </param>
+        </theme>
+        <theme name="rightbutton" ref="-defaults">
+            <param name="background">
+                <image>button.background</image>
+            </param>
+        </theme>
+        <theme name="thumb" ref="-defaults">
+            <param name="background">
+                <image>button.background</image>
+            </param>
+        </theme>
+    </theme>
+    <theme name="vscrollbar" ref="-defaults">
+        <param name="scaleThumb">
+            <bool>false</bool>
+        </param>
+        <theme name="upbutton" ref="-defaults">
+            <param name="background">
+                <image>button.background</image>
+            </param>
+        </theme>
+        <theme name="downbutton" ref="-defaults">
+            <param name="background">
+                <image>button.background</image>
+            </param>
+        </theme>
+        <theme name="thumb" ref="-defaults">
+            <param name="background">
+                <image>button.background</image>
+            </param>
+        </theme>
+    </theme>
+    <theme name="scrollpane" ref="-defaults">
+        <theme name="hscrollbar" ref="hscrollbar"/>
+        <theme name="vscrollbar" ref="vscrollbar"/>
+        <param name="hasDragButton">
+            <bool>false</bool>
+        </param>
+        <param name="maxHeight">
+            <int>50</int>
+        </param>
+        <param name="minHeight">
+            <int>0</int>
+        </param>
+        <param name="maxWidth">
+            <int>500</int>
+        </param>
+        <param name="minWidth">
+            <int>0</int>
+        </param>
+        <param name="autoScrollSpeed">
+            <int>0</int>
+        </param>
+        <param name="autoScrollArea">
+            <int>0</int>
+        </param>
+        <param name="scrollbarsAlwaysVisible">
+            <bool>true</bool>
+        </param>
+        <param name="font">
+            <font>normal</font>
+        </param>
+    </theme>
     <theme name="textarea" ref="-defaults">
         <param name="fonts">
             <map>
@@ -93,17 +165,9 @@
         <param name="font">
             <font>normal</font>
         </param>
-    </theme>
-    <theme name="scrollpane">
-        <theme name="hscrollbar" ref="-defaults"/>
-        <theme name="vscrollbar" ref="-defaults"/>
-        <param name="hasDragButton">
-            <bool>false</bool>
-        </param>
-    </theme>
-    <theme name="hscrollbar" ref="-defaults">
-        <param name="scaleThumb">
-            <bool>false</bool>
+        <param name="images">
+            <map>
+            </map>
         </param>
     </theme>
 </themes>
