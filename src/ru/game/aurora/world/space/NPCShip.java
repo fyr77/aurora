@@ -26,6 +26,10 @@ public class NPCShip extends BasePositionable implements GameObject {
 
     private String name;
 
+    private int speed = 3;
+
+    private int curSpeed = 3;
+
     private NPCShipAI ai;
 
     public NPCShip(int x, int y, String sprite, AlienRace race, NPC capitain, String name) {
@@ -44,8 +48,12 @@ public class NPCShip extends BasePositionable implements GameObject {
 
     @Override
     public void update(GameContainer container, World world) {
+        if (curSpeed-- > 0) {
+            return;
+        }
+        curSpeed = speed;
         if (ai != null) {
-            ai.update(this, world);
+            ai.update(this, world, (StarSystem) world.getCurrentRoom());
         }
     }
 
@@ -64,5 +72,17 @@ public class NPCShip extends BasePositionable implements GameObject {
 
     public AlienRace getRace() {
         return race;
+    }
+
+    public boolean isAlive() {
+        boolean rz = true;
+        if (ai != null) {
+            rz &= ai.isAlive();
+        }
+        return rz;
+    }
+
+    public String getName() {
+        return name;
     }
 }

@@ -13,10 +13,12 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
@@ -75,6 +77,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public void setRadius(int radius) {
         this.radius = radius;
+    }
+
+    public boolean isInside(Positionable p) {
+        return (p.getX() >= -radius && p.getX() <= radius && p.getY() >= -radius && p.getY() <= radius);
     }
 
     @Override
@@ -156,7 +162,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
 
-        for (NPCShip ship : ships) {
+        for (Iterator<NPCShip> iter = ships.iterator(); iter.hasNext();) {
+            NPCShip ship = iter.next();
             if (ship.getX() == x && ship.getY() == y) {
                 if (!ship.isHostile() && container.getInput().isKeyPressed(Input.KEY_ENTER)) {
                     world.setCurrentDialog(ship.getRace().getDefaultDialog());
@@ -164,6 +171,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
             if (world.isUpdatedThisFrame()) {
                 ship.update(container, world);
+                if (!ship.isAlive()) {
+                    iter.remove();
+                }
             }
         }
 

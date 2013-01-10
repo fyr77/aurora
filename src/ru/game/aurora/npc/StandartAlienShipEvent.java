@@ -34,7 +34,7 @@ public class StandartAlienShipEvent implements GameEventListener {
         }
 
         if (r.nextDouble() < probability) {
-            ss.getShips().add(new NPCShip(r.nextInt(ss.getRadius()), r.nextInt(ss.getRadius()), race.getShipSprite(), race, null, "Dummy"));
+            ss.getShips().add(new NPCShip(r.nextInt(ss.getRadius()) - ss.getRadius() / 2, r.nextInt(ss.getRadius()) - ss.getRadius() / 2, race.getShipSprite(), race, null, "Dummy"));
         }
     }
 

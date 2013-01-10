@@ -7,7 +7,11 @@ package ru.game.aurora.npc.shipai;
 
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.space.StarSystem;
 
 public interface NPCShipAI {
-    public void update(NPCShip ship, World world);
+
+    public void update(NPCShip ship, World world, StarSystem currentSystem);
+
+    public boolean isAlive();
 }
