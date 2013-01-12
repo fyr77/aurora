@@ -77,12 +77,16 @@ public class ParallaxBackground {
 
                 graphics.setColor(s.color);
 
-                float radius = (float) Math.ceil(baseWidth / (2 * i + 1));
-                if (radius < 1.0f) {
-                    // jgame does not draw oval with radius smaller than 3
-                    radius = 1.0f;
+                float diameter = 2 * (float) Math.ceil(baseWidth / (2 * i + 1));
+                if (diameter < 4.0f) {
+                    // jgame does not draw oval with diameter smaller than 3
+                    diameter = 4.0f;
                 }
-                graphics.fillOval(realX, realY, 2 * radius, 2 * radius);
+
+                if (realX < -diameter || realY < -diameter || realX > camera.getTileWidth() * camera.getNumTilesX() || realY > camera.getTileHeight() * camera.getNumTilesY()) {
+                    continue;
+                }
+                graphics.fillOval(realX, realY, diameter, diameter);
             }
         }
     }
