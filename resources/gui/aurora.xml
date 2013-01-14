@@ -130,35 +130,32 @@
             <bool>false</bool>
         </param>
         <param name="maxHeight">
-            <int>50</int>
+            <int>32767</int>
         </param>
         <param name="minHeight">
-            <int>0</int>
+            <int>100</int>
         </param>
         <param name="maxWidth">
-            <int>500</int>
+            <int>32767</int>
         </param>
         <param name="minWidth">
-            <int>0</int>
+            <int>100</int>
         </param>
         <param name="autoScrollSpeed">
-            <int>0</int>
+            <int>10</int>
         </param>
         <param name="autoScrollArea">
-            <int>0</int>
+            <int>5</int>
         </param>
         <param name="scrollbarsAlwaysVisible">
             <bool>true</bool>
-        </param>
-        <param name="font">
-            <font>normal</font>
         </param>
     </theme>
     <theme name="textarea" ref="-defaults">
         <param name="fonts">
             <map>
                 <param name="default">
-                    <string>normal</string>
+                    <font>normal</font>
                 </param>
             </map>
         </param>

@@ -106,7 +106,8 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     @Override
     public Widget getGUI() {
-        return new GalaxyMapWidget(world);
+        myGui = new GalaxyMapWidget(world);
+        return myGui;
     }
 
     public int[][] getMap() {
@@ -201,6 +202,7 @@ public class GalaxyMap extends BaseSpaceRoom {
                 world.setUpdatedThisFrame(true);
             }
         }
+        myGui.update();
     }
 
     @Override

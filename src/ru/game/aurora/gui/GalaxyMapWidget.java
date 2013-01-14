@@ -7,6 +7,7 @@ package ru.game.aurora.gui;
 
 import de.matthiasmann.twl.BoxLayout;
 import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.ScrollPane;
 import de.matthiasmann.twl.TextArea;
 import de.matthiasmann.twl.textarea.SimpleTextAreaModel;
 import org.newdawn.slick.geom.Rectangle;
@@ -24,6 +25,8 @@ public class GalaxyMapWidget extends BoxLayout {
 
     private World world;
 
+    private TextArea statusText;
+
     private final GalaxyMapScreen galaxyMapScreen = new GalaxyMapScreen();
 
     public GalaxyMapWidget(final World world) {
@@ -31,9 +34,17 @@ public class GalaxyMapWidget extends BoxLayout {
         setTheme("");
         this.world = world;
 
-        TextArea statusText = new TextArea();
+        statusText = new TextArea();
+        statusText.setTheme("textarea");
         statusText.setModel(textAreaModel);
-        add(statusText);
+        textAreaModel.setText("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+        ScrollPane scrollPane = new ScrollPane(statusText);
+        scrollPane.setSize(5 * 64, 5 * 64);
+        //  scrollPane.setTheme("scrollpane");
+        scrollPane.setFixed(ScrollPane.Fixed.HORIZONTAL);
+        scrollPane.setFixed(ScrollPane.Fixed.VERTICAL);
+        add(scrollPane);
 
 
         mapButton = new Button("View Map");
@@ -74,7 +85,7 @@ public class GalaxyMapWidget extends BoxLayout {
         final Rectangle sidePanelRect = GUI.getInstance().getSidePanelRect();
         setPosition((int) sidePanelRect.getX(), (int) sidePanelRect.getY());
         setSize((int) sidePanelRect.getWidth(), (int) sidePanelRect.getHeight());
-
+        statusText.adjustSize();
         mapButton.adjustSize();
         researchButton.adjustSize();
     }
