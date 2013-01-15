@@ -31,8 +31,25 @@ public class BlasterShotEffect implements Effect {
     private Image myImage;
 
     public BlasterShotEffect(Positionable source, Positionable target, Camera camera, int moveSpeed, String shotSprite) {
-        this.currentPos = new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2);
-        this.target = new Vector2f(camera.getXCoord(target.getX()) + camera.getTileWidth() / 2, camera.getYCoord(target.getY()) + camera.getTileHeight() / 2);
+        this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
+                , new Vector2f(camera.getXCoord(target.getX()) + camera.getTileWidth() / 2, camera.getYCoord(target.getY()) + camera.getTileHeight() / 2)
+                , camera
+                , moveSpeed
+                , shotSprite);
+
+    }
+
+    public BlasterShotEffect(Positionable source, int targetScreenX, int targetScreenY, Camera camera, int moveSpeed, String shotSprite) {
+        this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
+                , new Vector2f(targetScreenX, targetScreenY)
+                , camera
+                , moveSpeed
+                , shotSprite);
+    }
+
+    public BlasterShotEffect(Vector2f source, Vector2f target, Camera camera, int moveSpeed, String shotSprite) {
+        this.currentPos = source;
+        this.target = target;
         this.moveSpeed = moveSpeed;
 
         movementDir = new Vector2f(this.target.getX() - this.currentPos.getX(), this.target.getY() - this.currentPos.getY());

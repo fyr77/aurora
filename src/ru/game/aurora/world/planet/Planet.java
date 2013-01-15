@@ -14,6 +14,8 @@ import org.newdawn.slick.geom.Point;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.effects.BlasterShotEffect;
+import ru.game.aurora.effects.Effect;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.util.ProbabilitySet;
@@ -92,6 +94,8 @@ public class Planet extends BasePlanet {
      * When in fire mode, this is currently selected target
      */
     private PlanetObject target = null;
+
+    private Effect currentEffect = null;
 
     public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
         super(size, y, owner, atmosphere, x, cat);
@@ -271,7 +275,7 @@ public class Planet extends BasePlanet {
         final boolean enterPressed = container.getInput().isKeyPressed(Input.KEY_ENTER);
         if (enterPressed) {
             // check if can pick up smth
-            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext();) {
+            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext(); ) {
                 PlanetObject p = iter.next();
 
                 if (!p.canBePickedUp()) {
@@ -383,6 +387,9 @@ public class Planet extends BasePlanet {
         if (container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER)) {
             // firing
             final int damage = landingParty.calcDamage();
+
+            currentEffect = new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), width), world.getCamera().getYCoordWrapped(target.getY(), height), world.getCamera(), 800, "blaster_shot");
+
             target.onShotAt(damage);
             GameLogger.getInstance().logMessage("Bang! Dealt " + damage + " damage to " + target.getName());
             if (!target.isAlive()) {
@@ -397,6 +404,13 @@ public class Planet extends BasePlanet {
 
     @Override
     public void update(GameContainer container, World world) {
+        if (currentEffect != null) {
+            currentEffect.update(container, world);
+            if (currentEffect.isOver()) {
+                currentEffect = null;
+            }
+            return;
+        }
         switch (mode) {
             case MODE_MOVE:
                 if (container.getInput().isKeyPressed(Input.KEY_F)) {
@@ -569,6 +583,9 @@ public class Planet extends BasePlanet {
         printPlanetStatus();
         drawLandscape(container, graphics, camera, true);
         drawObjects(container, graphics, camera);
+        if (currentEffect != null) {
+            currentEffect.draw(container, graphics, camera);
+        }
     }
 
     @Override
