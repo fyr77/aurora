@@ -49,7 +49,7 @@ public class AuroraGame extends BasicGame {
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         world.draw(gameContainer, graphics);
         world.getCamera().drawBound();
-        //GameLogger.getInstance().draw(graphics);
+        GameLogger.getInstance().draw(graphics);
         GUI.getInstance().draw(gameContainer, graphics);
         GameLogger.getInstance().clearStatusMessages();
     }

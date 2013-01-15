@@ -14,10 +14,9 @@ import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.world.BasePositionable;
-import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 
-public class NPCShip extends BasePositionable implements GameObject {
+public class NPCShip extends BasePositionable implements SpaceObject {
     private String sprite;
 
     private AlienRace race;
@@ -53,6 +52,9 @@ public class NPCShip extends BasePositionable implements GameObject {
         }
         curSpeed = speed;
         if (ai != null) {
+            if (!(world.getCurrentRoom() instanceof StarSystem)) {
+                return;
+            }
             ai.update(this, world, (StarSystem) world.getCurrentRoom());
         }
     }
@@ -74,6 +76,7 @@ public class NPCShip extends BasePositionable implements GameObject {
         return race;
     }
 
+    @Override
     public boolean isAlive() {
         boolean rz = true;
         if (ai != null) {
@@ -82,7 +85,20 @@ public class NPCShip extends BasePositionable implements GameObject {
         return rz;
     }
 
+    @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void onContact(World world) {
+        if (!isHostile()) {
+            world.setCurrentDialog(race.getDefaultDialog());
+        }
+    }
+
+    @Override
+    public void onAttack(World world, int dmg) {
+
     }
 }

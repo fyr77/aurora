@@ -10,12 +10,13 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.world.equip.StarshipWeapon;
+import ru.game.aurora.world.equip.StarshipWeaponDesc;
 
-public class Ship implements GameObject, Positionable {
+import java.util.ArrayList;
+import java.util.List;
 
-    private int x;
-
-    private int y;
+public class Ship extends BasePositionable implements GameObject {
 
     private int hull;
 
@@ -27,14 +28,24 @@ public class Ship implements GameObject, Positionable {
 
     private int military = 5;
 
+    private List<StarshipWeapon> weapons = new ArrayList<StarshipWeapon>();
+
     public Ship(int x, int y) {
-        this.x = x;
-        this.y = y;
-        hull = maxHull = 100;
+        super(x, y);
+
+        weapons.add(new StarshipWeapon(new StarshipWeaponDesc(1, "Laser cannons", "Simple middle-range laser cannons", 5, 3), StarshipWeapon.MOUNT_ALL));
     }
+
 
     @Override
     public void update(GameContainer container, World world) {
+        if (world.isUpdatedThisFrame()) {
+            for (StarshipWeapon weapon : weapons) {
+                if (weapon.getReloadTimeLeft() > 0) {
+                    weapon.setReloadTimeLeft(weapon.getReloadTimeLeft() - 1);
+                }
+            }
+        }
     }
 
     public void setHull(int hull) {
@@ -97,5 +108,9 @@ public class Ship implements GameObject, Positionable {
 
     public int getTotalCrew() {
         return scientists + engineers + military;
+    }
+
+    public List<StarshipWeapon> getWeapons() {
+        return weapons;
     }
 }
