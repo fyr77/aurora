@@ -34,6 +34,7 @@ public class AuroraGame extends BasicGame {
         GameLogger.init(new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 10 * tileSize), new Rectangle((tilesX - 5) * tileSize, 10 * tileSize, 5 * tileSize, 5 * tileSize));
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
         gameContainer.getInput().enableKeyRepeat();
+        gameContainer.setTargetFrameRate(60);
 
         GUI.init(gameContainer, new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 15 * tileSize));
         GUI.getInstance().setCurrentScreen(new GalaxyMapWidget(world));
@@ -43,6 +44,7 @@ public class AuroraGame extends BasicGame {
     public void update(GameContainer gameContainer, int i) throws SlickException {
         world.update(gameContainer);
         GUI.getInstance().update(gameContainer);
+        gameContainer.getInput().clearKeyPressedRecord();
     }
 
     @Override

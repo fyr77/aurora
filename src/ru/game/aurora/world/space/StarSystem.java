@@ -12,6 +12,8 @@ import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.effects.BlasterShotEffect;
+import ru.game.aurora.effects.Effect;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Positionable;
@@ -68,6 +70,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     private int globalMapY;
 
     private ParallaxBackground background;
+
+    private Effect currentEffect = null;
 
     /**
      * Relation between tile size and max planet size
@@ -243,6 +247,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             final int damage = weapon.getWeaponDesc().damage;
             target.onAttack(world, damage);
             GameLogger.getInstance().logMessage("Bang! Dealt " + damage + " damage to " + target.getName());
+
+            currentEffect = new BlasterShotEffect(playerShip, target, world.getCamera(), 800, "blaster_shot");
+
             if (!target.isAlive()) {
                 GameLogger.getInstance().logMessage(target.getName() + " destroyed");
                 ships.remove(target);
@@ -256,6 +263,15 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     @Override
     public void update(GameContainer container, World world) {
+
+        if (currentEffect != null) {
+            currentEffect.update(container, world);
+            if (currentEffect.isOver()) {
+                currentEffect = null;
+            }
+            return;
+        }
+
         final Ship playerShip = world.getPlayer().getShip();
 
         if (mode == MODE_MOVE) {
@@ -370,6 +386,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         g.setColor(Color.red);
         g.drawRect(camera.getXCoord(-radius), camera.getYCoord(-radius), 2 * radius * camera.getTileWidth(), 2 * radius * camera.getTileHeight());
+
+        if (currentEffect != null) {
+            currentEffect.draw(container, g, camera);
+        }
     }
 
     public List<SpaceObject> getShips() {

@@ -8,6 +8,7 @@ package ru.game.aurora.world.space;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
@@ -23,9 +24,11 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     private NPC capitain;
 
+    private int hp = 3;
+
     private String name;
 
-    private int speed = 3;
+    private static final int speed = 3;
 
     private int curSpeed = 3;
 
@@ -37,7 +40,6 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         this.race = race;
         this.capitain = capitain;
         this.name = name;
-
         ai = new LeaveSystemAI();
     }
 
@@ -78,7 +80,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     @Override
     public boolean isAlive() {
-        boolean rz = true;
+        boolean rz = hp > 0;
         if (ai != null) {
             rz &= ai.isAlive();
         }
@@ -99,6 +101,9 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     @Override
     public void onAttack(World world, int dmg) {
-
+        hp -= dmg;
+        if (hp <= 0) {
+            GameLogger.getInstance().logMessage(getName() + " destroyed");
+        }
     }
 }
