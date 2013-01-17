@@ -54,4 +54,7 @@
 
     <resource type="image" id="earth">sprites/planets/earth.png</resource>
     <resource type="image" id="klisk_homeworld">sprites/planets/klisk_planet.png</resource>
+
+    <!-- effects -->
+    <resource type="image" id="blaster_shot">sprites/effects/blaster_shot.png</resource>
 </resources>

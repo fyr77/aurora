@@ -8,6 +8,7 @@ package ru.game.aurora.player;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.Ship;
+import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.LandingParty;
 
 public class Player {
@@ -48,13 +49,19 @@ public class Player {
         this.resourceUnits = resourceUnits;
     }
 
-    public void addGlobalStatus()
-    {
+    public void addGlobalStatus() {
         GameLogger.getInstance().addStatusMessage("Ship status:");
         GameLogger.getInstance().addStatusMessage("\tScientists: " + ship.getScientists());
         GameLogger.getInstance().addStatusMessage("\tEngineers: " + ship.getEngineers());
         GameLogger.getInstance().addStatusMessage("\tMilitary: " + ship.getMilitary());
         GameLogger.getInstance().addStatusMessage("\tResources: " + resourceUnits);
         GameLogger.getInstance().addStatusMessage(String.format("Ship coordinates: [%d, %d]", ship.getX(), ship.getY()));
+
+        GameLogger.getInstance().addStatusMessage("Weapons: ");
+        int slot = 1;
+        for (StarshipWeapon w : ship.getWeapons()) {
+            GameLogger.getInstance().addStatusMessage(slot + ": " + w.getWeaponDesc().name + " " + (w.getReloadTimeLeft() == 0 ? " [ready]" : w.getReloadTimeLeft() + " to reload"));
+            slot++;
+        }
     }
 }

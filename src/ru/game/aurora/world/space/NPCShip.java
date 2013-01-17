@@ -8,25 +8,27 @@ package ru.game.aurora.world.space;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.world.BasePositionable;
-import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 
-public class NPCShip extends BasePositionable implements GameObject {
+public class NPCShip extends BasePositionable implements SpaceObject {
     private String sprite;
 
     private AlienRace race;
 
     private NPC capitain;
 
+    private int hp = 3;
+
     private String name;
 
-    private int speed = 3;
+    private static final int speed = 3;
 
     private int curSpeed = 3;
 
@@ -38,7 +40,6 @@ public class NPCShip extends BasePositionable implements GameObject {
         this.race = race;
         this.capitain = capitain;
         this.name = name;
-
         ai = new LeaveSystemAI();
     }
 
@@ -53,6 +54,9 @@ public class NPCShip extends BasePositionable implements GameObject {
         }
         curSpeed = speed;
         if (ai != null) {
+            if (!(world.getCurrentRoom() instanceof StarSystem)) {
+                return;
+            }
             ai.update(this, world, (StarSystem) world.getCurrentRoom());
         }
     }
@@ -74,15 +78,32 @@ public class NPCShip extends BasePositionable implements GameObject {
         return race;
     }
 
+    @Override
     public boolean isAlive() {
-        boolean rz = true;
+        boolean rz = hp > 0;
         if (ai != null) {
             rz &= ai.isAlive();
         }
         return rz;
     }
 
+    @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void onContact(World world) {
+        if (!isHostile()) {
+            world.setCurrentDialog(race.getDefaultDialog());
+        }
+    }
+
+    @Override
+    public void onAttack(World world, int dmg) {
+        hp -= dmg;
+        if (hp <= 0) {
+            GameLogger.getInstance().logMessage(getName() + " destroyed");
+        }
     }
 }
