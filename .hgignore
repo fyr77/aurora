@@ -1,3 +1,4 @@
 glob:*Thumbs.db
 glob:out/*
 glob:Aurora.iws
+glob:resources/gui/aurora.xml.old
