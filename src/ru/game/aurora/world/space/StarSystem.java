@@ -56,6 +56,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private SpaceObject target;
 
+    private boolean visited = false;
+
     /**
      * Current mode
      */
@@ -319,6 +321,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         playerShip.update(container, world);
     }
 
+    public boolean isVisited() {
+        return visited;
+    }
+
     @Override
     public void enter(World world) {
         super.enter(world);
@@ -336,6 +342,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     , planets.length);
         }
         world.onPlayerEnteredSystem(this);
+        visited = true;
     }
 
     @Override

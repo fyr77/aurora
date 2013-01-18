@@ -14,16 +14,14 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.gui.GalaxyMapWidget;
-import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.npc.Dialog;
-import ru.game.aurora.npc.SingleShipEvent;
-import ru.game.aurora.npc.StandartAlienShipEvent;
+import ru.game.aurora.npc.*;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
+import ru.game.aurora.world.quest.AuroraProbe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +78,8 @@ public class GalaxyMap extends BaseSpaceRoom {
         gardenerShip.setAi(null);
         world.addListener(new SingleShipEvent(0.9, gardenerShip));
         world.addListener(new StandartAlienShipEvent(kliskRace));
+        world.addListener(new SingleShipFixedTime(4, new AuroraProbe(0, 0)));
+
 
         objects.add(kliskHomeworld);
         map[5][5] = objects.size() - 1;
