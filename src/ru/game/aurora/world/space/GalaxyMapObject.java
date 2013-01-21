@@ -10,7 +10,9 @@ import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.player.Player;
 
-public interface GalaxyMapObject {
+import java.io.Serializable;
+
+public interface GalaxyMapObject extends Serializable {
     /**
      * Draws tile for this object on global map
      */

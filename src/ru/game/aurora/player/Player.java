@@ -11,7 +11,9 @@ import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.LandingParty;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private Ship ship;
 
     private LandingParty landingParty;

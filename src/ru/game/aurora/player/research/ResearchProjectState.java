@@ -6,7 +6,9 @@
 
 package ru.game.aurora.player.research;
 
-public class ResearchProjectState {
+import java.io.Serializable;
+
+public class ResearchProjectState implements Serializable {
     public ResearchProjectDesc desc;
 
     public int scientists;

@@ -6,6 +6,8 @@
  */
 package ru.game.aurora.player.research;
 
+import java.io.Serializable;
+
 /**
  * Contains info about current geodata research.
  * There are 'raw' and 'processed' geodata.
@@ -16,7 +18,7 @@ package ru.game.aurora.player.research;
  * Raw geodata is converted to processed by scientists performing 'Cartography' task.
  * Processed geodata gives more Research points when returning science results to Earth.
  */
-public class Geodata {
+public class Geodata implements Serializable {
     private int raw = 0;
 
     private int processed = 0;

@@ -34,11 +34,11 @@ import java.util.Random;
  */
 public class GalaxyMap extends BaseSpaceRoom {
 
-    private ParallaxBackground background;
+    private transient ParallaxBackground background;
 
     private List<GalaxyMapObject> objects = new ArrayList<GalaxyMapObject>();
 
-    private GalaxyMapScreen fullMapScreen = new GalaxyMapScreen();
+    private transient GalaxyMapScreen fullMapScreen = new GalaxyMapScreen();
 
     private int[][] map;
 
@@ -50,7 +50,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     public static final int maxStars = 15;
 
-    private GalaxyMapWidget myGui;
+    private transient GalaxyMapWidget myGui;
 
     public GalaxyMap(World world, Camera cam, int tilesX, int tilesY, int systemSizeX, int systemSizeY) {
         this.world = world;

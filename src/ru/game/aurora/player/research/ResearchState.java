@@ -12,6 +12,7 @@ import ru.game.aurora.player.research.projects.AstronomyResearch;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Contains all data about science and research done by player
  */
-public class ResearchState {
+public class ResearchState implements Serializable {
 
     private int idleScientists;
 
@@ -67,7 +68,7 @@ public class ResearchState {
      * Updates research progress for current projects
      */
     public void update(World world) {
-        for (Iterator<ResearchProjectState> iter = currentProjects.iterator(); iter.hasNext(); ) {
+        for (Iterator<ResearchProjectState> iter = currentProjects.iterator(); iter.hasNext();) {
             ResearchProjectState state = iter.next();
             state.desc.update(world, state.scientists);
             if (state.desc.isCompleted()) {

@@ -26,6 +26,7 @@ public class AuroraGame extends BasicGame {
 
     private static final int tilesY = 15;
 
+    private SaveGameManager saveGameManager = new SaveGameManager();
 
     public AuroraGame() {
         super("Aurora");
@@ -48,6 +49,8 @@ public class AuroraGame extends BasicGame {
         world.update(gameContainer);
         GUI.getInstance().update(gameContainer);
         gameContainer.getInput().clearKeyPressedRecord();
+
+        //saveGameManager.saveGame(world);
     }
 
     @Override

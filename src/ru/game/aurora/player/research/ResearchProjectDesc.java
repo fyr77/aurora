@@ -8,10 +8,12 @@ package ru.game.aurora.player.research;
 
 import ru.game.aurora.world.World;
 
+import java.io.Serializable;
+
 /**
  * Base class for research projects
  */
-public abstract class ResearchProjectDesc {
+public abstract class ResearchProjectDesc implements Serializable {
     protected String name;
 
     protected String description;

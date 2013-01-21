@@ -7,7 +7,9 @@
 package ru.game.aurora.world.equip;
 
 
-public class StarshipWeapon {
+import java.io.Serializable;
+
+public class StarshipWeapon implements Serializable {
     private final StarshipWeaponDesc weaponDesc;
 
     private int reloadTimeLeft;

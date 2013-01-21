@@ -7,7 +7,9 @@
 package ru.game.aurora.world.equip;
 
 
-public class StarshipWeaponDesc {
+import java.io.Serializable;
+
+public class StarshipWeaponDesc implements Serializable {
     public final int damage;
 
     public final String name;

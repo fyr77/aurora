@@ -17,12 +17,13 @@ import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class World {
-    private Camera camera;
+public class World implements Serializable {
+    private transient Camera camera;
 
     private Room currentRoom;
 
@@ -30,9 +31,9 @@ public class World {
 
     private Player player;
 
-    private boolean updatedThisFrame;
+    private transient boolean updatedThisFrame;
 
-    private Dialog currentDialog;
+    private transient Dialog currentDialog;
 
     private int turnCount = 0;
 

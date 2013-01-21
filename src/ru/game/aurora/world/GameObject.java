@@ -9,7 +9,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 
-public interface GameObject {
+import java.io.Serializable;
+
+public interface GameObject extends Serializable {
 
     public void update(GameContainer container, World world);
 
