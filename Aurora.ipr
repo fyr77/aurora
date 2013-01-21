@@ -8,9 +8,26 @@
           <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
         </element>
         <element id="module-output" name="Aurora" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/third-party/gson-2.2.2.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../JGame-20120810/jars/jgame-jre.jar" path-in-jar="/" />
         <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+      </root>
+    </artifact>
+    <artifact name="Distribution">
+      <output-path>$PROJECT_DIR$/out/artifacts/Distribution</output-path>
+      <root id="root">
+        <element id="archive" name="Aurora.zip">
+          <element id="directory" name="Aurora">
+            <element id="artifact" artifact-name="Aurora:jar" />
+            <element id="directory" name="native">
+              <element id="dir-copy" path="$PROJECT_DIR$/native" />
+            </element>
+            <element id="dir-copy" path="$PROJECT_DIR$/scripts" />
+            <element id="library" level="project" name="gson-2.2.2" />
+            <element id="library" level="project" name="lwjgl" />
+            <element id="library" level="project" name="slick" />
+            <element id="library" level="project" name="Twl" />
+            <element id="library" level="project" name="xpp3-1.1.4c" />
+          </element>
+        </element>
       </root>
     </artifact>
   </component>
@@ -275,6 +292,13 @@
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/third-party/xpp3-1.1.4c.jar!/" />
         <root url="jar://$PROJECT_DIR$/third-party/TWL.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="xpp3-1.1.4c">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/third-party/xpp3-1.1.4c.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
