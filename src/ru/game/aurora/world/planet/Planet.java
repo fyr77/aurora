@@ -10,7 +10,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.geom.Point;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
@@ -19,6 +18,7 @@ import ru.game.aurora.effects.Effect;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.util.ProbabilitySet;
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.Animal;
@@ -78,7 +78,7 @@ public class Planet extends BasePlanet {
     /**
      * Where landing shuttle is located. Launching to orbit and refilling oxygen is available at shuttle
      */
-    private Point shuttlePosition;
+    private BasePositionable shuttlePosition;
 
     /**
      * Available animal species descriptions, if any.
@@ -190,7 +190,7 @@ public class Planet extends BasePlanet {
         landingParty.setPos(x, y);
 
         world.getCamera().setTarget(landingParty);
-        shuttlePosition = new Point(landingParty.getX(), landingParty.getY());
+        shuttlePosition = new BasePositionable(landingParty.getX(), landingParty.getY());
         int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
         landingParty.addCollectedGeodata(openedTiles);
     }

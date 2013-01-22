@@ -22,16 +22,18 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
+
     public static final Color[] possibleColors = {Color.red, Color.white, Color.yellow, new Color(122, 155, 243)};
 
     public static final int[] possibleSizes = {1, 2, 3, 4};
 
-    public static class Star {
+    public static class Star implements Serializable {
         // 1 is largest star, 4 is smallest
         public final int size;
         public final Color color;

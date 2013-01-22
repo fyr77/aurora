@@ -19,16 +19,13 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Dialog implements Room {
 
-    public static class Statement {
+    public static class Statement implements Serializable {
         public final int id;
 
         public final String npcText;
@@ -42,7 +39,7 @@ public class Dialog implements Room {
         }
     }
 
-    public static class Reply {
+    public static class Reply implements Serializable {
 
         /**
          * If this reply will be the last action of the dialog, this will be that dialog's return value

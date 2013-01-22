@@ -7,7 +7,9 @@ package ru.game.aurora.world;
 
 import ru.game.aurora.world.space.StarSystem;
 
-public interface GameEventListener {
+import java.io.Serializable;
+
+public interface GameEventListener extends Serializable {
     /**
      * Called when player enters star system, before it is shown
      */

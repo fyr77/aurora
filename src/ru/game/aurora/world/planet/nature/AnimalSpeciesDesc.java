@@ -9,10 +9,12 @@ package ru.game.aurora.world.planet.nature;
 
 import ru.game.aurora.world.planet.BasePlanet;
 
+import java.io.Serializable;
+
 /**
  * Represents common data about animal species: its name, look, behaviour, home planet, research progress for this animal etc
  */
-public class AnimalSpeciesDesc {
+public class AnimalSpeciesDesc implements Serializable {
 
     private String name;
 

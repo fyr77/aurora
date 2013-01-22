@@ -7,7 +7,9 @@ package ru.game.aurora.npc;
 
 import ru.game.aurora.world.space.StarSystem;
 
-public class AlienRace {
+import java.io.Serializable;
+
+public class AlienRace implements Serializable {
     private String name;
 
     /**

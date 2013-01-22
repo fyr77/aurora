@@ -49,8 +49,6 @@ public class AuroraGame extends BasicGame {
         world.update(gameContainer);
         GUI.getInstance().update(gameContainer);
         gameContainer.getInput().clearKeyPressedRecord();
-
-        //saveGameManager.saveGame(world);
     }
 
     @Override
