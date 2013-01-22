@@ -32,6 +32,11 @@ public class EngineUtils {
         drawRect(graphics, rectangle, camera, false);
     }
 
+    public static void drawRectWithBorderAndText(Graphics graphics, Rectangle rectangle, Camera camera, Color borderColor, Color fillColor, String text, Font font, Color textColor) {
+        drawRectWithBorder(graphics, rectangle, camera, borderColor, fillColor);
+        drawString(graphics, text, (int) (rectangle.getX() + 1) * camera.getTileWidth(), (int) (rectangle.getY() + 1) * camera.getTileHeight(), (int) (rectangle.getWidth() - 2) * camera.getTileHeight(), font, textColor);
+    }
+
     /**
      * Draws a rect specified by tile coordinates
      */

@@ -11,6 +11,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
@@ -71,8 +72,6 @@ public class Planet extends BasePlanet {
 
     private int height;
 
-    private static final Random r = new Random();
-
     private LandingParty landingParty;
 
     /**
@@ -93,12 +92,13 @@ public class Planet extends BasePlanet {
     /**
      * When in fire mode, this is currently selected target
      */
-    private PlanetObject target = null;
+    private transient PlanetObject target = null;
 
-    private Effect currentEffect = null;
+    private transient Effect currentEffect = null;
 
     public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
         super(size, y, owner, atmosphere, x, cat);
+        final Random r = CommonRandom.getRandom();
         switch (size) {
             case 1:
                 this.width = 500;
@@ -185,7 +185,7 @@ public class Planet extends BasePlanet {
 
         while (!SurfaceTypes.isPassible(landingParty, surface[y][x])) {
             x = wrapX(x + 1);
-            y = wrapY(y + r.nextInt(2) - 1);
+            y = wrapY(y + CommonRandom.getRandom().nextInt(2) - 1);
         }
         landingParty.setPos(x, y);
 

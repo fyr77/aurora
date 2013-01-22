@@ -26,15 +26,16 @@ public class AuroraGame extends BasicGame {
 
     private static final int tilesY = 15;
 
-    private SaveGameManager saveGameManager = new SaveGameManager();
-
     public AuroraGame() {
         super("Aurora");
     }
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
-        world = new World(new Camera(0, 0, tilesX, tilesY, tileSize, tileSize), 100, 100);
+        world = SaveGameManager.loadGame();
+        if (world == null) {
+            world = new World(new Camera(0, 0, tilesX, tilesY, tileSize, tileSize), 100, 100);
+        }
         GameLogger.init(new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 10 * tileSize), new Rectangle((tilesX - 5) * tileSize, 10 * tileSize, 5 * tileSize, 5 * tileSize));
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
         gameContainer.getInput().enableKeyRepeat();

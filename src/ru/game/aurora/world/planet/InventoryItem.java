@@ -7,8 +7,9 @@ package ru.game.aurora.world.planet;
 
 import ru.game.aurora.world.World;
 
-public interface InventoryItem
-{
+import java.io.Serializable;
+
+public interface InventoryItem extends Serializable {
     public String getName();
 
     public void onReturnToShip(World world, int amount);

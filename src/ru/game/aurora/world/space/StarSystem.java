@@ -73,9 +73,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private int globalMapY;
 
-    private ParallaxBackground background;
+    private transient ParallaxBackground background;
 
-    private Effect currentEffect = null;
+    private transient Effect currentEffect = null;
 
     /**
      * Relation between tile size and max planet size

@@ -65,13 +65,14 @@ public class World implements Serializable {
             currentRoom = researchScreen;
             return;
         }
+
         currentRoom.update(container, this);
         if (isUpdatedThisFrame()) {
             player.getResearchState().update(this);
             turnCount++;
         }
 
-        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext();) {
+        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext(); ) {
             GameEventListener l = listenerIterator.next();
             if (!l.isAlive()) {
                 listenerIterator.remove();
@@ -83,6 +84,15 @@ public class World implements Serializable {
                 container.exit();
             }
         }
+
+
+        // should be the last so that ESC event is not consumed
+        if (container.getInput().isKeyPressed(Input.KEY_ESCAPE) && (currentRoom instanceof GalaxyMap || currentRoom instanceof Planet || currentRoom instanceof StarSystem)) {
+            GameMenu menu = new GameMenu();
+            menu.enter(this);
+            currentRoom = menu;
+        }
+
     }
 
     public void draw(GameContainer container, Graphics graphics) {
