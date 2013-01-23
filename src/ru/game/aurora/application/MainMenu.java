@@ -80,5 +80,6 @@ public class MainMenu {
         EngineUtils.drawRectWithBorderAndText(graphics, continueRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Continue", GUIConstants.dialogFont, selectedIndex == 0 ? Color.green : (saveAvailable ? Color.white : Color.gray));
         EngineUtils.drawRectWithBorderAndText(graphics, newGameRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "New Game", GUIConstants.dialogFont, selectedIndex == 1 ? Color.green : Color.white);
         EngineUtils.drawRectWithBorderAndText(graphics, quitRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Exit", GUIConstants.dialogFont, selectedIndex == 2 ? Color.green : Color.white);
+        graphics.drawString(Version.VERSION, camera.getTileWidth() * camera.getNumTilesX() - 100, camera.getTileHeight() * camera.getNumTilesY() - 40);
     }
 }
