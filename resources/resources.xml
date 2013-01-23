@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+    <!-- backgrounds -->
+    <resource type="image" id="menu_background">gui/images/main_menu_background.png</resource>
+
     <!-- Player sprites -->
     <resource type="image" id="aurora">sprites/ships/Aurora.png</resource>
     <resource type="image" id="awayteam">sprites/ships/AwayTeam.png</resource>

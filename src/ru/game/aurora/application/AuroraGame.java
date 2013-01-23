@@ -20,19 +20,23 @@ public class AuroraGame extends BasicGame {
 
     private World world;
 
-    private static final int tileSize = 64;
+    private MainMenu mainMenu;
 
-    private static final int tilesX = 20;
+    public static final int tileSize = 64;
 
-    private static final int tilesY = 15;
+    public static final int tilesX = 20;
+
+    public static final int tilesY = 15;
+
+    final Camera camera = new Camera(0, 0, tilesX, tilesY, tileSize, tileSize);
 
     public AuroraGame() {
         super("Aurora");
+        mainMenu = new MainMenu();
     }
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
-        final Camera camera = new Camera(0, 0, tilesX, tilesY, tileSize, tileSize);
         world = SaveGameManager.loadGame();
         if (world == null) {
             world = new World(camera, 100, 100);
@@ -48,18 +52,29 @@ public class AuroraGame extends BasicGame {
 
     @Override
     public void update(GameContainer gameContainer, int i) throws SlickException {
-        world.update(gameContainer);
+        if (mainMenu != null) {
+            world = mainMenu.update(gameContainer);
+            if (world != null) {
+                mainMenu = null;
+            }
+        } else {
+            world.update(gameContainer);
+        }
         GUI.getInstance().update(gameContainer);
         gameContainer.getInput().clearKeyPressedRecord();
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        world.draw(gameContainer, graphics);
-        world.getCamera().drawBound();
-        GameLogger.getInstance().draw(graphics);
-        GUI.getInstance().draw(gameContainer, graphics);
-        GameLogger.getInstance().clearStatusMessages();
+        if (mainMenu != null) {
+            mainMenu.draw(graphics, camera);
+        } else {
+            world.draw(gameContainer, graphics);
+            world.getCamera().drawBound();
+            GameLogger.getInstance().draw(graphics);
+            GUI.getInstance().draw(gameContainer, graphics);
+            GameLogger.getInstance().clearStatusMessages();
+        }
     }
 
     private static void addDir(String s) throws IOException {

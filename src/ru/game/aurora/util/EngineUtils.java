@@ -34,7 +34,7 @@ public class EngineUtils {
 
     public static void drawRectWithBorderAndText(Graphics graphics, Rectangle rectangle, Camera camera, Color borderColor, Color fillColor, String text, Font font, Color textColor) {
         drawRectWithBorder(graphics, rectangle, camera, borderColor, fillColor);
-        drawString(graphics, text, (int) (rectangle.getX() + 1) * camera.getTileWidth(), (int) (rectangle.getY() + 1) * camera.getTileHeight(), (int) (rectangle.getWidth() - 2) * camera.getTileHeight(), font, textColor);
+        drawString(graphics, text, (int) ((rectangle.getX() + 1) * camera.getTileWidth()), (int) ((rectangle.getY() + 0.5) * camera.getTileHeight()), (int) (rectangle.getWidth() - 2) * camera.getTileHeight(), font, textColor);
     }
 
     /**

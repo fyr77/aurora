@@ -42,4 +42,9 @@ public class SaveGameManager {
         }
         return null;
     }
+
+    public static boolean isSaveAvailable() {
+        File f = new File(SAVE_NAME);
+        return f.exists();
+    }
 }
