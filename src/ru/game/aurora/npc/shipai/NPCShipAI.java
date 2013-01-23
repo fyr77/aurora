@@ -9,7 +9,9 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
-public interface NPCShipAI {
+import java.io.Serializable;
+
+public interface NPCShipAI extends Serializable {
 
     public void update(NPCShip ship, World world, StarSystem currentSystem);
 

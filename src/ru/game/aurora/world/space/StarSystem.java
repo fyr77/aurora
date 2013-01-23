@@ -267,7 +267,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     @Override
     public void update(GameContainer container, World world) {
-
+        if (background == null) {
+            createBackground(world);
+        }
         if (currentEffect != null) {
             currentEffect.update(container, world);
             if (currentEffect.isOver()) {
@@ -336,20 +338,26 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         //world.getCamera().setTarget(new BasePositionable(world.getCamera().getNumTilesX() / 2, world.getCamera().getNumTilesY() / 2));
         world.getCamera().setTarget(player.getShip());
         if (background == null) {
-            background = new ParallaxBackground(
-                    radius * 3 * world.getCamera().getTileWidth()
-                    , radius * 3 * world.getCamera().getTileHeight()
-                    , 0//planets.length * world.getCamera().getTileWidth()
-                    , 0//planets.length * world.getCamera().getTileHeight()
-                    , planets.length);
+            createBackground(world);
         }
         world.onPlayerEnteredSystem(this);
         visited = true;
     }
 
+    private void createBackground(World world) {
+        background = new ParallaxBackground(
+                radius * 3 * world.getCamera().getTileWidth()
+                , radius * 3 * world.getCamera().getTileHeight()
+                , 0//planets.length * world.getCamera().getTileWidth()
+                , 0//planets.length * world.getCamera().getTileHeight()
+                , planets.length);
+    }
+
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        background.draw(g, camera);
+        if (background != null) {
+            background.draw(g, camera);
+        }
         player.getShip().draw(container, g, camera);
         player.addGlobalStatus();
         GameLogger.getInstance().addStatusMessage("==========================");

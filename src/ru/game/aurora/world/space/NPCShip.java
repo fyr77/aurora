@@ -18,6 +18,9 @@ import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 
 public class NPCShip extends BasePositionable implements SpaceObject {
+
+    private static final long serialVersionUID = 4304196228941570752L;
+
     private String sprite;
 
     private AlienRace race;

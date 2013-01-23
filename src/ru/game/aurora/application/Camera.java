@@ -8,12 +8,14 @@ package ru.game.aurora.application;
 
 import ru.game.aurora.world.Positionable;
 
+import java.io.Serializable;
+
 /**
  * Camera defines coordinate transformation from in-game global coordinates to screen coordinates
  * Has position. A tile that has coordinates equal to this position is drawn in the middle of a screen
  */
-public class Camera {
-
+public class Camera implements Serializable {
+    private static final long serialVersionUID = 9034031741857618988L;
     /**
      * Coordinates for upper-left corner of draw area
      */
@@ -24,6 +26,11 @@ public class Camera {
     private int tileWidth;
 
     private int tileHeight;
+
+    /**
+     * Object camera is following
+     */
+    private Positionable target;
 
     /**
      * Number of tiles that are actually drawn
@@ -40,11 +47,6 @@ public class Camera {
         this.tileHeight = tileHeight;
         this.tileWidth = tileWidth;
     }
-
-    /**
-     * Object camera is following
-     */
-    private Positionable target;
 
     public void setTarget(Positionable target) {
         this.target = target;

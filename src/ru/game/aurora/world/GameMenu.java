@@ -20,6 +20,7 @@ import ru.game.aurora.util.EngineUtils;
  */
 
 public class GameMenu implements Room {
+    private static final long serialVersionUID = -6044928392351679484L;
 
     private int selectedIndex = 0;
 
@@ -53,12 +54,13 @@ public class GameMenu implements Room {
 
         if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
             switch (selectedIndex) {
-                case 1:
-                    SaveGameManager.saveGame(world);
-                    GameLogger.getInstance().logMessage("Game saved");
-                    // no break
                 case 0:
                     world.setCurrentRoom(prevRoom);
+                    return;
+                case 1:
+                    world.setCurrentRoom(prevRoom);
+                    SaveGameManager.saveGame(world);
+                    GameLogger.getInstance().logMessage("Game saved");
                     return;
                 case 2:
                     container.exit();

@@ -7,8 +7,8 @@ import java.io.Serializable;
  * User: Egor.Smirnov
  * Date: 03.12.12
  * Time: 13:33
- * To change this template use File | Settings | File Templates.
  */
+
 public interface Positionable extends Serializable {
     public int getX();
 

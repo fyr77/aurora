@@ -23,7 +23,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class World implements Serializable {
-    private transient Camera camera;
+    private static final long serialVersionUID = 8351730882236794281L;
+
+    private Camera camera;
 
     private Room currentRoom;
 
@@ -148,5 +150,9 @@ public class World implements Serializable {
 
     public void addListener(GameEventListener listener) {
         listeners.add(listener);
+    }
+
+    public void setCamera(Camera camera) {
+        this.camera = camera;
     }
 }

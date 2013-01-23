@@ -6,7 +6,11 @@
 package ru.game.aurora.world;
 
 public class BasePositionable implements Positionable {
+
+    private static final long serialVersionUID = -6804845897857713862L;
+
     protected int x;
+
     protected int y;
 
     public BasePositionable(int x, int y) {

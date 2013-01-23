@@ -23,6 +23,7 @@ import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.quest.AuroraProbe;
 
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,6 +34,8 @@ import java.util.Random;
  * (empty sector of space) or index of an element in this array.
  */
 public class GalaxyMap extends BaseSpaceRoom {
+
+    private static final long serialVersionUID = -2138368991952958011L;
 
     private transient ParallaxBackground background;
 
@@ -52,12 +55,15 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private transient GalaxyMapWidget myGui;
 
+    public GalaxyMap() {
+    }
+
     public GalaxyMap(World world, Camera cam, int tilesX, int tilesY, int systemSizeX, int systemSizeY) {
         this.world = world;
         this.myGui = new GalaxyMapWidget(world);
         this.tilesX = tilesX;
         this.tilesY = tilesY;
-        background = new ParallaxBackground(tilesX * cam.getTileWidth(), tilesY * cam.getTileHeight(), cam.getTileWidth() * tilesX / 2, cam.getTileHeight() * tilesY / 2, 4);
+        createBackground(cam, tilesX, tilesY);
         background.setBaseWidth(4);
         map = new int[tilesY][tilesX];
         for (int i = 0; i < tilesY; ++i) {
@@ -102,6 +108,10 @@ public class GalaxyMap extends BaseSpaceRoom {
             objects.add(generateRandomStarSystem(x, y, systemSizeX, systemSizeY));
             map[y][x] = idx;
         }
+    }
+
+    private void createBackground(Camera cam, int tilesX, int tilesY) {
+        background = new ParallaxBackground(tilesX * cam.getTileWidth(), tilesY * cam.getTileHeight(), cam.getTileWidth() * tilesX / 2, cam.getTileHeight() * tilesY / 2, 4);
     }
 
     @Override
@@ -174,9 +184,21 @@ public class GalaxyMap extends BaseSpaceRoom {
         return null;
     }
 
+    private void readObject(ObjectInputStream is) {
+        try {
+            is.defaultReadObject();
+            fullMapScreen = new GalaxyMapScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void update(GameContainer container, World world) {
+        if (background == null) {
+            createBackground(world.getCamera(), tilesX, tilesY);
+        }
         if (container.getInput().isKeyPressed(Input.KEY_M)) {
             world.setCurrentRoom(fullMapScreen);
             fullMapScreen.enter(world);
@@ -203,13 +225,17 @@ public class GalaxyMap extends BaseSpaceRoom {
                 world.setUpdatedThisFrame(true);
             }
         }
-        myGui.update();
+        if (myGui != null) {
+            myGui.update();
+        }
     }
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
         super.draw(container, graphics, camera);
-        background.draw(graphics, camera);
+        if (background != null) {
+            background.draw(graphics, camera);
+        }
         for (int i = 0; i < tilesY; ++i) {
             for (int j = 0; j < tilesX; ++j) {
                 if (map[i][j] != -1) {

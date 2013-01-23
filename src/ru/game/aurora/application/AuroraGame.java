@@ -32,9 +32,10 @@ public class AuroraGame extends BasicGame {
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
+        final Camera camera = new Camera(0, 0, tilesX, tilesY, tileSize, tileSize);
         world = SaveGameManager.loadGame();
         if (world == null) {
-            world = new World(new Camera(0, 0, tilesX, tilesY, tileSize, tileSize), 100, 100);
+            world = new World(camera, 100, 100);
         }
         GameLogger.init(new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 10 * tileSize), new Rectangle((tilesX - 5) * tileSize, 10 * tileSize, 5 * tileSize, 5 * tileSize));
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
