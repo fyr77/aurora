@@ -41,13 +41,10 @@ public class World implements Serializable {
 
     private List<GameEventListener> listeners = new LinkedList<GameEventListener>();
 
-    public World(Camera camera, int sizeX, int sizeY) {
+    public World(int sizeX, int sizeY) {
         player = new Player();
-        this.camera = camera;
-        camera.setTarget(player.getShip());
-        currentRoom = galaxyMap = new GalaxyMap(this, camera, sizeX, sizeY, camera.getNumTilesX(), camera.getNumTilesY());
-        currentRoom.enter(this);
         updatedThisFrame = false;
+        currentRoom = galaxyMap = new GalaxyMap(this, sizeX, sizeY);
     }
 
     public void update(GameContainer container) {
@@ -155,4 +152,5 @@ public class World implements Serializable {
     public void setCamera(Camera camera) {
         this.camera = camera;
     }
+
 }

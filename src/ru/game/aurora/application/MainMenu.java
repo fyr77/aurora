@@ -7,6 +7,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.WorldGenerator;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,7 +26,11 @@ public class MainMenu {
 
     private static final Rectangle quitRectangle = new Rectangle(2, 13, 3, 1);
 
+    private static final Rectangle worldGenerateMessageRectangle = new Rectangle(5, 5, 10, 2);
+
     private final boolean saveAvailable;
+
+    private WorldGenerator generator;
 
     public MainMenu() {
         saveAvailable = SaveGameManager.isSaveAvailable();
@@ -33,6 +38,14 @@ public class MainMenu {
     }
 
     public World update(GameContainer container) {
+        if (generator != null) {
+            if (generator.isGenerated()) {
+                return generator.getWorld();
+            }
+            return null;
+        }
+
+
         if (container.getInput().isKeyPressed(Input.KEY_DOWN) && selectedIndex < 2) {
             selectedIndex++;
         }
@@ -46,7 +59,7 @@ public class MainMenu {
                 case 0:
                     return SaveGameManager.loadGame();
                 case 1:
-                    return createNewGame();
+                    createNewGame();
                 case 2:
                     container.exit();
                     break;
@@ -61,7 +74,7 @@ public class MainMenu {
             }
 
             if (newGameRectangle.includes(mouseX, mouseY)) {
-                return createNewGame();
+                createNewGame();
             }
 
             if (quitRectangle.includes(mouseX, mouseY)) {
@@ -71,15 +84,20 @@ public class MainMenu {
         return null;
     }
 
-    private World createNewGame() {
-        return new World(new Camera(0, 0, AuroraGame.tilesX, AuroraGame.tilesY, AuroraGame.tileSize, AuroraGame.tileSize), 100, 100);
+    private void createNewGame() {
+        generator = new WorldGenerator();
+        new Thread(generator).start();
     }
 
     public void draw(Graphics graphics, Camera camera) {
         graphics.drawImage(ResourceManager.getInstance().getImage("menu_background"), 0, 0);
-        EngineUtils.drawRectWithBorderAndText(graphics, continueRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Continue", GUIConstants.dialogFont, selectedIndex == 0 ? Color.green : (saveAvailable ? Color.white : Color.gray));
-        EngineUtils.drawRectWithBorderAndText(graphics, newGameRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "New Game", GUIConstants.dialogFont, selectedIndex == 1 ? Color.green : Color.white);
-        EngineUtils.drawRectWithBorderAndText(graphics, quitRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Exit", GUIConstants.dialogFont, selectedIndex == 2 ? Color.green : Color.white);
+        if (generator == null) {
+            EngineUtils.drawRectWithBorderAndText(graphics, continueRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Continue", GUIConstants.dialogFont, selectedIndex == 0 ? Color.green : (saveAvailable ? Color.white : Color.gray));
+            EngineUtils.drawRectWithBorderAndText(graphics, newGameRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "New Game", GUIConstants.dialogFont, selectedIndex == 1 ? Color.green : Color.white);
+            EngineUtils.drawRectWithBorderAndText(graphics, quitRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Exit", GUIConstants.dialogFont, selectedIndex == 2 ? Color.green : Color.white);
+        } else {
+            EngineUtils.drawRectWithBorderAndText(graphics, worldGenerateMessageRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Generating world: " + generator.getCurrentStatus(), GUIConstants.dialogFont, Color.white);
+        }
         graphics.drawString(Version.VERSION, camera.getTileWidth() * camera.getNumTilesX() - 100, camera.getTileHeight() * camera.getNumTilesY() - 40);
     }
 }

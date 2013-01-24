@@ -51,9 +51,6 @@ public class HomeworldGenerator {
         return ss;
     }
 
-    public static StarSystem generateGardenerHomeworld(int x, int y, int maxSizeX, int maxSizeY) {
-        return GalaxyMap.generateRandomStarSystem(x, y, maxSizeX, maxSizeY);
-    }
 
     public static StarSystem generateKliskHomeworld(int x, int y, AlienRace kliskRace) {
         BasePlanet[] planets = new BasePlanet[3];
