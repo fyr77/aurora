@@ -25,7 +25,12 @@ import java.util.Map;
 
 public class Dialog implements Room {
 
+    private static final long serialVersionUID = -3952133424974552884L;
+
     public static class Statement implements Serializable {
+
+        private static final long serialVersionUID = -9058694068037621906L;
+
         public final int id;
 
         public final String npcText;
@@ -41,6 +46,7 @@ public class Dialog implements Room {
 
     public static class Reply implements Serializable {
 
+        private static final long serialVersionUID = -1616895998816949360L;
         /**
          * If this reply will be the last action of the dialog, this will be that dialog's return value
          */

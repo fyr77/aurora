@@ -4,16 +4,16 @@ VERSION 0.0.2
 In progress
 
 + World generation progress is now shown when 'New Game' is pressed
-* World generation is now multithreaded
+* World generation is now multi-threaded
 
 ======================================================
 VERSION 0.0.1
 
 23.01.2013
 
-First version with miminum set of required features:
+First version with mimimum set of required features:
 
-+ Main menu and save/load functiononality
++ Main menu and save/load functionality
 + Launching a new game, generating random galaxy
 + Travelling over global map, entering star system
 + Landing on planets. Exploring. Collecting resources, fighting with animals
