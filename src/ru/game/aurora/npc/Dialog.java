@@ -16,14 +16,14 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.Room;
+import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Dialog implements Room {
+public class Dialog implements OverlayWindow {
 
     private static final long serialVersionUID = -3952133424974552884L;
 
@@ -157,6 +157,7 @@ public class Dialog implements Room {
         }
     }
 
+    @Override
     public boolean isOver() {
         return currentStatement == null;
     }

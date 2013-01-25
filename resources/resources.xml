@@ -63,4 +63,7 @@
 
     <!-- effects -->
     <resource type="image" id="blaster_shot">sprites/effects/blaster_shot.png</resource>
+
+    <!-- story -->
+    <resource type="image" id="story_beginning">sprites/story/construction.png</resource>
 </resources>

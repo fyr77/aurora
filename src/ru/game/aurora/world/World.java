@@ -10,7 +10,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.gui.GUI;
-import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.ResearchScreen;
 import ru.game.aurora.world.planet.Planet;
@@ -35,7 +34,7 @@ public class World implements Serializable {
 
     private transient boolean updatedThisFrame;
 
-    private transient Dialog currentDialog;
+    private transient OverlayWindow currentDialog;
 
     private int turnCount = 0;
 
@@ -71,7 +70,7 @@ public class World implements Serializable {
             turnCount++;
         }
 
-        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext(); ) {
+        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext();) {
             GameEventListener l = listenerIterator.next();
             if (!l.isAlive()) {
                 listenerIterator.remove();
@@ -130,7 +129,7 @@ public class World implements Serializable {
         GUI.getInstance().setCurrentScreen(currentRoom.getGUI());
     }
 
-    public void setCurrentDialog(Dialog currentDialog) {
+    public void setCurrentDialog(OverlayWindow currentDialog) {
         this.currentDialog = currentDialog;
         currentDialog.enter(this);
     }

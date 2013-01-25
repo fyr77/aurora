@@ -8,6 +8,7 @@ package ru.game.aurora.world;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.npc.*;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.planet.Planet;
@@ -146,6 +147,7 @@ public class WorldGenerator implements Runnable {
         createAliens(world);
         generateMap(world);
 
+        world.setCurrentDialog(new StoryScreen("story/beginning.json"));
         currentStatus = "All done";
 
         this.world = world;

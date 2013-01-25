@@ -68,12 +68,13 @@ public class EngineUtils {
 
         g.setFont(font);
         g.setColor(color);
+        final int spaceWidth = font.getWidth(" ");
         for (String word : words) {
             // Find out thw width of the word.
-            int wordWidth = (word.length() + 1) * lineHeight / 2;
+            int wordWidth = font.getWidth(word);
 
             // If text exceeds the width, then move to next line.
-            if (word.contains("\n") || curX + wordWidth >= x + width) {
+            if (curX + wordWidth >= x + width) {
                 curY += lineHeight;
                 curX = x;
                 lines++;
@@ -82,7 +83,13 @@ public class EngineUtils {
             g.drawString(word, curX, curY);
 
             // Move over to the right for next word.
-            curX += wordWidth + 1;
+            curX += wordWidth + spaceWidth;
+
+            if (word.contains("\n")) {
+                curY += lineHeight;
+                curX = x;
+                lines++;
+            }
         }
         return lines;
     }

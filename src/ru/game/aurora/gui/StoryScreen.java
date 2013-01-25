@@ -17,7 +17,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.Room;
+import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
 
 import java.io.IOException;
@@ -28,7 +28,8 @@ import java.io.Serializable;
 /**
  * Screen that contains image, text and left/right buttons
  */
-public class StoryScreen implements Room {
+public class StoryScreen implements OverlayWindow {
+
     private static final long serialVersionUID = -3923197071117233494L;
 
     public static class StoryElement implements Serializable {
@@ -50,7 +51,7 @@ public class StoryScreen implements Room {
 
     private int currentScreen;
 
-    private final static Rectangle textRect = new Rectangle(5, 15, 10, 5);
+    private final static Rectangle textRect = new Rectangle(1, 6, 12, 7);
 
     public StoryScreen(String descPath) {
         Reader reader = new InputStreamReader(getClass().getClassLoader().getResourceAsStream(descPath));
@@ -79,13 +80,16 @@ public class StoryScreen implements Room {
         }
 
         if (container.getInput().isKeyPressed(Input.KEY_RIGHT) && currentScreen < screens.length) {
-            currentScreen--;
+            currentScreen++;
         }
     }
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        graphics.drawImage(ResourceManager.getInstance().getImage(screens[currentScreen].imageId), 100, 100);
+        if (isOver()) {
+            return;
+        }
+        graphics.drawImage(ResourceManager.getInstance().getImage(screens[currentScreen].imageId), 64, 64);
         EngineUtils.drawRectWithBorderAndText(graphics, textRect, camera, Color.yellow, GUIConstants.backgroundColor, screens[currentScreen].text, GUIConstants.dialogFont, Color.white);
     }
 
