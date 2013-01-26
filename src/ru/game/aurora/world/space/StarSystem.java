@@ -302,7 +302,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         } else {
             updateShoot(container, world);
-            if (container.getInput().isKeyDown(Input.KEY_ESCAPE)) {
+            if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
                 mode = MODE_MOVE;
             }
         }
