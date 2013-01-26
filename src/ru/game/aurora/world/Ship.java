@@ -12,11 +12,14 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
+import ru.game.aurora.world.space.SpaceObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ship extends BasePositionable implements GameObject {
+public class Ship extends BasePositionable implements SpaceObject {
+
+    private static final long serialVersionUID = 4691881150467099814L;
 
     private int hull;
 
@@ -112,5 +115,24 @@ public class Ship extends BasePositionable implements GameObject {
 
     public List<StarshipWeapon> getWeapons() {
         return weapons;
+    }
+
+    @Override
+    public void onContact(World world) {
+    }
+
+    @Override
+    public void onAttack(World world, SpaceObject attacker, int dmg) {
+        //todo: hp calculation and damage
+    }
+
+    @Override
+    public boolean isAlive() {
+        return true;//todo: hp
+    }
+
+    @Override
+    public String getName() {
+        return "Enterprise"; //todo: player set name
     }
 }

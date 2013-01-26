@@ -5,6 +5,7 @@ In progress
 
 + World generation progress is now shown when 'New Game' is pressed
 * World generation is now multi-threaded
++ NPC ships will now return fire if attacked
 
 ======================================================
 VERSION 0.0.1

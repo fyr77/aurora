@@ -5,11 +5,17 @@
  */
 package ru.game.aurora.npc;
 
+import ru.game.aurora.world.equip.StarshipWeapon;
+import ru.game.aurora.world.equip.StarshipWeaponDesc;
+import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
 
 public class AlienRace implements Serializable {
+
+    private static final long serialVersionUID = 5107718114248088759L;
+
     private String name;
 
     /**
@@ -36,6 +42,13 @@ public class AlienRace implements Serializable {
         this.homeworld = homeworld;
         this.defaultDialog = defaultDialog;
     }
+
+    public NPCShip createRandomShip() {
+        NPCShip ship = new NPCShip(0, 0, getShipSprite(), this, null, getName() + " ship");
+        ship.setWeapons(new StarshipWeapon(new StarshipWeaponDesc(1, "Laser cannons", "Simple middle-range laser cannons", 5, 3), StarshipWeapon.MOUNT_ALL));
+        return ship;
+    }
+
 
     public Dialog getDefaultDialog() {
         return defaultDialog;
@@ -74,5 +87,13 @@ public class AlienRace implements Serializable {
 
     public String getShipSprite() {
         return shipSprite;
+    }
+
+    public boolean isHostileTo(AlienRace other) {
+        return false;
+    }
+
+    public boolean isHostileToPlayer() {
+        return getRelationToPlayer() <= 3;
     }
 }

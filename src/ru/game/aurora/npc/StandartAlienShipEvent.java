@@ -18,6 +18,7 @@ import java.util.Random;
  * When player enters some star system that is close to some alien race homeworld, he has a chance of meeting that race's ship
  */
 public class StandartAlienShipEvent implements GameEventListener {
+
     private AlienRace race;
 
     private static final Random r = new Random();
@@ -34,7 +35,9 @@ public class StandartAlienShipEvent implements GameEventListener {
         }
 
         if (r.nextDouble() < probability) {
-            ss.getShips().add(new NPCShip(r.nextInt(ss.getRadius()) - ss.getRadius() / 2, r.nextInt(ss.getRadius()) - ss.getRadius() / 2, race.getShipSprite(), race, null, race.getName() + " ship"));
+            NPCShip ship = race.createRandomShip();
+            ship.setPos(r.nextInt(ss.getRadius()) - ss.getRadius() / 2, r.nextInt(ss.getRadius()) - ss.getRadius() / 2);
+            ss.getShips().add(ship);
         }
     }
 

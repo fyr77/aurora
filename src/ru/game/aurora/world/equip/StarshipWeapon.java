@@ -10,6 +10,9 @@ package ru.game.aurora.world.equip;
 import java.io.Serializable;
 
 public class StarshipWeapon implements Serializable {
+
+    private static final long serialVersionUID = -8961611987603093533L;
+
     private final StarshipWeaponDesc weaponDesc;
 
     private int reloadTimeLeft;
@@ -45,5 +48,15 @@ public class StarshipWeapon implements Serializable {
 
     public void setReloadTimeLeft(int reloadTimeLeft) {
         this.reloadTimeLeft = reloadTimeLeft;
+    }
+
+    public void fire() {
+        reloadTimeLeft = weaponDesc.reloadTurns;
+    }
+
+    public void reload() {
+        if (reloadTimeLeft > 0) {
+            reloadTimeLeft--;
+        }
     }
 }

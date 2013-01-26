@@ -13,6 +13,8 @@ import ru.game.aurora.world.space.StarSystem;
 
 public class LeaveSystemAI implements NPCShipAI {
 
+    private static final long serialVersionUID = -5263145319771641988L;
+
     private boolean isAway = false;
 
     private int dirX;

@@ -10,12 +10,16 @@ import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
+import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.equip.StarshipWeapon;
+import ru.game.aurora.world.equip.StarshipWeaponDesc;
 
 public class NPCShip extends BasePositionable implements SpaceObject {
 
@@ -37,6 +41,10 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     private NPCShipAI ai;
 
+    private boolean isHostile;
+
+    private StarshipWeapon[] weapons;
+
     public NPCShip(int x, int y, String sprite, AlienRace race, NPC capitain, String name) {
         super(x, y);
         this.sprite = sprite;
@@ -52,6 +60,11 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     @Override
     public void update(GameContainer container, World world) {
+        if (weapons != null) {
+            for (StarshipWeapon w : weapons) {
+                w.reload();
+            }
+        }
         if (curSpeed-- > 0) {
             return;
         }
@@ -71,10 +84,10 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     /**
      * Returns true if this ship is hostile to player
-     * Hostile ships can not be hailed
+     * Hostile ships can not be hailed and will attack player when they see it
      */
     public boolean isHostile() {
-        return false;
+        return !race.isHostileToPlayer() && !isHostile;
     }
 
     public AlienRace getRace() {
@@ -103,10 +116,41 @@ public class NPCShip extends BasePositionable implements SpaceObject {
     }
 
     @Override
-    public void onAttack(World world, int dmg) {
+    public void onAttack(World world, SpaceObject attacker, int dmg) {
         hp -= dmg;
         if (hp <= 0) {
             GameLogger.getInstance().logMessage(getName() + " destroyed");
+        }
+        if (!(ai instanceof CombatAI)) {
+            GameLogger.getInstance().logMessage(getName() + " is now hostile to " + attacker.getName());
+            ai = new CombatAI(attacker);
+        }
+    }
+
+    public StarshipWeapon[] getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(StarshipWeapon... weapons) {
+        this.weapons = weapons;
+    }
+
+    public void fire(World world, StarSystem ss, int weaponIdx, SpaceObject target) {
+        weapons[weaponIdx].fire();
+        final StarshipWeaponDesc weaponDesc = weapons[weaponIdx].getWeaponDesc();
+        GameLogger.getInstance().logMessage(String.format("%s fires at %s with %s, dealing %d damage"
+                , getName()
+                , target.getName()
+                , weaponDesc.name
+                , weaponDesc.damage
+        ));
+        target.onAttack(world, this, weaponDesc.damage);
+
+        ss.setCurrentEffect(new BlasterShotEffect(this, target, world.getCamera(), 800, "blaster_shot"));
+
+        if (!target.isAlive()) {
+            GameLogger.getInstance().logMessage(target.getName() + " destroyed");
+            ss.getShips().remove(target);
         }
     }
 }

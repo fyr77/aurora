@@ -18,6 +18,8 @@ import ru.game.aurora.world.space.StarSystem;
  */
 public class SingleShipEvent implements GameEventListener {
 
+    private static final long serialVersionUID = 8667890627684730845L;
+
     private double chance;
 
     private NPCShip ship;

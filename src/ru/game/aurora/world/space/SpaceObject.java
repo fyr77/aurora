@@ -16,7 +16,7 @@ import ru.game.aurora.world.World;
 public interface SpaceObject extends GameObject, Positionable {
     public void onContact(World world);
 
-    public void onAttack(World world, int dmg);
+    public void onAttack(World world, SpaceObject attacker, int dmg);
 
     public boolean isAlive();
 

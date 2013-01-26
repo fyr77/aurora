@@ -249,7 +249,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
             // firing
             final int damage = weapon.getWeaponDesc().damage;
-            target.onAttack(world, damage);
+            target.onAttack(world, playerShip, damage);
             GameLogger.getInstance().logMessage("Bang! Dealt " + damage + " damage to " + target.getName());
 
             currentEffect = new BlasterShotEffect(playerShip, target, world.getCamera(), 800, "blaster_shot");
@@ -307,7 +307,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
-        for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext(); ) {
+        for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext();) {
             SpaceObject ship = iter.next();
 
             if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
@@ -431,5 +431,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public int getRadius() {
         return radius;
+    }
+
+    public void setCurrentEffect(Effect currentEffect) {
+        this.currentEffect = currentEffect;
     }
 }
