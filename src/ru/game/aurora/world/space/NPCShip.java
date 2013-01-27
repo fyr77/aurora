@@ -11,6 +11,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
+import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
@@ -120,6 +121,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         hp -= dmg;
         if (hp <= 0) {
             GameLogger.getInstance().logMessage(getName() + " destroyed");
+            ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect(x, y, "ship_explosion"));
         }
         if (!(ai instanceof CombatAI)) {
             GameLogger.getInstance().logMessage(getName() + " is now hostile to " + attacker.getName());
@@ -146,7 +148,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         ));
         target.onAttack(world, this, weaponDesc.damage);
 
-        ss.setCurrentEffect(new BlasterShotEffect(this, target, world.getCamera(), 800, "blaster_shot"));
+        ss.addEffect(new BlasterShotEffect(this, target, world.getCamera(), 800, "blaster_shot"));
 
         if (!target.isAlive()) {
             GameLogger.getInstance().logMessage(target.getName() + " destroyed");

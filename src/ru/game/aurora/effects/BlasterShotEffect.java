@@ -18,6 +18,8 @@ import ru.game.aurora.world.World;
 
 
 public class BlasterShotEffect implements Effect {
+    private static final long serialVersionUID = 7969961076017675842L;
+
     private Vector2f currentPos;
 
     private Vector2f movementDir;
@@ -28,7 +30,7 @@ public class BlasterShotEffect implements Effect {
 
     private boolean isOver = false;
 
-    private Image myImage;
+    private transient Image myImage;
 
     public BlasterShotEffect(Positionable source, Positionable target, Camera camera, int moveSpeed, String shotSprite) {
         this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)

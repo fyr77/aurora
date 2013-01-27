@@ -63,6 +63,8 @@
 
     <!-- effects -->
     <resource type="image" id="blaster_shot">sprites/effects/blaster_shot.png</resource>
+    <resource type="animation" id="ship_explosion" tw="64" th="64" duration="100">sprites/effects/explosion.png
+    </resource>
 
     <!-- story -->
     <resource type="image" id="story_beginning">sprites/story/construction.png</resource>

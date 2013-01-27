@@ -25,6 +25,7 @@ import ru.game.aurora.world.planet.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
@@ -33,7 +34,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public static final int[] possibleSizes = {1, 2, 3, 4};
 
+    private static final long serialVersionUID = -1967789857191116940L;
+
     public static class Star implements Serializable {
+        private static final long serialVersionUID = -3746922025754658839L;
         // 1 is largest star, 4 is smallest
         public final int size;
         public final Color color;
@@ -75,7 +79,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private transient ParallaxBackground background;
 
-    private transient Effect currentEffect = null;
+    private transient List<Effect> effects = new LinkedList<Effect>();
 
     /**
      * Relation between tile size and max planet size
@@ -252,7 +256,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             target.onAttack(world, playerShip, damage);
             GameLogger.getInstance().logMessage("Bang! Dealt " + damage + " damage to " + target.getName());
 
-            currentEffect = new BlasterShotEffect(playerShip, target, world.getCamera(), 800, "blaster_shot");
+            effects.add(new BlasterShotEffect(playerShip, target, world.getCamera(), 800, "blaster_shot"));
 
             if (!target.isAlive()) {
                 GameLogger.getInstance().logMessage(target.getName() + " destroyed");
@@ -270,10 +274,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         if (background == null) {
             createBackground(world);
         }
-        if (currentEffect != null) {
-            currentEffect.update(container, world);
-            if (currentEffect.isOver()) {
-                currentEffect = null;
+        if (!effects.isEmpty()) {
+            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext();) {
+                Effect currentEffect = iter.next();
+                currentEffect.update(container, world);
+                if (currentEffect.isOver()) {
+                    iter.remove();
+                }
             }
             return;
         }
@@ -380,7 +387,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             int planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);
             int planetY = camera.getYCoord(p.getGlobalY()) + camera.getTileWidth() / 2;
             int radius = (int) Math.sqrt(Math.pow((planetX - starX), 2) + Math.pow((planetY - starY), 2));
-            EngineUtils.drawCircleCentered(g, starX, starY, (int) radius, Color.gray, false);
+            EngineUtils.drawCircleCentered(g, starX, starY, radius, Color.gray, false);
             p.drawOnGlobalMap(container, g, camera, 0, 0);
 
         }
@@ -404,7 +411,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         g.setColor(Color.red);
         g.drawRect(camera.getXCoord(-radius), camera.getYCoord(-radius), 2 * radius * camera.getTileWidth(), 2 * radius * camera.getTileHeight());
 
-        if (currentEffect != null) {
+        for (Effect currentEffect : effects) {
             currentEffect.draw(container, g, camera);
         }
     }
@@ -433,7 +440,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return radius;
     }
 
-    public void setCurrentEffect(Effect currentEffect) {
-        this.currentEffect = currentEffect;
+    public void addEffect(Effect effect) {
+        effects.add(effect);
     }
 }
