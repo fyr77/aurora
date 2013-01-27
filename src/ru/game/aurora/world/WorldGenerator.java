@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  * Generates world in separate thread
  */
 public class WorldGenerator implements Runnable {
-    private String currentStatus = "Initializing...";
+    private String currentStatus = "Initializing";
 
     public static final int maxStars = 15;
 
@@ -41,7 +41,7 @@ public class WorldGenerator implements Runnable {
     private ExecutorService executor = Executors.newFixedThreadPool(4);
 
     private void createAliens(World world) {
-        currentStatus = "Creating aliens...";
+        currentStatus = "Creating aliens";
 
         AlienRace gardenerRace = null;
         AlienRace kliskRace = null;
@@ -67,7 +67,7 @@ public class WorldGenerator implements Runnable {
     }
 
     private void generateMap(final World world) {
-        currentStatus = "Generating star systems...";
+        currentStatus = "Generating star systems";
 
         // now generate random star systems
         for (int i = 0; i < maxStars; ++i) {

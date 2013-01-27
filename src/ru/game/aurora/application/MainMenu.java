@@ -32,6 +32,12 @@ public class MainMenu {
 
     private WorldGenerator generator;
 
+
+    // used for changing number of dots in message while generating world
+    private int dotsCount = 0;
+
+    private long lastTimeChecked = 0;
+
     public MainMenu() {
         saveAvailable = SaveGameManager.isSaveAvailable();
         selectedIndex = saveAvailable ? 0 : 1;
@@ -41,6 +47,12 @@ public class MainMenu {
         if (generator != null) {
             if (generator.isGenerated()) {
                 return generator.getWorld();
+            }
+            if (container.getTime() - lastTimeChecked > 500) {
+                if (dotsCount++ > 5) {
+                    dotsCount = 0;
+                }
+                lastTimeChecked = container.getTime();
             }
             return null;
         }
@@ -96,7 +108,12 @@ public class MainMenu {
             EngineUtils.drawRectWithBorderAndText(graphics, newGameRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "New Game", GUIConstants.dialogFont, selectedIndex == 1 ? Color.green : Color.white);
             EngineUtils.drawRectWithBorderAndText(graphics, quitRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Exit", GUIConstants.dialogFont, selectedIndex == 2 ? Color.green : Color.white);
         } else {
-            EngineUtils.drawRectWithBorderAndText(graphics, worldGenerateMessageRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Generating world: " + generator.getCurrentStatus(), GUIConstants.dialogFont, Color.white);
+            StringBuilder sb = new StringBuilder("Generating world: ");
+            sb.append(generator.getCurrentStatus());
+            for (int i = 0; i < dotsCount; ++i) {
+                sb.append(".");
+            }
+            EngineUtils.drawRectWithBorderAndText(graphics, worldGenerateMessageRectangle, camera, Color.yellow, GUIConstants.backgroundColor, sb.toString(), GUIConstants.dialogFont, Color.white);
         }
         graphics.drawString(Version.VERSION, camera.getTileWidth() * camera.getNumTilesX() - 100, camera.getTileHeight() * camera.getNumTilesY() - 40);
     }
