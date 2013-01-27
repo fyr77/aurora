@@ -10,6 +10,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.gui.FailScreen;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
 import ru.game.aurora.world.space.SpaceObject;
@@ -35,7 +36,7 @@ public class Ship extends BasePositionable implements SpaceObject {
 
     public Ship(int x, int y) {
         super(x, y);
-
+        hull = maxHull = 3;
         weapons.add(new StarshipWeapon(new StarshipWeaponDesc(1, "Laser cannons", "Simple middle-range laser cannons", 5, 3), StarshipWeapon.MOUNT_ALL));
     }
 
@@ -123,12 +124,15 @@ public class Ship extends BasePositionable implements SpaceObject {
 
     @Override
     public void onAttack(World world, SpaceObject attacker, int dmg) {
-        //todo: hp calculation and damage
+        hull -= dmg;
+        if (hull <= 0) {
+            world.setCurrentRoom(FailScreen.createShipDestroyedFailScreen());
+        }
     }
 
     @Override
     public boolean isAlive() {
-        return true;//todo: hp
+        return hull > 0;
     }
 
     @Override

@@ -74,18 +74,23 @@ public class WorldGenerator implements Runnable {
             executor.submit(new Runnable() {
                 @Override
                 public void run() {
-                    int x;
-                    int y;
-                    do {
-                        x = CommonRandom.getRandom().nextInt(worldWidth);
-                        y = CommonRandom.getRandom().nextInt(worldHeight);
-                    } while (world.getGalaxyMap().getObjectAt(x, y) != null);
-                    StarSystem ss = generateRandomStarSystem(x, y);
+                    try {
+                        int x;
+                        int y;
+                        do {
+                            x = CommonRandom.getRandom().nextInt(worldWidth);
+                            y = CommonRandom.getRandom().nextInt(worldHeight);
+                        } while (world.getGalaxyMap().getObjectAt(x, y) != null);
+                        StarSystem ss = generateRandomStarSystem(x, y);
 
-                    synchronized (world) {
-                        final int idx = world.getGalaxyMap().getObjects().size();
-                        world.getGalaxyMap().getObjects().add(ss);
-                        world.getGalaxyMap().setTileAt(x, y, idx);
+                        synchronized (world) {
+                            final int idx = world.getGalaxyMap().getObjects().size();
+                            world.getGalaxyMap().getObjects().add(ss);
+                            world.getGalaxyMap().setTileAt(x, y, idx);
+                        }
+                    } catch (Throwable t) {
+                        System.err.println("Failed to generate world");
+                        t.printStackTrace();
                     }
                 }
             });

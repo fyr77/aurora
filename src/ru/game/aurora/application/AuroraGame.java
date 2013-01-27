@@ -57,6 +57,10 @@ public class AuroraGame extends BasicGame {
             }
         } else {
             world.update(gameContainer);
+            if (world.isGameOver()) {
+                mainMenu = new MainMenu();
+                world = null;
+            }
         }
         GUI.getInstance().update(gameContainer);
         gameContainer.getInput().clearKeyPressedRecord();

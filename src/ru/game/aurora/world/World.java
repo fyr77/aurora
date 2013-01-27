@@ -26,6 +26,11 @@ public class World implements Serializable {
 
     private Camera camera;
 
+    /**
+     * Set by game logic, shows that game is over and on next update this world will be deallocated and main menu will be shown
+     */
+    private boolean isGameOver;
+
     private Room currentRoom;
 
     private GalaxyMap galaxyMap;
@@ -152,4 +157,11 @@ public class World implements Serializable {
         this.camera = camera;
     }
 
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        isGameOver = gameOver;
+    }
 }
