@@ -22,6 +22,8 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.*;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -195,6 +197,18 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
     }
 
+    private void readObject(ObjectInputStream ois) throws IOException,
+            ClassNotFoundException {
+        try {
+            ois.defaultReadObject();
+            effects = new LinkedList<Effect>();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void updateShoot(GameContainer container, World world) {
         if (ships.isEmpty()) {
             // nothing to shoot at
@@ -275,7 +289,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             createBackground(world);
         }
         if (!effects.isEmpty()) {
-            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext(); ) {
+            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext();) {
                 Effect currentEffect = iter.next();
                 currentEffect.update(container, world);
                 if (currentEffect.isOver()) {
@@ -314,7 +328,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
-        for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext(); ) {
+        for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext();) {
             SpaceObject ship = iter.next();
 
             if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {

@@ -7,6 +7,8 @@
 package ru.game.aurora.player.engineering;
 
 
+import ru.game.aurora.world.World;
+
 import java.io.Serializable;
 
 public class EngineeringState implements Serializable {
@@ -21,6 +23,11 @@ public class EngineeringState implements Serializable {
         hullRepairs = new HullRepairs();
     }
 
+    public void update(World world) {
+        hullRepairs.update(world);
+    }
+
+
     public HullRepairs getHullRepairs() {
         return hullRepairs;
     }
@@ -31,5 +38,9 @@ public class EngineeringState implements Serializable {
 
     public void setIdleEngineers(int idleEngineers) {
         this.idleEngineers = idleEngineers;
+    }
+
+    public void addIdleEngineers(int amount) {
+        idleEngineers += amount;
     }
 }

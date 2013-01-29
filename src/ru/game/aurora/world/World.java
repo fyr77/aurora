@@ -83,10 +83,11 @@ public class World implements Serializable {
         currentRoom.update(container, this);
         if (isUpdatedThisFrame()) {
             player.getResearchState().update(this);
+            player.getEngineeringState().update(this);
             turnCount++;
         }
 
-        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext(); ) {
+        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext();) {
             GameEventListener l = listenerIterator.next();
             if (!l.isAlive()) {
                 listenerIterator.remove();

@@ -16,6 +16,7 @@ import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.player.engineering.EngineeringState;
+import ru.game.aurora.player.engineering.HullRepairs;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -55,6 +56,35 @@ public class EngineeringScreen implements Room {
         if (container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_DOWN)) {
             selectedIdx = 1 - selectedIdx;
             return;
+        }
+        final EngineeringState engineeringState = world.getPlayer().getEngineeringState();
+
+        if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
+            if (selectedIdx == 1 && engineeringState.getIdleEngineers() > 0) {
+                engineeringState.getHullRepairs().engineersAssigned++;
+                engineeringState.setIdleEngineers(engineeringState.getIdleEngineers() - 1);
+            }
+
+            if (selectedIdx == 0 && world.getPlayer().getShip().getHull() + engineeringState.getHullRepairs().remainingPoints < world.getPlayer().getShip().getMaxHull()) {
+                if (engineeringState.getHullRepairs().remainingPoints == 0) {
+                    engineeringState.getHullRepairs().resetProgress();
+                }
+                engineeringState.getHullRepairs().remainingPoints++;
+            }
+        } else if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
+            if (selectedIdx == 1 && engineeringState.getHullRepairs().engineersAssigned > 0) {
+                engineeringState.getHullRepairs().engineersAssigned--;
+                engineeringState.addIdleEngineers(1);
+            }
+
+            if (selectedIdx == 0 && engineeringState.getHullRepairs().remainingPoints > 0) {
+                engineeringState.getHullRepairs().remainingPoints--;
+                if (engineeringState.getHullRepairs().remainingPoints == 0) {
+                    // returning resource unis
+                    world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() + HullRepairs.POINT_RES_COST);
+                    engineeringState.getHullRepairs().resetProgress();
+                }
+            }
         }
     }
 
