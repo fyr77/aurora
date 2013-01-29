@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.gui.EngineeringScreen;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.ResearchScreen;
@@ -68,6 +69,14 @@ public class World implements Serializable {
             ResearchScreen researchScreen = new ResearchScreen();
             researchScreen.enter(this);
             currentRoom = researchScreen;
+            return;
+        }
+
+        if (container.getInput().isKeyPressed(Input.KEY_E)) {
+            // open research screen
+            EngineeringScreen engineeringScreen = new EngineeringScreen();
+            engineeringScreen.enter(this);
+            currentRoom = engineeringScreen;
             return;
         }
 

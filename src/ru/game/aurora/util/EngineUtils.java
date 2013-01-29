@@ -11,6 +11,7 @@ import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.application.GameLogger;
 
 
@@ -30,6 +31,10 @@ public class EngineUtils {
         drawRect(graphics, rectangle, camera, true);
         graphics.setColor(borderColor);
         drawRect(graphics, rectangle, camera, false);
+    }
+
+    public static void drawRectWithBorderAndText(Graphics graphics, Rectangle rectangle, Camera camera, String text) {
+        drawRectWithBorderAndText(graphics, rectangle, camera, Color.yellow, GUIConstants.backgroundColor, text, GUIConstants.dialogFont, Color.white);
     }
 
     public static void drawRectWithBorderAndText(Graphics graphics, Rectangle rectangle, Camera camera, Color borderColor, Color fillColor, String text, Font font, Color textColor) {

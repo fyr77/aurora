@@ -6,6 +6,7 @@
 package ru.game.aurora.player;
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.player.engineering.EngineeringState;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.equip.StarshipWeapon;
@@ -14,17 +15,22 @@ import ru.game.aurora.world.planet.LandingParty;
 import java.io.Serializable;
 
 public class Player implements Serializable {
+    private static final long serialVersionUID = -5632323774252846544L;
+
     private Ship ship;
 
     private LandingParty landingParty;
 
     private ResearchState researchState;
 
+    private EngineeringState engineeringState;
+
     private int resourceUnits = 0;
 
     public Player() {
         ship = new Ship(10, 10);
-        researchState = new ResearchState(10);
+        researchState = new ResearchState(ship.getScientists());
+        engineeringState = new EngineeringState(ship.getEngineers());
     }
 
     public Ship getShip() {
@@ -66,5 +72,9 @@ public class Player implements Serializable {
             GameLogger.getInstance().addStatusMessage(slot + ": " + w.getWeaponDesc().name + " " + (w.getReloadTimeLeft() == 0 ? " [ready]" : w.getReloadTimeLeft() + " to reload"));
             slot++;
         }
+    }
+
+    public EngineeringState getEngineeringState() {
+        return engineeringState;
     }
 }
