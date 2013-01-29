@@ -41,6 +41,8 @@ public class World implements Serializable {
 
     private transient OverlayWindow currentDialog;
 
+    private StarSystem currentStarSystem = null;
+
     private int turnCount = 0;
 
     private List<GameEventListener> listeners = new LinkedList<GameEventListener>();
@@ -75,7 +77,7 @@ public class World implements Serializable {
             turnCount++;
         }
 
-        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext();) {
+        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext(); ) {
             GameEventListener l = listenerIterator.next();
             if (!l.isAlive()) {
                 listenerIterator.remove();
@@ -163,5 +165,13 @@ public class World implements Serializable {
 
     public void setGameOver(boolean gameOver) {
         isGameOver = gameOver;
+    }
+
+    public StarSystem getCurrentStarSystem() {
+        return currentStarSystem;
+    }
+
+    public void setCurrentStarSystem(StarSystem currentStarSystem) {
+        this.currentStarSystem = currentStarSystem;
     }
 }

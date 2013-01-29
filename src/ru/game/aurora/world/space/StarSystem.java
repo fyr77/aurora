@@ -275,7 +275,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             createBackground(world);
         }
         if (!effects.isEmpty()) {
-            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext();) {
+            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext(); ) {
                 Effect currentEffect = iter.next();
                 currentEffect.update(container, world);
                 if (currentEffect.isOver()) {
@@ -314,7 +314,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
-        for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext();) {
+        for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext(); ) {
             SpaceObject ship = iter.next();
 
             if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
@@ -347,6 +347,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         if (background == null) {
             createBackground(world);
         }
+        world.setCurrentStarSystem(this);
         world.onPlayerEnteredSystem(this);
         visited = true;
     }
@@ -442,5 +443,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public void addEffect(Effect effect) {
         effects.add(effect);
+    }
+
+    public void setStar(Star star) {
+        this.star = star;
     }
 }

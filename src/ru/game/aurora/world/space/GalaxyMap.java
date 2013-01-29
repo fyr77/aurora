@@ -87,6 +87,7 @@ public class GalaxyMap extends BaseSpaceRoom {
     public void enter(World world) {
         super.enter(world);
         world.getCamera().setTarget(player.getShip());
+        world.setCurrentStarSystem(null);
     }
 
 

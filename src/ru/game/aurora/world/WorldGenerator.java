@@ -10,6 +10,7 @@ import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.npc.*;
+import ru.game.aurora.player.research.projects.StarResearchProject;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
@@ -145,12 +146,26 @@ public class WorldGenerator implements Runnable {
         return ss;
     }
 
+    private void createQuestWorlds(World world) {
+        currentStatus = "Creating quest locations";
+        // initial research projects and their star system
+        StarSystem greenStar = generateRandomStarSystem(6, 7);
+        greenStar.setStar(new StarSystem.Star(6, new Color(176, 255, 202)));
+
+        final int idx = world.getGalaxyMap().getObjects().size();
+        world.getGalaxyMap().getObjects().add(greenStar);
+        world.getGalaxyMap().setTileAt(6, 7, idx);
+
+        world.getPlayer().getResearchState().getAvailableProjects().add(new StarResearchProject(greenStar));
+    }
+
     @Override
     public void run() {
         World world = new World(worldWidth, worldHeight);
 
-        createAliens(world);
         generateMap(world);
+        createAliens(world);
+        createQuestWorlds(world);
 
         world.setCurrentDialog(new StoryScreen("story/beginning.json"));
         currentStatus = "All done";

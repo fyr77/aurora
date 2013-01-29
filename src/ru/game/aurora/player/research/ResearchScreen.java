@@ -51,7 +51,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
             graphics.setColor(Color.white);
             final ResearchProjectState researchProjectState = researchState.getCurrentProjects().get(currentIdx);
             iconName = researchProjectState.desc.getIcon();
-            descr = researchProjectState.desc.getDescription() + " \n" + researchProjectState.desc.getStatusString(world, researchProjectState.scientists);
+            descr = researchProjectState.desc.getDescription() + " \n \n " + researchProjectState.desc.getStatusString(world, researchProjectState.scientists);
         }
 
         draw(graphics, camera, "Active projects", iconName, descr);

@@ -79,7 +79,7 @@ public class StoryScreen implements OverlayWindow {
             currentScreen--;
         }
 
-        if (container.getInput().isKeyPressed(Input.KEY_RIGHT) && currentScreen < screens.length) {
+        if ((container.getInput().isKeyPressed(Input.KEY_RIGHT) || container.getInput().isKeyPressed(Input.KEY_ENTER)) && currentScreen < screens.length) {
             currentScreen++;
         }
     }
