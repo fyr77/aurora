@@ -22,7 +22,7 @@ public class HullRepairs implements Serializable {
 
     public static final int WORK_FOR_POINT = 40;
 
-    public static final int POINT_RES_COST = 1;
+    public static final int POINT_RES_COST = 5;
 
     private int currentWorkRemaining = WORK_FOR_POINT;
 

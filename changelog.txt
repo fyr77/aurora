@@ -8,6 +8,7 @@ In progress
 + NPC ships will now return fire if attacked
 + Player ship can now be destroyed in combat
 + Added gameover message screen with image
++ Added ability to repair hull for resources
 
 ======================================================
 VERSION 0.0.1
