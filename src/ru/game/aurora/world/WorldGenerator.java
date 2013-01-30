@@ -56,7 +56,7 @@ public class WorldGenerator implements Runnable {
         gardenerShip.setAi(null);
         world.addListener(new SingleShipEvent(0.9, gardenerShip));
         world.addListener(new StandartAlienShipEvent(kliskRace));
-        world.addListener(new SingleShipFixedTime(4, new AuroraProbe(0, 0)));
+        world.addListener(new SingleShipFixedTime(4, new AuroraProbe(0, 0), Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_detected.json"))));
 
         world.getGalaxyMap().getObjects().add(kliskHomeworld);
         world.getGalaxyMap().setTileAt(5, 5, world.getGalaxyMap().getObjects().size() - 1);

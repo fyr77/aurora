@@ -15,16 +15,28 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * Creates given alien ship when player enters Xth starsystem for first time
  */
-public class SingleShipFixedTime implements GameEventListener {
+public class SingleShipFixedTime implements GameEventListener
+{
+    private static final long serialVersionUID = 6541906542086925960L;
+
     private int x;
 
     private int count = 0;
 
     private NPCShip ship;
 
+    // optional dialog that will appear when player enters star system and notifies about presence of event starship
+    private Dialog dialog;
+
     public SingleShipFixedTime(int x, NPCShip ship) {
         this.x = x;
         this.ship = ship;
+    }
+
+    public SingleShipFixedTime(int x, NPCShip ship, Dialog dialog) {
+        this.x = x;
+        this.ship = ship;
+        this.dialog = dialog;
     }
 
     @Override
@@ -33,6 +45,9 @@ public class SingleShipFixedTime implements GameEventListener {
             ship.setPos(CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius(), CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius());
             ss.getShips().add(ship);
             ship = null;
+            if (dialog != null) {
+                world.setCurrentDialog(dialog);
+            }
         }
 
     }

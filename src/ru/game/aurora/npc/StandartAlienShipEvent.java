@@ -17,7 +17,9 @@ import java.util.Random;
 /**
  * When player enters some star system that is close to some alien race homeworld, he has a chance of meeting that race's ship
  */
-public class StandartAlienShipEvent implements GameEventListener {
+public class StandartAlienShipEvent implements GameEventListener
+{
+    private static final long serialVersionUID = -3413422560284690414L;
 
     private AlienRace race;
 

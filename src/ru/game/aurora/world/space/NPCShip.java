@@ -88,7 +88,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
      * Hostile ships can not be hailed and will attack player when they see it
      */
     public boolean isHostile() {
-        return !race.isHostileToPlayer() && !isHostile;
+        return race.isHostileToPlayer() || isHostile;
     }
 
     public AlienRace getRace() {
