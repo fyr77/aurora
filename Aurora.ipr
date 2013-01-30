@@ -269,6 +269,15 @@
       </item>
     </group>
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="Egor.Smirnov">
+      <words>
+        <w>gameover</w>
+        <w>homeworlds</w>
+        <w>starships</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Aurora.iml" filepath="$PROJECT_DIR$/Aurora.iml" />

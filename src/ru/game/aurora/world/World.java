@@ -11,6 +11,7 @@ import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.gui.EngineeringScreen;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.HelpScreen;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.ResearchScreen;
 import ru.game.aurora.world.planet.Planet;
@@ -106,6 +107,10 @@ public class World implements Serializable {
             GameMenu menu = new GameMenu();
             menu.enter(this);
             currentRoom = menu;
+        }
+
+        if (container.getInput().isKeyPressed(Input.KEY_F1)) {
+            setCurrentDialog(new HelpScreen());
         }
 
     }

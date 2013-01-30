@@ -1,7 +1,12 @@
 ======================================================
+VERSION 0.0.3
+
+In progress...
+
+======================================================
 VERSION 0.0.2
 
-In progress
+30.01.2013
 
 + World generation progress is now shown when 'New Game' is pressed
 * World generation is now multi-threaded
@@ -9,6 +14,7 @@ In progress
 + Player ship can now be destroyed in combat
 + Added gameover message screen with image
 + Added ability to repair hull for resources
++ Added Help screen
 
 ======================================================
 VERSION 0.0.1
