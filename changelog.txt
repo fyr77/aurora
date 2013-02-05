@@ -3,6 +3,8 @@ VERSION 0.0.3
 
 In progress...
 
++ Research projects can now show report screen when finished
+
 ======================================================
 VERSION 0.0.2
 
