@@ -50,7 +50,7 @@ public class AlienHomeworld extends BasePlanet {
 
     @Override
     public void enter(World world) {
-        world.setCurrentDialog(dialog);
+        world.addOverlayWindow(dialog);
     }
 
     @Override

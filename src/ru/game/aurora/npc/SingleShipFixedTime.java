@@ -46,7 +46,7 @@ public class SingleShipFixedTime implements GameEventListener
             ss.getShips().add(ship);
             ship = null;
             if (dialog != null) {
-                world.setCurrentDialog(dialog);
+                world.addOverlayWindow(dialog);
             }
         }
 

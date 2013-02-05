@@ -49,7 +49,7 @@ public class AuroraProbe extends NPCShip {
 
     @Override
     public void onContact(World world) {
-        world.setCurrentDialog(dialog);
+        world.addOverlayWindow(dialog);
         contacted = true;
         world.getPlayer().getResearchState().getAvailableProjects().add(new DecodingResearch());
 

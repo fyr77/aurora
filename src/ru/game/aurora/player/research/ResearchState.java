@@ -20,7 +20,9 @@ import java.util.List;
 /**
  * Contains all data about science and research done by player
  */
-public class ResearchState implements Serializable {
+public class ResearchState implements Serializable
+{
+    private static final long serialVersionUID = -5676580254565166442L;
 
     private int idleScientists;
 
@@ -79,6 +81,9 @@ public class ResearchState implements Serializable {
                     availableProjects.add(state.desc);
                 }
                 idleScientists += state.scientists;
+                if (state.desc.getReport() != null) {
+                    world.addOverlayWindow(new ResearchReportScreen(state.desc, state.desc.getReport()));
+                }
                 GameLogger.getInstance().logMessage("Research project " + state.desc.name + " completed");
             }
         }

@@ -9,13 +9,22 @@ package ru.game.aurora.player.research;
 
 import ru.game.aurora.world.World;
 
-public abstract class BaseResearchWithFixedProgress extends ResearchProjectDesc {
+public abstract class BaseResearchWithFixedProgress extends ResearchProjectDesc
+{
+    private static final long serialVersionUID = 5476045747203186686L;
+
     protected int progress;
 
     protected final int initialProgress;
 
     public BaseResearchWithFixedProgress(String name, String description, String icon, int initialProgress) {
         super(name, description, icon);
+        this.initialProgress = initialProgress;
+        this.progress = initialProgress;
+    }
+
+    public BaseResearchWithFixedProgress(String name, String description, String icon, ResearchReport report, int initialProgress) {
+        super(name, description, icon, report);
         this.initialProgress = initialProgress;
         this.progress = initialProgress;
     }

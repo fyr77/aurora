@@ -49,7 +49,7 @@ public class Earth extends Planet {
 
     @Override
     public void enter(World world) {
-        world.setCurrentDialog(earthDialog);
+        world.addOverlayWindow(earthDialog);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class Earth extends Planet {
                     stmt = new Dialog.Statement(0, "We are pleased to see you come back, but your flight was too short to judge your perfomance. Come back later after you have acquired more data", new Dialog.Reply(0, -1, "Ok"));
                 }
                 progressDialog.putStatement(stmt);
-                world.setCurrentDialog(progressDialog);
+                world.addOverlayWindow(progressDialog);
             }
             // just reset state
             earthDialog.enter(world);

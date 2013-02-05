@@ -13,17 +13,42 @@ import java.io.Serializable;
 /**
  * Base class for research projects
  */
-public abstract class ResearchProjectDesc implements Serializable {
+public abstract class ResearchProjectDesc implements Serializable
+{
+    private static final long serialVersionUID = 929590331247291625L;
+
+    /**
+     * Research name, will be used in list of research projects
+     */
     protected String name;
 
+    /**
+     * Brief description, will be used in list of research projects
+     */
     protected String description;
 
+    /**
+     * 256x256 icon id
+     */
     protected String icon;
+
+    /**
+     * Optional report that will be shown to player when research is completed
+     * Can be null
+     */
+    protected ResearchReport report;
 
     protected ResearchProjectDesc(String name, String description, String icon) {
         this.name = name;
         this.description = description;
         this.icon = icon;
+    }
+
+    protected ResearchProjectDesc(String name, String description, String icon, ResearchReport report) {
+        this.name = name;
+        this.description = description;
+        this.icon = icon;
+        this.report = report;
     }
 
     public String getName() {
@@ -36,6 +61,14 @@ public abstract class ResearchProjectDesc implements Serializable {
 
     public String getIcon() {
         return icon;
+    }
+
+    public ResearchReport getReport() {
+        return report;
+    }
+
+    public void setReport(ResearchReport report) {
+        this.report = report;
     }
 
     /**
