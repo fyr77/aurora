@@ -1,0 +1,25 @@
+{
+    "iconName":"scientist_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "npcText":"Captain, we have detected a strange alien ship in this star system! I have never seen something like that before, it looks like a huge tree floating in space!",
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"Gordon, are you drunk? What are you talking about? Trees in space?!"
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "npcText":"I'm totally sane, captain! Just look yourself!",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"Ok, but if this is a joke you are going to regret it."
+                }
+            ]
+        }
+    }
+}

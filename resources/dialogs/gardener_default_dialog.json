@@ -20,8 +20,8 @@
             "npcText":"I have met your species before. We are always curious about new civilizations, so we always try to communicate newcomers",
             "replies":[
                 {
-                    "targetStatementId":-1,
-                    "replyText":"Ok"
+                    "targetStatementId":3,
+                    "replyText":"You have met humans before? No other expedition mentioned somebody like you."
                 }
             ]
         },
@@ -30,10 +30,148 @@
             "npcText":"Others call us Gardeners. Mostly because we fly these tree-ships, but also our ways have some similarity with gardener work",
             "replies":[
                 {
-                    "targetStatementId":-1,
-                    "replyText":"Ok"
+                    "targetStatementId":9,
+                    "replyText":"Gardener work? What do you mean?"
+                }
+            ]
+        },
+        "3":{
+            "id" : 3,
+            "npcText":"I have met one your ship. It happened 321 your days ago, to be exact, and the ship was identical to yours. It was called Aurora.",
+            "replies":[
+                {
+                    "targetStatementId":4,
+                    "replyText":"You met Aurora? That ship never returned from that trip, and one of our task is to find what happened to him"
+                }
+            ]
+        },
+
+        "4":{
+            "id" : 4,
+            "npcText":"Then you are some kind of a rescue team? Well, in this case you can return home. That ship and its crew does not need any help anymore.",
+            "replies":[
+                {
+                    "targetStatementId":5,
+                    "replyText":"What do you mean? Do you know what has happened to them?"
+                },
+                {
+                    "targetStatementId": 8,
+                    "replyText":"Are they dead?"
+                }
+            ]
+        },
+
+        "5":{
+            "id" : 5,
+            "npcText":"I know. But i will allow you to find that yourself.",
+            "replies":[
+                {
+                    "targetStatementId":6,
+                    "replyText":"You know, but will not tell? Why?"
+                },
+                {
+                    "targetStatementId":7,
+                    "replyText":"Oh, i see. What do you want in exchange for this information?"
+                }
+            ]
+        },
+
+        "6":{
+            "id" : 6,
+            "npcText":"Because we believe that curiosity and exploration are the best ways to uncover your true potential. Find them yourself, and we promise that you will find much more than you have ever dreamed",
+            "replies":[
+                {
+                    "targetStatementId": 9,
+                    "replyText":"Ok. Can you answer a few other questions then?"
+                }
+            ]
+        },
+
+        "7":{
+            "id" : 7,
+            "npcText":"Don't think that i'm trying to blackmail you. You civilisation has nothing to offer for us. We already have all that we need",
+            "replies":[
+                {
+                    "targetStatementId": 6,
+                    "replyText":"Then why don't just tell us?"
+                }
+            ]
+        },
+
+        "8":{
+            "id" : 8,
+            "npcText":"No, they still exist, though that form of existence is not exactly the same as yours.",
+            "replies":[
+                {
+                    "targetStatementId": 5,
+                    "replyText":"So you know where we can find them?"
+                }
+            ]
+        },
+
+        "9":{
+            "id" : 9,
+            "npcText":"You want to know who we are? We are the Gardeners. We oversee the galaxy and deal with threats that are beyond your imagination, so that younger races can dwell in relative peace and safety.",
+            "replies":[
+                {
+                    "targetStatementId": 10,
+                    "replyText":"Threats?"
+                },
+                {
+                    "targetStatementId": 11,
+                    "replyText":"So you say you rule the galaxy?"
+                },
+                {
+                    "targetStatementId": 12,
+                    "replyText":"I see that you do not want to share information, so this conversation is pointless. Over."
+                },
+                {
+                    "targetStatementId": 12,
+                    "replyText":"Thank you for your time, but we have to leave"
+                }
+            ]
+        },
+
+        "10":{
+            "id" : 10,
+            "npcText":"Do not ask about what you do not want to know. If you start looking for such things, one day you will attract their attention. And you do not want it",
+            "replies":[
+                {
+                    "targetStatementId": 12,
+                    "replyText":"I see that you do not want to share information, so this conversation is pointless. Over."
+                } ,
+                {
+                    "targetStatementId": 9,
+                    "replyText":"I have more questions"
+                }
+            ]
+        },
+        "11":{
+            "id" : 11,
+            "npcText":"No, we do not rule. We do not establish laws nor do we punish other species in any way. We just make sure that you will not encounter threats you can not handle due to your immaturity",
+            "replies":[
+                {
+                    "targetStatementId": 10,
+                    "replyText":"Threats?"
+                } ,
+                {
+                    "targetStatementId": 9,
+                    "replyText":"I have more questions"
+                }
+            ]
+        },
+
+        "12":{
+            "id" : 12,
+            "npcText":"We will meet again soon.",
+            "replies":[
+                {
+                    "targetStatementId": -1,
+                    "replyText":"<over>"
                 }
             ]
         }
+
+
     }
 }

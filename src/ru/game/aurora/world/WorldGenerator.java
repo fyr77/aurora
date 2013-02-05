@@ -9,7 +9,10 @@ package ru.game.aurora.world;
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.gui.StoryScreen;
-import ru.game.aurora.npc.*;
+import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Dialog;
+import ru.game.aurora.npc.SingleShipFixedTime;
+import ru.game.aurora.npc.StandartAlienShipEvent;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.StarResearchProject;
@@ -46,8 +49,8 @@ public class WorldGenerator implements Runnable {
     private void createAliens(World world) {
         currentStatus = "Creating aliens";
 
-        AlienRace gardenerRace = null;
-        AlienRace kliskRace = null;
+        AlienRace gardenerRace;
+        AlienRace kliskRace;
 
         gardenerRace = new AlienRace("Gardeners", "gardener_ship", 8, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));
         kliskRace = new AlienRace("Klisk", "klisk_ship", 8, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/klisk_default_dialog.json")));
@@ -56,7 +59,7 @@ public class WorldGenerator implements Runnable {
 
         NPCShip gardenerShip = new NPCShip(0, 0, gardenerRace.getShipSprite(), gardenerRace, null, null);
         gardenerShip.setAi(null);
-        world.addListener(new SingleShipEvent(0.9, gardenerShip));
+        world.addListener(new SingleShipFixedTime(1, gardenerShip, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_ship_detected.json"))));
         world.addListener(new StandartAlienShipEvent(kliskRace));
         world.addListener(new SingleShipFixedTime(4, new AuroraProbe(0, 0), Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_detected.json"))));
 
