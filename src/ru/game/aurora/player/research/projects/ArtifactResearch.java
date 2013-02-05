@@ -8,13 +8,16 @@ package ru.game.aurora.player.research.projects;
 
 
 import ru.game.aurora.player.research.ResearchProjectDesc;
+import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.world.World;
 
 public class ArtifactResearch extends ResearchProjectDesc {
+    private static final long serialVersionUID = -5713273233606677508L;
+
     private int progress = 100;
 
-    public ArtifactResearch() {
-        super("Artifact research", "Study for an alien artifact. Different physical and chemical tests for its condition, contents and materials", "artifact_research");
+    public ArtifactResearch(ResearchReport report) {
+        super("Artifact research", "Study for an alien artifact. Different physical and chemical tests for its condition, contents and materials", "artifact_research", report);
     }
 
     @Override
