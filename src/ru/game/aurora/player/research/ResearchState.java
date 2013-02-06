@@ -84,6 +84,12 @@ public class ResearchState implements Serializable
                 if (state.desc.getReport() != null) {
                     world.addOverlayWindow(new ResearchReportScreen(state.desc, state.desc.getReport()));
                 }
+                if (state.desc.getMakesAvailable() != null) {
+                    for (ResearchProjectDesc projectDesc : state.desc.getMakesAvailable()) {
+                        availableProjects.add(projectDesc);
+                        GameLogger.getInstance().logMessage("New research project " + projectDesc.getName() + " is now available");
+                    }
+                }
                 GameLogger.getInstance().logMessage("Research project " + state.desc.name + " completed");
             }
         }

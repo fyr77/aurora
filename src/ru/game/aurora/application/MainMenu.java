@@ -7,7 +7,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.WorldGenerator;
+import ru.game.aurora.world.generation.WorldGenerator;
 
 /**
  * Created with IntelliJ IDEA.

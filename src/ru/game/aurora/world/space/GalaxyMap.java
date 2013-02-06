@@ -176,4 +176,9 @@ public class GalaxyMap extends BaseSpaceRoom {
     public void setTileAt(int x, int y, int val) {
         map[y][x] = val;
     }
+
+    public void addObjectAndSetTile(GalaxyMapObject object, int x, int y) {
+        objects.add(object);
+        map[y][x] = objects.size() - 1;
+    }
 }

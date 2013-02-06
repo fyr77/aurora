@@ -9,6 +9,8 @@ package ru.game.aurora.player.research;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Base class for research projects
@@ -38,6 +40,11 @@ public abstract class ResearchProjectDesc implements Serializable
      */
     protected ResearchReport report;
 
+    /**
+     * After completing this research, these researches will become available
+     */
+    protected List<ResearchProjectDesc> makesAvailable;
+
     protected ResearchProjectDesc(String name, String description, String icon) {
         this.name = name;
         this.description = description;
@@ -49,6 +56,18 @@ public abstract class ResearchProjectDesc implements Serializable
         this.description = description;
         this.icon = icon;
         this.report = report;
+    }
+
+    public void addNextResearch(ResearchProjectDesc desc)
+    {
+        if (makesAvailable == null) {
+            makesAvailable = new LinkedList<ResearchProjectDesc>();
+        }
+        makesAvailable.add(desc);
+    }
+
+    public List<ResearchProjectDesc> getMakesAvailable() {
+        return makesAvailable;
     }
 
     public String getName() {

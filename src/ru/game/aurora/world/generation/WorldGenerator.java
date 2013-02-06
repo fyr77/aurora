@@ -4,25 +4,20 @@
  * Date: 24.01.13
  * Time: 16:13
  */
-package ru.game.aurora.world;
+package ru.game.aurora.world.generation;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.gui.StoryScreen;
-import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.npc.Dialog;
-import ru.game.aurora.npc.SingleShipFixedTime;
-import ru.game.aurora.npc.StandartAlienShipEvent;
-import ru.game.aurora.player.research.ResearchProjectDesc;
-import ru.game.aurora.player.research.ResearchReport;
-import ru.game.aurora.player.research.projects.StarResearchProject;
 import ru.game.aurora.util.CollectionUtils;
+import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.aliens.GardenerGenerator;
+import ru.game.aurora.world.generation.aliens.HumanityGenerator;
+import ru.game.aurora.world.generation.aliens.KliskGenerator;
+import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
-import ru.game.aurora.world.quest.AuroraProbe;
-import ru.game.aurora.world.space.HomeworldGenerator;
-import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Random;
@@ -46,30 +41,23 @@ public class WorldGenerator implements Runnable {
 
     private ExecutorService executor = Executors.newFixedThreadPool(4);
 
+    private static final WorldGeneratorPart[] questGenerators = {
+            new InitialRadioEmissionQuestGenerator()
+    };
+
+    private static final WorldGeneratorPart[] alienGenerators = {
+            new KliskGenerator()
+            , new GardenerGenerator()
+            , new HumanityGenerator()
+    };
+
     private void createAliens(World world) {
         currentStatus = "Creating aliens";
 
-        AlienRace gardenerRace;
-        AlienRace kliskRace;
+        for (WorldGeneratorPart part : alienGenerators) {
+            part.updateWorld(world);
+        }
 
-        gardenerRace = new AlienRace("Gardeners", "gardener_ship", 8, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));
-        kliskRace = new AlienRace("Klisk", "klisk_ship", 8, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/klisk_default_dialog.json")));
-        StarSystem kliskHomeworld = HomeworldGenerator.generateKliskHomeworld(5, 5, kliskRace);
-        kliskRace.setHomeworld(kliskHomeworld);
-
-        NPCShip gardenerShip = new NPCShip(0, 0, gardenerRace.getShipSprite(), gardenerRace, null, null);
-        gardenerShip.setAi(null);
-        world.addListener(new SingleShipFixedTime(1, gardenerShip, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_ship_detected.json"))));
-        world.addListener(new StandartAlienShipEvent(kliskRace));
-        world.addListener(new SingleShipFixedTime(4, new AuroraProbe(0, 0), Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_detected.json"))));
-
-        world.getGalaxyMap().getObjects().add(kliskHomeworld);
-        world.getGalaxyMap().setTileAt(5, 5, world.getGalaxyMap().getObjects().size() - 1);
-
-        // earth
-        StarSystem solarSystem = HomeworldGenerator.createSolarSystem();
-        world.getGalaxyMap().getObjects().add(solarSystem);
-        world.getGalaxyMap().setTileAt(9, 9, world.getGalaxyMap().getObjects().size() - 1);
     }
 
     private void generateMap(final World world) {
@@ -152,20 +140,10 @@ public class WorldGenerator implements Runnable {
     }
 
     private void createQuestWorlds(World world) {
-        currentStatus = "Creating quest locations";
-        // initial research projects and their star system
-        StarSystem brownStar = generateRandomStarSystem(6, 7);
-        brownStar.setStar(new StarSystem.Star(6, new Color(128, 0, 0)));
-
-        final int idx = world.getGalaxyMap().getObjects().size();
-        world.getGalaxyMap().getObjects().add(brownStar);
-        world.getGalaxyMap().setTileAt(6, 7, idx);
-
-        ResearchProjectDesc starInitialResearch = new StarResearchProject(brownStar);
-        starInitialResearch.setReport(new ResearchReport("star_research", "This brown dwarf is unusual, as it actively emits radiowaves. Origin of this emission is currently unclear, and it is changing in time in a way that breaks all current theories concerning brown dwarves structure. " +
-                "This star is small, and its surface temperature is only about 900K, which makes it look more like a gas giant than like a star. Tracking such stars from Solar system using long-range radio telescopes is very difficult due to their low contrast and great distance." +
-                " \n Data collected by expedition can lead to better understanding of processes occurring inside these 'wannabe-stars'."));
-        world.getPlayer().getResearchState().getAvailableProjects().add(starInitialResearch);
+        currentStatus = "Creating quests";
+        for (WorldGeneratorPart part : questGenerators) {
+            part.updateWorld(world);
+        }
     }
 
     @Override

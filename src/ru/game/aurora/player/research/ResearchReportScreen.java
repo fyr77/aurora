@@ -8,9 +8,7 @@ package ru.game.aurora.player.research;
 
 
 import de.matthiasmann.twl.Widget;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
@@ -62,10 +60,29 @@ public class ResearchReportScreen implements OverlayWindow
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
+
+        final Font textFont = GUIConstants.dialogFont;
+        final Font captionFont = GameLogger.getInstance().getFont();
+
         EngineUtils.drawRectWithBorder(graphics, rect, camera, GUIConstants.borderColor, GUIConstants.backgroundColor);
         graphics.drawImage(ResourceManager.getInstance().getImage(report.icon), 5.5f * camera.getTileWidth(), 1.5f * camera.getTileHeight());
+        graphics.setFont(captionFont);
         graphics.drawString(research.getName() + " report", 5 * camera.getTileWidth(), 6 * camera.getTileHeight());
-        int lines = EngineUtils.drawString(graphics, report.text, 2 * camera.getTileWidth(), 7 * camera.getTileHeight(), 11 * camera.getTileWidth());
-        graphics.drawString("Press <enter> to continue", 2 * camera.getTileWidth(), 7 * camera.getTileHeight() + (lines + 1) *  GameLogger.getInstance().getFont().getHeight("l"));
+
+        int lines = EngineUtils.drawString(graphics, report.text, 2 * camera.getTileWidth(), 7 * camera.getTileHeight(), 11 * camera.getTileWidth(), textFont, Color.white);
+
+        if (research.getMakesAvailable() != null && research.getMakesAvailable().size() > 0) {
+            lines++;
+            graphics.setFont(captionFont);
+            graphics.drawString("New research available: ", 2 * camera.getTileWidth(), 7 * camera.getTileHeight() + (lines + 1) *  textFont.getHeight("l"));
+            graphics.setFont(textFont);
+            lines++;
+            for (ResearchProjectDesc newResearch : research.getMakesAvailable()) {
+                lines++;
+                graphics.drawString(newResearch.getName(), 2.5f * camera.getTileWidth(), 7 * camera.getTileHeight() + (lines + 1) *  textFont.getHeight("l"));
+            }
+        }
+        lines += 2;
+        graphics.drawString("Press <enter> to continue", 2 * camera.getTileWidth(), 7 * camera.getTileHeight() + (lines + 1) * textFont.getHeight("l"));
     }
 }
