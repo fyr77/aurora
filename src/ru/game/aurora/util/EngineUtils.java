@@ -6,9 +6,7 @@
  */
 package ru.game.aurora.util;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
@@ -97,6 +95,16 @@ public class EngineUtils {
             }
         }
         return lines;
+    }
+
+    public static boolean checkRectanglePressed(GameContainer container, Camera camera, Rectangle rect)
+    {
+        if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            final int mouseX = container.getInput().getMouseX() / camera.getTileWidth();
+            final int mouseY = container.getInput().getMouseY() / camera.getTileHeight();
+            return rect.contains(mouseX, mouseY);
+        }
+        return false;
     }
 
 }

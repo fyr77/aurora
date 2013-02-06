@@ -52,22 +52,22 @@ public class GameMenu implements Room {
             selectedIndex--;
         }
 
-        if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
-            switch (selectedIndex) {
-                case 0:
-                    world.setCurrentRoom(prevRoom);
-                    return;
-                case 1:
-                    world.setCurrentRoom(prevRoom);
-                    SaveGameManager.saveGame(world);
-                    GameLogger.getInstance().logMessage("Game saved");
-                    return;
-                case 2:
-                    container.exit();
-                    break;
-            }
+        boolean enterPressed = container.getInput().isKeyPressed(Input.KEY_ENTER);
+
+        if ((enterPressed && selectedIndex == 0) || EngineUtils.checkRectanglePressed(container, world.getCamera(), continueRectangle)) {
+            world.setCurrentRoom(prevRoom);
+            return;
         }
 
+        if ((enterPressed && selectedIndex == 1) || EngineUtils.checkRectanglePressed(container, world.getCamera(), saveRectangle)) {
+            world.setCurrentRoom(prevRoom);
+            SaveGameManager.saveGame(world);
+            GameLogger.getInstance().logMessage("Game saved");
+            return;
+        }
+        if ((enterPressed && selectedIndex == 2) || EngineUtils.checkRectanglePressed(container, world.getCamera(), quitRectangle)) {
+            container.exit();
+        }
 
     }
 
