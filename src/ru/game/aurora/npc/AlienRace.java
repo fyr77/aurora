@@ -45,7 +45,7 @@ public class AlienRace implements Serializable {
 
     public NPCShip createRandomShip() {
         NPCShip ship = new NPCShip(0, 0, getShipSprite(), this, null, getName() + " ship");
-        ship.setWeapons(new StarshipWeapon(new StarshipWeaponDesc(1, "Laser cannons", "Simple middle-range laser cannons", 5, 3), StarshipWeapon.MOUNT_ALL));
+        ship.setWeapons(new StarshipWeapon(new StarshipWeaponDesc(1, "Laser cannons", "Simple middle-range laser cannons", "blaster_shot", 5, 3), StarshipWeapon.MOUNT_ALL));
         return ship;
     }
 

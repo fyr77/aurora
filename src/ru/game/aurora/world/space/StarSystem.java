@@ -276,7 +276,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             target.onAttack(world, playerShip, damage);
             GameLogger.getInstance().logMessage("Bang! Dealt " + damage + " damage to " + target.getName());
 
-            effects.add(new BlasterShotEffect(playerShip, target, world.getCamera(), 800, "blaster_shot"));
+            effects.add(new BlasterShotEffect(playerShip, target, world.getCamera(), 800, weapon.getWeaponDesc().shotSprite));
 
             if (!target.isAlive()) {
                 GameLogger.getInstance().logMessage(target.getName() + " destroyed");

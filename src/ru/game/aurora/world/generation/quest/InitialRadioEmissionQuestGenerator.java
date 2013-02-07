@@ -47,7 +47,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
 
         NPCShip defenceProbe = new NPCShip(-3, 1, "rogues_probe", world.getRaces().get("Rogues"), null, "Defence drone");
         defenceProbe.setAi(new CombatAI(world.getPlayer().getShip()));
-        defenceProbe.setWeapons(new StarshipWeapon(new StarshipWeaponDesc(1, "Phaser", "", 4, 4), StarshipWeapon.MOUNT_ALL));
+        defenceProbe.setWeapons(new StarshipWeapon(new StarshipWeaponDesc(1, "Plasma gun", "", "plasma_shot", 4, 4), StarshipWeapon.MOUNT_ALL));
         defenceProbe.setHostile(true);
         defenceProbe.setStationary(true);
         brownStar.getShips().add(defenceProbe);

@@ -37,7 +37,7 @@ public class Ship extends BasePositionable implements SpaceObject {
     public Ship(int x, int y) {
         super(x, y);
         hull = maxHull = 3;
-        weapons.add(new StarshipWeapon(new StarshipWeaponDesc(1, "Laser cannons", "Simple middle-range laser cannons", 5, 3), StarshipWeapon.MOUNT_ALL));
+        weapons.add(new StarshipWeapon(new StarshipWeaponDesc(1, "Laser cannons", "Simple middle-range laser cannons", "blaster_shot", 5, 3), StarshipWeapon.MOUNT_ALL));
     }
 
 
