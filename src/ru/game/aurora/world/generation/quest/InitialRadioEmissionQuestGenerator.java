@@ -7,12 +7,18 @@
 package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.Color;
+import ru.game.aurora.npc.Dialog;
+import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.StarResearchProject;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.equip.StarshipWeapon;
+import ru.game.aurora.world.equip.StarshipWeaponDesc;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.space.SpaceHulk;
 import ru.game.aurora.world.space.StarSystem;
 
 /**
@@ -39,8 +45,20 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
         brownStar.setStar(new StarSystem.Star(6, new Color(128, 0, 0)));
         world.getGalaxyMap().addObjectAndSetTile(brownStar, 12, 12);
 
+        NPCShip defenceProbe = new NPCShip(-3, 1, "rogues_probe", world.getRaces().get("Rogues"), null, "Defence drone");
+        defenceProbe.setAi(new CombatAI(world.getPlayer().getShip()));
+        defenceProbe.setWeapons(new StarshipWeapon(new StarshipWeaponDesc(1, "Phaser", "", 4, 4), StarshipWeapon.MOUNT_ALL));
+        defenceProbe.setHostile(true);
+        defenceProbe.setStationary(true);
+        brownStar.getShips().add(defenceProbe);
+        brownStar.setFirstEnterDialog(Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/rogue_beacon_found.json")));
+
+        SpaceHulk beacon = new SpaceHulk(-2, 2, "Beacon", "rogues_beacon");
+        brownStar.getShips().add(beacon);
+
         ResearchProjectDesc secondResearch = new StarResearchProject(brownStar);
-        secondResearch.setReport(new ResearchReport("star_research", "This is dummy research, it will be replaced later"));
+        secondResearch.setReport(new ResearchReport("star_research", "We have studied the star, but it is not emitting anything unusual this time. It is a typical brown dwarf of spectral class L, its optical spectrum dominated by absorption bands of FeH, CrH and prominent alkali metal lines." +
+                " \n Perhaps, the source of emission is that alien structure near it. But what an immense power should it contain then? We should investigate this as soon as possible"));
         starInitialResearch.addNextResearch(secondResearch);
 
     }

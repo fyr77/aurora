@@ -12,6 +12,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.gui.EngineeringScreen;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpScreen;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.research.ResearchScreen;
 import ru.game.aurora.world.planet.Planet;
@@ -19,9 +20,7 @@ import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class World implements Serializable {
     private static final long serialVersionUID = 8351730882236794281L;
@@ -48,6 +47,8 @@ public class World implements Serializable {
     private int turnCount = 0;
 
     private List<GameEventListener> listeners = new LinkedList<GameEventListener>();
+
+    private Map<String, AlienRace> races = new HashMap<String, AlienRace>();
 
     public World(int sizeX, int sizeY) {
         player = new Player();
@@ -194,5 +195,9 @@ public class World implements Serializable {
 
     public void setCurrentStarSystem(StarSystem currentStarSystem) {
         this.currentStarSystem = currentStarSystem;
+    }
+
+    public Map<String, AlienRace> getRaces() {
+        return races;
     }
 }

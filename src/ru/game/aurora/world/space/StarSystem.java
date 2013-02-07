@@ -14,6 +14,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
+import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Positionable;
@@ -65,6 +66,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     private SpaceObject target;
 
     private boolean visited = false;
+
+    /**
+     * Dialog that will be shown when player enters this system for first time.
+     */
+    private Dialog firstEnterDialog;
 
     /**
      * Current mode
@@ -363,6 +369,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
         world.setCurrentStarSystem(this);
         world.onPlayerEnteredSystem(this);
+
+        if (firstEnterDialog != null && !visited) {
+            world.addOverlayWindow(firstEnterDialog);
+        }
+
         visited = true;
     }
 
@@ -461,5 +472,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public void setStar(Star star) {
         this.star = star;
+    }
+
+    public void setFirstEnterDialog(Dialog firstEnterDialog) {
+        this.firstEnterDialog = firstEnterDialog;
     }
 }

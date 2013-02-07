@@ -25,5 +25,6 @@ public class GardenerGenerator implements WorldGeneratorPart
         NPCShip gardenerShip = new NPCShip(0, 0, gardenerRace.getShipSprite(), gardenerRace, null, null);
         gardenerShip.setAi(null);
         world.addListener(new SingleShipFixedTime(1, gardenerShip, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_ship_detected.json"))));
+        world.getRaces().put(gardenerRace.getName(), gardenerRace);
     }
 }

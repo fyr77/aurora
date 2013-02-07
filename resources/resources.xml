@@ -45,6 +45,10 @@
     <resource type="image" id="klisk_ship">sprites/ships/klisk_ship.png</resource>
     <resource type="image" id="klisk_dialog">sprites/portraits/klisk.png</resource>
 
+    <!-- rogues -->
+    <resource type="image" id="rogues_probe">sprites/ships/rogues_probe.png</resource>
+    <resource type="image" id="rogues_beacon">sprites/ships/rogues_beacon.png</resource>
+
     <!-- earth -->
     <resource type="image" id="earth_dialog">sprites/portraits/earth-1.png</resource>
 

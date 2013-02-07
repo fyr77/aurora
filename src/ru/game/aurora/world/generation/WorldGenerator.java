@@ -14,6 +14,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.GardenerGenerator;
 import ru.game.aurora.world.generation.aliens.HumanityGenerator;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
@@ -31,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 public class WorldGenerator implements Runnable {
     private String currentStatus = "Initializing";
 
-    public static final int maxStars = 15;
+    public static final int maxStars = 30;
 
     public static final int worldWidth = 100;
 
@@ -49,6 +50,7 @@ public class WorldGenerator implements Runnable {
             new KliskGenerator()
             , new GardenerGenerator()
             , new HumanityGenerator()
+            , new RoguesGenerator()
     };
 
     private void createAliens(World world) {

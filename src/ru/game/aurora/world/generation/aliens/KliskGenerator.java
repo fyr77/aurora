@@ -28,5 +28,7 @@ public class KliskGenerator implements WorldGeneratorPart
         world.addListener(new StandartAlienShipEvent(kliskRace));
         world.getGalaxyMap().getObjects().add(kliskHomeworld);
         world.getGalaxyMap().setTileAt(5, 5, world.getGalaxyMap().getObjects().size() - 1);
+
+        world.getRaces().put(kliskRace.getName(), kliskRace);
     }
 }
