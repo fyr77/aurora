@@ -9,6 +9,7 @@ import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Dialog;
+import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.earth.Earth;
@@ -65,7 +66,9 @@ public class HomeworldGenerator {
         planets[2] = new Planet(ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0, false);
         setCoord(planets[2], 5);
 
-        AlienArtifact a = new AlienArtifact(3, 4, "small_artifact", new ArtifactResearch());
+        AlienArtifact a = new AlienArtifact(3, 4, "small_artifact", new ArtifactResearch(new ResearchReport("small_artifact", "This artifact represents a platinum plate with engraved message on it. Based on our knowlege of klisk language, we could decipher it partially." +
+                " It seems to tell about the nation that was first to reach another planet in their home system. Similar plates were sent by humnanity to Moon and Mars with first probes that reached these celestial bodies." +
+                " \n It is purely a memorial and posess little scientific interest. However perhaps it will help learn Klisk language and culture better, when Earth linguists and xenopshycologists will decipher it completely.")));
         ((Planet) planets[2]).setNearestFreePoint(a, 2, 2);
         ((Planet) planets[2]).getPlanetObjects().add(a);
 
