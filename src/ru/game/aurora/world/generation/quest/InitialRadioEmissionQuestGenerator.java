@@ -45,7 +45,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
         brownStar.setStar(new StarSystem.Star(6, new Color(128, 0, 0)));
         world.getGalaxyMap().addObjectAndSetTile(brownStar, 12, 12);
 
-        NPCShip defenceProbe = new NPCShip(-3, 1, "rogues_probe", world.getRaces().get("Rogues"), null, "Defence drone");
+        NPCShip defenceProbe = new NPCShip(2, 1, "rogues_probe", world.getRaces().get("Rogues"), null, "Defence drone");
         defenceProbe.setAi(new CombatAI(world.getPlayer().getShip()));
         defenceProbe.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), StarshipWeapon.MOUNT_ALL));
         defenceProbe.setHostile(true);
@@ -53,7 +53,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
         brownStar.getShips().add(defenceProbe);
         brownStar.setFirstEnterDialog(Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/rogue_beacon_found.json")));
 
-        SpaceHulk beacon = new SpaceHulk(-2, 2, "Beacon", "rogues_beacon");
+        SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon");
         brownStar.getShips().add(beacon);
 
         ResearchProjectDesc secondResearch = new StarResearchProject(brownStar);
