@@ -6,6 +6,7 @@ In progress...
 + Research projects can now show report screen when finished
 + Research projects can now spawn new projects when they are finished
 * Refactored world generation, split into multiple classes
++ Added universal json resource manager for loading game entity descriptions.
 
 ======================================================
 VERSION 0.0.2

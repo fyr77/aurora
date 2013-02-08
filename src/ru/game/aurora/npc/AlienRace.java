@@ -5,8 +5,8 @@
  */
 package ru.game.aurora.npc;
 
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.equip.StarshipWeapon;
-import ru.game.aurora.world.equip.StarshipWeaponDesc;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -45,7 +45,7 @@ public class AlienRace implements Serializable {
 
     public NPCShip createRandomShip() {
         NPCShip ship = new NPCShip(0, 0, getShipSprite(), this, null, getName() + " ship");
-        ship.setWeapons(new StarshipWeapon(new StarshipWeaponDesc(1, "Laser cannons", "Simple middle-range laser cannons", "blaster_shot", 5, 3), StarshipWeapon.MOUNT_ALL));
+        ship.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"), StarshipWeapon.MOUNT_ALL));
         return ship;
     }
 

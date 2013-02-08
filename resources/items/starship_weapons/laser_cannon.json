@@ -1,0 +1,9 @@
+{
+    "id" : "laser_cannon",
+    "damage" : 1,
+    "name": "Laser cannon",
+    "desc": "Simple but powerful middle-range laser cannon",
+    "shotSprite" : "blaster_shot",
+    "range" : 3,
+    "reloadTurns" : 3
+}
