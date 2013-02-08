@@ -417,21 +417,33 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             p.drawOnGlobalMap(container, g, camera, 0, 0);
 
         }
+
+        final int selectedWeaponRange = player.getShip().getWeapons().get(selectedWeapon).getWeaponDesc().range;
+        g.setColor(Color.red);
         for (SpaceObject ship : ships) {
             ship.draw(container, g, camera);
             if (ship.getX() == player.getShip().getX() && ship.getY() == player.getShip().getY()) {
                 GameLogger.getInstance().addStatusMessage("Press <enter> to contact");
             }
 
-            if (mode == MODE_SHOOT && player.getShip().getDistance(ship) < player.getShip().getWeapons().get(selectedWeapon).getWeaponDesc().range) {
+            if (mode == MODE_SHOOT && player.getShip().getDistance(ship) < selectedWeaponRange) {
                 // every targetable ship is surrounded by rectangle
                 g.drawRect(camera.getXCoord(ship.getX()), camera.getYCoord(ship.getY()), camera.getTileWidth(), camera.getTileHeight());
             }
         }
 
-        if (mode == MODE_SHOOT && target != null) {
-            // draw target mark
-            g.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoord(target.getX()), camera.getYCoord(target.getY()));
+        if (mode == MODE_SHOOT) {
+            if (target != null) {
+                // draw target mark
+                g.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoord(target.getX()), camera.getYCoord(target.getY()));
+            }
+
+            // drawing rect that shows radius of current weapon
+            g.drawRect((camera.getNumTilesX() / 2 - selectedWeaponRange + 1) * camera.getTileWidth()
+                    , (camera.getNumTilesY() / 2 - selectedWeaponRange + 1) * camera.getTileHeight()
+                    , (2 * selectedWeaponRange - 1) * camera.getTileWidth()
+                    , (2 * selectedWeaponRange - 1) * camera.getTileHeight());
+
         }
 
         g.setColor(Color.red);

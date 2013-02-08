@@ -72,6 +72,7 @@ public class MainMenu {
                     return SaveGameManager.loadGame();
                 case 1:
                     createNewGame();
+                    break;
                 case 2:
                     container.exit();
                     break;
