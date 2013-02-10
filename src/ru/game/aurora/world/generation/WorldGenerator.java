@@ -15,6 +15,7 @@ import ru.game.aurora.world.generation.aliens.GardenerGenerator;
 import ru.game.aurora.world.generation.aliens.HumanityGenerator;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
@@ -53,13 +54,22 @@ public class WorldGenerator implements Runnable {
             , new RoguesGenerator()
     };
 
+    private static final WorldGeneratorPart[] otherGenerators = {
+            new BuildersRuinGenerator()
+    };
+
     private void createAliens(World world) {
         currentStatus = "Creating aliens";
-
         for (WorldGeneratorPart part : alienGenerators) {
             part.updateWorld(world);
         }
+    }
 
+    private void createArtifactsAndAnomalies(World world) {
+        currentStatus = "Creating artifacts and anomalies";
+        for (WorldGeneratorPart part : otherGenerators) {
+            part.updateWorld(world);
+        }
     }
 
     private void generateMap(final World world) {
@@ -154,6 +164,7 @@ public class WorldGenerator implements Runnable {
 
         generateMap(world);
         createAliens(world);
+        createArtifactsAndAnomalies(world);
         createQuestWorlds(world);
 
         world.addOverlayWindow(new StoryScreen("story/beginning.json"));

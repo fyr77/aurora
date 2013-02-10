@@ -489,4 +489,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     public void setFirstEnterDialog(Dialog firstEnterDialog) {
         this.firstEnterDialog = firstEnterDialog;
     }
+
+    public BasePlanet[] getPlanets() {
+        return planets;
+    }
 }

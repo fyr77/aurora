@@ -118,7 +118,7 @@ public class ResourceManager {
         if (spriteSheetPath == null || spriteSheetPath.length() == 0)
             throw new SlickException("Image resource [" + id + "] has invalid path");
 
-        loadImage(SPRITE_SHEET_REF + id, spriteSheetPath);
+        loadImage(SPRITE_SHEET_REF + id, spriteSheetPath.trim());
 
         animationMap.put(id, new ResourceAnimationData(SPRITE_SHEET_REF + id, tw, th, duration));
     }

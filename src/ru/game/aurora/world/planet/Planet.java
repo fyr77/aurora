@@ -183,7 +183,7 @@ public class Planet extends BasePlanet {
         int x = landingParty.getX();
         int y = landingParty.getY();
 
-        while (!SurfaceTypes.isPassible(landingParty, surface[y][x])) {
+        while (!SurfaceTypes.isPassible(landingParty, surface[wrapY(y)][wrapX(x)])) {
             x = wrapX(x + 1);
             y = wrapY(y + CommonRandom.getRandom().nextInt(2) - 1);
         }
@@ -275,7 +275,7 @@ public class Planet extends BasePlanet {
         final boolean enterPressed = container.getInput().isKeyPressed(Input.KEY_ENTER);
         if (enterPressed) {
             // check if can pick up smth
-            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext(); ) {
+            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext();) {
                 PlanetObject p = iter.next();
 
                 if (!p.canBePickedUp()) {

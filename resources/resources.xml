@@ -34,6 +34,7 @@
 
     <!-- artifacts -->
     <resource type="image" id="small_artifact">sprites/planet_objects/small_artifact.png</resource>
+    <resource type="image" id="builders_ruins">sprites/planet_objects/ruins.png</resource>
 
     <!-- races -->
 
