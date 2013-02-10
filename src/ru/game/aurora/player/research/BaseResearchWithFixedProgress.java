@@ -9,24 +9,25 @@ package ru.game.aurora.player.research;
 
 import ru.game.aurora.world.World;
 
-public abstract class BaseResearchWithFixedProgress extends ResearchProjectDesc
-{
+public class BaseResearchWithFixedProgress extends ResearchProjectDesc {
     private static final long serialVersionUID = 5476045747203186686L;
 
     protected int progress;
 
+    protected int score;
+
     protected final int initialProgress;
 
-    public BaseResearchWithFixedProgress(String name, String description, String icon, int initialProgress) {
+    public BaseResearchWithFixedProgress(String name, String description, String icon, int initialProgress, int score) {
         super(name, description, icon);
         this.initialProgress = initialProgress;
         this.progress = initialProgress;
+        this.score = score;
     }
 
-    public BaseResearchWithFixedProgress(String name, String description, String icon, ResearchReport report, int initialProgress) {
-        super(name, description, icon, report);
-        this.initialProgress = initialProgress;
-        this.progress = initialProgress;
+    public BaseResearchWithFixedProgress(String name, String description, String icon, ResearchReport report, int initialProgress, int score) {
+        this(name, description, icon, initialProgress, score);
+        this.report = report;
     }
 
     @Override
@@ -59,5 +60,10 @@ public abstract class BaseResearchWithFixedProgress extends ResearchProjectDesc
     @Override
     public boolean isRepeatable() {
         return false;
+    }
+
+    @Override
+    public int getScore() {
+        return score;
     }
 }

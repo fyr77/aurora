@@ -25,13 +25,12 @@ public class SpaceObjectResearchProject extends BaseResearchWithFixedProgress {
     protected BasePositionable position;
 
     public SpaceObjectResearchProject(String name, String description, String icon, int initialProgress, StarSystem starSystem, BasePositionable object) {
-        super(name, description, icon, initialProgress);
+        super(name, description, icon, initialProgress, 50);
         this.starSystem = starSystem;
         this.position = object;
     }
 
-    protected boolean isInRange(World world)
-    {
+    protected boolean isInRange(World world) {
         return Math.pow(position.getX() - world.getPlayer().getShip().getX(), 2) + Math.pow(world.getPlayer().getShip().getY() - position.getY(), 2) <= 16;
     }
 
@@ -65,8 +64,4 @@ public class SpaceObjectResearchProject extends BaseResearchWithFixedProgress {
         return "Completed";
     }
 
-    @Override
-    public int getScore() {
-        return 50;
-    }
 }

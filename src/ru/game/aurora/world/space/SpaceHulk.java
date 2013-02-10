@@ -12,16 +12,31 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.npc.Dialog;
+import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 
-public class SpaceHulk extends BasePositionable implements SpaceObject
-{
+/**
+ * A space hulk drifting in space.
+ * Does not move or react on player. Can not be shot at and destroyed.
+ * Can contain something valuable, like resources, materials for research etc.
+ * In future versions will contain enemies and location similar to planet
+ */
+public class SpaceHulk extends BasePositionable implements SpaceObject {
     private static final long serialVersionUID = 1122189215297259875L;
 
     private String name;
 
     private String image;
+
+    // dialog that is shown to player when interacting with hulk
+    private Dialog onInteractDialog;
+
+    private boolean explored = false;
+
+    // research that becomes available after interaction
+    private ResearchProjectDesc[] researchProjectDescs;
 
     public SpaceHulk(int x, int y, String name, String image) {
         super(x, y);
@@ -31,7 +46,21 @@ public class SpaceHulk extends BasePositionable implements SpaceObject
 
     @Override
     public void onContact(World world) {
+        if (explored) {
+            return;
+        }
 
+        if (onInteractDialog != null) {
+            world.addOverlayWindow(onInteractDialog);
+        }
+
+        if (researchProjectDescs != null) {
+            for (ResearchProjectDesc researchProjectDesc : researchProjectDescs) {
+                world.getPlayer().getResearchState().addNewAvailableProject(researchProjectDesc);
+            }
+        }
+
+        explored = true;
     }
 
     @Override
@@ -57,5 +86,13 @@ public class SpaceHulk extends BasePositionable implements SpaceObject
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
         graphics.drawImage(ResourceManager.getInstance().getImage(image), camera.getXCoord(x), camera.getYCoord(y));
+    }
+
+    public void setOnInteractDialog(Dialog onInteractDialog) {
+        this.onInteractDialog = onInteractDialog;
+    }
+
+    public void setResearchProjectDescs(ResearchProjectDesc... descs) {
+        this.researchProjectDescs = descs;
     }
 }

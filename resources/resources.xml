@@ -60,6 +60,7 @@
     <resource type="image" id="artifact_research">sprites/research_icons/artifact.png</resource>
     <resource type="image" id="probe_research">sprites/research_icons/probe_research.png</resource>
     <resource type="image" id="star_research">sprites/research_icons/star_research.png</resource>
+    <resource type="image" id="technology_research">sprites/research_icons/technology_research.png</resource>
 
     <!-- planets -->
 
@@ -69,7 +70,8 @@
     <!-- effects -->
     <resource type="image" id="blaster_shot">sprites/effects/blaster_shot.png</resource>
     <resource type="image" id="plasma_shot">sprites/effects/plasma_shot.png</resource>
-    <resource type="animation" id="ship_explosion" tw="64" th="64" duration="100">sprites/effects/explosion.png</resource>
+    <resource type="animation" id="ship_explosion" tw="64" th="64" duration="100">sprites/effects/explosion.png
+    </resource>
 
     <!-- story -->
     <resource type="image" id="story_beginning">sprites/story/construction.png</resource>

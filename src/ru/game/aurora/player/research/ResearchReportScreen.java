@@ -18,8 +18,7 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
 
-public class ResearchReportScreen implements OverlayWindow
-{
+public class ResearchReportScreen implements OverlayWindow {
     private static final long serialVersionUID = 8117170582835644516L;
 
     private boolean isOver = false;
@@ -30,8 +29,7 @@ public class ResearchReportScreen implements OverlayWindow
 
     private static final Rectangle rect = new Rectangle(1, 1, 13, 13);
 
-    public ResearchReportScreen(ResearchProjectDesc research, ResearchReport report)
-    {
+    public ResearchReportScreen(ResearchProjectDesc research, ResearchReport report) {
         this.research = research;
         this.report = report;
     }
@@ -65,7 +63,12 @@ public class ResearchReportScreen implements OverlayWindow
         final Font captionFont = GameLogger.getInstance().getFont();
 
         EngineUtils.drawRectWithBorder(graphics, rect, camera, GUIConstants.borderColor, GUIConstants.backgroundColor);
-        graphics.drawImage(ResourceManager.getInstance().getImage(report.icon), 5.5f * camera.getTileWidth(), 1.5f * camera.getTileHeight());
+
+
+        final Image image = ResourceManager.getInstance().getImage(report.icon);
+        final float scale = Math.min(256.0f / image.getWidth(), 256.0f / image.getHeight());
+        image.draw(5.5f * camera.getTileWidth(), 1.5f * camera.getTileHeight(), scale);
+
         graphics.setFont(captionFont);
         graphics.drawString(research.getName() + " report", 5 * camera.getTileWidth(), 6 * camera.getTileHeight());
 
@@ -74,12 +77,12 @@ public class ResearchReportScreen implements OverlayWindow
         if (research.getMakesAvailable() != null && research.getMakesAvailable().size() > 0) {
             lines++;
             graphics.setFont(captionFont);
-            graphics.drawString("New research available: ", 2 * camera.getTileWidth(), 7 * camera.getTileHeight() + (lines + 1) *  textFont.getHeight("l"));
+            graphics.drawString("New research available: ", 2 * camera.getTileWidth(), 7 * camera.getTileHeight() + (lines + 1) * textFont.getHeight("l"));
             graphics.setFont(textFont);
             lines++;
             for (ResearchProjectDesc newResearch : research.getMakesAvailable()) {
                 lines++;
-                graphics.drawString(newResearch.getName(), 2.5f * camera.getTileWidth(), 7 * camera.getTileHeight() + (lines + 1) *  textFont.getHeight("l"));
+                graphics.drawString(newResearch.getName(), 2.5f * camera.getTileWidth(), 7 * camera.getTileHeight() + (lines + 1) * textFont.getHeight("l"));
             }
         }
         lines += 2;

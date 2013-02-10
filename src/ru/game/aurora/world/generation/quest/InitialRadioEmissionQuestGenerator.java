@@ -10,6 +10,7 @@ import org.newdawn.slick.Color;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.npc.shipai.CombatAI;
+import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.StarResearchProject;
@@ -24,8 +25,7 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * Creates quest chain with initial research for brown dwarf radio emission, that is given to player on game startup
  */
-public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
-{
+public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
         // initial research projects and their star system
@@ -53,7 +53,26 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
         brownStar.getShips().add(defenceProbe);
         brownStar.setFirstEnterDialog(Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/rogue_beacon_found.json")));
 
+        ResearchProjectDesc beaconResearchProject = new BaseResearchWithFixedProgress(
+                "Beacon research"
+                , "Detailed study for materials and samples taken from enormous alien structure, assigned name 'beacon'"
+                , "technology_research"
+                , 40
+                , 50
+        );
+
+        ResearchReport beaconReport = new ResearchReport("rogues_beacon", "This structure is located near the sun, consuming its energy and transforming it into" +
+                " emiision of different types of waves, both radio and hyperwave. It is transmitting a small, repeatable pattern, and its power is enormous. We believe it can" +
+                " be easily detected even with our low-resolution sensors from more than a thousand light years. Due to these points we believe that this structure is some kind of a beacon, " +
+                " perhaps used for navigation, or for marking places of interest for its creators. \n " +
+                " We din't fully understand mechanincs of its emission and energy consumption, but it overpowers all technology available to humanity. Detailed study of " +
+                " collected data in Earth laboratories can lead to a breakthrough in high-energy and hyperwave physics." +
+                " \n We should also be careful, as creators of this beacon may not welcome our violation of their territory.");
+        beaconResearchProject.setReport(beaconReport);
+
         SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon");
+        beacon.setResearchProjectDescs(beaconResearchProject);
+        beacon.setOnInteractDialog(Dialog.loadFromFile("dialogs/quest/rogues_beacon_explored.json"));
         brownStar.getShips().add(beacon);
 
         ResearchProjectDesc secondResearch = new StarResearchProject(brownStar);
