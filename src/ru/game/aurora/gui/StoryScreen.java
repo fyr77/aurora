@@ -90,7 +90,7 @@ public class StoryScreen implements OverlayWindow {
             return;
         }
         graphics.drawImage(ResourceManager.getInstance().getImage(screens[currentScreen].imageId), 64, 64);
-        EngineUtils.drawRectWithBorderAndText(graphics, textRect, camera, Color.yellow, GUIConstants.backgroundColor, screens[currentScreen].text, GUIConstants.dialogFont, Color.white);
+        EngineUtils.drawRectWithBorderAndText(graphics, textRect, camera, Color.yellow, GUIConstants.backgroundColor, screens[currentScreen].text, GUIConstants.dialogFont, Color.white, false);
     }
 
     public boolean isOver() {

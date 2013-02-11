@@ -73,8 +73,8 @@ public class GameMenu implements Room {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        EngineUtils.drawRectWithBorderAndText(graphics, continueRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Continue", GUIConstants.dialogFont, selectedIndex == 0 ? Color.green : Color.white);
-        EngineUtils.drawRectWithBorderAndText(graphics, saveRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Save", GUIConstants.dialogFont, selectedIndex == 1 ? Color.green : Color.white);
-        EngineUtils.drawRectWithBorderAndText(graphics, quitRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Exit", GUIConstants.dialogFont, selectedIndex == 2 ? Color.green : Color.white);
+        EngineUtils.drawRectWithBorderAndText(graphics, continueRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Continue", GUIConstants.dialogFont, selectedIndex == 0 ? Color.green : Color.white, true);
+        EngineUtils.drawRectWithBorderAndText(graphics, saveRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Save", GUIConstants.dialogFont, selectedIndex == 1 ? Color.green : Color.white, true);
+        EngineUtils.drawRectWithBorderAndText(graphics, quitRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Exit", GUIConstants.dialogFont, selectedIndex == 2 ? Color.green : Color.white, true);
     }
 }

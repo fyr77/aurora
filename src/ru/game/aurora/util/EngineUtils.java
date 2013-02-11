@@ -32,12 +32,16 @@ public class EngineUtils {
     }
 
     public static void drawRectWithBorderAndText(Graphics graphics, Rectangle rectangle, Camera camera, String text) {
-        drawRectWithBorderAndText(graphics, rectangle, camera, Color.yellow, GUIConstants.backgroundColor, text, GUIConstants.dialogFont, Color.white);
+        drawRectWithBorderAndText(graphics, rectangle, camera, Color.yellow, GUIConstants.backgroundColor, text, GUIConstants.dialogFont, Color.white, false);
     }
 
-    public static void drawRectWithBorderAndText(Graphics graphics, Rectangle rectangle, Camera camera, Color borderColor, Color fillColor, String text, Font font, Color textColor) {
+    public static void drawRectWithBorderAndText(Graphics graphics, Rectangle rectangle, Camera camera, Color borderColor, Color fillColor, String text, Font font, Color textColor, boolean aligned) {
         drawRectWithBorder(graphics, rectangle, camera, borderColor, fillColor);
-        drawString(graphics, text, (int) ((rectangle.getX() + 1) * camera.getTileWidth()), (int) ((rectangle.getY() + 0.5) * camera.getTileHeight()), (int) (rectangle.getWidth() - 2) * camera.getTileHeight(), font, textColor);
+        if (!aligned) {
+            drawString(graphics, text, (int) ((rectangle.getX() + 1) * camera.getTileWidth()), (int) ((rectangle.getY() + 0.5) * camera.getTileHeight()), (int) (rectangle.getWidth() - 2) * camera.getTileHeight(), font, textColor);
+        } else {
+            drawSingleStringAligned(graphics, text, font, textColor, (int) ((rectangle.getX() ) * camera.getTileWidth()), (int) ((rectangle.getY()) * camera.getTileHeight()), (int) (rectangle.getWidth() ) * camera.getTileWidth(), (int) (rectangle.getHeight() * camera.getTileHeight()));
+        }
     }
 
     /**
@@ -95,6 +99,19 @@ public class EngineUtils {
             }
         }
         return lines;
+    }
+
+    public static void drawSingleStringAligned(Graphics g, String s, Font font, Color color, int x, int y, int width, int height)
+    {
+        final int lineHeight = font.getLineHeight();
+        final int lineWidth = font.getWidth(s);
+
+        final int textStartX = x + (width - lineWidth) / 2;
+        final int textStartY = y + (height + lineHeight) / 2;
+
+        g.setFont(font);
+        g.setColor(color);
+        g.drawString(s, textStartX, textStartY);
     }
 
     public static boolean checkRectanglePressed(GameContainer container, Camera camera, Rectangle rect)

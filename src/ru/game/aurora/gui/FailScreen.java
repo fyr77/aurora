@@ -60,7 +60,7 @@ public class FailScreen implements OverlayWindow {
         graphics.drawImage(image1, 128, 64);
         graphics.setColor(Color.yellow);
         graphics.drawRect(128, 64, image1.getWidth(), image1.getHeight());
-        EngineUtils.drawRectWithBorderAndText(graphics, textRect, camera, Color.yellow, GUIConstants.backgroundColor, text, GUIConstants.dialogFont, Color.white);
+        EngineUtils.drawRectWithBorderAndText(graphics, textRect, camera, Color.yellow, GUIConstants.backgroundColor, text, GUIConstants.dialogFont, Color.white, false);
     }
 
     public static FailScreen createShipDestroyedFailScreen() {
