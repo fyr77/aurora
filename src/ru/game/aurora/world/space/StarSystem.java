@@ -131,7 +131,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             return;
         }
         g.setColor(star.color);
-        EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, camera.getTileWidth() / (2 * star.size), star.color, true);
+        EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, camera.getTileWidth() / star.size, star.color, true);
     }
 
     @Override

@@ -20,6 +20,10 @@
             "npcText":"We are Klisk",
             "replies":[
                 {
+                    "targetStatementId":3,
+                    "replyText":"Can you tell a bit about yourself?"
+                },
+                {
                     "targetStatementId":2,
                     "replyText":"Oh, I know, you are the famous interstellar traders?"
                 }
@@ -32,6 +36,138 @@
                 {
                     "targetStatementId":-1,
                     "replyText":"No, thanks, we don't have anything to trade right now"
+                }
+            ]
+        },
+        "3":{
+            "id":3,
+            "npcText":"Klisk are traders. And diplomats. We make connections. Between species.",
+            "replies":[
+                {
+                    "targetStatementId":4,
+                    "replyText":"And what do you offer, exactly?"
+                },
+                {
+                    "targetStatementId":5,
+                    "replyText":"But any service has a price, right?"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"That's all we need for now, goodbye."
+                }
+            ]
+        },
+        "4":{
+            "id":4,
+            "npcText":"Klisk offer technology and equipment. Klisk offer information about space and other species. Klisk offer support and translation in communication with species from other classes",
+            "replies":[
+                {
+                    "targetStatementId":6,
+                    "replyText":"Other classes?"
+                },
+                {
+                    "targetStatementId":3,
+                    "replyText":"Good, but we have more questions"
+                }
+            ]
+        },
+        "5":{
+            "id":5,
+            "npcText":"Right. Klisk provide interstellar currency. Credits. All Klisk services are paid with it.",
+            "replies":[
+                {
+                    "targetStatementId":11,
+                    "replyText":"Credits? How we can get them?"
+                },
+                {
+                    "targetStatementId":3,
+                    "replyText":"I see. We have more questions"
+                }
+            ]
+        },
+        "6":{
+            "id":6,
+            "npcText":"All sentinent beings are divided into classes. Species withing same class can theoretically understand each other. You are from most common 2nd class.",
+            "replies":[
+                {
+                    "targetStatementId":7,
+                    "replyText" : "So you are also from second class if we can communicate?"
+                },
+                {
+                    "targetStatementId":3,
+                    "replyText":"I see. Now back to my other questions..."
+                }
+            ]
+        },
+        "7":{
+            "id":7,
+            "npcText":"Yes. But Klisk are unique, we can communicate with species of 1st and 5th classes.",
+            "replies":[
+                {
+                    "targetStatementId":8,
+                    "replyText":"Why is it so difficult?"
+                },
+                {
+                    "targetStatementId":9,
+                    "replyText":"Are there other species who can do it?"
+                }
+            ]
+        },
+        "8":{
+            "id":8,
+            "npcText":"Different ways of communication. And more, different mind and logic. Impossible to understand for beings from other classes. Except for us. Klisk are flexible.",
+            "replies":[
+                {
+                    "targetStatementId":9,
+                    "replyText":"Are there other species who can do it?"
+                }
+            ]
+        },
+        "9":{
+            "id":9,
+            "npcText":"Gardeners can. It is hard to say if there is anything they can not do.",
+            "replies":[
+                {
+                    "targetStatementId":10,
+                    "replyText":"Gardeners?"
+                },
+                {
+                    "targetStatementId":3,
+                    "replyText":"I guess you are right... now back to my other questions"
+                }
+            ]
+        },
+        "10":{
+            "id":10,
+            "npcText":"Ancient and powerful race. If you haven't yet seen them you will soon. They always contact and welcome newcomers.",
+            "replies":[
+                {
+                    "targetStatementId":3,
+                    "replyText":"Ok, i want to ask something more"
+                }
+            ]
+        },
+        "11":{
+            "id":11,
+            "npcText":"Can get them by selling valuable technology and information to Klisk. Or some other species that use Klisk credits.",
+            "replies":[
+                {
+                    "targetStatementId":12,
+                    "replyText":"We have some spare resources, can we convert them to credits?"
+                },
+                {
+                    "targetStatementId":3,
+                    "replyText":"Ok, we will remember that for future"
+                }
+            ]
+        },
+        "12":{
+            "id":12,
+            "npcText":"No. Raw resources are rarely needed by advanced space-travelling species. Only technology and knowledge have value.",
+            "replies":[
+                {
+                    "targetStatementId":3,
+                    "replyText":"Ok, i want to ask something more"
                 }
             ]
         }

@@ -40,7 +40,7 @@ public class ParallaxBackground {
 
     private static final Random r = new Random();
 
-    private float baseWidth = 2;
+    private float baseWidth = 3;
 
     public ParallaxBackground(int width, int height, int centerX, int centerY, int density) {
         if (density == 0) {
@@ -78,10 +78,10 @@ public class ParallaxBackground {
                 graphics.setColor(s.color);
 
                 float diameter = 2 * (float) Math.ceil(baseWidth / (2 * i + 1));
-                if (diameter < 4.0f) {
+             /*   if (diameter < 4.0f) {
                     // jgame does not draw oval with diameter smaller than 3
                     diameter = 4.0f;
-                }
+                }*/
 
                 if (realX < -diameter || realY < -diameter || realX > camera.getTileWidth() * camera.getNumTilesX() || realY > camera.getTileHeight() * camera.getNumTilesY()) {
                     continue;
