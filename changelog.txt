@@ -1,13 +1,18 @@
+=====================================================
+VERSION 0.0.4
+
+In progress...
+
 ======================================================
 VERSION 0.0.3
 
-In progress...
+11.02.2013
 
 + Research projects can now show report screen when finished
 + Research projects can now spawn new projects when they are finished
 * Refactored world generation, split into multiple classes
 + Added universal json resource manager for loading game entity descriptions.
-+ Added content - some new researches, reports and artifacts
++ Added content - some new researches, dialogs, reports and artifacts
 
 ======================================================
 VERSION 0.0.2

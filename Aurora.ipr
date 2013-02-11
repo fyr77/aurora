@@ -8,7 +8,6 @@
           <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
         </element>
         <element id="module-output" name="Aurora" />
-        <element id="dir-copy" path="$PROJECT_DIR$/resources" />
       </root>
     </artifact>
     <artifact name="Distribution">
@@ -26,6 +25,9 @@
             <element id="library" level="project" name="slick" />
             <element id="library" level="project" name="Twl" />
             <element id="library" level="project" name="xpp3-1.1.4c" />
+            <element id="directory" name="resources">
+              <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+            </element>
           </element>
         </element>
       </root>
