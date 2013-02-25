@@ -27,8 +27,7 @@ public class LandscapeGenerator {
     }
 
     // check that every mountain tile has at least 1 neighbour both on x and on y (standalone mountain tiles can not be drawn correctly)
-    private static void updateMountains(byte[][] surface, int width, int height)
-    {
+    private static void updateMountains(byte[][] surface, int width, int height) {
         boolean changed;
         do {
             changed = false;
@@ -68,11 +67,11 @@ public class LandscapeGenerator {
         }
 
         // generate mountain clusters
-        for (int i = 0; i < random.nextInt(25) + 5; ++i) {
+        for (int i = 0; i < random.nextInt(50) + 20; ++i) {
             int centerX = random.nextInt(width);
             int centerY = random.nextInt(height);
 
-            for (int j = 0; j < random.nextInt(30) + 10; ++j) {
+            for (int j = 0; j < random.nextInt(80) + 10; ++j) {
                 final int x = wrap(centerX + random.nextInt(20) - 10, width);
                 final int y = wrap(centerY + random.nextInt(20) - 10, height);
                 surface[y][x] |= SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
@@ -109,7 +108,7 @@ public class LandscapeGenerator {
                         }
                     }
 
-                    if (mountainCount >= 4) {
+                    if (mountainCount >= 3) {
                         surface[i][j] |= SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
                     } else {
                         if (SurfaceTypes.isMountain(surface[i][j])) {
