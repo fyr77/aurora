@@ -81,7 +81,11 @@ public class SurfaceTypes {
         }
 
         graphics.drawImage(ResourceManager.getInstance().getImage(spriteName), screenX, screenY);
+    }
 
+    public static boolean isMountain(byte b)
+    {
+        return (b & MOUNTAINS_MASK) != 0;
     }
 
     public static boolean isPassible(LandingParty party, byte tileType) {

@@ -26,10 +26,7 @@ import ru.game.aurora.world.planet.nature.Animal;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 import ru.game.aurora.world.space.StarSystem;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Class for planet.
@@ -95,6 +92,25 @@ public class Planet extends BasePlanet {
     private transient PlanetObject target = null;
 
     private transient Effect currentEffect = null;
+
+
+    private static Map<Integer, String> mountainSprites = new HashMap<Integer, String>();
+
+    static {
+        mountainSprites.put(31, "mountains_4");
+        mountainSprites.put(11, "mountains_5");
+        mountainSprites.put(107, "mountains_6");
+        mountainSprites.put(127, "mountains_7");
+        mountainSprites.put(22, "mountains_8");
+        mountainSprites.put(214, "mountains_9");
+        mountainSprites.put(223, "mountains_10");
+        mountainSprites.put(251, "mountains_11");
+        mountainSprites.put(248, "mountains_12");
+        mountainSprites.put(208, "mountains_13");
+        mountainSprites.put(254, "mountains_14");
+        mountainSprites.put(104, "mountains_15");
+    }
+
 
     public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
         super(size, y, owner, atmosphere, x, cat);
@@ -483,46 +499,71 @@ public class Planet extends BasePlanet {
 
         }
 
+
         // after all draw mountains
         if (detailed) {
             for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
                 // first draw outer mountains (that have only one neighbour on X)
                 for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; j++) {
-
-                    final byte type = surface[wrapY(i)][wrapX(j)];
-                    if ((type & SurfaceTypes.VISIBILITY_MASK) == 0) {
+                    if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.VISIBILITY_MASK) == 0) {
                         continue;
                     }
-                    if ((type & SurfaceTypes.MOUNTAINS_MASK) != 0) {
 
-                        byte leftNeighbour = surface[wrapY(i)][wrapX(j - 1)];
-                        byte rightNeighbour = surface[wrapY(i)][wrapX(j + 1)];
-
-                        if (((leftNeighbour & SurfaceTypes.MOUNTAINS_MASK) == 0) || ((rightNeighbour & SurfaceTypes.MOUNTAINS_MASK) == 0)) {
-                            graphics.drawImage(ResourceManager.getInstance().getImage("mountains_tile_1"), camera.getXCoord(j), camera.getYCoord(i));
-
-                        }
-                    }
-                }
-
-                for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; j++) {
-
-                    final byte type = surface[wrapY(i)][wrapX(j)];
-                    if ((type & SurfaceTypes.VISIBILITY_MASK) == 0) {
+                    if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {
+                        graphics.drawImage(ResourceManager.getInstance().getImage("rock_tile_1"), camera.getXCoord(j), camera.getYCoord(i));
                         continue;
                     }
-                    if ((type & SurfaceTypes.MOUNTAINS_MASK) != 0) {
 
-                        byte leftNeighbour = surface[wrapY(i)][wrapX(j - 1)];
-                        byte rightNeighbour = surface[wrapY(i)][wrapX(j + 1)];
 
-                        if (((leftNeighbour & SurfaceTypes.MOUNTAINS_MASK) != 0) && ((rightNeighbour & SurfaceTypes.MOUNTAINS_MASK) != 0)) {
-                            graphics.drawImage(ResourceManager.getInstance().getImage("mountains_tile_2"), camera.getXCoord(j), camera.getYCoord(i));
-                        }
+
+                    final boolean left = ((surface[wrapY(i)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    final boolean right = ((surface[wrapY(i)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    final boolean up = ((surface[wrapY(i - 1)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    final boolean down= ((surface[wrapY(i + 1)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+
+                    final boolean downLeft= ((surface[wrapY(i + 1)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    final boolean downRight= ((surface[wrapY(i + 1)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    final boolean upLeft= ((surface[wrapY(i - 1)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    final boolean upRight= ((surface[wrapY(i - 1)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+
+                    int number = 0;
+                    if (upLeft) {
+                        number |= 11;
                     }
+                    if (up) {
+                       number |= 31;
+                    }
+
+                    if (upRight) {
+                        number |= 22;
+                    }
+
+                    if (left) {
+                        number |= 107;
+                    }
+
+                    if (right) {
+                        number |= 214;
+                    }
+
+                    if (downLeft) {
+                        number |= 104;
+                    }
+
+                    if (down) {
+                        number |= 248;
+                    }
+
+                    if (downRight) {
+                        number |= 208;
+                    }
+                    String name = mountainSprites.get(number);
+                    if (name != null) {
+                        graphics.drawImage(ResourceManager.getInstance().getImage(name), camera.getXCoord(j), camera.getYCoord(i));
+                    }
+
+
                 }
-
-
             }
         }
     }
