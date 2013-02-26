@@ -28,6 +28,8 @@ public class AlienRace implements Serializable {
 
     private StarSystem homeworld;
 
+    private int travelDistance = 5;
+
     /**
      * Default dialog is used when hailing random encounter ship of this race
      */
@@ -39,7 +41,6 @@ public class AlienRace implements Serializable {
         this.name = name;
         this.relationToPlayer = relationToPlayer;
         this.shipSprite = shipSprite;
-        this.homeworld = homeworld;
         this.defaultDialog = defaultDialog;
     }
 
@@ -78,7 +79,11 @@ public class AlienRace implements Serializable {
      * How many tiles away from main homeworld system player can meet ships of this race
      */
     public int getTravelDistance() {
-        return 5;
+        return travelDistance;
+    }
+
+    public void setTravelDistance(int travelDistance) {
+        this.travelDistance = travelDistance;
     }
 
     public void setHomeworld(StarSystem homeworld) {

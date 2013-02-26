@@ -25,7 +25,7 @@ public class HomeworldGenerator {
         p.setGlobalY(planetY);
     }
 
-    public static StarSystem createSolarSystem() {
+    public static StarSystem createSolarSystem(AlienRace humanRace) {
         // todo: gas giants and other planets
 
         Planet[] planets = new Planet[4];
@@ -49,6 +49,12 @@ public class HomeworldGenerator {
 
         ss.setPlanets(planets);
         ss.setRadius(Math.max((int) (6 * 1.5), 10));
+
+        NPCShip spaceStation = new NPCShip(planets[2].getGlobalX() + 1, planets[2].getGlobalY() - 1, "earth_station", humanRace, null, "Orbital Scaffold");
+        spaceStation.setStationary(true);
+        spaceStation.setAi(null);
+        ss.getShips().add(spaceStation);
+
         return ss;
     }
 

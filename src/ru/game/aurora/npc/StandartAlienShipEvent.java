@@ -6,13 +6,12 @@
  */
 package ru.game.aurora.npc;
 
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
-
-import java.util.Random;
 
 /**
  * When player enters some star system that is close to some alien race homeworld, he has a chance of meeting that race's ship
@@ -23,22 +22,33 @@ public class StandartAlienShipEvent implements GameEventListener
 
     private AlienRace race;
 
-    private static final Random r = new Random();
+    /**
+     * If true, will ignore questLocation flag on star systems and will still spawn ships in them.
+     */
+    private boolean spawnInQuestStarSystems = false;
 
     public StandartAlienShipEvent(AlienRace race) {
         this.race = race;
     }
 
+    public StandartAlienShipEvent(AlienRace race, boolean spawnInQuestStarSystems) {
+        this.race = race;
+        this.spawnInQuestStarSystems = spawnInQuestStarSystems;
+    }
+
     @Override
     public void onPlayerEnterStarSystem(World world, StarSystem ss) {
+        if (ss.isQuestLocation() && !spawnInQuestStarSystems) {
+            return;
+        }
         double probability = 1 - GalaxyMap.getDistance(ss, race.getHomeworld()) / race.getTravelDistance();
         if (probability < 0) {
             return;
         }
 
-        if (r.nextDouble() < probability) {
+        if (CommonRandom.getRandom().nextDouble() < probability) {
             NPCShip ship = race.createRandomShip();
-            ship.setPos(r.nextInt(ss.getRadius()) - ss.getRadius() / 2, r.nextInt(ss.getRadius()) - ss.getRadius() / 2);
+            ship.setPos(CommonRandom.getRandom().nextInt(ss.getRadius()) - ss.getRadius() / 2, CommonRandom.getRandom().nextInt(ss.getRadius()) - ss.getRadius() / 2);
             ss.getShips().add(ship);
         }
     }

@@ -41,6 +41,9 @@ public class SingleShipFixedTime implements GameEventListener
 
     @Override
     public void onPlayerEnterStarSystem(World world, StarSystem ss) {
+        if (ss.isQuestLocation()) {
+            return;
+        }
         if (!ss.isVisited() && ++count == x) {
             ship.setPos(CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius(), CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius());
             ss.getShips().add(ship);

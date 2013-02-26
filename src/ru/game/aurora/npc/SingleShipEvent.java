@@ -31,6 +31,10 @@ public class SingleShipEvent implements GameEventListener {
 
     @Override
     public void onPlayerEnterStarSystem(World world, StarSystem ss) {
+        // do not spawn in quest star systems
+        if (ss.isQuestLocation()) {
+            return;
+        }
         if (CommonRandom.getRandom().nextDouble() < chance) {
             ship.setPos(CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius(), CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius());
             ss.getShips().add(ship);

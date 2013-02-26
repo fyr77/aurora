@@ -4,6 +4,8 @@ VERSION 0.0.4
 In progress...
 
 * Nice mountain tiles from anon
++ More life in Solar system - added space station and humanity spaceships with dummy dialogs
+* Alien starships will no longer spawn in quest and unique locations, like Solar system.
 
 ======================================================
 VERSION 0.0.3
@@ -34,7 +36,7 @@ VERSION 0.0.1
 
 23.01.2013
 
-First version with mimimum set of required features:
+First version with minimum set of required features:
 
 + Main menu and save/load functionality
 + Launching a new game, generating random galaxy

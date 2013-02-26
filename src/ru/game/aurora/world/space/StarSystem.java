@@ -63,6 +63,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private int selectedWeapon = 0;
 
+    /**
+     * Quest star system, like solar system and others.
+     * Blocks spawning of random encounters in them.
+     */
+    private boolean isQuestLocation = false;
+
     private SpaceObject target;
 
     private boolean visited = false;
@@ -492,5 +498,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public BasePlanet[] getPlanets() {
         return planets;
+    }
+
+    public boolean isQuestLocation() {
+        return isQuestLocation;
+    }
+
+    public void setQuestLocation(boolean questLocation) {
+        isQuestLocation = questLocation;
     }
 }
