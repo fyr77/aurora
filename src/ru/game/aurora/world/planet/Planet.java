@@ -46,6 +46,8 @@ public class Planet extends BasePlanet {
      */
     private static final int MODE_SHOOT = 1;
 
+    private static final long serialVersionUID = -3267009875710669678L;
+
     /**
      * Current mode
      */
@@ -196,6 +198,7 @@ public class Planet extends BasePlanet {
         landingParty = world.getPlayer().getLandingParty();
         landingParty.onLaunch(world);
         landingParty.refillOxygen();
+        landingParty.setPos(10, 10); //todo: set position on land
         int x = landingParty.getX();
         int y = landingParty.getY();
 
@@ -520,9 +523,9 @@ public class Planet extends BasePlanet {
             for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
                 // first draw outer mountains (that have only one neighbour on X)
                 for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; j++) {
-                    //if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.VISIBILITY_MASK) == 0) {
-                    //    continue;
-                    //}
+                    if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.VISIBILITY_MASK) == 0) {
+                        continue;
+                    }
 
 
                     if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {

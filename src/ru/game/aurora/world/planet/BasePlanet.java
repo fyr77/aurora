@@ -13,7 +13,9 @@ import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
 
-public abstract class BasePlanet implements Room, GalaxyMapObject {
+public abstract class BasePlanet implements Room, GalaxyMapObject
+{
+    private static final long serialVersionUID = 5047939414473391148L;
     protected StarSystem owner;
     protected PlanetCategory category;
     protected PlanetAtmosphere atmosphere;

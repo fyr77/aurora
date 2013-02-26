@@ -3,6 +3,8 @@ VERSION 0.0.4
 
 In progress...
 
+* Nice mountain tiles from anon
+
 ======================================================
 VERSION 0.0.3
 

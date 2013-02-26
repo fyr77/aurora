@@ -108,7 +108,7 @@ public class LandscapeGenerator {
                         }
                     }
 
-                    if (mountainCount >= 3) {
+                    if (mountainCount >= 4) {
                         surface[i][j] |= SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
                     } else {
                         if (SurfaceTypes.isMountain(surface[i][j])) {
