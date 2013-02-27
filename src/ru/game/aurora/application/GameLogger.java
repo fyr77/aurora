@@ -9,6 +9,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
+import ru.game.aurora.util.EngineUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -71,14 +72,13 @@ public class GameLogger {
         graphics.setFont(font);
         int i = 0;
         for (String m : messages) {
-            graphics.drawString(m, logRect.getX() + TEXT_OFFSET, logRect.getY() + TEXT_OFFSET + i * font.getLineHeight());
-            ++i;
+            //graphics.drawString(m, logRect.getX() + TEXT_OFFSET, logRect.getY() + TEXT_OFFSET + i * font.getLineHeight());
+            i += EngineUtils.drawString(graphics, m, (int)(logRect.getX() + TEXT_OFFSET), (int)(logRect.getY() + TEXT_OFFSET + i * font.getLineHeight()), (int) logRect.getWidth() - 2 * TEXT_OFFSET);
         }
 
         i = 0;
         for (String m : statusMessages) {
-            graphics.drawString(m, statusMessagesRect.getX() + TEXT_OFFSET, statusMessagesRect.getY() + TEXT_OFFSET + i * font.getLineHeight());
-            ++i;
+            i += EngineUtils.drawString(graphics, m, (int)(statusMessagesRect.getX() + TEXT_OFFSET), (int)(statusMessagesRect.getY() + TEXT_OFFSET + i * font.getLineHeight()), (int) statusMessagesRect.getWidth() - 2 * TEXT_OFFSET);
         }
     }
 

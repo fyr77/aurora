@@ -84,11 +84,11 @@ public class LandingParty implements GameObject, Positionable {
         GameLogger.getInstance().addStatusMessage("Remaining oxygen: " + oxygen);
         GameLogger.getInstance().addStatusMessage(String.format("Current coordinates (%d, %d)", x, y));
         GameLogger.getInstance().addStatusMessage(String.format("Weapons: %s, %d rng, %d dmg", weapon.getName(), weapon.getRange(), weapon.getDamage()));
-        GameLogger.getInstance().addStatusMessage("============= Inventory: ================");
+        GameLogger.getInstance().addStatusMessage("====== Inventory: ======");
         for (Map.Entry<InventoryItem, Integer> po : inventory.entrySet()) {
             GameLogger.getInstance().addStatusMessage(po.getKey().getName() + ": " + po.getValue());
         }
-        GameLogger.getInstance().addStatusMessage("=========================================");
+        GameLogger.getInstance().addStatusMessage("====================");
     }
 
     public void consumeOxygen() {
