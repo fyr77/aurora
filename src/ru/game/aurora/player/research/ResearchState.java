@@ -131,4 +131,7 @@ public class ResearchState implements Serializable {
         return rz;
     }
 
+    public int getProcessedAstroData() {
+        return processedAstroData;
+    }
 }

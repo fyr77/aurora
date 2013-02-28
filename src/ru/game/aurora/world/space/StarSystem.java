@@ -183,7 +183,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     world.setCurrentRoom(p);
 
                     final LandingParty landingParty = world.getPlayer().getLandingParty();
-                    if (landingParty == null || !landingParty.canBeLaunched(world)) {
+                    if (p.canBeLanded() && (landingParty == null || !landingParty.canBeLaunched(world))) {
                         // first landing, show 'Landing party equipment' screen
                         LandingPartyEquipScreen screen = new LandingPartyEquipScreen(true);
                         screen.enter(world);

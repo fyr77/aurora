@@ -63,4 +63,13 @@ public abstract class BasePlanet implements Room, GalaxyMapObject
     public void setGlobalX(int globalX) {
         this.globalX = globalX;
     }
+
+    /**
+     * True if this is ordinary planet that can be explored with landing party.
+     * False if this is some kind of quest location that can not be actually landed on (like alien homeworld)
+     */
+    public boolean canBeLanded()
+    {
+        return true;
+    }
 }

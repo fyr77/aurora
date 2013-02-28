@@ -10,6 +10,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.gui.ProgressDumpScreen;
 import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
@@ -19,7 +20,12 @@ import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.StarSystem;
 
-public class Earth extends Planet {
+public class Earth extends Planet
+{
+
+    private static final long serialVersionUID = 3431652617342589266L;
+
+    private ProgressDumpScreen dumpScreen = null;
 
     private Dialog earthDialog;
 
@@ -50,6 +56,7 @@ public class Earth extends Planet {
     @Override
     public void enter(World world) {
         world.addOverlayWindow(earthDialog);
+        dumpScreen = null;
     }
 
     @Override
@@ -62,6 +69,16 @@ public class Earth extends Planet {
                 Dialog.Statement stmt;
 
                 if (daysPassed > 50) {
+                    // show research screen
+                    if (dumpScreen == null) {
+                        dumpScreen = new ProgressDumpScreen(world.getPlayer().getResearchState());
+                        world.addOverlayWindow(dumpScreen);
+                        return;
+                    }
+                    if (!dumpScreen.isOver()) {
+                        return;
+                    }
+
                     int totalScore = dumpResearch(world);
                     double scorePerTurn = (double) totalScore / (daysPassed);
                     stmt = new Dialog.Statement(0, String.format("Let us see. You have brought us new %d points of data, giving %f points/day", totalScore, scorePerTurn), new Dialog.Reply(0, 0, ""));
@@ -110,5 +127,10 @@ public class Earth extends Planet {
         researchState.getCompletedProjects().clear();
         result += researchState.dumpAstroData();
         return result;
+    }
+
+    @Override
+    public boolean canBeLanded() {
+        return false;
     }
 }

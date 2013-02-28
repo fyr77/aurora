@@ -23,7 +23,10 @@ import ru.game.aurora.world.planet.PlanetCategory;
  * Planet inhabited with aliens.
  * Such planet can not be landed on, only communicated
  */
-public class AlienHomeworld extends BasePlanet {
+public class AlienHomeworld extends BasePlanet
+{
+    private static final long serialVersionUID = -1818088878360415965L;
+
     private AlienRace ownerRace;
 
     private Dialog dialog;
@@ -70,5 +73,10 @@ public class AlienHomeworld extends BasePlanet {
 
     public AlienRace getOwnerRace() {
         return ownerRace;
+    }
+
+    @Override
+    public boolean canBeLanded() {
+        return false;
     }
 }
