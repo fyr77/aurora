@@ -54,17 +54,53 @@ public abstract class ListWithIconAndDescrScreen implements Room {
 
     public void draw(Graphics graphics, Camera camera, String caption, String image, String description) {
         EngineUtils.drawRectWithBorder(graphics, captionRect, camera, Color.yellow, backgroundColor);
-        EngineUtils.drawRectWithBorder(graphics, listRect, camera, Color.yellow, backgroundColor);
-        EngineUtils.drawRectWithBorder(graphics, imageRect, camera, Color.yellow, backgroundColor);
-        EngineUtils.drawRectWithBorder(graphics, descriptionRect, camera, Color.yellow, backgroundColor);
 
-        graphics.setFont(GUIConstants.dialogFont);
+        graphics.setFont(GUIConstants.captionFont);
         graphics.setColor(Color.yellow);
         graphics.drawString(caption, camera.getRelativeX((int) captionRect.getX()) + 200, camera.getRelativeY((int) captionRect.getY()) + 20);
 
+        drawTabContent(graphics, camera, image, description);
+    }
+
+    public void drawTabbed(Graphics graphics, Camera camera, String[] captions, int activeTab, String image, String description)
+    {
+        final int tabCaptionWidth = (int) (captionRect.getWidth() / captions.length);
+
+        Rectangle rectangle = new Rectangle(captionRect.getX(), captionRect.getY(), tabCaptionWidth - 1, captionRect.getHeight());
+        for (int i = 0; i < captions.length; ++i) {
+            EngineUtils.drawRectWithBorderAndText(
+                    graphics
+                    , rectangle
+                    , camera
+                    , GUIConstants.borderColor
+                    , GUIConstants.backgroundColor
+                    , captions[i]
+                    , i == activeTab ? GUIConstants.captionFont : GUIConstants.dialogFont
+                    , i == activeTab ? Color.yellow : Color.gray
+                    , true
+            );
+
+            rectangle.setX(rectangle.getX() + tabCaptionWidth + 1);
+        }
+
+        drawTabContent(graphics, camera, image, description);
+    }
+
+    private void drawTabContent(Graphics graphics, Camera camera, String image, String description)
+    {
+        graphics.setFont(GUIConstants.dialogFont);
+        EngineUtils.drawRectWithBorder(graphics, listRect, camera, Color.yellow, backgroundColor);
+
+        EngineUtils.drawRectWithBorder(graphics, descriptionRect, camera, Color.yellow, backgroundColor);
+
         if (image != null) {
             graphics.drawImage(ResourceManager.getInstance().getImage(image), camera.getRelativeX((int) imageRect.getX()), camera.getRelativeY((int) imageRect.getY()));
+            graphics.setColor(GUIConstants.borderColor);
+            EngineUtils.drawRect(graphics, imageRect, camera, false);
+        } else {
+            EngineUtils.drawRectWithBorder(graphics, imageRect, camera, Color.yellow, backgroundColor);
         }
+
 
         if (description == null) {
             description = "<Select a research project>";

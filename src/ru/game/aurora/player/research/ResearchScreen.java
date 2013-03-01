@@ -18,14 +18,21 @@ import ru.game.aurora.ui.ListWithIconAndDescrScreen;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
-public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
+public class ResearchScreen extends ListWithIconAndDescrScreen implements Room
+{
     private static final int ACTIVE_TAB = 0;
+
     private static final int AVAILABLE_TAB = 1;
+
     private static final int COMPLETED_TAB = 2;
+
+    private static final long serialVersionUID = 7529297861702546424L;
 
     private int currentTab;
 
     private ResearchState researchState;
+
+    private static final String[] tabs = {"Active projects", "Available projects", "Completed projects"};
 
     @Override
     public void enter(World world) {
@@ -54,7 +61,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
             descr = researchProjectState.desc.getDescription() + " \n \n " + researchProjectState.desc.getStatusString(world, researchProjectState.scientists);
         }
 
-        draw(graphics, camera, "Active projects", iconName, descr);
+        drawTabbed(graphics, camera, tabs, currentTab, iconName, descr);
         GameLogger.getInstance().addStatusMessage("Available scientists: " + researchState.getIdleScientists());
     }
 
@@ -72,7 +79,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
             descr = desc.getDescription();
         }
 
-        draw(graphics, camera, "Available research projects", icon, descr);
+        drawTabbed(graphics, camera, tabs, currentTab, icon, descr);
         GameLogger.getInstance().addStatusMessage("Press <enter> to start selected research");
     }
 
@@ -90,7 +97,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room {
             descr = desc.getDescription();
         }
 
-        draw(graphics, camera, "Completed research projects", icon, descr);
+        drawTabbed(graphics, camera, tabs, currentTab, icon, descr);
     }
 
 
