@@ -6,6 +6,7 @@
 package ru.game.aurora.player;
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.player.earth.EarthState;
 import ru.game.aurora.player.engineering.EngineeringState;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.Ship;
@@ -25,12 +26,15 @@ public class Player implements Serializable {
 
     private EngineeringState engineeringState;
 
+    private EarthState earthState;
+
     private int resourceUnits = 0;
 
     public Player() {
         ship = new Ship(10, 10);
         researchState = new ResearchState(ship.getScientists());
         engineeringState = new EngineeringState(ship.getEngineers());
+        earthState = new EarthState();
     }
 
     public Ship getShip() {
@@ -55,6 +59,10 @@ public class Player implements Serializable {
 
     public void setResourceUnits(int resourceUnits) {
         this.resourceUnits = resourceUnits;
+    }
+
+    public EarthState getEarthState() {
+        return earthState;
     }
 
     public void addGlobalStatus() {

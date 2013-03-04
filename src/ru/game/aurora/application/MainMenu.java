@@ -116,6 +116,6 @@ public class MainMenu {
             }
             EngineUtils.drawRectWithBorderAndText(graphics, worldGenerateMessageRectangle, camera, Color.yellow, GUIConstants.backgroundColor, sb.toString(), GUIConstants.dialogFont, Color.white, true);
         }
-        graphics.drawString(Version.VERSION, camera.getTileWidth() * camera.getNumTilesX() - 100, camera.getTileHeight() * camera.getNumTilesY() - 40);
+        graphics.drawString(Version.VERSION, camera.getTileWidth()  * camera.getNumTilesX() + GameLogger.getInstance().getStatusMessagesRect().getWidth() - 100, camera.getTileHeight() * camera.getNumTilesY() - 40);
     }
 }

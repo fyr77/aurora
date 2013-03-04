@@ -10,12 +10,15 @@ package ru.game.aurora.world.generation.aliens;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.npc.*;
 import ru.game.aurora.npc.shipai.LandOnPlanetAI;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.quest.AuroraProbe;
 import ru.game.aurora.world.space.HomeworldGenerator;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
+
+import java.util.List;
 
 public class HumanityGenerator implements WorldGeneratorPart
 {
@@ -47,5 +50,13 @@ public class HumanityGenerator implements WorldGeneratorPart
                 return ship;
             }
         }, true));
+
+        // add welcoming messages
+        List<PrivateMessage> pm = world.getPlayer().getEarthState().getMessages();
+
+        pm.add(new PrivateMessage("Good Luck", "Greetings. \n On behalf of Earth Command of Aurora space exploration project I whis you good luck in your mission." +
+                "The fate of Earth, the future of humanity depends on heroes like you and your crew. \n A. V. Buren, Aurora CEO", "message"));
+        pm.add(new PrivateMessage("Status Report", "Greetings. This is an automated message sent to you by UNS information center. All cargo loaded according to " +
+                " provided manifests and your ship is ready to launch at any time. Have a nice flight. \n Do not respond to this message.", "message"));
     }
 }

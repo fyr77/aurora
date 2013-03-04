@@ -12,6 +12,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.ProgressDumpScreen;
 import ru.game.aurora.npc.Dialog;
+import ru.game.aurora.player.earth.EarthScreen;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.World;
@@ -108,6 +109,11 @@ public class Earth extends Planet
                 container.exit();
             }
             world.setCurrentRoom(owner);
+
+            EarthScreen es = new EarthScreen();
+            es.enter(world);
+            world.setCurrentRoom(es);
+
         }
 
     }

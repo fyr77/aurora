@@ -7,6 +7,7 @@ In progress...
 + More life in Solar system - added space station and humanity spaceships with dummy dialogs
 * Alien starships will no longer spawn in quest and unique locations, like Solar system.
 + Screen with detailed calculation of research progress upon returning to Earth
++ Added private message system and screen
 
 ======================================================
 VERSION 0.0.3
