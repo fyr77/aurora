@@ -16,23 +16,31 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * When player enters some star system that is close to some alien race homeworld, he has a chance of meeting that race's ship
  */
-public class StandartAlienShipEvent implements GameEventListener
+public class StandardAlienShipEvent implements GameEventListener
 {
     private static final long serialVersionUID = -3413422560284690414L;
 
     private AlienRace race;
+
+    private NPCShipFactory shipFactory;
 
     /**
      * If true, will ignore questLocation flag on star systems and will still spawn ships in them.
      */
     private boolean spawnInQuestStarSystems = false;
 
-    public StandartAlienShipEvent(AlienRace race) {
+    public StandardAlienShipEvent(AlienRace race) {
         this.race = race;
+        this.shipFactory = race.getDefaultFactory();
     }
 
-    public StandartAlienShipEvent(AlienRace race, boolean spawnInQuestStarSystems) {
+    public StandardAlienShipEvent(AlienRace race, NPCShipFactory shipFactory) {
         this.race = race;
+        this.shipFactory = shipFactory;
+    }
+
+    public StandardAlienShipEvent(AlienRace race, NPCShipFactory shipFactory, boolean spawnInQuestStarSystems) {
+        this(race, shipFactory);
         this.spawnInQuestStarSystems = spawnInQuestStarSystems;
     }
 
@@ -47,7 +55,7 @@ public class StandartAlienShipEvent implements GameEventListener
         }
 
         if (CommonRandom.getRandom().nextDouble() < probability) {
-            NPCShip ship = race.createRandomShip();
+            NPCShip ship = shipFactory.createShip();
             ship.setPos(CommonRandom.getRandom().nextInt(ss.getRadius()) - ss.getRadius() / 2, CommonRandom.getRandom().nextInt(ss.getRadius()) - ss.getRadius() / 2);
             ss.getShips().add(ship);
         }

@@ -37,19 +37,24 @@ public class AlienRace implements Serializable {
 
     private String shipSprite;
 
+    private NPCShipFactory defaultFactory = new NPCShipFactory() {
+
+        private static final long serialVersionUID = -6223078452316173728L;
+
+        @Override
+        public NPCShip createShip() {
+            NPCShip ship = new NPCShip(0, 0, getShipSprite(), AlienRace.this, null, getName() + " ship");
+            ship.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"), StarshipWeapon.MOUNT_ALL));
+            return ship;
+        }
+    };
+
     public AlienRace(String name, String shipSprite, int relationToPlayer, Dialog defaultDialog) {
         this.name = name;
         this.relationToPlayer = relationToPlayer;
         this.shipSprite = shipSprite;
         this.defaultDialog = defaultDialog;
     }
-
-    public NPCShip createRandomShip() {
-        NPCShip ship = new NPCShip(0, 0, getShipSprite(), this, null, getName() + " ship");
-        ship.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"), StarshipWeapon.MOUNT_ALL));
-        return ship;
-    }
-
 
     public Dialog getDefaultDialog() {
         return defaultDialog;
@@ -69,6 +74,10 @@ public class AlienRace implements Serializable {
 
     public void setRelationToPlayer(int relationToPlayer) {
         this.relationToPlayer = relationToPlayer;
+    }
+
+    public NPCShipFactory getDefaultFactory() {
+        return defaultFactory;
     }
 
     public StarSystem getHomeworld() {

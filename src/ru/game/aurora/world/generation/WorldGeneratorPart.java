@@ -8,11 +8,13 @@ package ru.game.aurora.world.generation;
 
 import ru.game.aurora.world.World;
 
+import java.io.Serializable;
+
 /**
  * Base interface for classes that participate in initial world generation.
  * Each subclass aggregates generation of some connected part of game universe, e.g. a quest line or an alien race
  */
-public interface WorldGeneratorPart
+public interface WorldGeneratorPart extends Serializable
 {
     public void updateWorld(World world);
 }

@@ -19,6 +19,8 @@ import ru.game.aurora.world.space.NPCShip;
  */
 public class GardenerGenerator implements WorldGeneratorPart
 {
+    private static final long serialVersionUID = -2142318077060757284L;
+
     @Override
     public void updateWorld(World world) {
         AlienRace gardenerRace = new AlienRace("Gardeners", "gardener_ship", 8, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json")));

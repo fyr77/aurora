@@ -19,8 +19,11 @@ import ru.game.aurora.world.space.StarSystem;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BuildersRuinGenerator implements WorldGeneratorPart {
+public class BuildersRuinGenerator implements WorldGeneratorPart
+{
     private static final int SYSTEMS = 50;
+
+    private static final long serialVersionUID = 1848518979450823837L;
 
     private void updateStarSystem(StarSystem ss) {
         for (BasePlanet p : ss.getPlanets()) {
