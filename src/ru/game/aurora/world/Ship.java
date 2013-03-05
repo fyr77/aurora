@@ -23,6 +23,8 @@ public class Ship extends BasePositionable implements SpaceObject {
 
     private int hull;
 
+    private final String name;
+
     private int maxHull;
 
     private int scientists = 10;
@@ -35,6 +37,7 @@ public class Ship extends BasePositionable implements SpaceObject {
 
     public Ship(int x, int y) {
         super(x, y);
+        name = "Hawking";
         hull = maxHull = 3;
         weapons.add(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"), StarshipWeapon.MOUNT_ALL));
     }
@@ -136,6 +139,6 @@ public class Ship extends BasePositionable implements SpaceObject {
 
     @Override
     public String getName() {
-        return "Enterprise"; //todo: player set name
+        return name;
     }
 }

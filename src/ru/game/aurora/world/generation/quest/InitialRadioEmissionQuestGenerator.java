@@ -8,8 +8,11 @@ package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.npc.shipai.CombatAI;
+import ru.game.aurora.player.earth.EarthResearch;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
@@ -25,7 +28,59 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * Creates quest chain with initial research for brown dwarf radio emission, that is given to player on game startup
  */
-public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
+public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
+{
+
+    private static final long serialVersionUID = -4950686913834019746L;
+
+    private static final class EarthEnergyResearch extends EarthResearch
+    {
+
+        private static final long serialVersionUID = 8367244693901465513L;
+
+        public EarthEnergyResearch()
+        {
+            super(100);
+        }
+
+        @Override
+        protected void onCompleted(World world) {
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                    "Good work",
+                    " Greetings. \n Perhaps you have heard already about the Icarus project? A few more years, and earth energy crisis will be over once and for ever. And this is done thanks to your effort. Good job, captain!" +
+                            " \n A. V. Buren, Aurora CEO",
+                    "message"
+                    )
+                    );
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                    "Free energy tomorrow?"
+                    , "The world scientific society is shocked by the discoveries done by analyzing materials retrieved from alien beacon by UNS " + world.getPlayer().getShip().getName() + ", as they break" +
+                    " all that we knew about using solar energy before. New discoveries has lead to creation of new cheap ways of extracting power from the Sun. \n " +
+                    " As Earth energy reserves are nearly depleted, scientist use this new knowledge to present a solution. An Icarus project, a series of energy consuming space stations surrounding the Sun." +
+                    " Construction of the first one has already started."
+                    , "news"
+            ));
+
+
+            final AlienRace humanity = world.getRaces().get("Humanity");
+            NPCShip construction = new NPCShip(0, 1, "earth_construction", humanity, null, "Icarus #1");
+            construction.setAi(null);
+            humanity.getHomeworld().getShips().add(construction);
+        }
+
+        @Override
+        public void onStarted(World world) {
+            super.onStarted(world);
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                    "Breakthrough in solar power usage?"
+                    , "According to data stated in official Aurora project news, UNS " + world.getPlayer().getShip().getName() + " has brought very valuable data conserning use" +
+                    " of star enegry from its expedition. \n Data and technology acquired from an alien beacon-like structure can lead to a creation of much more effective ways of collecting and transfering solar power, which could give" +
+                    " humanity so long anticipated 'free energy'. Scientists at Earth laboratories are now carefully studying retrieved material and are preparing official conclusion."
+                    , "news"
+            ));
+        }
+    }
+
     @Override
     public void updateWorld(World world) {
         // initial research projects and their star system
@@ -69,6 +124,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 " collected data in Earth laboratories can lead to a breakthrough in high-energy and hyperwave physics." +
                 " \n We should also be careful, as creators of this beacon may not welcome our violation of their territory.");
         beaconResearchProject.setReport(beaconReport);
+        beaconResearchProject.addEarthProgressResearch(new EarthEnergyResearch());
 
         SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon");
         beacon.setResearchProjectDescs(beaconResearchProject);

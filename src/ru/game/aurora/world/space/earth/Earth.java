@@ -12,6 +12,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.ProgressDumpScreen;
 import ru.game.aurora.npc.Dialog;
+import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.EarthScreen;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
@@ -129,6 +130,12 @@ public class Earth extends Planet
         result += researchState.getGeodata().dumpAndGetVictoryPoints();
         for (ResearchProjectDesc desc : researchState.getCompletedProjects()) {
             result += desc.getScore();
+            if (desc.getEarthProgress() != null) {
+                for (EarthResearch res : desc.getEarthProgress()) {
+                    world.addListener(res);
+                    res.onStarted(world);
+                }
+            }
         }
         researchState.getCompletedProjects().clear();
         result += researchState.dumpAstroData();

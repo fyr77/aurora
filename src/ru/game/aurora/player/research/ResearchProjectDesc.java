@@ -6,9 +6,11 @@
  */
 package ru.game.aurora.player.research;
 
+import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,6 +47,11 @@ public abstract class ResearchProjectDesc implements Serializable
      */
     protected List<ResearchProjectDesc> makesAvailable;
 
+    /**
+     * This stuff is launched when this research is completed and its results are dumped on earth
+     */
+    protected List<EarthResearch> earthProgress;
+
     protected ResearchProjectDesc(String name, String description, String icon) {
         this.name = name;
         this.description = description;
@@ -66,8 +73,20 @@ public abstract class ResearchProjectDesc implements Serializable
         makesAvailable.add(desc);
     }
 
+    public void addEarthProgressResearch(EarthResearch r)
+    {
+        if (earthProgress == null) {
+            earthProgress = new ArrayList<EarthResearch>();
+        }
+        earthProgress.add(r);
+    }
+
     public List<ResearchProjectDesc> getMakesAvailable() {
         return makesAvailable;
+    }
+
+    public List<EarthResearch> getEarthProgress() {
+        return earthProgress;
     }
 
     public String getName() {
