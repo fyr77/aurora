@@ -9,6 +9,8 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.ui.ListWithIconAndDescrScreen;
 import ru.game.aurora.world.World;
 
+import java.util.ListIterator;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Egor.Smirnov
@@ -43,6 +45,10 @@ public class EarthScreen extends ListWithIconAndDescrScreen
 
     @Override
     public void update(GameContainer container, World world) {
+        if (currentTab == PM_TAB) {
+            maxIdx = state.getMessages().size();
+        }
+
         if (container.getInput().isKeyPressed(Input.KEY_TAB)) {
             currentTab++;
             if (currentTab > UPGRADE_TAB) {
@@ -50,36 +56,22 @@ public class EarthScreen extends ListWithIconAndDescrScreen
             }
         }
 
-        if (container.getInput().isKeyPressed(Input.KEY_UP)) {
-            currentIdx--;
-            if (currentIdx < 0) {
-                currentIdx = maxIdx - 1;
-            }
-        }
-
-        if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
-            currentIdx++;
-            if (currentIdx == maxIdx) {
-                currentIdx = 0;
-            }
-        }
-
-        if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-            world.setCurrentRoom(previousRoom);
-        }
+        super.update(container, world);
     }
 
     private void drawPMTab(Graphics graphics, Camera camera)
     {
         strings.clear();
-        for (PrivateMessage res : state.getMessages()) {
+        // iterate in reverse order
+        for (ListIterator<PrivateMessage> iter = state.getMessages().listIterator(state.getMessages().size()); iter.hasPrevious();) {
+            PrivateMessage res = iter.previous();
             strings.add(res.getName());
         }
 
         String icon = null;
         String descr = null;
         if (!state.getMessages().isEmpty()) {
-            PrivateMessage pm = state.getMessages().get(currentIdx);
+            PrivateMessage pm = state.getMessages().get(state.getMessages().size() - 1 - currentIdx);
             icon = pm.getIcon();
             descr = pm.getText();
         }

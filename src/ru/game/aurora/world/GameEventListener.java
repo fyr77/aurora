@@ -9,14 +9,29 @@ import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
 
-public interface GameEventListener extends Serializable {
+public abstract class GameEventListener implements Serializable
+{
+
+    private static final long serialVersionUID = -4189717114829655272L;
+
     /**
      * Called when player enters star system, before it is shown
      */
-    public void onPlayerEnterStarSystem(World world, StarSystem ss);
+    public void onPlayerEnterStarSystem(World world, StarSystem ss)
+    {
+        // nothing
+    }
+
+    public void onTurnEnded(World world)
+    {
+        // nothing
+    }
 
     /**
      * Returns false if this event will never happen again and should be disposed
      */
-    public boolean isAlive();
+    public boolean isAlive()
+    {
+        return false;
+    }
 }

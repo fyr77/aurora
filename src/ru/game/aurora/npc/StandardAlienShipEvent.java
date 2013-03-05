@@ -16,7 +16,7 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * When player enters some star system that is close to some alien race homeworld, he has a chance of meeting that race's ship
  */
-public class StandardAlienShipEvent implements GameEventListener
+public class StandardAlienShipEvent extends GameEventListener
 {
     private static final long serialVersionUID = -3413422560284690414L;
 

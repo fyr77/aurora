@@ -4,7 +4,7 @@
  * Date: 06.02.13
  * Time: 15:17
  */
-package ru.game.aurora.world.generation.aliens;
+package ru.game.aurora.world.generation.humanity;
 
 
 import ru.game.aurora.application.CommonRandom;
@@ -58,5 +58,8 @@ public class HumanityGenerator implements WorldGeneratorPart
                 "The fate of Earth, the future of humanity depends on heroes like you and your crew. \n A. V. Buren, Aurora CEO", "message"));
         pm.add(new PrivateMessage("Status Report", "Greetings. This is an automated message sent to you by UNS information center. All cargo loaded according to " +
                 " provided manifests and your ship is ready to launch at any time. Have a nice flight. \n Do not respond to this message.", "message"));
+
+        // add Enterprise ship event
+        world.addListener(new EnterpriseEncounterCreator());
     }
 }

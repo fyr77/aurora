@@ -15,7 +15,7 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * Creates given alien ship when player enters Xth starsystem for first time
  */
-public class SingleShipFixedTime implements GameEventListener
+public class SingleShipFixedTime extends GameEventListener
 {
     private static final long serialVersionUID = 6541906542086925960L;
 

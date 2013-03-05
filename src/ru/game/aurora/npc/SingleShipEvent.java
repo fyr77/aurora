@@ -16,7 +16,7 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * Event when player has a fixed chance of meeting specific ship when entering arbitrary star system
  */
-public class SingleShipEvent implements GameEventListener {
+public class SingleShipEvent extends GameEventListener {
 
     private static final long serialVersionUID = 8667890627684730845L;
 

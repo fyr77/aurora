@@ -90,6 +90,11 @@ public class World implements Serializable {
             player.getResearchState().update(this);
             player.getEngineeringState().update(this);
             turnCount++;
+            // to prevent concurrent modification if some of listeners adds new ones
+            List<GameEventListener> oldListeners = new LinkedList<GameEventListener>(listeners);
+            for (GameEventListener listener : oldListeners) {
+                listener.onTurnEnded(this);
+            }
         }
 
         for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext();) {
