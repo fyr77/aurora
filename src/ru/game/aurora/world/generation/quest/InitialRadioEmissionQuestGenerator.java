@@ -38,6 +38,10 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
 
         private static final long serialVersionUID = 8367244693901465513L;
 
+        private NPCShip construction;
+
+        private int state = 0;
+
         public EarthEnergyResearch()
         {
             super(100);
@@ -45,27 +49,66 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
 
         @Override
         protected void onCompleted(World world) {
-            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
-                    "Good work",
-                    " Greetings. \n Perhaps you have heard already about the Icarus project? A few more years, and earth energy crisis will be over once and for ever. And this is done thanks to your effort. Good job, captain!" +
-                            " \n A. V. Buren, Aurora CEO",
-                    "message"
-                    )
-                    );
-            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
-                    "Free energy tomorrow?"
-                    , "The world scientific society is shocked by the discoveries done by analyzing materials retrieved from alien beacon by UNS " + world.getPlayer().getShip().getName() + ", as they break" +
-                    " all that we knew about using solar energy before. New discoveries has lead to creation of new cheap ways of extracting power from the Sun. \n " +
-                    " As Earth energy reserves are nearly depleted, scientist use this new knowledge to present a solution. An Icarus project, a series of energy consuming space stations surrounding the Sun." +
-                    " Construction of the first one has already started."
-                    , "news"
-            ));
+            // begin construction of a beacon near the sun
+            if (state == 0) {
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                        "Good work",
+                        " Greetings. \n Perhaps you have heard already about the Icarus project? A few more years, and earth energy crisis will be over once and for ever. And this is done thanks to your effort. Good job, captain!" +
+                                " \n A. V. Buren, Aurora CEO",
+                        "message"
+                        )
+                        );
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                        "Free energy tomorrow?"
+                        , "The world scientific society is shocked by the discoveries done by analyzing materials retrieved from alien beacon by UNS " + world.getPlayer().getShip().getName() + ", as they break" +
+                        " all that we knew about using solar energy before. New discoveries has lead to creation of new cheap ways of extracting power from the Sun. \n " +
+                        " As Earth energy reserves are nearly depleted, scientist use this new knowledge to present a solution. An Icarus project, a series of energy consuming space stations surrounding the Sun." +
+                        " Construction of the first one has already started."
+                        , "news"
+                ));
 
 
-            final AlienRace humanity = world.getRaces().get("Humanity");
-            NPCShip construction = new NPCShip(0, 1, "earth_construction", humanity, null, "Icarus #1");
-            construction.setAi(null);
-            humanity.getHomeworld().getShips().add(construction);
+                final AlienRace humanity = world.getRaces().get("Humanity");
+                construction = new NPCShip(0, 1, "earth_construction", humanity, null, "Icarus #1");
+                construction.setAi(null);
+                humanity.getHomeworld().getShips().add(construction);
+
+                completed = false;
+
+                targetTurn += 100;
+                state = 1;
+            } else if (state == 1) {
+                // finish construction
+                final AlienRace humanity = world.getRaces().get("Humanity");
+
+                // replace station sprite
+                humanity.getHomeworld().getShips().remove(construction);
+                construction = new NPCShip(0, 1, "icarus_station", humanity, null, "Icarus #1");
+                construction.setAi(null);
+                humanity.getHomeworld().getShips().add(construction);
+
+                // add messages
+
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                        "First Icarus station launch"
+                        , "The world holds breath while watching how first GW of energy are transferred from Icarus #1 station to earth. Though the launch of the station was postponed a couple of times, now" +
+                        " it is finally launched and is producing power for Earth needs. \n Experts predict lowering of prices for energy by the end of the year by 15%, and cancelling of special power regulation laws" +
+                        " in some most populated Earth regions."
+                        , "news"
+                ));
+                completed = false;
+                targetTurn += 20;
+                state = 2;
+            } else if (state == 2) {
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                        "Energy crisis gone, labor crisis coming?"
+                        , "For the last months after Icarus power station has reached its full productivity, troubling news are coming from UN power plants and factories. Cheap solar energy has driven" +
+                        " these structures obsolete. While ecologists and population praise Icarus project, power tycoons and workers hate it and try to sabotage building of new stations. \n Many people in energy production sector" +
+                        " have lost their jobs. Strikes and uprisings happened in Russia, Egypt and some of european countries, which makes future of Icarus project unclear."
+                        , "news"
+                ));
+            }
+
         }
 
         @Override
