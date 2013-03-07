@@ -173,8 +173,18 @@ public class World implements Serializable {
     }
 
     public void onPlayerEnteredSystem(StarSystem ss) {
-        for (GameEventListener l : listeners) {
+        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        for (GameEventListener l : newList) {
             l.onPlayerEnterStarSystem(this, ss);
+        }
+    }
+
+    public void onPlayerReturnToEarth()
+    {
+        // to avoid concurrent modification exception
+        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        for (GameEventListener l : newList) {
+            l.onReturnToEarth(this);
         }
     }
 

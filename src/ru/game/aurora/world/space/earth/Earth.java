@@ -125,6 +125,7 @@ public class Earth extends Planet
     }
 
     private int dumpResearch(World world) {
+        world.onPlayerReturnToEarth();
         int result = 0;
         final ResearchState researchState = world.getPlayer().getResearchState();
         result += researchState.getGeodata().dumpAndGetVictoryPoints();
@@ -139,6 +140,7 @@ public class Earth extends Planet
         }
         researchState.getCompletedProjects().clear();
         result += researchState.dumpAstroData();
+        world.getPlayer().getEarthState().updateTechnologyLevel(result);
         return result;
     }
 

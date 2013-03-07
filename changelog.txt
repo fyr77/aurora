@@ -8,6 +8,8 @@ In progress...
 * Alien starships will no longer spawn in quest and unique locations, like Solar system.
 + Screen with detailed calculation of research progress upon returning to Earth
 + Added private message system and screen
++ Earth research system. Solar system state changes now based on stuff carried from space by player.
++ Calculating global research score.
 
 ======================================================
 VERSION 0.0.3

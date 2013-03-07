@@ -134,5 +134,10 @@ public abstract class ResearchProjectDesc implements Serializable
      */
     public abstract int getScore();
 
-
+    /**
+     * Called when completed project is dumped on earth and its score is calculated
+     */
+    public void onReturnToEarth(World world)
+    {
+    }
 }

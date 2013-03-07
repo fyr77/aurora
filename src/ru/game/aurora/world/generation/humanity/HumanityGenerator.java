@@ -61,5 +61,7 @@ public class HumanityGenerator implements WorldGeneratorPart
 
         // add Enterprise ship event
         world.addListener(new EnterpriseEncounterCreator());
+
+        world.addListener(new BiologyResearch());
     }
 }

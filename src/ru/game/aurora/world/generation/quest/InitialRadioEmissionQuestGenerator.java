@@ -12,6 +12,7 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.player.earth.EarthResearch;
+import ru.game.aurora.player.earth.EarthState;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
 import ru.game.aurora.player.research.ResearchProjectDesc;
@@ -50,15 +51,16 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
         @Override
         protected void onCompleted(World world) {
             // begin construction of a beacon near the sun
+            final EarthState earthState = world.getPlayer().getEarthState();
             if (state == 0) {
-                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                earthState.getMessages().add(new PrivateMessage(
                         "Good work",
                         " Greetings. \n Perhaps you have heard already about the Icarus project? A few more years, and earth energy crisis will be over once and for ever. And this is done thanks to your effort. Good job, captain!" +
                                 " \n A. V. Buren, Aurora CEO",
                         "message"
                         )
                         );
-                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                earthState.getMessages().add(new PrivateMessage(
                         "Free energy tomorrow?"
                         , "The world scientific society is shocked by the discoveries done by analyzing materials retrieved from alien beacon by UNS " + world.getPlayer().getShip().getName() + ", as they break" +
                         " all that we knew about using solar energy before. New discoveries has lead to creation of new cheap ways of extracting power from the Sun. \n " +
@@ -89,7 +91,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
 
                 // add messages
 
-                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                earthState.getMessages().add(new PrivateMessage(
                         "First Icarus station launch"
                         , "The world holds breath while watching how first GW of energy are transferred from Icarus #1 station to earth. Though the launch of the station was postponed a couple of times, now" +
                         " it is finally launched and is producing power for Earth needs. \n Experts predict lowering of prices for energy by the end of the year by 15%, and cancelling of special power regulation laws" +
@@ -100,13 +102,14 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
                 targetTurn += 20;
                 state = 2;
             } else if (state == 2) {
-                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                earthState.getMessages().add(new PrivateMessage(
                         "Energy crisis gone, labor crisis coming?"
                         , "For the last months after Icarus power station has reached its full productivity, troubling news are coming from UN power plants and factories. Cheap solar energy has driven" +
                         " these structures obsolete. While ecologists and population praise Icarus project, power tycoons and workers hate it and try to sabotage building of new stations. \n Many people in energy production sector" +
                         " have lost their jobs. Strikes and uprisings happened in Russia, Egypt and some of european countries, which makes future of Icarus project unclear."
                         , "news"
                 ));
+                earthState.updateTechnologyLevel(200);
             }
 
         }

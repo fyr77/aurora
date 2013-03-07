@@ -16,6 +16,13 @@ public class EarthState implements Serializable
 
     private List<PrivateMessage> messages = new LinkedList<PrivateMessage>();
 
+    private int technologyLevel = 0;
+
+    public void updateTechnologyLevel(int value)
+    {
+        technologyLevel += value;
+    }
+
     public List<PrivateMessage> getMessages() {
         return messages;
     }
