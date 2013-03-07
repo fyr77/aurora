@@ -1,7 +1,12 @@
 =====================================================
+VERSION 0.0.5
+
+IN PROGRESS...
+
+=====================================================
 VERSION 0.0.4
 
-In progress...
+07.03.2013
 
 * Nice mountain tiles from anon
 + More life in Solar system - added space station and humanity spaceships with dummy dialogs
