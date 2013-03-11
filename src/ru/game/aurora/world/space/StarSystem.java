@@ -26,10 +26,7 @@ import ru.game.aurora.world.planet.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
@@ -109,6 +106,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     private List<SpaceObject> ships = new ArrayList<SpaceObject>();
 
     /**
+     * Variables available for quest logic
+     */
+    private Map<String, Serializable> variables = new HashMap<String, Serializable>();
+
+    /**
      * How many unexplored data for Astronomy research this star system contains
      */
     private int astronomyData;
@@ -121,6 +123,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public void setPlanets(BasePlanet[] planets) {
         this.planets = planets;
+    }
+
+    public Map<String, Serializable> getVariables() {
+        return variables;
     }
 
     public void setRadius(int radius) {

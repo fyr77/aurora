@@ -1,0 +1,39 @@
+{
+    "iconName":"scientist_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "npcText":"Captain, guess what? This is another 'twin' star system.",
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"The third one? I have to admit, version with their natural origin looks less and less probable to me."
+                },
+                {
+                    "targetStatementId":2,
+                    "replyText":"And still no trace of who could have done it?"
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "npcText":"Haha, same to me",
+            "replies":[
+                {
+                    "targetStatementId":2,
+                    "replyText":"And still no trace of who can have don it?"
+                }
+            ]
+        },
+        "2":{
+            "id":2,
+            "npcText":"No. This star system looks perfectly virgin, just like the others.",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"Maybe if we ask another races we will learn something about it. We can not be the first ones to notice it"
+                }
+            ]
+        }
+    }
+}

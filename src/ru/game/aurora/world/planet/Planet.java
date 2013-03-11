@@ -113,6 +113,17 @@ public class Planet extends BasePlanet {
         mountainSprites.put(104, "mountains_15");
     }
 
+    public Planet(StarSystem owner, Planet other)
+    {
+        super(other.size, other.globalY, owner, other.atmosphere, other.globalX, other.category);
+        this.width = other.width;
+        this.height = other.height;
+        surface = new byte[height][width];
+        for (int i = 0; i < height ; ++i) {
+            System.arraycopy(other.surface[i], 0, surface[i], 0, width);
+        }
+        createOreDeposits(size, CommonRandom.getRandom());
+    }
 
     public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
         super(size, y, owner, atmosphere, x, cat);
@@ -146,18 +157,7 @@ public class Planet extends BasePlanet {
 
         surface = LandscapeGenerator.generateLandscape(cat, width, height);
 
-        final int resourceDeposits = r.nextInt(40 / size);
-        for (int i = 0; i < resourceDeposits; ++i) {
-            OreDeposit d = new OreDeposit(this, r.nextInt(10), r.nextInt(10), CollectionUtils.selectRandomElement(OreDeposit.OreType.values()), r.nextInt(3) + 1);
-            int oreX;
-            int oreY;
-            do {
-                oreX = r.nextInt(10);
-                oreY = r.nextInt(10);
-            } while (!SurfaceTypes.isPassible(surface[oreY][oreX]));
-            d.setPos(oreX, oreY);
-            planetObjects.add(d);
-        }
+        createOreDeposits(size, r);
 
         if (hasLife) {
             // generate random species descs. Currently only one
@@ -179,6 +179,22 @@ public class Planet extends BasePlanet {
             }
         }
     }
+
+    private void createOreDeposits(int size, Random r) {
+        final int resourceDeposits = r.nextInt(40 / size);
+        for (int i = 0; i < resourceDeposits; ++i) {
+            OreDeposit d = new OreDeposit(this, r.nextInt(10), r.nextInt(10), CollectionUtils.selectRandomElement(OreDeposit.OreType.values()), r.nextInt(3) + 1);
+            int oreX;
+            int oreY;
+            do {
+                oreX = r.nextInt(10);
+                oreY = r.nextInt(10);
+            } while (!SurfaceTypes.isPassible(surface[oreY][oreX]));
+            d.setPos(oreX, oreY);
+            planetObjects.add(d);
+        }
+    }
+
 
     public void setNearestFreePoint(Positionable p, int x, int y) {
         while (!SurfaceTypes.isPassible(surface[y][wrapX(x)])) {

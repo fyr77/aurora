@@ -163,6 +163,9 @@ public class Dialog implements OverlayWindow {
     }
 
     public static Dialog loadFromFile(InputStream is) {
+        if (is == null) {
+            throw new IllegalArgumentException("Can not load dialog from null stream");
+        }
         Gson gson = new Gson();
         Reader reader = new InputStreamReader(is);
         Dialog d = gson.fromJson(reader, Dialog.class);

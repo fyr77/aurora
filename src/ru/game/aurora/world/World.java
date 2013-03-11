@@ -50,10 +50,16 @@ public class World implements Serializable {
 
     private Map<String, AlienRace> races = new HashMap<String, AlienRace>();
 
+    private Map<String, String> globalVariables = new HashMap<String, String>();
+
     public World(int sizeX, int sizeY) {
         player = new Player();
         updatedThisFrame = false;
         currentRoom = galaxyMap = new GalaxyMap(this, sizeX, sizeY);
+    }
+
+    public Map<String, String> getGlobalVariables() {
+        return globalVariables;
     }
 
     public void update(GameContainer container) {

@@ -16,7 +16,7 @@ import ru.game.aurora.world.space.earth.Earth;
 
 public class HomeworldGenerator {
 
-    private static void setCoord(BasePlanet p, int radius) {
+    public static void setCoord(BasePlanet p, int radius) {
         int planetX = CommonRandom.getRandom().nextInt(2 * radius) - radius;
 
         int planetY = (int) (Math.sqrt(radius * radius - planetX * planetX) * (CommonRandom.getRandom().nextBoolean() ? -1 : 1));
