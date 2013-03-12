@@ -51,12 +51,13 @@ public class MainQuestGenerator implements WorldGeneratorPart
 
             if (count == 2) {
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/second_cloned_system_found.json"));
-                world.getGlobalVariables().put("quest.main.cloned_systems_encountered", null);
+                world.getGlobalVariables().put(MAIN_QUEST_STATE_VAR_NAME, "2_encountered");
                 return;
             }
 
             if (count == 3) {
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/third_cloned_system_found.json"));
+                world.getGlobalVariables().put(MAIN_QUEST_STATE_VAR_NAME, "3_encountered");
             }
         }
     }
@@ -66,6 +67,8 @@ public class MainQuestGenerator implements WorldGeneratorPart
     private static final int CLONED_SYSTEM_COUNT = 5;
 
     private static final String CLONED_SYSTEM_PROPERTY = "quest.main.cloned";
+
+    private static final String MAIN_QUEST_STATE_VAR_NAME = "quest.main.state";
 
     @Override
     public void updateWorld(World world) {

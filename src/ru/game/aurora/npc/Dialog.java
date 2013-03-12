@@ -20,7 +20,9 @@ import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Dialog implements OverlayWindow {
@@ -42,6 +44,18 @@ public class Dialog implements OverlayWindow {
             this.npcText = npcText;
             this.replies = replies;
         }
+
+        public List<Reply> getAvailableReplies(World world)
+        {
+            List<Reply> rz = new ArrayList<Reply>(replies.length);
+            for (Reply r : replies) {
+                if (r.isVisible(world)) {
+                    rz.add(r);
+                }
+            }
+
+            return rz;
+        }
     }
 
     public static class Reply implements Serializable {
@@ -56,10 +70,47 @@ public class Dialog implements OverlayWindow {
 
         public final String replyText;
 
+        /**
+         * This reply will only be visible if global game state contains given global variables with given values
+         */
+        public final Map<String, String> replyConditions;
+
         public Reply(int returnValue, int targetStatementId, String replyText) {
             this.returnValue = returnValue;
             this.targetStatementId = targetStatementId;
             this.replyText = replyText;
+            this.replyConditions = null;
+        }
+
+        public Reply(int returnValue, int targetStatementId, String replyText, Map<String, String> replyConditions) {
+            this.returnValue = returnValue;
+            this.targetStatementId = targetStatementId;
+            this.replyText = replyText;
+            this.replyConditions = replyConditions;
+        }
+
+        /**
+         * Returns true if this dialog option is available given current world state
+         */
+        public boolean isVisible(World world)
+        {
+            if (replyConditions == null) {
+                return true;
+            }
+
+            for (Map.Entry<String, String> replyCondition : replyConditions.entrySet()) {
+                if (!world.getGlobalVariables().containsKey(replyCondition.getKey())) {
+                    return false;
+                }
+
+                String val = world.getGlobalVariables().get(replyCondition.getKey());
+                String desiredVal = replyCondition.getValue();
+
+                if ((val != null && !val.equals(desiredVal)) || (val == null && desiredVal != null)) {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 
@@ -70,6 +121,11 @@ public class Dialog implements OverlayWindow {
     private Statement currentStatement;
 
     private int returnValue = 0;
+
+    /**
+     * Replies that are available for current statement based on current world state.
+     */
+    private List<Reply> availableReplies;
 
     public Dialog() {
         // for gson
@@ -90,6 +146,7 @@ public class Dialog implements OverlayWindow {
     @Override
     public void enter(World world) {
         currentStatement = statements.get(0);
+        availableReplies = currentStatement.getAvailableReplies(world);
         returnValue = 0;
     }
 
@@ -112,11 +169,16 @@ public class Dialog implements OverlayWindow {
             }
         }
 
-        if (idx >= currentStatement.replies.length || idx < 0) {
+        if (idx >= availableReplies.size() || idx < 0) {
             return;
         }
-        Reply selectedReply = currentStatement.replies[idx];
+        Reply selectedReply = availableReplies.get(idx);
         currentStatement = statements.get(selectedReply.targetStatementId);
+        if (currentStatement != null) {
+            availableReplies = currentStatement.getAvailableReplies(world);
+        } else {
+            availableReplies = null;
+        }
         returnValue = selectedReply.returnValue;
     }
 
@@ -148,7 +210,7 @@ public class Dialog implements OverlayWindow {
                 , Color.yellow);
 
         int i = 0;
-        for (Reply r : currentStatement.replies) {
+        for (Reply r : availableReplies) {
             graphics.drawString(
                     (i + 1) + ": " + r.replyText
                     , camera.getRelativeX((int) replyRectangle.getX()) + camera.getTileWidth() / 2

@@ -10,6 +10,13 @@
                     "replyText":"Who are you?"
                 },
                 {
+                    "replyConditions" : {
+                        "quest.main.state" : "3_encountered"
+                    },
+                    "targetStatementId":13,
+                    "replyText":"We know you sell information, perhaps you can help us?"
+                },
+                {
                     "targetStatementId":-1,
                     "replyText":"Oops, sorry, pushed wrong button. Bye."
                 }
@@ -168,6 +175,30 @@
                 {
                     "targetStatementId":3,
                     "replyText":"Ok, i want to ask something more"
+                }
+            ]
+        },
+
+
+
+        "13":{
+            "id":13,
+            "npcText":"We listen.",
+            "replies":[
+                {
+                    "targetStatementId":14,
+                    "replyText":"We have encountered strangely identical star systems... <tell all the information>"
+                }
+            ]
+        },
+
+        "14":{
+            "id":14,
+            "npcText":"Twin starsystems. We know about it. Knowledge is quite common and not a secret. It is worth just 1 credit.",
+            "replies":[
+                {
+                    "targetStatementId":3,
+                    "replyText":"We do not have enough credits."
                 }
             ]
         }
