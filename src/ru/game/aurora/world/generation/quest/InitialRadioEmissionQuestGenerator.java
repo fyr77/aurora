@@ -8,8 +8,8 @@ package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.EarthState;

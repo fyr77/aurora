@@ -8,7 +8,11 @@ package ru.game.aurora.world.generation.humanity;
 
 
 import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.npc.*;
+import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPCShipFactory;
+import ru.game.aurora.npc.SingleShipFixedTime;
+import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.npc.shipai.LandOnPlanetAI;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.World;

@@ -8,7 +8,7 @@ package ru.game.aurora.world.quest;
 
 
 import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.npc.Dialog;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;

@@ -3,7 +3,7 @@
  * Date: 11.12.12
  * Time: 22:20
  */
-package ru.game.aurora.npc;
+package ru.game.aurora.dialog;
 
 import com.google.gson.Gson;
 import de.matthiasmann.twl.Widget;
@@ -19,8 +19,10 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,91 +30,6 @@ import java.util.Map;
 public class Dialog implements OverlayWindow {
 
     private static final long serialVersionUID = -3952133424974552884L;
-
-    public static class Statement implements Serializable {
-
-        private static final long serialVersionUID = -9058694068037621906L;
-
-        public final int id;
-
-        public final String npcText;
-
-        public final Reply[] replies;
-
-        public Statement(int id, String npcText, Reply... replies) {
-            this.id = id;
-            this.npcText = npcText;
-            this.replies = replies;
-        }
-
-        public List<Reply> getAvailableReplies(World world)
-        {
-            List<Reply> rz = new ArrayList<Reply>(replies.length);
-            for (Reply r : replies) {
-                if (r.isVisible(world)) {
-                    rz.add(r);
-                }
-            }
-
-            return rz;
-        }
-    }
-
-    public static class Reply implements Serializable {
-
-        private static final long serialVersionUID = -1616895998816949360L;
-        /**
-         * If this reply will be the last action of the dialog, this will be that dialog's return value
-         */
-        public final int returnValue;
-
-        public final int targetStatementId;
-
-        public final String replyText;
-
-        /**
-         * This reply will only be visible if global game state contains given global variables with given values
-         */
-        public final Map<String, String> replyConditions;
-
-        public Reply(int returnValue, int targetStatementId, String replyText) {
-            this.returnValue = returnValue;
-            this.targetStatementId = targetStatementId;
-            this.replyText = replyText;
-            this.replyConditions = null;
-        }
-
-        public Reply(int returnValue, int targetStatementId, String replyText, Map<String, String> replyConditions) {
-            this.returnValue = returnValue;
-            this.targetStatementId = targetStatementId;
-            this.replyText = replyText;
-            this.replyConditions = replyConditions;
-        }
-
-        /**
-         * Returns true if this dialog option is available given current world state
-         */
-        public boolean isVisible(World world)
-        {
-            if (replyConditions == null) {
-                return true;
-            }
-
-            for (Map.Entry<String, String> replyCondition : replyConditions.entrySet()) {
-                if (!world.getGlobalVariables().containsKey(replyCondition.getKey())) {
-                    return false;
-                }
-
-                String val = world.getGlobalVariables().get(replyCondition.getKey());
-                String desiredVal = replyCondition.getValue();
-
-                if ((val != null && !val.equals(desiredVal)) || (val == null && desiredVal != null)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
 
     private String iconName;
 
@@ -210,12 +127,19 @@ public class Dialog implements OverlayWindow {
                 , Color.yellow);
 
         int i = 0;
+        int lineIdx = 0;
         for (Reply r : availableReplies) {
-            graphics.drawString(
-                    (i + 1) + ": " + r.replyText
+            lineIdx += EngineUtils.drawString(
+                    graphics
+                    , (i + 1) + ": " + r.replyText
                     , camera.getRelativeX((int) replyRectangle.getX()) + camera.getTileWidth() / 2
-                    , camera.getRelativeY((int) (replyRectangle.getY() + (i++))) + camera.getTileHeight() / 2
+                    , camera.getRelativeY((int) (replyRectangle.getY())) + camera.getTileHeight() / 2 + (lineIdx) * GUIConstants.dialogFont.getLineHeight()
+                    , camera.getTileWidth() * ((int) replyRectangle.getWidth() - 1)
+                    , GUIConstants.dialogFont
+                    , Color.yellow
             );
+            ++i;
+            ++lineIdx;
         }
     }
 

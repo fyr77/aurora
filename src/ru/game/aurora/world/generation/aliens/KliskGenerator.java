@@ -6,8 +6,8 @@
  */
 package ru.game.aurora.world.generation.aliens;
 
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;

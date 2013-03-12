@@ -7,6 +7,7 @@
 package ru.game.aurora.npc;
 
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;

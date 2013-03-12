@@ -6,6 +6,7 @@
 package ru.game.aurora.npc;
 
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;

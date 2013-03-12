@@ -12,9 +12,9 @@ import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
-import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Positionable;
@@ -430,7 +430,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         }
 
-        final int selectedWeaponRange = player.getShip().getWeapons().get(selectedWeapon).getWeaponDesc().range;
+
+        final int selectedWeaponRange;
+        if (mode == MODE_SHOOT) {
+            selectedWeaponRange = player.getShip().getWeapons().get(selectedWeapon).getWeaponDesc().range;
+        } else {
+            selectedWeaponRange = 0;
+        }
         g.setColor(Color.red);
         for (SpaceObject ship : ships) {
             ship.draw(container, g, camera);

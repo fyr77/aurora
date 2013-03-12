@@ -12,7 +12,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.npc.Dialog;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;

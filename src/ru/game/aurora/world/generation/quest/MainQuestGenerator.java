@@ -2,7 +2,7 @@ package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.npc.Dialog;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;

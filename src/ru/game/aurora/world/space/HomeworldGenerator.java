@@ -7,8 +7,8 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.npc.Dialog;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.world.planet.*;
