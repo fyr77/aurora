@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+    <!-- stuff -->
+    <resource type="image" id="no_image">no_image.png</resource>
+
     <!-- backgrounds -->
     <resource type="image" id="menu_background">gui/images/main_menu_background.png</resource>
 
@@ -60,6 +63,8 @@
     <!-- rogues -->
     <resource type="image" id="rogues_probe">sprites/ships/rogues_probe.png</resource>
     <resource type="image" id="rogues_beacon">sprites/ships/rogues_beacon.png</resource>
+    <resource type="image" id="rogues_scout">sprites/ships/rogues_scout_damaged.png</resource>
+    <resource type="image" id="rogues_scout_damaged">sprites/ships/rogues_scout_damaged.png</resource>
 
     <!-- earth -->
     <resource type="image" id="earth_dialog">sprites/portraits/earth-1.png</resource>
