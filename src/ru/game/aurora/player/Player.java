@@ -30,6 +30,8 @@ public class Player implements Serializable {
 
     private int resourceUnits = 0;
 
+    private int credits = 0;
+
     public Player() {
         ship = new Ship(10, 10);
         researchState = new ResearchState(ship.getScientists());
@@ -84,5 +86,15 @@ public class Player implements Serializable {
 
     public EngineeringState getEngineeringState() {
         return engineeringState;
+    }
+
+    public void changeCredits(int delta)
+    {
+        credits += delta;
+    }
+
+    public int getCredits()
+    {
+        return credits;
     }
 }

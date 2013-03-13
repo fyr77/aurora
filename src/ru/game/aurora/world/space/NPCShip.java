@@ -115,7 +115,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
     @Override
     public void onContact(World world) {
         if (!isHostile()) {
-            world.addOverlayWindow(race.getDefaultDialog());
+            world.addOverlayWindow(capitain != null ? capitain.getCustomDialog() : race.getDefaultDialog());
         }
     }
 
