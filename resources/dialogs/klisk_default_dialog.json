@@ -204,8 +204,13 @@
             "npcText":"Twin starsystems. We know about it. Knowledge is quite common and not a secret. It is worth just 1 credit.",
             "replies":[
                 {
+                    "returnValue" : 200,
+                    "targetStatementId":-1,
+                    "replyText":"Deal. Here is your credit."
+                },
+                {
                     "targetStatementId":3,
-                    "replyText":"We do not have enough credits."
+                    "replyText":"Too expensive for 'quite common knowledge'. We will find it ourselves"
                 }
             ]
         },
@@ -222,7 +227,7 @@
             "npcText":"We are interested. We will pay 10 credits for this information.",
             "replies":[
                 {
-                    "returnValue" : 100,
+                    "returnValue" : 200,
                     "targetStatementId":-1,
                     "replyText":"Deal. Transferring its coordinates now..."
                 },

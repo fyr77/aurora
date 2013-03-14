@@ -65,7 +65,7 @@
             "npcText":"Yes, this is most simple and obvious answer. Some kind of system-wide terraforming, or something like that. Or maybe just some alien 'stone garden'.",
             "replies":[
                 {
-                    "targetStatementId":6,
+                    "targetStatementId":-1,
                     "replyText":"Ok, we will investigate that."
                 }
             ]

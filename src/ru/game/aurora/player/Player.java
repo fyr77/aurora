@@ -30,7 +30,7 @@ public class Player implements Serializable {
 
     private int resourceUnits = 0;
 
-    private int credits = 0;
+    private int credits = 5;
 
     public Player() {
         ship = new Ship(10, 10);
