@@ -3,9 +3,11 @@ VERSION 0.0.5
 
 IN PROGRESS...
 
-* Dialogs with options that are visible only in certain conditions (based on game state)
++ Dialogs with options that are visible only in certain conditions (based on game state)
 * Fixes of dialog view (multi-line replies)
 * Some crashes fixed
++ Dialog listeners
++ New random encounters
 
 =====================================================
 VERSION 0.0.4

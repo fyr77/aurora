@@ -50,7 +50,7 @@ public class World implements Serializable {
 
     private Map<String, AlienRace> races = new HashMap<String, AlienRace>();
 
-    private Map<String, String> globalVariables = new HashMap<String, String>();
+    private Map<String, Serializable> globalVariables = new HashMap<String, Serializable>();
 
     public World(int sizeX, int sizeY) {
         player = new Player();
@@ -58,7 +58,7 @@ public class World implements Serializable {
         currentRoom = galaxyMap = new GalaxyMap(this, sizeX, sizeY);
     }
 
-    public Map<String, String> getGlobalVariables() {
+    public Map<String, Serializable> getGlobalVariables() {
         return globalVariables;
     }
 

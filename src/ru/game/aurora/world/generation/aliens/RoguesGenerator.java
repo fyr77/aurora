@@ -7,10 +7,15 @@
 
 package ru.game.aurora.world.generation.aliens;
 
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.dialog.Reply;
+import ru.game.aurora.dialog.Statement;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.SingleShipEvent;
+import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.space.GalaxyMap;
@@ -27,7 +32,7 @@ public class RoguesGenerator implements WorldGeneratorPart
         private static final long serialVersionUID = 4954480685679636543L;
 
         public MeetDamagedRogueEvent(NPCShip ship) {
-            super(0.9, ship);
+            super(0.4, ship);
         }
 
         @Override
@@ -43,17 +48,64 @@ public class RoguesGenerator implements WorldGeneratorPart
         }
     }
 
+    private void createDamagedScoutEvent(World world, final AlienRace rogueRace) {
+        final NPCShip damagedRogueScout = new NPCShip(0, 0, "rogues_scout_damaged", rogueRace, null, "Rogue scout");
+        // event with meeting a damaged rogue ship asking for help
+        final Dialog dialog = Dialog.loadFromFile("dialogs/encounters/rogues_damaged_scout.json");
+        dialog.setListener(new DialogListener() {
+
+            private static final long serialVersionUID = -1975417060573768272L;
+
+            @Override
+            public void onDialogEnded(World world, int returnCode) {
+
+                if (returnCode == 0) {
+                    return;
+                }
+
+                if (returnCode == 100) {
+                    world.getGlobalVariables().put("rogues.damaged_scout_found", world.getCurrentStarSystem());
+                    return;
+                }
+
+                if (world.getPlayer().getResourceUnits() < 5) {
+                    GameLogger.getInstance().logMessage("Not enough resource units");
+                    return;
+                }
+
+                world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() - 5);
+
+                if (returnCode == 1) {
+                    // player decided to help without reward
+                    rogueRace.setRelationToPlayer(rogueRace.getRelationToPlayer() + 2);
+                } else {
+                    // player decided to help for reward
+                    world.getPlayer().changeCredits(5);
+                    GameLogger.getInstance().logMessage("Received 5 credits");
+                    rogueRace.setRelationToPlayer(rogueRace.getRelationToPlayer() + 1);
+                }
+
+                world.getGlobalVariables().put("rogues.damage_scout_result", "help");
+                damagedRogueScout.setSprite("rogues_scout");
+                damagedRogueScout.setAi(new LeaveSystemAI());
+                damagedRogueScout.setCapitain(new NPC(
+                        new Dialog("no_image",
+                                new Statement(0, "Grateful for help. Kindness not be forgotten.", new Reply(0, -1, "You are welcome. Over.")))
+                ));
+            }
+        });
+        damagedRogueScout.setCapitain(new NPC(dialog));
+        damagedRogueScout.setAi(null);
+        damagedRogueScout.setStationary(true);
+        world.addListener(new MeetDamagedRogueEvent(damagedRogueScout));
+    }
 
     @Override
     public void updateWorld(World world) {
         AlienRace rogueRace = new AlienRace("Rogues", null, 5, null);
 
         world.getRaces().put(rogueRace.getName(), rogueRace);
-
-        // event with meeting a damaged rogue ship asking for help
-        NPCShip damagedRogueScout = new NPCShip(0, 0, "rogues_scout_damaged", rogueRace, new NPC(Dialog.loadFromFile("dialogs/encounters/rogues_damaged_scout.json")), "Rogue scout");
-        damagedRogueScout.setAi(null);
-        damagedRogueScout.setStationary(true);
-        world.addListener(new MeetDamagedRogueEvent(damagedRogueScout));
+        createDamagedScoutEvent(world, rogueRace);
     }
+
 }

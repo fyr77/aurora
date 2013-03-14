@@ -91,6 +91,7 @@
             "npcText":"It is possible. Preparations will be done for that case. <Alien ship cuts communication>",
             "replies":[
                 {
+                    "returnValue" : 100,
                     "targetStatementId":-1,
                     "replyText":"<over>"
                 }

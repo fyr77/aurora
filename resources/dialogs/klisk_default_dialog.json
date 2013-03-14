@@ -17,6 +17,13 @@
                     "replyText":"We know you sell information, perhaps you can help us?"
                 },
                 {
+                    "replyConditions" : {
+                        "rogues.damaged_scout_found" : null
+                    },
+                    "targetStatementId":15,
+                    "replyText":"We have information about a stranded Rogue ship, that has destroyed one of your spaceships, but was heavily damaged and is now unable to move. We can sell you information about its location"
+                },
+                {
                     "targetStatementId":-1,
                     "replyText":"Oops, sorry, pushed wrong button. Bye."
                 }
@@ -199,6 +206,29 @@
                 {
                     "targetStatementId":3,
                     "replyText":"We do not have enough credits."
+                }
+            ]
+        },
+
+
+
+
+
+
+
+
+        "15":{
+            "id":15,
+            "npcText":"We are interested. We will pay 10 credits for this information.",
+            "replies":[
+                {
+                    "returnValue" : 100,
+                    "targetStatementId":-1,
+                    "replyText":"Deal. Transferring its coordinates now..."
+                },
+                {
+                    "targetStatementId":3,
+                    "replyText":"No, that's not enough."
                 }
             ]
         }

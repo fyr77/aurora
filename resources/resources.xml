@@ -63,7 +63,7 @@
     <!-- rogues -->
     <resource type="image" id="rogues_probe">sprites/ships/rogues_probe.png</resource>
     <resource type="image" id="rogues_beacon">sprites/ships/rogues_beacon.png</resource>
-    <resource type="image" id="rogues_scout">sprites/ships/rogues_scout_damaged.png</resource>
+    <resource type="image" id="rogues_scout">sprites/ships/rogues_scout.png</resource>
     <resource type="image" id="rogues_scout_damaged">sprites/ships/rogues_scout_damaged.png</resource>
 
     <!-- earth -->

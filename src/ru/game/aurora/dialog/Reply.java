@@ -57,10 +57,12 @@ public class Reply implements Serializable {
                 return false;
             }
 
-            String val = world.getGlobalVariables().get(replyCondition.getKey());
+            Serializable val = world.getGlobalVariables().get(replyCondition.getKey());
             String desiredVal = replyCondition.getValue();
-
-            if ((val != null && !val.equals(desiredVal)) || (val == null && desiredVal != null)) {
+            if (desiredVal == null) {
+                return true;
+            }
+            if ((val != null && !val.equals(desiredVal)) || (val == null)) {
                 return false;
             }
         }

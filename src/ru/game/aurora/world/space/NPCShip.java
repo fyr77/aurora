@@ -174,4 +174,16 @@ public class NPCShip extends BasePositionable implements SpaceObject {
     public void setStationary(boolean stationary) {
         isStationary = stationary;
     }
+
+    public void setSprite(String sprite) {
+        this.sprite = sprite;
+    }
+
+    public void setCapitain(NPC capitain) {
+        this.capitain = capitain;
+    }
+
+    public NPC getCapitain() {
+        return capitain;
+    }
 }

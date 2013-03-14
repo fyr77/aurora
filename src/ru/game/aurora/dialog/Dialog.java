@@ -44,6 +44,8 @@ public class Dialog implements OverlayWindow {
      */
     private List<Reply> availableReplies;
 
+    private DialogListener listener;
+
     public Dialog() {
         // for gson
     }
@@ -58,6 +60,10 @@ public class Dialog implements OverlayWindow {
     public Dialog(String iconName, Map<Integer, Statement> statements) {
         this.iconName = iconName;
         this.statements = statements;
+    }
+
+    public void setListener(DialogListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -91,12 +97,17 @@ public class Dialog implements OverlayWindow {
         }
         Reply selectedReply = availableReplies.get(idx);
         currentStatement = statements.get(selectedReply.targetStatementId);
+        returnValue = selectedReply.returnValue;
+
         if (currentStatement != null) {
             availableReplies = currentStatement.getAvailableReplies(world);
         } else {
+            // dialog is over
+            if (listener != null) {
+                listener.onDialogEnded(world, returnValue);
+            }
             availableReplies = null;
         }
-        returnValue = selectedReply.returnValue;
     }
 
     private static final Rectangle iconRectangle = new Rectangle(3, 3, 4, 4);
