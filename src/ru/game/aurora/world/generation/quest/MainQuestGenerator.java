@@ -19,14 +19,12 @@ import ru.game.aurora.world.space.StarSystem;
  * Date: 11.03.13
  * Time: 14:05
  */
-public class MainQuestGenerator implements WorldGeneratorPart
-{
+public class MainQuestGenerator implements WorldGeneratorPart {
 
     /**
      * Checks that player has entered a 'cloned' star system and shows dialog in proper cases
      */
-    private static final class MainQuestSystemEnterListener extends GameEventListener
-    {
+    private static final class MainQuestSystemEnterListener extends GameEventListener {
         private static final long serialVersionUID = -1300971040110944699L;
 
         private int count = 0;
@@ -37,8 +35,7 @@ public class MainQuestGenerator implements WorldGeneratorPart
         }
 
         @Override
-        public void onPlayerEnterStarSystem(World world, StarSystem ss)
-        {
+        public void onPlayerEnterStarSystem(World world, StarSystem ss) {
             if (!ss.getVariables().containsKey(CLONED_SYSTEM_PROPERTY)) {
                 return;
             }
@@ -83,8 +80,26 @@ public class MainQuestGenerator implements WorldGeneratorPart
                 y = CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesX());
             } while (world.getGalaxyMap().getObjectAt(x, y) != null);
 
-            StarSystem ss = cloneStarSystem(original, x, y);
+            final StarSystem ss = cloneStarSystem(original, x, y);
             world.getGalaxyMap().addObjectAndSetTile(ss, x, y);
+
+            if (i == 0) {
+                // this system is currently in process of terraforming, Obliterator is there
+                ss.setBackgroundSprite("obliterator_background");
+                ss.setFirstEnterDialog(Dialog.loadFromFile("dialogs/quest/main/obliterator_encountered.json"));
+                ss.setQuestLocation(true);
+                world.addListener(new GameEventListener() {
+                    private static final long serialVersionUID = -8345545783110990443L;
+
+                    @Override
+                    public void onPlayerEnterStarSystem(World world, StarSystem s) {
+                        if (s == ss) {
+                            world.getGlobalVariables().put("quest.main.obliterator_encountered", null);
+                            isAlive = false;
+                        }
+                    }
+                });
+            }
         }
 
         world.addListener(new MainQuestSystemEnterListener());
@@ -113,8 +128,7 @@ public class MainQuestGenerator implements WorldGeneratorPart
         return ss;
     }
 
-    private StarSystem cloneStarSystem(StarSystem proto, int x, int y)
-    {
+    private StarSystem cloneStarSystem(StarSystem proto, int x, int y) {
         BasePlanet[] planets = new BasePlanet[3];
         StarSystem ss = new StarSystem(new StarSystem.Star(2, Color.green), x, y);
 

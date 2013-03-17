@@ -22,8 +22,7 @@ import java.util.Iterator;
 /**
  * Processes outcome of default dialog with Klisk race
  */
-public class KliskMainDialogListener implements DialogListener
-{
+public class KliskMainDialogListener implements DialogListener {
     private static final long serialVersionUID = -2351530187782245878L;
 
     private AlienRace kliskRace;
@@ -32,14 +31,13 @@ public class KliskMainDialogListener implements DialogListener
         this.kliskRace = kliskRace;
     }
 
-    private void destroyRogueScout(World world)
-    {
+    private void destroyRogueScout(World world) {
         StarSystem ss = (StarSystem) world.getGlobalVariables().get("rogues.damaged_scout_found");
         if (ss == null) {
             throw new IllegalStateException("Can not sell information about rogues scout to Klisk. 'rogues.damaged_scout_found' global variable not set");
         }
 
-        for (Iterator<SpaceObject> iter = ss.getShips().iterator(); iter.hasNext();){
+        for (Iterator<SpaceObject> iter = ss.getShips().iterator(); iter.hasNext(); ) {
             SpaceObject so = iter.next();
             if (so instanceof NPCShip && so.getName().equals("Rogue scout")) {
                 iter.remove();
@@ -55,8 +53,7 @@ public class KliskMainDialogListener implements DialogListener
         world.getGlobalVariables().remove("rogues.damaged_scout_found");
     }
 
-    private void sellTerraformerInformation(World world)
-    {
+    private void sellTerraformerInformation(World world) {
         if (world.getPlayer().getCredits() < 1) {
             GameLogger.getInstance().logMessage("Not enough credits");
             return;
@@ -87,13 +84,12 @@ public class KliskMainDialogListener implements DialogListener
                 20,
                 30
         );
-
+        world.getGlobalVariables().put("quest.main.knows_about_obliterator", null);
         world.getPlayer().getResearchState().addNewAvailableProject(research);
     }
 
     @Override
-    public void onDialogEnded(World world, int returnCode)
-    {
+    public void onDialogEnded(World world, int returnCode) {
         switch (returnCode) {
             case 100:
                 // player has given location of a damaged rogue scout

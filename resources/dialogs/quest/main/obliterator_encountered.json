@@ -1,0 +1,42 @@
+{
+    "iconName":"scientist_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "npcText":"Oh my god, captain, look at this",
+            "replies":[
+                {
+                     "replyConditions" : {
+                                            "quest.main.knows_about_obliterator" : null
+                                        },
+                    "targetStatementId":1,
+                    "replyText":"Is this that Obliterator stuff?"
+                },
+                {
+                    "targetStatementId":2,
+                    "replyText":"What the hell is that thing?"
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "npcText":"Looks like that. I have seen its images, but to see it with own eyes... I can't imagine power of civilization that has built this",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"We will stay here for some time and study it"
+                }
+            ]
+        },
+        "2":{
+            "id":2,
+            "npcText":"I do not know... I can't even imagine how it can exist. It's greater than the sun! Its half of a system size! Oh my god...",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"We will stay here for some time and study it"
+                }
+            ]
+        }
+    }
+}

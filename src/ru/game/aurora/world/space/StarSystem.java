@@ -76,6 +76,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     private Dialog firstEnterDialog;
 
     /**
+     * Special background sprite that will be drawn between parallax background and planets pane
+     */
+    private String backgroundSprite;
+
+    /**
      * Current mode
      */
     private int mode = MODE_MOVE;
@@ -307,7 +312,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             createBackground(world);
         }
         if (!effects.isEmpty()) {
-            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext();) {
+            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext(); ) {
                 Effect currentEffect = iter.next();
                 currentEffect.update(container, world);
                 if (currentEffect.isOver()) {
@@ -346,7 +351,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
-        for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext();) {
+        for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext(); ) {
             SpaceObject ship = iter.next();
 
             if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
@@ -402,7 +407,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     public void draw(GameContainer container, Graphics g, Camera camera) {
         if (background != null) {
             background.draw(g, camera);
+            if (backgroundSprite != null) {
+                float x = background.getXCoordPoint(camera, -100, -1);
+                float y = background.getYCoordPoint(camera, -100, -1);
+                g.drawImage(ResourceManager.getInstance().getImage(backgroundSprite), x, y);
+            }
         }
+
         player.getShip().draw(container, g, camera);
         player.addGlobalStatus();
         GameLogger.getInstance().addStatusMessage("==========================");
@@ -518,5 +529,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public void setQuestLocation(boolean questLocation) {
         isQuestLocation = questLocation;
+    }
+
+    public void setBackgroundSprite(String backgroundSprite) {
+        this.backgroundSprite = backgroundSprite;
     }
 }
