@@ -66,4 +66,9 @@ public class FailScreen implements OverlayWindow {
     public static FailScreen createShipDestroyedFailScreen() {
         return new FailScreen("Your ship was lost in space, a lifeless hulk flying through the void. Noone on Earth never learned what happend to you.", "ship_destroyed_gameover");
     }
+
+    public static FailScreen createRetirementFailScreen() {
+        return new FailScreen("You have been removed from commanding your ship and from Aurora project itself. \n" +
+                "        No one blamed you for this failure, and your next assignments were good enough, fine ships under your command, but each time you saw Aurora ship on your radar, returning from deep space, you felt sad and some times envy...", "retirement_gameover");
+    }
 }

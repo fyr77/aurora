@@ -3,6 +3,7 @@ package ru.game.aurora.world.generation.quest;
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -94,6 +95,14 @@ public class MainQuestGenerator implements WorldGeneratorPart {
                         if (s == ss) {
                             world.getGlobalVariables().put("quest.main.obliterator_encountered", null);
                             isAlive = false;
+                            world.getPlayer().getEarthState().getMessages().add(
+                                    new PrivateMessage(
+                                            "Greatest known artificial structure discovered"
+                                            ,world.getPlayer().getShip().getName() + " has encountered the biggest artificial structure ever seen by man in a distant star system. A huge object of" +
+                                            "unknown origin, larger than a star can be seen on these amazing photos. Who has created it? What is its purpose? What power does it have? Read more in next issue of 'Galaxy News'."
+                                            ,"news"
+                                    )
+                            );
                         }
                     }
                 });

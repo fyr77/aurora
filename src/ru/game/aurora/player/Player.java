@@ -32,6 +32,12 @@ public class Player implements Serializable {
 
     private int credits = 5;
 
+    /**
+     * Number of times player has returned to Earth without enough research data
+     * When this count reaches some limit, game is over
+     */
+    private int failsCount = 0;
+
     public Player() {
         ship = new Ship(10, 10);
         researchState = new ResearchState(ship.getScientists());
@@ -96,5 +102,15 @@ public class Player implements Serializable {
     public int getCredits()
     {
         return credits;
+    }
+
+    public void increaseFailCount()
+    {
+        failsCount++;
+    }
+
+    public int getFailCount()
+    {
+        return failsCount;
     }
 }

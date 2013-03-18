@@ -13,6 +13,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.dialog.Statement;
+import ru.game.aurora.gui.FailScreen;
 import ru.game.aurora.gui.ProgressDumpScreen;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.EarthScreen;
@@ -87,12 +88,15 @@ public class Earth extends Planet
                     double scorePerTurn = (double) totalScore / (daysPassed);
                     stmt = new Statement(0, String.format("Let us see. You have brought us new %d points of data, giving %f points/day", totalScore, scorePerTurn), new Reply(0, 0, ""));
 
-                    if (scorePerTurn < 0.001) {
-                        // unsatisfactory
-                        stmt.replies[0] = new Reply(0, 3, "=continue=");
-                    } else if (scorePerTurn < 0.01) {
-                        // poor
-                        stmt.replies[0] = new Reply(0, 2, "=continue=");
+                    if (scorePerTurn < 0.01) {
+                        world.getPlayer().increaseFailCount();
+                        if (world.getPlayer().getFailCount() > 3) {
+                            // unsatisfactory
+                            stmt.replies[0] = new Reply(0, 3, "=continue=");
+                        } else {
+                            // poor
+                            stmt.replies[0] = new Reply(0, 2, "=continue=");
+                        }
                     } else {
                         // ok
                         stmt.replies[0] = new Reply(0, 1, "=continue=");
@@ -109,7 +113,8 @@ public class Earth extends Planet
         }
         if (progressDialog.isOver()) {
             if (progressDialog.getReturnValue() == -1) {
-                container.exit();
+                world.setCurrentRoom(FailScreen.createRetirementFailScreen());
+                return;
             }
             world.setCurrentRoom(owner);
 
