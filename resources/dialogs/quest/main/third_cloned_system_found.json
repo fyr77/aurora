@@ -30,10 +30,22 @@
             "npcText":"No. This star system looks perfectly virgin, just like the others.",
             "replies":[
                 {
+                    "targetStatementId":3,
+                    "replyText":"Maybe if we ask another races we will learn something about it. We can not be the first ones to notice it."
+                }
+            ]
+        },
+
+        "3":{
+            "id":3,
+            "npcText":"Yes, maybe. But they may require something in exchange for this information. I think we should look for others star systems like this, maybe we will find answer there.",
+            "replies":[
+                {
                     "targetStatementId":-1,
-                    "replyText":"Maybe if we ask another races we will learn something about it. We can not be the first ones to notice it"
+                    "replyText":"Maybe..."
                 }
             ]
         }
+
     }
 }

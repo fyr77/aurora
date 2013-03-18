@@ -6,13 +6,17 @@
             "npcText":"Oh my god, captain, look at this",
             "replies":[
                 {
-                     "replyConditions" : {
-                                            "quest.main.knows_about_obliterator" : null
-                                        },
+                    "replyConditions" : {
+                        "quest.main.knows_about_obliterator" : null
+                    },
                     "targetStatementId":1,
                     "replyText":"Is this that Obliterator stuff?"
                 },
                 {
+                    "replyConditions" : {
+                        "quest.main.knows_about_obliterator" : null
+                    },
+                    "invertCondition": true,
                     "targetStatementId":2,
                     "replyText":"What the hell is that thing?"
                 }

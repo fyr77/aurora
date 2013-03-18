@@ -78,11 +78,13 @@ public class RoguesGenerator implements WorldGeneratorPart
                 if (returnCode == 1) {
                     // player decided to help without reward
                     rogueRace.setRelationToPlayer(rogueRace.getRelationToPlayer() + 2);
+                    world.getGlobalVariables().remove("rogues.damaged_scout_found");
                 } else {
                     // player decided to help for reward
                     world.getPlayer().changeCredits(5);
                     GameLogger.getInstance().logMessage("Received 5 credits");
                     rogueRace.setRelationToPlayer(rogueRace.getRelationToPlayer() + 1);
+                    world.getGlobalVariables().remove("rogues.damaged_scout_found");
                 }
 
                 world.getGlobalVariables().put("rogues.damage_scout_result", "help");

@@ -1,0 +1,16 @@
+Description for global variables that are used to track quest state
+
+==============================
+Main quest:
+
+quest.main.state - overall state
+quest.main.obliterator_encountered - set after player meets Obliterator in space
+quest.main.knows_about_obliterator - set after player retrieves information about Obliterator from other species
+quest.main.cloned_starsystems_encountered - how many terraformed starsystems player has visited
+
+==============================
+
+Relations with rogues:
+
+rogues.damaged_scout_found - set when player finds a damaged rogues scout. Deleted after scout is repaired or sold to Klisk
+rogues.damage_scout_result - outcome of this situation. Either 'help' or 'sold_to_klisk'

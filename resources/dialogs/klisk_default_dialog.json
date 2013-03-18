@@ -11,7 +11,7 @@
                 },
                 {
                     "replyConditions" : {
-                        "quest.main.state" : "3_encountered"
+                        "quest.main.cloned_starsystems_encountered" : 3
                     },
                     "targetStatementId":13,
                     "replyText":"We know you sell information, perhaps you can help us?"

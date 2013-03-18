@@ -24,6 +24,9 @@ public class Reply implements Serializable {
 
     public final String replyText;
 
+    // if true, this dialo option will be only shown if conditions are NOT satisfied
+    public final boolean invertCondition;
+
     /**
      * This reply will only be visible if global game state contains given global variables with given values
      */
@@ -34,6 +37,7 @@ public class Reply implements Serializable {
         this.targetStatementId = targetStatementId;
         this.replyText = replyText;
         this.replyConditions = null;
+        invertCondition = false;
     }
 
     public Reply(int returnValue, int targetStatementId, String replyText, Map<String, String> replyConditions) {
@@ -41,6 +45,7 @@ public class Reply implements Serializable {
         this.targetStatementId = targetStatementId;
         this.replyText = replyText;
         this.replyConditions = replyConditions;
+        invertCondition = false;
     }
 
     /**
@@ -54,16 +59,16 @@ public class Reply implements Serializable {
 
         for (Map.Entry<String, String> replyCondition : replyConditions.entrySet()) {
             if (!world.getGlobalVariables().containsKey(replyCondition.getKey())) {
-                return false;
+                return invertCondition;
             }
 
             Serializable val = world.getGlobalVariables().get(replyCondition.getKey());
             String desiredVal = replyCondition.getValue();
             if (desiredVal == null) {
-                return true;
+                return !invertCondition;
             }
             if ((val != null && !val.equals(desiredVal)) || (val == null)) {
-                return false;
+                return invertCondition;
             }
         }
         return true;
