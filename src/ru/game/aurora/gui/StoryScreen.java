@@ -8,13 +8,11 @@ package ru.game.aurora.gui;
 
 import com.google.gson.Gson;
 import de.matthiasmann.twl.Widget;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.OverlayWindow;
@@ -82,6 +80,8 @@ public class StoryScreen implements OverlayWindow {
         if ((container.getInput().isKeyPressed(Input.KEY_RIGHT) || container.getInput().isKeyPressed(Input.KEY_ENTER)) && currentScreen < screens.length) {
             currentScreen++;
         }
+
+        GameLogger.getInstance().addStatusMessage("Press <left> or <right> to change pages");
     }
 
     @Override
@@ -89,8 +89,13 @@ public class StoryScreen implements OverlayWindow {
         if (isOver()) {
             return;
         }
-        graphics.drawImage(ResourceManager.getInstance().getImage(screens[currentScreen].imageId), 64, 64);
+        graphics.clear();
+        final Image image = ResourceManager.getInstance().getImage(screens[currentScreen].imageId);
+        graphics.drawImage(image, 64, 64);
+        graphics.setColor(Color.yellow);
+        graphics.drawRect(64, 64, image.getWidth(), image.getHeight());
         EngineUtils.drawRectWithBorderAndText(graphics, textRect, camera, Color.yellow, GUIConstants.backgroundColor, screens[currentScreen].text, GUIConstants.dialogFont, Color.white, false);
+
     }
 
     public boolean isOver() {

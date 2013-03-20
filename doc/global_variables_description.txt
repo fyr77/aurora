@@ -7,6 +7,7 @@ quest.main.state - overall state
 quest.main.obliterator_encountered - set after player meets Obliterator in space
 quest.main.knows_about_obliterator - set after player retrieves information about Obliterator from other species
 quest.main.cloned_starsystems_encountered - how many terraformed starsystems player has visited
+quest.main.show_earth_dialog - when true, on return to earth player will be shown quest dialog concerning Obliterator thread, then this variable will be removed
 
 ==============================
 

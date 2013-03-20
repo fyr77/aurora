@@ -14,7 +14,9 @@ import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.npc.SingleShipFixedTime;
 import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.npc.shipai.LandOnPlanetAI;
+import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.PrivateMessage;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.quest.AuroraProbe;
@@ -67,5 +69,30 @@ public class HumanityGenerator implements WorldGeneratorPart
         world.addListener(new EnterpriseEncounterCreator());
 
         world.addListener(new BiologyResearch());
+
+        /**
+         * After player returns with first information about obliterator, on its next return earth researches will analyze obliterator route and show quest dialog
+         */
+        world.addListener(new GameEventListener() {
+
+            private static final long serialVersionUID = 2162720938893116702L;
+
+            @Override
+            public void onReturnToEarth(World world)
+            {
+                if (world.getGlobalVariables().containsKey("quest.main.knows_about_obliterator")) {
+                    world.addListener(new EarthResearch(30) {
+
+                        private static final long serialVersionUID = -2829778275793872022L;
+
+                        @Override
+                        protected void onCompleted(World world) {
+                            world.getGlobalVariables().put("quest.main.show_earth_dialog", null);
+                        }
+                    });
+                    isAlive = false;
+                }
+            }
+        });
     }
 }

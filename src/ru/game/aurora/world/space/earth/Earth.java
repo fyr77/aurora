@@ -11,10 +11,12 @@ import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.dialog.Statement;
 import ru.game.aurora.gui.FailScreen;
 import ru.game.aurora.gui.ProgressDumpScreen;
+import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.EarthScreen;
 import ru.game.aurora.player.research.ResearchProjectDesc;
@@ -60,12 +62,42 @@ public class Earth extends Planet
 
     @Override
     public void enter(World world) {
-        world.addOverlayWindow(earthDialog);
+        if (world.getGlobalVariables().containsKey("quest.main.show_earth_dialog")) {
+            showObliteratorThreatDialog(world);
+
+        } else {
+            world.addOverlayWindow(earthDialog);
+        }
         dumpScreen = null;
+    }
+
+    private void showObliteratorThreatDialog(World world)
+    {
+        world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/earth_obliterator_warning_1.json"));
+        world.addOverlayWindow(new StoryScreen("story/obliterator.json"));
+        Dialog last = Dialog.loadFromFile("dialogs/quest/main/earth_obliterator_warning_2.json");
+        last.setListener(new DialogListener() {
+
+            private static final long serialVersionUID = -374777902752182404L;
+
+            @Override
+            public void onDialogEnded(World world, int returnCode) {
+                world.getGlobalVariables().remove("quest.main.show_earth_dialog");
+            }
+        });
+        world.addOverlayWindow(last);
+
+
+
     }
 
     @Override
     public void update(GameContainer container, World world) {
+        if (world.getGlobalVariables().containsKey("quest.main.show_earth_dialog")) {
+            return;
+        }
+
+
         if (earthDialog.isOver()) {
             if (earthDialog.getReturnValue() == 1) {
                 // player has chosen to dump research info

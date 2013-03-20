@@ -40,7 +40,7 @@ public class World implements Serializable {
 
     private transient boolean updatedThisFrame;
 
-    private transient List<OverlayWindow> currentDialogs = new LinkedList<OverlayWindow>();
+    private transient List<OverlayWindow> overlayWindows = new LinkedList<OverlayWindow>();
 
     private StarSystem currentStarSystem = null;
 
@@ -65,14 +65,14 @@ public class World implements Serializable {
     public void update(GameContainer container) {
         updatedThisFrame = false;
 
-        if (currentDialogs != null && !currentDialogs.isEmpty()) {
-            for (Iterator<OverlayWindow> iter = currentDialogs.iterator(); iter.hasNext();) {
-                OverlayWindow w = iter.next();
-                w.update(container, this);
-                if (w.isOver()) {
-                    iter.remove();
-                }
+        if (overlayWindows != null && !overlayWindows.isEmpty()) {
+            Iterator<OverlayWindow> iter = overlayWindows.iterator();
+            OverlayWindow w = iter.next();
+            w.update(container, this);
+            if (w.isOver()) {
+                iter.remove();
             }
+            // only one active overlay window
             return;
         }
         if (container.getInput().isKeyPressed(Input.KEY_R)) {
@@ -132,8 +132,8 @@ public class World implements Serializable {
 
     public void draw(GameContainer container, Graphics graphics) {
         currentRoom.draw(container, graphics, camera);
-        if (currentDialogs != null && !currentDialogs.isEmpty()) {
-            currentDialogs.get(0).draw(container, graphics, camera);
+        if (overlayWindows != null && !overlayWindows.isEmpty()) {
+            overlayWindows.get(0).draw(container, graphics, camera);
         }
     }
 
@@ -167,10 +167,10 @@ public class World implements Serializable {
     }
 
     public void addOverlayWindow(OverlayWindow currentDialog) {
-        if (currentDialogs == null) {
-            currentDialogs = new LinkedList<OverlayWindow>();
+        if (overlayWindows == null) {
+            overlayWindows = new LinkedList<OverlayWindow>();
         }
-        currentDialogs.add(currentDialog);
+        overlayWindows.add(currentDialog);
         currentDialog.enter(this);
     }
 

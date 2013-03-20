@@ -49,13 +49,13 @@ public class MainQuestGenerator implements WorldGeneratorPart {
 
             if (count == 2) {
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/second_cloned_system_found.json"));
-                world.getGlobalVariables().put("quest.main.cloned_starsystems_encountered", 2);
+                world.getGlobalVariables().put("quest.main.cloned_starsystems_encountered", "2");
                 return;
             }
 
             if (count == 3) {
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/third_cloned_system_found.json"));
-                world.getGlobalVariables().put("quest.main.cloned_starsystems_encountered", 3);
+                world.getGlobalVariables().put("quest.main.cloned_starsystems_encountered", "3");
             }
         }
     }
@@ -98,7 +98,7 @@ public class MainQuestGenerator implements WorldGeneratorPart {
                             world.getPlayer().getEarthState().getMessages().add(
                                     new PrivateMessage(
                                             "Greatest known artificial structure discovered"
-                                            ,world.getPlayer().getShip().getName() + " has encountered the biggest artificial structure ever seen by man in a distant star system. A huge object of" +
+                                            ,"UNS " + world.getPlayer().getShip().getName() + " has encountered the biggest artificial structure ever seen by man in a distant star system. A huge object of" +
                                             "unknown origin, larger than a star can be seen on these amazing photos. Who has created it? What is its purpose? What power does it have? Read more in next issue of 'Galaxy News'."
                                             ,"news"
                                     )

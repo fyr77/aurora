@@ -1,0 +1,45 @@
+{
+    "iconName":"earth_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "npcText":"Captain, we have urgent news for you.",
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"What has happened?"
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "npcText":"We have analyzed the data you have collected about that huge Obliterator ship",
+            "replies":[
+                {
+                    "targetStatementId":2,
+                    "replyText":"You have never been so taciturn before. What have you discovered? Obliterator is coming to Earth tomorrow, heh?"
+                }
+            ]
+        },
+        "2":{
+            "id":2,
+            "npcText":"Actually it does.",
+            "replies":[
+                {
+                    "targetStatementId":3,
+                    "replyText":"WHAT?!"
+                }
+            ]
+        },
+        "3":{
+            "id":3,
+            "npcText":"Not tomorrow, of course, but within next 10 years. Look at our report based on materials you collected.",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"You must be kidding..."
+                }
+            ]
+        }
+    }
+}
