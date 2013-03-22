@@ -129,6 +129,16 @@ public class Camera implements Serializable {
         return tileHeight;
     }
 
+    public int getPointTileX(int x)
+    {
+        return x / tileWidth;
+    }
+
+    public int getPointTileY(int y)
+    {
+        return y / tileHeight;
+    }
+
     public Positionable getTarget() {
         return target;
     }

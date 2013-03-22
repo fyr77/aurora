@@ -312,10 +312,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             createBackground(world);
         }
         if (!effects.isEmpty()) {
-            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext(); ) {
-                Effect currentEffect = iter.next();
+            List<Effect> newList = new ArrayList<Effect>(effects);
+            for (Effect currentEffect : newList) {
                 currentEffect.update(container, world);
-                if (currentEffect.isOver()) {
+            }
+            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext();) {
+                Effect e = iter.next();
+                if (e.isOver()) {
                     iter.remove();
                 }
             }
@@ -533,5 +536,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public void setBackgroundSprite(String backgroundSprite) {
         this.backgroundSprite = backgroundSprite;
+    }
+
+    public ParallaxBackground getBackground() {
+        return background;
     }
 }

@@ -20,7 +20,7 @@ import ru.game.aurora.world.World;
 public class BlasterShotEffect implements Effect {
     private static final long serialVersionUID = 7969961076017675842L;
 
-    private Vector2f currentPos;
+    protected Vector2f currentPos;
 
     private Vector2f movementDir;
 

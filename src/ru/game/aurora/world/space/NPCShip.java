@@ -124,7 +124,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         hp -= dmg;
         if (hp <= 0) {
             GameLogger.getInstance().logMessage(getName() + " destroyed");
-            ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect(x, y, "ship_explosion"));
+            ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect(x, y, "ship_explosion", false));
         }
         if (!(ai instanceof CombatAI)) {
             GameLogger.getInstance().logMessage(getName() + " is now hostile to " + attacker.getName());

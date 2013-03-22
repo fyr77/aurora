@@ -20,10 +20,17 @@ public class ExplosionEffect extends BasePositionable implements Effect {
 
     private long lastCall;
 
-    public ExplosionEffect(int x, int y, String animName) {
+    private boolean screenCoords;
+
+    /**
+     *
+     * @param screenCoords If true, these x and y are already coordinates on screen and should not be transformed
+     */
+    public ExplosionEffect(int x, int y, String animName, boolean screenCoords) {
         super(x, y);
         anim = ResourceManager.getInstance().getAnimation(animName);
         anim.setLooping(false);
+        this.screenCoords = screenCoords;
     }
 
 
@@ -43,6 +50,12 @@ public class ExplosionEffect extends BasePositionable implements Effect {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        graphics.drawAnimation(anim, camera.getXCoord(x), camera.getYCoord(y));
+        int drawX = x;
+        int drawY = y;
+        if (!screenCoords) {
+            drawX = camera.getXCoord(x);
+            drawY = camera.getYCoord(y);
+        }
+        graphics.drawAnimation(anim, drawX, drawY);
     }
 }
