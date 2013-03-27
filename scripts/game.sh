@@ -1,3 +1,3 @@
 #!/bin/bash
 
-java -cp . -jar ./Aurora.jar
+java -cp "resources:Aurora.jar" ru.game.aurora.application.AuroraGame
