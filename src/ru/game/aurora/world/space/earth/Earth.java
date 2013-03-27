@@ -62,9 +62,24 @@ public class Earth extends Planet
 
     @Override
     public void enter(World world) {
+        String specialDialog = (String) world.getGlobalVariables().get("earth.special_dialog");
+        if (specialDialog != null) {
+            Dialog d = Dialog.loadFromFile(specialDialog);
+            world.addOverlayWindow(d);
+            d.setListener(new DialogListener() {
+
+                private static final long serialVersionUID = -374777902752182404L;
+
+                @Override
+                public void onDialogEnded(World world, int returnCode) {
+                    world.getGlobalVariables().remove("earth.special_dialog");
+                }
+            });
+            //todo: maybe not return? what if both variables are set?
+            return;
+        }
         if (world.getGlobalVariables().containsKey("quest.main.show_earth_dialog")) {
             showObliteratorThreatDialog(world);
-
         } else {
             world.addOverlayWindow(earthDialog);
         }
@@ -86,9 +101,6 @@ public class Earth extends Planet
             }
         });
         world.addOverlayWindow(last);
-
-
-
     }
 
     @Override
@@ -96,7 +108,6 @@ public class Earth extends Planet
         if (world.getGlobalVariables().containsKey("quest.main.show_earth_dialog")) {
             return;
         }
-
 
         if (earthDialog.isOver()) {
             if (earthDialog.getReturnValue() == 1) {

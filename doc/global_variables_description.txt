@@ -1,6 +1,13 @@
 Description for global variables that are used to track quest state
 
 ==============================
+Global game state:
+
+earth.special_dialog - path to file with special dialog. If this variable is set and not null, this dialog will be shown
+upon returning to Earth instead of a default one
+
+
+==============================
 Main quest:
 
 quest.main.state - overall state
@@ -16,3 +23,5 @@ Relations with rogues:
 
 rogues.damaged_scout_found - set when player finds a damaged rogues scout. Deleted after scout is repaired or sold to Klisk
 rogues.damage_scout_result - outcome of this situation. Either 'help' or 'sold_to_klisk'
+
+==============================

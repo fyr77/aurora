@@ -1,7 +1,12 @@
 =====================================================
-VERSION 0.0.5
+VERSION 0.0.6
 
 IN PROGRESS...
+
+=====================================================
+VERSION 0.0.5
+
+27.03.2013
 
 + Dialogs with options that are visible only in certain conditions (based on game state)
 * Fixes of dialog view (multi-line replies)
@@ -9,7 +14,8 @@ IN PROGRESS...
 + Dialog listeners
 + New random encounters
 + Encounter with Obliterator ship
-* Gamover after player 3 times returns with not enough data (was 1 time before)
++ Weapon test quest
+* Gameover after player 3 times returns with not enough data (was 1 time before)
 
 =====================================================
 VERSION 0.0.4

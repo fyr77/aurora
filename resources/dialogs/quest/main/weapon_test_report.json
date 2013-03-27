@@ -1,0 +1,45 @@
+{
+    "iconName":"earth_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "npcText":"So, captain, what are the results of the weapon test?",
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"Our weapon failed to inflict any damage to alien ship"
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "npcText":"Any? What do you mean?",
+            "replies":[
+                {
+                    "targetStatementId":2,
+                    "replyText":"'Any' means 'any'. Not a single scratch after the explosion. Than ship is perfectly shielded against any physical threat."
+                }
+            ]
+        },
+        "2":{
+            "id":2,
+            "npcText":"Too bad. We didn't expect that bomb to destroy it, but to make no damage at all... Then evacuation is the only choice.",
+            "replies":[
+                {
+                    "targetStatementId":3,
+                    "replyText":"Are we able to save everyone?"
+                }
+            ]
+        },
+        "3":{
+            "id":3,
+            "npcText":"I don't think so. It will be very good if we manage to save enough to establish at least a small colony that can survive on its own. \n We will continue preparations, you are free for now.",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"<over>"
+                }
+            ]
+        }
+    }
+}
