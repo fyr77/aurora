@@ -16,7 +16,6 @@ import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.npc.shipai.LandOnPlanetAI;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.PrivateMessage;
-import ru.game.aurora.player.research.projects.NuclearWeaponTestProject;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -70,8 +69,6 @@ public class HumanityGenerator implements WorldGeneratorPart
         world.addListener(new EnterpriseEncounterCreator());
 
         world.addListener(new BiologyResearch());
-
-        world.getPlayer().getResearchState().getAvailableProjects().add(new NuclearWeaponTestProject());
 
         /**
          * After player returns with first information about obliterator, on its next return earth researches will analyze obliterator route and show quest dialog
