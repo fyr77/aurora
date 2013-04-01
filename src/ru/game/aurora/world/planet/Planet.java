@@ -6,10 +6,7 @@
 package ru.game.aurora.world.planet;
 
 import de.matthiasmann.twl.Widget;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
+import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
@@ -17,7 +14,6 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.util.CollectionUtils;
-import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Positionable;
@@ -88,6 +84,8 @@ public class Planet extends BasePlanet {
      */
     private List<PlanetObject> planetObjects = new ArrayList<PlanetObject>();
 
+    private transient Image sprite;
+
     /**
      * When in fire mode, this is currently selected target
      */
@@ -113,13 +111,12 @@ public class Planet extends BasePlanet {
         mountainSprites.put(104, "mountains_15");
     }
 
-    public Planet(StarSystem owner, Planet other)
-    {
+    public Planet(StarSystem owner, Planet other) {
         super(other.size, other.globalY, owner, other.atmosphere, other.globalX, other.category);
         this.width = other.width;
         this.height = other.height;
         surface = new byte[height][width];
-        for (int i = 0; i < height ; ++i) {
+        for (int i = 0; i < height; ++i) {
             System.arraycopy(other.surface[i], 0, surface[i], 0, width);
         }
         createOreDeposits(size, CommonRandom.getRandom());
@@ -310,7 +307,7 @@ public class Planet extends BasePlanet {
         final boolean enterPressed = container.getInput().isKeyPressed(Input.KEY_ENTER);
         if (enterPressed) {
             // check if can pick up smth
-            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext();) {
+            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext(); ) {
                 PlanetObject p = iter.next();
 
                 if (!p.canBePickedUp()) {
@@ -688,19 +685,10 @@ public class Planet extends BasePlanet {
         if (!camera.isInViewport(globalX, globalY)) {
             return;
         }
-        Color color;
-        switch (category) {
-            case PLANET_ROCK:
-                color = Color.gray;
-                break;
-            case PLANET_ICE:
-                color = Color.white;
-                break;
-            default:
-                color = Color.gray;
+        if (sprite == null) {
+            sprite = PlanetSpriteGenerator.getInstance().createPlanetSprite(camera, category, size);
         }
-        EngineUtils.drawCircleCentered(graphics, camera.getXCoord(globalX) + (camera.getTileWidth() / 2)
-                , camera.getYCoord(globalY) + camera.getTileHeight() / 2, StarSystem.PLANET_SCALE_FACTOR * camera.getTileWidth() / (2 * size), color, true);
+        graphics.drawImage(sprite, camera.getXCoord(globalX), camera.getYCoord(globalY));
     }
 
     public int getWidth() {

@@ -12,6 +12,8 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.application.GameLogger;
 
+import java.awt.image.BufferedImage;
+
 
 public class EngineUtils {
 
@@ -40,7 +42,7 @@ public class EngineUtils {
         if (!aligned) {
             drawString(graphics, text, (int) ((rectangle.getX() + 1) * camera.getTileWidth()), (int) ((rectangle.getY() + 0.5) * camera.getTileHeight()), (int) (rectangle.getWidth() - 2) * camera.getTileHeight(), font, textColor);
         } else {
-            drawSingleStringAligned(graphics, text, font, textColor, (int) ((rectangle.getX() ) * camera.getTileWidth()), (int) ((rectangle.getY()) * camera.getTileHeight()), (int) (rectangle.getWidth() ) * camera.getTileWidth(), (int) (rectangle.getHeight() * camera.getTileHeight()));
+            drawSingleStringAligned(graphics, text, font, textColor, (int) ((rectangle.getX()) * camera.getTileWidth()), (int) ((rectangle.getY()) * camera.getTileHeight()), (int) (rectangle.getWidth()) * camera.getTileWidth(), (int) (rectangle.getHeight() * camera.getTileHeight()));
         }
     }
 
@@ -101,8 +103,7 @@ public class EngineUtils {
         return lines;
     }
 
-    public static void drawSingleStringAligned(Graphics g, String s, Font font, Color color, int x, int y, int width, int height)
-    {
+    public static void drawSingleStringAligned(Graphics g, String s, Font font, Color color, int x, int y, int width, int height) {
         final int lineHeight = font.getLineHeight();
         final int lineWidth = font.getWidth(s);
 
@@ -114,14 +115,24 @@ public class EngineUtils {
         g.drawString(s, textStartX, textStartY);
     }
 
-    public static boolean checkRectanglePressed(GameContainer container, Camera camera, Rectangle rect)
-    {
+    public static boolean checkRectanglePressed(GameContainer container, Camera camera, Rectangle rect) {
         if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             final int mouseX = container.getInput().getMouseX() / camera.getTileWidth();
             final int mouseY = container.getInput().getMouseY() / camera.getTileHeight();
             return rect.contains(mouseX, mouseY);
         }
         return false;
+    }
+
+    public static Image createImage(BufferedImage source) {
+        ImageBuffer ib = new ImageBuffer(source.getWidth(), source.getHeight());
+        for (int x = 0; x < source.getWidth(); ++x) {
+            for (int y = 0; y < source.getHeight(); ++y) {
+                int rgb = source.getRGB(x, y);
+                ib.setRGBA(x, y, 0x000000ff & (rgb >> 16), 0x000000ff & (rgb >> 8), 0x000000ff & rgb, 0x000000ff & (rgb >> 24));
+            }
+        }
+        return new Image(ib);
     }
 
 }

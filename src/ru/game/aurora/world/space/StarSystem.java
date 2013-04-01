@@ -101,7 +101,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
      * Relation between tile size and max planet size
      * 3 means max planet will have radius of 3 tiles
      */
-    public final static int PLANET_SCALE_FACTOR = 2;
+    public final static int PLANET_SCALE_FACTOR = 3;
 
     public final static int STAR_SCALE_FACTOR = 4;
 
@@ -316,7 +316,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             for (Effect currentEffect : newList) {
                 currentEffect.update(container, world);
             }
-            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext();) {
+            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext(); ) {
                 Effect e = iter.next();
                 if (e.isOver()) {
                     iter.remove();
