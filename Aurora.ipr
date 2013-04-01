@@ -306,6 +306,13 @@
       <JAVADOC />
       <SOURCES />
     </library>
+    <library name="Libnoiseforjava-master">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/third-party/Libnoiseforjava-master.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="lwjgl">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/third-party/lwjgl.jar!/" />
