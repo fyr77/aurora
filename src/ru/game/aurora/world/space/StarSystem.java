@@ -40,11 +40,34 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         private static final long serialVersionUID = -3746922025754658839L;
         // 1 is largest star, 4 is smallest
         public final int size;
+
         public final Color color;
+
+        // colors for drawing in star system view
+        // star consists of 3 gradients of main color
+        private transient Color coreColor;
+
+        private transient Color outerColor;
 
         public Star(int size, Color color) {
             this.size = size;
             this.color = color;
+        }
+
+        public Color getCoreColor()
+        {
+            if (coreColor == null) {
+                coreColor =  new Color(color.r * 1.5f, color.g * 1.5f, color.b * 1.5f);
+            }
+            return coreColor;
+        }
+
+        public Color getOuterColor()
+        {
+            if (outerColor == null) {
+                outerColor = new Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f);
+            }
+            return outerColor;
         }
     }
 
@@ -425,8 +448,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         final int starX = camera.getXCoord(0) + (camera.getTileWidth() / 2);
         final int starY = camera.getYCoord(0) + camera.getTileHeight() / 2;
         if (camera.isInViewport(0, 0)) {
-            //g.fillOval(starX, starY, camera.getTileWidth() * STAR_SCALE_FACTOR / star.size, camera.getTileHeight() * STAR_SCALE_FACTOR / star.size);
+            // draw 3 circles
+            EngineUtils.drawCircleCentered(g, starX, starY, (int)(camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size) * 1.25), star.getOuterColor(), true);
             EngineUtils.drawCircleCentered(g, starX, starY, camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size), star.color, true);
+            EngineUtils.drawCircleCentered(g, starX, starY, (int)(camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size) * 0.75), star.getCoreColor(), true);
         }
 
         for (BasePlanet p : planets) {
