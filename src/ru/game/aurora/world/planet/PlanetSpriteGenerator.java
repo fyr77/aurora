@@ -6,15 +6,19 @@
  */
 package ru.game.aurora.world.planet;
 
+import libnoiseforjava.exception.ExceptionInvalidParam;
 import libnoiseforjava.module.Perlin;
 import libnoiseforjava.util.*;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.ImageBuffer;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.awt.image.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,11 +28,15 @@ import java.util.Map;
  */
 public class PlanetSpriteGenerator {
     private static final class PlanetSpriteParameters {
+
+        public final boolean hasAtmosphere;
+
         public final PlanetCategory cat;
 
         public final int size;
 
-        private PlanetSpriteParameters(PlanetCategory cat, int size) {
+        private PlanetSpriteParameters(boolean hasAtmosphere, PlanetCategory cat, int size) {
+            this.hasAtmosphere = hasAtmosphere;
             this.cat = cat;
             this.size = size;
         }
@@ -40,22 +48,29 @@ public class PlanetSpriteGenerator {
 
             PlanetSpriteParameters that = (PlanetSpriteParameters) o;
 
-            return size == that.size && cat == that.cat;
+            if (hasAtmosphere != that.hasAtmosphere) return false;
+            if (size != that.size) return false;
+            if (cat != that.cat) return false;
+
+            return true;
         }
 
         @Override
         public int hashCode() {
-            int result = cat.hashCode();
+            int result = (hasAtmosphere ? 1 : 0);
+            result = 31 * result + (cat != null ? cat.hashCode() : 0);
             result = 31 * result + size;
             return result;
         }
     }
 
-    private Map<PlanetSpriteParameters, Image> cache = new HashMap<PlanetSpriteParameters, Image>();
+    private Map<PlanetSpriteParameters, Collection<Image>> cache = new HashMap<PlanetSpriteParameters, Collection<Image>>();
 
     private Perlin p = new Perlin();
 
     private int seedIncrementer = 0;
+
+    private static final int SPRITES_PER_PLANET_TYPE = 3;
 
     private static final PlanetSpriteGenerator instance = new PlanetSpriteGenerator();
 
@@ -63,8 +78,8 @@ public class PlanetSpriteGenerator {
         return instance;
     }
 
-    public Image createPlanetSprite(Camera camera, PlanetCategory cat, int size) {
-        return createPlanetSprite(camera, new PlanetSpriteParameters(cat, size));
+    public Image createPlanetSprite(Camera camera, PlanetCategory cat, int size, boolean hasAtmosphere) {
+        return createPlanetSprite(camera, new PlanetSpriteParameters(hasAtmosphere, cat, size));
     }
 
     /**
@@ -100,14 +115,48 @@ public class PlanetSpriteGenerator {
     }
 
     private Image createPlanetSprite(Camera cam, PlanetSpriteParameters params) {
-        Image rz = cache.get(params);
-        if (rz != null) {
-            return rz;
+        Collection<Image> images = cache.get(params);
+        if (images != null && images.size() >= SPRITES_PER_PLANET_TYPE) {
+            return CollectionUtils.selectRandomElement(images);
         }
-        rz = createPlanetSpriteImpl(cam, params);
-        cache.put(params, rz);
-        return rz;
+        if (images == null) {
+            images = new ArrayList<Image>(SPRITES_PER_PLANET_TYPE);
+        }
+        Image im = createPlanetSpriteImpl(cam, params);
+        images.add(im);
+        cache.put(params, images);
+        return im;
     }
+
+    private void setRockPlanetGradients(RendererImage renderer) throws ExceptionInvalidParam {
+        renderer.addGradientPoint(-1.0000, new ColorCafe(0, 0, 128, 255)); // deeps
+        renderer.addGradientPoint(-0.9, new ColorCafe(0, 0, 255, 255)); // shallow
+        renderer.addGradientPoint(-0.7000, new ColorCafe(0, 128, 255, 255)); // shore
+        renderer.addGradientPoint(-0.500, new ColorCafe(247, 203, 121, 255)); // rock
+        renderer.addGradientPoint(0.000, new ColorCafe(251, 166, 89, 255)); // rock
+        renderer.addGradientPoint(0.500, new ColorCafe(128, 128, 128, 255)); // rock
+        renderer.addGradientPoint(1.0000, new ColorCafe(255, 255, 255, 255)); // snow
+    }
+
+    private void setIcePlanetGradients(RendererImage renderer) throws ExceptionInvalidParam {
+        renderer.addGradientPoint(-1.0000, new ColorCafe(205, 205, 205, 255));
+        renderer.addGradientPoint(-0.2500, new ColorCafe(228, 228, 228, 255));
+        renderer.addGradientPoint(0.3000, new ColorCafe(100, 100, 100, 255));
+        renderer.addGradientPoint(0.6000, new ColorCafe(128, 128, 128, 255));
+        renderer.addGradientPoint(1.0000, new ColorCafe(255, 255, 255, 255));
+    }
+
+    private void setEarthLikePlanetGradients(RendererImage renderer) throws ExceptionInvalidParam {
+        renderer.addGradientPoint(-1.0000, new ColorCafe(0, 0, 128, 255)); // deeps
+        renderer.addGradientPoint(-0.2500, new ColorCafe(0, 0, 255, 255)); // shallow
+        renderer.addGradientPoint(0.0000, new ColorCafe(0, 128, 255, 255)); // shore
+        renderer.addGradientPoint(0.7500, new ColorCafe(128, 128, 128, 255)); // rock
+        renderer.addGradientPoint(1.0000, new ColorCafe(255, 255, 255, 255)); // snow
+        renderer.addGradientPoint(0.0625, new ColorCafe(240, 240, 64, 255)); // sand
+        renderer.addGradientPoint(0.1250, new ColorCafe(32, 160, 0, 255)); // grass
+        renderer.addGradientPoint(0.3750, new ColorCafe(224, 224, 0, 255)); // dirt
+    }
+
 
     private Image createPlanetSpriteImpl(Camera cam, PlanetSpriteParameters params) {
         try {
@@ -131,20 +180,16 @@ public class PlanetSpriteGenerator {
             renderer.setDestImage(image);
 
             renderer.clearGradient();
-            for (byte st : params.cat.availableSurfaces) {
-                if (st == SurfaceTypes.WATER) {
-                    renderer.addGradientPoint(-1.0000, new ColorCafe(0, 0, 128, 255)); // deeps
-                    renderer.addGradientPoint(-0.2500, new ColorCafe(0, 0, 255, 255)); // shallow
-                    renderer.addGradientPoint(0.0000, new ColorCafe(0, 128, 255, 255)); // shore
-                } else if (st == SurfaceTypes.DIRT) {
-                    renderer.addGradientPoint(0.0625, new ColorCafe(240, 240, 64, 255)); // sand
-                    renderer.addGradientPoint(0.1250, new ColorCafe(32, 160, 0, 255)); // grass
-                    renderer.addGradientPoint(0.3750, new ColorCafe(224, 224, 0, 255)); // dirt
-                } else if (st == SurfaceTypes.ICE) {
-                    renderer.addGradientPoint(1.0000, new ColorCafe(255, 255, 255, 255)); // snow
-                } else if (st == SurfaceTypes.ROCKS) {
-                    renderer.addGradientPoint(0.7500, new ColorCafe(128, 128, 128, 255)); // rock
-                }
+
+            switch (params.cat) {
+                case PLANET_ROCK:
+                    setRockPlanetGradients(renderer);
+                    break;
+                case PLANET_ICE:
+                    setIcePlanetGradients(renderer);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Can not generate sprite for planet category" + params.cat);
             }
 
             renderer.render();
@@ -172,8 +217,8 @@ public class PlanetSpriteGenerator {
             op.filter(result, blurred);
 
             // todo: mask based on position relative to sun
-            BufferedImage firstMask = createMask(50, (int) (0.75 * width), (int) (0.75 * height), (int) (0.2 * width));
-            BufferedImage secondMask = createMask(50, (int) (0.75 * width), (int) (0.75 * height), (int) (0.6 * width));
+            BufferedImage firstMask = createMask(radius, (int) (0.75 * width), (int) (0.75 * height), (int) (0.2 * width));
+            BufferedImage secondMask = createMask(radius, (int) (0.75 * width), (int) (0.75 * height), (int) (0.6 * width));
 
             float[] scales = {1f, 1f, 1f, 0.4f};
             float[] offsets = new float[4];
@@ -183,22 +228,26 @@ public class PlanetSpriteGenerator {
             blurred.createGraphics().drawImage(firstMask, rop, 0, 0);
             blurred.createGraphics().drawImage(secondMask, rop, 0, 0);
 
+            if (params.hasAtmosphere) {
+                // draw atmosphere 'glow' surrounding the planet
+                final int glowRadius = 20;
+                ImageBuffer id = new ImageBuffer(width + glowRadius, height + glowRadius);
 
-            ImageBuffer id = new ImageBuffer(width + 10, height + 10);
-
-            for (int i = 0; i < width + 10; ++i) {
-                for (int j = 0; j < height + 10; ++j) {
-                    double d = Math.pow(width / 2 + 5 - i, 2) + Math.pow(height / 2 - j + 5, 2);
-                    if (d > Math.pow(width / 2, 2) && d < Math.pow(width / 2 + 5, 2)) {
-                        short alpha = (short) (255 - 255 * (Math.sqrt(d) - (width / 2)) / 5.0);
-                        id.setRGBA(i, j, 0xff, 0xff, 0xff, alpha);
+                for (int i = 0; i < width + glowRadius; ++i) {
+                    for (int j = 0; j < height + glowRadius; ++j) {
+                        double d = Math.pow((width + glowRadius)/2 - i, 2) + Math.pow((height + glowRadius) / 2 - j, 2);
+                        if (d > Math.pow(width/ 2, 2) && d < Math.pow((width + glowRadius) / 2, 2)) {
+                            short alpha = (short) (255 - 255 * (Math.sqrt(d) - (width / 2)) / (glowRadius / 2));
+                            id.setRGBA(i, j, 0xff, 0xff, 0xff, alpha);
+                        }
                     }
                 }
+                Image finalResult = new Image(id);
+                finalResult.getGraphics().drawImage(EngineUtils.createImage(blurred), glowRadius / 2, glowRadius / 2);
+                return finalResult;
+            } else {
+                return EngineUtils.createImage(blurred);
             }
-            Image finalResult = new Image(id);
-            finalResult.getGraphics().drawImage(EngineUtils.createImage(blurred), 5, 5);
-            // ImageIO.write(finalResult, "png", new File("out.png"));
-            return finalResult;
         } catch (Exception ex) {
             ex.printStackTrace();
         }

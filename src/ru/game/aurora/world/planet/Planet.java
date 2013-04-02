@@ -686,7 +686,7 @@ public class Planet extends BasePlanet {
             return;
         }
         if (sprite == null) {
-            sprite = PlanetSpriteGenerator.getInstance().createPlanetSprite(camera, category, size);
+            sprite = PlanetSpriteGenerator.getInstance().createPlanetSprite(camera, category, size, atmosphere != PlanetAtmosphere.NO_ATMOSPHERE);
         }
         graphics.drawImage(sprite, camera.getXCoord(globalX), camera.getYCoord(globalY));
     }
