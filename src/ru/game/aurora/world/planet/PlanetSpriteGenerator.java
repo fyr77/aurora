@@ -16,7 +16,11 @@ import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.space.StarSystem;
 
-import java.awt.image.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -71,6 +75,11 @@ public class PlanetSpriteGenerator {
     private int seedIncrementer = 0;
 
     private static final int SPRITES_PER_PLANET_TYPE = 3;
+
+    /**
+     * How many times generated noise is smaller than planet
+     */
+    private static final int SCALE = 2;
 
     private static final PlanetSpriteGenerator instance = new PlanetSpriteGenerator();
 
@@ -158,6 +167,20 @@ public class PlanetSpriteGenerator {
     }
 
 
+    private BufferedImage getScaledImage(BufferedImage image, int width, int height) throws IOException {
+        int imageWidth  = image.getWidth();
+        int imageHeight = image.getHeight();
+
+        double scaleX = (double)width/imageWidth;
+        double scaleY = (double)height/imageHeight;
+        AffineTransform scaleTransform = AffineTransform.getScaleInstance(scaleX, scaleY);
+        AffineTransformOp bilinearScaleOp = new AffineTransformOp(scaleTransform, AffineTransformOp.TYPE_BILINEAR);
+
+        return bilinearScaleOp.filter(
+                image,
+                new BufferedImage(width, height, image.getType()));
+    }
+
     private Image createPlanetSpriteImpl(Camera cam, PlanetSpriteParameters params) {
         try {
             final int radius = StarSystem.PLANET_SCALE_FACTOR * cam.getTileWidth() / (2 * params.size);
@@ -165,17 +188,20 @@ public class PlanetSpriteGenerator {
             int height = 2 * radius;
 
 
-            NoiseMap heightMap = new NoiseMap(width, height);
+            final int noiseWidth = (int) Math.ceil(width / (float)SCALE);
+            final int noiseHeight = (int) Math.ceil(height / (float)SCALE);
+            NoiseMap heightMap = new NoiseMap(noiseWidth, noiseHeight);
+
             p.setSeed((int) System.currentTimeMillis() + (seedIncrementer++));
             NoiseMapBuilderPlane heightMapBuilder = new NoiseMapBuilderPlane();
             heightMapBuilder.setSourceModule(p);
             heightMapBuilder.setDestNoiseMap(heightMap);
-            heightMapBuilder.setDestSize(width, height);
+            heightMapBuilder.setDestSize(noiseWidth, noiseHeight);
             heightMapBuilder.setBounds(2.0, 6.0, 1.0, 5.0);
             heightMapBuilder.build();
 
             RendererImage renderer = new RendererImage();
-            ImageCafe image = new ImageCafe(width, height);
+            ImageCafe image = new ImageCafe(noiseWidth, noiseHeight);
             renderer.setSourceNoiseMap(heightMap);
             renderer.setDestImage(image);
 
@@ -194,11 +220,11 @@ public class PlanetSpriteGenerator {
 
             renderer.render();
 
-            BufferedImage result = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
-            for (int i = 0; i < width; ++i) {
-                for (int j = 0; j < height; ++j) {
+            BufferedImage result = new BufferedImage(noiseWidth, noiseHeight, BufferedImage.TYPE_4BYTE_ABGR);
+            for (int i = 0; i < noiseWidth; ++i) {
+                for (int j = 0; j < noiseHeight; ++j) {
 
-                    if (Math.pow(width / 2 - i, 2) + Math.pow(height / 2 - j, 2) > Math.pow(width / 2, 2)) {
+                    if (Math.pow(noiseWidth / 2  - i, 2) + Math.pow(noiseHeight / 2 - j, 2) > Math.pow(noiseWidth / 2, 2)) {
                         continue;
                     }
 
@@ -208,13 +234,8 @@ public class PlanetSpriteGenerator {
                 }
             }
 
-            float[] matrix = new float[9];
-            for (int i = 0; i < 9; i++)
-                matrix[i] = 1.0f / 9;
-
-            BufferedImage blurred = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
-            BufferedImageOp op = new ConvolveOp(new Kernel(3, 3, matrix), ConvolveOp.EDGE_NO_OP, null);
-            op.filter(result, blurred);
+            // scale image up
+            result = getScaledImage(result, width, height);
 
             // todo: mask based on position relative to sun
             BufferedImage firstMask = createMask(radius, (int) (0.75 * width), (int) (0.75 * height), (int) (0.2 * width));
@@ -225,8 +246,8 @@ public class PlanetSpriteGenerator {
             RescaleOp rop = new RescaleOp(scales, offsets, null);
 
             /* Draw the image, applying the filter */
-            blurred.createGraphics().drawImage(firstMask, rop, 0, 0);
-            blurred.createGraphics().drawImage(secondMask, rop, 0, 0);
+            result.createGraphics().drawImage(firstMask, rop, 0, 0);
+            result.createGraphics().drawImage(secondMask, rop, 0, 0);
 
             if (params.hasAtmosphere) {
                 // draw atmosphere 'glow' surrounding the planet
@@ -243,10 +264,10 @@ public class PlanetSpriteGenerator {
                     }
                 }
                 Image finalResult = new Image(id);
-                finalResult.getGraphics().drawImage(EngineUtils.createImage(blurred), glowRadius / 2, glowRadius / 2);
+                finalResult.getGraphics().drawImage(EngineUtils.createImage(result), glowRadius / 2, glowRadius / 2);
                 return finalResult;
             } else {
-                return EngineUtils.createImage(blurred);
+                return EngineUtils.createImage(result);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

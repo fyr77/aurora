@@ -57,7 +57,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         public Color getCoreColor()
         {
             if (coreColor == null) {
-                coreColor =  new Color(color.r * 1.5f, color.g * 1.5f, color.b * 1.5f);
+                float[] hsb = new float[3];
+                java.awt.Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
+                hsb[1] *= 0.3;
+                hsb[2] = (float) Math.min(1.0, hsb[2] * 1.25);
+                int rgb = java.awt.Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
+                coreColor =  new Color((rgb & 0x00ff0000) >> 16, (rgb & 0x0000ff00)>> 8, (rgb & 0x000000ff));
             }
             return coreColor;
         }
