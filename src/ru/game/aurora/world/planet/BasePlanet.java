@@ -72,4 +72,12 @@ public abstract class BasePlanet implements Room, GalaxyMapObject
     {
         return true;
     }
+
+    public PlanetCategory getCategory() {
+        return category;
+    }
+
+    public PlanetAtmosphere getAtmosphere() {
+        return atmosphere;
+    }
 }

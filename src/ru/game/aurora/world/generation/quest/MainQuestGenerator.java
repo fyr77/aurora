@@ -124,12 +124,12 @@ public class MainQuestGenerator implements WorldGeneratorPart {
         HomeworldGenerator.setCoord(planets[0], 2);
 
         // venus
-        planets[1] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0, false);
+        planets[1] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 1, 0, 0, false);
         HomeworldGenerator.setCoord(planets[1], 3);
 
 
         // mars
-        planets[2] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0, false);
+        planets[2] = new Planet(ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0, false);
         HomeworldGenerator.setCoord(planets[2], 5);
 
 

@@ -183,7 +183,7 @@ public class PlanetSpriteGenerator {
 
     private Image createPlanetSpriteImpl(Camera cam, PlanetSpriteParameters params) {
         try {
-            final int radius = StarSystem.PLANET_SCALE_FACTOR * cam.getTileWidth() / (2 * params.size);
+            final int radius = StarSystem.PLANET_SCALE_FACTOR * cam.getTileWidth() / (4 * params.size);
             int width = 2 * radius;
             int height = 2 * radius;
 

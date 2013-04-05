@@ -18,6 +18,8 @@ public class EarthState implements Serializable
 
     private int technologyLevel = 0;
 
+    private EvacuationState evacuationState;
+
     public void updateTechnologyLevel(int value)
     {
         technologyLevel += value;
@@ -25,5 +27,13 @@ public class EarthState implements Serializable
 
     public List<PrivateMessage> getMessages() {
         return messages;
+    }
+
+    public EvacuationState getEvacuationState() {
+        return evacuationState;
+    }
+
+    public void setEvacuationState(EvacuationState evacuationState) {
+        this.evacuationState = evacuationState;
     }
 }
