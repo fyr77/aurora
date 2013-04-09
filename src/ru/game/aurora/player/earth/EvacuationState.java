@@ -24,8 +24,7 @@ import java.util.List;
 /**
  * State of humanity evacuation from Earth
  */
-public class EvacuationState implements Serializable
-{
+public class EvacuationState implements Serializable {
     private static final long serialVersionUID = -5249504974370213017L;
 
     private final int turnObliteratorArrives;
@@ -41,8 +40,7 @@ public class EvacuationState implements Serializable
         findSuitableStarSystem(world.getGalaxyMap(), world.getRaces().get("Humanity").getHomeworld());
     }
 
-    public void update(World world)
-    {
+    public void update(World world) {
         evacuated += evacuationSpeed;
     }
 
@@ -66,12 +64,15 @@ public class EvacuationState implements Serializable
         return targetSystem;
     }
 
+    private boolean isGameOver(World world) {
+        return world.getTurnCount() >= turnObliteratorArrives;
+    }
+
     /**
      * Find a suitable star system for humanity migration
      * It must contain an earth-like planet with breathable atmosphere and life
      */
-    private void findSuitableStarSystem(GalaxyMap map, final StarSystem solarSystem)
-    {
+    private void findSuitableStarSystem(GalaxyMap map, final StarSystem solarSystem) {
         List<StarSystem> suitableStarSystems = new LinkedList<StarSystem>();
         for (GalaxyMapObject o : map.getObjects()) {
             if (!(o instanceof StarSystem)) {

@@ -6,12 +6,13 @@
  */
 package ru.game.aurora.player.earth;
 
+import ru.game.aurora.world.World;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class EarthState implements Serializable
-{
+public class EarthState implements Serializable {
     private static final long serialVersionUID = 7511734171340918376L;
 
     private List<PrivateMessage> messages = new LinkedList<PrivateMessage>();
@@ -20,8 +21,7 @@ public class EarthState implements Serializable
 
     private EvacuationState evacuationState;
 
-    public void updateTechnologyLevel(int value)
-    {
+    public void updateTechnologyLevel(int value) {
         technologyLevel += value;
     }
 
@@ -35,5 +35,11 @@ public class EarthState implements Serializable
 
     public void setEvacuationState(EvacuationState evacuationState) {
         this.evacuationState = evacuationState;
+    }
+
+    public void update(World world) {
+        if (evacuationState != null) {
+            evacuationState.update(world);
+        }
     }
 }

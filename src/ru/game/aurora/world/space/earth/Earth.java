@@ -19,6 +19,7 @@ import ru.game.aurora.gui.ProgressDumpScreen;
 import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.EarthScreen;
+import ru.game.aurora.player.earth.EvacuationState;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.World;
@@ -27,8 +28,7 @@ import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.StarSystem;
 
-public class Earth extends Planet
-{
+public class Earth extends Planet {
 
     private static final long serialVersionUID = 3431652617342589266L;
 
@@ -86,8 +86,7 @@ public class Earth extends Planet
         dumpScreen = null;
     }
 
-    private void showObliteratorThreatDialog(World world)
-    {
+    private void showObliteratorThreatDialog(World world) {
         world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/earth_obliterator_warning_1.json"));
         world.addOverlayWindow(new StoryScreen("story/obliterator.json"));
         Dialog last = Dialog.loadFromFile("dialogs/quest/main/earth_obliterator_warning_2.json");
@@ -101,6 +100,9 @@ public class Earth extends Planet
             }
         });
         world.addOverlayWindow(last);
+
+        // setting main quest timer
+        world.getPlayer().getEarthState().setEvacuationState(new EvacuationState(world, world.getTurnCount() + 365 * 10));
     }
 
     @Override

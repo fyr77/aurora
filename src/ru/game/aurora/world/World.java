@@ -95,6 +95,7 @@ public class World implements Serializable {
         if (isUpdatedThisFrame()) {
             player.getResearchState().update(this);
             player.getEngineeringState().update(this);
+            player.getEarthState().update(this);
             turnCount++;
             // to prevent concurrent modification if some of listeners adds new ones
             List<GameEventListener> oldListeners = new LinkedList<GameEventListener>(listeners);
@@ -103,7 +104,7 @@ public class World implements Serializable {
             }
         }
 
-        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext();) {
+        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext(); ) {
             GameEventListener l = listenerIterator.next();
             if (!l.isAlive()) {
                 listenerIterator.remove();
@@ -185,8 +186,7 @@ public class World implements Serializable {
         }
     }
 
-    public void onPlayerReturnToEarth()
-    {
+    public void onPlayerReturnToEarth() {
         // to avoid concurrent modification exception
         List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
         for (GameEventListener l : newList) {
