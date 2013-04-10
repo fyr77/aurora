@@ -110,4 +110,6 @@
     <resource type="image" id="story_obliterator_3">sprites/story/obliterator_3.png</resource>
     <resource type="image" id="story_obliterator_4">sprites/story/obliterator_route.png</resource>
 
+    <resource type="image" id="evacuation-1">sprites/story/evacuation-1.png</resource>
+
 </resources>
