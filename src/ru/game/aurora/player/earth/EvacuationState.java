@@ -58,8 +58,8 @@ public class EvacuationState implements Serializable {
         return evacuated;
     }
 
-    public void setEvacuationSpeed(int evacuationSpeed) {
-        this.evacuationSpeed = evacuationSpeed;
+    public void changeEvacuationSpeed(int delta) {
+        this.evacuationSpeed += delta;
     }
 
     public int getEvacuationSpeed() {
