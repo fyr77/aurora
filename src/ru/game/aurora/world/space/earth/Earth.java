@@ -19,7 +19,6 @@ import ru.game.aurora.gui.ProgressDumpScreen;
 import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.EarthScreen;
-import ru.game.aurora.player.earth.EvacuationState;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.World;
@@ -100,9 +99,6 @@ public class Earth extends Planet {
             }
         });
         world.addOverlayWindow(last);
-
-        // setting main quest timer
-        world.getPlayer().getEarthState().setEvacuationState(new EvacuationState(world, world.getTurnCount() + 365 * 10));
     }
 
     @Override
