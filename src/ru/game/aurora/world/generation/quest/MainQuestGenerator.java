@@ -3,6 +3,7 @@ package ru.game.aurora.world.generation.quest;
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.player.earth.EvacuationState;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
@@ -99,8 +100,8 @@ public class MainQuestGenerator implements WorldGeneratorPart {
                             world.getPlayer().getEarthState().getMessages().add(
                                     new PrivateMessage(
                                             "Greatest known artificial structure discovered"
-                                            ,"UNS " + world.getPlayer().getShip().getName() + " has encountered the biggest artificial structure ever seen by man in a distant star system. A huge object of" +
-                                            "unknown origin, larger than a star can be seen on these amazing photos. Who has created it? What is its purpose? What power does it have? Read more in next issue of 'Galaxy News'."
+                                            ,"UNS " + world.getPlayer().getShip().getName() + " has encountered the biggest artificial structure ever seen by man in a distant star system. A huge object of " +
+                                            "unknown origin, larger than a star, can be seen on these amazing photos. Who has created it? What is its purpose? What power does it have? Read more in next issue of 'Galaxy News'."
                                             ,"news"
                                     )
                             );
@@ -113,8 +114,7 @@ public class MainQuestGenerator implements WorldGeneratorPart {
         }
 
         world.addListener(new MainQuestSystemEnterListener());
-
-        world.getPlayer().getEarthState().getEvacuationState().changeEvacuationSpeed(20); // initial evacuation on small colony ships, about 600 people per month
+        world.getPlayer().getEarthState().setEvacuationState(new EvacuationState(world));
     }
 
     public static StarSystem createStarSystem(int x, int y) {
