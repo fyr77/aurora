@@ -128,6 +128,8 @@ public class Earth extends Planet {
                 ));
             }
         });
+
+        world.getGlobalVariables().put("quest.main.evacuation_started", null);
     }
 
     @Override

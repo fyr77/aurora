@@ -9,6 +9,8 @@ package ru.game.aurora.world.generation.aliens;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.SingleStarsystemShipSpawner;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
@@ -88,6 +90,32 @@ public class KliskMainDialogListener implements DialogListener {
         world.getPlayer().getResearchState().addNewAvailableProject(research);
     }
 
+    private void helpWithEvacuation(World world) {
+        if (world.getPlayer().getCredits() < 10) {
+            GameLogger.getInstance().logMessage("Not enough credits");
+            return;
+        }
+        GameLogger.getInstance().logMessage("Klisk will now evacuate from Earth 10000 people/month");
+        world.getPlayer().getEarthState().getEvacuationState().changeEvacuationSpeed(10000 / 30);
+
+        if (world.getGlobalVariables().containsKey("quest.main.klisk_evacuation_help")) {
+            return;
+        }
+
+        world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                "First benefits of interstellar diplomacy"
+                , "As it was declared yesterday, representatives of Klisk alien race will help our newly-developing colony. They will" +
+                " provide transport starships as well as some types of equipment and expertise. This will greatly speed up construction of a first human settlement outside of Solar system."
+                , "news"
+        ));
+
+        world.addListener(new SingleStarsystemShipSpawner(
+                world.getRaces().get("Klisk").getDefaultFactory()
+                , 0.1, world.getRaces().get("Humanity").getHomeworld()
+        ));
+
+    }
+
     @Override
     public void onDialogEnded(World world, int returnCode) {
         switch (returnCode) {
@@ -97,6 +125,9 @@ public class KliskMainDialogListener implements DialogListener {
                 break;
             case 200:
                 sellTerraformerInformation(world);
+                break;
+            case 300:
+                helpWithEvacuation(world);
                 break;
         }
     }

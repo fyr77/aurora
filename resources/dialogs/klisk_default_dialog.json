@@ -23,6 +23,15 @@
                     "targetStatementId":15,
                     "replyText":"We have information about a stranded Rogue ship, that has destroyed one of your spaceships, but was heavily damaged and is now unable to move. We can sell you information about its location"
                 },
+
+                {
+                    "replyConditions" : {
+                        "quest.main.evacuation_started" : null
+                    },
+                    "targetStatementId":100,
+                    "replyText":"We require your assistance. Our homeworld is threatened by Obliterator and we need all help we can get in order to save as much as possible."
+                },
+
                 {
                     "targetStatementId":-1,
                     "replyText":"Oops, sorry, pushed wrong button. Bye."
@@ -234,6 +243,30 @@
                 {
                     "targetStatementId":3,
                     "replyText":"No, that's not enough."
+                }
+            ]
+        },
+
+
+
+
+
+
+
+
+
+        "100":{
+            "id":100,
+            "npcText":"Klisk can provide part of Trade Fleet for your needs. Freighting fleet capable of evacuating 10 000 beings / month for remaining time of existence of your homeworld will cost you 10 credits",
+            "replies":[
+                {
+                    "returnValue" : 300,
+                    "targetStatementId":-1,
+                    "replyText":"Deal. Here are your credits."
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"No, this is not acceptable for us."
                 }
             ]
         }
