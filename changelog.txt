@@ -4,6 +4,8 @@ VERSION 0.0.6
 IN PROGRESS...
 
 + Generating sprites for planets
+* Nice portraits for dialogs made by gerardivn
++ End-game screens, currently with stub art and only with 1 ending.
 
 =====================================================
 VERSION 0.0.5

@@ -14,6 +14,7 @@ import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpScreen;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Player;
+import ru.game.aurora.player.earth.EvacuationState;
 import ru.game.aurora.player.research.ResearchScreen;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
@@ -97,6 +98,11 @@ public class World implements Serializable {
             player.getEngineeringState().update(this);
             player.getEarthState().update(this);
             turnCount++;
+            EvacuationState es = player.getEarthState().getEvacuationState();
+            if (es != null && es.isGameOver(this)) {
+                es.showEndGameScreen(this);
+                return;
+            }
             // to prevent concurrent modification if some of listeners adds new ones
             List<GameEventListener> oldListeners = new LinkedList<GameEventListener>(listeners);
             for (GameEventListener listener : oldListeners) {

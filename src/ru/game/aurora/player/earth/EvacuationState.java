@@ -7,6 +7,8 @@
 package ru.game.aurora.player.earth;
 
 
+import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Planet;
@@ -25,18 +27,26 @@ import java.util.List;
  * State of humanity evacuation from Earth
  */
 public class EvacuationState implements Serializable {
+    // Constants that are used to select ending based on progress
+
+    // If evacuated count is less than this, show 'bad' ending - humanity extinction
+    private static final long E1 = 4 * 1000000000L;
+
+    // Obliterator will visit earth in 10 years after game start
+    private static final int OBLITERATOR_TURNS = 365 * 10;
+
     private static final long serialVersionUID = -5249504974370213017L;
 
     private final int turnObliteratorArrives;
 
-    private int evacuated;
+    private long evacuated = E1 + 1;
 
-    private int evacuationSpeed;
+    private long evacuationSpeed;
 
     private StarSystem targetSystem;
 
-    public EvacuationState(World world, int turnObliteratorArrives) {
-        this.turnObliteratorArrives = turnObliteratorArrives;
+    public EvacuationState(World world) {
+        this.turnObliteratorArrives = world.getTurnCount() + OBLITERATOR_TURNS;
         findSuitableStarSystem(world.getGalaxyMap(), world.getRaces().get("Humanity").getHomeworld());
     }
 
@@ -48,15 +58,15 @@ public class EvacuationState implements Serializable {
         return turnObliteratorArrives;
     }
 
-    public int getEvacuated() {
+    public long getEvacuated() {
         return evacuated;
     }
 
-    public void setEvacuationSpeed(int evacuationSpeed) {
-        this.evacuationSpeed = evacuationSpeed;
+    public void changeEvacuationSpeed(int delta) {
+        this.evacuationSpeed += delta;
     }
 
-    public int getEvacuationSpeed() {
+    public long getEvacuationSpeed() {
         return evacuationSpeed;
     }
 
@@ -64,8 +74,32 @@ public class EvacuationState implements Serializable {
         return targetSystem;
     }
 
-    private boolean isGameOver(World world) {
+    public boolean isGameOver(World world) {
         return world.getTurnCount() >= turnObliteratorArrives;
+    }
+
+    public void showEndGameScreen(World world)
+    {
+
+        StoryScreen ss;
+
+        if (evacuated < E1) {
+            ss = new StoryScreen("story/evacuation_ending_bad.json");
+        } else {
+            ss = new StoryScreen("story/evacuation_ending_normal.json");
+        }
+
+        ss.setListener(new DialogListener() {
+
+            private static final long serialVersionUID = 2069156686330555730L;
+
+            @Override
+            public void onDialogEnded(World world, int returnCode) {
+                world.setGameOver(true);
+            }
+        });
+
+        world.addOverlayWindow(ss);
     }
 
     /**

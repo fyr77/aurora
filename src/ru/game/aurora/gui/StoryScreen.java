@@ -14,6 +14,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
@@ -51,6 +52,8 @@ public class StoryScreen implements OverlayWindow {
 
     private final static Rectangle textRect = new Rectangle(1, 6, 12, 7);
 
+    private DialogListener listener;
+
     public StoryScreen(String descPath) {
         Reader reader = new InputStreamReader(getClass().getClassLoader().getResourceAsStream(descPath));
         screens = gson.fromJson(reader, StoryElement[].class);
@@ -59,6 +62,10 @@ public class StoryScreen implements OverlayWindow {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setListener(DialogListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -79,6 +86,9 @@ public class StoryScreen implements OverlayWindow {
 
         if ((container.getInput().isKeyPressed(Input.KEY_RIGHT) || container.getInput().isKeyPressed(Input.KEY_ENTER)) && currentScreen < screens.length) {
             currentScreen++;
+            if (isOver() && listener != null) {
+                listener.onDialogEnded(world, 0);
+            }
         }
 
         GameLogger.getInstance().addStatusMessage("Press <left> or <right> to change pages");

@@ -90,7 +90,7 @@
 
         "7":{
             "id":7,
-            "npcText":"We will work on evacuation plans now. You will have 3 main goals: \n 1) Test our weapon against Obliterator \n 2) Collect information and technology that will help us destroy it or escape from it \n 3) Find allies that will assist us in saving humanity \n And let the God help us all.",
+            "npcText":"We will work on evacuation plans now and send first ships with colonists as soon as possible. You will have 3 main goals: \n 1) Test our weapon against Obliterator \n 2) Collect information and technology that will help us destroy it or escape from it \n 3) Find allies that will assist us in saving humanity \n And let the God help us all.",
             "replies":[
                 {
                     "targetStatementId":-1,
