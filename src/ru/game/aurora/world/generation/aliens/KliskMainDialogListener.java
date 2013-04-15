@@ -7,8 +7,13 @@
 package ru.game.aurora.world.generation.aliens;
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.dialog.Reply;
+import ru.game.aurora.dialog.Statement;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPC;
+import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.npc.SingleStarsystemShipSpawner;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
@@ -109,8 +114,20 @@ public class KliskMainDialogListener implements DialogListener {
                 , "news"
         ));
 
+        // set custom dialog for those ships that can be met in solar system and help with evac
+        final NPCShipFactory kliskDefaultFactory = world.getRaces().get("Klisk").getDefaultFactory();
         world.addListener(new SingleStarsystemShipSpawner(
-                world.getRaces().get("Klisk").getDefaultFactory()
+                new NPCShipFactory() {
+
+                    private static final long serialVersionUID = 1061545299484580242L;
+
+                    @Override
+                    public NPCShip createShip() {
+                        NPCShip ship = kliskDefaultFactory.createShip();
+                        ship.setCapitain(new NPC(new Dialog("klisk_dialog", new Statement(0, "We carry your colonists according to plan. What do you need?", new Reply(0, -1, "Nothing, just checking")))));
+                        return ship;
+                    }
+                }
                 , 0.1, world.getRaces().get("Humanity").getHomeworld()
         ));
 

@@ -7,7 +7,6 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
@@ -66,7 +65,7 @@ public class HomeworldGenerator {
         planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0, false);
         setCoord(planets[0], 2);
 
-        planets[1] = new AlienHomeworld("klisk_homeworld", kliskRace, Dialog.loadFromFile("dialogs/klisk_default_dialog.json"), 3, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK);
+        planets[1] = new AlienHomeworld("klisk_homeworld", kliskRace, kliskRace.getDefaultDialog(), 3, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK);
         setCoord(planets[1], 3);
 
         planets[2] = new Planet(ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0, false);
