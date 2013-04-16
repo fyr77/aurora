@@ -5,7 +5,9 @@ IN PROGRESS...
 
 + Generating sprites for planets
 * Nice portraits for dialogs made by gerardivn
-+ End-game screens, currently with stub art and only with 1 ending.
++ End-game screens, currently with stub art and only with 2 endings.
++ First tutorial dialog (when receiving first damage)
++ Requesting assistance from Klisk race with evacuation
 
 =====================================================
 VERSION 0.0.5
