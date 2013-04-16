@@ -39,7 +39,7 @@ public class EvacuationState implements Serializable {
 
     private final int turnObliteratorArrives;
 
-    private long evacuated = E1 + 1;
+    private long evacuated = 0;
 
     private long evacuationSpeed;
 
