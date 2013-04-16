@@ -192,6 +192,13 @@ public class World implements Serializable {
         }
     }
 
+    public void onPlayerShipDamaged() {
+        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        for (GameEventListener l : newList) {
+            l.onPlayerShipDamaged(this);
+        }
+    }
+
     public void onPlayerReturnToEarth() {
         // to avoid concurrent modification exception
         List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);

@@ -30,6 +30,11 @@ public abstract class GameEventListener implements Serializable {
         // nothing
     }
 
+    public void onPlayerShipDamaged(World world) {
+
+    }
+
+
     /**
      * Returns false if this event will never happen again and should be disposed
      */

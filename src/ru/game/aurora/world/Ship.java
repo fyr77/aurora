@@ -127,6 +127,7 @@ public class Ship extends BasePositionable implements SpaceObject {
     @Override
     public void onAttack(World world, SpaceObject attacker, int dmg) {
         hull -= dmg;
+        world.onPlayerShipDamaged();
         if (hull <= 0) {
             world.setCurrentRoom(FailScreen.createShipDestroyedFailScreen());
         }
