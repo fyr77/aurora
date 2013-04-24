@@ -1,7 +1,12 @@
 =====================================================
-VERSION 0.0.6
+VERSION 0.0.7
 
 IN PROGRESS...
+
+=====================================================
+VERSION 0.0.6
+
+24.04.2013
 
 + Generating sprites for planets
 * Nice portraits for dialogs made by gerardivn
