@@ -3,6 +3,8 @@ VERSION 0.0.7
 
 IN PROGRESS...
 
++ More tutorials at the beginning of game
+
 =====================================================
 VERSION 0.0.6
 
