@@ -1,9 +1,7 @@
 package ru.game.aurora.world.planet.nature;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 /**
  * Part of alien animals. Animals are created combining randomly these parts
@@ -41,16 +39,27 @@ public class AnimalPart
 
     public String imagePath;
 
-    public transient BufferedImage image;
+    public int centerX;
+
+    public int centerY;
+
+    public transient Image image;
 
     public AnimalPart(PartType partType, AttachmentPoint[] attachmentPoints, String imagePath) {
         this.partType = partType;
         this.attachmentPoints = attachmentPoints;
         this.imagePath = imagePath;
-        try {
-            this.image = ImageIO.read(new File(imagePath));
-        } catch (IOException e) {
-            e.printStackTrace();
+        loadImage();
+    }
+
+    public void loadImage()
+    {
+        if (image == null) {
+            try {
+                this.image = new Image(imagePath);
+            } catch (SlickException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -8,10 +8,14 @@ package ru.game.aurora.application;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.imageout.ImageIOWriter;
+import org.newdawn.slick.imageout.ImageWriter;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.nature.AnimalGenerator;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
@@ -44,6 +48,16 @@ public class AuroraGame extends BasicGame {
 
         GUI.init(gameContainer, new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 15 * tileSize));
         //GUI.getInstance().setCurrentScreen(new GalaxyMapWidget(world));
+
+
+        AnimalGenerator generator = new AnimalGenerator();
+        Image i = generator.getImageForAnimal(null);
+        ImageWriter iw = new ImageIOWriter();
+        try {
+            iw.saveImage(i, "png", new FileOutputStream("test.png"), true);
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 
     @Override

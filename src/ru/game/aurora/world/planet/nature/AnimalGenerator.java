@@ -1,13 +1,13 @@
 package ru.game.aurora.world.planet.nature;
 
 import com.google.gson.Gson;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.BasePositionable;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FilenameFilter;
@@ -24,19 +24,19 @@ public class AnimalGenerator {
     private Map<AnimalPart.PartType, Collection<AnimalPart>> parts = new HashMap<>();
 
     // image where all assembling of monster is made
-    private BufferedImage canvas;
+    private Image canvas;
 
     private final int CANVAS_SIZE = 400;
 
-    private Graphics2D canvasGraphics;
+    private Graphics canvasGraphics;
 
     // how many parts of type BODY animal can contain, to prevent infinite generation
     private static final int BODY_LIMIT = 3;
 
 
-    public AnimalGenerator() {
-        canvas = new BufferedImage(CANVAS_SIZE, CANVAS_SIZE, BufferedImage.TYPE_4BYTE_ABGR);
-        canvasGraphics = canvas.createGraphics();
+    public AnimalGenerator() throws SlickException {
+        canvas = new Image(CANVAS_SIZE, CANVAS_SIZE);
+        canvasGraphics = canvas.getGraphics();
         readAllParts(new File("resources/animal_parts"));
     }
 
@@ -53,6 +53,7 @@ public class AnimalGenerator {
         })) {
             try (FileReader fr = new FileReader(f)) {
                 AnimalPart part = gson.fromJson(fr, AnimalPart.class);
+                part.loadImage();
                 parts.get(part.partType).add(part);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -60,17 +61,25 @@ public class AnimalGenerator {
         }
     }
 
-    private void addPartToCanvas(BasePositionable anchor, AnimalPart.AttachmentPoint point, AnimalPart part) {
+    private void addPartToCanvas(Rectangle cropRect, BasePositionable anchor, AnimalPart.AttachmentPoint point, AnimalPart part) {
         int x = anchor.getX() + point.x;
         int y = anchor.getY() + point.y;
 
-        AffineTransform tForm = new AffineTransform();
-        tForm.rotate(Math.toRadians(point.angle));
+        /*AffineTransform tForm = new AffineTransform();
         tForm.translate(x, y);
-        canvasGraphics.drawImage(part.image, tForm, null);
+        tForm.rotate(Math.toRadians(point.angle));*/
+        part.image.setRotation(point.angle);
+        canvasGraphics.drawImage(part.image, x, y);
+        int cropX = (int) Math.min(cropRect.getX(), x);
+        int cropY = (int) Math.min(cropRect.getY(), y);
+
+        int cropWidth = (int) Math.max(cropRect.getWidth(), x + part.image.getWidth() - cropRect.getX());
+        int cropHeight = (int) Math.max(cropRect.getHeight(), y + part.image.getHeight() - cropRect.getY());
+
+        cropRect.setBounds(cropX, cropY, cropWidth, cropHeight);
     }
 
-    private int processPart(BasePositionable root, AnimalPart part, int bodyCount) {
+    private int processPart(Rectangle cropRect, BasePositionable root, AnimalPart part, int bodyCount) {
         for (AnimalPart.AttachmentPoint ap : part.attachmentPoints) {
             AnimalPart.PartType type = CollectionUtils.selectRandomElement(ap.availableParts);
             if (type == AnimalPart.PartType.BODY && bodyCount >= BODY_LIMIT) {
@@ -84,25 +93,30 @@ public class AnimalGenerator {
 
             AnimalPart newPart = CollectionUtils.selectRandomElement(parts.get(type));
 
-            addPartToCanvas(root, ap, newPart);
+            addPartToCanvas(cropRect, root, ap, newPart);
 
-            bodyCount += processPart(new BasePositionable(ap.x, ap.y), newPart, bodyCount);
+            bodyCount += processPart(cropRect, new BasePositionable(ap.x, ap.y), newPart, bodyCount);
         }
         return bodyCount;
     }
 
-    public Image getImageForAnimal(AnimalSpeciesDesc desc) {
-        canvasGraphics.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    private Image createImageForAnimal(AnimalSpeciesDesc desc)
+    {
+        canvasGraphics.clear();
 
         // first select main body
         AnimalPart part = CollectionUtils.selectRandomElement(parts.get(AnimalPart.PartType.BODY));
         canvasGraphics.drawImage(part.image, CANVAS_SIZE / 2, CANVAS_SIZE / 2, null);
-
+        Rectangle cropRect = new Rectangle(CANVAS_SIZE / 2, CANVAS_SIZE / 2, part.image.getWidth(), part.image.getHeight());
         // now select limbs and other parts
-        processPart(new BasePositionable(CANVAS_SIZE / 2, CANVAS_SIZE / 2), part, 1);
+        processPart(cropRect, new BasePositionable(CANVAS_SIZE / 2, CANVAS_SIZE / 2), part, 1);
 
+        return canvas.getSubImage((int) cropRect.getX(), (int) cropRect.getY(), (int) cropRect.getWidth(), (int) cropRect.getHeight());
+    }
 
-        return null;
+    public Image getImageForAnimal(AnimalSpeciesDesc desc) {
+
+        return createImageForAnimal(desc);
     }
 
 }
