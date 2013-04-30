@@ -6,10 +6,8 @@ import org.newdawn.slick.SlickException;
 /**
  * Part of alien animals. Animals are created combining randomly these parts
  */
-public class AnimalPart
-{
-    public static enum PartType
-    {
+public class AnimalPart {
+    public static enum PartType {
         BODY,
         LIMB,
         DECORATION
@@ -18,8 +16,7 @@ public class AnimalPart
     /**
      * Point of attach for limb parts. Each body part has several attachement points for connection with other body parts
      */
-    public static class AttachmentPoint
-    {
+    public static class AttachmentPoint {
         public final int x;
         public final int y;
         public final int angle;
@@ -52,11 +49,11 @@ public class AnimalPart
         loadImage();
     }
 
-    public void loadImage()
-    {
+    public void loadImage() {
         if (image == null) {
             try {
                 this.image = new Image(imagePath);
+                this.image.setCenterOfRotation(centerX, centerY);
             } catch (SlickException e) {
                 e.printStackTrace();
             }

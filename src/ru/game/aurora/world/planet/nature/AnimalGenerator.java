@@ -62,19 +62,18 @@ public class AnimalGenerator {
     }
 
     private void addPartToCanvas(Rectangle cropRect, BasePositionable anchor, AnimalPart.AttachmentPoint point, AnimalPart part) {
-        int x = anchor.getX() + point.x;
-        int y = anchor.getY() + point.y;
+        int x = anchor.getX() + point.x - part.centerX;
+        int y = anchor.getY() + point.y - part.centerY;
 
-        /*AffineTransform tForm = new AffineTransform();
-        tForm.translate(x, y);
-        tForm.rotate(Math.toRadians(point.angle));*/
         part.image.setRotation(point.angle);
+
         canvasGraphics.drawImage(part.image, x, y);
         int cropX = (int) Math.min(cropRect.getX(), x);
         int cropY = (int) Math.min(cropRect.getY(), y);
 
-        int cropWidth = (int) Math.max(cropRect.getWidth(), x + part.image.getWidth() - cropRect.getX());
-        int cropHeight = (int) Math.max(cropRect.getHeight(), y + part.image.getHeight() - cropRect.getY());
+        int maxWidthHeight = Math.max(part.image.getHeight(), part.image.getWidth());
+        int cropWidth = (int) Math.max(cropRect.getWidth(), x + part.centerX + maxWidthHeight - cropX);
+        int cropHeight = (int) Math.max(cropRect.getHeight(), y + part.centerY + maxWidthHeight - cropY);
 
         cropRect.setBounds(cropX, cropY, cropWidth, cropHeight);
     }
@@ -100,13 +99,12 @@ public class AnimalGenerator {
         return bodyCount;
     }
 
-    private Image createImageForAnimal(AnimalSpeciesDesc desc)
-    {
+    private Image createImageForAnimal(AnimalSpeciesDesc desc) {
         canvasGraphics.clear();
 
         // first select main body
         AnimalPart part = CollectionUtils.selectRandomElement(parts.get(AnimalPart.PartType.BODY));
-        canvasGraphics.drawImage(part.image, CANVAS_SIZE / 2, CANVAS_SIZE / 2, null);
+        canvasGraphics.drawImage(part.image, CANVAS_SIZE / 2, CANVAS_SIZE / 2);
         Rectangle cropRect = new Rectangle(CANVAS_SIZE / 2, CANVAS_SIZE / 2, part.image.getWidth(), part.image.getHeight());
         // now select limbs and other parts
         processPart(cropRect, new BasePositionable(CANVAS_SIZE / 2, CANVAS_SIZE / 2), part, 1);

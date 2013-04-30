@@ -51,12 +51,14 @@ public class AuroraGame extends BasicGame {
 
 
         AnimalGenerator generator = new AnimalGenerator();
-        Image i = generator.getImageForAnimal(null);
-        ImageWriter iw = new ImageIOWriter();
-        try {
-            iw.saveImage(i, "png", new FileOutputStream("test.png"), true);
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        for (int j = 0; j < 5; ++j) {
+            Image i = generator.getImageForAnimal(null);
+            ImageWriter iw = new ImageIOWriter();
+            try {
+                iw.saveImage(i, "png", new FileOutputStream(j + "_test.png"), true);
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
         }
     }
 
