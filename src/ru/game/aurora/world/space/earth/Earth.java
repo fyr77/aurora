@@ -148,7 +148,7 @@ public class Earth extends Planet {
                 if (daysPassed > 50) {
                     // show research screen
                     if (dumpScreen == null) {
-                        dumpScreen = new ProgressDumpScreen(world.getPlayer().getResearchState());
+                        dumpScreen = new ProgressDumpScreen(world);
                         world.addOverlayWindow(dumpScreen);
                         return;
                     }
@@ -194,6 +194,9 @@ public class Earth extends Planet {
             es.enter(world);
             world.setCurrentRoom(es);
 
+            // refilling crew
+            world.getPlayer().getShip().refillCrew();
+
         }
 
     }
@@ -220,6 +223,8 @@ public class Earth extends Planet {
         researchState.getCompletedProjects().clear();
         result += researchState.dumpAstroData();
         world.getPlayer().getEarthState().updateTechnologyLevel(result);
+        // subtracting points for loosing crew members
+        result -= 10 * (world.getPlayer().getShip().getLostCrewMembers());
         return result;
     }
 

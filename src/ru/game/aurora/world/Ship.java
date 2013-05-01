@@ -19,6 +19,10 @@ import java.util.List;
 
 public class Ship extends BasePositionable implements SpaceObject {
 
+    public static final int MAX_SCIENTISTS = 10;
+    public static final int MAX_ENGINEERS = 5;
+    public static final int MAX_MILITARY = 5;
+
     private static final long serialVersionUID = 4691881150467099814L;
 
     private int hull;
@@ -27,11 +31,11 @@ public class Ship extends BasePositionable implements SpaceObject {
 
     private int maxHull;
 
-    private int scientists = 10;
+    private int scientists = MAX_SCIENTISTS;
 
-    private int engineers = 5;
+    private int engineers = MAX_ENGINEERS;
 
-    private int military = 5;
+    private int military = MAX_MILITARY;
 
     private List<StarshipWeapon> weapons = new ArrayList<StarshipWeapon>();
 
@@ -141,5 +145,15 @@ public class Ship extends BasePositionable implements SpaceObject {
     @Override
     public String getName() {
         return name;
+    }
+
+    public int getLostCrewMembers() {
+        return Ship.MAX_ENGINEERS + Ship.MAX_MILITARY + Ship.MAX_SCIENTISTS - getTotalCrew();
+    }
+
+    public void refillCrew() {
+        scientists = Ship.MAX_SCIENTISTS;
+        engineers = Ship.MAX_ENGINEERS;
+        military = Ship.MAX_MILITARY;
     }
 }

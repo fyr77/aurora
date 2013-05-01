@@ -12,11 +12,12 @@ import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
 
 //todo: add scrolling
-public class ProgressDumpScreen implements OverlayWindow
-{
+public class ProgressDumpScreen implements OverlayWindow {
     private static final long serialVersionUID = 421626860785455868L;
 
     private ResearchState researchState;
+
+    private final int lostCrewMembers;
 
     private boolean allDrawn = false;
 
@@ -28,8 +29,9 @@ public class ProgressDumpScreen implements OverlayWindow
 
     private static Rectangle rect = new Rectangle(1, 1, 13, 14);
 
-    public ProgressDumpScreen(ResearchState researchState) {
-        this.researchState = researchState;
+    public ProgressDumpScreen(World world) {
+        this.researchState = world.getPlayer().getResearchState();
+        this.lostCrewMembers = world.getPlayer().getShip().getLostCrewMembers();
     }
 
     @Override
@@ -63,8 +65,7 @@ public class ProgressDumpScreen implements OverlayWindow
 
     }
 
-    private void drawLine(int lineIdx, String text1, String text2, Graphics g, Camera camera)
-    {
+    private void drawLine(int lineIdx, String text1, String text2, Graphics g, Camera camera) {
         final Font font = GUIConstants.dialogFont;
         int text1Width = font.getWidth(text1);
         int text2Width = font.getWidth(text2);
@@ -91,9 +92,9 @@ public class ProgressDumpScreen implements OverlayWindow
                 , "Exploration results:"
                 , GUIConstants.captionFont
                 , Color.yellow
-                , (int)rect.getX() * camera.getTileWidth()
-                , (int)rect.getY() * camera.getTileHeight()
-                , (int)rect.getWidth() * camera.getTileWidth()
+                , (int) rect.getX() * camera.getTileWidth()
+                , (int) rect.getY() * camera.getTileHeight()
+                , (int) rect.getWidth() * camera.getTileWidth()
                 , camera.getTileHeight());
 
         int line = 0;
@@ -123,12 +124,19 @@ public class ProgressDumpScreen implements OverlayWindow
             drawLine(line++, desc.getName(), String.valueOf(desc.getScore()), graphics, camera);
         }
 
-        if (maxIdx >= 4 + researchState.getCompletedProjects().size()) {
+        int tmp = lostCrewMembers > 0 ? 1 : 0;
+
+        if (lostCrewMembers > 0 && maxIdx >= 4 + researchState.getCompletedProjects().size()) {
+            drawLine(line++, "Crew members lost", String.valueOf(lostCrewMembers) + " (" + String.valueOf(-10 * lostCrewMembers) + ")", graphics, camera);
+            totalScore -= 10 * lostCrewMembers;
+        }
+
+        if (maxIdx >= tmp + 4 + researchState.getCompletedProjects().size()) {
             graphics.drawLine((rect.getX() + 1) * camera.getTileWidth(), (rect.getY() + 2 + line) * camera.getTileHeight(), (rect.getX() + rect.getWidth() - 1) * camera.getTileWidth(), (rect.getY() + 2 + line) * camera.getTileHeight());
         }
-        if (maxIdx >= 5 + researchState.getCompletedProjects().size()) {
+        if (maxIdx >= tmp + 5 + researchState.getCompletedProjects().size()) {
             graphics.setFont(GUIConstants.captionFont);
-            drawLine(line + 1, "Total: ", String.valueOf(totalScore), graphics,  camera);
+            drawLine(line + 1, "Total: ", String.valueOf(totalScore), graphics, camera);
             allDrawn = true;
         }
     }
