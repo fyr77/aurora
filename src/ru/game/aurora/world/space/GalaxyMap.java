@@ -112,9 +112,6 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     @Override
     public void update(GameContainer container, World world) {
-        if (background == null) {
-            createBackground(world.getCamera(), tilesX, tilesY);
-        }
         if (container.getInput().isKeyPressed(Input.KEY_M)) {
             world.setCurrentRoom(fullMapScreen);
             fullMapScreen.enter(world);
@@ -149,9 +146,10 @@ public class GalaxyMap extends BaseSpaceRoom {
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
         super.draw(container, graphics, camera);
-        if (background != null) {
-            background.draw(graphics, camera);
+        if (background == null) {
+            createBackground(world.getCamera(), tilesX, tilesY);
         }
+        background.draw(graphics, camera);
         for (int i = 0; i < tilesY; ++i) {
             for (int j = 0; j < tilesX; ++j) {
                 if (map[i][j] != -1) {

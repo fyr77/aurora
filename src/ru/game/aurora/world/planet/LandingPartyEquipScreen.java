@@ -20,12 +20,13 @@ import ru.game.aurora.world.equip.LandingPartyWeapon;
 
 public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
 
+    private static final long serialVersionUID = 4481758557250417847L;
     /*
-    Military
-    Engineers
-    Scientists
-    Weapon
-     */
+        Military
+        Engineers
+        Scientists
+        Weapon
+         */
     private boolean isBeforeLanding;
 
     public LandingPartyEquipScreen(boolean isBeforeLanding) {
@@ -35,6 +36,13 @@ public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
 
     @Override
     public void update(GameContainer container, World world) {
+        if (container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+            world.setCurrentRoom(previousRoom);
+            if (isBeforeLanding) {
+                previousRoom.enter(world);
+            }
+        }
+
         super.update(container, world);
 
         final Ship ship = world.getPlayer().getShip();
@@ -42,12 +50,6 @@ public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
 
         final int maxCapacity = 10;
 
-        if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
-            world.setCurrentRoom(previousRoom);
-            if (isBeforeLanding) {
-                previousRoom.enter(world);
-            }
-        }
 
         if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
             switch (currentIdx) {
