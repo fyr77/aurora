@@ -11,14 +11,14 @@ import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 
 
-public class TutorialGenerator implements WorldGeneratorPart
-{
+public class TutorialGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = 3572666350589263973L;
-
 
 
     @Override
     public void updateWorld(World world) {
+
+        world.getGlobalVariables().put("tutorial.landing", null);
 
         // Repair tutorial dialog - activated after taking damage for the first time
         world.addListener(new GameEventListener() {
@@ -46,7 +46,6 @@ public class TutorialGenerator implements WorldGeneratorPart
 
 
         });
-
 
 
     }

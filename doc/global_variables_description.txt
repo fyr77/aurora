@@ -32,3 +32,9 @@ Relations with Klisk
 quest.main.klisk_evacuation_help - Klisk are helping with evacuating Earth. Klisk ships will appear in solar system.
 
 ==============================
+
+Tutorials
+
+tutorial.landing - if set, on next planetary landing tutorial dialog will be shown
+
+==============================

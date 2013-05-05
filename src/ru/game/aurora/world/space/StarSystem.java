@@ -13,6 +13,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.player.Player;
@@ -54,21 +55,19 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             this.color = color;
         }
 
-        public Color getCoreColor()
-        {
+        public Color getCoreColor() {
             if (coreColor == null) {
                 float[] hsb = new float[3];
                 java.awt.Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
                 hsb[1] *= 0.3;
                 hsb[2] = (float) Math.min(1.0, hsb[2] * 1.25);
                 int rgb = java.awt.Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
-                coreColor =  new Color((rgb & 0x00ff0000) >> 16, (rgb & 0x0000ff00)>> 8, (rgb & 0x000000ff));
+                coreColor = new Color((rgb & 0x00ff0000) >> 16, (rgb & 0x0000ff00) >> 8, (rgb & 0x000000ff));
             }
             return coreColor;
         }
 
-        public Color getOuterColor()
-        {
+        public Color getOuterColor() {
             if (outerColor == null) {
                 outerColor = new Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f);
             }
@@ -224,9 +223,27 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     final LandingParty landingParty = world.getPlayer().getLandingParty();
                     if (p.canBeLanded() && (landingParty == null || !landingParty.canBeLaunched(world))) {
                         // first landing, show 'Landing party equipment' screen
-                        LandingPartyEquipScreen screen = new LandingPartyEquipScreen(true);
-                        screen.enter(world);
-                        world.setCurrentRoom(screen);
+
+                        if (world.getGlobalVariables().containsKey("tutorial.landing")) {
+                            // this is first landing on a planet, show tutorial dialog
+                            Dialog d = Dialog.loadFromFile("dialogs/tutorials/planet_landing_tutorial.json");
+                            d.setListener(new DialogListener() {
+                                private static final long serialVersionUID = 5036665500788544378L;
+
+                                @Override
+                                public void onDialogEnded(World world, int returnCode) {
+                                    LandingPartyEquipScreen screen = new LandingPartyEquipScreen(true);
+                                    screen.enter(world);
+                                    world.setCurrentRoom(screen);
+                                }
+                            });
+                            world.addOverlayWindow(d);
+                            world.getGlobalVariables().remove("tutorial.landing");
+                        } else {
+                            LandingPartyEquipScreen screen = new LandingPartyEquipScreen(true);
+                            screen.enter(world);
+                            world.setCurrentRoom(screen);
+                        }
                     } else {
                         p.enter(world);
                     }
@@ -454,9 +471,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         final int starY = camera.getYCoord(0) + camera.getTileHeight() / 2;
         if (camera.isInViewport(0, 0)) {
             // draw 3 circles
-            EngineUtils.drawCircleCentered(g, starX, starY, (int)(camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size) * 1.25), star.getOuterColor(), true);
+            EngineUtils.drawCircleCentered(g, starX, starY, (int) (camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size) * 1.25), star.getOuterColor(), true);
             EngineUtils.drawCircleCentered(g, starX, starY, camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size), star.color, true);
-            EngineUtils.drawCircleCentered(g, starX, starY, (int)(camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size) * 0.75), star.getCoreColor(), true);
+            EngineUtils.drawCircleCentered(g, starX, starY, (int) (camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size) * 0.75), star.getCoreColor(), true);
         }
 
         for (BasePlanet p : planets) {
