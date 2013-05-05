@@ -1,0 +1,51 @@
+{
+    "partType":"BODY",
+    "attachmentPoints" : [
+        {
+            "x": 12,
+            "y" : 58,
+            "angle" : -270,
+            "availableParts" : [
+                "LIMB"
+            ]
+        },
+         {
+            "x": 32,
+            "y" : 60,
+            "angle" : -270,
+            "availableParts" : [
+                "LIMB"
+            ]
+         },
+          {
+             "x": 50,
+             "y" : 59,
+             "angle" : -270,
+             "availableParts" : [
+                 "LIMB"
+             ]
+          },
+
+           {
+              "x": 33,
+              "y" : 11,
+              "angle" : 0,
+              "availableParts" : [
+                  "DECORATION"
+              ]
+          },
+
+          {
+            "x": 33,
+            "y" : 40,
+            "angle" : 0,
+            "availableParts" : [
+                "DECORATION"
+            ]
+        }
+
+     ],
+     "imagePath" : "resources/animal_parts/body1.png",
+     "centerX" : 32,
+     "centerY" : 50
+}

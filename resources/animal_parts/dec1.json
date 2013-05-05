@@ -1,0 +1,8 @@
+{
+    "partType":"DECORATION",
+    "attachmentPoints" : [
+     ],
+     "imagePath" : "resources/animal_parts/dec1.png",
+     "centerX" : 13,
+     "centerY" : 6
+}
