@@ -13,6 +13,7 @@ import org.newdawn.slick.imageout.ImageWriter;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
+import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -51,11 +52,14 @@ public class AuroraGame extends BasicGame {
 
 
         AnimalGenerator generator = new AnimalGenerator();
+        AnimalSpeciesDesc desc = new AnimalSpeciesDesc(null, null,null, null, true, false, 0, 0, 0, null);
         for (int j = 0; j < 5; ++j) {
-            Image i = generator.getImageForAnimal(null);
+
+            generator.getImageForAnimal(desc);
             ImageWriter iw = new ImageIOWriter();
             try {
-                iw.saveImage(i, "png", new FileOutputStream(j + "_test.png"), true);
+                iw.saveImage(desc.getImage(), "png", new FileOutputStream(j + "_test.png"), true);
+                iw.saveImage(desc.getDeadImage(), "png", new FileOutputStream(j + "_dead_test.png"), true);
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }

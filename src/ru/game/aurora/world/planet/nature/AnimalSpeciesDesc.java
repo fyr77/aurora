@@ -7,6 +7,7 @@
 package ru.game.aurora.world.planet.nature;
 
 
+import org.newdawn.slick.Image;
 import ru.game.aurora.world.planet.BasePlanet;
 
 import java.io.Serializable;
@@ -15,6 +16,8 @@ import java.io.Serializable;
  * Represents common data about animal species: its name, look, behaviour, home planet, research progress for this animal etc
  */
 public class AnimalSpeciesDesc implements Serializable {
+
+    private static final long serialVersionUID = 8842795492227344987L;
 
     private String name;
 
@@ -36,6 +39,10 @@ public class AnimalSpeciesDesc implements Serializable {
     private int speed;
 
     private int damage;
+
+    private transient Image image;
+
+    private transient Image deadImage;
 
     public static enum Behaviour {
         /**
@@ -110,5 +117,19 @@ public class AnimalSpeciesDesc implements Serializable {
 
     public int getDamage() {
         return damage;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public Image getDeadImage() {
+        return deadImage;
+    }
+
+    public void setImages(Image img, Image deadImg)
+    {
+        image = img;
+        deadImage = deadImg;
     }
 }

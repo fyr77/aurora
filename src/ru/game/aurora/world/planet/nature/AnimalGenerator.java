@@ -3,6 +3,7 @@ package ru.game.aurora.world.planet.nature;
 import com.google.gson.Gson;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
@@ -26,7 +27,7 @@ public class AnimalGenerator {
     private static final Color SHADOW_COLOR = new Color(0x00474e24);
     private static final Color DARK_SHADOW_COLOR = new Color(0x0033381a);
 
-    private final Color[] allowedColors = {MAIN_COLOR, new Color(0x00a12e00), new Color(0x00ad5400), new Color(0x005f4d96)};
+    private final Color[] allowedColors = {MAIN_COLOR, new Color(0x00a12e00), new Color(0x00ad5400), new Color(0x005f4d96), new Color(0x00966e00)};
 
     private Map<AnimalPart.PartType, Collection<AnimalPart>> parts = new HashMap<>();
 
@@ -40,6 +41,7 @@ public class AnimalGenerator {
     // how many parts of type BODY animal can contain, to prevent infinite generation
     private static final int BODY_LIMIT = 3;
 
+    private Image bloodImage = ResourceManager.getInstance().getImage("blood");
 
     public AnimalGenerator() throws SlickException {
         canvas = new Image(CANVAS_SIZE, CANVAS_SIZE);
@@ -77,7 +79,6 @@ public class AnimalGenerator {
         canvasGraphics.drawImage(part.image, x, y);
 
         Rectangle AABB = getRotatedRectangleAABB(x + part.centerX, y + part.centerY, x, y, x + part.image.getWidth(), y + part.image.getHeight(), (float) Math.toRadians(point.angle));
-
 
         float cropX = Math.min(cropRect.getX(), AABB.getX());
         float cropY = Math.min(cropRect.getY(), AABB.getY());
@@ -165,7 +166,37 @@ public class AnimalGenerator {
     }
 
 
-    private Image createImageForAnimal(AnimalSpeciesDesc desc) {
+    /**
+     * Creates image of a dead animal using original image.
+     * If animal width is greater than height - flips it horizontally. Otherwise rotates it 90 degrees.
+     * Adds drops of blood
+     */
+    private Image createCorpseImage(Image source)
+    {
+        try {
+            Image result;
+            if (source.getWidth() > source.getHeight()) {
+                result = new Image(source.getWidth(), source.getHeight());
+                // draw blood drops at center
+                result.getGraphics().drawImage(bloodImage, result.getWidth() / 2 - 32, result.getHeight() / 2 - 32);
+                result.getGraphics().drawImage(source.getFlippedCopy(true, false), 0, 0);
+            }  else {
+                result = new Image(source.getHeight(), source.getWidth());
+                // draw blood drops at center
+                result.getGraphics().drawImage(bloodImage, result.getWidth() / 2 - 32, result.getHeight() / 2 - 32);
+                source.setCenterOfRotation(source.getWidth() / 2, source.getHeight() / 2);
+                source.setRotation(90);
+                result.getGraphics().drawImage(source, (source.getHeight() - source.getWidth()) / 2, (source.getWidth() - source.getHeight()) / 2);
+                source.setRotation(0);
+            }
+            return result;
+        } catch (SlickException e) {
+            e.printStackTrace();
+            return source;
+        }
+    }
+
+    private void createImageForAnimal(AnimalSpeciesDesc desc) {
         canvasGraphics.clear();
 
         // first select main body
@@ -174,12 +205,15 @@ public class AnimalGenerator {
         Rectangle cropRect = new Rectangle(CANVAS_SIZE / 2, CANVAS_SIZE / 2, part.image.getWidth(), part.image.getHeight());
         // now select limbs and other parts
         processPart(cropRect, new BasePositionable(CANVAS_SIZE / 2, CANVAS_SIZE / 2), part, 1);
-        return colorise(canvas.getSubImage((int) cropRect.getX(), (int) cropRect.getY(), (int) cropRect.getWidth(), (int) cropRect.getHeight()), CollectionUtils.selectRandomElement(allowedColors));
+
+        Image img = colorise(canvas.getSubImage((int) cropRect.getX(), (int) cropRect.getY(), (int) cropRect.getWidth(), (int) cropRect.getHeight()), CollectionUtils.selectRandomElement(allowedColors));
+        Image corpseImg = createCorpseImage(img);
+        desc.setImages(img, corpseImg);
     }
 
-    public Image getImageForAnimal(AnimalSpeciesDesc desc) {
+    public void getImageForAnimal(AnimalSpeciesDesc desc) {
 
-        return createImageForAnimal(desc);
+        createImageForAnimal(desc);
     }
 
 }
