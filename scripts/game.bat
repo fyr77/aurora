@@ -1,1 +1,1 @@
-java -cp "resources;Aurora.jar;Libnoiseforjava-master.jar" ru.game.aurora.application.AuroraGame
+java -cp "resources;Aurora.jar;Libnoiseforjava-master.jar;TWL.jar" ru.game.aurora.application.AuroraGame
