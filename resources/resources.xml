@@ -7,8 +7,8 @@
     <resource type="image" id="menu_background">gui/images/main_menu_background.png</resource>
 
     <!-- Player sprites -->
-    <resource type="image" id="aurora">sprites/ships/Aurora.png</resource>
-    <resource type="image" id="awayteam">sprites/ships/AwayTeam.png</resource>
+    <resource type="image" id="aurora">sprites/ships/player_ship.png</resource>
+    <resource type="image" id="awayteam">sprites/ships/away_team.png</resource>
     <resource type="image" id="shuttle">sprites/ships/shuttle.png</resource>
     <resource type="image" id="probe">sprites/ships/probe.png</resource>
     <resource type="image" id="scientist_dialog">sprites/portraits/scientist.png</resource>
@@ -31,18 +31,18 @@
     <resource type="image" id="snow_tile_1">sprites/tiles/snow-1.png</resource>
     <resource type="image" id="water_tile_1">sprites/tiles/water-1.png</resource>
 
-    <resource type="image" id="mountains_4">sprites/tiles/mountains/Tiles_!_0004.png</resource>
-    <resource type="image" id="mountains_5">sprites/tiles/mountains/Tiles_!_0005.png</resource>
-    <resource type="image" id="mountains_6">sprites/tiles/mountains/Tiles_!_0006.png</resource>
-    <resource type="image" id="mountains_7">sprites/tiles/mountains/Tiles_!_0007.png</resource>
-    <resource type="image" id="mountains_8">sprites/tiles/mountains/Tiles_!_0008.png</resource>
-    <resource type="image" id="mountains_9">sprites/tiles/mountains/Tiles_!_0009.png</resource>
-    <resource type="image" id="mountains_10">sprites/tiles/mountains/Tiles_!_0010.png</resource>
-    <resource type="image" id="mountains_11">sprites/tiles/mountains/Tiles_!_0011.png</resource>
-    <resource type="image" id="mountains_12">sprites/tiles/mountains/Tiles_!_0012.png</resource>
-    <resource type="image" id="mountains_13">sprites/tiles/mountains/Tiles_!_0013.png</resource>
-    <resource type="image" id="mountains_14">sprites/tiles/mountains/Tiles_!_0014.png</resource>
-    <resource type="image" id="mountains_15">sprites/tiles/mountains/Tiles_!_0015.png</resource>
+    <resource type="image" id="mountains_4">sprites/tiles/mountains/tiles_0004.png</resource>
+    <resource type="image" id="mountains_5">sprites/tiles/mountains/tiles_0005.png</resource>
+    <resource type="image" id="mountains_6">sprites/tiles/mountains/tiles_0006.png</resource>
+    <resource type="image" id="mountains_7">sprites/tiles/mountains/tiles_0007.png</resource>
+    <resource type="image" id="mountains_8">sprites/tiles/mountains/tiles_0008.png</resource>
+    <resource type="image" id="mountains_9">sprites/tiles/mountains/tiles_0009.png</resource>
+    <resource type="image" id="mountains_10">sprites/tiles/mountains/tiles_0010.png</resource>
+    <resource type="image" id="mountains_11">sprites/tiles/mountains/tiles_0011.png</resource>
+    <resource type="image" id="mountains_12">sprites/tiles/mountains/tiles_0012.png</resource>
+    <resource type="image" id="mountains_13">sprites/tiles/mountains/tiles_0013.png</resource>
+    <resource type="image" id="mountains_14">sprites/tiles/mountains/tiles_0014.png</resource>
+    <resource type="image" id="mountains_15">sprites/tiles/mountains/tiles_0015.png</resource>
 
     <!-- ore -->
     <resource type="image" id="iron_deposit">sprites/tiles/iron_deposit.png</resource>
