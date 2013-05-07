@@ -41,7 +41,8 @@ public class AnimalGenerator {
     // how many parts of type BODY animal can contain, to prevent infinite generation
     private static final int BODY_LIMIT = 3;
 
-    private Image bloodImage = ResourceManager.getInstance().getImage("blood");
+    // blood drops that will be drawn on sprite of dead animal
+    private Image[] bloodImages = {ResourceManager.getInstance().getImage("blood"), ResourceManager.getInstance().getImage("blood2")};
 
     public AnimalGenerator() throws SlickException {
         canvas = new Image(CANVAS_SIZE, CANVAS_SIZE);
@@ -61,9 +62,11 @@ public class AnimalGenerator {
             }
         })) {
             try (FileReader fr = new FileReader(f)) {
-                AnimalPart part = gson.fromJson(fr, AnimalPart.class);
-                part.loadImage();
-                parts.get(part.partType).add(part);
+                AnimalPart[] part = gson.fromJson(fr, AnimalPart[].class);
+                for (AnimalPart p : part) {
+                    p.loadImage();
+                    parts.get(p.partType).add(p);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -175,15 +178,16 @@ public class AnimalGenerator {
     {
         try {
             Image result;
+            final Image bloodImage = CollectionUtils.selectRandomElement(bloodImages);
             if (source.getWidth() > source.getHeight()) {
-                result = new Image(source.getWidth(), source.getHeight());
+                result = new Image(source.getWidth(), source.getHeight() + bloodImage.getHeight() / 3);
                 // draw blood drops at center
-                result.getGraphics().drawImage(bloodImage, result.getWidth() / 2 - 32, result.getHeight() / 2 - 32);
+                result.getGraphics().drawImage(bloodImage, result.getWidth() / 2 - 32, result.getHeight() - bloodImage.getHeight());
                 result.getGraphics().drawImage(source.getFlippedCopy(true, false), 0, 0);
             }  else {
-                result = new Image(source.getHeight(), source.getWidth());
+                result = new Image(source.getHeight(), source.getWidth() + bloodImage.getHeight() / 3);
                 // draw blood drops at center
-                result.getGraphics().drawImage(bloodImage, result.getWidth() / 2 - 32, result.getHeight() / 2 - 32);
+                result.getGraphics().drawImage(bloodImage, result.getWidth() / 2 - 32, result.getHeight() - bloodImage.getHeight());
                 source.setCenterOfRotation(source.getWidth() / 2, source.getHeight() / 2);
                 source.setRotation(90);
                 result.getGraphics().drawImage(source, (source.getHeight() - source.getWidth()) / 2, (source.getWidth() - source.getHeight()) / 2);

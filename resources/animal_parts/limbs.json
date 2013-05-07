@@ -1,0 +1,66 @@
+[
+    {
+        "partType":"LIMB",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/limb1.png",
+        "centerX" : 6,
+        "centerY" : 6
+    },
+    {
+        "partType":"LIMB",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/limb2.png",
+        "centerX" : 6,
+        "centerY" : 6
+    },
+    {
+        "partType":"LIMB",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/limb3.png",
+        "centerX" : 7,
+        "centerY" : 15
+    },
+    {
+        "partType":"LIMB",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/limb4.png",
+        "centerX" : 5,
+        "centerY" : 8
+    },
+    {
+        "partType":"LIMB",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/limb5.png",
+        "centerX" : 4,
+        "centerY" : 5
+    },
+    {
+        "partType":"LIMB",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/limb6.png",
+        "centerX" : 2,
+        "centerY" : 17
+    },
+    {
+        "partType":"LIMB",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/limb7.png",
+        "centerX" : 3,
+        "centerY" : 10
+    },
+    {
+        "partType":"LIMB",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/limb8.png",
+        "centerX" : 2,
+        "centerY" : 10
+    }
+]

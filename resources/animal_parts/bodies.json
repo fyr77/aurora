@@ -1,0 +1,264 @@
+[
+    {
+        "partType":"BODY",
+        "attachmentPoints" : [
+            {
+                "x": 12,
+                "y" : 58,
+                "angle" : -270,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 32,
+                "y" : 60,
+                "angle" : -270,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 50,
+                "y" : 59,
+                "angle" : -270,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+
+            {
+                "x": 33,
+                "y" : 11,
+                "angle" : 0,
+                "availableParts" : [
+                    "DECORATION"
+                ]
+            },
+
+            {
+                "x": 33,
+                "y" : 40,
+                "angle" : 0,
+                "availableParts" : [
+                    "DECORATION"
+                ]
+            }
+
+        ],
+        "imagePath" : "resources/animal_parts/body1.png",
+        "centerX" : 32,
+        "centerY" : 50
+    },
+
+    {
+        "partType":"BODY",
+        "attachmentPoints" : [
+            {
+                "x": 12,
+                "y" : 58,
+                "angle" : -270,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 32,
+                "y" : 60,
+                "angle" : -270,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 50,
+                "y" : 59,
+                "angle" : -270,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+
+            {
+                "x": 14,
+                "y" : 12,
+                "angle" : 0,
+                "availableParts" : [
+                    "DECORATION"
+                ]
+            },
+
+            {
+                "x": 47,
+                "y" : 13,
+                "angle" : 0,
+                "availableParts" : [
+                    "DECORATION"
+                ]
+            }
+
+        ],
+        "imagePath" : "resources/animal_parts/body2.png",
+        "centerX" : 32,
+        "centerY" : 50
+    },
+
+    {
+        "partType":"BODY",
+        "attachmentPoints" : [
+            {
+                "x": 6,
+                "y" : 14,
+                "angle" : 180,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 9,
+                "y" : 34,
+                "angle" : 180,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 60,
+                "y" : 15,
+                "angle" : 0,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 55,
+                "y" : 32,
+                "angle" : 0,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 33,
+                "y" : 57,
+                "angle" : 0,
+                "availableParts" : [
+                    "DECORATION"
+                ]
+            },
+
+            {
+                "x": 33,
+                "y" : 40,
+                "angle" : 0,
+                "availableParts" : [
+                    "DECORATION"
+                ]
+            }
+
+        ],
+        "imagePath" : "resources/animal_parts/body3.png",
+        "centerX" : 32,
+        "centerY" : 50
+    },
+
+    {
+        "partType":"BODY",
+        "attachmentPoints" : [
+            {
+                "x": 31,
+                "y" : 40,
+                "angle" : 180,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 42,
+                "y" : 40,
+                "angle" : 0,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+
+            {
+                "x": 58,
+                "y" : 21,
+                "angle" : 0,
+                "availableParts" : [
+                    "DECORATION"
+                ]
+            }
+
+        ],
+        "imagePath" : "resources/animal_parts/body4.png",
+        "centerX" : 32,
+        "centerY" : 50
+    },
+    {
+        "partType":"BODY",
+        "attachmentPoints" : [
+            {
+                "x": 9,
+                "y" : 27,
+                "angle" : 120,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 2,
+                "y" : 37,
+                "angle" : 180,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 9,
+                "y" : 49,
+                "angle" : 220,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 55,
+                "y" : 27,
+                "angle" : 60,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 59,
+                "y" : 37,
+                "angle" : 0,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+            {
+                "x": 55,
+                "y" : 49,
+                "angle" : -60,
+                "availableParts" : [
+                    "LIMB"
+                ]
+            },
+
+            {
+                "x": 32,
+                "y" : 8,
+                "angle" : 0,
+                "availableParts" : [
+                    "DECORATION"
+                ]
+            }
+        ],
+        "imagePath" : "resources/animal_parts/body5.png",
+        "centerX" : 32,
+        "centerY" : 50
+    }
+]

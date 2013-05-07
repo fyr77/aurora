@@ -1,0 +1,34 @@
+[
+    {
+        "partType":"DECORATION",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/dec3.png",
+        "centerX" : 14,
+        "centerY" : 8
+    },
+    {
+        "partType":"DECORATION",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/mouth.png",
+        "centerX" : 16,
+        "centerY" : 11
+    },
+    {
+        "partType":"DECORATION",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/mouth1.png",
+        "centerX" : 12,
+        "centerY" : 9
+    },
+    {
+        "partType":"DECORATION",
+        "attachmentPoints" : [
+        ],
+        "imagePath" : "resources/animal_parts/mouth2.png",
+        "centerX" : 7,
+        "centerY" : 9
+    }
+]
