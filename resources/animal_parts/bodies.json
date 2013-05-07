@@ -8,7 +8,9 @@
                 "angle" : -270,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs",
+                "flipVertical" : true
             },
             {
                 "x": 32,
@@ -24,7 +26,8 @@
                 "angle" : -270,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                 "groupId" : "legs"
             },
 
             {
@@ -60,15 +63,27 @@
                 "angle" : -270,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs",
+                "flipVertical" : true
             },
             {
-                "x": 32,
+                "x": 22,
                 "y" : 60,
                 "angle" : -270,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs2"
+            },
+            {
+                "x": 40,
+                "y" : 60,
+                "angle" : -270,
+                "availableParts" : [
+                    "LIMB"
+                ],
+                "groupId" : "legs2"
             },
             {
                 "x": 50,
@@ -76,7 +91,8 @@
                 "angle" : -270,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs"
             },
 
             {
@@ -112,7 +128,9 @@
                 "angle" : 180,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs1",
+                "flipVertical" : true
             },
             {
                 "x": 9,
@@ -120,7 +138,9 @@
                 "angle" : 180,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs2",
+                "flipVertical" : true
             },
             {
                 "x": 60,
@@ -128,7 +148,8 @@
                 "angle" : 0,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs1"
             },
             {
                 "x": 55,
@@ -136,7 +157,8 @@
                 "angle" : 0,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs2"
             },
             {
                 "x": 33,
@@ -171,7 +193,8 @@
                 "angle" : 180,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "claws"
             },
             {
                 "x": 42,
@@ -179,7 +202,8 @@
                 "angle" : 0,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "claws"
             },
 
             {
@@ -205,7 +229,9 @@
                 "angle" : 120,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs1",
+                "flipVertical" : true
             },
             {
                 "x": 2,
@@ -213,7 +239,9 @@
                 "angle" : 180,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs2",
+                "flipVertical" : true
             },
             {
                 "x": 9,
@@ -221,7 +249,9 @@
                 "angle" : 220,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs3",
+                "flipVertical" : true
             },
             {
                 "x": 55,
@@ -229,7 +259,8 @@
                 "angle" : 60,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs1"
             },
             {
                 "x": 59,
@@ -237,15 +268,17 @@
                 "angle" : 0,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs2"
             },
             {
                 "x": 55,
                 "y" : 49,
-                "angle" : -60,
+                "angle" : 320,
                 "availableParts" : [
                     "LIMB"
-                ]
+                ],
+                "groupId" : "legs3"
             },
 
             {

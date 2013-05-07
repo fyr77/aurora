@@ -49,8 +49,7 @@ public class AnimalGenerator {
 
     private static AnimalGenerator instance;
 
-    public static void init()
-    {
+    public static void init() {
         instance = new AnimalGenerator();
     }
 
@@ -92,14 +91,28 @@ public class AnimalGenerator {
     }
 
     private void addPartToCanvas(Rectangle cropRect, BasePositionable anchor, AnimalPart.AttachmentPoint point, AnimalPart part) {
-        int x = anchor.getX() + point.x - part.centerX;
-        int y = anchor.getY() + point.y - part.centerY;
+        int centerX = part.centerX;
+        int centerY = part.centerY;
 
-        part.image.setRotation(point.angle);
+        Image image = part.image;
+        if (point.flipHorizontal || point.flipVertical) {
+            if (point.flipHorizontal) {
+                centerX = part.image.getWidth() - centerX;
+            }
+            if (point.flipVertical) {
+                centerY = part.image.getHeight() - centerY;
+            }
+            image = part.image.getFlippedCopy(point.flipHorizontal, point.flipVertical);
+            image.setCenterOfRotation(centerX, centerY);
+        }
 
-        canvasGraphics.drawImage(part.image, x, y);
+        int x = anchor.getX() + point.x - centerX;
+        int y = anchor.getY() + point.y - centerY;
+        image.setRotation(point.angle);
 
-        Rectangle AABB = getRotatedRectangleAABB(x + part.centerX, y + part.centerY, x, y, x + part.image.getWidth(), y + part.image.getHeight(), (float) Math.toRadians(point.angle));
+        canvasGraphics.drawImage(image, x, y);
+
+        Rectangle AABB = getRotatedRectangleAABB(x + centerX, y + centerY, x, y, x + image.getWidth(), y + image.getHeight(), (float) Math.toRadians(point.angle));
 
         float cropX = Math.min(cropRect.getX(), AABB.getX());
         float cropY = Math.min(cropRect.getY(), AABB.getY());
@@ -128,23 +141,36 @@ public class AnimalGenerator {
         return new Rectangle((float) rx1, (float) ry1, (float) (rx2 - rx1), (float) (ry2 - ry1));
     }
 
-    private int processPart(Rectangle cropRect, BasePositionable root, AnimalPart part, int bodyCount) {
+    private AnimalPart selectRandomPartForPoint(AnimalPart.AttachmentPoint ap, int bodyCount) {
+        AnimalPart.PartType type = CollectionUtils.selectRandomElement(ap.availableParts);
+        if (type == AnimalPart.PartType.BODY && bodyCount >= BODY_LIMIT) {
+            for (AnimalPart.PartType pt : ap.availableParts) {
+                if (pt != AnimalPart.PartType.BODY) {
+                    type = pt;
+                    break;
+                }
+            }
+        }
+
+        return CollectionUtils.selectRandomElement(parts.get(type));
+    }
+
+    private int processPart(Rectangle cropRect, BasePositionable root, AnimalPart part, int bodyCount, Map<String, AnimalPart> groups) {
         for (AnimalPart.AttachmentPoint ap : part.attachmentPoints) {
-            AnimalPart.PartType type = CollectionUtils.selectRandomElement(ap.availableParts);
-            if (type == AnimalPart.PartType.BODY && bodyCount >= BODY_LIMIT) {
-                for (AnimalPart.PartType pt : ap.availableParts) {
-                    if (pt != AnimalPart.PartType.BODY) {
-                        type = pt;
-                        break;
-                    }
+            AnimalPart newPart = null;
+            if (ap.groupId == null) {
+                newPart = selectRandomPartForPoint(ap, bodyCount);
+            } else {
+                newPart = groups.get(ap.groupId);
+                if (newPart == null) {
+                    newPart = selectRandomPartForPoint(ap, bodyCount);
+                    groups.put(ap.groupId, newPart);
                 }
             }
 
-            AnimalPart newPart = CollectionUtils.selectRandomElement(parts.get(type));
-
             addPartToCanvas(cropRect, root, ap, newPart);
 
-            bodyCount += processPart(cropRect, new BasePositionable(ap.x, ap.y), newPart, bodyCount);
+            bodyCount += processPart(cropRect, new BasePositionable(ap.x, ap.y), newPart, bodyCount, groups);
         }
         return bodyCount;
     }
@@ -193,8 +219,7 @@ public class AnimalGenerator {
      * If animal width is greater than height - flips it horizontally. Otherwise rotates it 90 degrees.
      * Adds drops of blood
      */
-    private Image createCorpseImage(Image source)
-    {
+    private Image createCorpseImage(Image source) {
         try {
             Image result;
             final Image bloodImage = CollectionUtils.selectRandomElement(bloodImages);
@@ -203,7 +228,7 @@ public class AnimalGenerator {
                 // draw blood drops at center
                 result.getGraphics().drawImage(bloodImage, result.getWidth() / 2 - 32, result.getHeight() - bloodImage.getHeight());
                 result.getGraphics().drawImage(source.getFlippedCopy(true, true), 0, 0);
-            }  else {
+            } else {
                 result = new Image(source.getHeight(), source.getWidth() + bloodImage.getHeight() / 3);
                 // draw blood drops at center
                 result.getGraphics().drawImage(bloodImage, result.getWidth() / 2 - 32, result.getHeight() - bloodImage.getHeight());
@@ -227,14 +252,14 @@ public class AnimalGenerator {
         canvasGraphics.drawImage(part.image, CANVAS_SIZE / 2, CANVAS_SIZE / 2);
         Rectangle cropRect = new Rectangle(CANVAS_SIZE / 2, CANVAS_SIZE / 2, part.image.getWidth(), part.image.getHeight());
         // now select limbs and other parts
-        processPart(cropRect, new BasePositionable(CANVAS_SIZE / 2, CANVAS_SIZE / 2), part, 1);
+        processPart(cropRect, new BasePositionable(CANVAS_SIZE / 2, CANVAS_SIZE / 2), part, 1, new HashMap<String, AnimalPart>());
 
         Image img = colorise(canvas.getSubImage((int) cropRect.getX(), (int) cropRect.getY(), (int) cropRect.getWidth(), (int) cropRect.getHeight()), CollectionUtils.selectRandomElement(allowedColors));
         Image imgWithShadow;
         try {
-             imgWithShadow = new Image(img.getWidth(), img.getHeight() + 16);
-             imgWithShadow.getGraphics().drawImage(shadowImage, (imgWithShadow.getWidth() - shadowImage.getWidth()) / 2, imgWithShadow.getHeight() - shadowImage.getHeight());
-             imgWithShadow.getGraphics().drawImage(img, 0, 0);
+            imgWithShadow = new Image(img.getWidth(), img.getHeight() + 16);
+            imgWithShadow.getGraphics().drawImage(shadowImage, (imgWithShadow.getWidth() - shadowImage.getWidth()) / 2, imgWithShadow.getHeight() - shadowImage.getHeight());
+            imgWithShadow.getGraphics().drawImage(img, 0, 0);
         } catch (SlickException e) {
             e.printStackTrace();
             imgWithShadow = img;

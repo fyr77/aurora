@@ -21,12 +21,19 @@ public class AnimalPart {
         public final int y;
         public final int angle;
         public final PartType[] availableParts;
+        // Same parts will be attached to all points sharing same groupId
+        public final String groupId;
+        public final boolean flipHorizontal;
+        public final boolean flipVertical;
 
-        public AttachmentPoint(int x, int y, int angle, PartType[] availableParts) {
+        public AttachmentPoint(int angle, int x, int y, PartType[] availableParts, String groupId, boolean flipHorizontal, boolean flipVertical) {
+            this.angle = angle;
             this.x = x;
             this.y = y;
-            this.angle = angle;
             this.availableParts = availableParts;
+            this.groupId = groupId;
+            this.flipHorizontal = flipHorizontal;
+            this.flipVertical = flipVertical;
         }
     }
 
