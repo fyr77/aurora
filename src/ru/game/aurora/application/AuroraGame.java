@@ -51,17 +51,17 @@ public class AuroraGame extends BasicGame {
         //GUI.getInstance().setCurrentScreen(new GalaxyMapWidget(world));
 
 
-        AnimalGenerator generator = new AnimalGenerator();
-        AnimalSpeciesDesc desc = new AnimalSpeciesDesc(null, null,null, null, true, false, 0, 0, 0, null);
+        AnimalGenerator.init();
+        AnimalSpeciesDesc desc = new AnimalSpeciesDesc(null, null, true, false, 0, 0, 0, null);
         for (int j = 0; j < 5; ++j) {
 
-            generator.getImageForAnimal(desc);
+            AnimalGenerator.getInstance().getImageForAnimal(desc);
             ImageWriter iw = new ImageIOWriter();
             try {
                 iw.saveImage(desc.getImage(), "png", new FileOutputStream(j + "_test.png"), true);
                 iw.saveImage(desc.getDeadImage(), "png", new FileOutputStream(j + "_dead_test.png"), true);
             } catch (IOException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                e.printStackTrace();
             }
         }
     }

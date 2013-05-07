@@ -23,10 +23,6 @@ public class AnimalSpeciesDesc implements Serializable {
 
     private BasePlanet homePlanet;
 
-    private String spriteName;
-
-    private String deadSpriteName;
-
     private boolean isCarnivorous;
 
     private boolean isHerbivorous;
@@ -74,25 +70,15 @@ public class AnimalSpeciesDesc implements Serializable {
      */
     private boolean outopsyMade = false;
 
-    public AnimalSpeciesDesc(BasePlanet homePlanet, String name, String spriteName, String deadSpriteName, boolean carnivorous, boolean herbivorous, int hp, int damage, int speed, Behaviour behaviour) {
+    public AnimalSpeciesDesc(BasePlanet homePlanet, String name, boolean carnivorous, boolean herbivorous, int hp, int damage, int speed, Behaviour behaviour) {
         this.homePlanet = homePlanet;
         this.name = name;
-        this.deadSpriteName = deadSpriteName;
-        this.spriteName = spriteName;
         isCarnivorous = carnivorous;
         isHerbivorous = herbivorous;
         this.hp = hp;
         this.damage = damage;
         this.speed = speed;
         this.behaviour = behaviour;
-    }
-
-    public String getSpriteName() {
-        return spriteName;
-    }
-
-    public String getDeadSpriteName() {
-        return deadSpriteName;
     }
 
     public Behaviour getBehaviour() {

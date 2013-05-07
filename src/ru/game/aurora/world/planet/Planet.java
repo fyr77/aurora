@@ -158,10 +158,11 @@ public class Planet extends BasePlanet {
 
         if (hasLife) {
             // generate random species descs. Currently only one
-            animalSpecies = new AnimalSpeciesDesc[2];
-            animalSpecies[0] = new AnimalSpeciesDesc(this, "Alien mammoth", "mammal_large_1", "mammal_large_1_dead", false, true, 3, 0, 5, AnimalSpeciesDesc.Behaviour.PASSIVE);
-            animalSpecies[1] = new AnimalSpeciesDesc(this, "Alien boar", "boar_1", "boar_1_dead", true, true, 5, 1, 2, AnimalSpeciesDesc.Behaviour.AGGRESSIVE);
-
+            int speciesCount = r.nextInt(5) + 2;
+            animalSpecies = new AnimalSpeciesDesc[speciesCount];
+            for (int i = 0; i < speciesCount; ++i) {
+                animalSpecies[i] = new AnimalSpeciesDesc(this, "Unknown alien animal",r.nextBoolean(), r.nextBoolean(), r.nextInt(10) + 3, r.nextInt(6), r.nextInt(5), CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values()));
+            }
             final int animalCount = r.nextInt(10) + 5;
             for (int i = 0; i < animalCount; ++i) {
                 Animal a = new Animal(this, 0, 0, animalSpecies[r.nextInt(animalSpecies.length)]);

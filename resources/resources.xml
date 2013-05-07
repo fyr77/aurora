@@ -21,6 +21,7 @@
     <resource type="image" id="boar_1">sprites/animals/boar_1.png</resource>
     <resource type="image" id="blood">animal_parts/blood.png</resource>
     <resource type="image" id="blood2">animal_parts/blood2.png</resource>
+    <resource type="image" id="animal_shadow">animal_parts/shadow.png</resource>
     <resource type="image" id="boar_1_dead">sprites/animals/boar_1_dead.png</resource>
 
     <!-- hud -->

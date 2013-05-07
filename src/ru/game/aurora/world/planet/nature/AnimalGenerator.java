@@ -44,10 +44,28 @@ public class AnimalGenerator {
     // blood drops that will be drawn on sprite of dead animal
     private Image[] bloodImages = {ResourceManager.getInstance().getImage("blood"), ResourceManager.getInstance().getImage("blood2")};
 
-    public AnimalGenerator() throws SlickException {
-        canvas = new Image(CANVAS_SIZE, CANVAS_SIZE);
-        canvasGraphics = canvas.getGraphics();
-        readAllParts(new File("resources/animal_parts"));
+    // shadow is painted below animal sprite
+    private Image shadowImage = ResourceManager.getInstance().getImage("animal_shadow");
+
+    private static AnimalGenerator instance;
+
+    public static void init()
+    {
+        instance = new AnimalGenerator();
+    }
+
+    public static AnimalGenerator getInstance() {
+        return instance;
+    }
+
+    public AnimalGenerator() {
+        try {
+            canvas = new Image(CANVAS_SIZE, CANVAS_SIZE);
+            canvasGraphics = canvas.getGraphics();
+            readAllParts(new File("resources/animal_parts"));
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
     }
 
     private void readAllParts(File rootDir) {
@@ -131,6 +149,7 @@ public class AnimalGenerator {
         return bodyCount;
     }
 
+    // replace fixed colors, used in sprites, with variations of a given color
     private Image colorise(Image source, Color newMainColor) {
         Color newShadowColor = EngineUtils.darkenColor(newMainColor, 0.8f);
         Color newDarkShadowColor = EngineUtils.darkenColor(newMainColor, 0.5f);
@@ -183,7 +202,7 @@ public class AnimalGenerator {
                 result = new Image(source.getWidth(), source.getHeight() + bloodImage.getHeight() / 3);
                 // draw blood drops at center
                 result.getGraphics().drawImage(bloodImage, result.getWidth() / 2 - 32, result.getHeight() - bloodImage.getHeight());
-                result.getGraphics().drawImage(source.getFlippedCopy(true, false), 0, 0);
+                result.getGraphics().drawImage(source.getFlippedCopy(true, true), 0, 0);
             }  else {
                 result = new Image(source.getHeight(), source.getWidth() + bloodImage.getHeight() / 3);
                 // draw blood drops at center
@@ -211,8 +230,17 @@ public class AnimalGenerator {
         processPart(cropRect, new BasePositionable(CANVAS_SIZE / 2, CANVAS_SIZE / 2), part, 1);
 
         Image img = colorise(canvas.getSubImage((int) cropRect.getX(), (int) cropRect.getY(), (int) cropRect.getWidth(), (int) cropRect.getHeight()), CollectionUtils.selectRandomElement(allowedColors));
+        Image imgWithShadow;
+        try {
+             imgWithShadow = new Image(img.getWidth(), img.getHeight() + 16);
+             imgWithShadow.getGraphics().drawImage(shadowImage, (imgWithShadow.getWidth() - shadowImage.getWidth()) / 2, imgWithShadow.getHeight() - shadowImage.getHeight());
+             imgWithShadow.getGraphics().drawImage(img, 0, 0);
+        } catch (SlickException e) {
+            e.printStackTrace();
+            imgWithShadow = img;
+        }
         Image corpseImg = createCorpseImage(img);
-        desc.setImages(img, corpseImg);
+        desc.setImages(imgWithShadow, corpseImg);
     }
 
     public void getImageForAnimal(AnimalSpeciesDesc desc) {

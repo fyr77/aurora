@@ -2,9 +2,9 @@ package ru.game.aurora.world.planet.nature;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.projects.AnimalResearch;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
@@ -133,8 +133,11 @@ public class Animal extends BasePositionable implements PlanetObject {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        final String spriteName = hp > 0 ? desc.getSpriteName() : desc.getDeadSpriteName();
-        graphics.drawImage(ResourceManager.getInstance().getImage(spriteName), camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
+        if (desc.getImage()== null || desc.getDeadImage() == null) {
+            AnimalGenerator.getInstance().getImageForAnimal(desc);
+        }
+        final Image image = hp > 0 ? desc.getImage() : desc.getDeadImage();
+        graphics.drawImage(image, camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
     }
 
     public int getX() {
