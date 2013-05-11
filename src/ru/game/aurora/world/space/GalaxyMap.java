@@ -155,7 +155,7 @@ public class GalaxyMap extends BaseSpaceRoom {
                 if (map[i][j] != -1) {
                     GalaxyMapObject obj = objects.get(map[i][j]);
                     if (j == player.getShip().getX() && i == player.getShip().getY() && obj.canBeEntered()) {
-                        GameLogger.getInstance().addStatusMessage("Press <enter> to enter location");
+                        GameLogger.getInstance().addStatusMessage("Press <enter> to enter " + obj.getName());
                     }
                     obj.drawOnGlobalMap(container, graphics, camera, j, i);
                 }

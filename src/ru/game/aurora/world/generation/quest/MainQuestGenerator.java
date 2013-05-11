@@ -71,7 +71,7 @@ public class MainQuestGenerator implements WorldGeneratorPart {
     public void updateWorld(World world) {
         // generate 5 cloned star systems
         // player must visit at least 2 of them
-        StarSystem original = createStarSystem(0, 0);
+        StarSystem original = createStarSystem(world, 0, 0);
         for (int i = 0; i < CLONED_SYSTEM_COUNT; ++i) {
             int x;
             int y;
@@ -80,7 +80,7 @@ public class MainQuestGenerator implements WorldGeneratorPart {
                 y = CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesX());
             } while (world.getGalaxyMap().getObjectAt(x, y) != null);
 
-            final StarSystem ss = cloneStarSystem(original, x, y);
+            final StarSystem ss = cloneStarSystem(world, original, x, y);
             world.getGalaxyMap().addObjectAndSetTile(ss, x, y);
 
             if (i == 0) {
@@ -100,9 +100,9 @@ public class MainQuestGenerator implements WorldGeneratorPart {
                             world.getPlayer().getEarthState().getMessages().add(
                                     new PrivateMessage(
                                             "Greatest known artificial structure discovered"
-                                            ,"UNS " + world.getPlayer().getShip().getName() + " has encountered the biggest artificial structure ever seen by man in a distant star system. A huge object of " +
+                                            , "UNS " + world.getPlayer().getShip().getName() + " has encountered the biggest artificial structure ever seen by man in a distant star system. A huge object of " +
                                             "unknown origin, larger than a star, can be seen on these amazing photos. Who has created it? What is its purpose? What power does it have? Read more in next issue of 'Galaxy News'."
-                                            ,"news"
+                                            , "news"
                                     )
                             );
                         }
@@ -117,10 +117,10 @@ public class MainQuestGenerator implements WorldGeneratorPart {
         world.getPlayer().getEarthState().setEvacuationState(new EvacuationState(world));
     }
 
-    public static StarSystem createStarSystem(int x, int y) {
+    public static StarSystem createStarSystem(World world, int x, int y) {
 
         Planet[] planets = new Planet[3];
-        StarSystem ss = new StarSystem(new StarSystem.Star(2, Color.green), 9, 9);
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new StarSystem.Star(2, Color.green), 9, 9);
 
         planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0, false);
         HomeworldGenerator.setCoord(planets[0], 2);
@@ -140,9 +140,9 @@ public class MainQuestGenerator implements WorldGeneratorPart {
         return ss;
     }
 
-    private StarSystem cloneStarSystem(StarSystem proto, int x, int y) {
+    private StarSystem cloneStarSystem(World world, StarSystem proto, int x, int y) {
         BasePlanet[] planets = new BasePlanet[3];
-        StarSystem ss = new StarSystem(new StarSystem.Star(2, Color.green), x, y);
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new StarSystem.Star(2, Color.green), x, y);
 
         planets[0] = new Planet(ss, (Planet) proto.getPlanets()[0]);
         HomeworldGenerator.setCoord(planets[0], 2);

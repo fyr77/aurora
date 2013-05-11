@@ -13,8 +13,7 @@ import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
 
-public abstract class BasePlanet implements Room, GalaxyMapObject
-{
+public abstract class BasePlanet implements Room, GalaxyMapObject {
     private static final long serialVersionUID = 5047939414473391148L;
     protected StarSystem owner;
     protected PlanetCategory category;
@@ -68,8 +67,7 @@ public abstract class BasePlanet implements Room, GalaxyMapObject
      * True if this is ordinary planet that can be explored with landing party.
      * False if this is some kind of quest location that can not be actually landed on (like alien homeworld)
      */
-    public boolean canBeLanded()
-    {
+    public boolean canBeLanded() {
         return true;
     }
 
@@ -79,5 +77,10 @@ public abstract class BasePlanet implements Room, GalaxyMapObject
 
     public PlanetAtmosphere getAtmosphere() {
         return atmosphere;
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 }

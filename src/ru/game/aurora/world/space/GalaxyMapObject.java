@@ -27,4 +27,6 @@ public interface GalaxyMapObject extends Serializable {
      * Processes player ship entering this tile
      */
     public void processCollision(GameContainer container, Player player);
+
+    public String getName();
 }

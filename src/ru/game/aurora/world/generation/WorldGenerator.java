@@ -91,7 +91,7 @@ public class WorldGenerator implements Runnable {
                             x = CommonRandom.getRandom().nextInt(worldWidth);
                             y = CommonRandom.getRandom().nextInt(worldHeight);
                         } while (world.getGalaxyMap().getObjectAt(x, y) != null);
-                        StarSystem ss = generateRandomStarSystem(x, y);
+                        StarSystem ss = generateRandomStarSystem(world, x, y);
 
                         synchronized (world) {
                             final int idx = world.getGalaxyMap().getObjects().size();
@@ -118,7 +118,7 @@ public class WorldGenerator implements Runnable {
         }
     }
 
-    public static StarSystem generateRandomStarSystem(int x, int y) {
+    public static StarSystem generateRandomStarSystem(World world, int x, int y) {
         final Random r = CommonRandom.getRandom();
 
         int size = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
@@ -126,7 +126,7 @@ public class WorldGenerator implements Runnable {
         final int planetCount = r.nextInt(5);
         Planet[] planets = new Planet[planetCount];
         int maxRadius = 0;
-        StarSystem ss = new StarSystem(new StarSystem.Star(size, starColor), x, y);
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new StarSystem.Star(size, starColor), x, y);
 
         int astroData = 20 * size;
 

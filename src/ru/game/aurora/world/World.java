@@ -16,6 +16,7 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.earth.EvacuationState;
 import ru.game.aurora.player.research.ResearchScreen;
+import ru.game.aurora.world.generation.StarSystemNamesCollection;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.StarSystem;
@@ -24,7 +25,8 @@ import java.io.Serializable;
 import java.util.*;
 
 public class World implements Serializable {
-    private static final long serialVersionUID = 8351730882236794281L;
+
+    private static final long serialVersionUID = 1L;
 
     private Camera camera;
 
@@ -40,6 +42,8 @@ public class World implements Serializable {
     private Player player;
 
     private transient boolean updatedThisFrame;
+
+    private transient StarSystemNamesCollection starSystemNamesCollection = new StarSystemNamesCollection();
 
     private transient List<OverlayWindow> overlayWindows = new LinkedList<OverlayWindow>();
 
@@ -233,5 +237,9 @@ public class World implements Serializable {
 
     public Map<String, AlienRace> getRaces() {
         return races;
+    }
+
+    public StarSystemNamesCollection getStarSystemNamesCollection() {
+        return starSystemNamesCollection;
     }
 }

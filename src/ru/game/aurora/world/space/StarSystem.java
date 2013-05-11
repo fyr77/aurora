@@ -35,7 +35,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public static final int[] possibleSizes = {1, 2, 3, 4};
 
-    private static final long serialVersionUID = -1967789857191116940L;
+    private static final long serialVersionUID = -1L;
 
     public static class Star implements Serializable {
         private static final long serialVersionUID = -3746922025754658839L;
@@ -142,7 +142,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
      */
     private int astronomyData;
 
-    public StarSystem(Star star, int globalMapX, int globalMapY) {
+    private String name;
+
+    public StarSystem(String name, Star star, int globalMapX, int globalMapY) {
+        this.name = name;
         this.star = star;
         this.globalMapX = globalMapX;
         this.globalMapY = globalMapY;
@@ -345,6 +348,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
 
     @Override
     public void update(GameContainer container, World world) {

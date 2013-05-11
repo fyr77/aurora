@@ -5,6 +5,8 @@ IN PROGRESS...
 
 + More tutorials at the beginning of game
 + Refilling lost crewmembers on Earth. They also reduce resulting score
++ Alien animal sprite generator implemented and used for generating sprites
++ Each star system now has a name
 
 =====================================================
 VERSION 0.0.6

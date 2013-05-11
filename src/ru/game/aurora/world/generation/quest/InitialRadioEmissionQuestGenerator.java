@@ -29,13 +29,11 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * Creates quest chain with initial research for brown dwarf radio emission, that is given to player on game startup
  */
-public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
-{
+public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
 
     private static final long serialVersionUID = -4950686913834019746L;
 
-    private static final class EarthEnergyResearch extends EarthResearch
-    {
+    private static final class EarthEnergyResearch extends EarthResearch {
 
         private static final long serialVersionUID = 8367244693901465513L;
 
@@ -43,8 +41,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
 
         private int state = 0;
 
-        public EarthEnergyResearch()
-        {
+        public EarthEnergyResearch() {
             super(100);
         }
 
@@ -58,8 +55,8 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
                         " Greetings. \n Perhaps you have heard already about the Icarus project? A few more years, and earth energy crisis will be over once and for ever. And this is done thanks to your effort. Good job, captain!" +
                                 " \n A. V. Buren, Aurora CEO",
                         "message"
-                        )
-                        );
+                )
+                );
                 earthState.getMessages().add(new PrivateMessage(
                         "Free energy tomorrow?"
                         , "The world scientific society is shocked by the discoveries done by analyzing materials retrieved from alien beacon by UNS " + world.getPlayer().getShip().getName() + ", as they break" +
@@ -130,7 +127,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
     @Override
     public void updateWorld(World world) {
         // initial research projects and their star system
-        StarSystem brownStar = WorldGenerator.generateRandomStarSystem(6, 7);
+        StarSystem brownStar = WorldGenerator.generateRandomStarSystem(world, 6, 7);
         brownStar.setStar(new StarSystem.Star(6, new Color(128, 0, 0)));
         world.getGalaxyMap().addObjectAndSetTile(brownStar, 6, 7);
 
@@ -142,7 +139,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart
 
         // add second quest in chain
 
-        brownStar = WorldGenerator.generateRandomStarSystem(12, 12);
+        brownStar = WorldGenerator.generateRandomStarSystem(world, 12, 12);
         brownStar.setStar(new StarSystem.Star(6, new Color(128, 0, 0)));
         world.getGalaxyMap().addObjectAndSetTile(brownStar, 12, 12);
 

@@ -17,8 +17,7 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * Creates Klisk alien race
  */
-public class KliskGenerator implements WorldGeneratorPart
-{
+public class KliskGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = -6983386879381885934L;
 
     @Override
@@ -27,7 +26,7 @@ public class KliskGenerator implements WorldGeneratorPart
         AlienRace kliskRace = new AlienRace("Klisk", "klisk_ship", 8, mainDialog);
         mainDialog.setListener(new KliskMainDialogListener(kliskRace));
 
-        StarSystem kliskHomeworld = HomeworldGenerator.generateKliskHomeworld(5, 5, kliskRace);
+        StarSystem kliskHomeworld = HomeworldGenerator.generateKliskHomeworld(world, 5, 5, kliskRace);
         kliskRace.setHomeworld(kliskHomeworld);
 
         world.addListener(new StandardAlienShipEvent(kliskRace));
