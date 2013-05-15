@@ -8,15 +8,11 @@ package ru.game.aurora.application;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.imageout.ImageIOWriter;
-import org.newdawn.slick.imageout.ImageWriter;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
-import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
@@ -50,8 +46,10 @@ public class AuroraGame extends BasicGame {
         GUI.init(gameContainer, new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 15 * tileSize));
         //GUI.getInstance().setCurrentScreen(new GalaxyMapWidget(world));
 
-
         AnimalGenerator.init();
+        /*
+        // Test code for animal generator. Can not be invoked outside of main app thread as it requires opengl context
+
         AnimalSpeciesDesc desc = new AnimalSpeciesDesc(null, null, true, false, 0, 0, 0, null);
         for (int j = 0; j < 5; ++j) {
 
@@ -63,7 +61,7 @@ public class AuroraGame extends BasicGame {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        } */
     }
 
     @Override

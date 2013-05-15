@@ -1,7 +1,12 @@
 =====================================================
-VERSION 0.0.7
+VERSION 0.0.8
 
 IN PROGRESS...
+
+=====================================================
+VERSION 0.0.7
+
+15.05.2013
 
 + More tutorials at the beginning of game
 + Refilling lost crewmembers on Earth. They also reduce resulting score
