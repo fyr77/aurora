@@ -26,6 +26,7 @@ public class GalaxyMapWidget extends BoxLayout {
     private World world;
 
     private TextArea statusText;
+    ScrollPane scrollPane;
 
     private final GalaxyMapScreen galaxyMapScreen = new GalaxyMapScreen();
 
@@ -36,12 +37,16 @@ public class GalaxyMapWidget extends BoxLayout {
 
         statusText = new TextArea();
         statusText.setTheme("textarea");
-        statusText.setModel(textAreaModel);
         textAreaModel.setText("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        statusText.setSize(500, 500);
+        statusText.setVisible(true);
 
-        ScrollPane scrollPane = new ScrollPane(statusText);
-        scrollPane.setSize(5 * 64, 5 * 64);
-        //  scrollPane.setTheme("scrollpane");
+        statusText.setModel(textAreaModel);
+
+        scrollPane = new ScrollPane();
+        scrollPane.setContent(statusText);
+        scrollPane.setSize(500, 500);
+        scrollPane.setTheme("scrollpane");
         scrollPane.setFixed(ScrollPane.Fixed.HORIZONTAL);
         scrollPane.setFixed(ScrollPane.Fixed.VERTICAL);
         add(scrollPane);
@@ -76,6 +81,13 @@ public class GalaxyMapWidget extends BoxLayout {
             }
         });
         add(researchButton);
+        final Rectangle sidePanelRect = GUI.getInstance().getSidePanelRect();
+        setPosition((int) sidePanelRect.getX(), (int) sidePanelRect.getY());
+    }
+
+    @Override
+    protected void paint(de.matthiasmann.twl.GUI gui) {
+        super.paint(gui);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
@@ -85,9 +97,9 @@ public class GalaxyMapWidget extends BoxLayout {
         final Rectangle sidePanelRect = GUI.getInstance().getSidePanelRect();
         setPosition((int) sidePanelRect.getX(), (int) sidePanelRect.getY());
         setSize((int) sidePanelRect.getWidth(), (int) sidePanelRect.getHeight());
-        statusText.adjustSize();
-        mapButton.adjustSize();
-        researchButton.adjustSize();
+        //scrollPane.adjustSize();
+        //mapButton.adjustSize();
+        //researchButton.adjustSize();
     }
 
     public void update() {
@@ -98,6 +110,6 @@ public class GalaxyMapWidget extends BoxLayout {
         sb.append("\t Military: ").append(ship.getMilitary()).append("\n");
         sb.append("Resources: ").append(world.getPlayer().getResourceUnits()).append("\n");
         sb.append("Ship coordinates: [").append(ship.getX()).append(", ").append(ship.getY()).append("]");
-        textAreaModel.setText(sb.toString());
+        //textAreaModel.setText(sb.toString());
     }
 }

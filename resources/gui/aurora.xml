@@ -123,8 +123,25 @@
             </param>
         </theme>
     </theme>
+    <theme name="textarea" ref="-defaults">
+        <param name="fonts">
+            <map>
+                <param name="default">
+                    <font>normal</font>
+                </param>
+            </map>
+        </param>
+        <param name="font">
+            <font>normal</font>
+        </param>
+        <param name="images">
+            <map>
+            </map>
+        </param>
+    </theme>
     <theme name="scrollpane" ref="-defaults">
         <theme name="hscrollbar" ref="hscrollbar"/>
+        <theme name="textarea" ref="textarea"/>
         <theme name="vscrollbar" ref="vscrollbar"/>
         <param name="hasDragButton">
             <bool>false</bool>
@@ -151,20 +168,5 @@
             <bool>true</bool>
         </param>
     </theme>
-    <theme name="textarea" ref="-defaults">
-        <param name="fonts">
-            <map>
-                <param name="default">
-                    <font>normal</font>
-                </param>
-            </map>
-        </param>
-        <param name="font">
-            <font>normal</font>
-        </param>
-        <param name="images">
-            <map>
-            </map>
-        </param>
-    </theme>
+
 </themes>

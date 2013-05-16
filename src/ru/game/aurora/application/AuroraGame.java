@@ -9,6 +9,7 @@ package ru.game.aurora.application;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.GalaxyMapWidget;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
 
@@ -44,7 +45,7 @@ public class AuroraGame extends BasicGame {
         gameContainer.setTargetFrameRate(60);
 
         GUI.init(gameContainer, new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 15 * tileSize));
-        //GUI.getInstance().setCurrentScreen(new GalaxyMapWidget(world));
+        GUI.getInstance().setCurrentScreen(new GalaxyMapWidget(world));
 
         AnimalGenerator.init();
         /*
