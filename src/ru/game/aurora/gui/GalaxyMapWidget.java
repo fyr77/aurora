@@ -37,7 +37,6 @@ public class GalaxyMapWidget extends BoxLayout {
 
         statusText = new TextArea();
         statusText.setTheme("textarea");
-        textAreaModel.setText("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         statusText.setSize(500, 500);
         statusText.setVisible(true);
 
@@ -45,7 +44,7 @@ public class GalaxyMapWidget extends BoxLayout {
 
         scrollPane = new ScrollPane();
         scrollPane.setContent(statusText);
-        scrollPane.setSize(500, 500);
+        scrollPane.adjustSize();
         scrollPane.setTheme("scrollpane");
         scrollPane.setFixed(ScrollPane.Fixed.HORIZONTAL);
         scrollPane.setFixed(ScrollPane.Fixed.VERTICAL);
@@ -83,6 +82,7 @@ public class GalaxyMapWidget extends BoxLayout {
         add(researchButton);
         final Rectangle sidePanelRect = GUI.getInstance().getSidePanelRect();
         setPosition((int) sidePanelRect.getX(), (int) sidePanelRect.getY());
+
     }
 
     @Override
@@ -110,6 +110,7 @@ public class GalaxyMapWidget extends BoxLayout {
         sb.append("\t Military: ").append(ship.getMilitary()).append("\n");
         sb.append("Resources: ").append(world.getPlayer().getResourceUnits()).append("\n");
         sb.append("Ship coordinates: [").append(ship.getX()).append(", ").append(ship.getY()).append("]");
-        //textAreaModel.setText(sb.toString());
+        textAreaModel.setText(sb.toString());
+        invalidateLayout();
     }
 }

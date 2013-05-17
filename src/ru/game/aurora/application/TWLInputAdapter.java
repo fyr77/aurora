@@ -177,7 +177,7 @@ public class TWLInputAdapter extends InputAdapter {
         gui.invokeRunables();
         gui.validateLayout();
         gui.setCursor();
-        // gui.update();
+        gui.update();
     }
 
     /**

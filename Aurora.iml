@@ -14,6 +14,7 @@
     <orderEntry type="library" name="Twl" level="project" />
     <orderEntry type="library" name="xpp3-1.1.4c" level="project" />
     <orderEntry type="library" name="Libnoiseforjava-master" level="project" />
+    <orderEntry type="library" name="nifty" level="project" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">

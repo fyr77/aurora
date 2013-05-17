@@ -6,10 +6,13 @@
  */
 package ru.game.aurora.application;
 
-import org.newdawn.slick.*;
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.slick2d.NiftyOverlayGame;
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
-import ru.game.aurora.gui.GUI;
-import ru.game.aurora.gui.GalaxyMapWidget;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
 
@@ -18,7 +21,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 
-public class AuroraGame extends BasicGame {
+public class AuroraGame extends NiftyOverlayGame {
 
     private World world;
 
@@ -33,20 +36,20 @@ public class AuroraGame extends BasicGame {
     final Camera camera = new Camera(0, 0, tilesX - 5, tilesY, tileSize, tileSize);
 
     public AuroraGame() {
-        super("Aurora");
         mainMenu = new MainMenu();
     }
 
+
     @Override
-    public void init(GameContainer gameContainer) throws SlickException {
+    protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
         GameLogger.init(new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 10 * tileSize), new Rectangle((tilesX - 5) * tileSize, 10 * tileSize, 5 * tileSize, 5 * tileSize));
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
         gameContainer.getInput().enableKeyRepeat();
         gameContainer.setTargetFrameRate(60);
 
-        GUI.init(gameContainer, new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 15 * tileSize));
-        GUI.getInstance().setCurrentScreen(new GalaxyMapWidget(world));
-
+        //GUI.init(gameContainer, new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 15 * tileSize));
+        //GUI.getInstance().setCurrentScreen(new GalaxyMapWidget(world));
+        initNifty(gameContainer);
         AnimalGenerator.init();
         /*
         // Test code for animal generator. Can not be invoked outside of main app thread as it requires opengl context
@@ -63,10 +66,17 @@ public class AuroraGame extends BasicGame {
                 e.printStackTrace();
             }
         } */
+
+
     }
 
     @Override
-    public void update(GameContainer gameContainer, int i) throws SlickException {
+    protected void prepareNifty(Nifty nifty) {
+
+    }
+
+    @Override
+    protected void updateGame(GameContainer gameContainer, int i) throws SlickException {
         if (mainMenu != null) {
             world = mainMenu.update(gameContainer);
             if (world != null) {
@@ -81,19 +91,28 @@ public class AuroraGame extends BasicGame {
                 world = null;
             }
         }
-        GUI.getInstance().update(gameContainer);
         gameContainer.getInput().clearKeyPressedRecord();
     }
 
     @Override
-    public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+    public boolean closeRequested() {
+        return false;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Aurora " + Version.VERSION;
+    }
+
+    @Override
+    protected void renderGame(GameContainer gameContainer, Graphics graphics) throws SlickException {
         if (mainMenu != null) {
             mainMenu.draw(graphics, camera);
         } else {
             world.draw(gameContainer, graphics);
             world.getCamera().drawBound();
-            GameLogger.getInstance().draw(graphics);
-            GUI.getInstance().draw(gameContainer, graphics);
+            //GameLogger.getInstance().draw(graphics);
+            //GUI.getInstance().draw(gameContainer, graphics);
             GameLogger.getInstance().clearStatusMessages();
         }
     }
