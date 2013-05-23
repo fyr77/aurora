@@ -6,7 +6,7 @@
  */
 package ru.game.aurora.world.space;
 
-import de.matthiasmann.twl.Widget;
+import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -57,7 +57,7 @@ public class AlienHomeworld extends BasePlanet
     }
 
     @Override
-    public Widget getGUI() {
+    public Screen getGUI() {
         return null;
     }
 

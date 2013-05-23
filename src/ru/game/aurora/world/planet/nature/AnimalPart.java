@@ -59,7 +59,7 @@ public class AnimalPart {
     public void loadImage() {
         if (image == null) {
             try {
-                this.image = new Image(imagePath, Image.FILTER_NEAREST);
+                this.image = new Image(imagePath, false, Image.FILTER_NEAREST);
                 this.image.setCenterOfRotation(centerX, centerY);
             } catch (SlickException e) {
                 e.printStackTrace();

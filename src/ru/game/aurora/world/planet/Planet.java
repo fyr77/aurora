@@ -5,7 +5,7 @@
  */
 package ru.game.aurora.world.planet;
 
-import de.matthiasmann.twl.Widget;
+import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
@@ -229,7 +229,7 @@ public class Planet extends BasePlanet {
     }
 
     @Override
-    public Widget getGUI() {
+    public Screen getGUI() {
         return null;
     }
 

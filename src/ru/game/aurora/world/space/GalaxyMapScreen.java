@@ -7,7 +7,7 @@
 package ru.game.aurora.world.space;
 
 
-import de.matthiasmann.twl.Widget;
+import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -47,7 +47,7 @@ public class GalaxyMapScreen implements Room {
     }
 
     @Override
-    public Widget getGUI() {
+    public Screen getGUI() {
         return null;
     }
 

@@ -7,7 +7,7 @@
 package ru.game.aurora.gui;
 
 import com.google.gson.Gson;
-import de.matthiasmann.twl.Widget;
+import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
@@ -74,7 +74,7 @@ public class StoryScreen implements OverlayWindow {
     }
 
     @Override
-    public Widget getGUI() {
+    public Screen getGUI() {
         return null;
     }
 

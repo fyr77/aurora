@@ -28,12 +28,12 @@
             <element id="library" level="project" name="gson-2.2.2" />
             <element id="library" level="project" name="lwjgl" />
             <element id="library" level="project" name="slick" />
-            <element id="library" level="project" name="Twl" />
             <element id="library" level="project" name="xpp3-1.1.4c" />
             <element id="directory" name="resources">
               <element id="dir-copy" path="$PROJECT_DIR$/resources" />
             </element>
             <element id="library" level="project" name="Libnoiseforjava-master" />
+            <element id="library" level="project" name="nifty" />
           </element>
         </element>
       </root>
@@ -61,11 +61,7 @@
       <entry name="*.fnt" />
       <entry name="*.txt" />
     </wildcardResourcePatterns>
-    <annotationProcessing>
-      <profile default="true" name="Default" enabled="false">
-        <processorPath useClasspath="true" />
-      </profile>
-    </annotationProcessing>
+    <annotationProcessing enabled="false" useClasspath="true" />
   </component>
   <component name="CopyrightManager" default="">
     <module2copyright />
@@ -330,17 +326,23 @@
       <JAVADOC />
       <SOURCES />
     </library>
+    <library name="nifty">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/third-party/nifty-slick-renderer-1.3.2.jar!/" />
+        <root url="jar://$PROJECT_DIR$/third-party/nifty-1.3.2.jar!/" />
+        <root url="jar://$PROJECT_DIR$/third-party/eventbus-1.4.jar!/" />
+        <root url="jar://$PROJECT_DIR$/third-party/nifty-default-controls-1.3.2.jar!/" />
+        <root url="jar://$PROJECT_DIR$/third-party/nifty-style-black-1.3.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://C:/Temp/_nifty-complete-1.3.2/nifty-default-controls-1.3.2-sources.jar!/" />
+        <root url="jar://C:/Temp/_nifty-complete-1.3.2/nifty-1.3.2-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="slick">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/third-party/slick.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="Twl">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/third-party/xpp3-1.1.4c.jar!/" />
-        <root url="jar://$PROJECT_DIR$/third-party/TWL.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
@@ -378,7 +380,7 @@
         <entry key="property.minPriorityToReport" value="Medium" />
         <entry key="property.runAnalysisInBackground" value="false" />
         <entry key="property.showHiddenDetectors" value="false" />
-        <entry key="property.toolWindowEditorPreview" value="false" />
+        <entry key="property.toolWindowEditorPreview" value="true" />
         <entry key="property.toolWindowToFront" value="true" />
       </map>
     </option>

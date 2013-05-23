@@ -1,6 +1,6 @@
 package ru.game.aurora.player.earth;
 
-import de.matthiasmann.twl.Widget;
+import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -39,7 +39,7 @@ public class EarthScreen extends ListWithIconAndDescrScreen
     }
 
     @Override
-    public Widget getGUI() {
+    public Screen getGUI() {
         return null;
     }
 

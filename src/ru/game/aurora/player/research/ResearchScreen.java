@@ -7,7 +7,7 @@
 
 package ru.game.aurora.player.research;
 
-import de.matthiasmann.twl.Widget;
+import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -41,7 +41,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room
     }
 
     @Override
-    public Widget getGUI() {
+    public Screen getGUI() {
         return null;
     }
 

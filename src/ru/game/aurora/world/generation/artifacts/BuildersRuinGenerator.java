@@ -29,11 +29,11 @@ public class BuildersRuinGenerator implements WorldGeneratorPart
         for (BasePlanet p : ss.getPlanets()) {
             // add random artifact on every planet
             if (p instanceof Planet) {
-                AlienArtifact artifact = new AlienArtifact(10, 10, "builders_ruins", new ArtifactResearch(new ResearchReport("builders_ruins", "This is an ancient building, a " +
+                AlienArtifact artifact = new AlienArtifact(15, 15, "builders_ruins", new ArtifactResearch(new ResearchReport("builders_ruins", "This is an ancient building, a " +
                         " remnant of a some old civilisation. Time and weather has left little of it, a few corroded pieces of metal and stone. Analysis indicate that it is at least thousand years old. It is impossible to" +
                         " understand now what was it built for.")));
 
-                ((Planet) p).setNearestFreePoint(artifact, 10, 10);
+                ((Planet) p).setNearestFreePoint(artifact, 15, 15);
                 ((Planet) p).getPlanetObjects().add(artifact);
             }
         }

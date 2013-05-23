@@ -1,10 +1,13 @@
 package ru.game.aurora.application;
 
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
@@ -15,8 +18,9 @@ import ru.game.aurora.world.generation.WorldGenerator;
  * Date: 23.01.13
  * Time: 16:23
  */
-public class MainMenu {
-    private static final long serialVersionUID = 916916126787160191L;
+public class MainMenu
+{
+    private static final long serialVersionUID = 1L;
 
     private int selectedIndex;
 
@@ -32,15 +36,74 @@ public class MainMenu {
 
     private WorldGenerator generator;
 
+    private World loadedState = null;
+
 
     // used for changing number of dots in message while generating world
     private int dotsCount = 0;
 
     private long lastTimeChecked = 0;
 
-    public MainMenu() {
+    private GameContainer container;
+
+    public static final class MainMenuController  implements ScreenController
+    {
+
+        private MainMenu menu;
+
+        public void setMenu(MainMenu menu) {
+            this.menu = menu;
+        }
+
+        @Override
+        public void bind(Nifty nifty, Screen screen) {
+
+        }
+
+        @Override
+        public void onStartScreen() {
+
+        }
+
+        @Override
+        public void onEndScreen() {
+
+        }
+
+        // these methods are specified in screen xml description and called using reflection
+        public void loadGame()
+        {
+            menu.loadedState = SaveGameManager.loadGame();
+            GUI.getInstance().getNifty().gotoScreen("empty_screen");
+        }
+
+        public void newGame() {
+            menu.generator = new WorldGenerator();
+            new Thread(menu.generator).start();
+            GUI.getInstance().getNifty().gotoScreen("empty_screen");
+        }
+
+        public void exitGame()
+        {
+            menu.container.exit();
+        }
+    }
+
+    public MainMenu(GameContainer container) {
         saveAvailable = SaveGameManager.isSaveAvailable();
         selectedIndex = saveAvailable ? 0 : 1;
+        this.container = container;
+
+        final Nifty nifty = GUI.getInstance().getNifty();
+        MainMenuController con = new MainMenuController();
+        con.setMenu(this);
+        nifty.fromXml("gui/screens/main_menu.xml", "main_menu", con);
+        nifty.gotoScreen("main_menu");
+
+
+        if (!saveAvailable) {
+            nifty.getCurrentScreen().findElementByName("panel").findElementByName("continue_game_button").disable();
+        }
     }
 
     public World update(GameContainer container) {
@@ -57,58 +120,14 @@ public class MainMenu {
             return null;
         }
 
-
-        if (container.getInput().isKeyPressed(Input.KEY_DOWN) && selectedIndex < 2) {
-            selectedIndex++;
-        }
-
-        if (container.getInput().isKeyPressed(Input.KEY_UP) && selectedIndex > 0 && (saveAvailable || selectedIndex > 1)) {
-            selectedIndex--;
-        }
-
-        if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
-            switch (selectedIndex) {
-                case 0:
-                    return SaveGameManager.loadGame();
-                case 1:
-                    createNewGame();
-                    break;
-                case 2:
-                    container.exit();
-                    break;
-            }
-        }
-
-        if (container.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            int mouseX = container.getInput().getMouseX() / 64;
-            int mouseY = container.getInput().getMouseY() / 64;
-            if (saveAvailable && continueRectangle.includes(mouseX, mouseY)) {
-                return SaveGameManager.loadGame();
-            }
-
-            if (newGameRectangle.includes(mouseX, mouseY)) {
-                createNewGame();
-            }
-
-            if (quitRectangle.includes(mouseX, mouseY)) {
-                container.exit();
-            }
-        }
-        return null;
+        return loadedState;
     }
 
-    private void createNewGame() {
-        generator = new WorldGenerator();
-        new Thread(generator).start();
-    }
+
 
     public void draw(Graphics graphics, Camera camera) {
         graphics.drawImage(ResourceManager.getInstance().getImage("menu_background"), 0, 0);
-        if (generator == null) {
-            EngineUtils.drawRectWithBorderAndText(graphics, continueRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Continue", GUIConstants.dialogFont, selectedIndex == 0 ? Color.green : (saveAvailable ? Color.white : Color.gray), true);
-            EngineUtils.drawRectWithBorderAndText(graphics, newGameRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "New Game", GUIConstants.dialogFont, selectedIndex == 1 ? Color.green : Color.white, true);
-            EngineUtils.drawRectWithBorderAndText(graphics, quitRectangle, camera, Color.yellow, GUIConstants.backgroundColor, "Exit", GUIConstants.dialogFont, selectedIndex == 2 ? Color.green : Color.white, true);
-        } else {
+        if (generator != null) {
             StringBuilder sb = new StringBuilder("Generating world: ");
             sb.append(generator.getCurrentStatus());
             for (int i = 0; i < dotsCount; ++i) {
@@ -118,4 +137,6 @@ public class MainMenu {
         }
         graphics.drawString(Version.VERSION, camera.getTileWidth()  * camera.getNumTilesX() + GameLogger.getInstance().getStatusMessagesRect().getWidth() - 100, camera.getTileHeight() * camera.getNumTilesY() - 40);
     }
+
+
 }

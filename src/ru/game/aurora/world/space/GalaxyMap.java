@@ -5,7 +5,7 @@
  */
 package ru.game.aurora.world.space;
 
-import de.matthiasmann.twl.Widget;
+import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -49,7 +49,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     public GalaxyMap(World world, int tilesX, int tilesY) {
         this.world = world;
-        this.myGui = new GalaxyMapWidget(world);
+        //this.myGui = new GalaxyMapWidget(world);
         this.tilesX = tilesX;
         this.tilesY = tilesY;
         map = new int[tilesY][tilesX];
@@ -66,10 +66,10 @@ public class GalaxyMap extends BaseSpaceRoom {
     }
 
     @Override
-    public Widget getGUI() {
-        myGui = new GalaxyMapWidget(world);
-        return myGui;
-        //return null;
+    public Screen getGUI() {
+       //myGui = new GalaxyMapWidget(world);
+       // return myGui;
+        return null;
     }
 
     public int[][] getMap() {

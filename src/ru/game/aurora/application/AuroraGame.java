@@ -13,6 +13,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
 
@@ -36,7 +37,7 @@ public class AuroraGame extends NiftyOverlayGame {
     final Camera camera = new Camera(0, 0, tilesX - 5, tilesY, tileSize, tileSize);
 
     public AuroraGame() {
-        mainMenu = new MainMenu();
+
     }
 
 
@@ -47,10 +48,10 @@ public class AuroraGame extends NiftyOverlayGame {
         gameContainer.getInput().enableKeyRepeat();
         gameContainer.setTargetFrameRate(60);
 
-        //GUI.init(gameContainer, new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 15 * tileSize));
-        //GUI.getInstance().setCurrentScreen(new GalaxyMapWidget(world));
         initNifty(gameContainer);
+        GUI.init(getNifty());
         AnimalGenerator.init();
+        mainMenu = new MainMenu(gameContainer);
         /*
         // Test code for animal generator. Can not be invoked outside of main app thread as it requires opengl context
 
@@ -72,7 +73,8 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     protected void prepareNifty(Nifty nifty) {
-
+        nifty.loadStyleFile("nifty-default-styles.xml");
+        nifty.loadControlFile("nifty-default-controls.xml");
     }
 
     @Override
@@ -87,7 +89,7 @@ public class AuroraGame extends NiftyOverlayGame {
         } else {
             world.update(gameContainer);
             if (world.isGameOver()) {
-                mainMenu = new MainMenu();
+                mainMenu = new MainMenu(gameContainer);
                 world = null;
             }
         }

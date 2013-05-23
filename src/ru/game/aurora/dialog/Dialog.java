@@ -6,7 +6,7 @@
 package ru.game.aurora.dialog;
 
 import com.google.gson.Gson;
-import de.matthiasmann.twl.Widget;
+import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -74,7 +74,7 @@ public class Dialog implements OverlayWindow {
     }
 
     @Override
-    public Widget getGUI() {
+    public Screen getGUI() {
         return null;
     }
 

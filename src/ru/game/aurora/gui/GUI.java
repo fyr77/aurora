@@ -5,78 +5,70 @@
  */
 package ru.game.aurora.gui;
 
-import de.matthiasmann.twl.Widget;
-import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
-import de.matthiasmann.twl.theme.ThemeManager;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Rectangle;
-import ru.game.aurora.application.TWLInputAdapter;
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.Screen;
 
-import java.io.IOException;
-
-public class GUI extends Widget {
-    private de.matthiasmann.twl.GUI gui;
-
-    private TWLInputAdapter twlInputAdapter;
+public class GUI
+{
+    private Nifty nifty;
 
     private static GUI instance;
 
-    public static void init(GameContainer gc, Rectangle sidePanel) {
-        instance = new GUI(gc, sidePanel);
+    public static void init(Nifty n) {
+        instance = new GUI(n);
     }
 
-    private Rectangle sidePanelRect;
+    public Nifty getNifty() {
+        return nifty;
+    }
 
-    private GUI(GameContainer gc, Rectangle sidePanel) {
-        this.sidePanelRect = sidePanel;
-        setTheme("");
-        // save Slick's GL state while loading the theme
-        GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
-        try {
-            LWJGLRenderer lwjglRenderer = new LWJGLRenderer();
-            ThemeManager theme = ThemeManager.createThemeManager(
-                    GUI.class.getClassLoader().getResource("gui/aurora.xml"), lwjglRenderer);
-            gui = new de.matthiasmann.twl.GUI(this, lwjglRenderer);
-            gui.applyTheme(theme);
-        } catch (LWJGLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            // restore Slick's GL state
-            GL11.glPopAttrib();
-        }
+    private GUI(Nifty n) {
+        this.nifty = n;
+       /*
+        Screen mainScreen = new ScreenBuilder("main", this) {{
+            layer(new LayerBuilder("layer") {{
+                childLayoutCenter();
+                panel(new PanelBuilder() {{
+                    height(percentage(40));
+                }
+                });
+                panel(new PanelBuilder() {{
+                    id("panel");
+                    childLayoutVertical();
+                    height(percentage(25));
+                    width(percentage(80));
+                    control(new ButtonBuilder("continue_button", "Continue") {{
 
-        // connect input
-        twlInputAdapter = new TWLInputAdapter(gui, gc.getInput());
-        gc.getInput().addPrimaryListener(twlInputAdapter);
+                        interactOnClick("continueGame()");
+                    }});
+                    control(new ButtonBuilder("new_game_button", "New Game") {{
+                        interactOnClick("newGame()");
+                    }});
+                    control(new ButtonBuilder("exit_button", "Exit") {{
+                        interactOnClick("exitGame()");
+                    }});
+                }});
+            }});
+        }}.build(nifty);
 
+
+        nifty.addScreen("mainScreen", mainScreen);
+        nifty.gotoScreen("mainScreen");
+        nifty.getCurrentScreen().findElementByName("panel").findElementByName("continue_button").disable();
+         */
     }
 
     public static GUI getInstance() {
         return instance;
     }
 
-    public void update(GameContainer gc) {
-        twlInputAdapter.update();
+    public void addScreen(Screen screen)
+    {
+        nifty.addScreen(screen.getScreenId(), screen);
     }
 
-    public void draw(GameContainer gc, Graphics g) {
-        twlInputAdapter.render();
-    }
-
-    public void setCurrentScreen(Widget widget) {
-        if (widget != null) {
-            gui.setRootPane(widget);
-        } else {
-            gui.setRootPane(this);
-        }
-    }
-
-    public Rectangle getSidePanelRect() {
-        return sidePanelRect;
+    public void setScreen(String id)
+    {
+        nifty.gotoScreen(id);
     }
 }
