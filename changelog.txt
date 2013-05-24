@@ -3,6 +3,9 @@ VERSION 0.0.8
 
 IN PROGRESS...
 
++ New GUI system using niffy-gui library
+* Nicer sprites for some objects
+
 =====================================================
 VERSION 0.0.7
 

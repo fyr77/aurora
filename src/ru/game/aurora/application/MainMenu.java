@@ -20,24 +20,13 @@ import ru.game.aurora.world.generation.WorldGenerator;
  */
 public class MainMenu
 {
-    private static final long serialVersionUID = 1L;
-
-    private int selectedIndex;
-
-    private static final Rectangle continueRectangle = new Rectangle(2, 9, 3, 1);
-
-    private static final Rectangle newGameRectangle = new Rectangle(2, 11, 3, 1);
-
-    private static final Rectangle quitRectangle = new Rectangle(2, 13, 3, 1);
+    private static final long serialVersionUID = 2L;
 
     private static final Rectangle worldGenerateMessageRectangle = new Rectangle(5, 5, 10, 2);
-
-    private final boolean saveAvailable;
 
     private WorldGenerator generator;
 
     private World loadedState = null;
-
 
     // used for changing number of dots in message while generating world
     private int dotsCount = 0;
@@ -90,8 +79,7 @@ public class MainMenu
     }
 
     public MainMenu(GameContainer container) {
-        saveAvailable = SaveGameManager.isSaveAvailable();
-        selectedIndex = saveAvailable ? 0 : 1;
+        boolean saveAvailable = SaveGameManager.isSaveAvailable();
         this.container = container;
 
         final Nifty nifty = GUI.getInstance().getNifty();
