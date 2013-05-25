@@ -5,33 +5,45 @@
  */
 package ru.game.aurora.gui;
 
-import ru.game.aurora.world.Ship;
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.space.GalaxyMapScreen;
 
-public class GalaxyMapWidget
-{
+public class GalaxyMapController implements ScreenController {
 
     private World world;
 
 
-    private final GalaxyMapScreen galaxyMapScreen = new GalaxyMapScreen();
-
-    public GalaxyMapWidget(final World world) {
+    public GalaxyMapController(final World world) {
 
     }
 
 
     public void update() {
-        StringBuilder sb = new StringBuilder("Ship status:\n");
+      /*  StringBuilder sb = new StringBuilder("Ship status:\n");
         final Ship ship = world.getPlayer().getShip();
         sb.append("\t Scientists: ").append(ship.getScientists()).append("\n");
         sb.append("\t Engineers: ").append(ship.getEngineers()).append("\n");
         sb.append("\t Military: ").append(ship.getMilitary()).append("\n");
         sb.append("Resources: ").append(world.getPlayer().getResourceUnits()).append("\n");
-        sb.append("Ship coordinates: [").append(ship.getX()).append(", ").append(ship.getY()).append("]");
+        sb.append("Ship coordinates: [").append(ship.getX()).append(", ").append(ship.getY()).append("]");*/
 
     }
 
 
+    @Override
+    public void bind(Nifty nifty, Screen screen) {
+
+    }
+
+    @Override
+    public void onStartScreen() {
+
+    }
+
+    @Override
+    public void onEndScreen() {
+
+    }
 }

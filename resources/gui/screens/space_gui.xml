@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+    <screen id="galaxy_map_gui" controller="ru.game.aurora.gui.GalaxyMapController">
+        <layer id="layer" childLayout="vertical">
+            <panel id="topPanel" height="10%" childLayout="horizontal">
+                <control id="ship_hp" name="progressbar" width="40%"/>
+                <panel width="*"/>
+                <control name="label" text="Here be dragons!" width="20%"/>
+            </panel>
+
+            <!-- midlle panel contains list of buttons to the right -->
+            <panel height="80%" childLayout="horizontal">
+                <panel width="80%"/>
+                <panel childLayout="vertical">
+                    <panel height="30%"/>
+                    <control id="research_button" name="button" label="Research" width="90%" height="7%"/>
+                    <control id="engineering_button" name="button" label="Engineering" width="90%" height="7%"/>
+                    <control id="starmap_button" name="button" label="Star map" width="90%" height="7%"/>
+                </panel>
+            </panel>
+
+        </layer>
+    </screen>
+</nifty>

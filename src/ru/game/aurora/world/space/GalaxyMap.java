@@ -11,7 +11,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.gui.GalaxyMapWidget;
+import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.GalaxyMapController;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
@@ -42,14 +43,14 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private World world;
 
-    private transient GalaxyMapWidget myGui;
+    private transient GalaxyMapController myGui;
 
     public GalaxyMap() {
     }
 
     public GalaxyMap(World world, int tilesX, int tilesY) {
         this.world = world;
-        //this.myGui = new GalaxyMapWidget(world);
+        //this.myGui = new GalaxyMapController(world);
         this.tilesX = tilesX;
         this.tilesY = tilesY;
         map = new int[tilesY][tilesX];
@@ -67,8 +68,8 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     @Override
     public Screen getGUI() {
-       //myGui = new GalaxyMapWidget(world);
-       // return myGui;
+        //myGui = new GalaxyMapController(world);
+        // return myGui;
         return null;
     }
 
@@ -89,6 +90,8 @@ public class GalaxyMap extends BaseSpaceRoom {
         super.enter(world);
         world.getCamera().setTarget(player.getShip());
         world.setCurrentStarSystem(null);
+        GUI.getInstance().getNifty().gotoScreen("galaxy_map_gui");
+        GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
     }
 
 

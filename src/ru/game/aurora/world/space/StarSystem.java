@@ -16,6 +16,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Positionable;
@@ -442,6 +443,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         visited = true;
+        GUI.getInstance().getNifty().gotoScreen("empty_screen");
     }
 
     private void createBackground(World world) {
