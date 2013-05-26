@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.gui.EngineeringScreen;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpScreen;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Player;
@@ -60,6 +61,8 @@ public class World implements Serializable {
         player = new Player();
         updatedThisFrame = false;
         currentRoom = galaxyMap = new GalaxyMap(this, sizeX, sizeY);
+
+        GUI.getInstance().initWorldControllers(this);
     }
 
     public Map<String, Serializable> getGlobalVariables() {

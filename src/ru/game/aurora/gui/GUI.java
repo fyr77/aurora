@@ -7,6 +7,7 @@ package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;
+import ru.game.aurora.world.World;
 
 public class GUI {
     private Nifty nifty;
@@ -38,5 +39,10 @@ public class GUI {
 
     public void setScreen(String id) {
         nifty.gotoScreen(id);
+    }
+
+    public void initWorldControllers(World world) {
+        GalaxyMapController gmc = (GalaxyMapController) nifty.getScreen("galaxy_map_gui").getScreenController();
+        gmc.setWorld(world);
     }
 }

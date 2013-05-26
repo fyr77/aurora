@@ -13,9 +13,15 @@
                 <panel width="80%"/>
                 <panel childLayout="vertical">
                     <panel height="30%"/>
-                    <control id="research_button" name="button" label="Research" width="90%" height="7%"/>
-                    <control id="engineering_button" name="button" label="Engineering" width="90%" height="7%"/>
-                    <control id="starmap_button" name="button" label="Star map" width="90%" height="7%"/>
+                    <control id="research_button" name="button" label="Research" width="90%" height="7%">
+                        <interact onClick="openResearchScreen()"/>
+                    </control>
+                    <control id="engineering_button" name="button" label="Engineering" width="90%" height="7%">
+                        <interact onClick="openEngineeringScreen()"/>
+                    </control>
+                    <control id="starmap_button" name="button" label="Star map" width="90%" height="7%">
+                        <interact onClick="openStarMap()"/>
+                    </control>
                 </panel>
             </panel>
 

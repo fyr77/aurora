@@ -8,26 +8,16 @@ package ru.game.aurora.gui;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import ru.game.aurora.player.research.ResearchScreen;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.space.GalaxyMapScreen;
 
 public class GalaxyMapController implements ScreenController {
 
     private World world;
 
 
-    public GalaxyMapController(final World world) {
-
-    }
-
-
     public void update() {
-      /*  StringBuilder sb = new StringBuilder("Ship status:\n");
-        final Ship ship = world.getPlayer().getShip();
-        sb.append("\t Scientists: ").append(ship.getScientists()).append("\n");
-        sb.append("\t Engineers: ").append(ship.getEngineers()).append("\n");
-        sb.append("\t Military: ").append(ship.getMilitary()).append("\n");
-        sb.append("Resources: ").append(world.getPlayer().getResourceUnits()).append("\n");
-        sb.append("Ship coordinates: [").append(ship.getX()).append(", ").append(ship.getY()).append("]");*/
 
     }
 
@@ -45,5 +35,28 @@ public class GalaxyMapController implements ScreenController {
     @Override
     public void onEndScreen() {
 
+    }
+
+    public void openStarMap() {
+        GalaxyMapScreen gms = new GalaxyMapScreen();
+        world.setCurrentRoom(gms);
+        gms.enter(world);
+    }
+
+    public void openResearchScreen() {
+        // open research screen
+        ResearchScreen researchScreen = new ResearchScreen();
+        researchScreen.enter(world);
+        world.setCurrentRoom(researchScreen);
+    }
+
+    public void openEngineeringScreen() {
+        EngineeringScreen engineeringScreen = new EngineeringScreen();
+        engineeringScreen.enter(world);
+        world.setCurrentRoom(engineeringScreen);
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
     }
 }
