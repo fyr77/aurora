@@ -24,9 +24,11 @@ public class GUI {
 
     private GUI(Nifty n) {
         this.nifty = n;
+
         nifty.fromXml("gui/screens/main_menu.xml", "main_menu");
         nifty.addXml("gui/screens/progress_bar.xml");
         nifty.addXml("gui/screens/space_gui.xml");
+        nifty.addXml("gui/screens/research_screen.xml");
     }
 
     public static GUI getInstance() {

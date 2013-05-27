@@ -48,6 +48,8 @@ public class GalaxyMapController implements ScreenController {
         ResearchScreen researchScreen = new ResearchScreen();
         researchScreen.enter(world);
         world.setCurrentRoom(researchScreen);
+
+        GUI.getInstance().getNifty().createPopup("research_screen");
     }
 
     public void openEngineeringScreen() {
