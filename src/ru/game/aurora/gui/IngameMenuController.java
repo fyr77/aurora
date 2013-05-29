@@ -22,7 +22,6 @@ public class IngameMenuController implements Controller
 
     @Override
     public void bind(Nifty nifty, Screen screen, Element element, Properties parameter, Attributes controlDefinitionAttributes) {
-        System.out.println("bind");
     }
 
     @Override
