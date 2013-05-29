@@ -12,7 +12,6 @@ import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.gui.GUI;
-import ru.game.aurora.gui.GalaxyMapController;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
@@ -42,8 +41,6 @@ public class GalaxyMap extends BaseSpaceRoom {
     private int tilesY;
 
     private World world;
-
-    private transient GalaxyMapController myGui;
 
     public GalaxyMap() {
     }
@@ -140,9 +137,6 @@ public class GalaxyMap extends BaseSpaceRoom {
                 r.enter(world);
                 world.setUpdatedThisFrame(true);
             }
-        }
-        if (myGui != null) {
-            myGui.update();
         }
     }
 

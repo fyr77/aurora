@@ -27,7 +27,7 @@ public class StarSystemNamesCollection {
         }
     }
 
-    public String popName() {
+    public synchronized String popName() {
         if (names.isEmpty()) {
             return "Nameless star";
         }

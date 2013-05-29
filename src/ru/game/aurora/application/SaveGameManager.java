@@ -5,7 +5,6 @@
  */
 package ru.game.aurora.application;
 
-import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
 
 import java.io.File;
@@ -37,7 +36,6 @@ public class SaveGameManager {
             World rz = (World) ois.readObject();
             ois.close();
 
-            GUI.getInstance().initWorldControllers(rz);
             return rz;
         } catch (Exception e) {
             System.err.println("Failed to load game");

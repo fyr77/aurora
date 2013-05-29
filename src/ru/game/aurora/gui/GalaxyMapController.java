@@ -20,10 +20,10 @@ public class GalaxyMapController implements ScreenController {
 
     private Element engineeringPopup;
 
-    public void update() {
 
+    public GalaxyMapController(World world) {
+        this.world = world;
     }
-
 
     @Override
     public void bind(Nifty nifty, Screen screen) {

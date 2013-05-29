@@ -38,7 +38,10 @@ public class MainMenu {
 
         private MainMenu menu;
 
-        public void setMenu(MainMenu menu) {
+        private GameContainer container;
+
+        public void setMenu(GameContainer con, MainMenu menu) {
+            this.container = con;
             this.menu = menu;
         }
 
@@ -60,6 +63,7 @@ public class MainMenu {
         // these methods are specified in screen xml description and called using reflection
         public void loadGame() {
             menu.loadedState = SaveGameManager.loadGame();
+            GUI.getInstance().onWorldLoaded(container, menu.loadedState);
             GUI.getInstance().getNifty().gotoScreen("empty_screen");
         }
 
@@ -81,7 +85,7 @@ public class MainMenu {
         final Nifty nifty = GUI.getInstance().getNifty();
         nifty.gotoScreen("main_menu");
         MainMenuController con = (MainMenuController) nifty.getCurrentScreen().getScreenController();
-        con.setMenu(this);
+        con.setMenu(container, this);
 
 
         if (!saveAvailable) {
@@ -92,7 +96,9 @@ public class MainMenu {
     public World update(GameContainer container) {
         if (generator != null) {
             if (generator.isGenerated()) {
-                return generator.getWorld();
+                final World world = generator.getWorld();
+                GUI.getInstance().onWorldLoaded(container, world);
+                return world;
             }
             if (container.getTime() - lastTimeChecked > 500) {
                 if (dotsCount++ > 5) {

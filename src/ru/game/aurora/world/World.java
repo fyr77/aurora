@@ -61,8 +61,6 @@ public class World implements Serializable {
         player = new Player();
         updatedThisFrame = false;
         currentRoom = galaxyMap = new GalaxyMap(this, sizeX, sizeY);
-
-        GUI.getInstance().initWorldControllers(this);
     }
 
     public Map<String, Serializable> getGlobalVariables() {
@@ -132,9 +130,8 @@ public class World implements Serializable {
 
         // should be the last so that ESC event is not consumed
         if (container.getInput().isKeyPressed(Input.KEY_ESCAPE) && (currentRoom instanceof GalaxyMap || currentRoom instanceof Planet || currentRoom instanceof StarSystem)) {
-            GameMenu menu = new GameMenu();
-            menu.enter(this);
-            currentRoom = menu;
+            GUI.getInstance().showIngameMenu();
+            return;
         }
 
         if (container.getInput().isKeyPressed(Input.KEY_F1)) {

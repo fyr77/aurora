@@ -6,13 +6,20 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.elements.Element;
+import org.newdawn.slick.GameContainer;
 import ru.game.aurora.world.World;
 
 public class GUI {
     private Nifty nifty;
 
     private static GUI instance;
+
+    private Element ingameMenuInstance = null;
+
+    private World worldInstance;
+
+    private GameContainer containerInstance;
 
     public static void init(Nifty n) {
         instance = new GUI(n);
@@ -24,27 +31,63 @@ public class GUI {
 
     private GUI(Nifty n) {
         this.nifty = n;
-
         nifty.fromXml("gui/screens/main_menu.xml", "main_menu");
-        nifty.addXml("gui/screens/progress_bar.xml");
-        nifty.addXml("gui/screens/space_gui.xml");
-        nifty.addXml("gui/screens/research_screen.xml");
     }
 
     public static GUI getInstance() {
         return instance;
     }
 
-    public void addScreen(Screen screen) {
-        nifty.addScreen(screen.getScreenId(), screen);
+    public void onWorldLoaded(GameContainer con, World world) {
+        worldInstance = world;
+        containerInstance = con;
+
+        // first register controllers
+        nifty.registerScreenController(new GalaxyMapController(world));
+
+        // load xmls
+        nifty.addXml("gui/screens/progress_bar.xml");
+        nifty.addXml("gui/screens/space_gui.xml");
+        nifty.addXml("gui/screens/research_screen.xml");
+        nifty.addXml("gui/screens/ingame_menu.xml");
+
+        // init single-instance popups, that should be created before they can be shown
+
     }
 
-    public void setScreen(String id) {
-        nifty.gotoScreen(id);
+    public World getWorldInstance() {
+        return worldInstance;
     }
 
-    public void initWorldControllers(World world) {
-        GalaxyMapController gmc = (GalaxyMapController) nifty.getScreen("galaxy_map_gui").getScreenController();
-        gmc.setWorld(world);
+    public void setWorldInstance(World worldInstance) {
+        this.worldInstance = worldInstance;
+    }
+
+    public GameContainer getContainerInstance() {
+        return containerInstance;
+    }
+
+    public void setContainerInstance(GameContainer containerInstance) {
+        this.containerInstance = containerInstance;
+    }
+
+    /**
+     * show menu with 'continue-save-exit' buttons
+     */
+    public void showIngameMenu()
+    {
+        if (ingameMenuInstance != null) {
+            return;
+        }
+        ingameMenuInstance = nifty.createPopup("ingame_menu");
+        nifty.showPopup(nifty.getCurrentScreen(), ingameMenuInstance.getId(), null);
+        nifty.setIgnoreKeyboardEvents(false);
+    }
+
+    public void closeIngameMenu()
+    {
+        nifty.closePopup(ingameMenuInstance.getId());
+        ingameMenuInstance = null;
+        nifty.setIgnoreKeyboardEvents(true);
     }
 }
