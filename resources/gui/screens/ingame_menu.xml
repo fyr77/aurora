@@ -3,7 +3,7 @@
 
 
     <popup id="ingame_menu" childLayout="absolute" >
-        <control id="menu_window" name="window" title="Menu" x="40%" y="30%" width="20%" height="30%">
+        <control id="menu_window" name="window" closeable="false" title="Menu" x="40%" y="30%" width="20%" height="30%">
             <panel childLayout="vertical">
                 <panel id="panel" childLayout="vertical">
                     <panel height="10%"/>

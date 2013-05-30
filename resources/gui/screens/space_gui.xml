@@ -22,6 +22,9 @@
                     <control id="starmap_button" name="button" label="Star map" width="90%" height="7%">
                         <interact onClick="openStarMap()"/>
                     </control>
+                    <control id="menu_button" name="button" label="Menu" width="90%" height="7%">
+                        <interact onClick="openMenu()"/>
+                    </control>
                 </panel>
             </panel>
 

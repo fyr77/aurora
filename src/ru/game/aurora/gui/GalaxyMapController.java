@@ -47,10 +47,6 @@ public class GalaxyMapController implements ScreenController {
     }
 
     public void openResearchScreen() {
-        // open research screen
-        //ResearchScreen researchScreen = new ResearchScreen();
-        //researchScreen.enter(world);
-        //world.setCurrentRoom(researchScreen);
         GUI.getInstance().getNifty().showPopup(GUI.getInstance().getNifty().getCurrentScreen(), researchPopup.getId(), null);
     }
 
@@ -62,5 +58,9 @@ public class GalaxyMapController implements ScreenController {
 
     public void setWorld(World world) {
         this.world = world;
+    }
+
+    public void openMenu() {
+        GUI.getInstance().showIngameMenu();
     }
 }

@@ -13,7 +13,7 @@
 
 
     <popup id="research_screen" childLayout="absolute" controller="ru.game.aurora.gui.ResearchScreenController">
-        <control id="research_window" name="window" title="Research"  width="800px" height="600px">
+        <control id="research_window" name="window" title="Research"  width="60%" height="80%" x="20%" y="10%">
             <panel childLayout="horizontal">
                 <control name="list_screen" id="content"/>
             </panel>
