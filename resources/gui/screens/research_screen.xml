@@ -1,7 +1,9 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
     <controlDefinition name="list_screen" controller="ru.game.aurora.gui.niffy.ListScreenController">
-        <panel childLayout="horizontal">
-            <control id="itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="20" selection="Single" forceSelection="true" />
+        <panel childLayout="horizontal" width="100%" height="100%">
+            <!--displayItems="20"-->
+            <control id="itemsList" name="listBox" vertical="optional" horizontal="optional" selection="Single" forceSelection="true" width="30%" height="100%"/>
+            <panel width="10%"/>
             <panel childLayout="vertical">
                 <panel id="selectedItemImg" height="256" />
                 <control id="scrollbarPanelId" name="scrollPanel" horizontal="false" height="*">
@@ -12,12 +14,31 @@
     </controlDefinition>
 
 
-    <popup id="research_screen" childLayout="absolute" controller="ru.game.aurora.gui.ResearchScreenController">
-        <control id="research_window" name="window" title="Research"  width="60%" height="80%" x="20%" y="10%">
-            <panel childLayout="horizontal">
-                <control name="list_screen" id="content"/>
-            </panel>
+    <screen id="research_screen" controller="ru.game.aurora.gui.ResearchScreenController">
+        <layer childLayout="absolute">
+            <control id="research_window" name="window" title="Research"  width="60%" height="80%" x="20%" y="10%">
+                <panel childLayout="vertical" height="80%">
 
-        </control>
-    </popup>
+                    <!-- tabs -->
+                    <control id="research_tabs" name="tabGroup" buttonWidth="150px">
+                        <control id="active_projects" name="tab" caption="Active projects" childLayout="center">
+                           <control name="list_screen" id="active_list_screen" width="100%" height="100%"/>
+                        </control>
+                        <control id="completed_projects" name="tab" caption="Completed projects">
+                            <control name="list_screen" id="completed_list_screen" width="100%" height="100%"/>
+                        </control>
+                    </control>
+
+                    <!-- close button panel -->
+
+                    <panel childLayout="horizontal">
+                        <panel width="75%"/>
+                        <control id="close_button" name="button" label="Close" width="150px" height="45px">
+                            <interact onClick="closeScreen()"/>
+                        </control>
+                    </panel>
+                </panel>
+            </control>
+        </layer>
+    </screen>
 </nifty>

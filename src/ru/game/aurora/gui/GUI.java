@@ -10,6 +10,8 @@ import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.GameContainer;
 import ru.game.aurora.world.World;
 
+import java.util.Stack;
+
 public class GUI {
     private Nifty nifty;
 
@@ -21,12 +23,29 @@ public class GUI {
 
     private GameContainer containerInstance;
 
+    private Stack<String> screens = new Stack<>();
+
     public static void init(Nifty n) {
         instance = new GUI(n);
     }
 
     public Nifty getNifty() {
         return nifty;
+    }
+
+    public void pushCurrentScreen()
+    {
+        pushScreen(nifty.getCurrentScreen().getScreenId());
+    }
+
+    public void pushScreen(String id)
+    {
+        screens.push(id);
+    }
+
+    public String popScreen()
+    {
+        return screens.pop();
     }
 
     private GUI(Nifty n) {
@@ -44,14 +63,13 @@ public class GUI {
 
         // first register controllers
         nifty.registerScreenController(new GalaxyMapController(world));
+        nifty.registerScreenController(new ResearchScreenController(world));
 
         // load xmls
         nifty.addXml("gui/screens/progress_bar.xml");
         nifty.addXml("gui/screens/space_gui.xml");
         nifty.addXml("gui/screens/research_screen.xml");
         nifty.addXml("gui/screens/ingame_menu.xml");
-
-        // init single-instance popups, that should be created before they can be shown
 
     }
 

@@ -8,6 +8,7 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.world.World;
@@ -16,7 +17,9 @@ public class ResearchScreenController implements ScreenController
 {
     private World world;
 
-    public void setWorld(World world) {
+    private ListBox researchListBox;
+
+    public ResearchScreenController(World world) {
         this.world = world;
     }
 
@@ -26,9 +29,16 @@ public class ResearchScreenController implements ScreenController
 
     @Override
     public void onStartScreen() {
+
     }
 
     @Override
     public void onEndScreen() {
+    }
+
+
+    public void closeScreen()
+    {
+        GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
     }
 }
