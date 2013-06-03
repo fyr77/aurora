@@ -19,7 +19,8 @@ Cassiopeia
 Centaurus
 Cepheus
 Cetus
-Chamaeleon	Circinus
+Chamaeleon
+Circinus
 Columba
 Coma Berenices
 Corona Australis
@@ -40,7 +41,8 @@ Hercules
 Horologium
 Hydra
 Hydrus
-Indus	Lacerta
+Indus
+Lacerta
 Leo
 Leo Minor
 Lepus
@@ -61,7 +63,8 @@ Pegasus
 Perseus
 Phoenix
 Pictor
-Pisces	Piscis Austrinus
+Pisces
+Piscis Austrinus
 Puppis
 Pyxis
 Reticulum
