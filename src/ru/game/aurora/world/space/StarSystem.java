@@ -443,7 +443,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         visited = true;
-        GUI.getInstance().getNifty().gotoScreen("empty_screen");
+        GUI.getInstance().getNifty().gotoScreen("star_system_gui");
     }
 
     private void createBackground(World world) {

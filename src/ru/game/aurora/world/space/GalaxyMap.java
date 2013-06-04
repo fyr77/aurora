@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world.space;
 
+import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -87,8 +88,9 @@ public class GalaxyMap extends BaseSpaceRoom {
         super.enter(world);
         world.getCamera().setTarget(player.getShip());
         world.setCurrentStarSystem(null);
-        GUI.getInstance().getNifty().gotoScreen("galaxy_map_gui");
-        GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
+        final Nifty nifty = GUI.getInstance().getNifty();
+        nifty.gotoScreen("galaxy_map_gui");
+        nifty.setIgnoreKeyboardEvents(true);
     }
 
 
