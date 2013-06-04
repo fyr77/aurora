@@ -50,7 +50,7 @@ public class AuroraProbe extends NPCShip {
                 " In addition probe storage contained some ship log messages and a backup copy of work done by Aurora science team. There is nothing really valuable for us there," +
                 " but it will be usefull for researches on Earth."));
 
-        world.getPlayer().getResearchState().getAvailableProjects().add(researchProjectDesc);
+        world.getPlayer().getResearchState().addNewAvailableProject(researchProjectDesc);
 
         StarSystem curSystem = (StarSystem) world.getCurrentRoom();
         int remainingAstroData = curSystem.getAstronomyData();

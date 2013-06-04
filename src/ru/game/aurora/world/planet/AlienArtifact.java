@@ -56,7 +56,7 @@ public class AlienArtifact extends BasePositionable implements PlanetObject {
         remainingData -= researchSpeed;
         if (remainingData <= 0) {
             GameLogger.getInstance().logMessage("Recovered all data from this artifact. Added research project.");
-            world.getPlayer().getResearchState().getAvailableProjects().add(resultResearch);
+            world.getPlayer().getResearchState().addNewAvailableProject(resultResearch);
         } else {
             GameLogger.getInstance().logMessage(String.format("Excavated %d data from object, %d work remaining", researchSpeed, remainingData));
         }

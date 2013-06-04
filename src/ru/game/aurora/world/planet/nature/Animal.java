@@ -37,7 +37,7 @@ public class Animal extends BasePositionable implements PlanetObject {
             if (!desc.isOutopsyMade() && !world.getPlayer().getResearchState().containsResearchFor(desc)) {
                 // this type of alien animal has never been seen before, add new research
                 GameLogger.getInstance().logMessage("Added biology research for new alien animal species " + desc.getName());
-                world.getPlayer().getResearchState().getAvailableProjects().add(new AnimalResearch(desc));
+                world.getPlayer().getResearchState().addNewAvailableProject(new AnimalResearch(desc));
             }
         }
 

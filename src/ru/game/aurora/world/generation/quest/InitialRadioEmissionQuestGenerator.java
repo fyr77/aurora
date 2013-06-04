@@ -135,7 +135,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         starInitialResearch.setReport(new ResearchReport("star_research", "This brown dwarf is unusual, as it actively emits radiowaves. Origin of this emission is currently unclear, and it is changing in time in a way that breaks all current theories concerning brown dwarves structure. " +
                 "This star is small, and its surface temperature is only about 900K, which makes it look more like a gas giant than like a star. Tracking such stars from Solar system using long-range radio telescopes is very difficult due to their low contrast and great distance." +
                 " \n Data collected by expedition can lead to better understanding of processes occurring inside these 'wannabe-stars'. But for better process understanding we should find and observe another brown dwarf with similar emission capacity. The closest one is at [12, 12]"));
-        world.getPlayer().getResearchState().getAvailableProjects().add(starInitialResearch);
+        world.getPlayer().getResearchState().addNewAvailableProject(starInitialResearch);
 
         // add second quest in chain
 

@@ -68,6 +68,7 @@ public class GUI {
         // load xmls
         nifty.addXml("gui/screens/progress_bar.xml");
         nifty.addXml("gui/screens/space_gui.xml");
+        nifty.addXml("gui/screens/list_screen.xml");
         nifty.addXml("gui/screens/research_screen.xml");
         nifty.addXml("gui/screens/ingame_menu.xml");
 

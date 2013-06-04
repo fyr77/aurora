@@ -15,6 +15,7 @@ import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -24,8 +25,6 @@ public class ResearchState implements Serializable {
     private static final long serialVersionUID = -5676580254565166442L;
 
     private int idleScientists;
-
-    private List<ResearchProjectDesc> availableProjects = new ArrayList<ResearchProjectDesc>();
 
     private List<ResearchProjectDesc> completedProjects = new ArrayList<ResearchProjectDesc>();
 
@@ -37,15 +36,11 @@ public class ResearchState implements Serializable {
 
     public ResearchState(int idleScientists) {
         this.idleScientists = idleScientists;
-        availableProjects.add(new AstronomyResearch());
+        currentProjects.add(new ResearchProjectState(new AstronomyResearch()));
     }
 
     public Geodata getGeodata() {
         return geodata;
-    }
-
-    public List<ResearchProjectDesc> getAvailableProjects() {
-        return availableProjects;
     }
 
     public List<ResearchProjectDesc> getCompletedProjects() {
@@ -65,7 +60,7 @@ public class ResearchState implements Serializable {
     }
 
     public void addNewAvailableProject(ResearchProjectDesc desc) {
-        this.availableProjects.add(desc);
+        this.currentProjects.add(new ResearchProjectState(desc));
         GameLogger.getInstance().logMessage(String.format("Added new research project '%s'", desc.getName()));
     }
 
@@ -74,6 +69,7 @@ public class ResearchState implements Serializable {
      * Updates research progress for current projects
      */
     public void update(World world) {
+        List<ResearchProjectState> toAdd = new LinkedList<>();
         for (Iterator<ResearchProjectState> iter = currentProjects.iterator(); iter.hasNext();) {
             ResearchProjectState state = iter.next();
             state.desc.update(world, state.scientists);
@@ -82,7 +78,7 @@ public class ResearchState implements Serializable {
                 if (!state.desc.isRepeatable()) {
                     completedProjects.add(state.desc);
                 } else {
-                    availableProjects.add(state.desc);
+                    toAdd.add(new ResearchProjectState(state.desc));
                 }
                 idleScientists += state.scientists;
                 if (state.desc.getReport() != null) {
@@ -90,13 +86,15 @@ public class ResearchState implements Serializable {
                 }
                 if (state.desc.getMakesAvailable() != null) {
                     for (ResearchProjectDesc projectDesc : state.desc.getMakesAvailable()) {
-                        availableProjects.add(projectDesc);
+                        toAdd.add(new ResearchProjectState(projectDesc));
                         GameLogger.getInstance().logMessage("New research project " + projectDesc.getName() + " is now available");
                     }
                 }
                 GameLogger.getInstance().logMessage("Research project " + state.desc.name + " completed");
             }
         }
+        // to prevent CME
+        currentProjects.addAll(toAdd);
     }
 
     public boolean containsResearchFor(AnimalSpeciesDesc animalSpeciesDesc) {
@@ -111,13 +109,6 @@ public class ResearchState implements Serializable {
                 return true;
             }
         }
-
-        for (ResearchProjectDesc d : availableProjects) {
-            if (d instanceof AnimalResearch && ((AnimalResearch) d).getDesc() == animalSpeciesDesc) {
-                return true;
-            }
-        }
-
         return false;
     }
 

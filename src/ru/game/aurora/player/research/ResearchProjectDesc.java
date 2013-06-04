@@ -140,4 +140,13 @@ public abstract class ResearchProjectDesc implements Serializable
     public void onReturnToEarth(World world)
     {
     }
+
+    /**
+     * This method is used in nifty-gui lists. Do not change (or add custom view converted to research screen)
+     */
+    @Override
+    public String toString()
+    {
+        return name;
+    }
 }

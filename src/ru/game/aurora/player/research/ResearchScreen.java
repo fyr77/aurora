@@ -66,7 +66,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room
     }
 
     private void drawAvailableTasksTab(Graphics graphics, Camera camera) {
-        strings.clear();
+        /*strings.clear();
         for (ResearchProjectDesc res : researchState.getAvailableProjects()) {
             strings.add(res.name);
         }
@@ -80,7 +80,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room
         }
 
         drawTabbed(graphics, camera, tabs, currentTab, icon, descr);
-        GameLogger.getInstance().addStatusMessage("Press <enter> to start selected research");
+        GameLogger.getInstance().addStatusMessage("Press <enter> to start selected research");*/
     }
 
     private void drawCompletedTasksTab(Graphics graphics, Camera camera) {
@@ -153,7 +153,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room
                 }
                 break;
             case AVAILABLE_TAB:
-                maxIdx = researchState.getAvailableProjects().size();
+              /*  maxIdx = researchState.getAvailableProjects().size();
                 if (currentIdx >= maxIdx) {
                     currentIdx = 0;
                 }
@@ -164,7 +164,7 @@ public class ResearchScreen extends ListWithIconAndDescrScreen implements Room
                     if (currentIdx > 0) {
                         currentIdx--;
                     }
-                }
+                }     */
                 break;
             case COMPLETED_TAB:
                 maxIdx = researchState.getCompletedProjects().size();

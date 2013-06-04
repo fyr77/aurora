@@ -165,8 +165,7 @@ public class LandingParty implements GameObject, Positionable {
             GameLogger.getInstance().logMessage("Adding " + getCollectedGeodata() + " pieces of raw geodata");
             final ResearchState researchState = world.getPlayer().getResearchState();
             if (researchState.getGeodata().getRaw() == 0) {
-                GameLogger.getInstance().logMessage("Cartography research is now available");
-                researchState.getAvailableProjects().add(new Cartography(researchState.getGeodata()));
+                researchState.addNewAvailableProject(new Cartography(researchState.getGeodata()));
             }
             researchState.getGeodata().addRawData(getCollectedGeodata());
             setCollectedGeodata(0);

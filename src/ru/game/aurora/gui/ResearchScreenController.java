@@ -9,6 +9,7 @@ package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.controls.TabGroup;
@@ -49,7 +50,6 @@ public class ResearchScreenController implements ScreenController
     public void onStartScreen() {
         ListBox l = availableResearch.findNiftyControl("itemsList", ListBox.class);
         l.clear();
-        l.addAllItems(world.getPlayer().getResearchState().getAvailableProjects());
         l.addAllItems(world.getPlayer().getResearchState().getCurrentProjects());
 
         l = completedResearch.findNiftyControl("itemsList", ListBox.class);
@@ -90,5 +90,45 @@ public class ResearchScreenController implements ScreenController
         }
         tr.setText(researchProjectDesc.getDescription());
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(researchProjectDesc.getIcon()))));
+    }
+
+    public void onIncreaseScientistsButtonClicked()
+    {
+        ListBox avail  = availableResearch.findNiftyControl("itemsList", ListBox.class);
+        if (avail.getSelection().isEmpty()) {
+            return;
+        }
+        final int idleScientists = world.getPlayer().getResearchState().getIdleScientists();
+        if (idleScientists == 0) {
+            return;
+        }
+        ResearchProjectState rp = (ResearchProjectState) avail.getSelection().get(0);
+        rp.scientists++;
+        world.getPlayer().getResearchState().setIdleScientists(idleScientists - 1);
+        avail.refresh();
+
+    }
+
+    public void onDecreaseScientistsButtonClicked()
+    {
+        ListBox avail  = availableResearch.findNiftyControl("itemsList", ListBox.class);
+        if (avail.getSelection().isEmpty()) {
+            return;
+        }
+        ResearchProjectState rp = (ResearchProjectState) avail.getSelection().get(0);
+        if (rp.scientists == 0) {
+            return;
+        }
+        rp.scientists--;
+        world.getPlayer().getResearchState().setIdleScientists(world.getPlayer().getResearchState().getIdleScientists() + 1);
+        avail.refresh();
+    }
+
+    // works for increase/decrease scientists buttons, makes item in list selected (by default clicking on button does not select item in list)
+    @NiftyEventSubscriber(pattern=".*crease_scientists")
+    public void onClicked(String id, ButtonClickedEvent event)
+    {
+        int numericId = Integer.parseInt(id.split("#")[0]) - 2;
+        availableResearch.findNiftyControl("itemsList", ListBox.class).selectItemByIndex(numericId);
     }
 }
