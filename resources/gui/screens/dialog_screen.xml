@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+    <screen id="dialog_screen" >
+        <layer childLayout="absolute">
+            <control id="dialog_window" name="window" title="Communication"  closeable="false" width="80%" height="80%" x="20%" y="10%">
+                <panel childLayout="vertical">
+                    <panel childLayout="horizontal">
+                        <panel id="dialogIcon" width="256px" height="256px"/>
+                        <panel width="10px"/>
+                        <control name="scrollPanel" horizontal="false" height="256px">
+                            <text id="npcText" font="font.fnt" wrap="true" text="" textHAlign="left" />
+                        </control>
+                    </panel>
+                    <panel height="10px"/>
+                    <control id="replyList" name="listBox" vertical="optional" horizontal="optional" displayItems="5" selection="Single" width="100%"/>
+                </panel>
+            </control>
+        </layer>
+    </screen>
+</nifty>
