@@ -42,18 +42,19 @@ public class ResearchScreenController implements ScreenController
     public void bind(Nifty nifty, Screen screen) {
         tg = screen.findNiftyControl("research_tabs", TabGroup.class);
         availableResearch = screen.findElementByName("active_list_screen");
-        ListBox l = availableResearch.findNiftyControl("itemsList", ListBox.class);
-        l.addAllItems(world.getPlayer().getResearchState().getAvailableProjects());
-        l.addAllItems(world.getPlayer().getResearchState().getCurrentProjects());
-
         completedResearch = screen.findElementByName("completed_list_screen");
-        l = completedResearch.findNiftyControl("itemsList", ListBox.class);
-        l.addAllItems(world.getPlayer().getResearchState().getCompletedProjects());
-
     }
 
     @Override
     public void onStartScreen() {
+        ListBox l = availableResearch.findNiftyControl("itemsList", ListBox.class);
+        l.clear();
+        l.addAllItems(world.getPlayer().getResearchState().getAvailableProjects());
+        l.addAllItems(world.getPlayer().getResearchState().getCurrentProjects());
+
+        l = completedResearch.findNiftyControl("itemsList", ListBox.class);
+        l.clear();
+        l.addAllItems(world.getPlayer().getResearchState().getCompletedProjects());
 
     }
 
@@ -73,7 +74,11 @@ public class ResearchScreenController implements ScreenController
         Element imagePanel = tg.getSelectedTab().getElement().findElementByName("selectedItemImg");
 
         TextRenderer tr = tg.getSelectedTab().getElement().findElementByName("selectedItemText").getRenderer(TextRenderer.class);
-
+        if (event.getSelection().isEmpty()) {
+            tr.setText("<No item selected>");
+            imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage("no_image"))));
+            return;
+        }
         Object obj = event.getSelection().get(0);
         ResearchProjectDesc researchProjectDesc;
         if (ResearchProjectDesc.class.isAssignableFrom(obj.getClass())) {
