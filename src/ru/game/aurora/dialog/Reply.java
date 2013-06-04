@@ -6,12 +6,12 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
-* Created with IntelliJ IDEA.
-* User: Egor.Smirnov
-* Date: 12.03.13
-* Time: 15:32
-* To change this template use File | Settings | File Templates.
-*/
+ * Created with IntelliJ IDEA.
+ * User: Egor.Smirnov
+ * Date: 12.03.13
+ * Time: 15:32
+ * To change this template use File | Settings | File Templates.
+ */
 public class Reply implements Serializable {
 
     private static final long serialVersionUID = -1616895998816949360L;
@@ -51,8 +51,7 @@ public class Reply implements Serializable {
     /**
      * Returns true if this dialog option is available given current world state
      */
-    public boolean isVisible(World world)
-    {
+    public boolean isVisible(World world) {
         if (replyConditions == null) {
             return true;
         }
@@ -72,5 +71,13 @@ public class Reply implements Serializable {
             }
         }
         return true;
+    }
+
+    /**
+     * This method is used to draw element string representation in GUI, do not modify
+     */
+    @Override
+    public String toString() {
+        return replyText;
     }
 }

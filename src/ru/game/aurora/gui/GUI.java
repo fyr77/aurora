@@ -33,18 +33,15 @@ public class GUI {
         return nifty;
     }
 
-    public void pushCurrentScreen()
-    {
+    public void pushCurrentScreen() {
         pushScreen(nifty.getCurrentScreen().getScreenId());
     }
 
-    public void pushScreen(String id)
-    {
+    public void pushScreen(String id) {
         screens.push(id);
     }
 
-    public String popScreen()
-    {
+    public String popScreen() {
         return screens.pop();
     }
 
@@ -64,6 +61,7 @@ public class GUI {
         // first register controllers
         nifty.registerScreenController(new GalaxyMapController(world));
         nifty.registerScreenController(new ResearchScreenController(world));
+        nifty.registerScreenController(new DialogController(world));
 
         // load xmls
         nifty.addXml("gui/screens/progress_bar.xml");
@@ -71,6 +69,7 @@ public class GUI {
         nifty.addXml("gui/screens/list_screen.xml");
         nifty.addXml("gui/screens/research_screen.xml");
         nifty.addXml("gui/screens/ingame_menu.xml");
+        nifty.addXml("gui/screens/dialog_screen.xml");
 
     }
 
@@ -93,8 +92,7 @@ public class GUI {
     /**
      * show menu with 'continue-save-exit' buttons
      */
-    public void showIngameMenu()
-    {
+    public void showIngameMenu() {
         if (ingameMenuInstance != null) {
             return;
         }
@@ -103,8 +101,7 @@ public class GUI {
         nifty.setIgnoreKeyboardEvents(false);
     }
 
-    public void closeIngameMenu()
-    {
+    public void closeIngameMenu() {
         nifty.closePopup(ingameMenuInstance.getId());
         ingameMenuInstance = null;
         nifty.setIgnoreKeyboardEvents(true);

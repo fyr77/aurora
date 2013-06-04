@@ -5,10 +5,13 @@
  */
 package ru.game.aurora.world;
 
+import de.lessvoid.nifty.Nifty;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.gui.DialogController;
 import ru.game.aurora.gui.EngineeringScreen;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpScreen;
@@ -182,6 +185,14 @@ public class World implements Serializable {
         }
         overlayWindows.add(currentDialog);
         currentDialog.enter(this);
+    }
+
+    public void addOverlayWindow(Dialog d) {
+        GUI.getInstance().pushCurrentScreen();
+        d.enter(this);
+        Nifty nifty = GUI.getInstance().getNifty();
+        ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).setDialog(d);
+        nifty.gotoScreen("dialog_screen");
     }
 
     public int getTurnCount() {

@@ -95,6 +95,10 @@ public class Dialog implements OverlayWindow {
         if (idx >= availableReplies.size() || idx < 0) {
             return;
         }
+        useReply(world, idx);
+    }
+
+    public void useReply(World world, int idx) {
         Reply selectedReply = availableReplies.get(idx);
         currentStatement = statements.get(selectedReply.targetStatementId);
         returnValue = selectedReply.returnValue;
@@ -115,6 +119,14 @@ public class Dialog implements OverlayWindow {
     private static final Rectangle replyRectangle = new Rectangle(3, 8, 9, 5);
 
     private static final Color backgroundColor = new Color(4, 7, 125);
+
+    public String getIconName() {
+        return iconName;
+    }
+
+    public Statement getCurrentStatement() {
+        return currentStatement;
+    }
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
