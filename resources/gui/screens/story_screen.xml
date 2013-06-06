@@ -2,12 +2,12 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
     <screen id="story_screen" controller="ru.game.aurora.gui.StoryScreenController">
         <layer childLayout="absolute">
-            <control id="story_window" name="window"  closeable="false" width="80%" height="80%" x="10%" y="10%">
+            <control id="story_window" name="window"  width="80%" height="80%" x="10%" y="10%">
                 <panel childLayout="vertical">
                     <panel id="imagePanel" width="800px" height="300px" />
                     <panel height="10px"/>
-                    <control name="scrollPanel" horizontal="false" height="*">
-                        <text id="storyText" font="font.fnt" wrap="true" text="" textHAlign="left" />
+                    <control name="scrollPanel" horizontal="false" height="*" childLayout="vertical">
+                        <text id="storyText" font="font.fnt" width="800px" wrap="true" text="" textHAlign="left" x="10px" y="10px"/>
                     </control>
                     <panel childLayout="horizontal" height="45px">
                         <panel width="80%"/>

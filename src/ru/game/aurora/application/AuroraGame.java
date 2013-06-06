@@ -80,11 +80,9 @@ public class AuroraGame extends NiftyOverlayGame {
     @Override
     protected void updateGame(GameContainer gameContainer, int i) throws SlickException {
         if (mainMenu != null) {
-            world = mainMenu.update(gameContainer);
+            world = mainMenu.update(camera, gameContainer);
             if (world != null) {
                 mainMenu = null;
-                world.setCamera(camera);
-                world.getCurrentRoom().enter(world);
             }
         } else {
             world.update(gameContainer);

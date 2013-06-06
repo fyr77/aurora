@@ -9,7 +9,7 @@
                         <panel id="dialogIcon" width="256px" height="256px"/>
                         <panel width="10px"/>
                         <control name="scrollPanel" horizontal="false" height="256px">
-                            <text id="npcText" font="font.fnt" wrap="true" text="..." textHAlign="left" height="90%"
+                            <text id="npcText" font="font.fnt" wrap="true" text="..." textHAlign="left" width="100%" height="90%"
                                   textVAlign="top"/>
                         </control>
                     </panel>

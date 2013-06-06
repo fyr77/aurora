@@ -62,6 +62,7 @@ public class GUI {
         nifty.registerScreenController(new GalaxyMapController(world));
         nifty.registerScreenController(new ResearchScreenController(world));
         nifty.registerScreenController(new DialogController(world));
+        nifty.registerScreenController(new StoryScreenController(world));
 
         // load xmls
         nifty.addXml("gui/screens/progress_bar.xml");
@@ -70,6 +71,7 @@ public class GUI {
         nifty.addXml("gui/screens/research_screen.xml");
         nifty.addXml("gui/screens/ingame_menu.xml");
         nifty.addXml("gui/screens/dialog_screen.xml");
+        nifty.addXml("gui/screens/story_screen.xml");
 
     }
 

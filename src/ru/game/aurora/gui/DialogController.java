@@ -49,6 +49,7 @@ public class DialogController implements ScreenController {
     public void bind(Nifty nifty, Screen screen) {
         imagePanel = screen.findElementByName("dialogIcon");
         npcText = screen.findElementByName("npcText");
+        npcText.getRenderer(TextRenderer.class).setLineWrapping(true);
         replies = screen.findNiftyControl("replyList", ListBox.class);
         this.screen = screen;
     }
@@ -61,7 +62,10 @@ public class DialogController implements ScreenController {
     public void updateDialog() {
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(dialog.getIconName()))));
         npcText.getRenderer(TextRenderer.class).setText(dialog.getCurrentStatement().npcText);
-        replies.clear();
+
+        if (!replies.getItems().isEmpty()) {
+            replies.clear();
+        }
         for (Reply r : dialog.getCurrentStatement().getAvailableReplies(world)) {
             replies.addItem(r);
         }

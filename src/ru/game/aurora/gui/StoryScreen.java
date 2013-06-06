@@ -7,16 +7,7 @@
 package ru.game.aurora.gui;
 
 import com.google.gson.Gson;
-import de.lessvoid.nifty.screen.Screen;
-import org.newdawn.slick.*;
-import org.newdawn.slick.geom.Rectangle;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GUIConstants;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.DialogListener;
-import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
 
 import java.io.IOException;
@@ -27,9 +18,9 @@ import java.io.Serializable;
 /**
  * Screen that contains image, text and left/right buttons
  */
-public class StoryScreen implements OverlayWindow {
-
-    private static final long serialVersionUID = -3923197071117233494L;
+public class StoryScreen
+{
+    private static final long serialVersionUID = 1L;
 
     public static class StoryElement implements Serializable {
         private static final long serialVersionUID = 3916693966824352564L;
@@ -50,8 +41,6 @@ public class StoryScreen implements OverlayWindow {
 
     private int currentScreen;
 
-    private final static Rectangle textRect = new Rectangle(1, 6, 12, 7);
-
     private DialogListener listener;
 
     public StoryScreen(String descPath) {
@@ -68,45 +57,37 @@ public class StoryScreen implements OverlayWindow {
         this.listener = listener;
     }
 
-    @Override
-    public void enter(World world) {
-        currentScreen = 0;
+    public StoryElement getCurrentElement()
+    {
+        return (currentScreen >= 0 && currentScreen < screens.length) ? screens[currentScreen] : null;
     }
 
-    @Override
-    public Screen getGUI() {
-        return null;
-    }
-
-    @Override
-    public void update(GameContainer container, World world) {
-        if (container.getInput().isKeyPressed(Input.KEY_LEFT) && currentScreen > 0) {
-            currentScreen--;
-        }
-
-        if ((container.getInput().isKeyPressed(Input.KEY_RIGHT) || container.getInput().isKeyPressed(Input.KEY_ENTER)) && currentScreen < screens.length) {
-            currentScreen++;
+    public boolean next(World world)
+    {
+        if (currentScreen < screens.length) {
+            ++currentScreen;
             if (isOver() && listener != null) {
                 listener.onDialogEnded(world, 0);
             }
+            return true;
         }
-
-        GameLogger.getInstance().addStatusMessage("Press <left> or <right> to change pages");
+        return false;
     }
 
-    @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        if (isOver()) {
-            return;
+    public boolean prev()
+    {
+        if (currentScreen > 0) {
+            --currentScreen;
+            return true;
         }
-        graphics.clear();
-        final Image image = ResourceManager.getInstance().getImage(screens[currentScreen].imageId);
-        graphics.drawImage(image, 64, 64);
-        graphics.setColor(Color.yellow);
-        graphics.drawRect(64, 64, image.getWidth(), image.getHeight());
-        EngineUtils.drawRectWithBorderAndText(graphics, textRect, camera, Color.yellow, GUIConstants.backgroundColor, screens[currentScreen].text, GUIConstants.dialogFont, Color.white, false);
-
+        return false;
     }
+
+    public void start()
+    {
+        currentScreen = 0;
+    }
+
 
     public boolean isOver() {
         return currentScreen == screens.length;

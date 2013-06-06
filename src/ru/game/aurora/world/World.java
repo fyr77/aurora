@@ -11,10 +11,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.gui.DialogController;
-import ru.game.aurora.gui.EngineeringScreen;
-import ru.game.aurora.gui.GUI;
-import ru.game.aurora.gui.HelpScreen;
+import ru.game.aurora.gui.*;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.earth.EvacuationState;
@@ -176,12 +173,11 @@ public class World implements Serializable {
 
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
-        //GUI.getInstance().setCurrentScreen(currentRoom.getGUI());
     }
 
     public void addOverlayWindow(OverlayWindow currentDialog) {
         if (overlayWindows == null) {
-            overlayWindows = new LinkedList<OverlayWindow>();
+            overlayWindows = new LinkedList<>();
         }
         overlayWindows.add(currentDialog);
         currentDialog.enter(this);
@@ -193,6 +189,13 @@ public class World implements Serializable {
         Nifty nifty = GUI.getInstance().getNifty();
         ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).setDialog(d);
         nifty.gotoScreen("dialog_screen");
+    }
+
+    public void addOverlayWindow(StoryScreen s) {
+        GUI.getInstance().pushCurrentScreen();
+        Nifty nifty = GUI.getInstance().getNifty();
+        ((StoryScreenController) nifty.getScreen("story_screen").getScreenController()).setStory(s);
+        nifty.gotoScreen("story_screen");
     }
 
     public int getTurnCount() {

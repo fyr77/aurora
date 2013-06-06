@@ -7,7 +7,9 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
@@ -65,6 +67,8 @@ public class MainMenu {
             menu.loadedState = SaveGameManager.loadGame();
             GUI.getInstance().onWorldLoaded(container, menu.loadedState);
             GUI.getInstance().getNifty().gotoScreen("empty_screen");
+            menu.loadedState.getCurrentRoom().enter(menu.loadedState);
+
         }
 
         public void newGame() {
@@ -93,11 +97,16 @@ public class MainMenu {
         }
     }
 
-    public World update(GameContainer container) {
+    public World update(Camera camera, GameContainer container) {
         if (generator != null) {
             if (generator.isGenerated()) {
                 final World world = generator.getWorld();
                 GUI.getInstance().onWorldLoaded(container, world);
+                world.setCamera(camera);
+                world.getCurrentRoom().enter(world);
+                // add them here and not in world generator, as gui must be created first
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/tutorials/game_start_tutorial.json"));
+                world.addOverlayWindow(new StoryScreen("story/beginning.json"));
                 return world;
             }
             if (container.getTime() - lastTimeChecked > 500) {

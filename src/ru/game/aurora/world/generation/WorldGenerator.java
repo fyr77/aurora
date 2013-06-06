@@ -8,8 +8,6 @@ package ru.game.aurora.world.generation;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.GardenerGenerator;
@@ -171,8 +169,6 @@ public class WorldGenerator implements Runnable {
         createArtifactsAndAnomalies(world);
         createQuestWorlds(world);
 
-        world.addOverlayWindow(new StoryScreen("story/beginning.json"));
-        world.addOverlayWindow(Dialog.loadFromFile("dialogs/tutorials/game_start_tutorial.json"));
         currentStatus = "All done";
 
         this.world = world;
