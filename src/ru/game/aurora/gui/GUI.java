@@ -45,6 +45,11 @@ public class GUI {
         return screens.pop();
     }
 
+    public void popAndSetScreen()
+    {
+        nifty.gotoScreen(screens.pop());
+    }
+
     private GUI(Nifty n) {
         this.nifty = n;
         nifty.fromXml("gui/screens/main_menu.xml", "main_menu");
@@ -63,6 +68,7 @@ public class GUI {
         nifty.registerScreenController(new ResearchScreenController(world));
         nifty.registerScreenController(new DialogController(world));
         nifty.registerScreenController(new StoryScreenController(world));
+        nifty.registerScreenController(new ResearchReportScreenController());
 
         // load xmls
         nifty.addXml("gui/screens/progress_bar.xml");

@@ -4,7 +4,7 @@
         <panel childLayout="horizontal" width="100%" align="right">
             <control id="#name_text" name="label" align="left" textHAlign="left" width="*"/>
             <control id="#decrease_scientists" name="button" width="32px" label="-" >
-                    <interact onClick="onDecreaseScientistsButtonClicked()"/>
+                <interact onClick="onDecreaseScientistsButtonClicked()"/>
             </control>
             <control id="#increase_scientists" name="button" width="32px" label="+">
                 <interact onClick="onIncreaseScientistsButtonClicked()"/>
@@ -17,14 +17,14 @@
     <controlDefinition name="list_screen_research">
         <panel childLayout="horizontal" width="100%" height="100%">
             <control id="itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="25" selection="Single" width="45%" viewConverterClass="ru.game.aurora.gui.ResearchListViewConverter">
-                    <control name="research_line" controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
-                        <effect>
-                            <onCustom customKey="focus" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
-                            <onCustom customKey="select" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
-                            <onCustom customKey="select" name="textColor" post="false" color="#fc0f" neverStopRendering="true" timeType="infinite" />
-                        </effect>
-                        <interact onClick="listBoxItemClicked()"/>
-                    </control>
+                <control name="research_line" controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
+                    <effect>
+                        <onCustom customKey="focus" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
+                        <onCustom customKey="select" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
+                        <onCustom customKey="select" name="textColor" post="false" color="#fc0f" neverStopRendering="true" timeType="infinite" />
+                    </effect>
+                    <interact onClick="listBoxItemClicked()"/>
+                </control>
             </control>
             <panel width="10%"/>
             <panel childLayout="vertical">
@@ -49,7 +49,7 @@
                     <!-- tabs -->
                     <control id="research_tabs" name="tabGroup" buttonWidth="30%" buttonHeight="30px" height="650px">
                         <control id="active_projects" name="tab" caption="Active" childLayout="center">
-                           <control name="list_screen_research" id="active_list_screen" />
+                            <control name="list_screen_research" id="active_list_screen" />
                         </control>
                         <control id="completed_projects" name="tab" caption="Completed">
                             <control name="list_screen" id="completed_list_screen" />
@@ -64,6 +64,27 @@
                             <interact onClick="closeScreen()"/>
                         </control>
                     </panel>
+                </panel>
+            </control>
+        </layer>
+    </screen>
+
+    <screen id="research_report_screen" controller="ru.game.aurora.gui.ResearchReportScreenController">
+        <layer childLayout="absolute">
+            <control id="research_report_window" name="window" title="Research report"  width="80%" height="80%" x="10%" y="10%">
+                <panel childLayout="vertical">
+                    <panel childLayout="horizontal">
+                        <panel id="image_panel" width="256px" height="256px"/>
+                        <panel width="10px"/>
+                        <panel childLayout="vertical">
+                            <text font="font.fnt"  text="New research projects available:"/>
+                            <control id="new_research" name="listBox" vertical="optional" horizontal="optional" displayItems="9" selection="Disabled" width="*" height="256px"/>
+                        </panel>
+                    </panel>
+                    <panel height="10px"/>
+                    <control name="scrollPanel" horizontal="false" vertical="optional" height="*" childLayout="vertical">
+                        <text id="report_text" font="font.fnt" width="100%" wrap="true" text="" textHAlign="left" x="10px" y="10px"/>
+                    </control>
                 </panel>
             </control>
         </layer>

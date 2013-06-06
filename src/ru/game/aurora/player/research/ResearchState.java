@@ -82,7 +82,7 @@ public class ResearchState implements Serializable {
                 }
                 idleScientists += state.scientists;
                 if (state.desc.getReport() != null) {
-                    world.addOverlayWindow(new ResearchReportScreen(state.desc, state.desc.getReport()));
+                    world.addOverlayWindow(state.desc);
                 }
                 if (state.desc.getMakesAvailable() != null) {
                     for (ResearchProjectDesc projectDesc : state.desc.getMakesAvailable()) {
