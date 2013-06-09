@@ -25,8 +25,7 @@ import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.world.World;
 
-public class ResearchScreenController implements ScreenController
-{
+public class ResearchScreenController implements ScreenController {
     private World world;
 
     private Element availableResearch;
@@ -63,14 +62,12 @@ public class ResearchScreenController implements ScreenController
     }
 
 
-    public void closeScreen()
-    {
+    public void closeScreen() {
         GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
     }
 
-    @NiftyEventSubscriber(id="itemsList")
-    public void onListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent event)
-    {
+    @NiftyEventSubscriber(id = "itemsList")
+    public void onListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent event) {
         Element imagePanel = tg.getSelectedTab().getElement().findElementByName("selectedItemImg");
 
         TextRenderer tr = tg.getSelectedTab().getElement().findElementByName("selectedItemText").getRenderer(TextRenderer.class);
@@ -92,9 +89,8 @@ public class ResearchScreenController implements ScreenController
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(researchProjectDesc.getIcon()))));
     }
 
-    public void onIncreaseScientistsButtonClicked()
-    {
-        ListBox avail  = availableResearch.findNiftyControl("itemsList", ListBox.class);
+    public void onIncreaseScientistsButtonClicked() {
+        ListBox avail = availableResearch.findNiftyControl("itemsList", ListBox.class);
         if (avail.getSelection().isEmpty()) {
             return;
         }
@@ -109,9 +105,8 @@ public class ResearchScreenController implements ScreenController
 
     }
 
-    public void onDecreaseScientistsButtonClicked()
-    {
-        ListBox avail  = availableResearch.findNiftyControl("itemsList", ListBox.class);
+    public void onDecreaseScientistsButtonClicked() {
+        ListBox avail = availableResearch.findNiftyControl("itemsList", ListBox.class);
         if (avail.getSelection().isEmpty()) {
             return;
         }
@@ -125,10 +120,14 @@ public class ResearchScreenController implements ScreenController
     }
 
     // works for increase/decrease scientists buttons, makes item in list selected (by default clicking on button does not select item in list)
-    @NiftyEventSubscriber(pattern=".*crease_scientists")
-    public void onClicked(String id, ButtonClickedEvent event)
-    {
-        int numericId = Integer.parseInt(id.split("#")[0]) - 2;
-        availableResearch.findNiftyControl("itemsList", ListBox.class).selectItemByIndex(numericId);
+    @NiftyEventSubscriber(pattern = ".*crease_scientists")
+    public void onClicked(String id, ButtonClickedEvent event) {
+
+        int numericId = Integer.parseInt(id.split("#")[0]);
+        ListBox itemsList = availableResearch.findNiftyControl("itemsList", ListBox.class);
+        // hack. No idea how ids are distributed between list elements, they seem to start from arbitrary number and be sorted in ascending order
+        // so in order to get index of clicked element, must subtract from its id id of the first one
+        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
+        itemsList.selectItemByIndex(numericId);
     }
 }

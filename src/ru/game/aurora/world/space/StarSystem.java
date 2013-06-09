@@ -13,7 +13,6 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
@@ -223,25 +222,14 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     if (p.canBeLanded() && (landingParty == null || !landingParty.canBeLaunched(world))) {
                         // first landing, show 'Landing party equipment' screen
 
+                        LandingPartyEquipScreen screen = new LandingPartyEquipScreen(true);
+                        screen.enter(world);
+                        world.setCurrentRoom(screen);
                         if (world.getGlobalVariables().containsKey("tutorial.landing")) {
                             // this is first landing on a planet, show tutorial dialog
                             Dialog d = Dialog.loadFromFile("dialogs/tutorials/planet_landing_tutorial.json");
-                            d.setListener(new DialogListener() {
-                                private static final long serialVersionUID = 5036665500788544378L;
-
-                                @Override
-                                public void onDialogEnded(World world, int returnCode) {
-                                    LandingPartyEquipScreen screen = new LandingPartyEquipScreen(true);
-                                    screen.enter(world);
-                                    world.setCurrentRoom(screen);
-                                }
-                            });
                             world.addOverlayWindow(d);
                             world.getGlobalVariables().remove("tutorial.landing");
-                        } else {
-                            LandingPartyEquipScreen screen = new LandingPartyEquipScreen(true);
-                            screen.enter(world);
-                            world.setCurrentRoom(screen);
                         }
                     } else {
                         p.enter(world);

@@ -79,6 +79,9 @@ public class DialogController implements ScreenController {
 
     @NiftyEventSubscriber(id = "replyList")
     public void onListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent<Reply> event) {
+        if (event.getSelectionIndices().isEmpty()) {
+            return;
+        }
         int selectedIdx = event.getSelectionIndices().get(0);
         dialog.useReply(world, selectedIdx);
         if (dialog.isOver()) {

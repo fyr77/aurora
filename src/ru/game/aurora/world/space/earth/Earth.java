@@ -15,6 +15,7 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.dialog.Statement;
 import ru.game.aurora.gui.FailScreen;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.ProgressDumpScreen;
 import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.player.earth.EarthResearch;
@@ -148,8 +149,8 @@ public class Earth extends Planet {
                 if (daysPassed > 50) {
                     // show research screen
                     if (dumpScreen == null) {
-                        dumpScreen = new ProgressDumpScreen(world);
-                        world.addOverlayWindow(dumpScreen);
+                        GUI.getInstance().pushCurrentScreen();
+                        GUI.getInstance().getNifty().gotoScreen("earth_progress_screen");
                         return;
                     }
                     if (!dumpScreen.isOver()) {

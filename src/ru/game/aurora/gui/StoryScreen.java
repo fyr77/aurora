@@ -18,8 +18,7 @@ import java.io.Serializable;
 /**
  * Screen that contains image, text and left/right buttons
  */
-public class StoryScreen
-{
+public class StoryScreen implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static class StoryElement implements Serializable {
@@ -57,13 +56,11 @@ public class StoryScreen
         this.listener = listener;
     }
 
-    public StoryElement getCurrentElement()
-    {
+    public StoryElement getCurrentElement() {
         return (currentScreen >= 0 && currentScreen < screens.length) ? screens[currentScreen] : null;
     }
 
-    public boolean next(World world)
-    {
+    public boolean next(World world) {
         if (currentScreen < screens.length) {
             ++currentScreen;
             if (isOver() && listener != null) {
@@ -74,8 +71,7 @@ public class StoryScreen
         return false;
     }
 
-    public boolean prev()
-    {
+    public boolean prev() {
         if (currentScreen > 0) {
             --currentScreen;
             return true;
@@ -83,8 +79,7 @@ public class StoryScreen
         return false;
     }
 
-    public void start()
-    {
+    public void start() {
         currentScreen = 0;
     }
 
