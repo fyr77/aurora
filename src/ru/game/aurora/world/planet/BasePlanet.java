@@ -83,4 +83,8 @@ public abstract class BasePlanet implements Room, GalaxyMapObject {
     public String getName() {
         return null;
     }
+
+    public StarSystem getOwner() {
+        return owner;
+    }
 }

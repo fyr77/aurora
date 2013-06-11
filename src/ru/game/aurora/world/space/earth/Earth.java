@@ -12,14 +12,8 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
-import ru.game.aurora.dialog.Reply;
-import ru.game.aurora.dialog.Statement;
-import ru.game.aurora.gui.FailScreen;
-import ru.game.aurora.gui.GUI;
-import ru.game.aurora.gui.ProgressDumpScreen;
 import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.player.earth.EarthResearch;
-import ru.game.aurora.player.earth.EarthScreen;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
@@ -33,8 +27,6 @@ public class Earth extends Planet {
 
     private static final long serialVersionUID = 3431652617342589266L;
 
-    private ProgressDumpScreen dumpScreen = null;
-
     private Dialog earthDialog;
 
     private Dialog progressDialog;
@@ -45,6 +37,12 @@ public class Earth extends Planet {
         super(owner, cat, atmosphere, size, x, y, hasLife);
         earthDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_dialog.json"));
         progressDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_progress_dialog.json"));
+        progressDialog.setListener(new EarthProgressDialogListener(this));
+        earthDialog.setListener(new EarthDialogListener(this));
+    }
+
+    public Dialog getProgressDialog() {
+        return progressDialog;
     }
 
     @Override
@@ -59,6 +57,10 @@ public class Earth extends Planet {
     @Override
     public boolean canBeEntered() {
         return true;
+    }
+
+    public Dialog getEarthDialog() {
+        return earthDialog;
     }
 
     @Override
@@ -84,7 +86,6 @@ public class Earth extends Planet {
         } else {
             world.addOverlayWindow(earthDialog);
         }
-        dumpScreen = null;
     }
 
     private void showObliteratorThreatDialog(World world) {
@@ -139,67 +140,7 @@ public class Earth extends Planet {
             return;
         }
 
-        if (earthDialog.isOver()) {
-            if (earthDialog.getReturnValue() == 1) {
-                // player has chosen to dump research info
-
-                int daysPassed = world.getTurnCount() - lastVisitTurn;
-                Statement stmt;
-
-                if (daysPassed > 50) {
-                    // show research screen
-                    if (dumpScreen == null) {
-                        GUI.getInstance().pushCurrentScreen();
-                        GUI.getInstance().getNifty().gotoScreen("earth_progress_screen");
-                        return;
-                    }
-                    if (!dumpScreen.isOver()) {
-                        return;
-                    }
-
-                    int totalScore = dumpResearch(world);
-                    double scorePerTurn = (double) totalScore / (daysPassed);
-                    stmt = new Statement(0, String.format("Let us see. You have brought us new %d points of data, giving %f points/day", totalScore, scorePerTurn), new Reply(0, 0, ""));
-
-                    if (scorePerTurn < 0.01) {
-                        world.getPlayer().increaseFailCount();
-                        if (world.getPlayer().getFailCount() > 3) {
-                            // unsatisfactory
-                            stmt.replies[0] = new Reply(0, 3, "=continue=");
-                        } else {
-                            // poor
-                            stmt.replies[0] = new Reply(0, 2, "=continue=");
-                        }
-                    } else {
-                        // ok
-                        stmt.replies[0] = new Reply(0, 1, "=continue=");
-                    }
-                    lastVisitTurn = world.getTurnCount();
-                } else {
-                    stmt = new Statement(0, "We are pleased to see you come back, but your flight was too short to judge your perfomance. Come back later after you have acquired more data", new Reply(0, -1, "Ok"));
-                }
-                progressDialog.putStatement(stmt);
-                world.addOverlayWindow(progressDialog);
-            }
-            // just reset state
-            earthDialog.enter(world);
-        }
-        if (progressDialog.isOver()) {
-            if (progressDialog.getReturnValue() == -1) {
-                world.setCurrentRoom(FailScreen.createRetirementFailScreen());
-                return;
-            }
-            world.setCurrentRoom(owner);
-
-            EarthScreen es = new EarthScreen();
-            es.enter(world);
-            world.setCurrentRoom(es);
-
-            // refilling crew
-            world.getPlayer().getShip().refillCrew();
-
-        }
-
+        world.addOverlayWindow(earthDialog);
     }
 
     @Override
@@ -207,7 +148,15 @@ public class Earth extends Planet {
         owner.draw(container, g, camera);
     }
 
-    private int dumpResearch(World world) {
+    public int getLastVisitTurn() {
+        return lastVisitTurn;
+    }
+
+    public void setLastVisitTurn(int lastVisitTurn) {
+        this.lastVisitTurn = lastVisitTurn;
+    }
+
+    int dumpResearch(World world) {
         world.onPlayerReturnToEarth();
         int result = 0;
         final ResearchState researchState = world.getPlayer().getResearchState();
