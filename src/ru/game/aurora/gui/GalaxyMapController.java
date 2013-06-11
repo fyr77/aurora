@@ -26,7 +26,7 @@ public class GalaxyMapController implements ScreenController {
 
     @Override
     public void onStartScreen() {
-
+        GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
     }
 
     @Override

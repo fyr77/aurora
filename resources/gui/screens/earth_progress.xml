@@ -6,7 +6,7 @@
                 <panel childLayout="vertical">
                     <control id="itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="25"
                              selection="Disabled" width="90%"/>
-                    <panel childLayout="horizontal" height="100px">
+                    <panel childLayout="horizontal" height="200px">
                         <panel width="*"/>
                         <text id="totalText" font="font.fnt" width="20%"/>
                     </panel>

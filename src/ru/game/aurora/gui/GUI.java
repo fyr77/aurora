@@ -45,8 +45,7 @@ public class GUI {
         return screens.pop();
     }
 
-    public void popAndSetScreen()
-    {
+    public void popAndSetScreen() {
         nifty.gotoScreen(screens.pop());
     }
 
@@ -69,6 +68,7 @@ public class GUI {
         nifty.registerScreenController(new DialogController(world));
         nifty.registerScreenController(new StoryScreenController(world));
         nifty.registerScreenController(new ResearchReportScreenController());
+        nifty.registerScreenController(new EarthProgressScreenController(world));
 
         // load xmls
         nifty.addXml("gui/screens/progress_bar.xml");
@@ -78,6 +78,7 @@ public class GUI {
         nifty.addXml("gui/screens/ingame_menu.xml");
         nifty.addXml("gui/screens/dialog_screen.xml");
         nifty.addXml("gui/screens/story_screen.xml");
+        nifty.addXml("gui/screens/earth_progress.xml");
 
     }
 

@@ -136,11 +136,7 @@ public class Earth extends Planet {
 
     @Override
     public void update(GameContainer container, World world) {
-        if (world.getGlobalVariables().containsKey("quest.main.show_earth_dialog")) {
-            return;
-        }
 
-        world.addOverlayWindow(earthDialog);
     }
 
     @Override

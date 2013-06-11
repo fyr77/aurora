@@ -3,6 +3,7 @@ package ru.game.aurora.world.space.earth;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.dialog.Statement;
+import ru.game.aurora.gui.EarthProgressScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
 
@@ -13,8 +14,7 @@ import ru.game.aurora.world.World;
  * Time: 16:22
  */
 
-public class EarthDialogListener implements DialogListener
-{
+public class EarthDialogListener implements DialogListener {
     private static final long serialVersionUID = 6653410057967364076L;
 
     private Earth earth;
@@ -32,11 +32,10 @@ public class EarthDialogListener implements DialogListener
             int daysPassed = world.getTurnCount() - earth.getLastVisitTurn();
             Statement stmt;
 
-            if (daysPassed > 50) {
-                // show research screen
-                GUI.getInstance().pushCurrentScreen();
-                GUI.getInstance().getNifty().gotoScreen("earth_progress_screen");
 
+            if (daysPassed > 50) {
+
+                ((EarthProgressScreenController) GUI.getInstance().getNifty().getScreen("earth_progress_screen").getScreenController()).updateStats();
                 int totalScore = earth.dumpResearch(world);
                 double scorePerTurn = (double) totalScore / (daysPassed);
                 stmt = new Statement(0, String.format("Let us see. You have brought us new %d points of data, giving %f points/day", totalScore, scorePerTurn), new Reply(0, 0, ""));
@@ -56,13 +55,21 @@ public class EarthDialogListener implements DialogListener
                 }
                 earth.setLastVisitTurn(world.getTurnCount());
             } else {
-                stmt = new Statement(0, "We are pleased to see you come back, but your flight was too short to judge your perfomance. Come back later after you have acquired more data", new Reply(0, -1, "Ok"));
+                stmt = new Statement(0, "We are pleased to see you come back, but your flight was too short to judge your performance. Come back later after you have acquired more data", new Reply(0, -1, "Ok"));
             }
             earth.getProgressDialog().putStatement(stmt);
             world.addOverlayWindow(earth.getProgressDialog());
+
+            if (daysPassed > 50) {
+                // show research screen, must call after addOverlayWindow(dialog)
+                GUI.getInstance().pushCurrentScreen();
+                GUI.getInstance().getNifty().gotoScreen("earth_progress_screen");
+            }
         }
+
 
         //reset dialog state
         earth.getEarthDialog().enter(world);
+
     }
 }
