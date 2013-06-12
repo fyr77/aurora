@@ -2,16 +2,19 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
     <screen id="earth_progress_screen" controller="ru.game.aurora.gui.EarthProgressScreenController">
         <layer childLayout="absolute">
-            <control id="earth_progress_window" name="window" width="80%" height="80%" x="10%" y="10%">
-                <panel childLayout="vertical">
-                    <control id="itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="25"
-                             selection="Disabled" width="90%"/>
-                    <panel childLayout="horizontal" height="200px">
-                        <panel width="*"/>
-                        <text id="totalText" font="font.fnt" width="20%"/>
-                    </panel>
-                    <panel childLayout="horizontal" height="100px">
+            <control id="earth_progress_window" name="window" width="80%" height="80%" x="10%" y="10%"
+                     childLayout="vertical">
+                <panel childLayout="vertical" height="100%" width="100%">
+                    <control id="itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="20"
+                             selection="Disabled"/>
+                    <panel height="20px"/>
+                    <panel childLayout="horizontal" height="50px">
                         <panel width="75%"/>
+                        <text id="totalText" font="font.fnt" text="Total:"/>
+                    </panel>
+                    <panel height="*"/>
+                    <panel childLayout="horizontal" height="50px">
+                        <panel width="85%"/>
                         <control id="close_button" name="button" label="Close" width="150px" height="45px">
                             <interact onClick="closeScreen()"/>
                         </control>

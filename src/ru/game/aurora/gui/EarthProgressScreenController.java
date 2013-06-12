@@ -83,7 +83,7 @@ public class EarthProgressScreenController implements ScreenController {
         data.add(new Pair<>("Processed geodata", String.valueOf(i)));
 
         data.add(new Pair<>("Astro data", String.valueOf(researchState.getProcessedAstroData())));
-
+        totalScore += researchState.getProcessedAstroData();
 
         for (ResearchProjectDesc desc : researchState.getCompletedProjects()) {
             totalScore += desc.getScore();
