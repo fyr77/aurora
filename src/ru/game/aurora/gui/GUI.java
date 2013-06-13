@@ -69,6 +69,7 @@ public class GUI {
         nifty.registerScreenController(new StoryScreenController(world));
         nifty.registerScreenController(new ResearchReportScreenController());
         nifty.registerScreenController(new EarthProgressScreenController(world));
+        nifty.registerScreenController(new EarthScreenController(world));
 
         // load xmls
         nifty.addXml("gui/screens/progress_bar.xml");

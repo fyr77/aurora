@@ -1,8 +1,10 @@
 package ru.game.aurora.world.space.earth;
 
+import de.lessvoid.nifty.Nifty;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.dialog.Statement;
+import ru.game.aurora.gui.DialogController;
 import ru.game.aurora.gui.EarthProgressScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
@@ -58,7 +60,14 @@ public class EarthDialogListener implements DialogListener {
                 stmt = new Statement(0, "We are pleased to see you come back, but your flight was too short to judge your performance. Come back later after you have acquired more data", new Reply(0, -1, "Ok"));
             }
             earth.getProgressDialog().putStatement(stmt);
-            world.addOverlayWindow(earth.getProgressDialog());
+
+
+            // hack: we do not want to return to current dialog screen after opening a new one, push next screen instead
+            GUI.getInstance().pushScreen("earth_screen");
+            earth.getProgressDialog().enter(world);
+            Nifty nifty = GUI.getInstance().getNifty();
+            ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).setDialog(earth.getProgressDialog());
+            nifty.gotoScreen("dialog_screen");
 
             if (daysPassed > 50) {
                 // show research screen, must call after addOverlayWindow(dialog)

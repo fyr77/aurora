@@ -2,7 +2,6 @@ package ru.game.aurora.world.space.earth;
 
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.FailScreen;
-import ru.game.aurora.player.earth.EarthScreen;
 import ru.game.aurora.world.World;
 
 /**
@@ -11,8 +10,7 @@ import ru.game.aurora.world.World;
  * Date: 11.06.13
  * Time: 19:23
  */
-public class EarthProgressDialogListener implements DialogListener
-{
+public class EarthProgressDialogListener implements DialogListener {
     private static final long serialVersionUID = 266428070604878318L;
 
     private Earth earth;
@@ -29,11 +27,9 @@ public class EarthProgressDialogListener implements DialogListener
         }
         world.setCurrentRoom(earth.getOwner());
 
-        EarthScreen es = new EarthScreen();
-        es.enter(world);
-        world.setCurrentRoom(es);
 
         // refilling crew
         world.getPlayer().getShip().refillCrew();
+
     }
 }

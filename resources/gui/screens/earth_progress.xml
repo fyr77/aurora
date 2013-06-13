@@ -23,4 +23,28 @@
             </control>
         </layer>
     </screen>
+
+    <screen id="earth_screen" controller="ru.game.aurora.gui.EarthScreenController">
+
+        <layer childLayout="absolute">
+            <control id="earth_window" name="window" title="Earth Relay" closeable="false" width="80%" height="80%"
+                     x="10%" y="10%" childLayout="vertical">
+
+                <control id="earth_tabs" name="tabGroup" buttonWidth="30%" buttonHeight="30px" height="650px">
+                    <control id="messages" name="tab" caption="Messages" childLayout="center">
+                        <control name="list_screen" id="messages_list"/>
+                    </control>
+                    <control id="shipyard" name="tab" caption="Shipyard">
+                    </control>
+                </control>
+
+                <panel childLayout="horizontal">
+                    <panel width="85%"/>
+                    <control id="close_button" name="button" label="Close" width="150px" height="45px">
+                        <interact onClick="closeScreen()"/>
+                    </control>
+                </panel>
+            </control>
+        </layer>
+    </screen>
 </nifty>
