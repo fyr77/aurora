@@ -15,9 +15,9 @@ import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.spi.render.RenderFont;
-import javafx.util.Pair;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
+import ru.game.aurora.util.Pair;
 import ru.game.aurora.world.World;
 
 import java.util.LinkedList;
@@ -104,7 +104,7 @@ public class EarthProgressScreenController implements ScreenController {
         total.getRenderer(TextRenderer.class).setText("Total: " + totalScore);
         results.clear();
         for (Pair<String, String> p : data) {
-            results.addItem(getLine(p.getKey(), p.getValue()));
+            results.addItem(getLine(p.getKey(), p.getVal()));
         }
     }
 
