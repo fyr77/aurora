@@ -70,6 +70,7 @@ public class GUI {
         nifty.registerScreenController(new ResearchReportScreenController());
         nifty.registerScreenController(new EarthProgressScreenController(world));
         nifty.registerScreenController(new EarthScreenController(world));
+        nifty.registerScreenController(new EngineeringScreenController(world));
 
         // load xmls
         nifty.addXml("gui/screens/progress_bar.xml");
@@ -80,6 +81,7 @@ public class GUI {
         nifty.addXml("gui/screens/dialog_screen.xml");
         nifty.addXml("gui/screens/story_screen.xml");
         nifty.addXml("gui/screens/earth_progress.xml");
+        nifty.addXml("gui/screens/engineering_screen.xml");
 
     }
 

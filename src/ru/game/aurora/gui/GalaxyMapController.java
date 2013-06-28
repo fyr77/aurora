@@ -46,9 +46,11 @@ public class GalaxyMapController implements ScreenController {
     }
 
     public void openEngineeringScreen() {
-        EngineeringScreen engineeringScreen = new EngineeringScreen();
+        /*EngineeringScreen engineeringScreen = new EngineeringScreen();
         engineeringScreen.enter(world);
-        world.setCurrentRoom(engineeringScreen);
+        world.setCurrentRoom(engineeringScreen);                        */
+        GUI.getInstance().pushCurrentScreen();
+        GUI.getInstance().getNifty().gotoScreen("engineering_screen");
     }
 
     public void setWorld(World world) {

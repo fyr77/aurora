@@ -9,10 +9,7 @@ package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.controls.ButtonClickedEvent;
-import de.lessvoid.nifty.controls.ListBox;
-import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
-import de.lessvoid.nifty.controls.TabGroup;
+import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.elements.render.TextRenderer;
@@ -64,6 +61,13 @@ public class ResearchScreenController implements ScreenController {
 
     public void closeScreen() {
         GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
+    }
+
+
+    @NiftyEventSubscriber(id="research_window")
+    public void onClose(final String id, final WindowClosedEvent event)
+    {
+        closeScreen();
     }
 
     @NiftyEventSubscriber(id = "itemsList")

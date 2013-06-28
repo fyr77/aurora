@@ -61,8 +61,8 @@ public class ResearchReportScreenController implements ScreenController
 
     }
 
-    public void onClose()
+    public void closeScreen()
     {
-
+        GUI.getInstance().popAndSetScreen();
     }
 }
