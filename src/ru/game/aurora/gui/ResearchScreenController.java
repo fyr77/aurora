@@ -91,6 +91,7 @@ public class ResearchScreenController implements ScreenController {
         }
         tr.setText(researchProjectDesc.getDescription());
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(researchProjectDesc.getIcon()))));
+        GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
 
     public void onIncreaseScientistsButtonClicked() {

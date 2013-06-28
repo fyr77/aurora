@@ -69,7 +69,7 @@ public class DialogController implements ScreenController {
         for (Reply r : dialog.getCurrentStatement().getAvailableReplies(world)) {
             replies.addItem(r);
         }
-        screen.resetLayout();
+        screen.layoutLayers();
     }
 
     @Override

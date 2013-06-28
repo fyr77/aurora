@@ -8,14 +8,17 @@
                     <panel childLayout="horizontal">
                         <panel id="dialogIcon" width="256px" height="256px"/>
                         <panel width="10px"/>
-                        <control name="scrollPanel" horizontal="false" height="256px">
-                            <text id="npcText" font="font.fnt" wrap="true" text="..." textHAlign="left" width="100%" height="90%"
-                                  textVAlign="top"/>
+                        <control name="scrollPanel" horizontal="false" height="256px" childLayout="vertical">
+                            <panel childLayout="center" padding="10px" width="100%">
+                                <text id="npcText" font="font_noalpha.fnt" wrap="true" text="..." textHAlign="left" width="90%" height="90%" textVAlign="top"/>
+                            </panel>
                         </control>
                     </panel>
                     <panel height="10px"/>
-                    <control id="replyList" name="listBox" vertical="optional" horizontal="optional" displayItems="10"
+                    <panel childLayout="center" padding="10px" width="100%">
+                        <control id="replyList" name="listBox" vertical="optional" horizontal="optional" displayItems="10"
                              height="256" selection="Single" width="100%"/>
+                    </panel>
                 </panel>
             </control>
         </layer>
