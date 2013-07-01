@@ -342,6 +342,27 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return name;
     }
 
+    public void onWeaponButtonPressed(World world, int index)
+    {
+        if (mode == MODE_MOVE) {
+            selectedWeapon = index;
+            Ship playerShip = world.getPlayer().getShip();
+            if (playerShip.getWeapons().size() <= selectedWeapon || playerShip.getWeapons().get(selectedWeapon) == null) {
+                GameLogger.getInstance().logMessage("No weapon in slot " + (1 + selectedWeapon));
+                return;
+            }
+
+            if (playerShip.getWeapons().get(selectedWeapon).getReloadTimeLeft() > 0) {
+                GameLogger.getInstance().logMessage("Weapon not yet reloaded");
+                return;
+            }
+
+            mode = MODE_SHOOT;
+        } else {
+            mode = MODE_MOVE;
+        }
+    }
+
     @Override
     public void update(GameContainer container, World world) {
         if (background == null) {
@@ -367,20 +388,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             updateMove(container, world);
             for (int i = Input.KEY_1; i <= Input.KEY_9; ++i) {
                 if (container.getInput().isKeyPressed(i)) {
-                    selectedWeapon = i - Input.KEY_1;
-                    if (playerShip.getWeapons().size() <= selectedWeapon || playerShip.getWeapons().get(selectedWeapon) == null) {
-                        GameLogger.getInstance().logMessage("No weapon in slot " + (1 + selectedWeapon));
-                        return;
-                    }
-
-                    if (playerShip.getWeapons().get(selectedWeapon).getReloadTimeLeft() > 0) {
-                        GameLogger.getInstance().logMessage("Weapon not yet reloaded");
-                        return;
-                    }
-
-                    mode = MODE_SHOOT;
+                    onWeaponButtonPressed(world, i - Input.KEY_1);
                     return;
-
                 }
             }
         } else {

@@ -64,6 +64,28 @@
                 </panel>
             </panel>
 
+            <!-- bottom panel containing weapon buttons and log text -->
+            <panel height="120px" childLayout="horizontal" backgroundColor="#5050a0ff" padding="10px">
+                <control id="weapon_0_button" name="button" label="Weapon #1" width="64px" height="64px">
+                    <interact onClick="weaponClicked(0)"/>
+                </control>
+                <panel width="10px"/>
+                <control id="weapon_1_button" enabled="false" name="button" label="Weapon #2" width="64px" height="64px">
+                    <interact onClick="weaponClicked(1)"/>
+                </control>
+                <panel width="10px"/>
+                <control id="weapon_2_button" enabled="false" name="button" label="Weapon #3" width="64px" height="64px">
+                    <interact onClick="weaponClicked(2)"/>
+                </control>
+                <panel width="10px"/>
+                <control id="weapon_3_button" enabled="false" name="button" label="Weapon #4" width="64px" height="64px">
+                    <interact onClick="weaponClicked(3)"/>
+                </control>
+
+                <panel width="20px"/>
+
+                <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3" selection="Disabled" width="50%" height="100px"/>
+            </panel>
         </layer>
     </screen>
 </nifty>

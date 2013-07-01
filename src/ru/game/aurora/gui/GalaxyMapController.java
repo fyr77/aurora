@@ -6,6 +6,7 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.button.ButtonControl;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
@@ -15,6 +16,7 @@ import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.GalaxyMapScreen;
+import ru.game.aurora.world.space.StarSystem;
 
 public class GalaxyMapController extends GameEventListener implements ScreenController
 {
@@ -38,6 +40,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     public void onStartScreen() {
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
         updateStats();
+        updateWeapons();
     }
 
     @Override
@@ -57,9 +60,6 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     }
 
     public void openEngineeringScreen() {
-        /*EngineeringScreen engineeringScreen = new EngineeringScreen();
-        engineeringScreen.enter(world);
-        world.setCurrentRoom(engineeringScreen);                        */
         GUI.getInstance().pushCurrentScreen();
         GUI.getInstance().getNifty().gotoScreen("engineering_screen");
     }
@@ -87,6 +87,8 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
             return;
         }
         crewStatus.getRenderer(TextRenderer.class).setText(String.format("Scientists: %d, Engineers: %d, Military: %d", ship.getScientists(), ship.getEngineers(), ship.getMilitary()));
+
+
     }
 
     @Override
@@ -97,5 +99,31 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     @Override
     public void onPlayerShipDamaged(World world) {
         updateStats();
+    }
+
+    public void updateWeapons()
+    {
+        for (int i = 0; i < 4; ++i) {
+            final ButtonControl buttonControl = myScreen.findControl("weapon_" + i + "_button", ButtonControl.class);
+            if (buttonControl == null) {
+                // this is another window controlled by same controller
+                return;
+            }
+            if (i < world.getPlayer().getShip().getWeapons().size()) {
+                buttonControl.enable();
+            } else {
+                buttonControl.disable();
+            }
+        }
+    }
+
+    public void weaponClicked(String weaponIdx)
+    {
+        StarSystem ss = world.getCurrentStarSystem();
+        if (ss == null) {
+            return;
+        }
+
+        ss.onWeaponButtonPressed(world, Integer.parseInt(weaponIdx));
     }
 }
