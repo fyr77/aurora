@@ -280,7 +280,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             target = null;
         }
 
-        GameLogger.getInstance().addStatusMessage("Press <enter> to fire from weapon " + selectedWeapon);
         //TODO: firing sectors
         for (SpaceObject spaceObject : ships) {
             if (weapon.getWeaponDesc().range >= playerShip.getDistance(spaceObject)) {
@@ -464,8 +463,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         player.getShip().draw(container, g, camera);
-        player.addGlobalStatus();
-        GameLogger.getInstance().addStatusMessage("==========================");
+
         g.setColor(star.color);
 
         final int starX = camera.getXCoord(0) + (camera.getTileWidth() / 2);
@@ -478,11 +476,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         for (BasePlanet p : planets) {
-            if (p.getGlobalX() == player.getShip().getX() && p.getGlobalY() == player.getShip().getY()) {
+          /*  if (p.getGlobalX() == player.getShip().getX() && p.getGlobalY() == player.getShip().getY()) {
                 GameLogger.getInstance().addStatusMessage("Approaching planet: ");
                 GameLogger.getInstance().addStatusMessage("Press <S> to scan");
                 GameLogger.getInstance().addStatusMessage("Press <enter> to launch surface party");
-            }
+            }*/
 
             int planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);
             int planetY = camera.getYCoord(p.getGlobalY()) + camera.getTileWidth() / 2;
@@ -503,7 +501,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         for (SpaceObject ship : ships) {
             ship.draw(container, g, camera);
             if (ship.getX() == player.getShip().getX() && ship.getY() == player.getShip().getY()) {
-                GameLogger.getInstance().addStatusMessage("Press <enter> to contact");
+               // GameLogger.getInstance().addStatusMessage("Press <enter> to contact");
             }
 
             if (mode == MODE_SHOOT && player.getShip().getDistance(ship) < selectedWeaponRange) {

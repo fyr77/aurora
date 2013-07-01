@@ -12,7 +12,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Room;
@@ -70,6 +69,5 @@ public class GalaxyMapScreen implements Room {
         }
 
         g.drawImage(ResourceManager.getInstance().getImage("aurora"), myCamera.getXCoord(ship.getX()), myCamera.getYCoord(ship.getY()));
-        GameLogger.getInstance().addStatusMessage("Press <enter>, <m> or <esc> to close Galaxy map");
     }
 }

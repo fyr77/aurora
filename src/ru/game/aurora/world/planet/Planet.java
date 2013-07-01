@@ -481,10 +481,7 @@ public class Planet extends BasePlanet {
     }
 
     public void printPlanetStatus() {
-        GameLogger.getInstance().addStatusMessage("Planet info:");
-        GameLogger.getInstance().addStatusMessage(String.format("Size: [%d, %d]", width, height));
-        GameLogger.getInstance().addStatusMessage("Atmosphere: " + atmosphere);
-        GameLogger.getInstance().addStatusMessage("=====================================");
+
     }
 
     private boolean allNeighboursAreMountain(int x, int y) {
@@ -630,7 +627,6 @@ public class Planet extends BasePlanet {
             graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped((int) shuttlePosition.getX(), width), camera.getYCoordWrapped((int) shuttlePosition.getY(), height));
 
             if (landingParty.getX() == (int) shuttlePosition.getX() && landingParty.getY() == (int) shuttlePosition.getY()) {
-                GameLogger.getInstance().addStatusMessage("Press <enter> to return to orbit");
             }
 
             graphics.setColor(Color.red);
@@ -655,7 +651,6 @@ public class Planet extends BasePlanet {
                 // draw target mark
                 graphics.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoordWrapped(target.getX(), width), camera.getYCoordWrapped(target.getY(), height));
             }
-            GameLogger.getInstance().addStatusMessage(mode == MODE_MOVE ? "MOVE" : "SHOOT");
         }
     }
 

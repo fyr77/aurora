@@ -12,7 +12,6 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
@@ -43,7 +42,6 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
-        GameLogger.init(new Rectangle((tilesX - 5) * tileSize, 0, 5 * tileSize, 10 * tileSize), new Rectangle((tilesX - 5) * tileSize, 10 * tileSize, 5 * tileSize, 5 * tileSize));
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
         gameContainer.getInput().enableKeyRepeat();
         gameContainer.setTargetFrameRate(60);
@@ -111,9 +109,6 @@ public class AuroraGame extends NiftyOverlayGame {
         } else {
             world.draw(gameContainer, graphics);
             world.getCamera().drawBound();
-            //GameLogger.getInstance().draw(graphics);
-            //GUI.getInstance().draw(gameContainer, graphics);
-            GameLogger.getInstance().clearStatusMessages();
         }
     }
 

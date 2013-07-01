@@ -5,12 +5,10 @@
  */
 package ru.game.aurora.player;
 
-import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.earth.EarthState;
 import ru.game.aurora.player.engineering.EngineeringState;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.Ship;
-import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.LandingParty;
 
 import java.io.Serializable;
@@ -71,23 +69,6 @@ public class Player implements Serializable {
 
     public EarthState getEarthState() {
         return earthState;
-    }
-
-    public void addGlobalStatus() {
-        GameLogger.getInstance().addStatusMessage("Ship status:");
-        GameLogger.getInstance().addStatusMessage("Hull: " + ship.getHull() + "/" + ship.getMaxHull());
-        GameLogger.getInstance().addStatusMessage("  Scientists: " + ship.getScientists());
-        GameLogger.getInstance().addStatusMessage("  Engineers: " + ship.getEngineers());
-        GameLogger.getInstance().addStatusMessage("  Military: " + ship.getMilitary());
-        GameLogger.getInstance().addStatusMessage("  Resources: " + resourceUnits);
-        GameLogger.getInstance().addStatusMessage(String.format("Ship coordinates: [%d, %d]", ship.getX(), ship.getY()));
-
-        GameLogger.getInstance().addStatusMessage("Weapons: ");
-        int slot = 1;
-        for (StarshipWeapon w : ship.getWeapons()) {
-            GameLogger.getInstance().addStatusMessage(slot + ": " + w.getWeaponDesc().name + " " + (w.getReloadTimeLeft() == 0 ? " [ready]" : w.getReloadTimeLeft() + " to reload"));
-            slot++;
-        }
     }
 
     public EngineeringState getEngineeringState() {

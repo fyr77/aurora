@@ -143,7 +143,6 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
 
     @Override
     public void printStatusInfo() {
-        GameLogger.getInstance().addStatusMessage("Press <enter> to mine " + type.name());
     }
 
     @Override

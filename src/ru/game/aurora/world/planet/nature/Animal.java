@@ -210,7 +210,6 @@ public class Animal extends BasePositionable implements PlanetObject {
     @Override
     public void printStatusInfo() {
         if (hp <= 0) {
-            GameLogger.getInstance().addStatusMessage("Press <enter> to pick up " + getName());
         }
     }
 

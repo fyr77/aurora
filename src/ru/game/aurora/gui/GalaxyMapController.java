@@ -6,11 +6,13 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.button.ButtonControl;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.gui.niffy.ProgressBarControl;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.Ship;
@@ -18,14 +20,18 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.GalaxyMapScreen;
 import ru.game.aurora.world.space.StarSystem;
 
-public class GalaxyMapController extends GameEventListener implements ScreenController
+public class GalaxyMapController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender
 {
 
     private static final long serialVersionUID = 6443855197594505098L;
 
     private World world;
 
-    private Screen myScreen;
+    private transient Screen myScreen;
+
+    private static final int MAX_LOG_ENTRIES = 50;
+
+    private ListBox logList;
 
     public GalaxyMapController(World world) {
         this.world = world;
@@ -34,6 +40,8 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     @Override
     public void bind(Nifty nifty, Screen screen) {
         myScreen = screen;
+        GameLogger.getInstance().addAppender(this);
+        logList = screen.findNiftyControl("log_list", ListBox.class);
     }
 
     @Override
@@ -125,5 +133,18 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         }
 
         ss.onWeaponButtonPressed(world, Integer.parseInt(weaponIdx));
+    }
+
+    @Override
+    public void logMessage(String message) {
+        if (logList == null) {
+            return;
+        }
+        if (logList.getItems().size() > MAX_LOG_ENTRIES) {
+            logList.getItems().remove(0);
+        }
+        logList.addItem(message);
+        logList.setFocusItemByIndex(logList.getItems().size() - 1);
+        myScreen.layoutLayers();
     }
 }

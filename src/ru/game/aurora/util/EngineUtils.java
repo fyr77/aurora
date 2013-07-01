@@ -10,7 +10,6 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
-import ru.game.aurora.application.GameLogger;
 
 import java.awt.image.BufferedImage;
 
@@ -73,9 +72,6 @@ public class EngineUtils {
         }
     }
 
-    public static int drawString(Graphics g, String s, int x, int y, int width) {
-        return drawString(g, s, x, y, width, GameLogger.getInstance().getFont(), Color.white);
-    }
 
     /**
      * Draws string at given coord, wrapping it if necessary (if it exceeds width pixels)

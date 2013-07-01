@@ -10,7 +10,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -59,6 +58,5 @@ public class PlanetScanScreen implements Room {
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
         planet.printPlanetStatus();
         planet.drawLandscape(container, graphics, myCamera, false);
-        GameLogger.getInstance().addStatusMessage("Press <enter>, <esc> or <S> to return");
     }
 }

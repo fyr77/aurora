@@ -76,19 +76,6 @@ public class LandingParty implements GameObject, Positionable {
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
         g.drawImage(ResourceManager.getInstance().getImage("awayteam"), camera.getXCoord(x), camera.getYCoord(y));
-
-        GameLogger.getInstance().addStatusMessage("Landing team status:");
-        GameLogger.getInstance().addStatusMessage("scientists: " + science);
-        GameLogger.getInstance().addStatusMessage("engineers: " + engineers);
-        GameLogger.getInstance().addStatusMessage("military: " + military);
-        GameLogger.getInstance().addStatusMessage("Remaining oxygen: " + oxygen);
-        GameLogger.getInstance().addStatusMessage(String.format("Current coordinates (%d, %d)", x, y));
-        GameLogger.getInstance().addStatusMessage(String.format("Weapons: %s, %d rng, %d dmg", weapon.getName(), weapon.getRange(), weapon.getDamage()));
-        GameLogger.getInstance().addStatusMessage("====== Inventory: ======");
-        for (Map.Entry<InventoryItem, Integer> po : inventory.entrySet()) {
-            GameLogger.getInstance().addStatusMessage(po.getKey().getName() + ": " + po.getValue());
-        }
-        GameLogger.getInstance().addStatusMessage("====================");
     }
 
     public void consumeOxygen() {

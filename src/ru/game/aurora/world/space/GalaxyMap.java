@@ -11,7 +11,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -153,14 +152,10 @@ public class GalaxyMap extends BaseSpaceRoom {
             for (int j = 0; j < tilesX; ++j) {
                 if (map[i][j] != -1) {
                     GalaxyMapObject obj = objects.get(map[i][j]);
-                    if (j == player.getShip().getX() && i == player.getShip().getY() && obj.canBeEntered()) {
-                        GameLogger.getInstance().addStatusMessage("Press <enter> to enter " + obj.getName());
-                    }
                     obj.drawOnGlobalMap(container, graphics, camera, j, i);
                 }
             }
         }
-        player.addGlobalStatus();
     }
 
     public static double getDistance(StarSystem first, StarSystem second) {

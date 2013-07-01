@@ -75,7 +75,7 @@ public class AlienArtifact extends BasePositionable implements PlanetObject {
     @Override
     public void printStatusInfo() {
         if (remainingData > 0) {
-            GameLogger.getInstance().addStatusMessage("Press <enter> to examine artifact");
+           // GameLogger.getInstance().addStatusMessage("Press <enter> to examine artifact");
         }
     }
 

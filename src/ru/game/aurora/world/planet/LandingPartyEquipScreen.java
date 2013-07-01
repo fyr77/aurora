@@ -11,7 +11,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.ui.ListWithIconAndDescrScreen;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
@@ -94,9 +93,7 @@ public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        GameLogger.getInstance().addStatusMessage("Up/down to scroll list");
-        GameLogger.getInstance().addStatusMessage("Left/right to change selected item");
-        GameLogger.getInstance().addStatusMessage("Enter to quit");
+
 
         strings.clear();
         LandingParty party = world.getPlayer().getLandingParty();

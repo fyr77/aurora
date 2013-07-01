@@ -9,7 +9,6 @@ package ru.game.aurora.player.research.projects;
 
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.research.ResearchProjectDesc;
-import ru.game.aurora.player.research.ResearchScreen;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.StarSystem;
@@ -19,7 +18,11 @@ import ru.game.aurora.world.space.StarSystem;
  * Available in every star system.
  * Collects data about space objects such as planets/stars/etc
  */
-public class AstronomyResearch extends ResearchProjectDesc {
+public class AstronomyResearch extends ResearchProjectDesc
+{
+
+    private static final long serialVersionUID = -4290850863471850561L;
+
     public AstronomyResearch() {
         super("Astronomy", "Scan and explore space objects in current star system: build navigation maps, celestial bodies catalog and sailing directions", "astronomy_research");
     }
@@ -42,15 +45,11 @@ public class AstronomyResearch extends ResearchProjectDesc {
 
     @Override
     public String getStatusString(World world, int scientists) {
-        Room r = world.getCurrentRoom();
-        if (r instanceof ResearchScreen) {
-            r = ((ResearchScreen) r).getPreviousRoom();
-        }
-        if (!(r instanceof StarSystem)) {
+        StarSystem ss = world.getCurrentStarSystem();
+        if (ss == null) {
             return "Research paused, no suitable celestial bodies nearby";
         }
 
-        StarSystem ss = (StarSystem) r;
         return String.format("Remaining %d astro data for this star system, %f days to finish", ss.getAstronomyData(), ss.getAstronomyData() / (float) scientists);
     }
 
