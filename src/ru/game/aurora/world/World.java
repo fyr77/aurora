@@ -236,6 +236,10 @@ public class World implements Serializable {
         listeners.add(listener);
     }
 
+    public List<GameEventListener> getListeners() {
+        return listeners;
+    }
+
     public void setCamera(Camera camera) {
         this.camera = camera;
     }

@@ -59,4 +59,9 @@ public class ProgressBarControl implements Controller {
         String progressText = String.format("%3.0f%%", progress * 100);
         progressTextElement.getRenderer(TextRenderer.class).setText(progressText);
     }
+
+    public void setText(String text)
+    {
+        progressTextElement.getRenderer(TextRenderer.class).setText(text);
+    }
 }

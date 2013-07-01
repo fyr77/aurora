@@ -8,8 +8,10 @@ package ru.game.aurora.gui;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.GameContainer;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 
+import java.util.Iterator;
 import java.util.Stack;
 
 public class GUI {
@@ -62,8 +64,9 @@ public class GUI {
         worldInstance = world;
         containerInstance = con;
 
+        GalaxyMapController galaxyMapController = new GalaxyMapController(world);
         // first register controllers
-        nifty.registerScreenController(new GalaxyMapController(world));
+        nifty.registerScreenController(galaxyMapController);
         nifty.registerScreenController(new ResearchScreenController(world));
         nifty.registerScreenController(new DialogController(world));
         nifty.registerScreenController(new StoryScreenController(world));
@@ -82,6 +85,17 @@ public class GUI {
         nifty.addXml("gui/screens/story_screen.xml");
         nifty.addXml("gui/screens/earth_progress.xml");
         nifty.addXml("gui/screens/engineering_screen.xml");
+
+        // remove old map controller listener, if it already exists (this is a loaded game). it should actually not be saved at all
+        for (Iterator<GameEventListener> iter = world.getListeners().iterator(); iter.hasNext();) {
+            GameEventListener gameEventListener = iter.next();
+            if (gameEventListener instanceof GalaxyMapController) {
+                iter.remove();
+                break;
+            }
+        }
+
+        world.addListener(galaxyMapController);
 
     }
 
