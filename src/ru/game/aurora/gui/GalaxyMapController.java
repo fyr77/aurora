@@ -20,8 +20,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.GalaxyMapScreen;
 import ru.game.aurora.world.space.StarSystem;
 
-public class GalaxyMapController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender
-{
+public class GalaxyMapController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender {
 
     private static final long serialVersionUID = 6443855197594505098L;
 
@@ -84,8 +83,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         GUI.getInstance().showIngameMenu();
     }
 
-    public void updateStats()
-    {
+    public void updateStats() {
         ProgressBarControl pb = myScreen.findControl("ship_hp", ProgressBarControl.class);
         if (pb == null) {
             return;
@@ -113,8 +111,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         updateStats();
     }
 
-    public void updateWeapons()
-    {
+    public void updateWeapons() {
         for (int i = 0; i < 4; ++i) {
             final ButtonControl buttonControl = myScreen.findControl("weapon_" + i + "_button", ButtonControl.class);
             if (buttonControl == null) {
@@ -129,8 +126,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         }
     }
 
-    public void weaponClicked(String weaponIdx)
-    {
+    public void weaponClicked(String weaponIdx) {
         StarSystem ss = world.getCurrentStarSystem();
         if (ss == null) {
             return;
@@ -142,7 +138,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     @Override
     public void logMessage(String message) {
         if (logList.getItems().size() > GameLogger.MAX_LOG_ENTRIES) {
-            logList.getItems().remove(0);
+            logList.removeItemByIndex(0);
         }
         logList.addItem(message);
         logList.setFocusItemByIndex(logList.getItems().size() - 1);

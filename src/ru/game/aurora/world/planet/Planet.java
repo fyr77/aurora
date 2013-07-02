@@ -162,7 +162,7 @@ public class Planet extends BasePlanet {
             int speciesCount = r.nextInt(5) + 2;
             animalSpecies = new AnimalSpeciesDesc[speciesCount];
             for (int i = 0; i < speciesCount; ++i) {
-                animalSpecies[i] = new AnimalSpeciesDesc(this, "Unknown alien animal",r.nextBoolean(), r.nextBoolean(), r.nextInt(10) + 3, r.nextInt(6), r.nextInt(5), CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values()));
+                animalSpecies[i] = new AnimalSpeciesDesc(this, "Unknown alien animal", r.nextBoolean(), r.nextBoolean(), r.nextInt(10) + 3, r.nextInt(6), r.nextInt(5), CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values()));
             }
             final int animalCount = r.nextInt(10) + 5;
             for (int i = 0; i < animalCount; ++i) {
@@ -310,45 +310,58 @@ public class Planet extends BasePlanet {
 
         final boolean enterPressed = container.getInput().isKeyPressed(Input.KEY_ENTER);
         if (enterPressed) {
-            // check if can pick up smth
-            for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext(); ) {
-                PlanetObject p = iter.next();
+            interactWithObject(world);
 
-                if (!p.canBePickedUp()) {
-                    continue;
-                }
-
-                if (p.getX() != x || p.getY() != y) {
-                    continue;
-                }
-                p.onPickedUp(world);
-                world.setUpdatedThisFrame(true);
-                // some items (like ore deposits) can be picked up more than once, do not remove them in this case
-                if (!p.isAlive()) {
-                    iter.remove();
-                }
-            }
         }
-
 
         int tilesExplored = updateVisibility(x, y, 1);
         landingParty.addCollectedGeodata(tilesExplored);
 
         if (x == (int) shuttlePosition.getX() && y == (int) shuttlePosition.getY()) {
-
             if (world.isUpdatedThisFrame()) {
                 GameLogger.getInstance().logMessage("Refilling oxygen");
                 world.getPlayer().getLandingParty().refillOxygen();
             }
             if (enterPressed) {
-                GameLogger.getInstance().logMessage("Launching shuttle to orbit...");
-                world.setCurrentRoom(owner);
-                owner.enter(world);
-                world.getPlayer().getShip().setPos(globalX, globalY);
-                landingParty.onReturnToShip(world);
+                leavePlanet(world);
             }
         }
         world.getPlayer().getLandingParty().setPos(x, y);
+    }
+
+    public BasePositionable getShuttlePosition() {
+        return shuttlePosition;
+    }
+
+    public void leavePlanet(World world) {
+        GameLogger.getInstance().logMessage("Launching shuttle to orbit...");
+        world.setCurrentRoom(owner);
+        owner.enter(world);
+        world.getPlayer().getShip().setPos(globalX, globalY);
+        landingParty.onReturnToShip(world);
+    }
+
+    public void interactWithObject(World world) {
+        int x = world.getPlayer().getLandingParty().getX();
+        int y = world.getPlayer().getLandingParty().getY();
+        // check if can pick up smth
+        for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext(); ) {
+            PlanetObject p = iter.next();
+
+            if (!p.canBePickedUp()) {
+                continue;
+            }
+
+            if (p.getX() != x || p.getY() != y) {
+                continue;
+            }
+            p.onPickedUp(world);
+            world.setUpdatedThisFrame(true);
+            // some items (like ore deposits) can be picked up more than once, do not remove them in this case
+            if (!p.isAlive()) {
+                iter.remove();
+            }
+        }
     }
 
     private int getDist(int first, int second, int total) {
@@ -436,6 +449,14 @@ public class Planet extends BasePlanet {
             world.setUpdatedThisFrame(true);
         }
 
+    }
+
+    public void changeMode() {
+        mode = (mode == MODE_MOVE) ? MODE_SHOOT : MODE_MOVE;
+    }
+
+    public int getMode() {
+        return mode;
     }
 
     @Override

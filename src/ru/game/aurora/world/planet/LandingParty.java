@@ -22,6 +22,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LandingParty implements GameObject, Positionable {
+    public static final int MAX_OXYGEN = 100;
+
+    private static final long serialVersionUID = 7804695272317195264L;
+
     private int x;
 
     private int y;
@@ -89,7 +93,7 @@ public class LandingParty implements GameObject, Positionable {
     }
 
     public void refillOxygen() {
-        oxygen = 100;
+        oxygen = MAX_OXYGEN;
     }
 
     public int getOxygen() {

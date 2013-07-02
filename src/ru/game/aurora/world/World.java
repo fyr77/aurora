@@ -16,7 +16,6 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.earth.EvacuationState;
 import ru.game.aurora.player.research.ResearchProjectDesc;
-import ru.game.aurora.player.research.ResearchScreen;
 import ru.game.aurora.world.generation.StarSystemNamesCollection;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
@@ -82,18 +81,14 @@ public class World implements Serializable {
             return;
         }
         if (container.getInput().isKeyPressed(Input.KEY_R)) {
-            // open research screen
-            ResearchScreen researchScreen = new ResearchScreen();
-            researchScreen.enter(this);
-            currentRoom = researchScreen;
+            GUI.getInstance().pushCurrentScreen();
+            GUI.getInstance().getNifty().gotoScreen("research_screen");
             return;
         }
 
         if (container.getInput().isKeyPressed(Input.KEY_E)) {
-            // open research screen
-            EngineeringScreen engineeringScreen = new EngineeringScreen();
-            engineeringScreen.enter(this);
-            currentRoom = engineeringScreen;
+            GUI.getInstance().pushCurrentScreen();
+            GUI.getInstance().getNifty().gotoScreen("engineering_screen");
             return;
         }
 
