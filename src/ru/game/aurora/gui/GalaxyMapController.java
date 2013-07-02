@@ -29,9 +29,8 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
     private transient Screen myScreen;
 
-    private static final int MAX_LOG_ENTRIES = 50;
+    private transient ListBox logList;
 
-    private ListBox logList;
 
     public GalaxyMapController(World world) {
         this.world = world;
@@ -42,6 +41,11 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         myScreen = screen;
         GameLogger.getInstance().addAppender(this);
         logList = screen.findNiftyControl("log_list", ListBox.class);
+        if (logList != null) {
+            logList.clear();
+            logList.addAllItems(GameLogger.getInstance().getLogItems());
+            logList.setFocusItemByIndex(logList.getItems().size() - 1);
+        }
     }
 
     @Override
@@ -137,10 +141,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
     @Override
     public void logMessage(String message) {
-        if (logList == null) {
-            return;
-        }
-        if (logList.getItems().size() > MAX_LOG_ENTRIES) {
+        if (logList.getItems().size() > GameLogger.MAX_LOG_ENTRIES) {
             logList.getItems().remove(0);
         }
         logList.addItem(message);

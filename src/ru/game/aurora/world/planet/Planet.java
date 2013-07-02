@@ -13,6 +13,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.BasePositionable;
@@ -226,6 +227,8 @@ public class Planet extends BasePlanet {
         shuttlePosition = new BasePositionable(landingParty.getX(), landingParty.getY());
         int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
         landingParty.addCollectedGeodata(openedTiles);
+
+        GUI.getInstance().getNifty().gotoScreen("surface_gui");
     }
 
     @Override

@@ -10,6 +10,10 @@ import java.util.List;
 
 public class GameLogger {
 
+    public static final int MAX_LOG_ENTRIES = 50;
+
+    private List<String> logItems = new ArrayList<>(MAX_LOG_ENTRIES);
+
     private List<LoggerAppender> appenders = new ArrayList<>();
 
     private static final GameLogger instance = new GameLogger();
@@ -44,8 +48,16 @@ public class GameLogger {
 
     public void logMessage(String message)
     {
+        if (logItems.size() > MAX_LOG_ENTRIES) {
+            logItems.remove(0);
+        }
         for (LoggerAppender appender : appenders) {
             appender.logMessage(message);
         }
+        logItems.add(message);
+    }
+
+    public List<String> getLogItems() {
+        return logItems;
     }
 }

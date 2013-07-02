@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+    <screen id="surface_gui" controller="ru.game.aurora.gui.SurfaceGUIController">
+        <layer  childLayout="vertical">
+            <panel id="topPanel" height="10%" childLayout="horizontal">
+                <panel width="60%"/>
+                <panel width="40%" backgroundColor="#5050a0ff" childLayout="center">
+                    <text id="crew_status" font="font.fnt" text="" />
+                </panel>
+            </panel>
+
+            <panel height="*"/>
+            <!-- bottom panel containing weapon buttons and log text -->
+            <panel height="120px" childLayout="horizontal" backgroundColor="#5050a0ff" padding="10px">
+                <control id="weapon_button" name="button" label="Fire" width="64px" height="64px">
+                    <interact onClick="weaponClicked()"/>
+                </control>
+                <panel width="10px"/>
+                <control id="interact_button" name="button" label="Interact" width="64px" height="64px">
+                    <interact onClick="weaponClicked(1)"/>
+                </control>
+
+                <panel width="128px"/>
+
+                <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3" selection="Disabled" width="50%" height="100px"/>
+            </panel>
+        </layer>
+    </screen>
+</nifty>
