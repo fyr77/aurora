@@ -14,13 +14,13 @@ public class SurfaceTypes {
 
     // constants for surface tiles
     // negative number means tile was not yet seen
-    public static final byte DIRT = 0x01;
+    public static final byte WATER = 0x01;
 
     public static final byte ROCKS = 0x02;
 
-    public static final byte WATER = 0x04;
+    public static final byte ICE = 0x04;
 
-    public static final byte ICE = 0x08;
+    public static final byte DIRT = 0x08;
 
     public static final byte OBSTACLE_MASK = 0x40;
 

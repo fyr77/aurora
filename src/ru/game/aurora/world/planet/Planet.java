@@ -62,7 +62,7 @@ public class Planet extends BasePlanet {
      * 0 - reserved
      * tttt - tile type
      */
-    private byte[][] surface;
+    byte[][] surface;
 
     private int width;
 
@@ -93,6 +93,9 @@ public class Planet extends BasePlanet {
     private transient PlanetObject target = null;
 
     private transient Effect currentEffect = null;
+
+    private static TileDrawer mountainDrawer = new TileDrawer("mountains", (byte) 0);
+    private static TileDrawer rockDrawer = new TileDrawer("rock", SurfaceTypes.ROCKS);
 
 
     private static Map<Integer, String> mountainSprites = new HashMap<Integer, String>();
