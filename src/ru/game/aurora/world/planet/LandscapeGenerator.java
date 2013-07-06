@@ -52,6 +52,36 @@ public class LandscapeGenerator {
         } while (changed);
     }
 
+    // check that every tile has at least 1 neighbour of same type both on x and on y (standalone tiles can not be drawn correctly)
+    private static void fixStandaloneTiles(byte[][] surface, int width, int height) {
+        boolean changed;
+        int iterations = 5;
+        do {
+            changed = false;
+            for (int i = 0; i < height; ++i) {
+                for (int j = 0; j < width; ++j) {
+                    boolean sameLeftNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[i][wrap(j - 1, width)]);
+                    boolean sameRightNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[i][wrap(j + 1, width)]);
+
+                    if (!sameLeftNeighbour && !sameRightNeighbour) {
+                        surface[i][j] = (byte) (surface[i][j] & 0xf0 | SurfaceTypes.getType(surface[i][wrap(j - 1, width)]));
+                        changed = true;
+                        continue;
+                    }
+
+                    boolean sameUpperNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[wrap(i - 1, height)][j]);
+                    boolean sameLowerNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[wrap(i + 1, height)][j]);
+
+                    if (!sameUpperNeighbour && !sameLowerNeighbour) {
+                        surface[i][j] = (byte) (surface[i][j] & 0xf0 | SurfaceTypes.getType(surface[wrap(i - 1, height)][j]));
+                        changed = true;
+                    }
+
+                }
+            }
+        } while (changed && iterations-- > 0);
+    }
+
     public static byte[][] generateLandscape(PlanetCategory cat, int width, int height) {
         byte[][] surface = new byte[height][width];
         final Random random = CommonRandom.getRandom();
@@ -102,10 +132,26 @@ public class LandscapeGenerator {
                     }
 
                     for (Map.Entry<Byte, Byte> e : neighbours.entrySet()) {
+
                         if (e.getValue() >= 5) {
                             surface[j][i] = e.getKey();
                             break;
                         }
+                    }
+
+                    boolean sameLeftNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[i][wrap(j - 1, width)]);
+                    boolean sameRightNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[i][wrap(j + 1, width)]);
+
+                    if (!sameLeftNeighbour && !sameRightNeighbour) {
+                        surface[i][j] = (byte) (surface[i][j] & 0xf0 | SurfaceTypes.getType(surface[i][wrap(j - 1, width)]));
+                        continue;
+                    }
+
+                    boolean sameUpperNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[wrap(i - 1, height)][j]);
+                    boolean sameLowerNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[wrap(i + 1, height)][j]);
+
+                    if (!sameUpperNeighbour && !sameLowerNeighbour) {
+                        surface[i][j] = (byte) (surface[i][j] & 0xf0 | SurfaceTypes.getType(surface[wrap(i - 1, height)][j]));
                     }
 
                     if (mountainCount >= 4) {
@@ -121,6 +167,7 @@ public class LandscapeGenerator {
             }
         }
         updateMountains(surface, width, height);
+        fixStandaloneTiles(surface, width, height);
         return surface;
     }
 }

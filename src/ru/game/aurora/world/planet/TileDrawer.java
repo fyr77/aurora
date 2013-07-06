@@ -14,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // draws tiles with beautiful borders between
-public class TileDrawer
-{
+public class TileDrawer {
     private final String tileName;
 
     private Map<Integer, String> sprites = new HashMap<Integer, String>();
@@ -72,9 +71,29 @@ public class TileDrawer
         if (downRight) {
             number |= 208;
         }
+        if (number == 0) {
+            return;
+        }
         String name = sprites.get(number);
         if (name != null) {
             graphics.drawImage(ResourceManager.getInstance().getImage(name), camera.getXCoord(tileX), camera.getYCoord(tileY));
         }
+    }
+
+    public void drawTile(Graphics graphics, Camera camera, Planet planet, int tileY, int tileX) {
+        if (SurfaceTypes.sameBaseSurfaceType(planet.surface[tileY][tileX], mySurfaceType)) {
+            return;
+        }
+        boolean left = SurfaceTypes.sameBaseSurfaceType(planet.surface[tileY][planet.wrapX(tileX - 1)], mySurfaceType);
+        boolean right = SurfaceTypes.sameBaseSurfaceType(planet.surface[tileY][planet.wrapX(tileX + 1)], mySurfaceType);
+        boolean up = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY - 1)][tileX], mySurfaceType);
+        boolean down = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY + 1)][tileX], mySurfaceType);
+
+        boolean downLeft = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY + 1)][planet.wrapX(tileX - 1)], mySurfaceType);
+        boolean downRight = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY + 1)][planet.wrapX(tileX + 1)], mySurfaceType);
+        boolean upLeft = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY - 1)][planet.wrapX(tileX - 1)], mySurfaceType);
+        boolean upRight = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY - 1)][planet.wrapX(tileX + 1)], mySurfaceType);
+
+        drawTile(graphics, camera, tileY, tileX, left, right, up, down, downLeft, downRight, upLeft, upRight);
     }
 }

@@ -95,7 +95,8 @@ public class Planet extends BasePlanet {
     private transient Effect currentEffect = null;
 
     private static TileDrawer mountainDrawer = new TileDrawer("mountains", (byte) 0);
-    private static TileDrawer rockDrawer = new TileDrawer("rock", SurfaceTypes.ROCKS);
+
+    private static Map<Byte, TileDrawer> drawers = new HashMap<>();
 
 
     private static Map<Integer, String> mountainSprites = new HashMap<Integer, String>();
@@ -113,6 +114,8 @@ public class Planet extends BasePlanet {
         mountainSprites.put(208, "mountains_13");
         mountainSprites.put(254, "mountains_14");
         mountainSprites.put(104, "mountains_15");
+
+        drawers.put(SurfaceTypes.ROCKS, new TileDrawer("rock", SurfaceTypes.ROCKS));
     }
 
     public Planet(StarSystem owner, Planet other) {
@@ -551,7 +554,34 @@ public class Planet extends BasePlanet {
                             , camera.getTileHeight()
                             , graphics);
                 }
+                /*if (SurfaceTypes.getType(type) == SurfaceTypes.ROCKS) {
+                    graphics.setColor(Color.red);
+                    graphics.fillRect(camera.getXCoord(j), camera.getYCoord(i), camera.getTileWidth(), camera.getTileHeight());
+                } */
+                // now draw edges of next sprites
+                Set<Byte> neighbours = new TreeSet<>();
+                for (int ii = -1; ii <= 1; ++ii) {
+                    for (int jj = -1; jj <= 1; ++jj) {
+                        if (ii == jj && ii == 0) {
+                            continue;
+                        }
+
+                        byte st = SurfaceTypes.getType(surface[wrapY(i + ii)][wrapX(j + jj)]);
+                        if (st <= surface[i][j]) {
+                            continue;
+                        }
+                        neighbours.add(st);
+                    }
+                }
+
+                for (Byte b : neighbours) {
+                    TileDrawer td = drawers.get(b);
+                    if (td != null) {
+                        td.drawTile(graphics, camera, this, i, j);
+                    }
+                }
             }
+
 
         }
 

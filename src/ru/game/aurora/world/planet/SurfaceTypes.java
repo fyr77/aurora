@@ -71,7 +71,7 @@ public class SurfaceTypes {
                 spriteName = "snow_tile_1";
                 break;
             case SurfaceTypes.ROCKS:
-                spriteName = "rock_tile_1";
+                spriteName = "rock_tile_2";
                 break;
             case SurfaceTypes.WATER:
                 spriteName = "water_tile_1";
@@ -83,9 +83,16 @@ public class SurfaceTypes {
         graphics.drawImage(ResourceManager.getInstance().getImage(spriteName), screenX, screenY);
     }
 
-    public static boolean isMountain(byte b)
-    {
+    public static boolean isMountain(byte b) {
         return (b & MOUNTAINS_MASK) != 0;
+    }
+
+    public static byte getType(byte b) {
+        return (byte) (b & 0x0f);
+    }
+
+    public static boolean sameBaseSurfaceType(byte b1, byte b2) {
+        return getType(b1) == getType(b2);
     }
 
     public static boolean isPassible(LandingParty party, byte tileType) {
