@@ -61,6 +61,20 @@
     <resource type="image" id="rock_14">sprites/tiles/rock/tiles_0014.png</resource>
     <resource type="image" id="rock_15">sprites/tiles/rock/tiles_0015.png</resource>
 
+
+    <resource type="image" id="sand_4">sprites/tiles/sand/tiles_0004.png</resource>
+    <resource type="image" id="sand_5">sprites/tiles/sand/tiles_0005.png</resource>
+    <resource type="image" id="sand_6">sprites/tiles/sand/tiles_0006.png</resource>
+    <resource type="image" id="sand_7">sprites/tiles/sand/tiles_0007.png</resource>
+    <resource type="image" id="sand_8">sprites/tiles/sand/tiles_0008.png</resource>
+    <resource type="image" id="sand_9">sprites/tiles/sand/tiles_0009.png</resource>
+    <resource type="image" id="sand_10">sprites/tiles/sand/tiles_0010.png</resource>
+    <resource type="image" id="sand_11">sprites/tiles/sand/tiles_0011.png</resource>
+    <resource type="image" id="sand_12">sprites/tiles/sand/tiles_0012.png</resource>
+    <resource type="image" id="sand_13">sprites/tiles/sand/tiles_0013.png</resource>
+    <resource type="image" id="sand_14">sprites/tiles/sand/tiles_0014.png</resource>
+    <resource type="image" id="sand_15">sprites/tiles/sand/tiles_0015.png</resource>
+
     <!-- ore -->
     <resource type="image" id="iron_deposit">sprites/tiles/iron_deposit.png</resource>
     <resource type="image" id="gold_deposit">sprites/tiles/gold_deposit.png</resource>

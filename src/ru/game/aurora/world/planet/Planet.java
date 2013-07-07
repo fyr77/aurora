@@ -116,6 +116,7 @@ public class Planet extends BasePlanet {
         mountainSprites.put(104, "mountains_15");
 
         drawers.put(SurfaceTypes.ROCKS, new TileDrawer("rock", SurfaceTypes.ROCKS));
+        drawers.put(SurfaceTypes.DIRT, new TileDrawer("sand", SurfaceTypes.DIRT));
     }
 
     public Planet(StarSystem owner, Planet other) {
@@ -554,10 +555,10 @@ public class Planet extends BasePlanet {
                             , camera.getTileHeight()
                             , graphics);
                 }
-                /*if (SurfaceTypes.getType(type) == SurfaceTypes.ROCKS) {
+                if (SurfaceTypes.getType(type) == SurfaceTypes.DIRT) {
                     graphics.setColor(Color.red);
-                    graphics.fillRect(camera.getXCoord(j), camera.getYCoord(i), camera.getTileWidth(), camera.getTileHeight());
-                } */
+                    graphics.drawRect(camera.getXCoord(j), camera.getYCoord(i), camera.getTileWidth(), camera.getTileHeight());
+                }
                 // now draw edges of next sprites
                 Set<Byte> neighbours = new TreeSet<>();
                 for (int ii = -1; ii <= 1; ++ii) {
@@ -567,7 +568,7 @@ public class Planet extends BasePlanet {
                         }
 
                         byte st = SurfaceTypes.getType(surface[wrapY(i + ii)][wrapX(j + jj)]);
-                        if (st <= surface[i][j]) {
+                        if (st <= SurfaceTypes.getType(surface[i][j])) {
                             continue;
                         }
                         neighbours.add(st);

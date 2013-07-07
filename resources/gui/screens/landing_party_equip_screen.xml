@@ -3,14 +3,24 @@
         <layer childLayout="absolute">
             <control id="equip_window" name="window" title="Engineering" width="80%" height="80%" x="10%" y="10%">
                 <panel childLayout="vertical">
-                    <text font="font.fnt" text="Scientists:" textHAlign="left" />
-                    <control id="scientists_count" name="horizontalScrollbar" worldMax="10" worldPageSize="1" initial="1" buttonStepSize="1" pageStepSize="1" />
-                    <text font="font.fnt" text="Engineers:" textHAlign="left" />
-                    <control id="engineers_count" name="horizontalScrollbar" worldMax="10" worldPageSize="1" initial="1" buttonStepSize="1" pageStepSize="1" />
-                    <text font="font.fnt" text="Military:" textHAlign="left" />
-                    <control id="military_count" name="horizontalScrollbar" worldMax="10" worldPageSize="1" initial="1" buttonStepSize="1" pageStepSize="1" />
-                    <text id="total_count" font="font.fnt" text="Total crew: 0/10" textHAlign="left" />
-                    <control id="weapon_select" name="dropDown" />
+                    <text font="font.fnt" text="Scientists:" textHAlign="left"/>
+                    <control id="scientists_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1"
+                             initial="1" buttonStepSize="1" pageStepSize="1"/>
+                    <text font="font.fnt" text="Engineers:" textHAlign="left"/>
+                    <control id="engineers_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1" initial="1"
+                             buttonStepSize="1" pageStepSize="1"/>
+                    <text font="font.fnt" text="Military:" textHAlign="left"/>
+                    <control id="military_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1" initial="1"
+                             buttonStepSize="1" pageStepSize="1"/>
+                    <text id="total_count" font="font.fnt" text="Total crew: 0/10" textHAlign="left"/>
+                    <control id="weapon_select" name="dropDown"/>
+
+                    <panel childLayout="horizontal" height="50px">
+                        <panel width="80%"/>
+                        <control id="close_button" name="button" label="Ok" width="150px" height="45px">
+                            <interact onClick="closeScreen()"/>
+                        </control>
+                    </panel>
                 </panel>
             </control>
         </layer>

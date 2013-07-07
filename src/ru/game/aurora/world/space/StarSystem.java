@@ -22,7 +22,10 @@ import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
-import ru.game.aurora.world.planet.*;
+import ru.game.aurora.world.planet.BasePlanet;
+import ru.game.aurora.world.planet.LandingParty;
+import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetScanScreen;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -191,10 +194,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         int y = world.getPlayer().getShip().getY();
         int x = world.getPlayer().getShip().getX();
 
-        if (container.getInput().isKeyPressed(Input.KEY_E)) {
-            LandingPartyEquipScreen screen = new LandingPartyEquipScreen(false);
+        if (container.getInput().isKeyPressed(Input.KEY_L)) {
+            /*LandingPartyEquipScreen screen = new LandingPartyEquipScreen(false);
             screen.enter(world);
-            world.setCurrentRoom(screen);
+            world.setCurrentRoom(screen);*/
+            GUI.getInstance().pushCurrentScreen();
+            GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
             return;
         }
 
@@ -222,9 +227,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     if (p.canBeLanded() && (landingParty == null || !landingParty.canBeLaunched(world))) {
                         // first landing, show 'Landing party equipment' screen
 
-                        LandingPartyEquipScreen screen = new LandingPartyEquipScreen(true);
-                        screen.enter(world);
-                        world.setCurrentRoom(screen);
+                        GUI.getInstance().pushCurrentScreen();
+                        GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
                         if (world.getGlobalVariables().containsKey("tutorial.landing")) {
                             // this is first landing on a planet, show tutorial dialog
                             Dialog d = Dialog.loadFromFile("dialogs/tutorials/planet_landing_tutorial.json");
@@ -341,8 +345,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return name;
     }
 
-    public void onWeaponButtonPressed(World world, int index)
-    {
+    public void onWeaponButtonPressed(World world, int index) {
         if (mode == MODE_MOVE) {
             selectedWeapon = index;
             Ship playerShip = world.getPlayer().getShip();
@@ -501,7 +504,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         for (SpaceObject ship : ships) {
             ship.draw(container, g, camera);
             if (ship.getX() == player.getShip().getX() && ship.getY() == player.getShip().getY()) {
-               // GameLogger.getInstance().addStatusMessage("Press <enter> to contact");
+                // GameLogger.getInstance().addStatusMessage("Press <enter> to contact");
             }
 
             if (mode == MODE_SHOOT && player.getShip().getDistance(ship) < selectedWeaponRange) {
