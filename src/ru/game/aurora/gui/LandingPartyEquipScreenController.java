@@ -13,8 +13,8 @@ import de.lessvoid.nifty.controls.ScrollbarChangedEvent;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.LandingParty;
 
 
@@ -29,7 +29,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
         this.world = world;
         landingParty = world.getPlayer().getLandingParty();
         if (landingParty == null) {
-            landingParty = new LandingParty(0, 0, new LandingPartyWeapon(1, 3, "Assault rifles"), 1, 1, 1);
+            landingParty = new LandingParty(0, 0, ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault"), 1, 1, 1);
             world.getPlayer().setLandingParty(landingParty);
         }
     }
