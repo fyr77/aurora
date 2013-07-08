@@ -577,10 +577,7 @@ public class Planet extends BasePlanet {
                             , camera.getTileHeight()
                             , graphics);
                 }
-                if (SurfaceTypes.getType(type) == SurfaceTypes.ROCKS) {
-                    graphics.setColor(Color.red);
-                    graphics.fillRect(camera.getXCoord(j), camera.getYCoord(i), camera.getTileWidth(), camera.getTileHeight());
-                }
+
                 // now draw edges of next sprites
                 Set<Byte> neighbours = new TreeSet<>();
                 for (int ii = -1; ii <= 1; ++ii) {
@@ -614,9 +611,9 @@ public class Planet extends BasePlanet {
             for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
                 // first draw outer mountains (that have only one neighbour on X)
                 for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; j++) {
-                  /*  if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.VISIBILITY_MASK) == 0) {
+                    if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.VISIBILITY_MASK) == 0) {
                         continue;
-                    }*/
+                    }
 
 
                     if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {

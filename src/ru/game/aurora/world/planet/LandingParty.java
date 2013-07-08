@@ -168,8 +168,8 @@ public class LandingParty implements GameObject, Positionable {
 
         Ship ship = world.getPlayer().getShip();
         ship.setMilitary(ship.getMilitary() + military);
-        ship.setMilitary(ship.getScientists() + science);
-        ship.setMilitary(ship.getEngineers() + engineers);
+        ship.setScientists(ship.getScientists() + science);
+        ship.setEngineers(ship.getEngineers() + engineers);
     }
 
     public int getTotalMembers() {

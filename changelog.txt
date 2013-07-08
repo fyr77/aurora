@@ -5,6 +5,7 @@ IN PROGRESS...
 
 + New GUI system using niffy-gui library
 * Nicer sprites for some objects
+* Planetary landscape now generated using Perlin noise, slow but effective
 
 =====================================================
 VERSION 0.0.7
