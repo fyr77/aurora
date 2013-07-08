@@ -11,10 +11,10 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.ui.ListWithIconAndDescrScreen;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
 
 
 public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
@@ -98,7 +98,7 @@ public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
         strings.clear();
         LandingParty party = world.getPlayer().getLandingParty();
         if (party == null) {
-            party = new LandingParty(0, 0, new LandingPartyWeapon(1, 3, "Assault rifles"), 1, 1, 1);
+            party = new LandingParty(0, 0, ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault"), 1, 1, 1);
             world.getPlayer().setLandingParty(party);
         }
         strings.add("Military: " + party.getMilitary());

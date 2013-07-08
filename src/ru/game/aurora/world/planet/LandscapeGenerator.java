@@ -7,15 +7,14 @@
 package ru.game.aurora.world.planet;
 
 
-import ru.game.aurora.application.CommonRandom;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import libnoiseforjava.util.NoiseMap;
 
 public class LandscapeGenerator {
 
-    private static final int ITERATIONS = 2;
+    private static PerlinNoiseGeneratorWrapper noiseGeneratorWrapper = new PerlinNoiseGeneratorWrapper();
+
+    // noise generation is rather slow, so generate noise SCALE_FACTOR times smaller than planet surface size, and then stretch
+    private static final int SCALE_FACTOR = 2;
 
     private static int wrap(int x, int size) {
         if (x < 0) {
@@ -26,148 +25,74 @@ public class LandscapeGenerator {
         return x;
     }
 
-    // check that every mountain tile has at least 1 neighbour both on x and on y (standalone mountain tiles can not be drawn correctly)
-    private static void updateMountains(byte[][] surface, int width, int height) {
-        boolean changed;
-        do {
-            changed = false;
-            for (int i = 0; i < height; ++i) {
-                for (int j = 0; j < width; ++j) {
-                    if (SurfaceTypes.isMountain(surface[i][j])) {
-                        continue;
-                    }
+    private static byte getTileForRockPlanet(double value)
+    {
+        if (value < -0.5) {
+            return SurfaceTypes.WATER;
+        }
 
-                    if (SurfaceTypes.isMountain(surface[wrap(i + 1, height)][j]) && SurfaceTypes.isMountain(surface[wrap(i - 1, height)][j])) {
-                        surface[i][j] |= SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
-                        changed = true;
-                        continue;
-                    }
+        if (value < -0.1) {
+            return SurfaceTypes.DIRT;
+        }
 
-                    if (SurfaceTypes.isMountain(surface[i][wrap(j - 1, width)]) && SurfaceTypes.isMountain(surface[i][wrap(j + 1, width)])) {
-                        surface[i][j] |= SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
-                        changed = true;
-                    }
-                }
-            }
-        } while (changed);
+        if (value < 0.4) {
+            return SurfaceTypes.ROCKS;
+        }
+
+        return SurfaceTypes.ROCKS | SurfaceTypes.MOUNTAINS_MASK;
     }
 
-    // check that every tile has at least 1 neighbour of same type both on x and on y (standalone tiles can not be drawn correctly)
-    private static void fixStandaloneTiles(byte[][] surface, int width, int height) {
-        boolean changed;
-        int iterations = 5;
-        do {
-            changed = false;
-            for (int i = 0; i < height; ++i) {
-                for (int j = 0; j < width; ++j) {
-                    boolean sameLeftNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[i][wrap(j - 1, width)]);
-                    boolean sameRightNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[i][wrap(j + 1, width)]);
+    private static byte getTileForIcePlanet(double value)
+    {
+        if (value < -0.4) {
+            return SurfaceTypes.WATER;
+        }
 
-                    if (!sameLeftNeighbour && !sameRightNeighbour) {
-                        surface[i][j] = (byte) (surface[i][j] & 0xf0 | SurfaceTypes.getType(surface[i][wrap(j - 1, width)]));
-                        changed = true;
-                        continue;
-                    }
+        if (value < 0) {
+            return SurfaceTypes.ICE;
+        }
 
-                    boolean sameUpperNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[wrap(i - 1, height)][j]);
-                    boolean sameLowerNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[wrap(i + 1, height)][j]);
+        if (value < 0.3) {
+            return SurfaceTypes.ROCKS;
+        }
 
-                    if (!sameUpperNeighbour && !sameLowerNeighbour) {
-                        surface[i][j] = (byte) (surface[i][j] & 0xf0 | SurfaceTypes.getType(surface[wrap(i - 1, height)][j]));
-                        changed = true;
-                    }
-
-                }
-            }
-        } while (changed && iterations-- > 0);
+        return SurfaceTypes.ROCKS | SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
     }
 
-    public static byte[][] generateLandscape(PlanetCategory cat, int width, int height) {
+    public static byte[][] generateLandscapePerlin(PlanetCategory cat, int width, int height)
+    {
+        if (width % SCALE_FACTOR != 0 || height % SCALE_FACTOR != 0) {
+            throw new IllegalArgumentException("Planet surface dimensions should be divided by " + SCALE_FACTOR);
+        }
+
+        final int noiseWidth = width / SCALE_FACTOR;
+        final int noiseHeight = height / SCALE_FACTOR;
+        NoiseMap noiseMap = noiseGeneratorWrapper.buildNoiseMap(noiseWidth, noiseHeight);
         byte[][] surface = new byte[height][width];
-        final Random random = CommonRandom.getRandom();
 
-        for (int i = 0; i < height; ++i) {
-            for (int j = 0; j < width; ++j) {
+        for (int y = 0; y < noiseHeight; ++y) {
+            for (int x = 0; x < noiseHeight; ++x) {
 
-                surface[i][j] = cat.availableSurfaces[random.nextInt(cat.availableSurfaces.length)];
-                if (random.nextInt(2) == 0) {
-                    surface[i][j] |= SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
+                for (int i = 0; i < SCALE_FACTOR; ++i) {
+                    for (int j = 0; j < SCALE_FACTOR; ++j) {
+                        switch (cat) {
+                            case PLANET_ROCK:
+                                surface[y * SCALE_FACTOR + i][x * SCALE_FACTOR + j] = getTileForRockPlanet(noiseMap.getValue(x, y));
+                                break;
+                            case PLANET_ICE:
+                                surface[y * SCALE_FACTOR + i][x * SCALE_FACTOR + j] = getTileForIcePlanet(noiseMap.getValue(x, y));
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Unsupported planet category for surface generator");
+                        }
+                    }
                 }
+
             }
         }
-
-        // generate mountain clusters
-        for (int i = 0; i < random.nextInt(50) + 20; ++i) {
-            int centerX = random.nextInt(width);
-            int centerY = random.nextInt(height);
-
-            for (int j = 0; j < random.nextInt(80) + 10; ++j) {
-                final int x = wrap(centerX + random.nextInt(20) - 10, width);
-                final int y = wrap(centerY + random.nextInt(20) - 10, height);
-                surface[y][x] |= SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
-            }
-        }
-
-        // cellular automata method described here http://roguebasin.roguelikedevelopment.org/index.php?title=Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels
-        Map<Byte, Byte> neighbours = new HashMap<Byte, Byte>();
-        for (int iter = 0; iter < ITERATIONS; ++iter) {
-            for (int i = 0; i < height; ++i) {
-                for (int j = 0; j < width; ++j) {
-                    neighbours.clear();
-
-                    int mountainCount = 0;
-                    for (int ii = -1; ii <= 1; ++ii) {
-                        for (int jj = -1; jj <= 1; ++jj) {
-                            if ((surface[wrap(j + jj, height)][wrap(i + ii, width)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {
-                                mountainCount++;
-                            }
-                            byte tileValue = (byte) (surface[wrap(j + jj, height)][wrap(i + ii, width)] & 0x0F);
-
-                            Byte b = neighbours.get(tileValue);
-                            if (b == null) {
-                                b = 0;
-                            }
-                            neighbours.put(tileValue, (byte) (b + 1));
-                        }
-                    }
-
-                    for (Map.Entry<Byte, Byte> e : neighbours.entrySet()) {
-
-                        if (e.getValue() >= 5) {
-                            surface[j][i] = e.getKey();
-                            break;
-                        }
-                    }
-
-                    boolean sameLeftNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[i][wrap(j - 1, width)]);
-                    boolean sameRightNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[i][wrap(j + 1, width)]);
-
-                    if (!sameLeftNeighbour && !sameRightNeighbour) {
-                        surface[i][j] = (byte) (surface[i][j] & 0xf0 | SurfaceTypes.getType(surface[i][wrap(j - 1, width)]));
-                        continue;
-                    }
-
-                    boolean sameUpperNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[wrap(i - 1, height)][j]);
-                    boolean sameLowerNeighbour = SurfaceTypes.sameBaseSurfaceType(surface[i][j], surface[wrap(i + 1, height)][j]);
-
-                    if (!sameUpperNeighbour && !sameLowerNeighbour) {
-                        surface[i][j] = (byte) (surface[i][j] & 0xf0 | SurfaceTypes.getType(surface[wrap(i - 1, height)][j]));
-                    }
-
-                    if (mountainCount >= 4) {
-                        surface[i][j] |= SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
-                    } else {
-                        if (SurfaceTypes.isMountain(surface[i][j])) {
-                            surface[i][j] ^= SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
-                        }
-                    }
-
-
-                }
-            }
-        }
-        updateMountains(surface, width, height);
-        fixStandaloneTiles(surface, width, height);
         return surface;
     }
+
+
+
 }

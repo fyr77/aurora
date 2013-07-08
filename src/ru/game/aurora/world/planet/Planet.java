@@ -80,6 +80,8 @@ public class Planet extends BasePlanet {
      */
     private AnimalSpeciesDesc[] animalSpecies;
 
+    private boolean hasLife;
+
     /**
      * Animals that are located on planet surface.
      */
@@ -124,6 +126,9 @@ public class Planet extends BasePlanet {
         this.width = other.width;
         this.height = other.height;
         surface = new byte[height][width];
+        if (other.surface == null) {
+            other.createSurface();
+        }
         for (int i = 0; i < height; ++i) {
             System.arraycopy(other.surface[i], 0, surface[i], 0, width);
         }
@@ -132,7 +137,6 @@ public class Planet extends BasePlanet {
 
     public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
         super(size, y, owner, atmosphere, x, cat);
-        final Random r = CommonRandom.getRandom();
         switch (size) {
             case 1:
                 this.width = 500;
@@ -153,6 +157,13 @@ public class Planet extends BasePlanet {
             default:
                 throw new IllegalArgumentException("Unsupported planet size value");
         }
+        this.hasLife = hasLife;
+    }
+
+    private void createSurface()
+    {
+        final Random r = CommonRandom.getRandom();
+
         // different planets will have different probabilities for tiles
         int mountainProbability = r.nextInt(5) + 2;
         ProbabilitySet<Byte> ps = new ProbabilitySet<Byte>();
@@ -160,7 +171,10 @@ public class Planet extends BasePlanet {
             ps.put(b, r.nextDouble() * (r.nextInt(5) + 1));
         }
 
-        surface = LandscapeGenerator.generateLandscape(cat, width, height);
+        //surface = LandscapeGenerator.generateLandscape(cat, width, height);
+        long start = System.currentTimeMillis();
+        surface = LandscapeGenerator.generateLandscapePerlin(category, width, height);
+        System.out.println("Generated landscape in " + (System.currentTimeMillis() - start));
 
         createOreDeposits(size, r);
 
@@ -203,6 +217,9 @@ public class Planet extends BasePlanet {
 
 
     public void setNearestFreePoint(Positionable p, int x, int y) {
+        if (surface == null) {
+            createSurface();
+        }
         while (!SurfaceTypes.isPassible(surface[y][wrapX(x)])) {
             x++;
         }
@@ -217,6 +234,9 @@ public class Planet extends BasePlanet {
 
     @Override
     public void enter(World world) {
+        if (surface == null) {
+            createSurface();
+        }
         landingParty = world.getPlayer().getLandingParty();
         landingParty.onLaunch(world);
         landingParty.refillOxygen();
@@ -531,6 +551,9 @@ public class Planet extends BasePlanet {
 
 
     public void drawLandscape(GameContainer container, Graphics graphics, Camera camera, boolean detailed) {
+        if (surface == null) {
+            createSurface();
+        }
         for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
             for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; ++j) {
 
@@ -555,10 +578,7 @@ public class Planet extends BasePlanet {
                             , camera.getTileHeight()
                             , graphics);
                 }
-                if (SurfaceTypes.getType(type) == SurfaceTypes.DIRT) {
-                    graphics.setColor(Color.red);
-                    graphics.drawRect(camera.getXCoord(j), camera.getYCoord(i), camera.getTileWidth(), camera.getTileHeight());
-                }
+
                 // now draw edges of next sprites
                 Set<Byte> neighbours = new TreeSet<>();
                 for (int ii = -1; ii <= 1; ++ii) {
@@ -568,7 +588,7 @@ public class Planet extends BasePlanet {
                         }
 
                         byte st = SurfaceTypes.getType(surface[wrapY(i + ii)][wrapX(j + jj)]);
-                        if (st <= SurfaceTypes.getType(surface[i][j])) {
+                        if (st <= SurfaceTypes.getType(surface[wrapY(i)][wrapX(j)])) {
                             continue;
                         }
                         neighbours.add(st);
@@ -578,7 +598,7 @@ public class Planet extends BasePlanet {
                 for (Byte b : neighbours) {
                     TileDrawer td = drawers.get(b);
                     if (td != null) {
-                        td.drawTile(graphics, camera, this, i, j);
+                        td.drawTile(graphics, camera, this, wrapY(i), wrapX(j));
                     }
                 }
             }
@@ -713,14 +733,23 @@ public class Planet extends BasePlanet {
     }
 
     public byte getTileTypeAt(int x, int y) {
+        if (surface == null) {
+            createSurface();
+        }
         return surface[y][x];
     }
 
     public void setTileTypeAt(int x, int y, byte val) {
+        if (surface == null) {
+            createSurface();
+        }
         surface[y][x] = val;
     }
 
     public void xorMaskAt(int x, int y, byte mask) {
+        if (surface == null) {
+            createSurface();
+        }
         surface[y][x] ^= mask;
     }
 

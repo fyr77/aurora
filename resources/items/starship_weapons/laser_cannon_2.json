@@ -1,0 +1,10 @@
+{
+    "id" : "laser_cannon2",
+    "damage" : 2,
+    "name": "Adv. Laser cannon",
+    "desc": "High-energy laser cannon",
+    "shotSprite" : "blaster_shot",
+    "range" : 3,
+    "image" : "ship_laser",
+    "reloadTurns" : 3
+}

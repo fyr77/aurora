@@ -7,8 +7,10 @@
 package ru.game.aurora.world.planet;
 
 import libnoiseforjava.exception.ExceptionInvalidParam;
-import libnoiseforjava.module.Perlin;
-import libnoiseforjava.util.*;
+import libnoiseforjava.util.ColorCafe;
+import libnoiseforjava.util.ImageCafe;
+import libnoiseforjava.util.NoiseMap;
+import libnoiseforjava.util.RendererImage;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.ImageBuffer;
 import ru.game.aurora.application.Camera;
@@ -70,9 +72,7 @@ public class PlanetSpriteGenerator {
 
     private Map<PlanetSpriteParameters, Collection<Image>> cache = new HashMap<PlanetSpriteParameters, Collection<Image>>();
 
-    private Perlin p = new Perlin();
-
-    private int seedIncrementer = 0;
+    private PerlinNoiseGeneratorWrapper noiseGeneratorWrapper = new PerlinNoiseGeneratorWrapper();
 
     private static final int SPRITES_PER_PLANET_TYPE = 3;
 
@@ -190,15 +190,7 @@ public class PlanetSpriteGenerator {
 
             final int noiseWidth = (int) Math.ceil(width / (float)SCALE);
             final int noiseHeight = (int) Math.ceil(height / (float)SCALE);
-            NoiseMap heightMap = new NoiseMap(noiseWidth, noiseHeight);
-
-            p.setSeed((int) System.currentTimeMillis() + (seedIncrementer++));
-            NoiseMapBuilderPlane heightMapBuilder = new NoiseMapBuilderPlane();
-            heightMapBuilder.setSourceModule(p);
-            heightMapBuilder.setDestNoiseMap(heightMap);
-            heightMapBuilder.setDestSize(noiseWidth, noiseHeight);
-            heightMapBuilder.setBounds(2.0, 6.0, 1.0, 5.0);
-            heightMapBuilder.build();
+            NoiseMap heightMap = noiseGeneratorWrapper.buildNoiseMap(noiseWidth, noiseHeight);
 
             RendererImage renderer = new RendererImage();
             ImageCafe image = new ImageCafe(noiseWidth, noiseHeight);

@@ -5,6 +5,8 @@ IN PROGRESS...
 
 + New GUI system using niffy-gui library
 * Nicer sprites for some objects
+* Planetary landscape now generated using Perlin noise, slow but effective
+* Crew weapons are now stored in json
 
 =====================================================
 VERSION 0.0.7

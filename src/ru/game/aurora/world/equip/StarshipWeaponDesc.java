@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 public class StarshipWeaponDesc implements Serializable, JsonConfigManager.EntityWithId
 {
-    private static final long serialVersionUID = -6078375681186450286L;
+    private static final long serialVersionUID = 1L;
 
     public final String id;
 
@@ -29,7 +29,9 @@ public class StarshipWeaponDesc implements Serializable, JsonConfigManager.Entit
 
     public final int reloadTurns;
 
-    public StarshipWeaponDesc(int damage, String id, String name, String desc, String shotSprite, int range, int reloadTurns) {
+    public final String image;
+
+    public StarshipWeaponDesc(int damage, String id, String name, String desc, String shotSprite, int range, int reloadTurns, String image) {
         this.id = id;
         this.damage = damage;
         this.name = name;
@@ -37,6 +39,7 @@ public class StarshipWeaponDesc implements Serializable, JsonConfigManager.Entit
         this.shotSprite = shotSprite;
         this.range = range;
         this.reloadTurns = reloadTurns;
+        this.image = image;
     }
 
     @Override

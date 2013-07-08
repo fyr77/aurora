@@ -1,0 +1,7 @@
+{
+    "id" : "laser",
+    "name" : "Laser rifles",
+    "range" : 3,
+    "damage" : 2,
+    "image" : "crew_laser"
+}

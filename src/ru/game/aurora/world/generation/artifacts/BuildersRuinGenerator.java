@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world.generation.artifacts;
 
+import ru.game.aurora.application.GlobalThreadPool;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.util.CollectionUtils;
@@ -44,10 +45,23 @@ public class BuildersRuinGenerator implements WorldGeneratorPart
         // select 10 random star systems
         Set<StarSystem> updatedSystems = new HashSet<StarSystem>();
         for (int i = 0; i < Math.min(SYSTEMS, world.getGalaxyMap().getObjects().size()); ++i) {
-            GalaxyMapObject obj = CollectionUtils.selectRandomElement(world.getGalaxyMap().getObjects());
+            final GalaxyMapObject obj = CollectionUtils.selectRandomElement(world.getGalaxyMap().getObjects());
             if (StarSystem.class.isAssignableFrom(obj.getClass()) && !updatedSystems.contains(obj)) {
-                updateStarSystem((StarSystem) obj);
+                GlobalThreadPool.getExecutor().submit(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateStarSystem((StarSystem) obj);
+                    }
+                });
                 updatedSystems.add((StarSystem) obj);
+            }
+        }
+
+        while (GlobalThreadPool.getExecutor().getQueue().size() + GlobalThreadPool.getExecutor().getActiveCount() > 0) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignore) {
+
             }
         }
     }

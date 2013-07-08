@@ -7,12 +7,13 @@ package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
-import de.lessvoid.nifty.controls.button.ButtonControl;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.gui.niffy.ImageButtonController;
 import ru.game.aurora.gui.niffy.ProgressBarControl;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.Ship;
@@ -116,13 +117,15 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
     public void updateWeapons() {
         for (int i = 0; i < 4; ++i) {
-            final ButtonControl buttonControl = myScreen.findControl("weapon_" + i + "_button", ButtonControl.class);
+            final ImageButtonController buttonControl = myScreen.findNiftyControl("weapon_" + i + "_button", ImageButtonController.class);
             if (buttonControl == null) {
                 // this is another window controlled by same controller
                 return;
             }
             if (i < world.getPlayer().getShip().getWeapons().size()) {
                 buttonControl.enable();
+                buttonControl.setImage(ResourceManager.getInstance().getImage(world.getPlayer().getShip().getWeapons().get(i).getWeaponDesc().image));
+                //buttonControl.getElement().getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(world.getPlayer().getShip().getWeapons().get(i).getWeaponDesc().image))));
             } else {
                 buttonControl.disable();
             }

@@ -1,0 +1,7 @@
+{
+    "id" : "assault",
+    "name" : "Assault rifles",
+    "range" : 3,
+    "damage" : 1,
+    "image" : "crew_rifle"
+}

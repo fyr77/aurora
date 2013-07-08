@@ -7,6 +7,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -36,6 +37,8 @@ public class ResourceManager {
     private Map<String, String> textMap;
 
     private JsonConfigManager<StarshipWeaponDesc> weapons = new JsonConfigManager<StarshipWeaponDesc>(StarshipWeaponDesc.class, "resources/items/starship_weapons");
+
+    private JsonConfigManager<LandingPartyWeapon> landingPartyWeapons = new JsonConfigManager<LandingPartyWeapon>(LandingPartyWeapon.class, "resources/items/crew_weapons");
 
     private ResourceManager() {
         soundMap = new HashMap<String, Sound>();
@@ -249,5 +252,9 @@ public class ResourceManager {
 
     public JsonConfigManager<StarshipWeaponDesc> getWeapons() {
         return weapons;
+    }
+
+    public JsonConfigManager<LandingPartyWeapon> getLandingPartyWeapons() {
+        return landingPartyWeapons;
     }
 }
