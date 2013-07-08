@@ -8,6 +8,7 @@ package ru.game.aurora.world.generation;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.GlobalThreadPool;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.GardenerGenerator;
@@ -22,10 +23,11 @@ import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Future;
 
 /**
  * Generates world in separate thread
@@ -40,8 +42,6 @@ public class WorldGenerator implements Runnable {
     public static final int worldHeight = 100;
 
     private World world;
-
-    private ExecutorService executor = Executors.newFixedThreadPool(4);
 
     private static final WorldGeneratorPart[] questGenerators = {
             new InitialRadioEmissionQuestGenerator()
@@ -76,10 +76,10 @@ public class WorldGenerator implements Runnable {
 
     private void generateMap(final World world) {
         currentStatus = "Generating star systems";
-
+        List<Future> futures = new ArrayList<>(maxStars);
         // now generate random star systems
         for (int i = 0; i < maxStars; ++i) {
-            executor.submit(new Runnable() {
+            futures.add(GlobalThreadPool.getExecutor().submit(new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -101,15 +101,19 @@ public class WorldGenerator implements Runnable {
                         t.printStackTrace();
                     }
                 }
-            });
+            }));
         }
-        executor.shutdown();
 
-        while (true) {
+
+        while (!futures.isEmpty()) {
             try {
-                if (executor.awaitTermination(1, TimeUnit.SECONDS)) {
-                    break;
+                for (Iterator<Future> iter = futures.iterator(); iter.hasNext();) {
+                    Future f = iter.next();
+                    if (f.isDone()) {
+                        iter.remove();
+                    }
                 }
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 // nothing
             }

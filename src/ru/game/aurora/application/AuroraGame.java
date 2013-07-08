@@ -33,7 +33,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
     public static final int tilesY = 15;
 
-    final Camera camera = new Camera(0, 0, tilesX - 5, tilesY, tileSize, tileSize);
+    final Camera camera = new Camera(0, 0, tilesX, tilesY, tileSize, tileSize);
 
     public AuroraGame() {
 
