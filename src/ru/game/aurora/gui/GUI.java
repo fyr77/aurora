@@ -78,6 +78,7 @@ public class GUI {
         nifty.registerScreenController(surfaceGUIController);
 
         // load xmls
+        nifty.addXml("gui/screens/image_button.xml");
         nifty.addXml("gui/screens/progress_bar.xml");
         nifty.addXml("gui/screens/space_gui.xml");
         nifty.addXml("gui/screens/list_screen.xml");
