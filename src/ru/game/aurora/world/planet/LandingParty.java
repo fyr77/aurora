@@ -215,6 +215,9 @@ public class LandingParty implements GameObject, Positionable {
     public void subtractHp(int amount) {
         while (amount > 0) {
             int amountToSubtract = Math.min(hp, amount);
+            if (amountToSubtract <= 0) {
+                break;
+            }
             hp -= amountToSubtract;
             if (hp == 0) {
                 // landing party member killed
