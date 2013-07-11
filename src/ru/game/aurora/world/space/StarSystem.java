@@ -222,9 +222,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     GameLogger.getInstance().logMessage("Descending to surface...");
 
                     world.setCurrentRoom(p);
-
+                    p.enter(world);
                     final LandingParty landingParty = world.getPlayer().getLandingParty();
-                    if (p.canBeLanded() && (landingParty == null || !landingParty.canBeLaunched(world))) {
+                    if (p.canBeLanded() && (landingParty == null || !landingParty.canBeLaunched(world) || world.getGlobalVariables().containsKey("tutorial.landing"))) {
                         // first landing, show 'Landing party equipment' screen
 
                         GUI.getInstance().pushCurrentScreen();
@@ -235,8 +235,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                             world.addOverlayWindow(d);
                             world.getGlobalVariables().remove("tutorial.landing");
                         }
-                    } else {
-                        p.enter(world);
                     }
                     break;
                 } else if (container.getInput().isKeyPressed(Input.KEY_S)) {
@@ -479,7 +477,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         for (BasePlanet p : planets) {
-          /*  if (p.getGlobalX() == player.getShip().getX() && p.getGlobalY() == player.getShip().getY()) {
+            /*  if (p.getGlobalX() == player.getShip().getX() && p.getGlobalY() == player.getShip().getY()) {
                 GameLogger.getInstance().addStatusMessage("Approaching planet: ");
                 GameLogger.getInstance().addStatusMessage("Press <S> to scan");
                 GameLogger.getInstance().addStatusMessage("Press <enter> to launch surface party");

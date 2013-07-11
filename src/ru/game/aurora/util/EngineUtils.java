@@ -6,15 +6,26 @@
  */
 package ru.game.aurora.util;
 
+import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.render.ImageRenderer;
+import de.lessvoid.nifty.render.NiftyImage;
+import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
+import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.gui.GUI;
 
 import java.awt.image.BufferedImage;
 
 
 public class EngineUtils {
+
+    public static void setImageForGUIElement(Element element, String imageName)
+    {
+        element.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(imageName))));
+    }
 
     /**
      * Returns a lighter version of a color

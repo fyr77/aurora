@@ -65,6 +65,9 @@
                     <control id="engineering_button" name="button" label="Engineering" width="90%" height="7%">
                         <interact onClick="openEngineeringScreen()"/>
                     </control>
+                    <control id="landing_party_equip_button" name="button" label="Landing party" width="90%" height="7%">
+                        <interact onClick="openLandingPartyScreen()"/>
+                    </control>
                     <control id="menu_button" name="button" label="Menu" width="90%" height="7%">
                         <interact onClick="openMenu()"/>
                     </control>

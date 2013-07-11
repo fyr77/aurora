@@ -240,4 +240,8 @@ public class LandingParty implements GameObject, Positionable {
     public int getHp() {
         return hp;
     }
+
+    public void setWeapon(LandingPartyWeapon weapon) {
+        this.weapon = weapon;
+    }
 }

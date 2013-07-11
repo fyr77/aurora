@@ -8,6 +8,8 @@
 package ru.game.aurora.world.equip;
 
 import ru.game.aurora.application.JsonConfigManager;
+import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.InventoryItem;
 
 import java.io.Serializable;
 
@@ -17,9 +19,9 @@ import java.io.Serializable;
  * Damage is calculated as [party combat strength] * [weapon damage],
  * where combat strength is 1 * number of military + 1/3 * (number of engineers and scientists)
  */
-public class LandingPartyWeapon implements Serializable, JsonConfigManager.EntityWithId {
+public class LandingPartyWeapon implements Serializable, JsonConfigManager.EntityWithId, InventoryItem {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private final String id;
 
@@ -52,11 +54,21 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
     }
 
     @Override
+    public void onReturnToShip(World world, int amount) {
+    }
+
+    @Override
     public String getId() {
         return id;
     }
 
     public String getImage() {
         return image;
+    }
+
+    @Override
+    public String toString()
+    {
+        return name + " " + damage + " DMG, " + range + " RNG";
     }
 }

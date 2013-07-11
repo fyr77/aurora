@@ -1,22 +1,37 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
     <screen id="landing_party_equip_screen" controller="ru.game.aurora.gui.LandingPartyEquipScreenController">
         <layer childLayout="absolute">
-            <control id="equip_window" name="window" title="Engineering" width="80%" height="80%" x="10%" y="10%">
-                <panel childLayout="vertical">
-                    <text font="font.fnt" text="Scientists:" textHAlign="left"/>
+            <control id="equip_window" name="window" title="Landing party configuration" width="50%" height="50%" x="25%" y="20%">
+                <panel childLayout="vertical" height="100%">
+                    <text font="font.fnt" id="scientists_count_text" text="Scientists:" textHAlign="left"/>
                     <control id="scientists_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1"
                              initial="1" buttonStepSize="1" pageStepSize="1"/>
-                    <text font="font.fnt" text="Engineers:" textHAlign="left"/>
+                    <text font="font.fnt" text="Engineers:" id="engineers_count_text" textHAlign="left"/>
                     <control id="engineers_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1" initial="1"
                              buttonStepSize="1" pageStepSize="1"/>
-                    <text font="font.fnt" text="Military:" textHAlign="left"/>
+                    <text font="font.fnt" text="Military:" id="military_count_text" textHAlign="left"/>
                     <control id="military_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1" initial="1"
                              buttonStepSize="1" pageStepSize="1"/>
                     <text id="total_count" font="font.fnt" text="Total crew: 0/10" textHAlign="left"/>
+
+                    <panel height="10px"/>
+                    <text font="font.fnt" text="Weapons:" textHAlign="left"/>
                     <control id="weapon_select" name="dropDown"/>
 
+                    <panel height="64px" childLayout="horizontal">
+                        <image id="selected_weapon_img" width="64px" height="64px"/>
+                        <panel width="10px"/>
+                        <text id="selected_weapon_text" font="font.fnt" text="Weapon descirption" textHAlign="left"/>
+                    </panel>
+
+                    <panel height="10px"/>
+                    <text font="font.fnt" text="Transport:" textHAlign="left"/>
+                    <control id="transport_select" name="dropDown"/>
+
+                    <panel height="10px"/>
+
                     <panel childLayout="horizontal" height="50px">
-                        <panel width="80%"/>
+                        <panel width="*"/>
                         <control id="close_button" name="button" label="Ok" width="150px" height="45px">
                             <interact onClick="closeScreen()"/>
                         </control>
