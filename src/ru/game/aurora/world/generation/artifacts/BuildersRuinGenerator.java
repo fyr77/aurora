@@ -20,9 +20,8 @@ import ru.game.aurora.world.space.StarSystem;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BuildersRuinGenerator implements WorldGeneratorPart
-{
-    private static final int SYSTEMS = 50;
+public class BuildersRuinGenerator implements WorldGeneratorPart {
+    private static final int SYSTEMS = 5;
 
     private static final long serialVersionUID = 1848518979450823837L;
 
