@@ -16,11 +16,14 @@ public class SurfaceTypes {
     // negative number means tile was not yet seen
     public static final byte WATER = 0x01;
 
-    public static final byte ROCKS = 0x02;
+    public static final byte ICE = 0x02;
 
-    public static final byte ICE = 0x04;
+    public static final byte DIRT = 0x03;
 
-    public static final byte DIRT = 0x08;
+    public static final byte ROCKS = 0x04;
+
+    public static final byte SNOW = 0x05;
+
 
     public static final byte OBSTACLE_MASK = 0x40;
 
@@ -39,6 +42,9 @@ public class SurfaceTypes {
                 break;
             case SurfaceTypes.ICE:
                 color = Color.white;
+                break;
+            case SurfaceTypes.SNOW:
+                color = Color.lightGray;
                 break;
             case SurfaceTypes.ROCKS:
                 color = Color.gray;
@@ -68,6 +74,9 @@ public class SurfaceTypes {
                 spriteName = "sand_tile_1";
                 break;
             case SurfaceTypes.ICE:
+                spriteName = "ice_tile_1";
+                break;
+            case SurfaceTypes.SNOW:
                 spriteName = "snow_tile_1";
                 break;
             case SurfaceTypes.ROCKS:

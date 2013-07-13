@@ -25,8 +25,7 @@ public class LandscapeGenerator {
         return x;
     }
 
-    private static byte getTileForRockPlanet(double value)
-    {
+    private static byte getTileForRockPlanet(double value) {
         if (value < -0.5) {
             return SurfaceTypes.WATER;
         }
@@ -42,25 +41,27 @@ public class LandscapeGenerator {
         return SurfaceTypes.ROCKS | SurfaceTypes.MOUNTAINS_MASK;
     }
 
-    private static byte getTileForIcePlanet(double value)
-    {
-        if (value < -0.4) {
+    private static byte getTileForIcePlanet(double value) {
+        if (value < -0.5) {
             return SurfaceTypes.WATER;
         }
 
-        if (value < 0) {
+        if (value < -0.2) {
             return SurfaceTypes.ICE;
         }
 
-        if (value < 0.3) {
+        if (value < 0.1) {
             return SurfaceTypes.ROCKS;
         }
 
-        return SurfaceTypes.ROCKS | SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
+        if (value < 0.5) {
+            return SurfaceTypes.SNOW;
+        }
+
+        return SurfaceTypes.SNOW | SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
     }
 
-    public static byte[][] generateLandscapePerlin(PlanetCategory cat, int width, int height)
-    {
+    public static byte[][] generateLandscapePerlin(PlanetCategory cat, int width, int height) {
         if (width % SCALE_FACTOR != 0 || height % SCALE_FACTOR != 0) {
             throw new IllegalArgumentException("Planet surface dimensions should be divided by " + SCALE_FACTOR);
         }
@@ -92,7 +93,6 @@ public class LandscapeGenerator {
         }
         return surface;
     }
-
 
 
 }

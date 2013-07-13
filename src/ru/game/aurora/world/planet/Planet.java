@@ -15,7 +15,6 @@ import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.util.CollectionUtils;
-import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
@@ -119,6 +118,9 @@ public class Planet extends BasePlanet {
 
         drawers.put(SurfaceTypes.ROCKS, new TileDrawer("rock", SurfaceTypes.ROCKS));
         drawers.put(SurfaceTypes.DIRT, new TileDrawer("sand", SurfaceTypes.DIRT));
+        drawers.put(SurfaceTypes.ICE, new TileDrawer("ice", SurfaceTypes.ICE));
+        drawers.put(SurfaceTypes.SNOW, new TileDrawer("snow", SurfaceTypes.SNOW));
+
     }
 
     public Planet(StarSystem owner, Planet other) {
@@ -160,18 +162,9 @@ public class Planet extends BasePlanet {
         this.hasLife = hasLife;
     }
 
-    private void createSurface()
-    {
+    private void createSurface() {
         final Random r = CommonRandom.getRandom();
 
-        // different planets will have different probabilities for tiles
-        int mountainProbability = r.nextInt(5) + 2;
-        ProbabilitySet<Byte> ps = new ProbabilitySet<Byte>();
-        for (byte b : category.availableSurfaces) {
-            ps.put(b, r.nextDouble() * (r.nextInt(5) + 1));
-        }
-
-        //surface = LandscapeGenerator.generateLandscape(cat, width, height);
         long start = System.currentTimeMillis();
         surface = LandscapeGenerator.generateLandscapePerlin(category, width, height);
         System.out.println("Generated landscape in " + (System.currentTimeMillis() - start));

@@ -6,14 +6,9 @@
 package ru.game.aurora.world.planet;
 
 public enum PlanetCategory {
-    PLANET_ROCK(new byte[]{SurfaceTypes.DIRT, SurfaceTypes.ROCKS, SurfaceTypes.WATER}),
 
-    PLANET_ICE(new byte[]{SurfaceTypes.ICE, SurfaceTypes.ROCKS});
+    PLANET_ROCK,
 
-    PlanetCategory(byte[] availableSurfaces) {
-        this.availableSurfaces = availableSurfaces;
-    }
-
-    public byte[] availableSurfaces;
+    PLANET_ICE
 
 }

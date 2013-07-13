@@ -32,7 +32,8 @@
     <resource type="image" id="rock_tile_1">sprites/tiles/rock-1.png</resource>
     <resource type="image" id="rock_tile_2">sprites/tiles/stonetext.png</resource>
     <resource type="image" id="sand_tile_1">sprites/tiles/sand-1.png</resource>
-    <resource type="image" id="snow_tile_1">sprites/tiles/snow-1.png</resource>
+    <resource type="image" id="snow_tile_1">sprites/tiles/snowtext.png</resource>
+    <resource type="image" id="ice_tile_1">sprites/tiles/icetext.png</resource>
     <resource type="image" id="water_tile_1">sprites/tiles/water-1.png</resource>
 
     <resource type="image" id="mountains_4">sprites/tiles/mountains/tiles_0004.png</resource>
@@ -74,6 +75,32 @@
     <resource type="image" id="sand_13">sprites/tiles/sand/tiles_0013.png</resource>
     <resource type="image" id="sand_14">sprites/tiles/sand/tiles_0014.png</resource>
     <resource type="image" id="sand_15">sprites/tiles/sand/tiles_0015.png</resource>
+
+    <resource type="image" id="ice_4">sprites/tiles/ice/tiles_0004.png</resource>
+    <resource type="image" id="ice_5">sprites/tiles/ice/tiles_0005.png</resource>
+    <resource type="image" id="ice_6">sprites/tiles/ice/tiles_0006.png</resource>
+    <resource type="image" id="ice_7">sprites/tiles/ice/tiles_0007.png</resource>
+    <resource type="image" id="ice_8">sprites/tiles/ice/tiles_0008.png</resource>
+    <resource type="image" id="ice_9">sprites/tiles/ice/tiles_0009.png</resource>
+    <resource type="image" id="ice_10">sprites/tiles/ice/tiles_0010.png</resource>
+    <resource type="image" id="ice_11">sprites/tiles/ice/tiles_0011.png</resource>
+    <resource type="image" id="ice_12">sprites/tiles/ice/tiles_0012.png</resource>
+    <resource type="image" id="ice_13">sprites/tiles/ice/tiles_0013.png</resource>
+    <resource type="image" id="ice_14">sprites/tiles/ice/tiles_0014.png</resource>
+    <resource type="image" id="ice_15">sprites/tiles/ice/tiles_0015.png</resource>
+
+    <resource type="image" id="snow_4">sprites/tiles/snow/tiles_0004.png</resource>
+    <resource type="image" id="snow_5">sprites/tiles/snow/tiles_0005.png</resource>
+    <resource type="image" id="snow_6">sprites/tiles/snow/tiles_0006.png</resource>
+    <resource type="image" id="snow_7">sprites/tiles/snow/tiles_0007.png</resource>
+    <resource type="image" id="snow_8">sprites/tiles/snow/tiles_0008.png</resource>
+    <resource type="image" id="snow_9">sprites/tiles/snow/tiles_0009.png</resource>
+    <resource type="image" id="snow_10">sprites/tiles/snow/tiles_0010.png</resource>
+    <resource type="image" id="snow_11">sprites/tiles/snow/tiles_0011.png</resource>
+    <resource type="image" id="snow_12">sprites/tiles/snow/tiles_0012.png</resource>
+    <resource type="image" id="snow_13">sprites/tiles/snow/tiles_0013.png</resource>
+    <resource type="image" id="snow_14">sprites/tiles/snow/tiles_0014.png</resource>
+    <resource type="image" id="snow_15">sprites/tiles/snow/tiles_0015.png</resource>
 
     <!-- ore -->
     <resource type="image" id="iron_deposit">sprites/tiles/iron_deposit.png</resource>
