@@ -10,13 +10,18 @@ package ru.game.aurora.player.engineering;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class EngineeringState implements Serializable {
-    private static final long serialVersionUID = 4160857126094990451L;
+    private static final long serialVersionUID = 1L;
 
     private int idleEngineers;
 
     private HullRepairs hullRepairs;
+
+    private List<EngineeringProject> projects = new LinkedList<>();
 
     public EngineeringState(int idleEngineers) {
         this.idleEngineers = idleEngineers;
@@ -25,6 +30,13 @@ public class EngineeringState implements Serializable {
 
     public void update(World world) {
         hullRepairs.update(world);
+
+        for (Iterator<EngineeringProject> iter = projects.iterator(); iter.hasNext();) {
+            EngineeringProject ep = iter.next();
+            if (!ep.update(world)) {
+                iter.remove();
+            }
+        }
     }
 
 
@@ -42,5 +54,9 @@ public class EngineeringState implements Serializable {
 
     public void addIdleEngineers(int amount) {
         idleEngineers += amount;
+    }
+
+    public List<EngineeringProject> getProjects() {
+        return projects;
     }
 }

@@ -8,11 +8,16 @@ package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.controls.WindowClosedEvent;
+import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.elements.render.TextRenderer;
+import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
+import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.engineering.EngineeringState;
 import ru.game.aurora.player.engineering.HullRepairs;
 import ru.game.aurora.world.World;
@@ -30,6 +35,8 @@ public class EngineeringScreenController implements ScreenController
 
     private Element ruText;
 
+    private TabGroup tg;
+
     public EngineeringScreenController(World world) {
         this.world = world;
         engineeringState = world.getPlayer().getEngineeringState();
@@ -37,6 +44,7 @@ public class EngineeringScreenController implements ScreenController
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
+        tg = screen.findNiftyControl("engineering_tabs", TabGroup.class);
         pointsText = screen.findElementByName("hullPointsToRepair");
         engiText = screen.findElementByName("assignedEngineers");
         ruText = screen.findElementByName("requiredRuText");
@@ -111,5 +119,64 @@ public class EngineeringScreenController implements ScreenController
     public void closeScreen()
     {
         GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
+    }
+
+
+    @NiftyEventSubscriber(id = "itemsList")
+    public void onListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent event) {
+        Element imagePanel = tg.getSelectedTab().getElement().findElementByName("selectedItemImg");
+
+        TextRenderer tr = tg.getSelectedTab().getElement().findElementByName("selectedItemText").getRenderer(TextRenderer.class);
+        if (event.getSelection().isEmpty()) {
+            tr.setText("<No item selected>");
+            imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage("no_image"))));
+            return;
+        }
+        EngineeringProject ep = (EngineeringProject) event.getSelection().get(0);
+        tr.setText(ep.getText());
+        imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(ep.getIcon()))));
+        GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
+    }
+
+    public void onIncreaseEngineersButtonClicked() {
+        ListBox avail = tg.getSelectedTab().getElement().findNiftyControl("itemsList", ListBox.class);
+        if (avail.getSelection().isEmpty()) {
+            return;
+        }
+        final int idleEngineers = world.getPlayer().getEngineeringState().getIdleEngineers();
+        if (idleEngineers == 0) {
+            return;
+        }
+        EngineeringProject rp = (EngineeringProject) avail.getSelection().get(0);
+        rp.changeEngineers(1);
+        world.getPlayer().getEngineeringState().setIdleEngineers(idleEngineers - 1);
+        avail.refresh();
+
+    }
+
+    public void onDecreaseEngineersButtonClicked() {
+        ListBox avail = tg.getSelectedTab().getElement().findNiftyControl("itemsList", ListBox.class);
+        if (avail.getSelection().isEmpty()) {
+            return;
+        }
+        EngineeringProject ep = (EngineeringProject) avail.getSelection().get(0);
+        if (ep.getEngineersAssigned()== 0) {
+            return;
+        }
+        ep.changeEngineers(-1);
+        world.getPlayer().getEngineeringState().setIdleEngineers(world.getPlayer().getEngineeringState().getIdleEngineers() + 1);
+        avail.refresh();
+    }
+
+    // works for increase/decrease scientists buttons, makes item in list selected (by default clicking on button does not select item in list)
+    @NiftyEventSubscriber(pattern = ".*crease_engineers")
+    public void onClicked(String id, ButtonClickedEvent event) {
+
+        int numericId = Integer.parseInt(id.split("#")[0]);
+        ListBox itemsList =  tg.getSelectedTab().getElement().findNiftyControl("itemsList", ListBox.class);
+        // hack. No idea how ids are distributed between list elements, they seem to start from arbitrary number and be sorted in ascending order
+        // so in order to get index of clicked element, must subtract from its id id of the first one
+        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
+        itemsList.selectItemByIndex(numericId);
     }
 }
