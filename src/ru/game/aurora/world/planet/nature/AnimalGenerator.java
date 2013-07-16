@@ -103,8 +103,8 @@ public class AnimalGenerator {
                 centerY = part.image.getHeight() - centerY;
             }
             image = part.image.getFlippedCopy(point.flipHorizontal, point.flipVertical);
-            image.setCenterOfRotation(centerX, centerY);
         }
+        image.setCenterOfRotation(centerX, centerY);
 
         int x = anchor.getX() + point.x - centerX;
         int y = anchor.getY() + point.y - centerY;
