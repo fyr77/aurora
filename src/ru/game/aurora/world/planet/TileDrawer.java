@@ -81,13 +81,13 @@ public class TileDrawer {
     }
 
     public void drawTile(Graphics graphics, Camera camera, Planet planet, int tileY, int tileX) {
-        if (SurfaceTypes.sameBaseSurfaceType(planet.surface[tileY][tileX], mySurfaceType)) {
+        if (SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY)][planet.wrapX(tileX)], mySurfaceType)) {
             return;
         }
-        boolean left = SurfaceTypes.sameBaseSurfaceType(planet.surface[tileY][planet.wrapX(tileX - 1)], mySurfaceType);
-        boolean right = SurfaceTypes.sameBaseSurfaceType(planet.surface[tileY][planet.wrapX(tileX + 1)], mySurfaceType);
-        boolean up = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY - 1)][tileX], mySurfaceType);
-        boolean down = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY + 1)][tileX], mySurfaceType);
+        boolean left = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY)][planet.wrapX(tileX - 1)], mySurfaceType);
+        boolean right = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY)][planet.wrapX(tileX + 1)], mySurfaceType);
+        boolean up = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY - 1)][planet.wrapX(tileX)], mySurfaceType);
+        boolean down = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY + 1)][planet.wrapX(tileX)], mySurfaceType);
 
         boolean downLeft = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY + 1)][planet.wrapX(tileX - 1)], mySurfaceType);
         boolean downRight = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY + 1)][planet.wrapX(tileX + 1)], mySurfaceType);

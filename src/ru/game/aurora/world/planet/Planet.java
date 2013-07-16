@@ -591,7 +591,7 @@ public class Planet extends BasePlanet {
                 for (Byte b : neighbours) {
                     TileDrawer td = drawers.get(b);
                     if (td != null) {
-                        td.drawTile(graphics, camera, this, wrapY(i), wrapX(j));
+                        td.drawTile(graphics, camera, this, i/*wrapY(i)*/, j/*wrapX(j)*/);
                     }
                 }
             }
