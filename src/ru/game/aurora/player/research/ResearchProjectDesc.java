@@ -7,6 +7,7 @@
 package ru.game.aurora.player.research;
 
 import ru.game.aurora.player.earth.EarthResearch;
+import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
@@ -47,6 +48,8 @@ public abstract class ResearchProjectDesc implements Serializable
      */
     protected List<ResearchProjectDesc> makesAvailable;
 
+    protected List<EngineeringProject> makesAvailableEngineering;
+
     /**
      * This stuff is launched when this research is completed and its results are dumped on earth
      */
@@ -73,6 +76,14 @@ public abstract class ResearchProjectDesc implements Serializable
         makesAvailable.add(desc);
     }
 
+    public void addEngineeringResult(EngineeringProject desc)
+    {
+        if (makesAvailableEngineering == null) {
+            makesAvailableEngineering = new LinkedList<>();
+        }
+        makesAvailableEngineering.add(desc);
+    }
+
     public void addEarthProgressResearch(EarthResearch r)
     {
         if (earthProgress == null) {
@@ -83,6 +94,10 @@ public abstract class ResearchProjectDesc implements Serializable
 
     public List<ResearchProjectDesc> getMakesAvailable() {
         return makesAvailable;
+    }
+
+    public List<EngineeringProject> getMakesAvailableEngineering() {
+        return makesAvailableEngineering;
     }
 
     public List<EarthResearch> getEarthProgress() {

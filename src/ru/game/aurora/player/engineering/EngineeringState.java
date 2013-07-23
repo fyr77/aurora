@@ -7,12 +7,11 @@
 package ru.game.aurora.player.engineering;
 
 
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class EngineeringState implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -22,6 +21,8 @@ public class EngineeringState implements Serializable {
     private HullRepairs hullRepairs;
 
     private List<EngineeringProject> projects = new LinkedList<>();
+
+    private Set<String> completedProjectNames = new HashSet<>();
 
     public EngineeringState(int idleEngineers) {
         this.idleEngineers = idleEngineers;
@@ -58,5 +59,15 @@ public class EngineeringState implements Serializable {
 
     public List<EngineeringProject> getProjects() {
         return projects;
+    }
+
+    public void addNewEngineeringProject(EngineeringProject project)
+    {
+        if (!completedProjectNames.contains(project.getName())) {
+            projects.add(project);
+            GameLogger.getInstance().logMessage("Added new engineering project '" + project.getName() + "'");
+            // every project can be added only once
+            completedProjectNames.add(project.getName());
+        }
     }
 }

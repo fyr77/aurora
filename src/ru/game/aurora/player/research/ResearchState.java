@@ -7,6 +7,7 @@
 package ru.game.aurora.player.research;
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.research.projects.AnimalResearch;
 import ru.game.aurora.player.research.projects.AstronomyResearch;
 import ru.game.aurora.world.World;
@@ -88,6 +89,11 @@ public class ResearchState implements Serializable {
                     for (ResearchProjectDesc projectDesc : state.desc.getMakesAvailable()) {
                         toAdd.add(new ResearchProjectState(projectDesc));
                         GameLogger.getInstance().logMessage("New research project " + projectDesc.getName() + " is now available");
+                    }
+                }
+                if (state.desc.getMakesAvailableEngineering() != null) {
+                    for (EngineeringProject projectDesc : state.desc.getMakesAvailableEngineering()) {
+                        world.getPlayer().getEngineeringState().addNewEngineeringProject(projectDesc);
                     }
                 }
                 GameLogger.getInstance().logMessage("Research project " + state.desc.name + " completed");

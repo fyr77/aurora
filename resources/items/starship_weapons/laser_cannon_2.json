@@ -5,6 +5,6 @@
     "desc": "High-energy laser cannon",
     "shotSprite" : "blaster_shot",
     "range" : 3,
-    "image" : "ship_laser",
+    "image" : "ship_laser2",
     "reloadTurns" : 3
 }

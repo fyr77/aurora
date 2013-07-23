@@ -37,6 +37,8 @@ public class EngineeringScreenController implements ScreenController
 
     private TabGroup tg;
 
+    private ListBox projectsList;
+
     public EngineeringScreenController(World world) {
         this.world = world;
         engineeringState = world.getPlayer().getEngineeringState();
@@ -48,11 +50,14 @@ public class EngineeringScreenController implements ScreenController
         pointsText = screen.findElementByName("hullPointsToRepair");
         engiText = screen.findElementByName("assignedEngineers");
         ruText = screen.findElementByName("requiredRuText");
+        projectsList = screen.findNiftyControl("itemsList", ListBox.class);
     }
 
     @Override
     public void onStartScreen() {
         updateLabels();
+        projectsList.clear();
+        projectsList.addAllItems(world.getPlayer().getEngineeringState().getProjects());
     }
 
     @Override

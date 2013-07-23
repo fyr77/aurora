@@ -14,6 +14,7 @@ import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.EarthState;
 import ru.game.aurora.player.earth.PrivateMessage;
+import ru.game.aurora.player.engineering.projects.AdvancedLasers;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
@@ -168,6 +169,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 " \n We should also be careful, as creators of this beacon may not welcome our violation of their territory.");
         beaconResearchProject.setReport(beaconReport);
         beaconResearchProject.addEarthProgressResearch(new EarthEnergyResearch());
+        beaconResearchProject.addEngineeringResult(new AdvancedLasers());
 
         SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon");
         beacon.setResearchProjectDescs(beaconResearchProject);

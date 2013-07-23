@@ -44,4 +44,10 @@ public abstract class EngineeringProject extends ItemWithTextAndImage
     }
 
     public abstract void onCompleted(World world);
+
+    @Override
+    public String toString()
+    {
+        return name;
+    }
 }

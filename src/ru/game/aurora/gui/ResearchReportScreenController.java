@@ -54,6 +54,9 @@ public class ResearchReportScreenController implements ScreenController
         if (research.getMakesAvailable() != null) {
             nextResearch.addAllItems(research.getMakesAvailable());
         }
+        if (research.getMakesAvailableEngineering() != null) {
+            nextResearch.addAllItems(research.getMakesAvailableEngineering());
+        }
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
 

@@ -162,7 +162,7 @@
 
     <resource type="image" id="ship_rocket">sprites/weapons/ship/rocket_iso.png</resource>
     <resource type="image" id="ship_laser">sprites/weapons/ship/laser1_iso.png</resource>
-    <resource type="image" id="crew_laser2">sprites/weapons/ship/laser2_iso.png</resource>
+    <resource type="image" id="ship_laser2">sprites/weapons/ship/laser2_iso.png</resource>
 
 
     <!-- story -->
