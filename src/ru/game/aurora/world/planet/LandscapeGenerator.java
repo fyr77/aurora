@@ -34,6 +34,10 @@ public class LandscapeGenerator {
             return SurfaceTypes.DIRT;
         }
 
+        if (value < 0.2) {
+            return SurfaceTypes.STONES;
+        }
+
         if (value < 0.4) {
             return SurfaceTypes.ROCKS;
         }
@@ -50,7 +54,11 @@ public class LandscapeGenerator {
             return SurfaceTypes.ICE;
         }
 
-        if (value < 0.1) {
+        if (value < 0.0) {
+            return SurfaceTypes.STONES;
+        }
+
+        if (value < 0.2) {
             return SurfaceTypes.ROCKS;
         }
 

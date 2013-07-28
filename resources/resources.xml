@@ -25,8 +25,8 @@
     <resource type="image" id="target">sprites/gui/target.png</resource>
 
     <!-- tiles -->
-    <resource type="image" id="rock_tile_1">sprites/tiles/rock-1.png</resource>
-    <resource type="image" id="rock_tile_2">sprites/tiles/stonetext.png</resource>
+    <resource type="image" id="rock">sprites/tiles/rock-1.png</resource>
+    <resource type="image" id="stones">sprites/tiles/stonetext.png</resource>
     <resource type="image" id="sand_tile_1">sprites/tiles/sand-1.png</resource>
     <resource type="image" id="snow_tile_1">sprites/tiles/snowtext.png</resource>
     <resource type="image" id="ice_tile_1">sprites/tiles/icetext.png</resource>
@@ -84,6 +84,19 @@
     <resource type="image" id="ice_13">sprites/tiles/ice/tiles_0013.png</resource>
     <resource type="image" id="ice_14">sprites/tiles/ice/tiles_0014.png</resource>
     <resource type="image" id="ice_15">sprites/tiles/ice/tiles_0015.png</resource>
+
+    <resource type="image" id="stones_4">sprites/tiles/stones/tiles_0004.png</resource>
+    <resource type="image" id="stones_5">sprites/tiles/stones/tiles_0005.png</resource>
+    <resource type="image" id="stones_6">sprites/tiles/stones/tiles_0006.png</resource>
+    <resource type="image" id="stones_7">sprites/tiles/stones/tiles_0007.png</resource>
+    <resource type="image" id="stones_8">sprites/tiles/stones/tiles_0008.png</resource>
+    <resource type="image" id="stones_9">sprites/tiles/stones/tiles_0009.png</resource>
+    <resource type="image" id="stones_10">sprites/tiles/stones/tiles_0010.png</resource>
+    <resource type="image" id="stones_11">sprites/tiles/stones/tiles_0011.png</resource>
+    <resource type="image" id="stones_12">sprites/tiles/stones/tiles_0012.png</resource>
+    <resource type="image" id="stones_13">sprites/tiles/stones/tiles_0013.png</resource>
+    <resource type="image" id="stones_14">sprites/tiles/stones/tiles_0014.png</resource>
+    <resource type="image" id="stones_15">sprites/tiles/stones/tiles_0015.png</resource>
 
     <resource type="image" id="snow_4">sprites/tiles/snow/tiles_0004.png</resource>
     <resource type="image" id="snow_5">sprites/tiles/snow/tiles_0005.png</resource>

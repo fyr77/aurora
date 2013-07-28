@@ -117,6 +117,7 @@ public class Planet extends BasePlanet {
         mountainSprites.put(104, "mountains_15");
 
         drawers.put(SurfaceTypes.ROCKS, new TileDrawer("rock", SurfaceTypes.ROCKS));
+        drawers.put(SurfaceTypes.STONES, new TileDrawer("stones", SurfaceTypes.STONES));
         drawers.put(SurfaceTypes.DIRT, new TileDrawer("sand", SurfaceTypes.DIRT));
         drawers.put(SurfaceTypes.ICE, new TileDrawer("ice", SurfaceTypes.ICE));
         drawers.put(SurfaceTypes.SNOW, new TileDrawer("snow", SurfaceTypes.SNOW));

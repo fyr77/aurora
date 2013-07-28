@@ -20,9 +20,11 @@ public class SurfaceTypes {
 
     public static final byte DIRT = 0x03;
 
-    public static final byte ROCKS = 0x04;
+    public static final byte STONES = 0x04;
 
-    public static final byte SNOW = 0x05;
+    public static final byte ROCKS = 0x05;
+
+    public static final byte SNOW = 0x06;
 
 
     public static final byte OBSTACLE_MASK = 0x40;
@@ -46,8 +48,11 @@ public class SurfaceTypes {
             case SurfaceTypes.SNOW:
                 color = Color.lightGray;
                 break;
-            case SurfaceTypes.ROCKS:
+            case SurfaceTypes.STONES:
                 color = Color.gray;
+                break;
+            case SurfaceTypes.ROCKS:
+                color = Color.darkGray;
                 break;
             case SurfaceTypes.WATER:
                 color = Color.blue;
@@ -79,8 +84,11 @@ public class SurfaceTypes {
             case SurfaceTypes.SNOW:
                 spriteName = "snow_tile_1";
                 break;
+            case SurfaceTypes.STONES:
+                spriteName = "stones";
+                break;
             case SurfaceTypes.ROCKS:
-                spriteName = "rock_tile_2";
+                spriteName = "rock";
                 break;
             case SurfaceTypes.WATER:
                 spriteName = "water_tile_1";
