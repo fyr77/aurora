@@ -612,7 +612,7 @@ public class Planet extends BasePlanet {
 
 
                     if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {
-                        graphics.drawImage(ResourceManager.getInstance().getImage("rock_tile_1"), camera.getXCoord(j), camera.getYCoord(i));
+                        graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
                     }
                     if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) == 0) {
                         boolean left = ((surface[wrapY(i)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
@@ -628,7 +628,7 @@ public class Planet extends BasePlanet {
                         drawMountainTile(graphics, camera, i, j, left, right, up, down, downLeft, downRight, upLeft, upRight);
                     }
                     if (allNeighboursAreMountain(wrapX(j), wrapY(i + 1))) {
-                        graphics.drawImage(ResourceManager.getInstance().getImage("rock_tile_1"), camera.getXCoord(j), camera.getYCoord(i));
+                        graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
 
                     } else {
                         // draw 2nd floor
