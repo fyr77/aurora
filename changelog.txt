@@ -1,12 +1,17 @@
+VERSION 0.0.9
+
+IN PROGRESS...
+
 =====================================================
 VERSION 0.0.8
 
-IN PROGRESS...
+31.07.2013
 
 + New GUI system using niffy-gui library
 * Nicer sprites for some objects
 * Planetary landscape now generated using Perlin noise, slow but effective
 * Crew weapons are now stored in json
++ Engineering upgrade system implemented
 
 =====================================================
 VERSION 0.0.7
