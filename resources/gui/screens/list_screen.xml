@@ -13,7 +13,7 @@
                 </panel>
                 <panel height="10px" />
                 <control id="scrollbarPanelId" name="scrollPanel" horizontal="false">
-                    <text id="selectedItemText" font="font.fnt" wrap="true" text="No item selected" width="60%" textHAlign="left" />
+                    <text id="selectedItemText" font="font_noalpha.fnt" wrap="true" text="No item selected" width="60%" textHAlign="left" />
                 </control>
             </panel>
         </panel>

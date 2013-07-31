@@ -45,7 +45,7 @@
 
     <screen id="engineering_screen" controller="ru.game.aurora.gui.EngineeringScreenController">
         <layer childLayout="absolute">
-            <control id="engineering_window" name="window" title="Engineering" width="80%" height="80%" x="10%" y="10%">
+            <control id="engineering_window" name="window" hideOnClose="true" title="Engineering" width="80%" height="80%" x="10%" y="10%">
                 <panel childLayout="vertical">
                     <control id="engineering_tabs" name="tabGroup" buttonWidth="30%" buttonHeight="30px" height="650px">
                         <control id="repairs" name="tab" caption="Repairs" childLayout="vertical">

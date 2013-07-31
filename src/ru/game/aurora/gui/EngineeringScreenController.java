@@ -39,6 +39,10 @@ public class EngineeringScreenController implements ScreenController
 
     private ListBox projectsList;
 
+    private Screen myScreen;
+
+    private Element window;
+
     public EngineeringScreenController(World world) {
         this.world = world;
         engineeringState = world.getPlayer().getEngineeringState();
@@ -46,6 +50,8 @@ public class EngineeringScreenController implements ScreenController
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
+        myScreen = screen;
+        window = myScreen.findElementByName("engineering_window");
         tg = screen.findNiftyControl("engineering_tabs", TabGroup.class);
         pointsText = screen.findElementByName("hullPointsToRepair");
         engiText = screen.findElementByName("assignedEngineers");
@@ -55,6 +61,7 @@ public class EngineeringScreenController implements ScreenController
 
     @Override
     public void onStartScreen() {
+        window.setVisible(true);
         updateLabels();
         projectsList.clear();
         projectsList.addAllItems(world.getPlayer().getEngineeringState().getProjects());
@@ -115,7 +122,7 @@ public class EngineeringScreenController implements ScreenController
         }
     }
 
-    @NiftyEventSubscriber(id="story_window")
+    @NiftyEventSubscriber(id="engineering_window")
     public void onClose(final String id, final WindowClosedEvent event)
     {
         closeScreen();
@@ -129,8 +136,10 @@ public class EngineeringScreenController implements ScreenController
 
     @NiftyEventSubscriber(id = "itemsList")
     public void onListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent event) {
+        if (tg.getTabCount() == 0) {
+            return;
+        }
         Element imagePanel = tg.getSelectedTab().getElement().findElementByName("selectedItemImg");
-
         TextRenderer tr = tg.getSelectedTab().getElement().findElementByName("selectedItemText").getRenderer(TextRenderer.class);
         if (event.getSelection().isEmpty()) {
             tr.setText("<No item selected>");

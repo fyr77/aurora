@@ -45,7 +45,7 @@
 
     <screen id="research_screen" controller="ru.game.aurora.gui.ResearchScreenController">
         <layer childLayout="absolute">
-            <control id="research_window" name="window" title="Research" width="80%" height="80%" x="10%" y="10%">
+            <control id="research_window" name="window" hideOnClose="true" title="Research" width="80%" height="80%" x="10%" y="10%">
                 <panel childLayout="vertical">
 
                     <!-- tabs -->
