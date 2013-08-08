@@ -43,22 +43,16 @@ public class CombatAI implements NPCShipAI {
                 }
             }
         }
-
-        if (ship.isStationary()) {
-            // can not move
-            return;
-        }
-
         // not all weapons fired because too far, move closer
         if (inRange < ship.getWeapons().length) {
             if (target.getX() < ship.getX()) {
-                ship.setPos(ship.getX() - 1, ship.getY());
+                ship.move(- 1, 0);
             } else if (target.getX() > ship.getX()) {
-                ship.setPos(ship.getX() + 1, ship.getY());
+                ship.move(1, 0);
             } else if (target.getY() < ship.getY()) {
-                ship.setPos(ship.getX(), ship.getY() - 1);
+                ship.move(0, - 1);
             } else if (target.getY() > ship.getY()) {
-                ship.setPos(ship.getX(), ship.getY() + 1);
+                ship.move(0, 1);
             }
         }
 

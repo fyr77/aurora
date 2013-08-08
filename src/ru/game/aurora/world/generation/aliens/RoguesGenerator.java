@@ -15,10 +15,11 @@ import ru.game.aurora.dialog.Statement;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.SingleShipEvent;
-import ru.game.aurora.npc.shipai.LeaveSystemAI;
+import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.space.GalaxyMap;
+import ru.game.aurora.world.space.HomeworldGenerator;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -89,7 +90,7 @@ public class RoguesGenerator implements WorldGeneratorPart
 
                 world.getGlobalVariables().put("rogues.damage_scout_result", "help");
                 damagedRogueScout.setSprite("rogues_scout");
-                damagedRogueScout.setAi(new LeaveSystemAI());
+                damagedRogueScout.setAi(null);
                 damagedRogueScout.setCapitain(new NPC(
                         new Dialog("no_image",
                                 new Statement(0, "Grateful for help. Kindness not be forgotten.", new Reply(0, -1, "You are welcome. Over.")))
@@ -104,7 +105,12 @@ public class RoguesGenerator implements WorldGeneratorPart
 
     @Override
     public void updateWorld(World world) {
-        AlienRace rogueRace = new AlienRace("Rogues", null, 5, null);
+        AlienRace rogueRace = new AlienRace("Rogues", "rogues_scout", 5, Dialog.loadFromFile("dialogs/rogues_frame_dialog.json"));
+        StarSystem homeworld = HomeworldGenerator.generateRoguesWorld(world, 15, 8, rogueRace);
+        rogueRace.setHomeworld(homeworld);
+
+        world.getGalaxyMap().addObjectAndSetTile(homeworld, 15, 8);
+        world.addListener(new StandardAlienShipEvent(rogueRace));
 
         world.getRaces().put(rogueRace.getName(), rogueRace);
         createDamagedScoutEvent(world, rogueRace);

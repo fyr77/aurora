@@ -7,10 +7,15 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPC;
+import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.earth.Earth;
 
@@ -81,6 +86,36 @@ public class HomeworldGenerator {
         ss.setPlanets(planets);
 
         ss.setRadius(Math.max((int) (6 * 1.5), 10));
+        return ss;
+    }
+
+    public static StarSystem generateRoguesWorld(World world, int x, int y, AlienRace roguesRace)
+    {
+        BasePlanet[] planets = new BasePlanet[2];
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new StarSystem.Star(2, Color.red), x, y);
+
+        planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0, false);
+        setCoord(planets[0], 2);
+
+        planets[1] = new Planet(ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0, false);
+        setCoord(planets[1], 5);
+
+        ss.setPlanets(planets);
+        ss.setRadius(8);
+
+        NPCShip frame = new NPCShip(2, 2, "rogues_frame", roguesRace, new NPC(Dialog.loadFromFile("dialogs/rogues_frame_dialog.json")), "Rogues Frame");
+        frame.setAi(null);
+        ss.getShips().add(frame);
+
+        for (int i = 0; i < 3; ++i) {
+            NPCShip probe = new NPCShip(CommonRandom.getRandom().nextInt(6) - 3, CommonRandom.getRandom().nextInt(6) - 3, "rogues_probe", roguesRace, null, "Defence drone");
+            probe.setStationary(true);
+            probe.setCanBeHailed(false);
+            probe.setAi(new LeaveSystemAI());
+            probe.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), StarshipWeapon.MOUNT_ALL));
+            ss.getShips().add(probe);
+        }
+
         return ss;
     }
 }

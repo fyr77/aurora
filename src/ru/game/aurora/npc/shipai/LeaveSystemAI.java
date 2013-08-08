@@ -30,7 +30,7 @@ public class LeaveSystemAI implements NPCShipAI {
 
     @Override
     public void update(NPCShip ship, World world, StarSystem currentSystem) {
-        ship.setPos(ship.getX() + dirX, ship.getY() + dirY);
+        ship.move(dirX, dirY);
         isAway = !currentSystem.isInside(ship);
         if (isAway) {
             GameLogger.getInstance().logMessage("Ship '" + ship.getName() + "' has left star system");

@@ -1,0 +1,29 @@
+{
+    "iconName":"no_image",
+    "statements":{
+        "0":{
+            "id":0,
+            "npcText":"Welcome, strangers.",
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"Who are you?"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"Sorry, no time for this."
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "npcText":"We are called rogues. We travel in space, trade and follow path of the void.",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"Ok."
+                }
+            ]
+        }
+    }
+}

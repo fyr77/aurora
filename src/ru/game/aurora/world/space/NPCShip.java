@@ -15,7 +15,6 @@ import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
-import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
@@ -44,6 +43,8 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     private boolean isHostile;
 
+    private boolean canBeHailed = true;
+
     private StarshipWeapon[] weapons;
 
     // this ship can not move
@@ -55,7 +56,6 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         this.race = race;
         this.capitain = capitain;
         this.name = name;
-        ai = new LeaveSystemAI();
     }
 
     public void setAi(NPCShipAI ai) {
@@ -114,9 +114,11 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     @Override
     public void onContact(World world) {
-        if (!isHostile()) {
-            world.addOverlayWindow(capitain != null ? capitain.getCustomDialog() : race.getDefaultDialog());
+        if (!canBeHailed || isHostile) {
+            GameLogger.getInstance().logMessage("This ship does not respond to our hail.");
+            return;
         }
+        world.addOverlayWindow(capitain != null ? capitain.getCustomDialog() : race.getDefaultDialog());
     }
 
     @Override
@@ -126,7 +128,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
             GameLogger.getInstance().logMessage(getName() + " destroyed");
             ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect(x, y, "ship_explosion", false));
         }
-        if (!(ai instanceof CombatAI)) {
+        if (ai == null || !(ai instanceof CombatAI)) {
             GameLogger.getInstance().logMessage(getName() + " is now hostile to " + attacker.getName());
             ai = new CombatAI(attacker);
         }
@@ -159,6 +161,15 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         }
     }
 
+    public void move(int dx, int dy)
+    {
+        if (isStationary) {
+            return;
+        }
+        x += dx;
+        y += dy;
+    }
+
     public void setHp(int hp) {
         this.hp = hp;
     }
@@ -185,5 +196,13 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     public NPC getCapitain() {
         return capitain;
+    }
+
+    public boolean isCanBeHailed() {
+        return canBeHailed;
+    }
+
+    public void setCanBeHailed(boolean canBeHailed) {
+        this.canBeHailed = canBeHailed;
     }
 }
