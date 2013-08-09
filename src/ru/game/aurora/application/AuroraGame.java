@@ -17,6 +17,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
@@ -48,7 +49,11 @@ public class AuroraGame extends NiftyOverlayGame {
 
         initNifty(gameContainer);
         GUI.init(getNifty());
-        AnimalGenerator.init();
+        try {
+            AnimalGenerator.init();
+        } catch (FileNotFoundException e) {
+            throw new SlickException("Failed to initialize Monster Generator", e);
+        }
         mainMenu = new MainMenu(gameContainer);
         /*
         // Test code for animal generator. Can not be invoked outside of main app thread as it requires opengl context

@@ -1,0 +1,25 @@
+{
+    "partFiles" : [
+        "resources/animal_parts/bodies.json"
+        , "resources/animal_parts/limbs.json"
+        , "resources/animal_parts/eyes.json"
+        , "resources/animal_parts/mouths.json"
+    ],
+
+    "bloodImages" : [
+        "resources/animal_parts/blood.png"
+        , "resources/animal_parts/blood2.png"
+    ],
+
+    "shadowImages" : [
+        "resources/animal_parts/shadow.png"
+    ],
+
+    "defaultColors" : {
+        "0x0033381a": 1,
+        "0x00474e24": 2,
+        "0x00697436": 3,
+        "0x00bdd064": 4
+    }
+
+}

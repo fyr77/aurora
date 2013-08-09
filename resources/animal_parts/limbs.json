@@ -1,66 +1,107 @@
 [
     {
-        "partType":"LIMB",
+        "type": "MONSTER_LIMB",
         "attachmentPoints" : [
+            {
+                "x": 6,
+                "y" : 6,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+
         ],
-        "imagePath" : "resources/animal_parts/limb1.png",
-        "centerX" : 6,
-        "centerY" : 6
+        "imageId" : "animal_parts/limb1.png"
     },
     {
-        "partType":"LIMB",
+        "type": "MONSTER_LIMB",
         "attachmentPoints" : [
+            {
+                "x": 6,
+                "y" : 6,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
         ],
-        "imagePath" : "resources/animal_parts/limb2.png",
-        "centerX" : 6,
-        "centerY" : 6
+        "imageId" : "animal_parts/limb2.png"
     },
     {
-        "partType":"LIMB",
+        "type": "MONSTER_LIMB",
         "attachmentPoints" : [
+            {
+                "x": 7,
+                "y" : 15,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
         ],
-        "imagePath" : "resources/animal_parts/limb3.png",
-        "centerX" : 7,
-        "centerY" : 15
+        "imageId" : "animal_parts/limb3.png"
     },
     {
-        "partType":"LIMB",
+        "type": "MONSTER_LIMB",
         "attachmentPoints" : [
+            {
+                "x": 5,
+                "y" : 8,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
         ],
-        "imagePath" : "resources/animal_parts/limb4.png",
-        "centerX" : 5,
-        "centerY" : 8
+        "imageId" : "animal_parts/limb4.png"
     },
     {
-        "partType":"LIMB",
+        "type": "MONSTER_LIMB",
         "attachmentPoints" : [
+            {
+                "x": 4,
+                "y" : 5,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
         ],
-        "imagePath" : "resources/animal_parts/limb5.png",
-        "centerX" : 4,
-        "centerY" : 5
+        "imageId" : "animal_parts/limb5.png"
     },
     {
-        "partType":"LIMB",
+        "type": "MONSTER_LIMB",
         "attachmentPoints" : [
+            {
+                "x": 2,
+                "y" : 17,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
         ],
-        "imagePath" : "resources/animal_parts/limb6.png",
-        "centerX" : 2,
-        "centerY" : 17
+        "imageId" : "animal_parts/limb6.png"
     },
     {
-        "partType":"LIMB",
+        "type": "MONSTER_LIMB",
         "attachmentPoints" : [
+            {
+                "x": 3,
+                "y" : 10,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
         ],
-        "imagePath" : "resources/animal_parts/limb7.png",
-        "centerX" : 3,
-        "centerY" : 10
+        "imageId" : "animal_parts/limb7.png"
     },
     {
-        "partType":"LIMB",
+        "type": "MONSTER_LIMB",
         "attachmentPoints" : [
+            {
+                "x": 2,
+                "y" : 10,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
         ],
-        "imagePath" : "resources/animal_parts/limb8.png",
-        "centerX" : 2,
-        "centerY" : 10
+        "imageId" : "animal_parts/limb8.png"
     }
 ]

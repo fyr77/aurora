@@ -61,11 +61,7 @@
       <entry name="*.fnt" />
       <entry name="*.txt" />
     </wildcardResourcePatterns>
-    <annotationProcessing>
-      <profile default="true" name="Default" enabled="false">
-        <processorPath useClasspath="true" />
-      </profile>
-    </annotationProcessing>
+    <annotationProcessing enabled="false" useClasspath="true" />
   </component>
   <component name="CopyrightManager" default="">
     <module2copyright />
@@ -309,6 +305,15 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
+    <library name="frankenstein-core">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/third-party/frankenstein-core.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="file://$PROJECT_DIR$/../frankenstein/frankenstein-core/src" />
+      </SOURCES>
+    </library>
     <library name="gson-2.2.2">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/third-party/gson-2.2.2.jar!/" />

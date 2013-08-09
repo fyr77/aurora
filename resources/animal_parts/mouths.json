@@ -1,34 +1,60 @@
 [
     {
-        "partType":"DECORATION",
+        "type": "MONSTER_DECORATION",
         "attachmentPoints" : [
+            {
+                "x": 14,
+                "y" : 8,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
         ],
-        "imagePath" : "resources/animal_parts/dec3.png",
-        "centerX" : 14,
-        "centerY" : 8
+        "imageId": "animal_parts/dec3.png",
+        "tags" : [
+            "carnivore", "predator"
+        ]
     },
     {
-        "partType":"DECORATION",
+        "type": "MONSTER_DECORATION",
         "attachmentPoints" : [
+            {
+                "x": 16,
+                "y": 11,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
         ],
-        "imagePath" : "resources/animal_parts/mouth.png",
-        "centerX" : 16,
-        "centerY" : 11
+        "imageId": "animal_parts/mouth.png"
     },
     {
-        "partType":"DECORATION",
+        "type": "MONSTER_DECORATION",
         "attachmentPoints" : [
+            {
+                "x": 12,
+                "y": 9,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
         ],
-        "imagePath" : "resources/animal_parts/mouth1.png",
-        "centerX" : 12,
-        "centerY" : 9
+        "imageId": "animal_parts/mouth1.png",
+        "tags" : [
+                "carnivore", "predator"
+        ]
     },
     {
-        "partType":"DECORATION",
+        "type": "MONSTER_DECORATION",
         "attachmentPoints" : [
+            {
+                "x": 7,
+                "y": 9,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
         ],
-        "imagePath" : "resources/animal_parts/mouth2.png",
-        "centerX" : 7,
-        "centerY" : 9
+        "imageId": "animal_parts/mouth2.png"
     }
 ]
