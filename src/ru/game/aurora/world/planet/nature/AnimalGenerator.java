@@ -4,7 +4,10 @@ import ru.game.aurora.frankenstein.Slick2DFrankensteinImage;
 import ru.game.aurora.frankenstein.Slick2DImageFactory;
 import ru.game.frankenstein.*;
 import ru.game.frankenstein.impl.MonsterPartsLoader;
+import ru.game.frankenstein.util.CollectionUtils;
+import ru.game.frankenstein.util.ColorUtils;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
 
 /**
@@ -17,6 +20,8 @@ public class AnimalGenerator {
     private MonsterGenerationParams params;
 
     private static AnimalGenerator instance;
+
+    public static Color[] supportedColors =  {new Color(0x00697436), new Color(0x00a12e00), new Color(0x00ad5400), new Color(0x005f4d96), new Color(0x00966e00)};
 
     public static void init() throws FileNotFoundException {
         instance = new AnimalGenerator();
@@ -38,6 +43,7 @@ public class AnimalGenerator {
 
     public void getImageForAnimal(AnimalSpeciesDesc desc) {
         try {
+            params.colorMap = ColorUtils.createDefault4TintMap(CollectionUtils.selectRandomElement(supportedColors));
             Monster monster = generator.generateMonster(params);
             desc.setImages(((Slick2DFrankensteinImage)monster.monsterImage).getImpl(), ((Slick2DFrankensteinImage)monster.deadImage).getImpl());
         } catch (FrankensteinException e) {
