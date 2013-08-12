@@ -155,6 +155,15 @@ public class PlanetSpriteGenerator {
         renderer.addGradientPoint(1.0000, new ColorCafe(255, 255, 255, 255));
     }
 
+    private void setWaterPlanetGradients(RendererImage renderer) throws ExceptionInvalidParam {
+        renderer.addGradientPoint(-1.0000, new ColorCafe(0, 0, 128, 255)); // deeps
+        renderer.addGradientPoint(-0.2500, new ColorCafe(0, 0, 255, 255)); // shallow
+        renderer.addGradientPoint(0.3000, new ColorCafe(0, 128, 255, 255)); // shore
+        renderer.addGradientPoint(0.4000, new ColorCafe(0, 128, 255, 255));
+        renderer.addGradientPoint(0.6000, new ColorCafe(128, 128, 128, 255));
+        renderer.addGradientPoint(0.8000, new ColorCafe(64, 64, 64, 255));
+    }
+
     private void setEarthLikePlanetGradients(RendererImage renderer) throws ExceptionInvalidParam {
         renderer.addGradientPoint(-1.0000, new ColorCafe(0, 0, 128, 255)); // deeps
         renderer.addGradientPoint(-0.2500, new ColorCafe(0, 0, 255, 255)); // shallow
@@ -205,6 +214,9 @@ public class PlanetSpriteGenerator {
                     break;
                 case PLANET_ICE:
                     setIcePlanetGradients(renderer);
+                    break;
+                case PLANET_WATER:
+                    setWaterPlanetGradients(renderer);
                     break;
                 default:
                     throw new IllegalArgumentException("Can not generate sprite for planet category" + params.cat);

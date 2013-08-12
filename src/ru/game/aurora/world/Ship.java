@@ -42,7 +42,7 @@ public class Ship extends BasePositionable implements SpaceObject {
     public Ship(int x, int y) {
         super(x, y);
         name = "Hawking";
-        hull = maxHull = 3;
+        hull = maxHull = 5;
         weapons.add(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"), StarshipWeapon.MOUNT_ALL));
     }
 

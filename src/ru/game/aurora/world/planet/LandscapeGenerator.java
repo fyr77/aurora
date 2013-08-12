@@ -69,6 +69,20 @@ public class LandscapeGenerator {
         return SurfaceTypes.SNOW | SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
     }
 
+    private static byte getTileForWaterPlanet(double value) {
+        if (value < 0.3) {
+            return SurfaceTypes.WATER;
+        }
+        if (value < 0.5) {
+            return SurfaceTypes.DIRT;
+        }
+        if (value < 0.6) {
+            return SurfaceTypes.STONES;
+        }
+
+        return SurfaceTypes.STONES | SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
+    }
+
     public static byte[][] generateLandscapePerlin(PlanetCategory cat, int width, int height) {
         if (width % SCALE_FACTOR != 0 || height % SCALE_FACTOR != 0) {
             throw new IllegalArgumentException("Planet surface dimensions should be divided by " + SCALE_FACTOR);
@@ -90,6 +104,9 @@ public class LandscapeGenerator {
                                 break;
                             case PLANET_ICE:
                                 surface[y * SCALE_FACTOR + i][x * SCALE_FACTOR + j] = getTileForIcePlanet(noiseMap.getValue(x, y));
+                                break;
+                            case PLANET_WATER:
+                                surface[y * SCALE_FACTOR + i][x * SCALE_FACTOR + j] = getTileForWaterPlanet(noiseMap.getValue(x, y));
                                 break;
                             default:
                                 throw new IllegalArgumentException("Unsupported planet category for surface generator");

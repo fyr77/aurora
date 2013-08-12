@@ -9,6 +9,8 @@ public enum PlanetCategory {
 
     PLANET_ROCK,
 
-    PLANET_ICE
+    PLANET_ICE,
+
+    PLANET_WATER
 
 }
