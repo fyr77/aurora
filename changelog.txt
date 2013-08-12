@@ -3,6 +3,8 @@ VERSION 0.0.9
 IN PROGRESS...
 
 + New content
+* Monster image generator moved to separate project - 'Frankenstein'
+* New star sprites from Dname
 
 =====================================================
 VERSION 0.0.8

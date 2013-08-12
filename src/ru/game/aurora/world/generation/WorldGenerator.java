@@ -21,6 +21,7 @@ import ru.game.aurora.world.generation.quest.MainQuestGenerator;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
+import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.ArrayList;
@@ -128,7 +129,7 @@ public class WorldGenerator implements Runnable {
         final int planetCount = r.nextInt(5);
         Planet[] planets = new Planet[planetCount];
         int maxRadius = 0;
-        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new StarSystem.Star(size, starColor), x, y);
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(size, starColor), x, y);
 
         int astroData = 20 * size;
 

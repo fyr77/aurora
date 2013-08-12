@@ -25,6 +25,7 @@ import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.SpaceHulk;
+import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
 /**
@@ -129,7 +130,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
     public void updateWorld(World world) {
         // initial research projects and their star system
         StarSystem brownStar = WorldGenerator.generateRandomStarSystem(world, 6, 7);
-        brownStar.setStar(new StarSystem.Star(6, new Color(128, 0, 0)));
+        brownStar.setStar(new Star(6, new Color(128, 0, 0)));
         world.getGalaxyMap().addObjectAndSetTile(brownStar, 6, 7);
 
         ResearchProjectDesc starInitialResearch = new StarResearchProject(brownStar);
@@ -141,7 +142,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         // add second quest in chain
 
         brownStar = WorldGenerator.generateRandomStarSystem(world, 12, 12);
-        brownStar.setStar(new StarSystem.Star(6, new Color(128, 0, 0)));
+        brownStar.setStar(new Star(6, new Color(128, 0, 0)));
         world.getGalaxyMap().addObjectAndSetTile(brownStar, 12, 12);
 
         NPCShip defenceProbe = new NPCShip(2, 1, "rogues_probe", world.getRaces().get("Rogues"), null, "Defence drone");

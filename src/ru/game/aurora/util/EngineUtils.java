@@ -18,6 +18,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.GUI;
 
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 
 public class EngineUtils {
@@ -50,6 +51,29 @@ public class EngineUtils {
         } else {
             graphics.drawOval(x - radius, y - radius, 2 * radius, 2 * radius);
         }
+    }
+
+    public static Image replaceColors(Image original, Map<Color, Color> colorMap)
+    {
+        ImageBuffer ib = new ImageBuffer(original.getWidth(), original.getHeight());
+        Color searchKey = new Color(255, 255, 255, 255);
+        for (int x = 0; x < original.getWidth(); ++x) {
+            for (int y = 0; y < original.getHeight(); ++y) {
+                org.newdawn.slick.Color c = original.getColor(x, y);
+                searchKey.r = c.r;
+                searchKey.g = c.g;
+                searchKey.b = c.b;
+
+                Color newColor = colorMap.get(searchKey);
+                if (newColor != null) {
+                    ib.setRGBA(x, y, newColor.getRed(), newColor.getGreen(), newColor.getBlue(), c.getAlpha());
+                } else {
+                    ib.setRGBA(x, y, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
+                }
+
+            }
+        }
+        return new Image(ib);
     }
 
     public static void drawRectWithBorder(Graphics graphics, Rectangle rectangle, Camera camera, Color borderColor, Color fillColor) {

@@ -34,7 +34,7 @@ public class HomeworldGenerator {
         // todo: gas giants and other planets
 
         Planet[] planets = new Planet[4];
-        StarSystem ss = new StarSystem("Solar system", new StarSystem.Star(2, Color.yellow), 9, 9);
+        StarSystem ss = new StarSystem("Solar system", new Star(2, Color.yellow), 9, 9);
 
         // mercury
         planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0, false);
@@ -66,7 +66,7 @@ public class HomeworldGenerator {
 
     public static StarSystem generateKliskHomeworld(World world, int x, int y, AlienRace kliskRace) {
         BasePlanet[] planets = new BasePlanet[3];
-        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new StarSystem.Star(2, Color.yellow), x, y);
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.yellow), x, y);
 
         planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0, false);
         setCoord(planets[0], 2);
@@ -92,7 +92,7 @@ public class HomeworldGenerator {
     public static StarSystem generateRoguesWorld(World world, int x, int y, AlienRace roguesRace)
     {
         BasePlanet[] planets = new BasePlanet[2];
-        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new StarSystem.Star(2, Color.red), x, y);
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.red), x, y);
 
         planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0, false);
         setCoord(planets[0], 2);

@@ -13,6 +13,7 @@ import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.HomeworldGenerator;
+import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
 /**
@@ -120,7 +121,7 @@ public class MainQuestGenerator implements WorldGeneratorPart {
     public static StarSystem createStarSystem(World world, int x, int y) {
 
         Planet[] planets = new Planet[3];
-        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new StarSystem.Star(2, Color.green), 9, 9);
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.green), 9, 9);
 
         planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0, false);
         HomeworldGenerator.setCoord(planets[0], 2);
@@ -142,7 +143,7 @@ public class MainQuestGenerator implements WorldGeneratorPart {
 
     private StarSystem cloneStarSystem(World world, StarSystem proto, int x, int y) {
         BasePlanet[] planets = new BasePlanet[3];
-        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new StarSystem.Star(2, Color.green), x, y);
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.green), x, y);
 
         planets[0] = new Planet(ss, (Planet) proto.getPlanets()[0]);
         HomeworldGenerator.setCoord(planets[0], 2);

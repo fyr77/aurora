@@ -5,10 +5,7 @@
  */
 package ru.game.aurora.world.space;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
+import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
@@ -39,39 +36,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     public static final int[] possibleSizes = {1, 2, 3, 4};
 
     private static final long serialVersionUID = -1L;
-
-    public static class Star implements Serializable {
-        private static final long serialVersionUID = -3746922025754658839L;
-        // 1 is largest star, 4 is smallest
-        public final int size;
-
-        public final Color color;
-
-        // colors for drawing in star system view
-        // star consists of 3 gradients of main color
-        private transient Color coreColor;
-
-        private transient Color outerColor;
-
-        public Star(int size, Color color) {
-            this.size = size;
-            this.color = color;
-        }
-
-        public Color getCoreColor() {
-            if (coreColor == null) {
-                coreColor = EngineUtils.lightenColor(color);
-            }
-            return coreColor;
-        }
-
-        public Color getOuterColor() {
-            if (outerColor == null) {
-                outerColor = EngineUtils.darkenColor(color, 0.75f);
-            }
-            return outerColor;
-        }
-    }
 
     /**
      * Mode for moving. Arrows control ship movement
@@ -175,8 +139,14 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         if (!camera.isInViewport(tileX, tileY)) {
             return;
         }
-        g.setColor(star.color);
-        EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, camera.getTileWidth() / star.size, star.color, true);
+        if (camera.getTileWidth() != 64) {
+            //hack: this is galaxy map screen, where all stars are drawn within single screen
+            // draw only dots, not images themselves, as they won't fit on screen and will overlap ugly
+            g.setColor(star.color);
+            EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, camera.getTileWidth() / star.size, star.color, true);
+        } else {
+            g.drawImage(star.getImage(), camera.getXCoord(tileX) - star.getImage().getWidth() / 2, camera.getYCoord(tileY) - star.getImage().getHeight() / 2);
+        }
     }
 
     @Override
@@ -471,9 +441,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         final int starY = camera.getYCoord(0) + camera.getTileHeight() / 2;
         if (camera.isInViewport(0, 0)) {
             // draw 3 circles
-            EngineUtils.drawCircleCentered(g, starX, starY, (int) (camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size) * 1.25), star.getOuterColor(), true);
-            EngineUtils.drawCircleCentered(g, starX, starY, camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size), star.color, true);
-            EngineUtils.drawCircleCentered(g, starX, starY, (int) (camera.getTileWidth() * STAR_SCALE_FACTOR / (2 * star.size) * 0.75), star.getCoreColor(), true);
+
+            final Image starImage = star.getImage();
+            g.drawImage(starImage, starX - starImage.getWidth() / 2, starY - starImage.getHeight() / 2);
         }
 
         for (BasePlanet p : planets) {
