@@ -201,7 +201,8 @@
                 "availableTypes" : [
                     "MONSTER_LIMB"
                 ],
-                "groupId" : "claws"
+                "groupId" : "claws",
+                "flipVertical" : true
             },
 
             {

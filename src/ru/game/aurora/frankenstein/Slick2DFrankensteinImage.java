@@ -46,12 +46,22 @@ public class Slick2DFrankensteinImage implements FrankensteinImage
         }
         Slick2DFrankensteinImage slick2DFrankensteinImage = (Slick2DFrankensteinImage) frankensteinImage;
 
-        slick2DFrankensteinImage.myImage.setCenterOfRotation(i2, i3);
-        slick2DFrankensteinImage.myImage.setRotation(i4);
+        float oldCenterX = slick2DFrankensteinImage.myImage.getCenterOfRotationX();
+        float oldCenterY = slick2DFrankensteinImage.myImage.getCenterOfRotationY();
+        float oldRotation = slick2DFrankensteinImage.myImage.getRotation();
+
+        if (i4 != 0) {
+            slick2DFrankensteinImage.myImage.setCenterOfRotation(i2, i3);
+            slick2DFrankensteinImage.myImage.setRotation(i4);
+        }
+
         try {
             myImage.getGraphics().drawImage(slick2DFrankensteinImage.myImage, i, i1);
         } catch (SlickException e) {
             throw new RuntimeException("Failed to draw image" ,e);
+        } finally {
+            slick2DFrankensteinImage.myImage.setCenterOfRotation(oldCenterX, oldCenterY);
+            slick2DFrankensteinImage.myImage.setRotation(oldRotation);
         }
     }
 
