@@ -1,0 +1,26 @@
+{
+    "partFiles" : [
+        "resources/plant_parts/trunks.json"
+        , "resources/plant_parts/branches.json"
+        , "resources/plant_parts/decorations.json"
+    ],
+
+    "shadowImages" : [
+        "resources/animal_parts/shadow.png"
+    ],
+
+    "defaultColors" : {
+        "0x004f3d22": 1,
+        "0x008c5822": 2,
+        "0x00be912c": 3,
+		
+		
+        "0x00006835": 4,
+		"0x007dc242": 5,
+		"0x00ffe77c": 6,
+		
+		"0x00b15fa5" : 7,
+		"0x00d993c0": 8
+    }
+
+}

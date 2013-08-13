@@ -1,0 +1,194 @@
+[
+    {
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 28,
+                "y" : 16,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            },
+			 {
+                "x": 7,
+                "y" : 3,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			 {
+                "x": 4,
+                "y" : 19,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			 {
+                "x": 12,
+                "y" : 26,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }
+
+        ],
+        "imageId" : "plant_parts/branch1.png"
+    },
+	
+	 {
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 27,
+                "y" : 15,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            },
+			 {
+                "x": 3,
+                "y" : 9,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			 {
+                "x": 16,
+                "y" : 25,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }	 
+
+        ],
+        "imageId" : "plant_parts/branch2.png"
+    },
+	
+	{
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 29,
+                "y" : 22,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            },
+			 {
+                "x": 12,
+                "y" : 5,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			 {
+                "x": 3,
+                "y" : 11,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			{
+                "x": 9,
+                "y" : 23,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }	 			
+			
+
+        ],
+        "imageId" : "plant_parts/branch3.png"
+    },
+	
+	{
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 29,
+                "y" : 27,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            },
+			 {
+                "x": 20,
+                "y" : 2,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			 {
+                "x": 7,
+                "y" : 19,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			{
+                "x": 20,
+                "y" : 27,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }	 			
+        ],
+        "imageId" : "plant_parts/branch4.png"
+    },
+	{
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 30,
+                "y" : 16,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            },
+			 {
+                "x": 18,
+                "y" : 2,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			 {
+                "x": 1,
+                "y" : 31,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }
+				
+        ],
+        "imageId" : "plant_parts/branch5.png"
+    },
+	{
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 27,
+                "y" : 16,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            },
+			 {
+                "x": 9,
+                "y" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			 {
+                "x": 8,
+                "y" : 25,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            } 			
+        ],
+        "imageId" : "plant_parts/branch6.png"
+    }
+]
+   

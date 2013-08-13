@@ -15,9 +15,13 @@ import java.io.FileNotFoundException;
  */
 public class AnimalGenerator {
 
-    private MonsterGenerator generator;
+    private MonsterGenerator monsterGenerator;
 
-    private MonsterGenerationParams params;
+    private MonsterGenerator plantGenerator;
+
+    private MonsterGenerationParams monsterGenerationParams;
+
+    private MonsterGenerationParams plantGenerationParams;
 
     private static AnimalGenerator instance;
 
@@ -34,20 +38,33 @@ public class AnimalGenerator {
     public AnimalGenerator() throws FileNotFoundException {
         ImageFactory imageFactory = new Slick2DImageFactory();
         MonsterPartsSet monsterPartsSet = MonsterPartsLoader.loadFromJSON(imageFactory, getClass().getClassLoader().getResourceAsStream("animal_parts/parts_library.json"));
-        generator = new MonsterGenerator(imageFactory, monsterPartsSet);
+        monsterGenerator = new MonsterGenerator(imageFactory, monsterPartsSet);
 
-        params = new MonsterGenerationParams(true, false);
+        MonsterPartsSet plantsPartSet = MonsterPartsLoader.loadFromJSON(imageFactory, getClass().getClassLoader().getResourceAsStream("plant_parts/parts_library.json"));
+        plantGenerator = new MonsterGenerator(imageFactory, plantsPartSet);
+
+        monsterGenerationParams = new MonsterGenerationParams(true, false);
+        plantGenerationParams = new MonsterGenerationParams(false, false);
     }
 
 
 
     public void getImageForAnimal(AnimalSpeciesDesc desc) {
         try {
-            params.colorMap = ColorUtils.createDefault4TintMap(CollectionUtils.selectRandomElement(supportedColors));
-            Monster monster = generator.generateMonster(params);
+            monsterGenerationParams.colorMap = ColorUtils.createDefault4TintMap(CollectionUtils.selectRandomElement(supportedColors));
+            Monster monster = monsterGenerator.generateMonster(monsterGenerationParams);
             desc.setImages(((Slick2DFrankensteinImage)monster.monsterImage).getImpl(), ((Slick2DFrankensteinImage)monster.deadImage).getImpl());
         } catch (FrankensteinException e) {
             System.err.println("Failed to generate monster image");
+            e.printStackTrace();
+        }
+    }
+
+    public void getImageForPlant(PlantSpeciesDesc desc) {
+        try {
+            desc.setImage(((Slick2DFrankensteinImage)plantGenerator.generateMonster(plantGenerationParams).monsterImage).getImpl());
+        } catch (FrankensteinException e) {
+            System.err.println("Failed to generate plant image");
             e.printStackTrace();
         }
     }
