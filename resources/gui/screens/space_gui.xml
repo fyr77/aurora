@@ -98,4 +98,22 @@
             </panel>
         </layer>
     </screen>
+    <popup id="landing_party_lost" childLayout="absolute">
+        <control id="landing_party_lost_window" name="window" hideOnClose="true" width="60%" height="350px" x="20%" y="30%">
+            <panel childLayout="vertical">
+                <panel height="10px"/>
+                <panel height="256px" childLayout="horizontal">
+                    <image width="256px" filename="sprites/gui/crew_death.png"/>
+                    <text width="*" height="256px" text="Lost contact with landing party" font="font.fnt"/>
+                </panel>
+                <panel height="10px"/>
+                <panel childLayout="horizontal" height="45px">
+                    <panel width="85%"/>
+                    <control id="close_button" name="button" label="Ok" height="45px">
+                        <interact onClick="closeLandingPartyLostPopup()"/>
+                    </control>
+                </panel>
+            </panel>
+        </control>
+    </popup>
 </nifty>

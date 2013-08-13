@@ -155,4 +155,10 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         logList.setFocusItemByIndex(logList.getItems().size() - 1);
         myScreen.layoutLayers();
     }
+
+    public void closeLandingPartyLostPopup()
+    {
+        GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
+        GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+    }
 }

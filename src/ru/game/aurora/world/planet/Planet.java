@@ -5,6 +5,8 @@
  */
 package ru.game.aurora.world.planet;
 
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
@@ -94,6 +96,8 @@ public class Planet extends BasePlanet {
     private transient PlanetObject target = null;
 
     private transient Effect currentEffect = null;
+
+
 
     private static TileDrawer mountainDrawer = new TileDrawer("mountains", (byte) 0);
 
@@ -518,6 +522,11 @@ public class Planet extends BasePlanet {
             world.setCurrentRoom(owner);
             owner.enter(world);
             world.getPlayer().getShip().setPos(globalX, globalY);
+
+            final Nifty nifty = GUI.getInstance().getNifty();
+            Element popup = nifty.createPopup("landing_party_lost");
+            nifty.setIgnoreKeyboardEvents(false);
+            nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
         }
 
         for (PlanetObject a : planetObjects) {
