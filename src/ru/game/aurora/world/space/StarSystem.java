@@ -405,12 +405,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         world.setCurrentStarSystem(this);
         world.onPlayerEnteredSystem(this);
 
+
+
+        GUI.getInstance().getNifty().gotoScreen("star_system_gui");
         if (firstEnterDialog != null && !visited) {
             world.addOverlayWindow(firstEnterDialog);
         }
-
         visited = true;
-        GUI.getInstance().getNifty().gotoScreen("star_system_gui");
     }
 
     private void createBackground(World world) {
