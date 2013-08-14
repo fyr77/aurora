@@ -74,6 +74,10 @@ public class EarthDialogListener implements DialogListener {
                 GUI.getInstance().pushCurrentScreen();
                 GUI.getInstance().getNifty().gotoScreen("earth_progress_screen");
             }
+        } else {
+            // return
+            world.setCurrentRoom(earth.getOwner());
+            GUI.getInstance().getNifty().gotoScreen("star_system_gui");
         }
 
 

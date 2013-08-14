@@ -99,6 +99,9 @@ public class Dialog implements OverlayWindow {
     }
 
     public void useReply(World world, int idx) {
+        if (availableReplies == null) {
+            availableReplies = currentStatement.getAvailableReplies(world);
+        }
         Reply selectedReply = availableReplies.get(idx);
         currentStatement = statements.get(selectedReply.targetStatementId);
         returnValue = selectedReply.returnValue;
