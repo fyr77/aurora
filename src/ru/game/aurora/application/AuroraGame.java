@@ -76,7 +76,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     protected void prepareNifty(Nifty nifty) {
-        nifty.loadStyleFile("nifty-default-styles.xml");
+        nifty.loadStyleFile("gui/style/aurora-style.xml");
         nifty.loadControlFile("nifty-default-controls.xml");
     }
 
