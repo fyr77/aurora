@@ -8,6 +8,7 @@ package ru.game.aurora.world.space.earth;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
@@ -51,7 +52,8 @@ public class Earth extends Planet {
             return;
         }
 
-        g.drawImage(ResourceManager.getInstance().getImage("earth"), camera.getXCoord(globalX), camera.getYCoord(globalY));
+        final Image earth = ResourceManager.getInstance().getImage("earth");
+        g.drawImage(earth, camera.getXCoord(globalX) - earth.getWidth() / 2, camera.getYCoord(globalY) - earth.getHeight() / 2);
     }
 
     @Override

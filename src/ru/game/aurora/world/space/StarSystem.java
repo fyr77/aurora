@@ -447,20 +447,20 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             g.drawImage(starImage, starX - starImage.getWidth() / 2, starY - starImage.getHeight() / 2);
         }
 
+        // first draw all orbits
         for (BasePlanet p : planets) {
-            /*  if (p.getGlobalX() == player.getShip().getX() && p.getGlobalY() == player.getShip().getY()) {
-                GameLogger.getInstance().addStatusMessage("Approaching planet: ");
-                GameLogger.getInstance().addStatusMessage("Press <S> to scan");
-                GameLogger.getInstance().addStatusMessage("Press <enter> to launch surface party");
-            }*/
-
             int planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);
             int planetY = camera.getYCoord(p.getGlobalY()) + camera.getTileWidth() / 2;
             int radius = (int) Math.sqrt(Math.pow((planetX - starX), 2) + Math.pow((planetY - starY), 2));
-            EngineUtils.drawCircleCentered(g, starX, starY, radius, Color.gray, false);
-            p.drawOnGlobalMap(container, g, camera, 0, 0);
-
+            //EngineUtils.drawCircleCentered(g, starX, starY, radius, Color.gray, false);
+            EngineUtils.drawDashedCircleCentered(g, starX, starY, radius, new Color(0, 0, 150));
         }
+
+        // and then all planets
+        for (BasePlanet p : planets) {
+            p.drawOnGlobalMap(container, g, camera, 0, 0);
+        }
+
 
 
         final int selectedWeaponRange;

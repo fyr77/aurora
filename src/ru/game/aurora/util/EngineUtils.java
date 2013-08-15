@@ -53,6 +53,32 @@ public class EngineUtils {
         }
     }
 
+    public static void drawDashedCircleCentered(Graphics graphics, int x, int y, int radius, Color c) {
+        graphics.setColor(c);
+        final int segments = radius / 10;
+        double angle = Math.PI / (2 * segments);
+        boolean b = true;
+        for (int i = 0; i <= segments; ++i) {
+
+            int x1 = (int) (radius * Math.cos(angle * i));
+            int x2 = (int)(radius *  Math.cos(angle * (i + 1)));
+
+            int y1 = (int)(radius *  Math.sin(angle * i));
+            int y2 = (int)(radius *  Math.sin(angle * (i + 1)));
+
+            if (b) {
+                graphics.drawLine(x + x1, y + y1, x + x2, y + y2);
+                graphics.drawLine(x - x1, y - y1, x - x2, y - y2);
+            } else {
+                graphics.drawLine(x - x1, y + y1, x - x2, y + y2);
+                graphics.drawLine(x + x1, y - y1, x + x2, y - y2);
+            }
+
+            b = !b;
+        }
+
+    }
+
     public static Image replaceColors(Image original, Map<Color, Color> colorMap)
     {
         ImageBuffer ib = new ImageBuffer(original.getWidth(), original.getHeight());
