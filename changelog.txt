@@ -1,11 +1,18 @@
-VERSION 0.0.9
+VERSION 0.0.10
 
 IN PROGRESS...
+
+=====================================================
+VERSION 0.0.9
+
+15.08.2013
 
 + New content
 * Monster image generator moved to separate project - 'Frankenstein'
 * New star sprites from Dname
 * New planet types
+* Multiple bugfixes and some improvements based on /gd-found issues
+* Better build
 
 =====================================================
 VERSION 0.0.8
