@@ -104,7 +104,10 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         }
         crewStatus.getRenderer(TextRenderer.class).setText(String.format("Scientists: %d, Engineers: %d, Military: %d", ship.getScientists(), ship.getEngineers(), ship.getMilitary()));
 
-
+        Element shipCoordinates = myScreen.findElementByName("ship_coordinates");
+        if (shipCoordinates != null) {
+            shipCoordinates.getRenderer(TextRenderer.class).setText(String.format("Ship coordinates: [%d, %d]", ship.getX(), ship.getY()));
+        }
     }
 
     @Override

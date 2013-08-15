@@ -37,6 +37,7 @@
                 <panel width="242px"/>
 
                 <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3" selection="Disabled" width="50%" height="100px"/>
+                <text id="ship_coordinates" font="font.fnt" text="Ship coordinates:" width="*"/>
             </panel>
 
         </layer>
