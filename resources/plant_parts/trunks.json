@@ -5,7 +5,7 @@
             {
                 "x": 4,
                 "y" : 2,
-                "angle" : -270,
+                "angle" : 0,
                 "availableTypes" : [
                     "MONSTER_LIMB"
                 ]
@@ -13,7 +13,7 @@
             {
                 "x": 5,
                 "y" : 15,
-                "angle" : -270,
+                "angle" : 0,
                 "availableTypes" : [
                     "MONSTER_LIMB"
                 ]
@@ -21,11 +21,27 @@
             {
                 "x": 61,
                 "y" : 6,
-                "angle" : 0,
+                "angle" : 180,
                 "availableTypes" : [
                     "MONSTER_LIMB"
                 ]
 			},
+            {
+                "x": 25,
+                "y" : 6,
+                "angle" : 90,
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ]
+            },
+            {
+                "x": 48,
+                "y" : 3,
+                "angle" : 90,
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ]
+            },
             {
                 "x": 9,
                 "y" : 34,
@@ -55,7 +71,7 @@
             {
                 "x": 3,
                 "y" : 2,
-                "angle" : -270,
+                "angle" : 0,
                 "availableTypes" : [
                     "MONSTER_LIMB",
 					"MONSTER_DECORATION"
@@ -64,7 +80,7 @@
             {
                 "x": 58,
                 "y" : 2,
-                "angle" : 0,
+                "angle" : 180,
                 "availableTypes" : [
                     "MONSTER_LIMB",
 					"MONSTER_DECORATION"
@@ -72,9 +88,25 @@
                 ]
             },
             {
+                "x": 12,
+                "y" : 4,
+                "angle" : 90,
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ]
+            },
+            {
+                "x": 48,
+                "y" : 1,
+                "angle" : 90,
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ]
+            },
+            {
                 "x": 41,
-                "y" : 27,
-                "angle" : 0,
+                "y" : 23,
+                "angle" : 180,
                 "availableTypes" : [
                     "MONSTER_LIMB",
 					"MONSTER_DECORATION"
@@ -83,7 +115,7 @@
             {
                 "x": 11,
                 "y" : 28,
-                "angle" : -270,
+                "angle" : 0,
                 "availableTypes" : [
                     "MONSTER_LIMB",
 					"MONSTER_DECORATION"

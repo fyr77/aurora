@@ -14,14 +14,16 @@
                 "y" : 3,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ],
+                 "groupId": "leaf1"
             },
 			 {
                 "x": 4,
                 "y" : 19,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ]                  ,
+                 "groupId": "leaf1"
             },
 			 {
                 "x": 12,
@@ -43,7 +45,8 @@
                 "y" : 15,
                 "availableTypes" : [
                     "MONSTER_BODY"
-                ]
+                ],
+                "groupId": "leaf1"
             },
 			 {
                 "x": 3,
@@ -57,7 +60,8 @@
                 "y" : 25,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ],
+                 "groupId": "leaf1"
             }	 
 
         ],
@@ -79,21 +83,24 @@
                 "y" : 5,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ],
+                 "groupId": "leaf1"
             },
 			 {
                 "x": 3,
                 "y" : 11,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ],
+                 "groupId": "leaf1"
             },
 			{
                 "x": 9,
                 "y" : 23,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ],
+                "groupId": "leaf1"
             }	 			
 			
 
@@ -116,7 +123,8 @@
                 "y" : 2,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ],
+                 "groupId": "leaf1"
             },
 			 {
                 "x": 7,
@@ -130,7 +138,8 @@
                 "y" : 27,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ],
+                "groupId": "leaf1"
             }	 			
         ],
         "imageId" : "plant_parts/branch4.png"
@@ -150,14 +159,16 @@
                 "y" : 2,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ],
+                 "groupId": "leaf1"
             },
 			 {
                 "x": 1,
                 "y" : 31,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ],
+                 "groupId": "leaf1"
             }
 				
         ],
@@ -178,14 +189,16 @@
                 "y" : 0,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ]                  ,
+                 "groupId": "leaf1"
             },
 			 {
                 "x": 8,
                 "y" : 25,
                 "availableTypes" : [
                     "MONSTER_DECORATION"
-                ]
+                ]                  ,
+                 "groupId": "leaf1"
             } 			
         ],
         "imageId" : "plant_parts/branch6.png"
