@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty-styles>
-  <style id="nifty-scrollpanel#scrollpanel">
-    <attributes backgroundColor="#ffff" />
-    <effect overlay="true">
-      <onActive name="blendMode" blendMode="multiply" post="true" />
-      <onActive name="imageOverlay" filename="gui/style/blackborder.png" imageMode="resize:1,30,1,1,1,30,1,1,1,30,1,1" post="true" />
-    </effect>
-  </style>
-  <style id="nifty-scrollpanel#bottom-right">
-    <attributes width="23px" height="23px" />
-  </style>
+    <style id="nifty-scrollpanel#scrollpanel">
+        <attributes padding="8px,16px,24px,16px" backgroundImage="gui/style/panel/aurora-panel.png"
+                    imageMode="resize:28,184,28,28,28,184,28,154,28,184,28,58"/>
+        <effect overlay="true">
+            <onActive name="blendMode" blendMode="multiply" post="true"/>
+            <onActive name="imageOverlay" filename="gui/style/blackborder.png"
+                      imageMode="resize:1,30,1,1,1,30,1,1,1,30,1,1" post="true"/>
+        </effect>
+    </style>
+    <style id="nifty-scrollpanel#bottom-right">
+        <attributes width="23px" height="23px"/>
+    </style>
 </nifty-styles>
