@@ -51,6 +51,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     @Override
     public void onStartScreen() {
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
+        myScreen = GUI.getInstance().getNifty().getCurrentScreen();
         updateStats();
         updateWeapons();
     }
@@ -99,10 +100,10 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         pb.setText(String.format("Hull: %d/%d", ship.getHull(), ship.getMaxHull()));
 
         Element crewStatus = myScreen.findElementByName("crew_status");
-        if (crewStatus == null) {
-            return;
+        if (crewStatus != null) {
+            crewStatus.getRenderer(TextRenderer.class).setText(String.format("Scientists: %d, Engineers: %d, Military: %d", ship.getScientists(), ship.getEngineers(), ship.getMilitary()));
         }
-        crewStatus.getRenderer(TextRenderer.class).setText(String.format("Scientists: %d, Engineers: %d, Military: %d", ship.getScientists(), ship.getEngineers(), ship.getMilitary()));
+
 
         Element shipCoordinates = myScreen.findElementByName("ship_coordinates");
         if (shipCoordinates != null) {
@@ -159,8 +160,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         myScreen.layoutLayers();
     }
 
-    public void closeLandingPartyLostPopup()
-    {
+    public void closeLandingPartyLostPopup() {
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
         GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
     }

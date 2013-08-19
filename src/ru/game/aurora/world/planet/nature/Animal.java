@@ -4,13 +4,12 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.research.projects.AnimalResearch;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.*;
-
-import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,7 +19,12 @@ import java.util.Random;
  */
 public class Animal extends BasePositionable implements PlanetObject {
 
+    private static final long serialVersionUID = 1L;
+
     public static class AnimalCorpseItem implements InventoryItem {
+
+        private static final long serialVersionUID = 1L;
+
         AnimalSpeciesDesc desc;
 
         public AnimalCorpseItem(AnimalSpeciesDesc desc) {
@@ -65,11 +69,11 @@ public class Animal extends BasePositionable implements PlanetObject {
 
     private Planet myPlanet;
 
-    private static final Random r = new Random();
-
     private boolean pickedUp = false;
 
     private int turnsBeforeMove;
+
+    private boolean wasAttacked = false;
 
     public Animal(Planet p, int x, int y, AnimalSpeciesDesc desc) {
         super(x, y);
@@ -89,10 +93,11 @@ public class Animal extends BasePositionable implements PlanetObject {
         }
         if (--turnsBeforeMove == 0) {
             turnsBeforeMove = desc.getSpeed();
-            int newX = x + r.nextInt(2) - 1;
-            int newY = y + r.nextInt(2) - 1;
+            int newX = x + CommonRandom.getRandom().nextInt(2) - 1;
+            int newY = y + CommonRandom.getRandom().nextInt(2) - 1;
             // if we want to attack landing party and it is close enough, move closer
-            if (desc.getBehaviour() == AnimalSpeciesDesc.Behaviour.AGGRESSIVE) {
+            if ((desc.getBehaviour() == AnimalSpeciesDesc.Behaviour.AGGRESSIVE)
+                    || (desc.getBehaviour() == AnimalSpeciesDesc.Behaviour.SELF_DEFENSIVE && wasAttacked)) {
                 LandingParty party = world.getPlayer().getLandingParty();
 
 
@@ -133,7 +138,7 @@ public class Animal extends BasePositionable implements PlanetObject {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        if (desc.getImage()== null || desc.getDeadImage() == null) {
+        if (desc.getImage() == null || desc.getDeadImage() == null) {
             AnimalGenerator.getInstance().getImageForAnimal(desc);
         }
         final Image image = hp > 0 ? desc.getImage() : desc.getDeadImage();
@@ -179,6 +184,7 @@ public class Animal extends BasePositionable implements PlanetObject {
     @Override
     public void onShotAt(int damage) {
         hp -= damage;
+        wasAttacked = true;
         if (hp <= 0) {
             // clean obstacle flag
             myPlanet.setTileTypeAt(x, y, (byte) ((~SurfaceTypes.OBSTACLE_MASK) & myPlanet.getTileTypeAt(x, y)));
