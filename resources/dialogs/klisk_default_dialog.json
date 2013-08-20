@@ -10,24 +10,35 @@
                     "replyText":"Who are you?"
                 },
                 {
-                    "replyConditions" : {
-                        "quest.main.cloned_starsystems_encountered" : 3
-                    },
+                    "replyConditions" :[
+                        {
+                            "type" : "EQUAL",
+                            "name" : "quest.main.cloned_starsystems_encountered",
+                            "value" : "3"
+                        }
+                    ],
                     "targetStatementId":13,
                     "replyText":"We know you sell information, perhaps you can help us?"
                 },
                 {
-                    "replyConditions" : {
-                        "rogues.damaged_scout_found" : null
-                    },
+                    "replyConditions" : [
+                        {
+                            "type" : "SET",
+                            "name" : "damaged_scout_found"
+                        }
+                    ],
                     "targetStatementId":15,
                     "replyText":"We have information about a stranded Rogue ship, that has destroyed one of your spaceships, but was heavily damaged and is now unable to move. We can sell you information about its location"
                 },
 
                 {
-                    "replyConditions" : {
-                        "quest.main.evacuation_started" : null
-                    },
+                    "replyConditions" : [
+                        {
+                            "type" : "SET",
+                            "name" : "quest.main.evacuation_started"
+                        }
+                    ],
+
                     "targetStatementId":100,
                     "replyText":"We require your assistance. Our homeworld is threatened by Obliterator and we need all help we can get in order to save as much as possible."
                 },

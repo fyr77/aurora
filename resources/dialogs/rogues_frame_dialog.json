@@ -17,11 +17,55 @@
         },
         "1":{
             "id":1,
-            "npcText":"We are called rogues. We travel in space, trade and follow path of the void.",
+            "npcText":"We are called rogues. We travel in space, trade and follow paths of the void.",
+            "replies":[
+                {
+                    "targetStatementId":2,
+                    "replyText":"So you are like Klisk? Interstellar traders?"
+                }
+            ]
+        },
+
+        "2":{
+            "id":2,
+            "npcText":"Do not mention Klisk here.",
+            "replies":[
+                {
+                    "targetStatementId":3,
+                    "replyText":"Why?"
+                }  ,
+                {
+                    "targetStatementId":0,
+                    "replyText" : "Ok, I have other questions."
+                }
+            ]
+        },
+
+        "3":{
+            "id":3,
+            "npcText":"Because for ages we have been rival with them.",
+            "replies":[
+                {
+                    "targetStatementId":4,
+                    "replyText":"So you fight because you can not share space trade routes? Or something like that?"
+                },
+                {
+                    "targetStatementId":0,
+                    "replyText":"I see. I have other questions."
+                }
+            ]
+        },
+        "4":{
+            "id":4,
+            "npcText":"Mentioning our rivals is considered to be impolite in our society. As you do not want to understand this, our communication is over",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"Ok."
+                    "replyText":"Pff, you are so sensitive"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"I am sorry, I did not want to offend you"
                 }
             ]
         }
