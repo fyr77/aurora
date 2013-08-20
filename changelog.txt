@@ -2,6 +2,8 @@ VERSION 0.0.10
 
 IN PROGRESS...
 
+* Extended dialog system. Dialogs can now have different initial statements, based on world state
+
 =====================================================
 VERSION 0.0.9
 

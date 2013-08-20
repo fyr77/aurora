@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class Dialog implements OverlayWindow {
 
-    private static final long serialVersionUID = -3952133424974552884L;
+    private static final long serialVersionUID = 1L;
 
     private String iconName;
 
@@ -45,6 +45,9 @@ public class Dialog implements OverlayWindow {
     private List<Reply> availableReplies;
 
     private DialogListener listener;
+
+    // dialog can start from different statements, based on world conditions
+    private Map<Integer, Condition> firstStatements;
 
     public Dialog() {
         // for gson
@@ -68,7 +71,18 @@ public class Dialog implements OverlayWindow {
 
     @Override
     public void enter(World world) {
-        currentStatement = statements.get(0);
+        if (firstStatements == null || firstStatements.isEmpty()) {
+            currentStatement = statements.get(0);
+        } else {
+            for (Map.Entry<Integer, Condition> conditionEntry : firstStatements.entrySet()) {
+                if (conditionEntry.getValue().isMet(world)) {
+                    currentStatement = statements.get(conditionEntry.getKey());
+                }
+            }
+            if (currentStatement == null) {
+                throw new IllegalStateException("Can not select any statement to start dialog for current world condition");
+            }
+        }
         availableReplies = currentStatement.getAvailableReplies(world);
         returnValue = 0;
     }

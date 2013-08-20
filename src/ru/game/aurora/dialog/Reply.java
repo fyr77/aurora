@@ -3,14 +3,12 @@ package ru.game.aurora.dialog;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Egor.Smirnov
  * Date: 12.03.13
  * Time: 15:32
- * To change this template use File | Settings | File Templates.
  */
 public class Reply implements Serializable {
 
@@ -24,28 +22,20 @@ public class Reply implements Serializable {
 
     public final String replyText;
 
-    // if true, this dialo option will be only shown if conditions are NOT satisfied
-    public final boolean invertCondition;
-
-    /**
-     * This reply will only be visible if global game state contains given global variables with given values
-     */
-    public final Map<String, String> replyConditions;
+    public final Condition[] replyConditions;
 
     public Reply(int returnValue, int targetStatementId, String replyText) {
         this.returnValue = returnValue;
         this.targetStatementId = targetStatementId;
         this.replyText = replyText;
         this.replyConditions = null;
-        invertCondition = false;
     }
 
-    public Reply(int returnValue, int targetStatementId, String replyText, Map<String, String> replyConditions) {
+    public Reply(int returnValue, int targetStatementId, String replyText, Condition[] replyConditions) {
         this.returnValue = returnValue;
         this.targetStatementId = targetStatementId;
         this.replyText = replyText;
         this.replyConditions = replyConditions;
-        invertCondition = false;
     }
 
     /**
@@ -56,18 +46,9 @@ public class Reply implements Serializable {
             return true;
         }
 
-        for (Map.Entry<String, String> replyCondition : replyConditions.entrySet()) {
-            if (!world.getGlobalVariables().containsKey(replyCondition.getKey())) {
-                return invertCondition;
-            }
-
-            Serializable val = world.getGlobalVariables().get(replyCondition.getKey());
-            String desiredVal = replyCondition.getValue();
-            if (desiredVal == null) {
-                return !invertCondition;
-            }
-            if ((val != null && !val.equals(desiredVal)) || (val == null)) {
-                return invertCondition;
+        for (Condition condition : replyConditions) {
+            if (!condition.isMet(world)) {
+                return false;
             }
         }
         return true;
