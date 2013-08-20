@@ -22,6 +22,8 @@ import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.Animal;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
+import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
+import ru.game.aurora.world.planet.nature.PlantSpeciesDesc;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.*;
@@ -44,7 +46,7 @@ public class Planet extends BasePlanet {
      */
     private static final int MODE_SHOOT = 1;
 
-    private static final long serialVersionUID = -3267009875710669678L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * Current mode
@@ -80,6 +82,8 @@ public class Planet extends BasePlanet {
      * Available animal species descriptions, if any.
      */
     private AnimalSpeciesDesc[] animalSpecies;
+
+    private PlantSpeciesDesc[] plantSpecies;
 
     private boolean hasLife;
 
@@ -195,6 +199,8 @@ public class Planet extends BasePlanet {
                 a.setPos(animalX, animalY);
                 planetObjects.add(a);
             }
+
+            PlanetaryLifeGenerator.addPlants(this);
         }
     }
 
@@ -785,4 +791,7 @@ public class Planet extends BasePlanet {
         return height;
     }
 
+    public void setPlantSpecies(PlantSpeciesDesc[] plantSpecies) {
+        this.plantSpecies = plantSpecies;
+    }
 }
