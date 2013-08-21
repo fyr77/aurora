@@ -5,7 +5,7 @@
     </style>
 
     <style id="nifty-window#bar">
-        <attributes width="100%" height="20px" padding="2px" backgroundColor="#333f" childLayout="horizontal"/>
+        <attributes width="100%" height="20px" padding="16px" backgroundColor="#2e3d42" childLayout="horizontal"/>
     </style>
 
     <style id="nifty-window#title" base="base-font">
