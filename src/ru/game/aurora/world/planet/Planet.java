@@ -9,10 +9,7 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.*;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
@@ -27,6 +24,7 @@ import ru.game.aurora.world.planet.nature.PlantSpeciesDesc;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.*;
+import java.util.concurrent.Future;
 
 /**
  * Class for planet.
@@ -101,7 +99,7 @@ public class Planet extends BasePlanet {
 
     private transient Effect currentEffect = null;
 
-
+    private transient Future surfaceGenerationFuture = null;
 
     private static TileDrawer mountainDrawer = new TileDrawer("mountains", (byte) 0);
 
@@ -237,29 +235,40 @@ public class Planet extends BasePlanet {
     }
 
     @Override
-    public void enter(World world) {
-        if (surface == null) {
-            createSurface();
-        }
-        landingParty = world.getPlayer().getLandingParty();
-        landingParty.onLaunch(world);
-        landingParty.refillOxygen();
-        landingParty.setPos(10, 10); //todo: set position on land
-        int x = landingParty.getX();
-        int y = landingParty.getY();
+    public void enter(final World world) {
 
-        while (!SurfaceTypes.isPassible(landingParty, surface[wrapY(y)][wrapX(x)])) {
-            x = wrapX(x + 1);
-            y = wrapY(y + CommonRandom.getRandom().nextInt(2) - 1);
-        }
-        landingParty.setPos(x, y);
+        final Nifty nifty = GUI.getInstance().getNifty();
+        Element popup = nifty.createPopup("landing");
+        nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
 
-        world.getCamera().setTarget(landingParty);
-        shuttlePosition = new BasePositionable(landingParty.getX(), landingParty.getY());
-        int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
-        landingParty.addCollectedGeodata(openedTiles);
+        surfaceGenerationFuture = GlobalThreadPool.getExecutor().submit(new Runnable() {
+            @Override
+            public void run() {
+                if (surface == null) {
+                    createSurface();
+                }
+                landingParty = world.getPlayer().getLandingParty();
+                landingParty.onLaunch(world);
+                landingParty.refillOxygen();
+                landingParty.setPos(10, 10); //todo: set position on land
+                int x = landingParty.getX();
+                int y = landingParty.getY();
 
-        GUI.getInstance().getNifty().gotoScreen("surface_gui");
+                while (!SurfaceTypes.isPassible(landingParty, surface[wrapY(y)][wrapX(x)])) {
+                    x = wrapX(x + 1);
+                    y = wrapY(y + CommonRandom.getRandom().nextInt(2) - 1);
+                }
+                landingParty.setPos(x, y);
+
+                world.getCamera().setTarget(landingParty);
+                shuttlePosition = new BasePositionable(landingParty.getX(), landingParty.getY());
+                int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
+                landingParty.addCollectedGeodata(openedTiles);
+                nifty.closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+                nifty.gotoScreen("surface_gui");
+            }
+        });
+
     }
 
     @Override
@@ -492,6 +501,12 @@ public class Planet extends BasePlanet {
 
     @Override
     public void update(GameContainer container, World world) {
+        if (surfaceGenerationFuture != null) {
+            if (surfaceGenerationFuture.isDone()) {
+                surfaceGenerationFuture = null;
+            }
+            return;
+        }
         if (currentEffect != null) {
             currentEffect.update(container, world);
             if (currentEffect.isOver()) {
@@ -764,6 +779,9 @@ public class Planet extends BasePlanet {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
+        if (surfaceGenerationFuture != null) {
+            return;
+        }
         printPlanetStatus();
         drawLandscape(container, graphics, camera, true);
         drawObjects(container, graphics, camera);
