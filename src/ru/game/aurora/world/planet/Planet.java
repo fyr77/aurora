@@ -185,7 +185,7 @@ public class Planet extends BasePlanet {
             int speciesCount = r.nextInt(5) + 2;
             animalSpecies = new AnimalSpeciesDesc[speciesCount];
             for (int i = 0; i < speciesCount; ++i) {
-                animalSpecies[i] = new AnimalSpeciesDesc(this, "Unknown alien animal", r.nextBoolean(), r.nextBoolean(), r.nextInt(10) + 3, r.nextInt(6), r.nextInt(5), CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values()));
+                animalSpecies[i] = new AnimalSpeciesDesc(this, "Unknown alien animal", r.nextBoolean(), r.nextBoolean(), r.nextInt(10) + 3, r.nextInt(6), 1 + r.nextInt(5), CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values()));
             }
             final int animalCount = r.nextInt(10) + 5;
             for (int i = 0; i < animalCount; ++i) {

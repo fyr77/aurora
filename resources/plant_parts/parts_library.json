@@ -5,9 +5,8 @@
         , "resources/plant_parts/decorations.json"
     ],
 
-    "shadowImages" : [
-        "resources/animal_parts/shadow.png"
-    ],
+    "shadowImage" : "resources/animal_parts/shadow.png",
+
 
     "defaultColors" : {
         "0x004f3d22": 1,

@@ -184,7 +184,10 @@ public class Animal extends BasePositionable implements PlanetObject {
     @Override
     public void onShotAt(int damage) {
         hp -= damage;
-        wasAttacked = true;
+        if (!wasAttacked && desc.getBehaviour() == AnimalSpeciesDesc.Behaviour.SELF_DEFENSIVE) {
+            GameLogger.getInstance().logMessage(getName() + " becomes enraged and charges at your party");
+            wasAttacked = true;
+        }
         if (hp <= 0) {
             // clean obstacle flag
             myPlanet.setTileTypeAt(x, y, (byte) ((~SurfaceTypes.OBSTACLE_MASK) & myPlanet.getTileTypeAt(x, y)));
