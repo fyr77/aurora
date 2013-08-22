@@ -33,7 +33,7 @@
             </panel>
 
             <!-- bottom panel containing weapon buttons and log text -->
-            <panel height="120px" childLayout="horizontal" backgroundColor="#5050a0ff" padding="10px">
+            <panel height="120px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel.png" padding="10px">
                 <panel width="242px"/>
 
                 <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3" selection="Disabled" width="50%" height="100px"/>
@@ -76,7 +76,7 @@
             </panel>
 
             <!-- bottom panel containing weapon buttons and log text -->
-            <panel height="120px" childLayout="horizontal" backgroundColor="#5050a0ff" padding="10px">
+            <panel height="120px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel.png" padding="10px">
                 <control id="weapon_0_button" name="image_button" label="Weapon #1" width="64px" height="64px">
                     <interact onClick="weaponClicked(0)"/>
                 </control>
