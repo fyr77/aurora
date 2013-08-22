@@ -390,11 +390,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             createBackground(world);
         }
         world.setCurrentStarSystem(this);
+        GUI.getInstance().getNifty().gotoScreen("star_system_gui");
         world.onPlayerEnteredSystem(this);
 
-
-
-        GUI.getInstance().getNifty().gotoScreen("star_system_gui");
         if (firstEnterDialog != null && !visited) {
             world.addOverlayWindow(firstEnterDialog);
         }
