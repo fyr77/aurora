@@ -25,7 +25,12 @@ public class EngineUtils {
 
     public static void setImageForGUIElement(Element element, String imageName)
     {
-        element.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(imageName))));
+        setImageForGUIElement(element, ResourceManager.getInstance().getImage(imageName));
+    }
+
+    public static void setImageForGUIElement(Element element, Image image)
+    {
+        element.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(image)));
     }
 
     /**

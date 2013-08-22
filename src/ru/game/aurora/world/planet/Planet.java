@@ -14,6 +14,7 @@ import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.util.CollectionUtils;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
@@ -100,6 +101,8 @@ public class Planet extends BasePlanet {
     private transient Effect currentEffect = null;
 
     private transient Future surfaceGenerationFuture = null;
+
+    private transient Animation shuttle_landing;
 
     private static TileDrawer mountainDrawer = new TileDrawer("mountains", (byte) 0);
 
@@ -236,7 +239,12 @@ public class Planet extends BasePlanet {
 
     @Override
     public void enter(final World world) {
-
+        if (shuttle_landing == null) {
+            shuttle_landing = ResourceManager.getInstance().getAnimation("shuttle_landing");
+            shuttle_landing.setAutoUpdate(false);
+            shuttle_landing.setLooping(true);
+            shuttle_landing.start();
+        }
         final Nifty nifty = GUI.getInstance().getNifty();
         Element popup = nifty.createPopup("landing");
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
@@ -725,7 +733,6 @@ public class Planet extends BasePlanet {
         if (landingParty != null) {
             landingParty.draw(container, graphics, camera);
 
-
             graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped((int) shuttlePosition.getX(), width), camera.getYCoordWrapped((int) shuttlePosition.getY(), height));
 
             if (landingParty.getX() == (int) shuttlePosition.getX() && landingParty.getY() == (int) shuttlePosition.getY()) {
@@ -779,7 +786,19 @@ public class Planet extends BasePlanet {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
+
         if (surfaceGenerationFuture != null) {
+            final Element topMostPopup = GUI.getInstance().getNifty().getTopMostPopup();
+            if (topMostPopup == null) {
+                return;
+            }
+            final Element shuttle_image = topMostPopup.findElementByName("shuttle_image");
+
+
+            final long delta = container.getTime() - AuroraGame.getLastFrameTime();
+            shuttle_landing.update(delta);
+            System.out.println("Draw call at " + container.getTime() + ", updating for " + delta + ", frame number is " + shuttle_landing.getFrame());
+            EngineUtils.setImageForGUIElement(shuttle_image, shuttle_landing.getCurrentFrame());
             return;
         }
         printPlanetStatus();

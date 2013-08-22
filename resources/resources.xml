@@ -175,6 +175,7 @@
     <resource type="animation" id="ship_explosion" tw="64" th="64" duration="100">sprites/effects/explosion.png
     </resource>
     <resource type="animation" id="big_mommy" tw="64" th="64" duration="400">sprites/effects/big_mommy.png</resource>
+    <resource type="animation" id="shuttle_landing" tw="256" th="256" duration="100">sprites/gui/landing.png</resource>
 
     <!-- weapon icons -->
     <resource type="image" id="crew_rifle">sprites/weapons/crew/gun.png</resource>

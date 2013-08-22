@@ -36,6 +36,8 @@ public class AuroraGame extends NiftyOverlayGame {
 
     final Camera camera = new Camera(0, 0, tilesX, tilesY, tileSize, tileSize);
 
+    private static long lastFrameTime;
+
     public AuroraGame() {
 
     }
@@ -55,6 +57,7 @@ public class AuroraGame extends NiftyOverlayGame {
             throw new SlickException("Failed to initialize Monster Generator", e);
         }
         mainMenu = new MainMenu(gameContainer);
+        lastFrameTime = gameContainer.getTime();
         /*
         // Test code for animal generator. Can not be invoked outside of main app thread as it requires opengl context
 
@@ -115,6 +118,8 @@ public class AuroraGame extends NiftyOverlayGame {
             world.draw(gameContainer, graphics);
             world.getCamera().drawBound();
         }
+
+        lastFrameTime = gameContainer.getTime();
     }
 
     private static void addDir(String s) throws IOException {
@@ -144,6 +149,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
     public static void main(String[] args) throws SlickException, IOException {
 
+        System.out.println("Aurora game version " + Version.VERSION + " started");
         final String osName = System.getProperty("os.name");
         String nativePath;
         if (osName.contains("Windows")) {
@@ -162,5 +168,9 @@ public class AuroraGame extends NiftyOverlayGame {
         AppGameContainer app = new AppGameContainer(new AuroraGame());
         app.setDisplayMode(tilesX * tileSize, tilesY * tileSize, false);
         app.start();
+    }
+
+    public static long getLastFrameTime() {
+        return lastFrameTime;
     }
 }
