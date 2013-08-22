@@ -46,6 +46,9 @@ public class LandingParty implements GameObject, Positionable {
 
     private int hp = 3;
 
+    public LandingParty() {
+    }
+
     public LandingParty(int x, int y, LandingPartyWeapon weapon, int military, int science, int engineers) {
         this.x = x;
         this.y = y;

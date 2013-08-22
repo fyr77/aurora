@@ -231,50 +231,27 @@ public class Planet extends BasePlanet {
         Element popup = nifty.createPopup("landing");
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
 
+
         surfaceGenerationFuture = GlobalThreadPool.getExecutor().submit(new Runnable() {
             @Override
             public void run() {
+
                 try {
                     if (surface == null) {
                         createSurface();
                     }
-                    landingParty = world.getPlayer().getLandingParty();
-                    landingParty.onLaunch(world);
-                    landingParty.refillOxygen();
-                    landingParty.setPos(10, 10); //todo: set position on land
-                    int x = landingParty.getX();
-                    int y = landingParty.getY();
-
-                    while (!SurfaceTypes.isPassible(landingParty, surface[wrapY(y)][wrapX(x)])) {
-                        x = wrapX(x + 1);
-                        y = wrapY(y + CommonRandom.getRandom().nextInt(2) - 1);
-                    }
-                    landingParty.setPos(x, y);
-
-                    world.getCamera().setTarget(landingParty);
-                    shuttlePosition = new BasePositionable(landingParty.getX(), landingParty.getY());
-                    int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
-                    landingParty.addCollectedGeodata(openedTiles);
                     nifty.closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
                     nifty.gotoScreen("surface_gui");
 
-                    if (!landingParty.canBeLaunched(world) || world.getGlobalVariables().containsKey("tutorial.landing")) {
-                        // either this is first landing, or landing party can not be launched in current state and must be reconfigured. Show landing party screen
-                        GUI.getInstance().pushCurrentScreen();
-                        GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
-                        if (world.getGlobalVariables().containsKey("tutorial.landing")) {
-                            // this is first landing on a planet, show tutorial dialog
-                            Dialog d = Dialog.loadFromFile("dialogs/tutorials/planet_landing_tutorial.json");
-                            world.addOverlayWindow(d);
-                            world.getGlobalVariables().remove("tutorial.landing");
-                        }
-                    }
+
                 } catch (Exception e) {
                     System.err.println("Failed to enter planet");
                     e.printStackTrace();
                 }
             }
         });
+
+
 
     }
 
@@ -510,6 +487,40 @@ public class Planet extends BasePlanet {
     public void update(GameContainer container, World world) {
         if (surfaceGenerationFuture != null) {
             if (surfaceGenerationFuture.isDone()) {
+                landingParty = world.getPlayer().getLandingParty();
+                if (landingParty == null) {
+                    landingParty = new LandingParty();
+                }
+                if (!landingParty.canBeLaunched(world) || world.getGlobalVariables().containsKey("tutorial.landing")) {
+                    // either this is first landing, or landing party can not be launched in current state and must be reconfigured. Show landing party screen
+                    GUI.getInstance().pushCurrentScreen();
+                    GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
+                    if (world.getGlobalVariables().containsKey("tutorial.landing")) {
+                        // this is first landing on a planet, show tutorial dialog
+                        Dialog d = Dialog.loadFromFile("dialogs/tutorials/planet_landing_tutorial.json");
+                        world.addOverlayWindow(d);
+                        world.getGlobalVariables().remove("tutorial.landing");
+                    }
+                    return;
+                }
+
+                landingParty.setPos(10, 10); //todo: set position on land
+                int x = landingParty.getX();
+                int y = landingParty.getY();
+
+                while (!SurfaceTypes.isPassible(landingParty, surface[wrapY(y)][wrapX(x)])) {
+                    x = wrapX(x + 1);
+                    y = wrapY(y + CommonRandom.getRandom().nextInt(2) - 1);
+                }
+                landingParty.setPos(x, y);
+                landingParty.onLaunch(world);
+                landingParty.refillOxygen();
+
+
+                world.getCamera().setTarget(landingParty);
+                shuttlePosition = new BasePositionable(landingParty.getX(), landingParty.getY());
+                int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
+                landingParty.addCollectedGeodata(openedTiles);
                 surfaceGenerationFuture = null;
             }
             return;

@@ -30,13 +30,13 @@ public class PlanetaryLifeGenerator
             plants[plantIdx - 1] = new PlantSpeciesDesc(planet.getTileTypeAt(CommonRandom.getRandom().nextInt(planet.getWidth()), CommonRandom.getRandom().nextInt(planet.getHeight())));
 
             if (plants[plantIdx - 1].isSingle()) {
-                for (int j = 0; j < CommonRandom.getRandom().nextInt(30 * (5 - planet.getSize())); ++j) {
+                for (int j = 0; j < 20 + CommonRandom.getRandom().nextInt(30 * (5 - planet.getSize())); ++j) {
                     plantArray[CommonRandom.getRandom().nextInt(planet.getWidth())][ CommonRandom.getRandom().nextInt(planet.getHeight())] = plantIdx;
                 }
 
             } else {
                 // todo: some kind of finite automata
-                for (int j = 0; j < CommonRandom.getRandom().nextInt(20 * (5 - planet.getSize())); ++j) {
+                for (int j = 0; j < 20 + CommonRandom.getRandom().nextInt(20 * (5 - planet.getSize())); ++j) {
                     int size = CommonRandom.getRandom().nextInt(10) + 1;
                     int x = CommonRandom.getRandom().nextInt(planet.getWidth() - size - 1);
                     int y = CommonRandom.getRandom().nextInt(planet.getHeight() - size - 1);
@@ -59,7 +59,10 @@ public class PlanetaryLifeGenerator
         for (int i = 0; i < planet.getHeight(); ++i) {
             for (int j = 0; j < planet.getWidth(); ++j) {
                 if (plantArray[i][j] != 0) {
-                    planet.getPlanetObjects().add(new Plant(j, i, plants[plantArray[i][j] - 1], planet));
+                    if (SurfaceTypes.getType(planet.getTileTypeAt(j, i)) != SurfaceTypes.WATER || SurfaceTypes.isMountain(planet.getTileTypeAt(j, i))) {
+                        // do not draw on water. TODO: water plants?
+                        planet.getPlanetObjects().add(new Plant(j, i, plants[plantArray[i][j] - 1], planet));
+                    }
                 }
             }
         }
