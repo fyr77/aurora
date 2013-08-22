@@ -7,7 +7,11 @@
 package ru.game.aurora.world.planet.nature;
 
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.SurfaceTypes;
+
+import java.util.Random;
 
 /**
  * Creates and adds plants and animals to a planet
@@ -59,5 +63,29 @@ public class PlanetaryLifeGenerator
                 }
             }
         }
+    }
+
+    public static void addAnimals(Planet planet)
+    {
+        // generate random species descs. Currently only one
+        final Random r = CommonRandom.getRandom();
+        int speciesCount = r.nextInt(5) + 2;
+        AnimalSpeciesDesc[] animalSpecies = new AnimalSpeciesDesc[speciesCount];
+        for (int i = 0; i < speciesCount; ++i) {
+            animalSpecies[i] = new AnimalSpeciesDesc(planet, "Unknown alien animal", r.nextBoolean(), r.nextBoolean(), r.nextInt(10) + 3, r.nextInt(6), 1 + r.nextInt(5), CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values()));
+        }
+        final int animalCount = r.nextInt(10) + 5;
+        for (int i = 0; i < animalCount; ++i) {
+            Animal a = new Animal(planet, 0, 0, animalSpecies[r.nextInt(animalSpecies.length)]);
+            int animalX;
+            int animalY;
+            do {
+                animalX = r.nextInt(10);
+                animalY = r.nextInt(10);
+            } while (!SurfaceTypes.isPassible(a, planet.getTileTypeAt(animalX, animalY)));
+            a.setPos(animalX, animalY);
+            planet.getPlanetObjects().add(a);
+        }
+        planet.setAnimalSpecies(animalSpecies);
     }
 }

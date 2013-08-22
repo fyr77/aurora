@@ -10,6 +10,7 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.*;
 import ru.game.aurora.application.*;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
@@ -18,7 +19,6 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.nature.Animal;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.planet.nature.PlantSpeciesDesc;
@@ -182,25 +182,7 @@ public class Planet extends BasePlanet {
         createOreDeposits(size, r);
 
         if (hasLife) {
-            // generate random species descs. Currently only one
-            int speciesCount = r.nextInt(5) + 2;
-            animalSpecies = new AnimalSpeciesDesc[speciesCount];
-            for (int i = 0; i < speciesCount; ++i) {
-                animalSpecies[i] = new AnimalSpeciesDesc(this, "Unknown alien animal", r.nextBoolean(), r.nextBoolean(), r.nextInt(10) + 3, r.nextInt(6), 1 + r.nextInt(5), CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values()));
-            }
-            final int animalCount = r.nextInt(10) + 5;
-            for (int i = 0; i < animalCount; ++i) {
-                Animal a = new Animal(this, 0, 0, animalSpecies[r.nextInt(animalSpecies.length)]);
-                int animalX;
-                int animalY;
-                do {
-                    animalX = r.nextInt(10);
-                    animalY = r.nextInt(10);
-                } while (!SurfaceTypes.isPassible(a, surface[animalY][animalX]));
-                a.setPos(animalX, animalY);
-                planetObjects.add(a);
-            }
-
+            PlanetaryLifeGenerator.addAnimals(this);
             PlanetaryLifeGenerator.addPlants(this);
         }
     }
@@ -252,28 +234,45 @@ public class Planet extends BasePlanet {
         surfaceGenerationFuture = GlobalThreadPool.getExecutor().submit(new Runnable() {
             @Override
             public void run() {
-                if (surface == null) {
-                    createSurface();
-                }
-                landingParty = world.getPlayer().getLandingParty();
-                landingParty.onLaunch(world);
-                landingParty.refillOxygen();
-                landingParty.setPos(10, 10); //todo: set position on land
-                int x = landingParty.getX();
-                int y = landingParty.getY();
+                try {
+                    if (surface == null) {
+                        createSurface();
+                    }
+                    landingParty = world.getPlayer().getLandingParty();
+                    landingParty.onLaunch(world);
+                    landingParty.refillOxygen();
+                    landingParty.setPos(10, 10); //todo: set position on land
+                    int x = landingParty.getX();
+                    int y = landingParty.getY();
 
-                while (!SurfaceTypes.isPassible(landingParty, surface[wrapY(y)][wrapX(x)])) {
-                    x = wrapX(x + 1);
-                    y = wrapY(y + CommonRandom.getRandom().nextInt(2) - 1);
-                }
-                landingParty.setPos(x, y);
+                    while (!SurfaceTypes.isPassible(landingParty, surface[wrapY(y)][wrapX(x)])) {
+                        x = wrapX(x + 1);
+                        y = wrapY(y + CommonRandom.getRandom().nextInt(2) - 1);
+                    }
+                    landingParty.setPos(x, y);
 
-                world.getCamera().setTarget(landingParty);
-                shuttlePosition = new BasePositionable(landingParty.getX(), landingParty.getY());
-                int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
-                landingParty.addCollectedGeodata(openedTiles);
-                nifty.closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
-                nifty.gotoScreen("surface_gui");
+                    world.getCamera().setTarget(landingParty);
+                    shuttlePosition = new BasePositionable(landingParty.getX(), landingParty.getY());
+                    int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
+                    landingParty.addCollectedGeodata(openedTiles);
+                    nifty.closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+                    nifty.gotoScreen("surface_gui");
+
+                    if (!landingParty.canBeLaunched(world) || world.getGlobalVariables().containsKey("tutorial.landing")) {
+                        // either this is first landing, or landing party can not be launched in current state and must be reconfigured. Show landing party screen
+                        GUI.getInstance().pushCurrentScreen();
+                        GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
+                        if (world.getGlobalVariables().containsKey("tutorial.landing")) {
+                            // this is first landing on a planet, show tutorial dialog
+                            Dialog d = Dialog.loadFromFile("dialogs/tutorials/planet_landing_tutorial.json");
+                            world.addOverlayWindow(d);
+                            world.getGlobalVariables().remove("tutorial.landing");
+                        }
+                    }
+                } catch (Exception e) {
+                    System.err.println("Failed to enter planet");
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -830,5 +829,9 @@ public class Planet extends BasePlanet {
 
     public void setPlantSpecies(PlantSpeciesDesc[] plantSpecies) {
         this.plantSpecies = plantSpecies;
+    }
+
+    public void setAnimalSpecies(AnimalSpeciesDesc[] animalSpecies) {
+        this.animalSpecies = animalSpecies;
     }
 }

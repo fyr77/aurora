@@ -18,6 +18,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.InventoryItem;
@@ -88,11 +89,12 @@ public class LandingPartyEquipScreenController implements ScreenController {
     @NiftyEventSubscriber(pattern = ".*_count")
     public void onScrollbarMoved(final String id, final ScrollbarChangedEvent event) {
         String scrollbarId = event.getScrollbar().getId();
+        final Ship ship = world.getPlayer().getShip();
         switch (scrollbarId) {
             case "scientists_count": {
                 int oldVal = landingParty.getScience();
                 landingParty.setScience((int) event.getValue());
-                if (landingParty.getTotalMembers() > 10) {
+                if (landingParty.getTotalMembers() > 10 || landingParty.getScience() > ship.getScientists()) {
                     event.getScrollbar().setValue(oldVal);
                     landingParty.setScience(oldVal);
                 }
@@ -102,7 +104,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
             case "engineers_count": {
                 int oldVal = landingParty.getEngineers();
                 landingParty.setEngineers((int) event.getValue());
-                if (landingParty.getTotalMembers() > 10) {
+                if (landingParty.getTotalMembers() > 10 || landingParty.getEngineers() > ship.getEngineers()) {
                     event.getScrollbar().setValue(oldVal);
                     landingParty.setEngineers(oldVal);
                 }
@@ -112,7 +114,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
             default:
                 int oldVal = landingParty.getMilitary();
                 landingParty.setMilitary((int) event.getValue());
-                if (landingParty.getTotalMembers() > 10) {
+                if (landingParty.getTotalMembers() > 10 || landingParty.getMilitary() > ship.getMilitary()) {
                     event.getScrollbar().setValue(oldVal);
                     landingParty.setMilitary(oldVal);
                 }

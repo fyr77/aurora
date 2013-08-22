@@ -20,7 +20,6 @@ import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.BasePlanet;
-import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetScanScreen;
 
@@ -193,19 +192,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
                     world.setCurrentRoom(p);
                     p.enter(world);
-                    final LandingParty landingParty = world.getPlayer().getLandingParty();
-                    if (p.canBeLanded() && (landingParty == null || !landingParty.canBeLaunched(world) || world.getGlobalVariables().containsKey("tutorial.landing"))) {
-                        // first landing, show 'Landing party equipment' screen
 
-                        GUI.getInstance().pushCurrentScreen();
-                        GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
-                        if (world.getGlobalVariables().containsKey("tutorial.landing")) {
-                            // this is first landing on a planet, show tutorial dialog
-                            Dialog d = Dialog.loadFromFile("dialogs/tutorials/planet_landing_tutorial.json");
-                            world.addOverlayWindow(d);
-                            world.getGlobalVariables().remove("tutorial.landing");
-                        }
-                    }
                     break;
                 } else if (container.getInput().isKeyPressed(Input.KEY_S)) {
                     if (!(p instanceof Planet)) {
