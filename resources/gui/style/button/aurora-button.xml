@@ -14,6 +14,17 @@
         </effect>
     </style>
 
+    <style id="aurora-button#panel">
+        <attributes backgroundImage="gui/style/button/button_1.png" imageMode="sprite-resize:100,23,0,2,96,2,2,2,96,2,19,2,96,2,2" paddingLeft="7px" paddingRight="7px" width="100px" height="23px" childLayout="center" visibleToMouse="true" />
+        <effect>
+            <!-- <onHover name="border" color="#822f" post="true" />-->
+            <onHover name="imageOverlay" filename="gui/style/button/button_1.png" imageMode="sprite-resize:100,23,1,2,96,2,2,2,96,2,19,2,96,2,2" post="true" />
+            <onClick name="imageOverlay" filename="gui/style/button/button_1.png" imageMode="sprite-resize:100,23,2,2,96,2,2,2,96,2,19,2,96,2,2" post="true" />
+            <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="true" length="150" />
+            <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="true" length="150" />
+        </effect>
+    </style>
+
     <!-- +++++++++++++++++++++++++++++++++++++ -->
     <!-- style for the button text -->
     <!-- +++++++++++++++++++++++++++++++++++++ -->

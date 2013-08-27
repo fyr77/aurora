@@ -6,7 +6,7 @@
   </style>
 
   <style id="nifty-panel-no-shadow">
-    <attributes padding="8px" backgroundImage="gui/style/panel/aurora-panel-no-shadow.png" imageMode="resize:8,210,8,8,8,210,8,209,8,210,8,8" />
+    <attributes padding="8px,16px,24px,16px" backgroundImage="gui/style/panel/aurora-panel-no-shadow.png" imageMode="resize:8,210,8,8,8,210,8,209,8,210,8,8" />
   </style>
 
 </nifty-styles>
