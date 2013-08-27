@@ -14,7 +14,7 @@
     <attributes width="23px" height="23px" />
   </style>
   <style id="nifty-listbox-item" base="nifty-label">
-    <attributes color="#000f" width="100%" align="left" textVAlign="center" textHAlign="left" />
+    <attributes color="#ffff" width="100%" align="left" textVAlign="center" textHAlign="left" />
     <interact onClick="listBoxItemClicked()" />
     <effect>
       <onCustom customKey="focus" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />

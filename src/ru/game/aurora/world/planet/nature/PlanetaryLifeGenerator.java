@@ -11,6 +11,8 @@ import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.SurfaceTypes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -20,49 +22,40 @@ public class PlanetaryLifeGenerator
 {
     public static void addPlants(Planet planet)
     {
-        int plantsCount = CommonRandom.getRandom().nextInt(5 * planet.getSize());
+        int plantsCount = CommonRandom.getRandom().nextInt(5 * (5 - planet.getSize()));
         PlantSpeciesDesc[] plants = new PlantSpeciesDesc[plantsCount];
-        byte[][] plantArray = new byte[planet.getHeight()][planet.getWidth()];
 
-
-        for (byte plantIdx = 1; plantIdx < plantsCount + 1; ++plantIdx) {
+        for (byte plantIdx = 0; plantIdx < plantsCount; ++plantIdx) {
             //todo: algorithm for plants distribution. Preferred coordinates, tile types
-            plants[plantIdx - 1] = new PlantSpeciesDesc(planet.getTileTypeAt(CommonRandom.getRandom().nextInt(planet.getWidth()), CommonRandom.getRandom().nextInt(planet.getHeight())));
 
-            if (plants[plantIdx - 1].isSingle()) {
-                for (int j = 0; j < 20 + CommonRandom.getRandom().nextInt(30 * (5 - planet.getSize())); ++j) {
-                    plantArray[CommonRandom.getRandom().nextInt(planet.getWidth())][ CommonRandom.getRandom().nextInt(planet.getHeight())] = plantIdx;
-                }
+            plants[plantIdx] = new PlantSpeciesDesc(
+                    SurfaceTypes.getType(planet.getTileTypeAt(CommonRandom.getRandom().nextInt(planet.getWidth()), CommonRandom.getRandom().nextInt(planet.getHeight())))
+                    , CommonRandom.getRandom().nextDouble()
+                    , CommonRandom.getRandom().nextDouble() * 0.3 + 0.1
+                    , CommonRandom.getRandom().nextDouble() * 0.6 + 0.1
+                    , false
+                    , CommonRandom.getRandom().nextDouble() > 0.8
+            );
 
-            } else {
-                // todo: some kind of finite automata
-                for (int j = 0; j < 20 + CommonRandom.getRandom().nextInt(20 * (5 - planet.getSize())); ++j) {
-                    int size = CommonRandom.getRandom().nextInt(10) + 1;
-                    int x = CommonRandom.getRandom().nextInt(planet.getWidth() - size - 1);
-                    int y = CommonRandom.getRandom().nextInt(planet.getHeight() - size - 1);
-
-                    for (int ii = 0; ii < size; ++ii) {
-                        for (int jj = 0; jj < size; ++jj) {
-                            if (CommonRandom.getRandom().nextInt(3) != 0) {
-                                plantArray[y + jj][x + ii] = plantIdx;
-                            }
-
-                        }
-                    }
-
-                }
-            }
         }
 
         planet.setPlantSpecies(plants);
 
+        List<PlantSpeciesDesc> availablePlants = new ArrayList<>(plantsCount);
         for (int i = 0; i < planet.getHeight(); ++i) {
             for (int j = 0; j < planet.getWidth(); ++j) {
-                if (plantArray[i][j] != 0) {
-                    if (SurfaceTypes.getType(planet.getTileTypeAt(j, i)) != SurfaceTypes.WATER || SurfaceTypes.isMountain(planet.getTileTypeAt(j, i))) {
-                        // do not draw on water. TODO: water plants?
-                        planet.getPlanetObjects().add(new Plant(j, i, plants[plantArray[i][j] - 1], planet));
+                availablePlants.clear();
+                for (PlantSpeciesDesc plant : plants) {
+                    if (plant.canPlantOnTile(j, i, planet)) {
+                        availablePlants.add(plant);
                     }
+                }
+                if (availablePlants.isEmpty()) {
+                    continue;
+                }
+                final PlantSpeciesDesc desc = CollectionUtils.selectRandomElement(availablePlants);
+                if (CommonRandom.getRandom().nextDouble() <= desc.getBaseProbability()) {
+                    planet.getPlanetObjects().add(new Plant(j, i, desc, planet));
                 }
             }
         }

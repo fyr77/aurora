@@ -807,7 +807,6 @@ public class Planet extends BasePlanet {
 
             final long delta = container.getTime() - AuroraGame.getLastFrameTime();
             shuttle_landing.update(delta);
-            System.out.println("Draw call at " + container.getTime() + ", updating for " + delta + ", frame number is " + shuttle_landing.getFrame());
             EngineUtils.setImageForGUIElement(shuttle_image, shuttle_landing.getCurrentFrame());
             return;
         }

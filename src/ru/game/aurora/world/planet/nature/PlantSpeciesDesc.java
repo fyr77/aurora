@@ -7,7 +7,8 @@
 package ru.game.aurora.world.planet.nature;
 
 import org.newdawn.slick.Image;
-import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.SurfaceTypes;
 
 import java.io.Serializable;
 
@@ -18,19 +19,36 @@ public class PlantSpeciesDesc implements Serializable
 
     private transient Image image;
 
+    /**
+     * This plant will grow only on this type of tiles
+     */
     private byte preferredSurfaceType;
+
+    /**
+     * This plant will grow somewhere around given latitude
+     * Value from 0 (Equator) to 1 (Pole)
+     */
+    private double preferredLatitude;
+
+    private double areaHeight;
 
     private String name = "Unknown alien plant";
 
-    /**
-     * If true, this plant grows randomly on its own
-     * If false, it grows in large groups
-     */
-    private boolean isSingle;
+    // probability of this plant to be generated on a tile, if all other conditions match
+    private double baseProbability;
 
-    public PlantSpeciesDesc(byte preferredSurfaceType) {
+    private boolean growsOnWater = false;
+
+    private boolean growsOnMountains = false;
+
+    public PlantSpeciesDesc(byte preferredSurfaceType, double preferredLatitude, double areaHeight, double baseProbability, boolean growsOnWater, boolean growsOnMountains)
+    {
         this.preferredSurfaceType = preferredSurfaceType;
-        this.isSingle = CommonRandom.getRandom().nextBoolean();
+        this.preferredLatitude = preferredLatitude;
+        this.areaHeight = areaHeight;
+        this.baseProbability = baseProbability;
+        this.growsOnWater = growsOnWater;
+        this.growsOnMountains = growsOnMountains;
     }
 
     public void setImage(Image image) {
@@ -48,11 +66,23 @@ public class PlantSpeciesDesc implements Serializable
         return preferredSurfaceType;
     }
 
-    public boolean isSingle() {
-        return isSingle;
+    public double getBaseProbability() {
+        return baseProbability;
     }
 
     public String getName() {
         return name;
+    }
+
+    public boolean canPlantOnTile(int x, int y, Planet planet)
+    {
+        byte value = planet.getTileTypeAt(x, y);
+
+        return y > planet.getHeight() * preferredLatitude
+                && y <= planet.getHeight() * (preferredLatitude + areaHeight)
+                && SurfaceTypes.sameBaseSurfaceType(value, preferredSurfaceType)
+                && !(SurfaceTypes.getType(value) == SurfaceTypes.WATER && !growsOnWater)
+                && !(SurfaceTypes.isMountain(value) && !growsOnMountains);
+
     }
 }
