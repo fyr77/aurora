@@ -23,13 +23,15 @@ import java.util.List;
  * Contains all data about science and research done by player
  */
 public class ResearchState implements Serializable {
-    private static final long serialVersionUID = -5676580254565166442L;
+    private static final long serialVersionUID = 1L;
 
     private int idleScientists;
 
     private List<ResearchProjectDesc> completedProjects = new ArrayList<ResearchProjectDesc>();
 
     private List<ResearchProjectState> currentProjects = new ArrayList<ResearchProjectState>();
+
+    private ResearchSet availableResearch = new ResearchSet();
 
     private Geodata geodata = new Geodata();
 
@@ -42,6 +44,10 @@ public class ResearchState implements Serializable {
 
     public Geodata getGeodata() {
         return geodata;
+    }
+
+    public ResearchSet getAvailableResearch() {
+        return availableResearch;
     }
 
     public List<ResearchProjectDesc> getCompletedProjects() {
@@ -71,7 +77,7 @@ public class ResearchState implements Serializable {
      */
     public void update(World world) {
         List<ResearchProjectState> toAdd = new LinkedList<>();
-        for (Iterator<ResearchProjectState> iter = currentProjects.iterator(); iter.hasNext();) {
+        for (Iterator<ResearchProjectState> iter = currentProjects.iterator(); iter.hasNext(); ) {
             ResearchProjectState state = iter.next();
             state.desc.update(world, state.scientists);
             if (state.desc.isCompleted()) {
