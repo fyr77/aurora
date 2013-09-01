@@ -18,8 +18,7 @@ import java.util.List;
 /**
  * Base class for research projects
  */
-public abstract class ResearchProjectDesc implements Serializable
-{
+public abstract class ResearchProjectDesc implements Serializable {
     private static final long serialVersionUID = 929590331247291625L;
 
     /**
@@ -46,14 +45,14 @@ public abstract class ResearchProjectDesc implements Serializable
     /**
      * After completing this research, these researches will become available
      */
-    protected List<ResearchProjectDesc> makesAvailable;
+    protected List<String> makesAvailable;
 
-    protected List<EngineeringProject> makesAvailableEngineering;
+    protected List<String> makesAvailableEngineering;
 
     /**
      * This stuff is launched when this research is completed and its results are dumped on earth
      */
-    protected List<EarthResearch> earthProgress;
+    protected List<String> earthProgress;
 
     protected ResearchProjectDesc(String name, String description, String icon) {
         this.name = name;
@@ -68,39 +67,36 @@ public abstract class ResearchProjectDesc implements Serializable
         this.report = report;
     }
 
-    public void addNextResearch(ResearchProjectDesc desc)
-    {
+    public void addNextResearch(ResearchProjectDesc desc) {
         if (makesAvailable == null) {
-            makesAvailable = new LinkedList<ResearchProjectDesc>();
+            makesAvailable = new LinkedList<String>();
         }
-        makesAvailable.add(desc);
+        makesAvailable.add(desc.getName());
     }
 
-    public void addEngineeringResult(EngineeringProject desc)
-    {
+    public void addEngineeringResult(EngineeringProject desc) {
         if (makesAvailableEngineering == null) {
             makesAvailableEngineering = new LinkedList<>();
         }
-        makesAvailableEngineering.add(desc);
+        makesAvailableEngineering.add(desc.getName());
     }
 
-    public void addEarthProgressResearch(EarthResearch r)
-    {
+    public void addEarthProgressResearch(EarthResearch r) {
         if (earthProgress == null) {
-            earthProgress = new ArrayList<EarthResearch>();
+            earthProgress = new ArrayList<String>();
         }
-        earthProgress.add(r);
+        earthProgress.add(r.getId());
     }
 
-    public List<ResearchProjectDesc> getMakesAvailable() {
+    public List<String> getMakesAvailable() {
         return makesAvailable;
     }
 
-    public List<EngineeringProject> getMakesAvailableEngineering() {
+    public List<String> getMakesAvailableEngineering() {
         return makesAvailableEngineering;
     }
 
-    public List<EarthResearch> getEarthProgress() {
+    public List<String> getEarthProgress() {
         return earthProgress;
     }
 
@@ -152,16 +148,14 @@ public abstract class ResearchProjectDesc implements Serializable
     /**
      * Called when completed project is dumped on earth and its score is calculated
      */
-    public void onReturnToEarth(World world)
-    {
+    public void onReturnToEarth(World world) {
     }
 
     /**
      * This method is used in nifty-gui lists. Do not change (or add custom view converted to research screen)
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return name;
     }
 }

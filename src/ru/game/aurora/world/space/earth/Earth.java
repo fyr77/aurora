@@ -108,7 +108,7 @@ public class Earth extends Planet {
         world.getPlayer().getEarthState().getEvacuationState().changeEvacuationSpeed(10);
 
         // after some time evacuation will go faster
-        world.addListener(new EarthResearch(50) {
+        world.addListener(new EarthResearch("evac_announce", 50) {
 
             private static final long serialVersionUID = -3699793069471281672L;
 
@@ -162,7 +162,8 @@ public class Earth extends Planet {
         for (ResearchProjectDesc desc : researchState.getCompletedProjects()) {
             result += desc.getScore();
             if (desc.getEarthProgress() != null) {
-                for (EarthResearch res : desc.getEarthProgress()) {
+                for (String resId : desc.getEarthProgress()) {
+                    EarthResearch res = world.getResearchAndDevelopmentProjects().getEarthResearchProjects().get(resId);
                     world.addListener(res);
                     res.onStarted(world);
                 }

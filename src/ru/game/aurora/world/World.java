@@ -16,6 +16,7 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.earth.EvacuationState;
 import ru.game.aurora.player.research.ResearchProjectDesc;
+import ru.game.aurora.player.research.RnDSet;
 import ru.game.aurora.world.generation.StarSystemNamesCollection;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
@@ -57,10 +58,14 @@ public class World implements Serializable {
 
     private Map<String, Serializable> globalVariables = new HashMap<String, Serializable>();
 
+    private RnDSet researchAndDevelopmentProjects;
+
+
     public World(int sizeX, int sizeY) {
         player = new Player();
         updatedThisFrame = false;
         currentRoom = galaxyMap = new GalaxyMap(this, sizeX, sizeY);
+        researchAndDevelopmentProjects = new RnDSet();
     }
 
     public Map<String, Serializable> getGlobalVariables() {
@@ -261,5 +266,9 @@ public class World implements Serializable {
 
     public StarSystemNamesCollection getStarSystemNamesCollection() {
         return starSystemNamesCollection;
+    }
+
+    public RnDSet getResearchAndDevelopmentProjects() {
+        return researchAndDevelopmentProjects;
     }
 }

@@ -7,10 +7,11 @@
 package ru.game.aurora.player.research;
 
 
+import ru.game.aurora.application.JsonConfigManager;
 import ru.game.aurora.world.World;
 
-public class BaseResearchWithFixedProgress extends ResearchProjectDesc {
-    private static final long serialVersionUID = 5476045747203186686L;
+public class BaseResearchWithFixedProgress extends ResearchProjectDesc implements JsonConfigManager.EntityWithId {
+    private static final long serialVersionUID = 1L;
 
     protected int progress;
 
@@ -65,5 +66,10 @@ public class BaseResearchWithFixedProgress extends ResearchProjectDesc {
     @Override
     public int getScore() {
         return score;
+    }
+
+    @Override
+    public String getId() {
+        return name;
     }
 }

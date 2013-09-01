@@ -9,8 +9,7 @@ package ru.game.aurora.player.earth;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 
-public abstract class EarthResearch extends GameEventListener
-{
+public abstract class EarthResearch extends GameEventListener {
     private static final long serialVersionUID = -5430246310704423995L;
 
     protected int targetTurn;
@@ -19,13 +18,14 @@ public abstract class EarthResearch extends GameEventListener
 
     protected boolean completed = false;
 
-    public EarthResearch(int length)
-    {
+    protected String id;
+
+    public EarthResearch(String id, int length) {
+        this.id = id;
         this.length = length;
     }
 
-    public void onStarted(World world)
-    {
+    public void onStarted(World world) {
         targetTurn = world.getTurnCount() + length;
     }
 
@@ -43,4 +43,8 @@ public abstract class EarthResearch extends GameEventListener
     }
 
     protected abstract void onCompleted(World world);
+
+    public String getId() {
+        return id;
+    }
 }

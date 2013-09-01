@@ -13,8 +13,7 @@ import ru.game.aurora.player.research.projects.AnimalResearch;
 import ru.game.aurora.world.World;
 
 
-public class BiologyResearch extends EarthResearch
-{
+public class BiologyResearch extends EarthResearch {
     private static final long serialVersionUID = -3631665834356175502L;
 
     private int materialCount = 0;
@@ -22,7 +21,7 @@ public class BiologyResearch extends EarthResearch
     private static final int TARGET_COUNT = 5;
 
     public BiologyResearch() {
-        super(Integer.MAX_VALUE);
+        super("cancer_cure", Integer.MAX_VALUE);
     }
 
     @Override
@@ -36,8 +35,7 @@ public class BiologyResearch extends EarthResearch
 
     @Override
     public void onReturnToEarth(World world) {
-        for (ResearchProjectDesc p : world.getPlayer().getResearchState().getCompletedProjects())
-        {
+        for (ResearchProjectDesc p : world.getPlayer().getResearchState().getCompletedProjects()) {
             if (p instanceof AnimalResearch) {
                 materialCount++;
             }

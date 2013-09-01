@@ -27,11 +27,9 @@ public class ResearchState implements Serializable {
 
     private int idleScientists;
 
-    private List<ResearchProjectDesc> completedProjects = new ArrayList<ResearchProjectDesc>();
+    private List<ResearchProjectDesc> completedProjects = new ArrayList<>();
 
-    private List<ResearchProjectState> currentProjects = new ArrayList<ResearchProjectState>();
-
-    private ResearchSet availableResearch = new ResearchSet();
+    private List<ResearchProjectState> currentProjects = new ArrayList<>();
 
     private Geodata geodata = new Geodata();
 
@@ -44,10 +42,6 @@ public class ResearchState implements Serializable {
 
     public Geodata getGeodata() {
         return geodata;
-    }
-
-    public ResearchSet getAvailableResearch() {
-        return availableResearch;
     }
 
     public List<ResearchProjectDesc> getCompletedProjects() {
@@ -92,14 +86,26 @@ public class ResearchState implements Serializable {
                     world.addOverlayWindow(state.desc);
                 }
                 if (state.desc.getMakesAvailable() != null) {
-                    for (ResearchProjectDesc projectDesc : state.desc.getMakesAvailable()) {
+                    for (String str : state.desc.getMakesAvailable()) {
+                        ResearchProjectDesc projectDesc = world.getResearchAndDevelopmentProjects().getResearchProjects().get(str);
+                        if (projectDesc == null) {
+                            // possibly already researched
+                            continue;
+                        }
                         toAdd.add(new ResearchProjectState(projectDesc));
                         GameLogger.getInstance().logMessage("New research project " + projectDesc.getName() + " is now available");
                     }
                 }
                 if (state.desc.getMakesAvailableEngineering() != null) {
-                    for (EngineeringProject projectDesc : state.desc.getMakesAvailableEngineering()) {
+                    for (String str : state.desc.getMakesAvailableEngineering()) {
+                        EngineeringProject projectDesc = world.getResearchAndDevelopmentProjects().getEngineeringProjects().get(str);
+                        if (projectDesc == null) {
+                            // possibly it is already done
+                            continue;
+                        }
                         world.getPlayer().getEngineeringState().addNewEngineeringProject(projectDesc);
+                        // engineering projects are removed after they are explored, so that they will not be re-added later
+                        world.getResearchAndDevelopmentProjects().getEngineeringProjects().remove(str);
                     }
                 }
                 GameLogger.getInstance().logMessage("Research project " + state.desc.name + " completed");

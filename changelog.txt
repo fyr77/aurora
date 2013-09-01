@@ -4,8 +4,9 @@ IN PROGRESS...
 
 * Extended dialog system. Dialogs can now have different initial statements, based on world state
 + New animated popup for planet landing. As landscape generation can take up to a minute, user must be sure
-that the game has not hanged up.
+that the game has not hanged up
 + Added plants to planet surface
+* Moved some research projects to external json files.
 
 =====================================================
 VERSION 0.0.9

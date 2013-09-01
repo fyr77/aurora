@@ -26,8 +26,7 @@ import ru.game.aurora.world.space.StarSystem;
 
 import java.util.List;
 
-public class HumanityGenerator implements WorldGeneratorPart
-{
+public class HumanityGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = -1289210420627927980L;
 
     @Override
@@ -75,15 +74,14 @@ public class HumanityGenerator implements WorldGeneratorPart
          */
         world.addListener(new GameEventListener() {
 
-            private static final long serialVersionUID = 2162720938893116702L;
+            private static final long serialVersionUID = 1;
 
             @Override
-            public void onReturnToEarth(World world)
-            {
+            public void onReturnToEarth(World world) {
                 if (world.getGlobalVariables().containsKey("quest.main.knows_about_obliterator")) {
-                    world.addListener(new EarthResearch(30) {
+                    world.addListener(new EarthResearch("obliterator_study", 30) {
 
-                        private static final long serialVersionUID = -2829778275793872022L;
+                        private static final long serialVersionUID = 1;
 
                         @Override
                         protected void onCompleted(World world) {
