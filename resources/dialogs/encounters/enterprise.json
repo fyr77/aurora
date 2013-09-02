@@ -1,0 +1,58 @@
+{
+    "iconName":"enterprise_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "npcText":"Look who is there. Glad to see you. Do you want anything special, or just visiting your old commander?",
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"Have you seen anything interesting nearby?"
+                },
+                {
+                    "targetStatementId":2,
+                    "replyText":"We need your assistance."
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"No, nothing special, was just passing by."
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "npcText":"No, nothing special. Usual mad alien stuff.",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"Ok then."
+                }
+            ]
+        },
+        "2":{
+            "id":2,
+            "npcText":"What do you need?",
+            "replies":[
+                {
+                    "targetStatementId":3,
+                    "replyText":"Our ship is damaged, can you spare some resources and engineers to help fixing it?"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"Actually nothing, I was wrong."
+                }
+            ]
+        },
+        "3":{
+            "id":3,
+            "npcText":"Sure. Humans must help each other in this vast void.",
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "returnValue" : 1,
+                    "replyText":"<over>"
+                }
+            ]
+        }
+    }
+}
