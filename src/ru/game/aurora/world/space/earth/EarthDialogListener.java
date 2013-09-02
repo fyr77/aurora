@@ -66,7 +66,7 @@ public class EarthDialogListener implements DialogListener {
             GUI.getInstance().pushScreen("earth_screen");
             earth.getProgressDialog().enter(world);
             Nifty nifty = GUI.getInstance().getNifty();
-            ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).setDialog(earth.getProgressDialog());
+            ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).pushDialog(earth.getProgressDialog());
             nifty.gotoScreen("dialog_screen");
 
             if (daysPassed > 50) {

@@ -188,7 +188,7 @@ public class World implements Serializable {
         GUI.getInstance().pushCurrentScreen();
         d.enter(this);
         Nifty nifty = GUI.getInstance().getNifty();
-        ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).setDialog(d);
+        ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).pushDialog(d);
         nifty.gotoScreen("dialog_screen");
     }
 

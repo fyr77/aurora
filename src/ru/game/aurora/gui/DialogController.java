@@ -23,11 +23,13 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.world.World;
 
+import java.util.Stack;
+
 
 public class DialogController implements ScreenController {
     private World world;
 
-    private Dialog dialog;
+    private Stack<Dialog> dialogs = new Stack<>();
 
     private Element imagePanel;
 
@@ -41,8 +43,8 @@ public class DialogController implements ScreenController {
         this.world = world;
     }
 
-    public void setDialog(Dialog dialog) {
-        this.dialog = dialog;
+    public void pushDialog(Dialog dialog) {
+        this.dialogs.push(dialog);
     }
 
     @Override
@@ -60,6 +62,7 @@ public class DialogController implements ScreenController {
     }
 
     public void updateDialog() {
+        final Dialog dialog = this.dialogs.peek();
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(dialog.getIconName()))));
         npcText.getRenderer(TextRenderer.class).setText(dialog.getCurrentStatement().npcText);
 
@@ -83,8 +86,9 @@ public class DialogController implements ScreenController {
             return;
         }
         int selectedIdx = event.getSelectionIndices().get(0);
-        dialog.useReply(world, selectedIdx);
-        if (dialog.isOver()) {
+        this.dialogs.peek().useReply(world, selectedIdx);
+        if (this.dialogs.peek().isOver()) {
+            this.dialogs.pop();
             GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
         } else {
             replies.deselectItem(selectedIdx);
