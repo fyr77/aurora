@@ -8,6 +8,7 @@ package ru.game.aurora.util;
 
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.ImageRenderer;
+import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import org.newdawn.slick.*;
@@ -31,6 +32,11 @@ public class EngineUtils {
     public static void setImageForGUIElement(Element element, Image image)
     {
         element.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(image)));
+    }
+
+    public static void setTextForGUIElement(Element element, String text)
+    {
+        element.getRenderer(TextRenderer.class).setText(text);
     }
 
     /**

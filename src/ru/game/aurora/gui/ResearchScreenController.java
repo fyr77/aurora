@@ -20,6 +20,7 @@ import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchProjectState;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 
 public class ResearchScreenController implements ScreenController {
@@ -52,6 +53,11 @@ public class ResearchScreenController implements ScreenController {
         l.clear();
         l.addAllItems(world.getPlayer().getResearchState().getCompletedProjects());
 
+        Element statusLines = tg.getSelectedTab().getElement().findElementByName("statusStrings");
+        if (statusLines != null) {
+            EngineUtils.setTextForGUIElement(statusLines, "Status:");
+        }
+
     }
 
     @Override
@@ -82,14 +88,24 @@ public class ResearchScreenController implements ScreenController {
         }
         Object obj = event.getSelection().get(0);
         ResearchProjectDesc researchProjectDesc;
+        Element statusLines = tg.getSelectedTab().getElement().findElementByName("statusStrings");
+        if (statusLines != null) {
+            EngineUtils.setTextForGUIElement(statusLines, "Status:");
+        }
         if (ResearchProjectDesc.class.isAssignableFrom(obj.getClass())) {
             researchProjectDesc = (ResearchProjectDesc) obj;
         } else if (ResearchProjectState.class.isAssignableFrom(obj.getClass())) {
             researchProjectDesc = ((ResearchProjectState) obj).desc;
+
+            if (statusLines != null) {
+                statusLines.getRenderer(TextRenderer.class).setText("Status: \n" + researchProjectDesc.getStatusString(world, ((ResearchProjectState) obj).scientists));
+            }
         } else {
             throw new IllegalStateException("research screen can not show research item of class " + obj.getClass());
         }
         tr.setText(researchProjectDesc.getDescription());
+
+
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(researchProjectDesc.getIcon()))));
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }

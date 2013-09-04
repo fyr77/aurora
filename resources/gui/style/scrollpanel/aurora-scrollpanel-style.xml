@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty-styles>
     <style id="nifty-scrollpanel#scrollpanel">
-        <attributes padding="8px,16px,24px,16px" backgroundImage="gui/style/panel/aurora-panel-no-shadow.png"
+        <attributes padding="6px" backgroundImage="gui/style/panel/aurora-panel-no-shadow.png"
                     imageMode="resize:6,212,6,6,6,212,6,211,6,212,6,6"/>
         <effect overlay="true">
             <onActive name="blendMode" blendMode="multiply" post="true"/>
