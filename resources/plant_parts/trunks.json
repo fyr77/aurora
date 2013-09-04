@@ -62,7 +62,8 @@
             }
 
         ],
-        "imageId" : "plant_parts/tree1.png"
+        "imageId" : "plant_parts/tree1.png",
+        "tags" : ["style1"]
     },
 
     {
@@ -131,7 +132,8 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/tree2.png"
+        "imageId" : "plant_parts/tree2.png",
+        "tags" : ["style1"]
     },
 
     {
@@ -194,7 +196,6 @@
             }
         ],
         "imageId" : "plant_parts/tree3.png",
-        "centerX" : 32,
-        "centerY" : 50
+        "tags" : ["style1"]
     }
 ]

@@ -34,8 +34,8 @@ public class Earth extends Planet {
 
     private int lastVisitTurn = 0;
 
-    public Earth(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
-        super(owner, cat, atmosphere, size, x, y, hasLife);
+    public Earth(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
+        super(owner, cat, atmosphere, size, x, y);
         earthDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_dialog.json"));
         progressDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_progress_dialog.json"));
         progressDialog.setListener(new EarthProgressDialogListener(this));

@@ -21,6 +21,7 @@ import ru.game.aurora.world.generation.quest.MainQuestGenerator;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
+import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -108,7 +109,7 @@ public class WorldGenerator implements Runnable {
 
         while (!futures.isEmpty()) {
             try {
-                for (Iterator<Future> iter = futures.iterator(); iter.hasNext();) {
+                for (Iterator<Future> iter = futures.iterator(); iter.hasNext(); ) {
                     Future f = iter.next();
                     if (f.isDone()) {
                         iter.remove();
@@ -148,7 +149,10 @@ public class WorldGenerator implements Runnable {
                     , planetSize
                     , planetX
                     , planetY
-                    , atmosphere != PlanetAtmosphere.NO_ATMOSPHERE);
+            );
+            if (atmosphere != PlanetAtmosphere.NO_ATMOSPHERE) {
+                PlanetaryLifeGenerator.setPlanetHasLife(planets[i]);
+            }
             astroData += 10 * planetSize;
         }
         ss.setPlanets(planets);

@@ -9,7 +9,12 @@ import java.util.*;
  */
 public abstract class CollectionUtils {
 
+    @SafeVarargs
     public static <T> T selectRandomElement(T... elems) {
+        return selectRandomElementArray(elems);
+    }
+
+    public static <T> T selectRandomElementArray(T[] elems) {
         if (elems.length == 0) {
             return null;
         }

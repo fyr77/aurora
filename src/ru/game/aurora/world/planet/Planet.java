@@ -19,9 +19,8 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
+import ru.game.aurora.world.planet.nature.PlanetFloraAndFauna;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
-import ru.game.aurora.world.planet.nature.PlantSpeciesDesc;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.*;
@@ -77,14 +76,7 @@ public class Planet extends BasePlanet {
      */
     private BasePositionable shuttlePosition;
 
-    /**
-     * Available animal species descriptions, if any.
-     */
-    private AnimalSpeciesDesc[] animalSpecies;
-
-    private PlantSpeciesDesc[] plantSpecies;
-
-    private boolean hasLife;
+    private PlanetFloraAndFauna floraAndFauna = null;
 
     /**
      * Animals that are located on planet surface.
@@ -147,7 +139,7 @@ public class Planet extends BasePlanet {
         createOreDeposits(size, CommonRandom.getRandom());
     }
 
-    public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y, boolean hasLife) {
+    public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
         super(size, y, owner, atmosphere, x, cat);
         switch (size) {
             case 1:
@@ -169,7 +161,6 @@ public class Planet extends BasePlanet {
             default:
                 throw new IllegalArgumentException("Unsupported planet size value");
         }
-        this.hasLife = hasLife;
     }
 
     private void createSurface() {
@@ -181,7 +172,7 @@ public class Planet extends BasePlanet {
 
         createOreDeposits(size, r);
 
-        if (hasLife) {
+        if (floraAndFauna != null) {
             PlanetaryLifeGenerator.addAnimals(this);
             PlanetaryLifeGenerator.addPlants(this);
         }
@@ -250,7 +241,6 @@ public class Planet extends BasePlanet {
                 }
             }
         });
-
 
 
     }
@@ -837,11 +827,11 @@ public class Planet extends BasePlanet {
         return height;
     }
 
-    public void setPlantSpecies(PlantSpeciesDesc[] plantSpecies) {
-        this.plantSpecies = plantSpecies;
+    public PlanetFloraAndFauna getFloraAndFauna() {
+        return floraAndFauna;
     }
 
-    public void setAnimalSpecies(AnimalSpeciesDesc[] animalSpecies) {
-        this.animalSpecies = animalSpecies;
+    public void setFloraAndFauna(PlanetFloraAndFauna floraAndFauna) {
+        this.floraAndFauna = floraAndFauna;
     }
 }
