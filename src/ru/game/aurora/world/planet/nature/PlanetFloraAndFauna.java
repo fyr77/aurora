@@ -27,10 +27,8 @@ public class PlanetFloraAndFauna implements Serializable {
 
     private PlantSpeciesDesc[] plantSpecies;
 
-    public PlanetFloraAndFauna(String plantsStyleTag, PlantSpeciesDesc[] plantSpecies, AnimalSpeciesDesc[] animalSpecies) {
+    public PlanetFloraAndFauna(String plantsStyleTag) {
         this.plantsStyleTag = plantsStyleTag;
-        this.plantSpecies = plantSpecies;
-        this.animalSpecies = animalSpecies;
     }
 
     public AnimalSpeciesDesc[] getAnimalSpecies() {
@@ -43,5 +41,11 @@ public class PlanetFloraAndFauna implements Serializable {
 
     public String getPlantsStyleTag() {
         return plantsStyleTag;
+    }
+
+    public void setSpecies(AnimalSpeciesDesc[] animalSpecies, PlantSpeciesDesc[] plantSpecies)
+    {
+        this.plantSpecies = plantSpecies;
+        this.animalSpecies = animalSpecies;
     }
 }

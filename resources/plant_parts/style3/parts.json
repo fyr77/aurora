@@ -1,0 +1,230 @@
+[
+    {
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 32,
+                "y" : 32,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+        ],
+        "imageId" : "plant_parts/style3/leaves1_1.png",
+        "tags" : ["style3"]
+    },
+    {
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 32,
+                "y" : 32,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+
+        ],
+        "imageId" : "plant_parts/style3/leaves1_2.png",
+        "tags" : ["style3"]
+    },
+
+    {
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 32,
+                "y" : 32,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+
+        ],
+        "imageId" : "plant_parts/style3/leaves1_3.png",
+        "tags" : ["style3"]
+    },
+
+    {
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 32,
+                "y" : 32,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+
+        ],
+        "imageId" : "plant_parts/style3/leaves1_4.png",
+        "tags" : ["style3"]
+    }, 
+	
+	{
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 32,
+                "y" : 32,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+        ],
+        "imageId" : "plant_parts/style3/leaves1_5.png",
+        "tags" : ["style3"]
+    },
+    {
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 32,
+                "y" : 32,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+
+        ],
+        "imageId" : "plant_parts/style3/leaves1_6.png",
+        "tags" : ["style3"]
+    },
+
+    {
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 32,
+                "y" : 32,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+
+        ],
+        "imageId" : "plant_parts/style3/leaves1_7.png",
+        "tags" : ["style3"]
+    },
+
+	
+	
+	{
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 2,
+                "y" : 21,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+            {
+                "x": 25,
+                "y" : 1,
+                "angle" : 90,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }
+
+        ],
+        "imageId" : "plant_parts/style3/trunk1_1.png",
+        "tags" : ["style3"]
+    },
+	
+	{
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 7,
+                "y" : 0,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+            {
+                "x": 27,
+                "y" : 2,
+                "angle" : 90,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }
+
+        ],
+        "imageId" : "plant_parts/style3/trunk1_2.png",
+        "tags" : ["style3"]
+    },
+	{
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 0,
+                "y" : 22,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ],
+				"groupId" : "leaves2"
+            },
+            {
+                "x": 18,
+                "y" : 2,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ],
+				"groupId" : "leaves2"
+            },
+			 {
+                "x": 30,
+                "y" : 30,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ],
+				"groupId" : "leaves2"
+            }
+        ],
+        "imageId" : "plant_parts/style3/trunk1_3.png",
+        "tags" : ["style3"]
+    },
+	
+
+	
+	{
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 2,
+                "y" : 17,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ],
+				"groupId" : "leaves2"
+            },
+            {
+                "x": 30,
+                "y" : 2,
+                "angle" : 90,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ],
+				"groupId" : "leaves2"
+            }
+        ],
+        "imageId" : "plant_parts/style3/trunk1_4.png",
+        "tags" : ["style3"]
+    }
+]

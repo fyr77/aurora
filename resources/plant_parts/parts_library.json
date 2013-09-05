@@ -1,8 +1,10 @@
 {
     "partFiles" : [
-        "resources/plant_parts/trunks.json"
-        , "resources/plant_parts/branches.json"
-        , "resources/plant_parts/decorations.json"
+        "resources/plant_parts/style1/trunks.json"
+        , "resources/plant_parts/style1/branches.json"
+        , "resources/plant_parts/style1/decorations.json"
+		, "resources/plant_parts/style2/parts.json"
+		, "resources/plant_parts/style3/parts.json"
     ],
 
     "shadowImage" : "resources/animal_parts/shadow.png",

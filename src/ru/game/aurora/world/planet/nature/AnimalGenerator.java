@@ -9,6 +9,7 @@ import ru.game.frankenstein.util.ColorUtils;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 
 /**
  * Generates random alien animals
@@ -45,6 +46,7 @@ public class AnimalGenerator {
 
         monsterGenerationParams = new MonsterGenerationParams(true, false);
         plantGenerationParams = new MonsterGenerationParams(false, false);
+        plantGenerationParams.tags = new HashSet<>();
     }
 
 
@@ -62,6 +64,8 @@ public class AnimalGenerator {
 
     public void getImageForPlant(PlantSpeciesDesc desc) {
         try {
+            plantGenerationParams.tags.clear(); //todo: thread-safe?
+            plantGenerationParams.tags.add(desc.getMyFlora().getPlantsStyleTag());
             desc.setImage(((Slick2DFrankensteinImage)plantGenerator.generateMonster(plantGenerationParams).monsterImage).getImpl());
         } catch (FrankensteinException e) {
             System.err.println("Failed to generate plant image");

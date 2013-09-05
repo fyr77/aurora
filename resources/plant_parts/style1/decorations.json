@@ -11,10 +11,10 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/flower1.png",
+        "imageId" : "plant_parts/style1/flower1.png",
         "tags" : ["style1"]
     },
-    {
+	{
         "type":"MONSTER_DECORATION",
         "attachmentPoints" : [
             {
@@ -25,13 +25,11 @@
 					"MONSTER_LIMB"
                 ]
             }
-
         ],
-        "imageId" : "plant_parts/flower2.png",
+        "imageId" : "plant_parts/style1/flower2.png",
         "tags" : ["style1"]
     },
-
-    {
+	{
         "type":"MONSTER_DECORATION",
         "attachmentPoints" : [
             {
@@ -42,13 +40,11 @@
 					"MONSTER_LIMB"
                 ]
             }
-
         ],
-        "imageId" : "plant_parts/flower3.png",
+        "imageId" : "plant_parts/style1/flower3.png",
         "tags" : ["style1"]
     },
-
-    {
+	{
         "type":"MONSTER_DECORATION",
         "attachmentPoints" : [
             {
@@ -59,11 +55,26 @@
 					"MONSTER_LIMB"
                 ]
             }
-
         ],
-        "imageId" : "plant_parts/flower4.png",
+        "imageId" : "plant_parts/style1/flower4.png",
         "tags" : ["style1"]
-    }, 
+    },
+   
+   {
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 32,
+                "y" : 32,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+        ],
+        "imageId" : "plant_parts/style1/flower5.png",
+        "tags" : ["style1"]
+    },
 	
 	{
         "type":"MONSTER_DECORATION",
@@ -77,61 +88,11 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/flower5.png",
-        "tags" : ["style1"]
-    },
-    {
-        "type":"MONSTER_DECORATION",
-        "attachmentPoints" : [
-            {
-                "x": 8,
-                "y" : 8,
-                "availableTypes" : [
-                    "MONSTER_BODY",
-					"MONSTER_LIMB"
-                ]
-            }
-
-        ],
-        "imageId" : "plant_parts/flower6.png",
-        "tags" : ["style1"]
-    },
-
-    {
-        "type":"MONSTER_DECORATION",
-        "attachmentPoints" : [
-            {
-                "x": 8,
-                "y" : 8,
-                "availableTypes" : [
-                    "MONSTER_BODY",
-					"MONSTER_LIMB"
-                ]
-            }
-
-        ],
-        "imageId" : "plant_parts/flower7.png",
-        "tags" : ["style1"]
-    },
-
-    {
-        "type":"MONSTER_DECORATION",
-        "attachmentPoints" : [
-            {
-                "x": 8,
-                "y" : 8,
-                "availableTypes" : [
-                    "MONSTER_BODY",
-					"MONSTER_LIMB"
-                ]
-            }
-
-        ],
-        "imageId" : "plant_parts/flower8.png",
+        "imageId" : "plant_parts/style1/flower6.png",
         "tags" : ["style1"]
     },
 	
-	 {
+	{
         "type":"MONSTER_DECORATION",
         "attachmentPoints" : [
             {
@@ -142,9 +103,38 @@
 					"MONSTER_LIMB"
                 ]
             }
-
         ],
-        "imageId" : "plant_parts/flower9.png",
+        "imageId" : "plant_parts/style1/flower7.png",
+        "tags" : ["style1"]
+    },
+	{
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 8,
+                "y" : 8,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+        ],
+        "imageId" : "plant_parts/style1/flower8.png",
+        "tags" : ["style1"]
+    },
+	{
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 8,
+                "y" : 8,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+        ],
+        "imageId" : "plant_parts/style1/flower9.png",
         "tags" : ["style1"]
     }
 ]

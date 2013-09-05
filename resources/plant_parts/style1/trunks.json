@@ -62,7 +62,7 @@
             }
 
         ],
-        "imageId" : "plant_parts/tree1.png",
+        "imageId" : "plant_parts/style1/tree1.png",
         "tags" : ["style1"]
     },
 
@@ -132,7 +132,7 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/tree2.png",
+        "imageId" : "plant_parts/style1/tree2.png",
         "tags" : ["style1"]
     },
 
@@ -195,7 +195,7 @@
                 "groupId" : "leaves1"                
             }
         ],
-        "imageId" : "plant_parts/tree3.png",
+        "imageId" : "plant_parts/style1/tree3.png",
         "tags" : ["style1"]
     }
 ]

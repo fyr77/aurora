@@ -34,6 +34,8 @@ public class PlantSpeciesDesc implements Serializable
 
     private String name = "Unknown alien plant";
 
+    private PlanetFloraAndFauna myFlora;
+
     // probability of this plant to be generated on a tile, if all other conditions match
     private double baseProbability;
 
@@ -41,7 +43,7 @@ public class PlantSpeciesDesc implements Serializable
 
     private boolean growsOnMountains = false;
 
-    public PlantSpeciesDesc(byte preferredSurfaceType, double preferredLatitude, double areaHeight, double baseProbability, boolean growsOnWater, boolean growsOnMountains)
+    public PlantSpeciesDesc(byte preferredSurfaceType, double preferredLatitude, double areaHeight, double baseProbability, boolean growsOnWater, boolean growsOnMountains, PlanetFloraAndFauna floraAndFauna)
     {
         this.preferredSurfaceType = preferredSurfaceType;
         this.preferredLatitude = preferredLatitude;
@@ -49,6 +51,7 @@ public class PlantSpeciesDesc implements Serializable
         this.baseProbability = baseProbability;
         this.growsOnWater = growsOnWater;
         this.growsOnMountains = growsOnMountains;
+        this.myFlora = floraAndFauna;
     }
 
     public void setImage(Image image) {
@@ -84,5 +87,9 @@ public class PlantSpeciesDesc implements Serializable
                 && !(SurfaceTypes.getType(value) == SurfaceTypes.WATER && !growsOnWater)
                 && !(SurfaceTypes.isMountain(value) && !growsOnMountains);
 
+    }
+
+    public PlanetFloraAndFauna getMyFlora() {
+        return myFlora;
     }
 }

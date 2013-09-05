@@ -483,6 +483,9 @@ public class Planet extends BasePlanet {
                 }
                 if (!landingParty.canBeLaunched(world) || world.getGlobalVariables().containsKey("tutorial.landing")) {
                     // either this is first landing, or landing party can not be launched in current state and must be reconfigured. Show landing party screen
+                    if (GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("landing_party_equip_screen")) {
+                        return;
+                    }
                     GUI.getInstance().pushCurrentScreen();
                     GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
                     if (world.getGlobalVariables().containsKey("tutorial.landing")) {

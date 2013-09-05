@@ -34,7 +34,7 @@
             }
 
         ],
-        "imageId" : "plant_parts/branch1.png",
+        "imageId" : "plant_parts/style1/branch1.png",
         "tags" : ["style1"]
 
     },
@@ -67,7 +67,7 @@
             }	 
 
         ],
-        "imageId" : "plant_parts/branch2.png",
+        "imageId" : "plant_parts/style1/branch2.png",
         "tags" : ["style1"]
 
     },
@@ -109,7 +109,7 @@
 			
 
         ],
-        "imageId" : "plant_parts/branch3.png",
+        "imageId" : "plant_parts/style1/branch3.png",
          "tags" : ["style1"]
     },
 	
@@ -147,7 +147,7 @@
                 "groupId": "leaf1"
             }	 			
         ],
-        "imageId" : "plant_parts/branch4.png",
+        "imageId" : "plant_parts/style1/branch4.png",
         "tags" : ["style1"]
     },
 	{
@@ -178,7 +178,7 @@
             }
 				
         ],
-        "imageId" : "plant_parts/branch5.png",
+        "imageId" : "plant_parts/style1/branch5.png",
         "tags" : ["style1"]
     },
 	{
@@ -208,7 +208,7 @@
                  "groupId": "leaf1"
             } 			
         ],
-        "imageId" : "plant_parts/branch6.png",
+        "imageId" : "plant_parts/style1/branch6.png",
         "tags" : ["style1"]
     }
 ]

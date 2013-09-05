@@ -24,13 +24,14 @@ public class PlanetaryLifeGenerator {
      * Within single planet only one style is allowed.
      * Only parts with this style in tag list will be used by monster generator
      */
-    private static final String[] plantStyles = {"style1"};
+    private static final String[] plantStyles = {"style1", "style2", "style3"};
 
     public static void setPlanetHasLife(Planet planet) {
         int plantsCount = CommonRandom.getRandom().nextInt(5 * (5 - planet.getSize()));
         PlantSpeciesDesc[] plants = new PlantSpeciesDesc[plantsCount];
 
         final String plantsStyle = CollectionUtils.selectRandomElement(plantStyles);
+        PlanetFloraAndFauna floraAndFauna = new PlanetFloraAndFauna(plantsStyle);
 
         for (byte plantIdx = 0; plantIdx < plantsCount; ++plantIdx) {
             //todo: algorithm for plants distribution. Preferred coordinates, tile types
@@ -42,6 +43,7 @@ public class PlanetaryLifeGenerator {
                     , CommonRandom.getRandom().nextDouble() * 0.6 + 0.1
                     , false
                     , CommonRandom.getRandom().nextDouble() > 0.8
+                    , floraAndFauna
             );
 
         }
@@ -53,7 +55,7 @@ public class PlanetaryLifeGenerator {
             animalSpecies[i] = new AnimalSpeciesDesc(planet, "Unknown alien animal", r.nextBoolean(), r.nextBoolean(), r.nextInt(10) + 3, r.nextInt(6), 1 + r.nextInt(5), CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values()));
         }
 
-        PlanetFloraAndFauna floraAndFauna = new PlanetFloraAndFauna(plantsStyle, plants, animalSpecies);
+        floraAndFauna.setSpecies(animalSpecies, plants);
         planet.setFloraAndFauna(floraAndFauna);
     }
 
