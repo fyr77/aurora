@@ -586,6 +586,9 @@ public class Planet extends BasePlanet {
 
     public void drawLandscapeMap(Graphics graphics, Camera camera)
     {
+        if (surface == null) {
+            createSurface();
+        }
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {
                 SurfaceTypes.drawSimple(
