@@ -584,8 +584,22 @@ public class Planet extends BasePlanet {
         return true;
     }
 
+    public void drawLandscapeMap(Graphics graphics, Camera camera)
+    {
+        for (int i = 0; i < height; ++i) {
+            for (int j = 0; j < width; ++j) {
+                SurfaceTypes.drawSimple(
+                        surface[i][j]
+                        , camera.getXCoord(j)
+                        , camera.getYCoord(i)
+                        , camera.getTileWidth()
+                        , camera.getTileHeight()
+                        , graphics);
+            }
+        }
+    }
 
-    public void drawLandscape(GameContainer container, Graphics graphics, Camera camera, boolean detailed) {
+    public void drawLandscape(GameContainer container, Graphics graphics, Camera camera) {
         if (surface == null) {
             createSurface();
         }
@@ -596,23 +610,14 @@ public class Planet extends BasePlanet {
                 if ((type & SurfaceTypes.VISIBILITY_MASK) == 0) {
                     continue;
                 }
-                if (detailed) {
-                    SurfaceTypes.drawDetailed(
-                            type
-                            , camera.getXCoord(j)
-                            , camera.getYCoord(i)
-                            , camera.getTileWidth()
-                            , camera.getTileHeight()
-                            , graphics);
-                } else {
-                    SurfaceTypes.drawSimple(
-                            type
-                            , camera.getXCoord(j)
-                            , camera.getYCoord(i)
-                            , camera.getTileWidth()
-                            , camera.getTileHeight()
-                            , graphics);
-                }
+
+                SurfaceTypes.drawDetailed(
+                        type
+                        , camera.getXCoord(j)
+                        , camera.getYCoord(i)
+                        , camera.getTileWidth()
+                        , camera.getTileHeight()
+                        , graphics);
 
                 // now draw edges of next sprites
                 Set<Byte> neighbours = new TreeSet<>();
@@ -636,6 +641,9 @@ public class Planet extends BasePlanet {
                         td.drawTile(graphics, camera, this, i/*wrapY(i)*/, j/*wrapX(j)*/);
                     }
                 }
+
+
+
             }
 
 
@@ -643,51 +651,49 @@ public class Planet extends BasePlanet {
 
 
         // after all draw mountains
-        if (detailed) {
-            for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
-                // first draw outer mountains (that have only one neighbour on X)
-                for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; j++) {
-                    if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.VISIBILITY_MASK) == 0) {
-                        continue;
-                    }
-
-
-                    if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {
-                        graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
-                    }
-                    if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) == 0) {
-                        boolean left = ((surface[wrapY(i)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                        boolean right = ((surface[wrapY(i)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                        boolean up = ((surface[wrapY(i - 1)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                        boolean down = ((surface[wrapY(i + 1)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-
-                        boolean downLeft = ((surface[wrapY(i + 1)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                        boolean downRight = ((surface[wrapY(i + 1)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                        boolean upLeft = ((surface[wrapY(i - 1)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                        boolean upRight = ((surface[wrapY(i - 1)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-
-                        drawMountainTile(graphics, camera, i, j, left, right, up, down, downLeft, downRight, upLeft, upRight);
-                    }
-                    if (allNeighboursAreMountain(wrapX(j), wrapY(i + 1))) {
-                        graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
-
-                    } else {
-                        // draw 2nd floor
-                        boolean left = allNeighboursAreMountain(j - 1, i + 1);
-                        boolean right = allNeighboursAreMountain(j + 1, i + 1);
-                        boolean up = allNeighboursAreMountain(j, i - 1 + 1);
-                        boolean down = allNeighboursAreMountain(j, i + 1 + 1);
-
-                        boolean downLeft = allNeighboursAreMountain(j - 1, i + 1 + 1);
-                        boolean downRight = allNeighboursAreMountain(j + 1, i + 1 + 1);
-                        boolean upLeft = allNeighboursAreMountain(j - 1, i - 1 + 1);
-                        boolean upRight = allNeighboursAreMountain(j + 1, i - 1 + 1);
-
-                        drawMountainTile(graphics, camera, i, j, left, right, up, down, downLeft, downRight, upLeft, upRight);
-                    }
-
-
+        for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
+            // first draw outer mountains (that have only one neighbour on X)
+            for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; j++) {
+                if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.VISIBILITY_MASK) == 0) {
+                    continue;
                 }
+
+
+                if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {
+                    graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
+                }
+                if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) == 0) {
+                    boolean left = ((surface[wrapY(i)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    boolean right = ((surface[wrapY(i)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    boolean up = ((surface[wrapY(i - 1)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    boolean down = ((surface[wrapY(i + 1)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+
+                    boolean downLeft = ((surface[wrapY(i + 1)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    boolean downRight = ((surface[wrapY(i + 1)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    boolean upLeft = ((surface[wrapY(i - 1)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+                    boolean upRight = ((surface[wrapY(i - 1)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
+
+                    drawMountainTile(graphics, camera, i, j, left, right, up, down, downLeft, downRight, upLeft, upRight);
+                }
+                if (allNeighboursAreMountain(wrapX(j), wrapY(i + 1))) {
+                    graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
+
+                } else {
+                    // draw 2nd floor
+                    boolean left = allNeighboursAreMountain(j - 1, i + 1);
+                    boolean right = allNeighboursAreMountain(j + 1, i + 1);
+                    boolean up = allNeighboursAreMountain(j, i - 1 + 1);
+                    boolean down = allNeighboursAreMountain(j, i + 1 + 1);
+
+                    boolean downLeft = allNeighboursAreMountain(j - 1, i + 1 + 1);
+                    boolean downRight = allNeighboursAreMountain(j + 1, i + 1 + 1);
+                    boolean upLeft = allNeighboursAreMountain(j - 1, i - 1 + 1);
+                    boolean upRight = allNeighboursAreMountain(j + 1, i - 1 + 1);
+
+                    drawMountainTile(graphics, camera, i, j, left, right, up, down, downLeft, downRight, upLeft, upRight);
+                }
+
+
             }
         }
     }
@@ -804,7 +810,7 @@ public class Planet extends BasePlanet {
             return;
         }
         printPlanetStatus();
-        drawLandscape(container, graphics, camera, true);
+        drawLandscape(container, graphics, camera);
         drawObjects(container, graphics, camera);
         if (currentEffect != null) {
             currentEffect.draw(container, graphics, camera);
@@ -836,5 +842,10 @@ public class Planet extends BasePlanet {
 
     public void setFloraAndFauna(PlanetFloraAndFauna floraAndFauna) {
         this.floraAndFauna = floraAndFauna;
+    }
+
+    @Override
+    public boolean hasLife() {
+        return floraAndFauna != null;
     }
 }

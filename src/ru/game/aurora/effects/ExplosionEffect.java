@@ -50,8 +50,8 @@ public class ExplosionEffect extends BasePositionable implements Effect {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        int drawX = x;
-        int drawY = y;
+        float drawX = x;
+        float drawY = y;
         if (!screenCoords) {
             drawX = camera.getXCoord(x);
             drawY = camera.getYCoord(y);

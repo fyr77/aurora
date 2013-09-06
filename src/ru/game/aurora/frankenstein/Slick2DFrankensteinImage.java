@@ -12,6 +12,7 @@ import org.newdawn.slick.ImageBuffer;
 import org.newdawn.slick.SlickException;
 import ru.game.frankenstein.FrankensteinImage;
 import ru.game.frankenstein.util.Rectangle;
+import ru.game.frankenstein.util.Size;
 
 import java.awt.*;
 import java.util.Map;
@@ -95,6 +96,11 @@ public class Slick2DFrankensteinImage implements FrankensteinImage
             }
         }
         return new Slick2DFrankensteinImage(new Image(ib));
+    }
+
+    @Override
+    public FrankensteinImage resize(Size targetSize, boolean constrainProportions) {
+        throw new UnsupportedOperationException();
     }
 
     public Image getImpl()

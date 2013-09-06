@@ -95,15 +95,16 @@ public class PlanetSpriteGenerator {
      * Create mask with a shadow.
      * Mask is a black circle with an excluded smaller circle inside it
      *
+     *
      * @param radius    circle radius
      * @param solX      center of excluded circle
      * @param solY      center of excluded circle
      * @param solRadius radius of excluded circle
      * @return
      */
-    private BufferedImage createMask(int radius, int solX, int solY, int solRadius) {
-        BufferedImage result = new BufferedImage(2 * radius, 2 * radius, BufferedImage.TYPE_4BYTE_ABGR);
-        final int diameter = 2 * radius;
+    private BufferedImage createMask(float radius, int solX, int solY, int solRadius) {
+        BufferedImage result = new BufferedImage((int)(2 * radius), (int) (2 * radius), BufferedImage.TYPE_4BYTE_ABGR);
+        final float diameter = 2 * radius;
         for (int i = 0; i < diameter; ++i) {
             for (int j = 0; j < diameter; ++j) {
 
@@ -176,7 +177,7 @@ public class PlanetSpriteGenerator {
     }
 
 
-    private BufferedImage getScaledImage(BufferedImage image, int width, int height) throws IOException {
+    private BufferedImage getScaledImage(BufferedImage image, float width, float height) throws IOException {
         int imageWidth  = image.getWidth();
         int imageHeight = image.getHeight();
 
@@ -187,14 +188,14 @@ public class PlanetSpriteGenerator {
 
         return bilinearScaleOp.filter(
                 image,
-                new BufferedImage(width, height, image.getType()));
+                new BufferedImage((int)width, (int)height, image.getType()));
     }
 
     private Image createPlanetSpriteImpl(Camera cam, PlanetSpriteParameters params) {
         try {
-            final int radius = StarSystem.PLANET_SCALE_FACTOR * cam.getTileWidth() / (4 * params.size);
-            int width = 2 * radius;
-            int height = 2 * radius;
+            final float radius = StarSystem.PLANET_SCALE_FACTOR * cam.getTileWidth() / (4 * params.size);
+            float width = 2 * radius;
+            float height = 2 * radius;
 
 
             final int noiseWidth = (int) Math.ceil(width / (float)SCALE);
@@ -256,7 +257,7 @@ public class PlanetSpriteGenerator {
             if (params.hasAtmosphere) {
                 // draw atmosphere 'glow' surrounding the planet
                 final int glowRadius = 20;
-                ImageBuffer id = new ImageBuffer(width + glowRadius, height + glowRadius);
+                ImageBuffer id = new ImageBuffer((int)(width + glowRadius), (int)(height + glowRadius));
 
                 for (int i = 0; i < width + glowRadius; ++i) {
                     for (int j = 0; j < height + glowRadius; ++j) {

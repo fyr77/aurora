@@ -71,9 +71,9 @@ public class ProgressDumpScreen implements OverlayWindow {
         int text2Width = font.getWidth(text2);
         int dotWidth = font.getWidth(".");
 
-        int totalTextWidth = (int) (rect.getWidth() - 2) * camera.getTileWidth();
+        float totalTextWidth = (rect.getWidth() - 2) * camera.getTileWidth();
 
-        int dotCount = (totalTextWidth - text1Width - text2Width) / dotWidth;
+        int dotCount = (int) ((totalTextWidth - text1Width - text2Width) / dotWidth);
 
         StringBuilder sb = new StringBuilder(text1);
         for (int i = 0; i < dotCount; ++i) {
@@ -92,10 +92,10 @@ public class ProgressDumpScreen implements OverlayWindow {
                 , "Exploration results:"
                 , GUIConstants.captionFont
                 , Color.yellow
-                , (int) rect.getX() * camera.getTileWidth()
-                , (int) rect.getY() * camera.getTileHeight()
-                , (int) rect.getWidth() * camera.getTileWidth()
-                , camera.getTileHeight());
+                , (int) (rect.getX() * camera.getTileWidth())
+                , (int) (rect.getY() * camera.getTileHeight())
+                , (int) (rect.getWidth() * camera.getTileWidth())
+                , (int) camera.getTileHeight());
 
         int line = 0;
         int totalScore = 0;

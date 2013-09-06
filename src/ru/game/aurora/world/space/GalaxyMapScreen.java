@@ -38,8 +38,8 @@ public class GalaxyMapScreen implements Room {
         this.world = world;
         galaxyMap = world.getGalaxyMap();
         final Camera oldCamera = world.getCamera();
-        final int newTileWidth = oldCamera.getNumTilesX() * oldCamera.getTileWidth() / galaxyMap.getTilesX();
-        final int newTileHeight = oldCamera.getNumTilesY() * oldCamera.getTileHeight() / galaxyMap.getTilesY();
+        final float newTileWidth = oldCamera.getNumTilesX() * oldCamera.getTileWidth() / galaxyMap.getTilesX();
+        final float newTileHeight = oldCamera.getNumTilesY() * oldCamera.getTileHeight() / galaxyMap.getTilesY();
         myCamera = new Camera(0, 0, galaxyMap.getTilesX(), galaxyMap.getTilesY(), newTileWidth, newTileHeight);
         myCamera.setTarget(new BasePositionable(galaxyMap.getTilesX() / 2, galaxyMap.getTilesY() / 2));
         ship = world.getPlayer().getShip();

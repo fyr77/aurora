@@ -41,7 +41,7 @@ public class BlasterShotEffect implements Effect {
 
     }
 
-    public BlasterShotEffect(Positionable source, int targetScreenX, int targetScreenY, Camera camera, int moveSpeed, String shotSprite) {
+    public BlasterShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, String shotSprite) {
         this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
                 , new Vector2f(targetScreenX, targetScreenY)
                 ,

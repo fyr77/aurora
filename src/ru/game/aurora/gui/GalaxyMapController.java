@@ -15,9 +15,12 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.niffy.ImageButtonController;
 import ru.game.aurora.gui.niffy.ProgressBarControl;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.BasePlanet;
+import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMapScreen;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -160,8 +163,57 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         myScreen.layoutLayers();
     }
 
-    public void closeLandingPartyLostPopup() {
+    public void closeCurrentPopup() {
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
         GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+    }
+
+    public void land()
+    {
+        world.getCurrentStarSystem().landOnCurrentPlanet(world);
+    }
+
+    public void scanPlanet()
+    {
+        BasePlanet planet = world.getCurrentStarSystem().getPlanetAtPlayerShipPosition();
+        if (planet == null) {
+            return;
+        }
+
+        final Nifty nifty = GUI.getInstance().getNifty();
+        Element popup = nifty.createPopup("planet_scan");
+        nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
+        GUI.getInstance().getNifty().setIgnoreKeyboardEvents(false);
+
+        StringBuilder sb = new StringBuilder("Planetary data:\n");
+        sb.append("Atmosphere: ").append(planet.getAtmosphere()).append('\n');
+
+        String sizeText;
+        switch (planet.getSize()) {
+            case 4:
+                sizeText = "small";
+                break;
+            case 3:
+                sizeText = "medium";
+                break;
+            case 2:
+                sizeText = "large";
+                break;
+            case 1:
+                sizeText = "huge";
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+        sb.append("Size: ").append(sizeText).append('\n');
+        sb.append("Biological activity: ").append(planet.hasLife() ? "detected" : "not detected").append('\n');
+        sb.append("Surface type: ").append(planet.getCategory()).append('\n');
+
+        EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), sb.toString());
+
+        if (planet instanceof Planet) {
+            world.getCurrentStarSystem().setSurfaceRenderTarget(popup.findElementByName("surfaceMapPanel"));
+        }
+
     }
 }

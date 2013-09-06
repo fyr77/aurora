@@ -91,4 +91,9 @@ public abstract class BasePlanet implements Room, GalaxyMapObject {
     public int getSize() {
         return size;
     }
+
+    public boolean hasLife()
+    {
+        return false;
+    }
 }

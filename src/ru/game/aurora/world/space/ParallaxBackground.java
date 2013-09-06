@@ -24,9 +24,9 @@ public class ParallaxBackground {
         public int y;
         public Color color;
 
-        private Star(int x, int y, Color color) {
-            this.x = x;
-            this.y = y;
+        private Star(float x, float y, Color color) {
+            this.x = (int) x;
+            this.y = (int) y;
             this.color = color;
         }
     }
@@ -42,7 +42,7 @@ public class ParallaxBackground {
 
     private float baseWidth = 3;
 
-    public ParallaxBackground(int width, int height, int centerX, int centerY, int density) {
+    public ParallaxBackground(float width, float height, float centerX, float centerY, int density) {
         if (density == 0) {
             density = 1;
         }
@@ -50,7 +50,7 @@ public class ParallaxBackground {
         stars = new Star[PLANES_COUNT][starsPerPlane];
         for (int i = 0; i < PLANES_COUNT; ++i) {
             for (int j = 0; j < starsPerPlane; ++j) {
-                stars[i][j] = new Star(r.nextInt(2 * width) - centerX - width, r.nextInt(2 * height) - centerY - height, CollectionUtils.selectRandomElement(StarSystem.possibleColors));
+                stars[i][j] = new Star(r.nextFloat() * 2 * width - centerX - width, r.nextFloat() * 2 * height - centerY - height, CollectionUtils.selectRandomElement(StarSystem.possibleColors));
             }
         }
     }

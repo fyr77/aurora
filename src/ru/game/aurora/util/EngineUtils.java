@@ -55,7 +55,7 @@ public class EngineUtils {
         return new Color(color.r * coeff, color.g * coeff, color.b * coeff);
     }
 
-    public static void drawCircleCentered(Graphics graphics, int x, int y, int radius, Color c, boolean filled) {
+    public static void drawCircleCentered(Graphics graphics, float x, float y, int radius, Color c, boolean filled) {
         graphics.setColor(c);
         if (filled) {
             graphics.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
@@ -64,7 +64,7 @@ public class EngineUtils {
         }
     }
 
-    public static void drawDashedCircleCentered(Graphics graphics, int x, int y, int radius, Color c) {
+    public static void drawDashedCircleCentered(Graphics graphics, float x, float y, int radius, Color c) {
         graphics.setColor(c);
         final int segments = radius / 10;
         double angle = Math.PI / (2 * segments);
@@ -127,9 +127,9 @@ public class EngineUtils {
     public static void drawRectWithBorderAndText(Graphics graphics, Rectangle rectangle, Camera camera, Color borderColor, Color fillColor, String text, Font font, Color textColor, boolean aligned) {
         drawRectWithBorder(graphics, rectangle, camera, borderColor, fillColor);
         if (!aligned) {
-            drawString(graphics, text, (int) ((rectangle.getX() + 1) * camera.getTileWidth()), (int) ((rectangle.getY() + 0.5) * camera.getTileHeight()), (int) (rectangle.getWidth() - 2) * camera.getTileHeight(), font, textColor);
+            drawString(graphics, text, ((rectangle.getX() + 1) * camera.getTileWidth()),  ((rectangle.getY() + 0.5f) * camera.getTileHeight()), ((rectangle.getWidth() - 2) * camera.getTileHeight()), font, textColor);
         } else {
-            drawSingleStringAligned(graphics, text, font, textColor, (int) ((rectangle.getX()) * camera.getTileWidth()), (int) ((rectangle.getY()) * camera.getTileHeight()), (int) (rectangle.getWidth()) * camera.getTileWidth(), (int) (rectangle.getHeight() * camera.getTileHeight()));
+            drawSingleStringAligned(graphics, text, font, textColor, (int)((rectangle.getX()) * camera.getTileWidth()), (int)((rectangle.getY()) * camera.getTileHeight()), (int) ((int)(rectangle.getWidth()) * camera.getTileWidth()), (int)(rectangle.getHeight() * camera.getTileHeight()));
         }
     }
 
@@ -138,9 +138,9 @@ public class EngineUtils {
      */
     public static void drawRect(Graphics engine, Rectangle rectangle, Camera camera, boolean filled) {
         if (filled) {
-            engine.fillRect(camera.getRelativeX((int) rectangle.getX()), camera.getRelativeY((int) rectangle.getY()), rectangle.getWidth() * camera.getTileWidth(), rectangle.getHeight() * camera.getTileHeight());
+            engine.fillRect(camera.getRelativeX(rectangle.getX()), camera.getRelativeY(rectangle.getY()), rectangle.getWidth() * camera.getTileWidth(), rectangle.getHeight() * camera.getTileHeight());
         } else {
-            engine.drawRect(camera.getRelativeX((int) rectangle.getX()), camera.getRelativeY((int) rectangle.getY()), rectangle.getWidth() * camera.getTileWidth(), rectangle.getHeight() * camera.getTileHeight());
+            engine.drawRect(camera.getRelativeX(rectangle.getX()), camera.getRelativeY(rectangle.getY()), rectangle.getWidth() * camera.getTileWidth(), rectangle.getHeight() * camera.getTileHeight());
         }
     }
 
@@ -149,12 +149,12 @@ public class EngineUtils {
      * Draws string at given coord, wrapping it if necessary (if it exceeds width pixels)
      * Returns nubmer of lines actually printed
      */
-    public static int drawString(Graphics g, String s, int x, int y, int width, Font font, Color color) {
+    public static int drawString(Graphics g, String s, float x, float y, float width, Font font, Color color) {
 
         int lineHeight = font.getLineHeight();
 
-        int curX = x;
-        int curY = y;
+        float curX = x;
+        float curY = y;
 
         String[] words = s.split(" ");
         int lines = 1;
@@ -201,8 +201,8 @@ public class EngineUtils {
 
     public static boolean checkRectanglePressed(GameContainer container, Camera camera, Rectangle rect) {
         if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            final int mouseX = container.getInput().getMouseX() / camera.getTileWidth();
-            final int mouseY = container.getInput().getMouseY() / camera.getTileHeight();
+            final float mouseX = container.getInput().getMouseX() / camera.getTileWidth();
+            final float mouseY = container.getInput().getMouseY() / camera.getTileHeight();
             return rect.contains(mouseX, mouseY);
         }
         return false;

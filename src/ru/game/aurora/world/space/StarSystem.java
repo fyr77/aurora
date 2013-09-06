@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world.space;
 
+import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
@@ -15,13 +16,13 @@ import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.PlanetScanScreen;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -110,6 +111,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private String name;
 
+    /**
+     * If not null, planet surface map should be rendered to an image and assigned to this element
+     */
+    private transient Element surfaceRenderTarget = null;
+
     public StarSystem(String name, Star star, int globalMapX, int globalMapY) {
         this.name = name;
         this.star = star;
@@ -142,7 +148,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             //hack: this is galaxy map screen, where all stars are drawn within single screen
             // draw only dots, not images themselves, as they won't fit on screen and will overlap ugly
             g.setColor(star.color);
-            EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, camera.getTileWidth() / star.size, star.color, true);
+            EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, (int) (camera.getTileWidth() / star.size), star.color, true);
         } else {
             g.drawImage(star.getImage(), camera.getXCoord(tileX) - star.getImage().getWidth() / 2, camera.getYCoord(tileY) - star.getImage().getHeight() / 2);
         }
@@ -184,31 +190,55 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             background = null;
         }
 
-
+        boolean isAtPlanet = false;
         for (BasePlanet p : planets) {
             if (x == p.getGlobalX() && y == p.getGlobalY()) {
+                isAtPlanet = true;
                 if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
-                    GameLogger.getInstance().logMessage("Descending to surface...");
-
-                    world.setCurrentRoom(p);
-                    p.enter(world);
-
+                    landOnCurrentPlanet(world);
                     break;
-                } else if (container.getInput().isKeyPressed(Input.KEY_S)) {
-                    if (!(p instanceof Planet)) {
-                        GameLogger.getInstance().logMessage("Can not scan this planet");
-                        return;
-                    }
-                    PlanetScanScreen s = new PlanetScanScreen(this, (Planet) p);
-                    s.enter(world);
-                    world.setCurrentRoom(s);
-                    return;
                 } else if (world.isUpdatedThisFrame()) {
                     p.processCollision(container, world.getPlayer());
                     break;
                 }
             }
         }
+
+        // if user ship is at planet, show additional gui panel
+        final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("scanLandPanel");
+        if (scanLandPanel != null) {
+            boolean landPanelVisible = scanLandPanel.isVisible();
+            if (!isAtPlanet && landPanelVisible) {
+                scanLandPanel.setVisible(false);
+            } else if (isAtPlanet && !landPanelVisible) {
+                scanLandPanel.setVisible(true);
+            }
+        }
+    }
+
+    public BasePlanet getPlanetAtPlayerShipPosition()
+    {
+        int x = player.getShip().getX();
+        int y = player.getShip().getY();
+        for (BasePlanet p : planets) {
+            if (x == p.getGlobalX() && y == p.getGlobalY()) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void landOnCurrentPlanet(World world)
+    {
+        BasePlanet p = getPlanetAtPlayerShipPosition();
+        if (p == null) {
+            return;
+        }
+        GameLogger.getInstance().logMessage("Descending to surface...");
+        world.setCurrentRoom(p);
+        p.enter(world);
+
+
     }
 
     private void readObject(ObjectInputStream ois) throws IOException,
@@ -216,9 +246,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         try {
             ois.defaultReadObject();
             effects = new LinkedList<Effect>();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -401,15 +429,47 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private void createBackground(World world) {
         background = new ParallaxBackground(
-                radius * 3 * world.getCamera().getTileWidth()
-                , radius * 3 * world.getCamera().getTileHeight()
+                radius * 3 * (int)world.getCamera().getTileWidth()
+                , radius * 3 * (int)world.getCamera().getTileHeight()
                 , 0//planets.length * world.getCamera().getTileWidth()
                 , 0//planets.length * world.getCamera().getTileHeight()
                 , planets.length);
     }
 
+    private void renderCurrentPlanetSurface(GameContainer container, Graphics g)
+    {
+        g.clear();
+        g.setColor(Color.black);
+        BasePlanet p = getPlanetAtPlayerShipPosition();
+        if (p == null || !(p instanceof Planet)) {
+            return;
+        }
+        Planet planet = (Planet)p;
+        final float newTileWidth = container.getWidth()/ (float)planet.getWidth();
+        final float newTileHeight = container.getHeight()/ (float)planet.getHeight();
+        Camera myCamera = new Camera(0, 0, planet.getWidth(), planet.getHeight(), newTileWidth, newTileHeight);
+
+        myCamera.setTarget(new BasePositionable(planet.getWidth() / 2, planet.getHeight() / 2));
+        planet.drawLandscapeMap(g, myCamera);
+        g.flush();
+        try {
+            Image image = new Image(container.getWidth(), container.getHeight());
+            g.copyArea(image, 0, 0);
+            EngineUtils.setImageForGUIElement(surfaceRenderTarget, image);
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+        g.clear();
+    }
+
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
+        if(surfaceRenderTarget != null) {
+            renderCurrentPlanetSurface(container, g);
+            surfaceRenderTarget = null;
+            return;
+        }
+
         if (background != null) {
             background.draw(g, camera);
             if (backgroundSprite != null) {
@@ -423,8 +483,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         g.setColor(star.color);
 
-        final int starX = camera.getXCoord(0) + (camera.getTileWidth() / 2);
-        final int starY = camera.getYCoord(0) + camera.getTileHeight() / 2;
+        final float starX = camera.getXCoord(0) + (camera.getTileWidth() / 2);
+        final float starY = camera.getYCoord(0) + camera.getTileHeight() / 2;
         if (camera.isInViewport(0, 0)) {
             // draw 3 circles
 
@@ -434,8 +494,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         // first draw all orbits
         for (BasePlanet p : planets) {
-            int planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);
-            int planetY = camera.getYCoord(p.getGlobalY()) + camera.getTileWidth() / 2;
+            float planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);
+            float planetY = camera.getYCoord(p.getGlobalY()) + camera.getTileWidth() / 2;
             int radius = (int) Math.sqrt(Math.pow((planetX - starX), 2) + Math.pow((planetY - starY), 2));
             //EngineUtils.drawCircleCentered(g, starX, starY, radius, Color.gray, false);
             EngineUtils.drawDashedCircleCentered(g, starX, starY, radius, new Color(0, 0, 150));
@@ -543,5 +603,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public ParallaxBackground getBackground() {
         return background;
+    }
+
+    public void setSurfaceRenderTarget(Element surfaceRenderTarget) {
+        this.surfaceRenderTarget = surfaceRenderTarget;
     }
 }

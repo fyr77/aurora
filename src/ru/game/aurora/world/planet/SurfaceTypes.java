@@ -36,7 +36,7 @@ public class SurfaceTypes {
     /**
      * Draws surface tiles in simple form - no sprites, just a square of corresponding color. Used in map screen
      */
-    public static void drawSimple(byte type, int screenX, int screenY, int width, int heght, Graphics graphics) {
+    public static void drawSimple(byte type, float screenX, float screenY, float width, float heght, Graphics graphics) {
         Color color;
         switch (type & 0x0F) {
             case SurfaceTypes.DIRT:
@@ -61,7 +61,7 @@ public class SurfaceTypes {
                 throw new IllegalArgumentException("Unsupported surface tile type " + type);
         }
         graphics.setColor(color);
-        graphics.fillRect(screenX, screenY, width, heght);
+        graphics.fillRect(screenX, screenY, Math.max(width, 1), Math.max(heght, 1));
         if ((type & SurfaceTypes.MOUNTAINS_MASK) != 0) {
             graphics.setColor(Color.black);
             graphics.drawLine(screenX, screenY + heght, screenX + width / 2, screenY);
@@ -72,7 +72,7 @@ public class SurfaceTypes {
     /**
      * Draws surface tiles in simple form - no sprites, just a square of corresponding color. Used in map screen
      */
-    public static void drawDetailed(byte type, int screenX, int screenY, int width, int heght, Graphics graphics) {
+    public static void drawDetailed(byte type, float screenX, float screenY, float width, float heght, Graphics graphics) {
         String spriteName;
         switch (type & 0x0F) {
             case SurfaceTypes.DIRT:

@@ -23,9 +23,9 @@ public class Camera implements Serializable {
 
     private int viewportY;
 
-    private int tileWidth;
+    private float tileWidth;
 
-    private int tileHeight;
+    private float tileHeight;
 
     /**
      * Object camera is following
@@ -39,7 +39,7 @@ public class Camera implements Serializable {
 
     private int viewportTilesY;
 
-    public Camera(int viewportX, int viewportY, int vieportWidth, int viewportHeight, int tileWidth, int tileHeight) {
+    public Camera(int viewportX, int viewportY, int vieportWidth, int viewportHeight, float tileWidth, float tileHeight) {
         this.viewportX = viewportX;
         this.viewportY = viewportY;
         this.viewportTilesX = vieportWidth;
@@ -58,35 +58,35 @@ public class Camera implements Serializable {
      * @param globalTileX Tile horizontal index
      * @return Absolute screen x coordinate for this tile
      */
-    public int getXCoord(int globalTileX) {
+    public float getXCoord(int globalTileX) {
         return viewportX + tileWidth * (viewportTilesX / 2 + (globalTileX - target.getX()));
     }
 
-    public int getYCoord(int globalTileY) {
-        return viewportTilesY + tileHeight * (viewportTilesY / 2 + (globalTileY - target.getY()));
+    public float getYCoord(int globalTileY) {
+        return viewportY + tileHeight * (viewportTilesY / 2 + (globalTileY - target.getY()));
     }
 
     // same but for absolute coordinate (not tile)
-    public int getXCoordPoint(int pointX) {
+    public float getXCoordPoint(int pointX) {
         return pointX - (target.getX() - viewportTilesX / 2) * tileWidth;
     }
 
-    public int getYCoordPoint(int pointY) {
+    public float getYCoordPoint(int pointY) {
         return pointY - (target.getY() - viewportTilesY / 2) * tileHeight;
     }
 
     /**
      * Return coordinates of given tile on screen
      */
-    public int getRelativeX(int tileX) {
+    public float getRelativeX(float tileX) {
         return viewportTilesX + tileWidth * tileX;
     }
 
-    public int getRelativeY(int tileY) {
+    public float getRelativeY(float tileY) {
         return viewportTilesY + tileHeight * tileY;
     }
 
-    public int getXCoordWrapped(int tileX, int totalTilesX) {
+    public float getXCoordWrapped(int tileX, int totalTilesX) {
         final int targetX = target.getX();
         if (totalTilesX - Math.abs(targetX - tileX) > viewportTilesX / 2) {
             return getXCoord(tileX);
@@ -99,7 +99,7 @@ public class Camera implements Serializable {
         }
     }
 
-    public int getYCoordWrapped(int tileY, int totalTilesY) {
+    public float getYCoordWrapped(int tileY, int totalTilesY) {
         final int targetY = target.getY();
         if (totalTilesY - Math.abs(targetY - tileY) > viewportTilesY / 2) {
             return getYCoord(tileY);
@@ -121,20 +121,20 @@ public class Camera implements Serializable {
         return viewportTilesY;
     }
 
-    public int getTileWidth() {
+    public float getTileWidth() {
         return tileWidth;
     }
 
-    public int getTileHeight() {
+    public float getTileHeight() {
         return tileHeight;
     }
 
-    public int getPointTileX(int x)
+    public float getPointTileX(int x)
     {
         return x / tileWidth;
     }
 
-    public int getPointTileY(int y)
+    public float getPointTileY(int y)
     {
         return y / tileHeight;
     }
@@ -151,7 +151,7 @@ public class Camera implements Serializable {
     }
 
     public boolean isInViewportAbs(int absX, int absY) {
-        return isInViewport(absX / tileWidth, absY / tileHeight);
+        return isInViewport((int)(absX / tileWidth), (int)(absY / tileHeight));
     }
 
     public void drawBound() {

@@ -75,6 +75,20 @@
                 </panel>
             </panel>
 
+            <!-- panel containing additional buttons like 'interact' 'land' 'scan' that appear only when needed -->
+            <panel id="scanLandPanel" height="100px" childLayout="horizontal" visible="false">
+                <panel width="40%"/>
+                <panel style="nifty-panel" x="40%" width="256px" childLayout="horizontal" height="100%">
+                    <control id="land_button" name="button" label="Land" width="40%" height="90%">
+                        <interact onClick="land()"/>
+                    </control>
+                    <panel width="*"/>
+                    <control id="scan_button" name="button" label="Scan" width="40%" height="90%">
+                        <interact onClick="scanPlanet()"/>
+                    </control>
+                </panel>
+            </panel>
+
             <!-- bottom panel containing weapon buttons and log text -->
             <panel height="113px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png" imageMode="repeat:0,0,1279,113" padding="20px">
                 <control id="weapon_0_button" name="image_button" label="Weapon #1" width="64px" height="64px">
@@ -114,7 +128,7 @@
                 <panel childLayout="horizontal" height="45px">
                     <panel width="85%"/>
                     <control id="close_button" name="button" label="Ok" height="45px">
-                        <interact onClick="closeLandingPartyLostPopup()"/>
+                        <interact onClick="closeCurrentPopup()"/>
                     </control>
                 </panel>
             </panel>
@@ -127,6 +141,32 @@
                 <panel height="256px" childLayout="horizontal">
                     <image id="shuttle_image" width="256px" height="256px"/>
                     <text width="*" height="256px" text="Landing..." font="font.fnt"/>
+                </panel>
+            </panel>
+        </control>
+    </popup>
+
+
+    <popup id="planet_scan" childLayout="absolute">
+        <control id="panet_scan_window" name="window" title="Planetary scan" hideOnClose="true" width="60%" height="80%" x="20%" y="10%">
+            <panel childLayout="vertical">
+                <panel childLayout="horizontal" height="266px">
+                    <image filename="resources/sprites/portraits/scientist.png" width="256px" height="256px"/>
+                    <panel width="10px"/>
+                    <panel style="nifty-listbox#scrollpanel" width="*" height="256px" childLayout="horizontal" padding="5px">
+                        <text width="*" height="256px" id="scan_text" font="font_white_small.fnt" textHAlign="left" padding="5px"/>
+                    </panel>
+                </panel>
+                <text font="font_white_small.fnt" text="Surface map:" />
+                <panel width="100%" height="*" childLayout="horizontal" style="nifty-panel-no-shadow"  padding="5px">
+                    <panel id="surfaceMapPanel" width="100%" height="90%"/>
+                </panel>
+                <panel height="10px"/>
+                <panel childLayout="horizontal" height="45px">
+                    <panel width="85%"/>
+                    <control id="close_button" name="button" label="Ok" height="45px">
+                        <interact onClick="closeCurrentPopup()"/>
+                    </control>
                 </panel>
             </panel>
         </control>
