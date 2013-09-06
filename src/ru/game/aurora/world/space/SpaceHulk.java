@@ -79,6 +79,11 @@ public class SpaceHulk extends BasePositionable implements SpaceObject {
     }
 
     @Override
+    public String getScanDescription() {
+        return null;
+    }
+
+    @Override
     public void update(GameContainer container, World world) {
         // nothing
     }

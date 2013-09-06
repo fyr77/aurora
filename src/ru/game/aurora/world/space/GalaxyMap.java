@@ -6,6 +6,7 @@
 package ru.game.aurora.world.space;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -128,17 +129,52 @@ public class GalaxyMap extends BaseSpaceRoom {
         } else {
             idx = -1;
         }
+
+        boolean hasEnterableObject = false;
         if (idx != -1) {
             if (world.isUpdatedThisFrame()) {
                 objects.get(idx).processCollision(container, player);
             }
-            if (objects.get(idx).canBeEntered() && container.getInput().isKeyPressed(Input.KEY_ENTER)) {
-                Room r = (Room) objects.get(idx);
-                world.setCurrentRoom(r);
-                r.enter(world);
-                world.setUpdatedThisFrame(true);
+
+            if (objects.get(idx).canBeEntered()) {
+                hasEnterableObject = true;
+                if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
+                    enterRoom(objects.get(idx));
+                }
             }
         }
+
+        // if user ship is at planet, show additional gui panel
+        final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("galaxy_map_gui").findElementByName("interactPanel");
+        if (scanLandPanel != null) {
+            boolean landPanelVisible = scanLandPanel.isVisible();
+            if (!hasEnterableObject && landPanelVisible) {
+                scanLandPanel.setVisible(false);
+            } else if (hasEnterableObject && !landPanelVisible) {
+                scanLandPanel.setVisible(true);
+            }
+        }
+    }
+
+    public void enterStarsystemAtPlayerCoordinates() {
+        final int y = player.getShip().getY();
+        final int x = player.getShip().getX();
+        int idx;
+        if (y >= 0 && x >= 0 && y < tilesY && x < tilesX) {
+            idx = map[y][x];
+        } else {
+            idx = -1;
+        }
+        if (idx != -1 && objects.get(idx).canBeEntered()) {
+            enterRoom(objects.get(idx));
+        }
+    }
+
+    private void enterRoom(GalaxyMapObject object) {
+        Room r = (Room) object;
+        world.setCurrentRoom(r);
+        r.enter(world);
+        world.setUpdatedThisFrame(true);
     }
 
     @Override

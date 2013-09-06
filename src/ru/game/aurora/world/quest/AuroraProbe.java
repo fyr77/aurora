@@ -53,4 +53,9 @@ public class AuroraProbe extends NPCShip {
     public boolean isAlive() {
         return !contacted;
     }
+
+    @Override
+    public String getScanDescription() {
+        return "This is a probe #XNA-12 from Aurora vessel. According to telemetry data, it is functioning properly and is awaiting orders.";
+    }
 }

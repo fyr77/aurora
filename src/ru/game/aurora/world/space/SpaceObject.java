@@ -21,4 +21,9 @@ public interface SpaceObject extends GameObject, Positionable {
     public boolean isAlive();
 
     public String getName();
+
+    /**
+     * This text will be shown to a player when he is scanning this object
+     */
+    public String getScanDescription();
 }

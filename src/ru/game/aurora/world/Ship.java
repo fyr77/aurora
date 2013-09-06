@@ -147,6 +147,11 @@ public class Ship extends BasePositionable implements SpaceObject {
         return name;
     }
 
+    @Override
+    public String getScanDescription() {
+        return null;
+    }
+
     public int getLostCrewMembers() {
         return Ship.MAX_ENGINEERS + Ship.MAX_MILITARY + Ship.MAX_SCIENTISTS - getTotalCrew();
     }

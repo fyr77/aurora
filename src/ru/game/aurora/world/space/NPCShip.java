@@ -113,6 +113,14 @@ public class NPCShip extends BasePositionable implements SpaceObject {
     }
 
     @Override
+    public String getScanDescription() {
+        StringBuilder sb = new StringBuilder("This is a spaceship of ").append(race.getName()).append(" race. ");
+        sb.append('\n');
+        sb.append("It is currently ").append(isHostile() ? "hostile" : "friendly");
+        return sb.toString();
+    }
+
+    @Override
     public void onContact(World world) {
         if (!canBeHailed || isHostile) {
             GameLogger.getInstance().logMessage("This ship does not respond to our hail.");
@@ -130,6 +138,9 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         }
         if (ai == null || !(ai instanceof CombatAI)) {
             GameLogger.getInstance().logMessage(getName() + " is now hostile to " + attacker.getName());
+            if (attacker.equals(world.getPlayer().getShip())) {
+                isHostile = true;
+            }
             ai = new CombatAI(attacker);
         }
     }
@@ -161,8 +172,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         }
     }
 
-    public void move(int dx, int dy)
-    {
+    public void move(int dx, int dy) {
         if (isStationary) {
             return;
         }
@@ -205,4 +215,6 @@ public class NPCShip extends BasePositionable implements SpaceObject {
     public void setCanBeHailed(boolean canBeHailed) {
         this.canBeHailed = canBeHailed;
     }
+
+
 }

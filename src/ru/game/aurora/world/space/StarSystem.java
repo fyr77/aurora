@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world.space;
 
+import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
@@ -205,19 +206,20 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         // if user ship is at planet, show additional gui panel
-        final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("scanLandPanel");
+        final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("interactPanel");
         if (scanLandPanel != null) {
             boolean landPanelVisible = scanLandPanel.isVisible();
-            if (!isAtPlanet && landPanelVisible) {
+            if (!isAtPlanet && landPanelVisible && getSpaceObjectAtPlayerShipPosition() == null) {
                 scanLandPanel.setVisible(false);
             } else if (isAtPlanet && !landPanelVisible) {
+                Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
+                leftButton.setText("Land");
                 scanLandPanel.setVisible(true);
             }
         }
     }
 
-    public BasePlanet getPlanetAtPlayerShipPosition()
-    {
+    public BasePlanet getPlanetAtPlayerShipPosition() {
         int x = player.getShip().getX();
         int y = player.getShip().getY();
         for (BasePlanet p : planets) {
@@ -228,8 +230,18 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return null;
     }
 
-    public void landOnCurrentPlanet(World world)
-    {
+    public SpaceObject getSpaceObjectAtPlayerShipPosition() {
+        int x = player.getShip().getX();
+        int y = player.getShip().getY();
+        for (SpaceObject p : ships) {
+            if (x == p.getX() && y == p.getY()) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void landOnCurrentPlanet(World world) {
         BasePlanet p = getPlanetAtPlayerShipPosition();
         if (p == null) {
             return;
@@ -384,10 +396,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
+        boolean shipAtSameCoords = false;
         for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext(); ) {
             SpaceObject ship = iter.next();
 
             if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
+                shipAtSameCoords = true;
                 if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
                     ship.onContact(world);
                 }
@@ -399,6 +413,19 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 }
             }
         }
+
+        final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("interactPanel");
+        if (scanLandPanel != null) {
+            boolean landPanelVisible = scanLandPanel.isVisible();
+            if (!shipAtSameCoords && landPanelVisible && getPlanetAtPlayerShipPosition() == null) {
+                scanLandPanel.setVisible(false);
+            } else if (shipAtSameCoords && !landPanelVisible) {
+                Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
+                leftButton.setText("Hail");
+                scanLandPanel.setVisible(true);
+            }
+        }
+
         playerShip.update(container, world);
     }
 
@@ -429,24 +456,23 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private void createBackground(World world) {
         background = new ParallaxBackground(
-                radius * 3 * (int)world.getCamera().getTileWidth()
-                , radius * 3 * (int)world.getCamera().getTileHeight()
+                radius * 3 * (int) world.getCamera().getTileWidth()
+                , radius * 3 * (int) world.getCamera().getTileHeight()
                 , 0//planets.length * world.getCamera().getTileWidth()
                 , 0//planets.length * world.getCamera().getTileHeight()
                 , planets.length);
     }
 
-    private void renderCurrentPlanetSurface(GameContainer container, Graphics g)
-    {
+    private void renderCurrentPlanetSurface(GameContainer container, Graphics g) {
         g.clear();
         g.setColor(Color.black);
         BasePlanet p = getPlanetAtPlayerShipPosition();
         if (p == null || !(p instanceof Planet)) {
             return;
         }
-        Planet planet = (Planet)p;
-        final float newTileWidth = container.getWidth()/ (float)planet.getWidth();
-        final float newTileHeight = container.getHeight()/ (float)planet.getHeight();
+        Planet planet = (Planet) p;
+        final float newTileWidth = container.getWidth() / (float) planet.getWidth();
+        final float newTileHeight = container.getHeight() / (float) planet.getHeight();
         Camera myCamera = new Camera(0, 0, planet.getWidth(), planet.getHeight(), newTileWidth, newTileHeight);
 
         myCamera.setTarget(new BasePositionable(planet.getWidth() / 2, planet.getHeight() / 2));
@@ -464,7 +490,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        if(surfaceRenderTarget != null) {
+        if (surfaceRenderTarget != null) {
             renderCurrentPlanetSurface(container, g);
             surfaceRenderTarget = null;
             return;
@@ -505,7 +531,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         for (BasePlanet p : planets) {
             p.drawOnGlobalMap(container, g, camera, 0, 0);
         }
-
 
 
         final int selectedWeaponRange;

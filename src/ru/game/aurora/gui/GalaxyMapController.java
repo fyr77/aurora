@@ -22,6 +22,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMapScreen;
+import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 public class GalaxyMapController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender {
@@ -168,14 +169,48 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
     }
 
-    public void land()
-    {
+    public void leftButtonPressed() {
+        StarSystem currentStarSystem = world.getCurrentStarSystem();
+        if (currentStarSystem != null) {
+            if (currentStarSystem.getPlanetAtPlayerShipPosition() != null) {
+                land();
+                return;
+            }
+            SpaceObject so = currentStarSystem.getSpaceObjectAtPlayerShipPosition();
+            if (so != null) {
+                so.onContact(world);
+            }
+        }
+    }
+
+    public void rightButtonPressed() {
+        if (world.getCurrentStarSystem() != null) {
+            BasePlanet planet = world.getCurrentStarSystem().getPlanetAtPlayerShipPosition();
+            if (planet != null) {
+                scanPlanet(planet);
+            }
+
+            SpaceObject spaceObject = world.getCurrentStarSystem().getSpaceObjectAtPlayerShipPosition();
+            if (spaceObject != null) {
+                scanObject(spaceObject);
+            }
+        }
+    }
+
+    private void land() {
         world.getCurrentStarSystem().landOnCurrentPlanet(world);
     }
 
-    public void scanPlanet()
-    {
-        BasePlanet planet = world.getCurrentStarSystem().getPlanetAtPlayerShipPosition();
+    private void scanObject(SpaceObject object) {
+        final Nifty nifty = GUI.getInstance().getNifty();
+        Element popup = nifty.createPopup("object_scan");
+        nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
+        GUI.getInstance().getNifty().setIgnoreKeyboardEvents(false);
+
+        EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), object.getScanDescription());
+    }
+
+    public void scanPlanet(BasePlanet planet) {
         if (planet == null) {
             return;
         }
@@ -215,5 +250,13 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
             world.getCurrentStarSystem().setSurfaceRenderTarget(popup.findElementByName("surfaceMapPanel"));
         }
 
+    }
+
+    public void enterStarsystem() {
+        if (world.getCurrentStarSystem() != null) {
+            return;
+        }
+
+        world.getGalaxyMap().enterStarsystemAtPlayerCoordinates();
     }
 }
