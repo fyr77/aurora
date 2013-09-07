@@ -476,7 +476,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         Camera myCamera = new Camera(0, 0, planet.getWidth(), planet.getHeight(), newTileWidth, newTileHeight);
 
         myCamera.setTarget(new BasePositionable(planet.getWidth() / 2, planet.getHeight() / 2));
-        planet.drawLandscapeMap(g, myCamera);
+        planet.getSurface().drawLandscapeMap(g, myCamera);
         g.flush();
         try {
             Image image = new Image(container.getWidth(), container.getHeight());

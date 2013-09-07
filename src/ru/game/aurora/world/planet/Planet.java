@@ -23,7 +23,10 @@ import ru.game.aurora.world.planet.nature.PlanetFloraAndFauna;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.space.StarSystem;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Future;
 
 /**
@@ -44,30 +47,15 @@ public class Planet extends BasePlanet {
      */
     private static final int MODE_SHOOT = 1;
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     /**
      * Current mode
      */
     private int mode = MODE_MOVE;
 
-    /**
-     * Tiles with planet surface.
-     * Actual contents are encoded by bits
-     * <p/>
-     * vpm0tttt
-     * <p/>
-     * v - visibility bit, 1 means tile is not explored, 0 is for explored
-     * p - bit shows if tile can be passed on foot (1)
-     * m - mountains
-     * 0 - reserved
-     * tttt - tile type
-     */
-    byte[][] surface;
+    private SurfaceTileMap surface = null;
 
-    private int width;
-
-    private int height;
 
     private LandingParty landingParty;
 
@@ -81,7 +69,7 @@ public class Planet extends BasePlanet {
     /**
      * Animals that are located on planet surface.
      */
-    private List<PlanetObject> planetObjects = new ArrayList<PlanetObject>();
+    private List<PlanetObject> planetObjects = new ArrayList<>();
 
     private transient Image sprite;
 
@@ -96,78 +84,49 @@ public class Planet extends BasePlanet {
 
     private transient Animation shuttle_landing;
 
-    private static TileDrawer mountainDrawer = new TileDrawer("mountains", (byte) 0);
-
-    private static Map<Byte, TileDrawer> drawers = new HashMap<>();
-
-
-    private static Map<Integer, String> mountainSprites = new HashMap<Integer, String>();
-
-    static {
-        mountainSprites.put(31, "mountains_4");
-        mountainSprites.put(11, "mountains_5");
-        mountainSprites.put(107, "mountains_6");
-        mountainSprites.put(127, "mountains_7");
-        mountainSprites.put(22, "mountains_8");
-        mountainSprites.put(214, "mountains_9");
-        mountainSprites.put(223, "mountains_10");
-        mountainSprites.put(251, "mountains_11");
-        mountainSprites.put(248, "mountains_12");
-        mountainSprites.put(208, "mountains_13");
-        mountainSprites.put(254, "mountains_14");
-        mountainSprites.put(104, "mountains_15");
-
-        drawers.put(SurfaceTypes.ROCKS, new TileDrawer("rock", SurfaceTypes.ROCKS));
-        drawers.put(SurfaceTypes.STONES, new TileDrawer("stones", SurfaceTypes.STONES));
-        drawers.put(SurfaceTypes.DIRT, new TileDrawer("sand", SurfaceTypes.DIRT));
-        drawers.put(SurfaceTypes.ICE, new TileDrawer("ice", SurfaceTypes.ICE));
-        drawers.put(SurfaceTypes.SNOW, new TileDrawer("snow", SurfaceTypes.SNOW));
-
-    }
 
     public Planet(StarSystem owner, Planet other) {
         super(other.size, other.globalY, owner, other.atmosphere, other.globalX, other.category);
-        this.width = other.width;
-        this.height = other.height;
-        surface = new byte[height][width];
         if (other.surface == null) {
             other.createSurface();
         }
-        for (int i = 0; i < height; ++i) {
-            System.arraycopy(other.surface[i], 0, surface[i], 0, width);
-        }
+        this.surface = new SurfaceTileMap(other.surface);
         createOreDeposits(size, CommonRandom.getRandom());
     }
 
     public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
         super(size, y, owner, atmosphere, x, cat);
-        switch (size) {
-            case 1:
-                this.width = 500;
-                this.height = 500;
-                break;
-            case 2:
-                this.width = 300;
-                this.height = 300;
-                break;
-            case 3:
-                this.width = 200;
-                this.height = 200;
-                break;
-            case 4:
-                this.width = 100;
-                this.height = 100;
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported planet size value");
-        }
+
     }
 
     private void createSurface() {
         final Random r = CommonRandom.getRandom();
 
         long start = System.currentTimeMillis();
-        surface = LandscapeGenerator.generateLandscapePerlin(category, width, height);
+        int width;
+        int height;
+        switch (size) {
+            case 1:
+                width = 500;
+                height = 500;
+                break;
+            case 2:
+                width = 300;
+                height = 300;
+                break;
+            case 3:
+                width = 200;
+                height = 200;
+                break;
+            case 4:
+                width = 100;
+                height = 100;
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported planet size value");
+        }
+
+        surface = new SurfaceTileMap(width, height, LandscapeGenerator.generateLandscapePerlin(category, width, height));
         System.out.println("Generated landscape in " + (System.currentTimeMillis() - start));
 
         createOreDeposits(size, r);
@@ -187,7 +146,7 @@ public class Planet extends BasePlanet {
             do {
                 oreX = r.nextInt(10);
                 oreY = r.nextInt(10);
-            } while (!SurfaceTypes.isPassible(surface[oreY][oreX]));
+            } while (!surface.isTilePassable(oreX, oreY));
             d.setPos(oreX, oreY);
             planetObjects.add(d);
         }
@@ -198,7 +157,7 @@ public class Planet extends BasePlanet {
         if (surface == null) {
             createSurface();
         }
-        while (!SurfaceTypes.isPassible(surface[y][wrapX(x)])) {
+        while (!surface.isTilePassable(EngineUtils.wrap(x, surface.getWidth()), y)) {
             x++;
         }
 
@@ -241,51 +200,11 @@ public class Planet extends BasePlanet {
                 }
             }
         });
-
-
     }
 
     @Override
     public Screen getGUI() {
         return null;
-    }
-
-    public int wrapX(int x) {
-        if (x < 0) {
-            return width + x;
-        } else if (x >= width) {
-            return x - width;
-        }
-        return x;
-    }
-
-    public int wrapY(int y) {
-        if (y < 0) {
-            return height + y;
-        } else if (y >= height) {
-            return y - height;
-        }
-        return y;
-    }
-
-    /**
-     * Updates planet map. Makes tiles visible in given range from given point
-     *
-     * @return Amount of tiles opened
-     */
-    private int updateVisibility(int x, int y, int range) {
-        int rz = 0;
-        for (int i = y - range; i <= y + range; ++i) {
-            for (int j = x - range; j <= x + range; ++j) {
-                int pointX = wrapX(j);
-                int pointY = wrapY(i);
-                if (0 == (SurfaceTypes.VISIBILITY_MASK & surface[pointY][pointX])) {
-                    surface[pointY][pointX] |= SurfaceTypes.VISIBILITY_MASK;
-                    ++rz;
-                }
-            }
-        }
-        return rz;
     }
 
     /**
@@ -313,10 +232,10 @@ public class Planet extends BasePlanet {
             world.setUpdatedThisFrame(true);
         }
 
-        x = wrapX(x);
-        y = wrapY(y);
+        x = EngineUtils.wrap(x, getWidth());
+        y = EngineUtils.wrap(y, getHeight());
 
-        if (!SurfaceTypes.isPassible(landingParty, surface[y][x])) {
+        if (!surface.isTilePassable(landingParty, x, y)) {
             world.setUpdatedThisFrame(false);
             x = world.getPlayer().getLandingParty().getX();
             y = world.getPlayer().getLandingParty().getY();
@@ -328,10 +247,10 @@ public class Planet extends BasePlanet {
 
         }
 
-        int tilesExplored = updateVisibility(x, y, 1);
+        int tilesExplored = surface.updateVisibility(x, y, 1);
         landingParty.addCollectedGeodata(tilesExplored);
 
-        if (x == (int) shuttlePosition.getX() && y == (int) shuttlePosition.getY()) {
+        if ((x == shuttlePosition.getX()) && (y == shuttlePosition.getY())) {
             if (world.isUpdatedThisFrame()) {
                 GameLogger.getInstance().logMessage("Refilling oxygen");
                 world.getPlayer().getLandingParty().refillOxygen();
@@ -387,8 +306,8 @@ public class Planet extends BasePlanet {
     }
 
     private int getRange(LandingParty party, Positionable target) {
-        int xDist = getDist(party.getX(), target.getX(), width);
-        int yDist = getDist(party.getY(), target.getY(), height);
+        int xDist = getDist(party.getX(), target.getX(), getWidth());
+        int yDist = getDist(party.getY(), target.getY(), getHeight());
         return xDist + yDist;
     }
 
@@ -400,7 +319,7 @@ public class Planet extends BasePlanet {
             return;
         }
         int targetIdx = 0;
-        List<PlanetObject> availableTargets = new ArrayList<PlanetObject>();
+        List<PlanetObject> availableTargets = new ArrayList<>();
 
         if (target != null && getRange(landingParty, target) > landingParty.getWeapon().getRange()) {
             // target moved out of range
@@ -411,7 +330,7 @@ public class Planet extends BasePlanet {
             if (!planetObject.canBeShotAt()) {
                 continue;
             }
-            if ((surface[planetObject.getY()][planetObject.getX()] & SurfaceTypes.VISIBILITY_MASK) == 0) {
+            if (surface.isTileVisible(planetObject.getX(), planetObject.getY())) {
                 // do not target animals on unexplored tiles
                 continue;
             }
@@ -451,7 +370,7 @@ public class Planet extends BasePlanet {
             // firing
             final int damage = landingParty.calcDamage();
 
-            currentEffect = new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), width), world.getCamera().getYCoordWrapped(target.getY(), height), world.getCamera(), 800, "blaster_shot");
+            currentEffect = new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), getWidth()), world.getCamera().getYCoordWrapped(target.getY(), getHeight()), world.getCamera(), 800, "blaster_shot");
 
             target.onShotAt(damage);
             GameLogger.getInstance().logMessage("Bang! Dealt " + damage + " damage to " + target.getName());
@@ -467,10 +386,6 @@ public class Planet extends BasePlanet {
 
     public void changeMode() {
         mode = (mode == MODE_MOVE) ? MODE_SHOOT : MODE_MOVE;
-    }
-
-    public int getMode() {
-        return mode;
     }
 
     @Override
@@ -501,9 +416,9 @@ public class Planet extends BasePlanet {
                 int x = landingParty.getX();
                 int y = landingParty.getY();
 
-                while (!SurfaceTypes.isPassible(landingParty, surface[wrapY(y)][wrapX(x)])) {
-                    x = wrapX(x + 1);
-                    y = wrapY(y + CommonRandom.getRandom().nextInt(2) - 1);
+                while (!surface.isTilePassable(landingParty, EngineUtils.wrap(x, getWidth()), EngineUtils.wrap(y, getHeight()))) {
+                    x = EngineUtils.wrap(x + 1, getWidth());
+                    y = EngineUtils.wrap(y + CommonRandom.getRandom().nextInt(2) - 1, getHeight());
                 }
                 landingParty.setPos(x, y);
                 landingParty.onLaunch(world);
@@ -512,7 +427,7 @@ public class Planet extends BasePlanet {
 
                 world.getCamera().setTarget(landingParty);
                 shuttlePosition = new BasePositionable(landingParty.getX(), landingParty.getY());
-                int openedTiles = updateVisibility(landingParty.getX(), landingParty.getY(), 5);
+                int openedTiles = surface.updateVisibility(landingParty.getX(), landingParty.getY(), 5);
                 landingParty.addCollectedGeodata(openedTiles);
                 surfaceGenerationFuture = null;
             }
@@ -566,199 +481,33 @@ public class Planet extends BasePlanet {
         }
     }
 
-    public void printPlanetStatus() {
-
-    }
-
-    private boolean allNeighboursAreMountain(int x, int y) {
-        for (int i = -1; i <= 1; ++i) {
-            for (int j = -1; j <= 1; ++j) {
-                if (i != 0 && j != 0) {
-                    continue;
-                }
-                if ((!SurfaceTypes.isMountain(surface[wrapY(y + j)][wrapX(x + i)]))) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    public void drawLandscapeMap(Graphics graphics, Camera camera)
-    {
-        if (surface == null) {
-            createSurface();
-        }
-        for (int i = 0; i < height; ++i) {
-            for (int j = 0; j < width; ++j) {
-                SurfaceTypes.drawSimple(
-                        surface[i][j]
-                        , camera.getXCoord(j)
-                        , camera.getYCoord(i)
-                        , camera.getTileWidth()
-                        , camera.getTileHeight()
-                        , graphics);
-            }
-        }
-    }
 
     public void drawLandscape(GameContainer container, Graphics graphics, Camera camera) {
         if (surface == null) {
             createSurface();
         }
-        for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
-            for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; ++j) {
-
-                final byte type = surface[wrapY(i)][wrapX(j)];
-                if ((type & SurfaceTypes.VISIBILITY_MASK) == 0) {
-                    continue;
-                }
-
-                SurfaceTypes.drawDetailed(
-                        type
-                        , camera.getXCoord(j)
-                        , camera.getYCoord(i)
-                        , camera.getTileWidth()
-                        , camera.getTileHeight()
-                        , graphics);
-
-                // now draw edges of next sprites
-                Set<Byte> neighbours = new TreeSet<>();
-                for (int ii = -1; ii <= 1; ++ii) {
-                    for (int jj = -1; jj <= 1; ++jj) {
-                        if (ii == jj && ii == 0) {
-                            continue;
-                        }
-
-                        byte st = SurfaceTypes.getType(surface[wrapY(i + ii)][wrapX(j + jj)]);
-                        if (st <= SurfaceTypes.getType(surface[wrapY(i)][wrapX(j)])) {
-                            continue;
-                        }
-                        neighbours.add(st);
-                    }
-                }
-
-                for (Byte b : neighbours) {
-                    TileDrawer td = drawers.get(b);
-                    if (td != null) {
-                        td.drawTile(graphics, camera, this, i/*wrapY(i)*/, j/*wrapX(j)*/);
-                    }
-                }
-
-
-
-            }
-
-
-        }
-
-
-        // after all draw mountains
-        for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
-            // first draw outer mountains (that have only one neighbour on X)
-            for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; j++) {
-                if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.VISIBILITY_MASK) == 0) {
-                    continue;
-                }
-
-
-                if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {
-                    graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
-                }
-                if ((surface[wrapY(i)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) == 0) {
-                    boolean left = ((surface[wrapY(i)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                    boolean right = ((surface[wrapY(i)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                    boolean up = ((surface[wrapY(i - 1)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                    boolean down = ((surface[wrapY(i + 1)][wrapX(j)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-
-                    boolean downLeft = ((surface[wrapY(i + 1)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                    boolean downRight = ((surface[wrapY(i + 1)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                    boolean upLeft = ((surface[wrapY(i - 1)][wrapX(j - 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-                    boolean upRight = ((surface[wrapY(i - 1)][wrapX(j + 1)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
-
-                    drawMountainTile(graphics, camera, i, j, left, right, up, down, downLeft, downRight, upLeft, upRight);
-                }
-                if (allNeighboursAreMountain(wrapX(j), wrapY(i + 1))) {
-                    graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
-
-                } else {
-                    // draw 2nd floor
-                    boolean left = allNeighboursAreMountain(j - 1, i + 1);
-                    boolean right = allNeighboursAreMountain(j + 1, i + 1);
-                    boolean up = allNeighboursAreMountain(j, i - 1 + 1);
-                    boolean down = allNeighboursAreMountain(j, i + 1 + 1);
-
-                    boolean downLeft = allNeighboursAreMountain(j - 1, i + 1 + 1);
-                    boolean downRight = allNeighboursAreMountain(j + 1, i + 1 + 1);
-                    boolean upLeft = allNeighboursAreMountain(j - 1, i - 1 + 1);
-                    boolean upRight = allNeighboursAreMountain(j + 1, i - 1 + 1);
-
-                    drawMountainTile(graphics, camera, i, j, left, right, up, down, downLeft, downRight, upLeft, upRight);
-                }
-
-
-            }
-        }
+        surface.draw(container, graphics, camera);
     }
-
-    private void drawMountainTile(Graphics graphics, Camera camera, int i, int j, boolean left, boolean right, boolean up, boolean down, boolean downLeft, boolean downRight, boolean upLeft, boolean upRight) {
-        int number = 0;
-        if (upLeft) {
-            number |= 11;
-        }
-        if (up) {
-            number |= 31;
-        }
-
-        if (upRight) {
-            number |= 22;
-        }
-
-        if (left) {
-            number |= 107;
-        }
-
-        if (right) {
-            number |= 214;
-        }
-
-        if (downLeft) {
-            number |= 104;
-        }
-
-        if (down) {
-            number |= 248;
-        }
-
-        if (downRight) {
-            number |= 208;
-        }
-        String name = mountainSprites.get(number);
-        if (name != null) {
-            graphics.drawImage(ResourceManager.getInstance().getImage(name), camera.getXCoord(j), camera.getYCoord(i));
-        }
-    }
-
 
     public void drawObjects(GameContainer container, Graphics graphics, Camera camera) {
         // this part (monsters, shuttle, landing party) is drawn only when landing party is on surface
         if (landingParty != null) {
             landingParty.draw(container, graphics, camera);
 
-            graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped((int) shuttlePosition.getX(), width), camera.getYCoordWrapped((int) shuttlePosition.getY(), height));
+            graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped(shuttlePosition.getX(), getWidth()), camera.getYCoordWrapped((int) shuttlePosition.getY(), getHeight()));
 
-            if (landingParty.getX() == (int) shuttlePosition.getX() && landingParty.getY() == (int) shuttlePosition.getY()) {
+            if (landingParty.getX() == shuttlePosition.getX() && landingParty.getY() == shuttlePosition.getY()) {
             }
 
             graphics.setColor(Color.red);
             for (PlanetObject a : planetObjects) {
                 // draw only if tile under this animal is visible
-                if ((surface[a.getY()][a.getX()] & SurfaceTypes.VISIBILITY_MASK) != 0) {
+                if (surface.isTileVisible(a.getX(), a.getY())) {
                     a.draw(container, graphics, camera);
 
                     // in shoot mode, all available targets are surrounded with red square
                     if (mode == MODE_SHOOT && a.canBeShotAt() && getRange(landingParty, a) < landingParty.getWeapon().getRange()) {
-                        graphics.drawRect(camera.getXCoordWrapped(a.getX(), width), camera.getYCoordWrapped(a.getY(), height), camera.getTileWidth(), camera.getTileHeight());
+                        graphics.drawRect(camera.getXCoordWrapped(a.getX(), getWidth()), camera.getYCoordWrapped(a.getY(), getHeight()), camera.getTileWidth(), camera.getTileHeight());
                     }
                 }
 
@@ -770,30 +519,9 @@ public class Planet extends BasePlanet {
 
             if (mode == MODE_SHOOT && target != null) {
                 // draw target mark
-                graphics.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoordWrapped(target.getX(), width), camera.getYCoordWrapped(target.getY(), height));
+                graphics.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoordWrapped(target.getX(), getWidth()), camera.getYCoordWrapped(target.getY(), getHeight()));
             }
         }
-    }
-
-    public byte getTileTypeAt(int x, int y) {
-        if (surface == null) {
-            createSurface();
-        }
-        return surface[y][x];
-    }
-
-    public void setTileTypeAt(int x, int y, byte val) {
-        if (surface == null) {
-            createSurface();
-        }
-        surface[y][x] = val;
-    }
-
-    public void xorMaskAt(int x, int y, byte mask) {
-        if (surface == null) {
-            createSurface();
-        }
-        surface[y][x] ^= mask;
     }
 
     @Override
@@ -812,7 +540,6 @@ public class Planet extends BasePlanet {
             EngineUtils.setImageForGUIElement(shuttle_image, shuttle_landing.getCurrentFrame());
             return;
         }
-        printPlanetStatus();
         drawLandscape(container, graphics, camera);
         drawObjects(container, graphics, camera);
         if (currentEffect != null) {
@@ -832,11 +559,11 @@ public class Planet extends BasePlanet {
     }
 
     public int getWidth() {
-        return width;
+        return getSurface().getWidth();
     }
 
     public int getHeight() {
-        return height;
+        return getSurface().getHeight();
     }
 
     public PlanetFloraAndFauna getFloraAndFauna() {
@@ -850,5 +577,12 @@ public class Planet extends BasePlanet {
     @Override
     public boolean hasLife() {
         return floraAndFauna != null;
+    }
+
+    public SurfaceTileMap getSurface() {
+        if (surface == null) {
+            createSurface();
+        }
+        return surface;
     }
 }

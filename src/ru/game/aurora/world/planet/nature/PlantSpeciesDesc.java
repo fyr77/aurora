@@ -13,8 +13,7 @@ import ru.game.aurora.world.planet.SurfaceTypes;
 import java.io.Serializable;
 
 
-public class PlantSpeciesDesc implements Serializable
-{
+public class PlantSpeciesDesc implements Serializable {
     private static final long serialVersionUID = 1l;
 
     private transient Image image;
@@ -43,8 +42,7 @@ public class PlantSpeciesDesc implements Serializable
 
     private boolean growsOnMountains = false;
 
-    public PlantSpeciesDesc(byte preferredSurfaceType, double preferredLatitude, double areaHeight, double baseProbability, boolean growsOnWater, boolean growsOnMountains, PlanetFloraAndFauna floraAndFauna)
-    {
+    public PlantSpeciesDesc(byte preferredSurfaceType, double preferredLatitude, double areaHeight, double baseProbability, boolean growsOnWater, boolean growsOnMountains, PlanetFloraAndFauna floraAndFauna) {
         this.preferredSurfaceType = preferredSurfaceType;
         this.preferredLatitude = preferredLatitude;
         this.areaHeight = areaHeight;
@@ -77,9 +75,8 @@ public class PlantSpeciesDesc implements Serializable
         return name;
     }
 
-    public boolean canPlantOnTile(int x, int y, Planet planet)
-    {
-        byte value = planet.getTileTypeAt(x, y);
+    public boolean canPlantOnTile(int x, int y, Planet planet) {
+        byte value = planet.getSurface().getTileAt(x, y);
 
         return y > planet.getHeight() * preferredLatitude
                 && y <= planet.getHeight() * (preferredLatitude + areaHeight)

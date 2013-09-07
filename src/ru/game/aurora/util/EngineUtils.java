@@ -24,20 +24,27 @@ import java.util.Map;
 
 public class EngineUtils {
 
-    public static void setImageForGUIElement(Element element, String imageName)
-    {
+    public static void setImageForGUIElement(Element element, String imageName) {
         setImageForGUIElement(element, ResourceManager.getInstance().getImage(imageName));
     }
 
-    public static void setImageForGUIElement(Element element, Image image)
-    {
+    public static void setImageForGUIElement(Element element, Image image) {
         element.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(image)));
     }
 
-    public static void setTextForGUIElement(Element element, String text)
-    {
+    public static void setTextForGUIElement(Element element, String text) {
         element.getRenderer(TextRenderer.class).setText(text);
     }
+
+    public static int wrap(int coord, int limit) {
+        if (coord < 0) {
+            return limit + coord;
+        } else if (coord >= limit) {
+            return coord - limit;
+        }
+        return coord;
+    }
+
 
     /**
      * Returns a lighter version of a color
@@ -72,10 +79,10 @@ public class EngineUtils {
         for (int i = 0; i <= segments; ++i) {
 
             int x1 = (int) (radius * Math.cos(angle * i));
-            int x2 = (int)(radius *  Math.cos(angle * (i + 1)));
+            int x2 = (int) (radius * Math.cos(angle * (i + 1)));
 
-            int y1 = (int)(radius *  Math.sin(angle * i));
-            int y2 = (int)(radius *  Math.sin(angle * (i + 1)));
+            int y1 = (int) (radius * Math.sin(angle * i));
+            int y2 = (int) (radius * Math.sin(angle * (i + 1)));
 
             if (b) {
                 graphics.drawLine(x + x1, y + y1, x + x2, y + y2);
@@ -90,8 +97,7 @@ public class EngineUtils {
 
     }
 
-    public static Image replaceColors(Image original, Map<Color, Color> colorMap)
-    {
+    public static Image replaceColors(Image original, Map<Color, Color> colorMap) {
         ImageBuffer ib = new ImageBuffer(original.getWidth(), original.getHeight());
         Color searchKey = new Color(255, 255, 255, 255);
         for (int x = 0; x < original.getWidth(); ++x) {
@@ -127,9 +133,9 @@ public class EngineUtils {
     public static void drawRectWithBorderAndText(Graphics graphics, Rectangle rectangle, Camera camera, Color borderColor, Color fillColor, String text, Font font, Color textColor, boolean aligned) {
         drawRectWithBorder(graphics, rectangle, camera, borderColor, fillColor);
         if (!aligned) {
-            drawString(graphics, text, ((rectangle.getX() + 1) * camera.getTileWidth()),  ((rectangle.getY() + 0.5f) * camera.getTileHeight()), ((rectangle.getWidth() - 2) * camera.getTileHeight()), font, textColor);
+            drawString(graphics, text, ((rectangle.getX() + 1) * camera.getTileWidth()), ((rectangle.getY() + 0.5f) * camera.getTileHeight()), ((rectangle.getWidth() - 2) * camera.getTileHeight()), font, textColor);
         } else {
-            drawSingleStringAligned(graphics, text, font, textColor, (int)((rectangle.getX()) * camera.getTileWidth()), (int)((rectangle.getY()) * camera.getTileHeight()), (int) ((int)(rectangle.getWidth()) * camera.getTileWidth()), (int)(rectangle.getHeight() * camera.getTileHeight()));
+            drawSingleStringAligned(graphics, text, font, textColor, (int) ((rectangle.getX()) * camera.getTileWidth()), (int) ((rectangle.getY()) * camera.getTileHeight()), (int) ((int) (rectangle.getWidth()) * camera.getTileWidth()), (int) (rectangle.getHeight() * camera.getTileHeight()));
         }
     }
 

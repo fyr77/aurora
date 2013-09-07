@@ -7,9 +7,13 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.player.research.projects.AnimalResearch;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.*;
+import ru.game.aurora.world.planet.InventoryItem;
+import ru.game.aurora.world.planet.LandingParty;
+import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetObject;
 
 /**
  * Created with IntelliJ IDEA.
@@ -123,15 +127,15 @@ public class Animal extends BasePositionable implements PlanetObject {
             }
 
 
-            newX = myPlanet.wrapX(newX);
-            newY = myPlanet.wrapY(newY);
+            newX = EngineUtils.wrap(newX, myPlanet.getWidth());
+            newY = EngineUtils.wrap(newY, myPlanet.getHeight());
 
-            if (SurfaceTypes.isPassible(this, myPlanet.getTileTypeAt(newX, newY))) {
+            if (myPlanet.getSurface().isTilePassable(newX, newY)) {
                 // change position, reset 'passible' flag on old tile and set on new one
-                myPlanet.setTileTypeAt(x, y, (byte) ((~SurfaceTypes.OBSTACLE_MASK) & myPlanet.getTileTypeAt(x, y)));
+                myPlanet.getSurface().setTilePassable(x, y, true);
                 x = newX;
                 y = newY;
-                myPlanet.setTileTypeAt(x, y, (byte) (myPlanet.getTileTypeAt(x, y) | SurfaceTypes.OBSTACLE_MASK));
+                myPlanet.getSurface().setTilePassable(x, y, false);
             }
         }
     }
@@ -190,7 +194,7 @@ public class Animal extends BasePositionable implements PlanetObject {
         }
         if (hp <= 0) {
             // clean obstacle flag
-            myPlanet.setTileTypeAt(x, y, (byte) ((~SurfaceTypes.OBSTACLE_MASK) & myPlanet.getTileTypeAt(x, y)));
+            myPlanet.getSurface().setTilePassable(x, y, true);
         }
     }
 

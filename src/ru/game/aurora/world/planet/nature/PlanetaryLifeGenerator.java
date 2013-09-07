@@ -9,7 +9,6 @@ package ru.game.aurora.world.planet.nature;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.SurfaceTypes;
 
 import java.awt.*;
 import java.util.*;
@@ -113,7 +112,7 @@ public class PlanetaryLifeGenerator {
             do {
                 animalX = r.nextInt(10);
                 animalY = r.nextInt(10);
-            } while (!SurfaceTypes.isPassible(a, planet.getTileTypeAt(animalX, animalY)));
+            } while (!planet.getSurface().isTilePassable(animalX, animalY));
             a.setPos(animalX, animalY);
             planet.getPlanetObjects().add(a);
         }

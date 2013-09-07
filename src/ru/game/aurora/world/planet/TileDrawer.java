@@ -9,6 +9,7 @@ package ru.game.aurora.world.planet;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.util.EngineUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -80,19 +81,19 @@ public class TileDrawer {
         }
     }
 
-    public void drawTile(Graphics graphics, Camera camera, Planet planet, int tileY, int tileX) {
-        if (SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY)][planet.wrapX(tileX)], mySurfaceType)) {
+    public void drawTile(Graphics graphics, Camera camera, byte[][] surface, int tileY, int tileX, int width, int height) {
+        if (SurfaceTypes.sameBaseSurfaceType(surface[EngineUtils.wrap(tileY, height)][EngineUtils.wrap(tileX, width)], mySurfaceType)) {
             return;
         }
-        boolean left = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY)][planet.wrapX(tileX - 1)], mySurfaceType);
-        boolean right = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY)][planet.wrapX(tileX + 1)], mySurfaceType);
-        boolean up = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY - 1)][planet.wrapX(tileX)], mySurfaceType);
-        boolean down = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY + 1)][planet.wrapX(tileX)], mySurfaceType);
+        boolean left = SurfaceTypes.sameBaseSurfaceType(surface[EngineUtils.wrap(tileY, height)][EngineUtils.wrap(tileX - 1, width)], mySurfaceType);
+        boolean right = SurfaceTypes.sameBaseSurfaceType(surface[EngineUtils.wrap(tileY, height)][EngineUtils.wrap(tileX + 1, width)], mySurfaceType);
+        boolean up = SurfaceTypes.sameBaseSurfaceType(surface[EngineUtils.wrap(tileY - 1, height)][EngineUtils.wrap(tileX, width)], mySurfaceType);
+        boolean down = SurfaceTypes.sameBaseSurfaceType(surface[EngineUtils.wrap(tileY + 1, height)][EngineUtils.wrap(tileX, width)], mySurfaceType);
 
-        boolean downLeft = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY + 1)][planet.wrapX(tileX - 1)], mySurfaceType);
-        boolean downRight = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY + 1)][planet.wrapX(tileX + 1)], mySurfaceType);
-        boolean upLeft = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY - 1)][planet.wrapX(tileX - 1)], mySurfaceType);
-        boolean upRight = SurfaceTypes.sameBaseSurfaceType(planet.surface[planet.wrapY(tileY - 1)][planet.wrapX(tileX + 1)], mySurfaceType);
+        boolean downLeft = SurfaceTypes.sameBaseSurfaceType(surface[EngineUtils.wrap(tileY + 1, height)][EngineUtils.wrap(tileX - 1, width)], mySurfaceType);
+        boolean downRight = SurfaceTypes.sameBaseSurfaceType(surface[EngineUtils.wrap(tileY + 1, height)][EngineUtils.wrap(tileX + 1, width)], mySurfaceType);
+        boolean upLeft = SurfaceTypes.sameBaseSurfaceType(surface[EngineUtils.wrap(tileY - 1, height)][EngineUtils.wrap(tileX - 1, width)], mySurfaceType);
+        boolean upRight = SurfaceTypes.sameBaseSurfaceType(surface[EngineUtils.wrap(tileY - 1, height)][EngineUtils.wrap(tileX + 1, width)], mySurfaceType);
 
         drawTile(graphics, camera, tileY, tileX, left, right, up, down, downLeft, downRight, upLeft, upRight);
     }
