@@ -26,7 +26,7 @@ public class AnimalGenerator {
 
     private static AnimalGenerator instance;
 
-    public static Color[] supportedColors =  {new Color(0x00697436), new Color(0x00a12e00), new Color(0x00ad5400), new Color(0x005f4d96), new Color(0x00966e00)};
+    public static Color[] supportedColors = {new Color(0x00697436), new Color(0x00a12e00), new Color(0x00ad5400), new Color(0x005f4d96), new Color(0x00966e00)};
 
     public static void init() throws FileNotFoundException {
         instance = new AnimalGenerator();
@@ -50,12 +50,11 @@ public class AnimalGenerator {
     }
 
 
-
     public void getImageForAnimal(AnimalSpeciesDesc desc) {
         try {
             monsterGenerationParams.colorMap = ColorUtils.createDefault4TintMap(CollectionUtils.selectRandomElement(supportedColors));
             Monster monster = monsterGenerator.generateMonster(monsterGenerationParams);
-            desc.setImages(((Slick2DFrankensteinImage)monster.monsterImage).getImpl(), ((Slick2DFrankensteinImage)monster.deadImage).getImpl());
+            desc.setImages(((Slick2DFrankensteinImage) monster.monsterImage).getImpl(), ((Slick2DFrankensteinImage) monster.deadImage).getImpl());
         } catch (FrankensteinException e) {
             System.err.println("Failed to generate monster image");
             e.printStackTrace();
@@ -66,7 +65,8 @@ public class AnimalGenerator {
         try {
             plantGenerationParams.tags.clear(); //todo: thread-safe?
             plantGenerationParams.tags.add(desc.getMyFlora().getPlantsStyleTag());
-            desc.setImage(((Slick2DFrankensteinImage)plantGenerator.generateMonster(plantGenerationParams).monsterImage).getImpl());
+            plantGenerationParams.colorMap = desc.getMyFlora().getColorMap();
+            desc.setImage(((Slick2DFrankensteinImage) plantGenerator.generateMonster(plantGenerationParams).monsterImage).getImpl());
         } catch (FrankensteinException e) {
             System.err.println("Failed to generate plant image");
             e.printStackTrace();

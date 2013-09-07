@@ -6,7 +6,9 @@
 
 package ru.game.aurora.world.planet.nature;
 
+import java.awt.*;
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Contains all data concerning planet wildlife
@@ -19,7 +21,10 @@ public class PlanetFloraAndFauna implements Serializable {
      */
     private final String plantsStyleTag;
 
-
+    /**
+     * Colors that will be used in plants sprites
+     */
+    private Map<Integer, Color> colorMap;
     /**
      * Available animal species descriptions, if any.
      */
@@ -43,9 +48,16 @@ public class PlanetFloraAndFauna implements Serializable {
         return plantsStyleTag;
     }
 
-    public void setSpecies(AnimalSpeciesDesc[] animalSpecies, PlantSpeciesDesc[] plantSpecies)
-    {
+    public void setSpecies(AnimalSpeciesDesc[] animalSpecies, PlantSpeciesDesc[] plantSpecies) {
         this.plantSpecies = plantSpecies;
         this.animalSpecies = animalSpecies;
+    }
+
+    public Map<Integer, Color> getColorMap() {
+        return colorMap;
+    }
+
+    public void setColorMap(Map<Integer, Color> colorMap) {
+        this.colorMap = colorMap;
     }
 }

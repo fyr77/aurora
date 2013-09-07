@@ -11,9 +11,9 @@ import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.SurfaceTypes;
 
-import java.util.ArrayList;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Creates and adds plants and animals to a planet
@@ -25,6 +25,26 @@ public class PlanetaryLifeGenerator {
      * Only parts with this style in tag list will be used by monster generator
      */
     private static final String[] plantStyles = {"style1", "style2", "style3"};
+
+    private static Map<Integer, Color> createColorsForPlants() {
+        Map<Integer, Color> result = new HashMap<>();
+        Random r = CommonRandom.getRandom();
+        Color trunkColor = new Color(r.nextFloat(), r.nextFloat(), r.nextFloat());
+        result.put(1, trunkColor.darker());
+        result.put(2, trunkColor);
+        result.put(3, trunkColor.brighter());
+
+        Color leafColor = new Color(r.nextFloat(), r.nextFloat(), r.nextFloat());
+        result.put(4, leafColor.darker());
+        result.put(5, leafColor);
+        result.put(6, leafColor.brighter());
+
+        Color decorColor = new Color(r.nextFloat(), r.nextFloat(), r.nextFloat());
+        result.put(7, decorColor.darker());
+        result.put(8, decorColor);
+
+        return result;
+    }
 
     public static void setPlanetHasLife(Planet planet) {
         int plantsCount = CommonRandom.getRandom().nextInt(5 * (5 - planet.getSize()));
@@ -57,6 +77,7 @@ public class PlanetaryLifeGenerator {
 
         floraAndFauna.setSpecies(animalSpecies, plants);
         planet.setFloraAndFauna(floraAndFauna);
+        floraAndFauna.setColorMap(createColorsForPlants());
     }
 
     public static void addPlants(Planet planet) {

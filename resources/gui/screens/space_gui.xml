@@ -207,7 +207,7 @@
                     <image filename="resources/sprites/portraits/scientist.png" width="256px" height="256px"/>
                     <panel width="10px"/>
                     <panel style="nifty-listbox#scrollpanel" width="*" height="256px" childLayout="horizontal">
-                        <text width="*" height="256px" id="scan_text" font="font_white_small.fnt" textHAlign="left"
+                        <text width="100%" height="256px" id="scan_text" font="font_white_small.fnt" textHAlign="left"
                               padding="5px" wrap="true"/>
                     </panel>
                 </panel>
