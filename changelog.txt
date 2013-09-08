@@ -7,6 +7,8 @@ IN PROGRESS...
 that the game has not hanged up
 + Added plants to planet surface
 * Moved some research projects to external json files.
++ Planets and space objects can now be scanned.
++ Added gui panel that pops up when some interaction is available
 
 =====================================================
 VERSION 0.0.9

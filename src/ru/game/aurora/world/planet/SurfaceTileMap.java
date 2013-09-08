@@ -159,7 +159,6 @@ public class SurfaceTileMap implements ITileMap, Serializable {
         }
     }
 
-
     private boolean allNeighboursAreMountain(int x, int y) {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
@@ -174,6 +173,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
         return true;
     }
 
+    @Override
     public int updateVisibility(int x, int y, int range) {
         int rz = 0;
         for (int i = y - range; i <= y + range; ++i) {
