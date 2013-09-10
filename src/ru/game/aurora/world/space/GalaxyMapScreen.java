@@ -7,7 +7,6 @@
 package ru.game.aurora.world.space;
 
 
-import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -43,11 +42,6 @@ public class GalaxyMapScreen implements Room {
         myCamera = new Camera(0, 0, galaxyMap.getTilesX(), galaxyMap.getTilesY(), newTileWidth, newTileHeight);
         myCamera.setTarget(new BasePositionable(galaxyMap.getTilesX() / 2, galaxyMap.getTilesY() / 2));
         ship = world.getPlayer().getShip();
-    }
-
-    @Override
-    public Screen getGUI() {
-        return null;
     }
 
     @Override

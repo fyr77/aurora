@@ -87,12 +87,12 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     }
 
     public void weaponClicked() {
-        ((Planet) world.getCurrentRoom()).changeMode();
+        ((Planet) world.getCurrentRoom()).getController().changeMode();
     }
 
     public void interactClicked() {
         Planet planet = (Planet) world.getCurrentRoom();
-        planet.interactWithObject(world);
+        planet.getController().interactWithObject(world);
         if (planet.getShuttlePosition().getDistance(world.getPlayer().getLandingParty()) == 0) {
             planet.leavePlanet(world);
         }

@@ -7,7 +7,6 @@ package ru.game.aurora.world.space;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
-import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -62,13 +61,6 @@ public class GalaxyMap extends BaseSpaceRoom {
     private void createBackground(Camera cam, int tilesX, int tilesY) {
         background = new ParallaxBackground(tilesX * cam.getTileWidth(), tilesY * cam.getTileHeight(), cam.getTileWidth() * tilesX / 2, cam.getTileHeight() * tilesY / 2, 8);
         background.setBaseWidth(2); // smaller size of background stars so that they are not messed with real stars
-    }
-
-    @Override
-    public Screen getGUI() {
-        //myGui = new GalaxyMapController(world);
-        // return myGui;
-        return null;
     }
 
     public int[][] getMap() {

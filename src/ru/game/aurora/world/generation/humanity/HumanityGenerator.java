@@ -37,7 +37,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
         world.addListener(new SingleShipFixedTime(4, new AuroraProbe(0, 0), Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_detected.json"))));
 
         // earth
-        final StarSystem solarSystem = HomeworldGenerator.createSolarSystem(humans);
+        final StarSystem solarSystem = HomeworldGenerator.createSolarSystem(world, humans);
         solarSystem.setQuestLocation(true);
         humans.setHomeworld(solarSystem);
         world.getGalaxyMap().getObjects().add(solarSystem);

@@ -12,8 +12,8 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.player.research.projects.Cartography;
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.GameObject;
-import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
@@ -21,14 +21,10 @@ import ru.game.aurora.world.equip.LandingPartyWeapon;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LandingParty implements GameObject, Positionable {
+public class LandingParty extends BasePositionable implements GameObject {
     public static final int MAX_OXYGEN = 100;
 
     private static final long serialVersionUID = 7804695272317195264L;
-
-    private int x;
-
-    private int y;
 
     private int military;
 
@@ -47,11 +43,11 @@ public class LandingParty implements GameObject, Positionable {
     private int hp = 3;
 
     public LandingParty() {
+        super(0, 0);
     }
 
     public LandingParty(int x, int y, LandingPartyWeapon weapon, int military, int science, int engineers) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.military = military;
         this.science = science;
         this.engineers = engineers;

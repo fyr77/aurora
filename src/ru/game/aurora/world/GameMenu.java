@@ -1,6 +1,5 @@
 package ru.game.aurora.world;
 
-import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -35,11 +34,6 @@ public class GameMenu implements Room {
     @Override
     public void enter(World world) {
         this.prevRoom = world.getCurrentRoom();
-    }
-
-    @Override
-    public Screen getGUI() {
-        return null;
     }
 
     @Override

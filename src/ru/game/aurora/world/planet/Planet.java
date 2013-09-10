@@ -7,24 +7,20 @@ package ru.game.aurora.world.planet;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
-import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.*;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.effects.BlasterShotEffect;
-import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
+import ru.game.aurora.world.DungeonController;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.PlanetFloraAndFauna;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.space.StarSystem;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Future;
@@ -37,22 +33,8 @@ import java.util.concurrent.Future;
  */
 public class Planet extends BasePlanet {
 
-    /**
-     * Mode for moving. Arrows control landing party movement.
-     */
-    private static final int MODE_MOVE = 0;
+    private static final long serialVersionUID = 3L;
 
-    /**
-     * Mode for shooting. Arrows control target selection.
-     */
-    private static final int MODE_SHOOT = 1;
-
-    private static final long serialVersionUID = 2L;
-
-    /**
-     * Current mode
-     */
-    private int mode = MODE_MOVE;
 
     private SurfaceTileMap surface = null;
 
@@ -66,37 +48,31 @@ public class Planet extends BasePlanet {
 
     private PlanetFloraAndFauna floraAndFauna = null;
 
-    /**
-     * Animals that are located on planet surface.
-     */
-    private List<PlanetObject> planetObjects = new ArrayList<>();
 
     private transient Image sprite;
-
-    /**
-     * When in fire mode, this is currently selected target
-     */
-    private transient PlanetObject target = null;
-
-    private transient Effect currentEffect = null;
 
     private transient Future surfaceGenerationFuture = null;
 
     private transient Animation shuttle_landing;
 
+    private DungeonController controller;
 
-    public Planet(StarSystem owner, Planet other) {
+    private World world;
+
+
+    public Planet(World world, StarSystem owner, Planet other) {
         super(other.size, other.globalY, owner, other.atmosphere, other.globalX, other.category);
         if (other.surface == null) {
             other.createSurface();
         }
         this.surface = new SurfaceTileMap(other.surface);
         createOreDeposits(size, CommonRandom.getRandom());
+        this.world = world;
     }
 
-    public Planet(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
+    public Planet(World world, StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
         super(size, y, owner, atmosphere, x, cat);
-
+        this.world = world;
     }
 
     private void createSurface() {
@@ -135,6 +111,7 @@ public class Planet extends BasePlanet {
             PlanetaryLifeGenerator.addAnimals(this);
             PlanetaryLifeGenerator.addPlants(this);
         }
+        controller = new DungeonController(world, surface, true);
     }
 
     private void createOreDeposits(int size, Random r) {
@@ -148,7 +125,7 @@ public class Planet extends BasePlanet {
                 oreY = r.nextInt(10);
             } while (!surface.isTilePassable(oreX, oreY));
             d.setPos(oreX, oreY);
-            planetObjects.add(d);
+            surface.getObjects().add(d);
         }
     }
 
@@ -166,7 +143,7 @@ public class Planet extends BasePlanet {
 
 
     public List<PlanetObject> getPlanetObjects() {
-        return planetObjects;
+        return getSurface().getObjects();
     }
 
     @Override
@@ -202,65 +179,6 @@ public class Planet extends BasePlanet {
         });
     }
 
-    @Override
-    public Screen getGUI() {
-        return null;
-    }
-
-    /**
-     * This update is used in MOVE mode. Moving landing party around.
-     */
-    private void updateMove(GameContainer container, World world) {
-        int x = world.getPlayer().getLandingParty().getX();
-        int y = world.getPlayer().getLandingParty().getY();
-
-        if (container.getInput().isKeyPressed(Input.KEY_UP)) {
-            y--;
-            world.setUpdatedThisFrame(true);
-        }
-        if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
-            y++;
-            world.setUpdatedThisFrame(true);
-        }
-
-        if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
-            x--;
-            world.setUpdatedThisFrame(true);
-        }
-        if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
-            x++;
-            world.setUpdatedThisFrame(true);
-        }
-
-        x = EngineUtils.wrap(x, getWidth());
-        y = EngineUtils.wrap(y, getHeight());
-
-        if (!surface.isTilePassable(landingParty, x, y)) {
-            world.setUpdatedThisFrame(false);
-            x = world.getPlayer().getLandingParty().getX();
-            y = world.getPlayer().getLandingParty().getY();
-        }
-
-        final boolean enterPressed = container.getInput().isKeyPressed(Input.KEY_ENTER);
-        if (enterPressed) {
-            interactWithObject(world);
-
-        }
-
-        int tilesExplored = surface.updateVisibility(x, y, 1);
-        landingParty.addCollectedGeodata(tilesExplored);
-
-        if ((x == shuttlePosition.getX()) && (y == shuttlePosition.getY())) {
-            if (world.isUpdatedThisFrame()) {
-                GameLogger.getInstance().logMessage("Refilling oxygen");
-                world.getPlayer().getLandingParty().refillOxygen();
-            }
-            if (enterPressed) {
-                leavePlanet(world);
-            }
-        }
-        world.getPlayer().getLandingParty().setPos(x, y);
-    }
 
     public BasePositionable getShuttlePosition() {
         return shuttlePosition;
@@ -274,119 +192,6 @@ public class Planet extends BasePlanet {
         landingParty.onReturnToShip(world);
     }
 
-    public void interactWithObject(World world) {
-        int x = world.getPlayer().getLandingParty().getX();
-        int y = world.getPlayer().getLandingParty().getY();
-        // check if can pick up smth
-        for (Iterator<PlanetObject> iter = planetObjects.iterator(); iter.hasNext(); ) {
-            PlanetObject p = iter.next();
-
-            if (!p.canBePickedUp()) {
-                continue;
-            }
-
-            if (p.getX() != x || p.getY() != y) {
-                continue;
-            }
-            p.onPickedUp(world);
-            world.setUpdatedThisFrame(true);
-            // some items (like ore deposits) can be picked up more than once, do not remove them in this case
-            if (!p.isAlive()) {
-                iter.remove();
-            }
-        }
-    }
-
-    private int getDist(int first, int second, int total) {
-        int max = Math.max(first, second);
-        int min = Math.min(first, second);
-
-        return Math.min(max - min, total + min - max);
-
-    }
-
-    private int getRange(LandingParty party, Positionable target) {
-        int xDist = getDist(party.getX(), target.getX(), getWidth());
-        int yDist = getDist(party.getY(), target.getY(), getHeight());
-        return xDist + yDist;
-    }
-
-    /**
-     * This update method is used in FIRE mode. Selecting targets and shooting.
-     */
-    private void updateShoot(GameContainer container, World world) {
-        if (planetObjects.isEmpty()) {
-            return;
-        }
-        int targetIdx = 0;
-        List<PlanetObject> availableTargets = new ArrayList<>();
-
-        if (target != null && getRange(landingParty, target) > landingParty.getWeapon().getRange()) {
-            // target moved out of range
-            target = null;
-        }
-
-        for (PlanetObject planetObject : planetObjects) {
-            if (!planetObject.canBeShotAt()) {
-                continue;
-            }
-            if (surface.isTileVisible(planetObject.getX(), planetObject.getY())) {
-                // do not target animals on unexplored tiles
-                continue;
-            }
-            if (landingParty.getWeapon().getRange() >= getRange(landingParty, planetObject)) {
-                availableTargets.add(planetObject);
-                if (target == null) {
-                    target = planetObject;
-                }
-
-                if (target == planetObject) {
-                    targetIdx = availableTargets.size() - 1;
-                }
-            }
-
-        }
-
-        if (availableTargets.isEmpty()) {
-            // no target available in weapon range
-            return;
-        }
-
-        if (container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
-            targetIdx++;
-            if (targetIdx >= availableTargets.size()) {
-                targetIdx = 0;
-            }
-        } else if (container.getInput().isKeyPressed(Input.KEY_DOWN) || container.getInput().isKeyPressed(Input.KEY_LEFT)) {
-            targetIdx--;
-            if (targetIdx < 0) {
-                targetIdx = availableTargets.size() - 1;
-            }
-        }
-
-        target = availableTargets.get(targetIdx);
-
-        if (container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER)) {
-            // firing
-            final int damage = landingParty.calcDamage();
-
-            currentEffect = new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), getWidth()), world.getCamera().getYCoordWrapped(target.getY(), getHeight()), world.getCamera(), 800, "blaster_shot");
-
-            target.onShotAt(damage);
-            GameLogger.getInstance().logMessage("Bang! Dealt " + damage + " damage to " + target.getName());
-            if (!target.isAlive()) {
-                GameLogger.getInstance().logMessage(target.getName() + " killed");
-                planetObjects.remove(target);
-                target = null;
-            }
-            world.setUpdatedThisFrame(true);
-        }
-
-    }
-
-    public void changeMode() {
-        mode = (mode == MODE_MOVE) ? MODE_SHOOT : MODE_MOVE;
-    }
 
     @Override
     public void update(GameContainer container, World world) {
@@ -433,31 +238,17 @@ public class Planet extends BasePlanet {
             }
             return;
         }
-        if (currentEffect != null) {
-            currentEffect.update(container, world);
-            if (currentEffect.isOver()) {
-                currentEffect = null;
-            }
-            return;
-        }
-        switch (mode) {
-            case MODE_MOVE:
-                if (container.getInput().isKeyPressed(Input.KEY_F)) {
-                    mode = MODE_SHOOT;
-                    return;
-                }
-                updateMove(container, world);
-                break;
-            case MODE_SHOOT:
-                if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-                    mode = MODE_MOVE;
-                    return;
-                }
-                updateShoot(container, world);
-                break;
-            default:
-                throw new IllegalStateException("Unknown planet update type " + mode);
 
+        controller.update(container, world);
+
+        if (landingParty.getDistance(shuttlePosition) == 0) {
+            if (world.isUpdatedThisFrame()) {
+                GameLogger.getInstance().logMessage("Refilling oxygen");
+                world.getPlayer().getLandingParty().refillOxygen();
+            }
+            if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
+                leavePlanet(world);
+            }
         }
 
         if (atmosphere != PlanetAtmosphere.BREATHABLE_ATMOSPHERE && world.isUpdatedThisFrame()) {
@@ -476,9 +267,6 @@ public class Planet extends BasePlanet {
             nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
         }
 
-        for (PlanetObject a : planetObjects) {
-            a.update(container, world);
-        }
     }
 
 
@@ -491,37 +279,8 @@ public class Planet extends BasePlanet {
 
     public void drawObjects(GameContainer container, Graphics graphics, Camera camera) {
         // this part (monsters, shuttle, landing party) is drawn only when landing party is on surface
-        if (landingParty != null) {
-            landingParty.draw(container, graphics, camera);
+        graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped(shuttlePosition.getX(), getWidth()), camera.getYCoordWrapped((int) shuttlePosition.getY(), getHeight()));
 
-            graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped(shuttlePosition.getX(), getWidth()), camera.getYCoordWrapped((int) shuttlePosition.getY(), getHeight()));
-
-            if (landingParty.getX() == shuttlePosition.getX() && landingParty.getY() == shuttlePosition.getY()) {
-            }
-
-            graphics.setColor(Color.red);
-            for (PlanetObject a : planetObjects) {
-                // draw only if tile under this animal is visible
-                if (surface.isTileVisible(a.getX(), a.getY())) {
-                    a.draw(container, graphics, camera);
-
-                    // in shoot mode, all available targets are surrounded with red square
-                    if (mode == MODE_SHOOT && a.canBeShotAt() && getRange(landingParty, a) < landingParty.getWeapon().getRange()) {
-                        graphics.drawRect(camera.getXCoordWrapped(a.getX(), getWidth()), camera.getYCoordWrapped(a.getY(), getHeight()), camera.getTileWidth(), camera.getTileHeight());
-                    }
-                }
-
-                if (a.getX() == landingParty.getX() && a.getY() == landingParty.getY()) {
-                    a.printStatusInfo();
-                }
-
-            }
-
-            if (mode == MODE_SHOOT && target != null) {
-                // draw target mark
-                graphics.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoordWrapped(target.getX(), getWidth()), camera.getYCoordWrapped(target.getY(), getHeight()));
-            }
-        }
     }
 
     @Override
@@ -542,9 +301,7 @@ public class Planet extends BasePlanet {
         }
         drawLandscape(container, graphics, camera);
         drawObjects(container, graphics, camera);
-        if (currentEffect != null) {
-            currentEffect.draw(container, graphics, camera);
-        }
+        controller.draw(container, graphics, camera);
     }
 
     @Override
@@ -584,5 +341,9 @@ public class Planet extends BasePlanet {
             createSurface();
         }
         return surface;
+    }
+
+    public DungeonController getController() {
+        return controller;
     }
 }

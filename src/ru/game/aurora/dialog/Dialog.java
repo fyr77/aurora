@@ -6,7 +6,6 @@
 package ru.game.aurora.dialog;
 
 import com.google.gson.Gson;
-import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -85,11 +84,6 @@ public class Dialog implements OverlayWindow {
         }
         availableReplies = currentStatement.getAvailableReplies(world);
         returnValue = 0;
-    }
-
-    @Override
-    public Screen getGUI() {
-        return null;
     }
 
     @Override

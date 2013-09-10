@@ -8,10 +8,7 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.ITileMap;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Internal tile map representation for planet surfaces, where each tile is assigned a byte value that contains encoded
@@ -24,6 +21,12 @@ public class SurfaceTileMap implements ITileMap, Serializable {
     private int width;
 
     private int height;
+
+    /**
+     * Animals that are located on planet surface.
+     */
+    private List<PlanetObject> planetObjects = new ArrayList<>();
+
 
     /**
      * Tiles with planet surface.
@@ -64,6 +67,11 @@ public class SurfaceTileMap implements ITileMap, Serializable {
         drawers.put(SurfaceTypes.DIRT, new TileDrawer("sand", SurfaceTypes.DIRT));
         drawers.put(SurfaceTypes.ICE, new TileDrawer("ice", SurfaceTypes.ICE));
         drawers.put(SurfaceTypes.SNOW, new TileDrawer("snow", SurfaceTypes.SNOW));
+    }
+
+    @Override
+    public List<PlanetObject> getObjects() {
+        return planetObjects;
     }
 
     @Override

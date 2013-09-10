@@ -123,16 +123,16 @@ public class MainQuestGenerator implements WorldGeneratorPart {
         Planet[] planets = new Planet[3];
         StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.green), 9, 9);
 
-        planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
+        planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
         HomeworldGenerator.setCoord(planets[0], 2);
 
         // venus
-        planets[1] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 1, 0, 0);
+        planets[1] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 1, 0, 0);
         HomeworldGenerator.setCoord(planets[1], 3);
 
 
         // mars
-        planets[2] = new Planet(ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
+        planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
         HomeworldGenerator.setCoord(planets[2], 5);
 
 
@@ -145,13 +145,13 @@ public class MainQuestGenerator implements WorldGeneratorPart {
         BasePlanet[] planets = new BasePlanet[3];
         StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.green), x, y);
 
-        planets[0] = new Planet(ss, (Planet) proto.getPlanets()[0]);
+        planets[0] = new Planet(world, ss, (Planet) proto.getPlanets()[0]);
         HomeworldGenerator.setCoord(planets[0], 2);
 
-        planets[1] = new Planet(ss, (Planet) proto.getPlanets()[1]);
+        planets[1] = new Planet(world, ss, (Planet) proto.getPlanets()[1]);
         HomeworldGenerator.setCoord(planets[1], 3);
 
-        planets[2] = new Planet(ss, (Planet) proto.getPlanets()[2]);
+        planets[2] = new Planet(world, ss, (Planet) proto.getPlanets()[2]);
         HomeworldGenerator.setCoord(planets[2], 5);
 
         ss.setPlanets(planets);

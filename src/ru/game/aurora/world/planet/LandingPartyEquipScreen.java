@@ -6,7 +6,6 @@
  */
 package ru.game.aurora.world.planet;
 
-import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -127,8 +126,4 @@ public class LandingPartyEquipScreen extends ListWithIconAndDescrScreen {
         draw(graphics, camera, "Landing party status", icon, text);
     }
 
-    @Override
-    public Screen getGUI() {
-        return null;
-    }
 }

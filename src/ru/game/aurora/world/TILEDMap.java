@@ -7,12 +7,19 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.world.planet.LandingParty;
+import ru.game.aurora.world.planet.PlanetObject;
 import ru.game.aurora.world.planet.SurfaceTypes;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Map in a format of a TILed EDitor
  */
 public class TILEDMap implements ITileMap {
+
+    List<PlanetObject> objects = new LinkedList<>();
+
     private byte[][] flags;
 
     private TiledMap map;
@@ -20,6 +27,11 @@ public class TILEDMap implements ITileMap {
     public TILEDMap(String mapRef) throws SlickException {
         map = new TiledMap(mapRef);
         flags = new byte[map.getHeight()][map.getWidth()];
+    }
+
+    @Override
+    public List<PlanetObject> getObjects() {
+        return objects;
     }
 
     @Override

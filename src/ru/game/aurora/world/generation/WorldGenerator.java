@@ -143,6 +143,7 @@ public class WorldGenerator implements Runnable {
             PlanetAtmosphere atmosphere = CollectionUtils.selectRandomElement(PlanetAtmosphere.values());
             final int planetSize = r.nextInt(3) + 1;
             planets[i] = new Planet(
+                    world,
                     ss
                     , CollectionUtils.selectRandomElement(PlanetCategory.values())
                     , atmosphere

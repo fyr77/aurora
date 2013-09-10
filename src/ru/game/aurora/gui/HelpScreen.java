@@ -7,7 +7,6 @@
 
 package ru.game.aurora.gui;
 
-import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -17,8 +16,7 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
 
-public class HelpScreen implements OverlayWindow
-{
+public class HelpScreen implements OverlayWindow {
     private static final long serialVersionUID = 8162960879655162640L;
 
     private boolean isOver = false;
@@ -58,11 +56,6 @@ public class HelpScreen implements OverlayWindow
     @Override
     public void enter(World world) {
 
-    }
-
-    @Override
-    public Screen getGUI() {
-        return null;
     }
 
     @Override

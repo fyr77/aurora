@@ -1,6 +1,5 @@
 package ru.game.aurora.gui;
 
-import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
@@ -36,11 +35,6 @@ public class ProgressDumpScreen implements OverlayWindow {
 
     @Override
     public void enter(World world) {
-    }
-
-    @Override
-    public Screen getGUI() {
-        return null;
     }
 
     @Override

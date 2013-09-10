@@ -6,7 +6,6 @@
  */
 package ru.game.aurora.world.space;
 
-import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -23,8 +22,7 @@ import ru.game.aurora.world.planet.PlanetCategory;
  * Planet inhabited with aliens.
  * Such planet can not be landed on, only communicated
  */
-public class AlienHomeworld extends BasePlanet
-{
+public class AlienHomeworld extends BasePlanet {
     private static final long serialVersionUID = -1818088878360415965L;
 
     private AlienRace ownerRace;
@@ -54,11 +52,6 @@ public class AlienHomeworld extends BasePlanet
     @Override
     public void enter(World world) {
         world.addOverlayWindow(dialog);
-    }
-
-    @Override
-    public Screen getGUI() {
-        return null;
     }
 
     @Override

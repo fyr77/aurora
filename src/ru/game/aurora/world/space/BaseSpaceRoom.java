@@ -5,7 +5,6 @@
  */
 package ru.game.aurora.world.space;
 
-import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -20,11 +19,6 @@ public class BaseSpaceRoom implements Room {
     @Override
     public void enter(World world) {
         this.player = world.getPlayer();
-    }
-
-    @Override
-    public Screen getGUI() {
-        return null;
     }
 
     @Override

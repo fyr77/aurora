@@ -5,12 +5,7 @@
  */
 package ru.game.aurora.world;
 
-import de.lessvoid.nifty.screen.Screen;
-
 public interface Room extends GameObject {
-
     public void enter(World world);
 
-
-    public Screen getGUI();
 }

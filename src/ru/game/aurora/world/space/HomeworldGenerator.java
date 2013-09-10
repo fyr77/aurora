@@ -30,25 +30,25 @@ public class HomeworldGenerator {
         p.setGlobalY(planetY);
     }
 
-    public static StarSystem createSolarSystem(AlienRace humanRace) {
+    public static StarSystem createSolarSystem(World world, AlienRace humanRace) {
         // todo: gas giants and other planets
 
         Planet[] planets = new Planet[4];
         StarSystem ss = new StarSystem("Solar system", new Star(2, Color.yellow), 9, 9);
 
         // mercury
-        planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
+        planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
         setCoord(planets[0], 2);
 
         // venus
-        planets[1] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
+        planets[1] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
         setCoord(planets[1], 3);
 
-        planets[2] = new Earth(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.BREATHABLE_ATMOSPHERE, 3, 0, 0);
+        planets[2] = new Earth(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.BREATHABLE_ATMOSPHERE, 3, 0, 0);
         setCoord(planets[2], 5);
 
         // mars
-        planets[3] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
+        planets[3] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
         setCoord(planets[3], 5);
 
 
@@ -68,13 +68,13 @@ public class HomeworldGenerator {
         BasePlanet[] planets = new BasePlanet[3];
         StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.yellow), x, y);
 
-        planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
+        planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
         setCoord(planets[0], 2);
 
         planets[1] = new AlienHomeworld("klisk_homeworld", kliskRace, kliskRace.getDefaultDialog(), 3, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK);
         setCoord(planets[1], 3);
 
-        planets[2] = new Planet(ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
+        planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
         setCoord(planets[2], 5);
 
         AlienArtifact a = new AlienArtifact(3, 4, "small_artifact", new ArtifactResearch(new ResearchReport("small_artifact", "This artifact represents a platinum plate with engraved message on it. Based on our knowlege of klisk language, we could decipher it partially." +
@@ -93,10 +93,10 @@ public class HomeworldGenerator {
         BasePlanet[] planets = new BasePlanet[2];
         StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.red), x, y);
 
-        planets[0] = new Planet(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
+        planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
         setCoord(planets[0], 2);
 
-        planets[1] = new Planet(ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
+        planets[1] = new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
         setCoord(planets[1], 5);
 
         ss.setPlanets(planets);
