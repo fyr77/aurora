@@ -178,7 +178,7 @@ public class DungeonController implements Serializable {
             if (!planetObject.canBeShotAt()) {
                 continue;
             }
-            if (map.isTileVisible(planetObject.getX(), planetObject.getY())) {
+            if (!map.isTileVisible(planetObject.getX(), planetObject.getY())) {
                 // do not target animals on unexplored tiles
                 continue;
             }
@@ -245,11 +245,6 @@ public class DungeonController implements Serializable {
             return;
         }
 
-
-        for (PlanetObject a : map.getObjects()) {
-            a.update(container, world);
-        }
-
         switch (mode) {
             case MODE_MOVE:
                 if (container.getInput().isKeyPressed(Input.KEY_F)) {
@@ -269,6 +264,11 @@ public class DungeonController implements Serializable {
                 throw new IllegalStateException("Unknown planet update type " + mode);
 
         }
+        // should always be done after player update, so that world.isUpdatedThisFrame() flag is set
+        for (PlanetObject a : map.getObjects()) {
+            a.update(container, world);
+        }
+
     }
 
     public void draw(GameContainer container, Graphics graphics, Camera camera) {

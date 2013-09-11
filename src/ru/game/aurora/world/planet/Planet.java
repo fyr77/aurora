@@ -44,7 +44,7 @@ public class Planet extends BasePlanet {
     /**
      * Where landing shuttle is located. Launching to orbit and refilling oxygen is available at shuttle
      */
-    private BasePositionable shuttlePosition;
+    private LandingShuttle shuttle;
 
     private PlanetFloraAndFauna floraAndFauna = null;
 
@@ -180,8 +180,8 @@ public class Planet extends BasePlanet {
     }
 
 
-    public BasePositionable getShuttlePosition() {
-        return shuttlePosition;
+    public BasePositionable getShuttle() {
+        return shuttle;
     }
 
     public void leavePlanet(World world) {
@@ -231,7 +231,19 @@ public class Planet extends BasePlanet {
 
 
                 world.getCamera().setTarget(landingParty);
-                shuttlePosition = new BasePositionable(landingParty.getX(), landingParty.getY());
+                shuttle = null;
+                for (PlanetObject po : surface.getObjects()) {
+                    if (po instanceof LandingShuttle) {
+                        shuttle = (LandingShuttle) po;
+                    }
+                }
+                if (shuttle == null) {
+                    shuttle = new LandingShuttle(this, landingParty.getX(), landingParty.getY());
+                    surface.getObjects().add(shuttle);
+                } else {
+                    shuttle.setPos(landingParty.getX(), landingParty.getY());
+                }
+
                 int openedTiles = surface.updateVisibility(landingParty.getX(), landingParty.getY(), 5);
                 landingParty.addCollectedGeodata(openedTiles);
                 surfaceGenerationFuture = null;
@@ -241,7 +253,7 @@ public class Planet extends BasePlanet {
 
         controller.update(container, world);
 
-        if (landingParty.getDistance(shuttlePosition) == 0) {
+        if (landingParty.getDistance(shuttle) == 0) {
             if (world.isUpdatedThisFrame()) {
                 GameLogger.getInstance().logMessage("Refilling oxygen");
                 world.getPlayer().getLandingParty().refillOxygen();
@@ -279,7 +291,7 @@ public class Planet extends BasePlanet {
 
     public void drawObjects(GameContainer container, Graphics graphics, Camera camera) {
         // this part (monsters, shuttle, landing party) is drawn only when landing party is on surface
-        graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped(shuttlePosition.getX(), getWidth()), camera.getYCoordWrapped((int) shuttlePosition.getY(), getHeight()));
+        graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped(shuttle.getX(), getWidth()), camera.getYCoordWrapped((int) shuttle.getY(), getHeight()));
 
     }
 

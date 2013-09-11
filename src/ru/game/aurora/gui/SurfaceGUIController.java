@@ -93,7 +93,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     public void interactClicked() {
         Planet planet = (Planet) world.getCurrentRoom();
         planet.getController().interactWithObject(world);
-        if (planet.getShuttlePosition().getDistance(world.getPlayer().getLandingParty()) == 0) {
+        if (planet.getShuttle().getDistance(world.getPlayer().getLandingParty()) == 0) {
             planet.leavePlanet(world);
         }
     }
