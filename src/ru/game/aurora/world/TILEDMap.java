@@ -80,11 +80,14 @@ public class TILEDMap implements ITileMap
                 if (i < 0 || j < 0 || i >= map.getHeight() || j >= map.getHeight()) {
                     continue;
                 }
-                final Image image = map.getTileImage(j, i, 0);
-                if (image == null) {
-                    continue;
+
+                for (int layer = 0; layer < map.getLayerCount(); ++layer) {
+                    final Image image = map.getTileImage(j, i, layer);
+                    if (image == null) {
+                        continue;
+                    }
+                    graphics.drawImage(image, camera.getXCoord(j), camera.getYCoord(i));
                 }
-                graphics.drawImage(image, camera.getXCoord(j), camera.getYCoord(i));
 
             }
         }
