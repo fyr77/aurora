@@ -111,7 +111,7 @@ public class Planet extends BasePlanet {
             PlanetaryLifeGenerator.addAnimals(this);
             PlanetaryLifeGenerator.addPlants(this);
         }
-        controller = new DungeonController(world, surface, true);
+        controller = new DungeonController(world, owner, surface, true);
     }
 
     private void createOreDeposits(int size, Random r) {

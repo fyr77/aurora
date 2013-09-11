@@ -16,17 +16,21 @@ import java.util.List;
 /**
  * Map in a format of a TILed EDitor
  */
-public class TILEDMap implements ITileMap {
+public class TILEDMap implements ITileMap
+{
+    private static final long serialVersionUID = -8605255474835067962L;
 
     List<PlanetObject> objects = new LinkedList<>();
 
     private byte[][] flags;
 
-    private TiledMap map;
+    private transient TiledMap map;
 
-    public TILEDMap(String mapRef) throws SlickException {
-        map = new TiledMap(mapRef);
-        flags = new byte[map.getHeight()][map.getWidth()];
+    private final String mapRef;
+
+    public TILEDMap(String mapRef)
+    {
+        this.mapRef = mapRef;
     }
 
     @Override
@@ -34,14 +38,31 @@ public class TILEDMap implements ITileMap {
         return objects;
     }
 
+    // must be called from main thread with OpenGL context
+    private void loadMap()
+    {
+        try {
+            map = new TiledMap(mapRef, "resources/maps");
+            flags = new byte[map.getHeight()][map.getWidth()];
+        } catch (SlickException e) {
+            throw new RuntimeException("Failed to load TILED map", e);
+        }
+    }
+
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
+        if (map == null) {
+            loadMap();
+        }
         for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
             for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; ++j) {
                 if (i < 0 || j < 0 || i >= map.getHeight() || j >= map.getHeight()) {
                     continue;
                 }
                 final Image image = map.getTileImage(j, i, 0);
+                if (image == null) {
+                    continue;
+                }
                 graphics.drawImage(image, camera.getXCoord(j), camera.getYCoord(i));
 
             }

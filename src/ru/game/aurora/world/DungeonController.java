@@ -41,6 +41,8 @@ public class DungeonController implements Serializable {
      * Mode for shooting. Arrows control target selection.
      */
     private static final int MODE_SHOOT = 1;
+
+    private Room prevRoom;
     /**
      * Current mode
      */
@@ -61,8 +63,9 @@ public class DungeonController implements Serializable {
      */
     private transient PlanetObject target = null;
 
-    public DungeonController(World world, ITileMap map, boolean wrap) {
-        isWrap = wrap;
+    public DungeonController(World world, Room prevRoom, ITileMap map, boolean wrap) {
+        this.isWrap = wrap;
+        this.prevRoom = prevRoom;
         this.map = map;
         this.world = world;
         this.landingParty = world.getPlayer().getLandingParty();
@@ -301,6 +304,13 @@ public class DungeonController implements Serializable {
         if (currentEffect != null) {
             currentEffect.draw(container, graphics, camera);
         }
+    }
+
+    public void returnToPrevRoom()
+    {
+        world.setCurrentRoom(prevRoom);
+        prevRoom.enter(world);
+        landingParty.onReturnToShip(world);
     }
 
 }

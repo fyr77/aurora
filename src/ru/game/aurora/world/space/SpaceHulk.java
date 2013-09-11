@@ -15,6 +15,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.BasePositionable;
+import ru.game.aurora.world.Dungeon;
 import ru.game.aurora.world.World;
 
 /**
@@ -23,8 +24,9 @@ import ru.game.aurora.world.World;
  * Can contain something valuable, like resources, materials for research etc.
  * In future versions will contain enemies and location similar to planet
  */
-public class SpaceHulk extends BasePositionable implements SpaceObject {
-    private static final long serialVersionUID = 1122189215297259875L;
+public class SpaceHulk extends BasePositionable implements SpaceObject
+{
+    private static final long serialVersionUID = 1L;
 
     private String name;
 
@@ -38,10 +40,20 @@ public class SpaceHulk extends BasePositionable implements SpaceObject {
     // research that becomes available after interaction
     private ResearchProjectDesc[] researchProjectDescs;
 
+    // space hulk can contain explorable location
+    private Dungeon dungeon;
+
     public SpaceHulk(int x, int y, String name, String image) {
         super(x, y);
         this.name = name;
         this.image = image;
+    }
+
+    public SpaceHulk(int x, int y, String name, String image, Dungeon dungeon) {
+        super(x, y);
+        this.name = name;
+        this.image = image;
+        this.dungeon = dungeon;
     }
 
     @Override
@@ -52,6 +64,11 @@ public class SpaceHulk extends BasePositionable implements SpaceObject {
 
         if (onInteractDialog != null) {
             world.addOverlayWindow(onInteractDialog);
+        }
+
+        if (dungeon != null) {
+            world.setCurrentRoom(dungeon);
+            dungeon.enter(world);
         }
 
         if (researchProjectDescs != null) {
