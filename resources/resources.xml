@@ -205,4 +205,8 @@
     <resource type="image" id="colony_construction">sprites/story/colony_construction.png</resource>
     <resource type="image" id="colony_dies">sprites/story/colony_dies.png</resource>
 
+    <!-- map data -->
+
+    <resource type="spritesheet" id="rogues_tileset" tw="64" th="64">maps/rogues_tileset.png</resource>
+
 </resources>

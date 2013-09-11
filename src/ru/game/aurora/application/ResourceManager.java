@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class ResourceManager {
 
-    private static String SPRITE_SHEET_REF = "__SPRITE_SHEET_";
+    private static final String SPRITE_SHEET_REF = "__SPRITE_SHEET_";
 
     private static ResourceManager _instance = new ResourceManager();
 
@@ -35,16 +35,18 @@ public class ResourceManager {
     private Map<String, Image> imageMap;
     private Map<String, ResourceAnimationData> animationMap;
     private Map<String, String> textMap;
+    private Map<String, SpriteSheet> spriteSheetMap;
 
     private JsonConfigManager<StarshipWeaponDesc> weapons = new JsonConfigManager<StarshipWeaponDesc>(StarshipWeaponDesc.class, "resources/items/starship_weapons");
 
     private JsonConfigManager<LandingPartyWeapon> landingPartyWeapons = new JsonConfigManager<LandingPartyWeapon>(LandingPartyWeapon.class, "resources/items/crew_weapons");
 
     private ResourceManager() {
-        soundMap = new HashMap<String, Sound>();
-        imageMap = new HashMap<String, Image>();
-        animationMap = new HashMap<String, ResourceAnimationData>();
-        textMap = new HashMap<String, String>();
+        soundMap = new HashMap<>();
+        imageMap = new HashMap<>();
+        animationMap = new HashMap<>();
+        textMap = new HashMap<>();
+        spriteSheetMap = new HashMap<>();
     }
 
     public static ResourceManager getInstance() {
@@ -66,9 +68,7 @@ public class ResourceManager {
         Document doc = null;
         try {
             doc = docBuilder.parse(is);
-        } catch (SAXException e) {
-            throw new SlickException("Could not load resources", e);
-        } catch (IOException e) {
+        } catch (SAXException | IOException e) {
             throw new SlickException("Could not load resources", e);
         }
 
@@ -93,16 +93,25 @@ public class ResourceManager {
 
                 String type = resourceElement.getAttribute("type");
 
-                if (type.equals("image")) {
-                    addElementAsImage(resourceElement);
-                } else if (type.equals("sound")) {
-                    addElementAsSound(resourceElement);
-                } else if (type.equals("text")) {
-                    addElementAsText(resourceElement);
-                } else if (type.equals("font")) {
+                switch (type) {
+                    case "image":
+                        addElementAsImage(resourceElement);
+                        break;
+                    case "sound":
+                        addElementAsSound(resourceElement);
+                        break;
+                    case "text":
+                        addElementAsText(resourceElement);
+                        break;
+                    case "font":
 
-                } else if (type.equals("animation")) {
-                    addElementAsAnimation(resourceElement);
+                        break;
+                    case "spritesheet":
+                        addElementAsSpriteSheet(resourceElement);
+                        break;
+                    case "animation":
+                        addElementAsAnimation(resourceElement);
+                        break;
                 }
             }
         }
@@ -114,6 +123,21 @@ public class ResourceManager {
                 Integer.valueOf(resourceElement.getAttribute("tw")),
                 Integer.valueOf(resourceElement.getAttribute("th")),
                 Integer.valueOf(resourceElement.getAttribute("duration")));
+    }
+
+    private void addElementAsSpriteSheet(Element resourceElement) throws SlickException {
+        loadSpriteSheet(resourceElement.getAttribute("id")
+                , resourceElement.getTextContent()
+                , Integer.valueOf(resourceElement.getAttribute("tw"))
+                , Integer.valueOf(resourceElement.getAttribute("th")));
+    }
+
+    private void loadSpriteSheet(String id, String spriteSheetPath, int tw, int th) throws SlickException {
+        if (spriteSheetPath == null || spriteSheetPath.length() == 0) {
+            throw new SlickException("Image resource [" + id + "] has invalid path");
+        }
+
+        spriteSheetMap.put(id, new SpriteSheet(spriteSheetPath, tw, th));
     }
 
     private void loadAnimation(String id, String spriteSheetPath,
@@ -131,9 +155,11 @@ public class ResourceManager {
 
         SpriteSheet spr = new SpriteSheet(getImage(rad.getImageId()), rad.tw, rad.th);
 
-        Animation animation = new Animation(spr, rad.duration);
+        return new Animation(spr, rad.duration);
+    }
 
-        return animation;
+    public final SpriteSheet getSpriteSheet(String ID) {
+        return spriteSheetMap.get(ID);
     }
 
     private void addElementAsText(Element resourceElement) throws SlickException {
@@ -161,7 +187,7 @@ public class ResourceManager {
         if (path == null || path.length() == 0)
             throw new SlickException("Sound resource [" + id + "] has invalid path");
 
-        Sound sound = null;
+        Sound sound;
 
         try {
             sound = new Sound(path);
@@ -187,7 +213,7 @@ public class ResourceManager {
         if (path == null || path.length() == 0)
             throw new SlickException("Image resource [" + id + "] has invalid path");
 
-        Image image = null;
+        Image image;
         try {
             image = new Image(path);
         } catch (SlickException e) {
