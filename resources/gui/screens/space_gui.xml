@@ -15,22 +15,25 @@
             </panel>
 
             <!-- midlle panel contains list of buttons to the right -->
-            <panel height="*" childLayout="horizontal">
-                <panel width="80%"/>
+            <panel height="*" childLayout="horizontal" >
+                <panel width="85%"/>
                 <panel childLayout="vertical">
                     <panel height="30%"/>
-                    <control id="research_button" name="button" label="Research" width="90%" height="7%">
-                        <interact onClick="openResearchScreen()"/>
-                    </control>
-                    <control id="engineering_button" name="button" label="Engineering" width="90%" height="7%">
-                        <interact onClick="openEngineeringScreen()"/>
-                    </control>
-                    <control id="starmap_button" name="button" label="Star map" width="90%" height="7%">
-                        <interact onClick="openStarMap()"/>
-                    </control>
-                    <control id="menu_button" name="button" label="Menu" width="90%" height="7%">
-                        <interact onClick="openMenu()"/>
-                    </control>
+                    <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png" padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                        <control id="research_button" name="button" label="Research" width="90%" height="50px">
+                            <interact onClick="openResearchScreen()"/>
+                        </control>
+                        <control id="engineering_button" name="button" label="Engineering" width="90%" height="50px">
+                            <interact onClick="openEngineeringScreen()"/>
+                        </control>
+                        <control id="starmap_button" name="button" label="Star map" width="90%" height="50px">
+                            <interact onClick="openStarMap()"/>
+                        </control>
+                        <control id="menu_button" name="button" label="Menu" width="90%" height="50px">
+                            <interact onClick="openMenu()"/>
+                        </control>
+                    </panel>
+                    <panel height="*"/>
                 </panel>
             </panel>
 
@@ -74,22 +77,24 @@
 
             <!-- midlle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
-                <panel width="80%"/>
+                <panel width="85%"/>
                 <panel childLayout="vertical">
                     <panel height="30%"/>
-                    <control id="research_button" name="button" label="Research" width="90%" height="7%">
-                        <interact onClick="openResearchScreen()"/>
-                    </control>
-                    <control id="engineering_button" name="button" label="Engineering" width="90%" height="7%">
-                        <interact onClick="openEngineeringScreen()"/>
-                    </control>
-                    <control id="landing_party_equip_button" name="button" label="Landing party" width="90%"
-                             height="7%">
-                        <interact onClick="openLandingPartyScreen()"/>
-                    </control>
-                    <control id="menu_button" name="button" label="Menu" width="90%" height="7%">
-                        <interact onClick="openMenu()"/>
-                    </control>
+                    <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png" padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                        <control id="research_button" name="button" label="Research" width="90%" height="50px">
+                            <interact onClick="openResearchScreen()"/>
+                        </control>
+                        <control id="engineering_button" name="button" label="Engineering" width="90%" height="50px">
+                            <interact onClick="openEngineeringScreen()"/>
+                        </control>
+                        <control id="landing_party_equip_button" name="button" label="Landing party" width="90%" height="50px">
+                            <interact onClick="openLandingPartyScreen()"/>
+                        </control>
+                        <control id="menu_button" name="button" label="Menu" width="90%" height="50px">
+                            <interact onClick="openMenu()"/>
+                        </control>
+                    </panel>
+                    <panel height="*"/>
                 </panel>
             </panel>
 
