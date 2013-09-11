@@ -6,10 +6,12 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.world.dungeon.DungeonObject;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.PlanetObject;
 import ru.game.aurora.world.planet.SurfaceTypes;
 
+import java.lang.reflect.Constructor;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,12 +40,31 @@ public class TILEDMap implements ITileMap
         return objects;
     }
 
+    private void loadObject(int groupId, int objectId)
+    {
+        final String typeName = map.getObjectType(groupId, objectId);
+        try {
+            Class<? extends DungeonObject> clazz = (Class<? extends DungeonObject>) Class.forName(typeName);
+            Constructor<? extends DungeonObject> ctor = clazz.getConstructor(TiledMap.class, int.class, int.class);
+            DungeonObject obj = ctor.newInstance(map, groupId, objectId);
+            objects.add(obj);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load object " + groupId + ", " + objectId, e);
+        }
+    }
+
     // must be called from main thread with OpenGL context
     private void loadMap()
     {
         try {
             map = new TiledMap(mapRef, "resources/maps");
             flags = new byte[map.getHeight()][map.getWidth()];
+
+            for (int i = 0; i < map.getObjectGroupCount(); ++i) {
+                for (int j = 0; j < map.getObjectCount(i); ++j) {
+                    loadObject(i, j);
+                }
+            }
         } catch (SlickException e) {
             throw new RuntimeException("Failed to load TILED map", e);
         }

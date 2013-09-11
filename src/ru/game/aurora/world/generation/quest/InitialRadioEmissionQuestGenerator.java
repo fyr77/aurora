@@ -18,6 +18,8 @@ import ru.game.aurora.player.engineering.projects.AdvancedLasers;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.StarResearchProject;
+import ru.game.aurora.world.Dungeon;
+import ru.game.aurora.world.TILEDMap;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.generation.WorldGenerator;
@@ -152,7 +154,8 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         brownStar.getShips().add(defenceProbe);
         brownStar.setFirstEnterDialog(Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/rogue_beacon_found.json")));
 
-        SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon");
+        Dungeon beaconInternals = new Dungeon(world, new TILEDMap("resources/maps/test.tmx"), brownStar);
+        SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon", beaconInternals);
         beacon.setResearchProjectDescs(world.getResearchAndDevelopmentProjects().getResearchProjects().get("Beacon research"));
         beacon.setOnInteractDialog(Dialog.loadFromFile("dialogs/quest/rogues_beacon_explored.json"));
         brownStar.getShips().add(beacon);
