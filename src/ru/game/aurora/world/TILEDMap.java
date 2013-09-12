@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
+import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.world.dungeon.DungeonObject;
 import ru.game.aurora.world.planet.LandingParty;
@@ -24,11 +25,13 @@ public class TILEDMap implements ITileMap
 
     List<PlanetObject> objects = new LinkedList<>();
 
-    private byte[][] flags;
+    private final String mapRef;
+
+    private transient byte[][] flags;
 
     private transient TiledMap map;
 
-    private final String mapRef;
+    private transient BasePositionable entryPoint;
 
     public TILEDMap(String mapRef)
     {
@@ -43,6 +46,10 @@ public class TILEDMap implements ITileMap
     private void loadObject(int groupId, int objectId)
     {
         final String typeName = map.getObjectType(groupId, objectId);
+        if (typeName.equals("entryPoint")) {
+            entryPoint = new BasePositionable(map.getObjectX(groupId, objectId) / AuroraGame.tileSize, map.getObjectY(groupId, objectId) / AuroraGame.tileSize);
+            return;
+        }
         try {
             Class<? extends DungeonObject> clazz = (Class<? extends DungeonObject>) Class.forName(typeName);
             Constructor<? extends DungeonObject> ctor = clazz.getConstructor(TiledMap.class, int.class, int.class);
@@ -50,6 +57,17 @@ public class TILEDMap implements ITileMap
             objects.add(obj);
         } catch (Exception e) {
             throw new RuntimeException("Failed to load object " + groupId + ", " + objectId, e);
+        }
+    }
+
+    private void setObstacles(int layerIdx)
+    {
+        for (int x = 0; x < map.getWidth(); ++x) {
+            for (int y = 0; y < map.getHeight(); ++y) {
+                if (map.getTileImage(x, y, layerIdx) != null) {
+                    flags[y][x] |= SurfaceTypes.OBSTACLE_MASK;
+                }
+            }
         }
     }
 
@@ -63,6 +81,12 @@ public class TILEDMap implements ITileMap
             for (int i = 0; i < map.getObjectGroupCount(); ++i) {
                 for (int j = 0; j < map.getObjectCount(i); ++j) {
                     loadObject(i, j);
+                }
+            }
+
+            for (int layerIdx = 0; layerIdx < map.getLayerCount(); ++layerIdx) {
+                if (map.getLayerProperty(layerIdx, "isObstacle", "false").equals("true")) {
+                    setObstacles(layerIdx);
                 }
             }
         } catch (SlickException e) {
@@ -142,5 +166,13 @@ public class TILEDMap implements ITileMap
         } else {
             flags[y][x] &= ~SurfaceTypes.OBSTACLE_MASK;
         }
+    }
+
+    @Override
+    public BasePositionable getEntryPoint() {
+        if (map == null) {
+            loadMap();
+        }
+        return entryPoint;
     }
 }

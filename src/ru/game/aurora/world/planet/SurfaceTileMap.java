@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.ITileMap;
 
 import java.io.Serializable;
@@ -204,6 +205,11 @@ public class SurfaceTileMap implements ITileMap, Serializable {
         } else {
             surface[y][x] &= ~SurfaceTypes.OBSTACLE_MASK;
         }
+    }
+
+    @Override
+    public BasePositionable getEntryPoint() {
+        return null;
     }
 
     public void drawLandscapeMap(Graphics graphics, Camera camera) {

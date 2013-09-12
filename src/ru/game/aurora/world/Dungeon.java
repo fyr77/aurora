@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.world.planet.LandingParty;
 
 /**
  * Dungeon is a location with a fixed tiled map, which can be explored by player landing party
@@ -24,7 +25,9 @@ public class Dungeon implements Room
     @Override
     public void enter(World world) {
         GUI.getInstance().getNifty().gotoScreen("surface_gui");
-        world.getCamera().setTarget(world.getPlayer().getLandingParty()); //todo: what if null?
+        LandingParty landingParty = world.getPlayer().getLandingParty();
+        landingParty.setPos(map.getEntryPoint().getX(), map.getEntryPoint().getY());
+        world.getCamera().setTarget(landingParty);
     }
 
     @Override

@@ -1,0 +1,16 @@
+Properties that are used in Tiled Map Editor to pass information to game.
+
+=== Map properties: ===
+
+=== Layer properties: ===
+
+isObstacle: if true, all tiles that are set on this layer will be not passable by anyone
+
+=== Object properties: ===
+
+image: id of standalone image or sprite sheet
+imageTileX,imageTileY: if image is a part of a sprite sheet, these are its indices inside this sheet
+
+=== Special object types: ===
+
+entryPoint: on enter to this dungeon, landing party will appear at one of these points

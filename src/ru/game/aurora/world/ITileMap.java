@@ -42,4 +42,6 @@ public interface ITileMap extends Serializable
     public int updateVisibility(int x, int y, int range);
 
     public void setTilePassable(int x, int y, boolean isPassable);
+
+    public BasePositionable getEntryPoint();
 }

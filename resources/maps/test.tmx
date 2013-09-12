@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="64" tileheight="64">
- <tileset firstgid="1" name="rogues_tiles" tilewidth="64" tileheight="64">
-  <image source="rogues_tileset.png" width="384" height="192"/>
- </tileset>
+ <tileset firstgid="1" source="rogues_tiles.tsx"/>
+ <tileset firstgid="19" source="editor_tileset.tsx"/>
  <layer name="surface" width="32" height="32">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3NsQkAAAzDsAz5/+a+UEpHCTy7SXrsw/Xt7+8PAACwN0vmeWgAEAAA
@@ -23,8 +23,12 @@
     <property name="imageTileY" value="0"/>
    </properties>
   </object>
+  <object type="entryPoint" gid="19" x="128" y="256" width="64" height="64"/>
  </objectgroup>
  <layer name="walls" width="32" height="32">
+  <properties>
+   <property name="isObstacle" value="true"/>
+  </properties>
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3S3QqAIAwF4FVERj/m+7+sixxE6CDYbup8cGCs8oCUiGh/5OCEklR5Lu9YmCu77dYTG99Njv2ateSL/R2n5wzKLDz6zzND2bVmz37576IyW/cvdN3t24xG/QAAAAAA8B8ZUBlAvAAQAAA=
   </data>
