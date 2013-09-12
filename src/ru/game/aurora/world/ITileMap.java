@@ -13,6 +13,7 @@ import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.PlanetObject;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -44,4 +45,6 @@ public interface ITileMap extends Serializable
     public void setTilePassable(int x, int y, boolean isPassable);
 
     public BasePositionable getEntryPoint();
+
+    public Collection<BasePositionable> getExitPoints();
 }

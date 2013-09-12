@@ -14,3 +14,4 @@ imageTileX,imageTileY: if image is a part of a sprite sheet, these are its indic
 === Special object types: ===
 
 entryPoint: on enter to this dungeon, landing party will appear at one of these points
+exitPoint: exit point for dungeon

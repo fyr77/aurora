@@ -212,6 +212,11 @@ public class SurfaceTileMap implements ITileMap, Serializable {
         return null;
     }
 
+    @Override
+    public Collection<BasePositionable> getExitPoints() {
+        return Collections.emptyList();
+    }
+
     public void drawLandscapeMap(Graphics graphics, Camera camera) {
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {

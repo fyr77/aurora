@@ -13,6 +13,8 @@ import ru.game.aurora.world.planet.PlanetObject;
 import ru.game.aurora.world.planet.SurfaceTypes;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,6 +35,8 @@ public class TILEDMap implements ITileMap
 
     private transient BasePositionable entryPoint;
 
+    private transient List<BasePositionable> exitPoints;
+
     public TILEDMap(String mapRef)
     {
         this.mapRef = mapRef;
@@ -43,22 +47,40 @@ public class TILEDMap implements ITileMap
         return objects;
     }
 
+    private int getXCoord(int x)
+    {
+        return x / AuroraGame.tileSize;
+    }
+
+    private int getYCoord(int y)
+    {
+        return (y - 1) / AuroraGame.tileSize; // somehow, y in editor starts from 1
+    }
+
     private void loadObject(int groupId, int objectId)
     {
         final String typeName = map.getObjectType(groupId, objectId);
-        if (typeName.equals("entryPoint")) {
-            entryPoint = new BasePositionable(map.getObjectX(groupId, objectId) / AuroraGame.tileSize, map.getObjectY(groupId, objectId) / AuroraGame.tileSize);
-            return;
-        }
-        try {
-            Class<? extends DungeonObject> clazz = (Class<? extends DungeonObject>) Class.forName(typeName);
-            Constructor<? extends DungeonObject> ctor = clazz.getConstructor(TiledMap.class, int.class, int.class);
-            DungeonObject obj = ctor.newInstance(map, groupId, objectId);
-            objects.add(obj);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to load object " + groupId + ", " + objectId, e);
+        switch (typeName) {
+            case "entryPoint": {
+                entryPoint = new BasePositionable(getXCoord(map.getObjectX(groupId, objectId)), getYCoord(map.getObjectY(groupId, objectId)));
+                break;
+            }
+            case "exitPoint": {
+                exitPoints.add(new BasePositionable(getXCoord(map.getObjectX(groupId, objectId)), getYCoord(map.getObjectY(groupId, objectId))));
+                break;
+            }
+            default:
+                try {
+                    Class<? extends DungeonObject> clazz = (Class<? extends DungeonObject>) Class.forName(typeName);
+                    Constructor<? extends DungeonObject> ctor = clazz.getConstructor(TiledMap.class, int.class, int.class);
+                    DungeonObject obj = ctor.newInstance(map, groupId, objectId);
+                    objects.add(obj);
+                } catch (Exception e) {
+                    throw new RuntimeException("Failed to load object " + groupId + ", " + objectId, e);
+                }
         }
     }
+
 
     private void setObstacles(int layerIdx)
     {
@@ -77,6 +99,7 @@ public class TILEDMap implements ITileMap
         try {
             map = new TiledMap(mapRef, "resources/maps");
             flags = new byte[map.getHeight()][map.getWidth()];
+            exitPoints = new ArrayList<>();
 
             for (int i = 0; i < map.getObjectGroupCount(); ++i) {
                 for (int j = 0; j < map.getObjectCount(i); ++j) {
@@ -174,5 +197,10 @@ public class TILEDMap implements ITileMap
             loadMap();
         }
         return entryPoint;
+    }
+
+    @Override
+    public Collection<BasePositionable> getExitPoints() {
+        return exitPoints;
     }
 }

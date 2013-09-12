@@ -40,7 +40,7 @@ public class DungeonObject extends BasePositionable implements PlanetObject {
     private transient Image image = null;
 
     public DungeonObject(TiledMap map, int groupId, int objectId) {
-        super(map.getObjectX(groupId, objectId) / AuroraGame.tileSize, map.getObjectY(groupId, objectId) / AuroraGame.tileSize);
+        super(map.getObjectX(groupId, objectId) / AuroraGame.tileSize, map.getObjectY(groupId, objectId) / AuroraGame.tileSize - 1); // -1 because Y coord in editor starts from 1
         this.imageName = map.getObjectProperty(groupId, objectId, "image", null);
         this.imageTileX = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageTileX", "-1"));
         this.imageTileY = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageTileY", "-1"));

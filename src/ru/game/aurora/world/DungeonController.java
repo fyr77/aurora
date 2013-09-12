@@ -114,7 +114,6 @@ public class DungeonController implements Serializable {
         final boolean enterPressed = container.getInput().isKeyPressed(Input.KEY_ENTER);
         if (enterPressed) {
             interactWithObject(world);
-
         }
 
         int tilesExplored = map.updateVisibility(x, y, 1);
@@ -144,6 +143,12 @@ public class DungeonController implements Serializable {
             // some items (like ore deposits) can be picked up more than once, do not remove them in this case
             if (!p.isAlive()) {
                 iter.remove();
+            }
+        }
+
+        for (BasePositionable exitPoint : map.getExitPoints()) {
+            if (exitPoint.getDistance(landingParty) == 0) {
+                returnToPrevRoom();
             }
         }
     }

@@ -5,7 +5,7 @@
  <tileset firstgid="19" source="editor_tileset.tsx"/>
  <layer name="surface" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3NsQkAAAzDsAz5/+a+UEpHCTy7SXrsw/Xt7+8PAACwN0vmeWgAEAAA
+   H4sIAAAAAAAAC+3PsQkAMAwDQRcusv/E2cEEBM4dqH7UVdXDvTBtb+ufcD/9Xz/TBwAA/nEB2L57agAQAAA=
   </data>
  </layer>
  <objectgroup name="objects" width="32" height="32">
@@ -16,7 +16,7 @@
     <property name="imageTileY" value="0"/>
    </properties>
   </object>
-  <object name="drone" type="ru.game.aurora.world.dungeon.DungeonObject" gid="6" x="445" y="254" width="64" height="64">
+  <object name="drone" type="ru.game.aurora.world.dungeon.DungeonObject" gid="6" x="448" y="256" width="64" height="64">
    <properties>
     <property name="image" value="rogues_tileset"/>
     <property name="imageTileX" value="5"/>
@@ -24,6 +24,7 @@
    </properties>
   </object>
   <object type="entryPoint" gid="19" x="128" y="256" width="64" height="64"/>
+  <object type="exitPoint" gid="20" x="128" y="256" width="128" height="64"/>
  </objectgroup>
  <layer name="walls" width="32" height="32">
   <properties>
