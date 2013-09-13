@@ -17,6 +17,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.PlanetObject;
 
@@ -277,6 +278,19 @@ public class DungeonController implements Serializable {
             a.update(container, world);
         }
 
+        if (world.isUpdatedThisFrame()) {
+            boolean allConditionsSatisfied = true;
+            for (IVictoryCondition cond : map.getVictoryConditions()) {
+                if (!cond.isSatisfied(world)) {
+                    allConditionsSatisfied = false;
+                    break;
+                }
+            }
+            if (allConditionsSatisfied) {
+                GameLogger.getInstance().logMessage("All objectives completed");
+                returnToPrevRoom();
+            }
+        }
     }
 
     public void draw(GameContainer container, Graphics graphics, Camera camera) {

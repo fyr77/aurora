@@ -9,6 +9,7 @@ that the game has not hanged up
 * Moved some research projects to external json files.
 + Planets and space objects can now be scanned.
 + Added gui panel that pops up when some interaction is available
++ Added loading of .tmx maps from Tiled Editor
 
 =====================================================
 VERSION 0.0.9

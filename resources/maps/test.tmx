@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="64" tileheight="64">
  <tileset firstgid="1" source="rogues_tiles.tsx"/>
  <tileset firstgid="19" source="editor_tileset.tsx"/>
@@ -16,11 +15,17 @@
     <property name="imageTileX" value="5"/>
     <property name="imageTileY" value="0"/>
     <property name="speed" value="3"/>
+    <property name="tags" value="guard"/>
     <property name="weapon" value="laser"/>
    </properties>
   </object>
   <object type="entryPoint" gid="19" x="128" y="256" width="64" height="64"/>
   <object type="exitPoint" gid="20" x="128" y="256" width="128" height="64"/>
+  <object type="ru.game.aurora.world.dungeon.KillAllMonstersCondition" gid="21" x="61" y="626" width="64" height="64">
+   <properties>
+    <property name="tags" value="guard"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="walls" width="32" height="32">
   <properties>

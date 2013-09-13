@@ -38,7 +38,7 @@ public class LandingParty extends BasePositionable implements GameObject {
 
     private int collectedGeodata = 0;
 
-    private Map<InventoryItem, Integer> inventory = new HashMap<InventoryItem, Integer>();
+    private Map<InventoryItem, Integer> inventory = new HashMap<>();
 
     private int hp = 3;
 
@@ -104,15 +104,15 @@ public class LandingParty extends BasePositionable implements GameObject {
     }
 
     public int calcDamage() {
-        return (int) (weapon.getDamage() * (1.0 / 3 * (science + engineers) + military));
+        return Math.max(1, (int) (weapon.getDamage() * (1.0 / 3 * (science + engineers) + military)));
     }
 
     public int calcMiningPower() {
-        return (int) (1.0 / 3 * (science + military) + engineers);
+        return Math.max(1, (int) (1.0 / 3 * (science + military) + engineers));
     }
 
     public int calcResearchPower() {
-        return (int) ((2 * engineers + military) / 3.0 + science);
+        return Math.max(1, (int) ((2 * engineers + military) / 3.0 + science));
     }
 
     public void addCollectedGeodata(int amount) {

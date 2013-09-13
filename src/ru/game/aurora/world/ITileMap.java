@@ -9,6 +9,7 @@ package ru.game.aurora.world;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.PlanetObject;
 
@@ -47,4 +48,6 @@ public interface ITileMap extends Serializable
     public BasePositionable getEntryPoint();
 
     public Collection<BasePositionable> getExitPoints();
+
+    public Collection<IVictoryCondition> getVictoryConditions();
 }

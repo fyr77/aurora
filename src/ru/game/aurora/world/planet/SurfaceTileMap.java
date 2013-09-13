@@ -7,6 +7,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.ITileMap;
+import ru.game.aurora.world.dungeon.IVictoryCondition;
 
 import java.io.Serializable;
 import java.util.*;
@@ -214,6 +215,11 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
     @Override
     public Collection<BasePositionable> getExitPoints() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public Collection<IVictoryCondition> getVictoryConditions() {
         return Collections.emptyList();
     }
 

@@ -8,6 +8,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.world.dungeon.DungeonObject;
+import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.PlanetObject;
 import ru.game.aurora.world.planet.SurfaceTypes;
@@ -25,7 +26,9 @@ public class TILEDMap implements ITileMap
 {
     private static final long serialVersionUID = -8605255474835067962L;
 
-    List<PlanetObject> objects = new LinkedList<>();
+    private List<PlanetObject> objects = new LinkedList<>();
+
+    private List<IVictoryCondition> victoryConditions = new ArrayList<>();
 
     private final String mapRef;
 
@@ -71,10 +74,15 @@ public class TILEDMap implements ITileMap
             }
             default:
                 try {
-                    Class<? extends DungeonObject> clazz = (Class<? extends DungeonObject>) Class.forName(typeName);
-                    Constructor<? extends DungeonObject> ctor = clazz.getConstructor(TiledMap.class, int.class, int.class);
-                    DungeonObject obj = ctor.newInstance(map, groupId, objectId);
-                    objects.add(obj);
+                    Class clazz = Class.forName(typeName);
+
+                    Constructor ctor = clazz.getConstructor(TiledMap.class, int.class, int.class);
+                    Object obj = ctor.newInstance(map, groupId, objectId);
+                    if (DungeonObject.class.isAssignableFrom(clazz)) {
+                        objects.add((PlanetObject) obj);
+                    } else if (IVictoryCondition.class.isAssignableFrom(clazz)) {
+                        victoryConditions.add((IVictoryCondition) obj);
+                    }
                 } catch (Exception e) {
                     throw new RuntimeException("Failed to load object " + groupId + ", " + objectId, e);
                 }
@@ -202,5 +210,10 @@ public class TILEDMap implements ITileMap
     @Override
     public Collection<BasePositionable> getExitPoints() {
         return exitPoints;
+    }
+
+    @Override
+    public List<IVictoryCondition> getVictoryConditions() {
+        return victoryConditions;
     }
 }

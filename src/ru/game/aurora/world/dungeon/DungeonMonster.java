@@ -11,6 +11,10 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.LandingParty;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Egor.Smirnov
@@ -19,9 +23,11 @@ import ru.game.aurora.world.planet.LandingParty;
  */
 public class DungeonMonster extends DungeonObject
 {
-    private static final long serialVersionUID = 2369918580875698530L;
+    private static final long serialVersionUID = 1L;
 
     private LandingPartyWeapon weapon;
+
+    private Set<String> tags = null;
 
     private int speed;
 
@@ -36,7 +42,11 @@ public class DungeonMonster extends DungeonObject
         weapon = ResourceManager.getInstance().getLandingPartyWeapons().getEntity(map.getObjectProperty(groupId, objectId, "weapon", null));
         turnsBeforeMove = speed = Integer.parseInt(map.getObjectProperty(groupId, objectId, "speed", "0"));
         hp = Integer.parseInt(map.getObjectProperty(groupId, objectId, "hp", "1"));
-
+        final String tagsString = map.getObjectProperty(groupId, objectId, "tags", null);
+        if (tagsString != null) {
+            tags = new HashSet<>();
+            Collections.addAll(tags, tagsString.split(","));
+        }
     }
 
     @Override
@@ -105,5 +115,9 @@ public class DungeonMonster extends DungeonObject
             // clean obstacle flag
             owner.setTilePassable(x, y, true);
         }
+    }
+
+    public Set<String> getTags() {
+        return tags;
     }
 }
