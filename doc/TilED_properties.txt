@@ -10,6 +10,9 @@ isObstacle: if true, all tiles that are set on this layer will be not passable b
 
 image: id of standalone image or sprite sheet
 imageTileX,imageTileY: if image is a part of a sprite sheet, these are its indices inside this sheet
+weapon: if object is a monster, this is ID of its weapon
+speed: number of turns between monster actions
+hp: monster hp
 
 === Special object types: ===
 

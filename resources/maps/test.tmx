@@ -9,18 +9,14 @@
   </data>
  </layer>
  <objectgroup name="objects" width="32" height="32">
-  <object name="drone" type="ru.game.aurora.world.dungeon.DungeonObject" gid="6" x="640" y="128" width="64" height="64">
+  <object name="drone" type="ru.game.aurora.world.dungeon.DungeonMonster" gid="6" x="640" y="128" width="64" height="64">
    <properties>
+    <property name="hp" value="5"/>
     <property name="image" value="rogues_tileset"/>
     <property name="imageTileX" value="5"/>
     <property name="imageTileY" value="0"/>
-   </properties>
-  </object>
-  <object name="drone" type="ru.game.aurora.world.dungeon.DungeonObject" gid="6" x="448" y="256" width="64" height="64">
-   <properties>
-    <property name="image" value="rogues_tileset"/>
-    <property name="imageTileX" value="5"/>
-    <property name="imageTileY" value="0"/>
+    <property name="speed" value="3"/>
+    <property name="weapon" value="laser"/>
    </properties>
   </object>
   <object type="entryPoint" gid="19" x="128" y="256" width="64" height="64"/>

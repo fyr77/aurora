@@ -164,6 +164,10 @@ public class World implements Serializable {
         return currentRoom;
     }
 
+    public Dungeon getCurrentDungeon() {
+        return (currentRoom instanceof Dungeon) ? (Dungeon) currentRoom : null;
+    }
+
     public GalaxyMap getGalaxyMap() {
         return galaxyMap;
     }

@@ -21,7 +21,7 @@ import java.io.Serializable;
  */
 public class LandingPartyWeapon implements Serializable, JsonConfigManager.EntityWithId, InventoryItem {
 
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 3L;
 
     private final String id;
 
@@ -33,12 +33,15 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
 
     private final String image;
 
-    public LandingPartyWeapon(String id, int damage, int range, String name, String image) {
+    private final String shotImage;
+
+    public LandingPartyWeapon(String id, int damage, int range, String name, String image, String shotImage) {
         this.id = id;
         this.damage = damage;
         this.range = range;
         this.name = name;
         this.image = image;
+        this.shotImage = shotImage;
     }
 
     public int getDamage() {
@@ -64,6 +67,10 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
 
     public String getImage() {
         return image;
+    }
+
+    public String getShotImage() {
+        return shotImage;
     }
 
     @Override

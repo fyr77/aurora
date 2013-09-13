@@ -1,6 +1,7 @@
 package ru.game.aurora.application;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.Color;
@@ -62,11 +63,22 @@ public class MainMenu {
 
         }
 
+        public void closeCurrentPopup()
+        {
+            GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+        }
+
         // these methods are specified in screen xml description and called using reflection
         public void loadGame() {
+            final Nifty nifty = GUI.getInstance().getNifty();
             menu.loadedState = SaveGameManager.loadGame();
+            if (menu.loadedState == null) {
+                GameLogger.getInstance().logMessage("Failed to load game");
+                Element popup = nifty.createPopup("load_failed");
+                nifty.showPopup(nifty.getScreen("main_menu"), popup.getId(), null);
+            }
             GUI.getInstance().onWorldLoaded(container, menu.loadedState);
-            GUI.getInstance().getNifty().gotoScreen("empty_screen");
+            nifty.gotoScreen("empty_screen");
             menu.loadedState.getCurrentRoom().enter(menu.loadedState);
 
         }

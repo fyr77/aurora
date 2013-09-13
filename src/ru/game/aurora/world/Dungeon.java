@@ -40,4 +40,12 @@ public class Dungeon implements Room
         map.draw(container, graphics, camera);
         controller.draw(container, graphics, camera);
     }
+
+    public DungeonController getController() {
+        return controller;
+    }
+
+    public ITileMap getMap() {
+        return map;
+    }
 }
