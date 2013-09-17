@@ -278,7 +278,7 @@ public class DungeonController implements Serializable {
             a.update(container, world);
         }
 
-        if (world.isUpdatedThisFrame()) {
+        if (world.isUpdatedThisFrame() && !map.getVictoryConditions().isEmpty()) {
             boolean allConditionsSatisfied = true;
             for (IVictoryCondition cond : map.getVictoryConditions()) {
                 if (!cond.isSatisfied(world)) {

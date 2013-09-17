@@ -14,7 +14,7 @@ import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.niffy.ImageButtonController;
-import ru.game.aurora.gui.niffy.ProgressBarControl;
+import ru.game.aurora.gui.niffy.TopPanelController;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.Ship;
@@ -34,6 +34,8 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     private transient Screen myScreen;
 
     private transient ListBox logList;
+
+    private transient TopPanelController topPanelController;
 
 
     public GalaxyMapController(World world) {
@@ -56,6 +58,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     public void onStartScreen() {
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
         myScreen = GUI.getInstance().getNifty().getCurrentScreen();
+        topPanelController = myScreen.findControl("top_panel", TopPanelController.class);
         updateStats();
         updateWeapons();
     }
@@ -95,19 +98,10 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     }
 
     public void updateStats() {
-        ProgressBarControl pb = myScreen.findControl("ship_hp", ProgressBarControl.class);
-        if (pb == null) {
-            return;
-        }
+
         final Ship ship = world.getPlayer().getShip();
-        pb.setProgress(ship.getHull() / (float) ship.getMaxHull());
-        pb.setText(String.format("Hull: %d/%d", ship.getHull(), ship.getMaxHull()));
-
-        Element crewStatus = myScreen.findElementByName("crew_status");
-        if (crewStatus != null) {
-            crewStatus.getRenderer(TextRenderer.class).setText(String.format("Scientists: %d, Engineers: %d, Military: %d", ship.getScientists(), ship.getEngineers(), ship.getMilitary()));
-        }
-
+        topPanelController.setProgress(String.format("Hull: %d/%d", ship.getHull(), ship.getMaxHull()), ship.getHull() / (float) ship.getMaxHull());
+        topPanelController.setCrewStats(ship.getScientists(), ship.getEngineers(), ship.getMilitary());
 
         Element shipCoordinates = myScreen.findElementByName("ship_coordinates");
         if (shipCoordinates != null) {

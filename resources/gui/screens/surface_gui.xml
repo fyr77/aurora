@@ -2,15 +2,7 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
     <screen id="surface_gui" controller="ru.game.aurora.gui.SurfaceGUIController">
         <layer childLayout="vertical">
-            <panel id="topPanel" height="10%" childLayout="horizontal">
-                <panel width="40%" backgroundColor="#5050a0ff" childLayout="center">
-                    <control id="oxygen" name="progressbar" width="100%"/>
-                </panel>
-                <panel width="*"/>
-                <panel width="40%" backgroundColor="#5050a0ff" childLayout="center">
-                    <text id="crew_status" font="font.fnt" text=""/>
-                </panel>
-            </panel>
+            <control name="top_panel" id="top_panel" />
 
             <panel height="*"/>
             <!-- bottom panel containing weapon buttons and log text -->

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+    <controlDefinition name="icon_and_count">
+        <panel style="nifty-listbox#scrollpanel" childLayout="horizontal" padding="5px">
+            <image filename="$icon"/>
+            <panel width="10px"/>
+            <text font="font_white_small.fnt" id="count" text="100" height="100%" textHAlign="center" textVAlign="center"/>
+        </panel>
+    </controlDefinition>
+
+    <controlDefinition name="top_panel"  controller="ru.game.aurora.gui.niffy.TopPanelController">
+        <panel id="topPanel" height="50px" childLayout="horizontal">
+            <panel width="559px" height="44px" backgroundImage="resources/sprites/gui/hull_bar.png"
+                   imageMode="repeat:0,0,559,44"
+                   childLayout="center">
+                <control id="progressbar" name="progressbar" width="450px" height="40px"/>
+            </panel>
+            <panel width="*"/>
+            <panel width="434px" height="74px" backgroundImage="resources/sprites/gui/crew_bar.png"
+               imageMode="repeat:0,0,434,74"
+               padding="5,5,5,75"
+               childLayout="horizontal">
+                <panel width="*"/>
+                <control name="icon_and_count" id="sci_count" icon="resources/sprites/gui/sci_count.png" width="100px" height="50px"/>
+                <panel width="10px"/>
+                <control name="icon_and_count" id="engi_count" icon="resources/sprites/gui/engi_count.png" width="100px" height="50px"/>
+                <panel width="10px"/>
+                <control name="icon_and_count" id="mil_count" icon="resources/sprites/gui/mil_count.png" width="100px" height="50px"/>
+            </panel>
+        </panel>
+    </controlDefinition>
+</nifty>

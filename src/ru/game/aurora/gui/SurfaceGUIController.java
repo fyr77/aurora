@@ -8,12 +8,10 @@ package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
-import de.lessvoid.nifty.elements.Element;
-import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.gui.niffy.ProgressBarControl;
+import ru.game.aurora.gui.niffy.TopPanelController;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.LandingParty;
@@ -29,7 +27,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
 
     private transient ListBox logList;
 
-    private transient ProgressBarControl oxygen;
+    private transient TopPanelController topPanelController;
 
     public SurfaceGUIController(World world) {
         this.world = world;
@@ -40,7 +38,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         myScreen = screen;
         GameLogger.getInstance().addAppender(this);
         logList = screen.findNiftyControl("log_list", ListBox.class);
-        oxygen = screen.findControl("oxygen", ProgressBarControl.class);
+        topPanelController = screen.findControl("top_panel", TopPanelController.class);
     }
 
     @Override
@@ -49,6 +47,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         logList.clear();
         logList.addAllItems(GameLogger.getInstance().getLogItems());
         logList.setFocusItemByIndex(logList.getItems().size() - 1);
+        updateStats();
     }
 
     @Override
@@ -57,15 +56,9 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     }
 
     public void updateStats() {
-        LandingParty landingParty = world.getPlayer().getLandingParty();
-        Element crewStatus = myScreen.findElementByName("crew_status");
-        if (crewStatus == null) {
-            return;
-        }
-        crewStatus.getRenderer(TextRenderer.class).setText(String.format("Scientists: %d, Engineers: %d, Military: %d", landingParty.getScience(), landingParty.getEngineers(), landingParty.getMilitary()));
-
-        oxygen.setProgress(landingParty.getOxygen() / (float) LandingParty.MAX_OXYGEN);
-        oxygen.setText("Remaining oxygen: " + landingParty.getOxygen());
+        final LandingParty landingParty = world.getPlayer().getLandingParty();
+        topPanelController.setCrewStats(landingParty.getScience(), landingParty.getEngineers(), landingParty.getMilitary());
+        topPanelController.setProgress("Remaining oxygen: " + landingParty.getOxygen(), landingParty.getOxygen() / (float) LandingParty.MAX_OXYGEN);
     }
 
     @Override

@@ -15,28 +15,15 @@
 
     <screen id="galaxy_map_gui" controller="ru.game.aurora.gui.GalaxyMapController">
         <layer id="starmap_layer" childLayout="vertical">
-            <panel id="topPanel" height="50px" childLayout="horizontal" padding="2px">
-                <panel width="560px" height="44px" backgroundImage="resources/sprites/gui/hull_bar.png"
-                       imageMode="repeat:0,0,559,44"
-                       childLayout="center">
-                    <control id="ship_hp" name="progressbar" width="450px" height="40px"/>
-                </panel>
-                <panel width="*"/>
-                <panel width="40%" backgroundColor="#5050a0ff" childLayout="center">
-                    <text id="crew_status" font="font.fnt" text=""/>
-                </panel>
-            </panel>
+           <control name="top_panel" id="top_panel" />
 
             <!-- midlle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
-                <panel width="65%"/>
+                <panel width="85%"/>
                 <panel childLayout="vertical">
                     <panel height="30%"/>
                     <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
                            padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
-                        <control id="research_button2" name="button_and_count"
-                                 background="resources/sprites/gui/sci_button.png"
-                                 icon="resources/sprites/gui/sci_count.png" title="Research"/>
                         <control id="research_button" name="button" label="Research" width="90%" height="50px">
                             <interact onClick="openResearchScreen()"/>
                         </control>
@@ -80,17 +67,7 @@
     <screen id="star_system_gui" controller="ru.game.aurora.gui.GalaxyMapController">
 
         <layer id="starsystem_layer" childLayout="vertical">
-            <panel id="topPanel" height="50px" childLayout="horizontal" padding="2px">
-                <panel width="559px" height="44px" backgroundImage="resources/sprites/gui/hull_bar.png"
-                       imageMode="repeat:0,0,559,44"
-                       childLayout="center">
-                    <control id="ship_hp" name="progressbar" width="450px" height="40px"/>
-                </panel>
-                <panel width="*"/>
-                <panel width="40%" backgroundColor="#5050a0ff" childLayout="center">
-                    <text id="crew_status" font="font.fnt" text=""/>
-                </panel>
-            </panel>
+            <control name="top_panel" id="top_panel" />
 
             <!-- midlle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
