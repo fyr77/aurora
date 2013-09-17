@@ -6,7 +6,7 @@
 
             <panel height="*"/>
             <!-- bottom panel containing weapon buttons and log text -->
-            <panel height="120px" childLayout="horizontal" backgroundColor="#5050a0ff" padding="10px">
+            <panel height="113px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png" imageMode="repeat:0,0,1279,113" padding="20px">
                 <control id="weapon_button" name="button" label="Fire" width="64px" height="64px">
                     <interact onClick="weaponClicked()"/>
                 </control>
@@ -15,10 +15,13 @@
                     <interact onClick="interactClicked()"/>
                 </control>
 
-                <panel width="128px"/>
+                <panel width="168px"/>
 
-                <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3"
-                         selection="Disabled" width="50%" height="100px"/>
+                <panel width="60%" childLayout="vertical">
+                    <panel height="15px"/>
+                    <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3"
+                             selection="Disabled" height="100px"/>
+                </panel>
             </panel>
         </layer>
     </screen>

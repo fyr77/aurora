@@ -4,7 +4,7 @@
     <attributes />
   </style>
   <style id="nifty-listbox#scrollpanel">
-    <attributes focusable="true" padding="10px" backgroundImage="gui/style/listbox/listbox.png" imageMode="resize:7,617,7,7,7,617,7,56,7,617,7,7" />
+    <attributes focusable="true" padding="7,2,7,2" backgroundImage="gui/style/listbox/listbox.png" imageMode="resize:7,617,7,7,7,617,7,56,7,617,7,7" />
     <effect overlay="true">
       <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="false" length="150" />
       <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="false" length="150" />
