@@ -1,6 +1,12 @@
-VERSION 0.0.10
+VERSION 0.0.11
 
 IN PROGRESS...
+
+=====================================================
+
+VERSION 0.0.10
+
+17.09.2013
 
 * Extended dialog system. Dialogs can now have different initial statements, based on world state
 + New animated popup for planet landing. As landscape generation can take up to a minute, user must be sure
