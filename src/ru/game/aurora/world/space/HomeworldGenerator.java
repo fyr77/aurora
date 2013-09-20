@@ -33,7 +33,7 @@ public class HomeworldGenerator {
     public static StarSystem createSolarSystem(World world, AlienRace humanRace) {
         // todo: gas giants and other planets
 
-        Planet[] planets = new Planet[4];
+        BasePlanet[] planets = new BasePlanet[5];
         StarSystem ss = new StarSystem("Solar system", new Star(2, Color.yellow), 9, 9);
 
         // mercury
@@ -49,11 +49,14 @@ public class HomeworldGenerator {
 
         // mars
         planets[3] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
-        setCoord(planets[3], 5);
+        setCoord(planets[3], 7);
 
+        // jupiter
+        planets[4] = new GasGiant(0, 0, ss);
+        setCoord(planets[4], 9);
 
         ss.setPlanets(planets);
-        ss.setRadius(Math.max((int) (6 * 1.5), 10));
+        ss.setRadius(Math.max((int) (9 * 1.5), 10));
 
         NPCShip spaceStation = new NPCShip(planets[2].getGlobalX() + 1, planets[2].getGlobalY() - 1, "earth_station", humanRace, null, "Orbital Scaffold");
         spaceStation.setStationary(true);

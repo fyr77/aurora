@@ -138,6 +138,14 @@ public class PlanetSpriteGenerator {
         return im;
     }
 
+    private void setGasGiantGradients(RendererImage renderer) throws ExceptionInvalidParam {
+        renderer.addGradientPoint(-1.0000, new ColorCafe(45, 19, 18, 255));
+        renderer.addGradientPoint(-0.7500, new ColorCafe(84, 45, 30, 255));
+        renderer.addGradientPoint(-0.2000, new ColorCafe(183, 111, 161, 255));
+        renderer.addGradientPoint(0.5000, new ColorCafe(194, 161, 118, 255));
+        renderer.addGradientPoint(1.0000, new ColorCafe(251, 233, 193, 255));
+    }
+
     private void setRockPlanetGradients(RendererImage renderer) throws ExceptionInvalidParam {
         renderer.addGradientPoint(-1.0000, new ColorCafe(0, 0, 128, 255)); // deeps
         renderer.addGradientPoint(-0.9, new ColorCafe(0, 0, 255, 255)); // shallow
@@ -218,6 +226,9 @@ public class PlanetSpriteGenerator {
                     break;
                 case PLANET_WATER:
                     setWaterPlanetGradients(renderer);
+                    break;
+                case GAS_GIANT:
+                    setGasGiantGradients(renderer);
                     break;
                 default:
                     throw new IllegalArgumentException("Can not generate sprite for planet category" + params.cat);

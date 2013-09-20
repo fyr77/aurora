@@ -18,9 +18,7 @@ import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
 import ru.game.aurora.world.generation.quest.MainQuestGenerator;
-import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.PlanetAtmosphere;
-import ru.game.aurora.world.planet.PlanetCategory;
+import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
@@ -127,8 +125,8 @@ public class WorldGenerator implements Runnable {
 
         int size = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
         Color starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
-        final int planetCount = r.nextInt(5);
-        Planet[] planets = new Planet[planetCount];
+        final int planetCount = r.nextInt(7);
+        BasePlanet[] planets = new BasePlanet[planetCount];
         int maxRadius = 0;
         StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(size, starColor), x, y);
 
@@ -142,19 +140,30 @@ public class WorldGenerator implements Runnable {
             int planetY = (int) (Math.sqrt(radius * radius - planetX * planetX) * (r.nextBoolean() ? -1 : 1));
             PlanetAtmosphere atmosphere = CollectionUtils.selectRandomElement(PlanetAtmosphere.values());
             final int planetSize = r.nextInt(3) + 1;
+            astroData += 10 * planetSize;
+            PlanetCategory cat = CollectionUtils.selectRandomElement(PlanetCategory.values());
+            if (cat == PlanetCategory.GAS_GIANT) {
+                // no gas giants on inner orbits
+                if (i < 2) {
+                    cat = PlanetCategory.PLANET_ROCK;
+                } else {
+                    planets[i] = new GasGiant(planetX, planetY, ss);
+                    continue;
+                }
+            }
             planets[i] = new Planet(
                     world,
                     ss
-                    , CollectionUtils.selectRandomElement(PlanetCategory.values())
+                    , cat
                     , atmosphere
                     , planetSize
                     , planetX
                     , planetY
             );
             if (atmosphere != PlanetAtmosphere.NO_ATMOSPHERE) {
-                PlanetaryLifeGenerator.setPlanetHasLife(planets[i]);
+                PlanetaryLifeGenerator.setPlanetHasLife((Planet) planets[i]);
             }
-            astroData += 10 * planetSize;
+
         }
         ss.setPlanets(planets);
         astroData += r.nextInt(30);

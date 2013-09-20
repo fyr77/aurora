@@ -196,6 +196,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             if (x == p.getGlobalX() && y == p.getGlobalY()) {
                 isAtPlanet = true;
                 if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
+                    if (!p.canBeLanded()) {
+                        GameLogger.getInstance().logMessage("You can not land on this planet");
+                        break;
+                    }
                     landOnCurrentPlanet(world);
                     break;
                 } else if (world.isUpdatedThisFrame()) {
