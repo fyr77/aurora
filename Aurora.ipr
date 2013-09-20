@@ -700,6 +700,8 @@
       <entry name="*.json" />
       <entry name="*.fnt" />
       <entry name="*.txt" />
+      <entry name="*.tsx" />
+      <entry name="*.tmx" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>

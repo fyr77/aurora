@@ -1,8 +1,8 @@
 {
     "id" : "missiles",
     "damage" : 2,
-    "name": "Missiles",
-    "desc": "Homing missiles with highly explosive warhead",
+    "name": "missiles.name",
+    "desc": "missiles.desc",
     "shotSprite" : "blaster_shot",
     "range" : 5,
     "image" : "ship_rocket",

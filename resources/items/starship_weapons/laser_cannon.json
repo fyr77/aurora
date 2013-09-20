@@ -1,8 +1,8 @@
 {
     "id" : "laser_cannon",
     "damage" : 1,
-    "name": "Laser cannon",
-    "desc": "Simple but powerful middle-range laser cannon",
+    "name": "laser_cannon.name",
+    "desc": "laser_cannon.desc",
     "shotSprite" : "blaster_shot",
     "range" : 3,
     "image" : "ship_laser",

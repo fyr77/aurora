@@ -8,6 +8,7 @@
 package ru.game.aurora.world.equip;
 
 import ru.game.aurora.application.JsonConfigManager;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
@@ -53,7 +54,7 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
     }
 
     public String getName() {
-        return name;
+        return Localization.getText("weapons", name);
     }
 
     @Override
@@ -76,6 +77,6 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
     @Override
     public String toString()
     {
-        return name + " " + damage + " DMG, " + range + " RNG";
+        return getName() + " " + damage + " DMG, " + range + " RNG";
     }
 }

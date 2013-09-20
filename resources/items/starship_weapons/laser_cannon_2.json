@@ -1,8 +1,8 @@
 {
     "id" : "laser_cannon2",
     "damage" : 2,
-    "name": "Adv. Laser cannon",
-    "desc": "High-energy laser cannon",
+    "name": "laser_cannon2.name",
+    "desc": "laser_cannon2.desc",
     "shotSprite" : "blaster_shot",
     "range" : 3,
     "image" : "ship_laser2",

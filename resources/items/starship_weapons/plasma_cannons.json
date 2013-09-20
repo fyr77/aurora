@@ -1,8 +1,8 @@
 {
     "id" : "plasma_cannon",
     "damage" : 2,
-    "name": "Plasma cannon",
-    "desc": "Weapon that uses accelerated overheated plasma clouds. High damage, low range",
+    "name": "plasma_cannon.name",
+    "desc": "plasma_cannon.desc",
     "shotSprite" : "plasma_shot",
     "range" : 2,
     "reloadTurns" : 4

@@ -7,5 +7,5 @@
 package ru.game.aurora.application;
 
 public final class Version {
-    public static final String VERSION = "0.0.10";
+    public static final String VERSION = "0.1.0";
 }

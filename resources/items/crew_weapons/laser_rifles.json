@@ -1,6 +1,6 @@
 {
     "id" : "laser",
-    "name" : "Laser rifles",
+    "name" : "laser_rifles.name",
     "range" : 3,
     "damage" : 2,
     "image" : "crew_laser",
