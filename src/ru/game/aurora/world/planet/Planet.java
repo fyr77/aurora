@@ -268,15 +268,7 @@ public class Planet extends BasePlanet {
         }
 
         if (world.getPlayer().getLandingParty().getOxygen() < 0 || world.getPlayer().getLandingParty().getTotalMembers() == 0) {
-            GameLogger.getInstance().logMessage("Lost connection with landing party");
-            world.setCurrentRoom(owner);
-            owner.enter(world);
-            world.getPlayer().getShip().setPos(globalX, globalY);
-
-            final Nifty nifty = GUI.getInstance().getNifty();
-            Element popup = nifty.createPopup("landing_party_lost");
-            nifty.setIgnoreKeyboardEvents(false);
-            nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
+            controller.onLandingPartyDestroyed(world);
         }
 
     }

@@ -9,8 +9,7 @@ import ru.game.aurora.world.planet.LandingParty;
 /**
  * Dungeon is a location with a fixed tiled map, which can be explored by player landing party
  */
-public class Dungeon implements Room
-{
+public class Dungeon implements Room {
     private static final long serialVersionUID = -6449421434646859444L;
 
     private ITileMap map;
@@ -27,6 +26,7 @@ public class Dungeon implements Room
         GUI.getInstance().getNifty().gotoScreen("surface_gui");
         LandingParty landingParty = world.getPlayer().getLandingParty();
         landingParty.setPos(map.getEntryPoint().getX(), map.getEntryPoint().getY());
+        landingParty.onLaunch(world);
         world.getCamera().setTarget(landingParty);
     }
 

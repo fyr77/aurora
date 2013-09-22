@@ -1,29 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="64" tileheight="64">
  <tileset firstgid="1" source="rogues_tiles.tsx"/>
- <tileset firstgid="19" source="editor_tileset.tsx"/>
+ <tileset firstgid="21" source="editor_tileset.tsx"/>
  <layer name="surface" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3PsQkAMAwDQRcusv/E2cEEBM4dqH7UVdXDvTBtb+ufcD/9Xz/TBwAA/nEB2L57agAQAAA=
+   H4sIAAAAAAAAC+3OUQoAIAgEUbv/pbuAYrJaEPPAX2fNYiu5DtHfrD3ZV46+3j/d5f3oVG1PbFD30f+3H2246XUfAAAANRsOP9KgABAAAA==
   </data>
  </layer>
  <objectgroup name="objects" width="32" height="32">
-  <object name="drone" type="ru.game.aurora.world.dungeon.DungeonMonster" gid="6" x="640" y="128" width="64" height="64">
+  <object type="entryPoint" gid="21" x="128" y="256" width="64" height="64"/>
+  <object type="exitPoint" gid="22" x="128" y="256" width="128" height="64"/>
+  <object type="ru.game.aurora.world.dungeon.KillAllMonstersCondition" gid="23" x="61" y="626" width="64" height="64">
+   <properties>
+    <property name="tags" value="guard"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="704" y="128" width="64" height="64">
    <properties>
     <property name="hp" value="5"/>
     <property name="image" value="rogues_tileset"/>
-    <property name="imageTileX" value="5"/>
+    <property name="imageTileX" value="3"/>
     <property name="imageTileY" value="0"/>
-    <property name="speed" value="3"/>
+    <property name="speed" value="2"/>
     <property name="tags" value="guard"/>
-    <property name="weapon" value="laser"/>
+    <property name="weapon" value="plasma"/>
    </properties>
   </object>
-  <object type="entryPoint" gid="19" x="128" y="256" width="64" height="64"/>
-  <object type="exitPoint" gid="20" x="128" y="256" width="128" height="64"/>
-  <object type="ru.game.aurora.world.dungeon.KillAllMonstersCondition" gid="21" x="61" y="626" width="64" height="64">
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1152" y="320" width="64" height="64">
    <properties>
+    <property name="hp" value="5"/>
+    <property name="image" value="rogues_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
     <property name="tags" value="guard"/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1088" y="768" width="64" height="64">
+   <properties>
+    <property name="hp" value="5"/>
+    <property name="image" value="rogues_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value="guard"/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1216" y="768" width="64" height="64">
+   <properties>
+    <property name="hp" value="5"/>
+    <property name="image" value="rogues_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value="guard"/>
+    <property name="weapon" value="plasma"/>
    </properties>
   </object>
  </objectgroup>
@@ -32,7 +65,7 @@
    <property name="isObstacle" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3S3QqAIAwF4FVERj/m+7+sixxE6CDYbup8cGCs8oCUiGh/5OCEklR5Lu9YmCu77dYTG99Njv2ateSL/R2n5wzKLDz6zzND2bVmz37576IyW/cvdN3t24xG/QAAAAAA8B8ZUBlAvAAQAAA=
+   H4sIAAAAAAAAC+2TyQqAMAxEC1JFRcXl/7/VFgwMwRSXuhzmQQ4taWeaJs7ZjCF6I6bEuTNojQn2h8S5OpN+q9bd5iOljXl3a6L1LXyIMkSVyLlSE61v6cS7G8iXPMy9oj/DPTEW2EcP+C8e8vANuXrC8qY9RrBPo8dcc3GEvRl504PVu7n/4Yh+8YE+9qjo6958GqmB6L/1dsGaX0IIIYQQ8k9WqiV+GwAQAAA=
   </data>
  </layer>
 </map>

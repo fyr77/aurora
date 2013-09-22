@@ -12,6 +12,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.gui.niffy.TopPanelController;
+import ru.game.aurora.world.Dungeon;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.LandingParty;
@@ -63,7 +64,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
 
     @Override
     public void onTurnEnded(World world) {
-        if (!(world.getCurrentRoom() instanceof Planet)) {
+        if (!(world.getCurrentRoom() instanceof Planet) && !(world.getCurrentRoom() instanceof Dungeon)) {
             return;
         }
         updateStats();

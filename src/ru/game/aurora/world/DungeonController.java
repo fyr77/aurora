@@ -7,6 +7,8 @@
 
 package ru.game.aurora.world;
 
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -16,6 +18,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
@@ -291,6 +294,9 @@ public class DungeonController implements Serializable {
                 returnToPrevRoom();
             }
         }
+        if (landingParty.getTotalMembers() == 0) {
+            onLandingPartyDestroyed(world);
+        }
     }
 
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
@@ -325,8 +331,20 @@ public class DungeonController implements Serializable {
         }
     }
 
-    public void returnToPrevRoom()
-    {
+    public void onLandingPartyDestroyed(World world) {
+        GameLogger.getInstance().logMessage("Lost connection with landing party");
+
+        // do not call returnToPrevRoom()
+        world.setCurrentRoom(prevRoom);
+        prevRoom.enter(world);
+
+        final Nifty nifty = GUI.getInstance().getNifty();
+        Element popup = nifty.createPopup("landing_party_lost");
+        nifty.setIgnoreKeyboardEvents(false);
+        nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
+    }
+
+    public void returnToPrevRoom() {
         world.setCurrentRoom(prevRoom);
         prevRoom.enter(world);
         landingParty.onReturnToShip(world);
