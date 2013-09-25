@@ -35,7 +35,7 @@
                 <panel height="10px" />
                 <control id="scrollbarPanelId" name="scrollPanel" horizontal="false" childLayout="center">
                     <panel childLayout="center" padding="10px" width="100%">
-                        <text id="selectedItemText" font="font_noalpha.fnt" wrap="true" text="No item selected" width="80%" textHAlign="left" />
+                        <text id="selectedItemText" style="base-font" wrap="true" text="No item selected" width="80%" textHAlign="left" />
                     </panel>
                 </control>
             </panel>
@@ -51,7 +51,7 @@
                         <control id="repairs" name="tab" caption="Repairs" childLayout="vertical">
 
                             <panel childLayout="horizontal">
-                                <text id="hullPointsToRepair" font="font.fnt" wrap="true" text="Hull points to repair" width="60%" textHAlign="left" />
+                                <text id="hullPointsToRepair" style="base-font" wrap="true" text="Hull points to repair" width="60%" textHAlign="left" />
                                 <control id="decreaseHullPoints" name="button" width="32px" label="-" >
                                     <interact onClick="onHullPointsDecreased()"/>
                                 </control>
@@ -60,7 +60,7 @@
                                 </control>
                             </panel>
                             <panel childLayout="horizontal">
-                                <text id="assignedEngineers" font="font.fnt" wrap="true" text="Hull points to repair" width="60%" textHAlign="left" />
+                                <text id="assignedEngineers" style="base-font" wrap="true" text="Hull points to repair" width="60%" textHAlign="left" />
                                 <control id="decreaseEngineers" name="button" width="32px" label="-" >
                                     <interact onClick="onEngineersDecreased()"/>
                                 </control>
@@ -69,7 +69,7 @@
                                 </control>
                             </panel>
 
-                            <text id="requiredRuText" font="font.fnt" wrap="true" text="Required resource units:" width="60%" textHAlign="left" />
+                            <text id="requiredRuText" style="base-font" wrap="true" text="Required resource units:" width="60%" textHAlign="left" />
 
                         </control>
                         <control id="upgrades" name="tab" caption="Upgrades" childLayout="center">

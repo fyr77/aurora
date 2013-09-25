@@ -10,7 +10,7 @@
                         <panel width="10px"/>
                         <control name="scrollPanel" horizontal="false" height="256px" childLayout="vertical">
                             <panel childLayout="center" padding="10px" width="100%">
-                                <text id="npcText" font="font_noalpha.fnt" wrap="true" text="..." textHAlign="left" width="90%" height="90%" textVAlign="top"/>
+                                <text id="npcText" style="base-font" wrap="true" text="..." textHAlign="left" width="90%" height="90%" textVAlign="top"/>
                             </panel>
                         </control>
                     </panel>

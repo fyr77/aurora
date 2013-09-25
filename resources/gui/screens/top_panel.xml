@@ -4,7 +4,7 @@
         <panel style="nifty-listbox#scrollpanel" childLayout="horizontal" padding="5px">
             <image filename="$icon"/>
             <panel width="10px"/>
-            <text font="font_white_small.fnt" id="#count" text="100" height="100%" textHAlign="center" textVAlign="center"/>
+            <text style="base-font" id="#count" text="100" height="100%" textHAlign="center" textVAlign="center"/>
         </panel>
     </controlDefinition>
 

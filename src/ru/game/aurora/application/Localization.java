@@ -14,7 +14,7 @@ public class Localization
 {
     private static Locale currentLocale;
     static {
-        currentLocale = Locale.forLanguageTag("en");
+        currentLocale = Locale.forLanguageTag("ru");
     }
 
     private static String getBundleName(String key)
