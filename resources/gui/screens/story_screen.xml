@@ -8,7 +8,7 @@
                     <panel height="10px"/>
                     <control name="scrollPanel" horizontal="false" height="*" childLayout="vertical">
                         <panel childLayout="center" padding="10px">
-                            <text id="storyText" style="base-font" width="750px" wrap="true" text=""
+                            <text id="storyText" style="white-font" width="750px" wrap="true" text=""
                                   textHAlign="left" x="10px" y="10px"/>
                         </panel>
                     </control>

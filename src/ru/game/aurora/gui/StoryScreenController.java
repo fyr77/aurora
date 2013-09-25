@@ -17,6 +17,7 @@ import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.World;
 
@@ -59,7 +60,7 @@ public class StoryScreenController implements ScreenController
             return;
         }
 
-        textPanel.getRenderer(TextRenderer.class).setText(elem.text);
+        textPanel.getRenderer(TextRenderer.class).setText(Localization.getText("story", elem.text));
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(elem.imageId))));
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
