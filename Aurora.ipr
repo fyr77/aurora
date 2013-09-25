@@ -702,6 +702,7 @@
       <entry name="*.txt" />
       <entry name="*.tsx" />
       <entry name="*.tmx" />
+      <entry name="*.ttf" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>
@@ -999,6 +1000,7 @@
       <SOURCES>
         <root url="jar://C:/Temp/_nifty-complete-1.3.2/nifty-default-controls-1.3.2-sources.jar!/" />
         <root url="jar://C:/Temp/_nifty-complete-1.3.2/nifty-1.3.2-sources.jar!/" />
+        <root url="jar://C:/Temp/_nifty-complete-1.3.2/nifty-slick-renderer-1.3.2-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="slick">
@@ -1006,7 +1008,9 @@
         <root url="jar://$PROJECT_DIR$/third-party/slick.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="file://C:/Temp/slick/src" />
+      </SOURCES>
     </library>
     <library name="xpp3-1.1.4c">
       <CLASSES>

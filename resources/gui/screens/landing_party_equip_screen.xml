@@ -3,29 +3,29 @@
         <layer childLayout="absolute">
             <control id="equip_window" name="window" title="Landing party configuration" width="50%" height="50%" x="25%" y="20%">
                 <panel childLayout="vertical" height="100%">
-                    <text font="font.fnt" id="scientists_count_text" text="Scientists:" textHAlign="left"/>
+                    <text style="base-font" id="scientists_count_text" text="Scientists:" textHAlign="left"/>
                     <control id="scientists_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1"
                              initial="1" buttonStepSize="1" pageStepSize="1"/>
-                    <text font="font.fnt" text="Engineers:" id="engineers_count_text" textHAlign="left"/>
+                    <text style="base-font" text="Engineers:" id="engineers_count_text" textHAlign="left"/>
                     <control id="engineers_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1" initial="1"
                              buttonStepSize="1" pageStepSize="1"/>
-                    <text font="font.fnt" text="Military:" id="military_count_text" textHAlign="left"/>
+                    <text style="base-font" text="Military:" id="military_count_text" textHAlign="left"/>
                     <control id="military_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1" initial="1"
                              buttonStepSize="1" pageStepSize="1"/>
-                    <text id="total_count" font="font.fnt" text="Total crew: 0/10" textHAlign="left"/>
+                    <text id="total_count" style="base-font" text="Total crew: 0/10" textHAlign="left"/>
 
                     <panel height="10px"/>
-                    <text font="font.fnt" text="Weapons:" textHAlign="left"/>
+                    <text style="base-font" text="Weapons:" textHAlign="left"/>
                     <control id="weapon_select" name="dropDown"/>
 
                     <panel height="64px" childLayout="horizontal">
                         <image id="selected_weapon_img" width="64px" height="64px"/>
                         <panel width="10px"/>
-                        <text id="selected_weapon_text" font="font.fnt" text="Weapon descirption" textHAlign="left"/>
+                        <text id="selected_weapon_text" style="base-font" text="Weapon descirption" textHAlign="left"/>
                     </panel>
 
                     <panel height="10px"/>
-                    <text font="font.fnt" text="Transport:" textHAlign="left"/>
+                    <text style="base-font" text="Transport:" textHAlign="left"/>
                     <control id="transport_select" name="dropDown"/>
 
                     <panel height="10px"/>

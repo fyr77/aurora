@@ -3,7 +3,7 @@
     <controlDefinition style="aurora-button" name="image_button" controller="ru.game.aurora.gui.niffy.ImageButtonController" inputMapping="de.lessvoid.nifty.input.mapping.MenuInputMapping">
         <panel style="#panel" focusable="true" childLayout="vertical">
             <image id="#image"/>
-            <text id="#text" font="font_white_small.fnt" text="$label"/>
+            <text id="#text" style="button-font" text="$label"/>
         </panel>
     </controlDefinition>
 </nifty>

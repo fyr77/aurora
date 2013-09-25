@@ -33,12 +33,12 @@
                     </panel>
                     <panel width="10px"/>
                     <panel style="nifty-panel-no-shadow" width="*" height="266px" childLayout="vertical" padding="5px">
-                        <text id="statusStrings" font="font_white_small.fnt" wrap="true" width="90%" textHAlign="left" />
+                        <text id="statusStrings" style="base-font" wrap="true" width="90%" textHAlign="left" />
                     </panel>
                 </panel>
                 <control id="scrollbarPanelId" name="scrollPanel" horizontal="false" childLayout="center">
                     <panel childLayout="center" padding="5px" width="100%">
-                        <text id="selectedItemText" font="font_noalpha.fnt" wrap="true" text="No item selected" width="80%" textHAlign="left" />
+                        <text id="selectedItemText" style="base-font" wrap="true" text="No item selected" width="80%" textHAlign="left" />
                     </panel>
                 </control>
             </panel>
@@ -82,14 +82,14 @@
                         <panel id="image_panel" width="256px" height="256px"/>
                         <panel width="10px"/>
                         <panel childLayout="vertical">
-                            <text font="font.fnt"  text="New research projects available:"/>
+                            <text style="base-font"  text="New research projects available:"/>
                             <control id="new_research" name="listBox" vertical="optional" horizontal="optional" displayItems="9" selection="Disabled" width="*" height="256px"/>
                         </panel>
                     </panel>
                     <panel height="10px"/>
                     <control name="scrollPanel" horizontal="false" height="*" childLayout="vertical">
                         <panel padding="10px" childLayout="center" width="100%">
-                            <text id="report_text" font="font_noalpha.fnt" width="100%" wrap="true" text="" textHAlign="left" x="10px" y="10px"/>
+                            <text id="report_text" style="base-font" width="100%" wrap="true" text="" textHAlign="left" x="10px" y="10px"/>
                         </panel>
                     </control>
                     <panel height="10px"/>

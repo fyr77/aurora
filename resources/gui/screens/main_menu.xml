@@ -34,7 +34,7 @@
                 <panel height="256px" childLayout="horizontal">
                     <image width="256px" filename="sprites/gui/crew_death.png"/>
                     <panel width="10px"/>
-                    <text width="60%" height="256px" wrap="true" textHAlign="center" textVAlign="center" text="Failed to load save game. Possibly because it is in an outdated format from previous version of the game" font="font_white_small.fnt"/>
+                    <text width="60%" height="256px" wrap="true" textHAlign="center" textVAlign="center" text="Failed to load save game. Possibly because it is in an outdated format from previous version of the game" style="base-font"/>
                 </panel>
                 <panel height="10px"/>
                 <panel childLayout="horizontal" height="45px">

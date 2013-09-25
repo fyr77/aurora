@@ -80,6 +80,7 @@ public class MainMenu {
             GUI.getInstance().onWorldLoaded(container, menu.loadedState);
             nifty.gotoScreen("empty_screen");
             menu.loadedState.getCurrentRoom().enter(menu.loadedState);
+            menu.loadedState.addOverlayWindow(new StoryScreen("story/beginning.json"));
 
         }
 

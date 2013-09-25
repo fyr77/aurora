@@ -10,7 +10,7 @@
                     <panel height="20px"/>
                     <panel childLayout="horizontal" height="50px">
                         <panel width="75%"/>
-                        <text id="totalText" font="font.fnt" text="Total:"/>
+                        <text id="totalText" style="base-font" text="Total:"/>
                     </panel>
                     <panel height="*"/>
                     <panel childLayout="horizontal" height="50px">

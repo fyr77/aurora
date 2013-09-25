@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty-styles>
   <style id="button-font">
-    <attributes font="font_white_small.fnt"/>
+    <attributes font="dpix_8pt.ttf"/>
   </style>
 
   <style id="tab-font">
-    <attributes font="font_white_small.fnt"/>
+    <attributes font="dpix_8pt.ttf"/>
   </style>
 
+    <style id="white-font">
+        <attributes font="dpix_8pt.ttf" color="#eeef"/>
+    </style>
+
   <style id="base-font">
-    <attributes font="font_white_small.fnt"/>
+    <attributes font="dpix_8pt.ttf"/>
   </style>
 </nifty-styles>
