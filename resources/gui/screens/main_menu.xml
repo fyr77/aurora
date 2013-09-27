@@ -6,7 +6,7 @@
             <panel width="10%"/>
             <panel id="panel" childLayout="vertical">
                 <panel height="60%"/>
-                <control id="continue_game_button" name="button" label="${gui.main_menu.load_game}" width="20%" height="7%">
+                <control id="continue_game_button" name="button" label="${gui.main_menu.continue_game}" width="20%" height="7%">
                         <interact onClick="loadGame()" />
                 </control>
                 <panel height="5%"/>

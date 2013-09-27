@@ -16,6 +16,7 @@ import de.lessvoid.nifty.controls.ScrollbarChangedEvent;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Ship;
@@ -62,10 +63,15 @@ public class LandingPartyEquipScreenController implements ScreenController {
             }
         }
 
-        myScreen.findElementByName("scientists_count_text").getRenderer(TextRenderer.class).setText("Scientists: " + landingParty.getScience());
-        myScreen.findElementByName("engineers_count_text").getRenderer(TextRenderer.class).setText("Engineers: " + landingParty.getEngineers());
-        myScreen.findElementByName("military_count_text").getRenderer(TextRenderer.class).setText("Military: " + landingParty.getMilitary());
-        myScreen.findElementByName("total_count").getRenderer(TextRenderer.class).setText("Total: " + landingParty.getTotalMembers() + " / 10");
+        updateLabels();
+    }
+
+    private void updateLabels()
+    {
+        myScreen.findElementByName("scientists_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.scientists") + " " + landingParty.getScience());
+        myScreen.findElementByName("engineers_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.engineers") + " " + landingParty.getEngineers());
+        myScreen.findElementByName("military_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.military") + " "+ landingParty.getMilitary());
+        myScreen.findElementByName("total_count").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.total") + " " + landingParty.getTotalMembers() + " / 10");
 
     }
 
@@ -98,7 +104,6 @@ public class LandingPartyEquipScreenController implements ScreenController {
                     event.getScrollbar().setValue(oldVal);
                     landingParty.setScience(oldVal);
                 }
-                myScreen.findElementByName("scientists_count_text").getRenderer(TextRenderer.class).setText("Scientists: " + landingParty.getScience());
                 break;
             }
             case "engineers_count": {
@@ -108,7 +113,6 @@ public class LandingPartyEquipScreenController implements ScreenController {
                     event.getScrollbar().setValue(oldVal);
                     landingParty.setEngineers(oldVal);
                 }
-                myScreen.findElementByName("engineers_count_text").getRenderer(TextRenderer.class).setText("Engineers: " + landingParty.getEngineers());
                 break;
             }
             default:
@@ -118,11 +122,9 @@ public class LandingPartyEquipScreenController implements ScreenController {
                     event.getScrollbar().setValue(oldVal);
                     landingParty.setMilitary(oldVal);
                 }
-                myScreen.findElementByName("military_count_text").getRenderer(TextRenderer.class).setText("Military: " + landingParty.getMilitary());
                 break;
         }
-
-        myScreen.findElementByName("total_count").getRenderer(TextRenderer.class).setText("Total: " + landingParty.getTotalMembers() + " / 10");
+        updateLabels();
     }
 
     public void closeScreen() {
