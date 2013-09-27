@@ -185,7 +185,7 @@ public class Planet extends BasePlanet {
     }
 
     public void leavePlanet(World world) {
-        GameLogger.getInstance().logMessage("Launching shuttle to orbit...");
+        GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.launch_shuttle"));
         world.setCurrentRoom(owner);
         owner.enter(world);
         world.getPlayer().getShip().setPos(globalX, globalY);
@@ -255,7 +255,7 @@ public class Planet extends BasePlanet {
 
         if (landingParty.getDistance(shuttle) == 0) {
             if (world.isUpdatedThisFrame()) {
-                GameLogger.getInstance().logMessage("Refilling oxygen");
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.refill_oxygen"));
                 world.getPlayer().getLandingParty().refillOxygen();
             }
             if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {

@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.tiled.TiledMap;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.world.ITileMap;
@@ -21,8 +22,7 @@ import java.util.Set;
  * Date: 13.09.13
  * Time: 12:40
  */
-public class DungeonMonster extends DungeonObject
-{
+public class DungeonMonster extends DungeonObject {
     private static final long serialVersionUID = 1L;
 
     private LandingPartyWeapon weapon;
@@ -74,7 +74,7 @@ public class DungeonMonster extends DungeonObject
             final double distance = this.getDistance(party);
             if (distance < 1.5 * weapon.getRange()) { //1.5 because of diagonal cells
                 party.subtractHp(weapon.getDamage());
-                GameLogger.getInstance().logMessage(getName() + " attacks! " + weapon.getDamage() + " damage done, " + party.getHp() + " hp remaining");
+                GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), getName(), weapon.getDamage(), party.getHp()));
                 world.getCurrentDungeon().getController().setCurrentEffect(new BlasterShotEffect(this, world.getPlayer().getLandingParty(), world.getCamera(), 800, weapon.getShotImage()));
                 newX = x;
                 newY = y;

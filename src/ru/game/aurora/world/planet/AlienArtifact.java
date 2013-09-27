@@ -11,6 +11,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.world.BasePositionable;
@@ -48,17 +49,17 @@ public class AlienArtifact extends BasePositionable implements PlanetObject {
     @Override
     public void onPickedUp(World world) {
         if (remainingData <= 0) {
-            GameLogger.getInstance().logMessage("This artifact is already explored");
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.artifact.already_explored"));
             return;
         }
 
         final int researchSpeed = world.getPlayer().getLandingParty().calcResearchPower();
         remainingData -= researchSpeed;
         if (remainingData <= 0) {
-            GameLogger.getInstance().logMessage("Recovered all data from this artifact. Added research project.");
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.artifact.excavated"));
             world.getPlayer().getResearchState().addNewAvailableProject(resultResearch);
         } else {
-            GameLogger.getInstance().logMessage(String.format("Excavated %d data from object, %d work remaining", researchSpeed, remainingData));
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.artifact.progress"), researchSpeed, remainingData));
         }
     }
 
@@ -75,7 +76,7 @@ public class AlienArtifact extends BasePositionable implements PlanetObject {
     @Override
     public void printStatusInfo() {
         if (remainingData > 0) {
-           // GameLogger.getInstance().addStatusMessage("Press <enter> to examine artifact");
+            // GameLogger.getInstance().addStatusMessage("Press <enter> to examine artifact");
         }
     }
 

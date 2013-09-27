@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.player.research.projects.Cartography;
@@ -85,9 +86,9 @@ public class LandingParty extends BasePositionable implements GameObject {
         //todo: depend on team size?
         oxygen--;
         if (oxygen == 50) {
-            GameLogger.getInstance().logMessage("Oxygen tank is half empty");
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.oxygen.half_empty"));
         } else if (oxygen == 20) {
-            GameLogger.getInstance().logMessage("Warning, low on oxygen");
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.oxygen.almost_empty"));
         }
     }
 
@@ -152,7 +153,7 @@ public class LandingParty extends BasePositionable implements GameObject {
 
     public void onReturnToShip(World world) {
         if (collectedGeodata > 0) {
-            GameLogger.getInstance().logMessage("Adding " + getCollectedGeodata() + " pieces of raw geodata");
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.collect_geodata"), getCollectedGeodata()));
             final ResearchState researchState = world.getPlayer().getResearchState();
             if (researchState.getGeodata().getRaw() == 0) {
                 researchState.addNewAvailableProject(new Cartography(researchState.getGeodata()));
@@ -220,7 +221,7 @@ public class LandingParty extends BasePositionable implements GameObject {
             hp -= amountToSubtract;
             if (hp == 0) {
                 // landing party member killed
-                GameLogger.getInstance().logMessage("Party member killed");
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.party_member_killed"));
                 if (military > 0) {
                     military--;
                 } else if (engineers > 0) {

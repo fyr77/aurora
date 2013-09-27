@@ -15,6 +15,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
@@ -233,9 +234,9 @@ public class DungeonController implements Serializable {
             currentEffect = new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), map.getWidth()), world.getCamera().getYCoordWrapped(target.getY(), map.getHeight()), world.getCamera(), 800, landingParty.getWeapon().getShotImage());
 
             target.onShotAt(damage);
-            GameLogger.getInstance().logMessage("Bang! Dealt " + damage + " damage to " + target.getName());
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.damage_message"), damage, target.getName()));
             if (!target.isAlive()) {
-                GameLogger.getInstance().logMessage(target.getName() + " killed");
+                GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), target.getName()));
                 map.getObjects().remove(target);
                 target = null;
             }
@@ -290,7 +291,7 @@ public class DungeonController implements Serializable {
                 }
             }
             if (allConditionsSatisfied) {
-                GameLogger.getInstance().logMessage("All objectives completed");
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.objectives_completed"));
                 returnToPrevRoom();
             }
         }
@@ -332,7 +333,7 @@ public class DungeonController implements Serializable {
     }
 
     public void onLandingPartyDestroyed(World world) {
-        GameLogger.getInstance().logMessage("Lost connection with landing party");
+        GameLogger.getInstance().logMessage(Localization.getText("gui", "landing_party_lost"));
 
         // do not call returnToPrevRoom()
         world.setCurrentRoom(prevRoom);

@@ -6,6 +6,7 @@ import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.research.projects.AnimalResearch;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
@@ -44,7 +45,7 @@ public class Animal extends BasePositionable implements PlanetObject {
         public void onReturnToShip(World world, int amount) {
             if (!desc.isOutopsyMade() && !world.getPlayer().getResearchState().containsResearchFor(desc)) {
                 // this type of alien animal has never been seen before, add new research
-                GameLogger.getInstance().logMessage("Added biology research for new alien animal species " + desc.getName());
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.new_animal_research") + " " + desc.getName());
                 world.getPlayer().getResearchState().addNewAvailableProject(new AnimalResearch(desc));
             }
         }
@@ -108,7 +109,7 @@ public class Animal extends BasePositionable implements PlanetObject {
                 final double distance = this.getDistance(party);
                 if (distance < 1.5) { //1.5 because of diagonal cells
                     party.subtractHp(desc.getDamage());
-                    GameLogger.getInstance().logMessage(getName() + " attacks! " + desc.getDamage() + " damage done, " + party.getHp() + " hp remaining");
+                    GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), getName(), desc.getDamage(), party.getHp()));
                     newX = x;
                     newY = y;
                 } else if (distance < 5) {
@@ -189,7 +190,7 @@ public class Animal extends BasePositionable implements PlanetObject {
     public void onShotAt(int damage) {
         hp -= damage;
         if (!wasAttacked && desc.getBehaviour() == AnimalSpeciesDesc.Behaviour.SELF_DEFENSIVE) {
-            GameLogger.getInstance().logMessage(getName() + " becomes enraged and charges at your party");
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_enraged"), getName()));
             wasAttacked = true;
         }
         if (hp <= 0) {
@@ -201,7 +202,7 @@ public class Animal extends BasePositionable implements PlanetObject {
     @Override
     public void onPickedUp(World world) {
         pickedUp = true;
-        GameLogger.getInstance().logMessage("Picked up " + getName());
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.picked_up"), getName()));
         world.getPlayer().getLandingParty().pickUp(world, new AnimalCorpseItem(desc));
     }
 
@@ -216,7 +217,7 @@ public class Animal extends BasePositionable implements PlanetObject {
         if (hp > 0) {
             return desc.getName();
         } else {
-            return desc.getName() + " corpse";
+            return desc.getName() + " " + Localization.getText("gui", "surface.corpse");
         }
     }
 

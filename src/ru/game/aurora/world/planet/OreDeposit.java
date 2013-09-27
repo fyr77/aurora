@@ -9,13 +9,16 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 
 public class OreDeposit extends BasePositionable implements PlanetObject {
+    private static final long serialVersionUID = -407383614466292775L;
 
     public static class OreUnit implements InventoryItem {
+        private static final long serialVersionUID = -5597582503966190176L;
         private OreType type;
 
         public OreUnit(OreType type) {
@@ -30,7 +33,7 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
         @Override
         public void onReturnToShip(World world, int amount) {
             final int resAmount = amount * type.getResCountForUnit();
-            GameLogger.getInstance().logMessage(String.format("Transferring %d units of %s worth of %d RU", amount, type.name(), resAmount));
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.resources_transfer"), amount, type.name(), resAmount));
             world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() + resAmount);
         }
 
@@ -119,15 +122,15 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
         final int miningPower = world.getPlayer().getLandingParty().calcMiningPower();
         currentMiningProgress -= miningPower;
         if (currentMiningProgress <= 0) {
-            GameLogger.getInstance().logMessage("Mined 1 unit of " + getName());
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.ore.mined") + " " + getName());
             currentMiningProgress = type.getMineTime();
             world.getPlayer().getLandingParty().pickUp(world, new OreUnit(type));
             amount--;
             if (amount == 0) {
-                GameLogger.getInstance().logMessage("Ore deposit depleted");
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.ore.depleted"));
             }
         } else {
-            GameLogger.getInstance().logMessage(String.format("Mining %s with %d speed, %d work remaining", getName(), miningPower, currentMiningProgress));
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.ore.mining"), getName(), miningPower, currentMiningProgress));
         }
     }
 

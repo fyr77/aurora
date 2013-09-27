@@ -2,16 +2,17 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
     <screen id="surface_gui" controller="ru.game.aurora.gui.SurfaceGUIController">
         <layer childLayout="vertical">
-            <control name="top_panel" id="top_panel" />
+            <control name="top_panel" id="top_panel"/>
 
             <panel height="*"/>
             <!-- bottom panel containing weapon buttons and log text -->
-            <panel height="113px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png" imageMode="repeat:0,0,1279,113" padding="20px">
-                <control id="weapon_button" name="button" label="Fire" width="64px" height="64px">
+            <panel height="113px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
+                   imageMode="repeat:0,0,1279,113" padding="20px">
+                <control id="weapon_button" name="button" label="${gui.surface.fire}" width="64px" height="64px">
                     <interact onClick="weaponClicked()"/>
                 </control>
                 <panel width="10px"/>
-                <control id="interact_button" name="button" label="Interact" width="64px" height="64px">
+                <control id="interact_button" name="button" label="${gui.surface.interact}" width="64px" height="64px">
                     <interact onClick="interactClicked()"/>
                 </control>
 

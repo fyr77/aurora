@@ -8,6 +8,7 @@ package ru.game.aurora.world.quest;
 
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
@@ -40,11 +41,11 @@ public class AuroraProbe extends NPCShip {
         world.addOverlayWindow(dialog);
         contacted = true;
 
-        world.getPlayer().getResearchState().addNewAvailableProject(world.getResearchAndDevelopmentProjects().getResearchProjects().get("Probe data decoding"));
+        world.getPlayer().getResearchState().addNewAvailableProject(world.getResearchAndDevelopmentProjects().getResearchProjects().get("probe"));
 
         StarSystem curSystem = (StarSystem) world.getCurrentRoom();
         int remainingAstroData = curSystem.getAstronomyData();
-        GameLogger.getInstance().logMessage("Retrieved " + remainingAstroData + " new astro data from probe");
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("research", "probe.astro_data_retrieved"), curSystem.getAstronomyData()));
         curSystem.setAstronomyData(0);
         world.getPlayer().getResearchState().addProcessedAstroData(remainingAstroData);
     }

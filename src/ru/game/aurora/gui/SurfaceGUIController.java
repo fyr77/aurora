@@ -11,6 +11,7 @@ import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.gui.niffy.TopPanelController;
 import ru.game.aurora.world.Dungeon;
 import ru.game.aurora.world.GameEventListener;
@@ -59,7 +60,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     public void updateStats() {
         final LandingParty landingParty = world.getPlayer().getLandingParty();
         topPanelController.setCrewStats(landingParty.getScience(), landingParty.getEngineers(), landingParty.getMilitary());
-        topPanelController.setProgress("Remaining oxygen: " + landingParty.getOxygen(), landingParty.getOxygen() / (float) LandingParty.MAX_OXYGEN);
+        topPanelController.setProgress(Localization.getText("gui", "surface.remaining_oxygen") + " " + landingParty.getOxygen(), landingParty.getOxygen() / (float) LandingParty.MAX_OXYGEN);
     }
 
     @Override
