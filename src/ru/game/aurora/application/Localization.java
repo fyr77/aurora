@@ -6,6 +6,8 @@
  */
 package ru.game.aurora.application;
 
+import de.lessvoid.nifty.Nifty;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -26,5 +28,12 @@ public class Localization
     {
         ResourceBundle bundle = ResourceBundle.getBundle(getBundleName(bundleId), currentLocale, new UTF8Control());
         return bundle.getString(textId);
+    }
+
+    public static void registerGUIBungles(Nifty nifty)
+    {
+        nifty.setLocale(currentLocale);
+        //nifty.addResourceBundle("gui", getBundleName("gui"));
+        nifty.getResourceBundles().put("gui", ResourceBundle.getBundle(getBundleName("gui"), currentLocale, new UTF8Control()));
     }
 }

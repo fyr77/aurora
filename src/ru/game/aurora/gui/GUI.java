@@ -12,6 +12,7 @@ import de.lessvoid.nifty.slick2d.render.font.UnicodeSlickRenderFont;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 
@@ -83,6 +84,8 @@ public class GUI {
 
     private GUI(Nifty n) {
         this.nifty = n;
+        Localization.registerGUIBungles(nifty);
+
         hackUnicodeFont("dpix_8pt.ttf");
 
         nifty.fromXml("gui/screens/main_menu.xml", "main_menu");
