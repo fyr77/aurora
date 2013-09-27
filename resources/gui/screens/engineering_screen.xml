@@ -35,7 +35,7 @@
                 <panel height="10px" />
                 <control id="scrollbarPanelId" name="scrollPanel" horizontal="false" childLayout="center">
                     <panel childLayout="center" padding="10px" width="100%">
-                        <text id="selectedItemText" style="base-font" wrap="true" text="No item selected" width="80%" textHAlign="left" />
+                        <text id="selectedItemText" style="base-font" wrap="true" text="${gui.no_item_selected}" width="80%" textHAlign="left" />
                     </panel>
                 </control>
             </panel>
@@ -45,13 +45,13 @@
 
     <screen id="engineering_screen" controller="ru.game.aurora.gui.EngineeringScreenController">
         <layer childLayout="absolute">
-            <control id="engineering_window" name="window" hideOnClose="true" title="Engineering" width="80%" height="80%" x="10%" y="10%">
+            <control id="engineering_window" name="window" hideOnClose="true" title="${gui.engineering.title}" width="80%" height="80%" x="10%" y="10%">
                 <panel childLayout="vertical">
                     <control id="engineering_tabs" name="tabGroup" buttonWidth="30%" buttonHeight="30px" height="650px">
-                        <control id="repairs" name="tab" caption="Repairs" childLayout="vertical">
+                        <control id="repairs" name="tab" caption="${gui.engineering.repairs.title}" childLayout="vertical">
 
                             <panel childLayout="horizontal">
-                                <text id="hullPointsToRepair" style="base-font" wrap="true" text="Hull points to repair" width="60%" textHAlign="left" />
+                                <text id="hullPointsToRepair" style="base-font" wrap="true" text="${gui.engineering.repairs.hull_points_to_repair}" width="60%" textHAlign="left" />
                                 <control id="decreaseHullPoints" name="button" width="32px" label="-" >
                                     <interact onClick="onHullPointsDecreased()"/>
                                 </control>
@@ -60,7 +60,7 @@
                                 </control>
                             </panel>
                             <panel childLayout="horizontal">
-                                <text id="assignedEngineers" style="base-font" wrap="true" text="Hull points to repair" width="60%" textHAlign="left" />
+                                <text id="assignedEngineers" style="base-font" wrap="true" text="${gui.engineering.repairs.assigned_engineers}" width="60%" textHAlign="left" />
                                 <control id="decreaseEngineers" name="button" width="32px" label="-" >
                                     <interact onClick="onEngineersDecreased()"/>
                                 </control>
@@ -69,17 +69,17 @@
                                 </control>
                             </panel>
 
-                            <text id="requiredRuText" style="base-font" wrap="true" text="Required resource units:" width="60%" textHAlign="left" />
+                            <text id="requiredRuText" style="base-font" wrap="true" text="${gui.engineering.repairs.resource_units_required}" width="60%" textHAlign="left" />
 
                         </control>
-                        <control id="upgrades" name="tab" caption="Upgrades" childLayout="center">
+                        <control id="upgrades" name="tab" caption="${gui.engineering.upgrades.title}" childLayout="center">
                             <control name="list_screen_engineering" id="engineering_projects_list_screen" />
                         </control>
                     </control>
 
                     <panel childLayout="horizontal" height="50px">
                         <panel width="75%"/>
-                        <control id="close_button" name="button" label="Close" width="150px" height="45px">
+                        <control id="close_button" name="button" label="${gui.close}" width="150px" height="45px">
                             <interact onClick="closeScreen()"/>
                         </control>
                     </panel>

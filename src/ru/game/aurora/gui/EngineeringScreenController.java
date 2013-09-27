@@ -16,6 +16,7 @@ import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.engineering.EngineeringState;
@@ -74,9 +75,9 @@ public class EngineeringScreenController implements ScreenController
 
     private void updateLabels()
     {
-        pointsText.getRenderer(TextRenderer.class).setText("Hull points to repair: " + engineeringState.getHullRepairs().remainingPoints);
-        engiText.getRenderer(TextRenderer.class).setText("Assigned engineers: " + engineeringState.getHullRepairs().engineersAssigned);
-        ruText.getRenderer(TextRenderer.class).setText("Requires " + engineeringState.getHullRepairs().calcResCost() + " out of " + world.getPlayer().getResourceUnits() + " resource units");
+        pointsText.getRenderer(TextRenderer.class).setText(Localization.getText("gui", "engineering.repairs.hull_points_to_repair") + " " + engineeringState.getHullRepairs().remainingPoints);
+        engiText.getRenderer(TextRenderer.class).setText(Localization.getText("gui", "engineering.repairs.assigned_engineers") + " " + engineeringState.getHullRepairs().engineersAssigned);
+        ruText.getRenderer(TextRenderer.class).setText(String.format(Localization.getText("gui", "engineering.repairs.resource_units_required"), engineeringState.getHullRepairs().calcResCost(), world.getPlayer().getResourceUnits()));
     }
 
     public void onHullPointsDecreased()
@@ -139,10 +140,13 @@ public class EngineeringScreenController implements ScreenController
         if (tg.getTabCount() == 0) {
             return;
         }
+        if (tg.getSelectedTabIndex() != 1) {
+            return;
+        }
         Element imagePanel = tg.getSelectedTab().getElement().findElementByName("selectedItemImg");
         TextRenderer tr = tg.getSelectedTab().getElement().findElementByName("selectedItemText").getRenderer(TextRenderer.class);
         if (event.getSelection().isEmpty()) {
-            tr.setText("<No item selected>");
+            tr.setText(Localization.getText("gui", "no_item_selected"));
             imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage("no_image"))));
             return;
         }

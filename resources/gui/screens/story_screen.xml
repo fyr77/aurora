@@ -6,10 +6,10 @@
                 <panel childLayout="vertical">
                     <panel id="imagePanel" width="800px" height="300px"/>
                     <panel height="10px"/>
-                    <control name="scrollPanel" horizontal="false" height="*" childLayout="vertical">
-                        <panel childLayout="center" padding="10px">
-                            <text id="storyText" style="white-font" width="750px" wrap="true" text=""
-                                  textHAlign="left" x="10px" y="10px"/>
+                    <control name="scrollPanel" width="800px" horizontal="false" height="*" childLayout="vertical">
+                        <panel childLayout="center"  width="100%" padding="10px">
+                            <text id="storyText" style="white-font" width="100%" wrap="true" text=""
+                                  textHAlign="left" />
                         </panel>
                     </control>
                     <panel height="10px"/>
