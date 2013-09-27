@@ -15,13 +15,18 @@ public class AnimalResearch extends ResearchProjectDesc {
     private int progress = 100;
 
     public AnimalResearch(AnimalSpeciesDesc desc) {
-        super("Biology research for '" + desc.getName() + "'", "A set of tasks for researching alien animal. Autopsy, chemical and biological tests etc. ", "autopsy_research");
+        super("animal", "autopsy_research");
         this.desc = desc;
     }
 
     @Override
     public void update(World world, int scientists) {
         progress -= scientists;
+    }
+
+    @Override
+    public String getName() {
+        return super.getName() + " " + desc.getName();
     }
 
     @Override

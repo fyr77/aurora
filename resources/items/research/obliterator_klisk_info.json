@@ -1,20 +1,9 @@
 {
-    "name" : "Obliterator",
-    "description" : "Study of materials provided by Klisk race about origin of 'twin' star systems. Contains huge text, image and video archives.",
+    "id": "obliterator_klisk",
     "icon" : "probe_research",
     "report": {
         "icon" : "astronomy_research",
-        "text" : "First section of processed data tells about an ancient 'Builder' race. This was an advanced civilisation that has created
-                                   a lot of huge astroengineering structures in galaxy. There ary Dyson spheres, artificial planets and others, their coordinates are mentioned in data, so we
-                                   may visit them and examine them ourselves. \n
-                                   Builders have disappeared from this Galaxy centuries ago, leaving everything they have created. And among their creations there were some really dangerous toys. \n
-                                       One of them is known as 'Obliterator'. It is hard to believe that such enormous spaceship really exists. \n
-                                       Obliterator is some kind of automated terraforming ship. But it transforms not only planets, but star systems themselves, including stars, satellites and other celestial bodies,
-                                   making all systems look the same, according to a given template. This is how these 'twin systems' are born. [Remark from Godon 'Ha, I was right about their origin, captain!'] \n
-                                   Obliterator seems to have no general purpose, it just follows its program and travels across galaxy, transforming all systems it meets on its way. \n
-                                       Its current coordinates are well-known, and we should probably go and look at it. Research project has been added for that purpose. \n
-                                       Though most probably we won't receive any new information. Records state that Builders technology is completely invulnerable, so we won't be able to sneak inside, or to chop off a piece
-                                   for detailed study. All such attempts, done by other civilisations for past millennium, have failed."
+        "text" : "obliterator_klisk.report"
     },
     "makesAvailable" : [],
     "makesAvailableEngineering" : [],

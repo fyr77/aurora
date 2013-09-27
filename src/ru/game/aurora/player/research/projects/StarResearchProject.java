@@ -13,15 +13,16 @@ import ru.game.aurora.world.space.StarSystem;
 public class StarResearchProject extends SpaceObjectResearchProject
 {
 
-    private static final long serialVersionUID = -259133742530809689L;
+    private static final long serialVersionUID = 1L;
 
     public StarResearchProject(StarSystem starSystem) {
-        super(String.format("Star exploration at [%d, %d]"
-                , starSystem.getGlobalMapX()
-                , starSystem.getGlobalMapY())
-                , "Collecting of detailed data about anomalous star in specific star system, located at given star coordinates. In order to perform measurements, starship must stay close to star"
+        super("star_exploration"
                 , "star_research"
                 , 30, starSystem, new BasePositionable(0, 0));
     }
 
+    @Override
+    public String getName() {
+        return String.format(super.getName(), starSystem.getGlobalMapX(), starSystem.getGlobalMapY());
+    }
 }

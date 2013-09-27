@@ -1,14 +1,9 @@
 {
-    "name" : "Probe data decoding",
-    "description" : "Decoding data from probe storage. It can contain scientific data, as well as some information on its mothership location and progress",
+    "id": "probe",
     "icon" : "probe_research",
     "report": {
         "icon" : "probe",
-        "text" :  "After decoding data from probe storage we have learned some information about Aurora route.
-                                  The last record was mentioning that they had searched stars nearby and found nothing interesting, and they were planning to make a long jump to sector
-                                  after [50, 10] and explore that part of space. \n
-                                  In addition probe storage contained some ship log messages and a backup copy of work done by Aurora science team. There is nothing really valuable for us there,
-                                  but it will be useful for researches on Earth."
+        "text" :  "probe.report"
     },
     "makesAvailable" : [],
     "makesAvailableEngineering" : [],

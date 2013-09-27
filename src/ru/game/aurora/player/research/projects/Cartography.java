@@ -7,6 +7,7 @@
 
 package ru.game.aurora.player.research.projects;
 
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.research.Geodata;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.World;
@@ -15,11 +16,14 @@ import ru.game.aurora.world.World;
  * Cartography project converts Raw Geodata into Processed Geodata.
  * Is always available
  */
-public class Cartography extends ResearchProjectDesc {
+public class Cartography extends ResearchProjectDesc
+{
+    private static final long serialVersionUID = 4588596463836210769L;
+
     private Geodata geodata;
 
     public Cartography(Geodata geodata) {
-        super("Cartography", "Processing of raw geological data received from sensors and converting it into its final and usable form, such as terrain maps", "cartography_research");
+        super("cartography", "cartography_research");
         this.geodata = geodata;
     }
 
@@ -30,7 +34,7 @@ public class Cartography extends ResearchProjectDesc {
 
     @Override
     public String getStatusString(World world, int scientists) {
-        return String.format("Remaining raw geodata: %d, est. %s days left", geodata.getRaw(), scientists != 0 ? Integer.toString(geodata.getRaw() / scientists) : "<inf>");
+        return String.format(Localization.getText("research", "cartography.status"), geodata.getRaw(), scientists != 0 ? Integer.toString(geodata.getRaw() / scientists) : "<inf>");
     }
 
     @Override

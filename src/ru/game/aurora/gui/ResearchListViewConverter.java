@@ -11,6 +11,7 @@ import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchProjectState;
 
@@ -23,7 +24,7 @@ public class ResearchListViewConverter implements ListBox.ListBoxViewConverter
             return ((ResearchProjectDesc) obj).getName();
         } else if (ResearchProjectState.class.isAssignableFrom(obj.getClass())) {
             ResearchProjectState rps = (ResearchProjectState) obj;
-            return rps.desc.getName() + ", " + rps.scientists + " scientists";
+            return rps.desc.getName() + ", " + rps.scientists + " " + Localization.getText("research", "scientists");
         } else {
             throw new IllegalStateException("research screen can not show research item of class " + obj.getClass());
         }

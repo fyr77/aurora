@@ -156,7 +156,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
 
         Dungeon beaconInternals = new Dungeon(world, new TILEDMap("resources/maps/test.tmx"), brownStar);
         SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon", beaconInternals);
-        beacon.setResearchProjectDescs(world.getResearchAndDevelopmentProjects().getResearchProjects().get("Beacon research"));
+        beacon.setResearchProjectDescs(world.getResearchAndDevelopmentProjects().getResearchProjects().get("beacon"));
         beacon.setOnInteractDialog(Dialog.loadFromFile("dialogs/quest/rogues_beacon_explored.json"));
         brownStar.getShips().add(beacon);
 

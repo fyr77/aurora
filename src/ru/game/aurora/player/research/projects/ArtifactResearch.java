@@ -7,6 +7,7 @@
 package ru.game.aurora.player.research.projects;
 
 
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.world.World;
@@ -17,7 +18,7 @@ public class ArtifactResearch extends ResearchProjectDesc {
     private int progress = 100;
 
     public ArtifactResearch(ResearchReport report) {
-        super("Artifact research", "Study for an alien artifact. Different physical and chemical tests for its condition, contents and materials", "artifact_research", report);
+        super("artifact", "artifact_research", report);
     }
 
     @Override
@@ -28,18 +29,18 @@ public class ArtifactResearch extends ResearchProjectDesc {
     @Override
     public String getStatusString(World world, int scientists) {
         if (progress > 60) {
-            return "Poor";
+            return Localization.getText("research", "poor");
         }
 
         if (progress > 30) {
-            return "Good";
+            return Localization.getText("research", "good");
         }
 
         if (progress > 0) {
-            return "Almost done";
+            return Localization.getText("research", "almost_done");
         }
 
-        return "Completed";
+        return Localization.getText("research", "done");
     }
 
     @Override

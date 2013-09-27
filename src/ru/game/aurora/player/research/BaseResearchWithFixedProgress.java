@@ -19,15 +19,15 @@ public class BaseResearchWithFixedProgress extends ResearchProjectDesc implement
 
     protected final int initialProgress;
 
-    public BaseResearchWithFixedProgress(String name, String description, String icon, int initialProgress, int score) {
-        super(name, description, icon);
+    public BaseResearchWithFixedProgress(String id, String icon, int initialProgress, int score) {
+        super(id, icon);
         this.initialProgress = initialProgress;
         this.progress = initialProgress;
         this.score = score;
     }
 
-    public BaseResearchWithFixedProgress(String name, String description, String icon, ResearchReport report, int initialProgress, int score) {
-        this(name, description, icon, initialProgress, score);
+    public BaseResearchWithFixedProgress(String id, String icon, ResearchReport report, int initialProgress, int score) {
+        this(id, icon, initialProgress, score);
         this.report = report;
     }
 
@@ -70,6 +70,6 @@ public class BaseResearchWithFixedProgress extends ResearchProjectDesc implement
 
     @Override
     public String getId() {
-        return name;
+        return id;
     }
 }

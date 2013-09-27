@@ -1,5 +1,6 @@
 package ru.game.aurora.player.research.projects;
 
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.effects.BigMommyShotEffect;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.ResearchProjectDesc;
@@ -20,12 +21,11 @@ public class NuclearWeaponTestProject extends ResearchProjectDesc
     private BigMommyShotEffect effect;
 
     public NuclearWeaponTestProject() {
-        super("'Big Mommy' weapons test", "Test of the most powerful weapon humanity can create against Obliterator. If even this enormous bomb, that can " +
-                "crack Earth into pieces, won't be able to do any major damage, then Earth is completely defenceless against this threat.", "weapons_test");
+        super("weapon_test", "weapons_test");
 
         setReport(new ResearchReport(
                 "obliterator_background",
-                "Our most powerful weapon failed to inflict any major damage to alien structure. In fact, it failed to inflict any damage at all. As if it were just a flashlight, and not the devastating weapon."
+                "weapon_test.report"
         ));
     }
 
@@ -67,9 +67,9 @@ public class NuclearWeaponTestProject extends ResearchProjectDesc
     @Override
     public String getStatusString(World world, int scientists) {
         if (!isInRightSystem(world)) {
-            return "Should be within same star system as Obliterator";
+            return Localization.getText("research", "weapon_test.paused");
         }
-        return "Done";
+        return Localization.getText("research", "done");
     }
 
     @Override

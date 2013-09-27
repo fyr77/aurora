@@ -7,11 +7,13 @@
 
 package ru.game.aurora.player.research;
 
+import ru.game.aurora.application.Localization;
+
 import java.io.Serializable;
 
 public class ResearchReport implements Serializable
 {
-    private static final long serialVersionUID = 4188622218643890126L;
+    private static final long serialVersionUID = 1L;
 
     public final String icon;
 
@@ -20,5 +22,10 @@ public class ResearchReport implements Serializable
     public ResearchReport(String icon, String text) {
         this.icon = icon;
         this.text = text;
+    }
+
+    public String getText()
+    {
+        return Localization.getText("research", text);
     }
 }

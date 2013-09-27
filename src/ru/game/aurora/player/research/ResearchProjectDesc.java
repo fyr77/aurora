@@ -6,6 +6,7 @@
  */
 package ru.game.aurora.player.research;
 
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.world.World;
@@ -18,18 +19,14 @@ import java.util.List;
 /**
  * Base class for research projects
  */
-public abstract class ResearchProjectDesc implements Serializable {
-    private static final long serialVersionUID = 929590331247291625L;
+public abstract class ResearchProjectDesc implements Serializable
+{
+    private static final long serialVersionUID = 1L;
 
     /**
-     * Research name, will be used in list of research projects
+     * unique id
      */
-    protected String name;
-
-    /**
-     * Brief description, will be used in list of research projects
-     */
-    protected String description;
+    protected String id;
 
     /**
      * 256x256 icon id
@@ -54,15 +51,13 @@ public abstract class ResearchProjectDesc implements Serializable {
      */
     protected List<String> earthProgress;
 
-    protected ResearchProjectDesc(String name, String description, String icon) {
-        this.name = name;
-        this.description = description;
+    protected ResearchProjectDesc(String id, String icon) {
+        this.id = id;
         this.icon = icon;
     }
 
-    protected ResearchProjectDesc(String name, String description, String icon, ResearchReport report) {
-        this.name = name;
-        this.description = description;
+    protected ResearchProjectDesc(String id, String icon, ResearchReport report) {
+        this.id = id;
         this.icon = icon;
         this.report = report;
     }
@@ -101,11 +96,11 @@ public abstract class ResearchProjectDesc implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return Localization.getText("research", id + ".name");
     }
 
     public String getDescription() {
-        return description;
+        return Localization.getText("research", id + ".desc");
     }
 
     public String getIcon() {
@@ -156,6 +151,6 @@ public abstract class ResearchProjectDesc implements Serializable {
      */
     @Override
     public String toString() {
-        return name;
+        return getName();
     }
 }

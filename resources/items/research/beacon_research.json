@@ -1,14 +1,9 @@
 {
-    "name" : "Beacon research",
-    "description" : "Detailed study for materials and samples taken from enormous alien structure, assigned name 'beacon'",
+    "id": "beacon",
     "icon" : "technology_research",
     "report": {
         "icon" : "rogues_beacon",
-        "text" : "This structure is located near the sun, consuming its energy and transforming it into emiision of different types of waves, both radio and hyperwave. It is transmitting a small, repeatable pattern, and its power is enormous. We believe it can be easily detected even with our low-resolution sensors from more than a thousand light years. Due to these points we believe that this structure is some kind of a beacon, perhaps used for navigation, or for marking places of interest for its creators. \n
-                                   We din't fully understand mechanincs of its emission and energy consumption, but it overpowers all technology available to humanity. Detailed study of
-                                   collected data in Earth laboratories can lead to a breakthrough in high-energy and hyperwave physics.
-
-                   We should also be careful, as creators of this beacon may not welcome our violation of their territory."
+        "text" : "beacon.report"
     },
     "makesAvailable" : [],
     "makesAvailableEngineering" : ["Advanced laser cannons"],

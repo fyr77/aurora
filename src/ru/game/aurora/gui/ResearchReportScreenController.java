@@ -49,7 +49,7 @@ public class ResearchReportScreenController implements ScreenController
     public void onStartScreen() {
         window.setTitle(research.getName() + " report");
         icon.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(research.getReport().icon))));
-        text.getRenderer(TextRenderer.class).setText(research.getReport().text);
+        text.getRenderer(TextRenderer.class).setText(research.getReport().getText());
         nextResearch.clear();
         if (research.getMakesAvailable() != null) {
             nextResearch.addAllItems(research.getMakesAvailable());

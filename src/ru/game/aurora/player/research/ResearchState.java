@@ -108,7 +108,7 @@ public class ResearchState implements Serializable {
                         world.getResearchAndDevelopmentProjects().getEngineeringProjects().remove(str);
                     }
                 }
-                GameLogger.getInstance().logMessage("Research project " + state.desc.name + " completed");
+                GameLogger.getInstance().logMessage("Research project " + state.desc.getName() + " completed");
             }
         }
         // to prevent CME

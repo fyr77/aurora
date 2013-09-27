@@ -8,6 +8,7 @@ package ru.game.aurora.player.research.projects;
  */
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -24,7 +25,7 @@ public class AstronomyResearch extends ResearchProjectDesc
     private static final long serialVersionUID = -4290850863471850561L;
 
     public AstronomyResearch() {
-        super("Astronomy", "Scan and explore space objects in current star system: build navigation maps, celestial bodies catalog and sailing directions", "astronomy_research");
+        super("astronomy", "astronomy_research");
     }
 
     @Override
@@ -39,7 +40,7 @@ public class AstronomyResearch extends ResearchProjectDesc
         world.getPlayer().getResearchState().addProcessedAstroData(dataToProcess);
         ss.setAstronomyData(ss.getAstronomyData() - dataToProcess);
         if (dataToProcess > 0 && ss.getAstronomyData() <= 0) {
-            GameLogger.getInstance().logMessage("All astronomy data collected for this star system");
+            GameLogger.getInstance().logMessage(Localization.getText("research", "astronomy.all_data_collected"));
         }
     }
 
@@ -47,10 +48,10 @@ public class AstronomyResearch extends ResearchProjectDesc
     public String getStatusString(World world, int scientists) {
         StarSystem ss = world.getCurrentStarSystem();
         if (ss == null) {
-            return "Research paused, no suitable celestial bodies nearby";
+            return Localization.getText("research", "astronomy.paused");
         }
 
-        return String.format("Remaining %d astro data for this star system, %f days to finish", ss.getAstronomyData(), ss.getAstronomyData() / (float) scientists);
+        return String.format(Localization.getText("research", "astronomy.status"), ss.getAstronomyData(), ss.getAstronomyData() / (float) scientists);
     }
 
     @Override

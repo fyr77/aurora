@@ -7,6 +7,7 @@
 
 package ru.game.aurora.player.research.projects;
 
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
@@ -24,8 +25,8 @@ public class SpaceObjectResearchProject extends BaseResearchWithFixedProgress {
 
     protected BasePositionable position;
 
-    public SpaceObjectResearchProject(String name, String description, String icon, int initialProgress, StarSystem starSystem, BasePositionable object) {
-        super(name, description, icon, initialProgress, 50);
+    public SpaceObjectResearchProject(String id, String icon, int initialProgress, StarSystem starSystem, BasePositionable object) {
+        super(id, icon, initialProgress, 50);
         this.starSystem = starSystem;
         this.position = object;
     }
@@ -50,18 +51,18 @@ public class SpaceObjectResearchProject extends BaseResearchWithFixedProgress {
     public String getStatusString(World world, int scientists) {
 
         if (world.getCurrentStarSystem() != starSystem) {
-            return "Must be in specific star system";
+            return Localization.getText("research", "space_object.wrong_system");
         }
 
         if (!isInRange(world)) {
-            return "Must be closer to object";
+            return Localization.getText("research", "space_object.too_far");
         }
 
         if (progress > 0) {
-            return "Processing, " + progress + " data remaining";
+            return Localization.getText("research", "space_object.progress") + " " + progress;
         }
 
-        return "Completed";
+        return Localization.getText("research", "done");
     }
 
 }
