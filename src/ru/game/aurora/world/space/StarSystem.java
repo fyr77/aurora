@@ -10,6 +10,7 @@ import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
@@ -217,7 +218,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 scanLandPanel.setVisible(false);
             } else if (isAtPlanet && !landPanelVisible) {
                 Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
-                leftButton.setText("Land");
+                leftButton.setText(Localization.getText("gui", "space.land"));
                 scanLandPanel.setVisible(true);
             }
         }
@@ -425,7 +426,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 scanLandPanel.setVisible(false);
             } else if (shipAtSameCoords && !landPanelVisible) {
                 Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
-                leftButton.setText("Hail");
+                leftButton.setText(Localization.getText("gui", "space.hail"));
                 scanLandPanel.setVisible(true);
             }
         }

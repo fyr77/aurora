@@ -24,16 +24,16 @@
                     <panel height="30%"/>
                     <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
                            padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
-                        <control id="research_button" name="button" label="Research" width="90%" height="50px">
+                        <control id="research_button" name="button" label="${gui.space.research}" width="90%" height="50px">
                             <interact onClick="openResearchScreen()"/>
                         </control>
-                        <control id="engineering_button" name="button" label="Engineering" width="90%" height="50px">
+                        <control id="engineering_button" name="button" label="${gui.space.engineering}" width="90%" height="50px">
                             <interact onClick="openEngineeringScreen()"/>
                         </control>
-                        <control id="starmap_button" name="button" label="Star map" width="90%" height="50px">
+                        <control id="starmap_button" name="button" label="${gui.space.galaxy_map}" width="90%" height="50px">
                             <interact onClick="openStarMap()"/>
                         </control>
-                        <control id="menu_button" name="button" label="Menu" width="90%" height="50px">
+                        <control id="menu_button" name="button" label="${gui.space.menu}" width="90%" height="50px">
                             <interact onClick="openMenu()"/>
                         </control>
                     </panel>
@@ -45,7 +45,7 @@
             <panel id="interactPanel" height="100px" childLayout="horizontal" visible="false">
                 <panel width="40%"/>
                 <panel style="nifty-panel" x="40%" width="200px" childLayout="center" height="100%">
-                    <control id="left_button" name="button" label="Enter star system" width="90%" height="90%">
+                    <control id="left_button" name="button" label="${gui.space.enter_system_button}" width="90%" height="90%">
                         <interact onClick="enterStarsystem()"/>
                     </control>
                     <panel width="*"/>
@@ -59,7 +59,7 @@
 
                 <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3"
                          selection="Disabled" width="50%" height="100px"/>
-                <text id="ship_coordinates" style="base-font" text="Ship coordinates:" width="*"/>
+                <text id="ship_coordinates" style="base-font" text="${gui.space.ship_coords}" width="*"/>
             </panel>
 
         </layer>
@@ -76,17 +76,17 @@
                     <panel height="30%"/>
                     <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
                            padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
-                        <control id="research_button" name="button" label="Research" width="90%" height="50px">
+                        <control id="research_button" name="button" label="${gui.space.research}" width="90%" height="50px">
                             <interact onClick="openResearchScreen()"/>
                         </control>
-                        <control id="engineering_button" name="button" label="Engineering" width="90%" height="50px">
+                        <control id="engineering_button" name="button" label="${gui.space.engineering}" width="90%" height="50px">
                             <interact onClick="openEngineeringScreen()"/>
                         </control>
-                        <control id="landing_party_equip_button" name="button" label="Landing party" width="90%"
+                        <control id="landing_party_equip_button" name="button" label="${gui.space.landing_party}" width="90%"
                                  height="50px">
                             <interact onClick="openLandingPartyScreen()"/>
                         </control>
-                        <control id="menu_button" name="button" label="Menu" width="90%" height="50px">
+                        <control id="menu_button" name="button" label="${gui.space.menu}" width="90%" height="50px">
                             <interact onClick="openMenu()"/>
                         </control>
                     </panel>
@@ -98,11 +98,11 @@
             <panel id="interactPanel" height="100px" childLayout="horizontal" visible="false">
                 <panel width="40%"/>
                 <panel style="nifty-panel" x="40%" width="256px" childLayout="horizontal" height="100%">
-                    <control id="left_button" name="button" label="Land" width="40%" height="90%">
+                    <control id="left_button" name="button" label="${gui.space.land}" width="40%" height="90%">
                         <interact onClick="leftButtonPressed()"/>
                     </control>
                     <panel width="*"/>
-                    <control id="right_button" name="button" label="Scan" width="40%" height="90%">
+                    <control id="right_button" name="button" label="${gui.space.scan}" width="40%" height="90%">
                         <interact onClick="rightButtonPressed()"/>
                     </control>
                 </panel>
@@ -147,12 +147,12 @@
                 <panel height="10px"/>
                 <panel height="256px" childLayout="horizontal">
                     <image width="256px" filename="sprites/gui/crew_death.png"/>
-                    <text width="*" height="256px" text="Lost contact with landing party" style="base-font"/>
+                    <text width="*" height="256px" text="${gui.landing_party_lost}" style="base-font"/>
                 </panel>
                 <panel height="10px"/>
                 <panel childLayout="horizontal" height="45px">
                     <panel width="85%"/>
-                    <control id="close_button" name="button" label="Ok" height="45px">
+                    <control id="close_button" name="button" label="${gui.ok}" height="45px">
                         <interact onClick="closeCurrentPopup()"/>
                     </control>
                 </panel>
@@ -165,7 +165,7 @@
             <panel childLayout="vertical" margin="10px">
                 <panel height="256px" childLayout="horizontal">
                     <image id="shuttle_image" width="256px" height="256px"/>
-                    <text width="*" height="256px" text="Landing..." style="base-font"/>
+                    <text width="*" height="256px" text="${gui.landing}" style="base-font"/>
                 </panel>
             </panel>
         </control>
@@ -173,7 +173,7 @@
 
 
     <popup id="planet_scan" childLayout="absolute">
-        <control id="panet_scan_window" name="window" title="Planetary scan" hideOnClose="true" width="60%" height="80%"
+        <control id="panet_scan_window" name="window" title="${gui.scan.title}" hideOnClose="true" width="60%" height="80%"
                  x="20%" y="10%">
             <panel childLayout="vertical">
                 <panel childLayout="horizontal" height="266px">
@@ -185,14 +185,14 @@
                               padding="5px"/>
                     </panel>
                 </panel>
-                <text style="base-font" text="Surface map:"/>
+                <text style="base-font" text="${gui.scan.surface_map}"/>
                 <panel width="100%" height="*" childLayout="horizontal" style="nifty-panel-no-shadow" padding="5px">
                     <panel id="surfaceMapPanel" width="100%" height="90%"/>
                 </panel>
                 <panel height="10px"/>
                 <panel childLayout="horizontal" height="45px">
                     <panel width="85%"/>
-                    <control id="close_button" name="button" label="Ok" height="45px">
+                    <control id="close_button" name="button" label="${gui.ok}" height="45px">
                         <interact onClick="closeCurrentPopup()"/>
                     </control>
                 </panel>
@@ -201,7 +201,7 @@
     </popup>
 
     <popup id="object_scan" childLayout="absolute">
-        <control id="object_scan_window" name="window" title="Object scan" hideOnClose="true" width="60%" x="20%"
+        <control id="object_scan_window" name="window" title="${gui.scan.title}" hideOnClose="true" width="60%" x="20%"
                  y="30%">
             <panel childLayout="vertical">
                 <panel childLayout="horizontal" padding="10px" height="276px">
@@ -215,7 +215,7 @@
                 <panel height="10px"/>
                 <panel childLayout="horizontal" height="45px">
                     <panel width="85%"/>
-                    <control id="close_button" name="button" label="Ok" height="45px">
+                    <control id="close_button" name="button" label="${gui.ok}" height="45px">
                         <interact onClick="closeCurrentPopup()"/>
                     </control>
                 </panel>

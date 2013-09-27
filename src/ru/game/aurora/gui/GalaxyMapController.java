@@ -12,6 +12,7 @@ import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.niffy.ImageButtonController;
 import ru.game.aurora.gui.niffy.TopPanelController;
@@ -100,12 +101,12 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     public void updateStats() {
 
         final Ship ship = world.getPlayer().getShip();
-        topPanelController.setProgress(String.format("Hull: %d/%d", ship.getHull(), ship.getMaxHull()), ship.getHull() / (float) ship.getMaxHull());
+        topPanelController.setProgress(String.format(Localization.getText("gui", "space.hull"), ship.getHull(), ship.getMaxHull()), ship.getHull() / (float) ship.getMaxHull());
         topPanelController.setCrewStats(ship.getScientists(), ship.getEngineers(), ship.getMilitary());
 
         Element shipCoordinates = myScreen.findElementByName("ship_coordinates");
         if (shipCoordinates != null) {
-            shipCoordinates.getRenderer(TextRenderer.class).setText(String.format("Ship coordinates: [%d, %d]", ship.getX(), ship.getY()));
+            shipCoordinates.getRenderer(TextRenderer.class).setText(String.format(Localization.getText("gui", "space.ship_coords"), ship.getX(), ship.getY()));
         }
     }
 
@@ -214,29 +215,29 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(false);
 
-        StringBuilder sb = new StringBuilder("Planetary data:\n");
-        sb.append("Atmosphere: ").append(planet.getAtmosphere()).append('\n');
+        StringBuilder sb = new StringBuilder(Localization.getText("gui", "scan.planetary_data")).append('\n');
+        sb.append(Localization.getText("gui", "scan.atmosphere")).append(' ').append(planet.getAtmosphere()).append('\n');
 
         String sizeText;
         switch (planet.getSize()) {
             case 4:
-                sizeText = "small";
+                sizeText = Localization.getText("gui", "scan.size.small");
                 break;
             case 3:
-                sizeText = "medium";
+                sizeText = Localization.getText("gui", "scan.size.medium");
                 break;
             case 2:
-                sizeText = "large";
+                sizeText = Localization.getText("gui", "scan.size.large");
                 break;
             case 1:
-                sizeText = "huge";
+                sizeText = Localization.getText("gui", "scan.size.huge");
                 break;
             default:
                 throw new IllegalArgumentException();
         }
-        sb.append("Size: ").append(sizeText).append('\n');
-        sb.append("Biological activity: ").append(planet.hasLife() ? "detected" : "not detected").append('\n');
-        sb.append("Surface type: ").append(planet.getCategory()).append('\n');
+        sb.append(Localization.getText("gui", "scan.size")).append(' ').append(sizeText).append('\n');
+        sb.append(Localization.getText("gui", "scan.bio_activity")).append(' ').append(planet.hasLife() ? Localization.getText("gui", "scan.detected") : Localization.getText("gui", "scan.not_detected")).append('\n');
+        sb.append(Localization.getText("gui", "scan.surface_type")).append(' ').append(planet.getCategory()).append('\n');
 
         EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), sb.toString());
 

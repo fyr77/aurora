@@ -17,6 +17,7 @@ import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchProjectState;
@@ -55,7 +56,7 @@ public class ResearchScreenController implements ScreenController {
 
         Element statusLines = tg.getSelectedTab().getElement().findElementByName("statusStrings");
         if (statusLines != null) {
-            EngineUtils.setTextForGUIElement(statusLines, "Status:");
+            EngineUtils.setTextForGUIElement(statusLines, Localization.getText("gui", "research.active.status"));
         }
 
     }
@@ -82,7 +83,7 @@ public class ResearchScreenController implements ScreenController {
 
         TextRenderer tr = tg.getSelectedTab().getElement().findElementByName("selectedItemText").getRenderer(TextRenderer.class);
         if (event.getSelection().isEmpty()) {
-            tr.setText("<No item selected>");
+            tr.setText(Localization.getText("gui", "no_item_selected"));
             imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage("no_image"))));
             return;
         }
@@ -90,7 +91,7 @@ public class ResearchScreenController implements ScreenController {
         ResearchProjectDesc researchProjectDesc;
         Element statusLines = tg.getSelectedTab().getElement().findElementByName("statusStrings");
         if (statusLines != null) {
-            EngineUtils.setTextForGUIElement(statusLines, "Status:");
+            EngineUtils.setTextForGUIElement(statusLines, Localization.getText("gui", "research.active.status"));
         }
         if (ResearchProjectDesc.class.isAssignableFrom(obj.getClass())) {
             researchProjectDesc = (ResearchProjectDesc) obj;
@@ -98,7 +99,7 @@ public class ResearchScreenController implements ScreenController {
             researchProjectDesc = ((ResearchProjectState) obj).desc;
 
             if (statusLines != null) {
-                statusLines.getRenderer(TextRenderer.class).setText("Status: \n" + researchProjectDesc.getStatusString(world, ((ResearchProjectState) obj).scientists));
+                statusLines.getRenderer(TextRenderer.class).setText(Localization.getText("gui", "research.active.status") + "\n" + researchProjectDesc.getStatusString(world, ((ResearchProjectState) obj).scientists));
             }
         } else {
             throw new IllegalStateException("research screen can not show research item of class " + obj.getClass());

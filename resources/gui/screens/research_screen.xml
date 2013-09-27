@@ -38,7 +38,7 @@
                 </panel>
                 <control id="scrollbarPanelId" name="scrollPanel" horizontal="false" childLayout="center">
                     <panel childLayout="center" padding="5px" width="100%">
-                        <text id="selectedItemText" style="base-font" wrap="true" text="No item selected" width="80%" textHAlign="left" />
+                        <text id="selectedItemText" style="base-font" wrap="true" text="${gui.no_item_selected}" width="80%" textHAlign="left" />
                     </panel>
                 </control>
             </panel>
@@ -48,15 +48,15 @@
 
     <screen id="research_screen" controller="ru.game.aurora.gui.ResearchScreenController">
         <layer childLayout="absolute">
-            <control id="research_window" name="window" hideOnClose="true" title="Research" width="80%" height="80%" x="10%" y="10%">
+            <control id="research_window" name="window" hideOnClose="true" title="${gui.research.title}" width="80%" height="80%" x="10%" y="10%">
                 <panel childLayout="vertical">
 
                     <!-- tabs -->
                     <control id="research_tabs" name="tabGroup" buttonWidth="30%" buttonHeight="30px" height="650px">
-                        <control id="active_projects" name="tab" caption="Active" childLayout="center">
+                        <control id="active_projects" name="tab" caption="${gui.research.active.title}" childLayout="center">
                             <control name="list_screen_research" id="active_list_screen" />
                         </control>
-                        <control id="completed_projects" name="tab" caption="Completed">
+                        <control id="completed_projects" name="tab" caption="${gui.research.completed.title}">
                             <control name="list_screen" id="completed_list_screen" />
                         </control>
                     </control>
@@ -65,7 +65,7 @@
                     <panel height="10px"/>
                     <panel childLayout="horizontal" height="50px">
                         <panel width="80%"/>
-                        <control id="close_button" name="button" label="Close" width="150px" height="45px">
+                        <control id="close_button" name="button" label="${gui.close}" width="150px" height="45px">
                             <interact onClick="closeScreen()"/>
                         </control>
                     </panel>
@@ -76,13 +76,13 @@
 
     <screen id="research_report_screen" controller="ru.game.aurora.gui.ResearchReportScreenController">
         <layer childLayout="absolute">
-            <control id="research_report_window" name="window" title="Research report"  width="80%" height="80%" x="10%" y="10%">
+            <control id="research_report_window" name="window" title="${gui.research.report.title}"  width="80%" height="80%" x="10%" y="10%">
                 <panel childLayout="vertical">
                     <panel childLayout="horizontal">
                         <panel id="image_panel" width="256px" height="256px"/>
                         <panel width="10px"/>
                         <panel childLayout="vertical">
-                            <text style="base-font"  text="New research projects available:"/>
+                            <text style="base-font"  text="${gui.research.new_projects_available}"/>
                             <control id="new_research" name="listBox" vertical="optional" horizontal="optional" displayItems="9" selection="Disabled" width="*" height="256px"/>
                         </panel>
                     </panel>
@@ -95,7 +95,7 @@
                     <panel height="10px"/>
                     <panel childLayout="horizontal" height="50px">
                         <panel width="85%"/>
-                        <control id="close_button" name="button" label="Close" width="150px" height="45px">
+                        <control id="close_button" name="button" label="${gui.ok}" width="150px" height="45px">
                             <interact onClick="closeScreen()"/>
                         </control>
                     </panel>
