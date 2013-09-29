@@ -23,12 +23,10 @@ import ru.game.aurora.world.space.HomeworldGenerator;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
-public class RoguesGenerator implements WorldGeneratorPart
-{
+public class RoguesGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = -8911801330633122269L;
 
-    private static class MeetDamagedRogueEvent extends SingleShipEvent
-    {
+    private static class MeetDamagedRogueEvent extends SingleShipEvent {
 
         private static final long serialVersionUID = 4954480685679636543L;
 
@@ -92,7 +90,7 @@ public class RoguesGenerator implements WorldGeneratorPart
                 damagedRogueScout.setSprite("rogues_scout");
                 damagedRogueScout.setAi(null);
                 damagedRogueScout.setCapitain(new NPC(
-                        new Dialog("no_image",
+                        new Dialog("rogue_damaged_scout.after_help", "no_image",
                                 new Statement(0, "Grateful for help. Kindness not be forgotten.", new Reply(0, -1, "You are welcome. Over.")))
                 ));
             }

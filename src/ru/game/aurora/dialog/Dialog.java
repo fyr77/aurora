@@ -13,6 +13,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GUIConstants;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.OverlayWindow;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +31,8 @@ import java.util.Map;
 public class Dialog implements OverlayWindow {
 
     private static final long serialVersionUID = 1L;
+
+    private String id;
 
     private String iconName;
 
@@ -52,20 +56,35 @@ public class Dialog implements OverlayWindow {
         // for gson
     }
 
-    public Dialog(String iconName, Statement... statements) {
+    public Dialog(String id, String iconName, Statement... statements) {
+        this.id = id;
         this.iconName = iconName;
         for (Statement s : statements) {
             this.statements.put(s.id, s);
         }
     }
 
-    public Dialog(String iconName, Map<Integer, Statement> statements) {
+    public Dialog(String id, String iconName, Map<Integer, Statement> statements) {
+        this.id = id;
         this.iconName = iconName;
         this.statements = statements;
     }
 
     public void setListener(DialogListener listener) {
         this.listener = listener;
+    }
+
+    public String getLocalizedNPCText() {
+        return Localization.getText("dialogs", id + "." + currentStatement.id);
+    }
+
+    public List<String> addAvailableRepliesLocalized(World world) {
+        List<Reply> replies = currentStatement.getAvailableReplies(world);
+        List<String> outList = new ArrayList<>(replies.size());
+        for (Reply reply : replies) {
+            outList.add(Localization.getText("dialogs", id + "." + currentStatement.id + "." + reply.replyText));
+        }
+        return outList;
     }
 
     @Override

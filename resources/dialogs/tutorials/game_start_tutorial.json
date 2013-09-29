@@ -1,58 +1,56 @@
 {
+    "id": "game_start",
     "iconName":"scientist_dialog",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"That's it, we have finally left Solar system. My team is anticipating beginning research of everything new we will find! Hope you will not make us wait for long, captain.",
             "replies":[
                 {
                     "targetStatementId":1,
-                    "replyText":"What do you think we shall do now?"
+                    "replyText":"next"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Sure, I will not allow your department to sit idle and play video games for much more. <Skip this tutorial>"
+                    "replyText":"end"
                 }
             ]
         },
 
         "1":{
             "id":1,
-            "npcText":"Well, we should travel now to some other star system and begin exploring it as soon as possible. \n\ <Use arrow keys to move ship, Enter to enter star system>. \n You can also observe list of tasks that are given to us by Earth science society \n <Press 'r' to open research screen> ",
             "replies":[
                 {
                     "targetStatementId":2,
-                    "replyText":"And what do you believe is the best way to explore a star system?"
+                    "replyText":"next"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Yes, that's exactly what I was about to do. Let's start our journey."
+                    "replyText":"end"
                 }
             ]
         },
 
         "2":{
             "id":2,
-            "npcText":"Each star system has a lot to explore. While staying in space, we can scan it, collect information about celestial bodies and build space map. In your Research panel, this is called 'Astronomy research'. It is available in any star system. Also you can send landing parties to planets and artificial space structures to explore them.",
             "replies":[
                 {
                     "targetStatementId":3,
-                    "replyText":"And what we can do on planets?"
+                    "replyText":"next"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Well, just as I expected. Just wanted to be sure that we have same ideas about means of exploration."
+                    "replyText":"end"
                 }
             ]
         },
 
         "3":{
             "id":3,
-            "npcText":"Is this some kind of exam, captain? Landing parties on planets can explore surface and build maps, collect resources, explore alien animals and artifacts, if found.",
+            "npcText":"",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"Yeah, was just checking if our ideas about means of exploration are the same. Now let's start our business."
+                    "replyText":"end"
                 }
             ]
         }

@@ -1,99 +1,96 @@
 {
+    "id": "damaged_rogue_scout.main"
     "iconName":"no_image",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"Assistance is required.",
             "replies":[
                 {
                     "targetStatementId":1,
-                    "replyText":"What has happend to your ship?"
+                    "replyText":"next"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Sorry, no time for this."
+                    "replyText":"end"
                 }
             ]
         },
         "1":{
             "id":1,
-            "npcText":"Attacked by Klisk raider. Managed to blow it up. Suffered critical damage. Require resources to repair engines.",
             "replies":[
                 {
                     "targetStatementId":2,
-                    "replyText":"How much do you need?"
+                    "replyText":"next"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Sorry, we can not spare resources."
+                    "replyText":"end"
                 }
             ]
         },
         "2":{
             "id":2,
-            "npcText":"5 units will be enough. Engines will start and journey will continue.",
+            "npcText":"",
             "replies":[
                 {
                     "targetStatementId":-1,
                     "returnValue" : 1,
-                    "replyText":"We will gladly help you. Prepare for transfer."
+                    "replyText":"help"
                 },
                 {
                     "targetStatementId":3,
-                    "replyText":"And what we will get in return?"
+                    "replyText":"price"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Sorry, we do not have enough."
+                    "replyText":"end"
                 }
             ]
         },
         "3":{
             "id":3,
-            "npcText":"Nothing is free in this world. Some Klisk credits available. Will pay you 5 credits. Nothing more left. Usually do not exchange valuable credits for raw resources, but special circumstances here.",
             "replies":[
                 {
                     "targetStatementId":-1,
                     "returnValue" : 2,
-                    "replyText":"One credit for one resource unit? I like your way of doing business. We accept."
+                    "replyText":"help"
                 },
                 {
                     "targetStatementId":4,
-                    "replyText":"No, that's not enough."
+                    "replyText":"not_enough"
                 },
                 {
                     "targetStatementId":5,
-                    "replyText":"Not too much for your lives. I guess we can get more if just tell Klisk about your location."
+                    "replyText":"sell"
                 }
             ]
         },
         "4":{
             "id":4,
-            "npcText":"Nothing more valuable left on this ship.",
             "replies":[
                 {
                     "targetStatementId":-1,
                     "returnValue" : 2,
-                    "replyText":"All right, we accept your offer but only because of pure kindness."
+                    "replyText":"help"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Then you are just out of luck. Over."
+                    "replyText":"end"
                 },
                 {
                     "targetStatementId":5,
-                    "replyText":"Not too much for your lives. I guess we can get more if just tell Klisk about your location."
+                    "replyText":"sell"
                 }
             ]
         },
         "5":{
             "id":5,
-            "npcText":"It is possible. Preparations will be done for that case. <Alien ship cuts communication>",
+            "npcText":"",
             "replies":[
                 {
                     "returnValue" : 100,
                     "targetStatementId":-1,
-                    "replyText":"<over>"
+                    "replyText":"end"
                 }
             ]
         }

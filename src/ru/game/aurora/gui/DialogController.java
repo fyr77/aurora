@@ -64,14 +64,12 @@ public class DialogController implements ScreenController {
     public void updateDialog() {
         final Dialog dialog = this.dialogs.peek();
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(dialog.getIconName()))));
-        npcText.getRenderer(TextRenderer.class).setText(dialog.getCurrentStatement().npcText);
+        npcText.getRenderer(TextRenderer.class).setText(dialog.getLocalizedNPCText());
 
         if (!replies.getItems().isEmpty()) {
             replies.clear();
         }
-        for (Reply r : dialog.getCurrentStatement().getAvailableReplies(world)) {
-            replies.addItem(r);
-        }
+        replies.addAllItems(dialog.addAvailableRepliesLocalized(world));
         screen.layoutLayers();
     }
 

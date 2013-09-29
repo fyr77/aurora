@@ -99,7 +99,7 @@ public class KliskMainDialogListener implements DialogListener {
                     @Override
                     public NPCShip createShip() {
                         NPCShip ship = kliskDefaultFactory.createShip();
-                        ship.setCapitain(new NPC(new Dialog("klisk_dialog", new Statement(0, "We carry your colonists according to plan. What do you need?", new Reply(0, -1, "Nothing, just checking")))));
+                        ship.setCapitain(new NPC(new Dialog("klisk_evac_dialog", "klisk_dialog", new Statement(0, "We carry your colonists according to plan. What do you need?", new Reply(0, -1, "Nothing, just checking")))));
                         return ship;
                     }
                 }
