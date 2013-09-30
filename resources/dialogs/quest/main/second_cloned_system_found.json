@@ -1,82 +1,76 @@
 {
+    "id": "second_cloned_system_found",
     "iconName":"scientist_dialog",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"Captain, there is something... strange about this star system, though we are not really sure...",
             "replies":[
                 {
                     "targetStatementId":1,
-                    "replyText":"Strange? What do you mean?"
+                    "replyText":"ask"
                 },
                 {
                     "targetStatementId":2,
-                    "replyText":"I see nothing strange about this star system, with except of that it is strangely similar to one we have visited before"
+                    "replyText":"guess"
                 }
             ]
         },
         "1":{
             "id":1,
-            "npcText":"According to our observations, this system is absolutely identical to one we have visited before. Number and size of planets, satellites, their orbits - everything is the same! Looks like these two systems has been done on the same conveyor, literally",
             "replies":[
                 {
                     "targetStatementId":3,
-                    "replyText":"And why is it a problem?"
+                    "replyText":"next"
                 }
             ]
         },
         "2":{
             "id":2,
-            "npcText":"I am impressed. Yes, that is the problem. this system is absolutely identical to one we have visited before. Number and size of planets, satellites, their orbits - everything is the same!",
             "replies":[
                 {
                     "targetStatementId":3,
-                    "replyText":"And why is it a problem?"
+                    "replyText":"next"
                 }
             ]
         },
         "3":{
             "id":3,
-            "npcText":"Such grade of similarity is virtually impossible! We have seen many stars and planets, some are similar, some are different, but none are absolutely identical! This could not have happened naturally!",
             "replies":[
                 {
                     "targetStatementId":4,
-                    "replyText":"Well, you tend to forget the basics of probability theory: even the most less-probable event actually MAY happen, Gordon"
+                    "replyText":"random"
                 } ,
                 {
                     "targetStatementId":5,
-                    "replyText":"So you think this is a result of some kind of sapient work?"
+                    "replyText":"artificial"
                 }
             ]
         } ,
         "4":{
             "id":4,
-            "npcText":"Of course theoretically you are right, but i'd rather believe these systems ware created by some super-powerful alien race, than that they had originated independently and naturally",
             "replies":[
                 {
                     "targetStatementId":6,
-                    "replyText":"Ok, we will investigate that."
+                    "replyText":"next"
                 }
             ]
         }
         ,
         "5":{
             "id":5,
-            "npcText":"Yes, this is most simple and obvious answer. Some kind of system-wide terraforming, or something like that. Or maybe just some alien 'stone garden'.",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"Ok, we will investigate that."
+                    "replyText":"next"
                 }
             ]
         },
         "6":{
             "id":6,
-            "npcText":"Of course theoretically you are right, but i'd rather believe these systems ware created by some super-powerful alien race, than that they had originated independently and naturally",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"Ok, we will investigate that."
+                    "replyText":"next"
                 }
             ]
         }
