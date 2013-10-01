@@ -1,13 +1,13 @@
 {
+    "id" : "aurora_probe_detected",
     "iconName":"scientist_dialog",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"Captain, we have detected a friendly signature in this star system! Most probably this is some piece of equipment from previous expeditions.",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"Ok"
+                    "replyText":"ok"
                 }
             ]
         }

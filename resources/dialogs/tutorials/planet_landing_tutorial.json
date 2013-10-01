@@ -1,55 +1,52 @@
 {
+    "id" : "planet_landing_tutorial",
     "iconName":"marine_dialog",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"My boys are ready for our first deployment, captain. Just be sure to configure landing party properly before we move out. \n <Landing party configuration screen will open on first landing, and can be manually called by pressing 'e'>",
             "replies":[
                 {
                     "targetStatementId":1,
-                    "replyText":"Do you have any suggestions about what landing party should be?"
+                    "replyText":"next"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Yes, I was just about to do this."
+                    "replyText":"end"
                 }
             ]
         },
          "1":{
             "id":1,
-            "npcText":"Well, that depends on its tasks. All landing party members can perform all basic activities (combat, research and excavation), but they are much more efficient doing their own job. \n My marines are best at combat, while scientists - at researching artifacts. Engineers are the fastest in gathering resources.",
             "replies":[
                 {
                     "targetStatementId":2,
-                    "replyText":"So basically even scientists can defend themselves?"
+                    "replyText":"next"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Ok, I'l take that to account."
+                    "replyText":"end"
                 }
             ]
         },
          "2":{
             "id":2,
-            "npcText":"Yes. But they lack the combat skill and heavy weaponry. A single marine is roughly three times more efficient in combat than a civilian. Same ratio applies to other activities. \n Also, it is a question of honor for my guys to protect civilian members, even with their lives. So if casualties happen, marines usually sacrifice themselves first to protect others.",
             "replies":[
                 {
                     "targetStatementId":3,
-                    "replyText":"I see. And how many people can we take to surface now?"
+                    "replyText":"next"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Ok, I'l take that to account."
+                    "replyText":"end"
                 }
             ]
         },
         "3":{
            "id":3,
-           "npcText":"Currently, our landing shuttle can take 10 persons on board. In future perhaps it can be upgraded to greater capacity. \n So for unknown world I will recommend taking at least 4 marines and equal number of scientists and engineers.",
            "replies":[
                {
                    "targetStatementId":-1,
-                   "replyText":"Ok, I'l take that to account."
+                   "replyText":"end"
                }
            ]
        }

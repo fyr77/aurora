@@ -1,17 +1,18 @@
 {
+    "id" : "repair_tutorial",
     "iconName":"engineer_dialog",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"We have suffered some bad damage here. You are the captain, of course, but I should have assigned someone for repairs already <press 'e' to view engineering screen after closing dialog window>",
+            "npcText":"",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"Thank you, Mira, I know what I am doing."
+                    "replyText":"1"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"You are right, I will designate repair works ASAP."
+                    "replyText":"2"
                 }
             ]
         }

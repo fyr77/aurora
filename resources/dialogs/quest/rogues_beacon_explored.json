@@ -1,14 +1,13 @@
 {
+    "id":"rogue_beacon_explored",
     "iconName":"scientist_dialog",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"Captain, we have sent landing parties to that huge alien structure. It seems to be unpopulated and unprotected. Our marines and scientists
- have successfully entered it and are now examining its internals. As soon as they return we will be able to study results.",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"Ok"
+                    "replyText":"ok"
                 }
             ]
         }

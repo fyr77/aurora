@@ -1,51 +1,48 @@
 {
+    "id": "aurora_probe_1",
     "iconName":"scientist_dialog",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"Captain, we have retrieved a probe. According to its ID, it is one of probes that were assigned to Aurora!",
             "replies":[
                 {
                     "targetStatementId":1,
-                    "replyText":"Very good, maybe we have finally found a trail. Did you receive any data from it?"
+                    "replyText":"data"
                 },
                 {
                     "targetStatementId":2,
-                    "replyText":"A probe?"
+                    "replyText":"ask"
                 }
             ]
         },
         "1":{
             "id":1,
-            "npcText":"We have collected all astro data from probe, it was easy. But if we want to get other data, like log messages and transmission records, we will need more time to decrypt and decompress it. I have added this task to our list of research projects",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"Very good, we will decode it when your department has free time"
+                    "replyText":"next"
                 }
             ]
         },
         "2":{
             "id":2,
-            "npcText":"Automated probe, there is a bunch of those on any ship. We also have a pack of them. Aurora captain must have left it here to collect astro data, and never returned",
             "replies":[
                 {
                     "targetStatementId":1,
-                    "replyText":"I see. Did you extract anything valuable out of it?"
+                    "replyText":"next"
                 },
                 {
                     "targetStatementId":3,
-                    "replyText":"Is it useful for us?"
+                    "replyText":"ask"
                 }
             ]
         },
         "3":{
             "id":3,
-            "npcText":"At least it will contain collected astro data about this star system, we could use it instead of collecting on our own. And if we are lucky, it will contain some records from Aurora log concerning their current whereabouts",
             "replies":[
                 {
                     "targetStatementId":1,
-                    "replyText":"I see. Did you extract anything valuable out of it?"
+                    "replyText":"next"
                 }
             ]
         }

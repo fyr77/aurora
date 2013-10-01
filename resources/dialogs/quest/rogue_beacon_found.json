@@ -1,18 +1,17 @@
 {
+    "id" : "rogue_beacon_found",
     "iconName":"scientist_dialog",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"Captain, we have detected two alien structures near this system's sun! The smaller one looks like it is some kind of defence drone and is guarding the larger one. And it has already targeted us!
-  None of them responds to our hails. We should be careful.",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"Ok, we will stay away from them and study from distance"
+                    "replyText":"peace"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Time to check our ship combat performance. Battle stations!"
+                    "replyText":"war"
                 }
             ]
         }
