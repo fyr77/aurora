@@ -27,6 +27,9 @@ public class Localization
     public static String getText(String bundleId, String textId)
     {
         ResourceBundle bundle = ResourceBundle.getBundle(getBundleName(bundleId), currentLocale, new UTF8Control());
+        if (!bundle.containsKey(textId)) {
+            return "<" + bundleId + "/" + textId + ">";
+        }
         return bundle.getString(textId);
     }
 

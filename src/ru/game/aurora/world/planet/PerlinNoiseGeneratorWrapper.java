@@ -8,6 +8,7 @@
 package ru.game.aurora.world.planet;
 
 
+import libnoiseforjava.NoiseGen;
 import libnoiseforjava.exception.ExceptionInvalidParam;
 import libnoiseforjava.module.Perlin;
 import libnoiseforjava.util.NoiseMap;
@@ -26,7 +27,9 @@ public class PerlinNoiseGeneratorWrapper
             noiseMap = new NoiseMap(noiseWidth, noiseHeight);
 
             p.setSeed((int) System.currentTimeMillis() + (seedIncrementer++));
-            NoiseMapBuilderPlane noiseMapBuilderPlane = null;
+            p.setOctaveCount(3);
+            p.setNoiseQuality(NoiseGen.NoiseQuality.QUALITY_FAST);
+            NoiseMapBuilderPlane noiseMapBuilderPlane;
 
             noiseMapBuilderPlane = new NoiseMapBuilderPlane();
             noiseMapBuilderPlane.setSourceModule(p);
@@ -40,5 +43,9 @@ public class PerlinNoiseGeneratorWrapper
         } catch (ExceptionInvalidParam exceptionInvalidParam) {
             throw new IllegalStateException(exceptionInvalidParam);
         }
+    }
+
+    public Perlin getP() {
+        return p;
     }
 }

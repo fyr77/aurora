@@ -35,6 +35,7 @@ public class BuildersRuinGenerator implements WorldGeneratorPart {
 
                 ((Planet) p).setNearestFreePoint(artifact, 15, 15);
                 ((Planet) p).getPlanetObjects().add(artifact);
+                break;
             }
         }
     }

@@ -95,22 +95,25 @@ public class LandscapeGenerator {
 
         for (int y = 0; y < noiseHeight; ++y) {
             for (int x = 0; x < noiseHeight; ++x) {
+                byte tile;
+                final double noiseValue = noiseMap.getValue(x, y);
+                switch (cat) {
+                    case PLANET_ROCK:
+                        tile = getTileForRockPlanet(noiseValue);
+                        break;
+                    case PLANET_ICE:
+                        tile = getTileForIcePlanet(noiseValue);
+                        break;
+                    case PLANET_WATER:
+                        tile = getTileForWaterPlanet(noiseValue);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unsupported planet category for surface generator");
+                }
 
                 for (int i = 0; i < SCALE_FACTOR; ++i) {
                     for (int j = 0; j < SCALE_FACTOR; ++j) {
-                        switch (cat) {
-                            case PLANET_ROCK:
-                                surface[y * SCALE_FACTOR + i][x * SCALE_FACTOR + j] = getTileForRockPlanet(noiseMap.getValue(x, y));
-                                break;
-                            case PLANET_ICE:
-                                surface[y * SCALE_FACTOR + i][x * SCALE_FACTOR + j] = getTileForIcePlanet(noiseMap.getValue(x, y));
-                                break;
-                            case PLANET_WATER:
-                                surface[y * SCALE_FACTOR + i][x * SCALE_FACTOR + j] = getTileForWaterPlanet(noiseMap.getValue(x, y));
-                                break;
-                            default:
-                                throw new IllegalArgumentException("Unsupported planet category for surface generator");
-                        }
+                        surface[y * SCALE_FACTOR + i][x * SCALE_FACTOR + j] = tile;
                     }
                 }
 
