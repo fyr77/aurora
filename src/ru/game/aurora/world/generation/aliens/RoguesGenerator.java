@@ -91,7 +91,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
                 damagedRogueScout.setAi(null);
                 damagedRogueScout.setCapitain(new NPC(
                         new Dialog("rogue_damaged_scout.after_help", "no_image",
-                                new Statement(0, "Grateful for help. Kindness not be forgotten.", new Reply(0, -1, "You are welcome. Over.")))
+                                new Statement(0, "", new Reply(0, -1, "end")))
                 ));
             }
         });

@@ -1,13 +1,13 @@
 {
+    "id" : "klisk",
     "iconName":"klisk_dialog",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"We listen",
             "replies":[
                 {
                     "targetStatementId":1,
-                    "replyText":"Who are you?"
+                    "replyText":"ask"
                 },
                 {
                     "replyConditions" :[
@@ -18,7 +18,7 @@
                         }
                     ],
                     "targetStatementId":13,
-                    "replyText":"We know you sell information, perhaps you can help us?"
+                    "replyText":"sell_info"
                 },
                 {
                     "replyConditions" : [
@@ -28,7 +28,7 @@
                         }
                     ],
                     "targetStatementId":15,
-                    "replyText":"We have information about a stranded Rogue ship, that has destroyed one of your spaceships, but was heavily damaged and is now unable to move. We can sell you information about its location"
+                    "replyText":"damaged_scout"
                 },
 
                 {
@@ -40,168 +40,156 @@
                     ],
 
                     "targetStatementId":100,
-                    "replyText":"We require your assistance. Our homeworld is threatened by Obliterator and we need all help we can get in order to save as much as possible."
+                    "replyText":"evac_assist"
                 },
 
                 {
                     "targetStatementId":-1,
-                    "replyText":"Oops, sorry, pushed wrong button. Bye."
+                    "replyText":"end"
                 }
             ]
         },
         "1":{
             "id":1,
-            "npcText":"We are Klisk",
             "replies":[
                 {
                     "targetStatementId":3,
-                    "replyText":"Can you tell a bit about yourself?"
+                    "replyText":"ask"
                 },
                 {
                     "targetStatementId":2,
-                    "replyText":"Oh, I know, you are the famous interstellar traders?"
+                    "replyText":"trade"
                 }
             ]
         },
         "2":{
             "id":2,
-            "npcText":"We are pleased Klisk are known. We make trade now?",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"No, thanks, we don't have anything to trade right now"
+                    "replyText":"trade"
                 }
             ]
         },
         "3":{
             "id":3,
-            "npcText":"Klisk are traders. And diplomats. We make connections. Between species.",
             "replies":[
                 {
                     "targetStatementId":4,
-                    "replyText":"And what do you offer, exactly?"
+                    "replyText":"goods"
                 },
                 {
                     "targetStatementId":5,
-                    "replyText":"But any service has a price, right?"
+                    "replyText":"price"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"That's all we need for now, goodbye."
+                    "replyText":"end"
                 }
             ]
         },
         "4":{
             "id":4,
-            "npcText":"Klisk offer technology and equipment. Klisk offer information about space and other species. Klisk offer support and translation in communication with species from other classes",
             "replies":[
                 {
                     "targetStatementId":6,
-                    "replyText":"Other classes?"
+                    "replyText":"classes"
                 },
                 {
                     "targetStatementId":3,
-                    "replyText":"Good, but we have more questions"
+                    "replyText":"info"
                 }
             ]
         },
         "5":{
             "id":5,
-            "npcText":"Right. Klisk provide interstellar currency. Credits. All Klisk services are paid with it.",
             "replies":[
                 {
                     "targetStatementId":11,
-                    "replyText":"Credits? How we can get them?"
+                    "replyText":"credits"
                 },
                 {
                     "targetStatementId":3,
-                    "replyText":"I see. We have more questions"
+                    "replyText":"info"
                 }
             ]
         },
         "6":{
             "id":6,
-            "npcText":"All sentinent beings are divided into classes. Species withing same class can theoretically understand each other. You are from most common 2nd class.",
             "replies":[
                 {
                     "targetStatementId":7,
-                    "replyText" : "So you are also from second class if we can communicate?"
+                    "replyText" : "class"
                 },
                 {
                     "targetStatementId":3,
-                    "replyText":"I see. Now back to my other questions..."
+                    "replyText":"info"
                 }
             ]
         },
         "7":{
             "id":7,
-            "npcText":"Yes. But Klisk are unique, we can communicate with species of 1st and 5th classes.",
             "replies":[
                 {
                     "targetStatementId":8,
-                    "replyText":"Why is it so difficult?"
+                    "replyText":"difficulty"
                 },
                 {
                     "targetStatementId":9,
-                    "replyText":"Are there other species who can do it?"
+                    "replyText":"others"
                 }
             ]
         },
         "8":{
             "id":8,
-            "npcText":"Different ways of communication. And more, different mind and logic. Impossible to understand for beings from other classes. Except for us. Klisk are flexible.",
             "replies":[
                 {
                     "targetStatementId":9,
-                    "replyText":"Are there other species who can do it?"
+                    "replyText":"others"
                 }
             ]
         },
         "9":{
             "id":9,
-            "npcText":"Gardeners can. It is hard to say if there is anything they can not do.",
             "replies":[
                 {
                     "targetStatementId":10,
-                    "replyText":"Gardeners?"
+                    "replyText":"gardeners"
                 },
                 {
                     "targetStatementId":3,
-                    "replyText":"I guess you are right... now back to my other questions"
+                    "replyText":"info"
                 }
             ]
         },
         "10":{
             "id":10,
-            "npcText":"Ancient and powerful race. If you haven't yet seen them you will soon. They always contact and welcome newcomers.",
             "replies":[
                 {
                     "targetStatementId":3,
-                    "replyText":"Ok, i want to ask something more"
+                    "replyText":"next"
                 }
             ]
         },
         "11":{
             "id":11,
-            "npcText":"Can get them by selling valuable technology and information to Klisk. Or some other species that use Klisk credits.",
             "replies":[
                 {
                     "targetStatementId":12,
-                    "replyText":"We have some spare resources, can we convert them to credits?"
+                    "replyText":"resources"
                 },
                 {
                     "targetStatementId":3,
-                    "replyText":"Ok, we will remember that for future"
+                    "replyText":"next"
                 }
             ]
         },
         "12":{
             "id":12,
-            "npcText":"No. Raw resources are rarely needed by advanced space-travelling species. Only technology and knowledge have value.",
             "replies":[
                 {
                     "targetStatementId":3,
-                    "replyText":"Ok, i want to ask something more"
+                    "replyText":"next"
                 }
             ]
         },
@@ -210,27 +198,25 @@
 
         "13":{
             "id":13,
-            "npcText":"We listen.",
             "replies":[
                 {
                     "targetStatementId":14,
-                    "replyText":"We have encountered strangely identical star systems... <tell all the information>"
+                    "replyText":"next"
                 }
             ]
         },
 
         "14":{
             "id":14,
-            "npcText":"Twin starsystems. We know about it. Knowledge is quite common and not a secret. It is worth just 1 credit.",
             "replies":[
                 {
                     "returnValue" : 200,
                     "targetStatementId":-1,
-                    "replyText":"Deal. Here is your credit."
+                    "replyText":"deal"
                 },
                 {
                     "targetStatementId":3,
-                    "replyText":"Too expensive for 'quite common knowledge'. We will find it ourselves"
+                    "replyText":"no"
                 }
             ]
         },
@@ -244,16 +230,15 @@
 
         "15":{
             "id":15,
-            "npcText":"We are interested. We will pay 10 credits for this information.",
             "replies":[
                 {
                     "returnValue" : 200,
                     "targetStatementId":-1,
-                    "replyText":"Deal. Transferring its coordinates now..."
+                    "replyText":"deal"
                 },
                 {
                     "targetStatementId":3,
-                    "replyText":"No, that's not enough."
+                    "replyText":"no"
                 }
             ]
         },
@@ -268,16 +253,15 @@
 
         "100":{
             "id":100,
-            "npcText":"Klisk can provide part of Trade Fleet for your needs. Freighting fleet capable of evacuating 10 000 beings / month for remaining time of existence of your homeworld will cost you 10 credits",
             "replies":[
                 {
                     "returnValue" : 300,
                     "targetStatementId":-1,
-                    "replyText":"Deal. Here are your credits."
+                    "replyText":"deal"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"No, this is not acceptable for us."
+                    "replyText":"no"
                 }
             ]
         }

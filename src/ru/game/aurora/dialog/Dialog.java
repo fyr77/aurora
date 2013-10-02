@@ -12,10 +12,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
 
@@ -75,6 +72,10 @@ public class Dialog implements OverlayWindow {
     }
 
     public String getLocalizedNPCText() {
+        if (currentStatement.npcText != null) {
+            // manually set localized string
+            return currentStatement.npcText;
+        }
         return Localization.getText("dialogs", id + "." + currentStatement.id);
     }
 
@@ -161,39 +162,7 @@ public class Dialog implements OverlayWindow {
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
 
-        graphics.drawImage(ResourceManager.getInstance().getImage(iconName), camera.getRelativeX((int) iconRectangle.getX()), camera.getRelativeY((int) iconRectangle.getY()));
-        graphics.setColor(backgroundColor);
-        EngineUtils.drawRectWithBorder(graphics, npcStatementRectangle, camera, Color.yellow, backgroundColor);
-        EngineUtils.drawRectWithBorder(graphics, replyRectangle, camera, Color.yellow, backgroundColor);
 
-        graphics.setColor(Color.yellow);
-
-        EngineUtils.drawRect(graphics, iconRectangle, camera, false);
-
-        EngineUtils.drawString(
-                graphics
-                , currentStatement.npcText
-                , camera.getRelativeX((int) npcStatementRectangle.getX()) + camera.getTileWidth() / 2
-                , camera.getRelativeY((int) npcStatementRectangle.getY()) + camera.getTileHeight() / 2
-                , camera.getTileWidth() * ((int) npcStatementRectangle.getWidth() - 1)
-                , GUIConstants.dialogFont
-                , Color.yellow);
-
-        int i = 0;
-        int lineIdx = 0;
-        for (Reply r : availableReplies) {
-            lineIdx += EngineUtils.drawString(
-                    graphics
-                    , (i + 1) + ": " + r.replyText
-                    , camera.getRelativeX((int) replyRectangle.getX()) + camera.getTileWidth() / 2
-                    , camera.getRelativeY((int) (replyRectangle.getY())) + camera.getTileHeight() / 2 + (lineIdx) * GUIConstants.dialogFont.getLineHeight()
-                    , camera.getTileWidth() * ((int) replyRectangle.getWidth() - 1)
-                    , GUIConstants.dialogFont
-                    , Color.yellow
-            );
-            ++i;
-            ++lineIdx;
-        }
     }
 
     @Override

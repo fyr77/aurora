@@ -36,7 +36,6 @@
 
         "3":{
             "id":3,
-            "npcText":"",
             "replies":[
                 {
                     "targetStatementId":4,
@@ -65,7 +64,6 @@
 
         "5":{
             "id":5,
-            "npcText":"",
             "replies":[
                 {
                     "targetStatementId":6,
@@ -76,7 +74,6 @@
 
         "6":{
             "id":6,
-            "npcText":"",
             "replies":[
                 {
                     "targetStatementId":7,
@@ -87,7 +84,6 @@
 
         "7":{
             "id":7,
-            "npcText":"",
             "replies":[
                 {
                     "targetStatementId":-1,

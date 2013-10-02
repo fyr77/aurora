@@ -1,71 +1,67 @@
 {
+    "id": "rogues_frame",
     "iconName":"no_image",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"Welcome, strangers.",
             "replies":[
                 {
                     "targetStatementId":1,
-                    "replyText":"Who are you?"
+                    "replyText":"next"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"Sorry, no time for this."
+                    "replyText":"end"
                 }
             ]
         },
         "1":{
             "id":1,
-            "npcText":"We are called rogues. We travel in space, trade and follow paths of the void.",
             "replies":[
                 {
                     "targetStatementId":2,
-                    "replyText":"So you are like Klisk? Interstellar traders?"
+                    "replyText":"klisk"
                 }
             ]
         },
 
         "2":{
             "id":2,
-            "npcText":"Do not mention Klisk here.",
             "replies":[
                 {
                     "targetStatementId":3,
-                    "replyText":"Why?"
+                    "replyText":"why"
                 }  ,
                 {
                     "targetStatementId":0,
-                    "replyText" : "Ok, I have other questions."
+                    "replyText" : "other"
                 }
             ]
         },
 
         "3":{
             "id":3,
-            "npcText":"Because for ages we have been rival with them.",
             "replies":[
                 {
                     "targetStatementId":4,
-                    "replyText":"So you fight because you can not share space trade routes? Or something like that?"
+                    "replyText":"push"
                 },
                 {
                     "targetStatementId":0,
-                    "replyText":"I see. I have other questions."
+                    "replyText":"other"
                 }
             ]
         },
         "4":{
             "id":4,
-            "npcText":"Mentioning our rivals is considered to be impolite in our society. As you do not want to understand this, our communication is over",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"Pff, you are so sensitive"
+                    "replyText":"rude"
                 },
                 {
                     "targetStatementId":-1,
-                    "replyText":"I am sorry, I did not want to offend you"
+                    "replyText":"sorry"
                 }
             ]
         }

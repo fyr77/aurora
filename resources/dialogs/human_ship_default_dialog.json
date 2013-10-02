@@ -1,13 +1,13 @@
 {
+    "id": "human_ship_default",
     "iconName":"earth_ship_dialog",
     "statements":{
         "0":{
             "id":0,
-            "npcText":"Greetings. On behalf of my crew and passengers I'm pleased to welcome the famous explorers of space. Can we assist you in any way?",
             "replies":[
                 {
                     "targetStatementId":-1,
-                    "replyText":"No, thanks, were just passing by and decided to make a courtesy visit."
+                    "replyText":"end"
                 }
             ]
         }

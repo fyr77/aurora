@@ -1,6 +1,7 @@
 package ru.game.aurora.world.space.earth;
 
 import de.lessvoid.nifty.Nifty;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.dialog.Statement;
@@ -40,24 +41,24 @@ public class EarthDialogListener implements DialogListener {
                 ((EarthProgressScreenController) GUI.getInstance().getNifty().getScreen("earth_progress_screen").getScreenController()).updateStats();
                 int totalScore = earth.dumpResearch(world);
                 double scorePerTurn = (double) totalScore / (daysPassed);
-                stmt = new Statement(0, String.format("Let us see. You have brought us new %d points of data, giving %f points/day", totalScore, scorePerTurn), new Reply(0, 0, ""));
+                stmt = new Statement(0, String.format(Localization.getText("dialogs", "earth.progress_string"), totalScore, scorePerTurn), new Reply(0, 0, ""));
 
                 if (scorePerTurn < 0.01) {
                     world.getPlayer().increaseFailCount();
                     if (world.getPlayer().getFailCount() > 3) {
                         // unsatisfactory
-                        stmt.replies[0] = new Reply(0, 3, "=continue=");
+                        stmt.replies[0] = new Reply(0, 3, "continue");
                     } else {
                         // poor
-                        stmt.replies[0] = new Reply(0, 2, "=continue=");
+                        stmt.replies[0] = new Reply(0, 2, "continue");
                     }
                 } else {
                     // ok
-                    stmt.replies[0] = new Reply(0, 1, "=continue=");
+                    stmt.replies[0] = new Reply(0, 1, "continue");
                 }
                 earth.setLastVisitTurn(world.getTurnCount());
             } else {
-                stmt = new Statement(0, "We are pleased to see you come back, but your flight was too short to judge your performance. Come back later after you have acquired more data", new Reply(0, -1, "Ok"));
+                stmt = new Statement(0, Localization.getText("dialogs", "earth.trip_too_short"), new Reply(0, -1, "Ok"));
             }
             earth.getProgressDialog().putStatement(stmt);
 

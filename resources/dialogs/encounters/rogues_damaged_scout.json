@@ -30,7 +30,6 @@
         },
         "2":{
             "id":2,
-            "npcText":"",
             "replies":[
                 {
                     "targetStatementId":-1,
@@ -85,7 +84,6 @@
         },
         "5":{
             "id":5,
-            "npcText":"",
             "replies":[
                 {
                     "returnValue" : 100,

@@ -46,7 +46,6 @@
 
         "3":{
             "id":3,
-            "npcText":"",
             "replies":[
                 {
                     "targetStatementId":-1,
