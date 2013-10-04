@@ -115,6 +115,7 @@ public class GUI {
 
         // load xmls
         nifty.addXml("gui/screens/image_button.xml");
+        nifty.addXml("gui/screens/shoot_panel.xml");
         nifty.addXml("gui/screens/progress_bar.xml");
         nifty.addXml("gui/screens/top_panel.xml");
         nifty.addXml("gui/screens/space_gui.xml");

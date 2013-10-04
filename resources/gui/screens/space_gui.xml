@@ -41,6 +41,9 @@
                 </panel>
             </panel>
 
+            <panel height="100px" childLayout="center">
+                <control id="shoot_panel" name="shoot_panel" height="100px"/>
+            </panel>
             <!-- panel containing additional buttons like 'interact' 'land' 'scan' that appear only when needed -->
             <panel id="interactPanel" height="100px" childLayout="horizontal" visible="false">
                 <panel width="40%"/>
@@ -92,6 +95,10 @@
                     </panel>
                     <panel height="*"/>
                 </panel>
+            </panel>
+
+            <panel height="100px" childLayout="center">
+                <control id="shoot_panel" name="shoot_panel" height="100px"/>
             </panel>
 
             <!-- panel containing additional buttons like 'interact' 'land' 'scan' that appear only when needed -->

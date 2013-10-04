@@ -82,7 +82,7 @@
                         <panel id="image_panel" width="256px" height="256px"/>
                         <panel width="10px"/>
                         <panel childLayout="vertical">
-                            <text style="base-font"  text="${gui.research.new_projects_available}"/>
+                            <text style="base-font"  text="${gui.research.report.new_projects_available}"/>
                             <control id="new_research" name="listBox" vertical="optional" horizontal="optional" displayItems="9" selection="Disabled" width="*" height="256px"/>
                         </panel>
                     </panel>
