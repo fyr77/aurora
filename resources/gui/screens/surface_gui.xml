@@ -5,27 +5,9 @@
             <control name="top_panel" id="top_panel"/>
 
             <panel height="*"/>
-
-            <panel id="shootPanel" height="100px" childLayout="horizontal" visible="false">
-                <panel width="40%"/>
-                <panel style="nifty-panel" x="40%" width="256px" childLayout="horizontal" height="100%">
-                    <control id="prev_target" name="button" label="${gui.prev_target}" width="20%" height="90%">
-                        <interact onClick="prevTargetPressed()"/>
-                    </control>
-                    <panel width="10px"/>
-                    <control id="next_target" name="button" label="${gui.next_target}" width="20%" height="90%">
-                        <interact onClick="nextTargetPressed()"/>
-                    </control>
-                    <panel width="10px"/>
-                    <control id="fire" name="button" label="${gui.fire}" width="25%" height="90%">
-                        <interact onClick="firePressed()"/>
-                    </control>
-                    <control id="cancel" name="button" label="${gui.cancel}" width="20%" height="90%">
-                        <interact onClick="cancelPressed()"/>
-                    </control>
-                </panel>
+            <panel height="100px" childLayout="center">
+                <control id="shoot_panel" name="shoot_panel" height="100px"/>
             </panel>
-
             <!-- bottom panel containing weapon buttons and log text -->
             <panel height="113px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
                    imageMode="repeat:0,0,1279,113" padding="20px">

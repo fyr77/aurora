@@ -15,7 +15,7 @@
 
     <screen id="galaxy_map_gui" controller="ru.game.aurora.gui.GalaxyMapController">
         <layer id="starmap_layer" childLayout="vertical">
-           <control name="top_panel" id="top_panel" />
+            <control name="top_panel" id="top_panel"/>
 
             <!-- midlle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
@@ -24,13 +24,16 @@
                     <panel height="30%"/>
                     <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
                            padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
-                        <control id="research_button" name="button" label="${gui.space.research}" width="90%" height="50px">
+                        <control id="research_button" name="button" label="${gui.space.research}" width="90%"
+                                 height="50px">
                             <interact onClick="openResearchScreen()"/>
                         </control>
-                        <control id="engineering_button" name="button" label="${gui.space.engineering}" width="90%" height="50px">
+                        <control id="engineering_button" name="button" label="${gui.space.engineering}" width="90%"
+                                 height="50px">
                             <interact onClick="openEngineeringScreen()"/>
                         </control>
-                        <control id="starmap_button" name="button" label="${gui.space.galaxy_map}" width="90%" height="50px">
+                        <control id="starmap_button" name="button" label="${gui.space.galaxy_map}" width="90%"
+                                 height="50px">
                             <interact onClick="openStarMap()"/>
                         </control>
                         <control id="menu_button" name="button" label="${gui.space.menu}" width="90%" height="50px">
@@ -41,14 +44,16 @@
                 </panel>
             </panel>
 
+
             <panel height="100px" childLayout="center">
-                <control id="shoot_panel" name="shoot_panel" height="100px"/>
+                <control id="shoot_panel" name="shoot_panel" height="100px" width="*"/>
             </panel>
             <!-- panel containing additional buttons like 'interact' 'land' 'scan' that appear only when needed -->
             <panel id="interactPanel" height="100px" childLayout="horizontal" visible="false">
                 <panel width="40%"/>
                 <panel style="nifty-panel" x="40%" width="200px" childLayout="center" height="100%">
-                    <control id="left_button" name="button" label="${gui.space.enter_system_button}" width="90%" height="90%">
+                    <control id="left_button" name="button" label="${gui.space.enter_system_button}" width="90%"
+                             height="90%">
                         <interact onClick="enterStarsystem()"/>
                     </control>
                     <panel width="*"/>
@@ -70,7 +75,7 @@
     <screen id="star_system_gui" controller="ru.game.aurora.gui.GalaxyMapController">
 
         <layer id="starsystem_layer" childLayout="vertical">
-            <control name="top_panel" id="top_panel" />
+            <control name="top_panel" id="top_panel"/>
 
             <!-- midlle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
@@ -79,13 +84,16 @@
                     <panel height="30%"/>
                     <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
                            padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
-                        <control id="research_button" name="button" label="${gui.space.research}" width="90%" height="50px">
+                        <control id="research_button" name="button" label="${gui.space.research}" width="90%"
+                                 height="50px">
                             <interact onClick="openResearchScreen()"/>
                         </control>
-                        <control id="engineering_button" name="button" label="${gui.space.engineering}" width="90%" height="50px">
+                        <control id="engineering_button" name="button" label="${gui.space.engineering}" width="90%"
+                                 height="50px">
                             <interact onClick="openEngineeringScreen()"/>
                         </control>
-                        <control id="landing_party_equip_button" name="button" label="${gui.space.landing_party}" width="90%"
+                        <control id="landing_party_equip_button" name="button" label="${gui.space.landing_party}"
+                                 width="90%"
                                  height="50px">
                             <interact onClick="openLandingPartyScreen()"/>
                         </control>
@@ -180,7 +188,8 @@
 
 
     <popup id="planet_scan" childLayout="absolute">
-        <control id="panet_scan_window" name="window" title="${gui.scan.title}" hideOnClose="true" width="60%" height="80%"
+        <control id="panet_scan_window" name="window" title="${gui.scan.title}" hideOnClose="true" width="60%"
+                 height="80%"
                  x="20%" y="10%">
             <panel childLayout="vertical">
                 <panel childLayout="horizontal" height="266px">

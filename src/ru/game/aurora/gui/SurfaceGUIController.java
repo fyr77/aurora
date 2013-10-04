@@ -92,4 +92,20 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
             planet.leavePlanet(world);
         }
     }
+
+    public void nextTargetPressed() {
+        ((Planet) world.getCurrentRoom()).getController().updateShoot(world, true, false, false);
+    }
+
+    public void prevTargetPressed() {
+        ((Planet) world.getCurrentRoom()).getController().updateShoot(world, false, true, false);
+    }
+
+    public void firePressed() {
+        ((Planet) world.getCurrentRoom()).getController().updateShoot(world, false, false, true);
+    }
+
+    public void cancelPressed() {
+        ((Planet) world.getCurrentRoom()).getController().changeMode();
+    }
 }

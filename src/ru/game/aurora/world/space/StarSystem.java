@@ -268,7 +268,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
     }
 
-    private void updateShoot(GameContainer container, World world) {
+    public void updateShoot(World world, boolean next, boolean prev, boolean shoot) {
         if (ships.isEmpty()) {
             // nothing to shoot at
             return;
@@ -302,12 +302,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             return;
         }
 
-        if (container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
+        if (next) {
             targetIdx++;
             if (targetIdx >= availableTargets.size()) {
                 targetIdx = 0;
             }
-        } else if (container.getInput().isKeyPressed(Input.KEY_DOWN) || container.getInput().isKeyPressed(Input.KEY_LEFT)) {
+        } else if (prev) {
             targetIdx--;
             if (targetIdx < 0) {
                 targetIdx = availableTargets.size() - 1;
@@ -316,7 +316,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         target = availableTargets.get(targetIdx);
 
-        if (container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(selectedWeapon + Input.KEY_1)) {
+        if (shoot) {
 
             if (weapon.getReloadTimeLeft() > 0) {
                 GameLogger.getInstance().logMessage("Weapon not yet reloaded");
@@ -360,10 +360,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
 
             mode = MODE_SHOOT;
+            GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(true);
         } else {
             mode = MODE_MOVE;
+            GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(false);
         }
     }
+
 
     @Override
     public void update(GameContainer container, World world) {
@@ -395,7 +398,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 }
             }
         } else {
-            updateShoot(container, world);
+            updateShoot(
+                    world
+                    , container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_RIGHT)
+                    , container.getInput().isKeyPressed(Input.KEY_DOWN) || container.getInput().isKeyPressed(Input.KEY_LEFT)
+                    , container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(selectedWeapon + Input.KEY_1)
+            );
             if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
                 mode = MODE_MOVE;
             }

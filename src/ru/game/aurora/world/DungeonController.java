@@ -175,7 +175,7 @@ public class DungeonController implements Serializable {
     /**
      * This update method is used in FIRE mode. Selecting targets and shooting.
      */
-    private void updateShoot(GameContainer container, World world) {
+    public void updateShoot(World world, boolean nextTarget, boolean prevTarget, boolean shoot) {
         if (map.getObjects().isEmpty()) {
             return;
         }
@@ -213,12 +213,12 @@ public class DungeonController implements Serializable {
             return;
         }
 
-        if (container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
+        if (nextTarget) {
             targetIdx++;
             if (targetIdx >= availableTargets.size()) {
                 targetIdx = 0;
             }
-        } else if (container.getInput().isKeyPressed(Input.KEY_DOWN) || container.getInput().isKeyPressed(Input.KEY_LEFT)) {
+        } else if (prevTarget) {
             targetIdx--;
             if (targetIdx < 0) {
                 targetIdx = availableTargets.size() - 1;
@@ -227,7 +227,7 @@ public class DungeonController implements Serializable {
 
         target = availableTargets.get(targetIdx);
 
-        if (container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER)) {
+        if (shoot) {
             // firing
             final int damage = landingParty.calcDamage();
 
@@ -247,6 +247,7 @@ public class DungeonController implements Serializable {
 
     public void changeMode() {
         mode = (mode == MODE_MOVE) ? MODE_SHOOT : MODE_MOVE;
+        GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(mode == MODE_SHOOT);
     }
 
     public void update(GameContainer container, World world) {
@@ -271,7 +272,12 @@ public class DungeonController implements Serializable {
                     mode = MODE_MOVE;
                     return;
                 }
-                updateShoot(container, world);
+                updateShoot(
+                        world
+                        , container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_RIGHT)
+                        , container.getInput().isKeyPressed(Input.KEY_DOWN) || container.getInput().isKeyPressed(Input.KEY_LEFT)
+                        , container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER)
+                );
                 break;
             default:
                 throw new IllegalStateException("Unknown planet update type " + mode);
