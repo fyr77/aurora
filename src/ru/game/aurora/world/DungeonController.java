@@ -284,9 +284,24 @@ public class DungeonController implements Serializable {
 
         }
         // should always be done after player update, so that world.isUpdatedThisFrame() flag is set
+        boolean isAtObject = false;
         for (PlanetObject a : map.getObjects()) {
             a.update(container, world);
+            if (landingParty.getDistance(a) == 0) {
+                isAtObject = true;
+            }
         }
+
+        final Element interactPanel = GUI.getInstance().getNifty().getScreen("surface_gui").findElementByName("interactPanel");
+        if (interactPanel != null) {
+            boolean interactPanelVisible = interactPanel.isVisible();
+            if (!isAtObject && interactPanelVisible) {
+                interactPanel.setVisible(false);
+            } else if (isAtObject && !interactPanelVisible) {
+                interactPanel.setVisible(true);
+            }
+        }
+
 
         if (world.isUpdatedThisFrame() && !map.getVictoryConditions().isEmpty()) {
             boolean allConditionsSatisfied = true;

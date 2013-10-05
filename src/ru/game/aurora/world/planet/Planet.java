@@ -262,11 +262,7 @@ public class Planet extends BasePlanet {
                 leavePlanet(world);
             }
         }
-
-        if (atmosphere != PlanetAtmosphere.BREATHABLE_ATMOSPHERE && world.isUpdatedThisFrame()) {
-            world.getPlayer().getLandingParty().consumeOxygen();
-        }
-
+        checkAndConsumeOxygen();
         if (world.getPlayer().getLandingParty().getOxygen() < 0 || world.getPlayer().getLandingParty().getTotalMembers() == 0) {
             controller.onLandingPartyDestroyed(world);
         }
@@ -349,5 +345,11 @@ public class Planet extends BasePlanet {
 
     public DungeonController getController() {
         return controller;
+    }
+
+    public void checkAndConsumeOxygen() {
+        if (atmosphere != PlanetAtmosphere.BREATHABLE_ATMOSPHERE && world.isUpdatedThisFrame()) {
+            world.getPlayer().getLandingParty().consumeOxygen();
+        }
     }
 }

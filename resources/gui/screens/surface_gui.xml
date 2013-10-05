@@ -8,18 +8,24 @@
             <panel height="100px" childLayout="center">
                 <control id="shoot_panel" name="shoot_panel" height="100px"/>
             </panel>
+
+            <panel id="interactPanel" height="100px" childLayout="horizontal" visible="false">
+                <panel width="40%"/>
+                <panel style="nifty-panel" x="40%" width="200px" childLayout="center" height="100%">
+                    <control id="left_button" name="button" label="${gui.surface.interact}" width="90%"
+                             height="90%">
+                        <interact onClick="interactClicked()"/>
+                    </control>
+                    <panel width="*"/>
+                </panel>
+            </panel>
             <!-- bottom panel containing weapon buttons and log text -->
             <panel height="113px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
                    imageMode="repeat:0,0,1279,113" padding="20px">
                 <control id="weapon_button" name="button" label="${gui.surface.fire}" width="64px" height="64px">
                     <interact onClick="weaponClicked()"/>
                 </control>
-                <panel width="10px"/>
-                <control id="interact_button" name="button" label="${gui.surface.interact}" width="64px" height="64px">
-                    <interact onClick="interactClicked()"/>
-                </control>
-
-                <panel width="168px"/>
+                <panel width="242px"/>
 
                 <panel width="60%" childLayout="vertical">
                     <panel height="15px"/>

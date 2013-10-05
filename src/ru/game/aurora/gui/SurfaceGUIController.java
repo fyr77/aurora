@@ -91,6 +91,9 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         if (planet.getShuttle().getDistance(world.getPlayer().getLandingParty()) == 0) {
             planet.leavePlanet(world);
         }
+        world.setUpdatedThisFrame(true);
+        planet.checkAndConsumeOxygen();
+        updateStats();
     }
 
     public void nextTargetPressed() {
