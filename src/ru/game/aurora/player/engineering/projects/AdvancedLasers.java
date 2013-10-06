@@ -7,6 +7,7 @@
 package ru.game.aurora.player.engineering.projects;
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.world.Ship;
@@ -14,19 +15,18 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 
 
-public class AdvancedLasers extends EngineeringProject
-{
+public class AdvancedLasers extends EngineeringProject {
     private static final long serialVersionUID = -6929677248004188022L;
 
     public AdvancedLasers() {
-        super("Advanced laser cannons", "New technology can improve our laser weapons, by better focusing their beams and increasing energy output", "ship_laser2");
+        super("advanced_lasers", "ship_laser2");
         remainingProgress = 10;
     }
 
     @Override
     public void onCompleted(World world) {
         Ship ship = world.getPlayer().getShip();
-        GameLogger.getInstance().logMessage("Upgrading laser cannons...");
+        GameLogger.getInstance().logMessage(Localization.getText("engineering", "advanced_lasers.end_message"));
         for (int idx = 0; idx < ship.getWeapons().size(); ++idx) {
             StarshipWeapon sw = ship.getWeapons().get(idx);
             if (sw.getWeaponDesc().getId().equals("laser_cannon")) {

@@ -83,9 +83,7 @@ public class KliskMainDialogListener implements DialogListener {
         }
 
         world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
-                "First benefits of interstellar diplomacy"
-                , "As it was declared yesterday, representatives of Klisk alien race will help our newly-developing colony. They will" +
-                " provide transport starships as well as some types of equipment and expertise. This will greatly speed up construction of a first human settlement outside of Solar system."
+                "klisk_help_evac"
                 , "news"
         ));
 

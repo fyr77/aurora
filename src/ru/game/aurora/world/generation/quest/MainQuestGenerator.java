@@ -100,9 +100,7 @@ public class MainQuestGenerator implements WorldGeneratorPart {
                             isAlive = false;
                             world.getPlayer().getEarthState().getMessages().add(
                                     new PrivateMessage(
-                                            "Greatest known artificial structure discovered"
-                                            , "UNS " + world.getPlayer().getShip().getName() + " has encountered the biggest artificial structure ever seen by man in a distant star system. A huge object of " +
-                                            "unknown origin, larger than a star, can be seen on these amazing photos. Who has created it? What is its purpose? What power does it have? Read more in next issue of 'Galaxy News'."
+                                            "obliterator_discovered"
                                             , "news"
                                     )
                             );

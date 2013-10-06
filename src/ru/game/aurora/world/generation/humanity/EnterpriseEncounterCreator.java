@@ -23,21 +23,18 @@ import ru.game.aurora.world.space.NPCShip;
  * Adds private messages from its captain.
  * Adds chance of meeting it in space.
  */
-public class EnterpriseEncounterCreator extends GameEventListener
-{
+public class EnterpriseEncounterCreator extends GameEventListener {
     private static final long serialVersionUID = 2077112120543067387L;
 
     private int turnCount;
 
     private boolean isAlive = true;
 
-    public EnterpriseEncounterCreator()
-    {
+    public EnterpriseEncounterCreator() {
         turnCount = CommonRandom.getRandom().nextInt(50) + 50;
     }
 
-    private static class EnterpriseDialogListener implements DialogListener
-    {
+    private static class EnterpriseDialogListener implements DialogListener {
 
         private static final long serialVersionUID = 8961118747394070541L;
 
@@ -67,20 +64,11 @@ public class EnterpriseEncounterCreator extends GameEventListener
 
         // spawn private messages.
         world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
-                "At last",
-                "Hello! \n At last my time on Earth is over, they have finally finished building my ship and we are leaving in a couple of days. So don't think you will be ahead of your teacher anymore." +
-                        " And guess how they named her? Enterprise, like in that old movie, heh. \n" +
-                        " So now we are joining you in your search. Looking forward to meet you in outer space, boy. \n" +
-                        " Derek McCartney, captain of UNS Enterprise, can't stop laughing from that name.",
+                "enterprise_1",
                 "message"
         ));
 
-        world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("Aurora project news: new ship launched"
-        , "A new ship from the Aurora project has been successfully launched this friday. It will explore new sector of galaxy near the Orion star system, its main" +
-                " objective is establishing diplomatic contacts with alien species in this region. \n " +
-                " Ship is called UNS Enterprise, based on hundreds of thousands pleas, received from Star Trek fans. It is the third ship in this series, capable of carrying up to a " +
-                "thousand crew members, scientists and explorers." +
-                "\n It return is scheduled for autumn of a next year.", "news"));
+        world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("enterprise_launch", "news"));
 
 
         Dialog captainDialog = Dialog.loadFromFile("dialogs/encounters/enterprise.json");

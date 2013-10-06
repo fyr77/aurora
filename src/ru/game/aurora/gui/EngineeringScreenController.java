@@ -24,8 +24,7 @@ import ru.game.aurora.player.engineering.HullRepairs;
 import ru.game.aurora.world.World;
 
 
-public class EngineeringScreenController implements ScreenController
-{
+public class EngineeringScreenController implements ScreenController {
     private World world;
 
     EngineeringState engineeringState;
@@ -73,15 +72,13 @@ public class EngineeringScreenController implements ScreenController
 
     }
 
-    private void updateLabels()
-    {
+    private void updateLabels() {
         pointsText.getRenderer(TextRenderer.class).setText(Localization.getText("gui", "engineering.repairs.hull_points_to_repair") + " " + engineeringState.getHullRepairs().remainingPoints);
         engiText.getRenderer(TextRenderer.class).setText(Localization.getText("gui", "engineering.repairs.assigned_engineers") + " " + engineeringState.getHullRepairs().engineersAssigned);
         ruText.getRenderer(TextRenderer.class).setText(String.format(Localization.getText("gui", "engineering.repairs.resource_units_required"), engineeringState.getHullRepairs().calcResCost(), world.getPlayer().getResourceUnits()));
     }
 
-    public void onHullPointsDecreased()
-    {
+    public void onHullPointsDecreased() {
         if (engineeringState.getHullRepairs().remainingPoints > 0) {
             engineeringState.getHullRepairs().remainingPoints--;
             if (engineeringState.getHullRepairs().remainingPoints == 0) {
@@ -93,8 +90,7 @@ public class EngineeringScreenController implements ScreenController
         }
     }
 
-    public void onHullPointsIncreased()
-    {
+    public void onHullPointsIncreased() {
         if (world.getPlayer().getShip().getHull() + engineeringState.getHullRepairs().remainingPoints < world.getPlayer().getShip().getMaxHull()) {
             if (engineeringState.getHullRepairs().remainingPoints == 0) {
                 engineeringState.getHullRepairs().resetProgress();
@@ -104,8 +100,7 @@ public class EngineeringScreenController implements ScreenController
         }
     }
 
-    public void onEngineersDecreased()
-    {
+    public void onEngineersDecreased() {
         if (engineeringState.getHullRepairs().engineersAssigned > 0) {
             engineeringState.getHullRepairs().engineersAssigned--;
             engineeringState.addIdleEngineers(1);
@@ -113,8 +108,7 @@ public class EngineeringScreenController implements ScreenController
         }
     }
 
-    public void onEngineersIncreased()
-    {
+    public void onEngineersIncreased() {
 
         if (engineeringState.getIdleEngineers() > 0) {
             engineeringState.getHullRepairs().engineersAssigned++;
@@ -123,14 +117,12 @@ public class EngineeringScreenController implements ScreenController
         }
     }
 
-    @NiftyEventSubscriber(id="engineering_window")
-    public void onClose(final String id, final WindowClosedEvent event)
-    {
+    @NiftyEventSubscriber(id = "engineering_window")
+    public void onClose(final String id, final WindowClosedEvent event) {
         closeScreen();
     }
 
-    public void closeScreen()
-    {
+    public void closeScreen() {
         GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
     }
 
@@ -151,7 +143,7 @@ public class EngineeringScreenController implements ScreenController
             return;
         }
         EngineeringProject ep = (EngineeringProject) event.getSelection().get(0);
-        tr.setText(ep.getText());
+        tr.setText(ep.getLocalizedText("engineering"));
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(ep.getIcon()))));
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
@@ -178,7 +170,7 @@ public class EngineeringScreenController implements ScreenController
             return;
         }
         EngineeringProject ep = (EngineeringProject) avail.getSelection().get(0);
-        if (ep.getEngineersAssigned()== 0) {
+        if (ep.getEngineersAssigned() == 0) {
             return;
         }
         ep.changeEngineers(-1);
@@ -191,7 +183,7 @@ public class EngineeringScreenController implements ScreenController
     public void onClicked(String id, ButtonClickedEvent event) {
 
         int numericId = Integer.parseInt(id.split("#")[0]);
-        ListBox itemsList =  tg.getSelectedTab().getElement().findNiftyControl("itemsList", ListBox.class);
+        ListBox itemsList = tg.getSelectedTab().getElement().findNiftyControl("itemsList", ListBox.class);
         // hack. No idea how ids are distributed between list elements, they seem to start from arbitrary number and be sorted in ascending order
         // so in order to get index of clicked element, must subtract from its id id of the first one
         numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());

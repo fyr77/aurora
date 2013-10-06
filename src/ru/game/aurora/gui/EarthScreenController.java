@@ -73,7 +73,7 @@ public class EarthScreenController implements ScreenController {
             return;
         }
         PrivateMessage pm = (PrivateMessage) event.getSelection().get(0);
-        tr.setText(pm.getText());
+        tr.setText(pm.getLocalizedText("private_messages"));
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(pm.getIcon()))));
         messagesList.layoutElements();
     }

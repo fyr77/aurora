@@ -44,10 +44,7 @@ public class BiologyResearch extends EarthResearch {
         if (materialCount >= TARGET_COUNT) {
             world.getPlayer().getEarthState().getMessages().add(
                     new PrivateMessage(
-                            "Cancer cure comes from space"
-                            , "As it was announced on recent annual congress on Extraterrestrial Biology, scientists have discovered a possible way to effectively cure cancer. Special " +
-                            " type of immune system cells, found in one of alien lifeforms brought from distant planet by Aurora project ship, effectively destroys cancer cells and swellings. \n" +
-                            " Scientists declare that after they succeed in synthesizing such cells in human body, cancer will be completely defeated."
+                            "cancer_cure"
                             , "news"
                     )
             );

@@ -116,18 +116,12 @@ public class Earth extends Planet {
             protected void onCompleted(World world) {
                 world.getPlayer().getEarthState().getEvacuationState().changeEvacuationSpeed(100);
                 world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
-                        "Colonization begins!",
-                        "UN government together with Aurora project officials has made a long-expected announcement. Finally humanity begins interstellar colonization! \n" +
-                                " Currently, everyone can make a request to enter the colonization program. Of course, preference is given to those who have good health and speciality, suitable for needs of a new colony. \n" +
-                                " Colonization plan is scheduled for next 10 years, new interstellar ships are laid entirely for its purposes. First colony ship will leave shortly.",
+                        "evac_start",
                         "news"
                 ));
 
                 world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
-                        "Form #312-b [SECRET]",
-                        "As a high-ranked Aurora project officer, you are allowed to select 2 other people that will be taken to a new colony. They are guaranteed a place on an evacuation ship. \n" +
-                                " They must be no older than 45 years, be your first-order relatives (including wife and children) and pass a medical test. Please, fill attached form and submit it to Aurora Special Operations Desk. \n " +
-                                " Remember, number of people we can save is heavily limited, so chose wisely. If you do not have any relatives you personally want to save, report this as soon as possible.",
+                        "evac_start_2",
                         "message"
                 ));
             }
