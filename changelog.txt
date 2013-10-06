@@ -1,6 +1,9 @@
-VERSION 0.0.11
+VERSION 0.1.0
 
 IN PROGRESS...
+
++ Localization support
++ New gui panel for target selection
 
 =====================================================
 
