@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="64" tileheight="64">
+<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="64" tileheight="64">
  <tileset firstgid="1" source="rogues_tiles.tsx"/>
- <tileset firstgid="21" source="editor_tileset.tsx"/>
- <layer name="surface" width="32" height="32">
+ <layer name="floor" width="20" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OUQoAIAgEUbv/pbuAYrJaEPPAX2fNYiu5DtHfrD3ZV46+3j/d5f3oVG1PbFD30f+3H2246XUfAAAANRsOP9KgABAAAA==
+   H4sIAAAAAAAAC8VUyw4AEAzb/P9HuziIRNfOcGiI0XaPaGbWBnzas3Dw1ieo5yh+qrPTUsB6VvON9Ji81nX1y/p7yVcBNJ9srJoPzW0F3636Mb5QfzN5/uaLapP5R9T7ak9QHbLzr/B1MMBFPUAGAAA=
   </data>
  </layer>
- <objectgroup name="objects" width="32" height="32">
-  <object type="entryPoint" gid="21" x="128" y="256" width="64" height="64"/>
-  <object type="exitPoint" gid="22" x="128" y="256" width="128" height="64"/>
-  <object type="ru.game.aurora.world.dungeon.KillAllMonstersCondition" gid="23" x="61" y="626" width="64" height="64">
+ <objectgroup name="objects" width="20" height="20">
+  <object type="entryPoint" x="192" y="64" width="64" height="64"/>
+  <object type="exitPoint" x="192" y="0" width="64" height="64"/>
+  <object name="bottomLeftDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="22" x="256" y="960" width="64" height="64">
    <properties>
-    <property name="tags" value="guard"/>
+    <property name="imageClose" value="rogues_tileset"/>
+    <property name="imageCloseTileX" value="1"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="rogues_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="6"/>
    </properties>
   </object>
-  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="704" y="128" width="64" height="64">
-   <properties>
-    <property name="hp" value="5"/>
-    <property name="image" value="rogues_tileset"/>
-    <property name="imageTileX" value="3"/>
-    <property name="imageTileY" value="0"/>
-    <property name="speed" value="2"/>
-    <property name="tags" value="guard"/>
-    <property name="weapon" value="plasma"/>
-   </properties>
-  </object>
-  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1152" y="320" width="64" height="64">
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1024" y="1152" width="64" height="64">
    <properties>
     <property name="hp" value="5"/>
     <property name="image" value="rogues_tileset"/>
@@ -37,7 +30,60 @@
     <property name="weapon" value="plasma"/>
    </properties>
   </object>
-  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1088" y="768" width="64" height="64">
+  <object name="bottomRightDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="24" x="832" y="1152" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="rogues_tileset"/>
+    <property name="imageCloseTileX" value="3"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="rogues_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="2"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="512" y="1216" width="64" height="64">
+   <properties>
+    <property name="door" value="bottomRightDoor"/>
+    <property name="imageNormal" value="rogues_tileset"/>
+    <property name="imageNormalTileX" value="0"/>
+    <property name="imageNormalTileY" value="6"/>
+    <property name="imagePress" value="rogues_tileset"/>
+    <property name="imagePressTileX" value="1"/>
+    <property name="imagePressTileY" value="6"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="1024" y="1024" width="64" height="64">
+   <properties>
+    <property name="door" value="bottomLeftDoor"/>
+    <property name="imageNormal" value="rogues_tileset"/>
+    <property name="imageNormalTileX" value="0"/>
+    <property name="imageNormalTileY" value="6"/>
+    <property name="imagePress" value="rogues_tileset"/>
+    <property name="imagePressTileX" value="1"/>
+    <property name="imagePressTileY" value="6"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="448" y="832" width="64" height="64">
+   <properties>
+    <property name="door" value="topLeftDoor"/>
+    <property name="imageNormal" value="rogues_tileset"/>
+    <property name="imageNormalTileX" value="0"/>
+    <property name="imageNormalTileY" value="6"/>
+    <property name="imagePress" value="rogues_tileset"/>
+    <property name="imagePressTileX" value="1"/>
+    <property name="imagePressTileY" value="6"/>
+   </properties>
+  </object>
+  <object name="topLeftDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="22" x="256" y="768" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="rogues_tileset"/>
+    <property name="imageCloseTileX" value="1"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="rogues_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="6"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="192" y="1152" width="64" height="64">
    <properties>
     <property name="hp" value="5"/>
     <property name="image" value="rogues_tileset"/>
@@ -48,7 +94,29 @@
     <property name="weapon" value="plasma"/>
    </properties>
   </object>
-  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1216" y="768" width="64" height="64">
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="704" y="832" width="64" height="64">
+   <properties>
+    <property name="hp" value="5"/>
+    <property name="image" value="rogues_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value="guard"/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="576" y="256" width="64" height="64">
+   <properties>
+    <property name="hp" value="5"/>
+    <property name="image" value="rogues_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value="guard"/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="256" y="832" width="64" height="64">
    <properties>
     <property name="hp" value="5"/>
     <property name="image" value="rogues_tileset"/>
@@ -60,12 +128,12 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="walls" width="32" height="32">
+ <layer name="walls" width="20" height="20">
   <properties>
    <property name="isObstacle" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2TyQqAMAxEC1JFRcXl/7/VFgwMwRSXuhzmQQ4taWeaJs7ZjCF6I6bEuTNojQn2h8S5OpN+q9bd5iOljXl3a6L1LXyIMkSVyLlSE61v6cS7G8iXPMy9oj/DPTEW2EcP+C8e8vANuXrC8qY9RrBPo8dcc3GEvRl504PVu7n/4Yh+8YE+9qjo6958GqmB6L/1dsGaX0IIIYQQ8k9WqiV+GwAQAAA=
+   H4sIAAAAAAAAC51U0Q7CMAjkRaczs26r8f//VIhtQpCDrST30oNjwOlKRE9GoV8sjI0xM9bGWWyAk/cH/ce95ReH6zyqO/PeYwG9Ir2dMQWaXkR6s8NdGNcGr5fW07kV6Mmcfe+7o631em52q16n71vUO6pBO4/qsjuiGNGTfaL7Zr6wexWtajgNzU1GT+/13d4/lP+27C2yec/kHJnXzuZx3h7QvHZO7bHof+es/6L5R/wnfW4DepH/UIx8u/R5BTWeZythP2c+/wImWfKqQAYAAA==
   </data>
  </layer>
 </map>
