@@ -302,7 +302,6 @@ public class DungeonController implements Serializable {
 
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
         if (landingParty != null) {
-            landingParty.draw(container, graphics, camera);
 
             graphics.setColor(Color.red);
             for (PlanetObject a : map.getObjects()) {
@@ -321,6 +320,8 @@ public class DungeonController implements Serializable {
                 }
 
             }
+
+            landingParty.draw(container, graphics, camera);
 
             if (mode == MODE_SHOOT && target != null) {
                 // draw target mark
