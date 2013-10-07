@@ -13,10 +13,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.BasePositionable;
-import ru.game.aurora.world.DungeonController;
-import ru.game.aurora.world.Positionable;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.planet.nature.PlanetFloraAndFauna;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.space.StarSystem;
@@ -31,10 +28,8 @@ import java.util.concurrent.Future;
  * Contains planetary data - atmosphere, size, flora and fauna (if any)
  * Contains Room - planet surface, with logic for landing party movement.
  */
-public class Planet extends BasePlanet {
-
+public class Planet extends BasePlanet implements IDungeon {
     private static final long serialVersionUID = 3L;
-
 
     private SurfaceTileMap surface = null;
 
@@ -345,6 +340,11 @@ public class Planet extends BasePlanet {
 
     public DungeonController getController() {
         return controller;
+    }
+
+    @Override
+    public ITileMap getMap() {
+        return surface;
     }
 
     public void checkAndConsumeOxygen() {

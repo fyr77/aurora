@@ -9,7 +9,7 @@ import ru.game.aurora.world.planet.LandingParty;
 /**
  * Dungeon is a location with a fixed tiled map, which can be explored by player landing party
  */
-public class Dungeon implements Room {
+public class Dungeon implements Room, IDungeon {
     private static final long serialVersionUID = -6449421434646859444L;
 
     private ITileMap map;
@@ -41,11 +41,14 @@ public class Dungeon implements Room {
         controller.draw(container, graphics, camera);
     }
 
+    @Override
     public DungeonController getController() {
         return controller;
     }
 
+    @Override
     public ITileMap getMap() {
         return map;
     }
+
 }

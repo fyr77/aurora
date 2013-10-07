@@ -13,8 +13,8 @@ import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.gui.niffy.TopPanelController;
-import ru.game.aurora.world.Dungeon;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.IDungeon;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
@@ -65,7 +65,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
 
     @Override
     public void onTurnEnded(World world) {
-        if (!(world.getCurrentRoom() instanceof Planet) && !(world.getCurrentRoom() instanceof Dungeon)) {
+        if (!(world.getCurrentRoom() instanceof Planet) && !(world.getCurrentRoom() instanceof IDungeon)) {
             return;
         }
         updateStats();
@@ -82,33 +82,30 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     }
 
     public void weaponClicked() {
-        ((Planet) world.getCurrentRoom()).getController().changeMode();
+        ((IDungeon) world.getCurrentRoom()).getController().changeMode();
     }
 
     public void interactClicked() {
-        Planet planet = (Planet) world.getCurrentRoom();
-        planet.getController().interactWithObject(world);
-        if (planet.getShuttle().getDistance(world.getPlayer().getLandingParty()) == 0) {
-            planet.leavePlanet(world);
-        }
-        world.setUpdatedThisFrame(true);
-        planet.checkAndConsumeOxygen();
+        IDungeon dungeon = (IDungeon) world.getCurrentRoom();
+        dungeon.getController().interactWithObject(world);
+        world.setUpdatedNextFrame(true);
         updateStats();
     }
 
     public void nextTargetPressed() {
-        ((Planet) world.getCurrentRoom()).getController().updateShoot(world, true, false, false);
+        ((IDungeon) world.getCurrentRoom()).getController().updateShoot(world, true, false, false);
     }
 
     public void prevTargetPressed() {
-        ((Planet) world.getCurrentRoom()).getController().updateShoot(world, false, true, false);
+        ((IDungeon) world.getCurrentRoom()).getController().updateShoot(world, false, true, false);
     }
 
     public void firePressed() {
-        ((Planet) world.getCurrentRoom()).getController().updateShoot(world, false, false, true);
+        ((IDungeon) world.getCurrentRoom()).getController().updateShoot(world, false, false, true);
+        world.setUpdatedNextFrame(true);
     }
 
     public void cancelPressed() {
-        ((Planet) world.getCurrentRoom()).getController().changeMode();
+        ((IDungeon) world.getCurrentRoom()).getController().changeMode();
     }
 }

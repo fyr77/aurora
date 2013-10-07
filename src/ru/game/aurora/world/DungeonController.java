@@ -256,20 +256,22 @@ public class DungeonController implements Serializable {
             if (currentEffect.isOver()) {
                 currentEffect = null;
             }
-            return;
+            if (!world.isUpdatedThisFrame()) {
+                return;
+            }
         }
 
         switch (mode) {
             case MODE_MOVE:
                 if (container.getInput().isKeyPressed(Input.KEY_F)) {
-                    mode = MODE_SHOOT;
+                    changeMode();
                     return;
                 }
                 updateMove(container, world);
                 break;
             case MODE_SHOOT:
                 if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-                    mode = MODE_MOVE;
+                    changeMode();
                     return;
                 }
                 updateShoot(

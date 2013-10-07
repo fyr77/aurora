@@ -44,6 +44,8 @@ public class World implements Serializable {
 
     private transient boolean updatedThisFrame;
 
+    private transient boolean updatedNextFrame;
+
     private transient StarSystemNamesCollection starSystemNamesCollection = new StarSystemNamesCollection();
 
     private transient List<OverlayWindow> overlayWindows = new LinkedList<OverlayWindow>();
@@ -73,7 +75,8 @@ public class World implements Serializable {
     }
 
     public void update(GameContainer container) {
-        updatedThisFrame = false;
+        updatedThisFrame = updatedNextFrame;
+        updatedNextFrame = false;
 
         if (overlayWindows != null && !overlayWindows.isEmpty()) {
             Iterator<OverlayWindow> iter = overlayWindows.iterator();
@@ -164,8 +167,8 @@ public class World implements Serializable {
         return currentRoom;
     }
 
-    public Dungeon getCurrentDungeon() {
-        return (currentRoom instanceof Dungeon) ? (Dungeon) currentRoom : null;
+    public IDungeon getCurrentDungeon() {
+        return (currentRoom instanceof IDungeon) ? (IDungeon) currentRoom : null;
     }
 
     public GalaxyMap getGalaxyMap() {
@@ -274,5 +277,9 @@ public class World implements Serializable {
 
     public RnDSet getResearchAndDevelopmentProjects() {
         return researchAndDevelopmentProjects;
+    }
+
+    public void setUpdatedNextFrame(boolean updatedNextFrame) {
+        this.updatedNextFrame = updatedNextFrame;
     }
 }
