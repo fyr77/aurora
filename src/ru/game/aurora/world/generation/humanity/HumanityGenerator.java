@@ -59,10 +59,8 @@ public class HumanityGenerator implements WorldGeneratorPart {
         // add welcoming messages
         List<PrivateMessage> pm = world.getPlayer().getEarthState().getMessages();
 
-        pm.add(new PrivateMessage("Good Luck", "Greetings. \n On behalf of Earth Command of Aurora space exploration project I whis you good luck in your mission." +
-                "The fate of Earth, the future of humanity depends on heroes like you and your crew. \n A. V. Buren, Aurora CEO", "message"));
-        pm.add(new PrivateMessage("Status Report", "Greetings. This is an automated message sent to you by UNS information center. All cargo loaded according to " +
-                " provided manifests and your ship is ready to launch at any time. Have a nice flight. \n Do not respond to this message.", "message"));
+        pm.add(new PrivateMessage("game_start", "message"));
+        pm.add(new PrivateMessage("game_start_2", "message"));
 
         // add Enterprise ship event
         world.addListener(new EnterpriseEncounterCreator());

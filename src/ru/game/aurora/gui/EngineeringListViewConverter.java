@@ -1,4 +1,3 @@
-
 /**
  * Created with IntelliJ IDEA.
  * User: Egor.Smirnov
@@ -13,12 +12,10 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import ru.game.aurora.player.engineering.EngineeringProject;
 
-public class EngineeringListViewConverter implements ListBox.ListBoxViewConverter
-{
-    private String getText(Object obj)
-    {
+public class EngineeringListViewConverter implements ListBox.ListBoxViewConverter {
+    private String getText(Object obj) {
         EngineeringProject ep = (EngineeringProject) obj;
-        return ep.getName() + ", engineers: " + ep.getEngineersAssigned();
+        return ep.getLocalizedName("engineering") + ", engineers: " + ep.getEngineersAssigned();
     }
 
     @Override

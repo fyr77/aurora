@@ -10,12 +10,12 @@ package ru.game.aurora.player.earth;
 import ru.game.aurora.common.ItemWithTextAndImage;
 
 public class PrivateMessage extends ItemWithTextAndImage {
-    private static final long serialVersionUID = -1550150685861280637L;
+    private static final long serialVersionUID = 1L;
 
     private boolean isRead;
 
-    public PrivateMessage(String name, String text, String icon) {
-        super(name, text, icon);
+    public PrivateMessage(String id, String icon) {
+        super(id, icon);
     }
 
     public boolean isRead() {
@@ -29,6 +29,6 @@ public class PrivateMessage extends ItemWithTextAndImage {
     // used for converting representation in gui, do not modify
     @Override
     public String toString() {
-        return name;
+        return getLocalizedName("private_messages");
     }
 }

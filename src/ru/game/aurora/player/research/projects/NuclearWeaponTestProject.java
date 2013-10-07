@@ -14,8 +14,7 @@ import ru.game.aurora.world.space.StarSystem;
  * Date: 22.03.13
  * Time: 12:14
  */
-public class NuclearWeaponTestProject extends ResearchProjectDesc
-{
+public class NuclearWeaponTestProject extends ResearchProjectDesc {
     private static final long serialVersionUID = 4529206689105938478L;
 
     private BigMommyShotEffect effect;
@@ -29,8 +28,7 @@ public class NuclearWeaponTestProject extends ResearchProjectDesc
         ));
     }
 
-    private boolean isInRightSystem(World world)
-    {
+    private boolean isInRightSystem(World world) {
         StarSystem ss = world.getCurrentStarSystem();
         return ss != null && ss.getVariables().containsKey("quest.main.obliterator");
     }
@@ -52,14 +50,10 @@ public class NuclearWeaponTestProject extends ResearchProjectDesc
         ss.addEffect(effect);
 
 
-
         world.getGlobalVariables().put("quest.main.weapon_test_done", null);
         world.getGlobalVariables().put("earth.special_dialog", "dialogs/quest/main/weapon_test_report.json");
         world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
-                "Leaked information - nuclear tests in space!"
-                , "Breaking news! According to information provided by our private source in UNS, Aurora project ships are loaded with" +
-                " powerful nuclear weapons. Possibly, they are conducting some kind of weapon tests in space, which directly violates Clean Space Act, signed by all UNS participants. \n Aurora " +
-                "project representatives have not made any comments on the situation yet."
+                "nuclear_tests_leaked"
                 , "news"
         ));
     }
