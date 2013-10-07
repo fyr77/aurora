@@ -32,7 +32,7 @@ public class EngineeringState implements Serializable {
     public void update(World world) {
         hullRepairs.update(world);
 
-        for (Iterator<EngineeringProject> iter = projects.iterator(); iter.hasNext();) {
+        for (Iterator<EngineeringProject> iter = projects.iterator(); iter.hasNext(); ) {
             EngineeringProject ep = iter.next();
             if (!ep.update(world)) {
                 iter.remove();
@@ -61,13 +61,12 @@ public class EngineeringState implements Serializable {
         return projects;
     }
 
-    public void addNewEngineeringProject(EngineeringProject project)
-    {
-        if (!completedProjectNames.contains(project.getName())) {
+    public void addNewEngineeringProject(EngineeringProject project) {
+        if (!completedProjectNames.contains(project.getId())) {
             projects.add(project);
-            GameLogger.getInstance().logMessage("Added new engineering project '" + project.getName() + "'");
+            GameLogger.getInstance().logMessage("Added new engineering project '" + project.getLocalizedName("engineering") + "'");
             // every project can be added only once
-            completedProjectNames.add(project.getName());
+            completedProjectNames.add(project.getId());
         }
     }
 }

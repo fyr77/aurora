@@ -19,8 +19,7 @@ import java.util.List;
 /**
  * Base class for research projects
  */
-public abstract class ResearchProjectDesc implements Serializable
-{
+public abstract class ResearchProjectDesc implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -73,7 +72,7 @@ public abstract class ResearchProjectDesc implements Serializable
         if (makesAvailableEngineering == null) {
             makesAvailableEngineering = new LinkedList<>();
         }
-        makesAvailableEngineering.add(desc.getName());
+        makesAvailableEngineering.add(desc.getId());
     }
 
     public void addEarthProgressResearch(EarthResearch r) {

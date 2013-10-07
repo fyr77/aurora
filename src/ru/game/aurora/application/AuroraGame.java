@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.Locale;
 
 
 public class AuroraGame extends NiftyOverlayGame {
@@ -58,22 +59,6 @@ public class AuroraGame extends NiftyOverlayGame {
         }
         mainMenu = new MainMenu(gameContainer);
         lastFrameTime = gameContainer.getTime();
-        /*
-        // Test code for animal generator. Can not be invoked outside of main app thread as it requires opengl context
-
-        AnimalSpeciesDesc desc = new AnimalSpeciesDesc(null, null, true, false, 0, 0, 0, null);
-        for (int j = 0; j < 5; ++j) {
-
-            AnimalGenerator.getInstance().getImageForAnimal(desc);
-            ImageWriter iw = new ImageIOWriter();
-            try {
-                iw.saveImage(desc.getImage(), "png", new FileOutputStream(j + "_test.png"), true);
-                iw.saveImage(desc.getDeadImage(), "png", new FileOutputStream(j + "_dead_test.png"), true);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } */
-
 
     }
 
@@ -165,6 +150,7 @@ public class AuroraGame extends NiftyOverlayGame {
         System.out.println("Setting native lib dir to " + nativePath);
         addDir(nativePath);
 
+        Localization.init(Locale.getDefault());
         AppGameContainer app = new AppGameContainer(new AuroraGame());
         app.setDisplayMode(tilesX * tileSize, tilesY * tileSize, false);
         app.start();

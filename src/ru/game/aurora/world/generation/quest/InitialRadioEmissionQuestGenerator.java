@@ -54,18 +54,12 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
             final EarthState earthState = world.getPlayer().getEarthState();
             if (state == 0) {
                 earthState.getMessages().add(new PrivateMessage(
-                        "Good work",
-                        " Greetings. \n Perhaps you have heard already about the Icarus project? A few more years, and earth energy crisis will be over once and for ever. And this is done thanks to your effort. Good job, captain!" +
-                                " \n A. V. Buren, Aurora CEO",
+                        "icarus_1",
                         "message"
                 )
                 );
                 earthState.getMessages().add(new PrivateMessage(
-                        "Free energy tomorrow?"
-                        , "The world scientific society is shocked by the discoveries done by analyzing materials retrieved from alien beacon by UNS " + world.getPlayer().getShip().getName() + ", as they break" +
-                        " all that we knew about using solar energy before. New discoveries has lead to creation of new cheap ways of extracting power from the Sun. \n " +
-                        " As Earth energy reserves are nearly depleted, scientist use this new knowledge to present a solution. An Icarus project, a series of energy consuming space stations surrounding the Sun." +
-                        " Construction of the first one has already started."
+                        "icarus_2"
                         , "news"
                 ));
 
@@ -92,10 +86,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 // add messages
 
                 earthState.getMessages().add(new PrivateMessage(
-                        "First Icarus station launch"
-                        , "The world holds breath while watching how first GW of energy are transferred from Icarus #1 station to earth. Though the launch of the station was postponed a couple of times, now" +
-                        " it is finally launched and is producing power for Earth needs. \n Experts predict lowering of prices for energy by the end of the year by 15%, and cancelling of special power regulation laws" +
-                        " in some most populated Earth regions."
+                        "icarus_3"
                         , "news"
                 ));
                 completed = false;
@@ -103,10 +94,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 state = 2;
             } else if (state == 2) {
                 earthState.getMessages().add(new PrivateMessage(
-                        "Energy crisis gone, labor crisis coming?"
-                        , "For the last months after Icarus power station has reached its full productivity, troubling news are coming from UN power plants and factories. Cheap solar energy has driven" +
-                        " these structures obsolete. While ecologists and population praise Icarus project, power tycoons and workers hate it and try to sabotage building of new stations. \n Many people in energy production sector" +
-                        " have lost their jobs. Strikes and uprisings happened in Russia, Egypt and some of european countries, which makes future of Icarus project unclear."
+                        "icarus_4"
                         , "news"
                 ));
                 earthState.updateTechnologyLevel(200);
@@ -118,10 +106,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         public void onStarted(World world) {
             super.onStarted(world);
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
-                    "Breakthrough in solar power usage?"
-                    , "According to data stated in official Aurora project news, UNS " + world.getPlayer().getShip().getName() + " has brought very valuable data conserning use" +
-                    " of star enegry from its expedition. \n Data and technology acquired from an alien beacon-like structure can lead to a creation of much more effective ways of collecting and transfering solar power, which could give" +
-                    " humanity so long anticipated 'free energy'. Scientists at Earth laboratories are now carefully studying retrieved material and are preparing official conclusion."
+                    "icarus_0"
                     , "news"
             ));
         }
@@ -165,7 +150,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         world.getResearchAndDevelopmentProjects().getEarthResearchProjects().put("solar_energy", new EarthEnergyResearch());
         world.getResearchAndDevelopmentProjects().getResearchProjects().put(secondResearch.getName(), secondResearch);
         AdvancedLasers al = new AdvancedLasers();
-        world.getResearchAndDevelopmentProjects().getEngineeringProjects().put(al.getName(), al);
+        world.getResearchAndDevelopmentProjects().getEngineeringProjects().put(al.getLocalizedName("engineering"), al);
 
     }
 }

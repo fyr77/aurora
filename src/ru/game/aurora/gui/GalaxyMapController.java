@@ -149,6 +149,24 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         ss.onWeaponButtonPressed(world, Integer.parseInt(weaponIdx));
     }
 
+    public void nextTargetPressed() {
+        world.getCurrentStarSystem().updateShoot(world, true, false, false);
+    }
+
+    public void prevTargetPressed() {
+        world.getCurrentStarSystem().updateShoot(world, false, true, false);
+    }
+
+    public void firePressed() {
+        world.getCurrentStarSystem().updateShoot(world, false, false, true);
+        cancelPressed(); // close after shooting
+    }
+
+    public void cancelPressed() {
+        // cancel shoot mode, weapon idx actually means nothing here
+        world.getCurrentStarSystem().onWeaponButtonPressed(world, 0);
+    }
+
     @Override
     public void logMessage(String message) {
         if (logList.getItems().size() > GameLogger.MAX_LOG_ENTRIES) {

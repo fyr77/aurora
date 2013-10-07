@@ -11,31 +11,28 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.world.World;
 
-public abstract class EngineeringProject extends ItemWithTextAndImage
-{
+public abstract class EngineeringProject extends ItemWithTextAndImage {
     private static final long serialVersionUID = -7083477407612327469L;
 
     protected int engineersAssigned;
 
     protected int remainingProgress;
 
-    public EngineeringProject(String name, String text, String icon) {
-        super(name, text, icon);
+    public EngineeringProject(String id, String icon) {
+        super(id, icon);
     }
 
-    public boolean update(World world)
-    {
+    public boolean update(World world) {
         remainingProgress -= engineersAssigned;
         if (remainingProgress <= 0) {
-            GameLogger.getInstance().logMessage("Engineering project '" + getName() + "' completed");
+            GameLogger.getInstance().logMessage("Engineering project '" + getLocalizedName("engineering") + "' completed");
             onCompleted(world);
             return false;
         }
         return true;
     }
 
-    public void changeEngineers(int amount)
-    {
+    public void changeEngineers(int amount) {
         engineersAssigned += amount;
     }
 
@@ -46,8 +43,7 @@ public abstract class EngineeringProject extends ItemWithTextAndImage
     public abstract void onCompleted(World world);
 
     @Override
-    public String toString()
-    {
-        return name;
+    public String toString() {
+        return getLocalizedName("engineering");
     }
 }

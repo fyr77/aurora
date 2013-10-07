@@ -6,33 +6,35 @@
  */
 package ru.game.aurora.common;
 
+import ru.game.aurora.application.Localization;
+
 import java.io.Serializable;
 
-public class ItemWithTextAndImage implements Serializable
-{
-    private static final long serialVersionUID = 6564450700449963202L;
+public class ItemWithTextAndImage implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    protected final String name;
-
-    protected final String text;
+    protected final String id;
 
     protected final String icon;
 
-    public ItemWithTextAndImage(String name, String text, String icon) {
-        this.name = name;
-        this.text = text;
+    public ItemWithTextAndImage(String id, String icon) {
+        this.id = id;
         this.icon = icon;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getText() {
-        return text;
     }
 
     public String getIcon() {
         return icon;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getLocalizedName(String group) {
+        return Localization.getText(group, id + ".name");
+    }
+
+    public String getLocalizedText(String group) {
+        return Localization.getText(group, id + ".desc");
     }
 }
