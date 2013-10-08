@@ -17,6 +17,7 @@
     <property name="imageOpen" value="rogues_tileset"/>
     <property name="imageOpenTileX" value="3"/>
     <property name="imageOpenTileY" value="6"/>
+    <property name="initialState" value="closed"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1024" y="1152" width="64" height="64">
@@ -38,6 +39,7 @@
     <property name="imageOpen" value="rogues_tileset"/>
     <property name="imageOpenTileX" value="3"/>
     <property name="imageOpenTileY" value="2"/>
+    <property name="initialState" value="closed"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="512" y="1216" width="64" height="64">
@@ -49,6 +51,7 @@
     <property name="imagePress" value="rogues_tileset"/>
     <property name="imagePressTileX" value="1"/>
     <property name="imagePressTileY" value="6"/>
+    <property name="initialState" value="normal"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="1024" y="1024" width="64" height="64">
@@ -60,6 +63,7 @@
     <property name="imagePress" value="rogues_tileset"/>
     <property name="imagePressTileX" value="1"/>
     <property name="imagePressTileY" value="6"/>
+    <property name="initialState" value="normal"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="448" y="832" width="64" height="64">
@@ -71,6 +75,7 @@
     <property name="imagePress" value="rogues_tileset"/>
     <property name="imagePressTileX" value="1"/>
     <property name="imagePressTileY" value="6"/>
+    <property name="initialState" value="normal"/>
    </properties>
   </object>
   <object name="topLeftDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="22" x="256" y="768" width="64" height="64">
@@ -81,6 +86,7 @@
     <property name="imageOpen" value="rogues_tileset"/>
     <property name="imageOpenTileX" value="3"/>
     <property name="imageOpenTileY" value="6"/>
+    <property name="initialState" value="closed"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="192" y="1152" width="64" height="64">
@@ -127,13 +133,36 @@
     <property name="weapon" value="plasma"/>
    </properties>
   </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="26" x="256" y="512" width="64" height="64">
+   <properties>
+    <property name="door" value="centerDoor"/>
+    <property name="imageNormal" value="rogues_tileset"/>
+    <property name="imageNormalTileX" value="0"/>
+    <property name="imageNormalTileY" value="6"/>
+    <property name="imagePress" value="rogues_tileset"/>
+    <property name="imagePressTileX" value="1"/>
+    <property name="imagePressTileY" value="6"/>
+    <property name="initialState" value="pressed"/>
+   </properties>
+  </object>
+  <object name="centerDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="12" x="448" y="576" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="rogues_tileset"/>
+    <property name="imageCloseTileX" value="3"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="rogues_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="2"/>
+    <property name="initialState" value="opened"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="walls" width="20" height="20">
   <properties>
    <property name="isObstacle" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC51U0Q7CMAjkRaczs26r8f//VIhtQpCDrST30oNjwOlKRE9GoV8sjI0xM9bGWWyAk/cH/ce95ReH6zyqO/PeYwG9Ir2dMQWaXkR6s8NdGNcGr5fW07kV6Mmcfe+7o631em52q16n71vUO6pBO4/qsjuiGNGTfaL7Zr6wexWtajgNzU1GT+/13d4/lP+27C2yec/kHJnXzuZx3h7QvHZO7bHof+es/6L5R/wnfW4DepH/UIx8u/R5BTWeZythP2c+/wImWfKqQAYAAA==
+   H4sIAAAAAAAAC61UXQ/CMAjkRaczW91W4///p4NYEoJ82EaSe+HoNcC1GwCsiAKfWBA7YkZsjdPYHY7yD/iOe6svBse8d64nz7E4d0V6B2IKNK2I9GaDuyCuDdZdUk/WVkeP+uS5H4a21OPabFd8Tu63iLx3hvRvgd7IHr0Y0aN5Pgf0rLmSVlWchOQmpSfn+mr5N+RvS+8i67en5pd+dW8WZ83B61f3KT0W/TuR/3refMZ5MeJzCprTv/6XiMt8bnm2gu/nzOcnDLwF9EAGAAA=
   </data>
  </layer>
 </map>

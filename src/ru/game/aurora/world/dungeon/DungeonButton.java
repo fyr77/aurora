@@ -6,6 +6,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.tiled.TiledMap;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.PlanetObject;
@@ -41,7 +42,7 @@ public class DungeonButton extends DungeonObject {
             setState(true);
         }
 
-        GameLogger.getInstance().logMessage("Button pressed"); //todo: localization
+        GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.button.pressed"));
 
         //search for associated door and change state for it
         for (PlanetObject po : world.getCurrentDungeon().getMap().getObjects()) {
@@ -56,7 +57,7 @@ public class DungeonButton extends DungeonObject {
 
     public DungeonButton(TiledMap map, int groupId, int objectId) {
         super(map, groupId, objectId);
-        state = false;
+        state = !map.getObjectProperty(groupId, objectId, "initialState", "normal").equals("normal");
 
         this.imageNormalName = map.getObjectProperty(groupId, objectId, "imageNormal", null);
         this.imageNormalTileX = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageNormalTileX", "-1"));

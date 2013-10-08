@@ -36,7 +36,7 @@ public class DungeonDoor extends DungeonObject {
 
     public DungeonDoor(TiledMap map, int groupId, int objectId) {
         super(map, groupId, objectId);
-        state = false;
+        state = !map.getObjectProperty(groupId, objectId, "initialState", "closed").equals("closed");
 
         this.imageOpenName = map.getObjectProperty(groupId, objectId, "imageOpen", null);
         this.imageOpenTileX = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageOpenTileX", "-1"));
