@@ -16,6 +16,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Dungeon;
+import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 
 /**
@@ -54,6 +55,21 @@ public class SpaceHulk extends BasePositionable implements SpaceObject
         this.name = name;
         this.image = image;
         this.dungeon = dungeon;
+        this.dungeon.getController().setSuccessListener(new IStateChangeListener() {
+
+            private static final long serialVersionUID = 4039714175367179410L;
+
+            @Override
+            public void stateChanged(World world) {
+                if (researchProjectDescs != null) {
+                    for (ResearchProjectDesc researchProjectDesc : researchProjectDescs) {
+                        world.getPlayer().getResearchState().addNewAvailableProject(researchProjectDesc);
+                    }
+                }
+
+                explored = true;
+            }
+        });
     }
 
     @Override
@@ -67,17 +83,9 @@ public class SpaceHulk extends BasePositionable implements SpaceObject
         }
 
         if (dungeon != null) {
-            world.setCurrentRoom(dungeon);
             dungeon.enter(world);
         }
 
-        if (researchProjectDescs != null) {
-            for (ResearchProjectDesc researchProjectDesc : researchProjectDescs) {
-                world.getPlayer().getResearchState().addNewAvailableProject(researchProjectDesc);
-            }
-        }
-
-        explored = true;
     }
 
     @Override

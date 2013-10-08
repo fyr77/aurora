@@ -87,7 +87,10 @@ public class DialogController implements ScreenController {
         this.dialogs.peek().useReply(world, selectedIdx);
         if (this.dialogs.peek().isOver()) {
             this.dialogs.pop();
-            GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
+            String prevScreen = GUI.getInstance().popScreen();
+            if (prevScreen != null) {
+                GUI.getInstance().getNifty().gotoScreen(prevScreen);
+            }
         } else {
             replies.deselectItem(selectedIdx);
             updateDialog();

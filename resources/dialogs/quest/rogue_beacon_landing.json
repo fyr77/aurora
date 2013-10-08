@@ -1,0 +1,21 @@
+{
+    "id":"rogue_beacon_landing",
+    "iconName":"marine_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "returnValue":1,
+                    "replyText":"land"
+                },
+                {
+                    "targetStatementId":-1,
+                    "returnValue":0,
+                    "replyText":"cancel"
+                }
+            ]
+        }
+    }
+}

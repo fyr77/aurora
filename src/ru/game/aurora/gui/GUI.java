@@ -76,6 +76,9 @@ public class GUI {
     }
 
     public String popScreen() {
+        if (screens.isEmpty()) {
+            return null;
+        }
         return screens.pop();
     }
 
