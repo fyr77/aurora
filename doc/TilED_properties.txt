@@ -8,11 +8,28 @@ isObstacle: if true, all tiles that are set on this layer will be not passable b
 
 === Object properties: ===
 
+Monster:
 image: id of standalone image or sprite sheet
 imageTileX,imageTileY: if image is a part of a sprite sheet, these are its indices inside this sheet
 weapon: if object is a monster, this is ID of its weapon
 speed: number of turns between monster actions
 hp: monster hp
+
+Door:
+<object name> name of the door
+imageOpen: id of standalone image or sprite sheet of opened door
+imageOpenTileX,imageOpenTileY: if image is a part of a sprite sheet, these are its indices inside this sheet
+imageClose: id of standalone image or sprite sheet of closed door
+imageCloseTileX,imageCloseTileY: if image is a part of a sprite sheet, these are its indices inside this sheet
+initialState: initial state of the door ("closed", "opened")
+
+Button:
+door: id of the associated door
+imageNormal: id of standalone image or sprite sheet of normal state
+imageNormalTileX,imageNormalTileY: if image is a part of a sprite sheet, these are its indices inside this sheet
+imagePress: id of standalone image or sprite sheet of pressed state
+imagePressTileX,imagePressTileY: if image is a part of a sprite sheet, these are its indices inside this sheet
+initialState: initial state of the button ("pressed", "normal")
 
 === Special object types: ===
 
