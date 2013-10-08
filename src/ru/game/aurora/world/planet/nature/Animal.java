@@ -108,7 +108,7 @@ public class Animal extends BasePositionable implements PlanetObject {
 
                 final double distance = this.getDistance(party);
                 if (distance < 1.5) { //1.5 because of diagonal cells
-                    party.subtractHp(desc.getDamage());
+                    party.subtractHp(world, desc.getDamage());
                     GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), getName(), desc.getDamage(), party.getHp()));
                     newX = x;
                     newY = y;

@@ -33,7 +33,7 @@ public class EarthProgressDialogListener implements DialogListener {
 
 
         // refilling crew
-        world.getPlayer().getShip().refillCrew();
+        world.getPlayer().getShip().refillCrew(world);
 
     }
 }

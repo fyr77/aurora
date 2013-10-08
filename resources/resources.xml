@@ -192,6 +192,7 @@
     <resource type="image" id="story_meeting">sprites/story/meeting_f.png</resource>
     <resource type="image" id="ship_destroyed_gameover">sprites/gui/ship_destroyed_fail_screen.png</resource>
     <resource type="image" id="retirement_gameover">sprites/story/retirement.png</resource>
+    <resource type="image" id="crew_lost_gameover">sprites/story/crew_lost.png</resource>
     <resource type="image" id="obliterator_background">sprites/ships/obliterator.png</resource>
 
     <resource type="image" id="story_obliterator_1">sprites/story/obliterator_1.png</resource>

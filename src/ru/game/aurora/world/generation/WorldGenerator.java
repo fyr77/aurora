@@ -10,6 +10,7 @@ import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GlobalThreadPool;
 import ru.game.aurora.util.CollectionUtils;
+import ru.game.aurora.world.CrewChangeListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.GardenerGenerator;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
@@ -182,7 +183,7 @@ public class WorldGenerator implements Runnable {
     @Override
     public void run() {
         World world = new World(worldWidth, worldHeight);
-
+        world.addListener(new CrewChangeListener());
         generateMap(world);
         createAliens(world);
         createArtifactsAndAnomalies(world);

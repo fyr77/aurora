@@ -212,7 +212,7 @@ public class LandingParty extends BasePositionable implements GameObject {
         hp = 3;
     }
 
-    public void subtractHp(int amount) {
+    public void subtractHp(World world, int amount) {
         while (amount > 0) {
             int amountToSubtract = Math.min(hp, amount);
             if (amountToSubtract <= 0) {
@@ -229,6 +229,7 @@ public class LandingParty extends BasePositionable implements GameObject {
                 } else {
                     science--;
                 }
+                world.onCrewChanged();
                 if (getTotalMembers() > 0) {
                     resetHp();
                 }

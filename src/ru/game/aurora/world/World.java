@@ -88,6 +88,7 @@ public class World implements Serializable {
             // only one active overlay window
             return;
         }
+
         if (container.getInput().isKeyPressed(Input.KEY_R)) {
             GUI.getInstance().pushCurrentScreen();
             GUI.getInstance().getNifty().gotoScreen("research_screen");
@@ -228,6 +229,13 @@ public class World implements Serializable {
         List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
         for (GameEventListener l : newList) {
             l.onPlayerShipDamaged(this);
+        }
+    }
+
+    public void onCrewChanged() {
+        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        for (GameEventListener l : newList) {
+            l.onCrewChanged(this);
         }
     }
 

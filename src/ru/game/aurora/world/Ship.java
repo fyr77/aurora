@@ -159,9 +159,10 @@ public class Ship extends BasePositionable implements SpaceObject {
         return Ship.MAX_ENGINEERS + Ship.MAX_MILITARY + Ship.MAX_SCIENTISTS - getTotalCrew();
     }
 
-    public void refillCrew() {
+    public void refillCrew(World world) {
         scientists = Ship.MAX_SCIENTISTS;
         engineers = Ship.MAX_ENGINEERS;
         military = Ship.MAX_MILITARY;
+        world.onCrewChanged();
     }
 }

@@ -366,6 +366,7 @@ public class DungeonController implements Serializable {
         Element popup = nifty.createPopup("landing_party_lost");
         nifty.setIgnoreKeyboardEvents(false);
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
+        world.onCrewChanged();
     }
 
     public void returnToPrevRoom() {
