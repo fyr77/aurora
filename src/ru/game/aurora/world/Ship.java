@@ -10,7 +10,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.gui.FailScreen;
+import ru.game.aurora.gui.FailScreenController;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.space.SpaceObject;
 
@@ -133,7 +134,9 @@ public class Ship extends BasePositionable implements SpaceObject {
         hull -= dmg;
         world.onPlayerShipDamaged();
         if (hull <= 0) {
-            world.setCurrentRoom(FailScreen.createShipDestroyedFailScreen());
+            GUI.getInstance().getNifty().gotoScreen("fail_screen");
+            FailScreenController controller = (FailScreenController) GUI.getInstance().getNifty().findScreenController(FailScreenController.class.getCanonicalName());
+            controller.set("ship_destroyed_gameover", "ship_destroyed");
         }
     }
 

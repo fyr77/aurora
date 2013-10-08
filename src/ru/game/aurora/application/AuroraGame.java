@@ -81,6 +81,7 @@ public class AuroraGame extends NiftyOverlayGame {
                 mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
                 mainMenu.reset();
                 world = null;
+                GUI.getInstance().getNifty().gotoScreen("main_menu");
             }
         }
         gameContainer.getInput().clearKeyPressedRecord();

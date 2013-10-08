@@ -110,6 +110,7 @@ public class GUI {
         nifty.registerScreenController(new EarthProgressScreenController(world));
         nifty.registerScreenController(new EarthScreenController(world));
         nifty.registerScreenController(new EngineeringScreenController(world));
+        nifty.registerScreenController(new FailScreenController(world));
         final SurfaceGUIController surfaceGUIController = new SurfaceGUIController(world);
         nifty.registerScreenController(surfaceGUIController);
         nifty.registerScreenController(new LandingPartyEquipScreenController(world));
@@ -120,6 +121,7 @@ public class GUI {
         nifty.addXml("gui/screens/progress_bar.xml");
         nifty.addXml("gui/screens/top_panel.xml");
         nifty.addXml("gui/screens/space_gui.xml");
+        nifty.addXml("gui/screens/fail_screen.xml");
         nifty.addXml("gui/screens/list_screen.xml");
         nifty.addXml("gui/screens/research_screen.xml");
         nifty.addXml("gui/screens/ingame_menu.xml");
