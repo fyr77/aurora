@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
 
-    <screen id="main_menu" controller="ru.game.aurora.application.MainMenu$MainMenuController">
+    <screen id="main_menu" controller="ru.game.aurora.application.MainMenuController">
         <layer id="layer" childLayout="horizontal">
             <panel width="10%"/>
             <panel id="panel" childLayout="vertical">
@@ -42,6 +42,17 @@
                     <control id="close_button" name="button" label="Ok" height="45px">
                         <interact onClick="closeCurrentPopup()"/>
                     </control>
+                </panel>
+            </panel>
+        </control>
+    </popup>
+
+    <popup id="generation" childLayout="absolute">
+        <control id="generation_window" name="window" closeable="false" hideOnClose="true" width="60%" height="350px" x="20%" y="30%">
+            <panel childLayout="vertical" margin="10px">
+                <panel height="256px" childLayout="horizontal">
+                    <image id="shuttle_image" width="256px" height="256px"/>
+                    <text width="*" id="generation_text" height="256px" style="base-font"/>
                 </panel>
             </panel>
         </control>

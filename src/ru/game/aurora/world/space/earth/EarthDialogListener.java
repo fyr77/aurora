@@ -58,7 +58,7 @@ public class EarthDialogListener implements DialogListener {
                 }
                 earth.setLastVisitTurn(world.getTurnCount());
             } else {
-                stmt = new Statement(0, Localization.getText("dialogs", "earth.trip_too_short"), new Reply(0, -1, "Ok"));
+                stmt = new Statement(0, Localization.getText("dialogs", "earth.trip_too_short"), new Reply(0, -1, "ok"));
             }
             earth.getProgressDialog().putStatement(stmt);
 

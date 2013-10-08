@@ -27,7 +27,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
     private World world;
 
-    private MainMenu mainMenu;
+    private MainMenuController mainMenu;
 
     public static final int tileSize = 64;
 
@@ -51,13 +51,13 @@ public class AuroraGame extends NiftyOverlayGame {
         gameContainer.setTargetFrameRate(60);
 
         initNifty(gameContainer);
-        GUI.init(getNifty());
+        GUI.init(gameContainer, getNifty());
+        mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
         try {
             AnimalGenerator.init();
         } catch (FileNotFoundException e) {
             throw new SlickException("Failed to initialize Monster Generator", e);
         }
-        mainMenu = new MainMenu(gameContainer);
         lastFrameTime = gameContainer.getTime();
 
     }
@@ -78,7 +78,8 @@ public class AuroraGame extends NiftyOverlayGame {
         } else {
             world.update(gameContainer);
             if (world.isGameOver()) {
-                mainMenu = new MainMenu(gameContainer);
+                mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
+                mainMenu.reset();
                 world = null;
             }
         }

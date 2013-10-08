@@ -4,10 +4,9 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import org.newdawn.slick.Color;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.StoryScreen;
@@ -21,10 +20,7 @@ import ru.game.aurora.world.generation.WorldGenerator;
  * Date: 23.01.13
  * Time: 16:23
  */
-public class MainMenu {
-    private static final long serialVersionUID = 2L;
-
-    private static final Rectangle worldGenerateMessageRectangle = new Rectangle(5, 5, 10, 2);
+public class MainMenuController implements ScreenController {
 
     private WorldGenerator generator;
 
@@ -37,72 +33,45 @@ public class MainMenu {
 
     private GameContainer container;
 
-    public static final class MainMenuController implements ScreenController {
+    private Animation shuttle_landing;
 
-        private MainMenu menu;
 
-        private GameContainer container;
 
-        public void setMenu(GameContainer con, MainMenu menu) {
-            this.container = con;
-            this.menu = menu;
+    // these methods are specified in screen xml description and called using reflection
+    public void loadGame() {
+        final Nifty nifty = GUI.getInstance().getNifty();
+        loadedState = SaveGameManager.loadGame();
+        if (loadedState == null) {
+            GameLogger.getInstance().logMessage("Failed to load game");
+            Element popup = nifty.createPopup("load_failed");
+            nifty.showPopup(nifty.getScreen("main_menu"), popup.getId(), null);
         }
+        GUI.getInstance().onWorldLoaded(container, loadedState);
+        nifty.gotoScreen("empty_screen");
+        loadedState.getCurrentRoom().enter(loadedState);
 
-        @Override
-        public void bind(Nifty nifty, Screen screen) {
-
-        }
-
-        @Override
-        public void onStartScreen() {
-
-        }
-
-        @Override
-        public void onEndScreen() {
-
-        }
-
-        public void closeCurrentPopup()
-        {
-            GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
-        }
-
-        // these methods are specified in screen xml description and called using reflection
-        public void loadGame() {
-            final Nifty nifty = GUI.getInstance().getNifty();
-            menu.loadedState = SaveGameManager.loadGame();
-            if (menu.loadedState == null) {
-                GameLogger.getInstance().logMessage("Failed to load game");
-                Element popup = nifty.createPopup("load_failed");
-                nifty.showPopup(nifty.getScreen("main_menu"), popup.getId(), null);
-            }
-            GUI.getInstance().onWorldLoaded(container, menu.loadedState);
-            nifty.gotoScreen("empty_screen");
-            menu.loadedState.getCurrentRoom().enter(menu.loadedState);
-
-        }
-
-        public void newGame() {
-            menu.generator = new WorldGenerator();
-            new Thread(menu.generator).start();
-            GUI.getInstance().getNifty().gotoScreen("empty_screen");
-        }
-
-        public void exitGame() {
-            menu.container.exit();
-        }
     }
 
-    public MainMenu(GameContainer container) {
+    public void newGame() {
+        shuttle_landing = ResourceManager.getInstance().getAnimation("shuttle_landing");
+        shuttle_landing.setAutoUpdate(false);
+        shuttle_landing.setLooping(true);
+        shuttle_landing.start();
+        generator = new WorldGenerator();
+        new Thread(generator).start();
+        Element elem = GUI.getInstance().getNifty().createPopup("generation");
+        GUI.getInstance().getNifty().showPopup(GUI.getInstance().getNifty().getCurrentScreen(), elem.getId(), null);
+        EngineUtils.setTextForGUIElement(elem.findElementByName("generation_test"), "Initializing...");
+    }
+    public void exitGame() {
+        container.exit();
+    }
+
+    public MainMenuController(Nifty nifty, GameContainer container) {
         boolean saveAvailable = SaveGameManager.isSaveAvailable();
         this.container = container;
 
-        final Nifty nifty = GUI.getInstance().getNifty();
         nifty.gotoScreen("main_menu");
-        MainMenuController con = (MainMenuController) nifty.getCurrentScreen().getScreenController();
-        con.setMenu(container, this);
-
 
         if (!saveAvailable) {
             nifty.getCurrentScreen().findElementByName("panel").findElementByName("continue_game_button").disable();
@@ -142,10 +111,40 @@ public class MainMenu {
             for (int i = 0; i < dotsCount; ++i) {
                 sb.append(".");
             }
-            EngineUtils.drawRectWithBorderAndText(graphics, worldGenerateMessageRectangle, camera, Color.yellow, GUIConstants.backgroundColor, sb.toString(), GUIConstants.dialogFont, Color.white, true);
+            final Element topMostPopup = GUI.getInstance().getNifty().getTopMostPopup();
+            EngineUtils.setTextForGUIElement(topMostPopup.findElementByName("generation_text"), sb.toString());
+            final Element shuttle_image = topMostPopup.findElementByName("shuttle_image");
+            final long delta = container.getTime() - AuroraGame.getLastFrameTime();
+            shuttle_landing.update(delta);
+            EngineUtils.setImageForGUIElement(shuttle_image, shuttle_landing.getCurrentFrame());
         }
         graphics.drawString(Version.VERSION, camera.getTileWidth() * camera.getNumTilesX() - 100, camera.getTileHeight() * camera.getNumTilesY() - 40);
     }
 
 
+    @Override
+    public void bind(Nifty nifty, Screen screen) {
+
+    }
+
+    @Override
+    public void onStartScreen() {
+    }
+
+    @Override
+    public void onEndScreen() {
+    }
+
+    public void reset()
+    {
+        generator = null;
+        loadedState = null;
+        dotsCount = 0;
+        lastTimeChecked = 0;
+    }
+
+    public void closeCurrentPopup()
+    {
+        GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+    }
 }

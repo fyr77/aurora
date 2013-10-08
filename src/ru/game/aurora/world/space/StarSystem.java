@@ -25,6 +25,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetCategory;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -197,10 +198,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             if (x == p.getGlobalX() && y == p.getGlobalY()) {
                 isAtPlanet = true;
                 if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
-                    if (!p.canBeLanded()) {
-                        GameLogger.getInstance().logMessage("You can not land on this planet");
-                        break;
-                    }
                     landOnCurrentPlanet(world);
                     break;
                 } else if (world.isUpdatedThisFrame()) {
@@ -249,6 +246,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     public void landOnCurrentPlanet(World world) {
         BasePlanet p = getPlanetAtPlayerShipPosition();
         if (p == null) {
+            return;
+        }
+        if (p.getCategory() == PlanetCategory.GAS_GIANT) {
+            GameLogger.getInstance().logMessage("We can not land here.");
             return;
         }
         GameLogger.getInstance().logMessage("Descending to surface...");
