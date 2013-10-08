@@ -36,7 +36,6 @@ public class MainMenuController implements ScreenController {
     private Animation shuttle_landing;
 
 
-
     // these methods are specified in screen xml description and called using reflection
     public void loadGame() {
         final Nifty nifty = GUI.getInstance().getNifty();
@@ -61,8 +60,9 @@ public class MainMenuController implements ScreenController {
         new Thread(generator).start();
         Element elem = GUI.getInstance().getNifty().createPopup("generation");
         GUI.getInstance().getNifty().showPopup(GUI.getInstance().getNifty().getCurrentScreen(), elem.getId(), null);
-        EngineUtils.setTextForGUIElement(elem.findElementByName("generation_test"), "Initializing...");
+        EngineUtils.setTextForGUIElement(elem.findElementByName("generation_text"), "Initializing...");
     }
+
     public void exitGame() {
         container.exit();
     }
@@ -135,16 +135,14 @@ public class MainMenuController implements ScreenController {
     public void onEndScreen() {
     }
 
-    public void reset()
-    {
+    public void reset() {
         generator = null;
         loadedState = null;
         dotsCount = 0;
         lastTimeChecked = 0;
     }
 
-    public void closeCurrentPopup()
-    {
+    public void closeCurrentPopup() {
         GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
     }
 }
