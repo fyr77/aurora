@@ -95,7 +95,6 @@ public class PlanetSpriteGenerator {
      * Create mask with a shadow.
      * Mask is a black circle with an excluded smaller circle inside it
      *
-     *
      * @param radius    circle radius
      * @param solX      center of excluded circle
      * @param solY      center of excluded circle
@@ -103,7 +102,7 @@ public class PlanetSpriteGenerator {
      * @return
      */
     private BufferedImage createMask(float radius, int solX, int solY, int solRadius) {
-        BufferedImage result = new BufferedImage((int)(2 * radius), (int) (2 * radius), BufferedImage.TYPE_4BYTE_ABGR);
+        BufferedImage result = new BufferedImage((int) (2 * radius), (int) (2 * radius), BufferedImage.TYPE_4BYTE_ABGR);
         final float diameter = 2 * radius;
         for (int i = 0; i < diameter; ++i) {
             for (int j = 0; j < diameter; ++j) {
@@ -186,17 +185,17 @@ public class PlanetSpriteGenerator {
 
 
     private BufferedImage getScaledImage(BufferedImage image, float width, float height) throws IOException {
-        int imageWidth  = image.getWidth();
+        int imageWidth = image.getWidth();
         int imageHeight = image.getHeight();
 
-        double scaleX = (double)width/imageWidth;
-        double scaleY = (double)height/imageHeight;
+        double scaleX = (double) width / imageWidth;
+        double scaleY = (double) height / imageHeight;
         AffineTransform scaleTransform = AffineTransform.getScaleInstance(scaleX, scaleY);
-        AffineTransformOp bilinearScaleOp = new AffineTransformOp(scaleTransform, AffineTransformOp.TYPE_BILINEAR);
+        AffineTransformOp bilinearScaleOp = new AffineTransformOp(scaleTransform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 
         return bilinearScaleOp.filter(
                 image,
-                new BufferedImage((int)width, (int)height, image.getType()));
+                new BufferedImage((int) width, (int) height, image.getType()));
     }
 
     private Image createPlanetSpriteImpl(Camera cam, PlanetSpriteParameters params) {
@@ -206,8 +205,8 @@ public class PlanetSpriteGenerator {
             float height = 2 * radius;
 
 
-            final int noiseWidth = (int) Math.ceil(width / (float)SCALE);
-            final int noiseHeight = (int) Math.ceil(height / (float)SCALE);
+            final int noiseWidth = (int) Math.ceil(width / (float) SCALE);
+            final int noiseHeight = (int) Math.ceil(height / (float) SCALE);
             NoiseMap heightMap = noiseGeneratorWrapper.buildNoiseMap(noiseWidth, noiseHeight);
 
             RendererImage renderer = new RendererImage();
@@ -240,7 +239,7 @@ public class PlanetSpriteGenerator {
             for (int i = 0; i < noiseWidth; ++i) {
                 for (int j = 0; j < noiseHeight; ++j) {
 
-                    if (Math.pow(noiseWidth / 2  - i, 2) + Math.pow(noiseHeight / 2 - j, 2) > Math.pow(noiseWidth / 2, 2)) {
+                    if (Math.pow(noiseWidth / 2 - i, 2) + Math.pow(noiseHeight / 2 - j, 2) > Math.pow(noiseWidth / 2, 2)) {
                         continue;
                     }
 
@@ -268,12 +267,12 @@ public class PlanetSpriteGenerator {
             if (params.hasAtmosphere) {
                 // draw atmosphere 'glow' surrounding the planet
                 final int glowRadius = 20;
-                ImageBuffer id = new ImageBuffer((int)(width + glowRadius), (int)(height + glowRadius));
+                ImageBuffer id = new ImageBuffer((int) (width + glowRadius), (int) (height + glowRadius));
 
                 for (int i = 0; i < width + glowRadius; ++i) {
                     for (int j = 0; j < height + glowRadius; ++j) {
-                        double d = Math.pow((width + glowRadius)/2 - i, 2) + Math.pow((height + glowRadius) / 2 - j, 2);
-                        if (d > Math.pow(width/ 2, 2) && d < Math.pow((width + glowRadius) / 2, 2)) {
+                        double d = Math.pow((width + glowRadius) / 2 - i, 2) + Math.pow((height + glowRadius) / 2 - j, 2);
+                        if (d > Math.pow(width / 2, 2) && d < Math.pow((width + glowRadius) / 2, 2)) {
                             short alpha = (short) (255 - 255 * (Math.sqrt(d) - (width / 2)) / (glowRadius / 2));
                             id.setRGBA(i, j, 0xff, 0xff, 0xff, alpha);
                         }
