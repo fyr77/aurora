@@ -152,7 +152,7 @@ public class AuroraGame extends NiftyOverlayGame {
         System.out.println("Setting native lib dir to " + nativePath);
         addDir(nativePath);
 
-        Localization.init(/*Locale.getDefault()*/Locale.forLanguageTag("ru"));
+        Localization.init(Locale.getDefault());
         AppGameContainer app = new AppGameContainer(new AuroraGame());
         app.setDisplayMode(tilesX * tileSize, tilesY * tileSize, false);
         app.start();

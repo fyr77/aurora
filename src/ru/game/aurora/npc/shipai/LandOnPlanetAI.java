@@ -7,6 +7,7 @@
 package ru.game.aurora.npc.shipai;
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.space.NPCShip;
@@ -39,7 +40,7 @@ public class LandOnPlanetAI implements NPCShipAI
             ship.move(0, 1);
         } else {
             hasLanded = true;
-            GameLogger.getInstance().logMessage(ship.getName() + " has landed on planet");
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.ship_landed"), ship.getName()));
         }
     }
 

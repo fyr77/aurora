@@ -7,6 +7,7 @@
 package ru.game.aurora.world.generation.aliens;
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
@@ -50,7 +51,7 @@ public class KliskMainDialogListener implements DialogListener {
         }
 
         world.getPlayer().changeCredits(10);
-        GameLogger.getInstance().logMessage("Received 10 credits");
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.credits_received"), 10));
         kliskRace.setRelationToPlayer(kliskRace.getRelationToPlayer() + 1);
         world.getGlobalVariables().put("rogues.damage_scout_result", "sold_to_klisk");
 
@@ -59,7 +60,7 @@ public class KliskMainDialogListener implements DialogListener {
 
     private void sellTerraformerInformation(World world) {
         if (world.getPlayer().getCredits() < 1) {
-            GameLogger.getInstance().logMessage("Not enough credits");
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.not_enough_credits"));
             return;
         }
 
@@ -72,10 +73,10 @@ public class KliskMainDialogListener implements DialogListener {
 
     private void helpWithEvacuation(World world) {
         if (world.getPlayer().getCredits() < 10) {
-            GameLogger.getInstance().logMessage("Not enough credits");
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.not_enough_credits"));
             return;
         }
-        GameLogger.getInstance().logMessage("Klisk will now evacuate from Earth 10000 people/month");
+        GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.klisk_joined_evac"));
         world.getPlayer().getEarthState().getEvacuationState().changeEvacuationSpeed(10000 / 30);
 
         if (world.getGlobalVariables().containsKey("quest.main.klisk_evacuation_help")) {

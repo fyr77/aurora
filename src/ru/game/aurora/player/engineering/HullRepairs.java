@@ -1,6 +1,7 @@
 package ru.game.aurora.player.engineering;
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 
@@ -37,19 +38,19 @@ public class HullRepairs implements Serializable {
 
             final Ship playerShip = world.getPlayer().getShip();
             if (playerShip.getHull() < playerShip.getMaxHull()) {
-                GameLogger.getInstance().logMessage("Engineers finished repairing 1 point of hull damage");
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.hull_point_repaired"));
                 playerShip.setHull(playerShip.getHull() + 1);
             }
 
             remainingPoints--;
 
             if (remainingPoints > 0 && world.getPlayer().getResourceUnits() < POINT_RES_COST) {
-                GameLogger.getInstance().logMessage("Not enough resources to continue repairs");
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.not_enough_resources_hull"));
                 remainingPoints = 0;
             }
 
             if (playerShip.getHull() == playerShip.getMaxHull() || remainingPoints == 0) {
-                GameLogger.getInstance().logMessage("Hull repairs completed");
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.repairs_completed"));
                 world.getPlayer().getEngineeringState().addIdleEngineers(engineersAssigned);
                 engineersAssigned = 0;
                 remainingPoints = 0;

@@ -7,6 +7,7 @@ package ru.game.aurora.npc.shipai;
 
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
@@ -33,7 +34,7 @@ public class LeaveSystemAI implements NPCShipAI {
         ship.move(dirX, dirY);
         isAway = !currentSystem.isInside(ship);
         if (isAway) {
-            GameLogger.getInstance().logMessage("Ship '" + ship.getName() + "' has left star system");
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.ship_warped"), ship.getName()));
         }
     }
 

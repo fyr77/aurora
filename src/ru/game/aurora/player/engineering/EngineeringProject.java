@@ -8,6 +8,7 @@ package ru.game.aurora.player.engineering;
 
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.world.World;
 
@@ -25,7 +26,7 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
     public boolean update(World world) {
         remainingProgress -= engineersAssigned;
         if (remainingProgress <= 0) {
-            GameLogger.getInstance().logMessage("Engineering project '" + getLocalizedName("engineering") + "' completed");
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.engineering_project_completed"), getLocalizedName("engineering")));
             onCompleted(world);
             return false;
         }

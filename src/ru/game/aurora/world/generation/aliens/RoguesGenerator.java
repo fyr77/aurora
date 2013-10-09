@@ -8,6 +8,7 @@
 package ru.game.aurora.world.generation.aliens;
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
@@ -81,7 +82,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
                 } else {
                     // player decided to help for reward
                     world.getPlayer().changeCredits(5);
-                    GameLogger.getInstance().logMessage("Received 5 credits");
+                    GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.credits_received"), 5));
                     rogueRace.setRelationToPlayer(rogueRace.getRelationToPlayer() + 1);
                     world.getGlobalVariables().remove("rogues.damaged_scout_found");
                 }

@@ -7,6 +7,7 @@ import de.lessvoid.nifty.input.NiftyInputEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.xml.xpp3.Attributes;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.SaveGameManager;
 
 import java.util.Properties;
@@ -51,7 +52,7 @@ public class IngameMenuController implements Controller
     {
         continueGame();
         SaveGameManager.saveGame(GUI.getInstance().getWorldInstance());
-        GameLogger.getInstance().logMessage("Game saved");
+        GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.game_saved"));
     }
 
     public void exitGame()

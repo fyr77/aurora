@@ -41,7 +41,6 @@ public class MainMenuController implements ScreenController {
         final Nifty nifty = GUI.getInstance().getNifty();
         loadedState = SaveGameManager.loadGame();
         if (loadedState == null) {
-            GameLogger.getInstance().logMessage("Failed to load game");
             Element popup = nifty.createPopup("load_failed");
             nifty.showPopup(nifty.getScreen("main_menu"), popup.getId(), null);
         }

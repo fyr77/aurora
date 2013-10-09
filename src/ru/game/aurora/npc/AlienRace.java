@@ -6,6 +6,7 @@
 package ru.game.aurora.npc;
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.equip.StarshipWeapon;
@@ -75,7 +76,7 @@ public class AlienRace implements Serializable {
     }
 
     public void setRelationToPlayer(int relationToPlayer) {
-        GameLogger.getInstance().logMessage("Relation with " + name + " race changed from " + this.relationToPlayer + " to " + relationToPlayer);
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.relation_changed"), name, this.relationToPlayer, relationToPlayer));
         this.relationToPlayer = relationToPlayer;
     }
 
