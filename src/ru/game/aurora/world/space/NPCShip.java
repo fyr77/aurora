@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.ExplosionEffect;
@@ -114,16 +115,16 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     @Override
     public String getScanDescription() {
-        StringBuilder sb = new StringBuilder("This is a spaceship of ").append(race.getName()).append(" race. ");
+        StringBuilder sb = new StringBuilder(String.format(Localization.getText("gui", "scan.ship.race"), race.getName()));
         sb.append('\n');
-        sb.append("It is currently ").append(isHostile() ? "hostile" : "friendly");
+        sb.append(Localization.getText("gui", "scan.ship.relation_prefix")).append(" ").append(isHostile() ? Localization.getText("gui", "scan.ship.hostile") : Localization.getText("gui", "scan.ship.friendly"));
         return sb.toString();
     }
 
     @Override
     public void onContact(World world) {
         if (!canBeHailed || isHostile) {
-            GameLogger.getInstance().logMessage("This ship does not respond to our hail.");
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "space.hail_not_responded"));
             return;
         }
         world.addOverlayWindow(capitain != null ? capitain.getCustomDialog() : race.getDefaultDialog());
@@ -133,11 +134,11 @@ public class NPCShip extends BasePositionable implements SpaceObject {
     public void onAttack(World world, SpaceObject attacker, int dmg) {
         hp -= dmg;
         if (hp <= 0) {
-            GameLogger.getInstance().logMessage(getName() + " destroyed");
+            GameLogger.getInstance().logMessage(getName() + " " + Localization.getText("gui", "space.destroyed"));
             ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect(x, y, "ship_explosion", false));
         }
         if (ai == null || !(ai instanceof CombatAI)) {
-            GameLogger.getInstance().logMessage(getName() + " is now hostile to " + attacker.getName());
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.hostile"), getName(), attacker.getName()));
             if (attacker.equals(world.getPlayer().getShip())) {
                 isHostile = true;
             }
@@ -156,7 +157,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
     public void fire(World world, StarSystem ss, int weaponIdx, SpaceObject target) {
         weapons[weaponIdx].fire();
         final StarshipWeaponDesc weaponDesc = weapons[weaponIdx].getWeaponDesc();
-        GameLogger.getInstance().logMessage(String.format("%s fires at %s with %s, dealing %d damage"
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.attack")
                 , getName()
                 , target.getName()
                 , weaponDesc.name
@@ -167,7 +168,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         ss.addEffect(new BlasterShotEffect(this, target, world.getCamera(), 800, weaponDesc.shotSprite));
 
         if (!target.isAlive()) {
-            GameLogger.getInstance().logMessage(target.getName() + " destroyed");
+            GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
             ss.getShips().remove(target);
         }
     }

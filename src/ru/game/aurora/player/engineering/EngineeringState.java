@@ -8,6 +8,7 @@ package ru.game.aurora.player.engineering;
 
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
@@ -64,7 +65,7 @@ public class EngineeringState implements Serializable {
     public void addNewEngineeringProject(EngineeringProject project) {
         if (!completedProjectNames.contains(project.getId())) {
             projects.add(project);
-            GameLogger.getInstance().logMessage("Added new engineering project '" + project.getLocalizedName("engineering") + "'");
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.new_engineering_added"), project.getLocalizedName("engineering")));
             // every project can be added only once
             completedProjectNames.add(project.getId());
         }

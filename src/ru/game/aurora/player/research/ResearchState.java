@@ -7,6 +7,7 @@
 package ru.game.aurora.player.research;
 
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.research.projects.AnimalResearch;
 import ru.game.aurora.player.research.projects.AstronomyResearch;
@@ -62,7 +63,7 @@ public class ResearchState implements Serializable {
 
     public void addNewAvailableProject(ResearchProjectDesc desc) {
         this.currentProjects.add(new ResearchProjectState(desc));
-        GameLogger.getInstance().logMessage(String.format("Added new research project '%s'", desc.getName()));
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.added_new_research"), desc.getName()));
     }
 
     /**
@@ -93,7 +94,7 @@ public class ResearchState implements Serializable {
                             continue;
                         }
                         toAdd.add(new ResearchProjectState(projectDesc));
-                        GameLogger.getInstance().logMessage("New research project " + projectDesc.getName() + " is now available");
+                        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "added_new_research"), projectDesc.getName()));
                     }
                 }
                 if (state.desc.getMakesAvailableEngineering() != null) {
@@ -108,7 +109,7 @@ public class ResearchState implements Serializable {
                         world.getResearchAndDevelopmentProjects().getEngineeringProjects().remove(str);
                     }
                 }
-                GameLogger.getInstance().logMessage("Research project " + state.desc.getName() + " completed");
+                GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.research_project_completed"), state.desc.getName()));
             }
         }
         // to prevent CME

@@ -69,7 +69,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
                 }
 
                 if (world.getPlayer().getResourceUnits() < 5) {
-                    GameLogger.getInstance().logMessage("Not enough resource units");
+                    GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.not_enough_resources"));
                     return;
                 }
 

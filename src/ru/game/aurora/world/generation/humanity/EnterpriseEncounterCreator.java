@@ -9,6 +9,7 @@ package ru.game.aurora.world.generation.humanity;
 
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.NPC;
@@ -44,9 +45,9 @@ public class EnterpriseEncounterCreator extends GameEventListener {
                 // repair
                 final int maxHull = world.getPlayer().getShip().getMaxHull();
                 if (world.getPlayer().getShip().getHull() == maxHull) {
-                    GameLogger.getInstance().logMessage("Ship's hull is not damaged");
+                    GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.enterprise.hull_not_damaged"));
                 } else {
-                    GameLogger.getInstance().logMessage("Enterprise engineers helped our crew in fixing breaches in ship hull");
+                    GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.enterprise.help"));
                     world.getPlayer().getShip().setHull(maxHull);
                 }
             }

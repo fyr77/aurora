@@ -105,7 +105,7 @@ public class MainMenuController implements ScreenController {
     public void draw(Graphics graphics, Camera camera) {
         graphics.drawImage(ResourceManager.getInstance().getImage("menu_background"), 0, 0);
         if (generator != null) {
-            StringBuilder sb = new StringBuilder("Generating world: ");
+            StringBuilder sb = new StringBuilder(Localization.getText("gui", "generation.prefix")).append(" ");
             sb.append(generator.getCurrentStatus());
             for (int i = 0; i < dotsCount; ++i) {
                 sb.append(".");

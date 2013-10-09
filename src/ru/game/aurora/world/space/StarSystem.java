@@ -185,7 +185,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 || (container.getInput().isKeyDown(Input.KEY_DOWN) && y >= radius)
                 || (container.getInput().isKeyDown(Input.KEY_LEFT) && x <= -radius)
                 || (container.getInput().isKeyDown(Input.KEY_RIGHT) && x >= radius)) {
-            GameLogger.getInstance().logMessage("Leaving star system...");
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "space.leaving_star_system"));
             world.setCurrentRoom(world.getGalaxyMap());
             world.getGalaxyMap().enter(world);
             player.getShip().setPos(globalMapX, globalMapY);
@@ -244,10 +244,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             return;
         }
         if (p.getCategory() == PlanetCategory.GAS_GIANT) {
-            GameLogger.getInstance().logMessage("We can not land here.");
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "space.can_not_land"));
             return;
         }
-        GameLogger.getInstance().logMessage("Descending to surface...");
+        GameLogger.getInstance().logMessage(Localization.getText("gui", "landing"));
         world.setCurrentRoom(p);
         p.enter(world);
 
@@ -315,19 +315,19 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         if (shoot) {
 
             if (weapon.getReloadTimeLeft() > 0) {
-                GameLogger.getInstance().logMessage("Weapon not yet reloaded");
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "space.weapon_not_reloaded"));
                 return;
             }
 
             // firing
             final int damage = weapon.getWeaponDesc().damage;
             target.onAttack(world, playerShip, damage);
-            GameLogger.getInstance().logMessage("Bang! Dealt " + damage + " damage to " + target.getName());
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, target.getName()));
 
             effects.add(new BlasterShotEffect(playerShip, target, world.getCamera(), 800, weapon.getWeaponDesc().shotSprite));
 
             if (!target.isAlive()) {
-                GameLogger.getInstance().logMessage(target.getName() + " destroyed");
+                GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
                 ships.remove(target);
                 target = null;
             }
@@ -346,12 +346,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             selectedWeapon = index;
             Ship playerShip = world.getPlayer().getShip();
             if (playerShip.getWeapons().size() <= selectedWeapon || playerShip.getWeapons().get(selectedWeapon) == null) {
-                GameLogger.getInstance().logMessage("No weapon in slot " + (1 + selectedWeapon));
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "space.no_weapon_in_slot") + " " + (1 + selectedWeapon));
                 return;
             }
 
             if (playerShip.getWeapons().get(selectedWeapon).getReloadTimeLeft() > 0) {
-                GameLogger.getInstance().logMessage("Weapon not yet reloaded");
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "space.weapon_not_reloaded"));
                 return;
             }
 

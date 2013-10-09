@@ -5,10 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GUIConstants;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.SaveGameManager;
+import ru.game.aurora.application.*;
 import ru.game.aurora.util.EngineUtils;
 
 /**
@@ -56,7 +53,7 @@ public class GameMenu implements Room {
         if ((enterPressed && selectedIndex == 1) || EngineUtils.checkRectanglePressed(container, world.getCamera(), saveRectangle)) {
             world.setCurrentRoom(prevRoom);
             SaveGameManager.saveGame(world);
-            GameLogger.getInstance().logMessage("Game saved");
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.game_saved"));
             return;
         }
         if ((enterPressed && selectedIndex == 2) || EngineUtils.checkRectanglePressed(container, world.getCamera(), quitRectangle)) {

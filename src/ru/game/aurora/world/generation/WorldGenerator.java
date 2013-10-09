@@ -9,6 +9,7 @@ package ru.game.aurora.world.generation;
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GlobalThreadPool;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.CrewChangeListener;
 import ru.game.aurora.world.World;
@@ -66,21 +67,21 @@ public class WorldGenerator implements Runnable {
     };
 
     private void createAliens(World world) {
-        currentStatus = "Creating aliens";
+        currentStatus = Localization.getText("gui", "generation.aliens");
         for (WorldGeneratorPart part : alienGenerators) {
             part.updateWorld(world);
         }
     }
 
     private void createArtifactsAndAnomalies(World world) {
-        currentStatus = "Creating artifacts and anomalies";
+        currentStatus = Localization.getText("gui", "generation.artifacts");
         for (WorldGeneratorPart part : otherGenerators) {
             part.updateWorld(world);
         }
     }
 
     private void generateMap(final World world) {
-        currentStatus = "Generating star systems";
+        currentStatus = Localization.getText("gui", "generation.stars");
         List<Future> futures = new ArrayList<>(maxStars);
         // now generate random star systems
         for (int i = 0; i < maxStars; ++i) {
@@ -170,7 +171,7 @@ public class WorldGenerator implements Runnable {
             }
 
             // only large planets have rings and satellites
-            if (planetSize <=2) {
+            if (planetSize <= 2) {
                 if (r.nextInt(3) == 0) {
                     planets[i].setRings(r.nextInt(rings) + 1);
                 }
@@ -198,7 +199,7 @@ public class WorldGenerator implements Runnable {
     }
 
     private void createQuestWorlds(World world) {
-        currentStatus = "Creating quests";
+        currentStatus = Localization.getText("gui", "generation.quests");
         for (WorldGeneratorPart part : questGenerators) {
             part.updateWorld(world);
         }
@@ -213,7 +214,7 @@ public class WorldGenerator implements Runnable {
         createArtifactsAndAnomalies(world);
         createQuestWorlds(world);
 
-        currentStatus = "All done";
+        currentStatus = Localization.getText("gui", "generation.done");
 
         this.world = world;
     }
