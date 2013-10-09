@@ -42,7 +42,9 @@ public class WorldGenerator implements Runnable {
 
     public static final int worldHeight = 100;
 
-    public static final int rings = 1;
+    public static final int rings = 3;
+
+    public static final PlanetCategory[] satelliteCategories = {PlanetCategory.PLANET_ROCK, PlanetCategory.PLANET_ICE};
 
     private World world;
 
@@ -167,11 +169,24 @@ public class WorldGenerator implements Runnable {
                 PlanetaryLifeGenerator.setPlanetHasLife((Planet) planets[i]);
             }
 
-            // only large planets have rings
+            // only large planets have rings and satellites
             if (planetSize <=2) {
-                if (r.nextInt(4) == 0) {
+                if (r.nextInt(3) == 0) {
                     planets[i].setRings(r.nextInt(rings) + 1);
                 }
+
+
+                int satelliteCount = r.nextInt(3);
+                for (int i1 = 1; i1 < satelliteCount + 1; ++i1) {
+
+
+                    atmosphere = CollectionUtils.selectRandomElement(PlanetAtmosphere.values());
+                    astroData += 10;
+                    cat = CollectionUtils.selectRandomElement(satelliteCategories);
+                    final Planet satellite = new Planet(world, ss, cat, atmosphere, 4, 0, 0);
+                    planets[i].addSatellite(satellite);
+                }
+
             }
 
         }

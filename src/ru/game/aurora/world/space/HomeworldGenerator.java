@@ -59,6 +59,7 @@ public class HomeworldGenerator {
         planets[5] = new GasGiant(0, 0, ss);
         setCoord(planets[5], 12);
         planets[5].setRings(1);
+        planets[5].addSatellite(new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0));
 
         ss.setPlanets(planets);
         ss.setRadius(Math.max((int) (12 * 1.5), 10));

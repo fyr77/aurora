@@ -193,27 +193,15 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             background = null;
         }
 
-        boolean isAtPlanet = false;
-        for (BasePlanet p : planets) {
-            if (x == p.getGlobalX() && y == p.getGlobalY()) {
-                isAtPlanet = true;
-                if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
-                    landOnCurrentPlanet(world);
-                    break;
-                } else if (world.isUpdatedThisFrame()) {
-                    p.processCollision(container, world.getPlayer());
-                    break;
-                }
-            }
-        }
+        BasePlanet p = getPlanetAtPlayerShipPosition();
 
         // if user ship is at planet, show additional gui panel
         final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("interactPanel");
         if (scanLandPanel != null) {
             boolean landPanelVisible = scanLandPanel.isVisible();
-            if (!isAtPlanet && landPanelVisible && getSpaceObjectAtPlayerShipPosition() == null) {
+            if (p == null && landPanelVisible && getSpaceObjectAtPlayerShipPosition() == null) {
                 scanLandPanel.setVisible(false);
-            } else if (isAtPlanet && !landPanelVisible) {
+            } else if (p != null && !landPanelVisible) {
                 Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
                 leftButton.setText(Localization.getText("gui", "space.land"));
                 scanLandPanel.setVisible(true);
@@ -227,6 +215,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         for (BasePlanet p : planets) {
             if (x == p.getGlobalX() && y == p.getGlobalY()) {
                 return p;
+            }
+            if (p.getSatellites() != null) {
+                for (BasePlanet s : p.getSatellites()) {
+                    if (x == s.getGlobalX() && y == s.getGlobalY()) {
+                        return s;
+                    }
+                }
             }
         }
         return null;
@@ -537,13 +532,26 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             float planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);
             float planetY = camera.getYCoord(p.getGlobalY()) + camera.getTileWidth() / 2;
             int radius = (int) Math.sqrt(Math.pow((planetX - starX), 2) + Math.pow((planetY - starY), 2));
-            //EngineUtils.drawCircleCentered(g, starX, starY, radius, Color.gray, false);
             EngineUtils.drawDashedCircleCentered(g, starX, starY, radius, new Color(0, 0, 150));
+
+            if (p.getSatellites() != null) {
+                for (BasePlanet satellite : p.getSatellites()) {
+                    float satelliteX = camera.getXCoord(satellite.getGlobalX()) + (camera.getTileWidth() / 2);
+                    float satelliteY = camera.getYCoord(satellite.getGlobalY()) + camera.getTileWidth() / 2;
+                    radius = (int) Math.sqrt(Math.pow((satelliteX - planetX), 2) + Math.pow((satelliteY - planetY), 2));
+                    EngineUtils.drawDashedCircleCentered(g, planetX, planetY, radius, new Color(0, 0, 150));
+                }
+            }
         }
 
         // and then all planets
         for (BasePlanet p : planets) {
             p.drawOnGlobalMap(container, g, camera, 0, 0);
+            if (p.getSatellites() != null) {
+                for (BasePlanet satellite : p.getSatellites()) {
+                    satellite.drawOnGlobalMap(container, g, camera, 0, 0);
+                }
+            }
         }
 
 

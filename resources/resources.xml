@@ -165,6 +165,10 @@
     <resource type="image" id="klisk_homeworld">sprites/planets/klisk_planet.png</resource>
     <resource type="image" id="ring_back_1">sprites/planets/rings_back.png</resource>
     <resource type="image" id="ring_front_1">sprites/planets/rings_front.png</resource>
+    <resource type="image" id="ring_back_2">sprites/planets/rings_back2.png</resource>
+    <resource type="image" id="ring_front_2">sprites/planets/rings_front2.png</resource>
+    <resource type="image" id="ring_back_3">sprites/planets/rings_back3.png</resource>
+    <resource type="image" id="ring_front_3">sprites/planets/rings_front3.png</resource>
 
     <!-- stars -->
     <resource type="image" id="star_4">sprites/space_objects/sun_64.png</resource>
