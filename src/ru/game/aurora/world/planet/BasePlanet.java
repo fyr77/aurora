@@ -7,17 +7,26 @@
 package ru.game.aurora.world.planet;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
 
-public abstract class BasePlanet implements Room, GalaxyMapObject {
-    private static final long serialVersionUID = 5047939414473391148L;
+public abstract class BasePlanet implements Room, GalaxyMapObject
+{
+    private static final long serialVersionUID = 1L;
     protected StarSystem owner;
     protected PlanetCategory category;
     protected PlanetAtmosphere atmosphere;
+    /**
+     * If planet has rings, this value is non-zero index of rings sprite
+     */
+    protected int rings;
     /**
      * Planet size type. 1 is largest, 4 is smallest.
      * Planet image size on global map and dimensions of planet surface depends on it.
@@ -29,6 +38,8 @@ public abstract class BasePlanet implements Room, GalaxyMapObject {
     protected int globalX;
     protected int globalY;
 
+    private transient Image sprite;
+
     public BasePlanet(int size, int y, StarSystem owner, PlanetAtmosphere atmosphere, int x, PlanetCategory cat) {
         this.size = size;
         this.globalY = y;
@@ -36,6 +47,10 @@ public abstract class BasePlanet implements Room, GalaxyMapObject {
         this.atmosphere = atmosphere;
         this.globalX = x;
         this.category = cat;
+    }
+
+    public void setRings(int ringsId) {
+        this.rings = ringsId;
     }
 
     public int getGlobalX() {
@@ -96,4 +111,29 @@ public abstract class BasePlanet implements Room, GalaxyMapObject {
     {
         return false;
     }
+
+
+    @Override
+    public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
+        if (!camera.isInViewport(globalX, globalY)) {
+            return;
+        }
+        if (sprite == null) {
+            sprite = PlanetSpriteGenerator.getInstance().createPlanetSprite(camera, category, size, atmosphere != PlanetAtmosphere.NO_ATMOSPHERE);
+        }
+        // draw planetary rings in 2 steps - first part that is behind planet, then planet itself, then part before planet
+        // draw rings shifted on 1/10 of planet diameter - looks nicer
+        final int RINGS_SHIFT_FACTOR = 10;
+        if (rings != 0) {
+            Image backRingsSprite = ResourceManager.getInstance().getImage("ring_back_" + rings);
+            graphics.drawImage(backRingsSprite, sprite.getWidth() / RINGS_SHIFT_FACTOR + camera.getXCoord(globalX) + (camera.getTileWidth() - backRingsSprite.getWidth()) / 2, sprite.getWidth() / RINGS_SHIFT_FACTOR + camera.getYCoord(globalY) + (camera.getTileHeight() - backRingsSprite.getHeight()) / 2);
+        }
+        graphics.drawImage(sprite, camera.getXCoord(globalX) + (camera.getTileWidth() - sprite.getWidth()) / 2, camera.getYCoord(globalY) + (camera.getTileHeight() - sprite.getHeight()) / 2);
+
+        if (rings != 0) {
+            Image frontRingsSprite = ResourceManager.getInstance().getImage("ring_front_" + rings);
+            graphics.drawImage(frontRingsSprite, sprite.getWidth() / RINGS_SHIFT_FACTOR + camera.getXCoord(globalX) + (camera.getTileWidth() - frontRingsSprite.getWidth()) / 2, sprite.getWidth() / RINGS_SHIFT_FACTOR + camera.getYCoord(globalY) + (camera.getTileHeight() - frontRingsSprite.getHeight()) / 2);
+        }
+    }
+
 }

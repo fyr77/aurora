@@ -42,6 +42,8 @@ public class WorldGenerator implements Runnable {
 
     public static final int worldHeight = 100;
 
+    public static final int rings = 1;
+
     private World world;
 
     private static final WorldGeneratorPart[] questGenerators = {
@@ -163,6 +165,13 @@ public class WorldGenerator implements Runnable {
             );
             if (atmosphere != PlanetAtmosphere.NO_ATMOSPHERE) {
                 PlanetaryLifeGenerator.setPlanetHasLife((Planet) planets[i]);
+            }
+
+            // only large planets have rings
+            if (planetSize <=2) {
+                if (r.nextInt(4) == 0) {
+                    planets[i].setRings(r.nextInt(rings) + 1);
+                }
             }
 
         }

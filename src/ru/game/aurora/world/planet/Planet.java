@@ -299,17 +299,6 @@ public class Planet extends BasePlanet implements IDungeon {
         controller.draw(container, graphics, camera);
     }
 
-    @Override
-    public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
-        if (!camera.isInViewport(globalX, globalY)) {
-            return;
-        }
-        if (sprite == null) {
-            sprite = PlanetSpriteGenerator.getInstance().createPlanetSprite(camera, category, size, atmosphere != PlanetAtmosphere.NO_ATMOSPHERE);
-        }
-        graphics.drawImage(sprite, camera.getXCoord(globalX) + (camera.getTileWidth() - sprite.getWidth()) / 2, camera.getYCoord(globalY) + (camera.getTileHeight() - sprite.getHeight()) / 2);
-    }
-
     public int getWidth() {
         return getSurface().getWidth();
     }
