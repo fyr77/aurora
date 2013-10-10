@@ -155,7 +155,7 @@
             "replies":[
                 {
                     "targetStatementId": -1,
-                    "replyText":"<over>"
+                    "replyText":"end"
                 }
             ]
         }

@@ -52,6 +52,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
         initNifty(gameContainer);
         GUI.init(gameContainer, getNifty());
+        GUI.getInstance().getNifty().gotoScreen("main_menu");
         mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
         try {
             AnimalGenerator.init();
@@ -152,7 +153,11 @@ public class AuroraGame extends NiftyOverlayGame {
         System.out.println("Setting native lib dir to " + nativePath);
         addDir(nativePath);
 
-        Localization.init(Locale.getDefault());
+        if (args.length != 0) {
+            Localization.init(Locale.forLanguageTag(args[0]));
+        } else {
+            Localization.init(Locale.getDefault());
+        }
         AppGameContainer app = new AppGameContainer(new AuroraGame());
         app.setDisplayMode(tilesX * tileSize, tilesY * tileSize, false);
         app.start();
