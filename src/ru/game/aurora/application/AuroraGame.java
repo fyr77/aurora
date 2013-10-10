@@ -21,6 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class AuroraGame extends NiftyOverlayGame {
@@ -136,6 +138,7 @@ public class AuroraGame extends NiftyOverlayGame {
     }
 
     public static void main(String[] args) throws SlickException, IOException {
+        Logger.getLogger("de.lessvoid.nifty").setLevel(Level.WARNING);
 
         System.out.println("Aurora game version " + Version.VERSION + " started");
         final String osName = System.getProperty("os.name");

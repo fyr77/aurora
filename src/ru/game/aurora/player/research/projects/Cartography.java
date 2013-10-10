@@ -44,7 +44,7 @@ public class Cartography extends ResearchProjectDesc
 
     @Override
     public boolean isRepeatable() {
-        return true;
+        return false;
     }
 
     /*

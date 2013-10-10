@@ -1,9 +1,17 @@
-VERSION 0.1.0
+VERSION 0.1.1
 
 IN PROGRESS...
 
+======================================================
+VERSION 0.1.0
+
+10.10.2013
+
 + Localization support
 + New gui panel for target selection
++ Planets with rings and satellites
++ New game over ending, when loosing all crew
++ More interactivity for dungeons: buttons and doors
 
 =====================================================
 
