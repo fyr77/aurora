@@ -52,14 +52,24 @@ public class EngineUtils {
     public static Color lightenColor(Color color) {
         float[] hsb = new float[3];
         java.awt.Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
-        hsb[1] *= 0.3;
+        hsb[0]+=0.05-(Math.random()/10);
+        if (hsb[0]>1) {
+            hsb[0]-=1;
+        } else if (hsb[0]<0) {
+            hsb[0]+=1;
+        }
         hsb[2] = (float) Math.min(1.0, hsb[2] * 1.25);
         int rgb = java.awt.Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
-        return new Color((rgb & 0x00ff0000) >> 16, (rgb & 0x0000ff00) >> 8, (rgb & 0x000000ff));
+        return new Color(rgb);
     }
 
     public static Color darkenColor(Color color, float coeff) {
-        return new Color(color.r * coeff, color.g * coeff, color.b * coeff);
+        float[] hsb = new float[3];
+        java.awt.Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
+        hsb[1]*=(coeff*1.1);
+        hsb[2]*=coeff;
+        int rgb = java.awt.Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
+        return new Color(rgb);
     }
 
     public static void drawCircleCentered(Graphics graphics, float x, float y, int radius, Color c, boolean filled) {
@@ -73,28 +83,18 @@ public class EngineUtils {
 
     public static void drawDashedCircleCentered(Graphics graphics, float x, float y, int radius, Color c) {
         graphics.setColor(c);
-        final int segments = radius / 10;
-        double angle = Math.PI / (2 * segments);
+        int segments = radius/5;
+        if (segments%2==1) {
+            segments++;
+        }
+        float angle = 360/(float)segments;
         boolean b = true;
-        for (int i = 0; i <= segments; ++i) {
-
-            int x1 = (int) (radius * Math.cos(angle * i));
-            int x2 = (int) (radius * Math.cos(angle * (i + 1)));
-
-            int y1 = (int) (radius * Math.sin(angle * i));
-            int y2 = (int) (radius * Math.sin(angle * (i + 1)));
-
+        for (int i = 0; i < segments; ++i) {
             if (b) {
-                graphics.drawLine(x + x1, y + y1, x + x2, y + y2);
-                graphics.drawLine(x - x1, y - y1, x - x2, y - y2);
-            } else {
-                graphics.drawLine(x - x1, y + y1, x - x2, y + y2);
-                graphics.drawLine(x + x1, y - y1, x + x2, y - y2);
+                graphics.drawArc(x-radius,y-radius,radius*2,radius*2, angle*i,angle*(i+1));
             }
-
             b = !b;
         }
-
     }
 
     public static Image replaceColors(Image original, Map<Color, Color> colorMap) {

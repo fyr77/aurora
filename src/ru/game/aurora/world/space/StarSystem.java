@@ -514,7 +514,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
-        player.getShip().draw(container, g, camera);
 
         g.setColor(star.color);
 
@@ -532,14 +531,14 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             float planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);
             float planetY = camera.getYCoord(p.getGlobalY()) + camera.getTileWidth() / 2;
             int radius = (int) Math.sqrt(Math.pow((planetX - starX), 2) + Math.pow((planetY - starY), 2));
-            EngineUtils.drawDashedCircleCentered(g, starX, starY, radius, new Color(0, 0, 150));
+            EngineUtils.drawDashedCircleCentered(g, starX, starY, radius, new Color(30, 30, 100));
 
             if (p.getSatellites() != null) {
                 for (BasePlanet satellite : p.getSatellites()) {
                     float satelliteX = camera.getXCoord(satellite.getGlobalX()) + (camera.getTileWidth() / 2);
                     float satelliteY = camera.getYCoord(satellite.getGlobalY()) + camera.getTileWidth() / 2;
                     radius = (int) Math.sqrt(Math.pow((satelliteX - planetX), 2) + Math.pow((satelliteY - planetY), 2));
-                    EngineUtils.drawDashedCircleCentered(g, planetX, planetY, radius, new Color(0, 0, 150));
+                    EngineUtils.drawDashedCircleCentered(g, planetX, planetY, radius, new Color(30, 30, 100));
                 }
             }
         }
@@ -594,6 +593,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         for (Effect currentEffect : effects) {
             currentEffect.draw(container, g, camera);
         }
+
+        player.getShip().draw(container, g, camera);
     }
 
     public List<SpaceObject> getShips() {

@@ -46,7 +46,7 @@ public class Star implements Serializable
 
     public Color getOuterColor() {
         if (outerColor == null) {
-            outerColor = EngineUtils.darkenColor(color, 0.75f);
+            outerColor = EngineUtils.darkenColor(color, 0.55f);
         }
         return outerColor;
     }
@@ -60,7 +60,7 @@ public class Star implements Serializable
             }
             Image template = ResourceManager.getInstance().getImage("star_" + imageSize);
             Map<Color, Color> colorMap = new HashMap<>();
-            colorMap.put(new Color(255, 243, 52, 255), color);
+            colorMap.put(new Color(255, 243, 52, 255), getCoreColor());
             colorMap.put(new Color(255, 172, 80, 255), getOuterColor());
             myImage = EngineUtils.replaceColors(template, colorMap);
         }
