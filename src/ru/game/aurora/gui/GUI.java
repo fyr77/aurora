@@ -46,11 +46,11 @@ public class GUI {
      * Hack: nifty-gui wraps slick unicode font. To correctly render symbols, loadGlyphs() must be called on that internal font
      * representation. But nifty loads only ASCII glyphs, and then hides it inside, providing no way for user to load other glyphs
      * This method should be called for ALL UTF-8 FONTS, BEFORE loading any nifty screens. It hacks private field and calls loadGlyphs() for cyrillic
+     *
      * @param name
      */
-    private void hackUnicodeFont(String name)
-    {
-        UnicodeSlickRenderFont font = (UnicodeSlickRenderFont)nifty.createFont(name);
+    private void hackUnicodeFont(String name) {
+        UnicodeSlickRenderFont font = (UnicodeSlickRenderFont) nifty.createFont(name);
         Field field = null;
         try {
             field = AbstractSlickRenderFont.class.getDeclaredField("internalFont");
@@ -109,7 +109,7 @@ public class GUI {
         nifty.registerScreenController(new ResearchScreenController(world));
         nifty.registerScreenController(new DialogController(world));
         nifty.registerScreenController(new StoryScreenController(world));
-        nifty.registerScreenController(new ResearchReportScreenController());
+        nifty.registerScreenController(new ResearchReportScreenController(world));
         nifty.registerScreenController(new EarthProgressScreenController(world));
         nifty.registerScreenController(new EarthScreenController(world));
         nifty.registerScreenController(new EngineeringScreenController(world));
@@ -173,12 +173,12 @@ public class GUI {
         }
         ingameMenuInstance = nifty.createPopup("ingame_menu");
         nifty.showPopup(nifty.getCurrentScreen(), ingameMenuInstance.getId(), null);
-        nifty.setIgnoreKeyboardEvents(false);
+        worldInstance.setPaused(true);
     }
 
     public void closeIngameMenu() {
         nifty.closePopup(ingameMenuInstance.getId());
         ingameMenuInstance = null;
-        nifty.setIgnoreKeyboardEvents(true);
+        worldInstance.setPaused(false);
     }
 }

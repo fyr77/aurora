@@ -19,10 +19,12 @@ import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.ResearchProjectDesc;
+import ru.game.aurora.world.World;
 
 
-public class ResearchReportScreenController implements ScreenController
-{
+public class ResearchReportScreenController implements ScreenController {
+    private World world;
+
     private ResearchProjectDesc research;
 
     private Window window;
@@ -32,6 +34,10 @@ public class ResearchReportScreenController implements ScreenController
     private Element text;
 
     private ListBox nextResearch;
+
+    public ResearchReportScreenController(World world) {
+        this.world = world;
+    }
 
     public void setResearch(ResearchProjectDesc research) {
         this.research = research;
@@ -47,6 +53,7 @@ public class ResearchReportScreenController implements ScreenController
 
     @Override
     public void onStartScreen() {
+        world.setPaused(true);
         window.setTitle(research.getName() + " report");
         icon.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(research.getReport().icon))));
         text.getRenderer(TextRenderer.class).setText(research.getReport().getText());
@@ -62,11 +69,10 @@ public class ResearchReportScreenController implements ScreenController
 
     @Override
     public void onEndScreen() {
-
+        world.setPaused(false);
     }
 
-    public void closeScreen()
-    {
+    public void closeScreen() {
         GUI.getInstance().popAndSetScreen();
     }
 }

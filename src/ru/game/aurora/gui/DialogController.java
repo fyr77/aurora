@@ -58,6 +58,7 @@ public class DialogController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        world.setPaused(true);
         updateDialog();
     }
 
@@ -75,7 +76,7 @@ public class DialogController implements ScreenController {
 
     @Override
     public void onEndScreen() {
-
+        world.setPaused(false);
     }
 
     @NiftyEventSubscriber(id = "replyList")

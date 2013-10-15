@@ -38,6 +38,9 @@ public class World implements Serializable {
 
     private Room currentRoom;
 
+    // if true, current room is not updated
+    private boolean isPaused;
+
     private GalaxyMap galaxyMap;
 
     private Player player;
@@ -75,9 +78,6 @@ public class World implements Serializable {
     }
 
     public void update(GameContainer container) {
-        updatedThisFrame = updatedNextFrame;
-        updatedNextFrame = false;
-
         if (overlayWindows != null && !overlayWindows.isEmpty()) {
             Iterator<OverlayWindow> iter = overlayWindows.iterator();
             OverlayWindow w = iter.next();
@@ -88,6 +88,13 @@ public class World implements Serializable {
             // only one active overlay window
             return;
         }
+
+        if (isPaused) {
+            return;
+        }
+
+        updatedThisFrame = updatedNextFrame;
+        updatedNextFrame = false;
 
         if (container.getInput().isKeyPressed(Input.KEY_R)) {
             GUI.getInstance().pushCurrentScreen();
@@ -125,13 +132,6 @@ public class World implements Serializable {
                 listenerIterator.remove();
             }
         }
-
-        if (player.getShip().getTotalCrew() <= 0) {
-            if (currentRoom instanceof Planet && player.getLandingParty().getTotalMembers() <= 0) {
-                container.exit();
-            }
-        }
-
 
         // should be the last so that ESC event is not consumed
         if (container.getInput().isKeyPressed(Input.KEY_ESCAPE) && (currentRoom instanceof GalaxyMap || currentRoom instanceof Planet || currentRoom instanceof StarSystem)) {
@@ -289,5 +289,9 @@ public class World implements Serializable {
 
     public void setUpdatedNextFrame(boolean updatedNextFrame) {
         this.updatedNextFrame = updatedNextFrame;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
     }
 }

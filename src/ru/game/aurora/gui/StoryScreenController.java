@@ -22,8 +22,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.World;
 
 
-public class StoryScreenController implements ScreenController
-{
+public class StoryScreenController implements ScreenController {
     private World world;
 
     private StoryScreen story;
@@ -49,12 +48,12 @@ public class StoryScreenController implements ScreenController
 
     @Override
     public void onStartScreen() {
+        world.setPaused(true);
         story.start();
         update();
     }
 
-    private void update()
-    {
+    private void update() {
         StoryScreen.StoryElement elem = story.getCurrentElement();
         if (elem == null) {
             return;
@@ -67,10 +66,10 @@ public class StoryScreenController implements ScreenController
 
     @Override
     public void onEndScreen() {
+        world.setPaused(false);
     }
 
-    public void nextPage()
-    {
+    public void nextPage() {
         if (story.next(world)) {
             if (story.isOver()) {
                 GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
@@ -79,16 +78,14 @@ public class StoryScreenController implements ScreenController
         }
     }
 
-    public void prevPage()
-    {
+    public void prevPage() {
         if (story.prev()) {
             update();
         }
     }
 
-    @NiftyEventSubscriber(id="story_window")
-    public void onClose(final String id, final WindowClosedEvent event)
-    {
+    @NiftyEventSubscriber(id = "story_window")
+    public void onClose(final String id, final WindowClosedEvent event) {
         while (!story.isOver()) {
             story.next(world);
         }

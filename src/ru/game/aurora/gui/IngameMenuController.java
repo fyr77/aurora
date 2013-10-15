@@ -18,9 +18,7 @@ import java.util.Properties;
  * Date: 29.05.13
  * Time: 17:32
  */
-public class IngameMenuController implements Controller
-{
-
+public class IngameMenuController implements Controller {
     @Override
     public void bind(Nifty nifty, Screen screen, Element element, Properties parameter, Attributes controlDefinitionAttributes) {
     }
@@ -43,20 +41,17 @@ public class IngameMenuController implements Controller
         return true;
     }
 
-    public void continueGame()
-    {
+    public void continueGame() {
         GUI.getInstance().closeIngameMenu();
     }
 
-    public void saveGame()
-    {
+    public void saveGame() {
         continueGame();
         SaveGameManager.saveGame(GUI.getInstance().getWorldInstance());
         GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.game_saved"));
     }
 
-    public void exitGame()
-    {
+    public void exitGame() {
         GUI.getInstance().getContainerInstance().exit();
     }
 }
