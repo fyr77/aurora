@@ -22,9 +22,11 @@ import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.space.AlienHomeworld;
 import ru.game.aurora.world.space.GalaxyMapScreen;
 import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.space.earth.Earth;
 
 public class GalaxyMapController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender {
 
@@ -233,36 +235,15 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(false);
 
-        StringBuilder sb = new StringBuilder(Localization.getText("gui", "scan.planetary_data")).append('\n');
-        sb.append(Localization.getText("gui", "scan.atmosphere")).append(' ').append(planet.getAtmosphere()).append('\n');
+        EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), planet.getScanText().toString());
 
-        String sizeText;
-        switch (planet.getSize()) {
-            case 4:
-                sizeText = Localization.getText("gui", "scan.size.small");
-                break;
-            case 3:
-                sizeText = Localization.getText("gui", "scan.size.medium");
-                break;
-            case 2:
-                sizeText = Localization.getText("gui", "scan.size.large");
-                break;
-            case 1:
-                sizeText = Localization.getText("gui", "scan.size.huge");
-                break;
-            default:
-                throw new IllegalArgumentException();
+        if ((planet instanceof Earth)||(planet instanceof AlienHomeworld)) {
+            //todo: load custom map
+            return;
         }
-        sb.append(Localization.getText("gui", "scan.size")).append(' ').append(sizeText).append('\n');
-        sb.append(Localization.getText("gui", "scan.bio_activity")).append(' ').append(planet.hasLife() ? Localization.getText("gui", "scan.detected") : Localization.getText("gui", "scan.not_detected")).append('\n');
-        sb.append(Localization.getText("gui", "scan.surface_type")).append(' ').append(planet.getCategory()).append('\n');
-
-        EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), sb.toString());
-
         if (planet instanceof Planet) {
             world.getCurrentStarSystem().setSurfaceRenderTarget(popup.findElementByName("surfaceMapPanel"));
         }
-
     }
 
     public void enterStarsystem() {

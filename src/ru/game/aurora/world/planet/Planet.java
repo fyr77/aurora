@@ -341,4 +341,33 @@ public class Planet extends BasePlanet implements IDungeon {
             world.getPlayer().getLandingParty().consumeOxygen();
         }
     }
+
+    @Override
+    public StringBuilder getScanText() {
+        StringBuilder sb = new StringBuilder(Localization.getText("gui", "scan.planetary_data")).append('\n');
+        sb.append(Localization.getText("gui", "scan.atmosphere")).append(' ').append(getAtmosphere()).append('\n');
+
+        String sizeText;
+        switch (getSize()) {
+            case 4:
+                sizeText = Localization.getText("gui", "scan.size.small");
+                break;
+            case 3:
+                sizeText = Localization.getText("gui", "scan.size.medium");
+                break;
+            case 2:
+                sizeText = Localization.getText("gui", "scan.size.large");
+                break;
+            case 1:
+                sizeText = Localization.getText("gui", "scan.size.huge");
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+        sb.append(Localization.getText("gui", "scan.size")).append(' ').append(sizeText).append('\n');
+        sb.append(Localization.getText("gui", "scan.bio_activity")).append(' ').append(hasLife() ? Localization.getText("gui", "scan.detected") : Localization.getText("gui", "scan.not_detected")).append('\n');
+        sb.append(Localization.getText("gui", "scan.surface_type")).append(' ').append(getCategory()).append('\n');
+
+        return sb;
+    }
 }

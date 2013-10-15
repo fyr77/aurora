@@ -10,6 +10,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
@@ -71,5 +72,11 @@ public class AlienHomeworld extends BasePlanet {
     @Override
     public boolean canBeLanded() {
         return false;
+    }
+
+    @Override
+    public StringBuilder getScanText() {
+        StringBuilder sb = new StringBuilder(Localization.getText("races", getOwnerRace().getName()+".homeworld.description"));
+        return sb;
     }
 }

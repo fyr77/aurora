@@ -137,6 +137,11 @@ public abstract class BasePlanet implements Room, GalaxyMapObject
         return satellites;
     }
 
+
+    public StringBuilder getScanText() {
+        return null;
+    }
+
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
         if (!camera.isInViewport(globalX, globalY)) {
