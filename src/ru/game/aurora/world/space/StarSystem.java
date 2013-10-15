@@ -207,6 +207,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 scanLandPanel.setVisible(true);
             }
         }
+
+        if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
+            landOnCurrentPlanet(world);
+        }
     }
 
     public BasePlanet getPlanetAtPlayerShipPosition() {

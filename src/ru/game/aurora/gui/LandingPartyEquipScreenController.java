@@ -66,11 +66,10 @@ public class LandingPartyEquipScreenController implements ScreenController {
         updateLabels();
     }
 
-    private void updateLabels()
-    {
+    private void updateLabels() {
         myScreen.findElementByName("scientists_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.scientists") + " " + landingParty.getScience());
         myScreen.findElementByName("engineers_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.engineers") + " " + landingParty.getEngineers());
-        myScreen.findElementByName("military_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.military") + " "+ landingParty.getMilitary());
+        myScreen.findElementByName("military_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.military") + " " + landingParty.getMilitary());
         myScreen.findElementByName("total_count").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.total") + " " + landingParty.getTotalMembers() + " / 10");
 
     }
@@ -80,8 +79,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
     }
 
     @NiftyEventSubscriber(id = "weapon_select")
-    public void onWeaponSelected(final String id, final DropDownSelectionChangedEvent event)
-    {
+    public void onWeaponSelected(final String id, final DropDownSelectionChangedEvent event) {
         if (event.getSelection() == null) {
             return;
         }
@@ -101,6 +99,9 @@ public class LandingPartyEquipScreenController implements ScreenController {
                 int oldVal = landingParty.getScience();
                 landingParty.setScience((int) event.getValue());
                 if (landingParty.getTotalMembers() > 10 || landingParty.getScience() > ship.getScientists()) {
+                    if (oldVal > ship.getScientists()) {
+                        oldVal = 0;
+                    }
                     event.getScrollbar().setValue(oldVal);
                     landingParty.setScience(oldVal);
                 }
@@ -110,6 +111,9 @@ public class LandingPartyEquipScreenController implements ScreenController {
                 int oldVal = landingParty.getEngineers();
                 landingParty.setEngineers((int) event.getValue());
                 if (landingParty.getTotalMembers() > 10 || landingParty.getEngineers() > ship.getEngineers()) {
+                    if (oldVal > ship.getEngineers()) {
+                        oldVal = 0;
+                    }
                     event.getScrollbar().setValue(oldVal);
                     landingParty.setEngineers(oldVal);
                 }
@@ -119,6 +123,9 @@ public class LandingPartyEquipScreenController implements ScreenController {
                 int oldVal = landingParty.getMilitary();
                 landingParty.setMilitary((int) event.getValue());
                 if (landingParty.getTotalMembers() > 10 || landingParty.getMilitary() > ship.getMilitary()) {
+                    if (oldVal > ship.getMilitary()) {
+                        oldVal = 0;
+                    }
                     event.getScrollbar().setValue(oldVal);
                     landingParty.setMilitary(oldVal);
                 }
