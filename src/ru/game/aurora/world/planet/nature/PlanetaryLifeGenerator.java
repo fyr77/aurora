@@ -7,6 +7,7 @@
 package ru.game.aurora.world.planet.nature;
 
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.planet.Planet;
 
@@ -71,7 +72,7 @@ public class PlanetaryLifeGenerator {
         int speciesCount = r.nextInt(5) + 2;
         AnimalSpeciesDesc[] animalSpecies = new AnimalSpeciesDesc[speciesCount];
         for (int i = 0; i < speciesCount; ++i) {
-            animalSpecies[i] = new AnimalSpeciesDesc(planet, "Unknown alien animal", r.nextBoolean(), r.nextBoolean(), r.nextInt(10) + 3, r.nextInt(6), 1 + r.nextInt(5), CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values()));
+            animalSpecies[i] = new AnimalSpeciesDesc(planet, Localization.getText("research", "animal.default_name"), r.nextBoolean(), r.nextBoolean(), r.nextInt(10) + 3, r.nextInt(6), 1 + r.nextInt(5), CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values()));
         }
 
         floraAndFauna.setSpecies(animalSpecies, plants);

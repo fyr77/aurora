@@ -91,8 +91,8 @@ public class GUI {
         Localization.registerGUIBungles(nifty);
 
         hackUnicodeFont("dpix_8pt.ttf");
-        nifty.registerScreenController(new MainMenuController(n, con));
-        nifty.fromXml("gui/screens/main_menu.xml", "main_menu");
+        nifty.registerScreenController(new MainMenuController(con));
+        nifty.addXml("gui/screens/main_menu.xml");
     }
 
     public static GUI getInstance() {

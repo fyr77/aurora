@@ -21,6 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class AuroraGame extends NiftyOverlayGame {
@@ -52,6 +54,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
         initNifty(gameContainer);
         GUI.init(gameContainer, getNifty());
+        GUI.getInstance().getNifty().gotoScreen("main_menu");
         mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
         try {
             AnimalGenerator.init();
@@ -135,6 +138,7 @@ public class AuroraGame extends NiftyOverlayGame {
     }
 
     public static void main(String[] args) throws SlickException, IOException {
+        Logger.getLogger("de.lessvoid.nifty").setLevel(Level.WARNING);
 
         System.out.println("Aurora game version " + Version.VERSION + " started");
         final String osName = System.getProperty("os.name");
@@ -152,7 +156,11 @@ public class AuroraGame extends NiftyOverlayGame {
         System.out.println("Setting native lib dir to " + nativePath);
         addDir(nativePath);
 
-        Localization.init(Locale.getDefault());
+        if (args.length != 0) {
+            Localization.init(Locale.forLanguageTag(args[0]));
+        } else {
+            Localization.init(Locale.getDefault());
+        }
         AppGameContainer app = new AppGameContainer(new AuroraGame());
         app.setDisplayMode(tilesX * tileSize, tilesY * tileSize, false);
         app.start();

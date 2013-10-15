@@ -66,15 +66,8 @@ public class MainMenuController implements ScreenController {
         container.exit();
     }
 
-    public MainMenuController(Nifty nifty, GameContainer container) {
-        boolean saveAvailable = SaveGameManager.isSaveAvailable();
+    public MainMenuController(GameContainer container) {
         this.container = container;
-
-        nifty.gotoScreen("main_menu");
-
-        if (!saveAvailable) {
-            nifty.getCurrentScreen().findElementByName("panel").findElementByName("continue_game_button").disable();
-        }
     }
 
     public World update(Camera camera, GameContainer container) {
@@ -128,6 +121,11 @@ public class MainMenuController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        boolean saveAvailable = SaveGameManager.isSaveAvailable();
+
+        if (!saveAvailable) {
+            GUI.getInstance().getNifty().getCurrentScreen().findElementByName("panel").findElementByName("continue_game_button").disable();
+        }
     }
 
     @Override

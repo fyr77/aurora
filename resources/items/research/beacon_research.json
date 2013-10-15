@@ -6,7 +6,7 @@
         "text" : "beacon.report"
     },
     "makesAvailable" : [],
-    "makesAvailableEngineering" : ["Advanced laser cannons"],
+    "makesAvailableEngineering" : ["advanced_lasers"],
     "earthProgress" : ["solar_energy"],
     "score" : 50,
     "progress" : 40,

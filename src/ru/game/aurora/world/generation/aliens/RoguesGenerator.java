@@ -32,7 +32,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
         private static final long serialVersionUID = 4954480685679636543L;
 
         public MeetDamagedRogueEvent(NPCShip ship) {
-            super(0.4, ship);
+            super(0.1, ship);
         }
 
         @Override

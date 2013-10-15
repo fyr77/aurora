@@ -38,7 +38,7 @@
                 </panel>
                 <control id="scrollbarPanelId" name="scrollPanel" horizontal="false" childLayout="center">
                     <panel childLayout="center" padding="5px" width="100%">
-                        <text id="selectedItemText" style="base-font" wrap="true" text="${gui.no_item_selected}" width="80%" textHAlign="left" />
+                        <text id="selectedItemText" style="base-font" wrap="true" text="${gui.no_item_selected}" width="85%" textHAlign="left" />
                     </panel>
                 </control>
             </panel>
