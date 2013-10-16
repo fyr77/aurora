@@ -75,7 +75,7 @@ public class EngineeringScreenController implements ScreenController {
     private void updateLabels() {
         pointsText.getRenderer(TextRenderer.class).setText(Localization.getText("gui", "engineering.repairs.hull_points_to_repair") + " " + engineeringState.getHullRepairs().remainingPoints);
         engiText.getRenderer(TextRenderer.class).setText(Localization.getText("gui", "engineering.repairs.assigned_engineers") + " " + engineeringState.getHullRepairs().engineersAssigned);
-        ruText.getRenderer(TextRenderer.class).setText(String.format(Localization.getText("gui", "engineering.repairs.resource_units_required"), engineeringState.getHullRepairs().calcResCost(), world.getPlayer().getResourceUnits()));
+        ruText.getRenderer(TextRenderer.class).setText(String.format(Localization.getText("gui", "engineering.repairs.resource_units_required"), engineeringState.getHullRepairs().calcResCost(), world.getPlayer().getResourceUnits() + (engineeringState.getHullRepairs().remainingPoints > 0 ? +HullRepairs.POINT_RES_COST : 0)));
     }
 
     public void onHullPointsDecreased() {
@@ -92,8 +92,13 @@ public class EngineeringScreenController implements ScreenController {
 
     public void onHullPointsIncreased() {
         if (world.getPlayer().getShip().getHull() + engineeringState.getHullRepairs().remainingPoints < world.getPlayer().getShip().getMaxHull()) {
+            if (engineeringState.getHullRepairs().calcResCost() + HullRepairs.POINT_RES_COST > world.getPlayer().getResourceUnits()) {
+                return;
+            }
             if (engineeringState.getHullRepairs().remainingPoints == 0) {
                 engineeringState.getHullRepairs().resetProgress();
+                // subtracting res for first point
+                world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() - HullRepairs.POINT_RES_COST);
             }
             engineeringState.getHullRepairs().remainingPoints++;
             updateLabels();
