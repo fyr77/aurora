@@ -300,7 +300,7 @@ public class DungeonController implements Serializable {
         boolean isAtObject = false;
         for (PlanetObject a : map.getObjects()) {
             a.update(container, world);
-            if (landingParty.getDistance(a) == 0) {
+            if (landingParty.getDistance(a) == 0 && a.canBePickedUp()) {
                 isAtObject = true;
             }
         }
