@@ -71,6 +71,7 @@ public class EarthProgressScreenController implements ScreenController {
     }
 
     public void updateStats() {
+        data.clear();
         totalScore = 0;
         final ResearchState researchState = world.getPlayer().getResearchState();
 
