@@ -4,6 +4,8 @@ IN PROGRESS...
 
 * Custom scanning descriptions for home planets
 * Game pausing during modal dialogs is now working
+* Some new art
+* Bugfix
 
 ======================================================
 VERSION 0.1.0
