@@ -150,9 +150,9 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         starInitialResearch.addNextResearch(secondResearch);
 
         world.getResearchAndDevelopmentProjects().getEarthResearchProjects().put("solar_energy", new EarthEnergyResearch());
-        world.getResearchAndDevelopmentProjects().getResearchProjects().put(secondResearch.getName(), secondResearch);
+        world.getResearchAndDevelopmentProjects().getResearchProjects().put(secondResearch.getId(), secondResearch);
         AdvancedLasers al = new AdvancedLasers();
-        world.getResearchAndDevelopmentProjects().getEngineeringProjects().put(al.getLocalizedName("engineering"), al);
+        world.getResearchAndDevelopmentProjects().getEngineeringProjects().put(al.getId(), al);
 
     }
 }

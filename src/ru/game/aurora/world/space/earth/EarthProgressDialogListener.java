@@ -23,10 +23,13 @@ public class EarthProgressDialogListener implements DialogListener {
     @Override
     public void onDialogEnded(World world, int returnCode) {
         if (returnCode == -1) {
+            // pop previouse screen and replace it with retirement gameover
+            GUI.getInstance().popScreen();
+            GUI.getInstance().pushScreen("fail_screen");
             GUI.getInstance().getNifty().gotoScreen("fail_screen");
             FailScreenController controller = (FailScreenController) GUI.getInstance().getNifty().findScreenController(FailScreenController.class.getCanonicalName());
-            controller.set("retirement_gameover", "retire");
 
+            controller.set("retirement_gameover", "retire");
             return;
         }
         world.setCurrentRoom(earth.getOwner());

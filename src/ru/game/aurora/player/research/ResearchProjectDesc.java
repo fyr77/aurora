@@ -106,6 +106,10 @@ public abstract class ResearchProjectDesc implements Serializable {
         return icon;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public ResearchReport getReport() {
         return report;
     }

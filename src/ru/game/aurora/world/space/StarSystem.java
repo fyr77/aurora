@@ -405,7 +405,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     , container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(selectedWeapon + Input.KEY_1)
             );
             if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-                mode = MODE_MOVE;
+                onWeaponButtonPressed(world, -1);
             }
         }
 

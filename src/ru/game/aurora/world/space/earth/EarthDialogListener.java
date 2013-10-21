@@ -45,7 +45,7 @@ public class EarthDialogListener implements DialogListener {
 
                 if (scorePerTurn < 0.01) {
                     world.getPlayer().increaseFailCount();
-                    if (world.getPlayer().getFailCount() > 3) {
+                    if (world.getPlayer().getFailCount() > 2) {
                         // unsatisfactory
                         stmt.replies[0] = new Reply(0, 3, "continue");
                     } else {
