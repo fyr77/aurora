@@ -1,6 +1,12 @@
-VERSION 0.1.1
+VERSION 0.1.2
 
 IN PROGRESS...
+
+======================================================
+
+VERSION 0.1.1
+
+21.10.2013
 
 * Custom scanning descriptions for home planets
 * Game pausing during modal dialogs is now working
