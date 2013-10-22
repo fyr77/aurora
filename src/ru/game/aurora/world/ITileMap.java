@@ -8,6 +8,7 @@ package ru.game.aurora.world;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import rlforj.los.ILosBoard;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Interface for different tile map formats.
  */
-public interface ITileMap extends Serializable
+public interface ITileMap extends Serializable, ILosBoard
 {
     public List<PlanetObject> getObjects();
 
@@ -31,6 +32,8 @@ public interface ITileMap extends Serializable
     public boolean isTilePassable(LandingParty landingParty, int x, int y);
 
     public boolean isTileVisible(int x, int y);
+
+    public boolean lineOfSightExists(int x1, int y1, int x2, int y2);
 
     public int getWidth();
 

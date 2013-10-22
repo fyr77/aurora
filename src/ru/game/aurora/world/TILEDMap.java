@@ -5,6 +5,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
+import rlforj.los.IFovAlgorithm;
+import rlforj.los.ILosAlgorithm;
+import rlforj.los.PrecisePermissive;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.world.dungeon.DungeonObject;
@@ -24,7 +27,7 @@ import java.util.List;
  */
 public class TILEDMap implements ITileMap
 {
-    private static final long serialVersionUID = -8605255474835067962L;
+    private static final long serialVersionUID = 1L;
 
     private List<PlanetObject> objects = new LinkedList<>();
 
@@ -40,9 +43,20 @@ public class TILEDMap implements ITileMap
 
     private transient List<BasePositionable> exitPoints;
 
+    private transient IFovAlgorithm fovAlgorithm;
+
+    private transient ILosAlgorithm losAlgorithm;
+
     public TILEDMap(String mapRef)
     {
         this.mapRef = mapRef;
+    }
+
+    private void loadAlgorithms()
+    {
+        final PrecisePermissive p = new PrecisePermissive();
+        fovAlgorithm = p;
+        losAlgorithm = p;
     }
 
     @Override
@@ -136,6 +150,9 @@ public class TILEDMap implements ITileMap
                     continue;
                 }
 
+                if (!isTileVisible(j, i)) {
+                    continue;
+                }
                 for (int layer = 0; layer < map.getLayerCount(); ++layer) {
                     final Image image = map.getTileImage(j, i, layer);
                     if (image == null) {
@@ -160,7 +177,15 @@ public class TILEDMap implements ITileMap
 
     @Override
     public boolean isTileVisible(int x, int y) {
-        return true;
+        return (flags[y][x] & SurfaceTypes.VISIBILITY_MASK) != 0;
+    }
+
+    @Override
+    public boolean lineOfSightExists(int x1, int y1, int x2, int y2) {
+        if (losAlgorithm == null) {
+            loadAlgorithms();
+        }
+        return losAlgorithm.existsLineOfSight(this, x1, y1, x2, y2, false);
     }
 
     @Override
@@ -175,19 +200,11 @@ public class TILEDMap implements ITileMap
 
     @Override
     public int updateVisibility(int x, int y, int range) {
-        int rz = 0;
-        for (int i = y - range; i <= y + range; ++i) {
-            for (int j = x - range; j <= x + range; ++j) {
-                if (i < 0 || j < 0 || i >= map.getHeight() || j >= map.getHeight()) {
-                    continue;
-                }
-                if (0 == (SurfaceTypes.VISIBILITY_MASK & flags[i][j])) {
-                    flags[i][j] |= SurfaceTypes.VISIBILITY_MASK;
-                    ++rz;
-                }
-            }
+        if (fovAlgorithm == null) {
+            loadAlgorithms();
         }
-        return rz;
+        fovAlgorithm.visitFieldOfView(this, x, y, range * 2);
+        return 0; // geodata not collected in dungeons
     }
 
     @Override
@@ -215,5 +232,20 @@ public class TILEDMap implements ITileMap
     @Override
     public List<IVictoryCondition> getVictoryConditions() {
         return victoryConditions;
+    }
+
+    @Override
+    public boolean contains(int i, int i1) {
+        return i >= 0 && i < getWidth() && i1 >= 0 && i1 < getHeight();
+    }
+
+    @Override
+    public boolean isObstacle(int i, int i1) {
+        return !isTilePassable(i, i1);
+    }
+
+    @Override
+    public void visit(int i, int i1) {
+        flags[i1][i] |= SurfaceTypes.VISIBILITY_MASK;
     }
 }
