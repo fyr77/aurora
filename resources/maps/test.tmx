@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="64" tileheight="64">
  <tileset firstgid="1" source="rogues_tiles.tsx"/>
- <tileset firstgid="29" source="editor_tileset.tsx"/>
+ <tileset firstgid="41" source="editor_tileset.tsx"/>
  <layer name="floor" width="20" height="20">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC8VUyw4AEAzb/P9HuziIRNfOcGiI0XaPaGbWBnzas3Dw1ieo5yh+qrPTUsB6VvON9Ji81nX1y/p7yVcBNJ9srJoPzW0F3636Mb5QfzN5/uaLapP5R9T7ak9QHbLzr/B1MMBFPUAGAAA=
@@ -67,7 +67,7 @@
     <property name="initialState" value="normal"/>
    </properties>
   </object>
-  <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="448" y="832" width="64" height="64">
+  <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="64" y="832" width="64" height="64">
    <properties>
     <property name="door" value="topLeftDoor"/>
     <property name="imageNormal" value="rogues_tileset"/>
@@ -123,7 +123,7 @@
     <property name="weapon" value="plasma"/>
    </properties>
   </object>
-  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="256" y="832" width="64" height="64">
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="192" y="832" width="64" height="64">
    <properties>
     <property name="hp" value="5"/>
     <property name="image" value="rogues_tileset"/>
@@ -157,14 +157,47 @@
     <property name="initialState" value="opened"/>
    </properties>
   </object>
-  <object type="ru.game.aurora.world.dungeon.KillAllMonstersCondition" gid="31" x="98" y="125" width="64" height="64"/>
+  <object type="ru.game.aurora.world.dungeon.KillAllMonstersCondition" gid="43" x="98" y="125" width="64" height="64"/>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="640" y="512" width="64" height="64">
+   <properties>
+    <property name="hp" value="5"/>
+    <property name="image" value="rogues_tileset"/>
+    <property name="imageTileX" value="0"/>
+    <property name="imageTileY" value="7"/>
+    <property name="speed" value="1"/>
+    <property name="tags" value="guard"/>
+    <property name="weapon" value="melee"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="1024" y="576" width="64" height="64">
+   <properties>
+    <property name="hp" value="5"/>
+    <property name="image" value="rogues_tileset"/>
+    <property name="imageTileX" value="0"/>
+    <property name="imageTileY" value="7"/>
+    <property name="speed" value="1"/>
+    <property name="tags" value="guard"/>
+    <property name="weapon" value="melee"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="320" y="832" width="64" height="64">
+   <properties>
+    <property name="hp" value="5"/>
+    <property name="image" value="rogues_tileset"/>
+    <property name="imageTileX" value="0"/>
+    <property name="imageTileY" value="7"/>
+    <property name="speed" value="1"/>
+    <property name="tags" value="guard"/>
+    <property name="weapon" value="melee"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="walls" width="20" height="20">
   <properties>
    <property name="isObstacle" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC61UXQ/CMAjkRaczW91W4///p4NYEoJ82EaSe+HoNcC1GwCsiAKfWBA7YkZsjdPYHY7yD/iOe6svBse8d64nz7E4d0V6B2IKNK2I9GaDuyCuDdZdUk/WVkeP+uS5H4a21OPabFd8Tu63iLx3hvRvgd7IHr0Y0aN5Pgf0rLmSVlWchOQmpSfn+mr5N+RvS+8i67en5pd+dW8WZ83B61f3KT0W/TuR/3refMZ5MeJzCprTv/6XiMt8bnm2gu/nzOcnDLwF9EAGAAA=
+   H4sIAAAAAAAAC51UXQ+CMAzsi0wliCDGNzVq1P//C73FNTSl3Raa3EuvPfo1BiI6AD39rQNGYA8MidMYHS76W1raLsX3Bsf8CQiG39Oz/Gyd6qlGz/p+yXJ6Vr8boEkIwhdEXmvETk593OeYeI5lDanHsaVdyfo5thd+LyfqbzN6a/bo2Rq9OM8jcAVuwL1Sj+eqd8ZzfgBP4EXzziaRF5SenOs5+S807+MNfIAvLXembzrXr6y99q5L/Q4035rkGgeck+tXv1U9I32z3jvtyP6/lGaU+y9ZtubOo8l3Xmul2i2O79zLkfuVe5oynOVn7gffI6NcQAYAAA==
   </data>
  </layer>
 </map>

@@ -7,6 +7,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
+import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.world.ITileMap;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
@@ -75,7 +76,11 @@ public class DungeonMonster extends DungeonObject {
             if (distance < 1.5 * weapon.getRange()) { //1.5 because of diagonal cells
                 party.subtractHp(world, weapon.getDamage());
                 GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), getName(), weapon.getDamage(), party.getHp()));
-                world.getCurrentDungeon().getController().setCurrentEffect(new BlasterShotEffect(this, world.getPlayer().getLandingParty(), world.getCamera(), 800, weapon.getShotImage()));
+                if(weapon.getId().equals("melee")) {
+                    world.getCurrentDungeon().getController().setCurrentEffect(new ExplosionEffect(world.getPlayer().getLandingParty().getX(),world.getPlayer().getLandingParty().getY(),"slash",false));
+                } else {
+                    world.getCurrentDungeon().getController().setCurrentEffect(new BlasterShotEffect(this, world.getPlayer().getLandingParty(), world.getCamera(), 800, weapon.getShotImage()));
+                }
                 newX = x;
                 newY = y;
             } else if (distance < 5 * weapon.getRange()) {

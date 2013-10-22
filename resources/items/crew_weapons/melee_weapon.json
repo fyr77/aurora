@@ -1,0 +1,8 @@
+{
+    "id" : "melee",
+    "name" : "melee_weapon.name",
+    "range" : 1,
+    "damage" : 5,
+    "image" : "crew_laser",
+    "shotImage" : "plasma_shot"
+}
