@@ -90,13 +90,13 @@ public class RoguesGenerator implements WorldGeneratorPart {
                 world.getGlobalVariables().put("rogues.damage_scout_result", "help");
                 damagedRogueScout.setSprite("rogues_scout");
                 damagedRogueScout.setAi(null);
-                damagedRogueScout.setCapitain(new NPC(
+                damagedRogueScout.setCaptain(new NPC(
                         new Dialog("rogue_damaged_scout.after_help", "no_image",
                                 new Statement(0, "", new Reply(0, -1, "end")))
                 ));
             }
         });
-        damagedRogueScout.setCapitain(new NPC(dialog));
+        damagedRogueScout.setCaptain(new NPC(dialog));
         damagedRogueScout.setAi(null);
         damagedRogueScout.setStationary(true);
         world.addListener(new MeetDamagedRogueEvent(damagedRogueScout));

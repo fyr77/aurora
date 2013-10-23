@@ -13,6 +13,7 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.ExplosionEffect;
+import ru.game.aurora.effects.WarpEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
@@ -28,9 +29,11 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     private String sprite;
 
+    private float spriteAlpha = 1.0f;
+
     private AlienRace race;
 
-    private NPC capitain;
+    private NPC captain;
 
     private int hp = 3;
 
@@ -51,11 +54,11 @@ public class NPCShip extends BasePositionable implements SpaceObject {
     // this ship can not move
     private boolean isStationary;
 
-    public NPCShip(int x, int y, String sprite, AlienRace race, NPC capitain, String name) {
+    public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
         super(x, y);
         this.sprite = sprite;
         this.race = race;
-        this.capitain = capitain;
+        this.captain = captain;
         this.name = name;
     }
 
@@ -84,7 +87,14 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        g.drawImage(ResourceManager.getInstance().getImage(sprite), camera.getXCoord(x), camera.getYCoord(y));
+        org.newdawn.slick.Image img;
+        img = ResourceManager.getInstance().getImage(sprite);
+        if (spriteAlpha == 0.0f) {
+            img.setAlpha(1.0f);
+        }else {
+            img.setAlpha(spriteAlpha);
+        }
+        g.drawImage(img, camera.getXCoord(x), camera.getYCoord(y));
     }
 
     /**
@@ -127,7 +137,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.hail_not_responded"));
             return;
         }
-        world.addOverlayWindow(capitain != null ? capitain.getCustomDialog() : race.getDefaultDialog());
+        world.addOverlayWindow(captain != null ? captain.getCustomDialog() : race.getDefaultDialog());
     }
 
     @Override
@@ -173,9 +183,12 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         }
     }
 
-    public void move(int dx, int dy) {
+    public void move(int dx, int dy, StarSystem ss) {
         if (isStationary) {
             return;
+        }
+        if (getRace().getName().equals("Gardeners")) {
+            ss.addEffect(new WarpEffect(this, x + dx, y + dy));
         }
         x += dx;
         y += dy;
@@ -201,12 +214,12 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         this.sprite = sprite;
     }
 
-    public void setCapitain(NPC capitain) {
-        this.capitain = capitain;
+    public void setCaptain(NPC captain) {
+        this.captain = captain;
     }
 
-    public NPC getCapitain() {
-        return capitain;
+    public NPC getCaptain() {
+        return captain;
     }
 
     public boolean isCanBeHailed() {
@@ -217,5 +230,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         this.canBeHailed = canBeHailed;
     }
 
-
+    public void setAlpha(float alpha) {
+        spriteAlpha = alpha;
+    }
 }

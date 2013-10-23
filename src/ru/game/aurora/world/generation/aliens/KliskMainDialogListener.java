@@ -98,7 +98,7 @@ public class KliskMainDialogListener implements DialogListener {
                     @Override
                     public NPCShip createShip() {
                         NPCShip ship = kliskDefaultFactory.createShip();
-                        ship.setCapitain(new NPC(new Dialog("klisk_evac_dialog", "klisk_dialog", new Statement(0, "", new Reply(0, -1, "end")))));
+                        ship.setCaptain(new NPC(new Dialog("klisk_evac_dialog", "klisk_dialog", new Statement(0, "", new Reply(0, -1, "end")))));
                         return ship;
                     }
                 }
