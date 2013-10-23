@@ -37,6 +37,8 @@ public class EarthProgressScreenController implements ScreenController {
 
     private int totalScore;
 
+    private Element myWindow;
+
     public EarthProgressScreenController(World world) {
         this.world = world;
     }
@@ -68,6 +70,7 @@ public class EarthProgressScreenController implements ScreenController {
         results = screen.findNiftyControl("itemsList", ListBox.class);
         total = screen.findElementByName("totalText");
         listFont = results.getElement().findElementByName("#child-root").getElements().get(0).getRenderer(TextRenderer.class).getFont();
+        myWindow = screen.findElementByName("earth_progress_window");
     }
 
     public void updateStats() {
@@ -102,6 +105,7 @@ public class EarthProgressScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        myWindow.setVisible(true);
         total.getRenderer(TextRenderer.class).setText("Total: " + totalScore);
         results.clear();
         for (Pair<String, String> p : data) {

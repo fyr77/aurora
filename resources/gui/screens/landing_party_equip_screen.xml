@@ -1,15 +1,19 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
     <screen id="landing_party_equip_screen" controller="ru.game.aurora.gui.LandingPartyEquipScreenController">
         <layer childLayout="absolute">
-            <control id="equip_window" name="window" title="${gui.landing_party.title}" width="50%" height="50%" x="25%" y="20%">
+            <control id="equip_window" name="window" title="${gui.landing_party.title}" hideOnClose="true" width="50%"
+                     height="50%" x="25%" y="20%">
                 <panel childLayout="vertical" height="100%">
-                    <text style="base-font" id="scientists_count_text" text="${gui.landing_party.scientists}" textHAlign="left"/>
+                    <text style="base-font" id="scientists_count_text" text="${gui.landing_party.scientists}"
+                          textHAlign="left"/>
                     <control id="scientists_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1"
                              initial="1" buttonStepSize="1" pageStepSize="1"/>
-                    <text style="base-font" text="${gui.landing_party.engineers}" id="engineers_count_text" textHAlign="left"/>
+                    <text style="base-font" text="${gui.landing_party.engineers}" id="engineers_count_text"
+                          textHAlign="left"/>
                     <control id="engineers_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1" initial="1"
                              buttonStepSize="1" pageStepSize="1"/>
-                    <text style="base-font" text="${gui.landing_party.military}" id="military_count_text" textHAlign="left"/>
+                    <text style="base-font" text="${gui.landing_party.military}" id="military_count_text"
+                          textHAlign="left"/>
                     <control id="military_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1" initial="1"
                              buttonStepSize="1" pageStepSize="1"/>
                     <text id="total_count" style="base-font" text="Total crew: 0/10" textHAlign="left"/>

@@ -33,6 +33,8 @@ public class ResearchScreenController implements ScreenController {
 
     private TabGroup tg;
 
+    private Element window;
+
     public ResearchScreenController(World world) {
         this.world = world;
     }
@@ -42,10 +44,12 @@ public class ResearchScreenController implements ScreenController {
         tg = screen.findNiftyControl("research_tabs", TabGroup.class);
         availableResearch = screen.findElementByName("active_list_screen");
         completedResearch = screen.findElementByName("completed_list_screen");
+        window = screen.findElementByName("research_window");
     }
 
     @Override
     public void onStartScreen() {
+        window.setVisible(true);
         ListBox l = availableResearch.findNiftyControl("itemsList", ListBox.class);
         l.clear();
         l.addAllItems(world.getPlayer().getResearchState().getCurrentProjects());
@@ -71,9 +75,8 @@ public class ResearchScreenController implements ScreenController {
     }
 
 
-    @NiftyEventSubscriber(id="research_window")
-    public void onClose(final String id, final WindowClosedEvent event)
-    {
+    @NiftyEventSubscriber(id = "research_window")
+    public void onClose(final String id, final WindowClosedEvent event) {
         closeScreen();
     }
 
