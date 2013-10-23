@@ -48,6 +48,11 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
+        try {
+            Configuration.init();
+        } catch (IOException e) {
+            throw new SlickException("Failed to load game properties", e);
+        }
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
         gameContainer.getInput().enableKeyRepeat();
         gameContainer.setTargetFrameRate(60);

@@ -253,6 +253,11 @@ public class SurfaceTileMap implements ITileMap, Serializable {
     }
 
     @Override
+    public boolean lineOfSightExists(int x1, int y1, int x2, int y2) {
+        return true;
+    }
+
+    @Override
     public int getWidth() {
         return width;
     }
@@ -264,5 +269,20 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
     public byte getTileAt(int x, int y) {
         return surface[y][x];
+    }
+
+    @Override
+    public boolean contains(int i, int i1) {
+        return true;
+    }
+
+    @Override
+    public boolean isObstacle(int i, int i1) {
+        return isTilePassable(EngineUtils.wrap(i, width), EngineUtils.wrap(i1, height));
+    }
+
+    @Override
+    public void visit(int i, int i1) {
+        // not implemented, has custom view logic
     }
 }

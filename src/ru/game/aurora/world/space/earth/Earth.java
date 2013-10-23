@@ -10,6 +10,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
@@ -168,7 +169,7 @@ public class Earth extends Planet {
         result += researchState.dumpAstroData();
         world.getPlayer().getEarthState().updateTechnologyLevel(result);
         // subtracting points for loosing crew members
-        result -= 10 * (world.getPlayer().getShip().getLostCrewMembers());
+        result += Configuration.getIntProperty("game.progress.lostCrewScore") * (world.getPlayer().getShip().getLostCrewMembers());
         return result;
     }
 
@@ -178,8 +179,7 @@ public class Earth extends Planet {
     }
 
     @Override
-    public StringBuilder getScanText(){
-        StringBuilder sb = new StringBuilder(Localization.getText("races", "Humans.homeworld.description"));
-        return sb;
+    public StringBuilder getScanText() {
+        return new StringBuilder(Localization.getText("races", "Humans.homeworld.description"));
     }
 }
