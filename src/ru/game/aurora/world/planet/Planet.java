@@ -7,7 +7,10 @@ package ru.game.aurora.world.planet;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
-import org.newdawn.slick.*;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
@@ -43,9 +46,6 @@ public class Planet extends BasePlanet implements IDungeon {
 
     private PlanetFloraAndFauna floraAndFauna = null;
 
-
-    private transient Image sprite;
-
     private transient Future surfaceGenerationFuture = null;
 
     private transient Animation shuttle_landing;
@@ -61,6 +61,7 @@ public class Planet extends BasePlanet implements IDungeon {
             other.createSurface();
         }
         this.surface = new SurfaceTileMap(other.surface);
+        this.controller = new DungeonController(world, owner, surface, true);
         createOreDeposits(size, CommonRandom.getRandom());
         this.world = world;
     }
