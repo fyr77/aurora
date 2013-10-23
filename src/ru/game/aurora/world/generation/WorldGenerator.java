@@ -8,6 +8,7 @@ package ru.game.aurora.world.generation;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GlobalThreadPool;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.util.CollectionUtils;
@@ -36,14 +37,6 @@ import java.util.concurrent.Future;
  */
 public class WorldGenerator implements Runnable {
     private String currentStatus = "Initializing";
-
-    public static final int maxStars = 30;
-
-    public static final int worldWidth = 100;
-
-    public static final int worldHeight = 100;
-
-    public static final int rings = 3;
 
     public static final PlanetCategory[] satelliteCategories = {PlanetCategory.PLANET_ROCK, PlanetCategory.PLANET_ICE};
 
@@ -82,6 +75,7 @@ public class WorldGenerator implements Runnable {
 
     private void generateMap(final World world) {
         currentStatus = Localization.getText("gui", "generation.stars");
+        final int maxStars = Configuration.getIntProperty("world.galaxy.maxStars");
         List<Future> futures = new ArrayList<>(maxStars);
         // now generate random star systems
         for (int i = 0; i < maxStars; ++i) {
@@ -92,8 +86,8 @@ public class WorldGenerator implements Runnable {
                         int x;
                         int y;
                         do {
-                            x = CommonRandom.getRandom().nextInt(worldWidth);
-                            y = CommonRandom.getRandom().nextInt(worldHeight);
+                            x = CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesX());
+                            y = CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesY());
                         } while (world.getGalaxyMap().getObjectAt(x, y) != null);
                         StarSystem ss = generateRandomStarSystem(world, x, y);
 
@@ -129,14 +123,17 @@ public class WorldGenerator implements Runnable {
     public static StarSystem generateRandomStarSystem(World world, int x, int y) {
         final Random r = CommonRandom.getRandom();
 
-        int size = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
+        int starSize = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
         Color starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
-        final int planetCount = r.nextInt(7);
+        final int planetCount = r.nextInt(Configuration.getIntProperty("world.starsystem.maxPlanets"));
         BasePlanet[] planets = new BasePlanet[planetCount];
         int maxRadius = 0;
-        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(size, starColor), x, y);
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(starSize, starColor), x, y);
 
-        int astroData = 20 * size;
+        int astroData = 20 * starSize;
+
+        final double ringsChance = Configuration.getDoubleProperty("world.starsystem.planetRingsChance");
+        final int maxSatellites = Configuration.getIntProperty("world.starsystem.maxSatellites");
 
         for (int i = 0; i < planetCount; ++i) {
             int radius = r.nextInt(planetCount * StarSystem.PLANET_SCALE_FACTOR) + StarSystem.STAR_SCALE_FACTOR;
@@ -171,16 +168,14 @@ public class WorldGenerator implements Runnable {
             }
 
             // only large planets have rings and satellites
+
             if (planetSize <= 2) {
-                if (r.nextInt(3) == 0) {
-                    planets[i].setRings(r.nextInt(rings) + 1);
+                if (r.nextDouble() < ringsChance ) {
+                    planets[i].setRings(r.nextInt() + 1);
                 }
 
-
-                int satelliteCount = r.nextInt(3);
+                int satelliteCount = r.nextInt(maxSatellites);
                 for (int i1 = 1; i1 < satelliteCount + 1; ++i1) {
-
-
                     atmosphere = CollectionUtils.selectRandomElement(PlanetAtmosphere.values());
                     astroData += 10;
                     cat = CollectionUtils.selectRandomElement(satelliteCategories);
@@ -207,7 +202,7 @@ public class WorldGenerator implements Runnable {
 
     @Override
     public void run() {
-        World world = new World(worldWidth, worldHeight);
+        World world = new World(Configuration.getIntProperty("world.galaxy.width"), Configuration.getIntProperty("world.galaxy.height"));
         world.addListener(new CrewChangeListener());
         generateMap(world);
         createAliens(world);

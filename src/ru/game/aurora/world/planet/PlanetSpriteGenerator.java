@@ -14,6 +14,7 @@ import libnoiseforjava.util.RendererImage;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.ImageBuffer;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.space.StarSystem;
@@ -70,16 +71,9 @@ public class PlanetSpriteGenerator {
         }
     }
 
-    private Map<PlanetSpriteParameters, Collection<Image>> cache = new HashMap<PlanetSpriteParameters, Collection<Image>>();
+    private Map<PlanetSpriteParameters, Collection<Image>> cache = new HashMap<>();
 
     private PerlinNoiseGeneratorWrapper noiseGeneratorWrapper = new PerlinNoiseGeneratorWrapper();
-
-    private static final int SPRITES_PER_PLANET_TYPE = 3;
-
-    /**
-     * How many times generated noise is smaller than planet
-     */
-    private static final int SCALE = 2;
 
     private static final PlanetSpriteGenerator instance = new PlanetSpriteGenerator();
 
@@ -125,11 +119,12 @@ public class PlanetSpriteGenerator {
 
     private Image createPlanetSprite(Camera cam, PlanetSpriteParameters params) {
         Collection<Image> images = cache.get(params);
-        if (images != null && images.size() >= SPRITES_PER_PLANET_TYPE) {
+        final int spritesPerType = Configuration.getIntProperty("world.planet.spriteGenerator.cacheSize");
+        if (images != null && images.size() >= spritesPerType) {
             return CollectionUtils.selectRandomElement(images);
         }
         if (images == null) {
-            images = new ArrayList<Image>(SPRITES_PER_PLANET_TYPE);
+            images = new ArrayList<>(spritesPerType);
         }
         Image im = createPlanetSpriteImpl(cam, params);
         images.add(im);
@@ -204,9 +199,9 @@ public class PlanetSpriteGenerator {
             float width = 2 * radius;
             float height = 2 * radius;
 
-
-            final int noiseWidth = (int) Math.ceil(width / (float) SCALE);
-            final int noiseHeight = (int) Math.ceil(height / (float) SCALE);
+            double scale = Configuration.getDoubleProperty("world.planet.spriteGenerator.scale");
+            final int noiseWidth = (int) Math.ceil(width / (float) scale);
+            final int noiseHeight = (int) Math.ceil(height / (float) scale);
             NoiseMap heightMap = noiseGeneratorWrapper.buildNoiseMap(noiseWidth, noiseHeight);
 
             RendererImage renderer = new RendererImage();
