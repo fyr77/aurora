@@ -50,12 +50,12 @@ public class Earth extends Planet {
 
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics g, Camera camera, int tileX, int tileY) {
-        if (!camera.isInViewport(globalX, globalY)) {
+        if (!camera.isInViewport(x, y)) {
             return;
         }
 
         final Image earth = ResourceManager.getInstance().getImage("earth");
-        g.drawImage(earth, camera.getXCoord(globalX) - earth.getWidth() / 2, camera.getYCoord(globalY) - earth.getHeight() / 2);
+        g.drawImage(earth, camera.getXCoord(x) - earth.getWidth() / 2, camera.getYCoord(y) - earth.getHeight() / 2);
     }
 
     @Override

@@ -13,6 +13,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.Player;
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class BasePlanet implements Room, GalaxyMapObject
+public abstract class BasePlanet extends BasePositionable implements Room, GalaxyMapObject
 {
     private static final long serialVersionUID = 1L;
     protected StarSystem owner;
@@ -36,35 +37,21 @@ public abstract class BasePlanet implements Room, GalaxyMapObject
      * Planet image size on global map and dimensions of planet surface depends on it.
      */
     protected int size;
-    /**
-     * Position of planet in star system
-     */
-    protected int globalX;
-    protected int globalY;
 
     protected List<BasePlanet> satellites;
 
     private transient Image sprite;
 
-    public BasePlanet(int size, int y, StarSystem owner, PlanetAtmosphere atmosphere, int x, PlanetCategory cat) {
+    public BasePlanet(int x, int y, int size, StarSystem owner, PlanetAtmosphere atmosphere, PlanetCategory cat) {
+        super(x, y);
         this.size = size;
-        this.globalY = y;
         this.owner = owner;
         this.atmosphere = atmosphere;
-        this.globalX = x;
         this.category = cat;
     }
 
     public void setRings(int ringsId) {
         this.rings = ringsId;
-    }
-
-    public int getGlobalX() {
-        return globalX;
-    }
-
-    public int getGlobalY() {
-        return globalY;
     }
 
     @Override
@@ -74,14 +61,6 @@ public abstract class BasePlanet implements Room, GalaxyMapObject
 
     @Override
     public void processCollision(GameContainer container, Player player) {
-    }
-
-    public void setGlobalY(int globalY) {
-        this.globalY = globalY;
-    }
-
-    public void setGlobalX(int globalX) {
-        this.globalX = globalX;
     }
 
     /**
@@ -128,8 +107,7 @@ public abstract class BasePlanet implements Room, GalaxyMapObject
         int satelliteX = CommonRandom.getRandom().nextInt(2 * orbit) - orbit;
 
         int satelliteY = (int) (Math.sqrt(orbit * orbit - satelliteX * satelliteX) * (CommonRandom.getRandom().nextBoolean() ? -1 : 1));
-        p.setGlobalX(globalX + satelliteX);
-        p.setGlobalY(globalY + satelliteY);
+        p.setPos(x + satelliteX, y + satelliteY);
         satellites.add(p);
     }
 
@@ -144,7 +122,7 @@ public abstract class BasePlanet implements Room, GalaxyMapObject
 
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
-        if (!camera.isInViewport(globalX, globalY)) {
+        if (!camera.isInViewport(x, y)) {
             return;
         }
         if (sprite == null) {
@@ -154,13 +132,13 @@ public abstract class BasePlanet implements Room, GalaxyMapObject
         // draw rings shifted on 1/10 of planet diameter - looks nicer
         if (rings != 0) {
             Image backRingsSprite = ResourceManager.getInstance().getImage("ring_back_" + rings);
-            graphics.drawImage(backRingsSprite, camera.getXCoord(globalX) + (camera.getTileWidth() - backRingsSprite.getWidth()) / 2, camera.getYCoord(globalY) + (camera.getTileHeight() - backRingsSprite.getHeight()) / 2);
+            graphics.drawImage(backRingsSprite, camera.getXCoord(x) + (camera.getTileWidth() - backRingsSprite.getWidth()) / 2, camera.getYCoord(y) + (camera.getTileHeight() - backRingsSprite.getHeight()) / 2);
         }
-        graphics.drawImage(sprite, camera.getXCoord(globalX) + (camera.getTileWidth() - sprite.getWidth()) / 2, camera.getYCoord(globalY) + (camera.getTileHeight() - sprite.getHeight()) / 2);
+        graphics.drawImage(sprite, camera.getXCoord(x) + (camera.getTileWidth() - sprite.getWidth()) / 2, camera.getYCoord(y) + (camera.getTileHeight() - sprite.getHeight()) / 2);
 
         if (rings != 0) {
             Image frontRingsSprite = ResourceManager.getInstance().getImage("ring_front_" + rings);
-            graphics.drawImage(frontRingsSprite, camera.getXCoord(globalX) + (camera.getTileWidth() - frontRingsSprite.getWidth()) / 2, camera.getYCoord(globalY) + (camera.getTileHeight() - frontRingsSprite.getHeight()) / 2);
+            graphics.drawImage(frontRingsSprite, camera.getXCoord(x) + (camera.getTileWidth() - frontRingsSprite.getWidth()) / 2, camera.getYCoord(y) + (camera.getTileHeight() - frontRingsSprite.getHeight()) / 2);
         }
     }
 

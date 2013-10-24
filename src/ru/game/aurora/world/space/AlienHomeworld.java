@@ -33,7 +33,7 @@ public class AlienHomeworld extends BasePlanet {
     private String spriteName;
 
     public AlienHomeworld(String spriteName, AlienRace ownerRace, Dialog customDialog, int size, int y, StarSystem owner, PlanetAtmosphere atmosphere, int x, PlanetCategory cat) {
-        super(size, y, owner, atmosphere, x, cat);
+        super(x, y, size, owner, atmosphere, cat);
         this.ownerRace = ownerRace;
         this.dialog = customDialog;
         this.spriteName = spriteName;
@@ -43,11 +43,11 @@ public class AlienHomeworld extends BasePlanet {
 
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
-        if (!camera.isInViewport(globalX, globalY)) {
+        if (!camera.isInViewport(x, y)) {
             return;
         }
         Image img = ResourceManager.getInstance().getImage(spriteName);
-        graphics.drawImage(img, camera.getXCoord(globalX) - img.getWidth() / 2 + camera.getTileWidth() / 2, camera.getYCoord(globalY) - img.getHeight() / 2 + camera.getTileHeight() / 2);
+        graphics.drawImage(img, camera.getXCoord(x) - img.getWidth() / 2 + camera.getTileWidth() / 2, camera.getYCoord(y) - img.getHeight() / 2 + camera.getTileHeight() / 2);
     }
 
     @Override

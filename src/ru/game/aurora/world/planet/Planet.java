@@ -56,7 +56,7 @@ public class Planet extends BasePlanet implements IDungeon {
 
 
     public Planet(World world, StarSystem owner, Planet other) {
-        super(other.size, other.globalY, owner, other.atmosphere, other.globalX, other.category);
+        super(other.getX(), other.getY(), other.size, owner, other.atmosphere, other.category);
         if (other.surface == null) {
             other.createSurface();
         }
@@ -67,7 +67,7 @@ public class Planet extends BasePlanet implements IDungeon {
     }
 
     public Planet(World world, StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
-        super(size, y, owner, atmosphere, x, cat);
+        super(x, y, size, owner, atmosphere, cat);
         this.world = world;
     }
 
@@ -184,7 +184,7 @@ public class Planet extends BasePlanet implements IDungeon {
         GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.launch_shuttle"));
         world.setCurrentRoom(owner);
         owner.enter(world);
-        world.getPlayer().getShip().setPos(globalX, globalY);
+        world.getPlayer().getShip().setPos(x, y);
         landingParty.onReturnToShip(world);
     }
 

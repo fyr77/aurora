@@ -8,10 +8,7 @@ package ru.game.aurora.world.space;
 import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.*;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
@@ -182,9 +179,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         if ((container.getInput().isKeyDown(Input.KEY_UP) && y < -radius)
-                || (container.getInput().isKeyDown(Input.KEY_DOWN) && y > radius)
+                || (container.getInput().isKeyDown(Input.KEY_DOWN) && y >= radius)
                 || (container.getInput().isKeyDown(Input.KEY_LEFT) && x < -radius)
-                || (container.getInput().isKeyDown(Input.KEY_RIGHT) && x > radius)) {
+                || (container.getInput().isKeyDown(Input.KEY_RIGHT) && x >= radius)) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.leaving_star_system"));
             world.setCurrentRoom(world.getGalaxyMap());
             world.getGalaxyMap().enter(world);
@@ -194,12 +191,14 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         BasePlanet p = getPlanetAtPlayerShipPosition();
+        final SpaceObject spaceObjectAtPlayerShipPosition = getSpaceObjectAtPlayerShipPosition();
+
 
         // if user ship is at planet, show additional gui panel
         final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("interactPanel");
         if (scanLandPanel != null) {
             boolean landPanelVisible = scanLandPanel.isVisible();
-            if (p == null && landPanelVisible && getSpaceObjectAtPlayerShipPosition() == null) {
+            if (p == null && landPanelVisible && spaceObjectAtPlayerShipPosition == null) {
                 scanLandPanel.setVisible(false);
             } else if (p != null && !landPanelVisible) {
                 Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
@@ -209,7 +208,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
-            landOnCurrentPlanet(world);
+            if (p != null) {
+                landOnCurrentPlanet(world);
+            } else if (spaceObjectAtPlayerShipPosition != null) {
+                spaceObjectAtPlayerShipPosition.onContact(world);
+            }
         }
     }
 
@@ -217,12 +220,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         int x = player.getShip().getX();
         int y = player.getShip().getY();
         for (BasePlanet p : planets) {
-            if (x == p.getGlobalX() && y == p.getGlobalY()) {
+            if (x == p.getX() && y == p.getY()) {
                 return p;
             }
             if (p.getSatellites() != null) {
                 for (BasePlanet s : p.getSatellites()) {
-                    if (x == s.getGlobalX() && y == s.getGlobalY()) {
+                    if (x == s.getX() && y == s.getY()) {
                         return s;
                     }
                 }
@@ -262,7 +265,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             ClassNotFoundException {
         try {
             ois.defaultReadObject();
-            effects = new LinkedList<Effect>();
+            effects = new LinkedList<>();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -274,7 +277,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             return;
         }
         int targetIdx = 0;
-        List<SpaceObject> availableTargets = new ArrayList<SpaceObject>();
+        List<SpaceObject> availableTargets = new ArrayList<>();
 
         final Ship playerShip = world.getPlayer().getShip();
         final StarshipWeapon weapon = playerShip.getWeapons().get(selectedWeapon);
@@ -374,7 +377,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             createBackground(world);
         }
         if (!effects.isEmpty()) {
-            List<Effect> newList = new ArrayList<Effect>(effects);
+            List<Effect> newList = new ArrayList<>(effects);
             for (Effect currentEffect : newList) {
                 currentEffect.update(container, world);
             }
@@ -415,9 +418,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
             if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
                 shipAtSameCoords = true;
-                if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
-                    ship.onContact(world);
-                }
             }
             if (world.isUpdatedThisFrame()) {
                 ship.update(container, world);
@@ -532,15 +532,15 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         // first draw all orbits
         for (BasePlanet p : planets) {
-            float planetX = camera.getXCoord(p.getGlobalX()) + (camera.getTileWidth() / 2);
-            float planetY = camera.getYCoord(p.getGlobalY()) + camera.getTileWidth() / 2;
+            float planetX = camera.getXCoord(p.getX()) + (camera.getTileWidth() / 2);
+            float planetY = camera.getYCoord(p.getY()) + camera.getTileWidth() / 2;
             int radius = (int) Math.sqrt(Math.pow((planetX - starX), 2) + Math.pow((planetY - starY), 2));
             EngineUtils.drawDashedCircleCentered(g, starX, starY, radius, new Color(30, 30, 100));
 
             if (p.getSatellites() != null) {
                 for (BasePlanet satellite : p.getSatellites()) {
-                    float satelliteX = camera.getXCoord(satellite.getGlobalX()) + (camera.getTileWidth() / 2);
-                    float satelliteY = camera.getYCoord(satellite.getGlobalY()) + camera.getTileWidth() / 2;
+                    float satelliteX = camera.getXCoord(satellite.getX()) + (camera.getTileWidth() / 2);
+                    float satelliteY = camera.getYCoord(satellite.getY()) + camera.getTileWidth() / 2;
                     radius = (int) Math.sqrt(Math.pow((satelliteX - planetX), 2) + Math.pow((satelliteY - planetY), 2));
                     EngineUtils.drawDashedCircleCentered(g, planetX, planetY, radius, new Color(30, 30, 100));
                 }
@@ -599,6 +599,41 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         player.getShip().draw(container, g, camera);
+    }
+
+    /**
+     * Sets random position of a given object within this star system.
+     * Not within sun, not near borders, on an empty spot
+     */
+    public void setRandomEmptyPosition(BasePositionable object)
+    {
+        final double maxRadius = Configuration.getDoubleProperty("world.starsystem.objectMaxRadius") * radius;
+        final double minRadius = Configuration.getDoubleProperty("world.starsystem.objectMinRadius") * radius;
+        int orbit;
+        orbit = (int) (CommonRandom.getRandom().nextDouble() * (maxRadius - minRadius) + minRadius);
+        boolean isEmpty;
+        do {
+            final int x = CommonRandom.getRandom().nextInt(2 * orbit) - orbit;
+            final int y = (int) (Math.sqrt(orbit * orbit - x * x) * (CommonRandom.getRandom().nextBoolean() ? -1 : 1));
+            object.setPos(x, y);
+            isEmpty = true;
+            // check that there are no planets or other objects at this position
+            for (SpaceObject obj: ships) {
+                if (object.getDistance(obj) == 0) {
+                    isEmpty = false;
+                    break;
+                }
+            }
+
+            if (isEmpty) {
+                for (BasePlanet p : planets) {
+                    if (object.getDistance(p) == 0) {
+                        isEmpty = false;
+                        break;
+                    }
+                }
+            }
+        } while (!isEmpty);
     }
 
     public List<SpaceObject> getShips() {
