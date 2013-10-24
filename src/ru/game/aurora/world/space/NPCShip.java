@@ -29,8 +29,6 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     private String sprite;
 
-    private float spriteAlpha = 1.0f;
-
     private AlienRace race;
 
     private NPC captain;
@@ -87,14 +85,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        org.newdawn.slick.Image img;
-        img = ResourceManager.getInstance().getImage(sprite);
-        if (spriteAlpha == 0.0f) {
-            img.setAlpha(1.0f);
-        }else {
-            img.setAlpha(spriteAlpha);
-        }
-        g.drawImage(img, camera.getXCoord(x), camera.getYCoord(y));
+        g.drawImage(ResourceManager.getInstance().getImage(sprite), camera.getXCoord(x), camera.getYCoord(y));
     }
 
     /**
@@ -183,12 +174,9 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         }
     }
 
-    public void move(int dx, int dy, StarSystem ss) {
+    public void move(int dx, int dy) {
         if (isStationary) {
             return;
-        }
-        if (getRace().getName().equals("Gardeners")) {
-            ss.addEffect(new WarpEffect(this, x + dx, y + dy));
         }
         x += dx;
         y += dy;
@@ -228,9 +216,5 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     public void setCanBeHailed(boolean canBeHailed) {
         this.canBeHailed = canBeHailed;
-    }
-
-    public void setAlpha(float alpha) {
-        spriteAlpha = alpha;
     }
 }

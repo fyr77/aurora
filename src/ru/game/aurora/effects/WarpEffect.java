@@ -7,6 +7,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.space.GardenersShip;
 import ru.game.aurora.world.space.NPCShip;
 
 /**
@@ -22,11 +23,7 @@ public class WarpEffect extends BasePositionable implements Effect {
 
     private int curY;
 
-    private int destX;
-
-    private int destY;
-
-    private NPCShip ship;
+    private GardenersShip ship;
 
     private float alpha;
 
@@ -34,15 +31,13 @@ public class WarpEffect extends BasePositionable implements Effect {
 
     private boolean isOver = false;
 
-    public WarpEffect(NPCShip ship, int destX, int destY) {
+    public WarpEffect(GardenersShip ship) {
         super(ship.getX(), ship.getY());
-        curX = ship.getX();
-        curY = ship.getY();
         this.ship = ship;
-        this.destX = destX;
-        this.destY = destY;
         anim = ResourceManager.getInstance().getAnimation("warp");
         anim.setLooping(false);
+        curX = ship.getX();
+        curY = ship.getY();
     }
 
     @Override
@@ -56,21 +51,14 @@ public class WarpEffect extends BasePositionable implements Effect {
             lastCall = container.getTime();
         }
         anim.update(container.getTime() - lastCall);
-        if (!secondExplosion) {
-            alpha = (float) ((anim.getFrameCount()-anim.getFrame())*(1.0/anim.getFrameCount()));
-        } else {
-            alpha = (float) ((anim.getFrame()+1)*(1.0/anim.getFrameCount()));
-        }
+
+        alpha = (float) ((anim.getFrameCount()-anim.getFrame())*(1.0/anim.getFrameCount()));
+
         lastCall = container.getTime();
-        if (anim.isStopped()){
-            if (!secondExplosion) {
-                curX = destX;
-                curY = destY;
-                secondExplosion = true;
-                anim.restart();
-            } else {
-                isOver = true;
-            }
+
+        if (anim.isStopped()) {
+            world.getCurrentStarSystem().getShips().remove(ship);
+            isOver = true;
         }
     }
 
