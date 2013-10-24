@@ -176,7 +176,7 @@
     </popup>
 
     <popup id="landing" childLayout="absolute">
-        <control id="landing_window" name="window" hideOnClose="true" width="60%" height="350px" x="20%" y="30%">
+        <control id="landing_window" name="window" hideOnClose="true" closeable="false" width="60%" height="350px" x="20%" y="30%">
             <panel childLayout="vertical" margin="10px">
                 <panel height="256px" childLayout="horizontal">
                     <image id="shuttle_image" width="256px" height="256px"/>

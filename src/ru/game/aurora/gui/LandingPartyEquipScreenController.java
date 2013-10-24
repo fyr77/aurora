@@ -9,7 +9,10 @@ package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.controls.*;
+import de.lessvoid.nifty.controls.DropDown;
+import de.lessvoid.nifty.controls.DropDownSelectionChangedEvent;
+import de.lessvoid.nifty.controls.Scrollbar;
+import de.lessvoid.nifty.controls.ScrollbarChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
@@ -51,6 +54,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
     @Override
     public void onStartScreen() {
         myWindow.setVisible(true);
+        world.setPaused(true);
         Scrollbar scrollbar = myScreen.findNiftyControl("scientists_count", Scrollbar.class);
         scrollbar.setValue(landingParty.getScience());
         scrollbar = myScreen.findNiftyControl("engineers_count", Scrollbar.class);
@@ -79,6 +83,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
 
     @Override
     public void onEndScreen() {
+        world.setPaused(false);
     }
 
     @NiftyEventSubscriber(id = "weapon_select")
@@ -134,15 +139,17 @@ public class LandingPartyEquipScreenController implements ScreenController {
                 }
                 break;
         }
+
+        if (!landingParty.canBeLaunched(world)) {
+            // disable close buttons, because current party configuration is invalid
+            myScreen.findElementByName("close_button").disable();
+        } else {
+            myScreen.findElementByName("close_button").enable();
+        }
         updateLabels();
     }
 
     public void closeScreen() {
         GUI.getInstance().popAndSetScreen();
-    }
-
-    @NiftyEventSubscriber(id = "equip_window")
-    public void onClose(final String id, final WindowClosedEvent event) {
-        closeScreen();
     }
 }

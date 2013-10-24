@@ -249,6 +249,8 @@ public class Planet extends BasePlanet implements IDungeon {
 
         controller.update(container, world);
 
+        checkAndConsumeOxygen();
+
         if (landingParty.getDistance(shuttle) == 0) {
             if (world.isUpdatedThisFrame()) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.refill_oxygen"));
@@ -258,8 +260,8 @@ public class Planet extends BasePlanet implements IDungeon {
                 leavePlanet(world);
             }
         }
-        checkAndConsumeOxygen();
-        if (world.getPlayer().getLandingParty().getOxygen() < 0 || world.getPlayer().getLandingParty().getTotalMembers() == 0) {
+
+        if (world.getPlayer().getLandingParty().getOxygen() < 0) {
             controller.onLandingPartyDestroyed(world);
         }
 

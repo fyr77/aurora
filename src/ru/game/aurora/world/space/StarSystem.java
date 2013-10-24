@@ -181,10 +181,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             return;
         }
 
-        if ((container.getInput().isKeyDown(Input.KEY_UP) && y <= -radius)
-                || (container.getInput().isKeyDown(Input.KEY_DOWN) && y >= radius)
-                || (container.getInput().isKeyDown(Input.KEY_LEFT) && x <= -radius)
-                || (container.getInput().isKeyDown(Input.KEY_RIGHT) && x >= radius)) {
+        if ((container.getInput().isKeyDown(Input.KEY_UP) && y < -radius)
+                || (container.getInput().isKeyDown(Input.KEY_DOWN) && y > radius)
+                || (container.getInput().isKeyDown(Input.KEY_LEFT) && x < -radius)
+                || (container.getInput().isKeyDown(Input.KEY_RIGHT) && x > radius)) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.leaving_star_system"));
             world.setCurrentRoom(world.getGalaxyMap());
             world.getGalaxyMap().enter(world);
