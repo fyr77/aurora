@@ -132,7 +132,7 @@ public class DungeonController implements Serializable {
             interactWithObject(world);
         }
 
-        int tilesExplored = map.updateVisibility(x, y, 1);
+        int tilesExplored = map.updateVisibility(x, y, 2);
         landingParty.addCollectedGeodata(tilesExplored);
 
 
@@ -239,6 +239,12 @@ public class DungeonController implements Serializable {
         target = availableTargets.get(targetIdx);
 
         if (shoot) {
+            // check line of sight
+            if (!map.lineOfSightExists(landingParty.getX(), landingParty.getY(), target.getX(), target.getY())) {
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.no_line_of_sight"));
+                return;
+            }
+
             // firing
             final int damage = landingParty.calcDamage();
 
@@ -335,7 +341,8 @@ public class DungeonController implements Serializable {
                 }
             }
         }
-        if (landingParty.getTotalMembers() == 0) {
+        // check that no crew member left, AND landing party window is not opened, because if it is - then landing party can have 0 members in process of configuration
+        if (landingParty.getTotalMembers() == 0 && !GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("landing_party_equip_screen")) {
             onLandingPartyDestroyed(world);
         }
     }

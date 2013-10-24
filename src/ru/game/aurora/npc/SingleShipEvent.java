@@ -36,7 +36,7 @@ public class SingleShipEvent extends GameEventListener {
             return;
         }
         if (CommonRandom.getRandom().nextDouble() < chance) {
-            ship.setPos((int)(0.75 * CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius()), (int)(0.75 * CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius()));
+            ss.setRandomEmptyPosition(ship);
             ss.getShips().add(ship);
             ship = null;
         }

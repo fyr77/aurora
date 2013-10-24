@@ -26,8 +26,7 @@ public class HomeworldGenerator {
 
         int planetY = (int) (Math.sqrt(radius * radius - planetX * planetX) * (CommonRandom.getRandom().nextBoolean() ? -1 : 1));
 
-        p.setGlobalX(planetX);
-        p.setGlobalY(planetY);
+        p.setPos(planetX, planetY);
     }
 
     public static StarSystem createSolarSystem(World world, AlienRace humanRace) {
@@ -64,7 +63,7 @@ public class HomeworldGenerator {
         ss.setPlanets(planets);
         ss.setRadius(Math.max((int) (12 * 1.5), 10));
 
-        NPCShip spaceStation = new NPCShip(planets[2].getGlobalX() + 1, planets[2].getGlobalY() - 1, "earth_station", humanRace, null, "Orbital Scaffold");
+        NPCShip spaceStation = new NPCShip(planets[2].getX() + 1, planets[2].getY() - 1, "earth_station", humanRace, null, "Orbital Scaffold");
         spaceStation.setStationary(true);
         spaceStation.setAi(null);
         ss.getShips().add(spaceStation);

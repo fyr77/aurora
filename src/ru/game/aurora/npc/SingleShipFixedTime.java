@@ -6,7 +6,6 @@
  */
 package ru.game.aurora.npc;
 
-import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
@@ -46,7 +45,7 @@ public class SingleShipFixedTime extends GameEventListener
             return;
         }
         if (!ss.isVisited() && ++count == x) {
-            ship.setPos(CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius(), CommonRandom.getRandom().nextInt(2 * ss.getRadius()) - ss.getRadius());
+            ss.setRandomEmptyPosition(ship);
             ss.getShips().add(ship);
             ship = null;
             if (dialog != null) {

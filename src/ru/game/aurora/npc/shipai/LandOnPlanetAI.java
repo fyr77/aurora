@@ -30,13 +30,13 @@ public class LandOnPlanetAI implements NPCShipAI
 
     @Override
     public void update(NPCShip ship, World world, StarSystem currentSystem) {
-        if (target.getGlobalX() < ship.getX()) {
+        if (target.getX() < ship.getX()) {
             ship.move(-1, 0);
-        } else if (target.getGlobalX() > ship.getX()) {
+        } else if (target.getX() > ship.getX()) {
             ship.move(1, 0);
-        } else if (target.getGlobalY() < ship.getY()) {
+        } else if (target.getY() < ship.getY()) {
             ship.move(0, -1);
-        } else if (target.getGlobalY() > ship.getY()) {
+        } else if (target.getY() > ship.getY()) {
             ship.move(0, 1);
         } else {
             hasLanded = true;

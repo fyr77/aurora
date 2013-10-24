@@ -7,7 +7,10 @@ package ru.game.aurora.world.planet;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
-import org.newdawn.slick.*;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
@@ -43,9 +46,6 @@ public class Planet extends BasePlanet implements IDungeon {
 
     private PlanetFloraAndFauna floraAndFauna = null;
 
-
-    private transient Image sprite;
-
     private transient Future surfaceGenerationFuture = null;
 
     private transient Animation shuttle_landing;
@@ -56,17 +56,18 @@ public class Planet extends BasePlanet implements IDungeon {
 
 
     public Planet(World world, StarSystem owner, Planet other) {
-        super(other.size, other.globalY, owner, other.atmosphere, other.globalX, other.category);
+        super(other.getX(), other.getY(), other.size, owner, other.atmosphere, other.category);
         if (other.surface == null) {
             other.createSurface();
         }
         this.surface = new SurfaceTileMap(other.surface);
+        this.controller = new DungeonController(world, owner, surface, true);
         createOreDeposits(size, CommonRandom.getRandom());
         this.world = world;
     }
 
     public Planet(World world, StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
-        super(size, y, owner, atmosphere, x, cat);
+        super(x, y, size, owner, atmosphere, cat);
         this.world = world;
     }
 
@@ -183,7 +184,7 @@ public class Planet extends BasePlanet implements IDungeon {
         GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.launch_shuttle"));
         world.setCurrentRoom(owner);
         owner.enter(world);
-        world.getPlayer().getShip().setPos(globalX, globalY);
+        world.getPlayer().getShip().setPos(x, y);
         landingParty.onReturnToShip(world);
     }
 
@@ -248,6 +249,8 @@ public class Planet extends BasePlanet implements IDungeon {
 
         controller.update(container, world);
 
+        checkAndConsumeOxygen();
+
         if (landingParty.getDistance(shuttle) == 0) {
             if (world.isUpdatedThisFrame()) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.refill_oxygen"));
@@ -257,8 +260,8 @@ public class Planet extends BasePlanet implements IDungeon {
                 leavePlanet(world);
             }
         }
-        checkAndConsumeOxygen();
-        if (world.getPlayer().getLandingParty().getOxygen() < 0 || world.getPlayer().getLandingParty().getTotalMembers() == 0) {
+
+        if (world.getPlayer().getLandingParty().getOxygen() < 0) {
             controller.onLandingPartyDestroyed(world);
         }
 

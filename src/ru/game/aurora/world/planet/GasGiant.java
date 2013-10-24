@@ -18,7 +18,7 @@ public class GasGiant extends BasePlanet
     private static final long serialVersionUID = -4326457278081029734L;
 
     public GasGiant(int x, int y, StarSystem owner) {
-        super(1, y, owner, PlanetAtmosphere.NO_ATMOSPHERE, x, PlanetCategory.GAS_GIANT);
+        super(x, y, 1, owner, PlanetAtmosphere.NO_ATMOSPHERE, PlanetCategory.GAS_GIANT);
     }
 
     @Override

@@ -182,6 +182,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     public void closeCurrentPopup() {
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
         GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+        world.setPaused(false);
     }
 
     public void leftButtonPressed() {
@@ -221,7 +222,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         Element popup = nifty.createPopup("object_scan");
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(false);
-
+        world.setPaused(true);
         EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), object.getScanDescription());
     }
 
@@ -229,7 +230,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         if (planet == null) {
             return;
         }
-
+        world.setPaused(true);
         final Nifty nifty = GUI.getInstance().getNifty();
         Element popup = nifty.createPopup("planet_scan");
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
@@ -237,7 +238,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
         EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), planet.getScanText().toString());
 
-        if ((planet instanceof Earth)||(planet instanceof AlienHomeworld)) {
+        if ((planet instanceof Earth) || (planet instanceof AlienHomeworld)) {
             //todo: load custom map
             return;
         }

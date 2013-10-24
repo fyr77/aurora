@@ -59,7 +59,7 @@ public class StandardAlienShipEvent extends GameEventListener
 
         if (CommonRandom.getRandom().nextDouble() < probability) {
             NPCShip ship = shipFactory.createShip();
-            ship.setPos(CommonRandom.getRandom().nextInt(ss.getRadius()) - ss.getRadius() / 2, CommonRandom.getRandom().nextInt(ss.getRadius()) - ss.getRadius() / 2);
+            ss.setRandomEmptyPosition(ship);
             ss.getShips().add(ship);
             if (CommonRandom.getRandom().nextBoolean() || world.getCurrentStarSystem().getPlanets().length == 0) {
                 ship.setAi(new LeaveSystemAI());

@@ -74,10 +74,14 @@ public class DungeonMonster extends DungeonObject {
 
             final double distance = this.getDistance(party);
             if (distance < 1.5 * weapon.getRange()) { //1.5 because of diagonal cells
+                if (!owner.lineOfSightExists(x, y, party.getX(), party.getY())) {
+                    // can't shoot because no line of sight
+                    return;
+                }
                 party.subtractHp(world, weapon.getDamage());
                 GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), getName(), weapon.getDamage(), party.getHp()));
-                if(weapon.getId().equals("melee")) {
-                    world.getCurrentDungeon().getController().setCurrentEffect(new ExplosionEffect(world.getPlayer().getLandingParty().getX(),world.getPlayer().getLandingParty().getY(),"slash",false));
+                if (weapon.getId().equals("melee")) {
+                    world.getCurrentDungeon().getController().setCurrentEffect(new ExplosionEffect(world.getPlayer().getLandingParty().getX(), world.getPlayer().getLandingParty().getY(), "slash", false));
                 } else {
                     world.getCurrentDungeon().getController().setCurrentEffect(new BlasterShotEffect(this, world.getPlayer().getLandingParty(), world.getCamera(), 800, weapon.getShotImage()));
                 }

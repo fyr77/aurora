@@ -31,6 +31,8 @@ public class StoryScreenController implements ScreenController {
 
     private Element textPanel;
 
+    private Element myWindow;
+
     public StoryScreenController(World world) {
         this.world = world;
     }
@@ -44,10 +46,12 @@ public class StoryScreenController implements ScreenController {
         textPanel = screen.findElementByName("storyText");
         textPanel.getRenderer(TextRenderer.class).setLineWrapping(true);
         imagePanel = screen.findElementByName("imagePanel");
+        myWindow = screen.findElementByName("story_window");
     }
 
     @Override
     public void onStartScreen() {
+        myWindow.setVisible(true);
         world.setPaused(true);
         story.start();
         update();

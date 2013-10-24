@@ -13,6 +13,7 @@ import de.lessvoid.nifty.controls.DropDown;
 import de.lessvoid.nifty.controls.DropDownSelectionChangedEvent;
 import de.lessvoid.nifty.controls.Scrollbar;
 import de.lessvoid.nifty.controls.ScrollbarChangedEvent;
+import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -33,6 +34,8 @@ public class LandingPartyEquipScreenController implements ScreenController {
 
     private Screen myScreen;
 
+    private Element myWindow;
+
     public LandingPartyEquipScreenController(World world) {
         this.world = world;
         landingParty = world.getPlayer().getLandingParty();
@@ -45,10 +48,13 @@ public class LandingPartyEquipScreenController implements ScreenController {
     @Override
     public void bind(Nifty nifty, Screen screen) {
         myScreen = screen;
+        myWindow = myScreen.findElementByName("equip_window");
     }
 
     @Override
     public void onStartScreen() {
+        myWindow.setVisible(true);
+        world.setPaused(true);
         Scrollbar scrollbar = myScreen.findNiftyControl("scientists_count", Scrollbar.class);
         scrollbar.setValue(landingParty.getScience());
         scrollbar = myScreen.findNiftyControl("engineers_count", Scrollbar.class);
@@ -57,6 +63,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
         scrollbar.setValue(landingParty.getMilitary());
 
         DropDown weaponSelect = myScreen.findNiftyControl("weapon_select", DropDown.class);
+        weaponSelect.clear();
         for (InventoryItem item : world.getPlayer().getInventory().keySet()) {
             if (item instanceof LandingPartyWeapon) {
                 weaponSelect.addItem(item);
@@ -76,6 +83,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
 
     @Override
     public void onEndScreen() {
+        world.setPaused(false);
     }
 
     @NiftyEventSubscriber(id = "weapon_select")
@@ -130,6 +138,13 @@ public class LandingPartyEquipScreenController implements ScreenController {
                     landingParty.setMilitary(oldVal);
                 }
                 break;
+        }
+
+        if (!landingParty.canBeLaunched(world)) {
+            // disable close buttons, because current party configuration is invalid
+            myScreen.findElementByName("close_button").disable();
+        } else {
+            myScreen.findElementByName("close_button").enable();
         }
         updateLabels();
     }
