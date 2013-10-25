@@ -2,22 +2,28 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
 
     <screen id="main_menu" controller="ru.game.aurora.application.MainMenuController">
-        <layer id="layer" childLayout="horizontal">
+        <layer id="layer" childLayout="horizontal" backgroundImage="resources/gui/images/main_menu_background.png">
             <panel width="10%"/>
-            <panel id="panel" childLayout="vertical">
+            <panel id="panel" width="20%" childLayout="vertical">
                 <panel height="60%"/>
-                <control id="continue_game_button" name="button" label="${gui.main_menu.continue_game}" width="20%" height="7%">
+                <control id="continue_game_button" name="button" label="${gui.main_menu.continue_game}" width="100%" height="7%">
                         <interact onClick="loadGame()" />
                 </control>
                 <panel height="5%"/>
-                <control id="new_game_button" name="button" label="${gui.main_menu.new_game}" width="20%" height="7%">
+                <control id="new_game_button" name="button" label="${gui.main_menu.new_game}" width="100%" height="7%">
                     <interact onClick="newGame()" />
                 </control>
                 <panel height="5%"/>
-                <control id="exit_game_button" name="button" label="${gui.main_menu.exit_game}" width="20%" height="7%">
+                <control id="exit_game_button" name="button" label="${gui.main_menu.exit_game}" width="100%" height="7%">
                     <interact onClick="exitGame()" />
                 </control>
             </panel>
+            <panel width="65%"/>
+            <panel childLayout="vertical">
+                <panel height="97%"/>
+                <text id="version_text" style="base-font"/>
+            </panel>
+
 
         </layer>
     </screen>
