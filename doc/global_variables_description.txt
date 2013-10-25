@@ -33,6 +33,12 @@ quest.main.klisk_evacuation_help - Klisk are helping with evacuating Earth. Klis
 
 ==============================
 
+Gardeners
+
+gardeners.first_warp - if set, and gardener ship is warping away, a dialog will be shown. After dialog variable will be removed
+
+==============================
+
 Tutorials
 
 tutorial.landing - if set, on next planetary landing tutorial dialog will be shown

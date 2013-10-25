@@ -5,16 +5,18 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.GardenersShip;
-import ru.game.aurora.world.space.NPCShip;
 
 /**
  * Date: 23.10.13
  * Time: 11:25
  */
-public class WarpEffect extends BasePositionable implements Effect {
+public class WarpEffect extends Effect
+{
+
+    private static final long serialVersionUID = 1L;
+
     private transient Animation anim;
 
     private boolean secondExplosion = false; //true when first effect is over

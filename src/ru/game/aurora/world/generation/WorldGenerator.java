@@ -171,7 +171,7 @@ public class WorldGenerator implements Runnable {
 
             if (planetSize <= 2) {
                 if (r.nextDouble() < ringsChance) {
-                    planets[i].setRings(r.nextInt() + 1);
+                    planets[i].setRings(r.nextInt(Configuration.getIntProperty("world.starsystem.ringsTypes")) + 1);
                 }
 
                 int satelliteCount = r.nextInt(maxSatellites);

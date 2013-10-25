@@ -384,6 +384,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             for (Iterator<Effect> iter = effects.iterator(); iter.hasNext(); ) {
                 Effect e = iter.next();
                 if (e.isOver()) {
+                    e.onOver(world);
                     iter.remove();
                 }
             }

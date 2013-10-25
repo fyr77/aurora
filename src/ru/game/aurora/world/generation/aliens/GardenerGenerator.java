@@ -40,5 +40,7 @@ public class GardenerGenerator implements WorldGeneratorPart
         gardenerShip.setCaptain(new NPC(dialog));
         world.addListener(new SingleShipFixedTime(1, gardenerShip, Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_ship_detected.json"))));
         world.getRaces().put(gardenerRace.getName(), gardenerRace);
+
+        world.getGlobalVariables().put("gardeners.first_warp", true);
     }
 }
