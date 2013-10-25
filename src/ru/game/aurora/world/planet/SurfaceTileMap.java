@@ -201,10 +201,12 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
     @Override
     public void setTilePassable(int x, int y, boolean isPassable) {
+        final int wrappedX = EngineUtils.wrap(x, width);
+        final int wrappedY = EngineUtils.wrap(y, height);
         if (!isPassable) {
-            surface[y][x] |= SurfaceTypes.OBSTACLE_MASK;
+            surface[wrappedY][wrappedX] |= SurfaceTypes.OBSTACLE_MASK;
         } else {
-            surface[y][x] &= ~SurfaceTypes.OBSTACLE_MASK;
+            surface[wrappedY][wrappedX] &= ~SurfaceTypes.OBSTACLE_MASK;
         }
     }
 
@@ -239,7 +241,12 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
     @Override
     public boolean isTilePassable(int x, int y) {
-        return SurfaceTypes.isPassible(surface[y][x]);
+        return SurfaceTypes.isPassible(getByteWrapped(x, y));
+    }
+
+    private byte getByteWrapped(int x, int y)
+    {
+        return surface[EngineUtils.wrap(y, height)][EngineUtils.wrap(x, width)];
     }
 
     @Override
@@ -249,7 +256,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
     @Override
     public boolean isTileVisible(int x, int y) {
-        return (SurfaceTypes.VISIBILITY_MASK & surface[y][x]) != 0;
+        return (SurfaceTypes.VISIBILITY_MASK & getByteWrapped(x, y)) != 0;
     }
 
     @Override
@@ -268,7 +275,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
     }
 
     public byte getTileAt(int x, int y) {
-        return surface[y][x];
+        return getByteWrapped(x, y);
     }
 
     @Override

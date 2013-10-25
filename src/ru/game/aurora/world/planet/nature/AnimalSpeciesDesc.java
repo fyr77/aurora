@@ -8,6 +8,7 @@ package ru.game.aurora.world.planet.nature;
 
 
 import org.newdawn.slick.Image;
+import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.BasePlanet;
 
 import java.io.Serializable;
@@ -34,7 +35,7 @@ public class AnimalSpeciesDesc implements Serializable {
      */
     private int speed;
 
-    private int damage;
+    private LandingPartyWeapon weapon;
 
     private transient Image image;
 
@@ -70,13 +71,13 @@ public class AnimalSpeciesDesc implements Serializable {
      */
     private boolean outopsyMade = false;
 
-    public AnimalSpeciesDesc(BasePlanet homePlanet, String name, boolean carnivorous, boolean herbivorous, int hp, int damage, int speed, Behaviour behaviour) {
+    public AnimalSpeciesDesc(BasePlanet homePlanet, String name, boolean carnivorous, boolean herbivorous, int hp, LandingPartyWeapon weapon, int speed, Behaviour behaviour) {
         this.homePlanet = homePlanet;
         this.name = name;
+        this.weapon = weapon;
         isCarnivorous = carnivorous;
         isHerbivorous = herbivorous;
         this.hp = hp;
-        this.damage = damage;
         this.speed = speed;
         this.behaviour = behaviour;
     }
@@ -101,8 +102,8 @@ public class AnimalSpeciesDesc implements Serializable {
         return speed;
     }
 
-    public int getDamage() {
-        return damage;
+    public LandingPartyWeapon getWeapon() {
+        return weapon;
     }
 
     public Image getImage() {

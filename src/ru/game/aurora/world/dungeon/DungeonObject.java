@@ -13,6 +13,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.PlanetObject;
@@ -39,12 +40,14 @@ public class DungeonObject extends BasePositionable implements PlanetObject {
 
     private transient Image image = null;
 
-    public DungeonObject(TiledMap map, int groupId, int objectId) {
-        super(map.getObjectX(groupId, objectId) / AuroraGame.tileSize, map.getObjectY(groupId, objectId) / AuroraGame.tileSize - 1); // -1 because Y coord in editor starts from 1
-        this.imageName = map.getObjectProperty(groupId, objectId, "image", null);
-        this.imageTileX = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageTileX", "-1"));
-        this.imageTileY = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageTileY", "-1"));
-        this.name = map.getObjectName(groupId, objectId);
+    public DungeonObject(AuroraTiledMap map, int groupId, int objectId) {
+        super(map.getMap().getObjectX(groupId, objectId) / AuroraGame.tileSize, map.getMap().getObjectY(groupId, objectId) / AuroraGame.tileSize - 1); // -1 because Y coord in editor starts from 1
+        TiledMap impl = map.getMap();
+
+        this.imageName = impl.getObjectProperty(groupId, objectId, "image", null);
+        this.imageTileX = Integer.parseInt(impl.getObjectProperty(groupId, objectId, "imageTileX", "-1"));
+        this.imageTileY = Integer.parseInt(impl.getObjectProperty(groupId, objectId, "imageTileY", "-1"));
+        this.name = impl.getObjectName(groupId, objectId);
     }
 
     @Override

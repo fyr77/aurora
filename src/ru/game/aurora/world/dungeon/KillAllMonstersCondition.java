@@ -7,7 +7,7 @@
 package ru.game.aurora.world.dungeon;
 
 
-import org.newdawn.slick.tiled.TiledMap;
+import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.PlanetObject;
 
@@ -22,9 +22,9 @@ public class KillAllMonstersCondition implements IVictoryCondition
     // if set, must kill all monsters with these tags
     private Set<String> tags = null;
 
-    public KillAllMonstersCondition(TiledMap map, int groupId, int objectId)
+    public KillAllMonstersCondition(AuroraTiledMap map, int groupId, int objectId)
     {
-        final String tagString = map.getObjectProperty(groupId, objectId, "tags", null);
+        final String tagString = map.getMap().getObjectProperty(groupId, objectId, "tags", null);
         if (tagString != null) {
             tags = new HashSet<>();
             Collections.addAll(tags, tagString.split(","));
