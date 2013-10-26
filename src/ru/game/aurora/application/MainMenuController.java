@@ -96,7 +96,6 @@ public class MainMenuController implements ScreenController {
 
 
     public void draw(Graphics graphics, Camera camera) {
-        graphics.drawImage(ResourceManager.getInstance().getImage("menu_background"), 0, 0);
         if (generator != null) {
             StringBuilder sb = new StringBuilder(Localization.getText("gui", "generation.prefix")).append(" ");
             sb.append(generator.getCurrentStatus());
@@ -110,13 +109,12 @@ public class MainMenuController implements ScreenController {
             shuttle_landing.update(delta);
             EngineUtils.setImageForGUIElement(shuttle_image, shuttle_landing.getCurrentFrame());
         }
-        graphics.drawString(Version.VERSION, camera.getTileWidth() * camera.getNumTilesX() - 100, camera.getTileHeight() * camera.getNumTilesY() - 40);
     }
 
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
-
+        EngineUtils.setTextForGUIElement(screen.findElementByName("version_text"), Version.VERSION);
     }
 
     @Override

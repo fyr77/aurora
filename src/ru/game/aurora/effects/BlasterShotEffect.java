@@ -17,7 +17,8 @@ import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 
 
-public class BlasterShotEffect implements Effect {
+public class BlasterShotEffect extends Effect
+{
     private static final long serialVersionUID = 7969961076017675842L;
 
     protected Vector2f currentPos;
@@ -50,6 +51,7 @@ public class BlasterShotEffect implements Effect {
     }
 
     public BlasterShotEffect(Vector2f source, Vector2f target, int moveSpeed, String shotSprite) {
+        super(0, 0);
         this.currentPos = source;
         this.target = target;
         this.moveSpeed = moveSpeed;

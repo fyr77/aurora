@@ -1,17 +1,9 @@
 package ru.game.aurora.world.dungeon;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.tiled.TiledMap;
-import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.effects.BlasterShotEffect;
-import ru.game.aurora.effects.ExplosionEffect;
-import ru.game.aurora.world.ITileMap;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
-import ru.game.aurora.world.planet.LandingParty;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,7 +15,8 @@ import java.util.Set;
  * Date: 13.09.13
  * Time: 12:40
  */
-public class DungeonMonster extends DungeonObject {
+public class DungeonMonster extends DungeonObject implements IMonster
+{
     private static final long serialVersionUID = 1L;
 
     private LandingPartyWeapon weapon;
@@ -32,22 +25,24 @@ public class DungeonMonster extends DungeonObject {
 
     private int speed;
 
-    private int turnsBeforeMove;
-
     private int hp;
+
+    private MonsterController controller;
 
     private transient ITileMap owner;
 
-    public DungeonMonster(TiledMap map, int groupId, int objectId) {
+    public DungeonMonster(AuroraTiledMap map, int groupId, int objectId) {
         super(map, groupId, objectId);
-        weapon = ResourceManager.getInstance().getLandingPartyWeapons().getEntity(map.getObjectProperty(groupId, objectId, "weapon", null));
-        turnsBeforeMove = speed = Integer.parseInt(map.getObjectProperty(groupId, objectId, "speed", "0"));
-        hp = Integer.parseInt(map.getObjectProperty(groupId, objectId, "hp", "1"));
-        final String tagsString = map.getObjectProperty(groupId, objectId, "tags", null);
+        owner = map;
+        weapon = ResourceManager.getInstance().getLandingPartyWeapons().getEntity(map.getMap().getObjectProperty(groupId, objectId, "weapon", null));
+        speed = Integer.parseInt(map.getMap().getObjectProperty(groupId, objectId, "speed", "0"));
+        hp = Integer.parseInt(map.getMap().getObjectProperty(groupId, objectId, "hp", "1"));
+        final String tagsString = map.getMap().getObjectProperty(groupId, objectId, "tags", null);
         if (tagsString != null) {
             tags = new HashSet<>();
             Collections.addAll(tags, tagsString.split(","));
         }
+        controller = new MonsterController(map, this);
     }
 
     @Override
@@ -57,59 +52,7 @@ public class DungeonMonster extends DungeonObject {
 
     @Override
     public void update(GameContainer container, World world) {
-        if (hp <= 0) {
-            return;
-        }
-        if (!world.isUpdatedThisFrame()) {
-            return;
-        }
-        if (--turnsBeforeMove == 0) {
-            turnsBeforeMove = speed;
-            int newX = x + CommonRandom.getRandom().nextInt(2) - 1;
-            int newY = y + CommonRandom.getRandom().nextInt(2) - 1;
-            // if we want to attack landing party and it is close enough, move closer
-
-            LandingParty party = world.getPlayer().getLandingParty();
-
-
-            final double distance = this.getDistance(party);
-            if (distance < 1.5 * weapon.getRange()) { //1.5 because of diagonal cells
-                if (!owner.lineOfSightExists(x, y, party.getX(), party.getY())) {
-                    // can't shoot because no line of sight
-                    return;
-                }
-                party.subtractHp(world, weapon.getDamage());
-                GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), getName(), weapon.getDamage(), party.getHp()));
-                if (weapon.getId().equals("melee")) {
-                    world.getCurrentDungeon().getController().setCurrentEffect(new ExplosionEffect(world.getPlayer().getLandingParty().getX(), world.getPlayer().getLandingParty().getY(), "slash", false));
-                } else {
-                    world.getCurrentDungeon().getController().setCurrentEffect(new BlasterShotEffect(this, world.getPlayer().getLandingParty(), world.getCamera(), 800, weapon.getShotImage()));
-                }
-                newX = x;
-                newY = y;
-            } else if (distance < 5 * weapon.getRange()) {
-                if (x < party.getX() - 1) {
-                    newX = x + 1;
-                } else if (x > party.getX() + 1) {
-                    newX = x - 1;
-                }
-
-                if (y < party.getY() - 1) {
-                    newY = y + 1;
-                } else if (y > party.getY() + 1) {
-                    newY = y - 1;
-                }
-            }
-
-            owner = world.getCurrentDungeon().getMap();
-            if (owner.isTilePassable(newX, newY)) {
-                owner.setTilePassable(x, y, true);
-                x = newX;
-                y = newY;
-                owner.setTilePassable(x, y, false);
-            }
-
-        }
+        controller.update(world);
     }
 
     @Override
@@ -128,5 +71,25 @@ public class DungeonMonster extends DungeonObject {
 
     public Set<String> getTags() {
         return tags;
+    }
+
+    @Override
+    public int getHp() {
+        return hp;
+    }
+
+    @Override
+    public void changeHp(int amount) {
+        hp += amount;
+    }
+
+    @Override
+    public int getSpeed() {
+        return speed;
+    }
+
+    @Override
+    public LandingPartyWeapon getWeapon() {
+        return weapon;
     }
 }

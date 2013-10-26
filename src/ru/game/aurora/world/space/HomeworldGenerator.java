@@ -92,7 +92,7 @@ public class HomeworldGenerator {
         ((Planet) planets[2]).getPlanetObjects().add(a);
 
         ss.setPlanets(planets);
-
+        ss.setQuestLocation(true);
         ss.setRadius(Math.max((int) (6 * 1.5), 10));
         return ss;
     }
@@ -122,7 +122,7 @@ public class HomeworldGenerator {
             probe.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), StarshipWeapon.MOUNT_ALL));
             ss.getShips().add(probe);
         }
-
+        ss.setQuestLocation(true);
         return ss;
     }
 }

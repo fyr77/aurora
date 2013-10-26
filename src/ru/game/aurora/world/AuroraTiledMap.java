@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Map in a format of a TILed EDitor
  */
-public class TILEDMap implements ITileMap {
+public class AuroraTiledMap implements ITileMap {
     private static final long serialVersionUID = 1L;
 
     private List<PlanetObject> objects = new LinkedList<>();
@@ -46,7 +46,7 @@ public class TILEDMap implements ITileMap {
 
     private transient ILosAlgorithm losAlgorithm;
 
-    public TILEDMap(String mapRef) {
+    public AuroraTiledMap(String mapRef) {
         this.mapRef = mapRef;
     }
 
@@ -84,8 +84,8 @@ public class TILEDMap implements ITileMap {
                 try {
                     Class clazz = Class.forName(typeName);
 
-                    Constructor ctor = clazz.getConstructor(TiledMap.class, int.class, int.class);
-                    Object obj = ctor.newInstance(map, groupId, objectId);
+                    Constructor ctor = clazz.getConstructor(AuroraTiledMap.class, int.class, int.class);
+                    Object obj = ctor.newInstance(this, groupId, objectId);
                     if (DungeonObject.class.isAssignableFrom(clazz)) {
                         objects.add((PlanetObject) obj);
                     } else if (IVictoryCondition.class.isAssignableFrom(clazz)) {
@@ -129,6 +129,13 @@ public class TILEDMap implements ITileMap {
         } catch (SlickException e) {
             throw new RuntimeException("Failed to load TILED map", e);
         }
+    }
+
+    public TiledMap getMap() {
+        if (map == null) {
+            loadMap();
+        }
+        return map;
     }
 
     @Override

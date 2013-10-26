@@ -4,9 +4,11 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.WarpEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
+import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 
 /**
@@ -34,7 +36,7 @@ public class GardenersShip extends NPCShip implements SpaceObject {
     public void update(GameContainer container, World world) {
         super.update(container, world);
         if (timeToLeave && world.isUpdatedThisFrame()) {
-            warpAway(world.getCurrentStarSystem());
+            warpAway(world, world.getCurrentStarSystem());
         }
     }
 
@@ -52,15 +54,29 @@ public class GardenersShip extends NPCShip implements SpaceObject {
 
     @Override
     public void onAttack(World world, SpaceObject attacker, int dmg) {
-        warpAway(world.getCurrentStarSystem());
+        warpAway(world, world.getCurrentStarSystem());
     }
 
     public void setAlpha(float alpha) {
         spriteAlpha = alpha;
     }
 
-    public void warpAway (StarSystem ss) {
-        ss.addEffect(new WarpEffect(this));
+    public void warpAway (World world, StarSystem ss) {
+        final WarpEffect warpEffect = new WarpEffect(this);
+        ss.addEffect(warpEffect);
+        // show dialog after first wrap seen by player
+        if (world.getGlobalVariables().containsKey("gardeners.first_warp")) {
+            warpEffect.setEndListener(new IStateChangeListener() {
+
+                private static final long serialVersionUID = -4524072912665603030L;
+
+                @Override
+                public void stateChanged(World world) {
+                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/first_gardener_warp.json"));
+                }
+            });
+            world.getGlobalVariables().remove("gardeners.first_warp");
+        }
     }
 
     public void warpAwayNextTurn () {

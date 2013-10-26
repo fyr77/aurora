@@ -8,6 +8,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.PlanetObject;
 
@@ -55,19 +56,20 @@ public class DungeonButton extends DungeonObject {
         }
     }
 
-    public DungeonButton(TiledMap map, int groupId, int objectId) {
+    public DungeonButton(AuroraTiledMap map, int groupId, int objectId) {
         super(map, groupId, objectId);
-        state = !map.getObjectProperty(groupId, objectId, "initialState", "normal").equals("normal");
+        TiledMap impl = map.getMap();
+        state = !impl.getObjectProperty(groupId, objectId, "initialState", "normal").equals("normal");
 
-        this.imageNormalName = map.getObjectProperty(groupId, objectId, "imageNormal", null);
-        this.imageNormalTileX = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageNormalTileX", "-1"));
-        this.imageNormalTileY = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageNormalTileY", "-1"));
+        this.imageNormalName = impl.getObjectProperty(groupId, objectId, "imageNormal", null);
+        this.imageNormalTileX = Integer.parseInt(impl.getObjectProperty(groupId, objectId, "imageNormalTileX", "-1"));
+        this.imageNormalTileY = Integer.parseInt(impl.getObjectProperty(groupId, objectId, "imageNormalTileY", "-1"));
 
-        this.imagePressName = map.getObjectProperty(groupId, objectId, "imagePress", null);
-        this.imagePressTileX = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imagePressTileX", "-1"));
-        this.imagePressTileY = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imagePressTileY", "-1"));
+        this.imagePressName = impl.getObjectProperty(groupId, objectId, "imagePress", null);
+        this.imagePressTileX = Integer.parseInt(impl.getObjectProperty(groupId, objectId, "imagePressTileX", "-1"));
+        this.imagePressTileY = Integer.parseInt(impl.getObjectProperty(groupId, objectId, "imagePressTileY", "-1"));
 
-        this.door = map.getObjectProperty(groupId, objectId, "door", null);
+        this.door = impl.getObjectProperty(groupId, objectId, "door", null);
     }
 
     @Override

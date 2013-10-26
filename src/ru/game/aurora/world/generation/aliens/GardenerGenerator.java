@@ -41,5 +41,7 @@ public class GardenerGenerator implements WorldGeneratorPart {
         listener.setGroups(GameEventListener.EventGroup.ENCOUNTER_SPAWN);
         world.addListener(listener);
         world.getRaces().put(gardenerRace.getName(), gardenerRace);
+
+        world.getGlobalVariables().put("gardeners.first_warp", true);
     }
 }

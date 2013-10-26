@@ -6,6 +6,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.tiled.TiledMap;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.World;
 
 /**
@@ -34,19 +35,20 @@ public class DungeonDoor extends DungeonObject {
 
     private String doorName;
 
-    public DungeonDoor(TiledMap map, int groupId, int objectId) {
+    public DungeonDoor(AuroraTiledMap map, int groupId, int objectId) {
         super(map, groupId, objectId);
-        state = !map.getObjectProperty(groupId, objectId, "initialState", "closed").equals("closed");
+        TiledMap impl = map.getMap();
+        state = !impl.getObjectProperty(groupId, objectId, "initialState", "closed").equals("closed");
 
-        this.imageOpenName = map.getObjectProperty(groupId, objectId, "imageOpen", null);
-        this.imageOpenTileX = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageOpenTileX", "-1"));
-        this.imageOpenTileY = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageOpenTileY", "-1"));
+        this.imageOpenName = impl.getObjectProperty(groupId, objectId, "imageOpen", null);
+        this.imageOpenTileX = Integer.parseInt(impl.getObjectProperty(groupId, objectId, "imageOpenTileX", "-1"));
+        this.imageOpenTileY = Integer.parseInt(impl.getObjectProperty(groupId, objectId, "imageOpenTileY", "-1"));
 
-        this.imageCloseName = map.getObjectProperty(groupId, objectId, "imageClose", null);
-        this.imageCloseTileX = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageCloseTileX", "-1"));
-        this.imageCloseTileY = Integer.parseInt(map.getObjectProperty(groupId, objectId, "imageCloseTileY", "-1"));
+        this.imageCloseName = impl.getObjectProperty(groupId, objectId, "imageClose", null);
+        this.imageCloseTileX = Integer.parseInt(impl.getObjectProperty(groupId, objectId, "imageCloseTileX", "-1"));
+        this.imageCloseTileY = Integer.parseInt(impl.getObjectProperty(groupId, objectId, "imageCloseTileY", "-1"));
 
-        this.doorName = map.getObjectName(groupId, objectId);
+        this.doorName = impl.getObjectName(groupId, objectId);
     }
 
     @Override

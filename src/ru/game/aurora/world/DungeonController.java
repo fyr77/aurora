@@ -271,6 +271,7 @@ public class DungeonController implements Serializable {
         if (currentEffect != null) {
             currentEffect.update(container, world);
             if (currentEffect.isOver()) {
+                currentEffect.onOver(world);
                 currentEffect = null;
             }
             if (!world.isUpdatedThisFrame()) {

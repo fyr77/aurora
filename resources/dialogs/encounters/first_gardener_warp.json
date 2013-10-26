@@ -1,0 +1,38 @@
+{
+    "id": "first_gardener_warp",
+    "iconName":"scientist_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"hyper"
+                },
+                {
+                    "targetStatementId":2,
+                    "replyText":"new_tech"
+                }
+            ]
+
+        },
+        "1":{
+            "id":1,
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                }
+            ]
+        },
+        "2":{
+            "id":2,
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                }
+            ]
+        }
+    }
+}
