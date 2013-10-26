@@ -6,6 +6,7 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
@@ -72,9 +73,15 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     }
 
     public void openStarMap() {
-        GalaxyMapScreen gms = new GalaxyMapScreen();
-        world.setCurrentRoom(gms);
-        gms.enter(world);
+        if (world.getCurrentRoom().equals(world.getGalaxyMap())) {
+            GalaxyMapScreen gms = new GalaxyMapScreen();
+            world.setCurrentRoom(gms);
+            gms.enter(world);
+            myScreen.findNiftyControl("starmap_button", Button.class).setText(Localization.getText("gui", "space.galaxy_map_return"));
+        } else {
+            world.setCurrentRoom(world.getGalaxyMap());
+            myScreen.findNiftyControl("starmap_button", Button.class).setText(Localization.getText("gui", "space.galaxy_map"));
+        }
     }
 
     public void openResearchScreen() {

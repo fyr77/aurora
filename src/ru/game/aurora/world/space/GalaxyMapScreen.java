@@ -7,11 +7,14 @@
 package ru.game.aurora.world.space;
 
 
+import de.lessvoid.nifty.controls.Button;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.Ship;
@@ -48,6 +51,7 @@ public class GalaxyMapScreen implements Room {
     public void update(GameContainer container, World world) {
         if (container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(Input.KEY_ESCAPE) || container.getInput().isKeyPressed(Input.KEY_M)) {
             world.setCurrentRoom(world.getGalaxyMap());
+            GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("starmap_button", Button.class).setText(Localization.getText("gui", "space.galaxy_map"));
         }
     }
 
