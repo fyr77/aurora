@@ -30,16 +30,18 @@ public class SingleShipEvent extends GameEventListener {
     }
 
     @Override
-    public void onPlayerEnterStarSystem(World world, StarSystem ss) {
+    public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
         // do not spawn in quest star systems
         if (ss.isQuestLocation()) {
-            return;
+            return false;
         }
         if (CommonRandom.getRandom().nextDouble() < chance) {
             ss.setRandomEmptyPosition(ship);
             ss.getShips().add(ship);
             ship = null;
+            return true;
         }
+        return false;
     }
 
     @Override

@@ -28,20 +28,24 @@ public class TutorialGenerator implements WorldGeneratorPart {
             private int count = -1;
 
             @Override
-            public void onTurnEnded(World world) {
+            public boolean onTurnEnded(World world) {
                 if (count < 0) {
-                    return;
+                    return false;
                 }
 
                 if (--count == 0) {
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/tutorials/repair_tutorial.json"));
                     isAlive = false;
+                    return true;
+                } else {
+                    return false;
                 }
             }
 
             @Override
-            public void onPlayerShipDamaged(World world) {
+            public boolean onPlayerShipDamaged(World world) {
                 count = 2;
+                return false;
             }
 
 

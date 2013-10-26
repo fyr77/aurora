@@ -30,11 +30,13 @@ public abstract class EarthResearch extends GameEventListener {
     }
 
     @Override
-    public void onTurnEnded(World world) {
+    public boolean onTurnEnded(World world) {
         if (targetTurn <= world.getTurnCount()) {
             completed = true;
             onCompleted(world);
+            return true;
         }
+        return false;
     }
 
     @Override

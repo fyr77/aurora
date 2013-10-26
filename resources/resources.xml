@@ -136,6 +136,10 @@
     <resource type="image" id="rogues_frame">sprites/ships/rogues_frame.png</resource>
     <resource type="image" id="rogues_scout_damaged">sprites/ships/rogues_scout_damaged.png</resource>
 
+    <!-- swarm -->
+    <resource type="image" id="swarm_ship">sprites/ships/swarm.png</resource>
+    <resource type="image" id="swarm_dialog">sprites/portraits/swarm.png</resource>
+
     <!-- earth -->
     <resource type="image" id="earth_dialog">sprites/portraits/earth-1.png</resource>
     <resource type="image" id="enterprise_dialog">sprites/portraits/enterprise.png</resource>

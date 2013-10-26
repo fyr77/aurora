@@ -55,12 +55,12 @@ public class EnterpriseEncounterCreator extends GameEventListener {
     }
 
     @Override
-    public void onTurnEnded(World world) {
+    public boolean onTurnEnded(World world) {
         if (!isAlive) {
-            return;
+            return false;
         }
         if (world.getTurnCount() < turnCount) {
-            return;
+            return false;
         }
 
         // spawn private messages.
@@ -80,6 +80,8 @@ public class EnterpriseEncounterCreator extends GameEventListener {
         world.addListener(new SingleShipEvent(0.9, enterprise));
 
         isAlive = false;
+
+        return true;
     }
 
     @Override

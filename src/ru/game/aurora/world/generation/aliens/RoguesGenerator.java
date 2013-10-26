@@ -17,6 +17,7 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.SingleShipEvent;
 import ru.game.aurora.npc.StandardAlienShipEvent;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.space.GalaxyMap;
@@ -36,15 +37,10 @@ public class RoguesGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public void onPlayerEnterStarSystem(World world, StarSystem ss) {
+        public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
             AlienRace kliskRace = world.getRaces().get("Klisk");
 
-            if (GalaxyMap.getDistance(ss, kliskRace.getHomeworld()) <= kliskRace.getTravelDistance()) {
-                // do not spawn this event in Klisk-controlled systems
-                return;
-            }
-
-            super.onPlayerEnterStarSystem(world, ss);
+            return GalaxyMap.getDistance(ss, kliskRace.getHomeworld()) > kliskRace.getTravelDistance() && super.onPlayerEnterStarSystem(world, ss);
         }
     }
 
@@ -99,13 +95,17 @@ public class RoguesGenerator implements WorldGeneratorPart {
         damagedRogueScout.setCaptain(new NPC(dialog));
         damagedRogueScout.setAi(null);
         damagedRogueScout.setStationary(true);
-        world.addListener(new MeetDamagedRogueEvent(damagedRogueScout));
+
+        MeetDamagedRogueEvent listener = new MeetDamagedRogueEvent(damagedRogueScout);
+        listener.setGroups(GameEventListener.EventGroup.ENCOUNTER_SPAWN);
+        world.addListener(listener);
     }
 
     @Override
     public void updateWorld(World world) {
         AlienRace rogueRace = new AlienRace("Rogues", "rogues_scout", 5, Dialog.loadFromFile("dialogs/rogues_frame_dialog.json"));
         StarSystem homeworld = HomeworldGenerator.generateRoguesWorld(world, 15, 8, rogueRace);
+        homeworld.setQuestLocation(true);
         rogueRace.setHomeworld(homeworld);
 
         world.getGalaxyMap().addObjectAndSetTile(homeworld, 15, 8);

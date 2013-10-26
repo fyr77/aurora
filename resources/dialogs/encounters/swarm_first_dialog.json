@@ -1,0 +1,15 @@
+{
+    "id": "swarm_first",
+    "iconName":"swarm_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                }
+            ]
+        }
+    }
+}

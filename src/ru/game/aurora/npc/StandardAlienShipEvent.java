@@ -19,8 +19,7 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * When player enters some star system that is close to some alien race homeworld, he has a chance of meeting that race's ship
  */
-public class StandardAlienShipEvent extends GameEventListener
-{
+public class StandardAlienShipEvent extends GameEventListener {
     private static final long serialVersionUID = -3413422560284690414L;
 
     private AlienRace race;
@@ -48,13 +47,13 @@ public class StandardAlienShipEvent extends GameEventListener
     }
 
     @Override
-    public void onPlayerEnterStarSystem(World world, StarSystem ss) {
+    public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
         if (ss.isQuestLocation() && !spawnInQuestStarSystems) {
-            return;
+            return false;
         }
         double probability = 1 - GalaxyMap.getDistance(ss, race.getHomeworld()) / race.getTravelDistance();
         if (probability < 0) {
-            return;
+            return false;
         }
 
         if (CommonRandom.getRandom().nextDouble() < probability) {
@@ -66,7 +65,9 @@ public class StandardAlienShipEvent extends GameEventListener
             } else {
                 ship.setAi(new LandOnPlanetAI(CollectionUtils.selectRandomElement(world.getCurrentStarSystem().getPlanets())));
             }
+            return true;
         }
+        return false;
     }
 
     @Override

@@ -15,8 +15,7 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * Creates given alien ship when player enters Xth starsystem for first time
  */
-public class SingleShipFixedTime extends GameEventListener
-{
+public class SingleShipFixedTime extends GameEventListener {
     private static final long serialVersionUID = 6541906542086925960L;
 
     private int x;
@@ -40,9 +39,9 @@ public class SingleShipFixedTime extends GameEventListener
     }
 
     @Override
-    public void onPlayerEnterStarSystem(World world, StarSystem ss) {
+    public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
         if (ss.isQuestLocation()) {
-            return;
+            return false;
         }
         if (!ss.isVisited() && ++count == x) {
             ss.setRandomEmptyPosition(ship);
@@ -51,8 +50,9 @@ public class SingleShipFixedTime extends GameEventListener
             if (dialog != null) {
                 world.addOverlayWindow(dialog);
             }
+            return true;
         }
-
+        return false;
     }
 
     @Override

@@ -16,8 +16,7 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * Just spawns ships in given star system
  */
-public class SingleStarsystemShipSpawner extends GameEventListener
-{
+public class SingleStarsystemShipSpawner extends GameEventListener {
     private static final long serialVersionUID = 3478980636928820446L;
 
     private NPCShipFactory factory;
@@ -33,17 +32,18 @@ public class SingleStarsystemShipSpawner extends GameEventListener
     }
 
     @Override
-    public void onPlayerEnterStarSystem(World world, StarSystem ss) {
+    public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
         if (ss != targetSystem) {
-            return;
+            return false;
         }
 
         if (CommonRandom.getRandom().nextDouble() > probability) {
-            return;
+            return false;
         }
 
         NPCShip ship = factory.createShip();
         ss.setRandomEmptyPosition(ship);
         ss.getShips().add(ship);
+        return true;
     }
 }

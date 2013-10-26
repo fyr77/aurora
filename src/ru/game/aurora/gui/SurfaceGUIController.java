@@ -64,11 +64,11 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     }
 
     @Override
-    public void onTurnEnded(World world) {
-        if (!(world.getCurrentRoom() instanceof Planet) && !(world.getCurrentRoom() instanceof IDungeon)) {
-            return;
+    public boolean onTurnEnded(World world) {
+        if (world.getCurrentRoom() instanceof Planet || world.getCurrentRoom() instanceof IDungeon) {
+            updateStats();
         }
-        updateStats();
+        return false;
     }
 
     @Override

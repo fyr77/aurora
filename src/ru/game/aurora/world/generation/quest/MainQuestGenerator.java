@@ -38,13 +38,13 @@ public class MainQuestGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public void onPlayerEnterStarSystem(World world, StarSystem ss) {
+        public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
             if (!ss.getVariables().containsKey(CLONED_SYSTEM_PROPERTY)) {
-                return;
+                return false;
             }
 
             if (ss.isVisited()) {
-                return;
+                return false;
             }
 
             ++count;
@@ -52,13 +52,16 @@ public class MainQuestGenerator implements WorldGeneratorPart {
             if (count == 2) {
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/second_cloned_system_found.json"));
                 world.getGlobalVariables().put("quest.main.cloned_starsystems_encountered", "2");
-                return;
+                return true;
             }
 
             if (count == 3) {
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/third_cloned_system_found.json"));
                 world.getGlobalVariables().put("quest.main.cloned_starsystems_encountered", "3");
+                return true;
             }
+
+            return false;
         }
     }
 
@@ -94,7 +97,7 @@ public class MainQuestGenerator implements WorldGeneratorPart {
                     private static final long serialVersionUID = -8345545783110990443L;
 
                     @Override
-                    public void onPlayerEnterStarSystem(World world, StarSystem s) {
+                    public boolean onPlayerEnterStarSystem(World world, StarSystem s) {
                         if (s == ss) {
                             world.getGlobalVariables().put("quest.main.obliterator_encountered", null);
                             isAlive = false;
@@ -104,7 +107,9 @@ public class MainQuestGenerator implements WorldGeneratorPart {
                                             , "news"
                                     )
                             );
+                            return true;
                         }
+                        return false;
                     }
                 });
             } else {

@@ -34,7 +34,7 @@ public class BiologyResearch extends EarthResearch {
     }
 
     @Override
-    public void onReturnToEarth(World world) {
+    public boolean onReturnToEarth(World world) {
         for (ResearchProjectDesc p : world.getPlayer().getResearchState().getCompletedProjects()) {
             if (p instanceof AnimalResearch) {
                 materialCount++;
@@ -50,7 +50,8 @@ public class BiologyResearch extends EarthResearch {
             );
 
             world.getPlayer().getEarthState().updateTechnologyLevel(100);
-
+            return true;
         }
+        return false;
     }
 }

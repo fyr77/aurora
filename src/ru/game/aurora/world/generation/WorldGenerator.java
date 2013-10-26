@@ -17,6 +17,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.GardenerGenerator;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.aliens.SwarmGenerator;
 import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
@@ -52,6 +53,7 @@ public class WorldGenerator implements Runnable {
             , new GardenerGenerator()
             , new HumanityGenerator()
             , new RoguesGenerator()
+            , new SwarmGenerator()
     };
 
     private static final WorldGeneratorPart[] otherGenerators = {

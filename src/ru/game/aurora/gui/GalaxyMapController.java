@@ -120,16 +120,17 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     }
 
     @Override
-    public void onTurnEnded(World world) {
-        if (!GUI.getInstance().getNifty().getCurrentScreen().getScreenController().equals(this)) {
-            return;
+    public boolean onTurnEnded(World world) {
+        if (GUI.getInstance().getNifty().getCurrentScreen().getScreenController().equals(this)) {
+            updateStats();
         }
-        updateStats();
+        return false;
     }
 
     @Override
-    public void onPlayerShipDamaged(World world) {
+    public boolean onPlayerShipDamaged(World world) {
         updateStats();
+        return false;
     }
 
     public void updateWeapons() {

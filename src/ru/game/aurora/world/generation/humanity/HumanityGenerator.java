@@ -75,7 +75,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
             private static final long serialVersionUID = 1;
 
             @Override
-            public void onReturnToEarth(World world) {
+            public boolean onReturnToEarth(World world) {
                 if (world.getGlobalVariables().containsKey("quest.main.knows_about_obliterator")) {
                     world.addListener(new EarthResearch("obliterator_study", 30) {
 
@@ -87,7 +87,9 @@ public class HumanityGenerator implements WorldGeneratorPart {
                         }
                     });
                     isAlive = false;
+                    return true;
                 }
+                return false;
             }
         });
     }

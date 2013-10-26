@@ -219,31 +219,94 @@ public class World implements Serializable {
     }
 
     public void onPlayerEnteredSystem(StarSystem ss) {
+        Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
         List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
         for (GameEventListener l : newList) {
-            l.onPlayerEnterStarSystem(this, ss);
+
+            boolean alreadyCalledThisGroup = false;
+            for (GameEventListener.EventGroup group : l.getGroups()) {
+                if (calledGroups.contains(group)) {
+                    alreadyCalledThisGroup = true;
+                    break;
+                }
+            }
+
+            if (alreadyCalledThisGroup) {
+                continue;
+            }
+
+            if (l.onPlayerEnterStarSystem(this, ss)) {
+                calledGroups.addAll(l.getGroups());
+            }
         }
     }
 
     public void onPlayerShipDamaged() {
+        Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
         List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
         for (GameEventListener l : newList) {
-            l.onPlayerShipDamaged(this);
+
+            boolean alreadyCalledThisGroup = false;
+            for (GameEventListener.EventGroup group : l.getGroups()) {
+                if (calledGroups.contains(group)) {
+                    alreadyCalledThisGroup = true;
+                    break;
+                }
+            }
+
+            if (alreadyCalledThisGroup) {
+                continue;
+            }
+
+            if (l.onPlayerShipDamaged(this)) {
+                calledGroups.addAll(l.getGroups());
+            }
         }
     }
 
     public void onCrewChanged() {
+        Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
         List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
         for (GameEventListener l : newList) {
-            l.onCrewChanged(this);
+
+            boolean alreadyCalledThisGroup = false;
+            for (GameEventListener.EventGroup group : l.getGroups()) {
+                if (calledGroups.contains(group)) {
+                    alreadyCalledThisGroup = true;
+                    break;
+                }
+            }
+
+            if (alreadyCalledThisGroup) {
+                continue;
+            }
+
+            if (l.onCrewChanged(this)) {
+                calledGroups.addAll(l.getGroups());
+            }
         }
     }
 
     public void onPlayerReturnToEarth() {
-        // to avoid concurrent modification exception
+        Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
         List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
         for (GameEventListener l : newList) {
-            l.onReturnToEarth(this);
+
+            boolean alreadyCalledThisGroup = false;
+            for (GameEventListener.EventGroup group : l.getGroups()) {
+                if (calledGroups.contains(group)) {
+                    alreadyCalledThisGroup = true;
+                    break;
+                }
+            }
+
+            if (alreadyCalledThisGroup) {
+                continue;
+            }
+
+            if (l.onReturnToEarth(this)) {
+                calledGroups.addAll(l.getGroups());
+            }
         }
     }
 
