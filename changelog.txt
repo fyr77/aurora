@@ -2,6 +2,11 @@ VERSION 0.1.2
 
 IN PROGRESS...
 
++ New Swarm alien race
++ NPC ships can now fight each other, added relationship system between races
+* Bugfix
+
+
 ======================================================
 
 VERSION 0.1.1

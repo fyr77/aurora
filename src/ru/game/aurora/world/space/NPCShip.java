@@ -13,12 +13,12 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.ExplosionEffect;
-import ru.game.aurora.effects.WarpEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.world.BasePositionable;
+import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
@@ -75,10 +75,18 @@ public class NPCShip extends BasePositionable implements SpaceObject {
             return;
         }
         curSpeed = speed;
-        if (ai != null) {
-            if (!(world.getCurrentRoom() instanceof StarSystem)) {
-                return;
+        StarSystem ss = world.getCurrentStarSystem();
+        if (ss == null) {
+            return;
+        }
+
+        for (SpaceObject so : ss.getShips()) {
+            if (isHostile(so) && (ai == null || !(ai instanceof CombatAI))) {
+                ai = new CombatAI(so);
             }
+        }
+
+        if (ai != null) {
             ai.update(this, world, (StarSystem) world.getCurrentRoom());
         }
     }
@@ -92,10 +100,11 @@ public class NPCShip extends BasePositionable implements SpaceObject {
      * Returns true if this ship is hostile to player
      * Hostile ships can not be hailed and will attack player when they see it
      */
-    public boolean isHostile() {
-        return race.isHostileToPlayer() || isHostile;
+    public boolean isHostile(SpaceObject object) {
+        return (object instanceof Ship && isHostile) || race.getRelation(object.getRace()) <= 3;
     }
 
+    @Override
     public AlienRace getRace() {
         return race;
     }
@@ -115,10 +124,10 @@ public class NPCShip extends BasePositionable implements SpaceObject {
     }
 
     @Override
-    public String getScanDescription() {
+    public String getScanDescription(World world) {
         StringBuilder sb = new StringBuilder(String.format(Localization.getText("gui", "scan.ship.race"), race.getName()));
         sb.append('\n');
-        sb.append(Localization.getText("gui", "scan.ship.relation_prefix")).append(" ").append(isHostile() ? Localization.getText("gui", "scan.ship.hostile") : Localization.getText("gui", "scan.ship.friendly"));
+        sb.append(Localization.getText("gui", "scan.ship.relation_prefix")).append(" ").append(isHostile(world.getPlayer().getShip()) ? Localization.getText("gui", "scan.ship.hostile") : Localization.getText("gui", "scan.ship.friendly"));
         return sb.toString();
     }
 
@@ -170,7 +179,6 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
         if (!target.isAlive()) {
             GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
-            ss.getShips().remove(target);
         }
     }
 

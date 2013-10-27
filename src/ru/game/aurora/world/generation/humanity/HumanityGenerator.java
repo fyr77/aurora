@@ -31,10 +31,13 @@ public class HumanityGenerator implements WorldGeneratorPart {
 
     @Override
     public void updateWorld(World world) {
-        final AlienRace humans = new AlienRace("Humanity", "earth_transport", 10, Dialog.loadFromFile("dialogs/human_ship_default_dialog.json"));
+        final AlienRace humans = new AlienRace("Humanity", "earth_transport", Dialog.loadFromFile("dialogs/human_ship_default_dialog.json"));
+        world.getPlayer().setShip(humans);
         humans.setTravelDistance(1);
         world.getRaces().put(humans.getName(), humans);
-        world.addListener(new SingleShipFixedTime(4, new AuroraProbe(0, 0), Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_detected.json"))));
+        SingleShipFixedTime listener = new SingleShipFixedTime(4, new AuroraProbe(0, 0), Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_detected.json")));
+        listener.setGroups(GameEventListener.EventGroup.ENCOUNTER_SPAWN);
+        world.addListener(listener);
 
         // earth
         final StarSystem solarSystem = HomeworldGenerator.createSolarSystem(world, humans);

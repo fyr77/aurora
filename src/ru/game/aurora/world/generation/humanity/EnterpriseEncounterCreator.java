@@ -33,6 +33,7 @@ public class EnterpriseEncounterCreator extends GameEventListener {
 
     public EnterpriseEncounterCreator() {
         turnCount = CommonRandom.getRandom().nextInt(50) + 50;
+        setGroups(EventGroup.ENCOUNTER_SPAWN);
     }
 
     private static class EnterpriseDialogListener implements DialogListener {

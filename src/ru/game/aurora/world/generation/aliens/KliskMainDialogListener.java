@@ -52,7 +52,7 @@ public class KliskMainDialogListener implements DialogListener {
 
         world.getPlayer().changeCredits(10);
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.credits_received"), 10));
-        kliskRace.setRelationToPlayer(kliskRace.getRelationToPlayer() + 1);
+        kliskRace.setRelation(world.getPlayer().getShip().getRace(), kliskRace.getRelation(world.getPlayer().getShip().getRace()) + 1);
         world.getGlobalVariables().put("rogues.damage_scout_result", "sold_to_klisk");
 
         world.getGlobalVariables().remove("rogues.damaged_scout_found");

@@ -73,13 +73,13 @@ public class RoguesGenerator implements WorldGeneratorPart {
 
                 if (returnCode == 1) {
                     // player decided to help without reward
-                    rogueRace.setRelationToPlayer(rogueRace.getRelationToPlayer() + 2);
+                    rogueRace.setRelation(world.getPlayer().getShip().getRace(), rogueRace.getRelation(world.getPlayer().getShip().getRace()) + 2);
                     world.getGlobalVariables().remove("rogues.damaged_scout_found");
                 } else {
                     // player decided to help for reward
                     world.getPlayer().changeCredits(5);
                     GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.credits_received"), 5));
-                    rogueRace.setRelationToPlayer(rogueRace.getRelationToPlayer() + 1);
+                    rogueRace.setRelation(world.getPlayer().getShip().getRace(), rogueRace.getRelation(world.getPlayer().getShip().getRace()) + 1);
                     world.getGlobalVariables().remove("rogues.damaged_scout_found");
                 }
 
@@ -103,7 +103,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
 
     @Override
     public void updateWorld(World world) {
-        AlienRace rogueRace = new AlienRace("Rogues", "rogues_scout", 5, Dialog.loadFromFile("dialogs/rogues_frame_dialog.json"));
+        AlienRace rogueRace = new AlienRace("Rogues", "rogues_scout", Dialog.loadFromFile("dialogs/rogues_frame_dialog.json"));
         StarSystem homeworld = HomeworldGenerator.generateRoguesWorld(world, 15, 8, rogueRace);
         homeworld.setQuestLocation(true);
         rogueRace.setHomeworld(homeworld);

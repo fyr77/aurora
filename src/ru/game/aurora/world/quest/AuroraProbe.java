@@ -12,6 +12,7 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 /**
@@ -32,7 +33,7 @@ public class AuroraProbe extends NPCShip {
     }
 
     @Override
-    public boolean isHostile() {
+    public boolean isHostile(SpaceObject object) {
         return false;
     }
 
@@ -56,7 +57,7 @@ public class AuroraProbe extends NPCShip {
     }
 
     @Override
-    public String getScanDescription() {
+    public String getScanDescription(World world) {
         return Localization.getText("research", "probe.scan_description");
     }
 }

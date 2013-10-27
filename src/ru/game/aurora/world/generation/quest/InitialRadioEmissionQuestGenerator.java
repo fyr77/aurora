@@ -127,6 +127,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
 
         brownStar = WorldGenerator.generateRandomStarSystem(world, 12, 12);
         brownStar.setStar(new Star(6, new Color(128, 0, 0)));
+        brownStar.setQuestLocation(true);
         world.getGalaxyMap().addObjectAndSetTile(brownStar, 12, 12);
 
         NPCShip defenceProbe = new NPCShip(2, 1, "rogues_probe", world.getRaces().get("Rogues"), null, "Defence drone");

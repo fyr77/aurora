@@ -6,6 +6,7 @@
 package ru.game.aurora.player;
 
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.earth.EarthState;
 import ru.game.aurora.player.engineering.EngineeringState;
 import ru.game.aurora.player.research.ResearchState;
@@ -18,8 +19,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Player implements Serializable
-{
+public class Player implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -46,13 +46,16 @@ public class Player implements Serializable
     private int failsCount = 0;
 
     public Player() {
-        ship = new Ship(10, 10);
-        researchState = new ResearchState(ship.getScientists());
-        engineeringState = new EngineeringState(ship.getEngineers());
         earthState = new EarthState();
         final LandingPartyWeapon defaultWeapon = ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault");
         inventory.put(defaultWeapon, 1);
         landingParty = new LandingParty(0, 0, defaultWeapon, 1, 1, 1);
+    }
+
+    public void setShip(AlienRace humanity) {
+        ship = new Ship(humanity, 10, 10);
+        researchState = new ResearchState(ship.getScientists());
+        engineeringState = new EngineeringState(ship.getEngineers());
     }
 
     public Ship getShip() {
@@ -87,23 +90,19 @@ public class Player implements Serializable
         return engineeringState;
     }
 
-    public void changeCredits(int delta)
-    {
+    public void changeCredits(int delta) {
         credits += delta;
     }
 
-    public int getCredits()
-    {
+    public int getCredits() {
         return credits;
     }
 
-    public void increaseFailCount()
-    {
+    public void increaseFailCount() {
         failsCount++;
     }
 
-    public int getFailCount()
-    {
+    public int getFailCount() {
         return failsCount;
     }
 

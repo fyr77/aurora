@@ -11,7 +11,6 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
  * User: User
  * Date: 26.10.13
  * Time: 17:12
- * To change this template use File | Settings | File Templates.
  */
 public class SwarmGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = 3878128826545719756L;
@@ -19,12 +18,12 @@ public class SwarmGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/encounters/swarm_first_dialog.json"));
-        final AlienRace swarmRace = new AlienRace("Swarm", "swarm_ship", 0, mainDialog);
+        final AlienRace swarmRace = new AlienRace("Swarm", "swarm_ship", mainDialog);
         mainDialog.setListener(new DialogListener() {
             @Override
             public void onDialogEnded(World world, int returnCode) {
                 // after first dialog swarm becomes hostile
-                swarmRace.setRelationToPlayer(-10);
+                swarmRace.setRelation(world.getPlayer().getShip().getRace(), 0);
             }
         });
 

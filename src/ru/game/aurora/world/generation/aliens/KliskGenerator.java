@@ -23,7 +23,7 @@ public class KliskGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/klisk_default_dialog.json"));
-        AlienRace kliskRace = new AlienRace("Klisk", "klisk_ship", 8, mainDialog);
+        AlienRace kliskRace = new AlienRace("Klisk", "klisk_ship", mainDialog);
         mainDialog.setListener(new KliskMainDialogListener(kliskRace));
 
         StarSystem kliskHomeworld = HomeworldGenerator.generateKliskHomeworld(world, 5, 5, kliskRace);

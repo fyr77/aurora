@@ -14,6 +14,8 @@ import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AlienRace implements Serializable {
 
@@ -21,13 +23,6 @@ public class AlienRace implements Serializable {
 
     private String name;
 
-    /**
-     * 0-3 - hate: will attack on sight
-     * 4-6 - dislike: will not attack, but also will not communicate
-     * 7-9 - neutral: will communicate, can occasionally help
-     * 10-12 - like: will help and easily share information
-     */
-    private int relationToPlayer;
 
     private StarSystem homeworld;
 
@@ -39,6 +34,15 @@ public class AlienRace implements Serializable {
     private Dialog defaultDialog;
 
     private String shipSprite;
+
+    /**
+     * Relation with other races. If a race is not present in this mapping then relation is neutral
+     * 0-3 - hate: will attack on sight
+     * 4-6 - dislike: will not attack, but also will not communicate
+     * 7-9 - neutral: will communicate, can occasionally help
+     * 10-12 - like: will help and easily share information
+     */
+    private Map<String, Integer> relations = new HashMap<>();
 
     private NPCShipFactory defaultFactory = new NPCShipFactory() {
 
@@ -52,9 +56,8 @@ public class AlienRace implements Serializable {
         }
     };
 
-    public AlienRace(String name, String shipSprite, int relationToPlayer, Dialog defaultDialog) {
+    public AlienRace(String name, String shipSprite, Dialog defaultDialog) {
         this.name = name;
-        this.relationToPlayer = relationToPlayer;
         this.shipSprite = shipSprite;
         this.defaultDialog = defaultDialog;
     }
@@ -71,13 +74,12 @@ public class AlienRace implements Serializable {
         this.name = name;
     }
 
-    public int getRelationToPlayer() {
-        return relationToPlayer;
-    }
 
-    public void setRelationToPlayer(int relationToPlayer) {
-        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.relation_changed"), name, this.relationToPlayer, relationToPlayer));
-        this.relationToPlayer = relationToPlayer;
+    public void setRelation(AlienRace race, int value) {
+        if (race.getName().equals("Humanity")) {
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.relation_changed"), name, getRelation(race), value));
+        }
+        relations.put(race.getName(), value);
     }
 
     public NPCShipFactory getDefaultFactory() {
@@ -107,11 +109,17 @@ public class AlienRace implements Serializable {
         return shipSprite;
     }
 
-    public boolean isHostileTo(AlienRace other) {
-        return false;
-    }
-
-    public boolean isHostileToPlayer() {
-        return getRelationToPlayer() <= 3;
+    public int getRelation(AlienRace race) {
+        if (race == null) {
+            return 5;
+        }
+        if (race == this) {
+            return 10;
+        }
+        Integer i = relations.get(race.getName());
+        if (i == null) {
+            return 5;
+        }
+        return i;
     }
 }

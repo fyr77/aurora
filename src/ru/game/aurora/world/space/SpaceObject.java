@@ -6,6 +6,7 @@
  */
 package ru.game.aurora.world.space;
 
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
@@ -25,5 +26,7 @@ public interface SpaceObject extends GameObject, Positionable {
     /**
      * This text will be shown to a player when he is scanning this object
      */
-    public String getScanDescription();
+    public String getScanDescription(World world);
+
+    public AlienRace getRace();
 }

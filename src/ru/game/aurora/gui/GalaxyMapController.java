@@ -231,7 +231,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(false);
         world.setPaused(true);
-        EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), object.getScanDescription());
+        EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), object.getScanDescription(world));
     }
 
     public void scanPlanet(BasePlanet planet) {

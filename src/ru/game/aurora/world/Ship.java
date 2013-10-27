@@ -12,6 +12,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.space.SpaceObject;
 
@@ -24,7 +25,7 @@ public class Ship extends BasePositionable implements SpaceObject {
     public static final int MAX_ENGINEERS = 5;
     public static final int MAX_MILITARY = 5;
 
-    private static final long serialVersionUID = 4691881150467099814L;
+    private static final long serialVersionUID = 1;
 
     private int hull;
 
@@ -40,8 +41,11 @@ public class Ship extends BasePositionable implements SpaceObject {
 
     private List<StarshipWeapon> weapons = new ArrayList<StarshipWeapon>();
 
-    public Ship(int x, int y) {
+    private AlienRace humanity;
+
+    public Ship(AlienRace humanity, int x, int y) {
         super(x, y);
+        this.humanity = humanity;
         name = "Hawking";
         hull = maxHull = 5;
         weapons.add(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"), StarshipWeapon.MOUNT_ALL));
@@ -151,8 +155,13 @@ public class Ship extends BasePositionable implements SpaceObject {
     }
 
     @Override
-    public String getScanDescription() {
+    public String getScanDescription(World world) {
         return null;
+    }
+
+    @Override
+    public AlienRace getRace() {
+        return humanity;
     }
 
     public int getLostCrewMembers() {
