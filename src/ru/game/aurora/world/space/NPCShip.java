@@ -86,6 +86,10 @@ public class NPCShip extends BasePositionable implements SpaceObject {
             }
         }
 
+        if (isHostile(world.getPlayer().getShip()) && (ai == null || !(ai instanceof CombatAI))) {
+            ai = new CombatAI(world.getPlayer().getShip());
+        }
+
         if (ai != null) {
             ai.update(this, world, (StarSystem) world.getCurrentRoom());
         }

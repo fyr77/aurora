@@ -17,8 +17,8 @@ import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
-import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.World;
 
@@ -61,12 +61,14 @@ public class ResearchReportScreenController implements ScreenController {
         nextResearch.clear();
         if (research.getMakesAvailable() != null) {
             for (String researchId : research.getMakesAvailable()) {
-                nextResearch.addItem(Localization.getText("research", researchId + ".name"));
+                ResearchProjectDesc r = world.getResearchAndDevelopmentProjects().getResearchProjects().get(researchId);
+                nextResearch.addItem(r.getName());
             }
         }
         if (research.getMakesAvailableEngineering() != null) {
             for (String engineeringId : research.getMakesAvailableEngineering()) {
-                nextResearch.addItem(Localization.getText("engineering", engineeringId + ".name"));
+                EngineeringProject p = world.getResearchAndDevelopmentProjects().getEngineeringProjects().get(engineeringId);
+                nextResearch.addItem(p.getLocalizedName("engineering"));
             }
         }
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();

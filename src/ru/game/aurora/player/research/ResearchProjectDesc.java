@@ -65,7 +65,7 @@ public abstract class ResearchProjectDesc implements Serializable {
         if (makesAvailable == null) {
             makesAvailable = new LinkedList<String>();
         }
-        makesAvailable.add(desc.getName());
+        makesAvailable.add(desc.getId());
     }
 
     public void addEngineeringResult(EngineeringProject desc) {
