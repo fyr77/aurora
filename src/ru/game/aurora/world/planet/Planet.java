@@ -291,7 +291,10 @@ public class Planet extends BasePlanet implements IDungeon {
             }
             final Element shuttle_image = topMostPopup.findElementByName("shuttle_image");
 
-
+            if (shuttle_image == null) {
+                // it is possible that some other popup will be on top, e.g. listbox item list
+                return;
+            }
             final long delta = container.getTime() - AuroraGame.getLastFrameTime();
             shuttle_landing.update(delta);
             EngineUtils.setImageForGUIElement(shuttle_image, shuttle_landing.getCurrentFrame());
