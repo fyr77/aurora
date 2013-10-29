@@ -29,6 +29,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.*;
 
+@SuppressWarnings("InstanceVariableMayNotBeInitializedByReadObject")
 public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public static final Color[] possibleColors = {Color.red, Color.white, Color.yellow, new Color(122, 155, 243)};
@@ -84,7 +85,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private transient ParallaxBackground background;
 
-    private transient List<Effect> effects = new LinkedList<Effect>();
+    private transient List<Effect> effects = new LinkedList<>();
 
     /**
      * Relation between tile size and max planet size
@@ -97,12 +98,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     // size of star system. moving out of radius from the star initiates return to global map
     private int radius;
 
-    private List<SpaceObject> ships = new ArrayList<SpaceObject>();
+    private List<SpaceObject> ships = new ArrayList<>();
 
     /**
      * Variables available for quest logic
      */
-    private Map<String, Serializable> variables = new HashMap<String, Serializable>();
+    private Map<String, Serializable> variables = new HashMap<>();
 
     /**
      * How many unexplored data for Astronomy research this star system contains
@@ -150,7 +151,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             g.setColor(star.color);
             EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, (int) (camera.getTileWidth() / star.size), star.color, true);
         } else {
-            g.drawImage(star.getImage(), camera.getXCoord(tileX) - star.getImage().getWidth() / 2, camera.getYCoord(tileY) - star.getImage().getHeight() / 2);
+            g.drawImage(star.getImage(), camera.getXCoord(tileX) +(camera.getTileWidth() -  star.getImage().getWidth()) / 2, camera.getYCoord(tileY) + (camera.getTileHeight() - star.getImage().getHeight()) / 2);
         }
     }
 
@@ -655,10 +656,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public int getGlobalMapY() {
         return globalMapY;
-    }
-
-    public int getRadius() {
-        return radius;
     }
 
     public void addEffect(Effect effect) {

@@ -171,7 +171,6 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        super.draw(container, graphics, camera);
         if (background == null) {
             createBackground(world.getCamera(), tilesX, tilesY);
         }
@@ -184,6 +183,7 @@ public class GalaxyMap extends BaseSpaceRoom {
                 }
             }
         }
+        super.draw(container, graphics, camera);
     }
 
     public static double getDistance(StarSystem first, StarSystem second) {
