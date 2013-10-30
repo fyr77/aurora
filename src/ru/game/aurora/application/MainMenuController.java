@@ -7,6 +7,7 @@ import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.StoryScreen;
@@ -34,6 +35,25 @@ public class MainMenuController implements ScreenController {
     private GameContainer container;
 
     private Animation shuttle_landing;
+
+    private Animation upperEngine;
+
+    private Animation lowerEngine;
+
+    private MainMenuBackground background;
+
+    public MainMenuController(GameContainer container) {
+        this.container = container;
+        background = new MainMenuBackground(AuroraGame.tilesX * AuroraGame.tileSize, AuroraGame.tilesY * AuroraGame.tileSize);
+        upperEngine = ResourceManager.getInstance().getAnimation("menu_engine_top");
+        upperEngine.setAutoUpdate(true);
+        upperEngine.setLooping(true);
+        upperEngine.start();
+        lowerEngine = ResourceManager.getInstance().getAnimation("menu_engine_bottom");
+        lowerEngine.setAutoUpdate(true);
+        lowerEngine.setLooping(true);
+        lowerEngine.start();
+    }
 
 
     // these methods are specified in screen xml description and called using reflection
@@ -66,11 +86,9 @@ public class MainMenuController implements ScreenController {
         container.exit();
     }
 
-    public MainMenuController(GameContainer container) {
-        this.container = container;
-    }
 
     public World update(Camera camera, GameContainer container) {
+        background.update(container);
         if (generator != null) {
             if (generator.isGenerated()) {
                 final World world = generator.getWorld();
@@ -96,6 +114,16 @@ public class MainMenuController implements ScreenController {
 
 
     public void draw(Graphics graphics, Camera camera) {
+        background.draw(graphics);
+        Image shipImage = ResourceManager.getInstance().getImage("menu_ship");
+        int shipX = (int) (AuroraGame.tilesX * AuroraGame.tileSize * 0.1);
+        int shipY = (int) (AuroraGame.tilesY * AuroraGame.tileSize - shipImage.getHeight() - 100);
+        graphics.drawImage(shipImage, shipX, shipY);
+
+        graphics.drawAnimation(upperEngine, shipX - 200, shipY + 110);
+        graphics.drawAnimation(lowerEngine, shipX - 200, shipY + 200);
+
+
         if (generator != null) {
             StringBuilder sb = new StringBuilder(Localization.getText("gui", "generation.prefix")).append(" ");
             sb.append(generator.getCurrentStatus());

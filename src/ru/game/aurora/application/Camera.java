@@ -6,6 +6,7 @@
  */
 package ru.game.aurora.application;
 
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Positionable;
 
 import java.io.Serializable;
@@ -30,7 +31,7 @@ public class Camera implements Serializable {
     /**
      * Object camera is following
      */
-    private Positionable target;
+    private Positionable target = new BasePositionable(0, 0);
 
     /**
      * Number of tiles that are actually drawn
@@ -129,13 +130,11 @@ public class Camera implements Serializable {
         return tileHeight;
     }
 
-    public float getPointTileX(int x)
-    {
+    public float getPointTileX(int x) {
         return x / tileWidth;
     }
 
-    public float getPointTileY(int y)
-    {
+    public float getPointTileY(int y) {
         return y / tileHeight;
     }
 
@@ -151,7 +150,7 @@ public class Camera implements Serializable {
     }
 
     public boolean isInViewportAbs(int absX, int absY) {
-        return isInViewport((int)(absX / tileWidth), (int)(absY / tileHeight));
+        return isInViewport((int) (absX / tileWidth), (int) (absY / tileHeight));
     }
 
     public void drawBound() {

@@ -5,6 +5,11 @@
 
     <!-- backgrounds -->
     <resource type="image" id="menu_background">gui/images/main_menu_background.png</resource>
+    <resource type="image" id="menu_ship">sprites/gui/big_ship.png</resource>
+    <resource type="image" id="menu_logo">sprites/gui/logo.png</resource>
+    <resource type="animation" id="menu_engine_top" tw="200" th="128" duration="100">sprites/gui/trail_1.png</resource>
+    <resource type="animation" id="menu_engine_bottom" tw="200" th="128" duration="100">sprites/gui/trail_2.png
+    </resource>
 
     <!-- Player sprites -->
     <resource type="image" id="aurora">sprites/ships/player_ship.png</resource>

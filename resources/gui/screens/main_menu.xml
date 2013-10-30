@@ -2,28 +2,40 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
 
     <screen id="main_menu" controller="ru.game.aurora.application.MainMenuController">
-        <layer id="layer" childLayout="horizontal" backgroundImage="resources/gui/images/main_menu_background.png">
-            <panel width="10%"/>
-            <panel id="panel" width="20%" childLayout="vertical">
-                <panel height="60%"/>
-                <control id="continue_game_button" name="button" label="${gui.main_menu.continue_game}" width="100%" height="7%">
-                        <interact onClick="loadGame()" />
-                </control>
+        <layer id="layer" childLayout="horizontal">
+            <panel width="*"/>
+            <panel id="panel" width="512px" childLayout="vertical">
                 <panel height="5%"/>
-                <control id="new_game_button" name="button" label="${gui.main_menu.new_game}" width="100%" height="7%">
-                    <interact onClick="newGame()" />
-                </control>
-                <panel height="5%"/>
-                <control id="exit_game_button" name="button" label="${gui.main_menu.exit_game}" width="100%" height="7%">
-                    <interact onClick="exitGame()" />
-                </control>
-            </panel>
-            <panel width="65%"/>
-            <panel childLayout="vertical">
-                <panel height="97%"/>
-                <text id="version_text" style="base-font"/>
-            </panel>
+                <panel backgroundImage="resources/sprites/gui/logo.png" width="512px" height="256px"/>
+                <panel height="10px"/>
 
+                <panel childLayout="horizontal">
+                    <panel width="*"/>
+                    <panel width="300px" childLayout="vertical">
+                        <text id="version_text" style="base-font" width="100%" textHAlign="right"/>
+                        <panel height="5%"/>
+                        <control id="continue_game_button" name="button" label="${gui.main_menu.continue_game}"
+                                 width="100%" height="20%">
+                            <interact onClick="loadGame()"/>
+                        </control>
+                        <panel height="5%"/>
+                        <control id="new_game_button" name="button" label="${gui.main_menu.new_game}" width="100%"
+                                 height="20%">
+                            <interact onClick="newGame()"/>
+                        </control>
+                        <panel height="5%"/>
+                        <control id="exit_game_button" name="button" label="${gui.main_menu.exit_game}" width="100%"
+                                 height="20%">
+                            <interact onClick="exitGame()"/>
+                        </control>
+
+                    </panel>
+                    <panel width="30px"/>
+                </panel>
+
+                <panel height="*"/>
+            </panel>
+            <panel width="50px"/>
 
         </layer>
     </screen>
@@ -33,14 +45,16 @@
     </screen>
 
     <popup id="load_failed" childLayout="absolute">
-        <control id="load_failed_window" name="window" hideOnClose="true" title="${gui.error_caption}" width="60%" height="350px" x="20%"
+        <control id="load_failed_window" name="window" hideOnClose="true" title="${gui.error_caption}" width="60%"
+                 height="350px" x="20%"
                  y="30%">
             <panel childLayout="vertical">
                 <panel height="10px"/>
                 <panel height="256px" childLayout="horizontal">
                     <image width="256px" filename="sprites/gui/crew_death.png"/>
                     <panel width="10px"/>
-                    <text width="60%" height="256px" wrap="true" textHAlign="center" textVAlign="center" text="${gui.main_menu.save_corrupted}" style="base-font"/>
+                    <text width="60%" height="256px" wrap="true" textHAlign="center" textVAlign="center"
+                          text="${gui.main_menu.save_corrupted}" style="base-font"/>
                 </panel>
                 <panel height="10px"/>
                 <panel childLayout="horizontal" height="45px">
@@ -54,7 +68,8 @@
     </popup>
 
     <popup id="generation" childLayout="absolute">
-        <control id="generation_window" name="window" closeable="false" hideOnClose="true" width="60%" height="350px" x="20%" y="30%">
+        <control id="generation_window" name="window" closeable="false" hideOnClose="true" width="60%" height="350px"
+                 x="20%" y="30%">
             <panel childLayout="vertical" margin="10px">
                 <panel height="256px" childLayout="horizontal">
                     <image id="shuttle_image" width="256px" height="256px"/>

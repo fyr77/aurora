@@ -15,18 +15,18 @@ import ru.game.aurora.util.CollectionUtils;
 import java.util.Random;
 
 public class ParallaxBackground {
-    private static final int PLANES_COUNT = 3;
+    public static final int PLANES_COUNT = 5;
 
-    private static final int STARS_PER_PLANE = 150;
+    public static final int STARS_PER_PLANE = 100;
 
-    private static class Star {
-        public int x;
-        public int y;
+    public static class Star {
+        public float x;
+        public float y;
         public Color color;
 
-        private Star(float x, float y, Color color) {
-            this.x = (int) x;
-            this.y = (int) y;
+        public Star(float x, float y, Color color) {
+            this.x = x;
+            this.y = y;
             this.color = color;
         }
     }
@@ -72,8 +72,8 @@ public class ParallaxBackground {
         for (int i = 0; i < PLANES_COUNT; ++i) {
             for (int j = 0; j < starsPerPlane; ++j) {
                 Star s = stars[i][j];
-                int realX = (int) getXCoordPoint(camera, s.x, i);
-                int realY = (int) getYCoordPoint(camera, s.y, i);
+                int realX = (int) getXCoordPoint(camera, (int) s.x, i);
+                int realY = (int) getYCoordPoint(camera, (int) s.y, i);
 
                 graphics.setColor(s.color);
 
