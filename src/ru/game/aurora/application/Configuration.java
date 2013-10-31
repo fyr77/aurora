@@ -1,6 +1,8 @@
 package ru.game.aurora.application;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -11,22 +13,48 @@ import java.util.Properties;
  * Time: 15:11
  */
 public class Configuration {
-    private static Properties properties;
+    /**
+     * Properties of game world like galaxy size
+     */
+    private static Properties worldProperties;
+
+    /**
+     * System properties like screen resolution
+     */
+    private static Properties systemProperties;
 
     public static void init() throws IOException {
-        properties = new Properties();
-        properties.load(new FileInputStream("resources/game.properties"));
+        worldProperties = new Properties();
+        worldProperties.load(new FileInputStream("resources/game.properties"));
+
+        systemProperties = new Properties();
+        File systemPropsFile = new File("system.properties");
+        if (systemPropsFile.exists()) {
+            systemProperties.load(new FileInputStream(systemPropsFile));
+        }
     }
 
     public static int getIntProperty(String key) {
-        return Integer.parseInt(properties.getProperty(key));
+        return Integer.parseInt(worldProperties.getProperty(key));
     }
 
     public static double getDoubleProperty(String key) {
-        return Double.parseDouble(properties.getProperty(key));
+        return Double.parseDouble(worldProperties.getProperty(key));
     }
 
-    public static Properties getProperties() {
-        return properties;
+    public static Properties getWorldProperties() {
+        return worldProperties;
+    }
+
+    public static Properties getSystemProperties() {
+        return systemProperties;
+    }
+
+    public static void saveSystemProperties() {
+        try (FileOutputStream fos = new FileOutputStream("system.properties")) {
+            systemProperties.store(fos, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

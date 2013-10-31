@@ -24,6 +24,12 @@
                             <interact onClick="newGame()"/>
                         </control>
                         <panel height="5%"/>
+                        <control id="settings_button" name="button" label="${gui.main_menu.settings}" width="100%"
+                                 height="20%">
+                            <interact onClick="openSettings()"/>
+                        </control>
+
+                        <panel height="5%"/>
                         <control id="exit_game_button" name="button" label="${gui.main_menu.exit_game}" width="100%"
                                  height="20%">
                             <interact onClick="exitGame()"/>

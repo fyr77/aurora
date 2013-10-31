@@ -13,6 +13,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.SettingsScreenController;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
 
@@ -27,32 +28,48 @@ import java.util.logging.Logger;
 
 public class AuroraGame extends NiftyOverlayGame {
 
-    private World world;
+    private static World world;
 
     private MainMenuController mainMenu;
 
     public static final int tileSize = 64;
 
-    public static final int tilesX = 20;
+    public static int tilesX = 20;
 
-    public static final int tilesY = 15;
+    public static int tilesY = 15;
 
-    final Camera camera = new Camera(0, 0, tilesX, tilesY, tileSize, tileSize);
+    private static Camera camera = new Camera(0, 0, tilesX, tilesY, tileSize, tileSize);
 
     private static long lastFrameTime;
 
-    public AuroraGame() {
+    private static AppGameContainer app;
 
+    public AuroraGame() {
     }
 
+    public static void changeResolution(int newTilesX, int newTilesY)
+    {
+        tilesX = newTilesX;
+        tilesY = newTilesY;
+        Camera oldCam = camera;
+        camera = new Camera(0, 0, tilesX, tilesY, tileSize, tileSize);
+        camera.setTarget(oldCam.getTarget());
+
+        if (world != null) {
+            world.setCamera(camera);
+        }
+
+        try {
+            app.setDisplayMode(newTilesX * tileSize, newTilesY * tileSize, false);
+            GUI.getInstance().getNifty().resolutionChanged();
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
-        try {
-            Configuration.init();
-        } catch (IOException e) {
-            throw new SlickException("Failed to load game properties", e);
-        }
+
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
         gameContainer.getInput().enableKeyRepeat();
         gameContainer.setTargetFrameRate(60);
@@ -161,13 +178,28 @@ public class AuroraGame extends NiftyOverlayGame {
         System.out.println("Setting native lib dir to " + nativePath);
         addDir(nativePath);
 
+        try {
+            Configuration.init();
+        } catch (IOException e) {
+            throw new SlickException("Failed to load game properties", e);
+        }
+
         if (args.length != 0) {
             Localization.init(Locale.forLanguageTag(args[0]));
         } else {
             Localization.init(Locale.getDefault());
         }
-        AppGameContainer app = new AppGameContainer(new AuroraGame());
-        app.setDisplayMode(tilesX * tileSize, tilesY * tileSize, false);
+        app = new AppGameContainer(new AuroraGame());
+        SettingsScreenController.Resolution res;
+        String resolutionString = Configuration.getSystemProperties().getProperty("screen.resolution");
+        if (resolutionString != null) {
+             res = new SettingsScreenController.Resolution(resolutionString);
+        } else {
+            res = new SettingsScreenController.Resolution(1280, 960);
+        }
+        app.setDisplayMode(res.getWidth(), res.getHeight(), false);
+        tilesX = res.getTilesX();
+        tilesY = res.getTilesY();
         app.start();
     }
 

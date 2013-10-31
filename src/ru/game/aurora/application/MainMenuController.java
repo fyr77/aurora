@@ -44,7 +44,6 @@ public class MainMenuController implements ScreenController {
 
     public MainMenuController(GameContainer container) {
         this.container = container;
-        background = new MainMenuBackground(AuroraGame.tilesX * AuroraGame.tileSize, AuroraGame.tilesY * AuroraGame.tileSize);
         upperEngine = ResourceManager.getInstance().getAnimation("menu_engine_top");
         upperEngine.setAutoUpdate(true);
         upperEngine.setLooping(true);
@@ -84,6 +83,11 @@ public class MainMenuController implements ScreenController {
 
     public void exitGame() {
         container.exit();
+    }
+
+    public void openSettings() {
+        GUI.getInstance().pushCurrentScreen();
+        GUI.getInstance().getNifty().gotoScreen("settings_screen");
     }
 
 
@@ -147,6 +151,7 @@ public class MainMenuController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        background = new MainMenuBackground(AuroraGame.tilesX * AuroraGame.tileSize, AuroraGame.tilesY * AuroraGame.tileSize);
         boolean saveAvailable = SaveGameManager.isSaveAvailable();
 
         if (!saveAvailable) {
