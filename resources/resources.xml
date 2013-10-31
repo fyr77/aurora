@@ -4,7 +4,6 @@
     <resource type="image" id="no_image">sprites/no_image.png</resource>
 
     <!-- backgrounds -->
-    <resource type="image" id="menu_background">gui/images/main_menu_background.png</resource>
     <resource type="image" id="menu_ship">sprites/gui/big_ship.png</resource>
     <resource type="image" id="menu_logo">sprites/gui/logo.png</resource>
     <resource type="animation" id="menu_engine_top" tw="200" th="128" duration="100">sprites/gui/trail_1.png</resource>
@@ -188,6 +187,7 @@
     <!-- effects -->
     <resource type="image" id="blaster_shot">sprites/effects/blaster_shot.png</resource>
     <resource type="image" id="plasma_shot">sprites/effects/plasma_shot.png</resource>
+    <resource type="image" id="bullet_shot">sprites/effects/bullet_shot.png</resource>
     <resource type="animation" id="ship_explosion" tw="64" th="64" duration="100">sprites/effects/explosion.png
     </resource>
     <resource type="animation" id="big_mommy" tw="64" th="64" duration="400">sprites/effects/big_mommy.png</resource>

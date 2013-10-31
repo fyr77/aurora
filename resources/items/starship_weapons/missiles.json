@@ -3,7 +3,7 @@
     "damage" : 2,
     "name": "missiles.name",
     "desc": "missiles.desc",
-    "shotSprite" : "blaster_shot",
+    "shotSprite" : "missile_shot",
     "range" : 5,
     "image" : "ship_rocket",
     "reloadTurns" : 5

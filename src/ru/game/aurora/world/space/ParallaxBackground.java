@@ -23,11 +23,13 @@ public class ParallaxBackground {
         public float x;
         public float y;
         public Color color;
+        public int baseSize;
 
-        public Star(float x, float y, Color color) {
+        public Star(float x, float y, Color color, int baseSize) {
             this.x = x;
             this.y = y;
             this.color = color;
+            this.baseSize = baseSize;
         }
     }
 
@@ -50,7 +52,7 @@ public class ParallaxBackground {
         stars = new Star[PLANES_COUNT][starsPerPlane];
         for (int i = 0; i < PLANES_COUNT; ++i) {
             for (int j = 0; j < starsPerPlane; ++j) {
-                stars[i][j] = new Star(r.nextFloat() * 2 * width - centerX - width, r.nextFloat() * 2 * height - centerY - height, CollectionUtils.selectRandomElement(StarSystem.possibleColors));
+                stars[i][j] = new Star(r.nextFloat() * 2 * width - centerX - width, r.nextFloat() * 2 * height - centerY - height, CollectionUtils.selectRandomElement(StarSystem.possibleColors), r.nextInt((int) baseWidth) + 1);
             }
         }
     }
@@ -77,11 +79,7 @@ public class ParallaxBackground {
 
                 graphics.setColor(s.color);
 
-                float diameter = 2 * (float) Math.ceil(baseWidth / (2 * i + 1));
-             /*   if (diameter < 4.0f) {
-                    // jgame does not draw oval with diameter smaller than 3
-                    diameter = 4.0f;
-                }*/
+                float diameter = Math.max(1, 2 * (float) Math.ceil(s.baseSize / (2 * i + 1)));
 
                 if (realX < -diameter || realY < -diameter || realX > camera.getTileWidth() * camera.getNumTilesX() || realY > camera.getTileHeight() * camera.getNumTilesY()) {
                     continue;

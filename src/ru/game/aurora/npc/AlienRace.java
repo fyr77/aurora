@@ -109,6 +109,10 @@ public class AlienRace implements Serializable {
         return shipSprite;
     }
 
+    public void setDefaultFactory(NPCShipFactory defaultFactory) {
+        this.defaultFactory = defaultFactory;
+    }
+
     public int getRelation(AlienRace race) {
         if (race == null) {
             return 5;

@@ -1,10 +1,14 @@
 package ru.game.aurora.world.generation.aliens;
 
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.space.NPCShip;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,6 +23,18 @@ public class SwarmGenerator implements WorldGeneratorPart {
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/encounters/swarm_first_dialog.json"));
         final AlienRace swarmRace = new AlienRace("Swarm", "swarm_ship", mainDialog);
+
+        swarmRace.setDefaultFactory(new NPCShipFactory() {
+            @Override
+            public NPCShip createShip() {
+                NPCShip ship = new NPCShip(0, 0, "swarm_ship", swarmRace, null, "Swarm ship");
+                ship.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("simple_cannon"), StarshipWeapon.MOUNT_ALL));
+                ship.setHp(3);
+                return ship;
+            }
+        });
+
+
         mainDialog.setListener(new DialogListener() {
             @Override
             public void onDialogEnded(World world, int returnCode) {

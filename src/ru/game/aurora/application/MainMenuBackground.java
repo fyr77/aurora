@@ -6,6 +6,8 @@ import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.space.ParallaxBackground;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.Random;
+
 /**
  * Created with IntelliJ IDEA.
  * User: User
@@ -23,9 +25,11 @@ public class MainMenuBackground {
     public MainMenuBackground(int width, int height) {
         this.width = width;
         stars = new ParallaxBackground.Star[ParallaxBackground.PLANES_COUNT][ParallaxBackground.STARS_PER_PLANE];
+        final Random random = CommonRandom.getRandom();
+
         for (int i = 0; i < ParallaxBackground.PLANES_COUNT; ++i) {
             for (int j = 0; j < ParallaxBackground.STARS_PER_PLANE; ++j) {
-                stars[i][j] = new ParallaxBackground.Star(CommonRandom.getRandom().nextInt(width), CommonRandom.getRandom().nextInt(height), CollectionUtils.selectRandomElement(StarSystem.possibleColors));
+                stars[i][j] = new ParallaxBackground.Star(random.nextInt(width), random.nextInt(height), CollectionUtils.selectRandomElement(StarSystem.possibleColors), random.nextInt(3) + 1);
             }
         }
     }
@@ -50,7 +54,7 @@ public class MainMenuBackground {
             for (int j = 0; j < ParallaxBackground.STARS_PER_PLANE; ++j) {
                 final ParallaxBackground.Star s = stars[i][j];
                 graphics.setColor(s.color);
-                float diameter = Math.max(1, 2 * (float) Math.ceil(3 / (2 * i + 1)));
+                float diameter = Math.max(1, 2 * (float) Math.ceil(s.baseSize / (2 * i + 1)));
                 graphics.fillOval(s.x, s.y, diameter, diameter);
             }
         }

@@ -118,10 +118,10 @@ public class MainMenuController implements ScreenController {
         Image shipImage = ResourceManager.getInstance().getImage("menu_ship");
         int shipX = (int) (AuroraGame.tilesX * AuroraGame.tileSize * 0.1);
         int shipY = (int) (AuroraGame.tilesY * AuroraGame.tileSize - shipImage.getHeight() - 100);
+        graphics.drawAnimation(upperEngine, shipX - 195, shipY + 110);
+        graphics.drawAnimation(lowerEngine, shipX - 195, shipY + 200);
         graphics.drawImage(shipImage, shipX, shipY);
 
-        graphics.drawAnimation(upperEngine, shipX - 200, shipY + 110);
-        graphics.drawAnimation(lowerEngine, shipX - 200, shipY + 200);
 
 
         if (generator != null) {

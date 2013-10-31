@@ -21,9 +21,9 @@ import java.util.List;
 
 public class Ship extends BasePositionable implements SpaceObject {
 
-    public static final int MAX_SCIENTISTS = 10;
-    public static final int MAX_ENGINEERS = 5;
-    public static final int MAX_MILITARY = 5;
+    public static final int MAX_SCIENTISTS = 20;
+    public static final int MAX_ENGINEERS = 10;
+    public static final int MAX_MILITARY = 15;
 
     private static final long serialVersionUID = 1;
 
@@ -47,7 +47,7 @@ public class Ship extends BasePositionable implements SpaceObject {
         super(x, y);
         this.humanity = humanity;
         name = "Hawking";
-        hull = maxHull = 5;
+        hull = maxHull = 10;
         weapons.add(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"), StarshipWeapon.MOUNT_ALL));
     }
 

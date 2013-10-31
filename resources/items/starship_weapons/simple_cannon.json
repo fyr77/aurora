@@ -1,0 +1,10 @@
+{
+    "id" : "simple_cannon",
+    "damage" : 1,
+    "name": "simple_cannon.name",
+    "desc": "simple_cannon.desc",
+    "shotSprite" : "bullet_shot",
+    "range" : 2,
+    "image" : "ship_laser",
+    "reloadTurns" : 2
+}

@@ -174,7 +174,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.attack")
                 , getName()
                 , target.getName()
-                , weaponDesc.name
+                , Localization.getText("weapons", weaponDesc.name)
                 , weaponDesc.damage
         ));
         target.onAttack(world, this, weaponDesc.damage);

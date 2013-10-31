@@ -77,6 +77,7 @@ public class EnterpriseEncounterCreator extends GameEventListener {
         captainDialog.setListener(new EnterpriseDialogListener());
 
         NPCShip enterprise = new NPCShip(0, 0, "aurora", world.getRaces().get("Humanity"), new NPC(captainDialog), "UNS Enterprise");
+        enterprise.setHp(10);
 
         world.addListener(new SingleShipEvent(0.9, enterprise));
 
