@@ -6,6 +6,10 @@
     <!-- backgrounds -->
     <resource type="image" id="menu_ship">sprites/gui/big_ship.png</resource>
     <resource type="image" id="menu_logo">sprites/gui/logo.png</resource>
+    <resource type="image" id="stars_s0">sprites/space_objects/s0.png</resource>
+    <resource type="image" id="stars_s1">sprites/space_objects/s1.png</resource>
+    <resource type="image" id="stars_s2">sprites/space_objects/s2.png</resource>
+    <resource type="image" id="stars_s3">sprites/space_objects/s3.png</resource>
     <resource type="animation" id="menu_engine_top" tw="200" th="128" duration="100">sprites/gui/trail_1.png</resource>
     <resource type="animation" id="menu_engine_bottom" tw="200" th="128" duration="100">sprites/gui/trail_2.png
     </resource>
