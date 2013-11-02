@@ -163,9 +163,6 @@ public class Planet extends BasePlanet implements IDungeon {
                     if (surface == null) {
                         createSurface();
                     }
-                    nifty.closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
-                    nifty.gotoScreen("surface_gui");
-
 
                 } catch (Exception e) {
                     System.err.println("Failed to enter planet");
@@ -193,6 +190,8 @@ public class Planet extends BasePlanet implements IDungeon {
     public void update(GameContainer container, World world) {
         if (surfaceGenerationFuture != null) {
             if (surfaceGenerationFuture.isDone()) {
+                GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+                GUI.getInstance().getNifty().gotoScreen("surface_gui");
                 landingParty = world.getPlayer().getLandingParty();
                 if (landingParty == null) {
                     landingParty = new LandingParty();

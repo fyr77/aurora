@@ -64,7 +64,6 @@ public class MainMenuController implements ScreenController {
             nifty.showPopup(nifty.getScreen("main_menu"), popup.getId(), null);
         }
         GUI.getInstance().onWorldLoaded(container, loadedState);
-        nifty.gotoScreen("empty_screen");
         loadedState.getCurrentRoom().enter(loadedState);
 
     }
@@ -125,7 +124,6 @@ public class MainMenuController implements ScreenController {
         graphics.drawAnimation(upperEngine, shipX - 195, shipY + 110);
         graphics.drawAnimation(lowerEngine, shipX - 195, shipY + 200);
         graphics.drawImage(shipImage, shipX, shipY);
-
 
 
         if (generator != null) {
