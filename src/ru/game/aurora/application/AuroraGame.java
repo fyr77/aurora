@@ -47,8 +47,7 @@ public class AuroraGame extends NiftyOverlayGame {
     public AuroraGame() {
     }
 
-    public static void changeResolution(int newTilesX, int newTilesY)
-    {
+    public static void changeResolution(int newTilesX, int newTilesY, boolean fullScreen) {
         tilesX = newTilesX;
         tilesY = newTilesY;
         Camera oldCam = camera;
@@ -60,11 +59,27 @@ public class AuroraGame extends NiftyOverlayGame {
         }
 
         try {
-            app.setDisplayMode(newTilesX * tileSize, newTilesY * tileSize, false);
+            app.setDisplayMode(newTilesX * tileSize, newTilesY * tileSize, fullScreen);
             GUI.getInstance().getNifty().resolutionChanged();
         } catch (SlickException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void setFullScreen(boolean fullScreen) {
+        if (fullScreen == app.isFullscreen()) {
+            return;
+        }
+
+        try {
+            app.setFullscreen(fullScreen);
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean isFullScreen() {
+        return app.isFullscreen();
     }
 
     @Override
@@ -193,11 +208,12 @@ public class AuroraGame extends NiftyOverlayGame {
         SettingsScreenController.Resolution res;
         String resolutionString = Configuration.getSystemProperties().getProperty("screen.resolution");
         if (resolutionString != null) {
-             res = new SettingsScreenController.Resolution(resolutionString);
+            res = new SettingsScreenController.Resolution(resolutionString);
         } else {
             res = new SettingsScreenController.Resolution(1280, 960);
         }
-        app.setDisplayMode(res.getWidth(), res.getHeight(), false);
+        final boolean fullScreen = Boolean.parseBoolean(Configuration.getSystemProperties().getProperty("screen.full_screen", "false"));
+        app.setDisplayMode(res.getWidth(), res.getHeight(), fullScreen);
         tilesX = res.getTilesX();
         tilesY = res.getTilesY();
         app.start();

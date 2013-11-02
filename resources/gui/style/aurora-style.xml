@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty-styles>
-  <useStyles filename="gui/style/fonts.xml" />
-  <useStyles filename="gui/style/panel/aurora-panel.xml" />
-  <useStyles filename="gui/style/button/aurora-button.xml" />
-  <useStyles filename="gui/style/label/aurora-label.xml" />
-  <useStyles filename="gui/style/dropdown/aurora-drop-down.xml" />
-  <useStyles filename="gui/style/scrollbar/aurora-scrollbar-style.xml" />
-  <useStyles filename="gui/style/slider/aurora-slider-style.xml" />
-  <useStyles filename="gui/style/scrollpanel/aurora-scrollpanel-style.xml" />
-  <useStyles filename="gui/style/listbox/aurora-listbox-style.xml" />
-  <useStyles filename="gui/style/window/aurora-window.xml" />
-  <useStyles filename="gui/style/tabs/aurora-tabs.xml" />
+    <useStyles filename="gui/style/fonts.xml"/>
+    <useStyles filename="gui/style/panel/aurora-panel.xml"/>
+    <useStyles filename="gui/style/button/aurora-button.xml"/>
+    <useStyles filename="gui/style/label/aurora-label.xml"/>
+    <useStyles filename="gui/style/dropdown/aurora-drop-down.xml"/>
+    <useStyles filename="gui/style/scrollbar/aurora-scrollbar-style.xml"/>
+    <useStyles filename="gui/style/slider/aurora-slider-style.xml"/>
+    <useStyles filename="gui/style/scrollpanel/aurora-scrollpanel-style.xml"/>
+    <useStyles filename="gui/style/listbox/aurora-listbox-style.xml"/>
+    <useStyles filename="gui/style/window/aurora-window.xml"/>
+    <useStyles filename="gui/style/tabs/aurora-tabs.xml"/>
+    <useStyles filename="gui/style/checkbox/aurora-checkbox.xml"/>
 </nifty-styles>

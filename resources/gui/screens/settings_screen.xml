@@ -1,10 +1,19 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
     <screen id="settings_screen" controller="ru.game.aurora.gui.SettingsScreenController">
         <layer childLayout="absolute">
-            <control id="settings_window" name="window" closeable="false" title="${gui.settings.title}" width="80%" height="80%" x="10%" y="10%">
+            <control id="settings_window" name="window" closeable="false" title="${gui.settings.title}" width="80%"
+                     height="80%" x="10%" y="10%">
                 <panel childLayout="vertical">
-                    <text style="base-font" wrap="true" text="${gui.settings.resolution}" width="60%" textHAlign="left" />
+                    <text style="base-font" wrap="true" text="${gui.settings.resolution}" width="60%"
+                          textHAlign="left"/>
+                    <panel height="10px"/>
                     <control id="resolution_select" name="dropDown"/>
+                    <panel height="10px"/>
+                    <panel childLayout="horizontal">
+                        <text style="base-font" text="${gui.settings.fullscreen}"/>
+                        <panel width="10px"/>
+                        <control id="fullscreen" name="checkbox" checked="false"/>
+                    </panel>
                     <panel height="*"/>
                     <panel childLayout="horizontal" height="50px">
                         <panel width="*"/>
