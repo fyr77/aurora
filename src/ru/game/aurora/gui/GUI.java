@@ -60,7 +60,6 @@ public class GUI {
             realFont.loadGlyphs();
 
         } catch (NoSuchFieldException | SlickException | IllegalAccessException e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
 

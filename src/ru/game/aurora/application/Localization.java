@@ -7,12 +7,17 @@
 package ru.game.aurora.application;
 
 import de.lessvoid.nifty.Nifty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 
 public class Localization {
+
+    private static final Logger logger = LoggerFactory.getLogger(Localization.class);
+
     private static Locale currentLocale;
 
     private static String[] supportedLocales = {"ru", "en"};
@@ -21,12 +26,12 @@ public class Localization {
         for (String s : supportedLocales) {
             if (locale.getLanguage().contains(s)) {
                 currentLocale = locale;
-                System.out.println("Using locale " + locale.getLanguage());
+                logger.info("Using locale " + locale.getLanguage());
                 return;
             }
         }
 
-        System.out.println("Locale " + locale.getLanguage() + " is not supported, defaulting to en");
+        logger.warn("Locale " + locale.getLanguage() + " is not supported, defaulting to en");
         currentLocale = Locale.ENGLISH;
     }
 
@@ -37,6 +42,7 @@ public class Localization {
     public static String getText(String bundleId, String textId) {
         ResourceBundle bundle = ResourceBundle.getBundle(getBundleName(bundleId), currentLocale, new UTF8Control());
         if (!bundle.containsKey(textId)) {
+            logger.warn("Localization key {}:{} not found", bundleId, textId);
             return "<" + bundleId + "/" + textId + ">";
         }
         return bundle.getString(textId);

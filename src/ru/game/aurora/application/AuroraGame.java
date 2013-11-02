@@ -12,6 +12,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.SettingsScreenController;
 import ru.game.aurora.world.World;
@@ -27,6 +28,8 @@ import java.util.logging.Logger;
 
 
 public class AuroraGame extends NiftyOverlayGame {
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AuroraGame.class);
 
     private static World world;
 
@@ -62,7 +65,7 @@ public class AuroraGame extends NiftyOverlayGame {
             app.setDisplayMode(newTilesX * tileSize, newTilesY * tileSize, fullScreen);
             GUI.getInstance().getNifty().resolutionChanged();
         } catch (SlickException e) {
-            e.printStackTrace();
+            logger.error("Failed to change display mode", e);
         }
     }
 
@@ -74,7 +77,7 @@ public class AuroraGame extends NiftyOverlayGame {
         try {
             app.setFullscreen(fullScreen);
         } catch (SlickException e) {
-            e.printStackTrace();
+            logger.error("Failed to set fullscreen to " + fullScreen, e);
         }
     }
 
@@ -177,7 +180,7 @@ public class AuroraGame extends NiftyOverlayGame {
     public static void main(String[] args) throws SlickException, IOException {
         Logger.getLogger("de.lessvoid.nifty").setLevel(Level.WARNING);
 
-        System.out.println("Aurora game version " + Version.VERSION + " started");
+        logger.info("Aurora game version " + Version.VERSION + " started");
         final String osName = System.getProperty("os.name");
         String nativePath;
         if (osName.contains("Windows")) {
@@ -187,10 +190,10 @@ public class AuroraGame extends NiftyOverlayGame {
         } else if (osName.contains("Mac")) {
             nativePath = "native/macosx";
         } else {
-            System.err.println("Unsupported os " + osName + ", lwjgl has no native libraries for it");
+            logger.error("Unsupported os " + osName + ", lwjgl has no native libraries for it");
             throw new RuntimeException("Unsupported os " + osName + ", lwjgl has no native libraries for it");
         }
-        System.out.println("Setting native lib dir to " + nativePath);
+        logger.info("Setting native lib dir to " + nativePath);
         addDir(nativePath);
 
         try {

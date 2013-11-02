@@ -1,5 +1,8 @@
 package ru.game.aurora.application;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,6 +16,8 @@ import java.util.Properties;
  * Time: 15:11
  */
 public class Configuration {
+
+    private static final Logger logger = LoggerFactory.getLogger(Configuration.class);
     /**
      * Properties of game world like galaxy size
      */
@@ -54,7 +59,7 @@ public class Configuration {
         try (FileOutputStream fos = new FileOutputStream("system.properties")) {
             systemProperties.store(fos, null);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to save system.properties", e);
         }
     }
 }

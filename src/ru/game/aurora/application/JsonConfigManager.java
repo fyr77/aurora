@@ -7,6 +7,8 @@
 package ru.game.aurora.application;
 
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileReader;
@@ -17,6 +19,9 @@ import java.util.Map;
  * Class that loads all entities stored in json format in given order
  */
 public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
+
+    private static final Logger logger = LoggerFactory.getLogger(JsonConfigManager.class);
+
     public static interface EntityWithId {
         public String getId();
     }
@@ -47,8 +52,7 @@ public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
             T entity = gson.fromJson(reader, entityClass);
             entities.put(entity.getId(), entity);
         } catch (Exception e) {
-            System.err.println("Failed to read entity from " + f.getPath());
-            e.printStackTrace();
+            logger.error("Failed to read entity from " + f.getPath(), e);
         }
     }
 

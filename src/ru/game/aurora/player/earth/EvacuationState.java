@@ -78,8 +78,7 @@ public class EvacuationState implements Serializable {
         return world.getTurnCount() >= turnObliteratorArrives;
     }
 
-    public void showEndGameScreen(World world)
-    {
+    public void showEndGameScreen(World world) {
 
         StoryScreen ss;
 
@@ -135,7 +134,6 @@ public class EvacuationState implements Serializable {
         }
 
         if (suitableStarSystems.isEmpty()) {
-            System.err.println("Fatal error, no suitable star system found for main quest");
             throw new IllegalStateException("No suitable star system for humanity evacuation");
         }
         // now sort suitable systems based on their distance to Earth and select the closest one

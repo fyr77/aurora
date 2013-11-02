@@ -48,7 +48,7 @@ public class StoryScreen implements Serializable {
         try {
             reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

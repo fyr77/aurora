@@ -1,5 +1,7 @@
 package ru.game.aurora.world.planet.nature;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.frankenstein.Slick2DFrankensteinImage;
 import ru.game.aurora.frankenstein.Slick2DImageFactory;
 import ru.game.frankenstein.*;
@@ -15,6 +17,7 @@ import java.util.HashSet;
  * Generates random alien animals
  */
 public class AnimalGenerator {
+    private static final Logger logger = LoggerFactory.getLogger(AnimalGenerator.class);
 
     private MonsterGenerator monsterGenerator;
 
@@ -56,8 +59,7 @@ public class AnimalGenerator {
             Monster monster = monsterGenerator.generateMonster(monsterGenerationParams);
             desc.setImages(((Slick2DFrankensteinImage) monster.monsterImage).getImpl(), ((Slick2DFrankensteinImage) monster.deadImage).getImpl());
         } catch (FrankensteinException e) {
-            System.err.println("Failed to generate monster image");
-            e.printStackTrace();
+            logger.error("Failed to generate monster image", e);
         }
     }
 
@@ -68,8 +70,7 @@ public class AnimalGenerator {
             plantGenerationParams.colorMap = desc.getMyFlora().getColorMap();
             desc.setImage(((Slick2DFrankensteinImage) plantGenerator.generateMonster(plantGenerationParams).monsterImage).getImpl());
         } catch (FrankensteinException e) {
-            System.err.println("Failed to generate plant image");
-            e.printStackTrace();
+            logger.error("Failed to generate plant image", e);
         }
     }
 

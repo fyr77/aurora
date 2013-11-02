@@ -11,6 +11,8 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
@@ -32,6 +34,8 @@ import java.util.concurrent.Future;
  * Contains Room - planet surface, with logic for landing party movement.
  */
 public class Planet extends BasePlanet implements IDungeon {
+    private static final Logger logger = LoggerFactory.getLogger(Planet.class);
+
     private static final long serialVersionUID = 3L;
 
     private SurfaceTileMap surface = null;
@@ -99,7 +103,7 @@ public class Planet extends BasePlanet implements IDungeon {
         }
 
         surface = new SurfaceTileMap(width, height, LandscapeGenerator.generateLandscapePerlin(category, width, height));
-        System.out.println("Generated landscape in " + (System.currentTimeMillis() - start));
+        logger.info("Generated landscape in " + (System.currentTimeMillis() - start));
 
         createOreDeposits(size, r);
 
@@ -165,8 +169,7 @@ public class Planet extends BasePlanet implements IDungeon {
                     }
 
                 } catch (Exception e) {
-                    System.err.println("Failed to enter planet");
-                    e.printStackTrace();
+                    logger.error("Failed to generate surface for planet", e);
                 }
             }
         });

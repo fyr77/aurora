@@ -13,6 +13,8 @@ import libnoiseforjava.util.NoiseMap;
 import libnoiseforjava.util.RendererImage;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.ImageBuffer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.util.CollectionUtils;
@@ -34,6 +36,9 @@ import java.util.Map;
  * Uses Perlin noise and libnoise library
  */
 public class PlanetSpriteGenerator {
+
+    private static final Logger logger = LoggerFactory.getLogger(PlanetSpriteGenerator.class);
+
     private static final class PlanetSpriteParameters {
 
         public final boolean hasAtmosphere;
@@ -280,7 +285,7 @@ public class PlanetSpriteGenerator {
                 return EngineUtils.createImage(result);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error("Failed to create sprite for planet", ex);
         }
         return null;
     }

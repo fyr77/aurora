@@ -5,6 +5,8 @@
  */
 package ru.game.aurora.application;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.world.World;
 
 import java.io.File;
@@ -13,6 +15,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class SaveGameManager {
+    private static final Logger logger = LoggerFactory.getLogger(SaveGameManager.class);
+
     private static final String SAVE_NAME = "save.bin";
 
     public static void saveGame(World world) {
@@ -21,8 +25,7 @@ public class SaveGameManager {
             oos.writeObject(world);
             oos.close();
         } catch (Exception ex) {
-            System.err.println("Failed to save game");
-            ex.printStackTrace();
+            logger.error("Failed to save game", ex);
         }
     }
 
@@ -38,8 +41,7 @@ public class SaveGameManager {
 
             return rz;
         } catch (Exception e) {
-            System.err.println("Failed to load game");
-            e.printStackTrace();
+            logger.error("Failed to load game", e);
         }
         return null;
     }

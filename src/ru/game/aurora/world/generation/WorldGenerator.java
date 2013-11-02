@@ -7,6 +7,8 @@
 package ru.game.aurora.world.generation;
 
 import org.newdawn.slick.Color;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GlobalThreadPool;
@@ -37,6 +39,8 @@ import java.util.concurrent.Future;
  * Generates world in separate thread
  */
 public class WorldGenerator implements Runnable {
+    private static final Logger logger = LoggerFactory.getLogger(WorldGenerator.class);
+
     private String currentStatus = "Initializing";
 
     public static final PlanetCategory[] satelliteCategories = {PlanetCategory.PLANET_ROCK, PlanetCategory.PLANET_ICE};
@@ -99,8 +103,7 @@ public class WorldGenerator implements Runnable {
                             world.getGalaxyMap().setTileAt(x, y, idx);
                         }
                     } catch (Throwable t) {
-                        System.err.println("Failed to generate world");
-                        t.printStackTrace();
+                        logger.error("Failed to generate world", t);
                     }
                 }
             }));

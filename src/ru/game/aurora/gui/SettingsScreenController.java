@@ -8,6 +8,8 @@ import de.lessvoid.nifty.screen.ScreenController;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Configuration;
 
@@ -25,7 +27,7 @@ public class SettingsScreenController implements ScreenController {
 
     private CheckBox fullScreen;
 
-    private boolean oldFullScreen;
+    private static final Logger logger = LoggerFactory.getLogger(SettingsScreenController.class);
 
     public static final class Resolution {
         private int width;
@@ -92,7 +94,7 @@ public class SettingsScreenController implements ScreenController {
                 resolutionset.add(mode.getWidth() * mode.getHeight());
             }
         } catch (LWJGLException e) {
-            e.printStackTrace();
+            logger.error("Failed to get list of display modes", e);
             return;
         }
 

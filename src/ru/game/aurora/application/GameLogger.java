@@ -5,10 +5,15 @@
  */
 package ru.game.aurora.application;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameLogger {
+
+    private static final Logger logger = LoggerFactory.getLogger(GameLogger.class);
 
     public static final int MAX_LOG_ENTRIES = 50;
 
@@ -22,32 +27,27 @@ public class GameLogger {
         return instance;
     }
 
-    public GameLogger()
-    {
+    public GameLogger() {
         appenders.add(new ConsoleAppender());
     }
 
-    public static interface LoggerAppender
-    {
+    public static interface LoggerAppender {
         public void logMessage(String message);
     }
 
-    public static final class ConsoleAppender implements LoggerAppender
-    {
+    public static final class ConsoleAppender implements LoggerAppender {
 
         @Override
         public void logMessage(String message) {
-            System.out.println(message);
+            logger.info(message);
         }
     }
 
-    public void addAppender(LoggerAppender appender)
-    {
+    public void addAppender(LoggerAppender appender) {
         appenders.add(appender);
     }
 
-    public void logMessage(String message)
-    {
+    public void logMessage(String message) {
         if (logItems.size() > MAX_LOG_ENTRIES) {
             logItems.remove(0);
         }

@@ -16,6 +16,7 @@
     <orderEntry type="library" name="nifty" level="project" />
     <orderEntry type="library" name="frankenstein-core" level="project" />
     <orderEntry type="library" name="rlforj.0.3" level="project" />
+    <orderEntry type="library" name="slf4j-logback" level="project" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">

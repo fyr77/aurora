@@ -37,7 +37,6 @@ public class IngameMenuController implements Controller {
 
     @Override
     public boolean inputEvent(NiftyInputEvent inputEvent) {
-        System.out.println("input event" + inputEvent);
         return true;
     }
 

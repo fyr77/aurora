@@ -1,5 +1,8 @@
 package ru.game.aurora.world.generation;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,6 +16,8 @@ import java.util.List;
  * Time: 17:17
  */
 public class StarSystemNamesCollection {
+    private static final Logger logger = LoggerFactory.getLogger(StarSystemNamesCollection.class);
+
     private List<String> names = new LinkedList<>();
 
     public StarSystemNamesCollection() {
@@ -23,12 +28,13 @@ public class StarSystemNamesCollection {
                 line = br.readLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to read star names file", e);
         }
     }
 
     public synchronized String popName() {
         if (names.isEmpty()) {
+            logger.warn("Not enough star names");
             return "Nameless star";
         }
         return names.remove(0) + " system";

@@ -10,6 +10,8 @@ package ru.game.aurora.frankenstein;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.ImageBuffer;
 import org.newdawn.slick.SlickException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.frankenstein.FrankensteinImage;
 import ru.game.frankenstein.util.Rectangle;
 import ru.game.frankenstein.util.Size;
@@ -17,9 +19,10 @@ import ru.game.frankenstein.util.Size;
 import java.awt.*;
 import java.util.Map;
 
-public class Slick2DFrankensteinImage implements FrankensteinImage
-{
+public class Slick2DFrankensteinImage implements FrankensteinImage {
     private Image myImage;
+
+    private static final Logger logger = LoggerFactory.getLogger(Slick2DFrankensteinImage.class);
 
     public Slick2DFrankensteinImage(Image myImage) {
         this.myImage = myImage;
@@ -59,7 +62,7 @@ public class Slick2DFrankensteinImage implements FrankensteinImage
         try {
             myImage.getGraphics().drawImage(slick2DFrankensteinImage.myImage, i, i1);
         } catch (SlickException e) {
-            throw new RuntimeException("Failed to draw image" ,e);
+            throw new RuntimeException("Failed to draw image", e);
         } finally {
             slick2DFrankensteinImage.myImage.setCenterOfRotation(oldCenterX, oldCenterY);
             slick2DFrankensteinImage.myImage.setRotation(oldRotation);
@@ -89,7 +92,7 @@ public class Slick2DFrankensteinImage implements FrankensteinImage
                         ib.setRGBA(x, y, newColor.getRed(), newColor.getGreen(), newColor.getBlue(), c.getAlpha());
                         continue;
                     } else {
-                        System.err.println("No mapping for base color " + id);
+                        logger.warn("No mapping for base color " + id);
                     }
                 }
                 ib.setRGBA(x, y, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
@@ -103,8 +106,7 @@ public class Slick2DFrankensteinImage implements FrankensteinImage
         throw new UnsupportedOperationException();
     }
 
-    public Image getImpl()
-    {
+    public Image getImpl() {
         return myImage;
     }
 }

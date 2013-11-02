@@ -6,11 +6,9 @@
 package ru.game.aurora.dialog;
 
 import com.google.gson.Gson;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.OverlayWindow;
@@ -33,7 +31,7 @@ public class Dialog implements OverlayWindow {
 
     private String iconName;
 
-    private Map<Integer, Statement> statements = new HashMap<Integer, Statement>();
+    private Map<Integer, Statement> statements = new HashMap<>();
 
     private Statement currentStatement;
 
@@ -145,12 +143,6 @@ public class Dialog implements OverlayWindow {
         }
     }
 
-    private static final Rectangle iconRectangle = new Rectangle(3, 3, 4, 4);
-    private static final Rectangle npcStatementRectangle = new Rectangle(8, 3, 4, 4);
-    private static final Rectangle replyRectangle = new Rectangle(3, 8, 9, 5);
-
-    private static final Color backgroundColor = new Color(4, 7, 125);
-
     public String getIconName() {
         return iconName;
     }
@@ -180,7 +172,7 @@ public class Dialog implements OverlayWindow {
         try {
             reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to read dialog", e);
         }
         return d;
     }
