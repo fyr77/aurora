@@ -5,5 +5,7 @@
     "desc": "plasma_cannon.desc",
     "shotSprite" : "plasma_shot",
     "range" : 2,
-    "reloadTurns" : 4
+    "reloadTurns" : 4,
+    "explosionAnimation" : "plasma_explosion",
+    "particlesAnimation" : "plasma_particles"
 }

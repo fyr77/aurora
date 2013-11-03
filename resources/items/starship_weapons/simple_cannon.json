@@ -6,5 +6,7 @@
     "shotSprite" : "bullet_shot",
     "range" : 2,
     "image" : "ship_laser",
-    "reloadTurns" : 2
+    "reloadTurns" : 2,
+    "explosionAnimation" : "plasma_explosion",
+    "particlesAnimation" : "plasma_particles"
 }

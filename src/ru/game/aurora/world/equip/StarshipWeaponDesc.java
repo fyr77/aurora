@@ -31,7 +31,11 @@ public class StarshipWeaponDesc implements Serializable, JsonConfigManager.Entit
 
     public final String image;
 
-    public StarshipWeaponDesc(int damage, String id, String name, String desc, String shotSprite, int range, int reloadTurns, String image) {
+    public final String explosionAnimation;
+
+    public final String particlesAnimation;
+
+    public StarshipWeaponDesc(int damage, String id, String name, String desc, String shotSprite, int range, int reloadTurns, String image, String explosionAnimation, String particlesAnimation) {
         this.id = id;
         this.damage = damage;
         this.name = name;
@@ -40,6 +44,8 @@ public class StarshipWeaponDesc implements Serializable, JsonConfigManager.Entit
         this.range = range;
         this.reloadTurns = reloadTurns;
         this.image = image;
+        this.explosionAnimation = explosionAnimation;
+        this.particlesAnimation = particlesAnimation;
     }
 
     @Override

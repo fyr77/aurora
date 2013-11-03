@@ -66,7 +66,7 @@ public class MonsterController implements Serializable
                 if (weapon.getId().equals("melee")) {
                     world.getCurrentDungeon().getController().setCurrentEffect(new ExplosionEffect(world.getPlayer().getLandingParty().getX(), world.getPlayer().getLandingParty().getY(), "slash", false));
                 } else {
-                    world.getCurrentDungeon().getController().setCurrentEffect(new BlasterShotEffect(myMonster, world.getPlayer().getLandingParty(), world.getCamera(), 800, weapon.getShotImage()));
+                    world.getCurrentDungeon().getController().setCurrentEffect(new BlasterShotEffect(myMonster, world.getPlayer().getLandingParty(), world.getCamera(), 800, weapon));
                 }
                 newX = x;
                 newY = y;

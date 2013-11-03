@@ -332,7 +332,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             target.onAttack(world, playerShip, damage);
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, target.getName()));
 
-            effects.add(new BlasterShotEffect(playerShip, target, world.getCamera(), 800, weapon.getWeaponDesc().shotSprite));
+            effects.add(new BlasterShotEffect(playerShip, target, world.getCamera(), 800, weapon));
 
             if (!target.isAlive()) {
                 GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
@@ -596,11 +596,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         g.setColor(Color.red);
         g.drawRect(camera.getXCoord(-radius), camera.getYCoord(-radius), 2 * radius * camera.getTileWidth(), 2 * radius * camera.getTileHeight());
 
+        player.getShip().draw(container, g, camera);
+
         for (Effect currentEffect : effects) {
             currentEffect.draw(container, g, camera);
         }
-
-        player.getShip().draw(container, g, camera);
     }
 
     /**
