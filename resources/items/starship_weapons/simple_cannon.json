@@ -7,6 +7,6 @@
     "range" : 2,
     "image" : "ship_laser",
     "reloadTurns" : 2,
-    "explosionAnimation" : "plasma_explosion",
-    "particlesAnimation" : "plasma_particles"
+    "explosionAnimation" : "rocket_explosion",
+    "particlesAnimation" : "rocket_particles"
 }

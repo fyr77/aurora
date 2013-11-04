@@ -81,8 +81,8 @@ public class BlasterShotEffect extends Effect
 
     public BlasterShotEffect(Vector2f source, Vector2f target, int moveSpeed, StarshipWeapon weapon) {
         this(source,target,moveSpeed,weapon.getWeaponDesc().shotSprite);
-        particlesAnimation = weapon.getWeaponDesc().particlesAnimation; //null?
-        explosionAnimation = weapon.getWeaponDesc().explosionAnimation; //null?
+        particlesAnimation = weapon.getWeaponDesc().particlesAnimation;
+        explosionAnimation = weapon.getWeaponDesc().explosionAnimation;
     }
 
     public BlasterShotEffect(Vector2f source, Vector2f target, int moveSpeed, String weaponSprite) {
@@ -105,22 +105,18 @@ public class BlasterShotEffect extends Effect
 
     @Override
     public void update(GameContainer container, World world) {
-
         Vector2f distToTarget = new Vector2f(target.getX() - currentPos.getX(), target.getY() - currentPos.getY());
         if (distToTarget.length() < (float) moveSpeed / container.getFPS()) {
-            startHitAnimation(world);
+            if (!isOver) {
+                startHitAnimation(world);
+            }
             return;
         }
-
         Vector2f delta = new Vector2f(movementDir.getX() * moveSpeed / container.getFPS(), movementDir.getY() * moveSpeed / container.getFPS());
         currentPos.add(delta);
         if (world.getCurrentRoom().getClass().isAssignableFrom(StarSystem.class)) {
-            //always null?
             if (!(particlesAnimation==null)){
                 ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect((int)currentPos.x, (int)currentPos.y, particlesAnimation, true));
-            } else {
-                //just a test
-                ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect((int)currentPos.x, (int)currentPos.y, "plasma_particles", true));
             }
         }
     }
@@ -132,12 +128,8 @@ public class BlasterShotEffect extends Effect
 
     public void startHitAnimation(World world) {
         if (world.getCurrentRoom().getClass().isAssignableFrom(StarSystem.class)) {
-            //always null?
             if (!(explosionAnimation==null)){
                 ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect((int)currentPos.x, (int)currentPos.y, explosionAnimation, true));
-            }else {
-                //just a test
-                ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect((int)currentPos.x, (int)currentPos.y, "plasma_explosion", true));
             }
         }
         isOver = true;
