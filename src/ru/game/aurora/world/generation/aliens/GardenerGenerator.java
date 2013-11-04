@@ -32,7 +32,7 @@ public class GardenerGenerator implements WorldGeneratorPart {
             private static final long serialVersionUID = -743686006546787750L;
 
             @Override
-            public void onDialogEnded(World world, int returnCode) {
+            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
                 gardenerShip.warpAwayNextTurn();
             }
         });

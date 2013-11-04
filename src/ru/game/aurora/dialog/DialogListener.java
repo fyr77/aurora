@@ -11,7 +11,6 @@ import ru.game.aurora.world.World;
 
 import java.io.Serializable;
 
-public interface DialogListener extends Serializable
-{
-    public void onDialogEnded(World world, int returnCode);
+public interface DialogListener extends Serializable {
+    public void onDialogEnded(World world, Dialog dialog, int returnCode);
 }

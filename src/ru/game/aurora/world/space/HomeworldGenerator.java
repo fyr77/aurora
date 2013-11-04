@@ -110,7 +110,7 @@ public class HomeworldGenerator {
         ss.setPlanets(planets);
         ss.setRadius(8);
 
-        NPCShip frame = new NPCShip(2, 2, "rogues_frame", roguesRace, new NPC(Dialog.loadFromFile("dialogs/rogues_frame_dialog.json")), "Rogues Frame");
+        NPCShip frame = new NPCShip(2, 2, "rogues_frame", roguesRace, new NPC(Dialog.loadFromFile("dialogs/rogues/rogues_frame_dialog.json")), "Rogues Frame");
         frame.setAi(null);
         ss.getShips().add(frame);
 

@@ -24,6 +24,8 @@ Relations with rogues:
 
 rogues.damaged_scout_found - set when player finds a damaged rogues scout. Deleted after scout is repaired or sold to Klisk
 rogues.damage_scout_result - outcome of this situation. Either 'help' or 'sold_to_klisk'
+rogues.fine - number of credits player has to pay for damaging beacon
+rogues.beacon_hostile - set if player failed to settle problem with rogues beacon in a peaceful way, will affect ending
 
 ==============================
 

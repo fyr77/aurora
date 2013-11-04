@@ -1,0 +1,116 @@
+{
+    "id": "search_beacon_attackers",
+    "iconName":"rogues_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"ask"
+                },
+                {
+                    "targetStatementId":5,
+                    "replyText":"convince"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "replies":[
+                {
+                    "targetStatementId":2,
+                    "replyText":"punishment"
+                },
+                {
+                    "targetStatementId":3,
+                    "replyText":"evidences"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                }
+            ]
+        },
+        "2":{
+            "id":2,
+            "replies":[
+                {
+                    "targetStatementId":5,
+                    "replyText":"convince"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                }
+            ]
+        },
+        "3":{
+            "id":3,
+            "replies":[
+                {
+                    "targetStatementId":4,
+                    "replyText":"klisk"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                }
+            ]
+        },
+        "4":{
+            "id":4,
+            "replies":[
+                {
+                    "targetStatementId":2,
+                    "replyText":"punishment"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                }
+
+            ]
+        },
+        "5":{
+            "id":5,
+            "replies":[
+                {
+                    "returnValue" : 100,
+                    "targetStatementId":-1,
+                    "replyText":"surrender"
+                },
+                {
+                    "targetStatementId":6,
+                    "replyText":"joke"
+                },
+                {
+                    "returnValue" : 200,
+                    "targetStatementId":-1,
+                    "replyText":"fight"
+                }
+
+            ]
+        },
+        "6":{
+            "id":6,
+            "replies":[
+                {
+                    "returnValue" : 100,
+                    "targetStatementId":-1,
+                    "replyText":"surrender"
+                },
+                {
+                    "returnValue" : 200,
+                    "targetStatementId":-1,
+                    "replyText":"fight"
+                }
+
+            ]
+        }
+    }
+}

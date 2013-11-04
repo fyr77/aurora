@@ -310,6 +310,29 @@ public class World implements Serializable {
         }
     }
 
+    public void onPlayerEnteredDungeon(Dungeon dungeon) {
+        Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
+        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        for (GameEventListener l : newList) {
+
+            boolean alreadyCalledThisGroup = false;
+            for (GameEventListener.EventGroup group : l.getGroups()) {
+                if (calledGroups.contains(group)) {
+                    alreadyCalledThisGroup = true;
+                    break;
+                }
+            }
+
+            if (alreadyCalledThisGroup) {
+                continue;
+            }
+
+            if (l.onPlayerEnteredDungeon(this, dungeon)) {
+                calledGroups.addAll(l.getGroups());
+            }
+        }
+    }
+
     public void addListener(GameEventListener listener) {
         listeners.add(listener);
     }

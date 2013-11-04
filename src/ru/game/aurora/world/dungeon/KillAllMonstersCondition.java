@@ -9,21 +9,18 @@ package ru.game.aurora.world.dungeon;
 
 import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.PlanetObject;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class KillAllMonstersCondition implements IVictoryCondition
-{
+public class KillAllMonstersCondition implements IVictoryCondition {
     private static final long serialVersionUID = 4371002710032440409L;
 
     // if set, must kill all monsters with these tags
     private Set<String> tags = null;
 
-    public KillAllMonstersCondition(AuroraTiledMap map, int groupId, int objectId)
-    {
+    public KillAllMonstersCondition(AuroraTiledMap map, int groupId, int objectId) {
         final String tagString = map.getMap().getObjectProperty(groupId, objectId, "tags", null);
         if (tagString != null) {
             tags = new HashSet<>();
@@ -33,7 +30,8 @@ public class KillAllMonstersCondition implements IVictoryCondition
 
     @Override
     public boolean isSatisfied(World world) {
-        for (PlanetObject po : world.getCurrentDungeon().getMap().getObjects()) {
+        return true;
+        /*for (PlanetObject po : world.getCurrentDungeon().getMap().getObjects()) {
             if (DungeonMonster.class.isAssignableFrom(po.getClass())) {
                 if (tags == null) {
                     return false;
@@ -50,6 +48,6 @@ public class KillAllMonstersCondition implements IVictoryCondition
                 }
             }
         }
-        return true;
+        return true;*/
     }
 }
