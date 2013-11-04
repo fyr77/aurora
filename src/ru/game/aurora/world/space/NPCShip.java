@@ -179,7 +179,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         ));
         target.onAttack(world, this, weaponDesc.damage);
 
-        ss.addEffect(new BlasterShotEffect(this, target, world.getCamera(), 800, weaponDesc.shotSprite));
+        ss.addEffect(new BlasterShotEffect(this, target, world.getCamera(), 800, weapons[weaponIdx]));
 
         if (!target.isAlive()) {
             GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));

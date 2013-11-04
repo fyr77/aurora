@@ -248,7 +248,7 @@ public class DungeonController implements Serializable {
             // firing
             final int damage = landingParty.calcDamage();
 
-            currentEffect = new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), map.getWidth()), world.getCamera().getYCoordWrapped(target.getY(), map.getHeight()), world.getCamera(), 800, landingParty.getWeapon().getShotImage());
+            currentEffect = new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), map.getWidth()), world.getCamera().getYCoordWrapped(target.getY(), map.getHeight()), world.getCamera(), 800, landingParty.getWeapon());
 
             target.onShotAt(damage);
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.damage_message"), damage, target.getName()));

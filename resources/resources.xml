@@ -194,6 +194,18 @@
     <resource type="image" id="bullet_shot">sprites/effects/bullet_shot.png</resource>
     <resource type="animation" id="ship_explosion" tw="64" th="64" duration="100">sprites/effects/explosion.png
     </resource>
+    <resource type="animation" id="plasma_explosion" tw="16" th="16" duration="100">sprites/effects/plasma_explosion.png
+    </resource>
+    <resource type="animation" id="plasma_particles" tw="8" th="8" duration="100">sprites/effects/plasma_particles.png
+    </resource>
+    <resource type="animation" id="blaster_explosion" tw="16" th="16" duration="100">sprites/effects/blaster_explosion.png
+    </resource>
+    <resource type="animation" id="blaster_particles" tw="8" th="8" duration="100">sprites/effects/blaster_particles.png
+    </resource>
+    <resource type="animation" id="rocket_explosion" tw="16" th="16" duration="100">sprites/effects/rocket_explosion.png
+    </resource>
+    <resource type="animation" id="rocket_particles" tw="8" th="8" duration="100">sprites/effects/rocket_particles.png
+    </resource>
     <resource type="animation" id="big_mommy" tw="64" th="64" duration="400">sprites/effects/big_mommy.png</resource>
     <resource type="animation" id="shuttle_landing" tw="256" th="256" duration="100">sprites/gui/landing.png</resource>
     <resource type="animation" id="slash" tw="64" th="64" duration="150">sprites/effects/slash.png</resource>

@@ -15,6 +15,10 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.equip.StarshipWeapon;
+import ru.game.aurora.world.equip.StarshipWeaponDesc;
+import ru.game.aurora.world.space.StarSystem;
 
 
 public class BlasterShotEffect extends Effect
@@ -33,24 +37,55 @@ public class BlasterShotEffect extends Effect
 
     private transient Image myImage;
 
-    public BlasterShotEffect(Positionable source, Positionable target, Camera camera, int moveSpeed, String shotSprite) {
+    private String particlesAnimation;
+
+    private String explosionAnimation;
+
+    public BlasterShotEffect(Positionable source, Positionable target, Camera camera, int moveSpeed, StarshipWeapon weapon) {
         this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
                 , new Vector2f(camera.getXCoord(target.getX()) + camera.getTileWidth() / 2, camera.getYCoord(target.getY()) + camera.getTileHeight() / 2)
                 ,
                 moveSpeed
-                , shotSprite);
+                , weapon);
 
     }
 
-    public BlasterShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, String shotSprite) {
+    public BlasterShotEffect(Positionable source, Positionable target, Camera camera, int moveSpeed, LandingPartyWeapon weapon) {
+        this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
+                , new Vector2f(camera.getXCoord(target.getX()) + camera.getTileWidth() / 2, camera.getYCoord(target.getY()) + camera.getTileHeight() / 2)
+                ,
+                moveSpeed
+                , weapon);
+
+    }
+
+    public BlasterShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, LandingPartyWeapon weapon) {
         this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
                 , new Vector2f(targetScreenX, targetScreenY)
                 ,
                 moveSpeed
-                , shotSprite);
+                , weapon);
     }
 
-    public BlasterShotEffect(Vector2f source, Vector2f target, int moveSpeed, String shotSprite) {
+    public BlasterShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, String weaponSprite) {
+        this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
+                , new Vector2f(targetScreenX, targetScreenY)
+                ,
+                moveSpeed
+                , weaponSprite);
+    }
+
+    public BlasterShotEffect(Vector2f source, Vector2f target, int moveSpeed, LandingPartyWeapon weapon) {
+        this(source,target,moveSpeed,weapon.getShotImage());
+    }
+
+    public BlasterShotEffect(Vector2f source, Vector2f target, int moveSpeed, StarshipWeapon weapon) {
+        this(source,target,moveSpeed,weapon.getWeaponDesc().shotSprite);
+        particlesAnimation = weapon.getWeaponDesc().particlesAnimation;
+        explosionAnimation = weapon.getWeaponDesc().explosionAnimation;
+    }
+
+    public BlasterShotEffect(Vector2f source, Vector2f target, int moveSpeed, String weaponSprite) {
         super(0, 0);
         this.currentPos = source;
         this.target = target;
@@ -59,7 +94,7 @@ public class BlasterShotEffect extends Effect
         movementDir = new Vector2f(this.target.getX() - this.currentPos.getX(), this.target.getY() - this.currentPos.getY());
         movementDir.normalise();
 
-        myImage = ResourceManager.getInstance().getImage(shotSprite);
+        myImage = ResourceManager.getInstance().getImage(weaponSprite);
         myImage.setRotation((float) movementDir.getTheta());
     }
 
@@ -70,19 +105,33 @@ public class BlasterShotEffect extends Effect
 
     @Override
     public void update(GameContainer container, World world) {
-
         Vector2f distToTarget = new Vector2f(target.getX() - currentPos.getX(), target.getY() - currentPos.getY());
         if (distToTarget.length() < (float) moveSpeed / container.getFPS()) {
-            isOver = true;
+            if (!isOver) {
+                startHitAnimation(world);
+            }
             return;
         }
-
         Vector2f delta = new Vector2f(movementDir.getX() * moveSpeed / container.getFPS(), movementDir.getY() * moveSpeed / container.getFPS());
         currentPos.add(delta);
+        if (world.getCurrentRoom().getClass().isAssignableFrom(StarSystem.class)) {
+            if (!(particlesAnimation==null)){
+                ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect((int)currentPos.x, (int)currentPos.y, particlesAnimation, true));
+            }
+        }
     }
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
         graphics.drawImage(myImage, currentPos.x, currentPos.y);
+    }
+
+    public void startHitAnimation(World world) {
+        if (world.getCurrentRoom().getClass().isAssignableFrom(StarSystem.class)) {
+            if (!(explosionAnimation==null)){
+                ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect((int)currentPos.x, (int)currentPos.y, explosionAnimation, true));
+            }
+        }
+        isOver = true;
     }
 }

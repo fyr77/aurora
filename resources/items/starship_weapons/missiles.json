@@ -6,5 +6,7 @@
     "shotSprite" : "missile_shot",
     "range" : 5,
     "image" : "ship_rocket",
-    "reloadTurns" : 5
+    "reloadTurns" : 5,
+    "explosionAnimation" : "rocket_explosion",
+    "particlesAnimation" : "rocket_particles"
 }
