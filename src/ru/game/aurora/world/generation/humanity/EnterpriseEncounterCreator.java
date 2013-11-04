@@ -41,7 +41,7 @@ public class EnterpriseEncounterCreator extends GameEventListener {
         private static final long serialVersionUID = 8961118747394070541L;
 
         @Override
-        public void onDialogEnded(World world, int returnCode) {
+        public void onDialogEnded(World world, Dialog dialog, int returnCode) {
             if (returnCode == 1) {
                 // repair
                 final int maxHull = world.getPlayer().getShip().getMaxHull();

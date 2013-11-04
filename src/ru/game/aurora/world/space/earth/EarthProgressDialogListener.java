@@ -1,5 +1,6 @@
 package ru.game.aurora.world.space.earth;
 
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
@@ -21,7 +22,7 @@ public class EarthProgressDialogListener implements DialogListener {
     }
 
     @Override
-    public void onDialogEnded(World world, int returnCode) {
+    public void onDialogEnded(World world, Dialog dialog, int returnCode) {
         if (returnCode == -1) {
             // pop previouse screen and replace it with retirement gameover
             GUI.getInstance().popScreen();

@@ -36,8 +36,11 @@ public class SwarmGenerator implements WorldGeneratorPart {
 
 
         mainDialog.setListener(new DialogListener() {
+
+            private static final long serialVersionUID = -4476192487724362451L;
+
             @Override
-            public void onDialogEnded(World world, int returnCode) {
+            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
                 // after first dialog swarm becomes hostile
                 swarmRace.setRelation(world.getPlayer().getShip().getRace(), 0);
             }

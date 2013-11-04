@@ -7,8 +7,8 @@
 package ru.game.aurora.player.earth;
 
 
-import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.StoryScreen;
+import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Planet;
@@ -88,12 +88,12 @@ public class EvacuationState implements Serializable {
             ss = new StoryScreen("story/evacuation_ending_normal.json");
         }
 
-        ss.setListener(new DialogListener() {
+        ss.setListener(new IStateChangeListener() {
 
             private static final long serialVersionUID = 2069156686330555730L;
 
             @Override
-            public void onDialogEnded(World world, int returnCode) {
+            public void stateChanged(World world) {
                 world.setGameOver(true);
             }
         });

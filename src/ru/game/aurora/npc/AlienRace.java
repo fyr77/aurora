@@ -113,6 +113,10 @@ public class AlienRace implements Serializable {
         this.defaultFactory = defaultFactory;
     }
 
+    public void setDefaultDialog(Dialog defaultDialog) {
+        this.defaultDialog = defaultDialog;
+    }
+
     public int getRelation(AlienRace race) {
         if (race == null) {
             return 5;

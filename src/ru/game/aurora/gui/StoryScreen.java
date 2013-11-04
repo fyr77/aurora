@@ -7,7 +7,7 @@
 package ru.game.aurora.gui;
 
 import com.google.gson.Gson;
-import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class StoryScreen implements Serializable {
 
     private int currentScreen;
 
-    private DialogListener listener;
+    private IStateChangeListener listener;
 
     public StoryScreen(String descPath) {
         Reader reader = new InputStreamReader(getClass().getClassLoader().getResourceAsStream(descPath));
@@ -52,7 +52,7 @@ public class StoryScreen implements Serializable {
         }
     }
 
-    public void setListener(DialogListener listener) {
+    public void setListener(IStateChangeListener listener) {
         this.listener = listener;
     }
 
@@ -64,7 +64,7 @@ public class StoryScreen implements Serializable {
         if (currentScreen < screens.length) {
             ++currentScreen;
             if (isOver() && listener != null) {
-                listener.onDialogEnded(world, 0);
+                listener.stateChanged(world);
             }
             return true;
         }

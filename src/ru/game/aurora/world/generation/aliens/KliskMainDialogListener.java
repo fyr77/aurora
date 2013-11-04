@@ -108,7 +108,7 @@ public class KliskMainDialogListener implements DialogListener {
     }
 
     @Override
-    public void onDialogEnded(World world, int returnCode) {
+    public void onDialogEnded(World world, Dialog dialog, int returnCode) {
         switch (returnCode) {
             case 100:
                 // player has given location of a damaged rogue scout

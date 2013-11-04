@@ -1,0 +1,107 @@
+{
+    "id": "admiral_court",
+    "iconName":"rogues_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"mistake"
+                },
+                {
+                    "targetStatementId":2,
+                    "replyText":"payment"
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "replies":[
+                {
+                    "targetStatementId":2,
+                    "replyText":"payment"
+                }
+            ]
+        },
+        "2":{
+            "id":2,
+            "replies":[
+                {
+                    "targetStatementId":3,
+                    "replyText":"exclaim"
+                },
+                {
+                    "replyConditions" :[
+                                        {
+                                            "type" : "EQUAL",
+                                            "name" : "rogues.damage_scout_result",
+                                            "value": "help"
+                                        }
+                                    ],
+                    "targetStatementId":4,
+                    "replyText":"remind"
+                },
+                {
+                    "targetStatementId":-1,
+                    "returnValue":100,
+                    "replyText":"subdue"
+                }
+            ]
+        },
+        "3":{
+            "id":3,
+            "replies":[
+                {
+                    "returnValue":100,
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                }
+            ]
+        },
+        "4":{
+            "id":4,
+            "replies":[
+                {
+                    "targetStatementId":5,
+                    "replyText":"next"
+                }
+            ]
+        },
+        "5":{
+            "id":5,
+            "replies":[
+                {
+                    "targetStatementId":6,
+                    "replyText":"next"
+                }
+
+            ]
+        },
+        "6":{
+            "id":6,
+            "replies":[
+                {
+                    "returnValue" : 30,
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                },
+                {
+                    "targetStatementId":7,
+                    "replyText":"next"
+                }
+
+            ]
+        },
+        "7":{
+            "id":7,
+            "replies":[
+                {
+                    "returnValue" : 30,
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                }
+            ]
+        }
+    }
+}
