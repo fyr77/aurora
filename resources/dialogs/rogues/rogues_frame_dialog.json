@@ -1,6 +1,6 @@
 {
     "id": "rogues_frame",
-    "iconName":"no_image",
+    "iconName":"rogues_dialog",
     "statements":{
         "0":{
             "id":0,
@@ -8,6 +8,16 @@
                 {
                     "targetStatementId":1,
                     "replyText":"next"
+                },
+                {
+                    "replyConditions" :[
+                        {
+                            "type" : "SET",
+                            "name" : "rogues.fine"
+                        }
+                    ],
+                    "targetStatementId":5,
+                    "replyText":"pay_fine"
                 },
                 {
                     "targetStatementId":-1,
@@ -62,6 +72,23 @@
                 {
                     "targetStatementId":-1,
                     "replyText":"sorry"
+                }
+            ]
+        },
+
+
+
+        "5":{
+            "id":5,
+            "replies":[
+                {
+                    "returnValue":100,
+                    "targetStatementId":-1,
+                    "replyText":"pay"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"end"
                 }
             ]
         }

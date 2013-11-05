@@ -11,8 +11,7 @@ import ru.game.aurora.world.planet.LandingParty;
 /**
  * Dungeon is a location with a fixed tiled map, which can be explored by player landing party
  */
-public class Dungeon implements Room, IDungeon
-{
+public class Dungeon implements Room, IDungeon {
     private static final long serialVersionUID = 1L;
 
     private ITileMap map;
@@ -25,12 +24,11 @@ public class Dungeon implements Room, IDungeon
      * If dungeon has an enter dialog - first show that dialog, and only if it ends with return code 1 - actually
      * enter dungeon
      */
-    private final class EnterDialogListener implements DialogListener
-    {
+    private final class EnterDialogListener implements DialogListener {
         private static final long serialVersionUID = -8962566365128471357L;
 
         @Override
-        public void onDialogEnded(World world, int returnCode) {
+        public void onDialogEnded(World world, Dialog dialog, int returnCode) {
             if (returnCode == 1) {
                 // pop prev screen, so that after dialog we will not return there
                 GUI.getInstance().popScreen();
@@ -60,7 +58,7 @@ public class Dungeon implements Room, IDungeon
         } else {
             world.addOverlayWindow(enterDialog);
         }
-
+        world.onPlayerEnteredDungeon(this);
         LandingParty landingParty = world.getPlayer().getLandingParty();
         if (landingParty == null || !landingParty.canBeLaunched(world) || world.getGlobalVariables().containsKey("tutorial.landing")) {
             // either this is first landing, or landing party can not be launched in current state and must be reconfigured. Show landing party screen
@@ -79,8 +77,7 @@ public class Dungeon implements Room, IDungeon
 
     }
 
-    private void enterImpl(World world)
-    {
+    private void enterImpl(World world) {
         world.setCurrentRoom(this);
         GUI.getInstance().getNifty().gotoScreen("surface_gui");
         LandingParty landingParty = world.getPlayer().getLandingParty();

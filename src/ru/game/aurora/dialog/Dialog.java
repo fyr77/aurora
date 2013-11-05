@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.OverlayWindow;
@@ -24,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Dialog implements OverlayWindow {
+
+    private static final Logger logger = LoggerFactory.getLogger(Dialog.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -63,6 +67,10 @@ public class Dialog implements OverlayWindow {
         this.id = id;
         this.iconName = iconName;
         this.statements = statements;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Dialog(String id, String iconName, Map<Integer, Statement> statements, Map<Integer, Condition> firstStatements) {
@@ -144,7 +152,7 @@ public class Dialog implements OverlayWindow {
         } else {
             // dialog is over
             if (listener != null) {
-                listener.onDialogEnded(world, returnValue);
+                listener.onDialogEnded(world, this, returnValue);
             }
             availableReplies = null;
         }
@@ -185,7 +193,13 @@ public class Dialog implements OverlayWindow {
     }
 
     public static Dialog loadFromFile(String path) {
-        return loadFromFile(Dialog.class.getClassLoader().getResourceAsStream(path));
+        InputStream is = Dialog.class.getClassLoader().getResourceAsStream(path);
+        if (is == null) {
+            logger.error("Failed to load dialog from " + path + ", maybe it does not exist");
+            throw new IllegalArgumentException();
+        }
+        logger.info("Reading dialog from " + path);
+        return loadFromFile(is);
     }
 
     public int getReturnValue() {

@@ -54,6 +54,10 @@ public abstract class GameEventListener implements Serializable {
         return false;
     }
 
+    public boolean onPlayerEnteredDungeon(World world, Dungeon dungeon) {
+        return false;
+    }
+
     /**
      * Returns false if this event will never happen again and should be disposed
      */

@@ -78,7 +78,7 @@ public class Earth extends Planet {
                 private static final long serialVersionUID = -374777902752182404L;
 
                 @Override
-                public void onDialogEnded(World world, int returnCode) {
+                public void onDialogEnded(World world, Dialog dialog, int returnCode) {
                     world.getGlobalVariables().remove("earth.special_dialog");
                 }
             });
@@ -101,7 +101,7 @@ public class Earth extends Planet {
             private static final long serialVersionUID = -374777902752182404L;
 
             @Override
-            public void onDialogEnded(World world, int returnCode) {
+            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
                 world.getGlobalVariables().remove("quest.main.show_earth_dialog");
             }
         });

@@ -3,6 +3,7 @@ package ru.game.aurora.world.space.earth;
 import de.lessvoid.nifty.Nifty;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.dialog.Statement;
@@ -28,7 +29,7 @@ public class EarthDialogListener implements DialogListener {
     }
 
     @Override
-    public void onDialogEnded(World world, int returnCode) {
+    public void onDialogEnded(World world, Dialog dialog, int returnCode) {
 
         if (returnCode == 1) {
             // player has chosen to dump research info

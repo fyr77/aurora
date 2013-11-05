@@ -2,6 +2,11 @@ VERSION 0.1.3
 
 IN PROGRESS...
 
++ Multiple resolution and fullscreen support
++ slf4j logging added
+* New nice looking main menu, new star sprites for background
+* Bugfix
+
 ======================================================
 
 VERSION 0.1.2

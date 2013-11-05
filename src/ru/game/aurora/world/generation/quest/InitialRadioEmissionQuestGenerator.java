@@ -9,7 +9,9 @@ package ru.game.aurora.world.generation.quest;
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.EarthState;
@@ -20,14 +22,13 @@ import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.StarResearchProject;
 import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.Dungeon;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
-import ru.game.aurora.world.space.NPCShip;
-import ru.game.aurora.world.space.SpaceHulk;
-import ru.game.aurora.world.space.Star;
-import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.generation.aliens.RoguesMainDialogListener;
+import ru.game.aurora.world.space.*;
 
 /**
  * Creates quest chain with initial research for brown dwarf radio emission, that is given to player on game startup
@@ -112,6 +113,96 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         }
     }
 
+    private static class RoguesStateChanger extends GameEventListener implements DialogListener {
+        private StarSystem roguesBase;
+
+        private NPCShip roguesFrame;
+
+        private Dungeon beacon;
+
+        private int turns = -1;
+
+        private int fine = -1;
+
+        private RoguesStateChanger(StarSystem roguesHomeworld, Dungeon beacon) {
+            this.roguesBase = roguesHomeworld;
+            for (SpaceObject s : roguesHomeworld.getShips()) {
+                if (s.getName().equals("Rogues Frame")) {
+                    roguesFrame = (NPCShip) s;
+                    break;
+                }
+            }
+            this.beacon = beacon;
+        }
+
+        private static final long serialVersionUID = 8294376357309852462L;
+
+        @Override
+        public boolean onPlayerEnteredDungeon(World world, Dungeon dungeon) {
+            if (dungeon == beacon) {
+                turns = 50;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onTurnEnded(World world) {
+            if (turns < 0) {
+                return false;
+            }
+
+            if (turns-- > 0) {
+                return false;
+            }
+            if (fine < 0) {
+                // change rogues default dialog
+                Dialog d = Dialog.loadFromFile("dialogs/rogues/search_beacon_attackers.json");
+                d.setListener(this);
+                world.getRaces().get("Rogues").setDefaultDialog(d);
+                return true;
+            } else {
+                if (world.getGlobalVariables().containsKey("rogues.fine")) {
+                    // player has not payed the fine
+                    world.getRaces().get("Rogues").setRelation(world.getRaces().get("Humanity"), 0);
+                    world.getGlobalVariables().put("rogues.beacon_hostile", true);
+                    return true;
+                }
+                isAlive = false;
+            }
+            return false;
+        }
+
+        @Override
+        public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+            if (dialog.getId().equals("search_beacon_attackers")) {
+                switch (returnCode) {
+                    case 200:
+                        // player refused to surrender and is now hostile with rogues
+                        world.getRaces().get("Rogues").setRelation(world.getRaces().get("Humanity"), 0);
+                        world.getGlobalVariables().put("rogues.beacon_hostile", true);
+                        break;
+                    case 100:
+                        // player surrenders, transport him to rogues homeworld
+                        world.setCurrentRoom(roguesBase);
+                        roguesBase.enter(world);
+                        world.getPlayer().getShip().setPos(roguesFrame.getX() + 1, roguesFrame.getY());
+                        Dialog admiralCourtDialog = Dialog.loadFromFile("dialogs/rogues/admiral_court.json");
+                        admiralCourtDialog.setListener(this);
+                        world.addOverlayWindow(admiralCourtDialog);
+                        break;
+                }
+            } else if (dialog.getId().equals("admiral_court")) {
+                fine = returnCode;
+                world.getGlobalVariables().put("rogues.fine", fine);
+                turns = 360;
+                Dialog defaultDialog = Dialog.loadFromFile("dialogs/rogues/rogues_frame_dialog.json");
+                defaultDialog.setListener(new RoguesMainDialogListener());
+                world.getRaces().get("Rogues").setDefaultDialog(defaultDialog);
+                roguesFrame.setCaptain(new NPC(defaultDialog));
+            }
+        }
+    }
+
     @Override
     public void updateWorld(World world) {
         // initial research projects and their star system
@@ -130,20 +221,21 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         brownStar.setQuestLocation(true);
         world.getGalaxyMap().addObjectAndSetTile(brownStar, 12, 12);
 
-        NPCShip defenceProbe = new NPCShip(2, 1, "rogues_probe", world.getRaces().get("Rogues"), null, "Defence drone");
+        AlienRace rogues = world.getRaces().get("Rogues");
+        NPCShip defenceProbe = new NPCShip(2, 1, "rogues_probe", rogues, null, "Defence drone");
         defenceProbe.setAi(new CombatAI(world.getPlayer().getShip()));
         defenceProbe.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), StarshipWeapon.MOUNT_ALL));
         defenceProbe.setHostile(true);
         defenceProbe.setStationary(true);
         brownStar.getShips().add(defenceProbe);
-        brownStar.setFirstEnterDialog(Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/rogue_beacon_found.json")));
+        brownStar.setFirstEnterDialog(Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/rogues/rogue_beacon_found.json")));
 
         Dungeon beaconInternals = new Dungeon(world, new AuroraTiledMap("resources/maps/test.tmx"), brownStar);
-        beaconInternals.setEnterDialog(Dialog.loadFromFile("dialogs/quest/rogue_beacon_landing.json"));
-        beaconInternals.setSuccessDialog(Dialog.loadFromFile("dialogs/quest/rogues_beacon_explored.json"));
+        beaconInternals.setEnterDialog(Dialog.loadFromFile("dialogs/rogues/rogue_beacon_landing.json"));
+        beaconInternals.setSuccessDialog(Dialog.loadFromFile("dialogs/rogues/rogues_beacon_explored.json"));
         SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon", beaconInternals);
         beacon.setResearchProjectDescs(world.getResearchAndDevelopmentProjects().getResearchProjects().get("beacon"));
-
+        world.addListener(new RoguesStateChanger(rogues.getHomeworld(), beaconInternals));
         brownStar.getShips().add(beacon);
 
         ResearchProjectDesc secondResearch = new StarResearchProject(brownStar);
