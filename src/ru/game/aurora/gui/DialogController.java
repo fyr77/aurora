@@ -12,15 +12,12 @@ import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.elements.Element;
-import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.elements.render.TextRenderer;
-import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.Reply;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 
 import java.util.Stack;
@@ -35,7 +32,7 @@ public class DialogController implements ScreenController {
 
     private Element npcText;
 
-    private ListBox replies;
+    private ListBox<String> replies;
 
     private Screen screen;
 
@@ -64,8 +61,8 @@ public class DialogController implements ScreenController {
 
     public void updateDialog() {
         final Dialog dialog = this.dialogs.peek();
-        imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(dialog.getIconName()))));
-        npcText.getRenderer(TextRenderer.class).setText(dialog.getLocalizedNPCText());
+        EngineUtils.setImageForGUIElement(imagePanel, dialog.getCurrentStatement().customIcon == null ? dialog.getIconName() : dialog.getCurrentStatement().customIcon);
+        EngineUtils.setTextForGUIElement(npcText, dialog.getLocalizedNPCText());
 
         if (!replies.getItems().isEmpty()) {
             replies.clear();
@@ -93,7 +90,7 @@ public class DialogController implements ScreenController {
                 GUI.getInstance().getNifty().gotoScreen(prevScreen);
             }
         } else {
-            replies.deselectItem(selectedIdx);
+            replies.deselectItemByIndex(selectedIdx);
             updateDialog();
         }
 

@@ -65,6 +65,13 @@ public class Dialog implements OverlayWindow {
         this.statements = statements;
     }
 
+    public Dialog(String id, String iconName, Map<Integer, Statement> statements, Map<Integer, Condition> firstStatements) {
+        this.id = id;
+        this.iconName = iconName;
+        this.statements = statements;
+        this.firstStatements = firstStatements;
+    }
+
     public void setListener(DialogListener listener) {
         this.listener = listener;
     }

@@ -15,7 +15,7 @@ import java.util.List;
 */
 public class Statement implements Serializable {
 
-    private static final long serialVersionUID = -9058694068037621906L;
+    private static final long serialVersionUID = 1L;
 
     public final int id;
 
@@ -23,10 +23,20 @@ public class Statement implements Serializable {
 
     public final Reply[] replies;
 
+    public final String customIcon;
+
     public Statement(int id, String npcText, Reply... replies) {
         this.id = id;
         this.npcText = npcText;
         this.replies = replies;
+        this.customIcon = null;
+    }
+
+    public Statement(int id, String customIcon, String npcText, Reply... replies) {
+        this.id = id;
+        this.npcText = npcText;
+        this.replies = replies;
+        this.customIcon = customIcon;
     }
 
     public List<Reply> getAvailableReplies(World world)
