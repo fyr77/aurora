@@ -140,6 +140,7 @@
     <!-- rogues -->
     <resource type="image" id="rogues_probe">sprites/ships/rogues_probe.png</resource>
     <resource type="image" id="rogues_dialog">sprites/portraits/rogues.png</resource>
+    <resource type="image" id="rogues_admiral_dialog">sprites/portraits/rogues_admiral.png</resource>
     <resource type="image" id="rogues_scar_dialog">sprites/portraits/rogues_scar.png</resource>
     <resource type="image" id="rogues_beacon">sprites/ships/rogues_beacon.png</resource>
     <resource type="image" id="rogues_scout">sprites/ships/rogues_scout.png</resource>

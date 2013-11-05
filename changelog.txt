@@ -4,7 +4,10 @@ IN PROGRESS...
 
 + Multiple resolution and fullscreen support
 + slf4j logging added
-* New nice looking main menu, new star sprites for background
++ Quest line with rogues beacon completed
+* Support for individual images for dialog statements
+* New nice looking main menu
+* New star sprites for background
 * Bugfix
 
 ======================================================

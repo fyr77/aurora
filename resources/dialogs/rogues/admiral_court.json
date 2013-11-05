@@ -1,6 +1,6 @@
 {
     "id": "admiral_court",
-    "iconName":"rogues_dialog",
+    "iconName":"rogues_admiral_dialog",
     "statements":{
         "0":{
             "id":0,
@@ -70,6 +70,7 @@
         },
         "5":{
             "id":5,
+            "customIcon": "rogues_scar_dialog",
             "replies":[
                 {
                     "targetStatementId":6,
