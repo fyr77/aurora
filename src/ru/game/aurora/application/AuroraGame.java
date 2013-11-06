@@ -113,21 +113,26 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     protected void updateGame(GameContainer gameContainer, int i) throws SlickException {
-        if (mainMenu != null) {
-            world = mainMenu.update(camera, gameContainer);
-            if (world != null) {
-                mainMenu = null;
+        try {
+            if (mainMenu != null) {
+                world = mainMenu.update(camera, gameContainer);
+                if (world != null) {
+                    mainMenu = null;
+                }
+            } else {
+                world.update(gameContainer);
+                if (world.isGameOver()) {
+                    mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
+                    mainMenu.reset();
+                    world = null;
+                    GUI.getInstance().getNifty().gotoScreen("main_menu");
+                }
             }
-        } else {
-            world.update(gameContainer);
-            if (world.isGameOver()) {
-                mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
-                mainMenu.reset();
-                world = null;
-                GUI.getInstance().getNifty().gotoScreen("main_menu");
-            }
+            gameContainer.getInput().clearKeyPressedRecord();
+        } catch (Exception ex) {
+            logger.error("Exception in updateGame()", ex);
+            throw ex;
         }
-        gameContainer.getInput().clearKeyPressedRecord();
     }
 
     @Override
@@ -142,14 +147,19 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     protected void renderGame(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        if (mainMenu != null) {
-            mainMenu.draw(graphics, camera);
-        } else {
-            world.draw(gameContainer, graphics);
-            world.getCamera().drawBound();
-        }
+        try {
+            if (mainMenu != null) {
+                mainMenu.draw(graphics, camera);
+            } else {
+                world.draw(gameContainer, graphics);
+                world.getCamera().drawBound();
+            }
 
-        lastFrameTime = gameContainer.getTime();
+            lastFrameTime = gameContainer.getTime();
+        } catch (Exception ex) {
+            logger.error("Exception in renderGame()", ex);
+            throw ex;
+        }
     }
 
     private static void addDir(String s) throws IOException {
@@ -171,9 +181,9 @@ public class AuroraGame extends NiftyOverlayGame {
             field.set(null, tmp);
             System.setProperty("java.library.path", System.getProperty("java.library.path") + File.pathSeparator + s);
         } catch (IllegalAccessException e) {
-            throw new IOException("Failed to get permissions to set library path");
+            throw new IOException("Failed to get permissions to set library path", e);
         } catch (NoSuchFieldException e) {
-            throw new IOException("Failed to get field handle to set library path");
+            throw new IOException("Failed to get field handle to set library path", e);
         }
     }
 

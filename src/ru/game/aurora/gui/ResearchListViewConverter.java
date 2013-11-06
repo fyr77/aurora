@@ -19,7 +19,6 @@ public class ResearchListViewConverter implements ListBox.ListBoxViewConverter
 {
     private String getText(Object obj)
     {
-        ResearchProjectDesc researchProjectDesc;
         if (ResearchProjectDesc.class.isAssignableFrom(obj.getClass())) {
             return ((ResearchProjectDesc) obj).getName();
         } else if (ResearchProjectState.class.isAssignableFrom(obj.getClass())) {

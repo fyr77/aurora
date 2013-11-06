@@ -23,7 +23,9 @@ import ru.game.aurora.world.World;
 /**
  * Global map of the galaxy, all stars in single screen
  */
-public class GalaxyMapScreen implements Room {
+public class GalaxyMapScreen implements Room
+{
+    private static final long serialVersionUID = -1602653800907830048L;
     /**
      * Renders galaxy objects in this camera, that is set up so that all galaxy will fit into render area
      */
@@ -33,11 +35,8 @@ public class GalaxyMapScreen implements Room {
 
     private GalaxyMap galaxyMap;
 
-    private World world;
-
     @Override
     public void enter(World world) {
-        this.world = world;
         galaxyMap = world.getGalaxyMap();
         final Camera oldCamera = world.getCamera();
         final float newTileWidth = oldCamera.getNumTilesX() * oldCamera.getTileWidth() / galaxyMap.getTilesX();

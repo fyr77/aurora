@@ -37,9 +37,9 @@ public class ResourceManager {
     private Map<String, String> textMap;
     private Map<String, SpriteSheet> spriteSheetMap;
 
-    private JsonConfigManager<StarshipWeaponDesc> weapons = new JsonConfigManager<StarshipWeaponDesc>(StarshipWeaponDesc.class, "resources/items/starship_weapons");
+    private JsonConfigManager<StarshipWeaponDesc> weapons = new JsonConfigManager<>(StarshipWeaponDesc.class, "resources/items/starship_weapons");
 
-    private JsonConfigManager<LandingPartyWeapon> landingPartyWeapons = new JsonConfigManager<LandingPartyWeapon>(LandingPartyWeapon.class, "resources/items/crew_weapons");
+    private JsonConfigManager<LandingPartyWeapon> landingPartyWeapons = new JsonConfigManager<>(LandingPartyWeapon.class, "resources/items/crew_weapons");
 
     private ResourceManager() {
         soundMap = new HashMap<>();
@@ -229,7 +229,7 @@ public class ResourceManager {
         return imageMap.get(ID);
     }
 
-    private class ResourceAnimationData {
+    private static class ResourceAnimationData {
         int duration;
         int tw;
         int th;

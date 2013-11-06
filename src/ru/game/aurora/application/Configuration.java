@@ -3,10 +3,7 @@ package ru.game.aurora.application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -30,12 +27,16 @@ public class Configuration {
 
     public static void init() throws IOException {
         worldProperties = new Properties();
-        worldProperties.load(new FileInputStream("resources/game.properties"));
+        try (InputStream is = new FileInputStream("resources/game.properties")) {
+            worldProperties.load(is);
+        }
 
         systemProperties = new Properties();
         File systemPropsFile = new File("system.properties");
         if (systemPropsFile.exists()) {
-            systemProperties.load(new FileInputStream(systemPropsFile));
+            try (InputStream is = new FileInputStream(systemPropsFile)) {
+                systemProperties.load(is);
+            }
         }
     }
 
@@ -45,10 +46,6 @@ public class Configuration {
 
     public static double getDoubleProperty(String key) {
         return Double.parseDouble(worldProperties.getProperty(key));
-    }
-
-    public static Properties getWorldProperties() {
-        return worldProperties;
     }
 
     public static Properties getSystemProperties() {

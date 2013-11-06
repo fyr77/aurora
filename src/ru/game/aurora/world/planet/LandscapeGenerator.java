@@ -16,15 +16,6 @@ public class LandscapeGenerator {
     // noise generation is rather slow, so generate noise SCALE_FACTOR times smaller than planet surface size, and then stretch
     private static final int SCALE_FACTOR = 2;
 
-    private static int wrap(int x, int size) {
-        if (x < 0) {
-            return size + x;
-        } else if (x >= size) {
-            return x - size;
-        }
-        return x;
-    }
-
     private static byte getTileForRockPlanet(double value) {
         if (value < -0.5) {
             return SurfaceTypes.WATER;

@@ -11,7 +11,6 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
-import de.lessvoid.nifty.controls.TabGroup;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.elements.render.TextRenderer;
@@ -27,7 +26,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class EarthScreenController implements ScreenController {
-    private TabGroup tg;
 
     private World world;
 
@@ -39,7 +37,6 @@ public class EarthScreenController implements ScreenController {
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
-        tg = screen.findNiftyControl("research_tabs", TabGroup.class);
         messagesList = screen.findElementByName("messages_list");
     }
 

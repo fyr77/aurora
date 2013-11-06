@@ -151,6 +151,11 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 return false;
             }
 
+            if (world.getCurrentDungeon() != null) {
+                // do not count turns spent in dungeon
+                return false;
+            }
+
             turns--;
             if (turns == 60 && fine < 0) {
                 // change rogues default dialog
