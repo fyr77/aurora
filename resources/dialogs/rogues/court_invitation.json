@@ -1,0 +1,71 @@
+{
+    "id": "court_invitation",
+    "iconName":"rogues_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "replies":[
+                {
+                    "targetStatementId":1,
+                    "replyText":"ask"
+                },
+                {
+                    "targetStatementId":1,
+                    "replyText":"aggr"
+                },
+                {
+                    "targetStatementId":2,
+                    "replyText":"very_aggr"
+                }
+            ]
+        },
+        "1":{
+            "id":1,
+            "replies":[
+                {
+                    "returnValue": 100,
+                    "targetStatementId":-1,
+                    "replyText":"ok"
+                },
+                {
+                    "targetStatementId":3,
+                    "replyText":"ask"
+                },
+                {
+                    "targetStatementId":2,
+                    "replyText":"aggr"
+                }
+            ]
+        },
+        "2":{
+            "id":2,
+            "replies":[
+                {
+                    "returnValue" : 100,
+                    "targetStatementId":-1,
+                    "replyText":"good"
+                },
+                {
+                    "returnValue" : 200,
+                    "targetStatementId":-1,
+                    "replyText":"bad"
+                }
+            ]
+        },
+        "3":{
+            "id":3,
+            "replies":[
+                {
+                    "returnValue" : 100,
+                    "targetStatementId":-1,
+                    "replyText":"good"
+                },
+                {
+                    "returnValue" : 200,
+                    "targetStatementId":-1,
+                    "replyText":"bad"
+                }
+            ]
+        }
+    }
+}

@@ -20,10 +20,7 @@ import ru.game.aurora.player.engineering.projects.AdvancedLasers;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.StarResearchProject;
-import ru.game.aurora.world.AuroraTiledMap;
-import ru.game.aurora.world.Dungeon;
-import ru.game.aurora.world.GameEventListener;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -114,6 +111,8 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
     }
 
     private static class RoguesStateChanger extends GameEventListener implements DialogListener {
+        private AlienRace rogues;
+
         private StarSystem roguesBase;
 
         private NPCShip roguesFrame;
@@ -124,9 +123,10 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
 
         private int fine = -1;
 
-        private RoguesStateChanger(StarSystem roguesHomeworld, Dungeon beacon) {
-            this.roguesBase = roguesHomeworld;
-            for (SpaceObject s : roguesHomeworld.getShips()) {
+        private RoguesStateChanger(World world, Dungeon beacon) {
+            rogues = world.getRaces().get("Rogues");
+            this.roguesBase = rogues.getHomeworld();
+            for (SpaceObject s : roguesBase.getShips()) {
                 if (s.getName().equals("Rogues Frame")) {
                     roguesFrame = (NPCShip) s;
                     break;
@@ -140,7 +140,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         @Override
         public boolean onPlayerEnteredDungeon(World world, Dungeon dungeon) {
             if (dungeon == beacon) {
-                turns = 50;
+                turns = 100;
             }
             return false;
         }
@@ -151,30 +151,59 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 return false;
             }
 
-            if (turns-- > 0) {
-                return false;
-            }
-            if (fine < 0) {
+            turns--;
+            if (turns == 60 && fine < 0) {
                 // change rogues default dialog
                 Dialog d = Dialog.loadFromFile("dialogs/rogues/search_beacon_attackers.json");
                 d.setListener(this);
                 world.getRaces().get("Rogues").setDefaultDialog(d);
                 return true;
-            } else {
-                if (world.getGlobalVariables().containsKey("rogues.fine")) {
-                    // player has not payed the fine
-                    world.getRaces().get("Rogues").setRelation(world.getRaces().get("Humanity"), 0);
-                    world.getGlobalVariables().put("rogues.beacon_hostile", true);
-                    return true;
+            }
+            if (turns == 0) {
+                if (fine < 0) {
+                    // in next star system a group of rogues will be awaiting player ship
+                    world.addListener(new GameEventListener() {
+
+                        private static final long serialVersionUID = 4464913526587137850L;
+
+                        @Override
+                        public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
+                            isAlive = false;
+
+                            NPCShip ship = rogues.getDefaultFactory().createShip();
+                            final Ship playerShip = world.getPlayer().getShip();
+                            ship.setPos(playerShip.getX() + 1, playerShip.getY());
+                            ss.getShips().add(ship);
+
+                            NPCShip defenceProbe = new NPCShip(playerShip.getX(), playerShip.getY() + 1, "rogues_probe", rogues, null, "Defence drone");
+                            defenceProbe.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), StarshipWeapon.MOUNT_ALL));
+                            defenceProbe.setStationary(true);
+                            ss.getShips().add(defenceProbe);
+
+                            Dialog dialog = Dialog.loadFromFile("dialogs/rogues/court_invitation.json");
+                            dialog.setListener(RoguesStateChanger.this);
+                            world.addOverlayWindow(dialog);
+                            return true;
+                        }
+                    });
+
+
+                } else {
+                    if (world.getGlobalVariables().containsKey("rogues.fine")) {
+                        // player has not payed the fine
+                        world.getRaces().get("Rogues").setRelation(world.getRaces().get("Humanity"), 0);
+                        world.getGlobalVariables().put("rogues.beacon_hostile", true);
+                        return true;
+                    }
+                    isAlive = false;
                 }
-                isAlive = false;
             }
             return false;
         }
 
         @Override
         public void onDialogEnded(World world, Dialog dialog, int returnCode) {
-            if (dialog.getId().equals("search_beacon_attackers")) {
+            if (dialog.getId().equals("search_beacon_attackers") || dialog.getId().equals("court_invitation")) {
                 switch (returnCode) {
                     case 200:
                         // player refused to surrender and is now hostile with rogues
@@ -235,7 +264,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         beaconInternals.setSuccessDialog(Dialog.loadFromFile("dialogs/rogues/rogues_beacon_explored.json"));
         SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon", beaconInternals);
         beacon.setResearchProjectDescs(world.getResearchAndDevelopmentProjects().getResearchProjects().get("beacon"));
-        world.addListener(new RoguesStateChanger(rogues.getHomeworld(), beaconInternals));
+        world.addListener(new RoguesStateChanger(world, beaconInternals));
         brownStar.getShips().add(beacon);
 
         ResearchProjectDesc secondResearch = new StarResearchProject(brownStar);
