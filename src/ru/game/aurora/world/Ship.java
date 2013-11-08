@@ -52,7 +52,7 @@ public class Ship extends BasePositionable implements SpaceObject {
 
     private int destinationX, destinationY;
 
-    private static int MOVE_FRAMES = 4;
+    private static int MOVE_FRAMES = 8;
 
     public Ship(AlienRace humanity, int x, int y) {
         super(x, y);
@@ -78,11 +78,15 @@ public class Ship extends BasePositionable implements SpaceObject {
         if (isMoving) {
             drawY+=kY;
             drawX+=kX;
+            world.getCamera().offsetX = -drawX;
+            world.getCamera().offsetY = -drawY;
             if ((Math.abs(drawY)>=AuroraGame.tileSize)||(Math.abs(drawX)>=AuroraGame.tileSize)) {
                 isMoving = false;
                 setPos(destinationX, destinationY);
                 drawY = 0.0f;
                 drawX = 0.0f;
+                world.getCamera().offsetX = 0.0f;
+                world.getCamera().offsetY = 0.0f;
                 world.setUpdatedNextFrame(true);
             }
         }

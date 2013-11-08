@@ -7,10 +7,7 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
@@ -51,6 +48,16 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     // this ship can not move
     private boolean isStationary;
+
+    private boolean isMoving = false;
+
+    private float drawX, drawY;
+
+    private float kX, kY;
+
+    private int destinationX, destinationY;
+
+    private static int MOVE_FRAMES = 4;
 
     public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
         super(x, y);
@@ -93,11 +100,24 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         if (ai != null) {
             ai.update(this, world, (StarSystem) world.getCurrentRoom());
         }
+
+        if (isMoving) {
+            //---not working yet---
+
+            //drawY+=kY;
+            //drawX+=kX;
+            //if ((Math.abs(drawY)>=AuroraGame.tileSize)||(Math.abs(drawX)>=AuroraGame.tileSize)) {
+                isMoving = false;
+                setPos(destinationX, destinationY);
+                drawY = 0.0f;
+                drawX = 0.0f;
+            //}
+        }
     }
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        g.drawImage(ResourceManager.getInstance().getImage(sprite), camera.getXCoord(x), camera.getYCoord(y));
+        g.drawImage(ResourceManager.getInstance().getImage(sprite), camera.getXCoord(x) + drawX, camera.getYCoord(y) + drawY);
     }
 
     /**
@@ -184,6 +204,38 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         if (!target.isAlive()) {
             GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
         }
+    }
+
+    public void moveUp() {
+        isMoving = true;
+        kY = -(AuroraGame.tileSize/MOVE_FRAMES);
+        kX = 0.0f;
+        destinationX = x;
+        destinationY = (y - 1);
+    }
+
+    public void moveDown() {
+        isMoving = true;
+        kY = AuroraGame.tileSize/MOVE_FRAMES;
+        kX = 0.0f;
+        destinationX = x;
+        destinationY = (y + 1);
+    }
+
+    public void moveRight() {
+        isMoving = true;
+        kY = 0.0f;
+        kX = AuroraGame.tileSize/MOVE_FRAMES;
+        destinationX = (x + 1);
+        destinationY = y;
+    }
+
+    public void moveLeft() {
+        isMoving = true;
+        kY = 0.0f;
+        kX = -(AuroraGame.tileSize/MOVE_FRAMES);
+        destinationX = (x - 1);
+        destinationY = y;
     }
 
     public void move(int dx, int dy) {

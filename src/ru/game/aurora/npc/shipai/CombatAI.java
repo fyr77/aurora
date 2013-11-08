@@ -46,13 +46,13 @@ public class CombatAI implements NPCShipAI {
         // not all weapons fired because too far, move closer
         if (inRange < ship.getWeapons().length) {
             if (target.getX() < ship.getX()) {
-                ship.move(- 1, 0);
+                ship.moveLeft();
             } else if (target.getX() > ship.getX()) {
-                ship.move(1, 0);
+                ship.moveRight();
             } else if (target.getY() < ship.getY()) {
-                ship.move(0, - 1);
+                ship.moveUp();
             } else if (target.getY() > ship.getY()) {
-                ship.move(0, 1);
+                ship.moveDown();
             }
         }
 

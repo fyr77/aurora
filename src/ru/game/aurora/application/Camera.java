@@ -40,6 +40,8 @@ public class Camera implements Serializable {
 
     private int viewportTilesY;
 
+    public float offsetX, offsetY;
+
     public Camera(int viewportX, int viewportY, int vieportWidth, int viewportHeight, float tileWidth, float tileHeight) {
         this.viewportX = viewportX;
         this.viewportY = viewportY;
@@ -47,6 +49,8 @@ public class Camera implements Serializable {
         this.viewportTilesY = viewportHeight;
         this.tileHeight = tileHeight;
         this.tileWidth = tileWidth;
+        offsetX = 0.0f;
+        offsetY = 0.0f;
     }
 
     public void setTarget(Positionable target) {
@@ -60,11 +64,11 @@ public class Camera implements Serializable {
      * @return Absolute screen x coordinate for this tile
      */
     public float getXCoord(int globalTileX) {
-        return viewportX + tileWidth * (viewportTilesX / 2 + (globalTileX - target.getX()));
+        return viewportX + tileWidth * (viewportTilesX / 2 + (globalTileX - target.getX())) + offsetX;
     }
 
     public float getYCoord(int globalTileY) {
-        return viewportY + tileHeight * (viewportTilesY / 2 + (globalTileY - target.getY()));
+        return viewportY + tileHeight * (viewportTilesY / 2 + (globalTileY - target.getY())) + offsetY;
     }
 
     // same but for absolute coordinate (not tile)
