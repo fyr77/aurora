@@ -152,6 +152,15 @@
                     <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3"
                              selection="Disabled" height="100px"/>
                 </panel>
+
+                <panel width="20px"/>
+
+                <panel width="50px" childLayout="vertical">
+                    <panel height="15px"/>
+                    <control id="next_turn_button" name="button" label=">>" width="50px" height="50px">
+                        <interact onClick="nextTurn()"/>
+                    </control>
+                </panel>
             </panel>
         </layer>
     </screen>

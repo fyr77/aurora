@@ -107,6 +107,10 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         GUI.getInstance().showIngameMenu();
     }
 
+    public void nextTurn() {
+        world.setUpdatedNextFrame(true);
+    }
+
     public void updateStats() {
 
         final Ship ship = world.getPlayer().getShip();

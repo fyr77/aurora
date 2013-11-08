@@ -83,7 +83,7 @@ public class Ship extends BasePositionable implements SpaceObject {
                 setPos(destinationX, destinationY);
                 drawY = 0.0f;
                 drawX = 0.0f;
-                world.setUpdatedThisFrame(true);
+                world.setUpdatedNextFrame(true);
             }
         }
     }
