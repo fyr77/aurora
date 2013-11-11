@@ -29,7 +29,7 @@ public class AnimalGenerator {
 
     private static AnimalGenerator instance;
 
-    public static Color[] supportedColors = {new Color(0x00697436), new Color(0x00a12e00), new Color(0x00ad5400), new Color(0x005f4d96), new Color(0x00966e00)};
+    public static final Color[] supportedColors = {new Color(0x00697436), new Color(0x00a12e00), new Color(0x00ad5400), new Color(0x005f4d96), new Color(0x00966e00)};
 
     public static void init() throws FileNotFoundException {
         instance = new AnimalGenerator();

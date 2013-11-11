@@ -39,8 +39,6 @@ public class EngineeringScreenController implements ScreenController {
 
     private ListBox projectsList;
 
-    private Screen myScreen;
-
     private Element window;
 
     public EngineeringScreenController(World world) {
@@ -50,8 +48,7 @@ public class EngineeringScreenController implements ScreenController {
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
-        myScreen = screen;
-        window = myScreen.findElementByName("engineering_window");
+        window = screen.findElementByName("engineering_window");
         tg = screen.findNiftyControl("engineering_tabs", TabGroup.class);
         pointsText = screen.findElementByName("hullPointsToRepair");
         engiText = screen.findElementByName("assignedEngineers");

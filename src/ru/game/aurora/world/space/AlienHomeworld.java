@@ -76,7 +76,6 @@ public class AlienHomeworld extends BasePlanet {
 
     @Override
     public StringBuilder getScanText() {
-        StringBuilder sb = new StringBuilder(Localization.getText("races", getOwnerRace().getName()+".homeworld.description"));
-        return sb;
+        return new StringBuilder(Localization.getText("races", getOwnerRace().getName()+".homeworld.description"));
     }
 }

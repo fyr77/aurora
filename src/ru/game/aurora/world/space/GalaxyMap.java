@@ -10,6 +10,8 @@ import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.Room;
@@ -24,7 +26,10 @@ import java.util.List;
  * Map is represented as a list of all static objects (like star systems), and a 2d array of cells, where each cell is either -1
  * (empty sector of space) or index of an element in this array.
  */
-public class GalaxyMap extends BaseSpaceRoom {
+public class GalaxyMap extends BaseSpaceRoom
+{
+
+    private static final Logger logger = LoggerFactory.getLogger(GalaxyMap.class);
 
     private static final long serialVersionUID = -2138368991952958011L;
 
@@ -99,7 +104,7 @@ public class GalaxyMap extends BaseSpaceRoom {
             is.defaultReadObject();
             fullMapScreen = new GalaxyMapScreen();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error on GalaxyMap deserialization", e);
         }
     }
 

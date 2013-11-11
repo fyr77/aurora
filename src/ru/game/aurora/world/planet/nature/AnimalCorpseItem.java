@@ -44,9 +44,8 @@ public class AnimalCorpseItem implements InventoryItem {
 
         AnimalCorpseItem that = (AnimalCorpseItem) o;
 
-        if (desc != null ? !desc.equals(that.desc) : that.desc != null) return false;
+        return !(desc != null ? !desc.equals(that.desc) : that.desc != null);
 
-        return true;
     }
 
     @Override

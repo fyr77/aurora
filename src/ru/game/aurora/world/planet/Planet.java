@@ -193,7 +193,10 @@ public class Planet extends BasePlanet implements IDungeon {
     public void update(GameContainer container, World world) {
         if (surfaceGenerationFuture != null) {
             if (surfaceGenerationFuture.isDone()) {
-                GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+                final Element topMostPopup = GUI.getInstance().getNifty().getTopMostPopup();
+                if (topMostPopup != null) {
+                    GUI.getInstance().getNifty().closePopup(topMostPopup.getId());
+                }
                 GUI.getInstance().getNifty().gotoScreen("surface_gui");
                 landingParty = world.getPlayer().getLandingParty();
                 if (landingParty == null) {

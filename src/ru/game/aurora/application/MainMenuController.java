@@ -62,6 +62,7 @@ public class MainMenuController implements ScreenController {
         if (loadedState == null) {
             Element popup = nifty.createPopup("load_failed");
             nifty.showPopup(nifty.getScreen("main_menu"), popup.getId(), null);
+            return;
         }
         GUI.getInstance().onWorldLoaded(container, loadedState);
         loadedState.getCurrentRoom().enter(loadedState);

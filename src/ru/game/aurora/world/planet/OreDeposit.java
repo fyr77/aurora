@@ -44,9 +44,8 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
 
             OreUnit oreUnit = (OreUnit) o;
 
-            if (type != oreUnit.type) return false;
+            return type == oreUnit.type;
 
-            return true;
         }
 
         @Override
