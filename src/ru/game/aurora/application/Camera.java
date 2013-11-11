@@ -7,7 +7,7 @@
 package ru.game.aurora.application;
 
 import ru.game.aurora.world.BasePositionable;
-import ru.game.aurora.world.Positionable;
+import ru.game.aurora.world.Moving;
 
 import java.io.Serializable;
 
@@ -31,7 +31,7 @@ public class Camera implements Serializable {
     /**
      * Object camera is following
      */
-    private Positionable target = new BasePositionable(0, 0);
+    private Moving target;
 
     /**
      * Number of tiles that are actually drawn
@@ -40,8 +40,6 @@ public class Camera implements Serializable {
 
     private int viewportTilesY;
 
-    public float offsetX, offsetY;
-
     public Camera(int viewportX, int viewportY, int vieportWidth, int viewportHeight, float tileWidth, float tileHeight) {
         this.viewportX = viewportX;
         this.viewportY = viewportY;
@@ -49,12 +47,14 @@ public class Camera implements Serializable {
         this.viewportTilesY = viewportHeight;
         this.tileHeight = tileHeight;
         this.tileWidth = tileWidth;
-        offsetX = 0.0f;
-        offsetY = 0.0f;
     }
 
-    public void setTarget(Positionable target) {
+    public void setTarget(Moving target) {
         this.target = target;
+    }
+
+    public void setTarget(BasePositionable target) {
+        this.target = new Moving(target.getX(),target.getY(),"none");
     }
 
     /**
@@ -64,20 +64,20 @@ public class Camera implements Serializable {
      * @return Absolute screen x coordinate for this tile
      */
     public float getXCoord(int globalTileX) {
-        return viewportX + tileWidth * (viewportTilesX / 2 + (globalTileX - target.getX())) + offsetX;
+        return viewportX + tileWidth * (viewportTilesX / 2 + (globalTileX - target.getX())) - target.getOffsetX();
     }
 
     public float getYCoord(int globalTileY) {
-        return viewportY + tileHeight * (viewportTilesY / 2 + (globalTileY - target.getY())) + offsetY;
+        return viewportY + tileHeight * (viewportTilesY / 2 + (globalTileY - target.getY())) - target.getOffsetY();
     }
 
     // same but for absolute coordinate (not tile)
     public float getXCoordPoint(int pointX) {
-        return pointX - (target.getX() - viewportTilesX / 2) * tileWidth;
+        return pointX - (target.getX() - viewportTilesX / 2) * tileWidth - target.getOffsetX();
     }
 
     public float getYCoordPoint(int pointY) {
-        return pointY - (target.getY() - viewportTilesY / 2) * tileHeight;
+        return pointY - (target.getY() - viewportTilesY / 2) * tileHeight - target.getOffsetY();
     }
 
     /**
@@ -142,7 +142,7 @@ public class Camera implements Serializable {
         return y / tileHeight;
     }
 
-    public Positionable getTarget() {
+    public Moving getTarget() {
         return target;
     }
 

@@ -421,11 +421,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
                 shipAtSameCoords = true;
             }
-            if (world.isUpdatedThisFrame()) {
-                ship.update(container, world);
-                if (!ship.isAlive()) {
-                    iter.remove();
-                }
+
+            ship.update(container, world);
+            if (!ship.isAlive()) {
+                iter.remove();
             }
         }
 
@@ -594,6 +593,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         g.setColor(Color.red);
         g.drawRect(camera.getXCoord(-radius), camera.getYCoord(-radius), 2 * radius * camera.getTileWidth(), 2 * radius * camera.getTileHeight());
+        g.setColor(Color.white);
 
         player.getShip().draw(container, g, camera);
 

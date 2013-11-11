@@ -267,6 +267,7 @@ public class Planet extends BasePlanet implements IDungeon {
             controller.onLandingPartyDestroyed(world);
         }
 
+        landingParty.update(container, world);
     }
 
 
@@ -279,7 +280,7 @@ public class Planet extends BasePlanet implements IDungeon {
 
     public void drawObjects(GameContainer container, Graphics graphics, Camera camera) {
         // this part (monsters, shuttle, landing party) is drawn only when landing party is on surface
-        graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped(shuttle.getX(), getWidth()), camera.getYCoordWrapped((int) shuttle.getY(), getHeight()));
+        graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped(shuttle.getX(), getWidth()), camera.getYCoordWrapped(shuttle.getY(), getHeight()));
 
     }
 

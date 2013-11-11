@@ -69,16 +69,16 @@ public class MainMenuBackground {
                 //select sprite for star
                 switch (i) {
                     case 2:
-                        star_image = EngineUtils.replaceColors(s2, colorMap);
-                        break;
-                    case 3:
                         star_image = EngineUtils.replaceColors(s1, colorMap);
                         break;
+                    case 3:
+                        star_image = EngineUtils.replaceColors(s2, colorMap);
+                        break;
                     case 4:
-                        star_image = EngineUtils.replaceColors(s0, colorMap);
+                        star_image = EngineUtils.replaceColors(s3, colorMap);
                         break;
                     default:
-                        star_image = EngineUtils.replaceColors(s3, colorMap);
+                        star_image = EngineUtils.replaceColors(s0, colorMap);
                         break;
                 }
 

@@ -14,17 +14,15 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
-import ru.game.aurora.world.BasePositionable;
+import ru.game.aurora.world.Moving;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
 
-public class NPCShip extends BasePositionable implements SpaceObject {
+public class NPCShip extends Moving implements SpaceObject {
 
     private static final long serialVersionUID = 4304196228941570752L;
-
-    private String sprite;
 
     private AlienRace race;
 
@@ -49,19 +47,8 @@ public class NPCShip extends BasePositionable implements SpaceObject {
     // this ship can not move
     private boolean isStationary;
 
-    private boolean isMoving = false;
-
-    private float drawX, drawY;
-
-    private float kX, kY;
-
-    private int destinationX, destinationY;
-
-    private static int MOVE_FRAMES = 4;
-
     public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
-        super(x, y);
-        this.sprite = sprite;
+        super(x, y, sprite);
         this.race = race;
         this.captain = captain;
         this.name = name;
@@ -73,12 +60,17 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     @Override
     public void update(GameContainer container, World world) {
+        super.update(container, world);
+
         if (weapons != null) {
             for (StarshipWeapon w : weapons) {
                 w.reload();
             }
         }
-        if (curSpeed-- > 0) {
+        if (world.isUpdatedThisFrame()) {
+            curSpeed--;
+        }
+        if (curSpeed > 0) {
             return;
         }
         curSpeed = speed;
@@ -100,24 +92,11 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         if (ai != null) {
             ai.update(this, world, (StarSystem) world.getCurrentRoom());
         }
-
-        if (isMoving) {
-            //---not working yet---
-
-            //drawY+=kY;
-            //drawX+=kX;
-            //if ((Math.abs(drawY)>=AuroraGame.tileSize)||(Math.abs(drawX)>=AuroraGame.tileSize)) {
-                isMoving = false;
-                setPos(destinationX, destinationY);
-                drawY = 0.0f;
-                drawX = 0.0f;
-            //}
-        }
     }
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        g.drawImage(ResourceManager.getInstance().getImage(sprite), camera.getXCoord(x) + drawX, camera.getYCoord(y) + drawY);
+        super.draw(container, g, camera);
     }
 
     /**
@@ -206,38 +185,7 @@ public class NPCShip extends BasePositionable implements SpaceObject {
         }
     }
 
-    public void moveUp() {
-        isMoving = true;
-        kY = -(AuroraGame.tileSize/MOVE_FRAMES);
-        kX = 0.0f;
-        destinationX = x;
-        destinationY = (y - 1);
-    }
-
-    public void moveDown() {
-        isMoving = true;
-        kY = AuroraGame.tileSize/MOVE_FRAMES;
-        kX = 0.0f;
-        destinationX = x;
-        destinationY = (y + 1);
-    }
-
-    public void moveRight() {
-        isMoving = true;
-        kY = 0.0f;
-        kX = AuroraGame.tileSize/MOVE_FRAMES;
-        destinationX = (x + 1);
-        destinationY = y;
-    }
-
-    public void moveLeft() {
-        isMoving = true;
-        kY = 0.0f;
-        kX = -(AuroraGame.tileSize/MOVE_FRAMES);
-        destinationX = (x - 1);
-        destinationY = y;
-    }
-
+    @Deprecated
     public void move(int dx, int dy) {
         if (isStationary) {
             return;
@@ -260,10 +208,6 @@ public class NPCShip extends BasePositionable implements SpaceObject {
 
     public void setStationary(boolean stationary) {
         isStationary = stationary;
-    }
-
-    public void setSprite(String sprite) {
-        this.sprite = sprite;
     }
 
     public void setCaptain(NPC captain) {

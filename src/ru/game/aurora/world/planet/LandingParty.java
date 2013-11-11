@@ -10,19 +10,15 @@ import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.player.research.projects.Cartography;
-import ru.game.aurora.world.BasePositionable;
-import ru.game.aurora.world.GameObject;
-import ru.game.aurora.world.Ship;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LandingParty extends BasePositionable implements GameObject {
+public class LandingParty extends Moving implements GameObject {
     public static final int MAX_OXYGEN = 100;
 
     private static final long serialVersionUID = 7804695272317195264L;
@@ -44,11 +40,11 @@ public class LandingParty extends BasePositionable implements GameObject {
     private int hp = 3;
 
     public LandingParty() {
-        super(0, 0);
+        super(0, 0, "awayteam");
     }
 
     public LandingParty(int x, int y, LandingPartyWeapon weapon, int military, int science, int engineers) {
-        super(x, y);
+        super(x, y, "awayteam");
         this.military = military;
         this.science = science;
         this.engineers = engineers;
@@ -79,7 +75,7 @@ public class LandingParty extends BasePositionable implements GameObject {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        g.drawImage(ResourceManager.getInstance().getImage("awayteam"), camera.getXCoord(x), camera.getYCoord(y));
+        super.draw(container, g, camera);
     }
 
     public void consumeOxygen() {

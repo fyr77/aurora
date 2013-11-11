@@ -94,16 +94,16 @@ public class ParallaxBackground {
                 //select sprite for star
                 switch (i) {
                     case 2:
-                        star_image = EngineUtils.replaceColors(s2, colorMap);
-                        break;
-                    case 3:
                         star_image = EngineUtils.replaceColors(s1, colorMap);
                         break;
+                    case 3:
+                        star_image = EngineUtils.replaceColors(s2, colorMap);
+                        break;
                     case 4:
-                        star_image = EngineUtils.replaceColors(s0, colorMap);
+                        star_image = EngineUtils.replaceColors(s3, colorMap);
                         break;
                     default:
-                        star_image = EngineUtils.replaceColors(s3, colorMap);
+                        star_image = EngineUtils.replaceColors(s0, colorMap);
                         break;
                 }
 
@@ -113,13 +113,12 @@ public class ParallaxBackground {
         }
     }
 
-    // same but for absolute coordinate (not tile)
     public float getXCoordPoint(Camera camera, int pointX, int planeNumber) {
-        return (pointX - 1.0f / (planeNumber * 2 + 5) * (camera.getTarget().getX() - camera.getViewportTilesX() / 2) * camera.getTileWidth());
+        return pointX - ((camera.getTarget().getX() - camera.getViewportTilesX() / 2) * camera.getTileWidth() + camera.getTarget().getOffsetX()) / (planeNumber * 2 + 5);
     }
 
     public float getYCoordPoint(Camera camera, int pointY, int planeNumber) {
-        return (pointY - 1.0f / (planeNumber * 2 + 5) * (camera.getTarget().getY() - camera.getViewportTilesY() / 2) * camera.getTileHeight());
+        return pointY - ((camera.getTarget().getY() - camera.getViewportTilesY() / 2) * camera.getTileHeight() + camera.getTarget().getOffsetY()) / (planeNumber * 2 + 5);
     }
 
     public void setBaseWidth(float baseWidth) {

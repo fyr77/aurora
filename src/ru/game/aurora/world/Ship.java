@@ -5,10 +5,8 @@
  */
 package ru.game.aurora.world;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.FailScreenController;
@@ -20,7 +18,7 @@ import ru.game.aurora.world.space.SpaceObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ship extends BasePositionable implements SpaceObject {
+public class Ship extends Moving implements SpaceObject {
 
     public static final int MAX_SCIENTISTS = 20;
     public static final int MAX_ENGINEERS = 10;
@@ -44,30 +42,18 @@ public class Ship extends BasePositionable implements SpaceObject {
 
     private AlienRace humanity;
 
-    private boolean isMoving = false;
-
-    private float drawX, drawY;
-
-    private float kX, kY;
-
-    private int destinationX, destinationY;
-
-    private static int MOVE_FRAMES = 8;
-
     public Ship(AlienRace humanity, int x, int y) {
-        super(x, y);
+        super(x, y, "aurora");
         this.humanity = humanity;
         name = "Hawking";
         hull = maxHull = 10;
         weapons.add(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"), StarshipWeapon.MOUNT_ALL));
-
-        drawX = 0.0f;
-        drawY = 0.0f;
     }
 
 
     @Override
     public void update(GameContainer container, World world) {
+        super.update(container, world);
         if (world.isUpdatedThisFrame()) {
             for (StarshipWeapon weapon : weapons) {
                 if (weapon.getReloadTimeLeft() > 0) {
@@ -75,57 +61,6 @@ public class Ship extends BasePositionable implements SpaceObject {
                 }
             }
         }
-        if (isMoving) {
-            drawY+=kY;
-            drawX+=kX;
-            world.getCamera().offsetX = -drawX;
-            world.getCamera().offsetY = -drawY;
-            if ((Math.abs(drawY)>=AuroraGame.tileSize)||(Math.abs(drawX)>=AuroraGame.tileSize)) {
-                isMoving = false;
-                setPos(destinationX, destinationY);
-                drawY = 0.0f;
-                drawX = 0.0f;
-                world.getCamera().offsetX = 0.0f;
-                world.getCamera().offsetY = 0.0f;
-                world.setUpdatedNextFrame(true);
-            }
-        }
-    }
-
-    public void moveUp() {
-        isMoving = true;
-        kY = -(AuroraGame.tileSize/MOVE_FRAMES);
-        kX = 0.0f;
-        destinationX = x;
-        destinationY = (y - 1);
-    }
-
-    public void moveDown() {
-        isMoving = true;
-        kY = AuroraGame.tileSize/MOVE_FRAMES;
-        kX = 0.0f;
-        destinationX = x;
-        destinationY = (y + 1);
-    }
-
-    public void moveRight() {
-        isMoving = true;
-        kY = 0.0f;
-        kX = AuroraGame.tileSize/MOVE_FRAMES;
-        destinationX = (x + 1);
-        destinationY = y;
-    }
-
-    public void moveLeft() {
-        isMoving = true;
-        kY = 0.0f;
-        kX = -(AuroraGame.tileSize/MOVE_FRAMES);
-        destinationX = (x - 1);
-        destinationY = y;
-    }
-
-    public boolean nowMoving() {
-        return isMoving;
     }
 
     public void setHull(int hull) {
@@ -142,8 +77,7 @@ public class Ship extends BasePositionable implements SpaceObject {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        g.setColor(Color.white);
-        g.drawImage(ResourceManager.getInstance().getImage("aurora"), camera.getXCoord(x) + drawX, camera.getYCoord(y) + drawY, null);
+        super.draw(container, g, camera);
     }
 
     @Override
