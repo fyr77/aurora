@@ -14,13 +14,13 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
-import ru.game.aurora.world.Moving;
+import ru.game.aurora.world.MovableSprite;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
 
-public class NPCShip extends Moving implements SpaceObject {
+public class NPCShip extends MovableSprite implements SpaceObject {
 
     private static final long serialVersionUID = 4304196228941570752L;
 

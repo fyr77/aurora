@@ -18,7 +18,7 @@ import ru.game.aurora.world.space.SpaceObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ship extends Moving implements SpaceObject {
+public class Ship extends MovableSprite implements SpaceObject {
 
     public static final int MAX_SCIENTISTS = 20;
     public static final int MAX_ENGINEERS = 10;

@@ -18,7 +18,7 @@ import ru.game.aurora.world.equip.LandingPartyWeapon;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LandingParty extends Moving implements GameObject {
+public class LandingParty extends MovableSprite implements GameObject {
     public static final int MAX_OXYGEN = 100;
 
     private static final long serialVersionUID = 7804695272317195264L;

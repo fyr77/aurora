@@ -4,18 +4,15 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.ResourceManager;
 
 /**
  * Date: 11.11.13
  * Time: 0:05
  */
 
-public class Moving extends BasePositionable implements GameObject {
+public class Movable extends BasePositionable implements GameObject {
 
     private static final long serialVersionUID = 6904064070429741009L;
-
-    private String sprite; //sometimes can be "none"
 
     private boolean isMoving = false;
 
@@ -31,13 +28,8 @@ public class Moving extends BasePositionable implements GameObject {
 
     private long lastCall;
 
-    public Moving(int x, int y, String sprite) {
+    public Movable(int x, int y) {
         super(x, y);
-        this.sprite = sprite;
-    }
-
-    public void setSprite(String sprite) {
-        this.sprite = sprite;
     }
 
     private void startMoving(int destinationX, int destinationY) {
@@ -99,9 +91,5 @@ public class Moving extends BasePositionable implements GameObject {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
-        if (!sprite.equals("none")) {
-            g.drawImage(ResourceManager.getInstance().getImage(sprite), camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
-        }
-    }
+    public void draw(GameContainer container, Graphics g, Camera camera) { }
 }
