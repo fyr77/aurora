@@ -14,7 +14,7 @@ import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
 public class BaseSpaceRoom implements Room {
-    private static final long serialVersionUID = 3043707321297157984L;
+    private static final long serialVersionUID = 1L;
 
     protected Player player;
 

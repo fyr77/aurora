@@ -6,8 +6,7 @@
  */
 package ru.game.aurora.application;
 
-import ru.game.aurora.world.BasePositionable;
-import ru.game.aurora.world.Movable;
+import ru.game.aurora.world.IMovable;
 
 import java.io.Serializable;
 
@@ -31,7 +30,7 @@ public class Camera implements Serializable {
     /**
      * Object camera is following
      */
-    private Movable target;
+    private IMovable target;
 
     /**
      * Number of tiles that are actually drawn
@@ -49,12 +48,8 @@ public class Camera implements Serializable {
         this.tileWidth = tileWidth;
     }
 
-    public void setTarget(Movable target) {
+    public void setTarget(IMovable target) {
         this.target = target;
-    }
-
-    public void setTarget(BasePositionable target) {
-        this.target = new Movable(target.getX(),target.getY());
     }
 
     /**
@@ -142,7 +137,7 @@ public class Camera implements Serializable {
         return y / tileHeight;
     }
 
-    public Movable getTarget() {
+    public IMovable getTarget() {
         return target;
     }
 

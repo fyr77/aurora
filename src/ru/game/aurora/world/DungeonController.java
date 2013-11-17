@@ -91,26 +91,50 @@ public class DungeonController implements Serializable {
      * This update is used in MOVE mode. Moving landing party around.
      */
     private void updateMove(GameContainer container, World world) {
+        if (landingParty.nowMoving()) {
+            landingParty.update(container, world);
+            return;
+        }
         int x = landingParty.getX();
         int y = landingParty.getY();
+        boolean actuallyMoved = false;
+
+        int dx = 0;
+        int dy = 0;
 
         if (container.getInput().isKeyPressed(Input.KEY_UP)) {
             y--;
+            dy = -1;
             world.setUpdatedThisFrame(true);
+            actuallyMoved = true;
         }
         if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
             y++;
+            dy = 1;
             world.setUpdatedThisFrame(true);
+            actuallyMoved = true;
         }
 
         if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
             x--;
+            dx = -1;
             world.setUpdatedThisFrame(true);
+            actuallyMoved = true;
         }
         if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
             x++;
+            dx = 1;
             world.setUpdatedThisFrame(true);
+            actuallyMoved = true;
         }
+
+        int tilesExplored = map.updateVisibility(x, y, 2);
+        landingParty.addCollectedGeodata(tilesExplored);
+
+        if (!actuallyMoved) {
+            return;
+        }
+
         if (isWrap) {
             x = EngineUtils.wrap(x, map.getWidth());
             y = EngineUtils.wrap(y, map.getHeight());
@@ -118,6 +142,7 @@ public class DungeonController implements Serializable {
             if (x < 0 || x >= map.getWidth() || y < 0 || y >= map.getHeight()) {
                 x = landingParty.getX();
                 y = landingParty.getY();
+                actuallyMoved = false;
             }
         }
 
@@ -125,6 +150,7 @@ public class DungeonController implements Serializable {
             world.setUpdatedThisFrame(false);
             x = world.getPlayer().getLandingParty().getX();
             y = world.getPlayer().getLandingParty().getY();
+            actuallyMoved = false;
         }
 
         final boolean enterPressed = container.getInput().isKeyPressed(Input.KEY_ENTER);
@@ -132,11 +158,25 @@ public class DungeonController implements Serializable {
             interactWithObject(world);
         }
 
-        int tilesExplored = map.updateVisibility(x, y, 2);
-        landingParty.addCollectedGeodata(tilesExplored);
+        if (!actuallyMoved) {
+            return;
+        }
 
+        if (dy < 0) {
+            landingParty.moveUp();
+        }
+        if (dy > 0) {
+            landingParty.moveDown();
+        }
 
-        world.getPlayer().getLandingParty().setPos(x, y);
+        if (dx < 0) {
+            landingParty.moveLeft();
+        }
+        if (dx > 0) {
+            landingParty.moveRight();
+        }
+
+        // world.getPlayer().getLandingParty().setPos(x, y);
     }
 
 

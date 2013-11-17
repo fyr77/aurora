@@ -5,14 +5,14 @@
  */
 package ru.game.aurora.world.planet;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.player.research.projects.Cartography;
-import ru.game.aurora.world.*;
+import ru.game.aurora.world.GameObject;
+import ru.game.aurora.world.MovableSprite;
+import ru.game.aurora.world.Ship;
+import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 
 import java.util.HashMap;
@@ -68,15 +68,6 @@ public class LandingParty extends MovableSprite implements GameObject {
         this.y = y;
     }
 
-    @Override
-    public void update(GameContainer container, World world) {
-
-    }
-
-    @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
-        super.draw(container, g, camera);
-    }
 
     public void consumeOxygen() {
         //todo: depend on team size?

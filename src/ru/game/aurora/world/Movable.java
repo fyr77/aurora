@@ -10,7 +10,7 @@ import ru.game.aurora.application.Camera;
  * Time: 0:05
  */
 
-public class Movable extends BasePositionable implements GameObject {
+public class Movable extends BasePositionable implements IMovable {
 
     private static final long serialVersionUID = 6904064070429741009L;
 
@@ -24,7 +24,7 @@ public class Movable extends BasePositionable implements GameObject {
 
     private int currentFrame = 0;
 
-    private static int FRAME_DURATION = 50; //ms
+    private static int FRAME_DURATION = 20; //ms
 
     private long lastCall;
 
@@ -38,30 +38,37 @@ public class Movable extends BasePositionable implements GameObject {
         this.destinationY = destinationY;
     }
 
+    @Override
     public void moveUp() {
-        startMoving(x,y - 1);
+        startMoving(x, y - 1);
     }
 
+    @Override
     public void moveDown() {
-        startMoving(x,y + 1);
+        startMoving(x, y + 1);
     }
 
+    @Override
     public void moveRight() {
-        startMoving(x + 1,y);
+        startMoving(x + 1, y);
     }
 
+    @Override
     public void moveLeft() {
-        startMoving(x - 1,y);
+        startMoving(x - 1, y);
     }
 
+    @Override
     public float getOffsetX() {
         return offsetX;
     }
 
+    @Override
     public float getOffsetY() {
         return offsetY;
     }
 
+    @Override
     public boolean nowMoving() {
         return isMoving;
     }
@@ -72,11 +79,11 @@ public class Movable extends BasePositionable implements GameObject {
             if (lastCall == 0) {
                 lastCall = container.getTime();
             } else {
-                if (lastCall<=(container.getTime()- FRAME_DURATION)) {
+                if (lastCall <= (container.getTime() - FRAME_DURATION)) {
                     currentFrame++;
                     lastCall = container.getTime();
-                    offsetX = (destinationX - x)*AuroraGame.tileSize*currentFrame/MOVE_FRAMES;
-                    offsetY = (destinationY - y)*AuroraGame.tileSize*currentFrame/MOVE_FRAMES;
+                    offsetX = (destinationX - x) * AuroraGame.tileSize * currentFrame / MOVE_FRAMES;
+                    offsetY = (destinationY - y) * AuroraGame.tileSize * currentFrame / MOVE_FRAMES;
                     if (currentFrame >= MOVE_FRAMES) {
                         isMoving = false;
                         currentFrame = 0;
@@ -91,5 +98,6 @@ public class Movable extends BasePositionable implements GameObject {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) { }
+    public void draw(GameContainer container, Graphics g, Camera camera) {
+    }
 }

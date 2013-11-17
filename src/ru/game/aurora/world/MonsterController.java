@@ -1,5 +1,6 @@
 package ru.game.aurora.world;
 
+import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
@@ -16,8 +17,7 @@ import java.io.Serializable;
  * Date: 25.10.13
  * Time: 14:11
  */
-public class MonsterController implements Serializable
-{
+public class MonsterController implements Serializable {
     private static final long serialVersionUID = -8278864000200488198L;
 
     private IMonster myMonster;
@@ -35,8 +35,10 @@ public class MonsterController implements Serializable
         this.weapon = myMonster.getWeapon();
     }
 
-    public void update(World world)
-    {
+    public void update(GameContainer container, World world) {
+        if (myMonster.nowMoving()) {
+            return;
+        }
         if (myMonster.getHp() <= 0) {
             return;
         }
@@ -86,7 +88,17 @@ public class MonsterController implements Serializable
 
             if (map.isTilePassable(newX, newY)) {
                 map.setTilePassable(x, y, true);
-                myMonster.setPos(newX, newY);
+                if (newX > x) {
+                    myMonster.moveRight();
+                } else if (newX < x) {
+                    myMonster.moveLeft();
+                }
+
+                if (newY < y) {
+                    myMonster.moveUp();
+                } else if (newY > y) {
+                    myMonster.moveDown();
+                }
                 map.setTilePassable(newX, newY, false);
             }
 

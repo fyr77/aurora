@@ -14,15 +14,15 @@ import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.AuroraTiledMap;
-import ru.game.aurora.world.BasePositionable;
+import ru.game.aurora.world.Movable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.PlanetObject;
 
 /**
  * Person or object that you can meet on planet surface
  */
-public class DungeonObject extends BasePositionable implements PlanetObject {
-    private static final long serialVersionUID = -6444096027905590867L;
+public class DungeonObject extends Movable implements PlanetObject {
+    private static final long serialVersionUID = 1L;
 
     private String name;
 
@@ -82,10 +82,6 @@ public class DungeonObject extends BasePositionable implements PlanetObject {
     public void printStatusInfo() {
     }
 
-    @Override
-    public void update(GameContainer container, World world) {
-    }
-
     private Image getImage() {
         if (imageTileX < 0) {
             //this is a standalone image
@@ -100,7 +96,7 @@ public class DungeonObject extends BasePositionable implements PlanetObject {
         if (image == null) {
             image = getImage();
         }
-        graphics.drawImage(image, camera.getXCoord(x), camera.getYCoord(y));
+        graphics.drawImage(image, camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
     }
 
 }

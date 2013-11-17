@@ -6,9 +6,9 @@ import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.IMonster;
 import ru.game.aurora.world.MonsterController;
+import ru.game.aurora.world.Movable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.Planet;
@@ -20,8 +20,7 @@ import ru.game.aurora.world.planet.PlanetObject;
  * Date: 04.12.12
  * Time: 17:00
  */
-public class Animal extends BasePositionable implements PlanetObject, IMonster
-{
+public class Animal extends Movable implements PlanetObject, IMonster {
 
     private static final long serialVersionUID = 1L;
 
@@ -47,7 +46,7 @@ public class Animal extends BasePositionable implements PlanetObject, IMonster
 
     @Override
     public void update(GameContainer container, World world) {
-       controller.update(world);
+        controller.update(container, world);
     }
 
     @Override

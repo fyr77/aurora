@@ -15,10 +15,7 @@ import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.BasePositionable;
-import ru.game.aurora.world.Positionable;
-import ru.game.aurora.world.Ship;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Planet;
@@ -151,7 +148,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             g.setColor(star.color);
             EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, (int) (camera.getTileWidth() / star.size), star.color, true);
         } else {
-            g.drawImage(star.getImage(), camera.getXCoord(tileX) +(camera.getTileWidth() -  star.getImage().getWidth()) / 2, camera.getYCoord(tileY) + (camera.getTileHeight() - star.getImage().getHeight()) / 2);
+            g.drawImage(star.getImage(), camera.getXCoord(tileX) + (camera.getTileWidth() - star.getImage().getWidth()) / 2, camera.getYCoord(tileY) + (camera.getTileHeight() - star.getImage().getHeight()) / 2);
         }
     }
 
@@ -489,7 +486,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         final float newTileHeight = container.getHeight() / (float) planet.getHeight();
         Camera myCamera = new Camera(0, 0, planet.getWidth(), planet.getHeight(), newTileWidth, newTileHeight);
 
-        myCamera.setTarget(new BasePositionable(planet.getWidth() / 2, planet.getHeight() / 2));
+        myCamera.setTarget(new Movable(planet.getWidth() / 2, planet.getHeight() / 2));
         planet.getSurface().drawLandscapeMap(g, myCamera);
         g.flush();
         try {
@@ -606,8 +603,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
      * Sets random position of a given object within this star system.
      * Not within sun, not near borders, on an empty spot
      */
-    public void setRandomEmptyPosition(BasePositionable object)
-    {
+    public void setRandomEmptyPosition(BasePositionable object) {
         final double maxRadius = Configuration.getDoubleProperty("world.starsystem.objectMaxRadius") * radius;
         final double minRadius = Configuration.getDoubleProperty("world.starsystem.objectMinRadius") * radius;
         int orbit;
@@ -619,7 +615,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             object.setPos(x, y);
             isEmpty = true;
             // check that there are no planets or other objects at this position
-            for (SpaceObject obj: ships) {
+            for (SpaceObject obj : ships) {
                 if (object.getDistance(obj) == 0) {
                     isEmpty = false;
                     break;

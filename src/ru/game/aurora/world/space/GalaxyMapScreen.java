@@ -15,7 +15,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.GUI;
-import ru.game.aurora.world.BasePositionable;
+import ru.game.aurora.world.Movable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
@@ -23,8 +23,7 @@ import ru.game.aurora.world.World;
 /**
  * Global map of the galaxy, all stars in single screen
  */
-public class GalaxyMapScreen implements Room
-{
+public class GalaxyMapScreen implements Room {
     private static final long serialVersionUID = -1602653800907830048L;
     /**
      * Renders galaxy objects in this camera, that is set up so that all galaxy will fit into render area
@@ -42,7 +41,7 @@ public class GalaxyMapScreen implements Room
         final float newTileWidth = oldCamera.getNumTilesX() * oldCamera.getTileWidth() / galaxyMap.getTilesX();
         final float newTileHeight = oldCamera.getNumTilesY() * oldCamera.getTileHeight() / galaxyMap.getTilesY();
         myCamera = new Camera(0, 0, galaxyMap.getTilesX(), galaxyMap.getTilesY(), newTileWidth, newTileHeight);
-        myCamera.setTarget(new BasePositionable(galaxyMap.getTilesX() / 2, galaxyMap.getTilesY() / 2));
+        myCamera.setTarget(new Movable(galaxyMap.getTilesX() / 2, galaxyMap.getTilesY() / 2));
         ship = world.getPlayer().getShip();
     }
 

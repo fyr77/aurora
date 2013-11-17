@@ -15,8 +15,7 @@ import java.util.Set;
  * Date: 13.09.13
  * Time: 12:40
  */
-public class DungeonMonster extends DungeonObject implements IMonster
-{
+public class DungeonMonster extends DungeonObject implements IMonster {
     private static final long serialVersionUID = 1L;
 
     private LandingPartyWeapon weapon;
@@ -52,7 +51,8 @@ public class DungeonMonster extends DungeonObject implements IMonster
 
     @Override
     public void update(GameContainer container, World world) {
-        controller.update(world);
+        super.update(container, world);
+        controller.update(container, world);
     }
 
     @Override
