@@ -93,6 +93,9 @@ public class DungeonController implements Serializable {
     private void updateMove(GameContainer container, World world) {
         if (landingParty.nowMoving()) {
             landingParty.update(container, world);
+            if (isWrap) {
+                landingParty.setPos(EngineUtils.wrap(landingParty.getX(), map.getWidth()), EngineUtils.wrap(landingParty.getY(), map.getHeight()));
+            }
             return;
         }
         int x = landingParty.getX();

@@ -46,6 +46,7 @@ public class Animal extends Movable implements PlanetObject, IMonster {
 
     @Override
     public void update(GameContainer container, World world) {
+        super.update(container, world);
         controller.update(container, world);
     }
 
