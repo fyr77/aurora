@@ -218,7 +218,6 @@ public class Planet extends BasePlanet implements IDungeon {
                     return;
                 }
 
-                landingParty.setPos(10, 10); //todo: set position on land
                 int x = landingParty.getX();
                 int y = landingParty.getY();
 

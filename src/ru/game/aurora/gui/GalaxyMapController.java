@@ -6,22 +6,25 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.controls.Button;
-import de.lessvoid.nifty.controls.ListBox;
+import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import de.lessvoid.nifty.tools.SizeValue;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.niffy.ImageButtonController;
 import ru.game.aurora.gui.niffy.TopPanelController;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
+import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.AlienHomeworld;
 import ru.game.aurora.world.space.GalaxyMapScreen;
@@ -35,11 +38,17 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
     private World world;
 
+    private BasePositionable shuttlePosition;
+
     private transient Screen myScreen;
 
     private transient ListBox logList;
 
     private transient TopPanelController topPanelController;
+
+    private BasePlanet planetToScan;
+
+    private Element landscapePanel;
 
 
     public GalaxyMapController(World world) {
@@ -242,11 +251,30 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         if (planet == null) {
             return;
         }
+        planetToScan = planet;
+
         world.setPaused(true);
         final Nifty nifty = GUI.getInstance().getNifty();
         Element popup = nifty.createPopup("planet_scan");
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(false);
+
+        Draggable shuttleDraggableElement = popup.findNiftyControl("shuttlePosition", Draggable.class);
+        shuttleDraggableElement.getElement().setVisible(planet instanceof Planet); // only on these planets player can see shuttle and change its position
+        landscapePanel = popup.findElementByName("surfaceMapPanel");
+
+
+        if (planetToScan instanceof Planet) {
+            Planet p = (Planet) planetToScan;
+            LandingParty lp = world.getPlayer().getLandingParty();
+            final int x = (int) (landscapePanel.getWidth() * (EngineUtils.wrap(lp.getX(), p.getWidth()) / (float) p.getWidth()));
+            final int y = (int) (landscapePanel.getHeight() * (EngineUtils.wrap(lp.getY(), p.getHeight()) / (float) p.getHeight()));
+
+            shuttlePosition = new BasePositionable(landscapePanel.getX() + x, landscapePanel.getY() + y);
+            shuttleDraggableElement.getElement().setConstraintX(SizeValue.px(shuttlePosition.getX()));
+            shuttleDraggableElement.getElement().setConstraintY(SizeValue.px(shuttlePosition.getY()));
+            popup.layoutElements();
+        }
 
         EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), planet.getScanText().toString());
 
@@ -266,4 +294,28 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
         world.getGalaxyMap().enterStarsystemAtPlayerCoordinates();
     }
+
+    @NiftyEventSubscriber(id = "shuttlePosition")
+    public void onShuttleDragStarted(final String id, final DraggableDragStartedEvent event) {
+        shuttlePosition.setPos(event.getDraggable().getElement().getX(), event.getDraggable().getElement().getY());
+    }
+
+    @NiftyEventSubscriber(id = "shuttlePosition")
+    public void onShuttleDragEnded(final String id, final DraggableDragCanceledEvent event) {
+        Element shuttleDraggableElement = GUI.getInstance().getNifty().getTopMostPopup().findElementByName("shuttlePosition");
+
+        if (landscapePanel.getX() > shuttleDraggableElement.getX() || landscapePanel.getY() > shuttleDraggableElement.getY()) {
+            //revert position
+            shuttleDraggableElement.setConstraintX(SizeValue.px(shuttlePosition.getX()));
+            shuttleDraggableElement.setConstraintY(SizeValue.px(shuttlePosition.getY()));
+            return;
+        }
+
+
+        LandingParty lp = world.getPlayer().getLandingParty();
+        final int x = (int) (((Planet) planetToScan).getWidth() * ((shuttleDraggableElement.getX() + shuttleDraggableElement.getWidth() / 2 - landscapePanel.getX()) / (float) landscapePanel.getWidth()));
+        final int y = (int) (((Planet) planetToScan).getHeight() * ((shuttleDraggableElement.getY() + shuttleDraggableElement.getHeight() / 2 - landscapePanel.getY()) / (float) landscapePanel.getHeight()));
+        lp.setPos(x, y);
+    }
+
 }
