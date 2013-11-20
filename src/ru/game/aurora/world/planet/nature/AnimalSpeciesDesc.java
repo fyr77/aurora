@@ -9,7 +9,7 @@ package ru.game.aurora.world.planet.nature;
 
 import org.newdawn.slick.Image;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
-import ru.game.aurora.world.planet.BasePlanet;
+import ru.game.aurora.world.planet.Planet;
 
 import java.io.Serializable;
 
@@ -18,11 +18,11 @@ import java.io.Serializable;
  */
 public class AnimalSpeciesDesc implements Serializable {
 
-    private static final long serialVersionUID = 8842795492227344987L;
+    private static final long serialVersionUID = 1L;
 
     private String name;
 
-    private BasePlanet homePlanet;
+    private Planet homePlanet;
 
     private boolean isCarnivorous;
 
@@ -71,7 +71,7 @@ public class AnimalSpeciesDesc implements Serializable {
      */
     private boolean outopsyMade = false;
 
-    public AnimalSpeciesDesc(BasePlanet homePlanet, String name, boolean carnivorous, boolean herbivorous, int hp, LandingPartyWeapon weapon, int speed, Behaviour behaviour) {
+    public AnimalSpeciesDesc(Planet homePlanet, String name, boolean carnivorous, boolean herbivorous, int hp, LandingPartyWeapon weapon, int speed, Behaviour behaviour) {
         this.homePlanet = homePlanet;
         this.name = name;
         this.weapon = weapon;
@@ -118,5 +118,9 @@ public class AnimalSpeciesDesc implements Serializable {
     {
         image = img;
         deadImage = deadImg;
+    }
+
+    public Planet getHomePlanet() {
+        return homePlanet;
     }
 }

@@ -1,0 +1,62 @@
+[
+    {
+        "type": "MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 8,
+                "y" : 8,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+        ],
+        "imageId": "animal_parts/style2/dec6.png",
+        "tags" : [
+            "style2"
+        ]
+    },
+    {
+        "type": "MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 8,
+                "y": 8,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+        ],
+		"tags" : ["style2"],
+        "imageId": "animal_parts/style2/dec7.png"
+    },
+    {
+        "type": "MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 8,
+                "y": 8,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+        ],
+        "imageId": "animal_parts/style2/dec8.png",
+        "tags" : [
+                "style2"
+        ]
+    },
+    {
+        "type": "MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 8,
+                "y": 8,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+        ],
+		"tags" : ["style2"],
+        "imageId": "animal_parts/style2/dec9.png"
+    }
+]

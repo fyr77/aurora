@@ -1,0 +1,133 @@
+[
+    {
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 9,
+                "y" : 14,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ],
+                "groupId" : "legs",
+                "flipVertical" : true
+            },
+            {
+                "x": 53,
+                "y" : 9,
+                "angle" : 180,
+				"groupId" : "legs",
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ]
+            },
+			
+			{
+                "x": 9,
+                "y" : 14,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ],
+                "groupId" : "legs2",
+                "flipVertical" : true
+            },
+            {
+                "x": 54,
+                "y" : 52,
+                "angle" : 180,
+				"groupId" : "legs2",
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ]
+            },
+            
+            {
+                "x": 31,
+                "y" : 22,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+
+            {
+                "x": 31,
+                "y" : 43,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }
+
+        ],
+		"tags" : ["style2"],
+        "imageId" : "animal_parts/style2/body6.png"
+    },
+
+   {
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 10,
+                "y" : 20,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ],
+                "groupId" : "legs",
+                "flipVertical" : true
+            },
+            {
+                "x": 52,
+                "y" : 20,
+                "angle" : 180,
+				"groupId" : "legs",
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ]
+            },
+			
+			{
+                "x": 15,
+                "y" : 51,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ],
+                "groupId" : "legs2",
+                "flipVertical" : true
+            },
+            {
+                "x": 47,
+                "y" : 51,
+                "angle" : 180,
+				"groupId" : "legs2",
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ]
+            },
+            
+            {
+                "x": 24,
+                "y" : 52,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+
+            {
+                "x": 40,
+                "y" : 52,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }
+
+        ],
+		"tags" : ["style2"],
+        "imageId" : "animal_parts/style2/body7.png"
+    }
+]

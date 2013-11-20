@@ -13,13 +13,16 @@ import java.util.Map;
 /**
  * Contains all data concerning planet wildlife
  */
-public class PlanetFloraAndFauna implements Serializable {
-    private static final long serialVersionUID = -73336834077349556L;
+public class PlanetFloraAndFauna implements Serializable
+{
+    private static final long serialVersionUID = 1L;
 
     /**
      * Style name used for generating plant sprites
      */
     private final String plantsStyleTag;
+
+    private final String animalsStyleTag;
 
     /**
      * Colors that will be used in plants sprites
@@ -32,8 +35,9 @@ public class PlanetFloraAndFauna implements Serializable {
 
     private PlantSpeciesDesc[] plantSpecies;
 
-    public PlanetFloraAndFauna(String plantsStyleTag) {
+    public PlanetFloraAndFauna(String plantsStyleTag, String animalsStyleTag) {
         this.plantsStyleTag = plantsStyleTag;
+        this.animalsStyleTag = animalsStyleTag;
     }
 
     public AnimalSpeciesDesc[] getAnimalSpecies() {
@@ -46,6 +50,10 @@ public class PlanetFloraAndFauna implements Serializable {
 
     public String getPlantsStyleTag() {
         return plantsStyleTag;
+    }
+
+    public String getAnimalsStyleTag() {
+        return animalsStyleTag;
     }
 
     public void setSpecies(AnimalSpeciesDesc[] animalSpecies, PlantSpeciesDesc[] plantSpecies) {

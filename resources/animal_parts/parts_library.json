@@ -1,9 +1,13 @@
 {
     "partFiles" : [
-        "resources/animal_parts/bodies.json"
-        , "resources/animal_parts/limbs.json"
-        , "resources/animal_parts/eyes.json"
-        , "resources/animal_parts/mouths.json"
+        "resources/animal_parts/style1/bodies.json"
+        , "resources/animal_parts/style1/limbs.json"
+        , "resources/animal_parts/style1/eyes.json"
+        , "resources/animal_parts/style1/mouths.json"
+		
+		, "resources/animal_parts/style2/bodies.json"
+        , "resources/animal_parts/style2/limbs.json"
+        , "resources/animal_parts/style2/decor.json"		
     ],
 
     "bloodImages" : [

@@ -1,0 +1,115 @@
+[
+    {
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 6,
+                "y" : 6,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+
+        ],
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/limb1.png"
+    },
+    {
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 6,
+                "y" : 6,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+        ],
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/limb2.png"
+    },
+    {
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 7,
+                "y" : 15,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+        ],
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/limb3.png"
+    },
+    {
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 5,
+                "y" : 8,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+        ],
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/limb4.png"
+    },
+    {
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 4,
+                "y" : 5,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+        ],
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/limb5.png"
+    },
+    {
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 2,
+                "y" : 17,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+        ],
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/limb6.png"
+    },
+    {
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 3,
+                "y" : 10,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+        ],
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/limb7.png"
+    },
+    {
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 2,
+                "y" : 10,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            }
+        ],
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/limb8.png"
+    }
+]

@@ -49,7 +49,8 @@
             }
 
         ],
-        "imageId" : "animal_parts/body1.png"
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/body1.png"
     },
 
     {
@@ -112,7 +113,8 @@
             }
 
         ],
-        "imageId" : "animal_parts/body2.png",
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/body2.png",
         "centerX" : 32,
         "centerY" : 50
     },
@@ -177,7 +179,8 @@
             }
 
         ],
-        "imageId" : "animal_parts/body3.png",
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/body3.png",
         "centerX" : 32,
         "centerY" : 50
     },
@@ -215,7 +218,8 @@
             }
 
         ],
-        "imageId" : "animal_parts/body4.png",
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/body4.png",
         "centerX" : 32,
         "centerY" : 50
     },
@@ -289,7 +293,8 @@
                 ]
             }
         ],
-        "imageId" : "animal_parts/body5.png",
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/body5.png",
         "centerX" : 32,
         "centerY" : 50
     }

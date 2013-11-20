@@ -1,60 +1,63 @@
 [
     {
-        "type": "MONSTER_DECORATION",
+        "type":"MONSTER_DECORATION",
         "attachmentPoints" : [
             {
-                "x": 14,
-                "y" : 8,
+                "x": 13,
+                "y" : 6,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
         ],
-        "imageId": "animal_parts/dec3.png",
-        "tags" : [
-            "carnivore", "predator"
-        ]
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/dec1.png"
     },
     {
-        "type": "MONSTER_DECORATION",
+        "type":"MONSTER_DECORATION",
         "attachmentPoints" : [
             {
-                "x": 16,
-                "y": 11,
+                "x": 13,
+                "y" : 6,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
+
         ],
-        "imageId": "animal_parts/mouth.png"
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/dec2.png"
     },
+
     {
-        "type": "MONSTER_DECORATION",
+        "type":"MONSTER_DECORATION",
         "attachmentPoints" : [
             {
                 "x": 12,
-                "y": 9,
+                "y" : 13,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
+
         ],
-        "imageId": "animal_parts/mouth1.png",
-        "tags" : [
-                "carnivore", "predator"
-        ]
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/dec4.png"
     },
+
     {
-        "type": "MONSTER_DECORATION",
+        "type":"MONSTER_DECORATION",
         "attachmentPoints" : [
             {
-                "x": 7,
-                "y": 9,
+                "x": 12,
+                "y" : 12,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
+
         ],
-        "imageId": "animal_parts/mouth2.png"
+		"tags" : ["style1"],
+        "imageId" : "animal_parts/style1/dec5.png"
     }
 ]

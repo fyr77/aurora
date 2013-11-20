@@ -27,6 +27,8 @@ public class PlanetaryLifeGenerator {
      */
     private static final String[] plantStyles = {"style1", "style2", "style3"};
 
+    private static final String[] animalStyles = {"style1", "style2"};
+
     private static Map<Integer, Color> createColorsForPlants() {
         Map<Integer, Color> result = new HashMap<>();
         Random r = CommonRandom.getRandom();
@@ -52,7 +54,8 @@ public class PlanetaryLifeGenerator {
         PlantSpeciesDesc[] plants = new PlantSpeciesDesc[plantsCount];
 
         final String plantsStyle = CollectionUtils.selectRandomElement(plantStyles);
-        PlanetFloraAndFauna floraAndFauna = new PlanetFloraAndFauna(plantsStyle);
+        final String animalStyle = CollectionUtils.selectRandomElement(plantStyles);
+        PlanetFloraAndFauna floraAndFauna = new PlanetFloraAndFauna(plantsStyle, animalStyle);
 
         for (byte plantIdx = 0; plantIdx < plantsCount; ++plantIdx) {
             //todo: algorithm for plants distribution. Preferred coordinates, tile types

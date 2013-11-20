@@ -1,59 +1,62 @@
 [
     {
-        "type":"MONSTER_DECORATION",
+        "type": "MONSTER_DECORATION",
         "attachmentPoints" : [
             {
-                "x": 13,
-                "y" : 6,
+                "x": 14,
+                "y" : 8,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
         ],
-        "imageId" : "animal_parts/dec1.png"
+        "imageId": "animal_parts/style1/dec3.png",
+        "tags" : [
+            "carnivore", "predator", "style1"
+        ]
     },
     {
-        "type":"MONSTER_DECORATION",
+        "type": "MONSTER_DECORATION",
         "attachmentPoints" : [
             {
-                "x": 13,
-                "y" : 6,
+                "x": 16,
+                "y": 11,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
-
         ],
-        "imageId" : "animal_parts/dec2.png"
+		"tags" : ["style1"],
+        "imageId": "animal_parts/style1/mouth.png"
     },
-
     {
-        "type":"MONSTER_DECORATION",
+        "type": "MONSTER_DECORATION",
         "attachmentPoints" : [
             {
                 "x": 12,
-                "y" : 13,
+                "y": 9,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
-
         ],
-        "imageId" : "animal_parts/dec4.png"
+        "imageId": "animal_parts/style1/mouth1.png",
+        "tags" : [
+                "carnivore", "predator", "style1"
+        ]
     },
-
     {
-        "type":"MONSTER_DECORATION",
+        "type": "MONSTER_DECORATION",
         "attachmentPoints" : [
             {
-                "x": 12,
-                "y" : 12,
+                "x": 7,
+                "y": 9,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
-
         ],
-        "imageId" : "animal_parts/dec5.png"
+		"tags" : ["style1"],
+        "imageId": "animal_parts/style1/mouth2.png"
     }
 ]

@@ -55,6 +55,8 @@ public class AnimalGenerator {
 
     public void getImageForAnimal(AnimalSpeciesDesc desc) {
         try {
+            plantGenerationParams.tags.clear(); //todo: thread-safe?
+            plantGenerationParams.tags.add(desc.getHomePlanet().getFloraAndFauna().getAnimalsStyleTag());
             monsterGenerationParams.colorMap = ColorUtils.createDefault4TintMap(CollectionUtils.selectRandomElement(supportedColors));
             Monster monster = monsterGenerator.generateMonster(monsterGenerationParams);
             desc.setImages(((Slick2DFrankensteinImage) monster.monsterImage).getImpl(), ((Slick2DFrankensteinImage) monster.deadImage).getImpl());
