@@ -117,6 +117,7 @@ public class GUI {
         final SurfaceGUIController surfaceGUIController = new SurfaceGUIController(world);
         nifty.registerScreenController(surfaceGUIController);
         nifty.registerScreenController(new LandingPartyEquipScreenController(world));
+        nifty.registerScreenController(new IntroDialogController(world));
 
         // load xmls
         nifty.addXml("gui/screens/image_button.xml");
@@ -134,6 +135,7 @@ public class GUI {
         nifty.addXml("gui/screens/engineering_screen.xml");
         nifty.addXml("gui/screens/surface_gui.xml");
         nifty.addXml("gui/screens/landing_party_equip_screen.xml");
+        nifty.addXml("gui/screens/intro_dialog.xml");
 
         // remove old map controller listener, if it already exists (this is a loaded game). it should actually not be saved at all
         for (Iterator<GameEventListener> iter = world.getListeners().iterator(); iter.hasNext(); ) {

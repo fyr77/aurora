@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+    <screen id="intro_dialog" controller="ru.game.aurora.gui.IntroDialogController">
+        <layer childLayout="absolute">
+            <panel childLayout="vertical" backgroundColor="#000f" width="100%" height="100%" visibleToMouse="true">
+                <interact onClick="advance()"/>
+                <panel height="10%"/>
+                <panel childLayout="center" width="100%">
+                    <panel id="dialogImage" width="800px" height="300px"/>
+                </panel>
+                <panel height="10%"/>
+                <panel childLayout="horizontal" width="100%">
+                    <panel width="10%"/>
+                    <panel id="leftPortrait" width="256px" height="256px"/>
+                    <panel width="10px"/>
+                    <panel childLayout="vertical" id="textPanel" width="*" height="256px" padding="10px">
+                        <text style="bold-font" id="caption" width="60%"/>
+                        <text style="base-font" id="npcText" wrap="true"/>
+                    </panel>
+                    <panel width="10px"/>
+                    <panel id="rightPortrait" width="256px" height="256px"/>
+                    <panel width="10%"/>
+
+                </panel>
+
+            </panel>
+
+        </layer>
+    </screen>
+</nifty>
