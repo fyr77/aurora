@@ -15,6 +15,7 @@ import org.newdawn.slick.SlickException;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.SettingsScreenController;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
 
@@ -22,6 +23,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,6 +49,8 @@ public class AuroraGame extends NiftyOverlayGame {
     private static long lastFrameTime;
 
     private static AppGameContainer app;
+
+    private static List<Updatable> updatables = new ArrayList<>();
 
     public AuroraGame() {
     }
@@ -85,6 +90,10 @@ public class AuroraGame extends NiftyOverlayGame {
         return app.isFullscreen();
     }
 
+    public static List<Updatable> getUpdatables() {
+        return updatables;
+    }
+
     @Override
     protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
 
@@ -121,6 +130,9 @@ public class AuroraGame extends NiftyOverlayGame {
                 }
             } else {
                 world.update(gameContainer);
+                for (Updatable up : updatables) {
+                    up.update(gameContainer, world);
+                }
                 if (world.isGameOver()) {
                     mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
                     mainMenu.reset();

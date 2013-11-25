@@ -11,9 +11,7 @@ import ru.game.aurora.application.Camera;
 
 import java.io.Serializable;
 
-public interface GameObject extends Serializable {
-
-    public void update(GameContainer container, World world);
+public interface GameObject extends Serializable, Updatable {
 
     public void draw(GameContainer container, Graphics graphics, Camera camera);
 
