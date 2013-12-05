@@ -1,6 +1,8 @@
 package ru.game.aurora.gui;
 
+import de.lessvoid.nifty.EndNotify;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.layout.align.HorizontalAlign;
@@ -31,6 +33,8 @@ public class IntroDialogController implements ScreenController, Updatable {
 
     private Element mainText;
 
+    private Element mainPanel;
+
     private IntroDialog introDialog;
 
     private int statement;
@@ -60,9 +64,10 @@ public class IntroDialogController implements ScreenController, Updatable {
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
-        leftPortrait = screen.findElementByName("leftPortrait");
-        rightPortrait = screen.findElementByName("rightPortrait");
-        Element textPanel = screen.findElementByName("textPanel");
+        mainPanel = screen.findElementByName("mainPanel");
+        leftPortrait = mainPanel.findElementByName("leftPortrait");
+        rightPortrait = mainPanel.findElementByName("rightPortrait");
+        Element textPanel = mainPanel.findElementByName("textPanel");
         imagePanel = screen.findElementByName("dialogImage");
         captionText = textPanel.findElementByName("caption");
         mainText = textPanel.findElementByName("npcText");
@@ -89,12 +94,9 @@ public class IntroDialogController implements ScreenController, Updatable {
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
 
-    public void advance() {
-        if (isTyping) {
-            EngineUtils.setTextForGUIElement(mainText, desiredString);
-            isTyping = false;
-        } else {
-            isTyping = true;
+    private class FadeOutEndListener implements EndNotify {
+        @Override
+        public void perform() {
             actualStringBuilder = new StringBuilder();
             statement++;
             isLeft = !isLeft;
@@ -105,7 +107,26 @@ public class IntroDialogController implements ScreenController, Updatable {
                 GUI.getInstance().popAndSetScreen();
             } else {
                 update();
+                mainPanel.startEffect(EffectEventId.onCustom, new FadeInEndListener(), "fadeIn");
             }
+        }
+    }
+
+    private class FadeInEndListener implements EndNotify {
+
+        @Override
+        public void perform() {
+            isTyping = true;
+
+        }
+    }
+
+    public void advance() {
+        if (isTyping) {
+            EngineUtils.setTextForGUIElement(mainText, desiredString);
+            isTyping = false;
+        } else {
+            mainPanel.startEffect(EffectEventId.onCustom, new FadeOutEndListener(), "fadeOut");
         }
     }
 
