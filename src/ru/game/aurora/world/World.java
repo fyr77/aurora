@@ -6,6 +6,7 @@
 package ru.game.aurora.world;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -89,53 +90,58 @@ public class World implements Serializable {
             return;
         }
 
-        if (isPaused) {
-            return;
-        }
+        final Nifty nifty = GUI.getInstance().getNifty();
+        if (!isPaused) {
+            // update game world
+            currentRoom.update(container, this);
+            if (isUpdatedThisFrame()) {
+                player.getResearchState().update(this);
+                player.getEngineeringState().update(this);
+                player.getEarthState().update(this);
+                turnCount++;
+                EvacuationState es = player.getEarthState().getEvacuationState();
+                if (es != null && es.isGameOver(this)) {
+                    es.showEndGameScreen(this);
+                    return;
+                }
+                // to prevent concurrent modification if some of listeners adds new ones
+                List<GameEventListener> oldListeners = new LinkedList<GameEventListener>(listeners);
+                for (GameEventListener listener : oldListeners) {
+                    listener.onTurnEnded(this);
+                }
+            }
 
-        updatedThisFrame = updatedNextFrame;
-        updatedNextFrame = false;
+            for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext(); ) {
+                GameEventListener l = listenerIterator.next();
+                if (!l.isAlive()) {
+                    listenerIterator.remove();
+                }
+            }
+            updatedThisFrame = updatedNextFrame;
+            updatedNextFrame = false;
 
-        if (container.getInput().isKeyPressed(Input.KEY_R)) {
-            GUI.getInstance().pushCurrentScreen();
-            GUI.getInstance().getNifty().gotoScreen("research_screen");
-            return;
-        }
-
-        if (container.getInput().isKeyPressed(Input.KEY_E)) {
-            GUI.getInstance().pushCurrentScreen();
-            GUI.getInstance().getNifty().gotoScreen("engineering_screen");
-            return;
-        }
-
-        currentRoom.update(container, this);
-        if (isUpdatedThisFrame()) {
-            player.getResearchState().update(this);
-            player.getEngineeringState().update(this);
-            player.getEarthState().update(this);
-            turnCount++;
-            EvacuationState es = player.getEarthState().getEvacuationState();
-            if (es != null && es.isGameOver(this)) {
-                es.showEndGameScreen(this);
+            if (container.getInput().isKeyPressed(Input.KEY_R)) {
+                GUI.getInstance().pushCurrentScreen();
+                nifty.gotoScreen("research_screen");
                 return;
             }
-            // to prevent concurrent modification if some of listeners adds new ones
-            List<GameEventListener> oldListeners = new LinkedList<GameEventListener>(listeners);
-            for (GameEventListener listener : oldListeners) {
-                listener.onTurnEnded(this);
-            }
-        }
 
-        for (Iterator<GameEventListener> listenerIterator = listeners.iterator(); listenerIterator.hasNext(); ) {
-            GameEventListener l = listenerIterator.next();
-            if (!l.isAlive()) {
-                listenerIterator.remove();
+            if (container.getInput().isKeyPressed(Input.KEY_E)) {
+                GUI.getInstance().pushCurrentScreen();
+                nifty.gotoScreen("engineering_screen");
+                return;
             }
+
         }
 
         // should be the last so that ESC event is not consumed
-        if (container.getInput().isKeyPressed(Input.KEY_ESCAPE) && (currentRoom instanceof GalaxyMap || currentRoom instanceof Planet || currentRoom instanceof StarSystem)) {
-            GUI.getInstance().showIngameMenu();
+        if (container.getInput().isKeyPressed(Input.KEY_ESCAPE) && (currentRoom instanceof GalaxyMap || currentRoom instanceof Planet || currentRoom instanceof StarSystem || currentRoom instanceof Dungeon)) {
+            Element popup = nifty.getTopMostPopup();
+            if (popup != null && popup.findElementByName("menu_window") != null) {
+                GUI.getInstance().closeIngameMenu();
+            } else {
+                GUI.getInstance().showIngameMenu();
+            }
             return;
         }
 
