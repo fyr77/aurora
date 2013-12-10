@@ -118,6 +118,7 @@ public class GUI {
         nifty.registerScreenController(surfaceGUIController);
         nifty.registerScreenController(new LandingPartyEquipScreenController(world));
         nifty.registerScreenController(new IntroDialogController(world));
+        nifty.registerScreenController(new CountrySelectScreenController(world));
 
         // load xmls
         nifty.addXml("gui/screens/image_button.xml");
@@ -125,6 +126,7 @@ public class GUI {
         nifty.addXml("gui/screens/progress_bar.xml");
         nifty.addXml("gui/screens/top_panel.xml");
         nifty.addXml("gui/screens/space_gui.xml");
+        nifty.addXml("gui/screens/country_select_screen.xml");
         nifty.addXml("gui/screens/fail_screen.xml");
         nifty.addXml("gui/screens/list_screen.xml");
         nifty.addXml("gui/screens/research_screen.xml");

@@ -15,7 +15,8 @@
                     <effect>
                         <onCustom customKey="fadeIn" name="fade" start="#0" end="#f" neverStopRendering="true"
                                   length="300"/>
-                        <onCustom customKey="fadeOut" name="fade" start="#f" end="#0" length="300"/>
+                        <onCustom customKey="fadeOut" name="fade" start="#f" end="#0" length="300"
+                                  neverStopRendering="true"/>
                     </effect>
                     <panel width="10%"/>
                     <panel id="leftPortrait" width="256px" height="256px" style="nifty-panel"/>

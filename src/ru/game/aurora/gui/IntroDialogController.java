@@ -101,10 +101,10 @@ public class IntroDialogController implements ScreenController, Updatable {
             statement++;
             isLeft = !isLeft;
             if (statement >= introDialog.statements.length) {
+                GUI.getInstance().popAndSetScreen();
                 if (endListener != null) {
                     endListener.stateChanged(world);
                 }
-                GUI.getInstance().popAndSetScreen();
             } else {
                 update();
                 mainPanel.startEffect(EffectEventId.onCustom, new FadeInEndListener(), "fadeIn");

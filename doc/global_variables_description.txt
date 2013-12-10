@@ -6,6 +6,8 @@ Global game state:
 earth.special_dialog - path to file with special dialog. If this variable is set and not null, this dialog will be shown
 upon returning to Earth instead of a default one
 
+player.country - which country player has chosen as a primary contributor to Aurora project. Possible values: america asia europe
+
 
 ==============================
 Main quest:

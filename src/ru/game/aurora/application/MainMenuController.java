@@ -14,6 +14,7 @@ import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.IntroDialogController;
 import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 
@@ -76,7 +77,15 @@ public class MainMenuController implements ScreenController {
                 , new IntroDialog.Statement("Gordon, Chief Scientific Officer", "scientist_dialog", "So be it")
         );
         GUI.getInstance().pushCurrentScreen();
-        ((IntroDialogController) GUI.getInstance().getNifty().findScreenController(IntroDialogController.class.getName())).setIntroDialog(dialog);
+        IntroDialogController introDialogController = (IntroDialogController) GUI.getInstance().getNifty().findScreenController(IntroDialogController.class.getName());
+        introDialogController.setIntroDialog(dialog);
+        introDialogController.setEndListener(new IStateChangeListener() {
+            @Override
+            public void stateChanged(World world) {
+                GUI.getInstance().pushCurrentScreen();
+                GUI.getInstance().getNifty().gotoScreen("country_select_screen");
+            }
+        });
         GUI.getInstance().getNifty().gotoScreen("intro_dialog");
     }
 

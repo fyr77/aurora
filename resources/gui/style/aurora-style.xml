@@ -3,6 +3,7 @@
     <useStyles filename="gui/style/fonts.xml"/>
     <useStyles filename="gui/style/panel/aurora-panel.xml"/>
     <useStyles filename="gui/style/button/aurora-button.xml"/>
+    <useStyles filename="gui/style/radiobutton/aurora-radiobutton.xml"/>
     <useStyles filename="gui/style/label/aurora-label.xml"/>
     <useStyles filename="gui/style/dropdown/aurora-drop-down.xml"/>
     <useStyles filename="gui/style/scrollbar/aurora-scrollbar-style.xml"/>
