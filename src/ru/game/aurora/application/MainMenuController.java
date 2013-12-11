@@ -70,12 +70,7 @@ public class MainMenuController implements ScreenController {
         GUI.getInstance().onWorldLoaded(container, loadedState);
         loadedState.getCurrentRoom().enter(loadedState);
 
-        IntroDialog dialog = new IntroDialog(
-                "obliterator_arrival"
-                , new IntroDialog.Statement("Gordon, Chief Scientific Officer", "scientist_dialog", "We should go deeper")
-                , new IntroDialog.Statement("Mira, Chief Engineer", "engineer_dialog", "Nope")
-                , new IntroDialog.Statement("Gordon, Chief Scientific Officer", "scientist_dialog", "So be it")
-        );
+        IntroDialog dialog = IntroDialog.load("story/intro_1.json");
         GUI.getInstance().pushCurrentScreen();
         IntroDialogController introDialogController = (IntroDialogController) GUI.getInstance().getNifty().findScreenController(IntroDialogController.class.getName());
         introDialogController.setIntroDialog(dialog);

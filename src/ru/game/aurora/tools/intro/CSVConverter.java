@@ -62,6 +62,7 @@ public class CSVConverter {
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(input));
+            reader.readLine(); // skip first line with headers
             String line = reader.readLine();
 
             List<IntroDialog.Statement> statements = new ArrayList<>();
@@ -78,7 +79,7 @@ public class CSVConverter {
             }
 
             System.out.println("CSV parsed");
-            IntroDialog introDialog = new IntroDialog(args[2], (IntroDialog.Statement[]) statements.toArray(new IntroDialog.Statement[statements.size()]));
+            IntroDialog introDialog = new IntroDialog(args[1], args[2], (IntroDialog.Statement[]) statements.toArray(new IntroDialog.Statement[statements.size()]));
 
             File outDir = new File(args[3]);
             if (!outDir.exists()) {

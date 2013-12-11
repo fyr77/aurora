@@ -152,6 +152,9 @@
     <resource type="image" id="swarm_dialog">sprites/portraits/swarm.png</resource>
 
     <!-- earth -->
+    <resource type="image" id="usa_leader">sprites/portraits/am_leader.png</resource>
+    <resource type="image" id="asia_leader">sprites/portraits/as_leader.png</resource>
+    <resource type="image" id="europe_leader">sprites/portraits/eu_leader.png</resource>
     <resource type="image" id="earth_dialog">sprites/portraits/earth-1.png</resource>
     <resource type="image" id="enterprise_dialog">sprites/portraits/enterprise.png</resource>
     <resource type="image" id="earth_ship_dialog">sprites/portraits/earth-2.png</resource>
@@ -225,6 +228,7 @@
 
 
     <!-- story -->
+    <resource type="image" id="intro">sprites/story/intro.png</resource>
     <resource type="image" id="story_beginning">sprites/story/construction.png</resource>
     <resource type="image" id="story_meeting">sprites/story/meeting_f.png</resource>
     <resource type="image" id="ship_destroyed_gameover">sprites/gui/ship_destroyed_fail_screen.png</resource>

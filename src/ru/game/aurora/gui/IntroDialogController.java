@@ -74,10 +74,12 @@ public class IntroDialogController implements ScreenController, Updatable {
     }
 
     private void update() {
+        final String bundleId = "intro/" + introDialog.id;
         IntroDialog.Statement currentStatement = introDialog.statements[statement];
-        EngineUtils.setTextForGUIElement(captionText, Localization.getText("dialogs", currentStatement.captionId));
+        EngineUtils.setTextForGUIElement(captionText, Localization.getText(bundleId, currentStatement.captionId));
         EngineUtils.setTextForGUIElement(mainText, "");
-        desiredString = Localization.getText("dialogs", currentStatement.textId);
+
+        desiredString = Localization.getText(bundleId, currentStatement.textId);
         if (isLeft) {
             captionText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.left);
             mainText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.left);

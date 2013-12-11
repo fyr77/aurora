@@ -23,7 +23,8 @@
                     <panel width="20px"/>
                     <panel childLayout="vertical" id="textPanel" width="*" height="256px">
                         <text style="bold-font" id="caption" width="60%"/>
-                        <text style="base-font" id="npcText" wrap="true"/>
+                        <panel height="20px"/>
+                        <text style="base-font" id="npcText" wrap="true" width="80%" textHAligh="center"/>
                     </panel>
                     <panel width="20px"/>
                     <panel id="rightPortrait" width="256px" height="256px"/>
