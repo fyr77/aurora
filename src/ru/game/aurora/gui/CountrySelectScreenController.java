@@ -7,6 +7,7 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 
@@ -46,6 +47,27 @@ public class CountrySelectScreenController implements ScreenController {
     public void closeScreen() {
         GUI.getInstance().popAndSetScreen();
         world.getGlobalVariables().put("player.country", selectedId);
+        GUI.getInstance().pushCurrentScreen();
+
+        IntroDialogController introDialogController = (IntroDialogController) GUI.getInstance().getNifty().findScreenController(IntroDialogController.class.getCanonicalName());
+        introDialogController.setEndListener(null);
+        IntroDialog dialog = null;
+        switch (selectedId) {
+            case "america":
+                dialog = IntroDialog.load("story/intro_am.json");
+                break;
+            case "asia":
+                dialog = IntroDialog.load("story/intro_as.json");
+                break;
+            case "europe":
+                dialog = IntroDialog.load("story/intro_eu.json");
+                break;
+            default:
+                throw new IllegalStateException("Invalid country id " + selectedId);
+        }
+
+        introDialogController.setIntroDialog(dialog);
+        GUI.getInstance().getNifty().gotoScreen("intro_dialog");
     }
 
     @NiftyEventSubscriber(id = "RadioGroup-1")

@@ -69,19 +69,6 @@ public class MainMenuController implements ScreenController {
         }
         GUI.getInstance().onWorldLoaded(container, loadedState);
         loadedState.getCurrentRoom().enter(loadedState);
-
-        IntroDialog dialog = IntroDialog.load("story/intro_1.json");
-        GUI.getInstance().pushCurrentScreen();
-        IntroDialogController introDialogController = (IntroDialogController) GUI.getInstance().getNifty().findScreenController(IntroDialogController.class.getName());
-        introDialogController.setIntroDialog(dialog);
-        introDialogController.setEndListener(new IStateChangeListener() {
-            @Override
-            public void stateChanged(World world) {
-                GUI.getInstance().pushCurrentScreen();
-                GUI.getInstance().getNifty().gotoScreen("country_select_screen");
-            }
-        });
-        GUI.getInstance().getNifty().gotoScreen("intro_dialog");
     }
 
     public void newGame() {
@@ -117,6 +104,18 @@ public class MainMenuController implements ScreenController {
                 // add them here and not in world generator, as gui must be created first
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/tutorials/game_start_tutorial.json"));
                 world.addOverlayWindow(new StoryScreen("story/beginning.json"));
+                IntroDialog dialog = IntroDialog.load("story/intro_1.json");
+                GUI.getInstance().pushCurrentScreen();
+                IntroDialogController introDialogController = (IntroDialogController) GUI.getInstance().getNifty().findScreenController(IntroDialogController.class.getName());
+                introDialogController.setIntroDialog(dialog);
+                introDialogController.setEndListener(new IStateChangeListener() {
+                    @Override
+                    public void stateChanged(World world) {
+                        GUI.getInstance().pushCurrentScreen();
+                        GUI.getInstance().getNifty().gotoScreen("country_select_screen");
+                    }
+                });
+                GUI.getInstance().getNifty().gotoScreen("intro_dialog");
                 return world;
             }
             if (container.getTime() - lastTimeChecked > 500) {

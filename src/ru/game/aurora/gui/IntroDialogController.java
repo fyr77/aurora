@@ -56,6 +56,9 @@ public class IntroDialogController implements ScreenController, Updatable {
     public void setIntroDialog(IntroDialog introDialog) {
         this.introDialog = introDialog;
         this.statement = 0;
+        this.isLeft = true;
+        this.isTyping = true;
+        this.actualStringBuilder = new StringBuilder();
     }
 
     public void setEndListener(IStateChangeListener endListener) {
@@ -141,6 +144,7 @@ public class IntroDialogController implements ScreenController, Updatable {
 
     @Override
     public void onEndScreen() {
+        mainPanel.stopEffect(EffectEventId.onCustom);
         AuroraGame.getUpdatables().remove(this);
     }
 
@@ -151,7 +155,7 @@ public class IntroDialogController implements ScreenController, Updatable {
                 isTyping = false;
                 return;
             }
-            if (container.getTime() - lastLetterTime > 50) {
+            if (container.getTime() - lastLetterTime > 30) {
                 actualStringBuilder.append(desiredString.charAt(actualStringBuilder.length()));
                 EngineUtils.setTextForGUIElement(mainText, actualStringBuilder.toString());
                 lastLetterTime = container.getTime();

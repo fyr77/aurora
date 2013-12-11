@@ -1,0 +1,21 @@
+{
+  "id": "intro_as",
+  "mainImageId": "intro",
+  "statements": [
+    {
+      "iconName": "asia_leader",
+      "captionId": "intro_as.1.caption",
+      "textId": "intro_as.1.text"
+    },
+    {
+      "iconName": "usa_leader",
+      "captionId": "intro_as.2.caption",
+      "textId": "intro_as.2.text"
+    },
+    {
+      "iconName": "europe_leader",
+      "captionId": "intro_as.3.caption",
+      "textId": "intro_as.3.text"
+    }
+  ]
+}
