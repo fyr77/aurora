@@ -98,6 +98,16 @@ public class Movable extends BasePositionable implements IMovable {
     }
 
     @Override
+    public int getTargetX() {
+        return destinationX;
+    }
+
+    @Override
+    public int getTargetY() {
+        return destinationY;
+    }
+
+    @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
     }
 }

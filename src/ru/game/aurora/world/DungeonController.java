@@ -386,7 +386,7 @@ public class DungeonController implements Serializable {
             }
         }
         // check that no crew member left, AND landing party window is not opened, because if it is - then landing party can have 0 members in process of configuration
-        if (landingParty.getTotalMembers() == 0 && !GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("landing_party_equip_screen")) {
+        if (landingParty.getTotalMembers() <= 0 && !GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("landing_party_equip_screen")) {
             onLandingPartyDestroyed(world);
         }
     }

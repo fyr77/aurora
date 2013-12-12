@@ -92,14 +92,12 @@ public class MonsterController implements Serializable {
                     myMonster.moveRight();
                 } else if (newX < x) {
                     myMonster.moveLeft();
-                }
-
-                if (newY < y) {
+                } else if (newY < y) {
                     myMonster.moveUp();
                 } else if (newY > y) {
                     myMonster.moveDown();
                 }
-                map.setTilePassable(newX, newY, false);
+                map.setTilePassable(myMonster.getTargetX(), myMonster.getTargetY(), false);
             }
 
         }

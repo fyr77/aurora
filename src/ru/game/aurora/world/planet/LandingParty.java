@@ -202,7 +202,7 @@ public class LandingParty extends MovableSprite implements GameObject {
     public void subtractHp(World world, int amount) {
         while (amount > 0) {
             int amountToSubtract = Math.min(hp, amount);
-            if (amountToSubtract <= 0) {
+            if (amountToSubtract < 0) {
                 break;
             }
             hp -= amountToSubtract;
@@ -219,6 +219,8 @@ public class LandingParty extends MovableSprite implements GameObject {
                 world.onCrewChanged();
                 if (getTotalMembers() > 0) {
                     resetHp();
+                } else {
+                    break;
                 }
             }
             amount -= amountToSubtract;

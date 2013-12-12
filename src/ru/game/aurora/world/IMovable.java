@@ -21,4 +21,8 @@ public interface IMovable extends Positionable, GameObject {
     float getOffsetY();
 
     boolean nowMoving();
+
+    int getTargetX();
+
+    int getTargetY();
 }
