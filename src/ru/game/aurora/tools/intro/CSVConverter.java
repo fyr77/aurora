@@ -3,11 +3,11 @@ package ru.game.aurora.tools.intro;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.game.aurora.dialog.IntroDialog;
+import ru.game.aurora.tools.Context;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Creates internal data representation for an intro dialog based on given csv file
@@ -18,18 +18,6 @@ import java.util.Properties;
 public class CSVConverter {
 
     private static final String delimiter = ";";
-
-    private static final class Context {
-        public String id;
-
-        public int lineNumber = 0;
-
-        public Properties text = new Properties();
-
-        private Context(String id) {
-            this.id = id;
-        }
-    }
 
     private static IntroDialog.Statement parseLine(Context context, String line) {
         String[] tokens = line.split(delimiter);
