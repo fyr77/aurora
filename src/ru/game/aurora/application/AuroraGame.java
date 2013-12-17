@@ -149,7 +149,9 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     public boolean closeRequested() {
-        return false;
+        Configuration.saveSystemProperties();
+        //todo: show confirmation
+        return true;
     }
 
     @Override
@@ -224,11 +226,13 @@ public class AuroraGame extends NiftyOverlayGame {
             throw new SlickException("Failed to load game properties", e);
         }
 
-        if (args.length != 0) {
-            Localization.init(Locale.forLanguageTag(args[0]));
+        final String locale = Configuration.getSystemProperties().getProperty("locale");
+        if (locale != null) {
+            Localization.init(Locale.forLanguageTag(locale));
         } else {
             Localization.init(Locale.getDefault());
         }
+        Configuration.getSystemProperties().put("locale", Localization.getCurrentLocaleTag());
         app = new AppGameContainer(new AuroraGame());
         SettingsScreenController.Resolution res;
         String resolutionString = Configuration.getSystemProperties().getProperty("screen.resolution");

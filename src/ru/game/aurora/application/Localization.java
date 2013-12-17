@@ -22,6 +22,12 @@ public class Localization {
 
     private static String[] supportedLocales = {"ru", "en"};
 
+    public static String getCurrentLocaleTag()
+    {
+        return currentLocale.toLanguageTag();
+    }
+
+
     public static void init(Locale locale) {
         for (String s : supportedLocales) {
             if (locale.getLanguage().contains(s)) {

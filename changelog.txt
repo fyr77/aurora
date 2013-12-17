@@ -1,7 +1,11 @@
 
-VERSION 0.1.4
+VERSION 0.2.0
 
 IN PROGRESS...
+
++ New story and dialogs
++ Tools to load dialogs from CSV files
+* Locale can now be read from properties
 
 ======================================================
 
