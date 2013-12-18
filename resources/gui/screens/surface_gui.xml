@@ -4,6 +4,25 @@
         <layer childLayout="vertical">
             <control name="top_panel" id="top_panel"/>
 
+            <!-- midlle panel contains list of buttons to the right -->
+            <panel height="*" childLayout="horizontal">
+                <panel width="85%"/>
+                <panel childLayout="vertical">
+                    <panel height="30%"/>
+                    <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
+                           padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                        <control id="inventory_button" name="button" label="${gui.inventory}" width="90%"
+                                 height="50px">
+                            <interact onClick="openInventory()"/>
+                        </control>
+                        <control id="menu_button" name="button" label="${gui.space.menu}" width="90%" height="50px">
+                            <interact onClick="openMenu()"/>
+                        </control>
+                    </panel>
+                    <panel height="*"/>
+                </panel>
+            </panel>
+
             <panel height="*"/>
             <panel height="100px" childLayout="center">
                 <control id="shoot_panel" name="shoot_panel" height="100px"/>

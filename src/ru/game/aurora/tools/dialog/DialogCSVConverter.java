@@ -18,15 +18,13 @@ import java.util.*;
  * ID;npc text;custom icon (if any)
  * Reply:
  * empty;reply text; target ID;condition;return value
- *
+ * <p/>
  * If condition is set, it can be one of following: either a variable name, or a variable name sign value, like 'quest.value=4'
  */
-public class DialogCSVConverter
-{
+public class DialogCSVConverter {
     private static final String delimiter = ";";
 
-    private static Condition[] parseConditions(String value)
-    {
+    private static Condition[] parseConditions(String value) {
         String[] split = value.split("=");
         Condition[] conditions = new Condition[1];
         if (split.length == 1) {
@@ -66,8 +64,7 @@ public class DialogCSVConverter
         return new Statement(stmtId, stmtStrings.length > 2 ? stmtStrings[2] : null, textId, replies);
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         if (args.length != 4) {
             System.err.println("Usage: DialogCSVConverter <input file> <dialog string id> <main image id> <out dir>");
             return;
@@ -108,7 +105,7 @@ public class DialogCSVConverter
                     Statement st = parseStatement(stmtLine, replyStrings, context);
                     statements.put(st.id, st);
                 }
-                stmtLine = null;
+                stmtLine = parts;
                 replyStrings.clear();
 
             }

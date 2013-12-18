@@ -108,4 +108,13 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     public void cancelPressed() {
         ((IDungeon) world.getCurrentRoom()).getController().changeMode();
     }
+
+    public void openMenu() {
+        GUI.getInstance().showIngameMenu();
+    }
+
+    public void openInventory() {
+        GUI.getInstance().pushCurrentScreen();
+        GUI.getInstance().getNifty().gotoScreen("inventory_screen");
+    }
 }

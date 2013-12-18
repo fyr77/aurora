@@ -7,6 +7,7 @@ package ru.game.aurora.world.planet;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
@@ -28,6 +29,11 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
         @Override
         public String getName() {
             return type.name();
+        }
+
+        @Override
+        public Image getImage() {
+            return ResourceManager.getInstance().getImage(type.getSpriteName());
         }
 
         @Override

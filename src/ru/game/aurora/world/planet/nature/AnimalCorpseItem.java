@@ -1,5 +1,6 @@
 package ru.game.aurora.world.planet.nature;
 
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.research.projects.AnimalResearch;
@@ -7,12 +8,12 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
 /**
-* Created with IntelliJ IDEA.
-* User: Egor.Smirnov
-* Date: 25.10.13
-* Time: 14:18
-* To change this template use File | Settings | File Templates.
-*/
+ * Created with IntelliJ IDEA.
+ * User: Egor.Smirnov
+ * Date: 25.10.13
+ * Time: 14:18
+ * To change this template use File | Settings | File Templates.
+ */
 public class AnimalCorpseItem implements InventoryItem {
 
     private static final long serialVersionUID = 1L;
@@ -26,6 +27,11 @@ public class AnimalCorpseItem implements InventoryItem {
     @Override
     public String getName() {
         return desc.getName();
+    }
+
+    @Override
+    public Image getImage() {
+        return desc.getDeadImage();
     }
 
     @Override

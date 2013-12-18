@@ -1,0 +1,36 @@
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+
+    <controlDefinition name="line-with-image">
+        <panel childLayout="horizontal" width="100%" align="center" padding="5px">
+            <image id="#line-icon" width="64px" height="64px"/>
+            <text id="#line-text" style="base-font" align="left" textHAlign="left" height="64px" width="*" wrap="true"/>
+        </panel>
+
+    </controlDefinition>
+
+    <screen id="inventory_screen" controller="ru.game.aurora.gui.InventoryController">
+        <layer childLayout="absolute">
+            <control id="inventory_window" name="window" hideOnClose="true" title="${gui.inventory.title}" width="80%"
+                     height="80%" x="10%" y="10%">
+                <panel childLayout="vertical">
+
+                    <control id="items" name="listBox" vertical="optional" horizontal="off" selection="Single"
+                             displayItems="8"
+                             viewConverterClass="ru.game.aurora.gui.InventoryViewConverter">
+                        <control name="line-with-image"
+                                 controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
+                    </control>
+
+                    <!-- close button panel -->
+                    <panel height="10px"/>
+                    <panel childLayout="horizontal" height="50px">
+                        <panel width="80%"/>
+                        <control id="close_button" name="button" label="${gui.close}" width="150px" height="45px">
+                            <interact onClick="closeScreen()"/>
+                        </control>
+                    </panel>
+                </panel>
+            </control>
+        </layer>
+    </screen>
+</nifty>

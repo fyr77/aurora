@@ -7,8 +7,10 @@
 
 package ru.game.aurora.world.equip;
 
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.JsonConfigManager;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
@@ -66,8 +68,8 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
         return id;
     }
 
-    public String getImage() {
-        return image;
+    public Image getImage() {
+        return ResourceManager.getInstance().getImage(image);
     }
 
     public String getShotImage() {
@@ -75,8 +77,7 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return getName() + " " + damage + " DMG, " + range + " RNG";
     }
 }
