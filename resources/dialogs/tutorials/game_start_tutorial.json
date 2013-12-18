@@ -1,58 +1,52 @@
 {
     "id": "game_start",
-    "iconName":"scientist_dialog",
+    "iconName":"no_image",
     "statements":{
         "0":{
             "id":0,
             "replies":[
                 {
-                    "targetStatementId":1,
-                    "replyText":"next"
+                    "targetStatementId":-1,
+                    "returnValue" : 1,
+                    "replyConditions" : [
+                        {
+                            "name" : "crew.scientist",
+                            "type" : "NOT_SET"
+                        }
+                    ],
+                    "replyText":"scientist"
                 },
+
                 {
                     "targetStatementId":-1,
-                    "replyText":"end"
-                }
-            ]
-        },
-
-        "1":{
-            "id":1,
-            "replies":[
-                {
-                    "targetStatementId":2,
-                    "replyText":"next"
+                    "returnValue" : 2,
+                    "replyConditions" : [
+                        {
+                            "name" : "crew.engineer",
+                            "type" : "NOT_SET"
+                        }
+                    ],
+                    "replyText":"engineer"
                 },
+
                 {
                     "targetStatementId":-1,
-                    "replyText":"end"
-                }
-            ]
-        },
-
-        "2":{
-            "id":2,
-            "replies":[
-                {
-                    "targetStatementId":3,
-                    "replyText":"next"
+                    "returnValue" : 3,
+                    "replyConditions" : [
+                        {
+                            "name" : "crew.military",
+                            "type" : "NOT_SET"
+                        }
+                    ],
+                    "replyText":"military"
                 },
-                {
-                    "targetStatementId":-1,
-                    "replyText":"end"
-                }
-            ]
-        },
 
-        "3":{
-            "id":3,
-            "replies":[
                 {
                     "targetStatementId":-1,
+                    "returnValue" : 0,
                     "replyText":"end"
                 }
             ]
         }
-
     }
 }

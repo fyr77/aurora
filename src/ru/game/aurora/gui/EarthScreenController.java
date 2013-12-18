@@ -56,7 +56,7 @@ public class EarthScreenController implements ScreenController {
     }
 
     public void closeScreen() {
-        GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
+        GUI.getInstance().getNifty().gotoScreen("star_system_gui");
     }
 
     @NiftyEventSubscriber(id = "itemsList")

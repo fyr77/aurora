@@ -21,6 +21,14 @@ quest.main.weapon_test_done - after player has performed a weapon test against O
 quest.main.evacuation_started - after evacuation from Earth has begun
 
 ==============================
+Crew relationship
+
+crew.engineer - store state of a relationship with chief engineer
+crew.scientist
+crew.military
+
+
+==============================
 
 Relations with rogues:
 

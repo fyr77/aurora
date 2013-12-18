@@ -89,14 +89,18 @@ public class Dialog implements OverlayWindow {
             // manually set localized string
             return currentStatement.npcText;
         }
-        return Localization.getText("dialogs", id + "." + currentStatement.id);
+        final String s = "dialogs/" + id;
+        boolean hasCustomBundle = Localization.bundleExists(s);
+        return Localization.getText(hasCustomBundle ? s : "dialogs", id + "." + currentStatement.id);
     }
 
     public List<String> addAvailableRepliesLocalized(World world) {
         List<Reply> replies = currentStatement.getAvailableReplies(world);
         List<String> outList = new ArrayList<>(replies.size());
+        final String s = "dialogs/" + id;
+        boolean hasCustomBundle = Localization.bundleExists(s);
         for (Reply reply : replies) {
-            outList.add(Localization.getText("dialogs", id + "." + currentStatement.id + "." + reply.replyText));
+            outList.add(Localization.getText(hasCustomBundle ? s : "dialogs", id + "." + currentStatement.id + "." + reply.replyText));
         }
         return outList;
     }
@@ -150,10 +154,6 @@ public class Dialog implements OverlayWindow {
         if (currentStatement != null) {
             availableReplies = currentStatement.getAvailableReplies(world);
         } else {
-            // dialog is over
-            if (listener != null) {
-                listener.onDialogEnded(world, this, returnValue);
-            }
             availableReplies = null;
         }
     }
@@ -168,7 +168,6 @@ public class Dialog implements OverlayWindow {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-
 
     }
 
@@ -208,5 +207,9 @@ public class Dialog implements OverlayWindow {
 
     public void putStatement(Statement stmt) {
         this.statements.put(stmt.id, stmt);
+    }
+
+    public DialogListener getListener() {
+        return listener;
     }
 }

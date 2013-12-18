@@ -34,7 +34,7 @@ public class EarthProgressDialogListener implements DialogListener {
             return;
         }
         world.setCurrentRoom(earth.getOwner());
-
+        GUI.getInstance().getNifty().gotoScreen("earth_screen");
 
         // refilling crew
         world.getPlayer().getShip().refillCrew(world);

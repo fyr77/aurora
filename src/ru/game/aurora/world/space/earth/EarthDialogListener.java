@@ -1,13 +1,11 @@
 package ru.game.aurora.world.space.earth;
 
-import de.lessvoid.nifty.Nifty;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.dialog.Statement;
-import ru.game.aurora.gui.DialogController;
 import ru.game.aurora.gui.EarthProgressScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
@@ -64,19 +62,13 @@ public class EarthDialogListener implements DialogListener {
             }
             earth.getProgressDialog().putStatement(stmt);
 
-
-            // hack: we do not want to return to current dialog screen after opening a new one, push next screen instead
-            GUI.getInstance().pushScreen("earth_screen");
-            earth.getProgressDialog().enter(world);
-            Nifty nifty = GUI.getInstance().getNifty();
-            ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).pushDialog(earth.getProgressDialog());
-            nifty.gotoScreen("dialog_screen");
+            world.addOverlayWindow(earth.getProgressDialog());
 
             if (daysPassed > Configuration.getIntProperty("game.minimumTripDays")) {
-                // show research screen, must call after addOverlayWindow(dialog)
                 GUI.getInstance().pushCurrentScreen();
                 GUI.getInstance().getNifty().gotoScreen("earth_progress_screen");
             }
+
         } else {
             // return
             world.setCurrentRoom(earth.getOwner());

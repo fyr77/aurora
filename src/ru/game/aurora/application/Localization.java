@@ -22,6 +22,8 @@ public class Localization {
 
     private static String[] supportedLocales = {"ru", "en"};
 
+    private static UTF8Control utf8Control = new UTF8Control();
+
     public static String getCurrentLocaleTag()
     {
         return currentLocale.toLanguageTag();
@@ -45,8 +47,19 @@ public class Localization {
         return "localization/" + currentLocale.getLanguage() + "/" + key;
     }
 
+    public static Boolean bundleExists(String bundleId) {
+        // this method is total shit, but no other easy way to check that bundle exists
+        // needed by dialogs, after all dialogs are moved to separate files i hope this will be no longer needed
+        try {
+            ResourceBundle.getBundle(getBundleName(bundleId), currentLocale, utf8Control);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
     public static String getText(String bundleId, String textId) {
-        ResourceBundle bundle = ResourceBundle.getBundle(getBundleName(bundleId), currentLocale, new UTF8Control());
+        ResourceBundle bundle = ResourceBundle.getBundle(getBundleName(bundleId), currentLocale, utf8Control);
         if (!bundle.containsKey(textId)) {
             logger.warn("Localization key {}:{} not found", bundleId, textId);
             return "<" + bundleId + "/" + textId + ">";

@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.IntroDialogController;
@@ -93,6 +94,72 @@ public class MainMenuController implements ScreenController {
         GUI.getInstance().getNifty().gotoScreen("settings_screen");
     }
 
+    private Dialog createInitialDialog(final World world)
+    {
+        final Dialog gameStartDialog = Dialog.loadFromFile("dialogs/tutorials/game_start_tutorial.json");
+        gameStartDialog.setListener(new DialogListener() {
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+                Dialog d = null;
+                switch (returnCode) {
+                    case 3:
+                        d = Dialog.loadFromFile("dialogs/tutorials/marine_intro.json");
+                        world.getGlobalVariables().put("crew.military", 1);
+                        d.setListener(new DialogListener() {
+                            @Override
+                            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+                                if (returnCode == -1) {
+                                    // player has made a mistake, military chief will not be friendly with him
+                                    world.getGlobalVariables().put("crew.military", -1);
+                                }
+                                // return to initial dialog, if player will want to visit other crewmembers
+                                world.addOverlayWindow(gameStartDialog);
+                            }
+                        });
+                        break;
+                    case 2:
+                        d = Dialog.loadFromFile("dialogs/tutorials/engineer_intro.json");
+                        world.getGlobalVariables().put("crew.engineer", 1);
+                        d.setListener(new DialogListener() {
+                            @Override
+                            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+                                if (returnCode == -1) {
+                                    // player has made a mistake, engineer chief will not be friendly with him
+                                    world.getGlobalVariables().put("crew.engineer", -1);
+                                }
+                                // return to initial dialog, if player will want to visit other crewmembers
+                                world.addOverlayWindow(gameStartDialog);
+                            }
+                        });
+                        break;
+
+                    case 1:
+                        d = Dialog.loadFromFile("dialogs/tutorials/scientist_intro.json");
+                        world.getGlobalVariables().put("crew.scientist", 1);
+                        d.setListener(new DialogListener() {
+                            @Override
+                            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+                                if (returnCode == -1) {
+                                    // player has made a mistake, engineer chief will not be friendly with him
+                                    world.getGlobalVariables().put("crew.scientist", -1);
+                                }
+                                // return to initial dialog, if player will want to visit other crewmembers
+                                world.addOverlayWindow(gameStartDialog);
+                            }
+                        });
+                        break;
+                }
+
+                if (d != null) {
+                    // player decided to visit one of his crew mates
+                    world.addOverlayWindow(d);
+                }
+            }
+        });
+
+        return gameStartDialog;
+    }
+
 
     public World update(Camera camera, GameContainer container) {
         background.update(container);
@@ -103,7 +170,9 @@ public class MainMenuController implements ScreenController {
                 world.setCamera(camera);
                 world.getCurrentRoom().enter(world);
                 // add them here and not in world generator, as gui must be created first
-                world.addOverlayWindow(Dialog.loadFromFile("dialogs/tutorials/game_start_tutorial.json"));
+
+                world.addOverlayWindow(createInitialDialog(world));
+
                 world.addOverlayWindow(new StoryScreen("story/beginning.json"));
                 IntroDialog dialog = IntroDialog.load("story/intro_1.json");
                 GUI.getInstance().pushCurrentScreen();

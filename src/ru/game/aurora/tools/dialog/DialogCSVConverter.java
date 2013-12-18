@@ -57,11 +57,11 @@ public class DialogCSVConverter {
             String[] replyString = replyStrings.get(i);
             final String replyTextId = textId + "." + i;
             context.text.put(replyTextId, replyString[1]);
-            replies[i] = new Reply(replyString.length >= 5 ? Integer.parseInt(replyString[4]) : 0, Integer.parseInt(replyString[2]), replyTextId, replyString.length > 3 ? parseConditions(replyString[3]) : null);
+            replies[i] = new Reply(replyString.length >= 5 ? Integer.parseInt(replyString[4]) : 0, Integer.parseInt(replyString[2]), Integer.toString(i), replyString.length > 3 ? parseConditions(replyString[3]) : null);
         }
 
         context.text.put(textId, stmtStrings[1]);
-        return new Statement(stmtId, stmtStrings.length > 2 ? stmtStrings[2] : null, textId, replies);
+        return new Statement(stmtId, stmtStrings.length > 2 ? stmtStrings[2] : null, null, replies);
     }
 
     public static void main(String[] args) {
@@ -85,28 +85,38 @@ public class DialogCSVConverter {
             List<String[]> replyStrings = new ArrayList<>();
             while (true) {
                 context.lineNumber++;
-                String line = reader.readLine();
-                if (line == null) {
+                try {
+                    String line = reader.readLine();
+                    if (line == null) {
+                        if (stmtLine != null) {
+                            Statement st = parseStatement(stmtLine, replyStrings, context);
+                            statements.put(st.id, st);
+                        }
+                        break;
+                    }
+
+                    String[] parts = line.split(delimiter);
+                    if (parts.length == 0) {
+                        // skip empty line
+                        System.err.println("You better delete empty line " + context.lineNumber);
+                        continue;
+                    }
+                    if (parts[0].isEmpty()) {
+                        // this is a reply
+                        replyStrings.add(parts);
+                        continue;
+                    }
+
                     if (stmtLine != null) {
                         Statement st = parseStatement(stmtLine, replyStrings, context);
                         statements.put(st.id, st);
                     }
-                    break;
+                    stmtLine = parts;
+                    replyStrings.clear();
+                } catch (Exception ex) {
+                    System.err.println("Error parsing line " + context.lineNumber);
+                    ex.printStackTrace();
                 }
-
-                String[] parts = line.split(delimiter);
-                if (parts[0].isEmpty()) {
-                    // this is a reply
-                    replyStrings.add(parts);
-                    continue;
-                }
-
-                if (stmtLine != null) {
-                    Statement st = parseStatement(stmtLine, replyStrings, context);
-                    statements.put(st.id, st);
-                }
-                stmtLine = parts;
-                replyStrings.clear();
 
             }
 
@@ -128,9 +138,15 @@ public class DialogCSVConverter {
 
             System.out.println("Saving localization");
             // save localizations
-            FileWriter localizationWriter = new FileWriter(new File(outDir, args[1] + "_localization.properties"));
+            FileWriter localizationWriter = new FileWriter(new File(outDir, args[1] + "_ru.properties"));
             context.text.store(localizationWriter, null);
             localizationWriter.close();
+
+            FileWriter enStubWriter = new FileWriter(new File(outDir, args[1] + "_en.properties"));
+            for (Map.Entry<Object, Object> entry : context.text.entrySet()) {
+                enStubWriter.write(entry.getKey() + "=TBD\n");
+            }
+            enStubWriter.close();
 
         } catch (IOException e) {
             e.printStackTrace();
