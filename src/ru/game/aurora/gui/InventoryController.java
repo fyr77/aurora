@@ -1,7 +1,9 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
+import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -51,5 +53,10 @@ public class InventoryController implements ScreenController {
 
     public void closeScreen() {
         GUI.getInstance().popAndSetScreen();
+    }
+
+    @NiftyEventSubscriber(id = "inventory_window")
+    public void onClose(final String id, final WindowClosedEvent event) {
+        closeScreen();
     }
 }

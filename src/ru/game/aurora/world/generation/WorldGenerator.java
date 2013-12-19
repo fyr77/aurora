@@ -26,6 +26,8 @@ import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
 import ru.game.aurora.world.generation.quest.MainQuestGenerator;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
+import ru.game.aurora.world.quest.Journal;
+import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -205,6 +207,15 @@ public class WorldGenerator implements Runnable {
         }
     }
 
+    private void createMisc(World world)
+    {
+        Journal journal = world.getPlayer().getJournal();
+        journal.getCodex().add(new JournalEntry("aurora_desc", "1"));
+        journal.getCodex().add(new JournalEntry("engineer_dossier", "1"));
+        journal.getCodex().add(new JournalEntry("scientist_dossier", "1"));
+        journal.getCodex().add(new JournalEntry("military_dossier", "1"));
+    }
+
     @Override
     public void run() {
         World world = new World(Configuration.getIntProperty("world.galaxy.width"), Configuration.getIntProperty("world.galaxy.height"));
@@ -213,6 +224,7 @@ public class WorldGenerator implements Runnable {
         createAliens(world);
         createArtifactsAndAnomalies(world);
         createQuestWorlds(world);
+        createMisc(world);
 
         currentStatus = Localization.getText("gui", "generation.done");
 

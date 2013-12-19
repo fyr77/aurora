@@ -14,6 +14,7 @@ import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.LandingParty;
+import ru.game.aurora.world.quest.Journal;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 public class Player implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private Ship ship;
 
@@ -36,6 +37,8 @@ public class Player implements Serializable {
     private int resourceUnits = 5;
 
     private int credits = 5;
+
+    private Journal journal = new Journal();
 
     private Map<InventoryItem, Integer> inventory = new HashMap<InventoryItem, Integer>();
 
@@ -108,5 +111,9 @@ public class Player implements Serializable {
 
     public Map<InventoryItem, Integer> getInventory() {
         return inventory;
+    }
+
+    public Journal getJournal() {
+        return journal;
     }
 }

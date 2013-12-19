@@ -32,6 +32,11 @@
                                  height="50px">
                             <interact onClick="openEngineeringScreen()"/>
                         </control>
+                        <control id="journal_button" name="button" label="${gui.journal.title}"
+                                 width="90%"
+                                 height="50px">
+                            <interact onClick="openJournal()"/>
+                        </control>
                         <control id="starmap_button" name="button" label="${gui.space.galaxy_map}" width="90%"
                                  height="50px">
                             <interact onClick="openStarMap()"/>
@@ -91,6 +96,11 @@
                         <control id="engineering_button" name="button" label="${gui.space.engineering}" width="90%"
                                  height="50px">
                             <interact onClick="openEngineeringScreen()"/>
+                        </control>
+                        <control id="journal_button" name="button" label="${gui.journal.title}"
+                                 width="90%"
+                                 height="50px">
+                            <interact onClick="openJournal()"/>
                         </control>
                         <control id="landing_party_equip_button" name="button" label="${gui.space.landing_party}"
                                  width="90%"
