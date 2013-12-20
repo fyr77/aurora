@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+    <include file="item_icons.xml"/>
+    <include file="tiles.xml"/>
+
     <!-- stuff -->
     <resource type="image" id="no_image">sprites/no_image.png</resource>
 
@@ -31,101 +34,6 @@
     <!-- hud -->
 
     <resource type="image" id="target">sprites/gui/target.png</resource>
-
-    <!-- tiles -->
-    <resource type="image" id="rock">sprites/tiles/rock-1.png</resource>
-    <resource type="image" id="stones">sprites/tiles/stonetext.png</resource>
-    <resource type="image" id="sand_tile_1">sprites/tiles/sand-1.png</resource>
-    <resource type="image" id="snow_tile_1">sprites/tiles/snowtext.png</resource>
-    <resource type="image" id="ice_tile_1">sprites/tiles/icetext.png</resource>
-    <resource type="image" id="water_tile_1">sprites/tiles/water-1.png</resource>
-
-    <resource type="image" id="mountains_4">sprites/tiles/mountains/tiles_0004.png</resource>
-    <resource type="image" id="mountains_5">sprites/tiles/mountains/tiles_0005.png</resource>
-    <resource type="image" id="mountains_6">sprites/tiles/mountains/tiles_0006.png</resource>
-    <resource type="image" id="mountains_7">sprites/tiles/mountains/tiles_0007.png</resource>
-    <resource type="image" id="mountains_8">sprites/tiles/mountains/tiles_0008.png</resource>
-    <resource type="image" id="mountains_9">sprites/tiles/mountains/tiles_0009.png</resource>
-    <resource type="image" id="mountains_10">sprites/tiles/mountains/tiles_0010.png</resource>
-    <resource type="image" id="mountains_11">sprites/tiles/mountains/tiles_0011.png</resource>
-    <resource type="image" id="mountains_12">sprites/tiles/mountains/tiles_0012.png</resource>
-    <resource type="image" id="mountains_13">sprites/tiles/mountains/tiles_0013.png</resource>
-    <resource type="image" id="mountains_14">sprites/tiles/mountains/tiles_0014.png</resource>
-    <resource type="image" id="mountains_15">sprites/tiles/mountains/tiles_0015.png</resource>
-
-    <resource type="image" id="rock_4">sprites/tiles/rock/tiles_0004.png</resource>
-    <resource type="image" id="rock_5">sprites/tiles/rock/tiles_0005.png</resource>
-    <resource type="image" id="rock_6">sprites/tiles/rock/tiles_0006.png</resource>
-    <resource type="image" id="rock_7">sprites/tiles/rock/tiles_0007.png</resource>
-    <resource type="image" id="rock_8">sprites/tiles/rock/tiles_0008.png</resource>
-    <resource type="image" id="rock_9">sprites/tiles/rock/tiles_0009.png</resource>
-    <resource type="image" id="rock_10">sprites/tiles/rock/tiles_0010.png</resource>
-    <resource type="image" id="rock_11">sprites/tiles/rock/tiles_0011.png</resource>
-    <resource type="image" id="rock_12">sprites/tiles/rock/tiles_0012.png</resource>
-    <resource type="image" id="rock_13">sprites/tiles/rock/tiles_0013.png</resource>
-    <resource type="image" id="rock_14">sprites/tiles/rock/tiles_0014.png</resource>
-    <resource type="image" id="rock_15">sprites/tiles/rock/tiles_0015.png</resource>
-
-
-    <resource type="image" id="sand_4">sprites/tiles/sand/tiles_0004.png</resource>
-    <resource type="image" id="sand_5">sprites/tiles/sand/tiles_0005.png</resource>
-    <resource type="image" id="sand_6">sprites/tiles/sand/tiles_0006.png</resource>
-    <resource type="image" id="sand_7">sprites/tiles/sand/tiles_0007.png</resource>
-    <resource type="image" id="sand_8">sprites/tiles/sand/tiles_0008.png</resource>
-    <resource type="image" id="sand_9">sprites/tiles/sand/tiles_0009.png</resource>
-    <resource type="image" id="sand_10">sprites/tiles/sand/tiles_0010.png</resource>
-    <resource type="image" id="sand_11">sprites/tiles/sand/tiles_0011.png</resource>
-    <resource type="image" id="sand_12">sprites/tiles/sand/tiles_0012.png</resource>
-    <resource type="image" id="sand_13">sprites/tiles/sand/tiles_0013.png</resource>
-    <resource type="image" id="sand_14">sprites/tiles/sand/tiles_0014.png</resource>
-    <resource type="image" id="sand_15">sprites/tiles/sand/tiles_0015.png</resource>
-
-    <resource type="image" id="ice_4">sprites/tiles/ice/tiles_0004.png</resource>
-    <resource type="image" id="ice_5">sprites/tiles/ice/tiles_0005.png</resource>
-    <resource type="image" id="ice_6">sprites/tiles/ice/tiles_0006.png</resource>
-    <resource type="image" id="ice_7">sprites/tiles/ice/tiles_0007.png</resource>
-    <resource type="image" id="ice_8">sprites/tiles/ice/tiles_0008.png</resource>
-    <resource type="image" id="ice_9">sprites/tiles/ice/tiles_0009.png</resource>
-    <resource type="image" id="ice_10">sprites/tiles/ice/tiles_0010.png</resource>
-    <resource type="image" id="ice_11">sprites/tiles/ice/tiles_0011.png</resource>
-    <resource type="image" id="ice_12">sprites/tiles/ice/tiles_0012.png</resource>
-    <resource type="image" id="ice_13">sprites/tiles/ice/tiles_0013.png</resource>
-    <resource type="image" id="ice_14">sprites/tiles/ice/tiles_0014.png</resource>
-    <resource type="image" id="ice_15">sprites/tiles/ice/tiles_0015.png</resource>
-
-    <resource type="image" id="stones_4">sprites/tiles/stones/tiles_0004.png</resource>
-    <resource type="image" id="stones_5">sprites/tiles/stones/tiles_0005.png</resource>
-    <resource type="image" id="stones_6">sprites/tiles/stones/tiles_0006.png</resource>
-    <resource type="image" id="stones_7">sprites/tiles/stones/tiles_0007.png</resource>
-    <resource type="image" id="stones_8">sprites/tiles/stones/tiles_0008.png</resource>
-    <resource type="image" id="stones_9">sprites/tiles/stones/tiles_0009.png</resource>
-    <resource type="image" id="stones_10">sprites/tiles/stones/tiles_0010.png</resource>
-    <resource type="image" id="stones_11">sprites/tiles/stones/tiles_0011.png</resource>
-    <resource type="image" id="stones_12">sprites/tiles/stones/tiles_0012.png</resource>
-    <resource type="image" id="stones_13">sprites/tiles/stones/tiles_0013.png</resource>
-    <resource type="image" id="stones_14">sprites/tiles/stones/tiles_0014.png</resource>
-    <resource type="image" id="stones_15">sprites/tiles/stones/tiles_0015.png</resource>
-
-    <resource type="image" id="snow_4">sprites/tiles/snow/tiles_0004.png</resource>
-    <resource type="image" id="snow_5">sprites/tiles/snow/tiles_0005.png</resource>
-    <resource type="image" id="snow_6">sprites/tiles/snow/tiles_0006.png</resource>
-    <resource type="image" id="snow_7">sprites/tiles/snow/tiles_0007.png</resource>
-    <resource type="image" id="snow_8">sprites/tiles/snow/tiles_0008.png</resource>
-    <resource type="image" id="snow_9">sprites/tiles/snow/tiles_0009.png</resource>
-    <resource type="image" id="snow_10">sprites/tiles/snow/tiles_0010.png</resource>
-    <resource type="image" id="snow_11">sprites/tiles/snow/tiles_0011.png</resource>
-    <resource type="image" id="snow_12">sprites/tiles/snow/tiles_0012.png</resource>
-    <resource type="image" id="snow_13">sprites/tiles/snow/tiles_0013.png</resource>
-    <resource type="image" id="snow_14">sprites/tiles/snow/tiles_0014.png</resource>
-    <resource type="image" id="snow_15">sprites/tiles/snow/tiles_0015.png</resource>
-
-    <!-- ore -->
-    <resource type="image" id="iron_deposit">sprites/tiles/iron_deposit.png</resource>
-    <resource type="image" id="gold_deposit">sprites/tiles/gold_deposit.png</resource>
-
-    <!-- artifacts -->
-    <resource type="image" id="small_artifact">sprites/planet_objects/small_artifact.png</resource>
-    <resource type="image" id="builders_ruins">sprites/planet_objects/ruins.png</resource>
 
     <!-- races -->
 
@@ -217,15 +125,6 @@
     <resource type="animation" id="shuttle_landing" tw="256" th="256" duration="100">sprites/gui/landing.png</resource>
     <resource type="animation" id="slash" tw="64" th="64" duration="150">sprites/effects/slash.png</resource>
     <resource type="animation" id="warp" tw="128" th="128" duration="300">sprites/effects/warp_effect.png</resource>
-
-    <!-- weapon icons -->
-    <resource type="image" id="crew_rifle">sprites/weapons/crew/gun.png</resource>
-    <resource type="image" id="crew_laser">sprites/weapons/crew/laser1.png</resource>
-
-    <resource type="image" id="ship_rocket">sprites/weapons/ship/rocket_iso.png</resource>
-    <resource type="image" id="ship_laser">sprites/weapons/ship/laser1_iso.png</resource>
-    <resource type="image" id="ship_laser2">sprites/weapons/ship/laser2_iso.png</resource>
-
 
     <!-- story -->
     <resource type="image" id="intro">sprites/story/intro.png</resource>

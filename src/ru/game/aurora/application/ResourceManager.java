@@ -75,6 +75,17 @@ public class ResourceManager {
         // normalize text representation
         doc.getDocumentElement().normalize();
 
+        NodeList includes = doc.getElementsByTagName("include");
+
+        for (int includeIdx = 0; includeIdx < includes.getLength(); ++includeIdx) {
+            Node includeNode = includes.item(includeIdx);
+
+            if (includeNode.getNodeType() == Node.ELEMENT_NODE) {
+                addNewResourceFile((Element)includeNode);
+            }
+        }
+
+
         NodeList listResources = doc.getElementsByTagName("resource");
 
         int totalResources = listResources.getLength();
@@ -116,6 +127,20 @@ public class ResourceManager {
             }
         }
 
+    }
+
+    private void addNewResourceFile(Element resourceElement) throws SlickException {
+        final String file = resourceElement.getAttribute("file");
+        try {
+            InputStream is = ResourceManager.class.getClassLoader().getResourceAsStream(file);
+            if (is == null) {
+                throw new SlickException("Resource file " + file + " not found in classpath");
+            }
+            loadResources(is, false);
+            is.close();
+        } catch (IOException ex) {
+            throw new SlickException("Failed to load resource file " + file, ex);
+        }
     }
 
     private void addElementAsAnimation(Element resourceElement) throws SlickException {
