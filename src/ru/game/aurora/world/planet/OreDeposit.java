@@ -44,6 +44,11 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
         }
 
         @Override
+        public boolean isDumpable() {
+            return true;
+        }
+
+        @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -129,7 +134,7 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
         if (currentMiningProgress <= 0) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.ore.mined") + " " + getName());
             currentMiningProgress = type.getMineTime();
-            world.getPlayer().getLandingParty().pickUp(world, new OreUnit(type));
+            world.getPlayer().getLandingParty().pickUp(new OreUnit(type), 1);
             amount--;
             if (amount == 0) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.ore.depleted"));

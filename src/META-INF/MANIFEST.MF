@@ -3,6 +3,6 @@ Class-Path: eventbus-1.4.jar frankenstein-core.jar gson-2.2.2.jar jinp
  ut.jar Libnoiseforjava-master.jar lwjgl.jar nifty-1.3.2.jar rlforj.0.
  3.jar slf4j-api-1.7.5.jar logback-core-1.0.13.jar logback-classic-1.0
  .13.jar nifty-default-controls-1.3.2.jar nifty-slick-renderer-1.3.2.j
- ar nifty-style-black-1.3.2.jar slick.jar xpp3-1.1.4c.jar resources/
+ ar nifty-style-black-1.3.2.jar slick.jar xpp3-1.1.4c.jar guava-15.0.jar resources/
 Main-Class: ru.game.aurora.application.AuroraGame
 

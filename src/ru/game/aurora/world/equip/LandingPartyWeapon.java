@@ -64,6 +64,11 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
     }
 
     @Override
+    public boolean isDumpable() {
+        return false;
+    }
+
+    @Override
     public String getId() {
         return id;
     }

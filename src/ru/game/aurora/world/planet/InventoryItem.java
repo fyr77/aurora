@@ -16,4 +16,9 @@ public interface InventoryItem extends Serializable {
     public Image getImage();
 
     public void onReturnToShip(World world, int amount);
+
+    /**
+     * If this item is automatically transfered from landing party to a ship
+     */
+    public boolean isDumpable();
 }

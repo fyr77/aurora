@@ -676,6 +676,7 @@
             <element id="library" level="project" name="frankenstein-core" />
             <element id="library" level="project" name="rlforj.0.3" />
             <element id="library" level="project" name="slf4j-logback" />
+            <element id="library" level="project" name="guava-15.0" />
           </element>
         </element>
       </root>
@@ -978,6 +979,13 @@
     <library name="gson-2.2.2">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/third-party/gson-2.2.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="guava-15.0">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/third-party/guava-15.0.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

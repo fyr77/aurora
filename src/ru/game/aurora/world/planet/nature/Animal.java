@@ -110,7 +110,7 @@ public class Animal extends Movable implements PlanetObject, IMonster {
     public void onPickedUp(World world) {
         pickedUp = true;
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.picked_up"), getName()));
-        world.getPlayer().getLandingParty().pickUp(world, new AnimalCorpseItem(desc));
+        world.getPlayer().getLandingParty().pickUp(new AnimalCorpseItem(desc), 1);
     }
 
     @Override

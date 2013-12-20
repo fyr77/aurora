@@ -8,6 +8,8 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.IntroDialog;
@@ -45,6 +47,8 @@ public class MainMenuController implements ScreenController {
     private Animation lowerEngine;
 
     private MainMenuBackground background;
+
+    private static final Logger logger = LoggerFactory.getLogger(MainMenuController.class);
 
     public MainMenuController(GameContainer container) {
         this.container = container;
@@ -170,6 +174,12 @@ public class MainMenuController implements ScreenController {
                 world.setCamera(camera);
                 world.getCurrentRoom().enter(world);
                 // add them here and not in world generator, as gui must be created first
+
+                if (Configuration.getBooleanProperty("debug.skipIntro")) {
+                    logger.warn("Skipping intro because debug.skipIntro property is set");
+                    world.getGlobalVariables().put("player.country", "america");
+                    return world;
+                }
 
                 world.addOverlayWindow(createInitialDialog(world));
 

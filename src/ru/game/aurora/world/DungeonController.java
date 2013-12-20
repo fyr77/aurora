@@ -110,21 +110,17 @@ public class DungeonController implements Serializable {
             dy = -1;
             world.setUpdatedThisFrame(true);
             actuallyMoved = true;
-        }
-        if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
+        } else if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
             y++;
             dy = 1;
             world.setUpdatedThisFrame(true);
             actuallyMoved = true;
-        }
-
-        if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
+        } else if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
             x--;
             dx = -1;
             world.setUpdatedThisFrame(true);
             actuallyMoved = true;
-        }
-        if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
+        } else if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
             x++;
             dx = 1;
             world.setUpdatedThisFrame(true);
@@ -151,8 +147,6 @@ public class DungeonController implements Serializable {
 
         if (!map.isTilePassable(landingParty, x, y)) {
             world.setUpdatedThisFrame(false);
-            x = world.getPlayer().getLandingParty().getX();
-            y = world.getPlayer().getLandingParty().getY();
             actuallyMoved = false;
         }
 

@@ -1,5 +1,6 @@
 package ru.game.aurora.gui;
 
+import com.google.common.collect.Multiset;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
@@ -12,19 +13,18 @@ import ru.game.aurora.world.planet.InventoryItem;
 public class InventoryViewConverter implements ListBox.ListBoxViewConverter {
     @Override
     public void display(Element element, Object o) {
-        InventoryItem item = (InventoryItem) o;
+        Multiset.Entry<InventoryItem> item = (Multiset.Entry<InventoryItem>) o;
 
-        EngineUtils.setTextForGUIElement(element.findElementByName("#line-text"), item.getName());
-        EngineUtils.setImageForGUIElement(element.findElementByName("#line-icon"), item.getImage());
+        EngineUtils.setTextForGUIElement(element.findElementByName("#line-text"), item.getCount() + " " + item.getElement().getName());
+        EngineUtils.setImageForGUIElement(element.findElementByName("#line-icon"), item.getElement().getImage());
     }
 
     @Override
     public int getWidth(Element element, Object o) {
-        InventoryItem item = (InventoryItem) o;
+        Multiset.Entry<InventoryItem> item = (Multiset.Entry<InventoryItem>) o;
         final Element text = element.findElementByName("#line-text");
         final TextRenderer textRenderer = text.getRenderer(TextRenderer.class);
-        final Element icon = element.findElementByName("#line-icon");
-        return ((textRenderer.getFont() == null) ? 0 : textRenderer.getFont().getWidth(item.getName()))
-                + ((item.getImage() == null) ? 0 : item.getImage().getWidth());
+        return ((textRenderer.getFont() == null) ? 0 : textRenderer.getFont().getWidth(item.getCount() + " " + item.getElement().getName()))
+                + ((item.getElement().getImage() == null) ? 0 : item.getElement().getImage().getWidth());
     }
 }

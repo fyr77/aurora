@@ -13,17 +13,23 @@ import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.world.World;
 
 public class ArtifactResearch extends ResearchProjectDesc {
-    private static final long serialVersionUID = -5713273233606677508L;
+    private static final long serialVersionUID = 1L;
 
     private int progress = 100;
+
+    private double speedModifier;
 
     public ArtifactResearch(ResearchReport report) {
         super("artifact", "artifact_research", report);
     }
 
+    public void setSpeedModifier(double speedModifier) {
+        this.speedModifier = speedModifier;
+    }
+
     @Override
     public void update(World world, int scientists) {
-        progress -= scientists;
+        progress -= Math.max(1, scientists * speedModifier);
     }
 
     @Override

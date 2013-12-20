@@ -5,6 +5,8 @@
  */
 package ru.game.aurora.world.planet;
 
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.research.ResearchState;
@@ -15,13 +17,12 @@ import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Iterator;
 
 public class LandingParty extends MovableSprite implements GameObject {
     public static final int MAX_OXYGEN = 100;
 
-    private static final long serialVersionUID = 7804695272317195264L;
+    private static final long serialVersionUID = 1;
 
     private int military;
 
@@ -35,7 +36,7 @@ public class LandingParty extends MovableSprite implements GameObject {
 
     private int collectedGeodata = 0;
 
-    private Map<InventoryItem, Integer> inventory = new HashMap<>();
+    private Multiset<InventoryItem> inventory = HashMultiset.<InventoryItem>create();
 
     private int hp = 3;
 
@@ -115,12 +116,8 @@ public class LandingParty extends MovableSprite implements GameObject {
         this.collectedGeodata = collectedGeodata;
     }
 
-    public void pickUp(World world, InventoryItem o) {
-        Integer i = inventory.get(o);
-        if (i == null) {
-            i = 0;
-        }
-        inventory.put(o, i + 1);
+    public void pickUp(InventoryItem o, int amount) {
+        inventory.add(o, amount);
     }
 
     /**
@@ -149,8 +146,12 @@ public class LandingParty extends MovableSprite implements GameObject {
             setCollectedGeodata(0);
         }
 
-        for (Map.Entry<InventoryItem, Integer> o : inventory.entrySet()) {
-            o.getKey().onReturnToShip(world, o.getValue());
+        for (Iterator<Multiset.Entry<InventoryItem>> iter = inventory.entrySet().iterator(); iter.hasNext();) {
+            Multiset.Entry<InventoryItem> o = iter.next();
+            o.getElement().onReturnToShip(world, o.getCount());
+            if (o.getElement().isDumpable()) {
+                iter.remove();
+            }
         }
 
         Ship ship = world.getPlayer().getShip();
@@ -187,12 +188,8 @@ public class LandingParty extends MovableSprite implements GameObject {
         this.engineers = engineers;
     }
 
-    public Map<InventoryItem, Integer> getInventory() {
+    public Multiset<InventoryItem> getInventory() {
         return inventory;
-    }
-
-    public void setInventory(Map<InventoryItem, Integer> inventory) {
-        this.inventory = inventory;
     }
 
     public void resetHp() {

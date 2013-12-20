@@ -1,5 +1,6 @@
 package ru.game.aurora.gui;
 
+import com.google.common.collect.Multiset;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
@@ -10,8 +11,6 @@ import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
-import java.util.Map;
-
 /**
  * Created with IntelliJ IDEA.
  * User: User
@@ -21,7 +20,7 @@ import java.util.Map;
 public class InventoryController implements ScreenController {
     private Element myWindow;
 
-    private ListBox<InventoryItem> items;
+    private ListBox<Multiset.Entry<InventoryItem>> items;
 
     private World world;
 
@@ -39,10 +38,8 @@ public class InventoryController implements ScreenController {
     public void onStartScreen() {
         myWindow.setVisible(true);
         items.clear();
-        for (Map.Entry<InventoryItem, Integer> entry : world.getPlayer().getLandingParty().getInventory().entrySet()) {
-            for (int i = 0; i < entry.getValue(); ++i) {
-                items.addItem(entry.getKey());
-            }
+        for (Multiset.Entry<InventoryItem> entry : world.getPlayer().getLandingParty().getInventory().entrySet()) {
+            items.addItem(entry);
         }
     }
 

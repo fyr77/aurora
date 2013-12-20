@@ -44,6 +44,10 @@ public class Configuration {
         return Integer.parseInt(worldProperties.getProperty(key));
     }
 
+    public static boolean getBooleanProperty(String key) {
+        return Boolean.parseBoolean(worldProperties.getProperty(key));
+    }
+
     public static double getDoubleProperty(String key) {
         return Double.parseDouble(worldProperties.getProperty(key));
     }
