@@ -2,18 +2,20 @@
 
     <controlDefinition name="journal_control">
         <panel childLayout="horizontal" width="100%" height="100%">
-            <control id="#itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="25" selection="Single" width="35%"/>
+            <control id="#itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="25" selection="Single" width="30%"/>
             <panel width="10px"/>
-            <panel childLayout="center" padding="10px" style="nifty-panel-no-shadow" height="100%" width="*">
-               <text id="#message_text" style="base-font" width="90%" wrap="true" textHAlign="left" textVAlign="top"/>
-            </panel>
+
+            <control name="scrollPanel" horizontal="false" height="100%">
+                <text id="#message_text" style="base-font" width="95%" wrap="true" textHAlign="left" textVAlign="top"/>
+            </control>
+
         </panel>
     </controlDefinition>
 
 
     <screen id="journal_screen" controller="ru.game.aurora.gui.JournalScreenController">
         <layer childLayout="absolute">
-            <control id="journal_window" name="window" hideOnClose="true" title="${gui.journal.title}" width="80%" height="80%" x="10%" y="10%">
+            <control id="journal_window" name="window" hideOnClose="true" title="${gui.journal.title}" width="90%" height="80%" x="5%" y="10%">
                 <panel childLayout="vertical">
 
                     <!-- tabs -->
