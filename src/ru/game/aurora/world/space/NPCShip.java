@@ -7,7 +7,9 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import ru.game.aurora.application.*;
+import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
@@ -192,6 +194,38 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         }
         x += dx;
         y += dy;
+    }
+
+    @Override
+    public void moveDown() {
+        if (isStationary) {
+            return;
+        }
+        super.moveDown();
+    }
+
+    @Override
+    public void moveLeft() {
+        if (isStationary) {
+            return;
+        }
+        super.moveLeft();
+    }
+
+    @Override
+    public void moveRight() {
+        if (isStationary) {
+            return;
+        }
+        super.moveRight();
+    }
+
+    @Override
+    public void moveUp() {
+        if (isStationary) {
+            return;
+        }
+        super.moveUp();
     }
 
     public void setHp(int hp) {
