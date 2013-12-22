@@ -21,5 +21,5 @@
     <resource type="image" id="oxygen_tank">sprites/items/cylinders.png</resource>
     <resource type="image" id="ore_box">sprites/items/ore.png</resource>
     <resource type="image" id="artifact_boxes">sprites/items/boxes.png</resource>
-    <resource type="image" id="medpack">sprites/items/ore.png</resource>
+    <resource type="image" id="medpack">sprites/items/medkit.png</resource>
 </resources>

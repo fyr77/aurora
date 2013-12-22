@@ -51,6 +51,8 @@ public class LandingParty extends MovableSprite implements GameObject {
         this.engineers = engineers;
         this.weapon = weapon;
         oxygen = 100;
+        pickUp(new MedPack(), 3);   //Santa's gifts
+        pickUp(new Cylinders(), 3);
     }
 
     @Override

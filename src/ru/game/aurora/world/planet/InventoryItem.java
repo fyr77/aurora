@@ -21,4 +21,6 @@ public interface InventoryItem extends Serializable {
      * If this item is automatically transfered from landing party to a ship
      */
     public boolean isDumpable();
+
+    public boolean isUsable();
 }

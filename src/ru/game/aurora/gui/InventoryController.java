@@ -3,6 +3,7 @@ package ru.game.aurora.gui;
 import com.google.common.collect.Multiset;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
@@ -10,6 +11,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
+import ru.game.aurora.world.planet.UsableItem;
 
 /**
  * Created with IntelliJ IDEA.
@@ -55,5 +57,20 @@ public class InventoryController implements ScreenController {
     @NiftyEventSubscriber(id = "inventory_window")
     public void onClose(final String id, final WindowClosedEvent event) {
         closeScreen();
+    }
+
+    public void usePressed() {
+        if (items.getFocusItem().getElement().isUsable()) {
+            UsableItem u = (UsableItem) items.getFocusItem().getElement();
+            u.useIt(world, items.getFocusItem().getCount());
+        }
+    }
+
+    //magic
+    @NiftyEventSubscriber(pattern = ".*useButton")
+    public void onClicked(String id, ButtonClickedEvent event) {
+        int numericId = Integer.parseInt(id.split("#")[0]);
+        numericId -= Integer.parseInt(items.getElement().findElementByName("#child-root").getElements().get(0).getId());
+        items.setFocusItemByIndex(numericId);
     }
 }

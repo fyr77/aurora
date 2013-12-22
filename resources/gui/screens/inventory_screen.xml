@@ -3,7 +3,10 @@
     <controlDefinition name="line-with-image">
         <panel childLayout="horizontal" width="100%" align="center" padding="5px">
             <image id="#line-icon" width="64px" height="64px"/>
-            <text id="#line-text" style="base-font" align="left" textHAlign="left" height="64px" width="*" wrap="true"/>
+            <text id="#line-text" style="base-font" align="left" textHAlign="left" height="64px" width="200px" wrap="true"/>
+            <control id="#useButton" name="button" label="${gui.use}" width="120px" height="64px">
+                <interact onClick="usePressed()"/>
+            </control>
         </panel>
 
     </controlDefinition>
