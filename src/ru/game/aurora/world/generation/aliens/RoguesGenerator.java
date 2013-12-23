@@ -74,7 +74,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
                     world.getGlobalVariables().remove("rogues.damaged_scout_found");
                 } else {
                     // player decided to help for reward
-                    world.getPlayer().changeCredits(5);
+                    world.getPlayer().changeCredits(world, 5);
                     GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.credits_received"), 5));
                     rogueRace.setRelation(world.getPlayer().getShip().getRace(), rogueRace.getRelation(world.getPlayer().getShip().getRace()) + 1);
                     world.getGlobalVariables().remove("rogues.damaged_scout_found");

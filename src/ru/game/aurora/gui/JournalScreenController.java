@@ -48,10 +48,14 @@ public class JournalScreenController implements ScreenController
         myWindow.getElement().setVisible(true);
         Journal journal = world.getPlayer().getJournal();
         questList.clear();
-        questList.addAllItems(journal.getQuests());
+        for (JournalEntry e : journal.getQuests().values()) {
+            questList.addItem(e);
+        }
 
         codexList.clear();
-        codexList.addAllItems(journal.getCodex());
+        for (JournalEntry e : journal.getCodex().values()) {
+            codexList.addItem(e);
+        }
 
     }
 

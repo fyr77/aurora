@@ -35,7 +35,11 @@ public class DialogCSVConverter {
                 conditions[0] = new Condition(split[0], null, Condition.ConditionType.SET);
             }
         } else {
-            conditions[0] = new Condition(split[0], split[1], Condition.ConditionType.EQUAL);
+            if (split[0].endsWith("!")) {
+                conditions[0] = new Condition(split[0].substring(0, split[0].length() - 1), split[1], Condition.ConditionType.NOT_EQUAL);
+            } else {
+                conditions[0] = new Condition(split[0], split[1], Condition.ConditionType.EQUAL);
+            }
         }
         return conditions;
     }

@@ -217,13 +217,13 @@ public class WorldGenerator implements Runnable {
     private void createMisc(World world)
     {
         Journal journal = world.getPlayer().getJournal();
-        journal.getCodex().add(new JournalEntry("aurora_desc", "1"));
-        journal.getCodex().add(new JournalEntry("engineer_dossier", "1"));
-        journal.getCodex().add(new JournalEntry("scientist_dossier", "1"));
-        journal.getCodex().add(new JournalEntry("military_dossier", "1"));
+        journal.addCodex(new JournalEntry("aurora_desc", "1"));
+        journal.addCodex(new JournalEntry("engineer_dossier", "1"));
+        journal.addCodex(new JournalEntry("scientist_dossier", "1"));
+        journal.addCodex(new JournalEntry("military_dossier", "1"));
 
-        journal.getQuests().add(new JournalEntry("colony_search", "start"));
-        journal.getQuests().add(new JournalEntry("last_beacon", "start"));
+        journal.addQuest(new JournalEntry("colony_search", "start"));
+        journal.addQuest(new JournalEntry("last_beacon", "start"));
     }
 
     @Override

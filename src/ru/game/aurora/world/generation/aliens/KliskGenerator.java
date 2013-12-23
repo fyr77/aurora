@@ -7,6 +7,7 @@
 package ru.game.aurora.world.generation.aliens;
 
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.world.World;
@@ -22,9 +23,16 @@ public class KliskGenerator implements WorldGeneratorPart {
 
     @Override
     public void updateWorld(World world) {
-        Dialog mainDialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/klisk_default_dialog.json"));
-        AlienRace kliskRace = new AlienRace("Klisk", "klisk_ship", mainDialog);
-        mainDialog.setListener(new KliskMainDialogListener(kliskRace));
+        Dialog mainDialog = Dialog.loadFromFile("dialogs/klisk_1.json");
+        final AlienRace kliskRace = new AlienRace("Klisk", "klisk_ship", mainDialog);
+        mainDialog.setListener(new DialogListener() {
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+                Dialog newDefaultDialog = Dialog.loadFromFile("dialogs/klisk_default_dialog.json");
+                newDefaultDialog.setListener(new KliskMainDialogListener(kliskRace));
+                kliskRace.setDefaultDialog(newDefaultDialog);
+            }
+        });
 
         StarSystem kliskHomeworld = HomeworldGenerator.generateKliskHomeworld(world, 15, 15, kliskRace);
         kliskRace.setHomeworld(kliskHomeworld);

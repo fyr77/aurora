@@ -7,7 +7,7 @@ earth.special_dialog - path to file with special dialog. If this variable is set
 upon returning to Earth instead of a default one
 
 player.country - which country player has chosen as a primary contributor to Aurora project. Possible values: america asia europe
-
+credits - amount of credits player has
 
 ==============================
 Main quest:
@@ -19,7 +19,9 @@ quest.main.cloned_starsystems_encountered - how many terraformed starsystems pla
 quest.main.show_earth_dialog - when true, on return to earth player will be shown quest dialog concerning Obliterator thread, then this variable will be removed
 quest.main.weapon_test_done - after player has performed a weapon test against Obliterator
 quest.main.evacuation_started - after evacuation from Earth has begun
+
 colony_search.klisk_coords - coordinates of an earth-like planet that Klisk can sell to a player
+colony_search.found - if suitable planet has been found
 last_beacon.coords - coordinates of a last-known aurora location
 ==============================
 Crew relationship

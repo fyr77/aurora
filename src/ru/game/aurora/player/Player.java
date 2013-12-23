@@ -11,6 +11,7 @@ import ru.game.aurora.player.earth.EarthState;
 import ru.game.aurora.player.engineering.EngineeringState;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.Ship;
+import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.LandingParty;
@@ -36,7 +37,7 @@ public class Player implements Serializable {
 
     private int resourceUnits = 5;
 
-    private int credits = 5;
+    private int credits = 0;
 
     private Journal journal = new Journal();
 
@@ -93,8 +94,9 @@ public class Player implements Serializable {
         return engineeringState;
     }
 
-    public void changeCredits(int delta) {
+    public void changeCredits(World world, int delta) {
         credits += delta;
+        world.getGlobalVariables().put("credits", credits);
     }
 
     public int getCredits() {

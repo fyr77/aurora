@@ -29,13 +29,24 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart
         AlienRace gardenerRace = world.getRaces().get("Gardeners");
         final GardenersShip gardenerShip = new GardenersShip(0, 0, gardenerRace.getShipSprite(), gardenerRace, null, "Sequoia");
         gardenerShip.setAi(null);
-        final Dialog dialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json"));
+        final Dialog dialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_1.json"));
         dialog.setListener(new DialogListener() {
             private static final long serialVersionUID = -743686006546787750L;
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode) {
-                gardenerShip.warpAwayNextTurn();
+
+                Dialog secondDialog = Dialog.loadFromFile("dialogs/gardener_2.json");
+                secondDialog.setListener(new DialogListener() {
+                    private static final long serialVersionUID = -1475155421006956885L;
+
+                    @Override
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+                        gardenerShip.warpAwayNextTurn();
+                        world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("gardener");
+                    }
+                });
+                gardenerShip.setCaptain(new NPC(secondDialog));
             }
         });
         gardenerShip.setCaptain(new NPC(dialog));

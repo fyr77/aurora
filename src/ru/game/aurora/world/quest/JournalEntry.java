@@ -1,5 +1,6 @@
 package ru.game.aurora.world.quest;
 
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.PlaceholderResolver;
 import ru.game.aurora.world.World;
@@ -31,6 +32,10 @@ public class JournalEntry implements Serializable
         Collections.addAll(messageIds, messages);
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String getLocalizedCaption()
     {
         return Localization.getText("journal", id + ".title");
@@ -38,6 +43,7 @@ public class JournalEntry implements Serializable
 
     public void addMessage(String textId)
     {
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "journal_updated"), getLocalizedCaption()));
         messageIds.add(textId);
     }
 

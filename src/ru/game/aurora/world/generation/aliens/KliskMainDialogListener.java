@@ -50,7 +50,7 @@ public class KliskMainDialogListener implements DialogListener {
             }
         }
 
-        world.getPlayer().changeCredits(10);
+        world.getPlayer().changeCredits(world, 10);
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.credits_received"), 10));
         kliskRace.setRelation(world.getPlayer().getShip().getRace(), kliskRace.getRelation(world.getPlayer().getShip().getRace()) + 1);
         world.getGlobalVariables().put("rogues.damage_scout_result", "sold_to_klisk");
@@ -64,7 +64,7 @@ public class KliskMainDialogListener implements DialogListener {
             return;
         }
 
-        world.getPlayer().changeCredits(-1);
+        world.getPlayer().changeCredits(world, -1);
 
 
         world.getGlobalVariables().put("quest.main.knows_about_obliterator", null);

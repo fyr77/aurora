@@ -1,8 +1,9 @@
 package ru.game.aurora.world.quest;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Contains log entries about game world
@@ -11,15 +12,23 @@ public class Journal implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
-    private List<JournalEntry> quests = new LinkedList<>();
+    private SortedMap<String, JournalEntry> quests = new TreeMap<>();
 
-    private List<JournalEntry> codex = new LinkedList<>();
+    private SortedMap<String, JournalEntry> codex = new TreeMap<>();
 
-    public List<JournalEntry> getQuests() {
+    public Map<String, JournalEntry> getQuests() {
         return quests;
     }
 
-    public List<JournalEntry> getCodex() {
+    public Map<String, JournalEntry> getCodex() {
         return codex;
+    }
+
+    public void addQuest(JournalEntry entry) {
+        quests.put(entry.getId(), entry);
+    }
+
+    public void addCodex(JournalEntry entry) {
+        codex.put(entry.getId(), entry);
     }
 }
