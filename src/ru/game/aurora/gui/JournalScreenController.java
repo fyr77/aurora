@@ -66,7 +66,7 @@ public class JournalScreenController implements ScreenController
         if (event.getSelection().isEmpty()) {
             return;
         }
-        EngineUtils.setTextForGUIElement(tg.getSelectedTab().getElement().findElementByName("#message_text"), ((JournalEntry)event.getSelection().get(0)).getFullText());
+        EngineUtils.setTextForGUIElement(tg.getSelectedTab().getElement().findElementByName("#message_text"), ((JournalEntry)event.getSelection().get(0)).getFullText(world));
         myWindow.getElement().layoutElements();
     }
 

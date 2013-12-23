@@ -26,12 +26,12 @@ public class KliskGenerator implements WorldGeneratorPart {
         AlienRace kliskRace = new AlienRace("Klisk", "klisk_ship", mainDialog);
         mainDialog.setListener(new KliskMainDialogListener(kliskRace));
 
-        StarSystem kliskHomeworld = HomeworldGenerator.generateKliskHomeworld(world, 5, 5, kliskRace);
+        StarSystem kliskHomeworld = HomeworldGenerator.generateKliskHomeworld(world, 15, 15, kliskRace);
         kliskRace.setHomeworld(kliskHomeworld);
 
         world.addListener(new StandardAlienShipEvent(kliskRace));
         world.getGalaxyMap().getObjects().add(kliskHomeworld);
-        world.getGalaxyMap().setTileAt(5, 5, world.getGalaxyMap().getObjects().size() - 1);
+        world.getGalaxyMap().setTileAt(15, 15, world.getGalaxyMap().getObjects().size() - 1);
 
         world.getRaces().put(kliskRace.getName(), kliskRace);
     }

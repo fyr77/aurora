@@ -1,6 +1,8 @@
 package ru.game.aurora.world.quest;
 
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.PlaceholderResolver;
+import ru.game.aurora.world.World;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class JournalEntry implements Serializable
         messageIds.add(textId);
     }
 
-    public String getFullText()
+    public String getFullText(World world)
     {
         StringBuilder builder = new StringBuilder();
         boolean isFirst = true;
@@ -47,7 +49,7 @@ public class JournalEntry implements Serializable
             if (!isFirst) {
                 builder.append("==============================\n");
             }
-            builder.append(Localization.getText("journal", id + "." + messageId)).append("\n");
+            builder.append(PlaceholderResolver.resolvePlaceholders(Localization.getText("journal", id + "." + messageId), world.getGlobalVariables())).append("\n");
             isFirst = false;
 
         }

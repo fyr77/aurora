@@ -103,11 +103,11 @@ public class RoguesGenerator implements WorldGeneratorPart {
         Dialog defaultDialog = Dialog.loadFromFile("dialogs/rogues/rogues_frame_dialog.json");
         defaultDialog.setListener(new RoguesMainDialogListener());
         AlienRace rogueRace = new AlienRace("Rogues", "rogues_scout", defaultDialog);
-        StarSystem homeworld = HomeworldGenerator.generateRoguesWorld(world, 15, 8, rogueRace);
+        StarSystem homeworld = HomeworldGenerator.generateRoguesWorld(world, 15, 28, rogueRace);
         homeworld.setQuestLocation(true);
         rogueRace.setHomeworld(homeworld);
 
-        world.getGalaxyMap().addObjectAndSetTile(homeworld, 15, 8);
+        world.getGalaxyMap().addObjectAndSetTile(homeworld, 15, 28);
         world.addListener(new StandardAlienShipEvent(rogueRace));
         world.addListener(new SingleStarsystemShipSpawner(rogueRace.getDefaultFactory(), 0.3, homeworld));
 

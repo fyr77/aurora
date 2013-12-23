@@ -23,6 +23,7 @@ import ru.game.aurora.world.generation.aliens.SwarmGenerator;
 import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
+import ru.game.aurora.world.generation.quest.LastBeaconQuestGenerator;
 import ru.game.aurora.world.generation.quest.MainQuestGenerator;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
@@ -52,6 +53,7 @@ public class WorldGenerator implements Runnable {
     private static final WorldGeneratorPart[] questGenerators = {
             new InitialRadioEmissionQuestGenerator()
             , new MainQuestGenerator()
+            , new LastBeaconQuestGenerator()
     };
 
     private static final WorldGeneratorPart[] alienGenerators = {
@@ -127,12 +129,12 @@ public class WorldGenerator implements Runnable {
         }
     }
 
-    public static StarSystem generateRandomStarSystem(World world, int x, int y) {
+    public static StarSystem generateRandomStarSystem(World world, int x, int y, int planetCount)
+    {
         final Random r = CommonRandom.getRandom();
 
         int starSize = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
         Color starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
-        final int planetCount = r.nextInt(Configuration.getIntProperty("world.starsystem.maxPlanets"));
         BasePlanet[] planets = new BasePlanet[planetCount];
         int maxRadius = 0;
         StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(starSize, starColor), x, y);
@@ -200,6 +202,11 @@ public class WorldGenerator implements Runnable {
         return ss;
     }
 
+    public static StarSystem generateRandomStarSystem(World world, int x, int y) {
+        final int planetCount = CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.starsystem.maxPlanets"));
+        return generateRandomStarSystem(world, x, y, planetCount);
+    }
+
     private void createQuestWorlds(World world) {
         currentStatus = Localization.getText("gui", "generation.quests");
         for (WorldGeneratorPart part : questGenerators) {
@@ -214,21 +221,29 @@ public class WorldGenerator implements Runnable {
         journal.getCodex().add(new JournalEntry("engineer_dossier", "1"));
         journal.getCodex().add(new JournalEntry("scientist_dossier", "1"));
         journal.getCodex().add(new JournalEntry("military_dossier", "1"));
+
+        journal.getQuests().add(new JournalEntry("colony_search", "start"));
+        journal.getQuests().add(new JournalEntry("last_beacon", "start"));
     }
 
     @Override
     public void run() {
-        World world = new World(Configuration.getIntProperty("world.galaxy.width"), Configuration.getIntProperty("world.galaxy.height"));
-        world.addListener(new CrewChangeListener());
-        generateMap(world);
-        createAliens(world);
-        createArtifactsAndAnomalies(world);
-        createQuestWorlds(world);
-        createMisc(world);
+        try {
+            World world = new World(Configuration.getIntProperty("world.galaxy.width"), Configuration.getIntProperty("world.galaxy.height"));
+            world.addListener(new CrewChangeListener());
+            generateMap(world);
+            createAliens(world);
+            createArtifactsAndAnomalies(world);
+            createQuestWorlds(world);
+            createMisc(world);
 
-        currentStatus = Localization.getText("gui", "generation.done");
+            currentStatus = Localization.getText("gui", "generation.done");
 
-        this.world = world;
+            this.world = world;
+        } catch (Exception ex) {
+            logger.error("Failed to generate world", ex);
+            System.exit(-1);
+        }
     }
 
     public String getCurrentStatus() {

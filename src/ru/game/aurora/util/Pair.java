@@ -28,4 +28,9 @@ public class Pair<K extends Serializable, V extends Serializable> implements Ser
     public V getVal() {
         return val;
     }
+
+    @Override
+    public String toString() {
+        return "[" + key + ", " + val + "]";
+    }
 }
