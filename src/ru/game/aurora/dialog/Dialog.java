@@ -29,7 +29,7 @@ public class Dialog implements OverlayWindow {
 
     private static final Logger logger = LoggerFactory.getLogger(Dialog.class);
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private String id;
 
@@ -37,9 +37,12 @@ public class Dialog implements OverlayWindow {
 
     private Map<Integer, Statement> statements = new HashMap<>();
 
-    private Statement currentStatement;
+    // replies can set these flags, which can later be checked
+    private transient Map<String, String> flags = new HashMap<>();
 
-    private int returnValue = 0;
+    private transient Statement currentStatement;
+
+    private transient int returnValue = 0;
 
     /**
      * Replies that are available for current statement based on current world state.
@@ -95,7 +98,7 @@ public class Dialog implements OverlayWindow {
     }
 
     public List<String> addAvailableRepliesLocalized(World world) {
-        List<Reply> replies = currentStatement.getAvailableReplies(world);
+        List<Reply> replies = currentStatement.getAvailableReplies(world, flags);
         List<String> outList = new ArrayList<>(replies.size());
         final String s = "dialogs/" + id;
         boolean hasCustomBundle = Localization.bundleExists(s);
@@ -105,13 +108,17 @@ public class Dialog implements OverlayWindow {
         return outList;
     }
 
+    public Map<String, String> getFlags() {
+        return flags;
+    }
+
     @Override
     public void enter(World world) {
         if (firstStatements == null || firstStatements.isEmpty()) {
             currentStatement = statements.get(0);
         } else {
             for (Map.Entry<Integer, Condition> conditionEntry : firstStatements.entrySet()) {
-                if (conditionEntry.getValue().isMet(world)) {
+                if (conditionEntry.getValue().isMet(world, flags)) {
                     currentStatement = statements.get(conditionEntry.getKey());
                 }
             }
@@ -119,7 +126,12 @@ public class Dialog implements OverlayWindow {
                 throw new IllegalStateException("Can not select any statement to start dialog for current world condition");
             }
         }
-        availableReplies = currentStatement.getAvailableReplies(world);
+        availableReplies = currentStatement.getAvailableReplies(world, flags);
+        if (flags == null) {
+            flags = new HashMap<>();
+        } else {
+            flags.clear();
+        }
         returnValue = 0;
     }
 
@@ -145,14 +157,19 @@ public class Dialog implements OverlayWindow {
 
     public void useReply(World world, int idx) {
         if (availableReplies == null) {
-            availableReplies = currentStatement.getAvailableReplies(world);
+            availableReplies = currentStatement.getAvailableReplies(world, flags);
         }
         Reply selectedReply = availableReplies.get(idx);
         currentStatement = statements.get(selectedReply.targetStatementId);
-        returnValue = selectedReply.returnValue;
+        if (selectedReply.returnValue != 0) {
+            returnValue = selectedReply.returnValue;
+        }
+        if (selectedReply.flags != null) {
+            flags.putAll(selectedReply.flags);
+        }
 
         if (currentStatement != null) {
-            availableReplies = currentStatement.getAvailableReplies(world);
+            availableReplies = currentStatement.getAvailableReplies(world, flags);
         } else {
             availableReplies = null;
         }

@@ -25,7 +25,7 @@ import ru.game.aurora.world.space.StarSystem;
 /**
  * Creates given alien ship when player enters Xth starsystem for first time
  */
-public class SwarmShipGenerator extends GameEventListener {
+public class BorkShipGenerator extends GameEventListener {
     private static final long serialVersionUID = 1;
 
     private int count = 0;
@@ -40,7 +40,7 @@ public class SwarmShipGenerator extends GameEventListener {
     private double chance;
 
 
-    public SwarmShipGenerator(double chance, int count, Dialog dialog, NPCShipFactory factory, int starshipsPerSystem) {
+    public BorkShipGenerator(double chance, int count, Dialog dialog, NPCShipFactory factory, int starshipsPerSystem) {
         this.chance = chance;
         this.count = count;
         this.dialog = dialog;

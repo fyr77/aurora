@@ -46,6 +46,15 @@ Relations with Klisk
 
 quest.main.klisk_evacuation_help - Klisk are helping with evacuating Earth. Klisk ships will appear in solar system.
 
+klisk.discount - player has a one-time 10% discount
+klisk.coordinates_traded - after player has made an initial deal with the klisk
+
+klisk.planet_info - if klisk promised to give player a coordinates of an earth-like planet
+klisk.klisk_info - set if player has bought info for these races
+klisk.zorsan_info
+klisk.rogues_info
+klisk.bork_info
+
 ==============================
 
 Gardeners

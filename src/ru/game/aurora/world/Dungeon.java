@@ -8,6 +8,8 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.planet.LandingParty;
 
+import java.util.Map;
+
 /**
  * Dungeon is a location with a fixed tiled map, which can be explored by player landing party
  */
@@ -28,7 +30,7 @@ public class Dungeon implements Room, IDungeon {
         private static final long serialVersionUID = -8962566365128471357L;
 
         @Override
-        public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
             if (returnCode == 1) {
                 // pop prev screen, so that after dialog we will not return there
                 GUI.getInstance().popScreen();

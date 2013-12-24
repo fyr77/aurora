@@ -10,6 +10,7 @@ package ru.game.aurora.dialog;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public class Condition implements Serializable
 {
@@ -35,9 +36,12 @@ public class Condition implements Serializable
         this.type = type;
     }
 
-    public boolean isMet(World world)
+    public boolean isMet(World world, Map<String, String> flags)
     {
-        Object val = world.getGlobalVariables().get(name);
+        Object val = flags.get(name);
+        if (val == null) {
+            val = world.getGlobalVariables().get(name);
+        }
         switch (type) {
             case SET:
                 return val != null;

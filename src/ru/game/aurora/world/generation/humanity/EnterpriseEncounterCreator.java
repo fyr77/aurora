@@ -19,6 +19,8 @@ import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
 
+import java.util.Map;
+
 /**
  * At some random moment in game, in about 100 turns, spawns next ship of Aurora project - Enterprise.
  * Adds private messages from its captain.
@@ -41,7 +43,7 @@ public class EnterpriseEncounterCreator extends GameEventListener {
         private static final long serialVersionUID = 8961118747394070541L;
 
         @Override
-        public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
             if (returnCode == 1) {
                 // repair
                 final int maxHull = world.getPlayer().getShip().getMaxHull();

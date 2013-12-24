@@ -61,6 +61,11 @@ public abstract class ResearchProjectDesc implements Serializable {
         this.report = report;
     }
 
+    public void onCompleted(World world)
+    {
+        // nothing
+    }
+
     public void addNextResearch(ResearchProjectDesc desc) {
         if (makesAvailable == null) {
             makesAvailable = new LinkedList<String>();

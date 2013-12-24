@@ -26,6 +26,8 @@ import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.Map;
+
 public class Earth extends Planet {
 
     private static final long serialVersionUID = 3431652617342589266L;
@@ -78,7 +80,7 @@ public class Earth extends Planet {
                 private static final long serialVersionUID = -374777902752182404L;
 
                 @Override
-                public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                     world.getGlobalVariables().remove("earth.special_dialog");
                 }
             });
@@ -101,7 +103,7 @@ public class Earth extends Planet {
             private static final long serialVersionUID = -374777902752182404L;
 
             @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 world.getGlobalVariables().remove("quest.main.show_earth_dialog");
             }
         });

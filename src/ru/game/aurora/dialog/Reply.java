@@ -3,6 +3,7 @@ package ru.game.aurora.dialog;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,30 +25,34 @@ public class Reply implements Serializable {
 
     public final Condition[] replyConditions;
 
+    public final Map<String, String> flags;
+
     public Reply(int returnValue, int targetStatementId, String replyText) {
         this.returnValue = returnValue;
         this.targetStatementId = targetStatementId;
         this.replyText = replyText;
         this.replyConditions = null;
+        this.flags = null;
     }
 
-    public Reply(int returnValue, int targetStatementId, String replyText, Condition[] replyConditions) {
+    public Reply(int returnValue, int targetStatementId, String replyText, Condition[] replyConditions, Map<String, String> flags) {
         this.returnValue = returnValue;
         this.targetStatementId = targetStatementId;
         this.replyText = replyText;
         this.replyConditions = replyConditions;
+        this.flags = flags;
     }
 
     /**
      * Returns true if this dialog option is available given current world state
      */
-    public boolean isVisible(World world) {
+    public boolean isVisible(World world, Map<String, String> flags) {
         if (replyConditions == null) {
             return true;
         }
 
         for (Condition condition : replyConditions) {
-            if (!condition.isMet(world)) {
+            if (!condition.isMet(world, flags)) {
                 return false;
             }
         }

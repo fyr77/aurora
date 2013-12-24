@@ -22,6 +22,8 @@ import ru.game.aurora.world.space.HomeworldGenerator;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.Map;
+
 public class RoguesGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = -8911801330633122269L;
 
@@ -50,7 +52,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
             private static final long serialVersionUID = -1975417060573768272L;
 
             @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
                 if (returnCode == 0) {
                     return;

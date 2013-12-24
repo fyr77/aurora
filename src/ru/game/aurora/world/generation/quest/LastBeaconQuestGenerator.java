@@ -12,6 +12,8 @@ import ru.game.aurora.world.space.GardenersShip;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.Map;
+
 /**
  */
 public class LastBeaconQuestGenerator implements WorldGeneratorPart
@@ -34,14 +36,14 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart
             private static final long serialVersionUID = -743686006546787750L;
 
             @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
                 Dialog secondDialog = Dialog.loadFromFile("dialogs/gardener_2.json");
                 secondDialog.setListener(new DialogListener() {
                     private static final long serialVersionUID = -1475155421006956885L;
 
                     @Override
-                    public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                         gardenerShip.warpAwayNextTurn();
                         world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("gardener");
                     }

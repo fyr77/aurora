@@ -5,6 +5,7 @@ import ru.game.aurora.world.World;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
 * Created with IntelliJ IDEA.
@@ -39,11 +40,11 @@ public class Statement implements Serializable {
         this.customIcon = customIcon;
     }
 
-    public List<Reply> getAvailableReplies(World world)
+    public List<Reply> getAvailableReplies(World world, Map<String, String> flags)
     {
         List<Reply> rz = new ArrayList<Reply>(replies.length);
         for (Reply r : replies) {
-            if (r.isVisible(world)) {
+            if (r.isVisible(world, flags)) {
                 rz.add(r);
             }
         }

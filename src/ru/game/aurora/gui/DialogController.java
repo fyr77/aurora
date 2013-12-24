@@ -90,7 +90,7 @@ public class DialogController implements ScreenController {
                 GUI.getInstance().getNifty().gotoScreen(prevScreen);
             }
             if (d.getListener() != null) {
-                d.getListener().onDialogEnded(world, d, d.getReturnValue());
+                d.getListener().onDialogEnded(world, d, d.getReturnValue(), d.getFlags());
             }
             d.enter(world);
         } else {

@@ -17,7 +17,7 @@ import java.util.*;
  * Statement:
  * ID;npc text;custom icon (if any)
  * Reply:
- * empty;reply text; target ID;condition;return value
+ * empty;reply text; target ID;condition;return value;flags
  * <p/>
  * If condition is set, it can be one of following: either a variable name, or a variable name sign value, like 'quest.value=4'
  */
@@ -61,11 +61,22 @@ public class DialogCSVConverter {
             String[] replyString = replyStrings.get(i);
             final String replyTextId = textId + "." + i;
             context.text.put(replyTextId, replyString[1]);
-            replies[i] = new Reply(replyString.length >= 5 ? Integer.parseInt(replyString[4]) : 0, Integer.parseInt(replyString[2]), Integer.toString(i), replyString.length > 3 ? parseConditions(replyString[3]) : null);
+            replies[i] = new Reply(
+                    replyString.length >= 5 && !replyString[4].isEmpty() ? Integer.parseInt(replyString[4]) : 0
+                    , Integer.parseInt(replyString[2])
+                    , Integer.toString(i)
+                    , replyString.length > 3 && !replyString[3].isEmpty() ? parseConditions(replyString[3]) : null
+                    , replyString.length >= 6 ? parseFlags(replyString[5]) : null);
         }
 
         context.text.put(textId, stmtStrings[1]);
         return new Statement(stmtId, stmtStrings.length > 2 ? stmtStrings[2] : null, null, replies);
+    }
+
+    private static Map<String, String> parseFlags(String s) {
+        Map<String, String> flags = new HashMap<>();
+        flags.put(s, "true");
+        return flags;
     }
 
     public static void main(String[] args) {
@@ -120,6 +131,7 @@ public class DialogCSVConverter {
                 } catch (Exception ex) {
                     System.err.println("Error parsing line " + context.lineNumber);
                     ex.printStackTrace();
+                    return;
                 }
 
             }

@@ -15,6 +15,8 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.space.HomeworldGenerator;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.Map;
+
 /**
  * Creates Klisk alien race
  */
@@ -27,8 +29,19 @@ public class KliskGenerator implements WorldGeneratorPart {
         final AlienRace kliskRace = new AlienRace("Klisk", "klisk_ship", mainDialog);
         mainDialog.setListener(new DialogListener() {
             @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
-                Dialog newDefaultDialog = Dialog.loadFromFile("dialogs/klisk_default_dialog.json");
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+
+                switch (returnCode) {
+                    case 2:
+                    case 4:
+                        world.getGlobalVariables().put("klisk.planet_info", true);
+                        break;
+                    case 10:
+                        // decided to take time
+                        return;
+                }
+
+                Dialog newDefaultDialog = Dialog.loadFromFile("dialogs/klisk_main.json");
                 newDefaultDialog.setListener(new KliskMainDialogListener(kliskRace));
                 kliskRace.setDefaultDialog(newDefaultDialog);
             }

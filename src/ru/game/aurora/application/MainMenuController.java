@@ -21,6 +21,8 @@ import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 
+import java.util.Map;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Egor.Smirnov
@@ -103,7 +105,7 @@ public class MainMenuController implements ScreenController {
         final Dialog gameStartDialog = Dialog.loadFromFile("dialogs/tutorials/game_start_tutorial.json");
         gameStartDialog.setListener(new DialogListener() {
             @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 Dialog d = null;
                 switch (returnCode) {
                     case 3:
@@ -111,7 +113,7 @@ public class MainMenuController implements ScreenController {
                         world.getGlobalVariables().put("crew.military", 1);
                         d.setListener(new DialogListener() {
                             @Override
-                            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+                            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                                 if (returnCode == -1) {
                                     // player has made a mistake, military chief will not be friendly with him
                                     world.getGlobalVariables().put("crew.military", -1);
@@ -126,7 +128,7 @@ public class MainMenuController implements ScreenController {
                         world.getGlobalVariables().put("crew.engineer", 1);
                         d.setListener(new DialogListener() {
                             @Override
-                            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+                            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                                 if (returnCode == -1) {
                                     // player has made a mistake, engineer chief will not be friendly with him
                                     world.getGlobalVariables().put("crew.engineer", -1);
@@ -142,7 +144,7 @@ public class MainMenuController implements ScreenController {
                         world.getGlobalVariables().put("crew.scientist", 1);
                         d.setListener(new DialogListener() {
                             @Override
-                            public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+                            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                                 if (returnCode == -1) {
                                     // player has made a mistake, engineer chief will not be friendly with him
                                     world.getGlobalVariables().put("crew.scientist", -1);

@@ -322,7 +322,7 @@
           "replyConditions": [
             {
               "name": "colony_search.found",
-              "type": "NOT_SET"
+              "type": "SET"
             }
           ]
         },
@@ -392,13 +392,7 @@
     },
     "29": {
       "id": 29,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 24,
-          "replyText": "0"
-        }
-      ]
+      "replies": []
     },
     "28": {
       "id": 28,
@@ -414,7 +408,7 @@
       "id": 31,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 10,
           "targetStatementId": -1,
           "replyText": "0"
         }
@@ -422,13 +416,7 @@
     },
     "30": {
       "id": 30,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 24,
-          "replyText": "0"
-        }
-      ]
+      "replies": []
     },
     "34": {
       "id": 34,
@@ -595,7 +583,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 36,
+          "targetStatementId": 37,
           "replyText": "0"
         }
       ]
@@ -604,13 +592,19 @@
       "id": 47,
       "replies": [
         {
-          "returnValue": 0,
-          "targetStatementId": 36,
-          "replyText": "0"
+          "returnValue": 2,
+          "targetStatementId": -2,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
-          "targetStatementId": 36,
+          "targetStatementId": 37,
           "replyText": "1"
         }
       ]
@@ -620,7 +614,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 36,
+          "targetStatementId": 37,
           "replyText": "0"
         },
         {
@@ -637,8 +631,13 @@
     },
     "45": {
       "id": 45,
-      "replies": [],
-      "customIcon": "36"
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 37,
+          "replyText": "0"
+        }
+      ]
     },
     "51": {
       "id": 51,
@@ -959,9 +958,15 @@
       "id": 78,
       "replies": [
         {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
+          "returnValue": 3,
+          "targetStatementId": -3,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "",
+              "type": "SET"
+            }
+          ]
         }
       ]
     },
@@ -1039,9 +1044,15 @@
       "id": 82,
       "replies": [
         {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
+          "returnValue": 4,
+          "targetStatementId": -4,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "",
+              "type": "SET"
+            }
+          ]
         }
       ]
     }

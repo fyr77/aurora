@@ -27,6 +27,8 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.RoguesMainDialogListener;
 import ru.game.aurora.world.space.*;
 
+import java.util.Map;
+
 /**
  * Creates quest chain with initial research for brown dwarf radio emission, that is given to player on game startup
  */
@@ -207,7 +209,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
             if (dialog.getId().equals("search_beacon_attackers") || dialog.getId().equals("court_invitation")) {
                 switch (returnCode) {
                     case 200:

@@ -10,6 +10,8 @@ import ru.game.aurora.gui.EarthProgressScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
 
+import java.util.Map;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Egor.Smirnov
@@ -27,7 +29,7 @@ public class EarthDialogListener implements DialogListener {
     }
 
     @Override
-    public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
         if (returnCode == 1) {
             // player has chosen to dump research info

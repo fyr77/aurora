@@ -6,6 +6,8 @@ import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
 
+import java.util.Map;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Egor.Smirnov
@@ -22,7 +24,7 @@ public class EarthProgressDialogListener implements DialogListener {
     }
 
     @Override
-    public void onDialogEnded(World world, Dialog dialog, int returnCode) {
+    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
         if (returnCode == -1) {
             // pop previouse screen and replace it with retirement gameover
             GUI.getInstance().popScreen();

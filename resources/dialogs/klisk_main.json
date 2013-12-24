@@ -1,0 +1,402 @@
+{
+  "id": "klisk_main",
+  "iconName": "klisk_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 1,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 2,
+          "targetStatementId": -1,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "klisk.discount",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "klisk.coordinates_traded",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "4"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "5"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "1",
+          "flags": {
+            "base_info": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "2"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 100,
+          "targetStatementId": 7,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "klisk.bork_info",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "klisk.bork_info": "true"
+          }
+        },
+        {
+          "returnValue": 200,
+          "targetStatementId": 7,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "klisk.klisk_info",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "klisk.klisk_info": "true"
+          }
+        },
+        {
+          "returnValue": 300,
+          "targetStatementId": 7,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "klisk.rogues_info",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "klisk.rogues_info": "true"
+          }
+        },
+        {
+          "returnValue": 400,
+          "targetStatementId": 7,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "klisk.zorsan_info",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "klisk.zorsan_info": "true"
+          }
+        },
+        {
+          "returnValue": 500,
+          "targetStatementId": 10,
+          "replyText": "4"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "5"
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 100,
+          "targetStatementId": 14,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "klisk.bork_info",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "klisk.bork_info": "true"
+          }
+        },
+        {
+          "returnValue": 200,
+          "targetStatementId": 14,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "klisk.klisk_info",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "klisk.klisk_info": "true"
+          }
+        },
+        {
+          "returnValue": 300,
+          "targetStatementId": 14,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "klisk.rogues_info",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "klisk.rogues_info": "true"
+          }
+        },
+        {
+          "returnValue": 400,
+          "targetStatementId": 14,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "klisk.zorsan_info",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "klisk.zorsan_info": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "4"
+        },
+        {
+          "returnValue": 500,
+          "targetStatementId": 10,
+          "replyText": "5"
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "1"
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "10": {
+      "id": 10,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "0"
+        }
+      ]
+    },
+    "11": {
+      "id": 11,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "0"
+        }
+      ]
+    },
+    "12": {
+      "id": 12,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "13": {
+      "id": 13,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "0"
+        }
+      ]
+    },
+    "14": {
+      "id": 14,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "klisk.planet_info",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "2"
+        }
+      ]
+    },
+    "15": {
+      "id": 15,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "1"
+        }
+      ]
+    },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "16": {
+      "id": 16,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "0",
+          "flags": {
+            "planet_info": "true"
+          }
+        }
+      ]
+    },
+    "18": {
+      "id": 18,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    }
+  }
+}
