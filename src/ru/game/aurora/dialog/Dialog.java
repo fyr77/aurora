@@ -126,12 +126,12 @@ public class Dialog implements OverlayWindow {
                 throw new IllegalStateException("Can not select any statement to start dialog for current world condition");
             }
         }
-        availableReplies = currentStatement.getAvailableReplies(world, flags);
         if (flags == null) {
             flags = new HashMap<>();
         } else {
             flags.clear();
         }
+        availableReplies = currentStatement.getAvailableReplies(world, flags);
         returnValue = 0;
     }
 

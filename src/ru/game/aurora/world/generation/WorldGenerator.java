@@ -16,10 +16,7 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.CrewChangeListener;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.generation.aliens.BorkGenerator;
-import ru.game.aurora.world.generation.aliens.GardenerGenerator;
-import ru.game.aurora.world.generation.aliens.KliskGenerator;
-import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.aliens.*;
 import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
@@ -62,6 +59,7 @@ public class WorldGenerator implements Runnable {
             , new HumanityGenerator()
             , new RoguesGenerator()
             , new BorkGenerator()
+            , new ZorsanGenerator()
     };
 
     private static final WorldGeneratorPart[] otherGenerators = {

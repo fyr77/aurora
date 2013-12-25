@@ -137,6 +137,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return (p.getX() >= -radius && p.getX() <= radius && p.getY() >= -radius && p.getY() <= radius);
     }
 
+    public int getRadius() {
+        return radius;
+    }
+
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics g, Camera camera, int tileX, int tileY) {
         if (!camera.isInViewport(tileX, tileY)) {

@@ -53,7 +53,7 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart
         });
         gardenerShip.setCaptain(new NPC(dialog));
 
-        lastBeaconLocation.setRandomEmptyPosition(gardenerShip);
+        gardenerShip.setPos(-lastBeaconLocation.getRadius() + 2, 1);
         lastBeaconLocation.getShips().add(gardenerShip);
 
 

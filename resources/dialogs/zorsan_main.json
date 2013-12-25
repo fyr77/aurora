@@ -1,0 +1,15 @@
+{
+    "id": "zorsan_main",
+    "iconName":"no_image",
+    "statements":{
+        "0":{
+            "id":0,
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"end"
+                }
+            ]
+        }
+    }
+}

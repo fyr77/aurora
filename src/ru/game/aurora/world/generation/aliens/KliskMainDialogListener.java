@@ -50,19 +50,20 @@ public class KliskMainDialogListener implements DialogListener {
         if (returnCode >= 100 && returnCode <= 500) {
 
             if (flags.containsKey("klisk.bork_info")) {
-                research = new AlienRaceResearch("bork", world.getRaces().get("Bork"), new JournalEntry("bork"));
+                research = new AlienRaceResearch("bork", world.getRaces().get("Bork"), new JournalEntry("bork", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
             if (flags.containsKey("klisk.klisk_info")) {
-                research = new AlienRaceResearch("klisk", world.getRaces().get("Klisk"), new JournalEntry("klisk"));
+                research = new AlienRaceResearch("klisk", world.getRaces().get("Klisk"), new JournalEntry("klisk", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
             if (flags.containsKey("klisk.rogues_info")) {
-                research = new AlienRaceResearch("rogues", world.getRaces().get("Rogues"), new JournalEntry("rogues"));
+                research = new AlienRaceResearch("rogues", world.getRaces().get("Rogues"), new JournalEntry("rogues", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
             if (flags.containsKey("klisk.zorsan_info")) {
-                GameLogger.getInstance().logMessage("Zorsan not implemented yet");
+                research = new AlienRaceResearch("zorsan", world.getRaces().get("Zorsan"), new JournalEntry("zorsan", "main"));
+                world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
 
 
