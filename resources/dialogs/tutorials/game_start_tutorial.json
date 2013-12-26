@@ -1,6 +1,6 @@
 {
     "id": "game_start",
-    "iconName":"no_image",
+    "iconName":"interior_dialog",
     "statements":{
         "0":{
             "id":0,
