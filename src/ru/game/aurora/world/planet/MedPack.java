@@ -15,7 +15,7 @@ public class MedPack extends UsableItem {
 
     @Override
     public void useIt(World world, int amount) {
-        world.getPlayer().getLandingParty().resetHp();
+        world.getPlayer().getLandingParty().resetHp(world);
         GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.medpack_used"));
         super.useIt(world, amount);
     }

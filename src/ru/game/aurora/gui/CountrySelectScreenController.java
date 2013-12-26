@@ -8,6 +8,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.IntroDialog;
+import ru.game.aurora.player.EarthCountry;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 
@@ -55,12 +56,15 @@ public class CountrySelectScreenController implements ScreenController {
         switch (selectedId) {
             case "america":
                 dialog = IntroDialog.load("story/intro_am.json");
+                world.getPlayer().setMainCountry(EarthCountry.AMERICA);
                 break;
             case "asia":
                 dialog = IntroDialog.load("story/intro_as.json");
+                world.getPlayer().setMainCountry(EarthCountry.ASIA);
                 break;
             case "europe":
                 dialog = IntroDialog.load("story/intro_eu.json");
+                world.getPlayer().setMainCountry(EarthCountry.EUROPE);
                 break;
             default:
                 throw new IllegalStateException("Invalid country id " + selectedId);

@@ -1,7 +1,9 @@
 package ru.game.aurora.player.engineering;
 
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.player.EarthCountry;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 
@@ -27,6 +29,15 @@ public class HullRepairs implements Serializable {
 
     private int currentWorkRemaining = WORK_FOR_POINT;
 
+    private int getRealPointCost(World world)
+    {
+        int result = POINT_RES_COST;
+        if (world.getPlayer().getMainCountry() == EarthCountry.EUROPE) {
+            result = (int) Math.floor(result * Configuration.getDoubleProperty("player.europe.engineeringPriceMultiplier"));
+        }
+        return result;
+    }
+
     public void update(World world) {
         if (remainingPoints == 0 || engineersAssigned == 0) {
             return;
@@ -44,7 +55,8 @@ public class HullRepairs implements Serializable {
 
             remainingPoints--;
 
-            if (remainingPoints > 0 && world.getPlayer().getResourceUnits() < POINT_RES_COST) {
+            final int pointResCost = getRealPointCost(world);
+            if (remainingPoints > 0 && world.getPlayer().getResourceUnits() < pointResCost) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.not_enough_resources_hull"));
                 remainingPoints = 0;
             }
@@ -57,12 +69,12 @@ public class HullRepairs implements Serializable {
                 return;
             }
 
-            world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() - POINT_RES_COST);
+            world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() - pointResCost);
         }
     }
 
-    public int calcResCost() {
-        return remainingPoints * POINT_RES_COST;
+    public int calcResCost(World world) {
+        return remainingPoints * getRealPointCost(world);
     }
 
     public void resetProgress() {

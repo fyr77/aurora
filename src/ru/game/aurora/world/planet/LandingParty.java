@@ -7,8 +7,10 @@ package ru.game.aurora.world.planet;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.player.EarthCountry;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.player.research.projects.Cartography;
 import ru.game.aurora.world.GameObject;
@@ -94,8 +96,12 @@ public class LandingParty extends MovableSprite implements GameObject {
         return weapon;
     }
 
-    public int calcDamage() {
-        return Math.max(1, (int) (weapon.getDamage() * (1.0 / 3 * (science + engineers) + military)));
+    public int calcDamage(World world) {
+        double baseValue =  (weapon.getDamage() * (1.0 / 3 * (science + engineers) + military));
+        if (world.getPlayer().getMainCountry() == EarthCountry.AMERICA) {
+            baseValue *= Configuration.getDoubleProperty("player.america.damageMultiplier");
+        }
+        return (int) Math.round(baseValue);
     }
 
     public int calcMiningPower() {
@@ -194,8 +200,11 @@ public class LandingParty extends MovableSprite implements GameObject {
         return inventory;
     }
 
-    public void resetHp() {
+    public void resetHp(World world) {
         hp = 3;
+        if (world.getPlayer().getMainCountry() == EarthCountry.AMERICA) {
+            hp += Configuration.getIntProperty("player.america.hpBonus");
+        }
     }
 
     public void subtractHp(World world, int amount) {
@@ -217,7 +226,7 @@ public class LandingParty extends MovableSprite implements GameObject {
                 }
                 world.onCrewChanged();
                 if (getTotalMembers() > 0) {
-                    resetHp();
+                    resetHp(world);
                 } else {
                     break;
                 }

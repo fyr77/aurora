@@ -7,9 +7,11 @@
 package ru.game.aurora.player.engineering;
 
 
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.ItemWithTextAndImage;
+import ru.game.aurora.player.EarthCountry;
 import ru.game.aurora.world.World;
 
 public abstract class EngineeringProject extends ItemWithTextAndImage {
@@ -24,7 +26,11 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
     }
 
     public boolean update(World world) {
-        remainingProgress -= engineersAssigned;
+        int realSpeed = engineersAssigned;
+        if (world.getPlayer().getMainCountry() == EarthCountry.EUROPE) {
+            realSpeed = (int) Math.ceil(realSpeed * Configuration.getDoubleProperty("player.europe.engineeringSpeedMultiplier"));
+        }
+        remainingProgress -= realSpeed;
         if (remainingProgress <= 0) {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.engineering_project_completed"), getLocalizedName("engineering")));
             onCompleted(world);

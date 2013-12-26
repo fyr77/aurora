@@ -6,8 +6,10 @@
  */
 package ru.game.aurora.player.research;
 
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.player.EarthCountry;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.research.projects.AnimalResearch;
 import ru.game.aurora.player.research.projects.AstronomyResearch;
@@ -74,7 +76,13 @@ public class ResearchState implements Serializable {
         List<ResearchProjectState> toAdd = new LinkedList<>();
         for (Iterator<ResearchProjectState> iter = currentProjects.iterator(); iter.hasNext(); ) {
             ResearchProjectState state = iter.next();
-            state.desc.update(world, state.scientists);
+
+            int realScientists = state.scientists;
+            if (world.getPlayer().getMainCountry() == EarthCountry.ASIA) {
+                // asia has a research bonus
+                realScientists = (int) Math.ceil(realScientists * Configuration.getDoubleProperty("player.asia.researchMultiplier"));
+            }
+            state.desc.update(world, realScientists);
             if (state.desc.isCompleted()) {
                 iter.remove();
                 if (!state.desc.isRepeatable()) {

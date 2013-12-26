@@ -21,9 +21,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Player implements Serializable {
+public class Player implements Serializable
+{
 
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 3L;
 
     private Ship ship;
 
@@ -42,6 +43,9 @@ public class Player implements Serializable {
     private Journal journal = new Journal();
 
     private Map<InventoryItem, Integer> inventory = new HashMap<InventoryItem, Integer>();
+
+    // main country in Aurora project, defines some bonuses
+    private EarthCountry mainCountry = EarthCountry.AMERICA;
 
     /**
      * Number of times player has returned to Earth without enough research data
@@ -117,5 +121,13 @@ public class Player implements Serializable {
 
     public Journal getJournal() {
         return journal;
+    }
+
+    public EarthCountry getMainCountry() {
+        return mainCountry;
+    }
+
+    public void setMainCountry(EarthCountry mainCountry) {
+        this.mainCountry = mainCountry;
     }
 }
