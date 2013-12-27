@@ -33,7 +33,7 @@
       "textId": "intro_1.6.text"
     },
     {
-      "iconName": "europe_leader",
+      "iconName": "usa_leader",
       "captionId": "intro_1.7.caption",
       "textId": "intro_1.7.text"
     },
@@ -43,7 +43,7 @@
       "textId": "intro_1.8.text"
     },
     {
-      "iconName": "usa_leader",
+      "iconName": "europe_leader",
       "captionId": "intro_1.9.caption",
       "textId": "intro_1.9.text"
     },
@@ -53,14 +53,24 @@
       "textId": "intro_1.10.text"
     },
     {
-      "iconName": "europe_leader",
+      "iconName": "usa_leader",
       "captionId": "intro_1.11.caption",
       "textId": "intro_1.11.text"
     },
     {
-      "iconName": "usa_leader",
+      "iconName": "europe_leader",
       "captionId": "intro_1.12.caption",
       "textId": "intro_1.12.text"
+    },
+    {
+      "iconName": "usa_leader",
+      "captionId": "intro_1.13.caption",
+      "textId": "intro_1.13.text"
+    },
+    {
+      "iconName": "europe_leader",
+      "captionId": "intro_1.14.caption",
+      "textId": "intro_1.14.text"
     }
   ]
 }

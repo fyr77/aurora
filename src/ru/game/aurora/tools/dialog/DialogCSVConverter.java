@@ -70,6 +70,9 @@ public class DialogCSVConverter {
         }
 
         context.text.put(textId, stmtStrings[1]);
+        if (replies.length == 0) {
+            throw new IllegalStateException("Empty reply list at line " + context.lineNumber);
+        }
         return new Statement(stmtId, stmtStrings.length > 2 ? stmtStrings[2] : null, null, replies);
     }
 
@@ -139,6 +142,13 @@ public class DialogCSVConverter {
             System.out.println("CSV parsed");
 
             Dialog dialog = new Dialog(args[1], args[2], statements);
+
+            System.out.println("Validating");
+
+            if (!DialogValidator.validate(dialog)) {
+                System.err.println("Validation failed, see log for details");
+                return;
+            }
 
             File outDir = new File(args[3]);
             if (!outDir.exists()) {

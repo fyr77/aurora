@@ -229,4 +229,8 @@ public class Dialog implements OverlayWindow {
     public DialogListener getListener() {
         return listener;
     }
+
+    public Map<Integer, Statement> getStatements() {
+        return statements;
+    }
 }

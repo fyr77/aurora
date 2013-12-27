@@ -56,7 +56,7 @@ public class GUI {
             field = AbstractSlickRenderFont.class.getDeclaredField("internalFont");
             field.setAccessible(true);
             UnicodeFont realFont = (UnicodeFont) field.get(font);
-            realFont.addGlyphs("АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя,.-–—_:;#!@?%^&*()");
+            realFont.addGlyphs("АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя,.-–—_:;#!@?%^&*()…");
             realFont.loadGlyphs();
 
         } catch (NoSuchFieldException | SlickException | IllegalAccessException e) {
