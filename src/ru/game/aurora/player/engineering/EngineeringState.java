@@ -36,11 +36,12 @@ public class EngineeringState implements Serializable {
         for (Iterator<EngineeringProject> iter = projects.iterator(); iter.hasNext(); ) {
             EngineeringProject ep = iter.next();
             if (!ep.update(world)) {
-                iter.remove();
+                if (!ep.isRepeatable()) {
+                    iter.remove();
+                }
             }
         }
     }
-
 
     public HullRepairs getHullRepairs() {
         return hullRepairs;
