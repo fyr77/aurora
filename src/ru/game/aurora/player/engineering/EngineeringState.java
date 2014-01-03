@@ -36,7 +36,10 @@ public class EngineeringState implements Serializable {
         for (Iterator<EngineeringProject> iter = projects.iterator(); iter.hasNext(); ) {
             EngineeringProject ep = iter.next();
             if (!ep.update(world)) {
-                if (!ep.isRepeatable()) {
+                if (ep.isRepeatable()) {
+                    addIdleEngineers(ep.getEngineersAssigned());
+                    ep.changeEngineers(-ep.getEngineersAssigned());
+                } else {
                     iter.remove();
                 }
             }

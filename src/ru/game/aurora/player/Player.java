@@ -9,6 +9,8 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.earth.EarthState;
 import ru.game.aurora.player.engineering.EngineeringState;
+import ru.game.aurora.player.engineering.projects.CylindersCraft;
+import ru.game.aurora.player.engineering.projects.MedpacksCraft;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
@@ -59,6 +61,9 @@ public class Player implements Serializable {
         ship = new Ship(humanity, 10, 10);
         researchState = new ResearchState(ship.getScientists());
         engineeringState = new EngineeringState(ship.getEngineers());
+
+        engineeringState.addNewEngineeringProject(new MedpacksCraft(3));  //добавим проекты для крафта аптечек и баллонов
+        engineeringState.addNewEngineeringProject(new CylindersCraft(3));
     }
 
     public Ship getShip() {

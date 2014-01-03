@@ -119,7 +119,17 @@ public class LandingParty extends MovableSprite implements GameObject {
     }
 
     public void pickUp(InventoryItem o, int amount) {
-        inventory.add(o, amount);
+        Boolean itemAlreadyInInventory = false;
+        for (Multiset.Entry<InventoryItem> entry : inventory.entrySet()) {
+            if (entry.getElement().getName().equals(o.getName())) {
+                inventory.setCount(entry.getElement(),entry.getCount() + amount);
+                itemAlreadyInInventory = true;
+                break;
+            }
+        }
+        if (!itemAlreadyInInventory) {
+            inventory.add(o, amount);
+        }
     }
 
     /**

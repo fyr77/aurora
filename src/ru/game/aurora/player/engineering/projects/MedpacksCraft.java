@@ -1,9 +1,7 @@
 package ru.game.aurora.player.engineering.projects;
 
 import ru.game.aurora.player.engineering.EngineeringProject;
-import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.MedPack;
 
 /**
@@ -12,19 +10,20 @@ import ru.game.aurora.world.planet.MedPack;
  */
 public class MedpacksCraft extends EngineeringProject {
     private static final long serialVersionUID = -2561453708074000488L;
-    private int amount;
+
+    private int amount; //сколько делать аптечек за один "проект"
+    private static final int progress = 10; //как долго будет идти создание аптечек
 
     public MedpacksCraft(int amount) {
         super("medpacks_craft", "medpack");
-        remainingProgress = 10;
+        remainingProgress = progress;
         this.amount = amount;
     }
 
     @Override
     public void onCompleted(World world) {
-        Ship ship = world.getPlayer().getShip();
-        MedPack mp = new MedPack();
-        ship.addItem(mp, amount);
+        world.getPlayer().getShip().addItem(new MedPack(), amount);
+        remainingProgress = progress;
     }
 
     @Override

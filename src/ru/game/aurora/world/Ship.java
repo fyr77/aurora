@@ -184,6 +184,16 @@ public class Ship extends MovableSprite implements SpaceObject {
     }
 
     public void addItem(InventoryItem o, int amount) {
-        storage.add(o, amount);
+        Boolean itemAlreadyInStorage = false;
+        for (Multiset.Entry<InventoryItem> entry : storage.entrySet()) {
+            if (entry.getElement().getName().equals(o.getName())) {
+                storage.setCount(entry.getElement(),entry.getCount() + amount);
+                itemAlreadyInStorage = true;
+                break;
+            }
+        }
+        if (!itemAlreadyInStorage) {
+            storage.add(o, amount);
+        }
     }
 }

@@ -17,7 +17,6 @@ import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.equip.StarshipWeapon;
-import ru.game.aurora.world.equip.StarshipWeaponDesc;
 import ru.game.aurora.world.space.StarSystem;
 
 
