@@ -53,4 +53,8 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
     public String toString() {
         return getLocalizedName("engineering");
     }
+
+    public boolean isRepeatable() {
+        return false;
+    }
 }

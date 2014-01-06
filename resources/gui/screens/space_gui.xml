@@ -17,7 +17,7 @@
         <layer id="starmap_layer" childLayout="vertical">
             <control name="top_panel" id="top_panel"/>
 
-            <!-- midlle panel contains list of buttons to the right -->
+            <!-- middle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
                 <panel width="85%"/>
                 <panel childLayout="vertical">

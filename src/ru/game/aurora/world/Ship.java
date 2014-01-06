@@ -5,6 +5,8 @@
  */
 package ru.game.aurora.world;
 
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
@@ -13,6 +15,7 @@ import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.equip.StarshipWeapon;
+import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.SpaceObject;
 
 import java.util.ArrayList;
@@ -41,6 +44,8 @@ public class Ship extends MovableSprite implements SpaceObject {
     private List<StarshipWeapon> weapons = new ArrayList<StarshipWeapon>();
 
     private AlienRace humanity;
+
+    private Multiset<InventoryItem> storage = HashMultiset.<InventoryItem>create();
 
     public Ship(AlienRace humanity, int x, int y) {
         super(x, y, "aurora");
@@ -172,5 +177,23 @@ public class Ship extends MovableSprite implements SpaceObject {
         engineers = Ship.MAX_ENGINEERS;
         military = Ship.MAX_MILITARY;
         world.onCrewChanged();
+    }
+
+    public Multiset<InventoryItem> getStorage() {
+        return storage;
+    }
+
+    public void addItem(InventoryItem o, int amount) {
+        Boolean itemAlreadyInStorage = false;
+        for (Multiset.Entry<InventoryItem> entry : storage.entrySet()) {
+            if (entry.getElement().getName().equals(o.getName())) {
+                storage.setCount(entry.getElement(),entry.getCount() + amount);
+                itemAlreadyInStorage = true;
+                break;
+            }
+        }
+        if (!itemAlreadyInStorage) {
+            storage.add(o, amount);
+        }
     }
 }
