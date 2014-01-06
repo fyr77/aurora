@@ -7,12 +7,10 @@
 
 package ru.game.aurora.gui;
 
+import com.google.common.collect.Multiset;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.controls.DropDown;
-import de.lessvoid.nifty.controls.DropDownSelectionChangedEvent;
-import de.lessvoid.nifty.controls.Scrollbar;
-import de.lessvoid.nifty.controls.ScrollbarChangedEvent;
+import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
@@ -36,6 +34,10 @@ public class LandingPartyEquipScreenController implements ScreenController {
 
     private Element myWindow;
 
+    private ListBox<Multiset.Entry<InventoryItem>> storageList;
+
+    private ListBox<Multiset.Entry<InventoryItem>> inventoryList;
+
     public LandingPartyEquipScreenController(World world) {
         this.world = world;
         landingParty = world.getPlayer().getLandingParty();
@@ -49,6 +51,9 @@ public class LandingPartyEquipScreenController implements ScreenController {
     public void bind(Nifty nifty, Screen screen) {
         myScreen = screen;
         myWindow = myScreen.findElementByName("equip_window");
+
+        storageList = screen.findNiftyControl("storageList", ListBox.class);
+        inventoryList = screen.findNiftyControl("inventoryList", ListBox.class);
     }
 
     @Override
@@ -71,6 +76,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
         }
 
         updateLabels();
+        refreshLists();
     }
 
     private void updateLabels() {
@@ -151,5 +157,52 @@ public class LandingPartyEquipScreenController implements ScreenController {
 
     public void closeScreen() {
         GUI.getInstance().popAndSetScreen();
+    }
+
+    public void onStorageToInventoryClicked() {
+        world.getPlayer().getLandingParty().pickUp(storageList.getFocusItem().getElement(), 1);
+        world.getPlayer().getShip().getStorage().setCount(storageList.getFocusItem().getElement(), storageList.getFocusItem().getCount() - 1);
+        if (storageList.getFocusItem().getCount() == 0) {
+            storageList.removeItem(storageList.getFocusItem());
+        }
+        refreshLists();
+    }
+
+    public void onInventoryToStorageClicked() {
+        world.getPlayer().getShip().addItem(inventoryList.getFocusItem().getElement(), 1);
+        world.getPlayer().getLandingParty().getInventory().setCount(inventoryList.getFocusItem().getElement(), inventoryList.getFocusItem().getCount() - 1);
+        if (inventoryList.getFocusItem().getCount() == 0) {
+            inventoryList.removeItem(inventoryList.getFocusItem());
+        }
+        refreshLists();
+    }
+
+    private void refreshLists() {
+        storageList.clear();
+        for (Multiset.Entry<InventoryItem> entry : world.getPlayer().getShip().getStorage().entrySet()) {
+            storageList.addItem(entry);
+        }
+        inventoryList.clear();
+        for (Multiset.Entry<InventoryItem> entry : world.getPlayer().getLandingParty().getInventory().entrySet()) {
+            inventoryList.addItem(entry);
+        }
+    }
+
+    //это - очень сильное колдунство. onClicked занят ниже. Поэтому тут - onReleased. Костыль
+    @NiftyEventSubscriber(pattern = ".*storage_to_inventory")
+    public void onReleased(String id, ButtonClickedEvent event) {
+        int numericId = Integer.parseInt(id.split("#")[0]);
+        ListBox itemsList = storageList;
+        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
+        itemsList.setFocusItemByIndex(numericId);
+    }
+
+    //костыль к костылю. YO DAWG
+    @NiftyEventSubscriber(pattern = ".*inventory_to_storage")
+    public void onPrimaryReleased(String id, ButtonClickedEvent event) {
+        int numericId = Integer.parseInt(id.split("#")[0]);
+        ListBox itemsList = inventoryList;
+        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
+        itemsList.setFocusItemByIndex(numericId);
     }
 }

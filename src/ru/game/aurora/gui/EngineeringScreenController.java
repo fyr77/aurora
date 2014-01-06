@@ -6,7 +6,6 @@
  */
 package ru.game.aurora.gui;
 
-import com.google.common.collect.Multiset;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.*;
@@ -23,7 +22,6 @@ import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.engineering.EngineeringState;
 import ru.game.aurora.player.engineering.HullRepairs;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.InventoryItem;
 
 
 public class EngineeringScreenController implements ScreenController {
@@ -43,9 +41,6 @@ public class EngineeringScreenController implements ScreenController {
 
     private Element window;
 
-    private ListBox<Multiset.Entry<InventoryItem>> storageList;
-
-    private ListBox<Multiset.Entry<InventoryItem>> inventoryList;
 
     public EngineeringScreenController(World world) {
         this.world = world;
@@ -61,8 +56,6 @@ public class EngineeringScreenController implements ScreenController {
         ruText = screen.findElementByName("requiredRuText");
         projectsList = screen.findNiftyControl("itemsList", ListBox.class);
 
-        storageList = screen.findNiftyControl("storageList", ListBox.class);
-        inventoryList = screen.findNiftyControl("inventoryList", ListBox.class);
     }
 
     @Override
@@ -71,8 +64,6 @@ public class EngineeringScreenController implements ScreenController {
         updateLabels();
         projectsList.clear();
         projectsList.addAllItems(world.getPlayer().getEngineeringState().getProjects());
-
-        refreshLists();
     }
 
     @Override
@@ -190,51 +181,6 @@ public class EngineeringScreenController implements ScreenController {
         avail.refresh();
     }
 
-    public void onStorageToInventoryClicked() {
-        world.getPlayer().getLandingParty().pickUp(storageList.getFocusItem().getElement(), 1);
-        world.getPlayer().getShip().getStorage().setCount(storageList.getFocusItem().getElement(), storageList.getFocusItem().getCount() - 1);
-        if (storageList.getFocusItem().getCount() == 0) {
-            storageList.removeItem(storageList.getFocusItem());
-        }
-        refreshLists();
-    }
-
-    public void onInventoryToStorageClicked() {
-        world.getPlayer().getShip().addItem(inventoryList.getFocusItem().getElement(), 1);
-        world.getPlayer().getLandingParty().getInventory().setCount(inventoryList.getFocusItem().getElement(), inventoryList.getFocusItem().getCount() - 1);
-        if (inventoryList.getFocusItem().getCount() == 0) {
-            inventoryList.removeItem(inventoryList.getFocusItem());
-        }
-        refreshLists();
-    }
-
-    private void refreshLists() {
-        storageList.clear();
-        for (Multiset.Entry<InventoryItem> entry : world.getPlayer().getShip().getStorage().entrySet()) {
-            storageList.addItem(entry);
-        }
-        inventoryList.clear();
-        for (Multiset.Entry<InventoryItem> entry : world.getPlayer().getLandingParty().getInventory().entrySet()) {
-            inventoryList.addItem(entry);
-        }
-    }
-
-    //это - очень сильное колдунство. onClicked занят ниже. Поэтому тут - onReleased. Костыль
-    @NiftyEventSubscriber(pattern = ".*storage_to_inventory")
-    public void onReleased(String id, ButtonClickedEvent event) {
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        ListBox itemsList = tg.getSelectedTab().getElement().findNiftyControl("storageList", ListBox.class);
-        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        itemsList.setFocusItemByIndex(numericId);
-    }
-    //костыль к костылю. YO DAWG
-    @NiftyEventSubscriber(pattern = ".*inventory_to_storage")
-    public void onPrimaryReleased(String id, ButtonClickedEvent event) {
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        ListBox itemsList = tg.getSelectedTab().getElement().findNiftyControl("inventoryList", ListBox.class);
-        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        itemsList.setFocusItemByIndex(numericId);
-    }
 
     // works for increase/decrease scientists buttons, makes item in list selected (by default clicking on button does not select item in list)
     @NiftyEventSubscriber(pattern = ".*crease_engineers")

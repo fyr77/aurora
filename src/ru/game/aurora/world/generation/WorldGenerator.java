@@ -212,6 +212,34 @@ public class WorldGenerator implements Runnable {
         }
     }
 
+    private static final class FirstContactListener extends GameEventListener {
+        private static final long serialVersionUID = -6283783334266117563L;
+
+        @Override
+        public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
+            if (ship.getRace() != world.getRaces().get("Humanity")) {
+                if (world.getGlobalVariables().containsKey("earth.special_dialog")) {
+                    logger.warn("Overwriting earth special dialog, can result in problems with game plot");
+                }
+                Dialog d = Dialog.loadFromFile("dialogs/earth_first_return_1.json");
+                d.setListener(new DialogListener() {
+                    private static final long serialVersionUID = 4929841605007880780L;
+
+                    @Override
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                        world.addOverlayWindow(Dialog.loadFromFile("dialogs/earth_first_return_2.json"));
+                    }
+                });
+
+
+                world.getGlobalVariables().put("earth.special_dialog", d);
+                return false;
+            }
+            return true;
+        }
+    }
+
+
     private void createMisc(World world) {
         Journal journal = world.getPlayer().getJournal();
         journal.addCodex(new JournalEntry("aurora_desc", "1"));
@@ -222,33 +250,7 @@ public class WorldGenerator implements Runnable {
         journal.addQuest(new JournalEntry("colony_search", "start"));
         journal.addQuest(new JournalEntry("last_beacon", "start"));
 
-        world.addListener(new GameEventListener() {
-            private static final long serialVersionUID = -6283783334266117563L;
-
-            @Override
-            public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
-                if (ship.getRace() != world.getRaces().get("Humanity")) {
-                    if (world.getGlobalVariables().containsKey("earth.special_dialog")) {
-                        logger.warn("Overwriting earth special dialog, can result in problems with game plot");
-                    }
-
-                    Dialog d = Dialog.loadFromFile("dialogs/earth_first_return_1.json");
-                    d.setListener(new DialogListener() {
-                        private static final long serialVersionUID = 4929841605007880780L;
-
-                        @Override
-                        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                            world.addOverlayWindow(Dialog.loadFromFile("dialogs/earth_first_return_2.json"));
-                        }
-                    });
-
-
-                    world.getGlobalVariables().put("earth.special_dialog", d);
-                    return false;
-                }
-                return true;
-            }
-        });
+        world.addListener(new FirstContactListener());
     }
 
     @Override
