@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world;
 
+import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
@@ -35,6 +36,10 @@ public abstract class GameEventListener implements Serializable {
      * Called when player enters star system, before it is shown
      */
     public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
+        return false;
+    }
+
+    public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
         return false;
     }
 

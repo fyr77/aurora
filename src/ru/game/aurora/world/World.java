@@ -21,6 +21,7 @@ import ru.game.aurora.player.research.RnDSet;
 import ru.game.aurora.world.generation.StarSystemNamesCollection;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
+import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
@@ -334,6 +335,29 @@ public class World implements Serializable {
             }
 
             if (l.onPlayerEnteredDungeon(this, dungeon)) {
+                calledGroups.addAll(l.getGroups());
+            }
+        }
+    }
+
+    public void onPlayerContactedAlienShip(SpaceObject ship) {
+        Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
+        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        for (GameEventListener l : newList) {
+
+            boolean alreadyCalledThisGroup = false;
+            for (GameEventListener.EventGroup group : l.getGroups()) {
+                if (calledGroups.contains(group)) {
+                    alreadyCalledThisGroup = true;
+                    break;
+                }
+            }
+
+            if (alreadyCalledThisGroup) {
+                continue;
+            }
+
+            if (l.onPlayerContactedOtherShip(this, ship)) {
                 calledGroups.addAll(l.getGroups());
             }
         }

@@ -13,8 +13,11 @@ import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GlobalThreadPool;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.CrewChangeListener;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.*;
 import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
@@ -26,13 +29,11 @@ import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.quest.Journal;
 import ru.game.aurora.world.quest.JournalEntry;
+import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.Future;
 
 /**
@@ -127,8 +128,7 @@ public class WorldGenerator implements Runnable {
         }
     }
 
-    public static StarSystem generateRandomStarSystem(World world, int x, int y, int planetCount)
-    {
+    public static StarSystem generateRandomStarSystem(World world, int x, int y, int planetCount) {
         final Random r = CommonRandom.getRandom();
 
         int starSize = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
@@ -212,8 +212,7 @@ public class WorldGenerator implements Runnable {
         }
     }
 
-    private void createMisc(World world)
-    {
+    private void createMisc(World world) {
         Journal journal = world.getPlayer().getJournal();
         journal.addCodex(new JournalEntry("aurora_desc", "1"));
         journal.addCodex(new JournalEntry("engineer_dossier", "1"));
@@ -222,6 +221,34 @@ public class WorldGenerator implements Runnable {
 
         journal.addQuest(new JournalEntry("colony_search", "start"));
         journal.addQuest(new JournalEntry("last_beacon", "start"));
+
+        world.addListener(new GameEventListener() {
+            private static final long serialVersionUID = -6283783334266117563L;
+
+            @Override
+            public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
+                if (ship.getRace() != world.getRaces().get("Humanity")) {
+                    if (world.getGlobalVariables().containsKey("earth.special_dialog")) {
+                        logger.warn("Overwriting earth special dialog, can result in problems with game plot");
+                    }
+
+                    Dialog d = Dialog.loadFromFile("dialogs/earth_first_return_1.json");
+                    d.setListener(new DialogListener() {
+                        private static final long serialVersionUID = 4929841605007880780L;
+
+                        @Override
+                        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                            world.addOverlayWindow(Dialog.loadFromFile("dialogs/earth_first_return_2.json"));
+                        }
+                    });
+
+
+                    world.getGlobalVariables().put("earth.special_dialog", d);
+                    return false;
+                }
+                return true;
+            }
+        });
     }
 
     @Override

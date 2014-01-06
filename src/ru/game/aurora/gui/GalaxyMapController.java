@@ -221,6 +221,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
             SpaceObject so = currentStarSystem.getSpaceObjectAtPlayerShipPosition();
             if (so != null) {
                 so.onContact(world);
+                world.onPlayerContactedAlienShip(so);
             }
         }
     }

@@ -214,6 +214,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 landOnCurrentPlanet(world);
             } else if (spaceObjectAtPlayerShipPosition != null) {
                 spaceObjectAtPlayerShipPosition.onContact(world);
+                world.onPlayerContactedAlienShip(spaceObjectAtPlayerShipPosition);
             }
         }
     }

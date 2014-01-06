@@ -68,6 +68,7 @@ public class DialogController implements ScreenController {
             replies.clear();
         }
         replies.addAllItems(dialog.addAvailableRepliesLocalized(world));
+        replies.refresh();
         screen.layoutLayers();
     }
 

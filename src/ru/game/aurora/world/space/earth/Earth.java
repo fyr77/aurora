@@ -71,19 +71,24 @@ public class Earth extends Planet {
 
     @Override
     public void enter(World world) {
-        String specialDialog = (String) world.getGlobalVariables().get("earth.special_dialog");
+        Object specialDialog = world.getGlobalVariables().get("earth.special_dialog");
         if (specialDialog != null) {
-            Dialog d = Dialog.loadFromFile(specialDialog);
-            world.addOverlayWindow(d);
-            d.setListener(new DialogListener() {
+            if (specialDialog instanceof String) {
+                Dialog d = Dialog.loadFromFile((String) specialDialog);
+                world.addOverlayWindow(d);
+                d.setListener(new DialogListener() {
 
-                private static final long serialVersionUID = -374777902752182404L;
+                    private static final long serialVersionUID = -374777902752182404L;
 
-                @Override
-                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                    world.getGlobalVariables().remove("earth.special_dialog");
-                }
-            });
+                    @Override
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                        world.getGlobalVariables().remove("earth.special_dialog");
+                    }
+                });
+            } else if (specialDialog instanceof Dialog) {
+                world.addOverlayWindow((Dialog) specialDialog);
+                world.getGlobalVariables().remove("earth.special_dialog");
+            }
             //todo: maybe not return? what if both variables are set?
             return;
         }
