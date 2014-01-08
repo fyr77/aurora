@@ -95,6 +95,10 @@ public class Animal extends Movable implements PlanetObject, IMonster {
 
     @Override
     public void onShotAt(int damage) {
+        if (desc.getModifiers().contains(AnimalModifier.ARMOR)) {
+            damage = Math.max(0, damage - desc.getArmor());
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.armor_consumed_damage"), desc.getArmor()));
+        }
         hp -= damage;
         if (!wasAttacked && desc.getBehaviour() == AnimalSpeciesDesc.Behaviour.SELF_DEFENSIVE) {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_enraged"), getName()));

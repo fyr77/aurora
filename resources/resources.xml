@@ -69,10 +69,9 @@
     <resource type="image" id="earth_ship_dialog">sprites/portraits/earth-2.png</resource>
     <resource type="image" id="earth_transport">sprites/ships/human_transport.png</resource>
     <resource type="image" id="earth_station">sprites/ships/human_station.png</resource>
-    <resource type="image" id="press_conference">sprites/ships/press_conference.png</resource>
     <resource type="image" id="earth_construction">sprites/ships/earth_construction.png</resource>
     <resource type="image" id="icarus_station">sprites/ships/icarus_station.png</resource>
-
+    <resource type="image" id="press_conference">sprites/portraits/press_conference.png</resource>
 
     <!-- research icons -->
     <resource type="image" id="cartography_research">sprites/research_icons/cartography.png</resource>

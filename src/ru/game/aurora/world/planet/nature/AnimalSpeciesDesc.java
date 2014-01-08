@@ -12,17 +12,20 @@ import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.Planet;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Represents common data about animal species: its name, look, behaviour, home planet, research progress for this animal etc
  */
 public class AnimalSpeciesDesc implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private String name;
 
     private Planet homePlanet;
+
+    private Set<AnimalModifier> modifiers;
 
     private boolean isCarnivorous;
 
@@ -71,7 +74,18 @@ public class AnimalSpeciesDesc implements Serializable {
      */
     private boolean outopsyMade = false;
 
-    public AnimalSpeciesDesc(Planet homePlanet, String name, boolean carnivorous, boolean herbivorous, int hp, LandingPartyWeapon weapon, int speed, Behaviour behaviour) {
+    private int armor;
+
+    public AnimalSpeciesDesc(Planet homePlanet
+            , String name
+            , boolean carnivorous
+            , boolean herbivorous
+            , int hp
+            , LandingPartyWeapon weapon
+            , int speed
+            , Behaviour behaviour
+            , Set<AnimalModifier> modifiers
+    ) {
         this.homePlanet = homePlanet;
         this.name = name;
         this.weapon = weapon;
@@ -80,6 +94,7 @@ public class AnimalSpeciesDesc implements Serializable {
         this.hp = hp;
         this.speed = speed;
         this.behaviour = behaviour;
+        this.modifiers = modifiers;
     }
 
     public Behaviour getBehaviour() {
@@ -98,6 +113,10 @@ public class AnimalSpeciesDesc implements Serializable {
         return outopsyMade;
     }
 
+    public Set<AnimalModifier> getModifiers() {
+        return modifiers;
+    }
+
     public int getSpeed() {
         return speed;
     }
@@ -114,13 +133,20 @@ public class AnimalSpeciesDesc implements Serializable {
         return deadImage;
     }
 
-    public void setImages(Image img, Image deadImg)
-    {
+    public void setImages(Image img, Image deadImg) {
         image = img;
         deadImage = deadImg;
     }
 
     public Planet getHomePlanet() {
         return homePlanet;
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public void setArmor(int armor) {
+        this.armor = armor;
     }
 }

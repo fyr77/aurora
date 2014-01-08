@@ -2,16 +2,26 @@ package ru.game.aurora.world.planet.nature;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.game.aurora.application.AuroraGame;
+import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.frankenstein.Slick2DFrankensteinImage;
 import ru.game.aurora.frankenstein.Slick2DImageFactory;
+import ru.game.aurora.util.ProbabilitySet;
+import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.planet.Planet;
 import ru.game.frankenstein.*;
 import ru.game.frankenstein.impl.MonsterPartsLoader;
 import ru.game.frankenstein.util.CollectionUtils;
 import ru.game.frankenstein.util.ColorUtils;
+import ru.game.frankenstein.util.Size;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * Generates random alien animals
@@ -30,6 +40,14 @@ public class AnimalGenerator {
     private static AnimalGenerator instance;
 
     public static final Color[] supportedColors = {new Color(0x00697436), new Color(0x00a12e00), new Color(0x00ad5400), new Color(0x005f4d96), new Color(0x00966e00)};
+
+    private int baseHp;
+
+    private int baseDmg;
+
+    private double rangeAttackChance;
+
+    private ProbabilitySet<AnimalModifier> modifierProbabilitySet = new ProbabilitySet<>();
 
     public static void init() throws FileNotFoundException {
         instance = new AnimalGenerator();
@@ -50,6 +68,67 @@ public class AnimalGenerator {
         monsterGenerationParams = new MonsterGenerationParams(true, false);
         plantGenerationParams = new MonsterGenerationParams(false, false);
         plantGenerationParams.tags = new HashSet<>();
+
+        baseHp = Configuration.getIntProperty("monster.baseHp");
+        baseDmg = Configuration.getIntProperty("monster.baseDmg");
+        rangeAttackChance = Configuration.getDoubleProperty("monster.shootChance");
+
+        modifierProbabilitySet.put(null, 2.0);
+        for (AnimalModifier m : AnimalModifier.values()) {
+            modifierProbabilitySet.put(m, m.weight);
+        }
+
+    }
+
+    public AnimalSpeciesDesc generateMonster(Planet home) {
+        Random random = CommonRandom.getRandom();
+        int hp = 2 * baseDmg + random.nextInt(baseDmg);
+        int dmg = (int) Math.ceil(((baseHp / 2.0 - baseHp / 3.0) * random.nextDouble() + baseHp / 3.0));
+
+        LandingPartyWeapon weapon;
+        boolean ranged = random.nextDouble() < rangeAttackChance;
+        int range = 3;
+
+        Set<AnimalModifier> modifiers = new HashSet<>();
+        AnimalModifier m = modifierProbabilitySet.getRandom();
+        if (m != null) {
+            modifiers.add(m);
+            switch (m) {
+                case SNIPER:
+                    range *= 2;
+                    break;
+                case LARGE:
+                    hp *= 2;
+                    break;
+                case SMALL:
+                    hp /= 2;
+                    break;
+            }
+        }
+
+        if (ranged) {
+            weapon = new LandingPartyWeapon("claw", dmg, range, "", "", "bullet_shot");
+        } else {
+            weapon = new LandingPartyWeapon("melee", dmg, 1, "", "", "");
+        }
+
+        AnimalSpeciesDesc result = new AnimalSpeciesDesc(
+                home
+                , Localization.getText("research", "animal.default_name")
+                , random.nextBoolean()
+                , random.nextBoolean()
+                , hp
+                , weapon
+                , 1 + random.nextInt(5),
+                ru.game.aurora.util.CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values())
+                , modifiers
+        );
+
+        if (modifiers.contains(AnimalModifier.ARMOR)) {
+            result.setArmor(random.nextInt(5) + 1);
+        }
+
+        return result;
     }
 
 
@@ -58,6 +137,13 @@ public class AnimalGenerator {
             plantGenerationParams.tags.clear(); //todo: thread-safe?
             plantGenerationParams.tags.add(desc.getHomePlanet().getFloraAndFauna().getAnimalsStyleTag());
             monsterGenerationParams.colorMap = ColorUtils.createDefault4TintMap(CollectionUtils.selectRandomElement(supportedColors));
+            if (desc.getModifiers().contains(AnimalModifier.LARGE)) {
+                monsterGenerationParams.targetSize = new Size(AuroraGame.tileSize * 2, AuroraGame.tileSize * 2);
+            } else if (desc.getModifiers().contains(AnimalModifier.SMALL)) {
+                monsterGenerationParams.targetSize = new Size(AuroraGame.tileSize / 2, AuroraGame.tileSize / 2);
+            } else {
+                monsterGenerationParams.targetSize = null;
+            }
             Monster monster = monsterGenerator.generateMonster(monsterGenerationParams);
             desc.setImages(((Slick2DFrankensteinImage) monster.monsterImage).getImpl(), ((Slick2DFrankensteinImage) monster.deadImage).getImpl());
         } catch (FrankensteinException e) {
