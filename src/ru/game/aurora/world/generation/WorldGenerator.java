@@ -15,6 +15,7 @@ import ru.game.aurora.application.GlobalThreadPool;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.CrewChangeListener;
 import ru.game.aurora.world.GameEventListener;
@@ -212,6 +213,10 @@ public class WorldGenerator implements Runnable {
         }
     }
 
+    /**
+     * This is listener for a first contact with any alien ship
+     * After this, when player returns to earth, a press-conference will be held, and a few story dialogs shown
+     */
     private static final class FirstContactListener extends GameEventListener {
         private static final long serialVersionUID = -6283783334266117563L;
 
@@ -227,7 +232,17 @@ public class WorldGenerator implements Runnable {
 
                     @Override
                     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                        world.addOverlayWindow(Dialog.loadFromFile("dialogs/earth_first_return_2.json"));
+                        Dialog pressConference = Dialog.loadFromFile("dialogs/earth_first_return_2.json");
+                        pressConference.setListener(new DialogListener() {
+                            private static final long serialVersionUID = 7949033555418969959L;
+
+                            @Override
+                            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                                // based on player replies in this dialog, different private messages are sent
+                                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("press_conference_" + flags.get("message"), "news"));
+                            }
+                        });
+                        world.addOverlayWindow(pressConference);
                     }
                 });
 

@@ -78,7 +78,12 @@ public class DialogCSVConverter {
 
     private static Map<String, String> parseFlags(String s) {
         Map<String, String> flags = new HashMap<>();
-        flags.put(s, "true");
+        String[] values = s.split("=");
+        if (values.length == 1) {
+            flags.put(s, "true");
+        } else {
+            flags.put(values[0], values[1]);
+        }
         return flags;
     }
 

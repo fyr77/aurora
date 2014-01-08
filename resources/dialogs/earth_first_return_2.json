@@ -1,6 +1,6 @@
 {
   "id": "earth_first_return_2",
-  "iconName": "no_image",
+  "iconName": "press_conference",
   "statements": {
     "0": {
       "id": 0,
@@ -28,17 +28,26 @@
         {
           "returnValue": 0,
           "targetStatementId": 3,
-          "replyText": "0"
+          "replyText": "0",
+          "flags" : {
+            "message" : 1
+          }
         },
         {
           "returnValue": 0,
           "targetStatementId": 3,
-          "replyText": "1"
+          "replyText": "1",
+            "flags" : {
+              "message" : 2
+            }
         },
         {
           "returnValue": 0,
           "targetStatementId": 3,
-          "replyText": "2"
+          "replyText": "2",
+            "flags" : {
+              "message" : 3
+            }
         }
       ]
     },
