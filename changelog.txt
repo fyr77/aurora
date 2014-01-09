@@ -3,12 +3,14 @@ VERSION 0.2.0
 
 IN PROGRESS...
 
-+ New story and dialogs
++ New story and dialogs, tons of them
 + Tools to load dialogs from CSV files
 + Added in-game story journal
 * Locale can now be read from properties
 * Dialog system improved. Now replies can set flags that can be queried after dialog end.
  Flags can also be used to hide replies, just like global variables.
++ Dungeon entrances on planet surface
+* Monster and ship parameters tuned
 
 ======================================================
 
