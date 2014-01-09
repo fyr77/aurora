@@ -29,9 +29,11 @@ import java.util.List;
 public class HumanityGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = -1289210420627927980L;
 
+    public static final String NAME = "Humanity";
+
     @Override
     public void updateWorld(World world) {
-        final AlienRace humans = new AlienRace("Humanity", "earth_transport", Dialog.loadFromFile("dialogs/human_ship_default_dialog.json"));
+        final AlienRace humans = new AlienRace(NAME, "earth_transport", Dialog.loadFromFile("dialogs/human_ship_default_dialog.json"));
         world.getPlayer().setShip(humans);
         humans.setTravelDistance(1);
         world.getRaces().put(humans.getName(), humans);

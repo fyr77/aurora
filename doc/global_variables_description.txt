@@ -22,6 +22,8 @@ quest.main.evacuation_started - after evacuation from Earth has begun
 
 colony_search.klisk_coords - coordinates of an earth-like planet that Klisk can sell to a player
 colony_search.found - if suitable planet has been found
+colony_search.explored - suitable planet explored
+colony_search.explored_fully
 last_beacon.coords - coordinates of a last-known aurora location
 ==============================
 Crew relationship
@@ -49,6 +51,8 @@ quest.main.klisk_evacuation_help - Klisk are helping with evacuating Earth. Klis
 klisk.discount - player has a one-time 10% discount
 klisk.coordinates_traded - after player has made an initial deal with the klisk
 
+klisk.knows_about_path_philosophy - if player has talked about 'the path' philosophy with the klisk
+
 klisk.planet_info - if klisk promised to give player a coordinates of an earth-like planet
 klisk.klisk_info - set if player has bought info for these races
 klisk.zorsan_info
@@ -68,3 +72,7 @@ Tutorials
 tutorial.landing - if set, on next planetary landing tutorial dialog will be shown
 
 ==============================
+
+rogues altar on the moon quest
+
+rogues_altar.moon_checked - if set, player had a conversation with rogues on the moon

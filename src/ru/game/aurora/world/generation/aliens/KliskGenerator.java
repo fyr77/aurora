@@ -41,6 +41,10 @@ public class KliskGenerator implements WorldGeneratorPart {
                         return;
                 }
 
+                if (flags.containsKey("klisk.knows_about_path_philosophy")) {
+                    world.getGlobalVariables().put("klisk.knows_about_path_philosophy", true);
+                }
+
                 Dialog newDefaultDialog = Dialog.loadFromFile("dialogs/klisk_main.json");
                 newDefaultDialog.setListener(new KliskMainDialogListener(kliskRace));
                 kliskRace.setDefaultDialog(newDefaultDialog);

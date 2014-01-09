@@ -12,6 +12,7 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.quest.EarthInvasionGenerator;
 import ru.game.aurora.world.quest.JournalEntry;
 
 import java.util.Map;
@@ -72,12 +73,14 @@ public class KliskMainDialogListener implements DialogListener {
                     world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("klisk_minimal");
                 } else {
                     world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("klisk_max");
+                    new EarthInvasionGenerator().updateWorld(world);
                 }
             } else {
                 if (flags.containsKey("base_info")) {
                     world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("klisk_minimal_no_coords");
                 } else {
                     world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("klisk_max_no_coords");
+                    new EarthInvasionGenerator().updateWorld(world);
                 }
             }
             world.getGlobalVariables().put("klisk.coordinates_traded", true);

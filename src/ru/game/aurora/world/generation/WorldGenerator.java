@@ -240,6 +240,7 @@ public class WorldGenerator implements Runnable {
                             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                                 // based on player replies in this dialog, different private messages are sent
                                 world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("press_conference_" + flags.get("message"), "news"));
+                                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("press_conference_common", "news"));
                             }
                         });
                         world.addOverlayWindow(pressConference);
