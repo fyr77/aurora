@@ -73,6 +73,7 @@ public class Earth extends Planet {
     public void enter(World world) {
         Object specialDialog = world.getGlobalVariables().get("earth.special_dialog");
         if (specialDialog != null) {
+            world.setCurrentRoom(owner);
             if (specialDialog instanceof String) {
                 Dialog d = Dialog.loadFromFile((String) specialDialog);
                 world.addOverlayWindow(d);
