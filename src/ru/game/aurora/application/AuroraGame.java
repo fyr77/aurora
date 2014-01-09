@@ -8,13 +8,15 @@ package ru.game.aurora.application;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.slick2d.NiftyOverlayGame;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.gui.GUI;
-import ru.game.aurora.gui.SettingsScreenController;
 import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
@@ -23,9 +25,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,6 +53,36 @@ public class AuroraGame extends NiftyOverlayGame {
     private static List<Updatable> updatables = new ArrayList<>();
 
     public AuroraGame() {
+    }
+
+    public static List<Resolution> getAvailableResolutions()
+    {
+        Set<Long> resolutionset = new HashSet<>();
+        List<Resolution> result = new ArrayList<>();
+        try {
+            for (DisplayMode mode : Display.getAvailableDisplayModes()) {
+                if (!mode.isFullscreenCapable() || mode.getBitsPerPixel() < 32) {
+                    continue;
+                }
+                if (mode.getWidth() < 1024 || mode.getHeight() < 768) {
+                    continue;
+                }
+                if (mode.getWidth() % 64 != 0 || mode.getHeight() % 64 != 0) {
+                    continue;
+                }
+
+                if (resolutionset.contains((long)mode.getWidth() * mode.getHeight())) {
+                    continue;
+                }
+                resolutionset.add((long)mode.getWidth() * mode.getHeight());
+                result.add(new Resolution(mode.getWidth(), mode.getHeight()));
+            }
+        } catch (LWJGLException e) {
+            logger.error("Failed to get list of display modes", e);
+            throw new RuntimeException(e);
+        }
+        Collections.sort(result);
+        return result;
     }
 
     public static void changeResolution(int newTilesX, int newTilesY, boolean fullScreen) {
@@ -234,12 +264,14 @@ public class AuroraGame extends NiftyOverlayGame {
         }
         Configuration.getSystemProperties().put("locale", Localization.getCurrentLocaleTag());
         app = new AppGameContainer(new AuroraGame());
-        SettingsScreenController.Resolution res;
+        Resolution res;
         String resolutionString = Configuration.getSystemProperties().getProperty("screen.resolution");
         if (resolutionString != null) {
-            res = new SettingsScreenController.Resolution(resolutionString);
+            res = new Resolution(resolutionString);
         } else {
-            res = new SettingsScreenController.Resolution(1280, 960);
+            List<Resolution> supportedResolutions = getAvailableResolutions();
+            // by default, use largest supported resolution available
+            res = supportedResolutions.get(supportedResolutions.size() - 1);
         }
         final boolean fullScreen = Boolean.parseBoolean(Configuration.getSystemProperties().getProperty("screen.full_screen", "false"));
         app.setDisplayMode(res.getWidth(), res.getHeight(), fullScreen);

@@ -5,16 +5,13 @@ import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.DropDown;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.Resolution;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,79 +26,16 @@ public class SettingsScreenController implements ScreenController {
 
     private static final Logger logger = LoggerFactory.getLogger(SettingsScreenController.class);
 
-    public static final class Resolution {
-        private int width;
-        private int height;
-
-        public Resolution(int width, int height) {
-            this.width = width;
-            this.height = height;
-        }
-
-        public Resolution(String propValue) {
-            String[] split = propValue.split("[xX]");
-            width = Integer.parseInt(split[0]);
-            height = Integer.parseInt(split[1]);
-        }
-
-        @Override
-        public String toString() {
-            return width + "x" + height;
-        }
-
-        public boolean isActive() {
-            return AuroraGame.tilesX * AuroraGame.tileSize == width && AuroraGame.tilesY * AuroraGame.tileSize == height;
-        }
-
-        public int getTilesX() {
-            return width / AuroraGame.tileSize;
-        }
-
-        public int getTilesY() {
-            return height / AuroraGame.tileSize;
-        }
-
-        public int getWidth() {
-            return width;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-    }
-
     @Override
     public void bind(Nifty nifty, Screen screen) {
         resolutionDropDown = screen.findNiftyControl("resolution_select", DropDown.class);
 
-        Set<Integer> resolutionset = new HashSet<>();
-        try {
-            for (DisplayMode mode : Display.getAvailableDisplayModes()) {
-                if (!mode.isFullscreenCapable() || mode.getBitsPerPixel() < 32) {
-                    continue;
-                }
-                if (mode.getWidth() < 1024 || mode.getHeight() < 768) {
-                    continue;
-                }
-                if (mode.getWidth() % 64 != 0 || mode.getHeight() % 64 != 0) {
-                    continue;
-                }
+        List<Resolution> resolutions = AuroraGame.getAvailableResolutions();
 
-                if (resolutionset.contains(mode.getWidth() * mode.getHeight())) {
-                    continue;
-                }
-                resolutionDropDown.addItem(new Resolution(mode.getWidth(), mode.getHeight()));
-                resolutionset.add(mode.getWidth() * mode.getHeight());
-            }
-        } catch (LWJGLException e) {
-            logger.error("Failed to get list of display modes", e);
-            return;
-        }
-
+        resolutionDropDown.addAllItems(resolutions);
 
         fullScreen = screen.findNiftyControl("fullscreen", CheckBox.class);
         fullScreen.setChecked(AuroraGame.isFullScreen());
-
 
         for (Resolution res : resolutionDropDown.getItems()) {
             if (res.isActive()) {
