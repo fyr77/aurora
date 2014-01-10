@@ -4,14 +4,15 @@ import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.world.AuroraTiledMap;
-import ru.game.aurora.world.Dungeon;
-import ru.game.aurora.world.GameEventListener;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
+import ru.game.aurora.world.dungeon.DungeonMonster;
+import ru.game.aurora.world.dungeon.KillAllMonstersCondition;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.DungeonEntrance;
 import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetObject;
+import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Map;
@@ -23,6 +24,72 @@ import java.util.Map;
 public class EarthInvasionGenerator implements WorldGeneratorPart
 {
     private static final long serialVersionUID = 1113857719613332116L;
+
+    public static final class RogueAltarWorker extends DungeonMonster
+    {
+        private static final long serialVersionUID = -2775935255374086503L;
+
+        public RogueAltarWorker(AuroraTiledMap map, int groupId, int objectId) {
+            super(map, groupId, objectId);
+        }
+
+        @Override
+        public void onShotAt(World world, int damage) {
+            if (getBehaviour() == AnimalSpeciesDesc.Behaviour.AGGRESSIVE) {
+                return;
+            }
+            // make all monsters aggressive
+            for (PlanetObject obj : myMap.getObjects()) {
+                if (DungeonMonster.class.isAssignableFrom(obj.getClass())) {
+                    ((DungeonMonster)obj).setBehaviour(AnimalSpeciesDesc.Behaviour.AGGRESSIVE);
+                }
+            }
+
+            // add a victory condition
+            myMap.getVictoryConditions().add(new KillAllMonstersCondition("guard"));
+            world.getCurrentDungeon().getController().setSuccessListener(new IStateChangeListener() {
+
+                private static final long serialVersionUID = 6517626927654743737L;
+
+                @Override
+                public void stateChanged(World world) {
+                    world.getGlobalVariables().put("rogues_altar.result", "destroy");
+
+                    world.getGlobalVariables().put("earth.special_dialog", Dialog.loadFromFile("dialogs/rogues_altar_destroyed.json"));
+                }
+            });
+        }
+
+        @Override
+        public boolean canBePickedUp() {
+            return true;
+        }
+
+        @Override
+        public void onPickedUp(World world) {
+            if (!world.getGlobalVariables().containsKey("rogues_altar.earth_communicated")) {
+                world.getGlobalVariables().put("rogues_altar.moon_checked", true);
+                // player has not yet received task to settle things down
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/rogues_altar_1.json"));
+                return;
+            }
+
+            final Dialog d = Dialog.loadFromFile("dialogs/encounters/rogues_altar_2.json");
+            d.setListener(new DialogListener() {
+                private static final long serialVersionUID = 7809964677347861595L;
+
+                @Override
+                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                    if (returnCode == 1) {
+                        // player decided to fight rogues, make them aggressive
+                        onShotAt(world, 0);
+                    }
+                }
+            });
+            world.addOverlayWindow(d);
+
+        }
+    }
 
     private static final class RogueInvasionAdder extends GameEventListener
     {
@@ -55,6 +122,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart
                     if (flags.containsKey("klisk.philosophy_research")) {
                         // add new research of a klisk philosophy
                     }
+                    world.getGlobalVariables().put("rogues_altar.earth_communicated", true);
                 }
             });
 
@@ -64,7 +132,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart
 
             Planet moon = (Planet) humanity.getHomeworld().getPlanets()[2].getSatellites().get(0);
 
-            DungeonEntrance entrance = new DungeonEntrance(moon, 5, 5, "builders_pyramid", new Dungeon(world, new AuroraTiledMap("maps/rogue_altar.tmx"), moon));
+            DungeonEntrance entrance = new DungeonEntrance(moon, 5, 5, "rogues_altar", new Dungeon(world, new AuroraTiledMap("maps/rogue_altar.tmx"), moon));
             moon.setNearestFreePoint(entrance, 5, 5);
             moon.getMap().getObjects().add(entrance);
 

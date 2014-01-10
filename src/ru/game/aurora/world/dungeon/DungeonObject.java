@@ -22,7 +22,10 @@ import ru.game.aurora.world.planet.PlanetObject;
  * Person or object that you can meet on planet surface
  */
 public class DungeonObject extends Movable implements PlanetObject {
+
     private static final long serialVersionUID = 1L;
+
+    protected AuroraTiledMap myMap;
 
     private String name;
 
@@ -42,6 +45,7 @@ public class DungeonObject extends Movable implements PlanetObject {
 
     public DungeonObject(AuroraTiledMap map, int groupId, int objectId) {
         super(map.getMap().getObjectX(groupId, objectId) / AuroraGame.tileSize, map.getMap().getObjectY(groupId, objectId) / AuroraGame.tileSize - 1); // -1 because Y coord in editor starts from 1
+        myMap = map;
         TiledMap impl = map.getMap();
 
         this.imageName = impl.getObjectProperty(groupId, objectId, "image", null);
@@ -61,7 +65,7 @@ public class DungeonObject extends Movable implements PlanetObject {
     }
 
     @Override
-    public void onShotAt(int damage) {
+    public void onShotAt(World world, int damage) {
     }
 
     @Override

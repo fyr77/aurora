@@ -128,7 +128,7 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
     }
 
     @Override
-    public void onShotAt(int damage) {
+    public void onShotAt(World world, int damage) {
 
     }
 

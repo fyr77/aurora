@@ -94,7 +94,7 @@ public class Animal extends Movable implements PlanetObject, IMonster {
     }
 
     @Override
-    public void onShotAt(int damage) {
+    public void onShotAt(World world, int damage) {
         if (desc.getModifiers().contains(AnimalModifier.ARMOR)) {
             damage = Math.max(0, damage - desc.getArmor());
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.armor_consumed_damage"), desc.getArmor()));

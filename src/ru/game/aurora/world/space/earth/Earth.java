@@ -57,7 +57,7 @@ public class Earth extends Planet {
         }
 
         final Image earth = ResourceManager.getInstance().getImage("earth");
-        g.drawImage(earth, camera.getXCoord(x) - earth.getWidth() / 2, camera.getYCoord(y) - earth.getHeight() / 2);
+        g.drawImage(earth, camera.getXCoord(x) - earth.getWidth() / 4, camera.getYCoord(y)  -earth.getHeight() / 4);
     }
 
     @Override

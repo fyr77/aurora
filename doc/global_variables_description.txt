@@ -76,3 +76,5 @@ tutorial.landing - if set, on next planetary landing tutorial dialog will be sho
 rogues altar on the moon quest
 
 rogues_altar.moon_checked - if set, player had a conversation with rogues on the moon
+rogues_altar.earth_communicated - after player has talked for a first time with earth
+rogues_altar.result - outcome of this quest. Can be "destroy" "help" "withdraw"

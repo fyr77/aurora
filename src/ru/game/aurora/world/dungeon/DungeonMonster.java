@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -26,6 +27,8 @@ public class DungeonMonster extends DungeonObject implements IMonster {
 
     private int hp;
 
+    private AnimalSpeciesDesc.Behaviour behaviour;
+
     private MonsterController controller;
 
     private transient ITileMap owner;
@@ -36,6 +39,7 @@ public class DungeonMonster extends DungeonObject implements IMonster {
         weapon = ResourceManager.getInstance().getLandingPartyWeapons().getEntity(map.getMap().getObjectProperty(groupId, objectId, "weapon", null));
         speed = Integer.parseInt(map.getMap().getObjectProperty(groupId, objectId, "speed", "0"));
         hp = Integer.parseInt(map.getMap().getObjectProperty(groupId, objectId, "hp", "1"));
+        behaviour = AnimalSpeciesDesc.Behaviour.valueOf(map.getMap().getObjectProperty(groupId, objectId, "behaviour", "AGGRESSIVE"));
         final String tagsString = map.getMap().getObjectProperty(groupId, objectId, "tags", null);
         if (tagsString != null) {
             tags = new HashSet<>();
@@ -52,7 +56,9 @@ public class DungeonMonster extends DungeonObject implements IMonster {
     @Override
     public void update(GameContainer container, World world) {
         super.update(container, world);
-        controller.update(container, world);
+        if (behaviour == AnimalSpeciesDesc.Behaviour.AGGRESSIVE) {
+            controller.update(container, world);
+        }
     }
 
     @Override
@@ -61,7 +67,7 @@ public class DungeonMonster extends DungeonObject implements IMonster {
     }
 
     @Override
-    public void onShotAt(int damage) {
+    public void onShotAt(World world, int damage) {
         hp -= damage;
         if (hp <= 0) {
             // clean obstacle flag
@@ -91,5 +97,13 @@ public class DungeonMonster extends DungeonObject implements IMonster {
     @Override
     public LandingPartyWeapon getWeapon() {
         return weapon;
+    }
+
+    public AnimalSpeciesDesc.Behaviour getBehaviour() {
+        return behaviour;
+    }
+
+    public void setBehaviour(AnimalSpeciesDesc.Behaviour behaviour) {
+        this.behaviour = behaviour;
     }
 }

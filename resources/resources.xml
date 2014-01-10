@@ -55,6 +55,8 @@
     <resource type="image" id="rogues_scout">sprites/ships/rogues_scout.png</resource>
     <resource type="image" id="rogues_frame">sprites/ships/rogues_frame.png</resource>
     <resource type="image" id="rogues_scout_damaged">sprites/ships/rogues_scout_damaged.png</resource>
+    <resource type="image" id="rogues_soldier">sprites/planet_objects/rogue_c.png</resource>
+    <resource type="image" id="rogues_altar">sprites/planet_objects/rogue_entrance.png</resource>
 
     <!-- swarm -->
     <resource type="image" id="swarm_ship">sprites/ships/swarm.png</resource>

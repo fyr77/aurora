@@ -2,6 +2,7 @@ package ru.game.aurora.world.planet;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.BasePositionable;
@@ -42,7 +43,7 @@ public class DungeonEntrance extends BasePositionable implements PlanetObject
     }
 
     @Override
-    public void onShotAt(int damage) {
+    public void onShotAt(World world, int damage) {
     }
 
     @Override
@@ -66,7 +67,8 @@ public class DungeonEntrance extends BasePositionable implements PlanetObject
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        graphics.drawImage(ResourceManager.getInstance().getImage(sprite), camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
+        final Image image = ResourceManager.getInstance().getImage(sprite);
+        graphics.drawImage(image, camera.getXCoordWrapped(x, myPlanet.getWidth()) - image.getWidth() / 2, camera.getYCoordWrapped(y, myPlanet.getHeight()) - image.getHeight() / 2);
     }
 
     @Override

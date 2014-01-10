@@ -21,6 +21,11 @@ public class KillAllMonstersCondition implements IVictoryCondition {
     // if set, must kill all monsters with these tags
     private Set<String> tags = null;
 
+    public KillAllMonstersCondition(String... tags) {
+        this.tags = new HashSet<>();
+        Collections.addAll(this.tags, tags);
+    }
+
     public KillAllMonstersCondition(AuroraTiledMap map, int groupId, int objectId) {
         final String tagString = map.getMap().getObjectProperty(groupId, objectId, "tags", null);
         if (tagString != null) {

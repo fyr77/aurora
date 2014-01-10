@@ -17,7 +17,7 @@ public interface PlanetObject extends Positionable, GameObject {
 
     public boolean canBeShotAt();
 
-    public void onShotAt(int damage);
+    public void onShotAt(World world, int damage);
 
     public void onPickedUp(World world);
 
