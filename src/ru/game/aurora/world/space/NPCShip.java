@@ -169,6 +169,13 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         this.weapons = weapons;
     }
 
+    public void setWeapons(StarshipWeaponDesc... weaponDescs) {
+        this.weapons = new StarshipWeapon[weaponDescs.length];
+        for (int i = 0; i < weaponDescs.length; ++i) {
+            this.weapons[i] = new StarshipWeapon(weaponDescs[i], StarshipWeapon.MOUNT_ALL);
+        }
+    }
+
     public void fire(World world, StarSystem ss, int weaponIdx, SpaceObject target) {
         weapons[weaponIdx].fire();
         final StarshipWeaponDesc weaponDesc = weapons[weaponIdx].getWeaponDesc();

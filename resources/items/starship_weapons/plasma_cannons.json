@@ -1,11 +1,11 @@
 {
     "id" : "plasma_cannon",
-    "damage" : 2,
+    "damage" : 3,
     "name": "plasma_cannon.name",
     "desc": "plasma_cannon.desc",
     "shotSprite" : "plasma_shot",
     "range" : 2,
-    "reloadTurns" : 4,
+    "reloadTurns" : 0,
     "explosionAnimation" : "plasma_explosion",
     "particlesAnimation" : "plasma_particles"
 }
