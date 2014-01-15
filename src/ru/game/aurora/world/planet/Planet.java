@@ -58,6 +58,9 @@ public class Planet extends BasePlanet implements IDungeon {
 
     private World world;
 
+    // total amount of all tiles explored on this planet
+    private int exploredTiles = 0;
+
 
     public Planet(World world, StarSystem owner, Planet other) {
         super(other.getX(), other.getY(), other.size, owner, other.atmosphere, other.category);
@@ -245,6 +248,7 @@ public class Planet extends BasePlanet implements IDungeon {
                 }
 
                 int openedTiles = surface.updateVisibility(landingParty.getX(), landingParty.getY(), 5);
+                exploredTiles += openedTiles;
                 landingParty.addCollectedGeodata(openedTiles);
                 surfaceGenerationFuture = null;
             }
@@ -380,5 +384,9 @@ public class Planet extends BasePlanet implements IDungeon {
         sb.append(Localization.getText("gui", "scan.surface_type")).append(' ').append(getCategory()).append('\n');
 
         return sb;
+    }
+
+    public int getExploredTiles() {
+        return exploredTiles;
     }
 }

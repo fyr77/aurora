@@ -21,6 +21,7 @@ quest.main.weapon_test_done - after player has performed a weapon test against O
 quest.main.evacuation_started - after evacuation from Earth has begun
 
 colony_search.klisk_coords - coordinates of an earth-like planet that Klisk can sell to a player
+colony_search.coords - coordinates of an explored planet that will be used as quest result
 colony_search.found - if suitable planet has been found
 colony_search.explored - suitable planet explored
 colony_search.explored_fully

@@ -23,6 +23,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.*;
 import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
+import ru.game.aurora.world.generation.quest.ColonyPlanetSearchListener;
 import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
 import ru.game.aurora.world.generation.quest.LastBeaconQuestGenerator;
 import ru.game.aurora.world.generation.quest.MainQuestGenerator;
@@ -53,6 +54,7 @@ public class WorldGenerator implements Runnable {
             new InitialRadioEmissionQuestGenerator()
             , new MainQuestGenerator()
             , new LastBeaconQuestGenerator()
+            , new ColonyPlanetSearchListener()
     };
 
     private static final WorldGeneratorPart[] alienGenerators = {

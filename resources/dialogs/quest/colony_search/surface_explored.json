@@ -1,0 +1,19 @@
+{
+    "id": "colony_search_surface_explored",
+    "iconName":"scientist_dialog",
+    "statements":{
+        "0":{
+            "id":0,
+            "replies":[
+                {
+                    "targetStatementId":-1,
+                    "replyText":"stay"
+                },
+                {
+                    "targetStatementId":-1,
+                    "replyText":"leave"
+                }
+            ]
+        }
+    }
+}

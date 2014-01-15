@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world;
 
+import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -60,6 +61,14 @@ public abstract class GameEventListener implements Serializable {
     }
 
     public boolean onPlayerEnteredDungeon(World world, Dungeon dungeon) {
+        return false;
+    }
+
+    public boolean onPlayerLandedPlanet(World world, Planet planet) {
+        return false;
+    }
+
+    public boolean onPlayerLeftPlanet(World world, Planet planet) {
         return false;
     }
 
