@@ -11,6 +11,7 @@ IN PROGRESS...
  Flags can also be used to hide replies, just like global variables.
 + Dungeon entrances on planet surface
 * Monster and ship parameters tuned
+* Intro dialogs are now shown in parallel with world generation
 
 ======================================================
 

@@ -73,16 +73,4 @@
         </control>
     </popup>
 
-    <popup id="generation" childLayout="absolute">
-        <control id="generation_window" name="window" closeable="false" hideOnClose="true" width="60%" height="350px"
-                 x="20%" y="30%">
-            <panel childLayout="vertical" margin="10px">
-                <panel height="256px" childLayout="horizontal">
-                    <image id="shuttle_image" width="256px" height="256px"/>
-                    <text width="*" id="generation_text" height="256px" style="base-font"/>
-                </panel>
-            </panel>
-        </control>
-    </popup>
-
 </nifty>

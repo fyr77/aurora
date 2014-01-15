@@ -55,8 +55,7 @@ public class AuroraGame extends NiftyOverlayGame {
     public AuroraGame() {
     }
 
-    public static List<Resolution> getAvailableResolutions()
-    {
+    public static List<Resolution> getAvailableResolutions() {
         Set<Long> resolutionset = new HashSet<>();
         List<Resolution> result = new ArrayList<>();
         try {
@@ -71,10 +70,10 @@ public class AuroraGame extends NiftyOverlayGame {
                     continue;
                 }
 
-                if (resolutionset.contains((long)mode.getWidth() * mode.getHeight())) {
+                if (resolutionset.contains((long) mode.getWidth() * mode.getHeight())) {
                     continue;
                 }
-                resolutionset.add((long)mode.getWidth() * mode.getHeight());
+                resolutionset.add((long) mode.getWidth() * mode.getHeight());
                 result.add(new Resolution(mode.getWidth(), mode.getHeight()));
             }
         } catch (LWJGLException e) {
@@ -160,15 +159,15 @@ public class AuroraGame extends NiftyOverlayGame {
                 }
             } else {
                 world.update(gameContainer);
-                for (Updatable up : updatables) {
-                    up.update(gameContainer, world);
-                }
                 if (world.isGameOver()) {
                     mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
                     mainMenu.reset();
                     world = null;
                     GUI.getInstance().getNifty().gotoScreen("main_menu");
                 }
+            }
+            for (Updatable up : updatables) {
+                up.update(gameContainer, world);
             }
             gameContainer.getInput().clearKeyPressedRecord();
         } catch (Exception ex) {
@@ -193,7 +192,7 @@ public class AuroraGame extends NiftyOverlayGame {
     protected void renderGame(GameContainer gameContainer, Graphics graphics) throws SlickException {
         try {
             if (mainMenu != null) {
-                mainMenu.draw(graphics, camera);
+                mainMenu.draw(graphics);
             } else {
                 world.draw(gameContainer, graphics);
                 world.getCamera().drawBound();
