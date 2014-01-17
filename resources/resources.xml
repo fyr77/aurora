@@ -107,6 +107,7 @@
 
     <!-- effects -->
     <resource type="image" id="blaster_shot">sprites/effects/blaster_shot.png</resource>
+    <resource type="image" id="missile_shot">sprites/effects/missile_shot.png</resource>
     <resource type="image" id="plasma_shot">sprites/effects/plasma_shot.png</resource>
     <resource type="image" id="bullet_shot">sprites/effects/bullet_shot.png</resource>
     <resource type="animation" id="ship_explosion" tw="64" th="64" duration="100">sprites/effects/explosion.png
