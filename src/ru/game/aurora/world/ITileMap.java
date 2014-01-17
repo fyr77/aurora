@@ -39,6 +39,11 @@ public interface ITileMap extends Serializable, ILosBoard {
     public int getHeight();
 
     /**
+     * Returns true if map is wrapped - so moving over it left border makes you appear at the right border. Like a globe.
+     */
+    public boolean isWrapped();
+
+    /**
      * Updates planet map. Makes tiles visible in given range from given point
      *
      * @return Amount of tiles opened
@@ -47,6 +52,9 @@ public interface ITileMap extends Serializable, ILosBoard {
 
     public void setTilePassable(int x, int y, boolean isPassable);
 
+    /**
+     * Get a spawn point for a landing party
+     */
     public BasePositionable getEntryPoint();
 
     public Collection<BasePositionable> getExitPoints();

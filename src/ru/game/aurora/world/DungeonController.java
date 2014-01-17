@@ -200,7 +200,7 @@ public class DungeonController implements Serializable {
         }
 
         for (BasePositionable exitPoint : map.getExitPoints()) {
-            if (exitPoint.getDistance(landingParty) == 0) {
+            if (getDistance(exitPoint, landingParty) == 0) {
                 returnToPrevRoom();
             }
         }
@@ -344,7 +344,7 @@ public class DungeonController implements Serializable {
         boolean isAtObject = false;
         for (PlanetObject a : map.getObjects()) {
             a.update(container, world);
-            if (landingParty.getDistance(a) == 0 && a.canBePickedUp()) {
+            if (getDistance(landingParty, a) == 0 && a.canBePickedUp()) {
                 isAtObject = true;
             }
         }
@@ -385,6 +385,13 @@ public class DungeonController implements Serializable {
         }
     }
 
+    private double getDistance(BasePositionable a, Positionable b) {
+        if (isWrap) {
+            return a.getDistanceWrapped(b, map.getWidth(), map.getHeight());
+        }
+        return a.getDistance(b);
+    }
+
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
         if (landingParty != null) {
 
@@ -395,7 +402,7 @@ public class DungeonController implements Serializable {
                     a.draw(container, graphics, camera);
 
                     // in shoot mode, all available targets are surrounded with red square
-                    if (mode == MODE_SHOOT && a.canBeShotAt() && landingParty.getDistance(a) < landingParty.getWeapon().getRange()) {
+                    if (mode == MODE_SHOOT && a.canBeShotAt() && getDistance(landingParty, a) < landingParty.getWeapon().getRange()) {
                         graphics.drawRect(camera.getXCoordWrapped(a.getX(), map.getWidth()), camera.getYCoordWrapped(a.getY(), map.getHeight()), camera.getTileWidth(), camera.getTileHeight());
                     }
                 }
