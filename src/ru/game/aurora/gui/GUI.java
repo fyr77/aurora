@@ -93,6 +93,7 @@ public class GUI {
         nifty.registerScreenController(new MainMenuController(con));
         nifty.registerScreenController(new LoadingScreenController());
         nifty.addXml("gui/screens/main_menu.xml");
+        nifty.addXml("gui/screens/misc_screens.xml");
         nifty.addXml("gui/screens/loading_screen.xml");
         nifty.addXml("gui/screens/settings_screen.xml");
     }

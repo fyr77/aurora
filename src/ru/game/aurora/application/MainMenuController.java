@@ -109,8 +109,7 @@ public class MainMenuController implements ScreenController {
     }
 
     public void exitGame() {
-        Configuration.saveSystemProperties();
-        container.exit();
+        AuroraGame.showExitConfirmation();
     }
 
     public void openSettings() {

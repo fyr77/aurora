@@ -176,11 +176,20 @@ public class AuroraGame extends NiftyOverlayGame {
         }
     }
 
+    public static void showExitConfirmation() {
+        GUI.getInstance().pushCurrentScreen();
+        GUI.getInstance().getNifty().gotoScreen("exit_confirmation_screen");
+    }
+
+    public static void exitGame() {
+        Configuration.saveSystemProperties();
+        app.exit();
+    }
+
     @Override
     public boolean closeRequested() {
-        Configuration.saveSystemProperties();
-        //todo: show confirmation
-        return true;
+        showExitConfirmation();
+        return false;
     }
 
     @Override
