@@ -48,7 +48,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
     private BasePlanet planetToScan;
 
-    private Element landscapePanel;
+    private transient Element landscapePanel;
 
 
     public GalaxyMapController(World world) {

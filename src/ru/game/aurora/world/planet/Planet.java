@@ -161,7 +161,7 @@ public class Planet extends BasePlanet implements IDungeon {
         Element popup = nifty.createPopup("landing");
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
 
-
+        world.onPlayerLandedPlanet(this);
         surfaceGenerationFuture = GlobalThreadPool.getExecutor().submit(new Runnable() {
             @Override
             public void run() {
@@ -188,6 +188,7 @@ public class Planet extends BasePlanet implements IDungeon {
         world.setCurrentRoom(owner);
         owner.enter(world);
         world.getPlayer().getShip().setPos(x, y);
+        world.onPlayerLeftPlanet(this);
         landingParty.onReturnToShip(world);
     }
 

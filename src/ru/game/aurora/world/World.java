@@ -319,7 +319,7 @@ public class World implements Serializable {
 
     public void onPlayerEnteredDungeon(Dungeon dungeon) {
         Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
-        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        List<GameEventListener> newList = new LinkedList<>(listeners);
         for (GameEventListener l : newList) {
 
             boolean alreadyCalledThisGroup = false;
@@ -339,6 +339,21 @@ public class World implements Serializable {
             }
         }
     }
+
+    public void onPlayerLandedPlanet(Planet planet) {
+        List<GameEventListener> newList = new LinkedList<>(listeners);
+        for (GameEventListener l : newList) {
+            l.onPlayerLandedPlanet(this, planet);
+        }
+    }
+
+    public void onPlayerLeftPlanet(Planet planet) {
+        List<GameEventListener> newList = new LinkedList<>(listeners);
+        for (GameEventListener l : newList) {
+            l.onPlayerLeftPlanet(this, planet);
+        }
+    }
+
 
     public void onPlayerContactedAlienShip(SpaceObject ship) {
         Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();

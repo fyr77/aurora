@@ -103,7 +103,19 @@ public class Slick2DFrankensteinImage implements FrankensteinImage {
 
     @Override
     public FrankensteinImage resize(Size targetSize, boolean constrainProportions) {
-        throw new UnsupportedOperationException();
+        int targetX, targetY;
+        if (constrainProportions) {
+            final double scaleX = (double)targetSize.width / myImage.getWidth();
+            final double scaleY = (double)targetSize.height / myImage.getHeight();
+
+            targetX = (int) (myImage.getWidth() * Math.min(scaleX, scaleY));
+            targetY = (int) (myImage.getHeight() * Math.min(scaleX, scaleY));
+        } else {
+            targetX = targetSize.width;
+            targetY = targetSize.height;
+        }
+
+        return new Slick2DFrankensteinImage(myImage.getScaledCopy(targetX, targetY));
     }
 
     public Image getImpl() {

@@ -86,6 +86,13 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
     @Override
     public boolean onPlayerLandedPlanet(World world, Planet planet) {
         currentPlanet = checkCurrentPlanet(planet);
+        if (currentPlanet != null) {
+            PlanetData data = planetDataMap.get(currentPlanet);
+            if (data == null) {
+                data = new PlanetData();
+                planetDataMap.put(currentPlanet, data);
+            }
+        }
         return false;
     }
 
@@ -111,6 +118,8 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
         if (data.animalCaptured && data.resourcesCollected && planet.getExploredTiles() > targetTiles) {
             world.getGlobalVariables().put("colony_search.explored_fully", true);
             world.getGlobalVariables().put("colony_search.coords", currentPlanet);
+            world.getPlayer().getJournal().getQuests().get("colony_search").addMessage("explored");
+            isAlive = false;
         }
 
         planetDataMap.put(planet, data);
@@ -136,6 +145,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
                 , AnimalSpeciesDesc.Behaviour.AGGRESSIVE
                 , modifierSet
         );
+        desc.setArmor(1);
 
         Animal animal1 = new Animal(currentPlanet, 0, 0, desc);
         currentPlanet.setNearestFreePoint(animal1, world.getPlayer().getLandingParty().getX() + 3, world.getPlayer().getLandingParty().getY());
@@ -143,7 +153,9 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
         currentPlanet.setNearestFreePoint(animal2, world.getPlayer().getLandingParty().getX() + 1, world.getPlayer().getLandingParty().getY() + 3);
         Animal animal3 = new Animal(currentPlanet, 0, 0, desc);
         currentPlanet.setNearestFreePoint(animal3, currentPlanet.getShuttle().getX(), currentPlanet.getShuttle().getY());
-
+        currentPlanet.getPlanetObjects().add(animal1);
+        currentPlanet.getPlanetObjects().add(animal2);
+        currentPlanet.getPlanetObjects().add(animal3);
     }
 
     @Override
@@ -163,9 +175,9 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
 
         data.dialogShown = true;
         // show dialog like 'hey, we have explored enough and this planet seems to be suitable
-        world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/colony_search_surface_explored.json"));
+        world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/colony_search/surface_explored.json"));
 
-        if (!firstPlanetFound) {
+        if (firstPlanetFound) {
             return false;
         }
         firstPlanetFound = true;
@@ -175,6 +187,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
         world.getGlobalVariables().put("colony_search.explored", true);
         if (!world.getGlobalVariables().containsKey("colony_search.coords")) {
             world.getGlobalVariables().put("colony_search.coords", currentPlanet);
+            world.getPlayer().getJournal().getQuests().get("colony_search").addMessage("found");
         }
         return false;
     }
