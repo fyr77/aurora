@@ -12,16 +12,16 @@ import ru.game.aurora.world.World;
 import java.io.Serializable;
 import java.util.Map;
 
-public class Condition implements Serializable
-{
+public class Condition implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static enum ConditionType
-    {
+    public static enum ConditionType {
         SET,
         NOT_SET,
         EQUAL,
-        NOT_EQUAL
+        NOT_EQUAL,
+        LESS,
+        GREATER
     }
 
     public final String name;
@@ -36,8 +36,7 @@ public class Condition implements Serializable
         this.type = type;
     }
 
-    public boolean isMet(World world, Map<String, String> flags)
-    {
+    public boolean isMet(World world, Map<String, String> flags) {
         Object val = flags.get(name);
         if (val == null) {
             val = world.getGlobalVariables().get(name);
@@ -51,6 +50,22 @@ public class Condition implements Serializable
                 return (val != null && val.equals(value));
             case NOT_EQUAL:
                 return (val == null || !val.equals(value));
+            case GREATER: {
+                if (val == null) {
+                    return false;
+                }
+                int worldValue = Integer.parseInt((String) val);
+                int myValue = Integer.parseInt(value);
+                return worldValue > myValue;
+            }
+            case LESS: {
+                if (val == null) {
+                    return false;
+                }
+                int worldValue = Integer.parseInt((String) val);
+                int myValue = Integer.parseInt(value);
+                return worldValue < myValue;
+            }
             default:
                 throw new IllegalArgumentException();
         }
