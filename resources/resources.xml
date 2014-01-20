@@ -46,6 +46,12 @@
     <resource type="image" id="klisk_ship">sprites/ships/klisk_ship.png</resource>
     <resource type="image" id="klisk_dialog">sprites/portraits/klisk.png</resource>
 
+    <!-- zorsan -->
+    <resource type="image" id="zorsan_scout">sprites/ships/zorsan_scout.png</resource>
+    <resource type="image" id="zorsan_cruiser">sprites/ships/zorsan_cruiser.png</resource>
+    <resource type="image" id="zorsan_dialog">sprites/portraits/zorsan.png</resource>
+    <resource type="image" id="zorsan_leader_dialog">sprites/portraits/zorsan_leader.png</resource>
+
     <!-- rogues -->
     <resource type="image" id="rogues_probe">sprites/ships/rogues_probe.png</resource>
     <resource type="image" id="rogues_dialog">sprites/portraits/rogues.png</resource>
@@ -107,6 +113,7 @@
 
     <!-- effects -->
     <resource type="image" id="blaster_shot">sprites/effects/blaster_shot.png</resource>
+    <resource type="image" id="missile_shot">sprites/effects/missile_shot.png</resource>
     <resource type="image" id="plasma_shot">sprites/effects/plasma_shot.png</resource>
     <resource type="image" id="bullet_shot">sprites/effects/bullet_shot.png</resource>
     <resource type="animation" id="ship_explosion" tw="64" th="64" duration="100">sprites/effects/explosion.png

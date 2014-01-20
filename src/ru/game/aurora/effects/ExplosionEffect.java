@@ -12,8 +12,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.World;
 
-public class ExplosionEffect extends Effect
-{
+public class ExplosionEffect extends Effect {
     private static final long serialVersionUID = -6865607525774879448L;
 
     private transient Animation anim;
@@ -23,16 +22,18 @@ public class ExplosionEffect extends Effect
     private boolean screenCoords;
 
     /**
-     *
      * @param screenCoords If true, these x and y are already coordinates on screen and should not be transformed
      */
     public ExplosionEffect(int x, int y, String animName, boolean screenCoords) {
         super(x, y);
-        anim = ResourceManager.getInstance().getAnimation(animName);
+        anim = ResourceManager.getInstance().getAnimation(animName).copy();
         anim.setLooping(false);
         this.screenCoords = screenCoords;
     }
 
+    public Animation getAnim() {
+        return anim;
+    }
 
     @Override
     public boolean isOver() {

@@ -11,12 +11,14 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.SpaceObject;
+import ru.game.aurora.world.space.StarSystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +84,9 @@ public class Ship extends MovableSprite implements SpaceObject {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        super.draw(container, g, camera);
+        if (hull > 0) {
+            super.draw(container, g, camera);
+        }
     }
 
     @Override
@@ -142,9 +146,21 @@ public class Ship extends MovableSprite implements SpaceObject {
         hull -= dmg;
         world.onPlayerShipDamaged();
         if (hull <= 0) {
-            GUI.getInstance().getNifty().gotoScreen("fail_screen");
-            FailScreenController controller = (FailScreenController) GUI.getInstance().getNifty().findScreenController(FailScreenController.class.getCanonicalName());
-            controller.set("ship_destroyed_gameover", "ship_destroyed");
+            ExplosionEffect ship_explosion = new ExplosionEffect(x, y, "ship_explosion", false);
+            ship_explosion.getAnim().setSpeed(0.5f);
+            ((StarSystem) world.getCurrentRoom()).addEffect(ship_explosion);
+            ship_explosion.setEndListener(new IStateChangeListener() {
+
+                private static final long serialVersionUID = -5155503207553019512L;
+
+                @Override
+                public void stateChanged(World world) {
+                    GUI.getInstance().getNifty().gotoScreen("fail_screen");
+                    FailScreenController controller = (FailScreenController) GUI.getInstance().getNifty().findScreenController(FailScreenController.class.getCanonicalName());
+                    controller.set("ship_destroyed_gameover", "ship_destroyed");
+                }
+            });
+
         }
     }
 
@@ -187,7 +203,7 @@ public class Ship extends MovableSprite implements SpaceObject {
         Boolean itemAlreadyInStorage = false;
         for (Multiset.Entry<InventoryItem> entry : storage.entrySet()) {
             if (entry.getElement().getName().equals(o.getName())) {
-                storage.setCount(entry.getElement(),entry.getCount() + amount);
+                storage.setCount(entry.getElement(), entry.getCount() + amount);
                 itemAlreadyInStorage = true;
                 break;
             }

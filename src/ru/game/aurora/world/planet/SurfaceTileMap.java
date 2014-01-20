@@ -244,8 +244,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
         return SurfaceTypes.isPassible(getByteWrapped(x, y));
     }
 
-    private byte getByteWrapped(int x, int y)
-    {
+    private byte getByteWrapped(int x, int y) {
         return surface[EngineUtils.wrap(y, height)][EngineUtils.wrap(x, width)];
     }
 
@@ -272,6 +271,11 @@ public class SurfaceTileMap implements ITileMap, Serializable {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public boolean isWrapped() {
+        return true;
     }
 
     public byte getTileAt(int x, int y) {

@@ -6,13 +6,16 @@
  */
 package ru.game.aurora.world.generation.aliens;
 
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.space.HomeworldGenerator;
+import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Map;
@@ -59,5 +62,15 @@ public class KliskGenerator implements WorldGeneratorPart {
         world.getGalaxyMap().setTileAt(15, 15, world.getGalaxyMap().getObjects().size() - 1);
 
         world.getRaces().put(kliskRace.getName(), kliskRace);
+
+        kliskRace.setDefaultFactory(new NPCShipFactory() {
+            @Override
+            public NPCShip createShip() {
+                NPCShip ship = new NPCShip(0, 0, "klisk_ship", kliskRace, null, "Klisk Ship");
+                ship.setHp(15);
+                ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
+                return ship;
+            }
+        });
     }
 }

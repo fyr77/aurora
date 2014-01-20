@@ -2,6 +2,7 @@ package ru.game.aurora.tools.dialog;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.mozilla.universalchardet.UniversalDetector;
 import ru.game.aurora.dialog.Condition;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.Reply;
@@ -87,22 +88,33 @@ public class DialogCSVConverter {
         return flags;
     }
 
-    public static void main(String[] args) {
-        if (args.length != 4) {
-            System.err.println("Usage: DialogCSVConverter <input file> <dialog string id> <main image id> <out dir>");
-            return;
-        }
+    private static String detectEncoding(String file) throws IOException {
+        // try detect file encoding first
+        UniversalDetector detector = new UniversalDetector(null);
 
-        File input = new File(args[0]);
-        if (!input.exists()) {
-            System.err.println("Input file does not exist");
-            return;
-        }
+        InputStream fis = new FileInputStream(file);
+        byte[] buf = new byte[4096];
 
+        int nread;
+        while ((nread = fis.read(buf)) > 0 && !detector.isDone()) {
+            detector.handleData(buf, 0, nread);
+        }
+        detector.dataEnd();
+        String encoding = detector.getDetectedCharset();
+        if (encoding != null) {
+            System.out.println("Detected encoding = " + encoding);
+        } else {
+            System.out.println("No encoding detected.");
+        }
+        return encoding;
+    }
+
+    public static void process(String input, String output, String dialogId, String imageId) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(input), detectEncoding(input)));
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(input));
+
             Map<Integer, Statement> statements = new HashMap<>();
-            Context context = new Context(args[1]);
+            Context context = new Context(dialogId);
             System.out.println("Started parsing CSV");
             String[] stmtLine = reader.readLine().split(delimiter);
             List<String[]> replyStrings = new ArrayList<>();
@@ -146,7 +158,7 @@ public class DialogCSVConverter {
 
             System.out.println("CSV parsed");
 
-            Dialog dialog = new Dialog(args[1], args[2], statements);
+            Dialog dialog = new Dialog(dialogId, imageId, statements);
 
             System.out.println("Validating");
 
@@ -155,7 +167,7 @@ public class DialogCSVConverter {
                 return;
             }
 
-            File outDir = new File(args[3]);
+            File outDir = new File(output);
             if (!outDir.exists()) {
                 outDir.mkdirs();
             }
@@ -163,24 +175,40 @@ public class DialogCSVConverter {
             System.out.println("Saving structure");
             // save dialog structure file
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            FileWriter writer = new FileWriter(new File(outDir, args[1] + ".json"));
+            FileWriter writer = new FileWriter(new File(outDir, dialogId + ".json"));
             gson.toJson(dialog, writer);
             writer.close();
 
             System.out.println("Saving localization");
             // save localizations
-            FileWriter localizationWriter = new FileWriter(new File(outDir, args[1] + "_ru.properties"));
+            Writer localizationWriter = new OutputStreamWriter(new FileOutputStream(new File(outDir, dialogId + "_ru.properties")), "utf-8");
             context.text.store(localizationWriter, null);
             localizationWriter.close();
 
-            FileWriter enStubWriter = new FileWriter(new File(outDir, args[1] + "_en.properties"));
+            FileWriter enStubWriter = new FileWriter(new File(outDir, dialogId + "_en.properties"));
             for (Map.Entry<Object, Object> entry : context.text.entrySet()) {
                 enStubWriter.write(entry.getKey() + "=TBD\n");
             }
             enStubWriter.close();
-
+            System.out.println("All done");
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        if (args.length != 4) {
+            System.err.println("Usage: DialogCSVConverter <input file> <dialog string id> <main image id> <out dir>");
+            return;
+        }
+
+        File input = new File(args[0]);
+        if (!input.exists()) {
+            System.err.println("Input file does not exist");
+            return;
+        }
+
+        process(args[0], args[3], args[1], args[2]);
+
     }
 }

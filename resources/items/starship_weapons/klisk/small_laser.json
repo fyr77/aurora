@@ -1,12 +1,12 @@
 {
-    "id" : "laser_cannon",
-    "damage" : 4,
-    "name": "laser_cannon.name",
-    "desc": "laser_cannon.desc",
+    "id" : "klisk_small_laser",
+    "damage" : 1,
+    "name": "",
+    "desc": "",
     "shotSprite" : "blaster_shot",
     "range" : 3,
     "image" : "ship_laser",
-    "reloadTurns" : 1,
+    "reloadTurns" : 0,
     "explosionAnimation" : "blaster_explosion",
     "particlesAnimation" : "blaster_particles"
 }

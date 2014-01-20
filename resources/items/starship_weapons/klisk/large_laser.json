@@ -1,8 +1,8 @@
 {
-    "id" : "laser_cannon",
+    "id" : "klisk_large_laser",
     "damage" : 4,
-    "name": "laser_cannon.name",
-    "desc": "laser_cannon.desc",
+    "name": "",
+    "desc": "",
     "shotSprite" : "blaster_shot",
     "range" : 3,
     "image" : "ship_laser",

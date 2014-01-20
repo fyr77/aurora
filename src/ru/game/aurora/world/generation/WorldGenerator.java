@@ -50,6 +50,8 @@ public class WorldGenerator implements Runnable {
 
     private World world;
 
+    private boolean completed = false;
+
     private static final WorldGeneratorPart[] questGenerators = {
             new InitialRadioEmissionQuestGenerator()
             , new MainQuestGenerator()
@@ -271,11 +273,17 @@ public class WorldGenerator implements Runnable {
         world.addListener(new FirstContactListener());
     }
 
+    // perform some fast initialization in gui thread
+    public World initWorld() {
+        world = new World(Configuration.getIntProperty("world.galaxy.width"), Configuration.getIntProperty("world.galaxy.height"));
+        world.addListener(new CrewChangeListener());
+        return world;
+    }
+
     @Override
     public void run() {
         try {
-            World world = new World(Configuration.getIntProperty("world.galaxy.width"), Configuration.getIntProperty("world.galaxy.height"));
-            world.addListener(new CrewChangeListener());
+
             generateMap(world);
             createAliens(world);
             createArtifactsAndAnomalies(world);
@@ -283,8 +291,7 @@ public class WorldGenerator implements Runnable {
             createMisc(world);
 
             currentStatus = Localization.getText("gui", "generation.done");
-
-            this.world = world;
+            completed = true;
         } catch (Exception ex) {
             logger.error("Failed to generate world", ex);
             System.exit(-1);
@@ -300,6 +307,6 @@ public class WorldGenerator implements Runnable {
     }
 
     public boolean isGenerated() {
-        return world != null;
+        return completed;
     }
 }

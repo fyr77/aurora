@@ -14,8 +14,7 @@ import ru.game.aurora.world.World;
  * Date: 08.10.13
  * Time: 13:35
  */
-public class FailScreenController implements ScreenController
-{
+public class FailScreenController implements ScreenController {
     private World world;
 
     private Element text;
@@ -26,8 +25,7 @@ public class FailScreenController implements ScreenController
         this.world = world;
     }
 
-    public void set(String imageId, String textId)
-    {
+    public void set(String imageId, String textId) {
         EngineUtils.setTextForGUIElement(text, Localization.getText("gameover", textId));
         EngineUtils.setImageForGUIElement(image, imageId);
     }
@@ -41,12 +39,12 @@ public class FailScreenController implements ScreenController
 
     @Override
     public void onStartScreen() {
-
+        world.setPaused(true);
     }
 
     @Override
     public void onEndScreen() {
-
+        world.setPaused(false);
     }
 
     public void gameOver() {

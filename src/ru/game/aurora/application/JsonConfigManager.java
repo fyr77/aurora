@@ -39,8 +39,14 @@ public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
             throw new IllegalArgumentException("Directory " + dir.getAbsolutePath() + " does not exist");
         }
 
+        processDir(dir);
+    }
+
+    private void processDir(File dir) {
         for (File f : dir.listFiles()) {
-            if (f.isFile() && f.getName().endsWith(".json")) {
+            if (f.isDirectory()) {
+                processDir(f);
+            } else if (f.isFile() && f.getName().endsWith(".json")) {
                 loadEntity(f);
             }
         }

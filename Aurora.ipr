@@ -707,11 +707,7 @@
       <entry name="*.tmx" />
       <entry name="*.ttf" />
     </wildcardResourcePatterns>
-    <annotationProcessing>
-      <profile default="true" name="Default" enabled="false">
-        <processorPath useClasspath="true" />
-      </profile>
-    </annotationProcessing>
+    <annotationProcessing enabled="false" useClasspath="true" />
   </component>
   <component name="CopyrightManager" default="">
     <module2copyright />
@@ -990,6 +986,13 @@
     <library name="guava-15.0">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/third-party/guava-15.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="juniversalchardet-1.0.3">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/third-party/juniversalchardet-1.0.3.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

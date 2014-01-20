@@ -1,6 +1,6 @@
 {
-    "id" : "missiles",
-    "damage" : 3,
+    "id" : "bork_missiles",
+    "damage" : 2,
     "name": "missiles.name",
     "desc": "missiles.desc",
     "shotSprite" : "missile_shot",

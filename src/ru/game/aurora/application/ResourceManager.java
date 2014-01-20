@@ -2,6 +2,8 @@ package ru.game.aurora.application;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.loading.LoadingList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -40,6 +42,8 @@ public class ResourceManager {
     private JsonConfigManager<StarshipWeaponDesc> weapons = new JsonConfigManager<>(StarshipWeaponDesc.class, "resources/items/starship_weapons");
 
     private JsonConfigManager<LandingPartyWeapon> landingPartyWeapons = new JsonConfigManager<>(LandingPartyWeapon.class, "resources/items/crew_weapons");
+
+    private static final Logger logger = LoggerFactory.getLogger(ResourceManager.class);
 
     private ResourceManager() {
         soundMap = new HashMap<>();
@@ -81,7 +85,7 @@ public class ResourceManager {
             Node includeNode = includes.item(includeIdx);
 
             if (includeNode.getNodeType() == Node.ELEMENT_NODE) {
-                addNewResourceFile((Element)includeNode);
+                addNewResourceFile((Element) includeNode);
             }
         }
 
@@ -251,7 +255,11 @@ public class ResourceManager {
     }
 
     public final Image getImage(String ID) {
-        return imageMap.get(ID);
+        Image rz = imageMap.get(ID);
+        if (rz == null) {
+            logger.warn("Image for id {} not found", ID);
+        }
+        return rz;
     }
 
     private static class ResourceAnimationData {

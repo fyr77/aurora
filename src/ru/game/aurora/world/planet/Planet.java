@@ -260,7 +260,7 @@ public class Planet extends BasePlanet implements IDungeon {
 
         checkAndConsumeOxygen();
 
-        if (landingParty.getDistance(shuttle) == 0) {
+        if (landingParty.getDistanceWrapped(shuttle, getWidth(), getHeight()) == 0) {
             if (world.isUpdatedThisFrame()) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.refill_oxygen"));
                 world.getPlayer().getLandingParty().refillOxygen();

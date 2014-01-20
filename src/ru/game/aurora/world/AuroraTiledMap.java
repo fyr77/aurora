@@ -198,6 +198,11 @@ public class AuroraTiledMap implements ITileMap {
     }
 
     @Override
+    public boolean isWrapped() {
+        return false;
+    }
+
+    @Override
     public int updateVisibility(int x, int y, int range) {
         if (fovAlgorithm == null) {
             loadAlgorithms();
