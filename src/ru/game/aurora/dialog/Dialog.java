@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.PlaceholderResolver;
 import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
 
@@ -87,14 +88,14 @@ public class Dialog implements OverlayWindow {
         this.listener = listener;
     }
 
-    public String getLocalizedNPCText() {
+    public String getLocalizedNPCText(World world) {
         if (currentStatement.npcText != null) {
             // manually set localized string
             return currentStatement.npcText;
         }
         final String s = "dialogs/" + id;
         boolean hasCustomBundle = Localization.bundleExists(s);
-        return Localization.getText(hasCustomBundle ? s : "dialogs", id + "." + currentStatement.id);
+        return PlaceholderResolver.resolvePlaceholders(Localization.getText(hasCustomBundle ? s : "dialogs", id + "." + currentStatement.id), world.getGlobalVariables());
     }
 
     public List<String> addAvailableRepliesLocalized(World world) {

@@ -62,7 +62,7 @@ public class DialogController implements ScreenController {
     public void updateDialog() {
         final Dialog dialog = this.dialogs.peek();
         EngineUtils.setImageForGUIElement(imagePanel, dialog.getCurrentStatement().customIcon == null ? dialog.getIconName() : dialog.getCurrentStatement().customIcon);
-        EngineUtils.setTextForGUIElement(npcText, dialog.getLocalizedNPCText());
+        EngineUtils.setTextForGUIElement(npcText, dialog.getLocalizedNPCText(world));
 
         if (!replies.getItems().isEmpty()) {
             replies.clear();

@@ -59,6 +59,12 @@ klisk.zorsan_info
 klisk.rogues_info
 klisk.bork_info
 
+=============================
+
+Zorsan
+
+zorsan.homeworld - string representing star coordinates of a Zorsan homeworld
+
 ==============================
 
 Gardeners
