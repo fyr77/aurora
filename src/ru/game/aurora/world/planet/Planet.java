@@ -352,6 +352,11 @@ public class Planet extends BasePlanet implements IDungeon {
         return surface;
     }
 
+    @Override
+    public boolean isCommanderInParty() {
+        return false;
+    }
+
     public void checkAndConsumeOxygen() {
         if (atmosphere != PlanetAtmosphere.BREATHABLE_ATMOSPHERE && world.isUpdatedThisFrame()) {
             world.getPlayer().getLandingParty().consumeOxygen();

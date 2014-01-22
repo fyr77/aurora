@@ -10,6 +10,7 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.equip.StarshipWeapon;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -76,7 +77,7 @@ public class AlienRace implements Serializable {
 
 
     public void setRelation(AlienRace race, int value) {
-        if (race.getName().equals("Humanity")) {
+        if (race.getName().equals(HumanityGenerator.NAME)) {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.relation_changed"), name, getRelation(race), value));
         }
         relations.put(race.getName(), value);

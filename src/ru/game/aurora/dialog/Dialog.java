@@ -109,6 +109,15 @@ public class Dialog implements OverlayWindow {
         return outList;
     }
 
+    public void setFlags(Map<String, String> flags) {
+        if (this.flags == null) {
+            this.flags = new HashMap<>(flags);
+        } else {
+            this.flags.clear();
+            this.flags.putAll(flags);
+        }
+    }
+
     public Map<String, String> getFlags() {
         return flags;
     }

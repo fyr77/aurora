@@ -61,7 +61,7 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.LINE_AXIS));
-
+        bottomPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 5, 5));
         processButton = new JButton("Process");
         processButton.addActionListener(this);
         bottomPanel.add(processButton);
@@ -188,7 +188,7 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
         try {
             DialogCSVConverter.process(source.getText(), out.getText(), id.getText(), image.getText());
             log.setText(new String(bos.toByteArray()));
-            log.invalidate();
+            getContentPane().invalidate();
             System.out.println("====================================");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error while processing", JOptionPane.ERROR_MESSAGE);

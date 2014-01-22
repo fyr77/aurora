@@ -8,4 +8,9 @@ public interface IDungeon {
     DungeonController getController();
 
     ITileMap getMap();
+
+    /**
+     * If returns true, and landing party is lost, this leads to game over
+     */
+    boolean isCommanderInParty();
 }

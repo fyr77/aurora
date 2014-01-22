@@ -13,14 +13,20 @@ import java.util.Map;
 /**
  * Dungeon is a location with a fixed tiled map, which can be explored by player landing party
  */
-public class Dungeon implements Room, IDungeon {
-    private static final long serialVersionUID = 1L;
+public class Dungeon implements Room, IDungeon
+{
+    private static final long serialVersionUID = 2L;
 
     private ITileMap map;
 
     private DungeonController controller;
 
     private Dialog enterDialog;
+
+    /**
+     * If set to true, and landing party is lost, this leads to a game over
+     */
+    private boolean isCommanderInParty = false;
 
     /**
      * If dungeon has an enter dialog - first show that dialog, and only if it ends with return code 1 - actually
@@ -109,4 +115,12 @@ public class Dungeon implements Room, IDungeon {
         return map;
     }
 
+    @Override
+    public boolean isCommanderInParty() {
+        return isCommanderInParty;
+    }
+
+    public void setCommanderInParty(boolean commanderInParty) {
+        isCommanderInParty = commanderInParty;
+    }
 }

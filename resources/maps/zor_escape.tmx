@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="30" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" source="zorsan_tileset.tsx"/>
+ <layer name="floor" width="30" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WTQrFMAiE0xwkvf8tuyrI4M9o4qOLtxCCCfniOJVeY4xLiWWsrTMyZ53P7HvnMD8L3Kmc0XJRvb+Ibq6l9w73vc/TdBmc3XrRQ1pkuOx97PtfXSKvR/rJmCRXsrQ3RN9Rpz//XM5/sucZj2b7W5nFp3T5Ehd1/kK9u71mZmMmn7m/wmX7z7znhliwZrmeLyZwPSays1wvNCbudegc1Ylan+r7MrgyX/VnpDPrLWYesDMD77Zq7+JW/VzlMt7q4kZziuEy/2lVf56o9wHtxwrlEA4AAA==
+  </data>
+ </layer>
+ <layer name="ship" width="30" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OAQ0AAAgDoGexf0hjfDpIQAIAAH9MOwCHLH+Z1zYQDgAA
+  </data>
+ </layer>
+ <objectgroup name="objects" width="30" height="30">
+  <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="1536" y="832" width="64" height="64">
+   <properties>
+    <property name="door" value="upperRightDoor"/>
+    <property name="imageNormal" value="zorsan_tileset"/>
+    <property name="imageNormalTileX" value="0"/>
+    <property name="imageNormalTileY" value="6"/>
+    <property name="imagePress" value="zorsan_tileset"/>
+    <property name="imagePressTileX" value="1"/>
+    <property name="imagePressTileY" value="6"/>
+    <property name="initialState" value="normal"/>
+   </properties>
+  </object>
+  <object name="upperLeftDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="24" x="832" y="128" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="zorsan_tileset"/>
+    <property name="imageCloseTileX" value="3"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="zorsan_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="2"/>
+    <property name="initialState" value="closed"/>
+   </properties>
+  </object>
+  <object name="upperRightDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="24" x="1600" y="128" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="zorsan_tileset"/>
+    <property name="imageCloseTileX" value="3"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="zorsan_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="2"/>
+    <property name="initialState" value="closed"/>
+   </properties>
+  </object>
+  <object name="hungarUpperDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="24" x="832" y="1472" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="zorsan_tileset"/>
+    <property name="imageCloseTileX" value="3"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="zorsan_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="2"/>
+    <property name="initialState" value="closed"/>
+   </properties>
+  </object>
+  <object name="hungarDownDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="24" x="832" y="1856" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="zorsan_tileset"/>
+    <property name="imageCloseTileX" value="3"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="zorsan_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="2"/>
+    <property name="initialState" value="closed"/>
+   </properties>
+  </object>
+  <object name="openedDoor1" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="12" x="320" y="320" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="zorsan_tileset"/>
+    <property name="imageCloseTileX" value="3"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="zorsan_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="2"/>
+    <property name="initialState" value="opened"/>
+   </properties>
+  </object>
+  <object name="openedDoor2" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="12" x="640" y="320" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="zorsan_tileset"/>
+    <property name="imageCloseTileX" value="3"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="zorsan_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="2"/>
+    <property name="initialState" value="opened"/>
+   </properties>
+  </object>
+  <object name="openedDoor3" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="12" x="1152" y="576" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="zorsan_tileset"/>
+    <property name="imageCloseTileX" value="3"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="zorsan_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="2"/>
+    <property name="initialState" value="opened"/>
+   </properties>
+  </object>
+  <object name="openedDoor4" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="28" x="512" y="576" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="zorsan_tileset"/>
+    <property name="imageCloseTileX" value="1"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="zorsan_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="6"/>
+    <property name="initialState" value="opened"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="1152" y="896" width="64" height="64">
+   <properties>
+    <property name="door" value="upperLeftDoor"/>
+    <property name="imageNormal" value="zorsan_tileset"/>
+    <property name="imageNormalTileX" value="0"/>
+    <property name="imageNormalTileY" value="6"/>
+    <property name="imagePress" value="zorsan_tileset"/>
+    <property name="imagePressTileX" value="1"/>
+    <property name="imagePressTileY" value="6"/>
+    <property name="initialState" value="normal"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="896" y="1408" width="64" height="64">
+   <properties>
+    <property name="door" value="hungarUpperDoor"/>
+    <property name="imageNormal" value="zorsan_tileset"/>
+    <property name="imageNormalTileX" value="0"/>
+    <property name="imageNormalTileY" value="6"/>
+    <property name="imagePress" value="zorsan_tileset"/>
+    <property name="imagePressTileX" value="1"/>
+    <property name="imagePressTileY" value="6"/>
+    <property name="initialState" value="normal"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="896" y="1792" width="64" height="64">
+   <properties>
+    <property name="door" value="hungarDownDoor"/>
+    <property name="imageNormal" value="zorsan_tileset"/>
+    <property name="imageNormalTileX" value="0"/>
+    <property name="imageNormalTileY" value="6"/>
+    <property name="imagePress" value="zorsan_tileset"/>
+    <property name="imagePressTileX" value="1"/>
+    <property name="imagePressTileY" value="6"/>
+    <property name="initialState" value="normal"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="448" y="320" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="896" y="512" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1344" y="384" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1536" y="512" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1728" y="832" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="768" y="832" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1216" y="1152" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1472" y="1280" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1344" y="1536" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="1152" y="128" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="0"/>
+    <property name="imageTileY" value="7"/>
+    <property name="speed" value="1"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="melee"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="64" y="896" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="0"/>
+    <property name="imageTileY" value="7"/>
+    <property name="speed" value="1"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="melee"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="896" y="1088" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="0"/>
+    <property name="imageTileY" value="7"/>
+    <property name="speed" value="1"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="melee"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="1344" y="1024" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="0"/>
+    <property name="imageTileY" value="7"/>
+    <property name="speed" value="1"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="melee"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="1216" y="1536" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="0"/>
+    <property name="imageTileY" value="7"/>
+    <property name="speed" value="1"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="melee"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="1536" y="1792" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="0"/>
+    <property name="imageTileY" value="7"/>
+    <property name="speed" value="1"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="melee"/>
+   </properties>
+  </object>
+  <object type="entryPoint" x="128" y="448" width="64" height="64"/>
+  <object type="exitPoint" x="384" y="1472" width="64" height="64"/>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="64" y="320" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="0"/>
+    <property name="imageTileY" value="7"/>
+    <property name="speed" value="1"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="melee"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="192" y="320" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="0"/>
+    <property name="imageTileY" value="7"/>
+    <property name="speed" value="1"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="melee"/>
+   </properties>
+  </object>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="128" y="256" width="64" height="64">
+   <properties>
+    <property name="hp" value="10"/>
+    <property name="image" value="zorsan_tileset"/>
+    <property name="imageTileX" value="3"/>
+    <property name="imageTileY" value="0"/>
+    <property name="speed" value="2"/>
+    <property name="tags" value=""/>
+    <property name="weapon" value="plasma"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="walls" width="30" height="30">
+  <properties>
+   <property name="isObstacle" value="true"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC61W7W7DIAy0FG1pWnVZu07qT97/KYe1WLveDBgSS1YSg7lw/oCbiHyA3rPeyLZmXcB+ynqlOTXl+YpxkV+ZtucCNpWU9S3rg+x7hDFqNt3run3rf7wP6FzBUD5ODRtyrpyd5X9sWJHbxcGIiP2v8X/evqeAj70/aVzX+mzYdP+r/OUK7iWKyxi4l1o8TNIgrpdDX/KavzVcFS8nWriKMcM41tl3EDcijGv1kQI+pbwp5YTtJzm4ut9W3T0a83DcywnuO1iHR+kKa3u88tjRUstf5mKWsR44wxoe9/buxYB7QVTvtH4pbtwn9/LM/7k6c5KM5XOJ1x7x8qyX1xGOvDxLQd8k7R7Sg1sSb22OTZTzHtySP575Uf+9uHj29PjvxeW1uC/34rbyxMbx7MHa9eo2ghuVEZ/pIFzuNZG+3nN/KeFir7H+bPdKU55jd84abi3WfJcqnSN4h7nKaw709qujZPRc2Ksakx9zzEccEA4AAA==
+  </data>
+ </layer>
+</map>

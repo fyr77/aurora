@@ -120,7 +120,7 @@ public class DialogCSVConverter {
 
             Map<Integer, Statement> statements = new HashMap<>();
             Context context = new Context(dialogId);
-            System.out.println("Started parsing CSV");
+            System.out.println(String.format("Processing input %s with id %s", input, dialogId));
             String[] stmtLine = reader.readLine().split(delimiter);
             List<String[]> replyStrings = new ArrayList<>();
             while (true) {

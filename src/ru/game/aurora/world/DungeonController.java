@@ -20,6 +20,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
+import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
@@ -201,7 +202,7 @@ public class DungeonController implements Serializable {
 
         for (BasePositionable exitPoint : map.getExitPoints()) {
             if (getDistance(exitPoint, landingParty) == 0) {
-                returnToPrevRoom();
+                returnToPrevRoom(map.getVictoryConditions().isEmpty());
             }
         }
     }
@@ -349,6 +350,12 @@ public class DungeonController implements Serializable {
             }
         }
 
+        for (BasePositionable exitPoint : map.getExitPoints()) {
+            if (getDistance(landingParty, exitPoint) == 0) {
+                isAtObject = true;
+            }
+        }
+
         final Element interactPanel = GUI.getInstance().getNifty().getScreen("surface_gui").findElementByName("interactPanel");
         if (interactPanel != null) {
             boolean interactPanelVisible = interactPanel.isVisible();
@@ -370,13 +377,7 @@ public class DungeonController implements Serializable {
             }
             if (allConditionsSatisfied) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.objectives_completed"));
-                returnToPrevRoom();
-                if (successDialog != null) {
-                    world.addOverlayWindow(successDialog);
-                }
-                if (successListener != null) {
-                    successListener.stateChanged(world);
-                }
+                returnToPrevRoom(allConditionsSatisfied);
             }
         }
         // check that no crew member left, AND landing party window is not opened, because if it is - then landing party can have 0 members in process of configuration
@@ -428,6 +429,13 @@ public class DungeonController implements Serializable {
     public void onLandingPartyDestroyed(World world) {
         GameLogger.getInstance().logMessage(Localization.getText("gui", "landing_party_lost"));
 
+        if (world.getCurrentDungeon().isCommanderInParty()) {
+            GUI.getInstance().getNifty().gotoScreen("fail_screen");
+            FailScreenController controller = (FailScreenController) GUI.getInstance().getNifty().findScreenController(FailScreenController.class.getCanonicalName());
+            controller.set("crew_lost_gameover", "commander_lost");
+            return;
+        }
+
         // do not call returnToPrevRoom()
         world.setCurrentRoom(prevRoom);
         prevRoom.enter(world);
@@ -439,7 +447,15 @@ public class DungeonController implements Serializable {
         world.onCrewChanged();
     }
 
-    public void returnToPrevRoom() {
+    public void returnToPrevRoom(boolean conditionsSatisfied) {
+        if (conditionsSatisfied) {
+            if (successDialog != null) {
+                world.addOverlayWindow(successDialog);
+            }
+            if (successListener != null) {
+                successListener.stateChanged(world);
+            }
+        }
         world.setCurrentRoom(prevRoom);
         prevRoom.enter(world);
         landingParty.onReturnToShip(world);
