@@ -21,12 +21,10 @@ import java.util.Map;
  * If player sells full info about earth to Klisk, there is some chance that they will sell this info to one of other races
  * This will lead to one of special events in solar system
  */
-public class EarthInvasionGenerator implements WorldGeneratorPart
-{
+public class EarthInvasionGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = 1113857719613332116L;
 
-    public static final class RogueAltarWorker extends DungeonMonster
-    {
+    public static final class RogueAltarWorker extends DungeonMonster {
         private static final long serialVersionUID = -2775935255374086503L;
 
         public RogueAltarWorker(AuroraTiledMap map, int groupId, int objectId) {
@@ -41,7 +39,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart
             // make all monsters aggressive
             for (PlanetObject obj : myMap.getObjects()) {
                 if (DungeonMonster.class.isAssignableFrom(obj.getClass())) {
-                    ((DungeonMonster)obj).setBehaviour(AnimalSpeciesDesc.Behaviour.AGGRESSIVE);
+                    ((DungeonMonster) obj).setBehaviour(AnimalSpeciesDesc.Behaviour.AGGRESSIVE);
                 }
             }
 
@@ -91,9 +89,8 @@ public class EarthInvasionGenerator implements WorldGeneratorPart
         }
     }
 
-    private static final class RogueInvasionAdder extends GameEventListener
-    {
-        private static final long serialVersionUID = -2497678330932578786L;
+    private static abstract class BaseInvasionQuestListener extends GameEventListener {
+        private static final long serialVersionUID = 8170368564115054199L;
 
         private int count = 0;
 
@@ -109,6 +106,20 @@ public class EarthInvasionGenerator implements WorldGeneratorPart
             if (count < 4 || world.getGlobalVariables().containsKey("earth.special_dialog")) {
                 return true;
             }
+
+
+            return process(world, ss);
+        }
+
+        protected abstract boolean process(World world, StarSystem ss);
+    }
+
+    private static final class RogueInvasionAdder extends BaseInvasionQuestListener {
+        private static final long serialVersionUID = -2497678330932578786L;
+
+        @Override
+        public boolean process(World world, StarSystem ss) {
+
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/rogues_altar_scientist.json"));
 
             Dialog earthDialog = Dialog.loadFromFile("dialogs/encounters/rogues_altar_earth.json");
@@ -130,12 +141,21 @@ public class EarthInvasionGenerator implements WorldGeneratorPart
 
             // now create dungeon on a moon
 
-            Planet moon = (Planet) humanity.getHomeworld().getPlanets()[2].getSatellites().get(0);
+            Planet moon = (Planet) ss.getPlanets()[2].getSatellites().get(0);
 
             DungeonEntrance entrance = new DungeonEntrance(moon, 5, 5, "rogues_altar", new Dungeon(world, new AuroraTiledMap("maps/rogue_altar.tmx"), moon));
             moon.setNearestFreePoint(entrance, 5, 5);
             moon.getMap().getObjects().add(entrance);
 
+            return false;
+        }
+    }
+
+    private static final class KliskTraderAdder extends BaseInvasionQuestListener {
+        private static final long serialVersionUID = -5491271253252252436L;
+
+        @Override
+        protected boolean process(World world, StarSystem ss) {
             return false;
         }
     }
@@ -147,6 +167,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart
             //return;
         }
 
-        world.addListener(new RogueInvasionAdder());
+        //world.addListener(new RogueInvasionAdder());
+        world.addListener(new KliskTraderAdder());
     }
 }

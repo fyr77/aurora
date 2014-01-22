@@ -29,8 +29,13 @@ public class DialogCSVConverter {
         String[] split = value.split("=");
         Condition[] conditions = new Condition[1];
         if (split.length == 1) {
-            // this is either SET or NOT_SET
-            if (split[0].startsWith("!")) {
+            int gr = value.indexOf('>');
+            int ls = value.indexOf('<');
+            if (gr != -1) {
+                conditions[0] = new Condition(value.substring(0, gr), value.substring(gr + 1), Condition.ConditionType.GREATER);
+            } else if (ls != -1) {
+                conditions[0] = new Condition(value.substring(0, ls), value.substring(ls + 1), Condition.ConditionType.LESS);
+            } else if (split[0].startsWith("!")) {
                 conditions[0] = new Condition(split[0].substring(1), null, Condition.ConditionType.NOT_SET);
             } else {
                 conditions[0] = new Condition(split[0], null, Condition.ConditionType.SET);
