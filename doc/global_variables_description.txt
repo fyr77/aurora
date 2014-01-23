@@ -91,3 +91,4 @@ rogues_altar.result - outcome of this quest. Can be "destroy" "help" "withdraw"
 klisk trader drone quest
 
 klisk_trader_drone.communicated - if player has talked to a drone
+klisk_trader_drone.result - outcome of this quest. "destroy" "withdraw"

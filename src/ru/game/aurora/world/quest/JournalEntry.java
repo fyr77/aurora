@@ -6,28 +6,25 @@ import ru.game.aurora.application.PlaceholderResolver;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Topic in a game journal. It can be a quest, an alien species info, or a crew member dossier
  */
-public class JournalEntry implements Serializable
-{
+public class JournalEntry implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;
 
-    private List<String> messageIds = new ArrayList<>();
+    private Set<String> messageIds = new LinkedHashSet<>();
 
-    public JournalEntry(String id)
-    {
+    public JournalEntry(String id) {
         this.id = id;
     }
 
-    public JournalEntry(String id, String... messages)
-    {
+    public JournalEntry(String id, String... messages) {
         this.id = id;
         Collections.addAll(messageIds, messages);
     }
@@ -36,19 +33,16 @@ public class JournalEntry implements Serializable
         return id;
     }
 
-    public String getLocalizedCaption()
-    {
+    public String getLocalizedCaption() {
         return Localization.getText("journal", id + ".title");
     }
 
-    public void addMessage(String textId)
-    {
+    public void addMessage(String textId) {
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "journal_updated"), getLocalizedCaption()));
         messageIds.add(textId);
     }
 
-    public String getFullText(World world)
-    {
+    public String getFullText(World world) {
         StringBuilder builder = new StringBuilder();
         boolean isFirst = true;
         for (String messageId : messageIds) {

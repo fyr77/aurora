@@ -26,25 +26,25 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     private static final long serialVersionUID = 4304196228941570752L;
 
-    private AlienRace race;
+    protected AlienRace race;
 
-    private NPC captain;
+    protected NPC captain;
 
-    private int hp = 3;
+    protected int hp = 3;
 
-    private String name;
+    protected String name;
 
-    private static final int speed = 3;
+    protected static final int speed = 3;
 
-    private int curSpeed = 3;
+    protected int curSpeed = 3;
 
-    private NPCShipAI ai;
+    protected NPCShipAI ai;
 
-    private boolean isHostile;
+    protected boolean isHostile;
 
-    private boolean canBeHailed = true;
+    protected boolean canBeHailed = true;
 
-    private StarshipWeapon[] weapons;
+    protected StarshipWeapon[] weapons;
 
     // this ship can not move
     private boolean isStationary;

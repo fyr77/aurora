@@ -23,10 +23,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.*;
 import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.generation.quest.ColonyPlanetSearchListener;
-import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
-import ru.game.aurora.world.generation.quest.LastBeaconQuestGenerator;
-import ru.game.aurora.world.generation.quest.MainQuestGenerator;
+import ru.game.aurora.world.generation.quest.*;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.quest.Journal;
@@ -271,6 +268,7 @@ public class WorldGenerator implements Runnable {
         journal.addQuest(new JournalEntry("last_beacon", "start"));
 
         world.addListener(new FirstContactListener());
+        world.addListener(new EarthInvasionGenerator.KliskTraderAdder());
     }
 
     // perform some fast initialization in gui thread

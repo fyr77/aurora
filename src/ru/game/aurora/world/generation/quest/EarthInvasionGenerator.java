@@ -1,18 +1,25 @@
 package ru.game.aurora.world.generation.quest;
 
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPC;
+import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.dungeon.KillAllMonstersCondition;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.DungeonEntrance;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetObject;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
+import ru.game.aurora.world.quest.JournalEntry;
+import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Map;
@@ -103,12 +110,8 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                 return true;
             }
 
-            if (count < 4 || world.getGlobalVariables().containsKey("earth.special_dialog")) {
-                return true;
-            }
+            return count < 4 || world.getGlobalVariables().containsKey("earth.special_dialog") || process(world, ss);
 
-
-            return process(world, ss);
         }
 
         protected abstract boolean process(World world, StarSystem ss);
@@ -151,12 +154,73 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
     }
 
-    private static final class KliskTraderAdder extends BaseInvasionQuestListener {
+    private static final class KliskTradeProbe extends NPCShip {
+        private static final long serialVersionUID = -8830393993027489642L;
+
+        public KliskTradeProbe(int x, int y, AlienRace klisk) {
+            super(x, y, "klisk_drone", klisk, null, "Klisk trade probe");
+
+            Dialog commDialog = Dialog.loadFromFile("dialogs/encounters/klisk_trade_probe_comm.json");
+            commDialog.setListener(new DialogListener() {
+
+                private static final long serialVersionUID = 6759215425541397109L;
+
+                @Override
+                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                    world.getGlobalVariables().put("klisk_trader_drone.communicated", true);
+                    JournalEntry klisk_trade_drone = world.getPlayer().getJournal().getQuests().get("klisk_trade_drone");
+
+                    klisk_trade_drone.addMessage("drone_desc");
+                    klisk_trade_drone.addMessage("task");
+                    if (returnCode == 1) {
+                        //todo: finish this quest by following the drone
+                        setAi(new LeaveSystemAI());
+                        klisk_trade_drone.addMessage("buyAll");
+                    }
+
+                }
+            });
+
+            setCaptain(new NPC(commDialog));
+
+            setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
+        }
+
+        @Override
+        public void onAttack(World world, SpaceObject attacker, int dmg) {
+            super.onAttack(world, attacker, dmg);
+            if (hp <= 0) {
+                world.getGlobalVariables().put("klisk_trader_drone.result", "destroy");
+                world.getGlobalVariables().put("earth.special_dialog", Dialog.loadFromFile("dialogs/encounter/klisk_trade_probe_earth_2.json"));
+                world.getPlayer().getJournal().getQuests().get("klisk_trade_drone").addMessage("destroyed");
+            }
+        }
+    }
+
+    public static final class KliskTraderAdder extends BaseInvasionQuestListener {
         private static final long serialVersionUID = -5491271253252252436L;
 
         @Override
         protected boolean process(World world, StarSystem ss) {
-            return false;
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/klisk_trade_probe_enter.json"));
+            world.getPlayer().getJournal().addQuest(new JournalEntry("klisk_trade_drone", "start"));
+
+            Dialog earthDialog = Dialog.loadFromFile("dialogs/encounters/klisk_trade_probe_earth.json");
+            earthDialog.setListener(new DialogListener() {
+                private static final long serialVersionUID = 6759215425541397109L;
+
+                @Override
+                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                    JournalEntry klisk_trade_drone = world.getPlayer().getJournal().getQuests().get("klisk_trade_drone");
+                    klisk_trade_drone.addMessage("drone_desc");
+                    klisk_trade_drone.addMessage("problem");
+                }
+            });
+            world.getGlobalVariables().put("earth.special_dialog", earthDialog);
+
+            KliskTradeProbe probe = new KliskTradeProbe(ss.getPlanets()[2].getX() - 1, ss.getPlanets()[2].getY() - 1, world.getRaces().get(KliskGenerator.NAME));
+            ss.getShips().add(probe);
+            return true;
         }
     }
 
@@ -168,6 +232,6 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
 
         //world.addListener(new RogueInvasionAdder());
-        world.addListener(new KliskTraderAdder());
+        //world.addListener(new KliskTraderAdder());
     }
 }

@@ -26,10 +26,12 @@ import java.util.Map;
 public class KliskGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = -6983386879381885934L;
 
+    public static final String NAME = "Klisk";
+
     @Override
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile("dialogs/klisk_1.json");
-        final AlienRace kliskRace = new AlienRace("Klisk", "klisk_ship", mainDialog);
+        final AlienRace kliskRace = new AlienRace(NAME, "klisk_ship", mainDialog);
         mainDialog.setListener(new DialogListener() {
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
