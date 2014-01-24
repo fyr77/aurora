@@ -26,12 +26,12 @@ public class BorkGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/encounters/swarm_first_dialog.json"));
-        final AlienRace borkRace = new AlienRace(NAME, "swarm_ship", mainDialog);
+        final AlienRace borkRace = new AlienRace(NAME, "bork_ship", mainDialog);
 
         borkRace.setDefaultFactory(new NPCShipFactory() {
             @Override
             public NPCShip createShip() {
-                NPCShip ship = new NPCShip(0, 0, "swarm_ship", borkRace, null, "Bork ship");
+                NPCShip ship = new NPCShip(0, 0, "bork_ship", borkRace, null, "Bork ship");
                 ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("simple_cannon"), ResourceManager.getInstance().getWeapons().getEntity("bork_missiles"));
                 ship.setHp(5);
                 return ship;

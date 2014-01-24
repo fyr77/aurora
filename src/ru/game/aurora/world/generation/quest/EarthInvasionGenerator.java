@@ -1,6 +1,7 @@
 package ru.game.aurora.world.generation.quest;
 
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
@@ -64,7 +65,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                 @Override
                 public void stateChanged(World world) {
                     world.getGlobalVariables().put("rogues_altar.result", "destroy");
-
+                    world.getPlayer().getJournal().addQuestEntries("rogues_altar", "destroy");
                     world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/rogues_altar_destroyed.json"));
                 }
             });
@@ -79,6 +80,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         public void onPickedUp(World world) {
             if (!world.getGlobalVariables().containsKey("rogues_altar.earth_communicated")) {
                 world.getGlobalVariables().put("rogues_altar.moon_checked", true);
+                world.getPlayer().getJournal().addQuestEntries("rogues_altar", "desc", "comm");
                 // player has not yet received task to settle things down
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/rogues_altar_1.json"));
                 return;
@@ -132,7 +134,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
         @Override
         public boolean process(World world, StarSystem ss) {
-
+            world.getPlayer().getJournal().addQuestEntries("rogues_altar", "enter");
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/rogues_altar_scientist.json"));
 
             Dialog earthDialog = Dialog.loadFromFile("dialogs/encounters/rogues_altar_earth.json");
@@ -147,6 +149,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                         // add new research of a klisk philosophy
                     }
                     world.getGlobalVariables().put("rogues_altar.earth_communicated", true);
+                    world.getPlayer().getJournal().addQuestEntries("rogues_altar", "earth");
                 }
             });
 
@@ -238,33 +241,73 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
     }
 
-    private static final class BorkBlockadeShip extends NPCShip
-    {
+    private static final class BorkBlockadeShip extends NPCShip {
 
         private static final long serialVersionUID = 8123694044569284242L;
 
-        private static int count = 7;
+        private static int count = Configuration.getIntProperty("quest.bork_blockade.ships");
+
+        private static boolean communicated = false;
 
         public BorkBlockadeShip(int x, int y, World world) {
             super(x, y, "bork_ship", world.getRaces().get(BorkGenerator.NAME), new NPC(Dialog.loadFromFile("dialogs/encounters/bork_blockade_contact.json")), "Bork ship");
+        }
+
+        @Override
+        public void onAttack(World world, SpaceObject attacker, int dmg) {
+            super.onAttack(world, attacker, dmg);
+            if (hp <= 0) {
+                count--;
+                if (count == 0) {
+                    // all ships destroyed
+                    world.getGlobalVariables().put("bork_blockade.result", "destroy");
+                    world.getPlayer().getJournal().addQuestEntries("bork_blockade", "destroy");
+                    world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/encounters/bork_blockade_destroyed.json"));
+                }
+            }
+        }
+
+        @Override
+        public void onContact(World world) {
+            super.onContact(world);
+            if (!communicated) {
+                world.getPlayer().getJournal().addQuestEntries("bork_blockade", "comm");
+                communicated = true;
+            }
         }
     }
 
     /**
      * Bork event puts a blockade on solar system
      */
-    private static final class BorkBlockadeAdder extends BaseInvasionQuestListener
-    {
+    private static final class BorkBlockadeAdder extends BaseInvasionQuestListener {
 
         private static final long serialVersionUID = 5403971949552674122L;
 
         @Override
         protected boolean process(World world, StarSystem ss) {
-
+            world.getPlayer().getJournal().addQuest(new JournalEntry("bork_blockade", "desc"));
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/bork_blockade_enter.json"));
             Dialog earthDialog = Dialog.loadFromFile("dialogs/encounters/bork_blockade_earth.json");
+            earthDialog.setListener(new DialogListener() {
+                private static final long serialVersionUID = -2735450899833830131L;
+
+                @Override
+                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                    world.getPlayer().getJournal().addQuestEntries("bork_blockade", "order");
+                }
+            });
             world.getPlayer().getEarthState().getEarthSpecialDialogs().add(earthDialog);
 
+            int shipsCount = Configuration.getIntProperty("quest.bork_blockade.ships");
+            BorkBlockadeShip ship = new BorkBlockadeShip(0, 0, world);
+            ship.setPos(ss.getPlanets()[2].getX() - 1, ss.getPlanets()[2].getY());
+            ss.getShips().add(ship);
+            for (int i = 1; i < shipsCount; ++i) {
+                ship = new BorkBlockadeShip(0, 0, world);
+                ss.setRandomEmptyPosition(ship);
+                ss.getShips().add(ship);
+            }
 
             return true;
         }
@@ -272,10 +315,17 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
     @Override
     public void updateWorld(World world) {
-        if (CommonRandom.getRandom().nextBoolean()) {
-            world.addListener(new RogueInvasionAdder());
-        } else {
-            world.addListener(new KliskTraderAdder());
+        int val = CommonRandom.getRandom().nextInt(3);
+        switch (val) {
+            case 0:
+                world.addListener(new RogueInvasionAdder());
+                break;
+            case 1:
+                world.addListener(new KliskTraderAdder());
+                break;
+            case 2:
+                world.addListener(new BorkBlockadeAdder());
+                break;
         }
     }
 }

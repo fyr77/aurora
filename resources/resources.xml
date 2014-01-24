@@ -66,8 +66,8 @@
     <resource type="image" id="rogues_altar">sprites/planet_objects/rogue_entrance.png</resource>
 
     <!-- swarm -->
-    <resource type="image" id="swarm_ship">sprites/ships/swarm.png</resource>
-    <resource type="image" id="swarm_dialog">sprites/portraits/swarm.png</resource>
+    <resource type="image" id="bork_ship">sprites/ships/swarm.png</resource>
+    <resource type="image" id="bork_dialog">sprites/portraits/swarm.png</resource>
 
     <!-- earth -->
     <resource type="image" id="usa_leader">sprites/portraits/am_leader.png</resource>

@@ -1,6 +1,6 @@
 {
   "id": "bork_blockade_enter",
-  "iconName": "military_dialog",
+  "iconName": "marine_dialog",
   "statements": {
     "0": {
       "id": 0,

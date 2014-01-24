@@ -8,8 +8,7 @@ import java.util.TreeMap;
 /**
  * Contains log entries about game world
  */
-public class Journal implements Serializable
-{
+public class Journal implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private SortedMap<String, JournalEntry> quests = new TreeMap<>();
@@ -26,6 +25,18 @@ public class Journal implements Serializable
 
     public void addQuest(JournalEntry entry) {
         quests.put(entry.getId(), entry);
+    }
+
+    public void addQuestEntries(String entryId, String... messages) {
+        JournalEntry journalEntry = quests.get(entryId);
+        if (journalEntry == null) {
+            journalEntry = new JournalEntry(entryId, messages);
+            quests.put(entryId, journalEntry);
+            return;
+        }
+        for (String m : messages) {
+            journalEntry.addMessage(m);
+        }
     }
 
     public void addCodex(JournalEntry entry) {
