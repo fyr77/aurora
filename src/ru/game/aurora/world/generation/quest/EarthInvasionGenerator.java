@@ -60,7 +60,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                 public void stateChanged(World world) {
                     world.getGlobalVariables().put("rogues_altar.result", "destroy");
 
-                    world.getGlobalVariables().put("earth.special_dialog", Dialog.loadFromFile("dialogs/rogues_altar_destroyed.json"));
+                    world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/rogues_altar_destroyed.json"));
                 }
             });
         }
@@ -110,7 +110,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                 return true;
             }
 
-            return count < 4 || world.getGlobalVariables().containsKey("earth.special_dialog") || process(world, ss);
+            return count < 4 || !world.getPlayer().getEarthState().getEarthSpecialDialogs().isEmpty() || process(world, ss);
 
         }
 
@@ -140,7 +140,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                 }
             });
 
-            world.getGlobalVariables().put("earth.special_dialog", earthDialog);
+            world.getPlayer().getEarthState().getEarthSpecialDialogs().add(earthDialog);
 
             // now create dungeon on a moon
 
@@ -191,7 +191,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
             super.onAttack(world, attacker, dmg);
             if (hp <= 0) {
                 world.getGlobalVariables().put("klisk_trader_drone.result", "destroy");
-                world.getGlobalVariables().put("earth.special_dialog", Dialog.loadFromFile("dialogs/encounter/klisk_trade_probe_earth_2.json"));
+                world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/encounters/klisk_trade_probe_earth_2.json"));
                 world.getPlayer().getJournal().getQuests().get("klisk_trade_drone").addMessage("destroyed");
             }
         }
@@ -216,7 +216,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                     klisk_trade_drone.addMessage("problem");
                 }
             });
-            world.getGlobalVariables().put("earth.special_dialog", earthDialog);
+            world.getPlayer().getEarthState().getEarthSpecialDialogs().add(earthDialog);
 
             KliskTradeProbe probe = new KliskTradeProbe(ss.getPlanets()[2].getX() - 1, ss.getPlanets()[2].getY() - 1, world.getRaces().get(KliskGenerator.NAME));
             ss.getShips().add(probe);
@@ -227,11 +227,9 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
         if (CommonRandom.getRandom().nextBoolean()) {
-            // nothing happens
-            //return;
+            world.addListener(new RogueInvasionAdder());
+        } else {
+            world.addListener(new KliskTraderAdder());
         }
-
-        //world.addListener(new RogueInvasionAdder());
-        //world.addListener(new KliskTraderAdder());
     }
 }

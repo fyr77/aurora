@@ -27,6 +27,7 @@ import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Map;
+import java.util.Queue;
 
 public class Earth extends Planet {
 
@@ -71,25 +72,12 @@ public class Earth extends Planet {
 
     @Override
     public void enter(World world) {
-        Object specialDialog = world.getGlobalVariables().get("earth.special_dialog");
-        if (specialDialog != null) {
+        final Queue<Dialog> earthSpecialDialogs = world.getPlayer().getEarthState().getEarthSpecialDialogs();
+
+        if (!earthSpecialDialogs.isEmpty()) {
+            Dialog specialDialog = earthSpecialDialogs.remove();
             world.setCurrentRoom(owner);
-            if (specialDialog instanceof String) {
-                Dialog d = Dialog.loadFromFile((String) specialDialog);
-                world.addOverlayWindow(d);
-                d.setListener(new DialogListener() {
-
-                    private static final long serialVersionUID = -374777902752182404L;
-
-                    @Override
-                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                        world.getGlobalVariables().remove("earth.special_dialog");
-                    }
-                });
-            } else if (specialDialog instanceof Dialog) {
-                world.addOverlayWindow((Dialog) specialDialog);
-                world.getGlobalVariables().remove("earth.special_dialog");
-            }
+            world.addOverlayWindow(specialDialog);
             //todo: maybe not return? what if both variables are set?
             return;
         }

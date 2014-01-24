@@ -1,6 +1,7 @@
 package ru.game.aurora.player.research.projects;
 
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BigMommyShotEffect;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.ResearchProjectDesc;
@@ -51,7 +52,7 @@ public class NuclearWeaponTestProject extends ResearchProjectDesc {
 
 
         world.getGlobalVariables().put("quest.main.weapon_test_done", null);
-        world.getGlobalVariables().put("earth.special_dialog", "dialogs/quest/main/weapon_test_report.json");
+        world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/quest/main/weapon_test_report.json"));
         world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
                 "nuclear_tests_leaked"
                 , "news"

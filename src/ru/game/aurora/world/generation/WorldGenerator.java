@@ -23,7 +23,10 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.*;
 import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.generation.quest.*;
+import ru.game.aurora.world.generation.quest.ColonyPlanetSearchListener;
+import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
+import ru.game.aurora.world.generation.quest.LastBeaconQuestGenerator;
+import ru.game.aurora.world.generation.quest.MainQuestGenerator;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.quest.Journal;
@@ -224,9 +227,6 @@ public class WorldGenerator implements Runnable {
         @Override
         public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
             if (ship.getRace() != world.getRaces().get("Humanity")) {
-                if (world.getGlobalVariables().containsKey("earth.special_dialog")) {
-                    logger.warn("Overwriting earth special dialog, can result in problems with game plot");
-                }
                 Dialog d = Dialog.loadFromFile("dialogs/earth_first_return_1.json");
                 d.setListener(new DialogListener() {
                     private static final long serialVersionUID = 4929841605007880780L;
@@ -249,7 +249,7 @@ public class WorldGenerator implements Runnable {
                 });
 
 
-                world.getGlobalVariables().put("earth.special_dialog", d);
+                world.getPlayer().getEarthState().getEarthSpecialDialogs().add(d);
                 return false;
             }
             return true;
@@ -268,7 +268,6 @@ public class WorldGenerator implements Runnable {
         journal.addQuest(new JournalEntry("last_beacon", "start"));
 
         world.addListener(new FirstContactListener());
-        world.addListener(new EarthInvasionGenerator.KliskTraderAdder());
     }
 
     // perform some fast initialization in gui thread
