@@ -11,6 +11,7 @@ import ru.game.aurora.world.*;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.dungeon.KillAllMonstersCondition;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.DungeonEntrance;
@@ -31,6 +32,10 @@ import java.util.Map;
 public class EarthInvasionGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = 1113857719613332116L;
 
+    /**
+     * Rogue altar event. Rogues start building an altar on the moon, to pray the Obliterator, that disturbs its gravity field.
+     * User can enter this altar as a dungeon, and either kill all rogues and destroy it, or help them fix it.
+     */
     public static final class RogueAltarWorker extends DungeonMonster {
         private static final long serialVersionUID = -2775935255374086503L;
 
@@ -96,6 +101,11 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
     }
 
+    /**
+     * All invasion events happen:
+     * 1) After at least 4th player return to earth
+     * 2) If there are no other global events
+     */
     private static abstract class BaseInvasionQuestListener extends GameEventListener {
         private static final long serialVersionUID = 8170368564115054199L;
 
@@ -154,6 +164,10 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
     }
 
+    /**
+     * Klisk event puts a trade probe on earth orbit, that disturbes all solar system communications with advertisements
+     * Player can either destroy it, or buy all its stuff
+     */
     private static final class KliskTradeProbe extends NPCShip {
         private static final long serialVersionUID = -8830393993027489642L;
 
@@ -197,7 +211,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
     }
 
-    public static final class KliskTraderAdder extends BaseInvasionQuestListener {
+    private static final class KliskTraderAdder extends BaseInvasionQuestListener {
         private static final long serialVersionUID = -5491271253252252436L;
 
         @Override
@@ -220,6 +234,38 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
             KliskTradeProbe probe = new KliskTradeProbe(ss.getPlanets()[2].getX() - 1, ss.getPlanets()[2].getY() - 1, world.getRaces().get(KliskGenerator.NAME));
             ss.getShips().add(probe);
+            return true;
+        }
+    }
+
+    private static final class BorkBlockadeShip extends NPCShip
+    {
+
+        private static final long serialVersionUID = 8123694044569284242L;
+
+        private static int count = 7;
+
+        public BorkBlockadeShip(int x, int y, World world) {
+            super(x, y, "bork_ship", world.getRaces().get(BorkGenerator.NAME), new NPC(Dialog.loadFromFile("dialogs/encounters/bork_blockade_contact.json")), "Bork ship");
+        }
+    }
+
+    /**
+     * Bork event puts a blockade on solar system
+     */
+    private static final class BorkBlockadeAdder extends BaseInvasionQuestListener
+    {
+
+        private static final long serialVersionUID = 5403971949552674122L;
+
+        @Override
+        protected boolean process(World world, StarSystem ss) {
+
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/bork_blockade_enter.json"));
+            Dialog earthDialog = Dialog.loadFromFile("dialogs/encounters/bork_blockade_earth.json");
+            world.getPlayer().getEarthState().getEarthSpecialDialogs().add(earthDialog);
+
+
             return true;
         }
     }

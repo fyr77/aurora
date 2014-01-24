@@ -91,3 +91,9 @@ klisk trader drone quest
 
 klisk_trader_drone.communicated - if player has talked to a drone
 klisk_trader_drone.result - outcome of this quest. "destroy" "withdraw"
+
+==============================
+
+bork blockade quest
+
+bork_blockade.result - outcome "destroy" "withdraw"
