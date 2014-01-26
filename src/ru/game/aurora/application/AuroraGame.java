@@ -15,6 +15,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.openal.SoundStore;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.Updatable;
@@ -140,6 +141,8 @@ public class AuroraGame extends NiftyOverlayGame {
             throw new SlickException("Failed to initialize Monster Generator", e);
         }
         lastFrameTime = gameContainer.getTime();
+
+        ResourceManager.getInstance().getPlaylist("background").play();
 
     }
 
@@ -280,6 +283,10 @@ public class AuroraGame extends NiftyOverlayGame {
             List<Resolution> supportedResolutions = getAvailableResolutions();
             // by default, use largest supported resolution available
             res = supportedResolutions.get(supportedResolutions.size() - 1);
+        }
+        String musicVolumeString = Configuration.getSystemProperties().getProperty("music.volume");
+        if (musicVolumeString != null) {
+            SoundStore.get().setCurrentMusicVolume(Float.parseFloat(musicVolumeString));
         }
         final boolean fullScreen = Boolean.parseBoolean(Configuration.getSystemProperties().getProperty("screen.full_screen", "false"));
         app.setDisplayMode(res.getWidth(), res.getHeight(), fullScreen);

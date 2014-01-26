@@ -2,6 +2,7 @@
 <resources>
     <include file="item_icons.xml"/>
     <include file="tiles.xml"/>
+    <include file="sound.xml"/>
 
     <!-- stuff -->
     <resource type="image" id="no_image">sprites/no_image.png</resource>

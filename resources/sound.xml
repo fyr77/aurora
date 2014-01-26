@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <resource type="playlist" id="background">resources/music/background</resource>
+    <resource type="playlist" id="dungeon_invasion">resources/music/dungeon/invasion</resource>
+</resources>

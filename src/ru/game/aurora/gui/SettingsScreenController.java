@@ -1,10 +1,14 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.DropDown;
+import de.lessvoid.nifty.controls.Scrollbar;
+import de.lessvoid.nifty.controls.ScrollbarChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.openal.SoundStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.AuroraGame;
@@ -24,6 +28,8 @@ public class SettingsScreenController implements ScreenController {
 
     private CheckBox fullScreen;
 
+    private Scrollbar musicVolume;
+
     private static final Logger logger = LoggerFactory.getLogger(SettingsScreenController.class);
 
     @Override
@@ -37,6 +43,8 @@ public class SettingsScreenController implements ScreenController {
         fullScreen = screen.findNiftyControl("fullscreen", CheckBox.class);
         fullScreen.setChecked(AuroraGame.isFullScreen());
 
+        musicVolume = screen.findNiftyControl("music_volume", Scrollbar.class);
+
         for (Resolution res : resolutionDropDown.getItems()) {
             if (res.isActive()) {
                 resolutionDropDown.selectItem(res);
@@ -47,7 +55,7 @@ public class SettingsScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
-
+        musicVolume.setValue(SoundStore.get().getCurrentMusicVolume());
     }
 
     @Override
@@ -63,9 +71,15 @@ public class SettingsScreenController implements ScreenController {
         }
         GUI.getInstance().popAndSetScreen();
         Configuration.getSystemProperties().put("screen.resolution", res.toString());
+        Configuration.getSystemProperties().put("music.volume", musicVolume.getValue());
         Configuration.getSystemProperties().put("screen.full_screen", String.valueOf(fullScreen.isChecked()));
         Configuration.saveSystemProperties();
 
+    }
+
+    @NiftyEventSubscriber(id = "music_volume")
+    public void onScrollbarMoved(final String id, final ScrollbarChangedEvent event) {
+        SoundStore.get().setCurrentMusicVolume(event.getValue());
     }
 
     public void cancelSettings() {

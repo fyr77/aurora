@@ -15,6 +15,7 @@ import ru.game.aurora.world.equip.StarshipWeaponDesc;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class ResourceManager {
     private static ResourceManager _instance = new ResourceManager();
 
     private Map<String, Sound> soundMap;
+    private Map<String, Playlist> playlistMap;
     private Map<String, Image> imageMap;
     private Map<String, ResourceAnimationData> animationMap;
     private Map<String, String> textMap;
@@ -51,6 +53,7 @@ public class ResourceManager {
         animationMap = new HashMap<>();
         textMap = new HashMap<>();
         spriteSheetMap = new HashMap<>();
+        playlistMap = new HashMap<>();
     }
 
     public static ResourceManager getInstance() {
@@ -126,6 +129,9 @@ public class ResourceManager {
                         break;
                     case "animation":
                         addElementAsAnimation(resourceElement);
+                        break;
+                    case "playlist":
+                        addElementAsPlaylist(resourceElement);
                         break;
                 }
             }
@@ -228,6 +234,32 @@ public class ResourceManager {
 
         return sound;
     }
+
+    private void addElementAsPlaylist(Element resourceElement) throws SlickException {
+        loadPlaylist(resourceElement.getAttribute("id"), resourceElement.getTextContent());
+    }
+
+    public Playlist loadPlaylist(String id, String path) throws SlickException {
+        if (path == null || path.length() == 0)
+            throw new SlickException("Playlist resource [" + id + "] has invalid path");
+
+        Playlist p;
+
+        try {
+            p = new Playlist(id, new File(path));
+        } catch (Exception e) {
+            throw new SlickException("Could not load playlist", e);
+        }
+
+        this.playlistMap.put(id, p);
+
+        return p;
+    }
+
+    public final Playlist getPlaylist(String id) {
+        return playlistMap.get(id);
+    }
+
 
     public final Sound getSound(String ID) {
         return soundMap.get(ID);
