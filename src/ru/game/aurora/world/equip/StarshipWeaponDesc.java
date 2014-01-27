@@ -11,8 +11,7 @@ import ru.game.aurora.application.JsonConfigManager;
 
 import java.io.Serializable;
 
-public class StarshipWeaponDesc implements Serializable, JsonConfigManager.EntityWithId
-{
+public class StarshipWeaponDesc implements Serializable, JsonConfigManager.EntityWithId {
     private static final long serialVersionUID = 1L;
 
     public final String id;
@@ -31,11 +30,13 @@ public class StarshipWeaponDesc implements Serializable, JsonConfigManager.Entit
 
     public final String image;
 
+    public final String shotSound;
+
     public final String explosionAnimation;
 
     public final String particlesAnimation;
 
-    public StarshipWeaponDesc(int damage, String id, String name, String desc, String shotSprite, int range, int reloadTurns, String image, String explosionAnimation, String particlesAnimation) {
+    public StarshipWeaponDesc(int damage, String id, String name, String desc, String shotSprite, int range, int reloadTurns, String image, String soundId, String explosionAnimation, String particlesAnimation) {
         this.id = id;
         this.damage = damage;
         this.name = name;
@@ -44,6 +45,7 @@ public class StarshipWeaponDesc implements Serializable, JsonConfigManager.Entit
         this.range = range;
         this.reloadTurns = reloadTurns;
         this.image = image;
+        this.shotSound = soundId;
         this.explosionAnimation = explosionAnimation;
         this.particlesAnimation = particlesAnimation;
     }

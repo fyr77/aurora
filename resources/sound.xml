@@ -2,4 +2,13 @@
 <resources>
     <resource type="playlist" id="background">resources/music/background</resource>
     <resource type="playlist" id="dungeon_invasion">resources/music/dungeon/invasion</resource>
+
+    <resource type="sound" id="laser_1">resources/sounds/shots/laser_1.wav</resource>
+    <resource type="sound" id="plasma_1">resources/sounds/shots/plasma_1.wav</resource>
+    <resource type="sound" id="bullet_1">resources/sounds/shots/bullet_1.wav</resource>
+    <resource type="sound" id="missile_1">resources/sounds/shots/missile_1.wav</resource>
+    <resource type="sound" id="melee_1">resources/sounds/shots/melee_1.wav</resource>
+
+    <resource type="sound" id="explosion_1">resources/sounds/explosions/explosion_1.wav</resource>
+    <resource type="sound" id="explosion_2">resources/sounds/explosions/explosion_2.wav</resource>
 </resources>

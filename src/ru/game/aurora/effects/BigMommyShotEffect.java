@@ -16,8 +16,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 
-public class BigMommyShotEffect extends BlasterShotEffect
-{
+public class BigMommyShotEffect extends BlasterShotEffect {
     private static final long serialVersionUID = 5526660301767290658L;
 
     private transient Animation animation;
@@ -39,9 +38,10 @@ public class BigMommyShotEffect extends BlasterShotEffect
         if (isOver()) {
             world.getCurrentStarSystem().addEffect(
                     new ExplosionEffect(
-                            (int)currentPos.x
-                            , (int)currentPos.y
+                            (int) currentPos.x
+                            , (int) currentPos.y
                             , "ship_explosion"
+                            , true
                             , true
                     )
             );

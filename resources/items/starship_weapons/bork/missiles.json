@@ -4,6 +4,7 @@
     "name": "missiles.name",
     "desc": "missiles.desc",
     "shotSprite" : "missile_shot",
+    "shotSound" : "missile_1",
     "range" : 5,
     "image" : "ship_rocket",
     "reloadTurns" : 2,

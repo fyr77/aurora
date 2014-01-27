@@ -107,9 +107,9 @@ public class AnimalGenerator {
         }
 
         if (ranged) {
-            weapon = new LandingPartyWeapon("claw", dmg, range, "", "", "bullet_shot");
+            weapon = new LandingPartyWeapon("claw", dmg, range, "", "", "bullet_shot", "bullet_1");
         } else {
-            weapon = new LandingPartyWeapon("melee", dmg, 1, "", "", "");
+            weapon = new LandingPartyWeapon("melee", dmg, 1, "", "", "", "melee_1");
         }
 
         AnimalSpeciesDesc result = new AnimalSpeciesDesc(

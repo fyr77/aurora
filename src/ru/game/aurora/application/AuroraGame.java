@@ -286,7 +286,11 @@ public class AuroraGame extends NiftyOverlayGame {
         }
         String musicVolumeString = Configuration.getSystemProperties().getProperty("music.volume");
         if (musicVolumeString != null) {
-            SoundStore.get().setCurrentMusicVolume(Float.parseFloat(musicVolumeString));
+            SoundStore.get().setMusicVolume(Float.parseFloat(musicVolumeString));
+        }
+        String soundVolumeString = Configuration.getSystemProperties().getProperty("sound.volume");
+        if (soundVolumeString != null) {
+            SoundStore.get().setSoundVolume(Float.parseFloat(soundVolumeString));
         }
         final boolean fullScreen = Boolean.parseBoolean(Configuration.getSystemProperties().getProperty("screen.full_screen", "false"));
         app.setDisplayMode(res.getWidth(), res.getHeight(), fullScreen);

@@ -146,7 +146,7 @@ public class Ship extends MovableSprite implements SpaceObject {
         hull -= dmg;
         world.onPlayerShipDamaged();
         if (hull <= 0) {
-            ExplosionEffect ship_explosion = new ExplosionEffect(x, y, "ship_explosion", false);
+            ExplosionEffect ship_explosion = new ExplosionEffect(x, y, "ship_explosion", false, true);
             ship_explosion.getAnim().setSpeed(0.5f);
             ((StarSystem) world.getCurrentRoom()).addEffect(ship_explosion);
             ship_explosion.setEndListener(new IStateChangeListener() {

@@ -23,6 +23,11 @@
                     <control name="horizontalScrollbar" id="music_volume" worldMax="1.0" worldPageSize="0.1"
                              initial="0.5" buttonStepSize="0.1" pageStepSize="0.3"/>
 
+                    <text style="base-font" wrap="true" text="${gui.settings.sound_volume}" width="60%"
+                          textHAlign="left"/>
+                    <control name="horizontalScrollbar" id="sound_volume" worldMax="1.0" worldPageSize="0.1"
+                             initial="0.5" buttonStepSize="0.1" pageStepSize="0.3"/>
+
                     <panel height="*"/>
                     <panel childLayout="horizontal" height="50px">
                         <panel width="*"/>

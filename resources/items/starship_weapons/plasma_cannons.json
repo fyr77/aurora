@@ -4,6 +4,7 @@
     "name": "plasma_cannon.name",
     "desc": "plasma_cannon.desc",
     "shotSprite" : "plasma_shot",
+    "shotSound" : "plasma_1",
     "range" : 2,
     "reloadTurns" : 0,
     "explosionAnimation" : "plasma_explosion",

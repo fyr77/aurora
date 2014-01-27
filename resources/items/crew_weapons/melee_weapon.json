@@ -4,5 +4,6 @@
     "range" : 1,
     "damage" : 5,
     "image" : "crew_laser",
-    "shotImage" : "plasma_shot"
+    "shotImage" : "plasma_shot",
+    "shotSound" : "melee_1"
 }

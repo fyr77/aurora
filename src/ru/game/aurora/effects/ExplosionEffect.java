@@ -24,11 +24,15 @@ public class ExplosionEffect extends Effect {
     /**
      * @param screenCoords If true, these x and y are already coordinates on screen and should not be transformed
      */
-    public ExplosionEffect(int x, int y, String animName, boolean screenCoords) {
+    public ExplosionEffect(int x, int y, String animName, boolean screenCoords, boolean playSound) {
         super(x, y);
         anim = ResourceManager.getInstance().getAnimation(animName).copy();
         anim.setLooping(false);
         this.screenCoords = screenCoords;
+
+        if (playSound) {
+            ResourceManager.getInstance().getSound("explosion_2").play();
+        }
     }
 
     public Animation getAnim() {

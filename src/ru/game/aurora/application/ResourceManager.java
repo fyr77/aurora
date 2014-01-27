@@ -219,15 +219,16 @@ public class ResourceManager {
     }
 
     public Sound loadSound(String id, String path) throws SlickException {
-        if (path == null || path.length() == 0)
+        if (path == null || path.length() == 0) {
             throw new SlickException("Sound resource [" + id + "] has invalid path");
+        }
 
         Sound sound;
 
         try {
             sound = new Sound(path);
         } catch (SlickException e) {
-            throw new SlickException("Could not load sound", e);
+            throw new SlickException("Could not load sound from " + path, e);
         }
 
         this.soundMap.put(id, sound);
@@ -262,7 +263,11 @@ public class ResourceManager {
 
 
     public final Sound getSound(String ID) {
-        return soundMap.get(ID);
+        Sound rz = soundMap.get(ID);
+        if (rz == null) {
+            logger.warn("No sound with id " + ID);
+        }
+        return rz;
     }
 
 

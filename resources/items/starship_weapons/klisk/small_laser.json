@@ -4,6 +4,7 @@
     "name": "",
     "desc": "",
     "shotSprite" : "blaster_shot",
+    "shotSound" : "laser_1",
     "range" : 3,
     "image" : "ship_laser",
     "reloadTurns" : 0,

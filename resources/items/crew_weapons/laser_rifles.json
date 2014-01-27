@@ -4,5 +4,6 @@
     "range" : 3,
     "damage" : 2,
     "image" : "crew_laser",
-    "shotImage" : "blaster_shot"
+    "shotImage" : "blaster_shot",
+    "shotSound" : "laser_1"
 }

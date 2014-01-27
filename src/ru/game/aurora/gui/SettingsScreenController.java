@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Resolution;
+import ru.game.aurora.application.ResourceManager;
 
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class SettingsScreenController implements ScreenController {
 
     private Scrollbar musicVolume;
 
+    private Scrollbar soundVolume;
+
     private static final Logger logger = LoggerFactory.getLogger(SettingsScreenController.class);
 
     @Override
@@ -44,6 +47,7 @@ public class SettingsScreenController implements ScreenController {
         fullScreen.setChecked(AuroraGame.isFullScreen());
 
         musicVolume = screen.findNiftyControl("music_volume", Scrollbar.class);
+        soundVolume = screen.findNiftyControl("sound_volume", Scrollbar.class);
 
         for (Resolution res : resolutionDropDown.getItems()) {
             if (res.isActive()) {
@@ -55,7 +59,8 @@ public class SettingsScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
-        musicVolume.setValue(SoundStore.get().getCurrentMusicVolume());
+        musicVolume.setValue(SoundStore.get().getMusicVolume());
+        soundVolume.setValue(SoundStore.get().getSoundVolume());
     }
 
     @Override
@@ -71,15 +76,22 @@ public class SettingsScreenController implements ScreenController {
         }
         GUI.getInstance().popAndSetScreen();
         Configuration.getSystemProperties().put("screen.resolution", res.toString());
-        Configuration.getSystemProperties().put("music.volume", musicVolume.getValue());
+        Configuration.getSystemProperties().put("music.volume", String.valueOf(musicVolume.getValue()));
+        Configuration.getSystemProperties().put("sound.volume", String.valueOf(soundVolume.getValue()));
         Configuration.getSystemProperties().put("screen.full_screen", String.valueOf(fullScreen.isChecked()));
         Configuration.saveSystemProperties();
 
     }
 
     @NiftyEventSubscriber(id = "music_volume")
-    public void onScrollbarMoved(final String id, final ScrollbarChangedEvent event) {
-        SoundStore.get().setCurrentMusicVolume(event.getValue());
+    public void onMusicVolumeChanged(final String id, final ScrollbarChangedEvent event) {
+        SoundStore.get().setMusicVolume(event.getValue());
+    }
+
+    @NiftyEventSubscriber(id = "sound_volume")
+    public void onSoundVolumeChanged(final String id, final ScrollbarChangedEvent event) {
+        SoundStore.get().setSoundVolume(event.getValue());
+        ResourceManager.getInstance().getSound("laser_1").play();
     }
 
     public void cancelSettings() {

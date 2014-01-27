@@ -4,6 +4,7 @@
     "name": "simple_cannon.name",
     "desc": "simple_cannon.desc",
     "shotSprite" : "bullet_shot",
+    "shotSound" : "bullet_1",
     "range" : 2,
     "image" : "ship_laser",
     "reloadTurns" : 0,

@@ -26,16 +26,15 @@ import java.util.Set;
  * User: Egor.Smirnov
  * Date: 15.01.14
  * Time: 14:03
- *
+ * <p/>
  * Listener created for a quest for finding a suitable planet for colonization.
  * 1) Plane must be in an inhabited starsystem (not a quest location)
  * 2) Must be medium size, with breathable atmosphere and life on it
- *
+ * <p/>
  * When player explores at least X tiles on it, it will be enough for a planet to become explored. Player will be attacked by
  * dangerous monsters
  */
-public class ColonyPlanetSearchListener extends GameEventListener implements WorldGeneratorPart
-{
+public class ColonyPlanetSearchListener extends GameEventListener implements WorldGeneratorPart {
     private static final long serialVersionUID = -3430060862654143997L;
 
     // set to true if first suitable planet found, there will be some tough monsters
@@ -46,8 +45,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
         world.addListener(this);
     }
 
-    private static class PlanetData implements Serializable
-    {
+    private static class PlanetData implements Serializable {
         private static final long serialVersionUID = -8703254150937720100L;
 
         public boolean resourcesCollected = false;
@@ -63,13 +61,11 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
 
     private int targetTiles;
 
-    public ColonyPlanetSearchListener()
-    {
+    public ColonyPlanetSearchListener() {
         targetTiles = Configuration.getIntProperty("quest.colony_search.requiredTiles");
     }
 
-    private Planet checkCurrentPlanet(Planet p)
-    {
+    private Planet checkCurrentPlanet(Planet p) {
         if (p.getOwner().isQuestLocation()) {
             return null;
         }
@@ -128,8 +124,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
     }
 
 
-    private void addMonsters(World world)
-    {
+    private void addMonsters(World world) {
         Set<AnimalModifier> modifierSet = new HashSet<>();
         modifierSet.add(AnimalModifier.ARMOR);
         modifierSet.add(AnimalModifier.LARGE);
@@ -140,7 +135,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
                 , true
                 , false
                 , 25
-                , new LandingPartyWeapon("melee", 6, 1, "", "", "")
+                , new LandingPartyWeapon("melee", 6, 1, "", "", "", "melee_1")
                 , 2
                 , AnimalSpeciesDesc.Behaviour.AGGRESSIVE
                 , modifierSet

@@ -38,13 +38,16 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
 
     private final String shotImage;
 
-    public LandingPartyWeapon(String id, int damage, int range, String name, String image, String shotImage) {
+    private final String shotSound;
+
+    public LandingPartyWeapon(String id, int damage, int range, String name, String image, String shotImage, String shotSound) {
         this.id = id;
         this.damage = damage;
         this.range = range;
         this.name = name;
         this.image = image;
         this.shotImage = shotImage;
+        this.shotSound = shotSound;
     }
 
     public int getDamage() {
@@ -84,6 +87,10 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
 
     public String getShotImage() {
         return shotImage;
+    }
+
+    public String getShotSound() {
+        return shotSound;
     }
 
     @Override

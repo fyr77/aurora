@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
@@ -150,7 +151,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         hp -= dmg;
         if (hp <= 0) {
             GameLogger.getInstance().logMessage(getName() + " " + Localization.getText("gui", "space.destroyed"));
-            ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect(x, y, "ship_explosion", false));
+            ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect(x, y, "ship_explosion", false, true));
         }
         if (ai == null || !(ai instanceof CombatAI)) {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.hostile"), getName(), attacker.getName()));
@@ -188,6 +189,8 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         target.onAttack(world, this, weaponDesc.damage);
 
         ss.addEffect(new BlasterShotEffect(this, target, world.getCamera(), 800, weapons[weaponIdx]));
+
+        ResourceManager.getInstance().getSound(weaponDesc.shotSound).play();
 
         if (!target.isAlive()) {
             GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));

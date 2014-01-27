@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
@@ -66,10 +67,11 @@ public class MonsterController implements Serializable {
                 party.subtractHp(world, weapon.getDamage());
                 GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), myMonster.getName(), weapon.getDamage(), party.getHp()));
                 if (weapon.getId().equals("melee")) {
-                    world.getCurrentDungeon().getController().setCurrentEffect(new ExplosionEffect(world.getPlayer().getLandingParty().getX(), world.getPlayer().getLandingParty().getY(), "slash", false));
+                    world.getCurrentDungeon().getController().setCurrentEffect(new ExplosionEffect(world.getPlayer().getLandingParty().getX(), world.getPlayer().getLandingParty().getY(), "slash", false, false));
                 } else {
                     world.getCurrentDungeon().getController().setCurrentEffect(new BlasterShotEffect(myMonster, world.getPlayer().getLandingParty(), world.getCamera(), 800, weapon));
                 }
+                ResourceManager.getInstance().getSound(weapon.getShotSound()).play();
                 newX = x;
                 newY = y;
             } else if (distance < 5 * weapon.getRange()) {

@@ -6,6 +6,7 @@
     "shotSprite" : "blaster_shot",
     "range" : 3,
     "image" : "ship_laser",
+    "shotSound" : "laser_1",
     "reloadTurns" : 1,
     "explosionAnimation" : "blaster_explosion",
     "particlesAnimation" : "blaster_particles"
