@@ -197,7 +197,7 @@ public class MainMenuController implements ScreenController {
             background.update(container);
         }
         if (generator != null) {
-            if (generator.isGenerated()) {
+            if (generator.isGenerated() && GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("loading_screen")) {
                 final World world = generator.getWorld();
                 world.setCamera(camera);
                 world.getCurrentRoom().enter(world);

@@ -55,7 +55,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
 
             @Override
             public NPCShip createShip(int shipType) {
-                NPCShip ship = new NPCShip(0, 0, "humanity_ship", humans, null, "Humanity ship");
+                NPCShip ship = new NPCShip(0, 0, "earth_transport", humans, null, "Humanity ship");
                 ship.setAi(new LandOnPlanetAI(solarSystem.getPlanets()[CommonRandom.getRandom().nextInt(solarSystem.getPlanets().length)]));
                 return ship;
             }
@@ -68,7 +68,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
         pm.add(new PrivateMessage("game_start_2", "message"));
 
         // add Enterprise ship event
-        world.addListener(new EnterpriseEncounterCreator());
+        //world.addListener(new EnterpriseEncounterCreator()); //TODO: re-add later
 
         world.addListener(new BiologyResearch());
 

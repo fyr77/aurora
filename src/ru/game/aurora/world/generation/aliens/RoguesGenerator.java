@@ -148,7 +148,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
         world.addListener(new SingleStarsystemShipSpawner(rogueRace.getDefaultFactory(), 0.3, homeworld));
 
         world.getRaces().put(rogueRace.getName(), rogueRace);
-        createDamagedScoutEvent(world, rogueRace);
+        //createDamagedScoutEvent(world, rogueRace); // TODO: restore some day
     }
 
 }
