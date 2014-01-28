@@ -7,11 +7,8 @@ package ru.game.aurora.npc;
 
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
@@ -45,17 +42,7 @@ public class AlienRace implements Serializable {
      */
     private Map<String, Integer> relations = new HashMap<>();
 
-    private NPCShipFactory defaultFactory = new NPCShipFactory() {
-
-        private static final long serialVersionUID = -6223078452316173728L;
-
-        @Override
-        public NPCShip createShip() {
-            NPCShip ship = new NPCShip(0, 0, getShipSprite(), AlienRace.this, null, getName() + " ship");
-            ship.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"), StarshipWeapon.MOUNT_ALL));
-            return ship;
-        }
-    };
+    private NPCShipFactory defaultFactory;
 
     public AlienRace(String name, String shipSprite, Dialog defaultDialog) {
         this.name = name;

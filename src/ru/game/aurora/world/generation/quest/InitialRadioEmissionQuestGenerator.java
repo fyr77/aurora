@@ -7,7 +7,6 @@
 package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.Color;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
@@ -21,9 +20,9 @@ import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.StarResearchProject;
 import ru.game.aurora.world.*;
-import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesMainDialogListener;
 import ru.game.aurora.world.space.*;
 
@@ -177,14 +176,13 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                         public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
                             isAlive = false;
 
-                            NPCShip ship = rogues.getDefaultFactory().createShip();
+                            NPCShip ship = rogues.getDefaultFactory().createShip(RoguesGenerator.SCOUT_SHIP);
                             final Ship playerShip = world.getPlayer().getShip();
                             ship.setPos(playerShip.getX() + 1, playerShip.getY());
                             ss.getShips().add(ship);
 
-                            NPCShip defenceProbe = new NPCShip(playerShip.getX(), playerShip.getY() + 1, "rogues_probe", rogues, null, "Defence drone");
-                            defenceProbe.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), StarshipWeapon.MOUNT_ALL));
-                            defenceProbe.setStationary(true);
+                            NPCShip defenceProbe = rogues.getDefaultFactory().createShip(RoguesGenerator.PROBE_SHIP);
+                            defenceProbe.setPos(playerShip.getX(), playerShip.getY() + 1);
                             ss.getShips().add(defenceProbe);
 
                             Dialog dialog = Dialog.loadFromFile("dialogs/rogues/court_invitation.json");
@@ -258,11 +256,10 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         world.getGalaxyMap().addObjectAndSetTile(brownStar, 12, 12);
 
         AlienRace rogues = world.getRaces().get("Rogues");
-        NPCShip defenceProbe = new NPCShip(2, 1, "rogues_probe", rogues, null, "Defence drone");
+        NPCShip defenceProbe = rogues.getDefaultFactory().createShip(RoguesGenerator.PROBE_SHIP);
+        defenceProbe.setPos(2, 1);
         defenceProbe.setAi(new CombatAI(world.getPlayer().getShip()));
-        defenceProbe.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), StarshipWeapon.MOUNT_ALL));
         defenceProbe.setHostile(true);
-        defenceProbe.setStationary(true);
         brownStar.getShips().add(defenceProbe);
         brownStar.setFirstEnterDialog(Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/rogues/rogue_beacon_found.json")));
 

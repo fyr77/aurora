@@ -9,6 +9,7 @@ package ru.game.aurora.world.generation.aliens;
 
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
@@ -26,6 +27,12 @@ import java.util.Map;
 
 public class RoguesGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = -8911801330633122269L;
+
+    public static final String NAME = "Rogues";
+
+    public static final int SCOUT_SHIP = 0;
+
+    public static final int PROBE_SHIP = 1;
 
     private static class MeetDamagedRogueEvent extends SingleShipEvent {
 
@@ -104,7 +111,34 @@ public class RoguesGenerator implements WorldGeneratorPart {
     public void updateWorld(World world) {
         Dialog defaultDialog = Dialog.loadFromFile("dialogs/rogues/rogues_frame_dialog.json");
         defaultDialog.setListener(new RoguesMainDialogListener());
-        AlienRace rogueRace = new AlienRace("Rogues", "rogues_scout", defaultDialog);
+        final AlienRace rogueRace = new AlienRace(NAME, "rogues_scout", defaultDialog);
+
+        rogueRace.setDefaultFactory(new NPCShipFactory() {
+            private static final long serialVersionUID = 1334986755758313061L;
+
+            @Override
+            public NPCShip createShip(int shipType) {
+                switch (shipType) {
+                    case SCOUT_SHIP: {
+                        NPCShip ship = new NPCShip(0, 0, "rogues_scout", rogueRace, null, "Rogues scout");
+                        ship.setHp(10);
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
+                        return ship;
+                    }
+                    case PROBE_SHIP: {
+                        NPCShip ship = new NPCShip(0, 0, "rogues_probe", rogueRace, null, "Rogues probe");
+                        ship.setHp(6);
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
+                        ship.setStationary(true);
+                        ship.setCanBeHailed(false);
+                        return ship;
+                    }
+                    default:
+                        throw new IllegalArgumentException("Unsupported ship type for Rogues race: " + shipType);
+                }
+            }
+        });
+
         StarSystem homeworld = HomeworldGenerator.generateRoguesWorld(world, 15, 28, rogueRace);
         homeworld.setQuestLocation(true);
         rogueRace.setHomeworld(homeworld);

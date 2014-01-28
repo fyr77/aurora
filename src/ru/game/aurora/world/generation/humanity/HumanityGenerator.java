@@ -54,8 +54,8 @@ public class HumanityGenerator implements WorldGeneratorPart {
             private static final long serialVersionUID = 5580476648808262345L;
 
             @Override
-            public NPCShip createShip() {
-                NPCShip ship = humans.getDefaultFactory().createShip();
+            public NPCShip createShip(int shipType) {
+                NPCShip ship = new NPCShip(0, 0, "humanity_ship", humans, null, "Humanity ship");
                 ship.setAi(new LandOnPlanetAI(solarSystem.getPlanets()[CommonRandom.getRandom().nextInt(solarSystem.getPlanets().length)]));
                 return ship;
             }

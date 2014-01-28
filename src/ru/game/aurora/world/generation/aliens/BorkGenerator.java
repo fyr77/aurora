@@ -30,7 +30,7 @@ public class BorkGenerator implements WorldGeneratorPart {
 
         borkRace.setDefaultFactory(new NPCShipFactory() {
             @Override
-            public NPCShip createShip() {
+            public NPCShip createShip(int shipId) {
                 NPCShip ship = new NPCShip(0, 0, "bork_ship", borkRace, null, "Bork ship");
                 ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("simple_cannon"), ResourceManager.getInstance().getWeapons().getEntity("bork_missiles"));
                 ship.setHp(5);

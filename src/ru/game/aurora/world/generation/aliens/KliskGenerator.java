@@ -28,6 +28,9 @@ public class KliskGenerator implements WorldGeneratorPart {
 
     public static final String NAME = "Klisk";
 
+    // ship IDs used in factory generation
+    public static final int DEFAULT_SHIP = 0;
+
     @Override
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile("dialogs/klisk_1.json");
@@ -66,12 +69,18 @@ public class KliskGenerator implements WorldGeneratorPart {
         world.getRaces().put(kliskRace.getName(), kliskRace);
 
         kliskRace.setDefaultFactory(new NPCShipFactory() {
+            private static final long serialVersionUID = 5473066320214324094L;
+
             @Override
-            public NPCShip createShip() {
-                NPCShip ship = new NPCShip(0, 0, "klisk_ship", kliskRace, null, "Klisk Ship");
-                ship.setHp(15);
-                ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
-                return ship;
+            public NPCShip createShip(int shipType) {
+                if (shipType == DEFAULT_SHIP) {
+                    NPCShip ship = new NPCShip(0, 0, "klisk_ship", kliskRace, null, "Klisk Ship");
+                    ship.setHp(15);
+                    ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
+                    return ship;
+                }
+
+                throw new IllegalArgumentException("Klisk race does not define ship of type " + shipType);
             }
         });
     }

@@ -7,7 +7,6 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
@@ -15,7 +14,7 @@ import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.equip.StarshipWeapon;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.earth.Earth;
 
@@ -114,11 +113,9 @@ public class HomeworldGenerator {
         ss.getShips().add(frame);
 
         for (int i = 0; i < 3; ++i) {
-            NPCShip probe = new NPCShip(CommonRandom.getRandom().nextInt(6) - 3, CommonRandom.getRandom().nextInt(6) - 3, "rogues_probe", roguesRace, null, "Defence drone");
-            probe.setStationary(true);
-            probe.setCanBeHailed(false);
+            NPCShip probe = roguesRace.getDefaultFactory().createShip(RoguesGenerator.PROBE_SHIP);
+            probe.setPos(CommonRandom.getRandom().nextInt(6) - 3, CommonRandom.getRandom().nextInt(6) - 3);
             probe.setAi(new LeaveSystemAI());
-            probe.setWeapons(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), StarshipWeapon.MOUNT_ALL));
             ss.getShips().add(probe);
         }
         ss.setQuestLocation(true);

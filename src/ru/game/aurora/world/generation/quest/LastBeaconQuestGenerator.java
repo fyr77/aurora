@@ -16,8 +16,7 @@ import java.util.Map;
 
 /**
  */
-public class LastBeaconQuestGenerator implements WorldGeneratorPart
-{
+public class LastBeaconQuestGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = -8675041991712792298L;
 
     @Override
@@ -58,7 +57,7 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart
 
 
         AlienRace kliskRace = world.getRaces().get("Klisk");
-        NPCShip kliskShip = kliskRace.getDefaultFactory().createShip();
+        NPCShip kliskShip = kliskRace.getDefaultFactory().createShip(0);
         kliskShip.setStationary(true);
         lastBeaconLocation.setRandomEmptyPosition(kliskShip);
         lastBeaconLocation.getShips().add(kliskShip);

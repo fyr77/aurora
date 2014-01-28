@@ -5,13 +5,14 @@ import ru.game.aurora.world.space.NPCShip;
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Egor.Smirnov
- * Date: 04.03.13
- * Time: 13:22
+ * Used to create NPC ships for a given race.
  */
 
-public interface NPCShipFactory extends Serializable
-{
-    public NPCShip createShip();
+public interface NPCShipFactory extends Serializable {
+    /**
+     * Create a new NPCShip object of a given type.
+     * Generally, all races should define shipType=0 as their default most-common ship, that should be used in default
+     * ship spawn events.
+     */
+    public NPCShip createShip(int shipType);
 }

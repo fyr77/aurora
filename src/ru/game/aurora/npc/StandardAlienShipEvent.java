@@ -57,7 +57,7 @@ public class StandardAlienShipEvent extends GameEventListener {
         }
 
         if (CommonRandom.getRandom().nextDouble() < probability) {
-            NPCShip ship = shipFactory.createShip();
+            NPCShip ship = shipFactory.createShip(0);
             ss.setRandomEmptyPosition(ship);
             ss.getShips().add(ship);
             if (CommonRandom.getRandom().nextBoolean() || world.getCurrentStarSystem().getPlanets().length == 0) {
