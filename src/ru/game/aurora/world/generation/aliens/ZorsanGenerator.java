@@ -53,7 +53,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                 if (dialog == initialHomeworldDialog || dialog == continueDialog) {
                     if (returnCode == 0) {
                         continueDialog.setListener(this);
-                        ((AlienHomeworld)planets[0]).setDialog(continueDialog);
+                        ((AlienHomeworld) planets[0]).setDialog(continueDialog);
                     }
 
                     if (returnCode == 1) {
@@ -66,6 +66,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     dungeon.setEnterDialog(zorsanFinalDialog);
                     dungeon.setSuccessDialog(escapeDialog);
                     dungeon.setCommanderInParty(true); // loosing this dungeon will lead to a gameover
+                    dungeon.setPlaylistName("dungeon_invasion");
                     dungeon.enter(world);
                     world.setCurrentRoom(dungeon);
 
@@ -74,7 +75,6 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                 }
             }
         });
-
 
 
         HomeworldGenerator.setCoord(planets[0], 3);

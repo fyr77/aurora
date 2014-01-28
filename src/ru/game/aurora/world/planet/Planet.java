@@ -68,7 +68,7 @@ public class Planet extends BasePlanet implements IDungeon {
             other.createSurface();
         }
         this.surface = new SurfaceTileMap(other.surface);
-        this.controller = new DungeonController(world, owner, surface, true);
+        this.controller = new DungeonController(world, owner, this);
         createOreDeposits(size, CommonRandom.getRandom());
         this.world = world;
     }
@@ -114,7 +114,7 @@ public class Planet extends BasePlanet implements IDungeon {
             PlanetaryLifeGenerator.addAnimals(this);
             PlanetaryLifeGenerator.addPlants(this);
         }
-        controller = new DungeonController(world, owner, surface, true);
+        controller = new DungeonController(world, owner, this);
     }
 
     private void createOreDeposits(int size, Random r) {
@@ -285,7 +285,7 @@ public class Planet extends BasePlanet implements IDungeon {
         surface.draw(container, graphics, camera);
     }
 
-    public void drawObjects(GameContainer container, Graphics graphics, Camera camera) {
+    public void drawObjects(Graphics graphics, Camera camera) {
         // this part (monsters, shuttle, landing party) is drawn only when landing party is on surface
         graphics.drawImage(ResourceManager.getInstance().getImage("shuttle"), camera.getXCoordWrapped(shuttle.getX(), getWidth()), camera.getYCoordWrapped(shuttle.getY(), getHeight()));
 
@@ -311,7 +311,7 @@ public class Planet extends BasePlanet implements IDungeon {
             return;
         }
         drawLandscape(container, graphics, camera);
-        drawObjects(container, graphics, camera);
+        drawObjects(graphics, camera);
         controller.draw(container, graphics, camera);
     }
 
@@ -354,6 +354,11 @@ public class Planet extends BasePlanet implements IDungeon {
 
     @Override
     public boolean isCommanderInParty() {
+        return false;
+    }
+
+    @Override
+    public boolean hasCustomMusic() {
         return false;
     }
 

@@ -13,4 +13,9 @@ public interface IDungeon {
      * If returns true, and landing party is lost, this leads to game over
      */
     boolean isCommanderInParty();
+
+    /**
+     * @return true if this dungeon has its own playlist, so that default playlist must be restored when leaving it
+     */
+    boolean hasCustomMusic();
 }

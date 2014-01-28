@@ -63,6 +63,8 @@ public class DungeonController implements Serializable {
 
     private LandingParty landingParty;
 
+    private IDungeon myDungeon;
+
     private Dialog successDialog;
 
     private IStateChangeListener successListener;
@@ -74,17 +76,14 @@ public class DungeonController implements Serializable {
      */
     private transient PlanetObject target = null;
 
-    public DungeonController(World world, Room prevRoom, ITileMap map, boolean wrap) {
-        this.isWrap = wrap;
+    public DungeonController(World world, Room prevRoom, IDungeon myDungeon) {
+        this.myDungeon = myDungeon;
         this.prevRoom = prevRoom;
-        this.map = map;
         this.world = world;
         this.landingParty = world.getPlayer().getLandingParty();
-    }
 
-    public DungeonController(World world, Room prevRoom, ITileMap map, boolean wrap, Dialog successDialog) {
-        this(world, prevRoom, map, wrap);
-        this.successDialog = successDialog;
+        this.isWrap = myDungeon.getMap().isWrapped();
+        this.map = myDungeon.getMap();
     }
 
 
@@ -434,7 +433,7 @@ public class DungeonController implements Serializable {
         if (world.getCurrentDungeon().isCommanderInParty()) {
             GUI.getInstance().getNifty().gotoScreen("fail_screen");
             FailScreenController controller = (FailScreenController) GUI.getInstance().getNifty().findScreenController(FailScreenController.class.getCanonicalName());
-            controller.set("crew_lost_gameover", "commander_lost");
+            controller.set("captain_lost_gameover", "commander_lost");
             return;
         }
 
@@ -447,6 +446,9 @@ public class DungeonController implements Serializable {
         nifty.setIgnoreKeyboardEvents(false);
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
         world.onCrewChanged();
+        if (myDungeon.hasCustomMusic()) {
+            ResourceManager.getInstance().getPlaylist("background").play();
+        }
     }
 
     public void returnToPrevRoom(boolean conditionsSatisfied) {
@@ -461,6 +463,10 @@ public class DungeonController implements Serializable {
         world.setCurrentRoom(prevRoom);
         prevRoom.enter(world);
         landingParty.onReturnToShip(world);
+
+        if (myDungeon.hasCustomMusic()) {
+            ResourceManager.getInstance().getPlaylist("background").play();
+        }
     }
 
     public void setCurrentEffect(Effect currentEffect) {
