@@ -23,7 +23,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1024" y="1152" width="64" height="64">
    <properties>
-    <property name="hp" value="5"/>
+    <property name="hp" value="12"/>
     <property name="image" value="rogues_tileset"/>
     <property name="imageTileX" value="3"/>
     <property name="imageTileY" value="0"/>
@@ -92,7 +92,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="192" y="1152" width="64" height="64">
    <properties>
-    <property name="hp" value="5"/>
+    <property name="hp" value="12"/>
     <property name="image" value="rogues_tileset"/>
     <property name="imageTileX" value="3"/>
     <property name="imageTileY" value="0"/>
@@ -103,7 +103,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="704" y="832" width="64" height="64">
    <properties>
-    <property name="hp" value="5"/>
+    <property name="hp" value="12"/>
     <property name="image" value="rogues_tileset"/>
     <property name="imageTileX" value="3"/>
     <property name="imageTileY" value="0"/>
@@ -114,7 +114,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="576" y="256" width="64" height="64">
    <properties>
-    <property name="hp" value="5"/>
+    <property name="hp" value="12"/>
     <property name="image" value="rogues_tileset"/>
     <property name="imageTileX" value="3"/>
     <property name="imageTileY" value="0"/>
@@ -125,7 +125,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="192" y="832" width="64" height="64">
    <properties>
-    <property name="hp" value="5"/>
+    <property name="hp" value="12"/>
     <property name="image" value="rogues_tileset"/>
     <property name="imageTileX" value="3"/>
     <property name="imageTileY" value="0"/>
@@ -160,7 +160,7 @@
   <object type="ru.game.aurora.world.dungeon.KillAllMonstersCondition" gid="43" x="98" y="125" width="64" height="64"/>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="640" y="512" width="64" height="64">
    <properties>
-    <property name="hp" value="5"/>
+    <property name="hp" value="12"/>
     <property name="image" value="rogues_tileset"/>
     <property name="imageTileX" value="0"/>
     <property name="imageTileY" value="7"/>
@@ -171,7 +171,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="1024" y="576" width="64" height="64">
    <properties>
-    <property name="hp" value="5"/>
+    <property name="hp" value="12"/>
     <property name="image" value="rogues_tileset"/>
     <property name="imageTileX" value="0"/>
     <property name="imageTileY" value="7"/>
@@ -182,7 +182,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="320" y="832" width="64" height="64">
    <properties>
-    <property name="hp" value="5"/>
+    <property name="hp" value="12"/>
     <property name="image" value="rogues_tileset"/>
     <property name="imageTileX" value="0"/>
     <property name="imageTileY" value="7"/>

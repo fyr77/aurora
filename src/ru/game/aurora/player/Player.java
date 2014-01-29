@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.player;
 
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.earth.EarthState;
@@ -59,7 +60,7 @@ public class Player implements Serializable
         earthState = new EarthState();
         final LandingPartyWeapon defaultWeapon = ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault");
         inventory.put(defaultWeapon, 1);
-        landingParty = new LandingParty(0, 0, defaultWeapon, 1, 1, 1);
+        landingParty = new LandingParty(0, 0, defaultWeapon, 1, 1, 1, Configuration.getIntProperty("player.landing_party.defaultHP"));
     }
 
     public void setShip(AlienRace humanity) {

@@ -8,11 +8,13 @@ package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.ListBox;
+import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.gui.niffy.TopPanelController;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.IDungeon;
 import ru.game.aurora.world.World;
@@ -31,6 +33,8 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
 
     private transient TopPanelController topPanelController;
 
+    private transient Element hpElement;
+
     public SurfaceGUIController(World world) {
         this.world = world;
     }
@@ -41,6 +45,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         GameLogger.getInstance().addAppender(this);
         logList = screen.findNiftyControl("log_list", ListBox.class);
         topPanelController = screen.findControl("top_panel", TopPanelController.class);
+        hpElement = screen.findElementByName("health_count").findElementByName("#count");
     }
 
     @Override
@@ -61,6 +66,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         final LandingParty landingParty = world.getPlayer().getLandingParty();
         topPanelController.setCrewStats(landingParty.getScience(), landingParty.getEngineers(), landingParty.getMilitary());
         topPanelController.setProgress(Localization.getText("gui", "surface.remaining_oxygen") + " " + landingParty.getOxygen(), landingParty.getOxygen() / (float) LandingParty.MAX_OXYGEN);
+        EngineUtils.setTextForGUIElement(hpElement, Integer.toString(world.getPlayer().getLandingParty().getHp()));
     }
 
     @Override

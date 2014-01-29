@@ -203,9 +203,6 @@ public class Planet extends BasePlanet implements IDungeon {
                 }
                 GUI.getInstance().getNifty().gotoScreen("surface_gui");
                 landingParty = world.getPlayer().getLandingParty();
-                if (landingParty == null) {
-                    landingParty = new LandingParty();
-                }
                 if (!landingParty.canBeLaunched(world) || world.getGlobalVariables().containsKey("tutorial.landing")) {
                     // either this is first landing, or landing party can not be launched in current state and must be reconfigured. Show landing party screen
                     if (GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("landing_party_equip_screen")) {

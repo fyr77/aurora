@@ -24,7 +24,7 @@ import java.util.Iterator;
 public class LandingParty extends MovableSprite implements GameObject {
     public static final int MAX_OXYGEN = 100;
 
-    private static final long serialVersionUID = 1;
+    private static final long serialVersionUID = 2;
 
     private int military;
 
@@ -40,18 +40,24 @@ public class LandingParty extends MovableSprite implements GameObject {
 
     private Multiset<InventoryItem> inventory = HashMultiset.<InventoryItem>create();
 
-    private int hp = 3;
+    private final int MAX_HP;
 
-    public LandingParty() {
+    private int hp;
+
+    public LandingParty(int maxHp) {
         super(0, 0, "awayteam");
+        this.MAX_HP = maxHp;
+        this.hp = maxHp;
     }
 
-    public LandingParty(int x, int y, LandingPartyWeapon weapon, int military, int science, int engineers) {
+    public LandingParty(int x, int y, LandingPartyWeapon weapon, int military, int science, int engineers, int maxHp) {
         super(x, y, "awayteam");
         this.military = military;
         this.science = science;
         this.engineers = engineers;
         this.weapon = weapon;
+        this.MAX_HP = maxHp;
+        this.hp = maxHp;
         oxygen = 100;
         pickUp(new MedPack(), 3);   //Santa's gifts
         pickUp(new Cylinders(), 3);
@@ -211,7 +217,7 @@ public class LandingParty extends MovableSprite implements GameObject {
     }
 
     public void resetHp(World world) {
-        hp = 3;
+        hp = MAX_HP;
         if (world.getPlayer().getMainCountry() == EarthCountry.AMERICA) {
             hp += Configuration.getIntProperty("player.america.hpBonus");
         }

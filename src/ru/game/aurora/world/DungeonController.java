@@ -127,9 +127,6 @@ public class DungeonController implements Serializable {
             actuallyMoved = true;
         }
 
-        int tilesExplored = map.updateVisibility(x, y, 2);
-        landingParty.addCollectedGeodata(tilesExplored);
-
         if (!actuallyMoved) {
             return;
         }
@@ -158,6 +155,9 @@ public class DungeonController implements Serializable {
         if (!actuallyMoved) {
             return;
         }
+
+        int tilesExplored = map.updateVisibility(x, y, 2);
+        landingParty.addCollectedGeodata(tilesExplored);
 
         if (dy < 0) {
             landingParty.moveUp();
@@ -453,9 +453,6 @@ public class DungeonController implements Serializable {
 
     public void returnToPrevRoom(boolean conditionsSatisfied) {
         if (conditionsSatisfied) {
-            if (successDialog != null) {
-                world.addOverlayWindow(successDialog);
-            }
             if (successListener != null) {
                 successListener.stateChanged(world);
             }
@@ -463,6 +460,10 @@ public class DungeonController implements Serializable {
         world.setCurrentRoom(prevRoom);
         prevRoom.enter(world);
         landingParty.onReturnToShip(world);
+
+        if (conditionsSatisfied && successDialog != null) {
+            world.addOverlayWindow(successDialog);
+        }
 
         if (myDungeon.hasCustomMusic()) {
             ResourceManager.getInstance().getPlaylist("background").play();

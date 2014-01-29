@@ -44,7 +44,6 @@ public class EngineeringScreenController implements ScreenController {
 
     public EngineeringScreenController(World world) {
         this.world = world;
-        engineeringState = world.getPlayer().getEngineeringState();
     }
 
     @Override
@@ -55,15 +54,15 @@ public class EngineeringScreenController implements ScreenController {
         engiText = screen.findElementByName("assignedEngineers");
         ruText = screen.findElementByName("requiredRuText");
         projectsList = screen.findNiftyControl("itemsList", ListBox.class);
-
     }
 
     @Override
     public void onStartScreen() {
         window.setVisible(true);
-        updateLabels();
         projectsList.clear();
         projectsList.addAllItems(world.getPlayer().getEngineeringState().getProjects());
+        engineeringState = world.getPlayer().getEngineeringState();
+        updateLabels();
     }
 
     @Override

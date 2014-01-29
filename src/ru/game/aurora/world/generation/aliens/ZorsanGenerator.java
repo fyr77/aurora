@@ -1,9 +1,11 @@
 package ru.game.aurora.world.generation.aliens;
 
 import org.newdawn.slick.Color;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.npc.SingleStarsystemShipSpawner;
 import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.world.AuroraTiledMap;
@@ -14,10 +16,7 @@ import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
-import ru.game.aurora.world.space.AlienHomeworld;
-import ru.game.aurora.world.space.HomeworldGenerator;
-import ru.game.aurora.world.space.Star;
-import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.space.*;
 
 import java.util.Map;
 
@@ -31,6 +30,10 @@ public class ZorsanGenerator implements WorldGeneratorPart {
     public static final String NAME = "zorsan";
 
     private static final long serialVersionUID = 1083992211652099884L;
+
+    public static final int SCOUT_SHIP = 0;
+
+    public static final int CRUISER_SHIP = 1;
 
     private StarSystem generateHomeworld(World world, int x, int y, final AlienRace race) {
         final BasePlanet[] planets = new BasePlanet[1];
@@ -88,7 +91,35 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
     @Override
     public void updateWorld(World world) {
-        AlienRace race = new AlienRace(NAME, "zorsan_scout", Dialog.loadFromFile("dialogs/zorsan_main.json"));
+        final AlienRace race = new AlienRace(NAME, "zorsan_scout", Dialog.loadFromFile("dialogs/zorsan_main.json"));
+
+        race.setDefaultFactory(new NPCShipFactory() {
+            private static final long serialVersionUID = -2842750240901357677L;
+
+            @Override
+            public NPCShip createShip(int shipType) {
+                switch (shipType) {
+                    case SCOUT_SHIP:
+                    {
+                        NPCShip ship = new NPCShip(0, 0, "zorsan_scout", race, null, "Zorsan scout");
+                        ship.setHp(8);
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
+                        return ship;
+                    }
+                    case CRUISER_SHIP:
+                    {
+                        NPCShip ship = new NPCShip(0, 0, "zorsan_cruiser", race, null, "Zorsan cruiser");
+                        ship.setHp(15);
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
+                        return ship;
+
+                    }
+                    default:
+                        throw new IllegalArgumentException("Unsupported ship type for Zorsan race: " + shipType);
+                }
+            }
+        });
+
         StarSystem homeworld = generateHomeworld(world, 3, 8, race);
         world.getGlobalVariables().put("zorsan.homeworld", String.format("[%d, %d]", homeworld.getGlobalMapX(), homeworld.getGlobalMapY()));
         world.getGalaxyMap().addObjectAndSetTile(homeworld, 3, 8);

@@ -1,10 +1,12 @@
 package ru.game.aurora.world;
 
+import java.io.Serializable;
+
 /**
  * Base interface for rooms that can be explored by landing party
  */
-public interface IDungeon {
-
+public interface IDungeon extends Serializable
+{
     DungeonController getController();
 
     ITileMap getMap();

@@ -1,7 +1,7 @@
 {
     "id" : "laser",
     "name" : "laser_rifles.name",
-    "range" : 3,
+    "range" : 6,
     "damage" : 2,
     "image" : "crew_laser",
     "shotImage" : "blaster_shot",

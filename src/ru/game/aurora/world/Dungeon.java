@@ -104,6 +104,10 @@ public class Dungeon implements Room, IDungeon {
         landingParty.onLaunch(world);
         world.getCamera().setTarget(landingParty);
 
+        int tilesExplored = map.updateVisibility(landingParty.getX(), landingParty.getY(), 2);
+        landingParty.addCollectedGeodata(tilesExplored);
+
+
         if (playlistName != null) {
             ResourceManager.getInstance().getPlaylist(playlistName).play();
         }
