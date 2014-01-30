@@ -13,6 +13,12 @@ public abstract class UsableItem implements InventoryItem {
 
     public void useIt(World world, int amount) {
         world.getPlayer().getLandingParty().getInventory().setCount(this, amount - 1);
+        world.getPlayer().getLandingParty().overWeightTest();
         GUI.getInstance().getNifty().findScreenController(InventoryController.class.getCanonicalName()).onStartScreen();
+    }
+
+    @Override
+    public int getWeight() {
+        return 1;
     }
 }

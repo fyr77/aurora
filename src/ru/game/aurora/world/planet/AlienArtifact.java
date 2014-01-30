@@ -59,6 +59,11 @@ public class AlienArtifact extends BasePositionable implements PlanetObject
         public boolean isUsable() {
             return false;
         }
+
+        @Override
+        public int getWeight() {
+            return 0;
+        }
     }
 
     public AlienArtifact(int x, int y, String spriteName, ArtifactResearch resultResearch) {
