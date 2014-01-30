@@ -22,8 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class BasePlanet extends BasePositionable implements Room, GalaxyMapObject
-{
+public abstract class BasePlanet extends BasePositionable implements Room, GalaxyMapObject {
     private static final long serialVersionUID = 1L;
     protected StarSystem owner;
     protected PlanetCategory category;
@@ -92,13 +91,11 @@ public abstract class BasePlanet extends BasePositionable implements Room, Galax
         return size;
     }
 
-    public boolean hasLife()
-    {
+    public boolean hasLife() {
         return false;
     }
 
-    public void addSatellite(BasePlanet p)
-    {
+    public void addSatellite(BasePlanet p) {
         if (satellites == null) {
             satellites = new ArrayList<>();
         }
@@ -122,9 +119,6 @@ public abstract class BasePlanet extends BasePositionable implements Room, Galax
 
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
-        if (!camera.isInViewport(x, y)) {
-            return;
-        }
         if (sprite == null) {
             sprite = PlanetSpriteGenerator.getInstance().createPlanetSprite(camera, category, size, atmosphere != PlanetAtmosphere.NO_ATMOSPHERE);
         }

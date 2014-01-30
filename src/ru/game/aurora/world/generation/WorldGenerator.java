@@ -250,9 +250,10 @@ public class WorldGenerator implements Runnable {
 
 
                 world.getPlayer().getEarthState().getEarthSpecialDialogs().add(d);
-                return false;
+                isAlive = false;
+                return true;
             }
-            return true;
+            return false;
         }
     }
 

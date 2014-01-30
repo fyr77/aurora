@@ -227,6 +227,10 @@
                 </panel>
                 <panel height="10px"/>
                 <panel childLayout="horizontal" height="45px">
+                    <text style="base-font" text="${gui.scan.filter}"/>;
+                    <control id="bioscan_checkbox" name="checkbox" checked="true"/>
+                </panel>
+                <panel childLayout="horizontal" height="45px">
                     <panel width="85%"/>
                     <control id="close_button" name="button" label="${gui.ok}" height="45px">
                         <interact onClick="closeCurrentPopup()"/>

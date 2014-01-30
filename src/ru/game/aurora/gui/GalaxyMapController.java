@@ -289,8 +289,17 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
             return;
         }
         if (planet instanceof Planet) {
-            world.getCurrentStarSystem().setSurfaceRenderTarget(popup.findElementByName("surfaceMapPanel"));
+            world.getCurrentStarSystem().setSurfaceRenderTarget(popup.findElementByName("surfaceMapPanel"), popup.findNiftyControl("bioscan_checkbox", CheckBox.class).isChecked());
         }
+    }
+
+    @NiftyEventSubscriber(id = "bioscan_checkbox")
+    public void scanFilterDisabled(final String id, final CheckBoxStateChangedEvent event) {
+        Element popup = GUI.getInstance().getNifty().getTopMostPopup();
+        if (popup == null) {
+            return;
+        }
+        world.getCurrentStarSystem().setSurfaceRenderTarget(popup.findElementByName("surfaceMapPanel"), popup.findNiftyControl("bioscan_checkbox", CheckBox.class).isChecked());
     }
 
     public void enterStarsystem() {

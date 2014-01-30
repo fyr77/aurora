@@ -124,8 +124,8 @@ public class Planet extends BasePlanet implements IDungeon {
             int oreX;
             int oreY;
             do {
-                oreX = r.nextInt(10);
-                oreY = r.nextInt(10);
+                oreX = r.nextInt(getWidth());
+                oreY = r.nextInt(getHeight());
             } while (!surface.isTilePassable(oreX, oreY));
             d.setPos(oreX, oreY);
             surface.getObjects().add(d);

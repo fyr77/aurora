@@ -143,7 +143,6 @@ public class AuroraGame extends NiftyOverlayGame {
         lastFrameTime = gameContainer.getTime();
 
         ResourceManager.getInstance().getPlaylist("background").play();
-
     }
 
     @Override
@@ -284,9 +283,12 @@ public class AuroraGame extends NiftyOverlayGame {
             // by default, use largest supported resolution available
             res = supportedResolutions.get(supportedResolutions.size() - 1);
         }
+        SoundStore.get().init();
         String musicVolumeString = Configuration.getSystemProperties().getProperty("music.volume");
         if (musicVolumeString != null) {
-            SoundStore.get().setMusicVolume(Float.parseFloat(musicVolumeString));
+            float volume = Float.parseFloat(musicVolumeString);
+            SoundStore.get().setMusicVolume(volume);
+            SoundStore.get().setCurrentMusicVolume(volume);
         }
         String soundVolumeString = Configuration.getSystemProperties().getProperty("sound.volume");
         if (soundVolumeString != null) {

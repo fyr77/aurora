@@ -43,9 +43,6 @@ public class AlienHomeworld extends BasePlanet {
 
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
-        if (!camera.isInViewport(x, y)) {
-            return;
-        }
         Image img = ResourceManager.getInstance().getImage(spriteName);
         graphics.drawImage(img, camera.getXCoord(x) - img.getWidth() / 2 + camera.getTileWidth() / 2, camera.getYCoord(y) - img.getHeight() / 2 + camera.getTileHeight() / 2);
     }
@@ -76,7 +73,7 @@ public class AlienHomeworld extends BasePlanet {
 
     @Override
     public StringBuilder getScanText() {
-        return new StringBuilder(Localization.getText("races", getOwnerRace().getName()+".homeworld.description"));
+        return new StringBuilder(Localization.getText("races", getOwnerRace().getName() + ".homeworld.description"));
     }
 
     public void setDialog(Dialog dialog) {

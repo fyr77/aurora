@@ -52,7 +52,7 @@ public class PlanetaryLifeGenerator {
         PlantSpeciesDesc[] plants = new PlantSpeciesDesc[plantsCount];
 
         final String plantsStyle = CollectionUtils.selectRandomElement(plantStyles);
-        final String animalStyle = CollectionUtils.selectRandomElement(plantStyles);
+        final String animalStyle = CollectionUtils.selectRandomElement(animalStyles);
         PlanetFloraAndFauna floraAndFauna = new PlanetFloraAndFauna(plantsStyle, animalStyle);
 
         for (byte plantIdx = 0; plantIdx < plantsCount; ++plantIdx) {
@@ -62,7 +62,7 @@ public class PlanetaryLifeGenerator {
                     CollectionUtils.selectRandomElementArray(planet.getCategory().availableSurfaceTypes)
                     , CommonRandom.getRandom().nextDouble()
                     , CommonRandom.getRandom().nextDouble() * 0.3 + 0.1
-                    , CommonRandom.getRandom().nextDouble() * 0.6 + 0.1
+                    , CommonRandom.getRandom().nextDouble() * 0.4 + 0.1
                     , false
                     , CommonRandom.getRandom().nextDouble() > 0.8
                     , floraAndFauna
@@ -106,15 +106,15 @@ public class PlanetaryLifeGenerator {
     public static void addAnimals(Planet planet) {
         // generate random species descs. Currently only one
         final Random r = CommonRandom.getRandom();
-        final int animalCount = r.nextInt(10) + 5;
+        final int animalCount = r.nextInt(100 / planet.getSize()) + 5;
         AnimalSpeciesDesc[] animalSpeciesDescs = planet.getFloraAndFauna().getAnimalSpecies();
         for (int i = 0; i < animalCount; ++i) {
             Animal a = new Animal(planet, 0, 0, animalSpeciesDescs[r.nextInt(animalSpeciesDescs.length)]);
             int animalX;
             int animalY;
             do {
-                animalX = r.nextInt(10);
-                animalY = r.nextInt(10);
+                animalX = r.nextInt(planet.getWidth());
+                animalY = r.nextInt(planet.getHeight());
             } while (!planet.getSurface().isTilePassable(animalX, animalY));
             a.setPos(animalX, animalY);
             planet.getPlanetObjects().add(a);

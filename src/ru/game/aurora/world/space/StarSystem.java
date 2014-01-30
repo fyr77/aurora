@@ -17,9 +17,8 @@ import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.StarshipWeapon;
-import ru.game.aurora.world.planet.BasePlanet;
-import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.PlanetCategory;
+import ru.game.aurora.world.planet.*;
+import ru.game.aurora.world.planet.nature.Animal;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -113,6 +112,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
      * If not null, planet surface map should be rendered to an image and assigned to this element
      */
     private transient Element surfaceRenderTarget = null;
+
+    /**
+     * If set to true, additianl overlay with object info will be added to rendered planet surface on a scan screen
+     */
+    private transient boolean showOverlay = false;
 
     public StarSystem(String name, Star star, int globalMapX, int globalMapY) {
         this.name = name;
@@ -497,6 +501,38 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         planet.getSurface().drawLandscapeMap(g, myCamera);
         g.flush();
         try {
+            if (showOverlay) {
+                // create overlay with info about life and anomalies
+                Image overlay = new Image(container.getWidth(), container.getHeight());
+                Graphics overlayGraphics = overlay.getGraphics();
+                overlayGraphics.setColor(Color.black);
+                overlayGraphics.fillRect(0, 0, container.getWidth(), container.getHeight());
+                int maxRadius = container.getHeight() / 10;
+                Random r = new Random(planet.hashCode()); // fixed-seed, so that runs on same planet produce same results
+                for (PlanetObject po : planet.getPlanetObjects()) {
+                    float objectX = myCamera.getXCoord(po.getX());
+                    float objectY = myCamera.getYCoord(po.getY());
+                    if (Animal.class.isAssignableFrom(po.getClass())) {
+                        overlayGraphics.setColor(Color.green);
+                    } else if (OreDeposit.class.isAssignableFrom(po.getClass())) {
+                        overlayGraphics.setColor(Color.yellow);
+                    } else if (AlienArtifact.class.isAssignableFrom(po.getClass())) {
+                        overlayGraphics.setColor(Color.blue);
+                    } else {
+                        continue;
+                    }
+
+                    float xRadius = r.nextInt(maxRadius) + maxRadius / 2;
+                    float yRadius = r.nextInt(maxRadius) + maxRadius / 2;
+
+                    float ovalX = objectX - xRadius + r.nextInt((int) (xRadius / 2));
+                    float ovalY = objectY - yRadius + r.nextInt((int) (yRadius / 2));
+                    overlayGraphics.fillOval(ovalX, ovalY, xRadius, yRadius);
+                }
+                overlayGraphics.flush();
+                overlay.setAlpha(0.5f);
+                g.drawImage(overlay, 0, 0);
+            }
             Image image = new Image(container.getWidth(), container.getHeight());
             g.copyArea(image, 0, 0);
             EngineUtils.setImageForGUIElement(surfaceRenderTarget, image);
@@ -529,10 +565,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         final float starX = camera.getXCoord(0) + (camera.getTileWidth() / 2);
         final float starY = camera.getYCoord(0) + camera.getTileHeight() / 2;
 
-        if (camera.isInViewport(0, 0)) {
-            final Image starImage = star.getImage();
-            g.drawImage(starImage, starX - starImage.getWidth() / 2, starY - starImage.getHeight() / 2);
-        }
+        final Image starImage = star.getImage();
+        g.drawImage(starImage, starX - starImage.getWidth() / 2, starY - starImage.getHeight() / 2);
 
         // first draw all orbits
         for (BasePlanet p : planets) {
@@ -571,10 +605,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         g.setColor(Color.red);
         for (SpaceObject ship : ships) {
             ship.draw(container, g, camera);
-            if (ship.getX() == player.getShip().getX() && ship.getY() == player.getShip().getY()) {
-                // GameLogger.getInstance().addStatusMessage("Press <enter> to contact");
-            }
-
             if (mode == MODE_SHOOT && player.getShip().getDistance(ship) < selectedWeaponRange) {
                 // every targetable ship is surrounded by rectangle
                 g.drawRect(camera.getXCoord(ship.getX()), camera.getYCoord(ship.getY()), camera.getTileWidth(), camera.getTileHeight());
@@ -692,7 +722,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return background;
     }
 
-    public void setSurfaceRenderTarget(Element surfaceRenderTarget) {
+    public void setSurfaceRenderTarget(Element surfaceRenderTarget, boolean addOverlay) {
         this.surfaceRenderTarget = surfaceRenderTarget;
+        this.showOverlay = addOverlay;
     }
 }
