@@ -8,6 +8,7 @@ IN PROGRESS...
 + Added in-game story journal
 + Dungeon entrances on planet surface
 + Confirmation on exit game
++ Scan screen now shows areas of interest on planet
 * Locale can now be read from properties
 * Dialog system improved. Now replies can set flags that can be queried after dialog end.
  Flags can also be used to hide replies, just like global variables.
