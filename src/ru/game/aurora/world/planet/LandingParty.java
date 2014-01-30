@@ -103,7 +103,7 @@ public class LandingParty extends MovableSprite implements GameObject {
     }
 
     public int calcDamage(World world) {
-        double baseValue =  (weapon.getDamage() * (1.0 / 3 * (science + engineers) + military));
+        double baseValue = (weapon.getDamage() * (1.0 / 3 * (science + engineers) + military));
         if (world.getPlayer().getMainCountry() == EarthCountry.AMERICA) {
             baseValue *= Configuration.getDoubleProperty("player.america.damageMultiplier");
         }
@@ -134,7 +134,7 @@ public class LandingParty extends MovableSprite implements GameObject {
         Boolean itemAlreadyInInventory = false;
         for (Multiset.Entry<InventoryItem> entry : inventory.entrySet()) {
             if (entry.getElement().getName().equals(o.getName())) {
-                inventory.setCount(entry.getElement(),entry.getCount() + amount);
+                inventory.setCount(entry.getElement(), entry.getCount() + amount);
                 itemAlreadyInInventory = true;
                 break;
             }
@@ -170,7 +170,7 @@ public class LandingParty extends MovableSprite implements GameObject {
             setCollectedGeodata(0);
         }
 
-        for (Iterator<Multiset.Entry<InventoryItem>> iter = inventory.entrySet().iterator(); iter.hasNext();) {
+        for (Iterator<Multiset.Entry<InventoryItem>> iter = inventory.entrySet().iterator(); iter.hasNext(); ) {
             Multiset.Entry<InventoryItem> o = iter.next();
             o.getElement().onReturnToShip(world, o.getCount());
             if (o.getElement().isDumpable()) {
@@ -182,6 +182,9 @@ public class LandingParty extends MovableSprite implements GameObject {
         ship.setMilitary(ship.getMilitary() + military);
         ship.setScientists(ship.getScientists() + science);
         ship.setEngineers(ship.getEngineers() + engineers);
+
+        resetHp(world);
+        refillOxygen();
     }
 
     public int getTotalMembers() {
