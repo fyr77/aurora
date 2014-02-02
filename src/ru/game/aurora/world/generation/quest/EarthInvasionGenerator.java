@@ -272,6 +272,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
             super.onContact(world);
             if (!communicated) {
                 world.getPlayer().getJournal().addQuestEntries("bork_blockade", "comm");
+                world.getGlobalVariables().put("bork_blockade.communicated", true);
                 communicated = true;
             }
         }

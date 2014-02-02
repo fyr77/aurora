@@ -1,0 +1,108 @@
+{
+  "id": "bork_planet_land",
+  "iconName": "bork_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "1",
+          "flags": {
+            "henry.taken": "true"
+          }
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "0"
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0"
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  }
+}

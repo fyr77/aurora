@@ -31,6 +31,8 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
 
     private JButton processButton;
 
+    private JButton clearLogButton;
+
     private JTextArea log;
 
     private static final String PREV_SOURCE_PATH_KEY = "sourcePath";
@@ -55,7 +57,7 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.add(new JLabel("Log:"));
         log = new JTextArea();
-        log.setPreferredSize(new Dimension(400, 600));
+        log.setMinimumSize(new Dimension(200, 400));
         centerPanel.add(new JScrollPane(log));
         add(centerPanel, BorderLayout.CENTER);
 
@@ -64,6 +66,10 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
         bottomPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 5, 5));
         processButton = new JButton("Process");
         processButton.addActionListener(this);
+        clearLogButton = new JButton("Clear output");
+        clearLogButton.addActionListener(this);
+        bottomPanel.add(clearLogButton);
+        bottomPanel.add(Box.createHorizontalStrut(10));
         bottomPanel.add(processButton);
         add(bottomPanel, BorderLayout.PAGE_END);
 
@@ -71,7 +77,7 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         id.setText(prefs.get(PREV_ID_KEY, ""));
         image.setText(prefs.get(PREV_IMAGE_KEY, ""));
-        pack();
+        setSize(600, 650);
 
     }
 
@@ -188,7 +194,7 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
         try {
             DialogCSVConverter.process(source.getText(), out.getText(), id.getText(), image.getText());
             log.setText(new String(bos.toByteArray()));
-            getContentPane().invalidate();
+            invalidate();
             System.out.println("====================================");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error while processing", JOptionPane.ERROR_MESSAGE);

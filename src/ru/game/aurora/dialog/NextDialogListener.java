@@ -7,8 +7,7 @@ import java.util.Map;
 /**
  * Simple listener that just shows next dialog when this one is over
  */
-public class NextDialogListener implements DialogListener
-{
+public class NextDialogListener implements DialogListener {
     private static final long serialVersionUID = 6141684215868408536L;
 
     private Dialog nextDialog;
@@ -24,5 +23,6 @@ public class NextDialogListener implements DialogListener
     @Override
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
         world.addOverlayWindow(nextDialog);
+        nextDialog.setFlags(flags);
     }
 }

@@ -1,13 +1,17 @@
 package ru.game.aurora.world.generation.aliens;
 
+import org.newdawn.slick.Color;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.dialog.NextDialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
-import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
+import ru.game.aurora.world.planet.*;
+import ru.game.aurora.world.space.*;
 
 import java.util.Map;
 
@@ -23,10 +27,89 @@ public class BorkGenerator implements WorldGeneratorPart {
 
     public static final String NAME = "Bork";
 
+
+    private Dialog generatePlanetDialog(World world) {
+        Dialog landDialog = Dialog.loadFromFile("dialogs/bork/bork_planet_land.json");
+        Dialog transferDialog = Dialog.loadFromFile("dialogs/bork/bork_planet_transfer.json");
+        Dialog testDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test.json");
+        landDialog.setListener(new NextDialogListener(transferDialog));
+        transferDialog.setListener(new NextDialogListener(testDialog));
+
+        testDialog.setListener(new DialogListener() {
+
+            private static final long serialVersionUID = 6603409563932739582L;
+
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                Dialog nextDialog;
+                switch (returnCode) {
+                    case 1:
+                        nextDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test_kill.json");
+                        break;
+                    case 2:
+                        nextDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test_injure.json");
+                        break;
+                    case 3:
+                        nextDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test_miss.json");
+                        break;
+                    default:
+                        throw new IllegalStateException("Unknown bork dialog return value " + returnCode);
+                }
+
+                world.addOverlayWindow(nextDialog);
+                nextDialog.setFlags(flags);
+
+                nextDialog.setListener(new DialogListener() {
+                    private static final long serialVersionUID = 8232477058890497167L;
+
+                    @Override
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                        if (flags.containsKey("bork_blockade.withdraw")) {
+                            removeBlockade(world);
+                        }
+
+                    }
+                });
+            }
+        });
+        return landDialog;
+    }
+
+    private void removeBlockade(World world) {
+        StarSystem ss = world.getRaces().get(HumanityGenerator.NAME).getHomeworld();
+    }
+
     @Override
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/encounters/swarm_first_dialog.json"));
+
         final AlienRace borkRace = new AlienRace(NAME, "bork_ship", mainDialog);
+
+
+        BasePlanet[] planets = new BasePlanet[6];
+        StarSystem ss = new StarSystem("Bork homeworld", new Star(1, Color.white), 13, 2);
+        planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
+        HomeworldGenerator.setCoord(planets[0], 2);
+        planets[1] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
+        HomeworldGenerator.setCoord(planets[1], 3);
+
+        planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.BREATHABLE_ATMOSPHERE, 3, 0, 0);
+        HomeworldGenerator.setCoord(planets[2], 5);
+        planets[2].addSatellite(new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0));
+
+        planets[3] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
+        HomeworldGenerator.setCoord(planets[3], 7);
+
+        planets[4] = new GasGiant(0, 0, ss);
+        HomeworldGenerator.setCoord(planets[4], 9);
+        planets[4].setRings(1);
+
+        Dialog homeworldDialog = generatePlanetDialog(world);
+        planets[4].addSatellite(new AlienHomeworld("klisk_homeworld", borkRace, homeworldDialog, 1, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK));
+
+        ss.setPlanets(planets);
+        ss.setRadius(Math.max((int) (12 * 1.5), 10));
+
 
         borkRace.setDefaultFactory(new NPCShipFactory() {
             @Override

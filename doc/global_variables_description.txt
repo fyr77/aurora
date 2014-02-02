@@ -64,6 +64,7 @@ klisk.bork_info
 Zorsan
 
 zorsan.homeworld - string representing star coordinates of a Zorsan homeworld
+zorsan.war_preparations
 
 ==============================
 
@@ -96,4 +97,5 @@ klisk_trader_drone.result - outcome of this quest. "destroy" "withdraw"
 
 bork blockade quest
 
+bork_blockade.communicated
 bork_blockade.result - outcome "destroy" "withdraw"
