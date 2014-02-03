@@ -66,8 +66,13 @@ public class InventoryController implements ScreenController {
         }
     }
 
+    public void dropPressed() {
+        world.getPlayer().getLandingParty().getInventory().setCount(items.getFocusItem().getElement(), items.getFocusItem().getCount() - 1);
+        GUI.getInstance().getNifty().findScreenController(InventoryController.class.getCanonicalName()).onStartScreen();
+    }
+
     //magic
-    @NiftyEventSubscriber(pattern = ".*useButton")
+    @NiftyEventSubscriber(pattern = ".*Button")
     public void onClicked(String id, ButtonClickedEvent event) {
         int numericId = Integer.parseInt(id.split("#")[0]);
         numericId -= Integer.parseInt(items.getElement().findElementByName("#child-root").getElements().get(0).getId());

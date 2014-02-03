@@ -79,6 +79,26 @@ public class LandingParty extends MovableSprite implements GameObject {
         this.y = y;
     }
 
+    public int getCapacity() {
+        return engineers * 2 + science; //Инженеры - крепкие ребята, учёные - не очень, солдаты таскают своё оружие
+    }
+
+    public int getInventoryWeight() {
+        int totalWeight = 0;
+        for (InventoryItem i:inventory) {
+            totalWeight += i.getWeight();
+        }
+        return totalWeight;
+    }
+
+    public void overWeightTest(){
+        boolean overWeight;
+        overWeight = getCapacity() < getInventoryWeight();
+        if (overWeight) {
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.overweight"));
+        }
+        setMoveability(!overWeight);
+    }
 
     public void consumeOxygen() {
         //todo: depend on team size?
@@ -149,7 +169,7 @@ public class LandingParty extends MovableSprite implements GameObject {
      */
     public boolean canBeLaunched(World world) {
         Ship ship = world.getPlayer().getShip();
-        return military <= ship.getMilitary() && science <= ship.getScientists() && engineers <= ship.getEngineers() && getTotalMembers() > 0;
+        return military <= ship.getMilitary() && science <= ship.getScientists() && engineers <= ship.getEngineers() && getTotalMembers() > 0 && getInventoryWeight() <= getCapacity();
     }
 
     public void onLaunch(World world) {
@@ -249,6 +269,7 @@ public class LandingParty extends MovableSprite implements GameObject {
                 } else {
                     break;
                 }
+                overWeightTest();   //возможен перегруз в результате потери члена команды
             }
             amount -= amountToSubtract;
         }
@@ -260,5 +281,29 @@ public class LandingParty extends MovableSprite implements GameObject {
 
     public void setWeapon(LandingPartyWeapon weapon) {
         this.weapon = weapon;
+    }
+
+    @Override
+    public void moveUp() {
+        overWeightTest();
+        super.moveUp();
+    }
+
+    @Override
+    public void moveDown() {
+        overWeightTest();
+        super.moveDown();
+    }
+
+    @Override
+    public void moveRight() {
+        overWeightTest();
+        super.moveRight();
+    }
+
+    @Override
+    public void moveLeft() {
+        overWeightTest();
+        super.moveLeft();
     }
 }

@@ -16,6 +16,8 @@ public class Movable extends BasePositionable implements IMovable {
 
     private boolean isMoving = false;
 
+    private boolean canMove = true;
+
     private float offsetX, offsetY;
 
     private int destinationX, destinationY;
@@ -33,9 +35,15 @@ public class Movable extends BasePositionable implements IMovable {
     }
 
     private void startMoving(int destinationX, int destinationY) {
-        isMoving = true;
-        this.destinationX = destinationX;
-        this.destinationY = destinationY;
+        if (canMove) {
+            isMoving = true;
+            this.destinationX = destinationX;
+            this.destinationY = destinationY;
+        }
+    }
+
+    public void setMoveability(boolean m){
+        canMove = m;
     }
 
     @Override

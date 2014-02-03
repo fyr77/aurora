@@ -23,4 +23,6 @@ public interface InventoryItem extends Serializable {
     public boolean isDumpable();
 
     public boolean isUsable();
+
+    public int getWeight();
 }

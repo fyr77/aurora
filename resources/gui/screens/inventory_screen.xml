@@ -7,6 +7,9 @@
             <control id="#useButton" name="button" label="${gui.use}" width="120px" height="64px">
                 <interact onClick="usePressed()"/>
             </control>
+            <control id="#dropButton" name="button" label="${gui.drop}" width="120px" height="64px">
+                <interact onClick="dropPressed()"/>
+            </control>
         </panel>
 
     </controlDefinition>

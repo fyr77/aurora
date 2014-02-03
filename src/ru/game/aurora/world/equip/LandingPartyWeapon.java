@@ -77,6 +77,11 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
     }
 
     @Override
+    public int getWeight() {
+        return 0;
+    }
+
+    @Override
     public String getId() {
         return id;
     }
