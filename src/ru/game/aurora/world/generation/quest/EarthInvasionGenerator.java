@@ -241,7 +241,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
     }
 
-    private static final class BorkBlockadeShip extends NPCShip {
+    public static final class BorkBlockadeShip extends NPCShip {
 
         private static final long serialVersionUID = 8123694044569284242L;
 

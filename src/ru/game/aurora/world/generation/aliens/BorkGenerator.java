@@ -10,9 +10,11 @@ import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
+import ru.game.aurora.world.generation.quest.EarthInvasionGenerator;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.*;
 
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -28,7 +30,7 @@ public class BorkGenerator implements WorldGeneratorPart {
     public static final String NAME = "Bork";
 
 
-    private Dialog generatePlanetDialog(World world) {
+    private Dialog generatePlanetDialog(World world, final AlienRace borkRace) {
         Dialog landDialog = Dialog.loadFromFile("dialogs/bork/bork_planet_land.json");
         Dialog transferDialog = Dialog.loadFromFile("dialogs/bork/bork_planet_transfer.json");
         Dialog testDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test.json");
@@ -42,11 +44,14 @@ public class BorkGenerator implements WorldGeneratorPart {
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 Dialog nextDialog;
+                AlienRace humanity = world.getRaces().get(HumanityGenerator.NAME);
                 switch (returnCode) {
                     case 1:
+                        borkRace.setRelation(humanity, borkRace.getRelation(humanity) + 2);
                         nextDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test_kill.json");
                         break;
                     case 2:
+                        borkRace.setRelation(humanity, 10);
                         nextDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test_injure.json");
                         break;
                     case 3:
@@ -76,7 +81,16 @@ public class BorkGenerator implements WorldGeneratorPart {
     }
 
     private void removeBlockade(World world) {
+        world.getPlayer().getJournal().addQuestEntries("bork_blockade", "withdraw");
+        world.getGlobalVariables().put("bork_blockade.result", "withdraw");
         StarSystem ss = world.getRaces().get(HumanityGenerator.NAME).getHomeworld();
+        for (Iterator<SpaceObject> iter = ss.getShips().iterator(); iter.hasNext();) {
+            SpaceObject so = iter.next();
+            if (so instanceof EarthInvasionGenerator.BorkBlockadeShip) {
+                iter.remove();
+            }
+        }
+
     }
 
     @Override
@@ -86,7 +100,7 @@ public class BorkGenerator implements WorldGeneratorPart {
         final AlienRace borkRace = new AlienRace(NAME, "bork_ship", mainDialog);
 
 
-        BasePlanet[] planets = new BasePlanet[6];
+        BasePlanet[] planets = new BasePlanet[5];
         StarSystem ss = new StarSystem("Bork homeworld", new Star(1, Color.white), 13, 2);
         planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
         HomeworldGenerator.setCoord(planets[0], 2);
@@ -104,11 +118,12 @@ public class BorkGenerator implements WorldGeneratorPart {
         HomeworldGenerator.setCoord(planets[4], 9);
         planets[4].setRings(1);
 
-        Dialog homeworldDialog = generatePlanetDialog(world);
+        Dialog homeworldDialog = generatePlanetDialog(world, borkRace);
         planets[4].addSatellite(new AlienHomeworld("klisk_homeworld", borkRace, homeworldDialog, 1, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK));
 
         ss.setPlanets(planets);
         ss.setRadius(Math.max((int) (12 * 1.5), 10));
+        world.getGalaxyMap().addObjectAndSetTile(ss, 13, 2);
 
 
         borkRace.setDefaultFactory(new NPCShipFactory() {

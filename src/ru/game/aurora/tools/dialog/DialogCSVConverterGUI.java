@@ -185,6 +185,9 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
                 return;
             }
             process();
+        } else if (e.getSource() == clearLogButton) {
+            bos.reset();
+            log.setText(null);
         }
     }
 
