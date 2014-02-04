@@ -137,7 +137,7 @@ public class Planet extends BasePlanet implements IDungeon {
         if (surface == null) {
             createSurface();
         }
-        while (!surface.isTilePassable(EngineUtils.wrap(x, surface.getWidth()), y)) {
+        while (!surface.isTilePassable(EngineUtils.wrap(x, surface.getWidthInTiles()), y)) {
             x++;
         }
 
@@ -313,11 +313,11 @@ public class Planet extends BasePlanet implements IDungeon {
     }
 
     public int getWidth() {
-        return getSurface().getWidth();
+        return getSurface().getWidthInTiles();
     }
 
     public int getHeight() {
-        return getSurface().getHeight();
+        return getSurface().getHeightInTiles();
     }
 
     public PlanetFloraAndFauna getFloraAndFauna() {

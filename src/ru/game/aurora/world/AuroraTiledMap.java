@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
+import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import rlforj.los.IFovAlgorithm;
 import rlforj.los.ILosAlgorithm;
 import rlforj.los.PrecisePermissive;
@@ -188,13 +189,27 @@ public class AuroraTiledMap implements ITileMap {
     }
 
     @Override
-    public int getWidth() {
+    public int getWidthInTiles() {
         return map.getWidth();
     }
 
     @Override
-    public int getHeight() {
+    public int getHeightInTiles() {
         return map.getHeight();
+    }
+
+    @Override
+    public void pathFinderVisited(int i, int i2) {
+    }
+
+    @Override
+    public boolean blocked(PathFindingContext pathFindingContext, int i, int i2) {
+        return !isTilePassable(i, i2);
+    }
+
+    @Override
+    public float getCost(PathFindingContext pathFindingContext, int i, int i2) {
+        return 1.0f;
     }
 
     @Override
@@ -240,7 +255,7 @@ public class AuroraTiledMap implements ITileMap {
 
     @Override
     public boolean contains(int i, int i1) {
-        return i >= 0 && i < getWidth() && i1 >= 0 && i1 < getHeight();
+        return i >= 0 && i < getWidthInTiles() && i1 >= 0 && i1 < getHeightInTiles();
     }
 
     @Override
