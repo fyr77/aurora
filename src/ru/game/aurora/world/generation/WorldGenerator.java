@@ -245,6 +245,8 @@ public class WorldGenerator implements Runnable {
                             }
                         });
                         world.addOverlayWindow(pressConference);
+
+                        world.getPlayer().getJournal().addQuestEntries("embassies", "start");
                     }
                 });
 

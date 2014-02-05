@@ -79,6 +79,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private int globalMapY;
 
+    private Reputation reputation;
+
     private transient ParallaxBackground background;
 
     private transient List<Effect> effects = new LinkedList<>();
@@ -165,6 +167,22 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return true;
     }
 
+    /**
+     * Sync local reputation with a global one.
+     * Do it only if some NPC ships are left in star system.
+     * If player has killed everybody, evidently there is no one left, who could tell that it was player fault, so
+     * his rep with other races will not decrease
+     */
+    private void checkAndSynchronizeReputation(World world)
+    {
+        for (SpaceObject so : ships) {
+            if (so instanceof NPCShip) {
+                world.getReputation().merge(reputation);
+                return;
+            }
+        }
+    }
+
     @Override
     public void processCollision(GameContainer container, Player player) {
     }
@@ -189,6 +207,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 || (x < -radius)
                 || (x >= radius)) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.leaving_star_system"));
+            checkAndSynchronizeReputation(world);
             world.setCurrentRoom(world.getGalaxyMap());
             world.getGalaxyMap().enter(world);
             player.getShip().setPos(globalMapX, globalMapY);
@@ -458,6 +477,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     @Override
     public void enter(World world) {
         super.enter(world);
+        reputation = world.getReputation().copy();
         player = world.getPlayer();
         player.getShip().setPos(-radius + 1, 0);
         // in star system camera is always fixed on center
@@ -725,5 +745,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     public void setSurfaceRenderTarget(Element surfaceRenderTarget, boolean addOverlay) {
         this.surfaceRenderTarget = surfaceRenderTarget;
         this.showOverlay = addOverlay;
+    }
+
+    public Reputation getReputation() {
+        return reputation;
     }
 }

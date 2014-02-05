@@ -83,12 +83,12 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         }
 
         for (SpaceObject so : ss.getShips()) {
-            if (isHostile(so) && (ai == null || !(ai instanceof CombatAI))) {
+            if (isHostile(world, so) && (ai == null || !(ai instanceof CombatAI))) {
                 ai = new CombatAI(so);
             }
         }
 
-        if (isHostile(world.getPlayer().getShip()) && (ai == null || !(ai instanceof CombatAI))) {
+        if (isHostile(world, world.getPlayer().getShip()) && (ai == null || !(ai instanceof CombatAI))) {
             ai = new CombatAI(world.getPlayer().getShip());
         }
 
@@ -106,8 +106,8 @@ public class NPCShip extends MovableSprite implements SpaceObject {
      * Returns true if this ship is hostile to player
      * Hostile ships can not be hailed and will attack player when they see it
      */
-    public boolean isHostile(SpaceObject object) {
-        return (object instanceof Ship && isHostile) || race.getRelation(object.getRace()) <= 3;
+    public boolean isHostile(World world, SpaceObject object) {
+        return (object instanceof Ship && isHostile) || world.getCurrentStarSystem().getReputation().isHostile(race.getName(), object.getRace().getName());
     }
 
     @Override
@@ -133,7 +133,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     public String getScanDescription(World world) {
         StringBuilder sb = new StringBuilder(String.format(Localization.getText("gui", "scan.ship.race"), race.getName()));
         sb.append('\n');
-        sb.append(Localization.getText("gui", "scan.ship.relation_prefix")).append(" ").append(isHostile(world.getPlayer().getShip()) ? Localization.getText("gui", "scan.ship.hostile") : Localization.getText("gui", "scan.ship.friendly"));
+        sb.append(Localization.getText("gui", "scan.ship.relation_prefix")).append(" ").append(isHostile(world, world.getPlayer().getShip()) ? Localization.getText("gui", "scan.ship.hostile") : Localization.getText("gui", "scan.ship.friendly"));
         return sb.toString();
     }
 
@@ -149,9 +149,10 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     @Override
     public void onAttack(World world, SpaceObject attacker, int dmg) {
         hp -= dmg;
+        final StarSystem currentStarSystem = world.getCurrentStarSystem();
         if (hp <= 0) {
             GameLogger.getInstance().logMessage(getName() + " " + Localization.getText("gui", "space.destroyed"));
-            ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect(x, y, "ship_explosion", false, true));
+            currentStarSystem.addEffect(new ExplosionEffect(x, y, "ship_explosion", false, true));
         }
         if (ai == null || !(ai instanceof CombatAI)) {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.hostile"), getName(), attacker.getName()));
@@ -159,6 +160,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
                 isHostile = true;
             }
             ai = new CombatAI(attacker);
+        }
+        if (!currentStarSystem.getReputation().isHostile(race.getName(), attacker.getRace().getName())) {
+            currentStarSystem.getReputation().setHostile(race.getName(), attacker.getRace().getName());
         }
     }
 

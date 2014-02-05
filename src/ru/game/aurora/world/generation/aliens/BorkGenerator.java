@@ -95,8 +95,8 @@ public class BorkGenerator implements WorldGeneratorPart {
 
     @Override
     public void updateWorld(World world) {
-        Dialog mainDialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/encounters/swarm_first_dialog.json"));
-
+        Dialog mainDialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/bork/bork_default_not_aggressive.json"));
+        // TODO: generate agressive bork ships
         final AlienRace borkRace = new AlienRace(NAME, "bork_ship", mainDialog);
 
 
@@ -127,6 +127,8 @@ public class BorkGenerator implements WorldGeneratorPart {
 
 
         borkRace.setDefaultFactory(new NPCShipFactory() {
+            private static final long serialVersionUID = 8000558666433188574L;
+
             @Override
             public NPCShip createShip(int shipId) {
                 NPCShip ship = new NPCShip(0, 0, "bork_ship", borkRace, null, "Bork ship");
@@ -137,7 +139,7 @@ public class BorkGenerator implements WorldGeneratorPart {
         });
 
 
-        mainDialog.setListener(new DialogListener() {
+     /**   mainDialog.setListener(new DialogListener() {
 
             private static final long serialVersionUID = -4476192487724362451L;
 
@@ -146,7 +148,7 @@ public class BorkGenerator implements WorldGeneratorPart {
                 // after first dialog swarm becomes hostile
                 borkRace.setRelation(world.getPlayer().getShip().getRace(), 0);
             }
-        });
+        });*/
 
         world.addListener(new BorkShipGenerator(0.5, 3, null, borkRace.getDefaultFactory(), 10));
 

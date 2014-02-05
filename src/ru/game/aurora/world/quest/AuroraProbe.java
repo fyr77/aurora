@@ -33,7 +33,7 @@ public class AuroraProbe extends NPCShip {
     }
 
     @Override
-    public boolean isHostile(SpaceObject object) {
+    public boolean isHostile(World world, SpaceObject object) {
         return false;
     }
 

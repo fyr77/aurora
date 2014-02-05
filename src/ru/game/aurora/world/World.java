@@ -29,7 +29,7 @@ import java.util.*;
 
 public class World implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private Camera camera;
 
@@ -46,6 +46,8 @@ public class World implements Serializable {
     private GalaxyMap galaxyMap;
 
     private Player player;
+
+    private Reputation reputation;
 
     private transient boolean updatedThisFrame;
 
@@ -73,10 +75,15 @@ public class World implements Serializable {
         updatedThisFrame = false;
         currentRoom = galaxyMap = new GalaxyMap(this, sizeX, sizeY);
         researchAndDevelopmentProjects = new RnDSet();
+        reputation = new Reputation();
     }
 
     public Map<String, Serializable> getGlobalVariables() {
         return globalVariables;
+    }
+
+    public Reputation getReputation() {
+        return reputation;
     }
 
     public void update(GameContainer container) {

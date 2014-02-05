@@ -44,6 +44,8 @@ public class LeaveSystemAI implements NPCShipAI {
         //ship.move(dirX, dirY);
         isAway = !currentSystem.isInside(ship);
         if (isAway) {
+            // escaped ship will report about reputation changes
+            world.getReputation().merge(currentSystem.getReputation());
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.ship_warped"), ship.getName()));
         }
     }

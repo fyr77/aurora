@@ -16,6 +16,7 @@ package ru.game.aurora.world.generation.aliens;
 
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
@@ -58,6 +59,7 @@ public class BorkShipGenerator extends GameEventListener {
             for (int i = 0; i < starshipsPerSystem; ++i) {
                 NPCShip ship = factory.createShip(0);
                 ss.setRandomEmptyPosition(ship);
+                ship.setCaptain(new NPC(Dialog.loadFromFile("dialogs/bork/bork_default_not_aggressive.json")));
                 ss.getShips().add(ship);
             }
             if (dialog != null) {
