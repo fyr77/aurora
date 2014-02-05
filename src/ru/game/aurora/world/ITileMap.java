@@ -8,6 +8,7 @@ package ru.game.aurora.world;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.util.pathfinding.TileBasedMap;
 import rlforj.los.ILosBoard;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * Interface for different tile map formats.
  */
-public interface ITileMap extends Serializable, ILosBoard {
+public interface ITileMap extends Serializable, ILosBoard, TileBasedMap {
     public List<PlanetObject> getObjects();
 
     public void draw(GameContainer container, Graphics graphics, Camera camera);
@@ -33,10 +34,6 @@ public interface ITileMap extends Serializable, ILosBoard {
     public boolean isTileVisible(int x, int y);
 
     public boolean lineOfSightExists(int x1, int y1, int x2, int y2);
-
-    public int getWidth();
-
-    public int getHeight();
 
     /**
      * Returns true if map is wrapped - so moving over it left border makes you appear at the right border. Like a globe.

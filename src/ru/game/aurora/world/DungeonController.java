@@ -94,7 +94,7 @@ public class DungeonController implements Serializable {
         if (landingParty.nowMoving()) {
             landingParty.update(container, world);
             if (isWrap) {
-                landingParty.setPos(EngineUtils.wrap(landingParty.getX(), map.getWidth()), EngineUtils.wrap(landingParty.getY(), map.getHeight()));
+                landingParty.setPos(EngineUtils.wrap(landingParty.getX(), map.getWidthInTiles()), EngineUtils.wrap(landingParty.getY(), map.getHeightInTiles()));
             }
             return;
         }
@@ -132,10 +132,10 @@ public class DungeonController implements Serializable {
         }
 
         if (isWrap) {
-            x = EngineUtils.wrap(x, map.getWidth());
-            y = EngineUtils.wrap(y, map.getHeight());
+            x = EngineUtils.wrap(x, map.getWidthInTiles());
+            y = EngineUtils.wrap(y, map.getHeightInTiles());
         } else {
-            if (x < 0 || x >= map.getWidth() || y < 0 || y >= map.getHeight()) {
+            if (x < 0 || x >= map.getWidthInTiles() || y < 0 || y >= map.getHeightInTiles()) {
                 x = landingParty.getX();
                 y = landingParty.getY();
                 actuallyMoved = false;
@@ -215,8 +215,8 @@ public class DungeonController implements Serializable {
     }
 
     private int getRange(LandingParty party, Positionable target) {
-        int xDist = getDist(party.getX(), target.getX(), map.getWidth());
-        int yDist = getDist(party.getY(), target.getY(), map.getHeight());
+        int xDist = getDist(party.getX(), target.getX(), map.getWidthInTiles());
+        int yDist = getDist(party.getY(), target.getY(), map.getHeightInTiles());
         return xDist + yDist;
     }
 
@@ -285,7 +285,7 @@ public class DungeonController implements Serializable {
             // firing
             final int damage = landingParty.calcDamage(world);
 
-            currentEffect = new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), map.getWidth()), world.getCamera().getYCoordWrapped(target.getY(), map.getHeight()), world.getCamera(), 800, landingParty.getWeapon());
+            currentEffect = new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), map.getWidthInTiles()), world.getCamera().getYCoordWrapped(target.getY(), map.getHeightInTiles()), world.getCamera(), 800, landingParty.getWeapon());
 
             ResourceManager.getInstance().getSound(landingParty.getWeapon().getShotSound()).play();
 
@@ -389,7 +389,7 @@ public class DungeonController implements Serializable {
 
     private double getDistance(BasePositionable a, Positionable b) {
         if (isWrap) {
-            return a.getDistanceWrapped(b, map.getWidth(), map.getHeight());
+            return a.getDistanceWrapped(b, map.getWidthInTiles(), map.getHeightInTiles());
         }
         return a.getDistance(b);
     }
@@ -405,7 +405,7 @@ public class DungeonController implements Serializable {
 
                     // in shoot mode, all available targets are surrounded with red square
                     if (mode == MODE_SHOOT && a.canBeShotAt() && getDistance(landingParty, a) < landingParty.getWeapon().getRange()) {
-                        graphics.drawRect(camera.getXCoordWrapped(a.getX(), map.getWidth()), camera.getYCoordWrapped(a.getY(), map.getHeight()), camera.getTileWidth(), camera.getTileHeight());
+                        graphics.drawRect(camera.getXCoordWrapped(a.getX(), map.getWidthInTiles()), camera.getYCoordWrapped(a.getY(), map.getHeightInTiles()), camera.getTileWidth(), camera.getTileHeight());
                     }
                 }
 
@@ -419,7 +419,7 @@ public class DungeonController implements Serializable {
 
             if (mode == MODE_SHOOT && target != null) {
                 // draw target mark
-                graphics.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoordWrapped(target.getX(), map.getWidth()), camera.getYCoordWrapped(target.getY(), map.getHeight()));
+                graphics.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoordWrapped(target.getX(), map.getWidthInTiles()), camera.getYCoordWrapped(target.getY(), map.getHeightInTiles()));
             }
         }
         if (currentEffect != null) {

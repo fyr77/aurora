@@ -1,6 +1,8 @@
 package ru.game.aurora.world;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.util.pathfinding.AStarPathFinder;
+import org.newdawn.slick.util.pathfinding.Path;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
@@ -29,11 +31,20 @@ public class MonsterController implements Serializable {
 
     private ITileMap map;
 
+    private transient AStarPathFinder pathFinder;
+    private Path path;
+    private int lastX;
+    private int lastY;
+    private boolean playerShown = false;
+    private int pathIndex = 1;
+
     public MonsterController(ITileMap map, IMonster myMonster) {
         this.map = map;
         this.myMonster = myMonster;
         this.turnsBeforeMove = myMonster.getSpeed();
         this.weapon = myMonster.getWeapon();
+
+        pathFinder = new AStarPathFinder(map, 200, false);   //200 - макс путь
     }
 
     public void update(GameContainer container, World world) {
@@ -56,35 +67,50 @@ public class MonsterController implements Serializable {
             // if we want to attack landing party and it is close enough, move closer
 
             LandingParty party = world.getPlayer().getLandingParty();
+            int partyX = party.getX();
+            int partyY = party.getY();
 
-
-            final double distance = map.isWrapped() ? party.getDistanceWrapped(myMonster, map.getWidth(), map.getHeight()) : party.getDistance(myMonster);
+            final double distance = map.isWrapped() ? party.getDistanceWrapped(myMonster, map.getWidthInTiles(), map.getHeightInTiles()) : party.getDistance(myMonster);
             if (distance < 1.5 * weapon.getRange()) { //1.5 because of diagonal cells
-                if (!map.lineOfSightExists(x, y, party.getX(), party.getY())) {
+                if (!map.lineOfSightExists(x, y, partyX, partyY)) {
                     // can't shoot because no line of sight
                     return;
                 }
                 party.subtractHp(world, weapon.getDamage());
                 GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), myMonster.getName(), weapon.getDamage(), party.getHp()));
                 if (weapon.getId().equals("melee")) {
-                    world.getCurrentDungeon().getController().setCurrentEffect(new ExplosionEffect(world.getPlayer().getLandingParty().getX(), world.getPlayer().getLandingParty().getY(), "slash", false, false));
+                    world.getCurrentDungeon().getController().setCurrentEffect(new ExplosionEffect(partyX, partyY, "slash", false, false));
                 } else {
-                    world.getCurrentDungeon().getController().setCurrentEffect(new BlasterShotEffect(myMonster, world.getPlayer().getLandingParty(), world.getCamera(), 800, weapon));
+                    world.getCurrentDungeon().getController().setCurrentEffect(new BlasterShotEffect(myMonster, party, world.getCamera(), 800, weapon));
                 }
                 ResourceManager.getInstance().getSound(weapon.getShotSound()).play();
                 newX = x;
                 newY = y;
-            } else if (distance < 5 * weapon.getRange()) {
-                if (x < party.getX() - 1) {
-                    newX = x + 1;
-                } else if (x > party.getX() + 1) {
-                    newX = x - 1;
+            } else if (distance < 5 * weapon.getRange() && map.lineOfSightExists(x, y, partyX, partyY)) {
+                lastX = partyX;
+                lastY = partyY;
+                playerShown = true;
+            }
+
+            if (playerShown) {
+                if (pathFinder == null) {
+                    pathFinder = new AStarPathFinder(map, 200, false);
                 }
 
-                if (y < party.getY() - 1) {
-                    newY = y + 1;
-                } else if (y > party.getY() + 1) {
-                    newY = y - 1;
+                map.setTilePassable(x, y, true);    //hack (pathfinder cannot find path if starting point is blocked)
+                path = pathFinder.findPath(null, x, y, lastX, lastY);
+                map.setTilePassable(x, y, false);   //hack
+
+                playerShown = false;
+                pathIndex = 1;
+            }
+
+            if (path != null && path.getLength() > 1) {
+                newX = path.getX(pathIndex);
+                newY = path.getY(pathIndex);
+                pathIndex++;
+                if (pathIndex >= (path.getLength() - 1)) {
+                    path = null;
                 }
             }
 
