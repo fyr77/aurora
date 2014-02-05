@@ -2,6 +2,7 @@ package ru.game.aurora.world.planet;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
@@ -264,13 +265,27 @@ public class SurfaceTileMap implements ITileMap, Serializable {
     }
 
     @Override
-    public int getWidth() {
+    public int getWidthInTiles() {
         return width;
     }
 
     @Override
-    public int getHeight() {
+    public int getHeightInTiles() {
         return height;
+    }
+
+    @Override
+    public void pathFinderVisited(int i, int i2) {
+    }
+
+    @Override
+    public boolean blocked(PathFindingContext pathFindingContext, int i, int i2) {
+        return isTilePassable(EngineUtils.wrap(i, width), EngineUtils.wrap(i2, height));
+    }
+
+    @Override
+    public float getCost(PathFindingContext pathFindingContext, int i, int i2) {
+        return 1.0f;
     }
 
     @Override
