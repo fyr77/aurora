@@ -47,11 +47,11 @@ public class BorkGenerator implements WorldGeneratorPart {
                 AlienRace humanity = world.getRaces().get(HumanityGenerator.NAME);
                 switch (returnCode) {
                     case 1:
-                        borkRace.setRelation(humanity, borkRace.getRelation(humanity) + 2);
+                        world.getReputation().updateReputation(borkRace.getName(), humanity.getName(), 1);
                         nextDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test_kill.json");
                         break;
                     case 2:
-                        borkRace.setRelation(humanity, 10);
+                        world.getReputation().setReputation(borkRace.getName(), humanity.getName(), 8);
                         nextDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test_injure.json");
                         break;
                     case 3:

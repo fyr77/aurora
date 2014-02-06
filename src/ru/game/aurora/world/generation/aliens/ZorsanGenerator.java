@@ -74,7 +74,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     world.setCurrentRoom(dungeon);
 
                     zorsanFinalDialog.setFlags(dialog.getFlags()); // pass flags from previous dialog to a next one
-                    race.setRelation(world.getRaces().get(HumanityGenerator.NAME), 0);
+                    world.getReputation().setHostile(race.getName(), HumanityGenerator.NAME);
                 }
             }
         });

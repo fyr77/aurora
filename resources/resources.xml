@@ -48,6 +48,7 @@
     <resource type="image" id="klisk_ship">sprites/ships/klisk_ship.png</resource>
     <resource type="image" id="klisk_drone">sprites/ships/klisk_drone.png</resource>
     <resource type="image" id="klisk_dialog">sprites/portraits/klisk.png</resource>
+    <resource type="image" id="klisk_vip_dialog">sprites/portraits/klisk_vip.png</resource>
 
     <!-- zorsan -->
     <resource type="image" id="zorsan_scout">sprites/ships/zorsan_scout.png</resource>

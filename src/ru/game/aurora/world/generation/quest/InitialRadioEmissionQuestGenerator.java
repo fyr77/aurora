@@ -24,6 +24,7 @@ import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesMainDialogListener;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.*;
 
 import java.util.Map;
@@ -196,7 +197,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 } else {
                     if (world.getGlobalVariables().containsKey("rogues.fine")) {
                         // player has not payed the fine
-                        world.getRaces().get("Rogues").setRelation(world.getRaces().get("Humanity"), 0);
+                        world.getReputation().setHostile(RoguesGenerator.NAME, HumanityGenerator.NAME);
                         world.getGlobalVariables().put("rogues.beacon_hostile", true);
                         return true;
                     }
@@ -212,7 +213,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 switch (returnCode) {
                     case 200:
                         // player refused to surrender and is now hostile with rogues
-                        world.getRaces().get("Rogues").setRelation(world.getRaces().get("Humanity"), 0);
+                        world.getReputation().setHostile(RoguesGenerator.NAME, HumanityGenerator.NAME);
                         world.getGlobalVariables().put("rogues.beacon_hostile", true);
                         break;
                     case 100:
