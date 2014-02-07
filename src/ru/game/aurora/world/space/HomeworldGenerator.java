@@ -11,8 +11,6 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
-import ru.game.aurora.player.research.ResearchReport;
-import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.planet.*;
@@ -71,29 +69,6 @@ public class HomeworldGenerator {
         return ss;
     }
 
-
-    public static StarSystem generateKliskHomeworld(World world, int x, int y, AlienRace kliskRace) {
-        BasePlanet[] planets = new BasePlanet[3];
-        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.yellow), x, y);
-
-        planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
-        setCoord(planets[0], 2);
-
-        planets[1] = new AlienHomeworld("klisk_homeworld", kliskRace, kliskRace.getDefaultDialog(), 3, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK);
-        setCoord(planets[1], 3);
-
-        planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
-        setCoord(planets[2], 5);
-
-        AlienArtifact a = new AlienArtifact(3, 4, "small_artifact", new ArtifactResearch(new ResearchReport("small_artifact", "klisk_banner.report")));
-        ((Planet) planets[2]).setNearestFreePoint(a, 2, 2);
-        ((Planet) planets[2]).getPlanetObjects().add(a);
-
-        ss.setPlanets(planets);
-        ss.setQuestLocation(true);
-        ss.setRadius(Math.max((int) (6 * 1.5), 10));
-        return ss;
-    }
 
     public static StarSystem generateRoguesWorld(World world, int x, int y, AlienRace roguesRace) {
         BasePlanet[] planets = new BasePlanet[2];

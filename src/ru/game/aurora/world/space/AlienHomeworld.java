@@ -15,6 +15,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
@@ -50,6 +51,8 @@ public class AlienHomeworld extends BasePlanet {
     @Override
     public void enter(World world) {
         world.addOverlayWindow(dialog);
+        // homeworld dialogs must have access to reputation with player
+        dialog.getFlags().put("reputation", String.valueOf(world.getReputation().getReputation(ownerRace.getName(), HumanityGenerator.NAME)));
     }
 
     @Override
