@@ -8,6 +8,7 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.npc.SingleStarsystemShipSpawner;
 import ru.game.aurora.npc.StandardAlienShipEvent;
+import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.Dungeon;
 import ru.game.aurora.world.World;
@@ -96,27 +97,36 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         race.setDefaultFactory(new NPCShipFactory() {
             private static final long serialVersionUID = -2842750240901357677L;
 
+            private final ProbabilitySet<SpaceObject> defaultLootTable;
+
+            {
+                defaultLootTable = new ProbabilitySet<>();
+                defaultLootTable.put(new SpaceDebris.ResourceDebris(5), 1.0);
+                defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
+            }
+
             @Override
             public NPCShip createShip(int shipType) {
+                NPCShip ship;
                 switch (shipType) {
-                    case SCOUT_SHIP:
-                    {
-                        NPCShip ship = new NPCShip(0, 0, "zorsan_scout", race, null, "Zorsan scout");
+                    case SCOUT_SHIP: {
+                        ship = new NPCShip(0, 0, "zorsan_scout", race, null, "Zorsan scout");
                         ship.setHp(8);
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
-                        return ship;
+                        break;
                     }
-                    case CRUISER_SHIP:
-                    {
-                        NPCShip ship = new NPCShip(0, 0, "zorsan_cruiser", race, null, "Zorsan cruiser");
+                    case CRUISER_SHIP: {
+                        ship = new NPCShip(0, 0, "zorsan_cruiser", race, null, "Zorsan cruiser");
                         ship.setHp(15);
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
-                        return ship;
-
+                        break;
                     }
                     default:
                         throw new IllegalArgumentException("Unsupported ship type for Zorsan race: " + shipType);
                 }
+
+                ship.setLoot(defaultLootTable);
+                return ship;
             }
         });
 
