@@ -30,12 +30,6 @@ public class KliskTradequestDialogListener implements DialogListener {
 
         // now put player into target star system
 
-        world.setCurrentRoom(targetSystem);
-        targetSystem.enter(world);
-
-        SpaceObject npcStation = targetSystem.getShips().get(0); // TODO: what if it is destroyed?
-        world.getPlayer().getShip().setPos(npcStation.getX() + 1, npcStation.getY());
-
         Dialog tradeDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_trade.json");
         tradeDialog.setListener(this);
 
@@ -43,6 +37,12 @@ public class KliskTradequestDialogListener implements DialogListener {
     }
 
     private void processPartyInvitation(World world, int returnCode) {
+        world.setCurrentRoom(targetSystem);
+        targetSystem.enter(world);
+
+        SpaceObject npcStation = targetSystem.getShips().get(0); // TODO: what if it is destroyed?
+        world.getPlayer().getShip().setPos(npcStation.getX() + 1, npcStation.getY());
+
         Dialog arrivalDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_arrival.json");
         arrivalDialog.setListener(this);
 

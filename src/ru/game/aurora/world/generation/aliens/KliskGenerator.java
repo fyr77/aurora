@@ -101,6 +101,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                 Dialog start = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_captain.json");
                 start.setListener(new KliskTradequestDialogListener(targetSystem));
                 world.addOverlayWindow(start);
+                isAlive = false;
                 return true;
             }
         });
@@ -112,6 +113,7 @@ public class KliskGenerator implements WorldGeneratorPart {
 
         NPCShip spaceStation = kliskRace.getDefaultFactory().createShip(STATION);
         ss.getShips().add(spaceStation);
+        ss.setRandomEmptyPosition(spaceStation);
         ss.setQuestLocation(true);
         return ss;
     }
@@ -195,17 +197,6 @@ public class KliskGenerator implements WorldGeneratorPart {
                 kliskRace.setDefaultDialog(newDefaultDialog);
             }
         });
-
-        StarSystem kliskHomeworld = generateKliskHomeworld(world, 15, 15, kliskRace);
-        kliskRace.setHomeworld(kliskHomeworld);
-
-        world.addListener(new StandardAlienShipEvent(kliskRace));
-        world.getGalaxyMap().getObjects().add(kliskHomeworld);
-        world.getGalaxyMap().setTileAt(15, 15, world.getGalaxyMap().getObjects().size() - 1);
-
-        world.getRaces().put(kliskRace.getName(), kliskRace);
-
-
         kliskRace.setDefaultFactory(new NPCShipFactory() {
             private static final long serialVersionUID = 5473066320214324094L;
 
@@ -238,5 +229,15 @@ public class KliskGenerator implements WorldGeneratorPart {
                 throw new IllegalArgumentException("Klisk race does not define ship of type " + shipType);
             }
         });
+        StarSystem kliskHomeworld = generateKliskHomeworld(world, 15, 15, kliskRace);
+        kliskRace.setHomeworld(kliskHomeworld);
+
+        world.addListener(new StandardAlienShipEvent(kliskRace));
+        world.getGalaxyMap().getObjects().add(kliskHomeworld);
+        world.getGalaxyMap().setTileAt(15, 15, world.getGalaxyMap().getObjects().size() - 1);
+
+        world.getRaces().put(kliskRace.getName(), kliskRace);
+
+
     }
 }
