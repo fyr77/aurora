@@ -7,16 +7,14 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
+import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.MovableSprite;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
@@ -25,7 +23,7 @@ import ru.game.aurora.world.equip.StarshipWeaponDesc;
 
 public class NPCShip extends MovableSprite implements SpaceObject {
 
-    private static final long serialVersionUID = 4304196228941570752L;
+    private static final long serialVersionUID = 1L;
 
     protected AlienRace race;
 
@@ -50,11 +48,18 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     // this ship can not move
     private boolean isStationary;
 
+    // map of loot that can be dropped by this ship, with its chances
+    private ProbabilitySet<SpaceObject> loot;
+
     public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
         super(x, y, sprite);
         this.race = race;
         this.captain = captain;
         this.name = name;
+    }
+
+    public void setLoot(ProbabilitySet<SpaceObject> loot) {
+        this.loot = loot;
     }
 
     public void setAi(NPCShipAI ai) {
@@ -153,6 +158,12 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         if (hp <= 0) {
             GameLogger.getInstance().logMessage(getName() + " " + Localization.getText("gui", "space.destroyed"));
             currentStarSystem.addEffect(new ExplosionEffect(x, y, "ship_explosion", false, true));
+
+            if (loot != null) {
+                if (CommonRandom.getRandom().nextBoolean()) {
+                    currentStarSystem.getShips().add(new SpaceDebris(x, y, loot));
+                }
+            }
         }
         if (ai == null || !(ai instanceof CombatAI)) {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.hostile"), getName(), attacker.getName()));

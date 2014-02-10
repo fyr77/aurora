@@ -39,6 +39,7 @@
     <resource type="image" id="target">sprites/gui/target.png</resource>
 
     <!-- races -->
+    <resource type="image" id="debris">sprites/ships/debris.png</resource>
 
     <!-- gardeners -->
     <resource type="image" id="gardener_ship">sprites/ships/tree_ship.png</resource>
