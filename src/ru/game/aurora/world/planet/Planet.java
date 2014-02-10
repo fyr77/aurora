@@ -86,20 +86,20 @@ public class Planet extends BasePlanet implements IDungeon {
         int height;
         switch (size) {
             case 1:
-                width = 500;
-                height = 500;
+                width = 250;
+                height = 250;
                 break;
             case 2:
-                width = 300;
-                height = 300;
+                width = 150;
+                height = 150;
                 break;
             case 3:
-                width = 200;
-                height = 200;
-                break;
-            case 4:
                 width = 100;
                 height = 100;
+                break;
+            case 4:
+                width = 70;
+                height = 70;
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported planet size value");

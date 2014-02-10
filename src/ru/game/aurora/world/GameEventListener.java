@@ -40,6 +40,10 @@ public abstract class GameEventListener implements Serializable {
         return false;
     }
 
+    public boolean onPlayerLeftStarSystem(World world, StarSystem ss) {
+        return false;
+    }
+
     public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
         return false;
     }

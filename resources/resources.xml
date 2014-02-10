@@ -46,6 +46,7 @@
 
     <!-- klisk -->
     <resource type="image" id="klisk_ship">sprites/ships/klisk_ship.png</resource>
+    <resource type="image" id="klisk_station">sprites/ships/klisk_station.png</resource>
     <resource type="image" id="klisk_drone">sprites/ships/klisk_drone.png</resource>
     <resource type="image" id="klisk_dialog">sprites/portraits/klisk.png</resource>
     <resource type="image" id="klisk_vip_dialog">sprites/portraits/klisk_vip.png</resource>

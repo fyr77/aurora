@@ -213,6 +213,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             player.getShip().setPos(globalMapX, globalMapY);
             // do not keep background
             background = null;
+            world.onPlayerLeftSystem(this);
         }
 
         BasePlanet p = getPlanetAtPlayerShipPosition();

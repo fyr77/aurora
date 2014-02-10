@@ -234,7 +234,7 @@ public class World implements Serializable {
 
     public void onPlayerEnteredSystem(StarSystem ss) {
         Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
-        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        List<GameEventListener> newList = new LinkedList<>(listeners);
         for (GameEventListener l : newList) {
 
             boolean alreadyCalledThisGroup = false;
@@ -250,6 +250,29 @@ public class World implements Serializable {
             }
 
             if (l.onPlayerEnterStarSystem(this, ss)) {
+                calledGroups.addAll(l.getGroups());
+            }
+        }
+    }
+
+    public void onPlayerLeftSystem(StarSystem ss) {
+        Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
+        List<GameEventListener> newList = new LinkedList<>(listeners);
+        for (GameEventListener l : newList) {
+
+            boolean alreadyCalledThisGroup = false;
+            for (GameEventListener.EventGroup group : l.getGroups()) {
+                if (calledGroups.contains(group)) {
+                    alreadyCalledThisGroup = true;
+                    break;
+                }
+            }
+
+            if (alreadyCalledThisGroup) {
+                continue;
+            }
+
+            if (l.onPlayerLeftStarSystem(this, ss)) {
                 calledGroups.addAll(l.getGroups());
             }
         }

@@ -12,10 +12,13 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.NextDialogListener;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.npc.StandardAlienShipEvent;
+import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
@@ -34,6 +37,8 @@ public class KliskGenerator implements WorldGeneratorPart {
 
     // ship IDs used in factory generation
     public static final int DEFAULT_SHIP = 0;
+
+    private static AlienRace kliskRace;
 
     private Dialog createDefaultKliskPlanetDialog(World world)
     {
@@ -75,7 +80,30 @@ public class KliskGenerator implements WorldGeneratorPart {
         return d;
     }
 
-    private Dialog createPlanetDialogAndQuests(World world, final AlienHomeworld kliskPlanet)
+    private void beginTradeQuest(World world, AlienHomeworld kliskPlanet)
+    {
+        NPCShip ship = world.getRaces().get(KliskGenerator.NAME).getDefaultFactory().createShip(0);
+        ship.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_ship_default.json")));
+
+        ship.setAi(new LeaveSystemAI());
+        ship.setPos(kliskPlanet.getX() - 1, kliskPlanet.getY() + 1);
+        world.getCurrentStarSystem().getShips().add(ship);
+
+        world.addListener(new GameEventListener() {
+            private static final long serialVersionUID = -4786822024248669833L;
+
+            @Override
+            public boolean onPlayerLeftStarSystem(World world, StarSystem ss) {
+
+                Dialog start = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_captain.json");
+                start.setListener(new KliskTradequestDialogListener());
+                world.addOverlayWindow(start);
+                return true;
+            }
+        });
+    }
+
+    private Dialog createPlanetDialogAndQuests(final AlienHomeworld kliskPlanet)
     {
         Dialog startDialog = Dialog.loadFromFile("dialogs/klisk/klisk_station_start.json");
 
@@ -93,6 +121,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                 } else {
                     // accepts a quest
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_start.json"));
+                    beginTradeQuest(world, kliskPlanet);
                 }
 
                 kliskPlanet.setDialog(createDefaultKliskPlanetDialog(world));
@@ -110,7 +139,8 @@ public class KliskGenerator implements WorldGeneratorPart {
         planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
         HomeworldGenerator.setCoord(planets[0], 2);
 
-        planets[1] = new AlienHomeworld("klisk_homeworld", kliskRace, kliskRace.getDefaultDialog(), 3, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK);
+        planets[1] = new AlienHomeworld("klisk_homeworld", kliskRace, null, 3, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK);
+        ((AlienHomeworld)planets[1]).setDialog(createPlanetDialogAndQuests((AlienHomeworld) planets[1]));
         HomeworldGenerator.setCoord(planets[1], 3);
 
         planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
@@ -129,7 +159,7 @@ public class KliskGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile("dialogs/klisk_1.json");
-        final AlienRace kliskRace = new AlienRace(NAME, "klisk_ship", mainDialog);
+        kliskRace = new AlienRace(NAME, "klisk_ship", mainDialog);
         mainDialog.setListener(new DialogListener() {
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
