@@ -20,6 +20,7 @@ import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.*;
@@ -38,10 +39,13 @@ public class KliskGenerator implements WorldGeneratorPart {
     // ship IDs used in factory generation
     public static final int DEFAULT_SHIP = 0;
 
+    public static final int TRADE_PROBE = 1;
+
+    public static final int STATION = 2;
+
     private static AlienRace kliskRace;
 
-    private Dialog createDefaultKliskPlanetDialog(World world)
-    {
+    private Dialog createDefaultKliskPlanetDialog(World world) {
         Dialog d = Dialog.loadFromFile("dialogs/klisk/klisk_planet_default.json");
         d.setListener(new DialogListener() {
             private static final long serialVersionUID = 4082728827280648178L;
@@ -58,7 +62,7 @@ public class KliskGenerator implements WorldGeneratorPart {
 
                 if (world.getGlobalVariables().containsKey("klisk_trade.result")) {
                     int repDelta = 0;
-                    switch ((String)world.getGlobalVariables().get("klisk_trade.result")) {
+                    switch ((String) world.getGlobalVariables().get("klisk_trade.result")) {
                         case "perfect":
                             repDelta = 2;
                             break;
@@ -80,8 +84,7 @@ public class KliskGenerator implements WorldGeneratorPart {
         return d;
     }
 
-    private void beginTradeQuest(World world, AlienHomeworld kliskPlanet)
-    {
+    private void beginTradeQuest(World world, AlienHomeworld kliskPlanet, final StarSystem targetSystem) {
         NPCShip ship = world.getRaces().get(KliskGenerator.NAME).getDefaultFactory().createShip(0);
         ship.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_ship_default.json")));
 
@@ -96,15 +99,24 @@ public class KliskGenerator implements WorldGeneratorPart {
             public boolean onPlayerLeftStarSystem(World world, StarSystem ss) {
 
                 Dialog start = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_captain.json");
-                start.setListener(new KliskTradequestDialogListener());
+                start.setListener(new KliskTradequestDialogListener(targetSystem));
                 world.addOverlayWindow(start);
                 return true;
             }
         });
     }
 
-    private Dialog createPlanetDialogAndQuests(final AlienHomeworld kliskPlanet)
-    {
+    private StarSystem generateTargetStarsystemForTradeQuest(World world) {
+        StarSystem ss = WorldGenerator.generateRandomStarSystem(world, 12, 15);
+        world.getGalaxyMap().addObjectAndSetTile(ss, 12, 15);
+
+        NPCShip spaceStation = kliskRace.getDefaultFactory().createShip(STATION);
+        ss.getShips().add(spaceStation);
+        ss.setQuestLocation(true);
+        return ss;
+    }
+
+    private Dialog createPlanetDialogAndQuests(final AlienHomeworld kliskPlanet, final StarSystem targetSystemForQuest) {
         Dialog startDialog = Dialog.loadFromFile("dialogs/klisk/klisk_station_start.json");
 
         Dialog ambassadorDialog = Dialog.loadFromFile("dialogs/klisk/klisk_station_main.json");
@@ -121,7 +133,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                 } else {
                     // accepts a quest
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_start.json"));
-                    beginTradeQuest(world, kliskPlanet);
+                    beginTradeQuest(world, kliskPlanet, targetSystemForQuest);
                 }
 
                 kliskPlanet.setDialog(createDefaultKliskPlanetDialog(world));
@@ -140,7 +152,7 @@ public class KliskGenerator implements WorldGeneratorPart {
         HomeworldGenerator.setCoord(planets[0], 2);
 
         planets[1] = new AlienHomeworld("klisk_homeworld", kliskRace, null, 3, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK);
-        ((AlienHomeworld)planets[1]).setDialog(createPlanetDialogAndQuests((AlienHomeworld) planets[1]));
+        ((AlienHomeworld) planets[1]).setDialog(createPlanetDialogAndQuests((AlienHomeworld) planets[1], generateTargetStarsystemForTradeQuest(world)));
         HomeworldGenerator.setCoord(planets[1], 3);
 
         planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
@@ -193,6 +205,7 @@ public class KliskGenerator implements WorldGeneratorPart {
 
         world.getRaces().put(kliskRace.getName(), kliskRace);
 
+
         kliskRace.setDefaultFactory(new NPCShipFactory() {
             private static final long serialVersionUID = 5473066320214324094L;
 
@@ -202,6 +215,23 @@ public class KliskGenerator implements WorldGeneratorPart {
                     NPCShip ship = new NPCShip(0, 0, "klisk_ship", kliskRace, null, "Klisk Ship");
                     ship.setHp(15);
                     ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
+                    return ship;
+                }
+
+                if (shipType == TRADE_PROBE) {
+                    NPCShip ship = new NPCShip(0, 0, "klisk_drone", kliskRace, null, "Klisk drone");
+                    ship.setHp(7);
+                    ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"));
+                    ship.setStationary(true);
+                    ship.setCanBeHailed(false);
+                    return ship;
+                }
+
+                if (shipType == STATION) {
+                    NPCShip ship = new NPCShip(0, 0, "klisk_station", kliskRace, null, "Klisk station");
+                    ship.setHp(20);
+                    ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
+                    ship.setStationary(true);
                     return ship;
                 }
 

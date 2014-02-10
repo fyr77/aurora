@@ -12,32 +12,37 @@ import java.util.Map;
 /**
  * Common listener for Klisk initial trade quest
  */
-public class KliskTradequestDialogListener implements DialogListener
-{
+public class KliskTradequestDialogListener implements DialogListener {
     private static final long serialVersionUID = -1387556231542083021L;
 
-    private void processArrival(World world, int returnCode)
-    {
+    private StarSystem targetSystem;
+
+    public KliskTradequestDialogListener(StarSystem targetSystem) {
+        this.targetSystem = targetSystem;
+    }
+
+    private void processArrival(World world, int returnCode) {
         if (returnCode == 0) {
             // player refused to perform trading
             world.getGlobalVariables().put("klisk_trade.result", "refused");
             return;
         }
 
+        // now put player into target star system
+
+        world.setCurrentRoom(targetSystem);
+        targetSystem.enter(world);
+
+        SpaceObject npcStation = targetSystem.getShips().get(0); // TODO: what if it is destroyed?
+        world.getPlayer().getShip().setPos(npcStation.getX() + 1, npcStation.getY());
+
         Dialog tradeDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_trade.json");
         tradeDialog.setListener(this);
 
-        // now put player into target star system
-        StarSystem ss = (StarSystem) world.getGalaxyMap().getObjectAt(7, 7); // same as in LastBeacon
-        world.setCurrentRoom(ss);
-        ss.enter(world);
-
-        SpaceObject npcStation = ss.getShips().get(0); // TODO: what if it is destroyed?
-        world.getPlayer().getShip().setPos(npcStation.getX() + 1, npcStation.getY());
+        world.addOverlayWindow(tradeDialog);
     }
 
-    private void processPartyInvitation(World world, int returnCode)
-    {
+    private void processPartyInvitation(World world, int returnCode) {
         Dialog arrivalDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_arrival.json");
         arrivalDialog.setListener(this);
 
@@ -78,8 +83,8 @@ public class KliskTradequestDialogListener implements DialogListener
             result = "perfect";
         } else if (
                 (flags.containsKey("fist_good") || flags.containsKey("fist_money"))
-                && (flags.containsKey("second_good") || flags.containsKey("second_money"))
-                && (flags.containsKey("third_good") || flags.containsKey("third_money"))
+                        && (flags.containsKey("second_good") || flags.containsKey("second_money"))
+                        && (flags.containsKey("third_good") || flags.containsKey("third_money"))
                 ) {
             result = "good";
         } else {
