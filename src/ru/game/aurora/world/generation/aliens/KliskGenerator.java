@@ -18,7 +18,6 @@ import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
-import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -92,28 +91,18 @@ public class KliskGenerator implements WorldGeneratorPart {
         ship.setPos(kliskPlanet.getX() - 1, kliskPlanet.getY() + 1);
         world.getCurrentStarSystem().getShips().add(ship);
 
-        world.addListener(new GameEventListener() {
-            private static final long serialVersionUID = -4786822024248669833L;
-
-            @Override
-            public boolean onPlayerLeftStarSystem(World world, StarSystem ss) {
-
-                Dialog start = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_captain.json");
-                start.setListener(new KliskTradequestDialogListener(targetSystem));
-                world.addOverlayWindow(start);
-                isAlive = false;
-                return true;
-            }
-        });
+        world.addListener(new KliskTradequestDialogListener(targetSystem));
     }
 
     private StarSystem generateTargetStarsystemForTradeQuest(World world) {
         StarSystem ss = WorldGenerator.generateRandomStarSystem(world, 12, 15);
         world.getGalaxyMap().addObjectAndSetTile(ss, 12, 15);
+        world.getGlobalVariables().put("klisk_trade.coords", "[12, 15]");
 
         NPCShip spaceStation = kliskRace.getDefaultFactory().createShip(STATION);
-        ss.getShips().add(spaceStation);
         ss.setRandomEmptyPosition(spaceStation);
+        ss.getShips().add(spaceStation);
+        spaceStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json")));
         ss.setQuestLocation(true);
         return ss;
     }
@@ -135,6 +124,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                 } else {
                     // accepts a quest
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_start.json"));
+                    world.getGlobalVariables().put("klisk_trade.result", 1); // hack to enable required statement in space station dialog
                     beginTradeQuest(world, kliskPlanet, targetSystemForQuest);
                 }
 

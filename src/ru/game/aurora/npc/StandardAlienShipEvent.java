@@ -7,7 +7,7 @@
 package ru.game.aurora.npc;
 
 import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.npc.shipai.LandOnPlanetAI;
+import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.GameEventListener;
@@ -63,7 +63,7 @@ public class StandardAlienShipEvent extends GameEventListener {
             if (CommonRandom.getRandom().nextBoolean() || world.getCurrentStarSystem().getPlanets().length == 0) {
                 ship.setAi(new LeaveSystemAI());
             } else {
-                ship.setAi(new LandOnPlanetAI(CollectionUtils.selectRandomElement(world.getCurrentStarSystem().getPlanets())));
+                ship.setAi(new LandAI(CollectionUtils.selectRandomElement(world.getCurrentStarSystem().getPlanets())));
             }
             return true;
         }

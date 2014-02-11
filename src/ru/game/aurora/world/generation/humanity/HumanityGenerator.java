@@ -13,7 +13,7 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.npc.SingleShipFixedTime;
 import ru.game.aurora.npc.StandardAlienShipEvent;
-import ru.game.aurora.npc.shipai.LandOnPlanetAI;
+import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.GameEventListener;
@@ -56,7 +56,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
             @Override
             public NPCShip createShip(int shipType) {
                 NPCShip ship = new NPCShip(0, 0, "earth_transport", humans, null, "Humanity ship");
-                ship.setAi(new LandOnPlanetAI(solarSystem.getPlanets()[CommonRandom.getRandom().nextInt(solarSystem.getPlanets().length)]));
+                ship.setAi(new LandAI(solarSystem.getPlanets()[CommonRandom.getRandom().nextInt(solarSystem.getPlanets().length)]));
                 return ship;
             }
         }, true));

@@ -8,23 +8,23 @@ package ru.game.aurora.npc.shipai;
 
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
 /**
  * Moves to a desired planet and lands on it
  */
-public class LandOnPlanetAI implements NPCShipAI
+public class LandAI implements NPCShipAI
 {
-    private static final long serialVersionUID = -8083999261802300585L;
+    private static final long serialVersionUID = 1;
 
-    private BasePlanet target;
+    private Positionable target;
 
     private boolean hasLanded = false;
 
-    public LandOnPlanetAI(BasePlanet target) {
+    public LandAI(Positionable target) {
         this.target = target;
     }
 

@@ -10,7 +10,8 @@
           "targetStatementId": 1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "1": {
       "id": 1,

@@ -10,7 +10,8 @@
           "targetStatementId": 1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "1": {
       "id": 1,
@@ -20,7 +21,8 @@
           "targetStatementId": 2,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "2": {
       "id": 2,
@@ -245,7 +247,8 @@
           "targetStatementId": 18,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "16": {
       "id": 16,
@@ -254,6 +257,11 @@
           "returnValue": 0,
           "targetStatementId": 17,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "1"
         }
       ]
     },
@@ -280,7 +288,8 @@
           "targetStatementId": 19,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "21": {
       "id": 21,
@@ -290,7 +299,8 @@
           "targetStatementId": 22,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "20": {
       "id": 20,
@@ -300,7 +310,8 @@
           "targetStatementId": 21,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "23": {
       "id": 23,
@@ -360,7 +371,8 @@
           "targetStatementId": 25,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "27": {
       "id": 27,
@@ -425,7 +437,8 @@
           "targetStatementId": 30,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "alien_city_dialog"
     },
     "28": {
       "id": 28,
@@ -460,7 +473,8 @@
           "targetStatementId": 32,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "alien_city_dialog"
     },
     "30": {
       "id": 30,
@@ -470,7 +484,8 @@
           "targetStatementId": 31,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "alien_city_dialog"
     },
     "34": {
       "id": 34,
@@ -510,7 +525,8 @@
           "targetStatementId": 36,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "alien_city_dialog"
     },
     "33": {
       "id": 33,

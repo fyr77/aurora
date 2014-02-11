@@ -173,7 +173,7 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
             });
             if (chooser.showDialog(this, "Select") == JFileChooser.APPROVE_OPTION) {
                 out.setText(chooser.getSelectedFile().getAbsolutePath());
-                prefs.put(PREV_OUT_PATH_KEY, chooser.getSelectedFile().getParent());
+                prefs.put(PREV_OUT_PATH_KEY, chooser.getSelectedFile().getAbsolutePath());
             }
         } else if (e.getSource() == processButton) {
             if (out.getText().isEmpty()

@@ -112,7 +112,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
      * Hostile ships can not be hailed and will attack player when they see it
      */
     public boolean isHostile(World world, SpaceObject object) {
-        return (object instanceof Ship && isHostile) || world.getCurrentStarSystem().getReputation().isHostile(race.getName(), object.getRace().getName());
+        return (object instanceof Ship && isHostile) || (race != null && world.getCurrentStarSystem().getReputation().isHostile(race.getName(), object.getRace().getName()));
     }
 
     @Override

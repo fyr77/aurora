@@ -1,9 +1,13 @@
 package ru.game.aurora.world.generation.aliens;
 
+import org.newdawn.slick.GameContainer;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
-import ru.game.aurora.dialog.NextDialogListener;
+import ru.game.aurora.npc.NPC;
+import ru.game.aurora.npc.shipai.LandAI;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -12,10 +16,12 @@ import java.util.Map;
 /**
  * Common listener for Klisk initial trade quest
  */
-public class KliskTradequestDialogListener implements DialogListener {
+public class KliskTradequestDialogListener extends GameEventListener implements DialogListener {
     private static final long serialVersionUID = -1387556231542083021L;
 
     private StarSystem targetSystem;
+
+    private NPCShip npcStation;
 
     public KliskTradequestDialogListener(StarSystem targetSystem) {
         this.targetSystem = targetSystem;
@@ -36,22 +42,54 @@ public class KliskTradequestDialogListener implements DialogListener {
         world.addOverlayWindow(tradeDialog);
     }
 
+
+    // this is a quest ship that will be used in target system
+    // when it docks with the station, it will reset its dialog to a quest one
+    private class KliskQuestShip extends NPCShip
+    {
+
+        private static final long serialVersionUID = -5895915582359778144L;
+
+        private NPCShip target;
+
+        public KliskQuestShip(World world, NPCShip target, int x, int y) {
+            super(x, y, "klisk_ship", world.getRaces().get(KliskGenerator.NAME), new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_ship_default.json")), "Klisk ship");
+            setAi(new LandAI(target));
+            this.target = target;
+        }
+
+        @Override
+        public void update(GameContainer container, World world) {
+            super.update(container, world);
+            if (!ai.isAlive()) {
+                // docked
+                Dialog arrivalDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_arrival.json");
+                arrivalDialog.setListener(KliskTradequestDialogListener.this);
+                target.setCaptain(new NPC(arrivalDialog));
+            }
+        }
+    }
+
     private void processPartyInvitation(World world, int returnCode) {
-        world.setCurrentRoom(targetSystem);
-        targetSystem.enter(world);
 
-        SpaceObject npcStation = targetSystem.getShips().get(0); // TODO: what if it is destroyed?
-        world.getPlayer().getShip().setPos(npcStation.getX() + 1, npcStation.getY());
+        npcStation = null;
 
-        Dialog arrivalDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_arrival.json");
-        arrivalDialog.setListener(this);
+        for (SpaceObject so : targetSystem.getShips()) {
+            if (so instanceof NPCShip) {
+                npcStation = (NPCShip) so;
+                break;
+            }
+        }
+
+        if (npcStation == null) {
+            throw new IllegalStateException("NPC station not found");
+        }
+
+        KliskQuestShip ship = new KliskQuestShip(world, npcStation, world.getPlayer().getShip().getX() + 1, world.getPlayer().getShip().getY());
+        targetSystem.getShips().add(ship);
 
         if (returnCode == 1) {
-            Dialog nextDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_party.json");
-            nextDialog.setListener(new NextDialogListener(arrivalDialog));
-            world.addOverlayWindow(nextDialog);
-        } else {
-            world.addOverlayWindow(arrivalDialog);
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_party.json"));
         }
     }
 
@@ -79,10 +117,10 @@ public class KliskTradequestDialogListener implements DialogListener {
         }
 
         String result;
-        if (flags.containsKey("fist_good") && flags.containsKey("second_good") && flags.containsKey("third_good")) {
+        if (flags.containsKey("first_good") && flags.containsKey("second_good") && flags.containsKey("third_good")) {
             result = "perfect";
         } else if (
-                (flags.containsKey("fist_good") || flags.containsKey("fist_money"))
+                (flags.containsKey("first_good") || flags.containsKey("fist_money"))
                         && (flags.containsKey("second_good") || flags.containsKey("second_money"))
                         && (flags.containsKey("third_good") || flags.containsKey("third_money"))
                 ) {
@@ -93,5 +131,21 @@ public class KliskTradequestDialogListener implements DialogListener {
 
         world.getGlobalVariables().put("klisk_trade.result", result);
 
+        // reset to default dialog
+        npcStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json")));
+
+    }
+
+    @Override
+    public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
+        if (ss != targetSystem) {
+            return false;
+        }
+
+        Dialog d = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_captain.json");
+        d.setListener(this);
+        world.addOverlayWindow(d);
+        isAlive = false;
+        return true;
     }
 }

@@ -674,6 +674,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             isEmpty = true;
             // check that there are no planets or other objects at this position
             for (SpaceObject obj : ships) {
+                if (obj == object) {
+                    continue;
+                }
                 if (object.getDistance(obj) == 0) {
                     isEmpty = false;
                     break;

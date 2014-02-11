@@ -64,7 +64,8 @@ klisk.war_help - if helped player with weapons against zorsan
 
 quest with trading klisk goods
 
-klisk_trade.result - "perfect" if player has followed codex, "good" if he has chosen money, "bad" if he has broken codex, "refused" if he refused to trade
+klisk_trade.result - "perfect" if player has followed codex, "good" if he has chosen money, "bad" if he has broken codex, "refused" if he refused to trade, null if quest is not yet completed
+klisk_trade.coords - coordinates of target system
 
 
 =============================
