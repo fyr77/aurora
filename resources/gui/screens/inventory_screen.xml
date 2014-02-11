@@ -27,6 +27,10 @@
                                  controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
                     </control>
 
+                    <panel height="10px"/>
+
+                    <text style="base-font" id="weight_text" textHAlign="left"/>
+
                     <!-- close button panel -->
                     <panel height="10px"/>
                     <panel childLayout="horizontal" height="50px">

@@ -60,7 +60,7 @@ public class Player implements Serializable
         earthState = new EarthState();
         final LandingPartyWeapon defaultWeapon = ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault");
         inventory.put(defaultWeapon, 1);
-        landingParty = new LandingParty(0, 0, defaultWeapon, 1, 1, 1, Configuration.getIntProperty("player.landing_party.defaultHP"));
+        landingParty = new LandingParty(0, 0, defaultWeapon, 2, 2, 4, Configuration.getIntProperty("player.landing_party.defaultHP"));
     }
 
     public void setShip(AlienRace humanity) {

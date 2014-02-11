@@ -35,6 +35,8 @@ public class LandingPartyEquipScreenController implements ScreenController {
 
     private Element myWindow;
 
+    private Element weightText;
+
     private ListBox<Multiset.Entry<InventoryItem>> storageList;
 
     private ListBox<Multiset.Entry<InventoryItem>> inventoryList;
@@ -52,7 +54,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
     public void bind(Nifty nifty, Screen screen) {
         myScreen = screen;
         myWindow = myScreen.findElementByName("equip_window");
-
+        weightText = myScreen.findElementByName("weight_text");
         storageList = screen.findNiftyControl("storageList", ListBox.class);
         inventoryList = screen.findNiftyControl("inventoryList", ListBox.class);
     }
@@ -86,6 +88,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
         myScreen.findElementByName("military_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.military") + " " + landingParty.getMilitary());
         myScreen.findElementByName("total_count").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.total") + " " + landingParty.getTotalMembers() + " / 10");
 
+        EngineUtils.setTextForGUIElement(weightText, String.format(Localization.getText("gui", "landing_party.weight"), landingParty.getInventoryWeight(), landingParty.getMaxWeight()));
     }
 
     @Override
@@ -187,6 +190,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
         for (Multiset.Entry<InventoryItem> entry : world.getPlayer().getLandingParty().getInventory().entrySet()) {
             inventoryList.addItem(entry);
         }
+        updateLabels();
     }
 
     //это - очень сильное колдунство. onClicked занят ниже. Поэтому тут - onReleased. Костыль

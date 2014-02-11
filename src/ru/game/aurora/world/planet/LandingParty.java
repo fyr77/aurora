@@ -79,7 +79,7 @@ public class LandingParty extends MovableSprite implements GameObject {
         this.y = y;
     }
 
-    public int getCapacity() {
+    public int getMaxWeight() {
         return engineers * 2 + science; //Инженеры - крепкие ребята, учёные - не очень, солдаты таскают своё оружие
     }
 
@@ -93,7 +93,7 @@ public class LandingParty extends MovableSprite implements GameObject {
 
     public void overWeightTest(){
         boolean overWeight;
-        overWeight = getCapacity() < getInventoryWeight();
+        overWeight = getMaxWeight() < getInventoryWeight();
         if (overWeight) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.overweight"));
         }
@@ -168,8 +168,11 @@ public class LandingParty extends MovableSprite implements GameObject {
      * Returns false if since last party configuration smth has changed and new 'Landing party screen' must be shown
      */
     public boolean canBeLaunched(World world) {
+        if (getMaxWeight() < getInventoryWeight()) {
+            return false;
+        }
         Ship ship = world.getPlayer().getShip();
-        return military <= ship.getMilitary() && science <= ship.getScientists() && engineers <= ship.getEngineers() && getTotalMembers() > 0 && getInventoryWeight() <= getCapacity();
+        return military <= ship.getMilitary() && science <= ship.getScientists() && engineers <= ship.getEngineers() && getTotalMembers() > 0 && getInventoryWeight() <= getMaxWeight();
     }
 
     public void onLaunch(World world) {

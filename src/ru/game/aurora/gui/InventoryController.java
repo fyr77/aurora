@@ -9,8 +9,11 @@ import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import ru.game.aurora.application.Localization;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
+import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.UsableItem;
 
 /**
@@ -26,23 +29,30 @@ public class InventoryController implements ScreenController {
 
     private World world;
 
+    private Element weightText;
+
+    private LandingParty landingParty;
+
     public InventoryController(World world) {
         this.world = world;
+        landingParty = world.getPlayer().getLandingParty();
     }
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
         items = screen.findNiftyControl("items", ListBox.class);
         myWindow = screen.findElementByName("inventory_window");
+        weightText = screen.findElementByName("weight_text");
     }
 
     @Override
     public void onStartScreen() {
         myWindow.setVisible(true);
         items.clear();
-        for (Multiset.Entry<InventoryItem> entry : world.getPlayer().getLandingParty().getInventory().entrySet()) {
+        for (Multiset.Entry<InventoryItem> entry : landingParty.getInventory().entrySet()) {
             items.addItem(entry);
         }
+        updateWeight();
     }
 
     @Override
@@ -59,16 +69,22 @@ public class InventoryController implements ScreenController {
         closeScreen();
     }
 
+    private void updateWeight()
+    {
+        EngineUtils.setTextForGUIElement(weightText, String.format(Localization.getText("gui", "landing_party.weight"), landingParty.getInventoryWeight(), landingParty.getMaxWeight()));
+    }
+
     public void usePressed() {
         if (items.getFocusItem().getElement().isUsable()) {
             UsableItem u = (UsableItem) items.getFocusItem().getElement();
             u.useIt(world, items.getFocusItem().getCount());
+            updateWeight();
         }
     }
 
     public void dropPressed() {
-        world.getPlayer().getLandingParty().getInventory().setCount(items.getFocusItem().getElement(), items.getFocusItem().getCount() - 1);
-        GUI.getInstance().getNifty().findScreenController(InventoryController.class.getCanonicalName()).onStartScreen();
+        landingParty.getInventory().setCount(items.getFocusItem().getElement(), items.getFocusItem().getCount() - 1);
+        onStartScreen();
     }
 
     //magic

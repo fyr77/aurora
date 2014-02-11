@@ -54,6 +54,10 @@
 
                     <panel height="10px"/>
 
+                    <text style="base-font" id="weight_text" textHAlign="left"/>
+
+                    <panel height="10px"/>
+
                     <panel childLayout="horizontal">
                         <panel childLayout="vertical" width="45%">
                             <text id="storageText" style="base-font" align="center" text="${gui.storage}"
