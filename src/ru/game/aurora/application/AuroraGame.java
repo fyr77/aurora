@@ -141,7 +141,16 @@ public class AuroraGame extends NiftyOverlayGame {
             throw new SlickException("Failed to initialize Monster Generator", e);
         }
         lastFrameTime = gameContainer.getTime();
-
+        String musicVolumeString = Configuration.getSystemProperties().getProperty("music.volume");
+        if (musicVolumeString != null) {
+            float volume = Float.parseFloat(musicVolumeString);
+            SoundStore.get().setMusicVolume(volume);
+            SoundStore.get().setCurrentMusicVolume(volume);
+        }
+        String soundVolumeString = Configuration.getSystemProperties().getProperty("sound.volume");
+        if (soundVolumeString != null) {
+            SoundStore.get().setSoundVolume(Float.parseFloat(soundVolumeString));
+        }
         ResourceManager.getInstance().getPlaylist("background").play();
     }
 
@@ -283,17 +292,7 @@ public class AuroraGame extends NiftyOverlayGame {
             // by default, use largest supported resolution available
             res = supportedResolutions.get(supportedResolutions.size() - 1);
         }
-        SoundStore.get().init();
-        String musicVolumeString = Configuration.getSystemProperties().getProperty("music.volume");
-        if (musicVolumeString != null) {
-            float volume = Float.parseFloat(musicVolumeString);
-            SoundStore.get().setMusicVolume(volume);
-            SoundStore.get().setCurrentMusicVolume(volume);
-        }
-        String soundVolumeString = Configuration.getSystemProperties().getProperty("sound.volume");
-        if (soundVolumeString != null) {
-            SoundStore.get().setSoundVolume(Float.parseFloat(soundVolumeString));
-        }
+
         final boolean fullScreen = Boolean.parseBoolean(Configuration.getSystemProperties().getProperty("screen.full_screen", "false"));
         app.setDisplayMode(res.getWidth(), res.getHeight(), fullScreen);
         tilesX = res.getTilesX();
