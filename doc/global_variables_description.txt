@@ -25,6 +25,8 @@ colony_search.found - if suitable planet has been found
 colony_search.explored - suitable planet explored
 colony_search.explored_fully
 last_beacon.coords - coordinates of a last-known aurora location
+
+diplomacy.flag - true if quest is active
 ==============================
 Crew relationship
 
@@ -42,6 +44,7 @@ rogues.damage_scout_result - outcome of this situation. Either 'help' or 'sold_t
 rogues.fine - number of credits player has to pay for damaging beacon
 rogues.beacon_hostile - set if player failed to settle problem with rogues beacon in a peaceful way, will affect ending
 
+rogues.zorsan_data - quest for retrieving zorsan data. Either 'forged' or 'real'
 ==============================
 
 Relations with Klisk

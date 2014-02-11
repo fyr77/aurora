@@ -1,0 +1,366 @@
+{
+  "id": "rogues_admiral_first",
+  "iconName": "rogues_admiral_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "alien_city_dialog"
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "3"
+        }
+      ],
+      "customIcon": "rogues_dialog"
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "alien_city_dialog"
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        }
+      ],
+      "customIcon": "rogues_dialog"
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "alien_city_dialog"
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        }
+      ],
+      "customIcon": "rogues_dialog"
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "rogues_dialog"
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "rogues_dialog"
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "rogues_dialog"
+    },
+    "9": {
+      "id": 9,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "alien_city_dialog"
+    },
+    "10": {
+      "id": 10,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "interior_dialog"
+    },
+    "11": {
+      "id": 11,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "interior_dialog"
+    },
+    "12": {
+      "id": 12,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "interior_dialog"
+    },
+    "13": {
+      "id": 13,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "0"
+        }
+      ]
+    },
+    "14": {
+      "id": 14,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "klisk.rogues_info",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "15": {
+      "id": 15,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "klisk.rogues_info",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "3"
+        }
+      ]
+    },
+    "16": {
+      "id": 16,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "0"
+        }
+      ]
+    },
+    "19": {
+      "id": 19,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "2"
+        }
+      ]
+    },
+    "18": {
+      "id": 18,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "2"
+        }
+      ]
+    },
+    "21": {
+      "id": 21,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "0"
+        }
+      ]
+    },
+    "20": {
+      "id": 20,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "2"
+        }
+      ]
+    },
+    "23": {
+      "id": 23,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "22": {
+      "id": 22,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "0"
+        }
+      ]
+    }
+  }
+}

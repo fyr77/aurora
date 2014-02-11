@@ -29,7 +29,7 @@ public class DialogValidator
             for (Reply reply : st.replies) {
                 if (!dialog.getStatements().containsKey(reply.targetStatementId)) {
                     if (reply.targetStatementId >= 0 ) {
-                        logger.error("Reply for statement {} contains link to statement {} which is >= 0 and does not exist", st, reply.targetStatementId);
+                        logger.error("Reply for statement {} contains link to statement {} which is >= 0 and does not exist", st.id, reply.targetStatementId);
                         rz = false;
                     } else {
                         hasExitStatement = true;

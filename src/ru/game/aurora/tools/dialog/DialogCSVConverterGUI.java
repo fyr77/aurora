@@ -104,6 +104,10 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
         outputPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
         outputPanel.setLayout(new BoxLayout(outputPanel, BoxLayout.LINE_AXIS));
         out = new JTextField(48);
+        String prevPath = prefs.get(PREV_OUT_PATH_KEY, null);
+        if (prevPath != null) {
+            out.setText(prevPath);
+        }
         outputPanel.add(out);
         targetBrowseButton = new JButton("...");
         targetBrowseButton.addActionListener(this);
