@@ -7,21 +7,23 @@
 
 package ru.game.aurora.world.generation.aliens;
 
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.Localization;
+import org.newdawn.slick.Color;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
-import ru.game.aurora.dialog.Reply;
-import ru.game.aurora.dialog.Statement;
+import ru.game.aurora.dialog.NextDialogListener;
 import ru.game.aurora.npc.*;
-import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
-import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.space.GalaxyMap;
+import ru.game.aurora.world.planet.BasePlanet;
+import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetAtmosphere;
+import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.HomeworldGenerator;
 import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Map;
@@ -35,83 +37,63 @@ public class RoguesGenerator implements WorldGeneratorPart {
 
     public static final int PROBE_SHIP = 1;
 
-    private static class MeetDamagedRogueEvent extends SingleShipEvent {
 
-        private static final long serialVersionUID = 4954480685679636543L;
+    private Dialog createFrameDialog(final NPCShip frame)
+    {
 
-        public MeetDamagedRogueEvent(NPCShip ship) {
-            super(0.1, ship);
-        }
+        Dialog frameDialog = Dialog.loadFromFile("dialogs/rogues/rogues_mothership_first_time.json");
+        Dialog admiralDialog = Dialog.loadFromFile("dialogs/rogues/rogues_admiral_first.json");
+        frameDialog.setListener(new NextDialogListener(admiralDialog));
 
-        @Override
-        public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
-            AlienRace kliskRace = world.getRaces().get("Klisk");
 
-            return GalaxyMap.getDistance(ss, kliskRace.getHomeworld()) > kliskRace.getTravelDistance() && super.onPlayerEnterStarSystem(world, ss);
-        }
-    }
-
-    private void createDamagedScoutEvent(World world, final AlienRace rogueRace) {
-        final NPCShip damagedRogueScout = new NPCShip(0, 0, "rogues_scout_damaged", rogueRace, null, "Rogue scout");
-        // event with meeting a damaged rogue ship asking for help
-        final Dialog dialog = Dialog.loadFromFile("dialogs/rogues/rogues_damaged_scout.json");
-        dialog.setListener(new DialogListener() {
-
-            private static final long serialVersionUID = -1975417060573768272L;
+        admiralDialog.setListener(new DialogListener() {
+            private static final long serialVersionUID = -1121310501064131337L;
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                Dialog newFrameDefault = Dialog.loadFromFile("dialogs/rogues/rogues_admiral_default.json");
+                newFrameDefault.setListener(new RoguesMainDialogListener());
+                frame.setCaptain(new NPC(newFrameDefault));
 
-                if (returnCode == 0) {
-                    return;
-                }
-
-                if (returnCode == 100) {
-                    world.getGlobalVariables().put("rogues.damaged_scout_found", world.getCurrentStarSystem());
-                    return;
-                }
-
-                if (world.getPlayer().getResourceUnits() < 5) {
-                    GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.not_enough_resources"));
-                    return;
-                }
-
-                world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() - 5);
-
-                if (returnCode == 1) {
-                    // player decided to help without reward
-                    world.getReputation().setReputation(rogueRace.getName(), HumanityGenerator.NAME, 2);
-                    world.getGlobalVariables().remove("rogues.damaged_scout_found");
-                } else {
-                    // player decided to help for reward
-                    world.getPlayer().changeCredits(world, 5);
-                    GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.credits_received"), 5));
-                    world.getReputation().setReputation(rogueRace.getName(), HumanityGenerator.NAME, 1);
-                    world.getGlobalVariables().remove("rogues.damaged_scout_found");
-                }
-
-                world.getGlobalVariables().put("rogues.damage_scout_result", "help");
-                damagedRogueScout.setSprite("rogues_scout");
-                damagedRogueScout.setAi(null);
-                damagedRogueScout.setCaptain(new NPC(
-                        new Dialog("rogue_damaged_scout.after_help", "no_image",
-                                new Statement(0, "", new Reply(0, -1, "end")))
-                ));
+                world.addOverlayWindow(newFrameDefault);
             }
         });
-        damagedRogueScout.setCaptain(new NPC(dialog));
-        damagedRogueScout.setAi(null);
-        damagedRogueScout.setStationary(true);
 
-        MeetDamagedRogueEvent listener = new MeetDamagedRogueEvent(damagedRogueScout);
-        listener.setGroups(GameEventListener.EventGroup.ENCOUNTER_SPAWN);
-        world.addListener(listener);
+        return frameDialog;
+    }
+
+    private StarSystem generateRoguesWorld(World world, int x, int y, AlienRace roguesRace) {
+        BasePlanet[] planets = new BasePlanet[2];
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.red), x, y);
+
+        planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
+        HomeworldGenerator.setCoord(planets[0], 2);
+
+        planets[1] = new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
+        HomeworldGenerator.setCoord(planets[1], 5);
+
+        ss.setPlanets(planets);
+        ss.setRadius(8);
+
+
+        NPCShip frame = new NPCShip(2, 2, "rogues_frame", roguesRace, null, "Rogues Frame");
+        frame.setCaptain(new NPC(createFrameDialog(frame)));
+        frame.setAi(null);
+        ss.getShips().add(frame);
+
+        for (int i = 0; i < 3; ++i) {
+            NPCShip probe = roguesRace.getDefaultFactory().createShip(RoguesGenerator.PROBE_SHIP);
+            probe.setPos(CommonRandom.getRandom().nextInt(6) - 3, CommonRandom.getRandom().nextInt(6) - 3);
+            probe.setAi(new LeaveSystemAI());
+            ss.getShips().add(probe);
+        }
+        ss.setQuestLocation(true);
+        return ss;
     }
 
     @Override
     public void updateWorld(World world) {
-        Dialog defaultDialog = Dialog.loadFromFile("dialogs/rogues/rogues_frame_dialog.json");
-        defaultDialog.setListener(new RoguesMainDialogListener());
+        Dialog defaultDialog = Dialog.loadFromFile("dialogs/rogues/rogues_default.json");
         final AlienRace rogueRace = new AlienRace(NAME, "rogues_scout", defaultDialog);
 
         rogueRace.setDefaultFactory(new NPCShipFactory() {
@@ -140,7 +122,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
             }
         });
 
-        StarSystem homeworld = HomeworldGenerator.generateRoguesWorld(world, 15, 28, rogueRace);
+        StarSystem homeworld = generateRoguesWorld(world, 15, 28, rogueRace);
         homeworld.setQuestLocation(true);
         rogueRace.setHomeworld(homeworld);
 
@@ -149,7 +131,6 @@ public class RoguesGenerator implements WorldGeneratorPart {
         world.addListener(new SingleStarsystemShipSpawner(rogueRace.getDefaultFactory(), 0.3, homeworld));
 
         world.getRaces().put(rogueRace.getName(), rogueRace);
-        //createDamagedScoutEvent(world, rogueRace); // TODO: restore some day
     }
 
 }

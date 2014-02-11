@@ -7,12 +7,8 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.npc.NPC;
-import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.earth.Earth;
 
@@ -70,30 +66,4 @@ public class HomeworldGenerator {
     }
 
 
-    public static StarSystem generateRoguesWorld(World world, int x, int y, AlienRace roguesRace) {
-        BasePlanet[] planets = new BasePlanet[2];
-        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.red), x, y);
-
-        planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
-        setCoord(planets[0], 2);
-
-        planets[1] = new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
-        setCoord(planets[1], 5);
-
-        ss.setPlanets(planets);
-        ss.setRadius(8);
-
-        NPCShip frame = new NPCShip(2, 2, "rogues_frame", roguesRace, new NPC(Dialog.loadFromFile("dialogs/rogues/rogues_frame_dialog.json")), "Rogues Frame");
-        frame.setAi(null);
-        ss.getShips().add(frame);
-
-        for (int i = 0; i < 3; ++i) {
-            NPCShip probe = roguesRace.getDefaultFactory().createShip(RoguesGenerator.PROBE_SHIP);
-            probe.setPos(CommonRandom.getRandom().nextInt(6) - 3, CommonRandom.getRandom().nextInt(6) - 3);
-            probe.setAi(new LeaveSystemAI());
-            ss.getShips().add(probe);
-        }
-        ss.setQuestLocation(true);
-        return ss;
-    }
 }

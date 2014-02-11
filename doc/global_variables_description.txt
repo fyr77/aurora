@@ -45,6 +45,7 @@ rogues.fine - number of credits player has to pay for damaging beacon
 rogues.beacon_hostile - set if player failed to settle problem with rogues beacon in a peaceful way, will affect ending
 
 rogues.zorsan_data - quest for retrieving zorsan data. Either 'forged' or 'real'
+rogues.war_help - if hepled player
 ==============================
 
 Relations with Klisk

@@ -42,8 +42,19 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 28,
+          "targetStatementId": 100,
           "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "rogues.fine",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 28,
+          "replyText": "3",
           "replyConditions": [
             {
               "name": "zorsan.war_preparations",
@@ -54,7 +65,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "3"
+          "replyText": "4"
         }
       ]
     },
@@ -84,6 +95,21 @@
               "type": "EQUAL"
             }
           ]
+        }
+      ]
+    },
+    "100": {
+      "id": 100,
+      "replies": [
+        {
+          "returnValue": 100,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
         }
       ]
     },

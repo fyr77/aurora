@@ -669,9 +669,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         final double maxRadius = Configuration.getDoubleProperty("world.starsystem.objectMaxRadius") * radius;
         final double minRadius = Configuration.getDoubleProperty("world.starsystem.objectMinRadius") * radius;
         int orbit;
-        orbit = (int) (CommonRandom.getRandom().nextDouble() * (maxRadius - minRadius) + minRadius);
+
         boolean isEmpty;
         do {
+            orbit = (int) (CommonRandom.getRandom().nextDouble() * (maxRadius - minRadius) + minRadius);
             final int x = CommonRandom.getRandom().nextInt(2 * orbit) - orbit;
             final int y = (int) (Math.sqrt(orbit * orbit - x * x) * (CommonRandom.getRandom().nextBoolean() ? -1 : 1));
             object.setPos(x, y);

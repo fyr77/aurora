@@ -4,6 +4,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.World;
 
 import java.util.Map;
@@ -14,8 +15,9 @@ import java.util.Map;
  * Date: 04.11.13
  * Time: 16:57
  */
-public class RoguesMainDialogListener implements DialogListener {
-    private static final long serialVersionUID = 7523069730734608685L;
+public class RoguesMainDialogListener implements DialogListener
+{
+    private static final long serialVersionUID = 1;
 
     @Override
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
@@ -29,6 +31,21 @@ public class RoguesMainDialogListener implements DialogListener {
 
             world.getPlayer().changeCredits(world, -fine);
             world.getGlobalVariables().remove("rogues.fine");
+        }
+
+        AlienRace rogueRace = world.getRaces().get(RoguesGenerator.NAME);
+
+        if (flags.containsKey("rogues_altar.withdraw")) {
+            world.getPlayer().getJournal().addQuestEntries("rogues_altar", "withdraw");
+            //TODO: remove rogues from altar on the moon
+        }
+
+        if (flags.containsKey("zorsan.quest")) {
+            // TODO: start a quest
+        }
+
+        if (flags.containsKey("war_help")) {
+            world.getGlobalVariables().put("rogues.war_help", true);
         }
     }
 }
