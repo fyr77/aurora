@@ -506,6 +506,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 , planets.length);
     }
 
+    private static final Color ANIMAL_COLOR = new Color(0, 255, 0, 200);
+    private static final Color RESOURCE_COLOR = new Color(255, 255, 0, 200);
+    private static final Color ANOMALY_COLOR = new Color(0, 0, 255, 200);
+    private static final Color BACKGROUND_COLOR = new Color(0, 0, 0, 200);
+
     private void renderCurrentPlanetSurface(GameContainer container, Graphics g) {
         g.clear();
         g.setColor(Color.black);
@@ -526,7 +531,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 // create overlay with info about life and anomalies
                 Image overlay = new Image(container.getWidth(), container.getHeight());
                 Graphics overlayGraphics = overlay.getGraphics();
-                overlayGraphics.setColor(Color.black);
+                overlayGraphics.setColor(BACKGROUND_COLOR);
                 overlayGraphics.fillRect(0, 0, container.getWidth(), container.getHeight());
                 int maxRadius = container.getHeight() / 10;
                 Random r = new Random(planet.hashCode()); // fixed-seed, so that runs on same planet produce same results
@@ -534,11 +539,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     float objectX = myCamera.getXCoord(po.getX());
                     float objectY = myCamera.getYCoord(po.getY());
                     if (Animal.class.isAssignableFrom(po.getClass())) {
-                        overlayGraphics.setColor(Color.green);
+                        overlayGraphics.setColor(ANIMAL_COLOR);
                     } else if (OreDeposit.class.isAssignableFrom(po.getClass())) {
-                        overlayGraphics.setColor(Color.yellow);
+                        overlayGraphics.setColor(RESOURCE_COLOR);
                     } else if (AlienArtifact.class.isAssignableFrom(po.getClass())) {
-                        overlayGraphics.setColor(Color.blue);
+                        overlayGraphics.setColor(ANOMALY_COLOR);
                     } else {
                         continue;
                     }
@@ -551,7 +556,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                     overlayGraphics.fillOval(ovalX, ovalY, xRadius, yRadius);
                 }
                 overlayGraphics.flush();
-                overlay.setAlpha(0.5f);
                 g.drawImage(overlay, 0, 0);
             }
             Image image = new Image(container.getWidth(), container.getHeight());
