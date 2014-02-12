@@ -33,7 +33,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     protected String name;
 
-    protected static final int speed = 3;
+    protected int speed = 3;
 
     protected int curSpeed = 3;
 
@@ -56,6 +56,10 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         this.race = race;
         this.captain = captain;
         this.name = name;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     public void setLoot(ProbabilitySet<SpaceObject> loot) {

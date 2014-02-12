@@ -20,6 +20,9 @@ import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Planet inhabited with aliens.
  * Such planet can not be landed on, only communicated
@@ -33,12 +36,13 @@ public class AlienHomeworld extends BasePlanet {
 
     private String spriteName;
 
+    private transient Map<String, String> dialogFlags = null;
+
     public AlienHomeworld(String spriteName, AlienRace ownerRace, Dialog customDialog, int size, int y, StarSystem owner, PlanetAtmosphere atmosphere, int x, PlanetCategory cat) {
         super(x, y, size, owner, atmosphere, cat);
         this.ownerRace = ownerRace;
         this.dialog = customDialog;
         this.spriteName = spriteName;
-
     }
 
 
@@ -50,9 +54,12 @@ public class AlienHomeworld extends BasePlanet {
 
     @Override
     public void enter(World world) {
-        world.addOverlayWindow(dialog);
-        // homeworld dialogs must have access to reputation with player
-        dialog.getFlags().put("reputation", String.valueOf(world.getReputation().getReputation(ownerRace.getName(), HumanityGenerator.NAME)));
+        if (dialogFlags == null) {
+            dialogFlags = new HashMap<>();
+        }
+        dialogFlags.put("reputation", String.valueOf(world.getReputation().getReputation(ownerRace.getName(), HumanityGenerator.NAME)));
+        world.addOverlayWindow(dialog, dialogFlags);
+
     }
 
     @Override

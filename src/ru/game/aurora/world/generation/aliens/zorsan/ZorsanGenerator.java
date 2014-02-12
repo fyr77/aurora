@@ -1,4 +1,4 @@
-package ru.game.aurora.world.generation.aliens;
+package ru.game.aurora.world.generation.aliens.zorsan;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.ResourceManager;
@@ -19,6 +19,7 @@ import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.*;
 
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -36,9 +37,23 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
     public static final int CRUISER_SHIP = 1;
 
+    private static final ProbabilitySet<SpaceObject> defaultLootTable;
+
+    static {
+        defaultLootTable = new ProbabilitySet<>();
+        defaultLootTable.put(new SpaceDebris.ResourceDebris(5), 1.0);
+        defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
+    }
+
+
     private StarSystem generateHomeworld(World world, int x, int y, final AlienRace race) {
         final BasePlanet[] planets = new BasePlanet[1];
         final StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.white), x, y);
+
+        // add a ship to fight with after takeoff
+        NPCShip cruiser = race.getDefaultFactory().createShip(CRUISER_SHIP);
+        cruiser.setPos(4, 2);
+        ss.getShips().add(cruiser);
 
         final Dialog initialHomeworldDialog = Dialog.loadFromFile("dialogs/zorsan/zorsan_homeworld_1.json");
         final Dialog continueDialog = Dialog.loadFromFile("dialogs/zorsan/zorsan_homeworld_2.json");
@@ -76,6 +91,9 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
                     zorsanFinalDialog.setFlags(dialog.getFlags()); // pass flags from previous dialog to a next one
                     world.getReputation().setHostile(race.getName(), HumanityGenerator.NAME);
+
+                    // after this, zorsan become hostile and player has fixed amount of time before they attack earth
+                    addWarDataDrop();
                 }
             }
         });
@@ -89,6 +107,20 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         return ss;
     }
 
+    public static void addWarDataDrop()
+    {
+        defaultLootTable.put(new ZorsanWarData(), 10.3);
+    }
+
+    public static void removeWarDataDrop()
+    {
+        for (Iterator<Map.Entry<SpaceObject, Double>> iter = defaultLootTable.entrySet().iterator(); iter.hasNext();) {
+            Map.Entry<SpaceObject, Double> e = iter.next();
+            if (e instanceof ZorsanWarData) {
+                iter.remove();
+            }
+        }
+    }
 
     @Override
     public void updateWorld(World world) {
@@ -97,13 +129,6 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         race.setDefaultFactory(new NPCShipFactory() {
             private static final long serialVersionUID = -2842750240901357677L;
 
-            private final ProbabilitySet<SpaceObject> defaultLootTable;
-
-            {
-                defaultLootTable = new ProbabilitySet<>();
-                defaultLootTable.put(new SpaceDebris.ResourceDebris(5), 1.0);
-                defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
-            }
 
             @Override
             public NPCShip createShip(int shipType) {
@@ -112,12 +137,14 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     case SCOUT_SHIP: {
                         ship = new NPCShip(0, 0, "zorsan_scout", race, null, "Zorsan scout");
                         ship.setHp(8);
+                        ship.setSpeed(1);
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
                         break;
                     }
                     case CRUISER_SHIP: {
                         ship = new NPCShip(0, 0, "zorsan_cruiser", race, null, "Zorsan cruiser");
                         ship.setHp(15);
+                        ship.setSpeed(2);
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
                         break;
                     }
@@ -133,10 +160,11 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         StarSystem homeworld = generateHomeworld(world, 3, 8, race);
         world.getGlobalVariables().put("zorsan.homeworld", String.format("[%d, %d]", homeworld.getGlobalMapX(), homeworld.getGlobalMapY()));
         world.getGalaxyMap().addObjectAndSetTile(homeworld, 3, 8);
-        world.addListener(new StandardAlienShipEvent(race));
-        world.addListener(new SingleStarsystemShipSpawner(race.getDefaultFactory(), 0.5, race.getHomeworld()));
-        race.setHomeworld(homeworld);
         race.setTravelDistance(5);
+        world.addListener(new StandardAlienShipEvent(race));
+        race.setHomeworld(homeworld);
+        world.addListener(new SingleStarsystemShipSpawner(race.getDefaultFactory(), 0.8, race.getHomeworld()));
         world.getRaces().put(race.getName(), race);
+        addWarDataDrop();
     }
 }

@@ -1,0 +1,15 @@
+{
+    "id": "zorsan_war_data_collected",
+    "iconName": "scientist_dialog",
+    "statements": {
+        "0": {
+            "id": 0,
+            "replies": [
+                {
+                    "targetStatementId": -1,
+                    "replyText": "0"
+                }
+            ]
+        }
+    }
+}

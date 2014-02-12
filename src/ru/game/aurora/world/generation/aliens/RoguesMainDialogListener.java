@@ -4,8 +4,13 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
-import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
+import ru.game.aurora.world.planet.DungeonEntrance;
+import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetObject;
+import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Map;
 
@@ -33,15 +38,20 @@ public class RoguesMainDialogListener implements DialogListener
             world.getGlobalVariables().remove("rogues.fine");
         }
 
-        AlienRace rogueRace = world.getRaces().get(RoguesGenerator.NAME);
-
         if (flags.containsKey("rogues_altar.withdraw")) {
             world.getPlayer().getJournal().addQuestEntries("rogues_altar", "withdraw");
-            //TODO: remove rogues from altar on the moon
+            StarSystem humanityHomeworld = world.getRaces().get(HumanityGenerator.NAME).getHomeworld();
+
+            Planet moon = (Planet) humanityHomeworld.getPlanets()[2].getSatellites().get(0);
+            for (PlanetObject po : moon.getPlanetObjects()) {
+                if (po instanceof DungeonEntrance) {
+                    ((DungeonEntrance) po).setLocked("rogues_altar_abandoned");
+                }
+            }
         }
 
-        if (flags.containsKey("zorsan.quest")) {
-            // TODO: start a quest
+        if (flags.containsKey("zorsan.quest") && !world.getGlobalVariables().containsKey("zorsan.war_preparations")) {
+            ZorsanGenerator.addWarDataDrop();
         }
 
         if (flags.containsKey("war_help")) {

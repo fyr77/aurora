@@ -77,7 +77,7 @@ klisk_trade.coords - coordinates of target system
 Zorsan
 
 zorsan.homeworld - string representing star coordinates of a Zorsan homeworld
-zorsan.war_preparations
+zorsan.war_preparations - if player knows that zorsan are going to attack earth
 
 ==============================
 

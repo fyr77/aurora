@@ -4,6 +4,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Dungeon;
@@ -17,7 +19,7 @@ import ru.game.aurora.world.World;
  */
 public class DungeonEntrance extends BasePositionable implements PlanetObject
 {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private String sprite;
 
@@ -25,11 +27,24 @@ public class DungeonEntrance extends BasePositionable implements PlanetObject
 
     private Planet myPlanet;
 
+    private boolean canBeEntered = true;
+
+    private String messageIdIfCanNotEnter = null;
+
     public DungeonEntrance(Planet myPlanet, int x, int y, String sprite, Dungeon dungeon) {
         super(x, y);
         this.myPlanet = myPlanet;
         this.sprite = sprite;
         this.dungeon = dungeon;
+    }
+
+    /**
+     * Locks this dungeon. Player can not enter it, and is shown a message instead
+     */
+    public void setLocked(String messageId)
+    {
+        canBeEntered = false;
+        messageIdIfCanNotEnter = messageId;
     }
 
     @Override
@@ -48,7 +63,11 @@ public class DungeonEntrance extends BasePositionable implements PlanetObject
 
     @Override
     public void onPickedUp(World world) {
-        dungeon.enter(world);
+        if (canBeEntered) {
+            dungeon.enter(world);
+        } else {
+            GameLogger.getInstance().logMessage(Localization.getText("gui", messageIdIfCanNotEnter));
+        }
     }
 
     @Override

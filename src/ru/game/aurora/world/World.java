@@ -206,6 +206,16 @@ public class World implements Serializable {
         currentDialog.enter(this);
     }
 
+    public void addOverlayWindow(Dialog d, Map<String, String> flags)
+    {
+        GUI.getInstance().pushCurrentScreen();
+        d.enter(this);
+        d.setFlags(flags);
+        Nifty nifty = GUI.getInstance().getNifty();
+        ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).pushDialog(d);
+        nifty.gotoScreen("dialog_screen");
+    }
+
     public void addOverlayWindow(Dialog d) {
         GUI.getInstance().pushCurrentScreen();
         d.enter(this);

@@ -75,7 +75,8 @@ public class EvacuationState implements Serializable {
     }
 
     public boolean isGameOver(World world) {
-        return world.getTurnCount() >= turnObliteratorArrives;
+        //todo: this is for Alpha, obliterator never arrives
+        return false;//world.getTurnCount() >= turnObliteratorArrives;
     }
 
     public void showEndGameScreen(World world) {
