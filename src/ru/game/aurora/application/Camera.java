@@ -20,8 +20,10 @@ public class Camera implements Serializable {
      * Coordinates for upper-left corner of draw area
      */
     private int viewportX;
-
     private int viewportY;
+
+    private int initialViewportX;
+    private int initialViewportY;
 
     private float tileWidth;
 
@@ -42,6 +44,8 @@ public class Camera implements Serializable {
     public Camera(int viewportX, int viewportY, int vieportWidth, int viewportHeight, float tileWidth, float tileHeight) {
         this.viewportX = viewportX;
         this.viewportY = viewportY;
+        this.initialViewportX = viewportX;
+        this.initialViewportY = viewportY;
         this.viewportTilesX = vieportWidth;
         this.viewportTilesY = viewportHeight;
         this.tileHeight = tileHeight;
@@ -173,4 +177,16 @@ public class Camera implements Serializable {
         return viewportTilesY;
     }
 
+    public void setViewportX(int viewportX) {
+        this.viewportX = viewportX;
+    }
+
+    public void setViewportY(int viewportY) {
+        this.viewportY = viewportY;
+    }
+
+    public void resetViewPort() {
+        this.viewportX = initialViewportX;
+        this.viewportY = initialViewportY;
+    }
 }

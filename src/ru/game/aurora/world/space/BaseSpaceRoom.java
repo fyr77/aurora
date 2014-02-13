@@ -18,6 +18,8 @@ public class BaseSpaceRoom implements Room {
 
     protected Player player;
 
+    private int xClick = 0, yClick = 0;
+
     @Override
     public void enter(World world) {
         this.player = world.getPlayer();
@@ -25,25 +27,39 @@ public class BaseSpaceRoom implements Room {
 
     @Override
     public void update(GameContainer container, World world) {
+        Camera myCamera = world.getCamera();
+        if (container.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            xClick = container.getInput().getMouseX() - myCamera.getViewportX();
+            yClick = container.getInput().getMouseY() - myCamera.getViewportY();
+        }
+        if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            myCamera.setViewportX(container.getInput().getMouseX() - xClick);
+            myCamera.setViewportY(container.getInput().getMouseY() - yClick);
+        }
         if (!player.getShip().nowMoving()) {
             if (container.getInput().isKeyPressed(Input.KEY_UP)) {
                 player.getShip().moveUp();
-                world.setUpdatedThisFrame(true);
+                shipMove(world);
             }
             if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
                 player.getShip().moveDown();
-                world.setUpdatedThisFrame(true);
+                shipMove(world);
             }
             if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
                 player.getShip().moveLeft();
-                world.setUpdatedThisFrame(true);
+                shipMove(world);
             }
             if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
                 player.getShip().moveRight();
-                world.setUpdatedThisFrame(true);
+                shipMove(world);
             }
         }
         player.getShip().update(container, world);
+    }
+
+    private void shipMove(World world) {
+        world.getCamera().resetViewPort();
+        world.setUpdatedThisFrame(true);
     }
 
     @Override
