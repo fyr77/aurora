@@ -226,11 +226,17 @@ public class WorldGenerator implements Runnable {
      * After this, when player returns to earth, a press-conference will be held, and a few story dialogs shown
      */
     private static final class FirstContactListener extends GameEventListener {
-        private static final long serialVersionUID = -6283783334266117563L;
+        private static final long serialVersionUID = 1L;
+
+        private int counter = 0;
 
         @Override
         public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
             if (ship.getRace() != world.getRaces().get("Humanity")) {
+                if (++counter < 5) {
+                    return false;
+                }
+
                 Dialog d = Dialog.loadFromFile("dialogs/earth_first_return_1.json");
                 d.setListener(new DialogListener() {
                     private static final long serialVersionUID = 4929841605007880780L;

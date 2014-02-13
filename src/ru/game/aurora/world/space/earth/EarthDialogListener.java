@@ -36,6 +36,7 @@ public class EarthDialogListener implements DialogListener {
     @Override
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
+        earth.getDialogFlags().putAll(flags);
         if (returnCode == 1) {
             // player has chosen to dump research info
 

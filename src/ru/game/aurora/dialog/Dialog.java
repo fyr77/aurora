@@ -141,7 +141,7 @@ public class Dialog implements OverlayWindow {
         } else {
             flags.clear();
         }
-        availableReplies = currentStatement.getAvailableReplies(world, flags);
+
         returnValue = 0;
     }
 
@@ -166,9 +166,7 @@ public class Dialog implements OverlayWindow {
     }
 
     public void useReply(World world, int idx) {
-        if (availableReplies == null) {
-            availableReplies = currentStatement.getAvailableReplies(world, flags);
-        }
+        availableReplies = currentStatement.getAvailableReplies(world, flags);
         Reply selectedReply = availableReplies.get(idx);
         currentStatement = statements.get(selectedReply.targetStatementId);
         if (selectedReply.returnValue != 0) {

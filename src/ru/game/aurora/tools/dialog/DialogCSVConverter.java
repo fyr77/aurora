@@ -25,29 +25,39 @@ import java.util.*;
 public class DialogCSVConverter {
     private static final String delimiter = ";";
 
-    private static Condition[] parseConditions(String value) {
+    private static Condition parseSingleCondition(String value) {
         String[] split = value.split("=");
-        Condition[] conditions = new Condition[1];
+        Condition condition;
         if (split.length == 1) {
             int gr = value.indexOf('>');
             int ls = value.indexOf('<');
             if (gr != -1) {
-                conditions[0] = new Condition(value.substring(0, gr), value.substring(gr + 1), Condition.ConditionType.GREATER);
+                condition = new Condition(value.substring(0, gr), value.substring(gr + 1), Condition.ConditionType.GREATER);
             } else if (ls != -1) {
-                conditions[0] = new Condition(value.substring(0, ls), value.substring(ls + 1), Condition.ConditionType.LESS);
+                condition = new Condition(value.substring(0, ls), value.substring(ls + 1), Condition.ConditionType.LESS);
             } else if (split[0].startsWith("!")) {
-                conditions[0] = new Condition(split[0].substring(1), null, Condition.ConditionType.NOT_SET);
+                condition = new Condition(split[0].substring(1), null, Condition.ConditionType.NOT_SET);
             } else {
-                conditions[0] = new Condition(split[0], null, Condition.ConditionType.SET);
+                condition = new Condition(split[0], null, Condition.ConditionType.SET);
             }
         } else {
             if (split[0].endsWith("!")) {
-                conditions[0] = new Condition(split[0].substring(0, split[0].length() - 1), split[1], Condition.ConditionType.NOT_EQUAL);
+                condition = new Condition(split[0].substring(0, split[0].length() - 1), split[1], Condition.ConditionType.NOT_EQUAL);
             } else {
-                conditions[0] = new Condition(split[0], split[1], Condition.ConditionType.EQUAL);
+                condition = new Condition(split[0], split[1], Condition.ConditionType.EQUAL);
             }
         }
-        return conditions;
+
+        return condition;
+    }
+
+    private static Condition[] parseConditions(String value) {
+        String[] parts = value.split("&&");
+        Condition[] result = new Condition[parts.length];
+        for (int i = 0; i < parts.length; ++i) {
+            result[i] = parseSingleCondition(parts[i].trim());
+        }
+        return result;
     }
 
     private static Statement parseStatement(String[] stmtStrings, List<String[]> replyStrings, Context context) throws IOException {

@@ -21,7 +21,7 @@
           "replyText": "2",
           "replyConditions": [
             {
-              "name": "quest_value n",
+              "name": "quest_value_n",
               "type": "SET"
             }
           ]
@@ -32,10 +32,17 @@
           "replyText": "3",
           "replyConditions": [
             {
-              "name": "rogues_beacon.result ",
+              "name": "rogues_beacon.result",
               "type": "SET"
+            },
+            {
+              "name": "beacon_reported",
+              "type": "NOT_SET"
             }
-          ]
+          ],
+          "flags": {
+            "beacon_reported": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -46,8 +53,15 @@
               "name": "bork_blockade.result",
               "value": "withdraw",
               "type": "EQUAL"
+            },
+            {
+              "name": "bork_blockade_reported",
+              "type": "NOT_SET"
             }
-          ]
+          ],
+          "flags": {
+            "bork_blockade_reported": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -58,8 +72,15 @@
               "name": "bork_blockade.result",
               "value": "pay",
               "type": "EQUAL"
+            },
+            {
+              "name": "bork_blockade_reported",
+              "type": "NOT_SET"
             }
-          ]
+          ],
+          "flags": {
+            "bork_blockade_reported": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -70,8 +91,15 @@
               "name": "bork_blockade.result",
               "value": "destroy",
               "type": "EQUAL"
+            },
+            {
+              "name": "bork_blockade_reported",
+              "type": "NOT_SET"
             }
-          ]
+          ],
+          "flags": {
+            "bork_blockade_reported": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -82,8 +110,15 @@
               "name": "klisk_trader_drone.result",
               "value": "withdraw",
               "type": "EQUAL"
+            },
+            {
+              "name": "klisk_trader_drone_reported",
+              "type": "NOT_SET"
             }
-          ]
+          ],
+          "flags": {
+            "klisk_trader_drone_reported": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -94,8 +129,15 @@
               "name": "klisk_trader_drone.result",
               "value": "buy",
               "type": "EQUAL"
+            },
+            {
+              "name": "klisk_trader_drone_reported",
+              "type": "NOT_SET"
             }
-          ]
+          ],
+          "flags": {
+            "klisk_trader_drone_reported": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -106,8 +148,15 @@
               "name": "klisk_trader_drone.result",
               "value": "destroy",
               "type": "EQUAL"
+            },
+            {
+              "name": "klisk_trader_drone_reported",
+              "type": "NOT_SET"
             }
-          ]
+          ],
+          "flags": {
+            "klisk_trader_drone_reported": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -118,8 +167,15 @@
               "name": "rogues_altar.result",
               "value": "withdraw",
               "type": "EQUAL"
+            },
+            {
+              "name": "rogues_altar_reported",
+              "type": "NOT_SET"
             }
-          ]
+          ],
+          "flags": {
+            "rogues_altar_reported": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -130,8 +186,15 @@
               "name": "rogues_altar.result",
               "value": "help",
               "type": "EQUAL"
+            },
+            {
+              "name": "rogues_altar_reported",
+              "type": "NOT_SET"
             }
-          ]
+          ],
+          "flags": {
+            "rogues_altar_reported": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -142,8 +205,15 @@
               "name": "rogues_altar.result",
               "value": "destroy",
               "type": "EQUAL"
+            },
+            {
+              "name": "rogues_altar_reported",
+              "type": "NOT_SET"
             }
-          ]
+          ],
+          "flags": {
+            "rogues_altar_reported": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -178,6 +248,10 @@
               "name": "diplomacy.all_done",
               "value": "0",
               "type": "EQUAL"
+            },
+            {
+              "name": "diplomacy_report",
+              "type": "NOT_SET"
             }
           ],
           "flags": {
@@ -679,15 +753,9 @@
           }
         },
         {
-          "returnValue": 0,
+          "returnValue": 80,
           "targetStatementId": -1,
-          "replyText": "3",
-          "replyConditions": [
-            {
-              "name": "80",
-              "type": "SET"
-            }
-          ]
+          "replyText": "3"
         }
       ]
     },
@@ -764,15 +832,9 @@
           }
         },
         {
-          "returnValue": 0,
+          "returnValue": 80,
           "targetStatementId": -1,
-          "replyText": "2",
-          "replyConditions": [
-            {
-              "name": "80",
-              "type": "SET"
-            }
-          ]
+          "replyText": "2"
         }
       ]
     },
@@ -885,15 +947,9 @@
           }
         },
         {
-          "returnValue": 0,
+          "returnValue": 80,
           "targetStatementId": -1,
-          "replyText": "2",
-          "replyConditions": [
-            {
-              "name": "80",
-              "type": "SET"
-            }
-          ]
+          "replyText": "2"
         }
       ]
     },
@@ -1020,15 +1076,9 @@
           }
         },
         {
-          "returnValue": 0,
+          "returnValue": 80,
           "targetStatementId": -1,
-          "replyText": "2",
-          "replyConditions": [
-            {
-              "name": "80",
-              "type": "SET"
-            }
-          ]
+          "replyText": "2"
         }
       ]
     }

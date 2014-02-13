@@ -32,7 +32,7 @@ public class Condition implements Serializable {
 
     public Condition(String name, String value, ConditionType type) {
         this.name = name.trim();
-        this.value = value.trim();
+        this.value = (value != null) ? value.trim() : null;
         this.type = type;
     }
 

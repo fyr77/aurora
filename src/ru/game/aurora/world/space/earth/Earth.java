@@ -32,13 +32,16 @@ import java.util.Queue;
 
 public class Earth extends Planet {
 
-    private static final long serialVersionUID = 3431652617342589266L;
+    private static final long serialVersionUID = 1L;
 
     private Dialog earthDialog;
 
     private Dialog progressDialog;
 
     private int lastVisitTurn = 0;
+
+    // flags used to control default earth dialog
+    private Map<String, String> dialogFlags = new HashMap<>();
 
     public Earth(World world, StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
         super(world, owner, cat, atmosphere, size, x, y);
@@ -50,6 +53,10 @@ public class Earth extends Planet {
 
     public Dialog getProgressDialog() {
         return progressDialog;
+    }
+
+    public Map<String, String> getDialogFlags() {
+        return dialogFlags;
     }
 
     @Override
@@ -85,9 +92,8 @@ public class Earth extends Planet {
         if (world.getGlobalVariables().containsKey("quest.main.show_earth_dialog")) {
             showObliteratorThreatDialog(world);
         } else {
-            Map<String, String> flags = new HashMap<>();
-            addQuestFlags(world, flags);
-            world.addOverlayWindow(earthDialog, flags);
+            addQuestFlags(world, dialogFlags);
+            world.addOverlayWindow(earthDialog, dialogFlags);
         }
     }
 

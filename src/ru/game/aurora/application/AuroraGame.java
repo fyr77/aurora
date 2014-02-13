@@ -22,9 +22,7 @@ import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.logging.Level;
@@ -52,6 +50,11 @@ public class AuroraGame extends NiftyOverlayGame {
     private static AppGameContainer app;
 
     private static List<Updatable> updatables = new ArrayList<>();
+
+    /*
+    Used for debugging purposes, this set of global variables is added to world state when it is loaded/created
+     */
+    public static Properties debugWorldVariables = null;
 
     public AuroraGame() {
     }
@@ -167,6 +170,13 @@ public class AuroraGame extends NiftyOverlayGame {
                 world = mainMenu.update(camera, gameContainer);
                 if (world != null) {
                     mainMenu = null;
+                    if (debugWorldVariables != null) {
+                        logger.warn("Adding debug variables");
+                        for (Map.Entry<Object, Object> e : debugWorldVariables.entrySet()) {
+                            world.getGlobalVariables().put((String)e.getKey(), (Serializable)e.getValue());
+                        }
+
+                    }
                 }
             } else {
                 world.update(gameContainer);
@@ -255,6 +265,14 @@ public class AuroraGame extends NiftyOverlayGame {
 
         logger.info("Aurora game version " + Version.VERSION + " started");
         final String osName = System.getProperty("os.name");
+
+        if (args.length > 0) {
+            if (args[0].equals("-debugVariables")) {
+                debugWorldVariables = new Properties();
+                debugWorldVariables.load(new FileInputStream(args[1]));
+            }
+        }
+
         String nativePath;
         if (osName.contains("Windows")) {
             nativePath = "native/windows";
