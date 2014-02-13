@@ -51,6 +51,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                world.getGlobalVariables().put("diplomacy.rogues_visited", 0);
                 Dialog newFrameDefault = Dialog.loadFromFile("dialogs/rogues/rogues_admiral_default.json");
                 newFrameDefault.setListener(new RoguesMainDialogListener());
                 frame.setCaptain(new NPC(newFrameDefault));

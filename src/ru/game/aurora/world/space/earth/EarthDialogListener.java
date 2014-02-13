@@ -9,7 +9,12 @@ import ru.game.aurora.dialog.Statement;
 import ru.game.aurora.gui.EarthProgressScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.aliens.BorkGenerator;
+import ru.game.aurora.world.generation.aliens.KliskGenerator;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -71,10 +76,77 @@ public class EarthDialogListener implements DialogListener {
                 GUI.getInstance().getNifty().gotoScreen("earth_progress_screen");
             }
 
-        } else {
+        } else if (returnCode == 0) {
             // return
             world.setCurrentRoom(earth.getOwner());
             GUI.getInstance().getNifty().gotoScreen("star_system_gui");
+        } else if (returnCode == 80) {
+            // give reward for diplomacy quest
+            int score = 0;
+
+            switch ((String)world.getGlobalVariables().get("klisk_trade.result")) {
+                case "perfect":
+                    score += 2;
+                    break;
+                case "good":
+                    score += 1;
+                    break;
+            }
+
+            switch ((String)world.getGlobalVariables().get("bork.diplomacy_test")) {
+                case "injure":
+                    score += 2;
+                    break;
+                case "miss":
+                    score += 1;
+                    break;
+            }
+
+            if (world.getReputation().isHostile(RoguesGenerator.NAME, HumanityGenerator.NAME)) {
+                score -= 2;
+            }
+            if (world.getReputation().isHostile(BorkGenerator.NAME, HumanityGenerator.NAME)) {
+                score -= 2;
+            }
+            if (world.getReputation().isHostile(KliskGenerator.NAME, HumanityGenerator.NAME)) {
+                score -= 2;
+            }
+
+            Map<String, String> flagsForNextDialog = new HashMap<>();
+            if (score >= 3) {
+                flagsForNextDialog.put("flag_good", null);
+            } else if (score >= 1) {
+                flagsForNextDialog.put("flag_ok", null);
+            } else {
+                flagsForNextDialog.put("flag_bad", null);
+            }
+
+            final Dialog d = Dialog.loadFromFile("dialogs/diplomacy_quest_results.json");
+            d.setListener(new DialogListener() {
+
+                private static final long serialVersionUID = -2200710202646449526L;
+
+                @Override
+                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                    world.setCurrentRoom(earth.getOwner());
+                    GUI.getInstance().getNifty().gotoScreen("star_system_gui");
+                }
+            });
+            world.addOverlayWindow(d, flagsForNextDialog);
+        }
+
+        // quest stuff
+        if (flags.containsKey("diplomacy_report")) {
+            // player has reported results of diplomacy quest
+            world.getGlobalVariables().put("diplomacy.all_done", 1);
+        }
+
+        if (flags.containsKey("zorsan_war_info_quest")) {
+            world.getGlobalVariables().put("zorsan.escape", 1);
+        }
+
+        if (flags.containsKey("zorsan_war_info_update")) {
+            world.getGlobalVariables().put("zorsan.war_preparations", 1);
         }
 
 

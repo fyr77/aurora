@@ -45,22 +45,27 @@ public class BorkGenerator implements WorldGeneratorPart {
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 Dialog nextDialog;
                 AlienRace humanity = world.getRaces().get(HumanityGenerator.NAME);
+                String variableValue;
                 switch (returnCode) {
                     case 1:
+                        variableValue = "kill";
                         world.getReputation().updateReputation(borkRace.getName(), humanity.getName(), 1);
                         nextDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test_kill.json");
                         break;
                     case 2:
+                        variableValue = "injure";
                         world.getReputation().setReputation(borkRace.getName(), humanity.getName(), 8);
                         nextDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test_injure.json");
                         break;
                     case 3:
+                        variableValue = "miss";
                         nextDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test_miss.json");
                         break;
                     default:
                         throw new IllegalStateException("Unknown bork dialog return value " + returnCode);
                 }
-
+                world.getGlobalVariables().put("bork.diplomacy_test", variableValue);
+                world.getGlobalVariables().put("diplomacy.bork_visited", 0);
                 world.addOverlayWindow(nextDialog);
                 nextDialog.setFlags(flags);
 

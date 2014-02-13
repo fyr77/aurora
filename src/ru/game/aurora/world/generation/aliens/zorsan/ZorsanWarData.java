@@ -28,7 +28,7 @@ public class ZorsanWarData extends BaseSpaceObject
 
         @Override
         public void onCompleted(World world) {
-            world.getGlobalVariables().put("zorsan.war_preparations", true);
+            world.getGlobalVariables().put("zorsan.war_preparations", 0);
         }
     }
 

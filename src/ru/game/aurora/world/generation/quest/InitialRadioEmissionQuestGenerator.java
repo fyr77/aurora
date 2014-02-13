@@ -142,7 +142,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         @Override
         public boolean onPlayerEnteredDungeon(World world, Dungeon dungeon) {
             if (dungeon == beacon) {
-                turns = 100;
+                turns = 500;
             }
             return false;
         }
@@ -265,6 +265,14 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         brownStar.setFirstEnterDialog(Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/rogues/rogue_beacon_found.json")));
 
         Dungeon beaconInternals = new Dungeon(world, new AuroraTiledMap("resources/maps/test.tmx"), brownStar);
+        beaconInternals.getController().setSuccessListener(new IStateChangeListener() {
+            private static final long serialVersionUID = 4018207362752529165L;
+
+            @Override
+            public void stateChanged(World world) {
+                world.getGlobalVariables().put("rogues_beacon.result", "invaded");
+            }
+        });
         beaconInternals.setPlaylistName("dungeon_invasion");
         beaconInternals.setEnterDialog(Dialog.loadFromFile("dialogs/rogues/rogue_beacon_landing.json"));
         beaconInternals.setSuccessDialog(Dialog.loadFromFile("dialogs/rogues/rogues_beacon_explored.json"));
@@ -276,6 +284,8 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         ResearchProjectDesc secondResearch = new StarResearchProject(brownStar);
         secondResearch.setReport(new ResearchReport("star_research", "brown_dwarf_2.report"));
         starInitialResearch.addNextResearch(secondResearch);
+
+        //todo: set 'scanned' result
 
         world.getResearchAndDevelopmentProjects().getEarthResearchProjects().put("solar_energy", new EarthEnergyResearch());
         world.getResearchAndDevelopmentProjects().getResearchProjects().put(secondResearch.getId(), secondResearch);

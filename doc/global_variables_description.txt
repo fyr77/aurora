@@ -44,6 +44,8 @@ rogues.damage_scout_result - outcome of this situation. Either 'help' or 'sold_t
 rogues.fine - number of credits player has to pay for damaging beacon
 rogues.beacon_hostile - set if player failed to settle problem with rogues beacon in a peaceful way, will affect ending
 
+rogues_beacon.result - invaded/scanned
+
 rogues.zorsan_data - quest for retrieving zorsan data. Either 'forged' or 'real'
 rogues.war_help - if hepled player
 ==============================
@@ -77,7 +79,8 @@ klisk_trade.coords - coordinates of target system
 Zorsan
 
 zorsan.homeworld - string representing star coordinates of a Zorsan homeworld
-zorsan.war_preparations - if player knows that zorsan are going to attack earth
+zorsan.war_preparations - if player knows that zorsan are going to attack earth. 0 - when learned about it. 1 - after reported to earth
+zorsan.escape - after player has escaped zorsan attack. 0 after escape, 1  after report on earth
 
 ==============================
 
@@ -104,11 +107,28 @@ rogues_altar.result - outcome of this quest. Can be "destroy" "help" "withdraw"
 klisk trader drone quest
 
 klisk_trader_drone.communicated - if player has talked to a drone
-klisk_trader_drone.result - outcome of this quest. "destroy" "withdraw"
+klisk_trader_drone.result - outcome of this quest. "destroy" "withdraw" "buy"
+
+==============================
+
+Bork
+
+bork.diplomacy_test = kill/injure/miss - result of initial dialog with bork ambassador
 
 ==============================
 
 bork blockade quest
 
 bork_blockade.communicated
-bork_blockade.result - outcome "destroy" "withdraw"
+bork_blockade.result - outcome "destroy" "withdraw" "pay"
+
+=============================
+
+Diplomacy quest
+
+diplomacy.bork_visited
+diplomacy.zorsan_visited
+diplomacy.rogues_visited
+diplomacy.klisk_visited
+
+diplomacy.all_done

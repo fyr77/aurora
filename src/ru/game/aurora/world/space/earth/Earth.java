@@ -26,6 +26,7 @@ import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
@@ -84,7 +85,21 @@ public class Earth extends Planet {
         if (world.getGlobalVariables().containsKey("quest.main.show_earth_dialog")) {
             showObliteratorThreatDialog(world);
         } else {
-            world.addOverlayWindow(earthDialog);
+            Map<String, String> flags = new HashMap<>();
+            addQuestFlags(world, flags);
+            world.addOverlayWindow(earthDialog, flags);
+        }
+    }
+
+    private void addQuestFlags(World world, Map<String, String> flags) {
+        // check for embassies quest
+        if (!world.getGlobalVariables().containsKey("diplomacy.all_done")
+                && world.getGlobalVariables().containsKey("diplomacy.klisk_visited")
+                && world.getGlobalVariables().containsKey("diplomacy.bork_visited")
+                && world.getGlobalVariables().containsKey("diplomacy.zorsan_visited")
+                && world.getGlobalVariables().containsKey("diplomacy.rogues_visited")
+                ) {
+            flags.put("diplomacy.all_done", "0");
         }
     }
 

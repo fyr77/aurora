@@ -31,8 +31,8 @@ public class Condition implements Serializable {
     public final ConditionType type;
 
     public Condition(String name, String value, ConditionType type) {
-        this.name = name;
-        this.value = value;
+        this.name = name.trim();
+        this.value = value.trim();
         this.type = type;
     }
 

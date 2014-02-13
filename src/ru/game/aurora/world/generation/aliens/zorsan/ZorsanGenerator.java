@@ -88,6 +88,8 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     dungeon.setPlaylistName("dungeon_invasion");
                     dungeon.enter(world);
                     world.setCurrentRoom(dungeon);
+                    world.getGlobalVariables().put("zorsan.escape", 0);
+                    world.getGlobalVariables().put("diplomacy.zorsan_visited", 0);
 
                     zorsanFinalDialog.setFlags(dialog.getFlags()); // pass flags from previous dialog to a next one
                     world.getReputation().setHostile(race.getName(), HumanityGenerator.NAME);

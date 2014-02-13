@@ -117,6 +117,7 @@ public class KliskGenerator implements WorldGeneratorPart {
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                world.getGlobalVariables().put("diplomacy.klisk_visited", 0);
                 if (returnCode == 0) {
                     // no quest
                     world.getReputation().updateReputation(KliskGenerator.NAME, HumanityGenerator.NAME, -1);
