@@ -72,6 +72,7 @@ public class Dungeon implements Room, IDungeon {
 
     @Override
     public void enter(World world) {
+        world.getCamera().resetViewPort();
         if (enterDialog == null) {
             enterImpl(world);
         } else {
