@@ -643,8 +643,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
 
             // drawing rect that shows radius of current weapon
-            g.drawRect((camera.getNumTilesX() / 2 - selectedWeaponRange + 1) * camera.getTileWidth()
-                    , (camera.getNumTilesY() / 2 - selectedWeaponRange + 1) * camera.getTileHeight()
+            g.drawRect((camera.getNumTilesX() / 2 - selectedWeaponRange + 1) * camera.getTileWidth() + camera.getViewportX()
+                    , (camera.getNumTilesY() / 2 - selectedWeaponRange + 1) * camera.getTileHeight() + camera.getViewportY()
                     , (2 * selectedWeaponRange - 1) * camera.getTileWidth()
                     , (2 * selectedWeaponRange - 1) * camera.getTileHeight());
 
