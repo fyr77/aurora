@@ -51,6 +51,11 @@ public class IngameMenuController implements Controller {
         GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.game_saved"));
     }
 
+    public void openSettings() {
+        GUI.getInstance().pushCurrentScreen();
+        GUI.getInstance().getNifty().gotoScreen("settings_screen");
+    }
+
     public void exitGame() {
         AuroraGame.showExitConfirmation();
     }

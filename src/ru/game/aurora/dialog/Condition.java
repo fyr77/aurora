@@ -43,9 +43,10 @@ public class Condition implements Serializable {
         }
         switch (type) {
             case SET:
-                return val != null;
+                // do note check val for null, as there can be a null mapping for this name
+                return flags.containsKey(name) || world.getGlobalVariables().containsKey(name);
             case NOT_SET:
-                return val == null;
+                return !flags.containsKey(name) && !world.getGlobalVariables().containsKey(name);
             case EQUAL:
                 return (val != null && val.equals(value));
             case NOT_EQUAL:
