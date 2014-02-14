@@ -6,15 +6,19 @@
         <control id="menu_window" name="window" closeable="false" title="Menu" x="40%" y="30%" width="20%" height="30%">
             <panel childLayout="vertical">
                 <panel id="panel" childLayout="vertical">
-                    <panel height="10%"/>
+                    <panel height="5%"/>
                     <control id="continue_game_button" name="button" label="${gui.main_menu.continue_game}" width="100%" height="20%" controller="ru.game.aurora.gui.IngameMenuController">
                         <interact onClick="continueGame()" />
                     </control>
-                    <panel height="10%"/>
+                    <panel height="5%"/>
                     <control id="save_game_button" name="button" label="${gui.main_menu.save_game}" width="100%" height="20%" controller="ru.game.aurora.gui.IngameMenuController">
                         <interact onClick="saveGame()" />
                     </control>
-                    <panel height="10%"/>
+                    <panel height="5%"/>
+                    <control id="settings_button" name="button" label="${gui.main_menu.settings}" width="100%" controller="ru.game.aurora.gui.IngameMenuController" height="20%">
+                        <interact onClick="openSettings()"/>
+                    </control>
+                    <panel height="5%"/>
                     <control id="exit_game_button" name="button" label="${gui.main_menu.exit_game}" width="100%" height="20%" controller="ru.game.aurora.gui.IngameMenuController">
                         <interact onClick="exitGame()" />
                     </control>
