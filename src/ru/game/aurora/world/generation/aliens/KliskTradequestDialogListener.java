@@ -37,7 +37,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
         // now put player into target star system
 
         Dialog tradeDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_trade.json");
-        tradeDialog.setListener(this);
+        tradeDialog.addListener(this);
 
         world.addOverlayWindow(tradeDialog);
     }
@@ -64,7 +64,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
             if (!ai.isAlive()) {
                 // docked
                 Dialog arrivalDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_arrival.json");
-                arrivalDialog.setListener(KliskTradequestDialogListener.this);
+                arrivalDialog.addListener(KliskTradequestDialogListener.this);
                 target.setCaptain(new NPC(arrivalDialog));
             }
         }
@@ -143,7 +143,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
         }
 
         Dialog d = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_captain.json");
-        d.setListener(this);
+        d.addListener(this);
         world.addOverlayWindow(d);
         isAlive = false;
         return true;

@@ -87,7 +87,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
             }
 
             final Dialog d = Dialog.loadFromFile("dialogs/encounters/rogues_altar_2.json");
-            d.setListener(new DialogListener() {
+            d.addListener(new DialogListener() {
                 private static final long serialVersionUID = 7809964677347861595L;
 
                 @Override
@@ -139,7 +139,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
             Dialog earthDialog = Dialog.loadFromFile("dialogs/encounters/rogues_altar_earth.json");
 
-            earthDialog.setListener(new DialogListener() {
+            earthDialog.addListener(new DialogListener() {
 
                 private static final long serialVersionUID = -6367061348256715021L;
 
@@ -178,7 +178,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
             super(x, y, "klisk_drone", klisk, null, "Klisk trade probe");
 
             Dialog commDialog = Dialog.loadFromFile("dialogs/encounters/klisk_trade_probe_comm.json");
-            commDialog.setListener(new DialogListener() {
+            commDialog.addListener(new DialogListener() {
 
                 private static final long serialVersionUID = 6759215425541397109L;
 
@@ -223,7 +223,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
             world.getPlayer().getJournal().addQuest(new JournalEntry("klisk_trade_drone", "start"));
 
             Dialog earthDialog = Dialog.loadFromFile("dialogs/encounters/klisk_trade_probe_earth.json");
-            earthDialog.setListener(new DialogListener() {
+            earthDialog.addListener(new DialogListener() {
                 private static final long serialVersionUID = 6759215425541397109L;
 
                 @Override
@@ -290,7 +290,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
             world.getPlayer().getJournal().addQuest(new JournalEntry("bork_blockade", "desc"));
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/bork_blockade_enter.json"));
             Dialog earthDialog = Dialog.loadFromFile("dialogs/encounters/bork_blockade_earth.json");
-            earthDialog.setListener(new DialogListener() {
+            earthDialog.addListener(new DialogListener() {
                 private static final long serialVersionUID = -2735450899833830131L;
 
                 @Override

@@ -31,14 +31,14 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart {
         final GardenersShip gardenerShip = new GardenersShip(0, 0, gardenerRace.getShipSprite(), gardenerRace, null, "Sequoia");
         gardenerShip.setAi(null);
         final Dialog dialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_1.json"));
-        dialog.setListener(new DialogListener() {
+        dialog.addListener(new DialogListener() {
             private static final long serialVersionUID = -743686006546787750L;
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
                 Dialog secondDialog = Dialog.loadFromFile("dialogs/gardener_2.json");
-                secondDialog.setListener(new DialogListener() {
+                secondDialog.addListener(new DialogListener() {
                     private static final long serialVersionUID = -1475155421006956885L;
 
                     @Override

@@ -34,10 +34,10 @@ public class BorkGenerator implements WorldGeneratorPart {
         Dialog landDialog = Dialog.loadFromFile("dialogs/bork/bork_planet_land.json");
         Dialog transferDialog = Dialog.loadFromFile("dialogs/bork/bork_planet_transfer.json");
         Dialog testDialog = Dialog.loadFromFile("dialogs/bork/bork_embassy_test.json");
-        landDialog.setListener(new NextDialogListener(transferDialog));
-        transferDialog.setListener(new NextDialogListener(testDialog));
+        landDialog.addListener(new NextDialogListener(transferDialog));
+        transferDialog.addListener(new NextDialogListener(testDialog));
 
-        testDialog.setListener(new DialogListener() {
+        testDialog.addListener(new DialogListener() {
 
             private static final long serialVersionUID = 6603409563932739582L;
 
@@ -69,7 +69,7 @@ public class BorkGenerator implements WorldGeneratorPart {
                 world.addOverlayWindow(nextDialog);
                 nextDialog.setFlags(flags);
 
-                nextDialog.setListener(new DialogListener() {
+                nextDialog.addListener(new DialogListener() {
                     private static final long serialVersionUID = 8232477058890497167L;
 
                     @Override

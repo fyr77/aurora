@@ -16,6 +16,7 @@ import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
@@ -90,8 +91,8 @@ public class DialogController implements ScreenController {
             if (prevScreen != null) {
                 GUI.getInstance().getNifty().gotoScreen(prevScreen);
             }
-            if (d.getListener() != null) {
-                d.getListener().onDialogEnded(world, d, d.getReturnValue(), d.getFlags());
+            for (DialogListener listener : d.getListeners()) {
+                listener.onDialogEnded(world, d, d.getReturnValue(), d.getFlags());
             }
             d.enter(world);
         } else {

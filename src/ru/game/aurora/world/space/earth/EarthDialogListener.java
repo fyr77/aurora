@@ -123,7 +123,7 @@ public class EarthDialogListener implements DialogListener {
             }
 
             final Dialog d = Dialog.loadFromFile("dialogs/diplomacy_quest_results.json");
-            d.setListener(new DialogListener() {
+            d.addListener(new DialogListener() {
 
                 private static final long serialVersionUID = -2200710202646449526L;
 

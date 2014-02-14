@@ -47,8 +47,8 @@ public class Earth extends Planet {
         super(world, owner, cat, atmosphere, size, x, y);
         earthDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_dialog.json"));
         progressDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_progress_dialog.json"));
-        progressDialog.setListener(new EarthProgressDialogListener(this));
-        earthDialog.setListener(new EarthDialogListener(this));
+        progressDialog.addListener(new EarthProgressDialogListener(this));
+        earthDialog.addListener(new EarthDialogListener(this));
     }
 
     public Dialog getProgressDialog() {
@@ -113,7 +113,7 @@ public class Earth extends Planet {
         world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/earth_obliterator_warning_1.json"));
         world.addOverlayWindow(new StoryScreen("story/obliterator.json"));
         Dialog last = Dialog.loadFromFile("dialogs/quest/main/earth_obliterator_warning_2.json");
-        last.setListener(new DialogListener() {
+        last.addListener(new DialogListener() {
 
             private static final long serialVersionUID = -374777902752182404L;
 

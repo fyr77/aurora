@@ -46,7 +46,7 @@ public class KliskGenerator implements WorldGeneratorPart {
 
     private Dialog createDefaultKliskPlanetDialog(World world) {
         Dialog d = Dialog.loadFromFile("dialogs/klisk/klisk_planet_default.json");
-        d.setListener(new DialogListener() {
+        d.addListener(new DialogListener() {
             private static final long serialVersionUID = 4082728827280648178L;
 
             @Override
@@ -111,8 +111,8 @@ public class KliskGenerator implements WorldGeneratorPart {
         Dialog startDialog = Dialog.loadFromFile("dialogs/klisk/klisk_station_start.json");
 
         Dialog ambassadorDialog = Dialog.loadFromFile("dialogs/klisk/klisk_station_main.json");
-        startDialog.setListener(new NextDialogListener(ambassadorDialog));
-        ambassadorDialog.setListener(new DialogListener() {
+        startDialog.addListener(new NextDialogListener(ambassadorDialog));
+        ambassadorDialog.addListener(new DialogListener() {
             private static final long serialVersionUID = 4082728827280648178L;
 
             @Override
@@ -165,7 +165,7 @@ public class KliskGenerator implements WorldGeneratorPart {
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile("dialogs/klisk_1.json");
         kliskRace = new AlienRace(NAME, "klisk_ship", mainDialog);
-        mainDialog.setListener(new DialogListener() {
+        mainDialog.addListener(new DialogListener() {
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
@@ -184,7 +184,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                 }
 
                 Dialog newDefaultDialog = Dialog.loadFromFile("dialogs/klisk_main.json");
-                newDefaultDialog.setListener(new KliskMainDialogListener(kliskRace));
+                newDefaultDialog.addListener(new KliskMainDialogListener(kliskRace));
                 kliskRace.setDefaultDialog(newDefaultDialog);
             }
         });

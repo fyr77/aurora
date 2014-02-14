@@ -119,7 +119,7 @@ public class MainMenuController implements ScreenController {
 
     private Dialog createInitialDialog() {
         final Dialog gameStartDialog = Dialog.loadFromFile("dialogs/tutorials/game_start_tutorial.json");
-        gameStartDialog.setListener(new DialogListener() {
+        gameStartDialog.addListener(new DialogListener() {
             private static final long serialVersionUID = 3479062521122587288L;
 
             @Override
@@ -129,7 +129,7 @@ public class MainMenuController implements ScreenController {
                     case 3:
                         d = Dialog.loadFromFile("dialogs/tutorials/marine_intro.json");
                         world.getGlobalVariables().put("crew.military", 1);
-                        d.setListener(new DialogListener() {
+                        d.addListener(new DialogListener() {
                             private static final long serialVersionUID = -7928559144883640398L;
 
                             @Override
@@ -146,7 +146,7 @@ public class MainMenuController implements ScreenController {
                     case 2:
                         d = Dialog.loadFromFile("dialogs/tutorials/engineer_intro.json");
                         world.getGlobalVariables().put("crew.engineer", 1);
-                        d.setListener(new DialogListener() {
+                        d.addListener(new DialogListener() {
 
                             private static final long serialVersionUID = -5149956426932570110L;
 
@@ -165,7 +165,7 @@ public class MainMenuController implements ScreenController {
                     case 1:
                         d = Dialog.loadFromFile("dialogs/tutorials/scientist_intro.json");
                         world.getGlobalVariables().put("crew.scientist", 1);
-                        d.setListener(new DialogListener() {
+                        d.addListener(new DialogListener() {
                             private static final long serialVersionUID = 3028202497230253046L;
 
                             @Override

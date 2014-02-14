@@ -21,16 +21,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Dialog implements OverlayWindow {
 
     private static final Logger logger = LoggerFactory.getLogger(Dialog.class);
 
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 3L;
 
     private String id;
 
@@ -50,7 +47,7 @@ public class Dialog implements OverlayWindow {
      */
     private List<Reply> availableReplies;
 
-    private DialogListener listener;
+    private List<DialogListener> listeners;
 
     // dialog can start from different statements, based on world conditions
     private Map<Integer, Condition> firstStatements;
@@ -84,8 +81,15 @@ public class Dialog implements OverlayWindow {
         this.firstStatements = firstStatements;
     }
 
-    public void setListener(DialogListener listener) {
-        this.listener = listener;
+    public void addListener(DialogListener listener) {
+        if (listeners == null) {
+            listeners = new ArrayList<>();
+        }
+        listeners.add(listener);
+    }
+
+    public void removeListener(DialogListener listener) {
+        listeners.remove(listener);
     }
 
     public String getLocalizedNPCText(World world) {
@@ -234,8 +238,8 @@ public class Dialog implements OverlayWindow {
         this.statements.put(stmt.id, stmt);
     }
 
-    public DialogListener getListener() {
-        return listener;
+    public List<DialogListener> getListeners() {
+        return listeners != null ? listeners : Collections.<DialogListener>emptyList();
     }
 
     public Map<Integer, Statement> getStatements() {

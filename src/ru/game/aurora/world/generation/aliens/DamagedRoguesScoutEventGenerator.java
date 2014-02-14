@@ -51,7 +51,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart
         final NPCShip damagedRogueScout = new NPCShip(0, 0, "rogues_scout_damaged", rogueRace, null, "Rogue scout");
         // event with meeting a damaged rogue ship asking for help
         final Dialog dialog = Dialog.loadFromFile("dialogs/rogues/rogues_damaged_scout.json");
-        dialog.setListener(new DialogListener() {
+        dialog.addListener(new DialogListener() {
 
             private static final long serialVersionUID = -1975417060573768272L;
 

@@ -55,7 +55,7 @@ public class Dungeon implements Room, IDungeon {
 
     public void setEnterDialog(Dialog enterDialog) {
         this.enterDialog = enterDialog;
-        this.enterDialog.setListener(new EnterDialogListener());
+        this.enterDialog.addListener(new EnterDialogListener());
     }
 
     public void setSuccessDialog(Dialog successDialog) {
@@ -72,12 +72,6 @@ public class Dungeon implements Room, IDungeon {
 
     @Override
     public void enter(World world) {
-        if (enterDialog == null) {
-            enterImpl(world);
-        } else {
-            world.addOverlayWindow(enterDialog);
-        }
-        world.onPlayerEnteredDungeon(this);
         LandingParty landingParty = world.getPlayer().getLandingParty();
         if (landingParty == null || !landingParty.canBeLaunched(world) || world.getGlobalVariables().containsKey("tutorial.landing")) {
             // either this is first landing, or landing party can not be launched in current state and must be reconfigured. Show landing party screen
@@ -94,6 +88,12 @@ public class Dungeon implements Room, IDungeon {
             }
         }
 
+        if (enterDialog == null) {
+            enterImpl(world);
+        } else {
+            world.addOverlayWindow(enterDialog);
+        }
+        world.onPlayerEnteredDungeon(this);
     }
 
     private void enterImpl(World world) {

@@ -63,7 +63,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
 
         planets[0] = new AlienHomeworld("zorsan_homeworld", race, initialHomeworldDialog, 3, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK);
-        initialHomeworldDialog.setListener(new DialogListener() {
+        initialHomeworldDialog.addListener(new DialogListener() {
 
             private static final long serialVersionUID = 5653727064261130921L;
 
@@ -71,13 +71,13 @@ public class ZorsanGenerator implements WorldGeneratorPart {
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 if (dialog == initialHomeworldDialog || dialog == continueDialog) {
                     if (returnCode == 0) {
-                        continueDialog.setListener(this);
+                        continueDialog.addListener(this);
                         ((AlienHomeworld) planets[0]).setDialog(continueDialog);
                     }
 
                     if (returnCode == 1) {
                         // descending to planet
-                        planetSightseeingDialog.setListener(this);
+                        planetSightseeingDialog.addListener(this);
                         world.addOverlayWindow(planetSightseeingDialog);
                     }
                 } else if (dialog == planetSightseeingDialog) {

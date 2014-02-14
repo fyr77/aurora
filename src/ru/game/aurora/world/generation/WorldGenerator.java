@@ -238,13 +238,13 @@ public class WorldGenerator implements Runnable {
                 }
 
                 Dialog d = Dialog.loadFromFile("dialogs/earth_first_return_1.json");
-                d.setListener(new DialogListener() {
+                d.addListener(new DialogListener() {
                     private static final long serialVersionUID = 4929841605007880780L;
 
                     @Override
                     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                         Dialog pressConference = Dialog.loadFromFile("dialogs/earth_first_return_2.json");
-                        pressConference.setListener(new DialogListener() {
+                        pressConference.addListener(new DialogListener() {
                             private static final long serialVersionUID = 7949033555418969959L;
 
                             @Override

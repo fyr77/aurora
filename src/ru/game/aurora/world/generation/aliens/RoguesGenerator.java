@@ -43,17 +43,17 @@ public class RoguesGenerator implements WorldGeneratorPart {
 
         Dialog frameDialog = Dialog.loadFromFile("dialogs/rogues/rogues_mothership_first_time.json");
         Dialog admiralDialog = Dialog.loadFromFile("dialogs/rogues/rogues_admiral_first.json");
-        frameDialog.setListener(new NextDialogListener(admiralDialog));
+        frameDialog.addListener(new NextDialogListener(admiralDialog));
 
 
-        admiralDialog.setListener(new DialogListener() {
+        admiralDialog.addListener(new DialogListener() {
             private static final long serialVersionUID = -1121310501064131337L;
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 world.getGlobalVariables().put("diplomacy.rogues_visited", 0);
                 Dialog newFrameDefault = Dialog.loadFromFile("dialogs/rogues/rogues_admiral_default.json");
-                newFrameDefault.setListener(new RoguesMainDialogListener());
+                newFrameDefault.addListener(new RoguesMainDialogListener());
                 frame.setCaptain(new NPC(newFrameDefault));
 
                 world.addOverlayWindow(newFrameDefault);
