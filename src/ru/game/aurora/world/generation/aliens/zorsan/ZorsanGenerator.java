@@ -14,6 +14,7 @@ import ru.game.aurora.world.Dungeon;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
+import ru.game.aurora.world.generation.quest.EmbassiesQuest;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
@@ -89,6 +90,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     dungeon.enter(world);
                     world.setCurrentRoom(dungeon);
                     world.getGlobalVariables().put("zorsan.escape", 0);
+                    EmbassiesQuest.updateJournal(world, "zorsan");
                     world.getGlobalVariables().put("diplomacy.zorsan_visited", 0);
 
                     zorsanFinalDialog.setFlags(dialog.getFlags()); // pass flags from previous dialog to a next one

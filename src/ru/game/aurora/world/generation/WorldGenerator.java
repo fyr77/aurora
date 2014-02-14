@@ -13,12 +13,8 @@ import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GlobalThreadPool;
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.dialog.DialogListener;
-import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.CrewChangeListener;
-import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.GardenerGenerator;
@@ -27,19 +23,18 @@ import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.generation.quest.ColonyPlanetSearchListener;
-import ru.game.aurora.world.generation.quest.InitialRadioEmissionQuestGenerator;
-import ru.game.aurora.world.generation.quest.LastBeaconQuestGenerator;
-import ru.game.aurora.world.generation.quest.MainQuestGenerator;
+import ru.game.aurora.world.generation.quest.*;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.quest.Journal;
 import ru.game.aurora.world.quest.JournalEntry;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Future;
 
 /**
@@ -61,6 +56,7 @@ public class WorldGenerator implements Runnable {
             , new MainQuestGenerator()
             , new LastBeaconQuestGenerator()
             , new ColonyPlanetSearchListener()
+            , new EmbassiesQuest()
     };
 
     private static final WorldGeneratorPart[] alienGenerators = {
@@ -221,55 +217,6 @@ public class WorldGenerator implements Runnable {
         }
     }
 
-    /**
-     * This is listener for a first contact with any alien ship
-     * After this, when player returns to earth, a press-conference will be held, and a few story dialogs shown
-     */
-    private static final class FirstContactListener extends GameEventListener {
-        private static final long serialVersionUID = 1L;
-
-        private int counter = 0;
-
-        @Override
-        public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
-            if (ship.getRace() != world.getRaces().get("Humanity")) {
-                if (++counter < 5) {
-                    return false;
-                }
-
-                Dialog d = Dialog.loadFromFile("dialogs/earth_first_return_1.json");
-                d.addListener(new DialogListener() {
-                    private static final long serialVersionUID = 4929841605007880780L;
-
-                    @Override
-                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                        Dialog pressConference = Dialog.loadFromFile("dialogs/earth_first_return_2.json");
-                        pressConference.addListener(new DialogListener() {
-                            private static final long serialVersionUID = 7949033555418969959L;
-
-                            @Override
-                            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                                // based on player replies in this dialog, different private messages are sent
-                                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("press_conference_" + flags.get("message"), "news"));
-                                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("press_conference_common", "news"));
-                            }
-                        });
-                        world.addOverlayWindow(pressConference);
-
-                        world.getPlayer().getJournal().addQuestEntries("embassies", "start");
-                    }
-                });
-
-
-                world.getPlayer().getEarthState().getEarthSpecialDialogs().add(d);
-                isAlive = false;
-                return true;
-            }
-            return false;
-        }
-    }
-
-
     private void createMisc(World world) {
         Journal journal = world.getPlayer().getJournal();
         journal.addCodex(new JournalEntry("aurora_desc", "1"));
@@ -279,8 +226,6 @@ public class WorldGenerator implements Runnable {
 
         journal.addQuest(new JournalEntry("colony_search", "start"));
         journal.addQuest(new JournalEntry("last_beacon", "start"));
-
-        world.addListener(new FirstContactListener());
     }
 
     // perform some fast initialization in gui thread

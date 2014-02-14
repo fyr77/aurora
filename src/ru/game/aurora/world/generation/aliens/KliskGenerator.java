@@ -22,6 +22,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
+import ru.game.aurora.world.generation.quest.EmbassiesQuest;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.*;
 
@@ -61,7 +62,8 @@ public class KliskGenerator implements WorldGeneratorPart {
 
                 if (world.getGlobalVariables().containsKey("klisk_trade.result")) {
                     int repDelta = 0;
-                    switch ((String) world.getGlobalVariables().get("klisk_trade.result")) {
+                    final String tradeResult = (String) world.getGlobalVariables().get("klisk_trade.result");
+                    switch (tradeResult) {
                         case "perfect":
                             repDelta = 2;
                             break;
@@ -72,7 +74,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                             repDelta = -1;
                             break;
                     }
-
+                    EmbassiesQuest.updateJournal(world, "klisk_" + tradeResult);
                     world.getReputation().updateReputation(KliskGenerator.NAME, HumanityGenerator.NAME, repDelta);
                     world.getGlobalVariables().remove("klisk_trade.result");
                 }
@@ -90,7 +92,7 @@ public class KliskGenerator implements WorldGeneratorPart {
         ship.setAi(new LeaveSystemAI());
         ship.setPos(kliskPlanet.getX() - 1, kliskPlanet.getY() + 1);
         world.getCurrentStarSystem().getShips().add(ship);
-
+        world.getPlayer().getJournal().addQuestEntries("klisk_trade", "start");
         world.addListener(new KliskTradequestDialogListener(targetSystem));
     }
 

@@ -31,6 +31,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
         if (returnCode == 0) {
             // player refused to perform trading
             world.getGlobalVariables().put("klisk_trade.result", "refused");
+            world.getPlayer().getJournal().addQuestEntries("klisk_trade", "refused");
             return;
         }
 
@@ -38,7 +39,6 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
 
         Dialog tradeDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_trade.json");
         tradeDialog.addListener(this);
-
         world.addOverlayWindow(tradeDialog);
     }
 
@@ -90,6 +90,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
 
         if (returnCode == 1) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_party.json"));
+            world.getPlayer().getJournal().addQuestEntries("klisk_trade", "party");
         }
     }
 
@@ -113,9 +114,10 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
         if (returnCode == 0) {
             // player refused to perform trading
             world.getGlobalVariables().put("klisk_trade.result", "refused");
+            world.getPlayer().getJournal().addQuestEntries("klisk_trade", "refused");
             return;
         }
-
+        world.getPlayer().getJournal().addQuestEntries("klisk_trade", "traded");
         String result;
         if (flags.containsKey("first_good") && flags.containsKey("second_good") && flags.containsKey("third_good")) {
             result = "perfect";

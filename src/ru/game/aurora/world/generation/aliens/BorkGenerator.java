@@ -11,6 +11,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.EarthInvasionGenerator;
+import ru.game.aurora.world.generation.quest.EmbassiesQuest;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.*;
 
@@ -64,6 +65,7 @@ public class BorkGenerator implements WorldGeneratorPart {
                     default:
                         throw new IllegalStateException("Unknown bork dialog return value " + returnCode);
                 }
+                EmbassiesQuest.updateJournal(world, "bork_" + variableValue);
                 world.getGlobalVariables().put("bork.diplomacy_test", variableValue);
                 world.getGlobalVariables().put("diplomacy.bork_visited", 0);
                 world.addOverlayWindow(nextDialog);
