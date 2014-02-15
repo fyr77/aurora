@@ -151,6 +151,7 @@ public class Planet extends BasePlanet implements IDungeon {
 
     @Override
     public void enter(final World world) {
+        world.getCamera().resetViewPort();
         if (shuttle_landing == null) {
             shuttle_landing = ResourceManager.getInstance().getAnimation("shuttle_landing");
             shuttle_landing.setAutoUpdate(false);

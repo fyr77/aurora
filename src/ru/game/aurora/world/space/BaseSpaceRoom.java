@@ -22,6 +22,7 @@ public class BaseSpaceRoom implements Room {
 
     @Override
     public void enter(World world) {
+        world.getCamera().resetViewPort();
         this.player = world.getPlayer();
     }
 
@@ -36,6 +37,10 @@ public class BaseSpaceRoom implements Room {
             myCamera.setViewportX(container.getInput().getMouseX() - xClick);
             myCamera.setViewportY(container.getInput().getMouseY() - yClick);
         }
+        if (container.getInput().isKeyPressed(Input.KEY_HOME)) {
+            myCamera.resetViewPort();
+        }
+
         if (!player.getShip().nowMoving()) {
             if (container.getInput().isKeyPressed(Input.KEY_UP)) {
                 player.getShip().moveUp();

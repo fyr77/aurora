@@ -76,6 +76,9 @@ public class DungeonController implements Serializable {
      */
     private transient PlanetObject target = null;
 
+    private int xClick;
+    private int yClick;
+
     public DungeonController(World world, Room prevRoom, IDungeon myDungeon) {
         this.myDungeon = myDungeon;
         this.prevRoom = prevRoom;
@@ -108,22 +111,22 @@ public class DungeonController implements Serializable {
         if (container.getInput().isKeyPressed(Input.KEY_UP)) {
             y--;
             dy = -1;
-            world.setUpdatedThisFrame(true);
+            partyMove(world);
             actuallyMoved = true;
         } else if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
             y++;
             dy = 1;
-            world.setUpdatedThisFrame(true);
+            partyMove(world);
             actuallyMoved = true;
         } else if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
             x--;
             dx = -1;
-            world.setUpdatedThisFrame(true);
+            partyMove(world);
             actuallyMoved = true;
         } else if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
             x++;
             dx = 1;
-            world.setUpdatedThisFrame(true);
+            partyMove(world);
             actuallyMoved = true;
         }
 
@@ -176,6 +179,10 @@ public class DungeonController implements Serializable {
         // world.getPlayer().getLandingParty().setPos(x, y);
     }
 
+    private void partyMove(World world) {
+        world.getCamera().resetViewPort();
+        world.setUpdatedThisFrame(true);
+    }
 
     public void interactWithObject(World world) {
         int x = world.getPlayer().getLandingParty().getX();
@@ -307,6 +314,18 @@ public class DungeonController implements Serializable {
     }
 
     public void update(GameContainer container, World world) {
+        Camera myCamera = world.getCamera();
+        if (container.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            xClick = container.getInput().getMouseX() - myCamera.getViewportX();
+            yClick = container.getInput().getMouseY() - myCamera.getViewportY();
+        }
+        if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            myCamera.setViewportX(container.getInput().getMouseX() - xClick);
+            myCamera.setViewportY(container.getInput().getMouseY() - yClick);
+        }
+        if (container.getInput().isKeyPressed(Input.KEY_HOME)) {
+            myCamera.resetViewPort();
+        }
         if (currentEffect != null) {
             currentEffect.update(container, world);
             if (currentEffect.isOver()) {

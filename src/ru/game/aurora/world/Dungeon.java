@@ -72,6 +72,7 @@ public class Dungeon implements Room, IDungeon {
 
     @Override
     public void enter(World world) {
+        world.getCamera().resetViewPort();
         LandingParty landingParty = world.getPlayer().getLandingParty();
         if (landingParty == null || !landingParty.canBeLaunched(world) || world.getGlobalVariables().containsKey("tutorial.landing")) {
             // either this is first landing, or landing party can not be launched in current state and must be reconfigured. Show landing party screen
