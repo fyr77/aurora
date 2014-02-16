@@ -1,96 +1,186 @@
 {
-    "id": "rogue_scout.main",
-    "iconName":"rogues_scar_dialog",
-    "statements":{
-        "0":{
-            "id":0,
-            "replies":[
-                {
-                    "targetStatementId":1,
-                    "replyText":"next"
-                },
-                {
-                    "targetStatementId":-1,
-                    "replyText":"end"
-                }
-            ]
-        },
-        "1":{
-            "id":1,
-            "replies":[
-                {
-                    "targetStatementId":2,
-                    "replyText":"next"
-                },
-                {
-                    "targetStatementId":-1,
-                    "replyText":"end"
-                }
-            ]
-        },
-        "2":{
-            "id":2,
-            "replies":[
-                {
-                    "targetStatementId":-1,
-                    "returnValue" : 1,
-                    "replyText":"help"
-                },
-                {
-                    "targetStatementId":3,
-                    "replyText":"price"
-                },
-                {
-                    "targetStatementId":-1,
-                    "replyText":"end"
-                }
-            ]
-        },
-        "3":{
-            "id":3,
-            "replies":[
-                {
-                    "targetStatementId":-1,
-                    "returnValue" : 2,
-                    "replyText":"help"
-                },
-                {
-                    "targetStatementId":4,
-                    "replyText":"not_enough"
-                },
-                {
-                    "targetStatementId":5,
-                    "replyText":"sell"
-                }
-            ]
-        },
-        "4":{
-            "id":4,
-            "replies":[
-                {
-                    "targetStatementId":-1,
-                    "returnValue" : 2,
-                    "replyText":"help"
-                },
-                {
-                    "targetStatementId":-1,
-                    "replyText":"end"
-                },
-                {
-                    "targetStatementId":5,
-                    "replyText":"sell"
-                }
-            ]
-        },
-        "5":{
-            "id":5,
-            "replies":[
-                {
-                    "returnValue" : 100,
-                    "targetStatementId":-1,
-                    "replyText":"end"
-                }
-            ]
+  "id": "rogues_damaged_scout",
+  "iconName": "rogues_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
         }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "2"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 1,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 2,
+          "targetStatementId": -3,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "2"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "1"
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
     }
+  }
 }
