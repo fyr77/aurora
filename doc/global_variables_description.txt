@@ -40,9 +40,10 @@ crew.military
 Relations with rogues:
 
 rogues.damaged_scout_found - set when player finds a damaged rogues scout. Deleted after scout is repaired or sold to Klisk
-rogues.damage_scout_result - outcome of this situation. Either 'help' or 'sold_to_klisk'
+rogues.damage_scout_result - outcome of this situation. Either 'help' or 'sold'
 rogues.fine - number of credits player has to pay for damaging beacon
 rogues.beacon_hostile - set if player failed to settle problem with rogues beacon in a peaceful way, will affect ending
+rogues.homeworld - coordinates of rogues homeworld
 
 rogues_beacon.result - invaded/scanned
 
@@ -66,6 +67,8 @@ klisk.rogues_info
 klisk.bork_info
 
 klisk.war_help - if helped player with weapons against zorsan
+
+klisk.homeworld - coordinates of klisk homeworld
 ============================
 
 quest with trading klisk goods
@@ -114,7 +117,7 @@ klisk_trader_drone.result - outcome of this quest. "destroy" "withdraw" "buy"
 Bork
 
 bork.diplomacy_test = kill/injure/miss - result of initial dialog with bork ambassador
-
+bork.homeworld - coordinates of bork homeworld
 ==============================
 
 bork blockade quest

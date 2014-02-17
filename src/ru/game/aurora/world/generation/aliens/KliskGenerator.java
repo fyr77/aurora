@@ -223,6 +223,7 @@ public class KliskGenerator implements WorldGeneratorPart {
             }
         });
         StarSystem kliskHomeworld = generateKliskHomeworld(world, 15, 15, kliskRace);
+        world.getGlobalVariables().put("klisk.homeworld", "[15, 15]");
         kliskRace.setHomeworld(kliskHomeworld);
 
         world.addListener(new StandardAlienShipEvent(kliskRace));

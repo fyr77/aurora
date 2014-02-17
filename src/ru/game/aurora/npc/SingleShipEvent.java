@@ -20,9 +20,9 @@ public class SingleShipEvent extends GameEventListener {
 
     private static final long serialVersionUID = 8667890627684730845L;
 
-    private double chance;
+    protected double chance;
 
-    private NPCShip ship;
+    protected NPCShip ship;
 
     public SingleShipEvent(double chance, NPCShip ship) {
         this.chance = chance;

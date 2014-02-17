@@ -1,6 +1,6 @@
 {
   "id": "rogues_damaged_scout_shuttle",
-  "iconName": "rogues_dialog",
+  "iconName": "rogues_scar_dialog",
   "statements": {
     "0": {
       "id": 0,
@@ -32,8 +32,13 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 4,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
         }
       ]
     },
@@ -42,10 +47,36 @@
       "replies": [
         {
           "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
           "replyText": "0"
         }
       ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "marine_dialog"
     }
   }
 }

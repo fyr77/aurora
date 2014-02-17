@@ -1,0 +1,14 @@
+{
+    "id": "captured_rogues",
+    "icon" : "rogues_dialog",
+    "report": {
+        "icon" : "rogues_dialog",
+        "text" : "captured_rogues.report"
+    },
+    "makesAvailable" : [],
+    "makesAvailableEngineering" : [],
+    "earthProgress" : [],
+    "score" : 50,
+    "progress" : 30,
+    "initialProgress" : 30
+}

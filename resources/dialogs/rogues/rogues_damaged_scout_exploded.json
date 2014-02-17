@@ -1,6 +1,6 @@
 {
-  "id": "rogues_damaged_scout_repaired",
-  "iconName": "rogues_scar_dialog",
+  "id": "rogues_damaged_scout_exploded",
+  "iconName": "rogues_dialog",
   "statements": {
     "0": {
       "id": 0,

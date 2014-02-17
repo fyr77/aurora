@@ -1,4 +1,4 @@
-package ru.game.aurora.world.generation.aliens;
+package ru.game.aurora.world.generation.aliens.bork;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.ResourceManager;
@@ -103,6 +103,7 @@ public class BorkGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/bork/bork_default_not_aggressive.json"));
+        mainDialog.addListener(new BorkShipDialogListener());
         // TODO: generate agressive bork ships
         final AlienRace borkRace = new AlienRace(NAME, "bork_ship", mainDialog);
 
@@ -130,8 +131,9 @@ public class BorkGenerator implements WorldGeneratorPart {
 
         ss.setPlanets(planets);
         ss.setRadius(Math.max((int) (12 * 1.5), 10));
-        world.getGalaxyMap().addObjectAndSetTile(ss, 13, 2);
-
+        world.getGalaxyMap().addObjectAndSetTile(ss, 13, 20);
+        world.getGlobalVariables().put("bork.homeworld", "[13, 20]");
+        borkRace.setHomeworld(ss);
 
         borkRace.setDefaultFactory(new NPCShipFactory() {
             private static final long serialVersionUID = 8000558666433188574L;

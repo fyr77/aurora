@@ -64,6 +64,9 @@ public class ResearchState implements Serializable {
     }
 
     public void addNewAvailableProject(ResearchProjectDesc desc) {
+        if (desc == null) {
+            return;
+        }
         this.currentProjects.add(new ResearchProjectState(desc));
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.added_new_research"), desc.getName()));
     }

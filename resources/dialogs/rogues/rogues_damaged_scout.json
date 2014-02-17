@@ -1,14 +1,31 @@
 {
   "id": "rogues_damaged_scout",
-  "iconName": "rogues_dialog",
+  "iconName": "rogues_scar_dialog",
   "statements": {
     "0": {
       "id": 0,
       "replies": [
         {
           "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "rogues.damaged_scout_found",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 1,
-          "replyText": "0"
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "rogues.damaged_scout_found",
+              "type": "NOT_SET"
+            }
+          ]
         }
       ]
     },
@@ -36,24 +53,9 @@
       "id": 2,
       "replies": [
         {
-          "returnValue": 1,
-          "targetStatementId": -1,
+          "returnValue": 0,
+          "targetStatementId": 21,
           "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 3,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 1,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "3"
         }
       ]
     },
@@ -179,6 +181,64 @@
           "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "1"
+        }
+      ]
+    },
+    "21": {
+      "id": 21,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "23": {
+      "id": 23,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "22": {
+      "id": 22,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "1"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "24": {
+      "id": 24,
+      "replies": [
+        {
+          "returnValue": 1,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "2"
         }
       ]
     }

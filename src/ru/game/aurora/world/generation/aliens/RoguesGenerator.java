@@ -126,6 +126,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
         });
 
         StarSystem homeworld = generateRoguesWorld(world, 15, 28, rogueRace);
+        world.getGlobalVariables().put("rogues.homeworld", "[15, 28]");
         homeworld.setQuestLocation(true);
         rogueRace.setHomeworld(homeworld);
 

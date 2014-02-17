@@ -1,22 +1,30 @@
 package ru.game.aurora.world.generation.aliens;
 
+import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.dialog.Statement;
+import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.SingleShipEvent;
+import ru.game.aurora.npc.shipai.LeaveSystemAI;
+import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.space.GalaxyMap;
+import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -27,20 +35,57 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart
 {
     private static final long serialVersionUID = 1894996386549484298L;
 
-    private static class MeetDamagedRogueEvent extends SingleShipEvent {
+    public static class MeetDamagedRogueEvent extends SingleShipEvent {
 
         private static final long serialVersionUID = 4954480685679636543L;
 
+        private int counter;
+
+        private StarSystem spawnedStarSystem = null;
+
         public MeetDamagedRogueEvent(NPCShip ship) {
-            super(0.1, ship);
+            super(1.0, ship);
+            setGroups(EventGroup.ENCOUNTER_SPAWN);
+        }
+
+        @Override
+        public boolean onTurnEnded(World world) {
+            if (spawnedStarSystem == null) {
+                return false;
+            }
+
+            if (world.getGlobalVariables().containsKey("rogues.damage_scout_result")) {
+                ship = null;
+                return false;
+            }
+
+            if (counter++ >= Configuration.getIntProperty("quest.damaged_rogue_scout.max_days")) {
+                // player didn't do anything.
+                remove(world);
+            }
+            return false;
+        }
+
+        public void remove(World world) {
+            spawnedStarSystem.getShips().remove(ship);
+            world.getGlobalVariables().remove("rogues.damaged_scout_found");
+            ship = null;
         }
 
         @Override
         public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
-            AlienRace kliskRace = world.getRaces().get("Klisk");
+            if (spawnedStarSystem != null) {
+                return  false;
+            }
 
-            return GalaxyMap.getDistance(ss, kliskRace.getHomeworld()) > kliskRace.getTravelDistance() && super.onPlayerEnterStarSystem(world, ss);
+            boolean spawned = !ss.isQuestLocation() && super.onPlayerEnterStarSystem(world, ss);
+            if (spawned) {
+                spawnedStarSystem = ss;
+            }
+            return spawned;
         }
+
+
     }
 
     @Override
@@ -50,52 +95,108 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart
 
         final NPCShip damagedRogueScout = new NPCShip(0, 0, "rogues_scout_damaged", rogueRace, null, "Rogue scout");
         // event with meeting a damaged rogue ship asking for help
-        final Dialog dialog = Dialog.loadFromFile("dialogs/rogues/rogues_damaged_scout.json");
-        dialog.addListener(new DialogListener() {
+        final Dialog initialDialog = Dialog.loadFromFile("dialogs/rogues/rogues_damaged_scout.json");
+        final Dialog saveByResourceDialog = Dialog.loadFromFile("dialogs/rogues/rogues_damaged_scout_repaired.json");
+
+
+        final DialogListener listener1 = new DialogListener() {
 
             private static final long serialVersionUID = -1975417060573768272L;
 
-            @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
-                if (returnCode == 0) {
-                    return;
-                }
-
-                if (returnCode == 100) {
-                    world.getGlobalVariables().put("rogues.damaged_scout_found", world.getCurrentStarSystem());
-                    return;
-                }
-
-                if (world.getPlayer().getResourceUnits() < 5) {
+            private void saveByResources(World world) {
+                if (world.getPlayer().getResourceUnits() < 10) {
                     GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.not_enough_resources"));
                     return;
                 }
 
-                world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() - 5);
-
-                if (returnCode == 1) {
-                    // player decided to help without reward
-                    world.getReputation().setReputation(rogueRace.getName(), HumanityGenerator.NAME, 2);
-                    world.getGlobalVariables().remove("rogues.damaged_scout_found");
-                } else {
-                    // player decided to help for reward
-                    world.getPlayer().changeCredits(world, 5);
-                    GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.credits_received"), 5));
-                    world.getReputation().setReputation(rogueRace.getName(), HumanityGenerator.NAME, 1);
-                    world.getGlobalVariables().remove("rogues.damaged_scout_found");
-                }
+                world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() - 10);
+                world.addOverlayWindow(saveByResourceDialog);
 
                 world.getGlobalVariables().put("rogues.damage_scout_result", "help");
                 damagedRogueScout.setSprite("rogues_scout");
-                damagedRogueScout.setAi(null);
+                damagedRogueScout.setAi(new LeaveSystemAI());
                 damagedRogueScout.setCaptain(new NPC(
-                        new Dialog("rogue_damaged_scout.after_help", "no_image",
+                        new Dialog("rogue_damaged_scout.after_help", "rogues_scar_dialog",
                                 new Statement(0, "", new Reply(0, -1, "end")))
                 ));
             }
-        });
-        damagedRogueScout.setCaptain(new NPC(dialog));
+
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+
+                if (dialog == initialDialog) {
+                    if (returnCode == 0) {
+                        world.getGlobalVariables().put("rogues.damaged_scout_found", world.getCurrentStarSystem());
+                        return;
+                    }
+
+                    if (returnCode == 1) {
+                        saveByResources(world);
+                    }
+
+                    if (returnCode == 2) {
+                        saveByShuttle(world);
+                    }
+                }
+
+                if (dialog == saveByResourceDialog) {
+                    if (returnCode == 1) {
+                        // player decided to help without reward
+                        world.getReputation().updateReputation(rogueRace.getName(), HumanityGenerator.NAME, 2);
+                        world.getGlobalVariables().remove("rogues.damaged_scout_found");
+                    } else {
+                        // player decided to help for reward
+                        world.getPlayer().changeCredits(world, 5);
+                        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.credits_received"), 5));
+                        world.getReputation().updateReputation(rogueRace.getName(), HumanityGenerator.NAME, 1);
+                        world.getGlobalVariables().remove("rogues.damaged_scout_found");
+                    }
+                }
+
+
+            }
+
+            private void saveByShuttle(World world) {
+                double boomChance = Configuration.getDoubleProperty("quest.damaged_rogue_scout.boom_chance");
+                if (CommonRandom.getRandom().nextDouble() > boomChance) {
+                    // successfully saved
+                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/rogues/rogues_damaged_scout_shuttle.json"));
+                    final ResearchProjectDesc captured_rogues = world.getResearchAndDevelopmentProjects().getResearchProjects().get("captured_rogues");
+                    captured_rogues.addListener(new IStateChangeListener() {
+                        private static final long serialVersionUID = 1125234617698299511L;
+
+                        @Override
+                        public void stateChanged(World world) {
+                            world.getPlayer().getJournal().addCodex(new JournalEntry("rogues", "main"));
+                        }
+                    });
+                    world.getPlayer().getResearchState().addNewAvailableProject(captured_rogues);
+                    world.getGlobalVariables().put("rogues.damage_scout_result", "help");
+                    world.getGlobalVariables().put("rogues.damage_scout_crew_saved", null);
+                    world.getReputation().updateReputation(rogueRace.getName(), HumanityGenerator.NAME, 1);
+                } else {
+                    world.getPlayer().getShip().setEngineers(world.getPlayer().getShip().getEngineers() - 1);
+                    world.getPlayer().getShip().setMilitary(world.getPlayer().getShip().getMilitary() - 1);
+                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/rogues/rogues_damaged_scout_exploded.json"));
+                }
+
+                // remove scout and add explosion
+                for (Iterator<SpaceObject> iter = world.getCurrentStarSystem().getShips().iterator(); iter.hasNext();) {
+                    SpaceObject so = iter.next();
+                    if (so != damagedRogueScout) {
+                        continue;
+                    }
+
+                    iter.remove();
+                    world.getCurrentStarSystem().addEffect(new ExplosionEffect(so.getX(), so.getY(), "ship_explosion", false, true));
+                }
+                world.getGlobalVariables().remove("rogues.damaged_scout_found");
+            }
+        };
+        initialDialog.addListener(listener1);
+        saveByResourceDialog.addListener(listener1);
+        damagedRogueScout.setCaptain(new NPC(initialDialog));
         damagedRogueScout.setAi(null);
         damagedRogueScout.setStationary(true);
 

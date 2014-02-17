@@ -16,10 +16,11 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.CrewChangeListener;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.generation.aliens.BorkGenerator;
+import ru.game.aurora.world.generation.aliens.DamagedRoguesScoutEventGenerator;
 import ru.game.aurora.world.generation.aliens.GardenerGenerator;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
@@ -57,6 +58,7 @@ public class WorldGenerator implements Runnable {
             , new LastBeaconQuestGenerator()
             , new ColonyPlanetSearchListener()
             , new EmbassiesQuest()
+            , new DamagedRoguesScoutEventGenerator()
     };
 
     private static final WorldGeneratorPart[] alienGenerators = {

@@ -9,9 +9,9 @@ package ru.game.aurora.player.research;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.engineering.EngineeringProject;
+import ru.game.aurora.world.Listenable;
 import ru.game.aurora.world.World;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +19,8 @@ import java.util.List;
 /**
  * Base class for research projects
  */
-public abstract class ResearchProjectDesc implements Serializable {
+public abstract class ResearchProjectDesc extends Listenable
+{
     private static final long serialVersionUID = 1L;
 
     /**
@@ -63,7 +64,7 @@ public abstract class ResearchProjectDesc implements Serializable {
 
     public void onCompleted(World world)
     {
-        // nothing
+        super.fireEvent(world);
     }
 
     public void addNextResearch(ResearchProjectDesc desc) {

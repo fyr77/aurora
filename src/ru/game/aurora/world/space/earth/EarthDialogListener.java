@@ -9,9 +9,9 @@ import ru.game.aurora.dialog.Statement;
 import ru.game.aurora.gui.EarthProgressScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.generation.aliens.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 
 import java.util.HashMap;

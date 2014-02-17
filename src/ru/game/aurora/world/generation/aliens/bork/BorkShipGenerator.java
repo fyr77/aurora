@@ -1,4 +1,4 @@
-package ru.game.aurora.world.generation.aliens;
+package ru.game.aurora.world.generation.aliens.bork;
 
 /**
  * Created with IntelliJ IDEA.

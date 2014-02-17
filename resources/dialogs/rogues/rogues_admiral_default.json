@@ -2,70 +2,39 @@
   "id": "rogues_admiral_default",
   "iconName": "rogues_admiral_dialog",
   "statements": {
-    "34": {
-      "id": 34,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0",
-          "flags": {
-            "zorsan.quest": "true"
-          }
-        }
-      ]
-    },
     "0": {
       "id": 0,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 1,
+          "targetStatementId": 100,
           "replyText": "0",
           "replyConditions": [
             {
-              "name": "rogues.zorsan_data",
+              "name": "rogues.damaged_scout_found",
               "type": "SET"
             }
           ]
         },
         {
           "returnValue": 0,
-          "targetStatementId": 25,
-          "replyText": "1",
-          "replyConditions": [
-            {
-              "name": "rogues_altar.moon_checked",
-              "type": "SET"
-            }
-          ]
+          "targetStatementId": 1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "103": {
+      "id": 103,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 103,
+          "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 100,
-          "replyText": "2",
-          "replyConditions": [
-            {
-              "name": "rogues.fine",
-              "type": "SET"
-            }
-          ]
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 28,
-          "replyText": "3",
-          "replyConditions": [
-            {
-              "name": "zorsan.war_preparations",
-              "type": "SET"
-            }
-          ]
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "4"
+          "targetStatementId": 105,
+          "replyText": "1"
         }
       ]
     },
@@ -74,27 +43,8 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 4,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "rogues.zorsan_data",
-              "value": "forged",
-              "type": "EQUAL"
-            }
-          ]
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 2,
-          "replyText": "1",
-          "replyConditions": [
-            {
-              "name": "rogues.zorsan_data",
-              "value": "real",
-              "type": "EQUAL"
-            }
-          ]
+          "targetStatementId": -1,
+          "replyText": "0"
         }
       ]
     },
@@ -102,192 +52,140 @@
       "id": 100,
       "replies": [
         {
-          "returnValue": 100,
-          "targetStatementId": -1,
+          "returnValue": 0,
+          "targetStatementId": 103,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 103,
           "replyText": "1"
         }
       ]
     },
-    "32": {
-      "id": 32,
+    "110": {
+      "id": 110,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 1,
+          "targetStatementId": -1,
           "replyText": "0",
           "replyConditions": [
             {
-              "name": "rogues.zorsan_data",
+              "name": "0",
               "type": "SET"
             }
           ]
         },
         {
           "returnValue": 0,
-          "targetStatementId": 33,
-          "replyText": "1"
-        }
-      ]
-    },
-    "2": {
-      "id": 2,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 3,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "1"
         }
       ]
     },
-    "33": {
-      "id": 33,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 34,
-          "replyText": "0"
-        }
-      ]
-    },
-    "3": {
-      "id": 3,
+    "108": {
+      "id": 108,
       "replies": [
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
-    "4": {
-      "id": 4,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 5,
-          "replyText": "0"
-        }
-      ]
-    },
-    "5": {
-      "id": 5,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 6,
           "replyText": "0",
-          "flags": {
-            "war_help": "true"
-          }
-        }
-      ]
-    },
-    "6": {
-      "id": 6,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
-    "25": {
-      "id": 25,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 26,
-          "replyText": "0"
+          "replyConditions": [
+            {
+              "name": "105",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
-          "targetStatementId": 27,
-          "replyText": "1",
-          "flags": {
-            "rogues_altar.withdraw": "true"
-          }
-        }
-      ]
-    },
-    "27": {
-      "id": 27,
-      "replies": [
-        {
-          "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 28,
           "replyText": "1",
           "replyConditions": [
             {
-              "name": "zorsan.war_preparations",
+              "name": "110",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 109,
+          "replyText": "2"
+        }
+      ]
+    },
+    "109": {
+      "id": 109,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 110,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "105",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 110,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "110",
               "type": "SET"
             }
           ]
         }
       ]
     },
-    "26": {
-      "id": 26,
+    "106": {
+      "id": 106,
       "replies": [
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 28,
-          "replyText": "1",
+          "replyText": "0",
           "replyConditions": [
             {
-              "name": "zorsan.war_preparations",
+              "name": "105",
               "type": "SET"
             }
           ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "110",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 108,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 108,
+          "replyText": "3"
         }
       ]
     },
-    "29": {
-      "id": 29,
+    "105": {
+      "id": 105,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 31,
-          "replyText": "0"
-        }
-      ]
-    },
-    "28": {
-      "id": 28,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 29,
-          "replyText": "0"
-        }
-      ]
-    },
-    "31": {
-      "id": 31,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 32,
+          "targetStatementId": 106,
           "replyText": "0"
         }
       ]
