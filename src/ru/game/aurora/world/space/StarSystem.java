@@ -32,7 +32,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public static final int[] possibleSizes = {1, 2, 3, 4};
 
-    private static final long serialVersionUID = -1L;
+    private static final long serialVersionUID = 2L;
 
     /**
      * Mode for moving. Arrows control ship movement
@@ -80,6 +80,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     private int globalMapY;
 
     private Reputation reputation;
+
+    // if set to false, player can not leave this star system
+    private boolean canBeLeft = true;
 
     private transient ParallaxBackground background;
 
@@ -206,14 +209,21 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 || (y >= radius)
                 || (x < -radius)
                 || (x >= radius)) {
-            GameLogger.getInstance().logMessage(Localization.getText("gui", "space.leaving_star_system"));
-            checkAndSynchronizeReputation(world);
-            world.setCurrentRoom(world.getGalaxyMap());
-            world.getGalaxyMap().enter(world);
-            player.getShip().setPos(globalMapX, globalMapY);
-            // do not keep background
-            background = null;
-            world.onPlayerLeftSystem(this);
+            if (canBeLeft) {
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "space.leaving_star_system"));
+                checkAndSynchronizeReputation(world);
+                world.setCurrentRoom(world.getGalaxyMap());
+                world.getGalaxyMap().enter(world);
+                player.getShip().setPos(globalMapX, globalMapY);
+                // do not keep background
+                background = null;
+                world.onPlayerLeftSystem(this);
+                return;
+            } else {
+                if (world.isUpdatedThisFrame()) {
+                    GameLogger.getInstance().logMessage(Localization.getText("gui", "space.can_not_leave_star_system"));
+                }
+            }
         }
 
         BasePlanet p = getPlanetAtPlayerShipPosition();
@@ -758,5 +768,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public Reputation getReputation() {
         return reputation;
+    }
+
+    public void setCanBeLeft(boolean canBeLeft) {
+        this.canBeLeft = canBeLeft;
     }
 }
