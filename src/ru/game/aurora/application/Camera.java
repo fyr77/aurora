@@ -133,12 +133,12 @@ public class Camera implements Serializable {
         return tileHeight;
     }
 
-    public float getPointTileX(int x) {
-        return x / tileWidth;
+    public int getPointTileX(int x) {
+        return Math.round(x / tileWidth);
     }
 
-    public float getPointTileY(int y) {
-        return y / tileHeight;
+    public int getPointTileY(int y) {
+        return Math.round(y / tileHeight);
     }
 
     public IMovable getTarget() {
