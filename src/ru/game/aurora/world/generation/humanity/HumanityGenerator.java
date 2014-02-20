@@ -8,6 +8,7 @@ package ru.game.aurora.world.generation.humanity;
 
 
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPCShipFactory;
@@ -56,6 +57,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
             @Override
             public NPCShip createShip(int shipType) {
                 NPCShip ship = new NPCShip(0, 0, "earth_transport", humans, null, "Humanity ship");
+                ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"));
                 ship.setAi(new LandAI(solarSystem.getPlanets()[CommonRandom.getRandom().nextInt(solarSystem.getPlanets().length)]));
                 return ship;
             }
