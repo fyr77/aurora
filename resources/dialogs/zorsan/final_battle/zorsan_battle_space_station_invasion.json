@@ -1,0 +1,36 @@
+{
+  "id": "zorsan_battle_space_station_invasion",
+  "iconName": "earth_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  }
+}

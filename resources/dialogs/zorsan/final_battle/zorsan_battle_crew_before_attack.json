@@ -1,0 +1,994 @@
+{
+  "id": "zorsan_battle_crew_before_attack",
+  "iconName": "interior_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 31,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 42,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "4"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "3"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "9": {
+      "id": 9,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "1"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "10": {
+      "id": 10,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "11": {
+      "id": 11,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "3"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "12": {
+      "id": 12,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "13": {
+      "id": 13,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "14": {
+      "id": 14,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "15": {
+      "id": 15,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "16": {
+      "id": 16,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "19": {
+      "id": 19,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "1"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "18": {
+      "id": 18,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "21": {
+      "id": 21,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "1"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "20": {
+      "id": 20,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "23": {
+      "id": 23,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 27,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "22": {
+      "id": 22,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "25": {
+      "id": 25,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "24": {
+      "id": 24,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "27": {
+      "id": 27,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 28,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 29,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 30,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "26": {
+      "id": 26,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "29": {
+      "id": 29,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "28": {
+      "id": 28,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "31": {
+      "id": 31,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 32,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 38,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 39,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "3"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "30": {
+      "id": 30,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "6",
+              "type": "LESS"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "5",
+              "type": "GREATER"
+            }
+          ]
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "34": {
+      "id": 34,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 35,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 36,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 37,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "35": {
+      "id": 35,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 38,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 39,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "32": {
+      "id": 32,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 33,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "33": {
+      "id": 33,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 34,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "101": {
+      "id": 101,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "38": {
+      "id": 38,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 32,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 39,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "98": {
+      "id": 98,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 101,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "39": {
+      "id": 39,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 40,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "99": {
+      "id": 99,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "flag1",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "flag1": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "flag2",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "flag2": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 31,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "flag3",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "flag3": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 42,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "flag4",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "flag4": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "4"
+        }
+      ]
+    },
+    "36": {
+      "id": 36,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 38,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 39,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "37": {
+      "id": 37,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 38,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 39,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "42": {
+      "id": 42,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 43,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 44,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 45,
+          "replyText": "2"
+        }
+      ]
+    },
+    "43": {
+      "id": 43,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 46,
+          "replyText": "0"
+        }
+      ]
+    },
+    "40": {
+      "id": 40,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 41,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "41": {
+      "id": 41,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 32,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 38,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "46": {
+      "id": 46,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 47,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 48,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 49,
+          "replyText": "2"
+        }
+      ]
+    },
+    "47": {
+      "id": 47,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 50,
+          "replyText": "0"
+        }
+      ]
+    },
+    "44": {
+      "id": 44,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 46,
+          "replyText": "0"
+        }
+      ]
+    },
+    "45": {
+      "id": 45,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 46,
+          "replyText": "0"
+        }
+      ]
+    },
+    "50": {
+      "id": 50,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "0"
+        }
+      ]
+    },
+    "49": {
+      "id": 49,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 50,
+          "replyText": "0"
+        }
+      ]
+    },
+    "48": {
+      "id": 48,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 50,
+          "replyText": "0"
+        }
+      ]
+    }
+  }
+}

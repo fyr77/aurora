@@ -2,6 +2,7 @@ package ru.game.aurora.world.quest;
 
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
@@ -26,7 +27,10 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         REINFORCEMENTS_ARRIVED,
         FIRST_WAVE_COMBAT,
         FIRST_WAVE_REINFORCEMENTS,
-        FIRST_WAVE_INTERMISSION
+        FIRST_WAVE_INTERMISSION,
+        ALL_REINFORCEMENTS_ARRIVED,
+        SECOND_WAVE_COMBAT,
+        THIRD_WAVE_COMBAT,
     }
 
     private State state = State.CREATED;
@@ -48,6 +52,10 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         //todo here arrive borks and klisk
     }
 
+    private void summonSecondWaveOfReinforcements(World world) {
+        // todo here arrive rogues
+    }
+
     private void summonFirstAttackWave(World world) {
         // first wave consists of some zorsan ships
         int count = Configuration.getIntProperty("quest.zorsan_final_battle.first_wave_ships");
@@ -58,10 +66,12 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
             currentWave.add(ship);
             solarSystem.getShips().add(ship);
         }
+
+        world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_first_wave.json"));
     }
 
     private void summonFirstAttackWaveReinforcements(World world) {
-        // todo show dialog
+        world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_first_wave_reinforcements.json"));
         int count = Configuration.getIntProperty("quest.zorsan_final_battle.first_wave_ships");
         for (int i = 0; i < count / 2; ++i) {
             NPCShip ship = zorsan.getDefaultFactory().createShip(ZorsanGenerator.CRUISER_SHIP);
@@ -89,7 +99,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
 
         if (state == State.FIRST_WAVE_COMBAT && world.getTurnCount() - turnNumber > 5) {
             // suddenly some ships appear from another side
-            summonFirstWaveOfReinforcements(world);
+            summonFirstAttackWaveReinforcements(world);
             state = State.FIRST_WAVE_REINFORCEMENTS;
             return true;
         }
@@ -105,11 +115,45 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         if (state == State.FIRST_WAVE_REINFORCEMENTS && currentWave.isEmpty()) {
             state = State.FIRST_WAVE_INTERMISSION;
             turnNumber = world.getTurnCount();
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_first_wave_ended.json"));
             return true;
+        }
+
+        if (state == State.FIRST_WAVE_INTERMISSION && world.getTurnCount() - turnNumber > 5) {
+            state = State.ALL_REINFORCEMENTS_ARRIVED;
+            turnNumber = world.getTurnCount();
+            summonSecondWaveOfReinforcements(world);
+            return true;
+        }
+
+        if (state == State.ALL_REINFORCEMENTS_ARRIVED && world.getTurnCount() - turnNumber > 5) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_second_wave.json"));
+            summonSecondAttackWave(world);
+            state = State.SECOND_WAVE_COMBAT;
+            return true;
+        }
+
+        if (state == State.SECOND_WAVE_COMBAT && currentWave.size() <= 1) {
+            summonThirdAttackWave(world);
+            state = State.THIRD_WAVE_COMBAT;
+            return true;
+        }
+
+        if (state == State.THIRD_WAVE_COMBAT && currentWave.size() == 0) {
+            // todo: end dialogs
+            world.getGlobalVariables().remove("zorsan.war_preparations");
         }
 
 
         return false;
+    }
+
+    private void summonThirdAttackWave(World world) {
+
+    }
+
+    private void summonSecondAttackWave(World world) {
+
     }
 
     private NPCShip createVoyager(World world) {
@@ -131,6 +175,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         }
 
         //todo: show dialogs
+        world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_crew_before_attack.json"));
 
         //todo: set earth dialog
 
