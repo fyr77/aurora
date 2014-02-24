@@ -79,8 +79,8 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
-            for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; ++j) {
+        for (int i = camera.getTarget().getY() - camera.getPointTileY(camera.getViewportY()) - 1 - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() - camera.getPointTileY(camera.getViewportY()) + camera.getNumTilesY() / 2; ++i) {
+            for (int j = camera.getTarget().getX() - camera.getPointTileX(camera.getViewportX()) - 1 - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() - camera.getPointTileX(camera.getViewportX()) + camera.getNumTilesX() / 2; ++j) {
 
                 final byte type = surface[EngineUtils.wrap(i, height)][EngineUtils.wrap(j, width)];
                 if ((type & SurfaceTypes.VISIBILITY_MASK) == 0) {
@@ -123,9 +123,9 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
 
         // after all draw mountains
-        for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2; ++i) {
+        for (int i = camera.getTarget().getY() - camera.getPointTileY(camera.getViewportY()) - 1 - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() - camera.getPointTileY(camera.getViewportY()) + camera.getNumTilesY() / 2; ++i) {
             // first draw outer mountains (that have only one neighbour on X)
-            for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2; j++) {
+            for (int j = camera.getTarget().getX() - camera.getPointTileX(camera.getViewportX()) - 1 - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() - camera.getPointTileX(camera.getViewportX()) + camera.getNumTilesX() / 2; j++) {
                 if ((surface[EngineUtils.wrap(i, height)][EngineUtils.wrap(j, width)] & SurfaceTypes.VISIBILITY_MASK) == 0) {
                     continue;
                 }
