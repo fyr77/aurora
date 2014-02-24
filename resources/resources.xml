@@ -55,6 +55,9 @@
     <!-- zorsan -->
     <resource type="image" id="zorsan_scout">sprites/ships/zorsan_scout.png</resource>
     <resource type="image" id="zorsan_cruiser">sprites/ships/zorsan_cruiser.png</resource>
+    <resource type="image" id="zorsan_transport">sprites/ships/zorsan_transport.png</resource>
+    <resource type="image" id="zorsan_station">sprites/ships/zorsan_station.png</resource>
+    <resource type="image" id="zorsan_boss">sprites/ships/zorsan_boss.png</resource>
     <resource type="image" id="zorsan_dialog">sprites/portraits/zorsan.png</resource>
     <resource type="image" id="zorsan_leader_dialog">sprites/portraits/zorsan_leader.png</resource>
 

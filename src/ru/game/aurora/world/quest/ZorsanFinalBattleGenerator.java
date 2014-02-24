@@ -4,6 +4,7 @@ import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPC;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
@@ -46,6 +47,13 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
     private AlienRace zorsan;
 
     private List<NPCShip> currentWave = new LinkedList<>();
+
+    class ZorsanTroopTransport extends NPCShip {
+
+        public ZorsanTroopTransport(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
+            super(x, y, sprite, race, captain, name);
+        }
+    }
 
 
     private void summonFirstWaveOfReinforcements(World world) {
