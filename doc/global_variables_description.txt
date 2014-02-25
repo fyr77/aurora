@@ -118,6 +118,7 @@ Bork
 
 bork.diplomacy_test = kill/injure/miss - result of initial dialog with bork ambassador
 bork.homeworld - coordinates of bork homeworld
+bork.war_help - if bork agree to send reinforcements
 ==============================
 
 bork blockade quest
