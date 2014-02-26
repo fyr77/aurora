@@ -212,4 +212,9 @@ public class Ship extends MovableSprite implements SpaceObject {
             storage.add(o, amount);
         }
     }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }

@@ -7,6 +7,7 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.util.pathfinding.navmesh.Space;
 import ru.game.aurora.application.*;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.ExplosionEffect;
@@ -20,6 +21,11 @@ import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class NPCShip extends MovableSprite implements SpaceObject {
 
@@ -51,6 +57,8 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     // map of loot that can be dropped by this ship, with its chances
     private ProbabilitySet<SpaceObject> loot;
 
+    private TreeMap<SpaceObject, Integer> threatMap = new TreeMap<>();
+
     public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
         super(x, y, sprite);
         this.race = race;
@@ -72,6 +80,8 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     @Override
     public void update(GameContainer container, World world) {
+        Ship player = world.getPlayer().getShip();
+
         super.update(container, world);
 
         if (weapons != null) {
@@ -91,15 +101,25 @@ public class NPCShip extends MovableSprite implements SpaceObject {
             return;
         }
 
-        for (SpaceObject so : ss.getShips()) {
-            if (isHostile(world, so) && (ai == null || !(ai instanceof CombatAI))) {
-                ai = new CombatAI(so);
-            }
+        if (threatMap == null) {
+            threatMap = new TreeMap<>();
         }
 
-        if (isHostile(world, world.getPlayer().getShip()) && (ai == null || !(ai instanceof CombatAI))) {
-            ai = new CombatAI(world.getPlayer().getShip());
+        //наполняем агролист
+        for (SpaceObject so : ss.getShips()) {
+            if (!threatMap.containsKey(so) && isHostile(world, so)) {
+                threatMap.put(so, 1);
+            }
         }
+        if (!threatMap.containsKey(player) && isHostile(world, player)) {
+            threatMap.put(player, 1);
+        }
+
+        //обновляем агро
+        updateThreatMap(world);
+
+        //если кто-то в листе есть - атакуем того, у кого больше всего агро
+        if (getMostThreatTarget() != null) ai = new CombatAI(getMostThreatTarget());
 
         if (ai != null) {
             ai.update(this, world, (StarSystem) world.getCurrentRoom());
@@ -170,13 +190,10 @@ public class NPCShip extends MovableSprite implements SpaceObject {
                 }
             }
         }
-        if (ai == null || !(ai instanceof CombatAI)) {
-            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.hostile"), getName(), attacker.getName()));
-            if (attacker.equals(world.getPlayer().getShip())) {
-                isHostile = true;
-            }
-            ai = new CombatAI(attacker);
-        }
+
+        //агро растёт на двойное значение урона
+        changeThreat(world, attacker, dmg*2);   //todo: balance
+
         if (!currentStarSystem.getReputation().isHostile(race.getName(), attacker.getRace().getName())) {
             currentStarSystem.getReputation().setHostile(race.getName(), attacker.getRace().getName());
         }
@@ -288,5 +305,71 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     public void setCanBeHailed(boolean canBeHailed) {
         this.canBeHailed = canBeHailed;
+    }
+
+    //изменяем значение агро для цели. Если цели нет в списке - добавляем.
+    public void changeThreat(World world, SpaceObject target, int amount) {
+        if (threatMap.containsKey(target)) {
+            int newAmount;
+            if (amount > 0) {
+                newAmount = Math.min(Integer.MAX_VALUE, threatMap.get(target) + amount);    //воизбежание переполнения
+            } else {
+                newAmount = Math.max(1, threatMap.get(target) + amount);    //агро не может быть меньше 1
+            }
+            threatMap.put(target, newAmount);
+        } else {
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.hostile"), getName(), target.getName()));
+            if (target.equals(world.getPlayer().getShip())) {
+                isHostile = true;
+            }
+            threatMap.put(target,  Math.max(1, amount));    //агро не может быть меньше 1
+        }
+    }
+
+    public void removeFromThreatMap(World world, SpaceObject target) {
+        threatMap.remove(target);
+        if (target.equals(world.getPlayer().getShip())) {
+            isHostile = false;
+        }
+        //todo: возможно надо проследить за репутацией
+    }
+
+    //цель для атаки
+    public SpaceObject getMostThreatTarget() {
+        if (!threatMap.isEmpty()) {
+            SpaceObject mostThreat = threatMap.firstKey();
+            int maxValue = threatMap.get(mostThreat);
+            for (Object o : threatMap.entrySet()) {
+                Map.Entry entry = (Map.Entry) o;
+                int nextValue = (int) entry.getValue();
+                if (nextValue > maxValue) {
+                    mostThreat = (SpaceObject) entry.getKey();
+                    maxValue = nextValue;
+                }
+            }
+            return mostThreat;
+        }
+        return null;    //если в агролисте никого нет
+    }
+
+    //происходит каждый ход корабля (как часто - зависит от скорости)
+    public void updateThreatMap(World world) {
+        for (Object o : threatMap.entrySet()) {
+            Map.Entry entry = (Map.Entry) o;
+            SpaceObject ship = (SpaceObject) entry.getKey();
+
+            //немного уменьшается агро каждой цели
+            changeThreat(world, ship, -1);  //todo: balance
+
+            //более близкие (в радиусе 2 ходов) цели становятся привлекательнее
+            if (getDistance(ship) < (speed * 2)) {
+                changeThreat(world, ship, 2);   //todo: balance
+            }
+        }
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }

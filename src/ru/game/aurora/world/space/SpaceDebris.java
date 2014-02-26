@@ -15,6 +15,11 @@ import ru.game.aurora.world.World;
  * Space debris are left after a ship is destroyed
  */
 public class SpaceDebris extends BasePositionable implements SpaceObject {
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
     public static class ResourceDebris extends BaseSpaceObject {
 
         private static final long serialVersionUID = -7839504515681696314L;

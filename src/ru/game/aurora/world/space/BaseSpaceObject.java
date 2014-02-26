@@ -55,4 +55,9 @@ public class BaseSpaceObject extends BasePositionable implements SpaceObject {
     @Override
     public void update(GameContainer container, World world) {
     }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }
