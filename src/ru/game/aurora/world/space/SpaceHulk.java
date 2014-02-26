@@ -130,9 +130,4 @@ public class SpaceHulk extends BasePositionable implements SpaceObject {
     public void setResearchProjectDescs(ResearchProjectDesc... descs) {
         this.researchProjectDescs = descs;
     }
-
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
 }

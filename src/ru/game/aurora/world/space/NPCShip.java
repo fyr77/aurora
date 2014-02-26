@@ -7,7 +7,6 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.util.pathfinding.navmesh.Space;
 import ru.game.aurora.application.*;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.ExplosionEffect;
@@ -21,11 +20,7 @@ import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 public class NPCShip extends MovableSprite implements SpaceObject {
 
@@ -57,7 +52,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     // map of loot that can be dropped by this ship, with its chances
     private ProbabilitySet<SpaceObject> loot;
 
-    private TreeMap<SpaceObject, Integer> threatMap = new TreeMap<>();
+    private HashMap<SpaceObject, Integer> threatMap = new HashMap<>();
 
     public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
         super(x, y, sprite);
@@ -102,7 +97,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         }
 
         if (threatMap == null) {
-            threatMap = new TreeMap<>();
+            threatMap = new HashMap<>();
         }
 
         //наполняем агролист
@@ -337,7 +332,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     //цель для атаки
     public SpaceObject getMostThreatTarget() {
         if (!threatMap.isEmpty()) {
-            SpaceObject mostThreat = threatMap.firstKey();
+            SpaceObject mostThreat = threatMap.keySet().iterator().next();
             int maxValue = threatMap.get(mostThreat);
             for (Object o : threatMap.entrySet()) {
                 Map.Entry entry = (Map.Entry) o;
@@ -357,19 +352,17 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         for (Object o : threatMap.entrySet()) {
             Map.Entry entry = (Map.Entry) o;
             SpaceObject ship = (SpaceObject) entry.getKey();
+            if (ship.isAlive()) {
+                //немного уменьшается агро каждой цели
+                changeThreat(world, ship, -1);  //todo: balance
 
-            //немного уменьшается агро каждой цели
-            changeThreat(world, ship, -1);  //todo: balance
-
-            //более близкие (в радиусе 2 ходов) цели становятся привлекательнее
-            if (getDistance(ship) < (speed * 2)) {
-                changeThreat(world, ship, 2);   //todo: balance
+                //более близкие (в радиусе 2 ходов) цели становятся привлекательнее
+                if (getDistance(ship) < (speed * 2)) {
+                    changeThreat(world, ship, 2);   //todo: balance
+                }
+            } else {
+                removeFromThreatMap(world, ship);
             }
         }
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        return 0;
     }
 }

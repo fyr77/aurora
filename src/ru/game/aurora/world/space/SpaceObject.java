@@ -14,7 +14,7 @@ import ru.game.aurora.world.World;
 /**
  * Base class for stuff that flies in space, everything except planets.
  */
-public interface SpaceObject extends GameObject, Positionable, Comparable {
+public interface SpaceObject extends GameObject, Positionable {
     public void onContact(World world);
 
     public void onAttack(World world, SpaceObject attacker, int dmg);
