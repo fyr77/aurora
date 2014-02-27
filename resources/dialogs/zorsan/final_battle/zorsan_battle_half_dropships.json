@@ -1,0 +1,176 @@
+{
+  "id": "zorsan_battle_half_dropships",
+  "iconName": "earth_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "f1",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "f1": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "f2",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "f2": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "f3",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "f3": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "3"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0",
+          "flags": {
+            "f2": "true"
+          }
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "f1",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "f1": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "f3",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "f3": "true"
+          }
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "f1",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "f1": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "f2",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "f2": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "f3",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "f3": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "3"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  }
+}

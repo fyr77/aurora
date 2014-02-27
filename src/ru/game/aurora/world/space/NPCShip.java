@@ -20,7 +20,9 @@ import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
-import java.util.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class NPCShip extends MovableSprite implements SpaceObject {
 
@@ -187,7 +189,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         }
 
         //агро растёт на двойное значение урона
-        changeThreat(world, attacker, dmg*2);   //todo: balance
+        changeThreat(world, attacker, dmg * 2);   //todo: balance
 
         if (!currentStarSystem.getReputation().isHostile(race.getName(), attacker.getRace().getName())) {
             currentStarSystem.getReputation().setHostile(race.getName(), attacker.getRace().getName());
@@ -317,7 +319,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
             if (target.equals(world.getPlayer().getShip())) {
                 isHostile = true;
             }
-            threatMap.put(target,  Math.max(1, amount));    //агро не может быть меньше 1
+            threatMap.put(target, Math.max(1, amount));    //агро не может быть меньше 1
         }
     }
 
@@ -364,5 +366,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
                 removeFromThreatMap(world, ship);
             }
         }
+    }
+
+    public int getHp() {
+        return hp;
     }
 }

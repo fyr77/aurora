@@ -191,6 +191,10 @@ public class Dialog implements OverlayWindow {
         return iconName;
     }
 
+    public void setIconName(String iconName) {
+        this.iconName = iconName;
+    }
+
     public Statement getCurrentStatement() {
         return currentStatement;
     }

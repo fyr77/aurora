@@ -7,6 +7,7 @@ upon returning to Earth instead of a default one
 
 player.country - which country player has chosen as a primary contributor to Aurora project. Possible values: america asia europe
 credits - amount of credits player has
+voyager - Voyager ship object
 
 ==============================
 Main quest:
