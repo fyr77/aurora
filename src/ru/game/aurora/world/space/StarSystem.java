@@ -374,7 +374,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
             if (!target.isAlive()) {
                 GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
-                ships.remove(target);
                 target = null;
             }
             weapon.setReloadTimeLeft(weapon.getWeaponDesc().reloadTurns);
@@ -453,14 +452,16 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         boolean shipAtSameCoords = false;
-        for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext(); ) {
-            SpaceObject ship = iter.next();
-
+        for (SpaceObject ship : ships) {
             if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
                 shipAtSameCoords = true;
             }
 
             ship.update(container, world);
+        }
+
+        for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext(); ) {
+            SpaceObject ship = iter.next();
             if (!ship.isAlive()) {
                 iter.remove();
             }
