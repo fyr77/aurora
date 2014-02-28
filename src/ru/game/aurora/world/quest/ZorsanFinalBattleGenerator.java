@@ -131,7 +131,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
             }
         }
 
-        if (true == world.getGlobalVariables().get("bork.war_help")) {
+        if (world.getGlobalVariables().containsKey("bork.war_help")) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_bork_arrive.json"));
             final int ships = Configuration.getIntProperty("quest.zorsan_final_battle.bork_ships");
 
@@ -271,6 +271,12 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
 
         if (state == State.THIRD_WAVE_COMBAT && currentWave.size() == 0) {
             // todo: end dialogs
+            solarSystem.setCanBeLeft(true);
+            for (NPCShip s : allyShips) {
+                if (s.isAlive()) {
+                    solarSystem.getShips().remove(s);
+                }
+            }
             world.getGlobalVariables().remove("zorsan.war_preparations");
         }
 
@@ -279,7 +285,19 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
     }
 
     private void summonThirdAttackWave(World world) {
+        int ships = Configuration.getIntProperty("quest.zorsan_final_battle.third_wave_ships");
+        for (int i = 0; i < ships; ++i) {
 
+            NPCShip warship = zorsan.getDefaultFactory().createShip(CommonRandom.getRandom().nextBoolean() ? ZorsanGenerator.CRUISER_SHIP : ZorsanGenerator.SCOUT_SHIP);
+            warship.setPos(1 + 2 * i, solarSystem.getRadius() + CommonRandom.getRandom().nextInt(5));
+            solarSystem.getShips().add(warship);
+        }
+
+        NPCShip bigBoss = new NPCShip(0, 0, "zorsan_boss", zorsan, null, "Zorsan Planet Killer");
+        bigBoss.setHp(30);
+        bigBoss.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"));
+        // todo: add areal damage
+        bigBoss.setPos(-1, solarSystem.getRadius());
     }
 
     private void summonSecondAttackWave(World world) {

@@ -1,0 +1,12 @@
+{
+    "id" : "laser_cannon",
+    "damage" : 4,
+    "name": "",
+    "desc": "",
+    "shotSprite" : "blaster_shot_red",
+    "range" : 3,
+    "image" : "",
+    "shotSound" : "laser_1",
+    "reloadTurns" : 1,
+    "explosionAnimation" : "blaster_explosion_red",
+}
