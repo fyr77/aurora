@@ -106,6 +106,7 @@ public class MainMenuController implements ScreenController {
             });
             GUI.getInstance().getNifty().gotoScreen("intro_dialog");
         }
+
     }
 
     public void exitGame() {

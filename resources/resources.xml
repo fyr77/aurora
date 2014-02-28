@@ -131,7 +131,9 @@
     </resource>
     <resource type="animation" id="plasma_explosion" tw="16" th="16" duration="100">sprites/effects/plasma_explosion.png
     </resource>
-    <resource type="animation" id="blaster_explosion" tw="16" th="16" duration="100">sprites/effects/blaster_explosion_red.png<resource/>
+    <resource type="animation" id="blaster_explosion_red" tw="16" th="16" duration="100">
+        sprites/effects/blaster_explosion_red.png
+    </resource>
     <resource type="animation" id="plasma_particles" tw="8" th="8" duration="100">sprites/effects/plasma_particles.png
     </resource>
     <resource type="animation" id="blaster_explosion" tw="16" th="16" duration="100">

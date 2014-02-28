@@ -1,5 +1,5 @@
 {
-    "id" : "laser_cannon",
+    "id" : "zorsan_cannon",
     "damage" : 4,
     "name": "",
     "desc": "",
@@ -8,5 +8,5 @@
     "image" : "",
     "shotSound" : "laser_1",
     "reloadTurns" : 1,
-    "explosionAnimation" : "blaster_explosion_red",
+    "explosionAnimation" : "blaster_explosion_red"
 }

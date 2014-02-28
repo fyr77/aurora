@@ -13,6 +13,7 @@ import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
+import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.MovableSprite;
@@ -23,6 +24,7 @@ import ru.game.aurora.world.equip.StarshipWeaponDesc;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 public class NPCShip extends MovableSprite implements SpaceObject {
 
@@ -54,7 +56,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     // map of loot that can be dropped by this ship, with its chances
     private ProbabilitySet<SpaceObject> loot;
 
-    private HashMap<SpaceObject, Integer> threatMap = new HashMap<>();
+    private Map<SpaceObject, Integer> threatMap = new WeakHashMap<>();
 
     public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
         super(x, y, sprite);
@@ -115,8 +117,21 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         //обновляем агро
         updateThreatMap(world);
 
-        //если кто-то в листе есть - атакуем того, у кого больше всего агро
-        if (getMostThreatTarget() != null) ai = new CombatAI(getMostThreatTarget());
+        while (!threatMap.isEmpty()) {
+            SpaceObject mostThreatTarget = getMostThreatTarget();
+            if (mostThreatTarget != null) {
+                if (!mostThreatTarget.isAlive()) {
+                    threatMap.remove(mostThreatTarget);
+                    continue;
+                }
+                ai = new CombatAI(mostThreatTarget);
+                break;
+            }
+        }
+
+        if (threatMap.isEmpty()) {
+            ai = new LeaveSystemAI();
+        }
 
         if (ai != null) {
             ai.update(this, world, (StarSystem) world.getCurrentRoom());
@@ -362,8 +377,6 @@ public class NPCShip extends MovableSprite implements SpaceObject {
                 if (getDistance(ship) < (speed * 2)) {
                     changeThreat(world, ship, 2);   //todo: balance
                 }
-            } else {
-                removeFromThreatMap(world, ship);
             }
         }
     }

@@ -49,19 +49,22 @@ public class HumanityGenerator implements WorldGeneratorPart {
         world.getGalaxyMap().getObjects().add(solarSystem);
         world.getGalaxyMap().setTileAt(9, 9, world.getGalaxyMap().getObjects().size() - 1);
 
-        // set custom ship AIs, only land on planets, do not leave star system
-        world.addListener(new StandardAlienShipEvent(humans, new NPCShipFactory() {
-
-            private static final long serialVersionUID = 5580476648808262345L;
+        humans.setDefaultFactory(new NPCShipFactory() {
+            private static final long serialVersionUID = -430786152130330165L;
 
             @Override
             public NPCShip createShip(int shipType) {
                 NPCShip ship = new NPCShip(0, 0, "earth_transport", humans, null, "Humanity ship");
                 ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"));
+                ship.setHp(8);
+                ship.setSpeed(2);
                 ship.setAi(new LandAI(solarSystem.getPlanets()[CommonRandom.getRandom().nextInt(solarSystem.getPlanets().length)]));
                 return ship;
             }
-        }, true));
+        });
+
+        // set custom ship AIs, only land on planets, do not leave star system
+        world.addListener(new StandardAlienShipEvent(humans, humans.getDefaultFactory(), true));
 
         // add welcoming messages
         List<PrivateMessage> pm = world.getPlayer().getEarthState().getMessages();

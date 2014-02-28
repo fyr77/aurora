@@ -176,8 +176,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
      * If player has killed everybody, evidently there is no one left, who could tell that it was player fault, so
      * his rep with other races will not decrease
      */
-    private void checkAndSynchronizeReputation(World world)
-    {
+    private void checkAndSynchronizeReputation(World world) {
         for (SpaceObject so : ships) {
             if (so instanceof NPCShip) {
                 world.getReputation().merge(reputation);
@@ -452,7 +451,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         boolean shipAtSameCoords = false;
-        for (SpaceObject ship : ships) {
+        List<SpaceObject> shipsCopy = new LinkedList<>(ships); //to prevent CMO
+        for (SpaceObject ship : shipsCopy) {
             if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
                 shipAtSameCoords = true;
             }

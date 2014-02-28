@@ -20,9 +20,9 @@ import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.space.AlienHomeworld;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.space.earth.Earth;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -59,7 +59,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
 
     private AlienRace zorsan;
 
-    private AlienHomeworld earth;
+    private Earth earth;
 
     private List<NPCShip> currentWave = new LinkedList<>();
 
@@ -226,7 +226,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
             return true;
         }
 
-        if (state == State.FIRST_WAVE_COMBAT && world.getTurnCount() - turnNumber > 5) {
+        if (state == State.FIRST_WAVE_COMBAT && world.getTurnCount() - turnNumber > 30) {
             // suddenly some ships appear from another side
             summonFirstAttackWaveReinforcements(world);
             state = State.FIRST_WAVE_REINFORCEMENTS;
@@ -339,13 +339,20 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         humanity = world.getRaces().get(HumanityGenerator.NAME);
         zorsan = world.getRaces().get(ZorsanGenerator.NAME);
         solarSystem = humanity.getHomeworld();
-        earth = (AlienHomeworld) solarSystem.getPlanets()[2];
+        earth = (Earth) solarSystem.getPlanets()[2];
         solarSystem.setCanBeLeft(false);
+
+        world.getReputation().setHostile(HumanityGenerator.NAME, ZorsanGenerator.NAME);
+        world.getReputation().setHostile(ZorsanGenerator.NAME, HumanityGenerator.NAME);
+
+        solarSystem.getReputation().setHostile(HumanityGenerator.NAME, ZorsanGenerator.NAME);
+        solarSystem.getReputation().setHostile(ZorsanGenerator.NAME, HumanityGenerator.NAME);
+
         // create humanity ships
         int humanityShips = Configuration.getIntProperty("quest.zorsan_final_battle.humanity_ships");
         for (int i = 0; i < humanityShips; ++i) {
             NPCShip defender = humanity.getDefaultFactory().createShip(0);
-            solarSystem.setRandomEmptyPosition(defender);
+            defender.setPos(earth.getX() + CommonRandom.getRandom().nextInt(6) - 3, earth.getY() + CommonRandom.getRandom().nextInt(6) - 3);
             solarSystem.getShips().add(defender);
         }
 
@@ -357,6 +364,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_crew_before_attack.json"));
 
         //todo: set earth dialog
+        // todo: grant resources
         world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_humanity_default.json"));
 
         turnNumber = world.getTurnCount();
