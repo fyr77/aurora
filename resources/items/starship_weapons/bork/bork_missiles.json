@@ -1,13 +1,13 @@
 {
     "id" : "bork_missiles",
-    "damage" : 2,
+    "damage" : 1,
     "name": "missiles.name",
     "desc": "missiles.desc",
     "shotSprite" : "missile_shot",
     "shotSound" : "missile_1",
-    "range" : 5,
+    "range" : 12,
     "image" : "ship_rocket",
-    "reloadTurns" : 2,
+    "reloadTurns" : 3,
     "explosionAnimation" : "rocket_explosion",
     "particlesAnimation" : "rocket_particles"
 }

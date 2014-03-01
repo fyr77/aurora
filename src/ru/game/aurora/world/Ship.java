@@ -184,6 +184,11 @@ public class Ship extends MovableSprite implements SpaceObject {
         return humanity;
     }
 
+    @Override
+    public boolean canBeShotAt() {
+        return true;
+    }
+
     public int getLostCrewMembers() {
         return Ship.MAX_ENGINEERS + Ship.MAX_MILITARY + Ship.MAX_SCIENTISTS - getTotalCrew();
     }

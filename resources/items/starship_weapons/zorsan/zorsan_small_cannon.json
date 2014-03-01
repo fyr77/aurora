@@ -1,6 +1,6 @@
 {
     "id" : "zorsan_cannon",
-    "damage" : 2,
+    "damage" : 1,
     "name": "",
     "desc": "",
     "shotSprite" : "blaster_shot_red",

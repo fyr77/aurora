@@ -55,4 +55,54 @@ public class BaseSpaceObject extends BasePositionable implements SpaceObject {
     @Override
     public void update(GameContainer container, World world) {
     }
+
+    @Override
+    public void moveUp() {
+
+    }
+
+    @Override
+    public void moveDown() {
+
+    }
+
+    @Override
+    public void moveRight() {
+
+    }
+
+    @Override
+    public void moveLeft() {
+
+    }
+
+    @Override
+    public float getOffsetX() {
+        return 0;
+    }
+
+    @Override
+    public float getOffsetY() {
+        return 0;
+    }
+
+    @Override
+    public boolean nowMoving() {
+        return false;
+    }
+
+    @Override
+    public int getTargetX() {
+        return x;
+    }
+
+    @Override
+    public int getTargetY() {
+        return y;
+    }
+
+    @Override
+    public boolean canBeShotAt() {
+        return false;
+    }
 }

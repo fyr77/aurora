@@ -203,11 +203,12 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         }
     }
 
-    private void preprocessDialog(Dialog dialog) {
+    private Dialog preprocessDialog(Dialog dialog) {
         if (dropShipsLanded >= 5) {
             // put america leader portrait instead of martan
             dialog.setIconName("usa_leader");
         }
+        return dialog;
     }
 
 
@@ -263,7 +264,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         }
 
         if (state == State.SECOND_WAVE_COMBAT && currentWave.size() <= 1) {
-            world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_third_wave.json"));
+            world.addOverlayWindow(preprocessDialog(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_third_wave.json")));
             summonThirdAttackWave(world);
             state = State.THIRD_WAVE_COMBAT;
             return true;
@@ -295,7 +296,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
 
         NPCShip bigBoss = new NPCShip(0, 0, "zorsan_boss", zorsan, null, "Zorsan Planet Killer");
         bigBoss.setHp(30);
-        bigBoss.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"));
+        bigBoss.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_small_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_boss_cannon"));
         // todo: add areal damage
         bigBoss.setPos(-1, solarSystem.getRadius());
     }
@@ -364,7 +365,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_crew_before_attack.json"));
 
         //todo: set earth dialog
-        // todo: grant resources
+        world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() + 20);
         world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_humanity_default.json"));
 
         turnNumber = world.getTurnCount();

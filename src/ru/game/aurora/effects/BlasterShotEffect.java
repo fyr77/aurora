@@ -13,6 +13,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.world.IMovable;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
@@ -39,9 +40,9 @@ public class BlasterShotEffect extends Effect {
 
     private String explosionAnimation;
 
-    public BlasterShotEffect(Positionable source, Positionable target, Camera camera, int moveSpeed, StarshipWeapon weapon) {
+    public BlasterShotEffect(Positionable source, IMovable target, Camera camera, int moveSpeed, StarshipWeapon weapon) {
         this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
-                , new Vector2f(camera.getXCoord(target.getX()) + camera.getTileWidth() / 2, camera.getYCoord(target.getY()) + camera.getTileHeight() / 2)
+                , new Vector2f(camera.getXCoord(target.getX()) + target.getOffsetX() + camera.getTileWidth() / 2, camera.getYCoord(target.getY()) + target.getOffsetY() + camera.getTileHeight() / 2)
                 ,
                 moveSpeed
                 , weapon);
@@ -68,9 +69,9 @@ public class BlasterShotEffect extends Effect {
     public BlasterShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, String weaponSprite) {
         this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
                 , new Vector2f(targetScreenX, targetScreenY)
+                , moveSpeed
                 ,
-                moveSpeed
-                , weaponSprite);
+                weaponSprite);
     }
 
     public BlasterShotEffect(Vector2f source, Vector2f target, int moveSpeed, LandingPartyWeapon weapon) {
@@ -84,7 +85,7 @@ public class BlasterShotEffect extends Effect {
     }
 
     public BlasterShotEffect(Vector2f source, Vector2f target, int moveSpeed, String weaponSprite) {
-        super(0, 0);
+        super(0, 0, LOW_PRIORITY, DrawOrder.BACK);
         this.currentPos = source;
         this.target = target;
         this.moveSpeed = moveSpeed;
@@ -112,16 +113,17 @@ public class BlasterShotEffect extends Effect {
         }
         Vector2f delta = new Vector2f(movementDir.getX() * moveSpeed / container.getFPS(), movementDir.getY() * moveSpeed / container.getFPS());
         currentPos.add(delta);
-        if (world.getCurrentRoom().getClass().isAssignableFrom(StarSystem.class)) {
-            if (!(particlesAnimation == null)) {
-                ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect((int) currentPos.x, (int) currentPos.y, particlesAnimation, true, false));
-            }
-        }
+        // todo: restore particle effects
+        //if (world.getCurrentRoom().getClass().isAssignableFrom(StarSystem.class)) {
+        //    if (!(particlesAnimation == null)) {
+        //        ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect((int) currentPos.x, (int) currentPos.y, particlesAnimation, true, false));
+        //    }
+        //}
     }
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        graphics.drawImage(myImage, currentPos.x, currentPos.y);
+        graphics.drawImage(myImage, currentPos.x - myImage.getWidth() / 2, currentPos.y - myImage.getHeight() / 2);
     }
 
     public void startHitAnimation(World world) {

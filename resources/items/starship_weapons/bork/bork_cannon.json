@@ -1,0 +1,13 @@
+{
+    "id" : "bork_cannon",
+    "damage" : 1,
+    "name": "simple_cannon.name",
+    "desc": "simple_cannon.desc",
+    "shotSprite" : "bullet_shot",
+    "shotSound" : "bullet_1",
+    "range" : 3,
+    "image" : "ship_laser",
+    "reloadTurns" : 0,
+    "explosionAnimation" : "rocket_explosion",
+    "particlesAnimation" : "rocket_particles"
+}

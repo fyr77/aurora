@@ -8,13 +8,13 @@ package ru.game.aurora.world.space;
 
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.GameObject;
-import ru.game.aurora.world.Positionable;
+import ru.game.aurora.world.IMovable;
 import ru.game.aurora.world.World;
 
 /**
  * Base class for stuff that flies in space, everything except planets.
  */
-public interface SpaceObject extends GameObject, Positionable {
+public interface SpaceObject extends GameObject, IMovable {
     public void onContact(World world);
 
     public void onAttack(World world, SpaceObject attacker, int dmg);
@@ -29,4 +29,6 @@ public interface SpaceObject extends GameObject, Positionable {
     public String getScanDescription(World world);
 
     public AlienRace getRace();
+
+    public boolean canBeShotAt();
 }

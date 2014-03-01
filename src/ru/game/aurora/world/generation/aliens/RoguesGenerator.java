@@ -39,8 +39,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
     public static final int PROBE_SHIP = 1;
 
 
-    private Dialog createFrameDialog(final NPCShip frame)
-    {
+    private Dialog createFrameDialog(final NPCShip frame) {
 
         Dialog frameDialog = Dialog.loadFromFile("dialogs/rogues/rogues_mothership_first_time.json");
         Dialog admiralDialog = Dialog.loadFromFile("dialogs/rogues/rogues_admiral_first.json");
@@ -114,7 +113,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
                     case PROBE_SHIP: {
                         NPCShip ship = new NPCShip(0, 0, "rogues_probe", rogueRace, null, "Rogues probe");
                         ship.setHp(6);
-                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("long_range_plasma_cannon"));
                         ship.setStationary(true);
                         ship.setCanBeHailed(false);
                         return ship;

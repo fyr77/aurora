@@ -1,6 +1,7 @@
 package ru.game.aurora.world.generation.aliens.bork;
 
 import org.newdawn.slick.Color;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
@@ -91,7 +92,7 @@ public class BorkGenerator implements WorldGeneratorPart {
         world.getPlayer().getJournal().addQuestEntries("bork_blockade", "withdraw");
         world.getGlobalVariables().put("bork_blockade.result", "withdraw");
         StarSystem ss = world.getRaces().get(HumanityGenerator.NAME).getHomeworld();
-        for (Iterator<SpaceObject> iter = ss.getShips().iterator(); iter.hasNext();) {
+        for (Iterator<SpaceObject> iter = ss.getShips().iterator(); iter.hasNext(); ) {
             SpaceObject so = iter.next();
             if (so instanceof EarthInvasionGenerator.BorkBlockadeShip) {
                 iter.remove();
@@ -141,23 +142,27 @@ public class BorkGenerator implements WorldGeneratorPart {
             @Override
             public NPCShip createShip(int shipId) {
                 NPCShip ship = new NPCShip(0, 0, "bork_ship", borkRace, null, "Bork ship");
-                ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("simple_cannon"), ResourceManager.getInstance().getWeapons().getEntity("bork_missiles"));
+                if (CommonRandom.getRandom().nextInt(3) == 1) {
+                    // some random bork ships carry a missile launcher
+                    ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("bork_cannon"), ResourceManager.getInstance().getWeapons().getEntity("bork_missiles"));
+                } else {
+                    ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("bork_cannon"));
+                }
                 ship.setHp(5);
                 return ship;
             }
         });
 
 
-     /**   mainDialog.setListener(new DialogListener() {
+        /**   mainDialog.setListener(new DialogListener() {
 
-            private static final long serialVersionUID = -4476192487724362451L;
+         private static final long serialVersionUID = -4476192487724362451L;
 
-            @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                // after first dialog swarm becomes hostile
-                borkRace.setRelation(world.getPlayer().getShip().getRace(), 0);
-            }
-        });*/
+         @Override public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+         // after first dialog swarm becomes hostile
+         borkRace.setRelation(world.getPlayer().getShip().getRace(), 0);
+         }
+         });*/
 
         world.addListener(new BorkShipGenerator(0.5, 3, null, borkRace.getDefaultFactory(), 10));
 

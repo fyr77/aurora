@@ -86,7 +86,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private transient ParallaxBackground background;
 
-    private transient List<Effect> effects = new LinkedList<>();
+    private transient PriorityQueue<Effect> effects = new PriorityQueue<>();
+
+    private transient Effect currentEffect = null;
 
     /**
      * Relation between tile size and max planet size
@@ -301,7 +303,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             ClassNotFoundException {
         try {
             ois.defaultReadObject();
-            effects = new LinkedList<>();
+            effects = new PriorityQueue<>();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -325,7 +327,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         //TODO: firing sectors
         for (SpaceObject spaceObject : ships) {
-            if (weapon.getWeaponDesc().range >= playerShip.getDistance(spaceObject)) {
+            if (spaceObject.canBeShotAt() && weapon.getWeaponDesc().range >= playerShip.getDistance(spaceObject) && playerShip.getRace() != spaceObject.getRace()) {
                 availableTargets.add(spaceObject);
                 if (target == null) {
                     target = spaceObject;
@@ -364,19 +366,31 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
             // firing
             final int damage = weapon.getWeaponDesc().damage;
-            target.onAttack(world, playerShip, damage);
+
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, target.getName()));
 
-            effects.add(new BlasterShotEffect(playerShip, target, world.getCamera(), 800, weapon));
+            BlasterShotEffect e = new BlasterShotEffect(playerShip, target, world.getCamera(), 800, weapon);
+            e.setEndListener(new IStateChangeListener() {
+                private static final long serialVersionUID = 8150717419595750398L;
+
+                @Override
+                public void stateChanged(World world) {
+                    target.onAttack(world, playerShip, damage);
+                    if (!target.isAlive()) {
+                        GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
+                        target = null;
+                    }
+                }
+            });
+            effects.add(e);
 
             ResourceManager.getInstance().getSound(weapon.getWeaponDesc().shotSound).play();
 
-            if (!target.isAlive()) {
-                GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
-                target = null;
-            }
+
             weapon.setReloadTimeLeft(weapon.getWeaponDesc().reloadTurns);
             world.setUpdatedThisFrame(true);
+
+            onWeaponButtonPressed(world, selectedWeapon);
         }
     }
 
@@ -413,40 +427,39 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         if (background == null) {
             createBackground(world);
         }
-        if (!effects.isEmpty()) {
-            List<Effect> newList = new ArrayList<>(effects);
-            for (Effect currentEffect : newList) {
-                currentEffect.update(container, world);
+
+        if (currentEffect == null && !effects.isEmpty()) {
+            currentEffect = effects.remove();
+        }
+        if (currentEffect != null) {
+            currentEffect.update(container, world);
+            if (currentEffect.isOver()) {
+                currentEffect.onOver(world);
+                currentEffect = null;
             }
-            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext(); ) {
-                Effect e = iter.next();
-                if (e.isOver()) {
-                    e.onOver(world);
-                    iter.remove();
-                }
-            }
-            return;
         }
 
         final Ship playerShip = world.getPlayer().getShip();
 
-        if (mode == MODE_MOVE) {
-            updateMove(container, world);
-            for (int i = Input.KEY_1; i <= Input.KEY_9; ++i) {
-                if (container.getInput().isKeyPressed(i)) {
-                    onWeaponButtonPressed(world, i - Input.KEY_1);
-                    return;
+        if (currentEffect == null) {
+            if (mode == MODE_MOVE) {
+                updateMove(container, world);
+                for (int i = Input.KEY_1; i <= Input.KEY_9; ++i) {
+                    if (container.getInput().isKeyPressed(i)) {
+                        onWeaponButtonPressed(world, i - Input.KEY_1);
+                        return;
+                    }
                 }
-            }
-        } else {
-            updateShoot(
-                    world
-                    , container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_RIGHT)
-                    , container.getInput().isKeyPressed(Input.KEY_DOWN) || container.getInput().isKeyPressed(Input.KEY_LEFT)
-                    , container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(selectedWeapon + Input.KEY_1)
-            );
-            if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-                onWeaponButtonPressed(world, -1);
+            } else {
+                updateShoot(
+                        world
+                        , container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_RIGHT)
+                        , container.getInput().isKeyPressed(Input.KEY_DOWN) || container.getInput().isKeyPressed(Input.KEY_LEFT)
+                        , container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(selectedWeapon + Input.KEY_1)
+                );
+                if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+                    onWeaponButtonPressed(world, -1);
+                }
             }
         }
 
@@ -631,6 +644,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
+        // now draw effects that are beyond starships
+        if (currentEffect != null && currentEffect.getOrder() == Effect.DrawOrder.BACK) {
+            currentEffect.draw(container, g, camera);
+        }
+
 
         final int selectedWeaponRange;
         if (mode == MODE_SHOOT) {
@@ -641,7 +659,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         g.setColor(Color.red);
         for (SpaceObject ship : ships) {
             ship.draw(container, g, camera);
-            if (mode == MODE_SHOOT && player.getShip().getDistance(ship) < selectedWeaponRange) {
+            if (mode == MODE_SHOOT && ship.canBeShotAt() && player.getShip().getDistance(ship) < selectedWeaponRange && player.getShip().getRace() != ship.getRace()) {
                 // every targetable ship is surrounded by rectangle
                 g.drawRect(camera.getXCoord(ship.getX()), camera.getYCoord(ship.getY()), camera.getTileWidth(), camera.getTileHeight());
             }
@@ -667,7 +685,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         player.getShip().draw(container, g, camera);
 
-        for (Effect currentEffect : effects) {
+        if (currentEffect != null && currentEffect.getOrder() == Effect.DrawOrder.FRONT) {
             currentEffect.draw(container, g, camera);
         }
     }

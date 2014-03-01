@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.*;
 import ru.game.aurora.effects.BlasterShotEffect;
+import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
@@ -16,6 +17,7 @@ import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.util.ProbabilitySet;
+import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.MovableSprite;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
@@ -56,7 +58,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     // map of loot that can be dropped by this ship, with its chances
     private ProbabilitySet<SpaceObject> loot;
 
-    private Map<SpaceObject, Integer> threatMap = new WeakHashMap<>();
+    private transient Map<SpaceObject, Integer> threatMap = new WeakHashMap<>();
 
     public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
         super(x, y, sprite);
@@ -79,6 +81,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     @Override
     public void update(GameContainer container, World world) {
+        if (!isAlive()) {
+            return;
+        }
         Ship player = world.getPlayer().getShip();
 
         super.update(container, world);
@@ -106,7 +111,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
         //наполняем агролист
         for (SpaceObject so : ss.getShips()) {
-            if (!threatMap.containsKey(so) && isHostile(world, so)) {
+            if (so.canBeShotAt() && !threatMap.containsKey(so) && isHostile(world, so)) {
                 threatMap.put(so, 1);
             }
         }
@@ -226,7 +231,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         }
     }
 
-    public void fire(World world, StarSystem ss, int weaponIdx, SpaceObject target) {
+    public void fire(World world, StarSystem ss, int weaponIdx, final SpaceObject target) {
         weapons[weaponIdx].fire();
         final StarshipWeaponDesc weaponDesc = weapons[weaponIdx].getWeaponDesc();
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.attack")
@@ -235,15 +240,25 @@ public class NPCShip extends MovableSprite implements SpaceObject {
                 , Localization.getText("weapons", weaponDesc.name)
                 , weaponDesc.damage
         ));
-        target.onAttack(world, this, weaponDesc.damage);
 
-        ss.addEffect(new BlasterShotEffect(this, target, world.getCamera(), 800, weapons[weaponIdx]));
+
+        Effect e = new BlasterShotEffect(this, target, world.getCamera(), 800, weapons[weaponIdx]);
+        e.setEndListener(new IStateChangeListener() {
+            private static final long serialVersionUID = -3379281638297845046L;
+
+            @Override
+            public void stateChanged(World world) {
+                target.onAttack(world, NPCShip.this, weaponDesc.damage);
+                if (!target.isAlive()) {
+                    GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
+                }
+            }
+        });
+        ss.addEffect(e);
 
         ResourceManager.getInstance().getSound(weaponDesc.shotSound).play();
 
-        if (!target.isAlive()) {
-            GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
-        }
+
     }
 
     @Deprecated
@@ -383,5 +398,10 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     public int getHp() {
         return hp;
+    }
+
+    @Override
+    public boolean canBeShotAt() {
+        return true;
     }
 }
