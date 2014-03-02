@@ -13,6 +13,9 @@ import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.Dungeon;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.KliskGenerator;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.EmbassiesQuest;
 import ru.game.aurora.world.planet.BasePlanet;
@@ -168,5 +171,13 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         world.addListener(new SingleStarsystemShipSpawner(race.getDefaultFactory(), 0.8, race.getHomeworld()));
         world.getRaces().put(race.getName(), race);
         addWarDataDrop();
+
+        // zorsan are hostile to anyone
+        world.getReputation().setHostile(NAME, BorkGenerator.NAME);
+        world.getReputation().setHostile(NAME, RoguesGenerator.NAME);
+        world.getReputation().setHostile(NAME, KliskGenerator.NAME);
+        world.getReputation().setHostile(BorkGenerator.NAME, NAME);
+        world.getReputation().setHostile(RoguesGenerator.NAME, NAME);
+        world.getReputation().setHostile(KliskGenerator.NAME, NAME);
     }
 }

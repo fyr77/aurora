@@ -437,29 +437,28 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 currentEffect.onOver(world);
                 currentEffect = null;
             }
+            return;
         }
 
         final Ship playerShip = world.getPlayer().getShip();
 
-        if (currentEffect == null) {
-            if (mode == MODE_MOVE) {
-                updateMove(container, world);
-                for (int i = Input.KEY_1; i <= Input.KEY_9; ++i) {
-                    if (container.getInput().isKeyPressed(i)) {
-                        onWeaponButtonPressed(world, i - Input.KEY_1);
-                        return;
-                    }
+        if (mode == MODE_MOVE) {
+            updateMove(container, world);
+            for (int i = Input.KEY_1; i <= Input.KEY_9; ++i) {
+                if (container.getInput().isKeyPressed(i)) {
+                    onWeaponButtonPressed(world, i - Input.KEY_1);
+                    return;
                 }
-            } else {
-                updateShoot(
-                        world
-                        , container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_RIGHT)
-                        , container.getInput().isKeyPressed(Input.KEY_DOWN) || container.getInput().isKeyPressed(Input.KEY_LEFT)
-                        , container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(selectedWeapon + Input.KEY_1)
-                );
-                if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-                    onWeaponButtonPressed(world, -1);
-                }
+            }
+        } else {
+            updateShoot(
+                    world
+                    , container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_RIGHT)
+                    , container.getInput().isKeyPressed(Input.KEY_DOWN) || container.getInput().isKeyPressed(Input.KEY_LEFT)
+                    , container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(selectedWeapon + Input.KEY_1)
+            );
+            if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+                onWeaponButtonPressed(world, -1);
             }
         }
 

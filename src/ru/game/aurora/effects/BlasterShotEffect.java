@@ -40,8 +40,8 @@ public class BlasterShotEffect extends Effect {
 
     private String explosionAnimation;
 
-    public BlasterShotEffect(Positionable source, IMovable target, Camera camera, int moveSpeed, StarshipWeapon weapon) {
-        this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
+    public BlasterShotEffect(IMovable source, IMovable target, Camera camera, int moveSpeed, StarshipWeapon weapon) {
+        this(new Vector2f(camera.getXCoord(source.getX()) + source.getOffsetX() + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2 + source.getOffsetY())
                 , new Vector2f(camera.getXCoord(target.getX()) + target.getOffsetX() + camera.getTileWidth() / 2, camera.getYCoord(target.getY()) + target.getOffsetY() + camera.getTileHeight() / 2)
                 ,
                 moveSpeed

@@ -184,7 +184,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         for (int i = 0; i < count; ++i) {
             // spawn in 2 lines, one straight and one broken
             NPCShip ship = zorsan.getDefaultFactory().createShip(0);
-            ship.setPos(-solarSystem.getRadius() + (i < count / 2 ? 2 + CommonRandom.getRandom().nextInt(4) : 0), i);
+            ship.setPos(-solarSystem.getRadius() - (i < (count / 2) ? 4 : 0) - CommonRandom.getRandom().nextInt(6), i * 2);
             currentWave.add(ship);
             solarSystem.getShips().add(ship);
         }
@@ -315,12 +315,12 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
     }
 
     private NPCShip createVoyager(World world) {
-        NPCShip ship = new NPCShip(0, 0, "aurora", humanity, new NPC(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_voyager.json")), "Voyager");
-
+        NPCShip ship = new NPCShip(0, 0, "voyager", humanity, new NPC(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_voyager.json")), "Voyager");
+        ship.setHp(15);
         List<StarshipWeaponDesc> weapons = new LinkedList<>();
         //default weapons
         weapons.add(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon2"));
-        weapons.add(ResourceManager.getInstance().getWeapons().getEntity("missiles"));
+        weapons.add(ResourceManager.getInstance().getWeapons().getEntity("humanity_missiles"));
 
         if (world.getGlobalVariables().containsKey("klisk.war_help")) {
             weapons.add(ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));

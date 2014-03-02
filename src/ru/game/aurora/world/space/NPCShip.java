@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world.space;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.*;
@@ -146,6 +147,13 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
         super.draw(container, g, camera);
+        if (hp < 3) {
+            g.setColor(Color.red);
+        } else {
+            g.setColor(Color.white);
+        }
+
+        g.drawString(Integer.toString(Math.max(0, hp)), camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
     }
 
     /**

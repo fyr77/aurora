@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.npc.shipai;
 
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.space.NPCShip;
@@ -48,7 +49,8 @@ public class CombatAI implements NPCShipAI {
             return;
         }
         // not all weapons fired because too far, move closer
-        if (inRange < ship.getWeapons().length) {
+        // if all weapons are in range, move closer in a random fashion, so that not all ships gather on single tile
+        if (inRange < ship.getWeapons().length || (distance > 1 && CommonRandom.getRandom().nextBoolean())) {
             if (target.getX() < ship.getX()) {
                 ship.moveLeft();
             } else if (target.getX() > ship.getX()) {

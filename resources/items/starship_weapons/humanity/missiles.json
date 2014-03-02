@@ -1,13 +1,13 @@
 {
-    "id" : "missiles",
-    "damage" : 3,
+    "id" : "humanity_missiles",
+    "damage" : 1,
     "name": "missiles.name",
     "desc": "missiles.desc",
     "shotSprite" : "missile_shot",
-    "range" : 5,
-    "image" : "ship_rocket",
     "shotSound" : "missile_1",
-    "reloadTurns" : 2,
+    "range" : 12,
+    "image" : "ship_rocket",
+    "reloadTurns" : 3,
     "explosionAnimation" : "rocket_explosion",
     "particlesAnimation" : "rocket_particles"
 }

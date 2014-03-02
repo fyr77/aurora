@@ -129,6 +129,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
+        Logger.getLogger("de.lessvoid.nifty").setLevel(Level.WARNING);
 
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
         gameContainer.getInput().enableKeyRepeat();
@@ -173,7 +174,7 @@ public class AuroraGame extends NiftyOverlayGame {
                     if (debugWorldVariables != null) {
                         logger.warn("Adding debug variables");
                         for (Map.Entry<Object, Object> e : debugWorldVariables.entrySet()) {
-                            world.getGlobalVariables().put((String)e.getKey(), (Serializable)e.getValue());
+                            world.getGlobalVariables().put((String) e.getKey(), (Serializable) e.getValue());
                         }
 
                     }
@@ -261,8 +262,6 @@ public class AuroraGame extends NiftyOverlayGame {
     }
 
     public static void main(String[] args) throws SlickException, IOException {
-        Logger.getLogger("de.lessvoid.nifty").setLevel(Level.WARNING);
-
         logger.info("Aurora game version " + Version.VERSION + " started");
         final String osName = System.getProperty("os.name");
 

@@ -7,6 +7,7 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.*;
@@ -58,7 +59,9 @@ public class HomeworldGenerator {
         ss.setRadius(Math.max((int) (12 * 1.5), 10));
 
         NPCShip spaceStation = new NPCShip(planets[2].getX() + 1, planets[2].getY() - 1, "earth_station", humanRace, null, "Orbital Scaffold");
+        spaceStation.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon2"), ResourceManager.getInstance().getWeapons().getEntity("humanity_missiles"));
         spaceStation.setStationary(true);
+        spaceStation.setHp(25);
         spaceStation.setAi(null);
         ss.getShips().add(spaceStation);
 

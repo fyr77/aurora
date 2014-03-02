@@ -63,6 +63,9 @@ public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
     }
 
     public T getEntity(String key) {
+        if (!entities.containsKey(key)) {
+            logger.warn("Entity '{}' not found", key);
+        }
         return entities.get(key);
     }
 
