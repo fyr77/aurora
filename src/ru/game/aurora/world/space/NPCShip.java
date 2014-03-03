@@ -17,6 +17,7 @@ import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
+import ru.game.aurora.util.GameTimer;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.MovableSprite;
@@ -59,6 +60,8 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     // this ship can not move
     private boolean isStationary;
 
+    private GameTimer repairTimer = null;
+
     // map of loot that can be dropped by this ship, with its chances
     private ProbabilitySet<SpaceObject> loot;
 
@@ -98,8 +101,12 @@ public class NPCShip extends MovableSprite implements SpaceObject {
                 w.reload();
             }
         }
-        if (world.isUpdatedThisFrame()) {
-            curSpeed--;
+        if (!world.isUpdatedThisFrame()) {
+            return;
+        }
+        curSpeed--;
+        if (repairTimer != null && hp < maxHP && repairTimer.update()) {
+            ++hp;
         }
         if (curSpeed > 0) {
             return;
@@ -144,6 +151,10 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         if (ai != null) {
             ai.update(this, world, (StarSystem) world.getCurrentRoom());
         }
+    }
+
+    public void enableRepairs(int turnsPerHp) {
+        repairTimer = new GameTimer(turnsPerHp);
     }
 
     @Override
