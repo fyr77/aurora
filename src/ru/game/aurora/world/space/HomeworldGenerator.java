@@ -58,10 +58,9 @@ public class HomeworldGenerator {
         ss.setPlanets(planets);
         ss.setRadius(Math.max((int) (12 * 1.5), 10));
 
-        NPCShip spaceStation = new NPCShip(planets[2].getX() + 1, planets[2].getY() - 1, "earth_station", humanRace, null, "Orbital Scaffold");
+        NPCShip spaceStation = new NPCShip(planets[2].getX() + 1, planets[2].getY() - 1, "earth_station", humanRace, null, "Orbital Scaffold", 25);
         spaceStation.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon2"), ResourceManager.getInstance().getWeapons().getEntity("humanity_missiles"));
         spaceStation.setStationary(true);
-        spaceStation.setHp(25);
         spaceStation.setAi(null);
         ss.getShips().add(spaceStation);
 

@@ -37,7 +37,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     protected NPC captain;
 
-    protected int hp = 3;
+    protected int hp;
+
+    protected int maxHP;
 
     protected String name;
 
@@ -61,11 +63,12 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     private transient Map<SpaceObject, Integer> threatMap = new WeakHashMap<>();
 
-    public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
+    public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name, int hp) {
         super(x, y, sprite);
         this.race = race;
         this.captain = captain;
         this.name = name;
+        this.maxHP = this.hp = hp;
     }
 
     public void setSpeed(int speed) {
@@ -152,8 +155,13 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         } else {
             g.setColor(Color.white);
         }
-
-        g.drawString(Integer.toString(Math.max(0, hp)), camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
+        String hpText;
+        if (hp < 100) {
+            hpText = Integer.toString(Math.max(0, hp));
+        } else {
+            hpText = "N/A";
+        }
+        g.drawString(hpText, camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
     }
 
     /**
@@ -376,7 +384,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
             int maxValue = threatMap.get(mostThreat);
             for (Object o : threatMap.entrySet()) {
                 Map.Entry entry = (Map.Entry) o;
-                int nextValue = (int) entry.getValue();
+                int nextValue = (Integer) entry.getValue();
                 if (nextValue > maxValue) {
                     mostThreat = (SpaceObject) entry.getKey();
                     maxValue = nextValue;
@@ -406,6 +414,10 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     public int getHp() {
         return hp;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
     }
 
     @Override

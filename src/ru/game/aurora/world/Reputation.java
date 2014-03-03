@@ -44,6 +44,14 @@ public class Reputation implements Serializable
             result = 31 * result + (raceTo != null ? raceTo.hashCode() : 0);
             return result;
         }
+
+        @Override
+        public String toString() {
+            return "RepKey{" +
+                    "raceFrom='" + raceFrom + '\'' +
+                    ", raceTo='" + raceTo + '\'' +
+                    '}';
+        }
     }
 
     private static final long serialVersionUID = 1L;

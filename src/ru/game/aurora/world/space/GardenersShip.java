@@ -27,7 +27,7 @@ public class GardenersShip extends NPCShip implements SpaceObject {
     private boolean timeToLeave = false;
 
     public GardenersShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
-        super(x, y, sprite, race, captain, name);
+        super(x, y, sprite, race, captain, name, Integer.MAX_VALUE);
         this.sprite = sprite;
         this.setStationary(true);
     }

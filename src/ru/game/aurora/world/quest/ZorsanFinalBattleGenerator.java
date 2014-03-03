@@ -73,8 +73,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
 
 
         public ZorsanTroopTransport(int x, int y, Positionable target) {
-            super(x, y, "zorsan_transport", zorsan, null, "Zorsan transport");
-            setHp(20);
+            super(x, y, "zorsan_transport", zorsan, null, "Zorsan transport", 20);
             setSpeed(2);
             setAi(new LandAI(target));
         }
@@ -124,8 +123,9 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
             for (int i = 0; i < ships; ++i) {
                 NPCShip probe = world.getRaces().get(KliskGenerator.NAME).getDefaultFactory().createShip(KliskGenerator.TRADE_PROBE);
                 probe.setCanBeHailed(false);
+                probe.setStationary(false);
+                probe.setSpeed(2);
                 probe.setPos(earth.getX() + 1 + i, earth.getY() + CommonRandom.getRandom().nextInt(3) - 1);
-                solarSystem.setRandomEmptyPosition(probe);
                 solarSystem.getShips().add(probe);
                 allyShips.add(probe);
             }
@@ -245,6 +245,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         if (state == State.FIRST_WAVE_REINFORCEMENTS && currentWave.isEmpty()) {
             state = State.FIRST_WAVE_INTERMISSION;
             turnNumber = world.getTurnCount();
+            repairAllies();
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_first_wave_ended.json"));
             return true;
         }
@@ -266,6 +267,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         if (state == State.SECOND_WAVE_COMBAT && currentWave.size() <= 1) {
             world.addOverlayWindow(preprocessDialog(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_third_wave.json")));
             summonThirdAttackWave(world);
+            repairAllies();
             state = State.THIRD_WAVE_COMBAT;
             return true;
         }
@@ -285,17 +287,25 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         return false;
     }
 
+    private void repairAllies()
+    {
+        for (NPCShip s : allyShips) {
+            s.setHp(s.getMaxHP());
+        }
+    }
+
     private void summonThirdAttackWave(World world) {
         int ships = Configuration.getIntProperty("quest.zorsan_final_battle.third_wave_ships");
         for (int i = 0; i < ships; ++i) {
 
             NPCShip warship = zorsan.getDefaultFactory().createShip(CommonRandom.getRandom().nextBoolean() ? ZorsanGenerator.CRUISER_SHIP : ZorsanGenerator.SCOUT_SHIP);
             warship.setPos(1 + 2 * i, solarSystem.getRadius() + CommonRandom.getRandom().nextInt(5));
+            currentWave.add(warship);
             solarSystem.getShips().add(warship);
         }
 
-        NPCShip bigBoss = new NPCShip(0, 0, "zorsan_boss", zorsan, null, "Zorsan Planet Killer");
-        bigBoss.setHp(30);
+        NPCShip bigBoss = new NPCShip(0, 0, "zorsan_boss", zorsan, null, "Zorsan Planet Killer", 30);
+        currentWave.add(bigBoss);
         bigBoss.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_small_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_boss_cannon"));
         // todo: add areal damage
         bigBoss.setPos(-1, solarSystem.getRadius());
@@ -308,15 +318,15 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
             NPCShip warship = zorsan.getDefaultFactory().createShip(CommonRandom.getRandom().nextBoolean() ? ZorsanGenerator.CRUISER_SHIP : ZorsanGenerator.SCOUT_SHIP);
             warship.setPos(1 + 2 * i, solarSystem.getRadius() + CommonRandom.getRandom().nextInt(5));
             solarSystem.getShips().add(warship);
+            currentWave.add(warship);
 
             ZorsanTroopTransport transport = new ZorsanTroopTransport(warship.getX(), warship.getY() + 4, earth);
             solarSystem.getShips().add(transport);
+            currentWave.add(transport);
         }
     }
 
     private NPCShip createVoyager(World world) {
-        NPCShip ship = new NPCShip(0, 0, "voyager", humanity, new NPC(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_voyager.json")), "Voyager");
-        ship.setHp(15);
         List<StarshipWeaponDesc> weapons = new LinkedList<>();
         //default weapons
         weapons.add(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon2"));
@@ -326,11 +336,14 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
             weapons.add(ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
         }
 
+        int hp = 15;
         if (world.getGlobalVariables().containsKey("rogues.war_help")) {
-            ship.setHp(ship.getHp() * 2);
+            hp *= 2;
             weapons.add(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
         }
 
+        NPCShip ship = new NPCShip(0, 0, "voyager", humanity, new NPC(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_voyager.json")), "Voyager", hp);
+        ship.setPos(earth.getX() + CommonRandom.getRandom().nextInt(8) - 2, earth.getY() + CommonRandom.getRandom().nextInt(6) - 3);
         StarshipWeaponDesc[] descs = weapons.toArray(new StarshipWeaponDesc[weapons.size()]);
         ship.setWeapons(descs);
         return ship;
