@@ -44,8 +44,6 @@ public class KliskGenerator implements WorldGeneratorPart {
 
     public static final int STATION = 2;
 
-    private static AlienRace kliskRace;
-
     private static final ProbabilitySet<SpaceObject> defaultLootTable;
 
     static {
@@ -105,12 +103,12 @@ public class KliskGenerator implements WorldGeneratorPart {
         world.addListener(new KliskTradequestDialogListener(targetSystem));
     }
 
-    private StarSystem generateTargetStarsystemForTradeQuest(World world) {
+    private StarSystem generateTargetStarsystemForTradeQuest(World world, AlienRace race) {
         StarSystem ss = WorldGenerator.generateRandomStarSystem(world, 12, 15);
         world.getGalaxyMap().addObjectAndSetTile(ss, 12, 15);
         world.getGlobalVariables().put("klisk_trade.coords", "[12, 15]");
 
-        NPCShip spaceStation = kliskRace.getDefaultFactory().createShip(STATION);
+        NPCShip spaceStation = race.getDefaultFactory().createShip(STATION);
         ss.setRandomEmptyPosition(spaceStation);
         ss.getShips().add(spaceStation);
         spaceStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json")));
@@ -156,7 +154,7 @@ public class KliskGenerator implements WorldGeneratorPart {
         HomeworldGenerator.setCoord(planets[0], 2);
 
         planets[1] = new AlienHomeworld("klisk_homeworld", kliskRace, null, 3, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK);
-        ((AlienHomeworld) planets[1]).setDialog(createPlanetDialogAndQuests((AlienHomeworld) planets[1], generateTargetStarsystemForTradeQuest(world)));
+        ((AlienHomeworld) planets[1]).setDialog(createPlanetDialogAndQuests((AlienHomeworld) planets[1], generateTargetStarsystemForTradeQuest(world, kliskRace)));
         HomeworldGenerator.setCoord(planets[1], 3);
 
         planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
@@ -175,8 +173,11 @@ public class KliskGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile("dialogs/klisk_1.json");
-        kliskRace = new AlienRace(NAME, "klisk_ship", mainDialog);
+        final AlienRace kliskRace = new AlienRace(NAME, "klisk_ship", mainDialog);
         mainDialog.addListener(new DialogListener() {
+
+            private static final long serialVersionUID = 8770464358766507288L;
+
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
@@ -204,6 +205,7 @@ public class KliskGenerator implements WorldGeneratorPart {
 
             @Override
             public NPCShip createShip(int shipType) {
+
                 NPCShip ship;
                 switch (shipType) {
                     case DEFAULT_SHIP:

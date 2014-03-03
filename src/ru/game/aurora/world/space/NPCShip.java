@@ -26,6 +26,7 @@ import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -113,17 +114,15 @@ public class NPCShip extends MovableSprite implements SpaceObject {
             threatMap = new HashMap<>();
         }
 
-        //наполняем агролист
         for (SpaceObject so : ss.getShips()) {
             if (so.canBeShotAt() && !threatMap.containsKey(so) && isHostile(world, so)) {
-                threatMap.put(so, 1);
+                threatMap.put(so, 0);
             }
         }
         if (!threatMap.containsKey(player) && isHostile(world, player)) {
-            threatMap.put(player, 1);
+            threatMap.put(player, 0);
         }
 
-        //обновляем агро
         updateThreatMap(world);
 
         while (!threatMap.isEmpty()) {
@@ -357,8 +356,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
             if (amount > 0) {
                 newAmount = Math.min(Integer.MAX_VALUE, threatMap.get(target) + amount);    //воизбежание переполнения
             } else {
-                newAmount = Math.max(1, threatMap.get(target) + amount);    //агро не может быть меньше 1
+                newAmount = Math.max(0, threatMap.get(target) + amount);    //агро не может быть меньше 1
             }
+
             threatMap.put(target, newAmount);
         } else {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.hostile"), getName(), target.getName()));
@@ -369,24 +369,21 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         }
     }
 
-    public void removeFromThreatMap(World world, SpaceObject target) {
-        threatMap.remove(target);
-        if (target.equals(world.getPlayer().getShip())) {
-            isHostile = false;
-        }
-        //todo: возможно надо проследить за репутацией
-    }
 
     //цель для атаки
     public SpaceObject getMostThreatTarget() {
         if (!threatMap.isEmpty()) {
             SpaceObject mostThreat = threatMap.keySet().iterator().next();
             int maxValue = threatMap.get(mostThreat);
-            for (Object o : threatMap.entrySet()) {
-                Map.Entry entry = (Map.Entry) o;
-                int nextValue = (Integer) entry.getValue();
+            for (Iterator<Map.Entry<SpaceObject, Integer>> iterator = threatMap.entrySet().iterator(); iterator.hasNext(); ) {
+                Map.Entry<SpaceObject, Integer> entry = iterator.next();
+                if (!entry.getKey().isAlive()) {
+                    iterator.remove();
+                    continue;
+                }
+                int nextValue = entry.getValue();
                 if (nextValue > maxValue) {
-                    mostThreat = (SpaceObject) entry.getKey();
+                    mostThreat = entry.getKey();
                     maxValue = nextValue;
                 }
             }
@@ -418,6 +415,10 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     public int getMaxHP() {
         return maxHP;
+    }
+
+    public Map<SpaceObject, Integer> getThreatMap() {
+        return threatMap;
     }
 
     @Override

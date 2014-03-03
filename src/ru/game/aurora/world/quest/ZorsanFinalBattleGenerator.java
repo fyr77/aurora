@@ -21,6 +21,7 @@ import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.earth.Earth;
 
@@ -73,14 +74,27 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
 
 
         public ZorsanTroopTransport(int x, int y, Positionable target) {
-            super(x, y, "zorsan_transport", zorsan, null, "Zorsan transport", 20);
-            setSpeed(2);
+            super(x, y, "zorsan_transport", zorsan, null, "Zorsan transport", 25);
+            setSpeed(1);
             setAi(new LandAI(target));
         }
 
         @Override
         public void update(GameContainer container, World world) {
-            super.update(container, world);
+            if (!isAlive()) {
+                return;
+            }
+
+            doMove(container);
+
+            if (world.isUpdatedThisFrame()) {
+                curSpeed--;
+            }
+            if (curSpeed > 0) {
+                return;
+            }
+            curSpeed = speed;
+            ai.update(this, world, solarSystem);
             if (!ai.isAlive()) {
                 dropShipsLanded++;
                 if (dropShipsLanded == 1) {
@@ -155,8 +169,8 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
                 NPCShip ship = world.getRaces().get(RoguesGenerator.NAME).getDefaultFactory().createShip(RoguesGenerator.SCOUT_SHIP);
                 NPCShip probe = world.getRaces().get(RoguesGenerator.NAME).getDefaultFactory().createShip(RoguesGenerator.PROBE_SHIP);
                 ship.setCanBeHailed(false);
-                probe.setPos(-3 + i, i - 1);
-                ship.setPos(-2 + i, i);
+                probe.setPos(earth.getX() + i, earth.getY() + i - 1);
+                ship.setPos(earth.getX() - 2 + i, earth.getY() + i);
                 solarSystem.getShips().add(ship);
                 solarSystem.getShips().add(probe);
                 allyShips.add(ship);
@@ -292,6 +306,11 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         for (NPCShip s : allyShips) {
             s.setHp(s.getMaxHP());
         }
+        for (SpaceObject s : solarSystem.getShips()) {
+            if (s instanceof NPCShip && s.getRace().getName().equals(HumanityGenerator.NAME)) {
+                ((NPCShip) s).setHp(((NPCShip) s).getMaxHP());
+            }
+        }
     }
 
     private void summonThirdAttackWave(World world) {
@@ -299,16 +318,17 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         for (int i = 0; i < ships; ++i) {
 
             NPCShip warship = zorsan.getDefaultFactory().createShip(CommonRandom.getRandom().nextBoolean() ? ZorsanGenerator.CRUISER_SHIP : ZorsanGenerator.SCOUT_SHIP);
-            warship.setPos(1 + 2 * i, solarSystem.getRadius() + CommonRandom.getRandom().nextInt(5));
+            warship.setPos(1 + 2 * i, -solarSystem.getRadius() - CommonRandom.getRandom().nextInt(5));
             currentWave.add(warship);
             solarSystem.getShips().add(warship);
         }
 
         NPCShip bigBoss = new NPCShip(0, 0, "zorsan_boss", zorsan, null, "Zorsan Planet Killer", 30);
         currentWave.add(bigBoss);
+        solarSystem.getShips().add(bigBoss);
         bigBoss.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_small_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_boss_cannon"));
         // todo: add areal damage
-        bigBoss.setPos(-1, solarSystem.getRadius());
+        bigBoss.setPos(-1, - solarSystem.getRadius());
     }
 
     private void summonSecondAttackWave(World world) {
@@ -316,11 +336,11 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         for (int i = 0; i < ships; ++i) {
 
             NPCShip warship = zorsan.getDefaultFactory().createShip(CommonRandom.getRandom().nextBoolean() ? ZorsanGenerator.CRUISER_SHIP : ZorsanGenerator.SCOUT_SHIP);
-            warship.setPos(1 + 2 * i, solarSystem.getRadius() + CommonRandom.getRandom().nextInt(5));
+            warship.setPos(2 * i, solarSystem.getRadius());
             solarSystem.getShips().add(warship);
             currentWave.add(warship);
 
-            ZorsanTroopTransport transport = new ZorsanTroopTransport(warship.getX(), warship.getY() + 4, earth);
+            ZorsanTroopTransport transport = new ZorsanTroopTransport(warship.getX(), warship.getY() + 8, earth);
             solarSystem.getShips().add(transport);
             currentWave.add(transport);
         }

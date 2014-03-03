@@ -83,6 +83,10 @@ public class Movable extends BasePositionable implements IMovable {
 
     @Override
     public void update(GameContainer container, World world) {
+        doMove(container);
+    }
+
+    protected void doMove(GameContainer container) {
         if (isMoving) {
             if (lastCall == 0) {
                 lastCall = container.getTime();

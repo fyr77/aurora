@@ -93,7 +93,7 @@ public class BlasterShotEffect extends Effect {
         movementDir = new Vector2f(this.target.getX() - this.currentPos.getX(), this.target.getY() - this.currentPos.getY());
         movementDir.normalise();
 
-        myImage = ResourceManager.getInstance().getImage(weaponSprite);
+        myImage = ResourceManager.getInstance().getImage(weaponSprite).copy();
         myImage.setRotation((float) movementDir.getTheta());
     }
 

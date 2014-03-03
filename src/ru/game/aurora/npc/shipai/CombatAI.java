@@ -39,29 +39,77 @@ public class CombatAI implements NPCShipAI {
             final StarshipWeapon weapon = ship.getWeapons()[i];
             if (weapon.getWeaponDesc().range >= distance) {
                 inRange++;
-                if (weapon.getReloadTimeLeft() <= 0) {
-                    ship.fire(world, currentSystem, i, target);
-                }
             }
         }
 
+        // more weapons in range - more chance to shoot
+        if (inRange > 0 && ship.isStationary() || CommonRandom.getRandom().nextDouble() < (float)inRange / ship.getWeapons().length) {
+            fireAtTarget(ship, world, currentSystem, distance);
+            return;
+        }
         if (ship.isStationary()) {
             return;
         }
+
+        // hack: if too much aggro - we are being focused by multiple enemies, move away
+        int val = 1;
+        int aggroSum = 0;
+        for (Integer i : ship.getThreatMap().values()) {
+            aggroSum += i;
+        }
+
+        if (aggroSum > ship.getHp() * 2) {
+            val = -1;
+        }
+
         // not all weapons fired because too far, move closer
         // if all weapons are in range, move closer in a random fashion, so that not all ships gather on single tile
         if (inRange < ship.getWeapons().length || (distance > 1 && CommonRandom.getRandom().nextBoolean())) {
-            if (target.getX() < ship.getX()) {
-                ship.moveLeft();
-            } else if (target.getX() > ship.getX()) {
-                ship.moveRight();
-            } else if (target.getY() < ship.getY()) {
-                ship.moveUp();
-            } else if (target.getY() > ship.getY()) {
-                ship.moveDown();
-            }
+            // randomly move either on X, or on Y, so that all ships do not get grouped on same path within 1-2 tiles
+             if (CommonRandom.getRandom().nextBoolean()) {
+                 if (!moveToTargetOnX(val, ship)) {
+                     moveToTargetOnY(val, ship);
+                 }
+             } else {
+                 if (!moveToTargetOnY(val, ship)) {
+                     moveToTargetOnX(val, ship);
+                 }
+             }
         }
 
+    }
+
+    private boolean moveToTargetOnX(int val, NPCShip ship)
+    {
+        if (val * target.getX() < val * ship.getX()) {
+            ship.moveLeft();
+            return true;
+        } else if (val * target.getX() > val * ship.getX()) {
+            ship.moveRight();
+            return true;
+        }
+        return false;
+    }
+
+    private boolean moveToTargetOnY(int val, NPCShip ship)
+    {
+        if (val * target.getY() < val * ship.getY()) {
+            ship.moveUp();
+            return true;
+        } else if (val * target.getY() > val * ship.getY()) {
+            ship.moveDown();
+            return true;
+        }
+        return false;
+    }
+
+    private void fireAtTarget(NPCShip ship, World world, StarSystem currentSystem, double distance) {
+        for (int i = 0; i < ship.getWeapons().length; ++i) {
+            final StarshipWeapon weapon = ship.getWeapons()[i];
+            if (weapon.getReloadTimeLeft() <= 0 && weapon.getWeaponDesc().range >= distance) {
+                ship.fire(world, currentSystem, i, target);
+            }
+        }
     }
 
     @Override
