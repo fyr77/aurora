@@ -232,8 +232,27 @@
         },
         {
           "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "5",
+              "type": "LESS"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 98,
-          "replyText": "3"
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "4",
+              "type": "GREATER"
+            }
+          ]
         }
       ],
       "customIcon": "engineer_dialog"
@@ -285,8 +304,27 @@
         },
         {
           "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "5",
+              "type": "LESS"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 98,
-          "replyText": "2"
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "4",
+              "type": "GREATER"
+            }
+          ]
         }
       ],
       "customIcon": "engineer_dialog"
@@ -303,11 +341,6 @@
           "returnValue": 0,
           "targetStatementId": 19,
           "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 98,
-          "replyText": "2"
         }
       ],
       "customIcon": "engineer_dialog"
@@ -335,11 +368,6 @@
           "returnValue": 0,
           "targetStatementId": 19,
           "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 98,
-          "replyText": "2"
         }
       ],
       "customIcon": "engineer_dialog"
@@ -354,8 +382,27 @@
         },
         {
           "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "5",
+              "type": "LESS"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 98,
-          "replyText": "1"
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "4",
+              "type": "GREATER"
+            }
+          ]
         }
       ],
       "customIcon": "engineer_dialog"
@@ -375,8 +422,27 @@
         },
         {
           "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "5",
+              "type": "LESS"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 98,
-          "replyText": "2"
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "4",
+              "type": "GREATER"
+            }
+          ]
         }
       ],
       "customIcon": "engineer_dialog"
@@ -444,8 +510,27 @@
       "replies": [
         {
           "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "5",
+              "type": "LESS"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 98,
-          "replyText": "0"
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "4",
+              "type": "GREATER"
+            }
+          ]
         }
       ],
       "customIcon": "engineer_dialog"
@@ -465,8 +550,27 @@
         },
         {
           "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "5",
+              "type": "LESS"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 98,
-          "replyText": "2"
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "4",
+              "type": "GREATER"
+            }
+          ]
         }
       ],
       "customIcon": "engineer_dialog"
@@ -529,8 +633,27 @@
         },
         {
           "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "5",
+              "type": "LESS"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 98,
-          "replyText": "2"
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "4",
+              "type": "GREATER"
+            }
+          ]
         }
       ],
       "customIcon": "engineer_dialog"
@@ -602,7 +725,7 @@
           "replyConditions": [
             {
               "name": "crew.engineer",
-              "value": "6",
+              "value": "5",
               "type": "LESS"
             }
           ]
@@ -614,7 +737,7 @@
           "replyConditions": [
             {
               "name": "crew.engineer",
-              "value": "5",
+              "value": "4",
               "type": "GREATER"
             }
           ]

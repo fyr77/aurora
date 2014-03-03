@@ -12,8 +12,7 @@ import ru.game.aurora.world.space.GardenersShip;
  * Date: 23.10.13
  * Time: 11:25
  */
-public class WarpEffect extends Effect
-{
+public class WarpEffect extends Effect {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,7 +33,7 @@ public class WarpEffect extends Effect
     private boolean isOver = false;
 
     public WarpEffect(GardenersShip ship) {
-        super(ship.getX(), ship.getY());
+        super(ship.getX(), ship.getY(), HIGH_PRIORITY, DrawOrder.FRONT);
         this.ship = ship;
         anim = ResourceManager.getInstance().getAnimation("warp");
         anim.setLooping(false);
@@ -54,7 +53,7 @@ public class WarpEffect extends Effect
         }
         anim.update(container.getTime() - lastCall);
 
-        alpha = (float) ((anim.getFrameCount()-anim.getFrame())*(1.0/anim.getFrameCount()));
+        alpha = (float) ((anim.getFrameCount() - anim.getFrame()) * (1.0 / anim.getFrameCount()));
 
         lastCall = container.getTime();
 
@@ -68,6 +67,6 @@ public class WarpEffect extends Effect
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
         ship.setAlpha(alpha);
         //32 - shipSize/2
-        graphics.drawAnimation(anim, camera.getXCoord(curX)-(anim.getWidth()/2)+32, camera.getYCoord(curY)-(anim.getHeight()/2)+32);
+        graphics.drawAnimation(anim, camera.getXCoord(curX) - (anim.getWidth() / 2) + 32, camera.getYCoord(curY) - (anim.getHeight() / 2) + 32);
     }
 }

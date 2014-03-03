@@ -15,6 +15,7 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.NextDialogListener;
 import ru.game.aurora.npc.*;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
+import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.quest.EmbassiesQuest;
@@ -22,10 +23,7 @@ import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
-import ru.game.aurora.world.space.HomeworldGenerator;
-import ru.game.aurora.world.space.NPCShip;
-import ru.game.aurora.world.space.Star;
-import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.space.*;
 
 import java.util.Map;
 
@@ -38,9 +36,16 @@ public class RoguesGenerator implements WorldGeneratorPart {
 
     public static final int PROBE_SHIP = 1;
 
+    private static final ProbabilitySet<SpaceObject> defaultLootTable;
 
-    private Dialog createFrameDialog(final NPCShip frame)
-    {
+    static {
+        defaultLootTable = new ProbabilitySet<>();
+        defaultLootTable.put(new SpaceDebris.ResourceDebris(5), 1.0);
+        defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
+    }
+
+
+    private Dialog createFrameDialog(final NPCShip frame) {
 
         Dialog frameDialog = Dialog.loadFromFile("dialogs/rogues/rogues_mothership_first_time.json");
         Dialog admiralDialog = Dialog.loadFromFile("dialogs/rogues/rogues_admiral_first.json");
@@ -79,7 +84,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
         ss.setRadius(8);
 
 
-        NPCShip frame = new NPCShip(2, 2, "rogues_frame", roguesRace, null, "Rogues Frame");
+        NPCShip frame = new NPCShip(2, 2, "rogues_frame", roguesRace, null, "Rogues Frame", Integer.MAX_VALUE);
         frame.setCaptain(new NPC(createFrameDialog(frame)));
         frame.setAi(null);
         ss.getShips().add(frame);
@@ -106,15 +111,13 @@ public class RoguesGenerator implements WorldGeneratorPart {
             public NPCShip createShip(int shipType) {
                 switch (shipType) {
                     case SCOUT_SHIP: {
-                        NPCShip ship = new NPCShip(0, 0, "rogues_scout", rogueRace, null, "Rogues scout");
-                        ship.setHp(10);
-                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
+                        NPCShip ship = new NPCShip(0, 0, "rogues_scout", rogueRace, null, "Rogues scout", 14);
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), ResourceManager.getInstance().getWeapons().getEntity("long_range_plasma_cannon"));
                         return ship;
                     }
                     case PROBE_SHIP: {
-                        NPCShip ship = new NPCShip(0, 0, "rogues_probe", rogueRace, null, "Rogues probe");
-                        ship.setHp(6);
-                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
+                        NPCShip ship = new NPCShip(0, 0, "rogues_probe", rogueRace, null, "Rogues probe", 6);
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("long_range_plasma_cannon"));
                         ship.setStationary(true);
                         ship.setCanBeHailed(false);
                         return ship;

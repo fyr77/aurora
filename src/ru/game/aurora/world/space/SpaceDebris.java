@@ -8,13 +8,12 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.util.ProbabilitySet;
-import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 
 /**
  * Space debris are left after a ship is destroyed
  */
-public class SpaceDebris extends BasePositionable implements SpaceObject {
+public class SpaceDebris extends BaseSpaceObject {
     public static class ResourceDebris extends BaseSpaceObject {
 
         private static final long serialVersionUID = -7839504515681696314L;

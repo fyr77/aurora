@@ -13,6 +13,8 @@ import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GlobalThreadPool;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.CrewChangeListener;
 import ru.game.aurora.world.World;
@@ -29,13 +31,11 @@ import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.quest.Journal;
 import ru.game.aurora.world.quest.JournalEntry;
+import ru.game.aurora.world.quest.ZorsanFinalBattleGenerator;
 import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.Future;
 
 /**
@@ -219,6 +219,18 @@ public class WorldGenerator implements Runnable {
         }
     }
 
+    private static class L implements DialogListener {
+
+        private static final long serialVersionUID = 6855746560946526755L;
+
+        @Override
+        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+            ZorsanFinalBattleGenerator g = new ZorsanFinalBattleGenerator();
+            world.addListener(g);
+            g.updateWorld(world);
+        }
+    }
+
     private void createMisc(World world) {
         Journal journal = world.getPlayer().getJournal();
         journal.addCodex(new JournalEntry("aurora_desc", "1"));
@@ -228,6 +240,17 @@ public class WorldGenerator implements Runnable {
 
         journal.addQuest(new JournalEntry("colony_search", "start"));
         journal.addQuest(new JournalEntry("last_beacon", "start"));
+
+        // initial relationship with crewmembers
+        world.getGlobalVariables().put("crew.engineer", "0");
+        world.getGlobalVariables().put("crew.marine", "0");
+        world.getGlobalVariables().put("crew.scientist", "0");
+
+        Dialog d = Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_before_start.json");
+        d.addListener(new L());
+
+        world.getPlayer().getEarthState().getEarthSpecialDialogs().add(d);
+
     }
 
     // perform some fast initialization in gui thread

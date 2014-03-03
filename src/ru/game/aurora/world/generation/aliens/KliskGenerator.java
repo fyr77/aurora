@@ -18,6 +18,7 @@ import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
+import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -43,7 +44,13 @@ public class KliskGenerator implements WorldGeneratorPart {
 
     public static final int STATION = 2;
 
-    private static AlienRace kliskRace;
+    private static final ProbabilitySet<SpaceObject> defaultLootTable;
+
+    static {
+        defaultLootTable = new ProbabilitySet<>();
+        defaultLootTable.put(new SpaceDebris.ResourceDebris(5), 1.0);
+        defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
+    }
 
     private Dialog createDefaultKliskPlanetDialog(World world) {
         Dialog d = Dialog.loadFromFile("dialogs/klisk/klisk_planet_default.json");
@@ -96,12 +103,12 @@ public class KliskGenerator implements WorldGeneratorPart {
         world.addListener(new KliskTradequestDialogListener(targetSystem));
     }
 
-    private StarSystem generateTargetStarsystemForTradeQuest(World world) {
+    private StarSystem generateTargetStarsystemForTradeQuest(World world, AlienRace race) {
         StarSystem ss = WorldGenerator.generateRandomStarSystem(world, 12, 15);
         world.getGalaxyMap().addObjectAndSetTile(ss, 12, 15);
         world.getGlobalVariables().put("klisk_trade.coords", "[12, 15]");
 
-        NPCShip spaceStation = kliskRace.getDefaultFactory().createShip(STATION);
+        NPCShip spaceStation = race.getDefaultFactory().createShip(STATION);
         ss.setRandomEmptyPosition(spaceStation);
         ss.getShips().add(spaceStation);
         spaceStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json")));
@@ -147,7 +154,7 @@ public class KliskGenerator implements WorldGeneratorPart {
         HomeworldGenerator.setCoord(planets[0], 2);
 
         planets[1] = new AlienHomeworld("klisk_homeworld", kliskRace, null, 3, 0, ss, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 0, PlanetCategory.PLANET_ROCK);
-        ((AlienHomeworld) planets[1]).setDialog(createPlanetDialogAndQuests((AlienHomeworld) planets[1], generateTargetStarsystemForTradeQuest(world)));
+        ((AlienHomeworld) planets[1]).setDialog(createPlanetDialogAndQuests((AlienHomeworld) planets[1], generateTargetStarsystemForTradeQuest(world, kliskRace)));
         HomeworldGenerator.setCoord(planets[1], 3);
 
         planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
@@ -166,8 +173,11 @@ public class KliskGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile("dialogs/klisk_1.json");
-        kliskRace = new AlienRace(NAME, "klisk_ship", mainDialog);
+        final AlienRace kliskRace = new AlienRace(NAME, "klisk_ship", mainDialog);
         mainDialog.addListener(new DialogListener() {
+
+            private static final long serialVersionUID = 8770464358766507288L;
+
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
@@ -195,43 +205,41 @@ public class KliskGenerator implements WorldGeneratorPart {
 
             @Override
             public NPCShip createShip(int shipType) {
-                if (shipType == DEFAULT_SHIP) {
-                    NPCShip ship = new NPCShip(0, 0, "klisk_ship", kliskRace, null, "Klisk Ship");
-                    ship.setHp(15);
-                    ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
-                    return ship;
+
+                NPCShip ship;
+                switch (shipType) {
+                    case DEFAULT_SHIP:
+                        ship = new NPCShip(0, 0, "klisk_ship", kliskRace, null, "Klisk Ship", 15);
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
+                        break;
+
+                    case TRADE_PROBE:
+                        ship = new NPCShip(0, 0, "klisk_drone", kliskRace, null, "Klisk drone", 7);
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"));
+                        ship.setStationary(true);
+                        ship.setCanBeHailed(false);
+                        break;
+                    case STATION:
+                        ship = new NPCShip(0, 0, "klisk_station", kliskRace, null, "Klisk station", 20);
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
+                        ship.setStationary(true);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Klisk race does not define ship of type " + shipType);
                 }
+                ship.setLoot(defaultLootTable);
+                return ship;
+            }});
+            StarSystem kliskHomeworld = generateKliskHomeworld(world, 15, 15, kliskRace);
+            world.getGlobalVariables().put("klisk.homeworld", "[15, 15]");
+            kliskRace.setHomeworld(kliskHomeworld);
 
-                if (shipType == TRADE_PROBE) {
-                    NPCShip ship = new NPCShip(0, 0, "klisk_drone", kliskRace, null, "Klisk drone");
-                    ship.setHp(7);
-                    ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"));
-                    ship.setStationary(true);
-                    ship.setCanBeHailed(false);
-                    return ship;
-                }
+            world.addListener(new StandardAlienShipEvent(kliskRace));
+            world.getGalaxyMap().getObjects().add(kliskHomeworld);
+            world.getGalaxyMap().setTileAt(15, 15, world.getGalaxyMap().getObjects().size() - 1);
 
-                if (shipType == STATION) {
-                    NPCShip ship = new NPCShip(0, 0, "klisk_station", kliskRace, null, "Klisk station");
-                    ship.setHp(20);
-                    ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
-                    ship.setStationary(true);
-                    return ship;
-                }
-
-                throw new IllegalArgumentException("Klisk race does not define ship of type " + shipType);
-            }
-        });
-        StarSystem kliskHomeworld = generateKliskHomeworld(world, 15, 15, kliskRace);
-        world.getGlobalVariables().put("klisk.homeworld", "[15, 15]");
-        kliskRace.setHomeworld(kliskHomeworld);
-
-        world.addListener(new StandardAlienShipEvent(kliskRace));
-        world.getGalaxyMap().getObjects().add(kliskHomeworld);
-        world.getGalaxyMap().setTileAt(15, 15, world.getGalaxyMap().getObjects().size() - 1);
-
-        world.getRaces().put(kliskRace.getName(), kliskRace);
+            world.getRaces().put(kliskRace.getName(), kliskRace);
 
 
+        }
     }
-}

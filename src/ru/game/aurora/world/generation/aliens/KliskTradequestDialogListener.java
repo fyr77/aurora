@@ -53,7 +53,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
         private NPCShip target;
 
         public KliskQuestShip(World world, NPCShip target, int x, int y) {
-            super(x, y, "klisk_ship", world.getRaces().get(KliskGenerator.NAME), new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_ship_default.json")), "Klisk ship");
+            super(x, y, "klisk_ship", world.getRaces().get(KliskGenerator.NAME), new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_ship_default.json")), "Klisk ship", 15);
             setAi(new LandAI(target));
             this.target = target;
         }

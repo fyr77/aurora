@@ -15,7 +15,6 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.research.ResearchProjectDesc;
-import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Dungeon;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
@@ -26,7 +25,7 @@ import ru.game.aurora.world.World;
  * Can contain something valuable, like resources, materials for research etc.
  * In future versions will contain enemies and location similar to planet
  */
-public class SpaceHulk extends BasePositionable implements SpaceObject {
+public class SpaceHulk extends BaseSpaceObject {
     private static final long serialVersionUID = 1L;
 
     private String name;

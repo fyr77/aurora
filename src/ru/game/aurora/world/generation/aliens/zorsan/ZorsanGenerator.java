@@ -13,6 +13,9 @@ import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.Dungeon;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.KliskGenerator;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.EmbassiesQuest;
 import ru.game.aurora.world.planet.BasePlanet;
@@ -111,14 +114,12 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         return ss;
     }
 
-    public static void addWarDataDrop()
-    {
+    public static void addWarDataDrop() {
         defaultLootTable.put(new ZorsanWarData(), 10.3);
     }
 
-    public static void removeWarDataDrop()
-    {
-        for (Iterator<Map.Entry<SpaceObject, Double>> iter = defaultLootTable.entrySet().iterator(); iter.hasNext();) {
+    public static void removeWarDataDrop() {
+        for (Iterator<Map.Entry<SpaceObject, Double>> iter = defaultLootTable.entrySet().iterator(); iter.hasNext(); ) {
             Map.Entry<SpaceObject, Double> e = iter.next();
             if (e instanceof ZorsanWarData) {
                 iter.remove();
@@ -139,17 +140,15 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                 NPCShip ship;
                 switch (shipType) {
                     case SCOUT_SHIP: {
-                        ship = new NPCShip(0, 0, "zorsan_scout", race, null, "Zorsan scout");
-                        ship.setHp(8);
+                        ship = new NPCShip(0, 0, "zorsan_scout", race, null, "Zorsan scout", 10);
                         ship.setSpeed(1);
-                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"));
                         break;
                     }
                     case CRUISER_SHIP: {
-                        ship = new NPCShip(0, 0, "zorsan_cruiser", race, null, "Zorsan cruiser");
-                        ship.setHp(15);
+                        ship = new NPCShip(0, 0, "zorsan_cruiser", race, null, "Zorsan cruiser", 15);
                         ship.setSpeed(2);
-                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
+                        ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_small_cannon"));
                         break;
                     }
                     default:
@@ -170,5 +169,13 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         world.addListener(new SingleStarsystemShipSpawner(race.getDefaultFactory(), 0.8, race.getHomeworld()));
         world.getRaces().put(race.getName(), race);
         addWarDataDrop();
+
+        // zorsan are hostile to anyone
+        world.getReputation().setHostile(NAME, BorkGenerator.NAME);
+        world.getReputation().setHostile(NAME, RoguesGenerator.NAME);
+        world.getReputation().setHostile(NAME, KliskGenerator.NAME);
+        world.getReputation().setHostile(BorkGenerator.NAME, NAME);
+        world.getReputation().setHostile(RoguesGenerator.NAME, NAME);
+        world.getReputation().setHostile(KliskGenerator.NAME, NAME);
     }
 }

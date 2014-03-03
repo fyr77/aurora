@@ -86,7 +86,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private transient ParallaxBackground background;
 
-    private transient List<Effect> effects = new LinkedList<>();
+    private transient PriorityQueue<Effect> effects = new PriorityQueue<>();
+
+    private transient Effect currentEffect = null;
 
     /**
      * Relation between tile size and max planet size
@@ -176,8 +178,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
      * If player has killed everybody, evidently there is no one left, who could tell that it was player fault, so
      * his rep with other races will not decrease
      */
-    private void checkAndSynchronizeReputation(World world)
-    {
+    private void checkAndSynchronizeReputation(World world) {
         for (SpaceObject so : ships) {
             if (so instanceof NPCShip) {
                 world.getReputation().merge(reputation);
@@ -302,7 +303,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             ClassNotFoundException {
         try {
             ois.defaultReadObject();
-            effects = new LinkedList<>();
+            effects = new PriorityQueue<>();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -326,7 +327,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         //TODO: firing sectors
         for (SpaceObject spaceObject : ships) {
-            if (weapon.getWeaponDesc().range >= playerShip.getDistance(spaceObject)) {
+            if (spaceObject.canBeShotAt() && weapon.getWeaponDesc().range >= playerShip.getDistance(spaceObject) && playerShip.getRace() != spaceObject.getRace()) {
                 availableTargets.add(spaceObject);
                 if (target == null) {
                     target = spaceObject;
@@ -365,19 +366,31 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
             // firing
             final int damage = weapon.getWeaponDesc().damage;
-            target.onAttack(world, playerShip, damage);
+
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, target.getName()));
 
-            effects.add(new BlasterShotEffect(playerShip, target, world.getCamera(), 800, weapon));
+            BlasterShotEffect e = new BlasterShotEffect(playerShip, target, world.getCamera(), 800, weapon);
+            e.setEndListener(new IStateChangeListener() {
+                private static final long serialVersionUID = 8150717419595750398L;
+
+                @Override
+                public void stateChanged(World world) {
+                    target.onAttack(world, playerShip, damage);
+                    if (!target.isAlive()) {
+                        GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
+                        target = null;
+                    }
+                }
+            });
+            effects.add(e);
 
             ResourceManager.getInstance().getSound(weapon.getWeaponDesc().shotSound).play();
 
-            if (!target.isAlive()) {
-                GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
-                target = null;
-            }
+
             weapon.setReloadTimeLeft(weapon.getWeaponDesc().reloadTurns);
             world.setUpdatedThisFrame(true);
+
+            onWeaponButtonPressed(world, selectedWeapon);
         }
     }
 
@@ -414,17 +427,15 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         if (background == null) {
             createBackground(world);
         }
-        if (!effects.isEmpty()) {
-            List<Effect> newList = new ArrayList<>(effects);
-            for (Effect currentEffect : newList) {
-                currentEffect.update(container, world);
-            }
-            for (Iterator<Effect> iter = effects.iterator(); iter.hasNext(); ) {
-                Effect e = iter.next();
-                if (e.isOver()) {
-                    e.onOver(world);
-                    iter.remove();
-                }
+
+        if (currentEffect == null && !effects.isEmpty()) {
+            currentEffect = effects.remove();
+        }
+        if (currentEffect != null) {
+            currentEffect.update(container, world);
+            if (currentEffect.isOver()) {
+                currentEffect.onOver(world);
+                currentEffect = null;
             }
             return;
         }
@@ -452,7 +463,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         boolean shipAtSameCoords = false;
-        for (SpaceObject ship : ships) {
+        List<SpaceObject> shipsCopy = new LinkedList<>(ships); //to prevent CMO
+        for (SpaceObject ship : shipsCopy) {
             if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
                 shipAtSameCoords = true;
             }
@@ -631,6 +643,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
+        // now draw effects that are beyond starships
+        if (currentEffect != null && currentEffect.getOrder() == Effect.DrawOrder.BACK) {
+            currentEffect.draw(container, g, camera);
+        }
+
 
         final int selectedWeaponRange;
         if (mode == MODE_SHOOT) {
@@ -641,7 +658,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         g.setColor(Color.red);
         for (SpaceObject ship : ships) {
             ship.draw(container, g, camera);
-            if (mode == MODE_SHOOT && player.getShip().getDistance(ship) < selectedWeaponRange) {
+            if (mode == MODE_SHOOT && ship.canBeShotAt() && player.getShip().getDistance(ship) < selectedWeaponRange && player.getShip().getRace() != ship.getRace()) {
                 // every targetable ship is surrounded by rectangle
                 g.drawRect(camera.getXCoord(ship.getX()), camera.getYCoord(ship.getY()), camera.getTileWidth(), camera.getTileHeight());
             }
@@ -667,7 +684,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         player.getShip().draw(container, g, camera);
 
-        for (Effect currentEffect : effects) {
+        if (currentEffect != null && currentEffect.getOrder() == Effect.DrawOrder.FRONT) {
             currentEffect.draw(container, g, camera);
         }
     }

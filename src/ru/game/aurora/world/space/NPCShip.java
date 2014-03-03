@@ -5,16 +5,20 @@
  */
 package ru.game.aurora.world.space;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.*;
 import ru.game.aurora.effects.BlasterShotEffect;
+import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
+import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.util.ProbabilitySet;
+import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.MovableSprite;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
@@ -22,7 +26,9 @@ import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 public class NPCShip extends MovableSprite implements SpaceObject {
 
@@ -32,7 +38,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     protected NPC captain;
 
-    protected int hp = 3;
+    protected int hp;
+
+    protected int maxHP;
 
     protected String name;
 
@@ -54,13 +62,14 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     // map of loot that can be dropped by this ship, with its chances
     private ProbabilitySet<SpaceObject> loot;
 
-    private HashMap<SpaceObject, Integer> threatMap = new HashMap<>();
+    private transient Map<SpaceObject, Integer> threatMap = new WeakHashMap<>();
 
-    public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
+    public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name, int hp) {
         super(x, y, sprite);
         this.race = race;
         this.captain = captain;
         this.name = name;
+        this.maxHP = this.hp = hp;
     }
 
     public void setSpeed(int speed) {
@@ -77,6 +86,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     @Override
     public void update(GameContainer container, World world) {
+        if (!isAlive()) {
+            return;
+        }
         Ship player = world.getPlayer().getShip();
 
         super.update(container, world);
@@ -102,21 +114,32 @@ public class NPCShip extends MovableSprite implements SpaceObject {
             threatMap = new HashMap<>();
         }
 
-        //наполняем агролист
         for (SpaceObject so : ss.getShips()) {
-            if (!threatMap.containsKey(so) && isHostile(world, so)) {
-                threatMap.put(so, 1);
+            if (so.canBeShotAt() && !threatMap.containsKey(so) && isHostile(world, so)) {
+                threatMap.put(so, 0);
             }
         }
         if (!threatMap.containsKey(player) && isHostile(world, player)) {
-            threatMap.put(player, 1);
+            threatMap.put(player, 0);
         }
 
-        //обновляем агро
         updateThreatMap(world);
 
-        //если кто-то в листе есть - атакуем того, у кого больше всего агро
-        if (getMostThreatTarget() != null) ai = new CombatAI(getMostThreatTarget());
+        while (!threatMap.isEmpty()) {
+            SpaceObject mostThreatTarget = getMostThreatTarget();
+            if (mostThreatTarget != null) {
+                if (!mostThreatTarget.isAlive()) {
+                    threatMap.remove(mostThreatTarget);
+                    continue;
+                }
+                ai = new CombatAI(mostThreatTarget);
+                break;
+            }
+        }
+
+        if (threatMap.isEmpty()) {
+            ai = new LeaveSystemAI();
+        }
 
         if (ai != null) {
             ai.update(this, world, (StarSystem) world.getCurrentRoom());
@@ -126,6 +149,18 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
         super.draw(container, g, camera);
+        if (hp < 3) {
+            g.setColor(Color.red);
+        } else {
+            g.setColor(Color.white);
+        }
+        String hpText;
+        if (hp < 100) {
+            hpText = Integer.toString(Math.max(0, hp));
+        } else {
+            hpText = "N/A";
+        }
+        g.drawString(hpText, camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
     }
 
     /**
@@ -211,7 +246,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         }
     }
 
-    public void fire(World world, StarSystem ss, int weaponIdx, SpaceObject target) {
+    public void fire(World world, StarSystem ss, int weaponIdx, final SpaceObject target) {
         weapons[weaponIdx].fire();
         final StarshipWeaponDesc weaponDesc = weapons[weaponIdx].getWeaponDesc();
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.attack")
@@ -220,15 +255,25 @@ public class NPCShip extends MovableSprite implements SpaceObject {
                 , Localization.getText("weapons", weaponDesc.name)
                 , weaponDesc.damage
         ));
-        target.onAttack(world, this, weaponDesc.damage);
 
-        ss.addEffect(new BlasterShotEffect(this, target, world.getCamera(), 800, weapons[weaponIdx]));
+
+        Effect e = new BlasterShotEffect(this, target, world.getCamera(), 800, weapons[weaponIdx]);
+        e.setEndListener(new IStateChangeListener() {
+            private static final long serialVersionUID = -3379281638297845046L;
+
+            @Override
+            public void stateChanged(World world) {
+                target.onAttack(world, NPCShip.this, weaponDesc.damage);
+                if (!target.isAlive()) {
+                    GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
+                }
+            }
+        });
+        ss.addEffect(e);
 
         ResourceManager.getInstance().getSound(weaponDesc.shotSound).play();
 
-        if (!target.isAlive()) {
-            GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
-        }
+
     }
 
     @Deprecated
@@ -311,8 +356,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
             if (amount > 0) {
                 newAmount = Math.min(Integer.MAX_VALUE, threatMap.get(target) + amount);    //воизбежание переполнения
             } else {
-                newAmount = Math.max(1, threatMap.get(target) + amount);    //агро не может быть меньше 1
+                newAmount = Math.max(0, threatMap.get(target) + amount);    //агро не может быть меньше 1
             }
+
             threatMap.put(target, newAmount);
         } else {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.hostile"), getName(), target.getName()));
@@ -323,24 +369,21 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         }
     }
 
-    public void removeFromThreatMap(World world, SpaceObject target) {
-        threatMap.remove(target);
-        if (target.equals(world.getPlayer().getShip())) {
-            isHostile = false;
-        }
-        //todo: возможно надо проследить за репутацией
-    }
 
     //цель для атаки
     public SpaceObject getMostThreatTarget() {
         if (!threatMap.isEmpty()) {
             SpaceObject mostThreat = threatMap.keySet().iterator().next();
             int maxValue = threatMap.get(mostThreat);
-            for (Object o : threatMap.entrySet()) {
-                Map.Entry entry = (Map.Entry) o;
-                int nextValue = (int) entry.getValue();
+            for (Iterator<Map.Entry<SpaceObject, Integer>> iterator = threatMap.entrySet().iterator(); iterator.hasNext(); ) {
+                Map.Entry<SpaceObject, Integer> entry = iterator.next();
+                if (!entry.getKey().isAlive()) {
+                    iterator.remove();
+                    continue;
+                }
+                int nextValue = entry.getValue();
                 if (nextValue > maxValue) {
-                    mostThreat = (SpaceObject) entry.getKey();
+                    mostThreat = entry.getKey();
                     maxValue = nextValue;
                 }
             }
@@ -362,13 +405,24 @@ public class NPCShip extends MovableSprite implements SpaceObject {
                 if (getDistance(ship) < (speed * 2)) {
                     changeThreat(world, ship, 2);   //todo: balance
                 }
-            } else {
-                removeFromThreatMap(world, ship);
             }
         }
     }
 
     public int getHp() {
         return hp;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public Map<SpaceObject, Integer> getThreatMap() {
+        return threatMap;
+    }
+
+    @Override
+    public boolean canBeShotAt() {
+        return true;
     }
 }

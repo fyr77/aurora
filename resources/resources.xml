@@ -20,6 +20,7 @@
 
     <!-- Player sprites -->
     <resource type="image" id="aurora">sprites/ships/player_ship.png</resource>
+    <resource type="image" id="voyager">sprites/ships/voyager.png</resource>
     <resource type="image" id="awayteam">sprites/ships/away_team.png</resource>
     <resource type="image" id="shuttle">sprites/ships/player_shuttle.png</resource>
     <resource type="image" id="probe">sprites/ships/probe.png</resource>
@@ -76,6 +77,7 @@
     <!-- swarm -->
     <resource type="image" id="bork_ship">sprites/ships/swarm.png</resource>
     <resource type="image" id="bork_dialog">sprites/portraits/swarm.png</resource>
+    <resource type="image" id="bork_vip_dialog">sprites/portraits/bork_vip_dialog.png</resource>
 
     <!-- earth -->
     <resource type="image" id="usa_leader">sprites/portraits/am_leader.png</resource>
@@ -131,7 +133,9 @@
     </resource>
     <resource type="animation" id="plasma_explosion" tw="16" th="16" duration="100">sprites/effects/plasma_explosion.png
     </resource>
-    <resource type="animation" id="blaster_explosion" tw="16" th="16" duration="100">sprites/effects/blaster_explosion_red.png<resource/>
+    <resource type="animation" id="blaster_explosion_red" tw="16" th="16" duration="100">
+        sprites/effects/blaster_explosion_red.png
+    </resource>
     <resource type="animation" id="plasma_particles" tw="8" th="8" duration="100">sprites/effects/plasma_particles.png
     </resource>
     <resource type="animation" id="blaster_explosion" tw="16" th="16" duration="100">

@@ -1,10 +1,10 @@
 {
     "id" : "laser_cannon",
-    "damage" : 4,
+    "damage" : 2,
     "name": "laser_cannon.name",
     "desc": "laser_cannon.desc",
     "shotSprite" : "blaster_shot",
-    "range" : 3,
+    "range" : 5,
     "image" : "ship_laser",
     "shotSound" : "laser_1",
     "reloadTurns" : 1,

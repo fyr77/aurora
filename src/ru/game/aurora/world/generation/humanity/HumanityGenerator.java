@@ -17,13 +17,12 @@ import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.PrivateMessage;
+import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.quest.AuroraProbe;
-import ru.game.aurora.world.space.HomeworldGenerator;
-import ru.game.aurora.world.space.NPCShip;
-import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.space.*;
 
 import java.util.List;
 
@@ -31,6 +30,14 @@ public class HumanityGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = -1289210420627927980L;
 
     public static final String NAME = "Humanity";
+
+    private static final ProbabilitySet<SpaceObject> defaultLootTable;
+
+    static {
+        defaultLootTable = new ProbabilitySet<>();
+        defaultLootTable.put(new SpaceDebris.ResourceDebris(5), 1.0);
+        defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
+    }
 
     @Override
     public void updateWorld(World world) {
@@ -49,19 +56,22 @@ public class HumanityGenerator implements WorldGeneratorPart {
         world.getGalaxyMap().getObjects().add(solarSystem);
         world.getGalaxyMap().setTileAt(9, 9, world.getGalaxyMap().getObjects().size() - 1);
 
-        // set custom ship AIs, only land on planets, do not leave star system
-        world.addListener(new StandardAlienShipEvent(humans, new NPCShipFactory() {
-
-            private static final long serialVersionUID = 5580476648808262345L;
+        humans.setDefaultFactory(new NPCShipFactory() {
+            private static final long serialVersionUID = -430786152130330165L;
 
             @Override
             public NPCShip createShip(int shipType) {
-                NPCShip ship = new NPCShip(0, 0, "earth_transport", humans, null, "Humanity ship");
+                NPCShip ship = new NPCShip(0, 0, "earth_transport", humans, null, "Humanity ship", 8);
                 ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"));
+                ship.setSpeed(2);
                 ship.setAi(new LandAI(solarSystem.getPlanets()[CommonRandom.getRandom().nextInt(solarSystem.getPlanets().length)]));
+                ship.setLoot(defaultLootTable);
                 return ship;
             }
-        }, true));
+        });
+
+        // set custom ship AIs, only land on planets, do not leave star system
+        world.addListener(new StandardAlienShipEvent(humans, humans.getDefaultFactory(), true));
 
         // add welcoming messages
         List<PrivateMessage> pm = world.getPlayer().getEarthState().getMessages();

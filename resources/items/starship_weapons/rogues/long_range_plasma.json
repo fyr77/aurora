@@ -1,0 +1,12 @@
+{
+    "id" : "long_range_plasma_cannon",
+    "damage" : 1,
+    "name": "plasma_cannon.name",
+    "desc": "plasma_cannon.desc",
+    "shotSprite" : "plasma_shot",
+    "shotSound" : "plasma_1",
+    "range" : 5,
+    "reloadTurns" : 1,
+    "explosionAnimation" : "plasma_explosion",
+    "particlesAnimation" : "plasma_particles"
+}

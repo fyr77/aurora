@@ -27,7 +27,7 @@ public class AuroraProbe extends NPCShip {
     private boolean contacted = false;
 
     public AuroraProbe(int x, int y) {
-        super(x, y, "probe", null, null, "Probe-X513M");
+        super(x, y, "probe", null, null, "Probe-X513M", 5);
         setAi(null);
         dialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_1_found.json"));
     }
