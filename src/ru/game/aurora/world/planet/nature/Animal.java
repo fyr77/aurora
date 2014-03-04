@@ -107,6 +107,7 @@ public class Animal extends Movable implements PlanetObject, IMonster {
         if (hp <= 0) {
             // clean obstacle flag
             myPlanet.getSurface().setTilePassable(x, y, true);
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), getName()));
         }
     }
 
@@ -130,6 +131,11 @@ public class Animal extends Movable implements PlanetObject, IMonster {
         } else {
             return desc.getName() + " " + Localization.getText("gui", "surface.corpse");
         }
+    }
+
+    @Override
+    public AnimalSpeciesDesc.Behaviour getBehaviour() {
+        return (desc.getBehaviour() == AnimalSpeciesDesc.Behaviour.SELF_DEFENSIVE && wasAttacked) ? AnimalSpeciesDesc.Behaviour.AGGRESSIVE : desc.getBehaviour();
     }
 
     @Override

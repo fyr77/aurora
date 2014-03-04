@@ -40,6 +40,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="27" x="128" y="960" width="64" height="64">
    <properties>
+    <property name="behaviour" value="FRIENDLY"/>
     <property name="hp" value="3"/>
     <property name="image" value="humanity_tileset"/>
     <property name="imageTileX" value="2"/>
@@ -62,6 +63,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="38" x="192" y="576" width="64" height="64">
    <properties>
+    <property name="behaviour" value="FRIENDLY"/>
     <property name="hp" value="4"/>
     <property name="image" value="humanity_tileset"/>
     <property name="imageTileX" value="1"/>
@@ -73,6 +75,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="39" x="640" y="896" width="64" height="64">
    <properties>
+    <property name="behaviour" value="FRIENDLY"/>
     <property name="hp" value="3"/>
     <property name="image" value="humanity_tileset"/>
     <property name="imageTileX" value="2"/>
@@ -84,6 +87,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="37" x="128" y="704" width="64" height="64">
    <properties>
+    <property name="behaviour" value="FRIENDLY"/>
     <property name="hp" value="3"/>
     <property name="image" value="humanity_tileset"/>
     <property name="imageTileX" value="0"/>
@@ -95,6 +99,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="25" x="1088" y="1216" width="64" height="64">
    <properties>
+    <property name="behaviour" value="FRIENDLY"/>
     <property name="hp" value="3"/>
     <property name="image" value="humanity_tileset"/>
     <property name="imageTileX" value="0"/>
@@ -148,29 +153,7 @@
     <property name="weapon" value="plasma"/>
    </properties>
   </object>
-  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="44" x="960" y="320" width="64" height="64">
-   <properties>
-    <property name="hp" value="5"/>
-    <property name="image" value="zorsan_tileset"/>
-    <property name="imageTileX" value="3"/>
-    <property name="imageTileY" value="0"/>
-    <property name="speed" value="2"/>
-    <property name="tags" value="guard"/>
-    <property name="weapon" value="plasma"/>
-   </properties>
-  </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="44" x="1088" y="576" width="64" height="64">
-   <properties>
-    <property name="hp" value="5"/>
-    <property name="image" value="zorsan_tileset"/>
-    <property name="imageTileX" value="3"/>
-    <property name="imageTileY" value="0"/>
-    <property name="speed" value="2"/>
-    <property name="tags" value="guard"/>
-    <property name="weapon" value="plasma"/>
-   </properties>
-  </object>
-  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="44" x="704" y="128" width="64" height="64">
    <properties>
     <property name="hp" value="5"/>
     <property name="image" value="zorsan_tileset"/>
@@ -249,6 +232,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="37" x="512" y="832" width="64" height="64">
    <properties>
+    <property name="behaviour" value="FRIENDLY"/>
     <property name="hp" value="3"/>
     <property name="image" value="humanity_tileset"/>
     <property name="imageTileX" value="0"/>
@@ -260,6 +244,7 @@
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="38" x="1088" y="1024" width="64" height="64">
    <properties>
+    <property name="behaviour" value="FRIENDLY"/>
     <property name="hp" value="4"/>
     <property name="image" value="humanity_tileset"/>
     <property name="imageTileX" value="1"/>
@@ -317,13 +302,24 @@
     <property name="initialState" value="opened"/>
    </properties>
   </object>
+  <object name="opendoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="28" x="192" y="896"  width="64" height="64">
+   <properties>
+    <property name="imageClose" value="humanity_tileset"/>
+    <property name="imageCloseTileX" value="1"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="humanity_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="6"/>
+    <property name="initialState" value="open"/>
+	</properties>
+  </object>
  </objectgroup>
  <layer name="walls" width="20" height="20">
   <properties>
    <property name="isObstacle" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC51UiwrCMAwsOK1Vpu6l//+nJtCDcDRZt8CxkibZ5dJ2Sim9BJvgK/gFa42bBVMjB3vPdMxKzbkKcvVhjb3INPZmsAqW+kVuafgiPugPQM9bjTnSL3q4GN8ouHfGWhtSnya2nvYNbay+Vi+up/sf599WG9bD08TjfKbfSIOz+rV8vVrrLN8d9SL/nkX17HwZmeIxd9wRPg/q57OPmT4aHEr12/dALbofg8kD91w5rM5/WAee70g8cdfBi+fD9TxDXcCrs8fviCHXO3/qt/eXZ8gzZ36t8wLd8cbhTZ+deJv3B3asYl5ABgAA
+   H4sIAAAAAAAAC51UiwqDMAwszM51w23q3P7/T5dAD46Q1GrgUNI877RzSukp2ARfwa/xrnGLYHZycPZIx6zUnCwYqw/vOGuZxl4JH8Fan8gtjq81D/YDsPNWY47six0u5JsEt85YtiH1ccL1dG9ww/wyX7aenr+D3syN5SPiJJr5zL4tDs7y5/l6uVYtXx31Wv49a9WDvp62o4nHGf4Rm6N+/rfVVFvV9O7MUKrfy4m+hYHyePZc+3t9uJ+n70T9UJd3sfrYepGhLhDV2ZvviCE3+v7U72mck6+5nY/vA74DoCPf6UsQz3l/xoLlfkAGAAA=
   </data>
  </layer>
 </map>

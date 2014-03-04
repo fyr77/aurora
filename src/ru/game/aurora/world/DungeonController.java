@@ -159,7 +159,7 @@ public class DungeonController implements Serializable {
             return;
         }
 
-        int tilesExplored = map.updateVisibility(x, y, 2);
+        int tilesExplored = map.updateVisibility(x, y, 3);
         landingParty.addCollectedGeodata(tilesExplored);
 
         if (dy < 0) {
@@ -237,7 +237,7 @@ public class DungeonController implements Serializable {
         int targetIdx = 0;
         List<PlanetObject> availableTargets = new ArrayList<>();
 
-        if (target != null && getRange(landingParty, target) > landingParty.getWeapon().getRange()) {
+        if (target != null && (!target.isAlive() || getRange(landingParty, target) > landingParty.getWeapon().getRange())) {
             // target moved out of range
             target = null;
         }
@@ -363,7 +363,7 @@ public class DungeonController implements Serializable {
         }
         // should always be done after player update, so that world.isUpdatedThisFrame() flag is set
         boolean isAtObject = false;
-        for (PlanetObject a : map.getObjects()) {
+        for (PlanetObject a : new ArrayList<>(map.getObjects())) {
             a.update(container, world);
             if (getDistance(landingParty, a) == 0 && a.canBePickedUp()) {
                 isAtObject = true;
@@ -458,7 +458,7 @@ public class DungeonController implements Serializable {
 
         // do not call returnToPrevRoom()
         world.setCurrentRoom(prevRoom);
-        prevRoom.enter(world);
+        prevRoom.returnTo(world);
 
         final Nifty nifty = GUI.getInstance().getNifty();
         Element popup = nifty.createPopup("landing_party_lost");
@@ -477,7 +477,7 @@ public class DungeonController implements Serializable {
             }
         }
         world.setCurrentRoom(prevRoom);
-        prevRoom.enter(world);
+        prevRoom.returnTo(world);
         landingParty.onReturnToShip(world);
 
         if (conditionsSatisfied && successDialog != null) {

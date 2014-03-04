@@ -56,7 +56,12 @@ public class AnimalSpeciesDesc implements Serializable {
         /**
          * Will attack any human on sight
          */
-        AGGRESSIVE
+        AGGRESSIVE,
+
+        /**
+         * Will attack monsters with AGGRESSIVE behaviour
+         */
+        FRIENDLY
     }
 
     private Behaviour behaviour;

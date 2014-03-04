@@ -1,6 +1,8 @@
 package ru.game.aurora.world.dungeon;
 
 import org.newdawn.slick.GameContainer;
+import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
@@ -56,14 +58,14 @@ public class DungeonMonster extends DungeonObject implements IMonster {
     @Override
     public void update(GameContainer container, World world) {
         super.update(container, world);
-        if (behaviour == AnimalSpeciesDesc.Behaviour.AGGRESSIVE) {
+        if (behaviour == AnimalSpeciesDesc.Behaviour.AGGRESSIVE || behaviour == AnimalSpeciesDesc.Behaviour.FRIENDLY) {
             controller.update(container, world);
         }
     }
 
     @Override
     public boolean canBeShotAt() {
-        return hp > 0;
+        return behaviour != AnimalSpeciesDesc.Behaviour.FRIENDLY && hp > 0;
     }
 
     @Override
@@ -72,6 +74,8 @@ public class DungeonMonster extends DungeonObject implements IMonster {
         if (hp <= 0) {
             // clean obstacle flag
             owner.setTilePassable(x, y, true);
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), getName()));
+            myMap.getObjects().remove(this);
         }
     }
 
