@@ -148,6 +148,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     case CRUISER_SHIP: {
                         ship = new NPCShip(0, 0, "zorsan_cruiser", race, null, "Zorsan cruiser", 15);
                         ship.setSpeed(2);
+                        ship.enableRepairs(5);
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_small_cannon"));
                         break;
                     }
@@ -177,5 +178,9 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         world.getReputation().setHostile(BorkGenerator.NAME, NAME);
         world.getReputation().setHostile(RoguesGenerator.NAME, NAME);
         world.getReputation().setHostile(KliskGenerator.NAME, NAME);
+    }
+
+    public static ProbabilitySet<SpaceObject> getDefaultLootTable() {
+        return defaultLootTable;
     }
 }
