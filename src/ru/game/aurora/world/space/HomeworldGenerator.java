@@ -39,7 +39,8 @@ public class HomeworldGenerator {
 
         planets[2] = new Earth(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.BREATHABLE_ATMOSPHERE, 3, 0, 0);
         setCoord(planets[2], 5);
-        planets[2].addSatellite(new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0));
+        Planet Moon = new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
+        planets[2].addSatellite(Moon);
 
         // mars
         planets[3] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
@@ -59,6 +60,9 @@ public class HomeworldGenerator {
         ss.setRadius(Math.max((int) (12 * 1.5), 10));
 
         NPCShip spaceStation = new NPCShip(planets[2].getX() + 1, planets[2].getY() - 1, "earth_station", humanRace, null, "Orbital Scaffold", 25);
+        if (spaceStation.getDistance(Moon) == 0) { // check that it does not intersect with moon
+            spaceStation.setPos(spaceStation.getX(), spaceStation.getY() + 1);
+        }
         spaceStation.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon2"), ResourceManager.getInstance().getWeapons().getEntity("humanity_missiles"));
         spaceStation.setStationary(true);
         spaceStation.setAi(null);

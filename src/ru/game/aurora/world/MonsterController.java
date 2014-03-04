@@ -71,7 +71,7 @@ public class MonsterController implements Serializable {
             int partyY = party.getY();
 
             final double distance = map.isWrapped() ? party.getDistanceWrapped(myMonster, map.getWidthInTiles(), map.getHeightInTiles()) : party.getDistance(myMonster);
-            if (distance < 1.5 * weapon.getRange()) { //1.5 because of diagonal cells
+            if (weapon != null && distance < 1.5 * weapon.getRange()) { //1.5 because of diagonal cells
                 if (!map.lineOfSightExists(x, y, partyX, partyY)) {
                     // can't shoot because no line of sight
                     return;
@@ -86,7 +86,7 @@ public class MonsterController implements Serializable {
                 ResourceManager.getInstance().getSound(weapon.getShotSound()).play();
                 newX = x;
                 newY = y;
-            } else if (distance < 5 * weapon.getRange() && map.lineOfSightExists(x, y, partyX, partyY)) {
+            } else if (map.lineOfSightExists(x, y, partyX, partyY) && (weapon == null || distance < 5 * weapon.getRange())) {
                 lastX = partyX;
                 lastY = partyY;
                 playerShown = true;

@@ -63,6 +63,11 @@ public class AlienHomeworld extends BasePlanet {
     }
 
     @Override
+    public void returnTo(World world) {
+        enter(world);
+    }
+
+    @Override
     public void update(GameContainer container, World world) {
         world.setCurrentRoom(owner);
     }

@@ -10,6 +10,7 @@ import com.google.common.collect.Multiset;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.gui.FailScreenController;
@@ -143,6 +144,9 @@ public class Ship extends MovableSprite implements SpaceObject {
 
     @Override
     public void onAttack(World world, SpaceObject attacker, int dmg) {
+        if (Configuration.getBooleanProperty("cheat.invulnerability")) {
+            return;
+        }
         hull -= dmg;
         world.onPlayerShipDamaged();
         if (hull <= 0) {

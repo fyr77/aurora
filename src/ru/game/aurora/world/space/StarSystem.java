@@ -520,6 +520,15 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         visited = true;
     }
 
+    @Override
+    public void returnTo(World world) {
+        world.getCamera().setTarget(player.getShip());
+        if (background == null) {
+            createBackground(world);
+        }
+        GUI.getInstance().getNifty().gotoScreen("star_system_gui");
+    }
+
     private void createBackground(World world) {
         background = new ParallaxBackground(
                 radius * 3 * (int) world.getCamera().getTileWidth()

@@ -59,6 +59,11 @@ public class HelpScreen implements OverlayWindow {
     }
 
     @Override
+    public void returnTo(World world) {
+        enter(world);
+    }
+
+    @Override
     public void update(GameContainer container, World world) {
         if (container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
             isOver = true;

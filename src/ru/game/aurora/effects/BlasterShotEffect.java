@@ -105,7 +105,7 @@ public class BlasterShotEffect extends Effect {
     @Override
     public void update(GameContainer container, World world) {
         Vector2f distToTarget = new Vector2f(target.getX() - currentPos.getX(), target.getY() - currentPos.getY());
-        if (distToTarget.length() < (float) moveSpeed / container.getFPS()) {
+        if (distToTarget.length() < (float) moveSpeed / container.getFPS() || (!world.getCamera().isInViewportScreen(currentPos.getX(), currentPos.getY()) && !world.getCamera().isInViewportScreen(target.getX(), target.getY()))) {
             if (!isOver) {
                 startHitAnimation(world);
             }
@@ -127,11 +127,15 @@ public class BlasterShotEffect extends Effect {
     }
 
     public void startHitAnimation(World world) {
+        isOver = true;
+        if (!world.getCamera().isInViewportScreen(currentPos.getX(), currentPos.getY())) {
+            return;
+        }
         if (world.getCurrentRoom().getClass().isAssignableFrom(StarSystem.class)) {
             if (!(explosionAnimation == null)) {
                 ((StarSystem) world.getCurrentRoom()).addEffect(new ExplosionEffect((int) currentPos.x, (int) currentPos.y, explosionAnimation, true, false));
             }
         }
-        isOver = true;
+
     }
 }

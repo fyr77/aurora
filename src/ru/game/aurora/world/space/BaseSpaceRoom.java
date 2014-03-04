@@ -13,7 +13,7 @@ import ru.game.aurora.player.Player;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
-public class BaseSpaceRoom implements Room {
+public abstract class BaseSpaceRoom implements Room {
     private static final long serialVersionUID = 1L;
 
     protected Player player;

@@ -226,7 +226,6 @@ public class WorldGenerator implements Runnable {
         @Override
         public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
             ZorsanFinalBattleGenerator g = new ZorsanFinalBattleGenerator();
-            world.addListener(g);
             g.updateWorld(world);
         }
     }

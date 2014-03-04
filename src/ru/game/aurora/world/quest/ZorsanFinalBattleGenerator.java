@@ -1,6 +1,8 @@
 package ru.game.aurora.world.quest;
 
 import org.newdawn.slick.GameContainer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
@@ -11,9 +13,8 @@ import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LandAI;
-import ru.game.aurora.world.GameEventListener;
-import ru.game.aurora.world.Positionable;
-import ru.game.aurora.world.World;
+import ru.game.aurora.util.GameTimer;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
@@ -36,7 +37,11 @@ import java.util.Map;
  * Date: 20.02.14
  * Time: 23:06
  */
-public class ZorsanFinalBattleGenerator extends GameEventListener {
+public class ZorsanFinalBattleGenerator extends GameEventListener implements DialogListener {
+
+    private static final Logger logger = LoggerFactory.getLogger(ZorsanFinalBattleGenerator.class);
+
+
     private enum State {
         CREATED,
         REINFORCEMENTS_ARRIVED,
@@ -67,6 +72,14 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
     private int dropShipsLanded = 0;
 
     private List<NPCShip> allyShips = new LinkedList<>();
+
+    // if it is not null - space station is being boarded
+    // if it becomes signalled - station is captured and destroyed
+    private GameTimer spaceStationBoardingTimer = null;
+
+    private NPCShip spaceStation = null;
+
+    private Dungeon spaceStationDungeon = null;
 
     class ZorsanTroopTransport extends NPCShip {
 
@@ -100,6 +113,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
                 dropShipsLanded++;
                 if (dropShipsLanded == 1) {
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_first_dropship.json"));
+                    attackSpaceStation(world);
                 }
 
                 if (dropShipsLanded == 3) {
@@ -128,6 +142,35 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
         }
     }
 
+    // when first troop transport reaches earth, it also starts an attack on a space station
+    private void attackSpaceStation(World world) {
+        if (spaceStation == null || !spaceStation.isAlive()) {
+            // already destroyed
+            return;
+        }
+
+        Dialog boardingDialog = Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_before_station_boarding.json");
+        boardingDialog.addListener(this);
+        spaceStation.setCaptain(new NPC(boardingDialog));
+        spaceStationBoardingTimer = new GameTimer(15);
+        spaceStationDungeon = new Dungeon(world, new AuroraTiledMap("maps/hum_station.tmx"), solarSystem);
+        spaceStationDungeon.getController().setSuccessListener(new IStateChangeListener() {
+            @Override
+            public void stateChanged(World world) {
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_station_saved.json"));
+                spaceStationBoardingTimer = null;
+                spaceStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_humanity_default.json")));
+            }
+        });
+    }
+
+
+    @Override
+    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+        if (dialog.getId().equals("zorsan_battle_before_station_boarding")) {
+            spaceStationDungeon.enter(world);
+        }
+    }
 
     private void summonFirstWaveOfReinforcements(World world) {
         String val = (String) world.getGlobalVariables().get("klisk_trader_drone.result");
@@ -247,6 +290,15 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
             summonFirstAttackWaveReinforcements(world);
             state = State.FIRST_WAVE_REINFORCEMENTS;
             return true;
+        }
+
+        if (world.getCurrentDungeon() == null && spaceStationBoardingTimer != null && spaceStationBoardingTimer.update()) {
+            // player did not help space station, destroy it
+            if (spaceStation.isAlive()) {
+                spaceStation.onAttack(world, null, spaceStation.getHp());
+                world.addOverlayWindow(preprocessDialog(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_station_captured.json")));
+            }
+            spaceStationBoardingTimer = null;
         }
 
         // clean up dead attacking ships
@@ -390,6 +442,17 @@ public class ZorsanFinalBattleGenerator extends GameEventListener {
             NPCShip defender = humanity.getDefaultFactory().createShip(0);
             defender.setPos(earth.getX() + CommonRandom.getRandom().nextInt(6) - 3, earth.getY() + CommonRandom.getRandom().nextInt(6) - 3);
             solarSystem.getShips().add(defender);
+        }
+
+        for (SpaceObject so : solarSystem.getShips()) {
+            if (so.getName().equals("Orbital Scaffold")) {
+                spaceStation = (NPCShip) so;
+                break;
+            }
+        }
+
+        if (spaceStation == null) {
+            logger.error("Failed to find space station in solar system");
         }
 
         NPCShip voyager = createVoyager(world);

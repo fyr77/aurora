@@ -179,6 +179,14 @@ public class Planet extends BasePlanet implements IDungeon {
         });
     }
 
+    @Override
+    public void returnTo(World world) {
+        GUI.getInstance().getNifty().gotoScreen("surface_gui");
+        world.getCamera().setTarget(landingParty);
+        world.getCamera().resetViewPort();
+
+    }
+
 
     public BasePositionable getShuttle() {
         return shuttle;

@@ -234,11 +234,13 @@ public class NPCShip extends MovableSprite implements SpaceObject {
             }
         }
 
-        //агро растёт на двойное значение урона
-        changeThreat(world, attacker, dmg * 2);   //todo: balance
 
-        if (!currentStarSystem.getReputation().isHostile(race.getName(), attacker.getRace().getName())) {
-            currentStarSystem.getReputation().setHostile(race.getName(), attacker.getRace().getName());
+        if (attacker != null) {
+            changeThreat(world, attacker, dmg * 2);   //todo: balance
+
+            if (!currentStarSystem.getReputation().isHostile(race.getName(), attacker.getRace().getName())) {
+                currentStarSystem.getReputation().setHostile(race.getName(), attacker.getRace().getName());
+            }
         }
     }
 
@@ -362,6 +364,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     //изменяем значение агро для цели. Если цели нет в списке - добавляем.
     public void changeThreat(World world, SpaceObject target, int amount) {
+        if (threatMap == null) {
+            threatMap = new WeakHashMap<>();
+        }
         if (threatMap.containsKey(target)) {
             int newAmount;
             if (amount > 0) {

@@ -26,8 +26,7 @@ import java.util.List;
  * Map is represented as a list of all static objects (like star systems), and a 2d array of cells, where each cell is either -1
  * (empty sector of space) or index of an element in this array.
  */
-public class GalaxyMap extends BaseSpaceRoom
-{
+public class GalaxyMap extends BaseSpaceRoom {
 
     private static final Logger logger = LoggerFactory.getLogger(GalaxyMap.class);
 
@@ -88,6 +87,11 @@ public class GalaxyMap extends BaseSpaceRoom
         final Nifty nifty = GUI.getInstance().getNifty();
         nifty.gotoScreen("galaxy_map_gui");
         nifty.setIgnoreKeyboardEvents(true);
+    }
+
+    @Override
+    public void returnTo(World world) {
+        enter(world);
     }
 
 

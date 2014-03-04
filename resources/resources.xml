@@ -177,5 +177,6 @@
 
     <resource type="spritesheet" id="rogues_tileset" tw="64" th="64">maps/rogues_tileset.png</resource>
     <resource type="spritesheet" id="zorsan_tileset" tw="64" th="64">maps/zorsan_tileset.png</resource>
+    <resource type="spritesheet" id="humanity_tileset" tw="64" th="64">maps/humanity_tileset.png</resource>
 
 </resources>

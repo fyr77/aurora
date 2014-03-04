@@ -69,7 +69,7 @@ public class MainMenuController implements ScreenController {
             return;
         }
         GUI.getInstance().onWorldLoaded(container, loadedState);
-        loadedState.getCurrentRoom().enter(loadedState);
+        loadedState.getCurrentRoom().returnTo(loadedState);
     }
 
     public void newGame() {

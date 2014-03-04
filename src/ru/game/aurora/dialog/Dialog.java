@@ -150,6 +150,11 @@ public class Dialog implements OverlayWindow {
     }
 
     @Override
+    public void returnTo(World world) {
+        enter(world);
+    }
+
+    @Override
     public void update(GameContainer container, World world) {
         if (currentStatement == null) {
             return;

@@ -13,8 +13,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.StarSystem;
 
-public class GasGiant extends BasePlanet
-{
+public class GasGiant extends BasePlanet {
     private static final long serialVersionUID = -4326457278081029734L;
 
     public GasGiant(int x, int y, StarSystem owner) {
@@ -33,6 +32,11 @@ public class GasGiant extends BasePlanet
 
     @Override
     public void enter(World world) {
+    }
+
+    @Override
+    public void returnTo(World world) {
+        enter(world);
     }
 
     @Override

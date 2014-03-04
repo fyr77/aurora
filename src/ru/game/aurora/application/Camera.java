@@ -152,8 +152,12 @@ public class Camera implements Serializable {
         return Math.abs(target.getX() - tileX) <= getNumTilesX() / 2 && Math.abs(target.getY() - tileY) <= getNumTilesY() / 2;
     }
 
-    public boolean isInViewportAbs(int absX, int absY) {
+    public boolean isInViewportAbs(float absX, float absY) {
         return isInViewport((int) (absX / tileWidth), (int) (absY / tileHeight));
+    }
+
+    public boolean isInViewportScreen(float x, float y) {
+        return x >= 0 && x < getNumTilesX() * tileWidth && y >= 0 && y < getNumTilesY() * tileHeight;
     }
 
     public void drawBound() {

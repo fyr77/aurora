@@ -71,6 +71,17 @@ public class Dungeon implements Room, IDungeon {
     }
 
     @Override
+    public void returnTo(World world) {
+        GUI.getInstance().getNifty().gotoScreen("surface_gui");
+        world.getCamera().resetViewPort();
+        LandingParty landingParty = world.getPlayer().getLandingParty();
+        world.getCamera().setTarget(landingParty);
+        if (playlistName != null) {
+            ResourceManager.getInstance().getPlaylist(playlistName).play();
+        }
+    }
+
+    @Override
     public void enter(World world) {
         world.getCamera().resetViewPort();
         LandingParty landingParty = world.getPlayer().getLandingParty();
