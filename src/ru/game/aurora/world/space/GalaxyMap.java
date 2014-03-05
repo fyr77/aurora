@@ -178,6 +178,26 @@ public class GalaxyMap extends BaseSpaceRoom {
         world.setUpdatedThisFrame(true);
     }
 
+    public StarSystem getClosestStarSystem(StarSystem s)
+    {
+        StarSystem result = null;
+        for (GalaxyMapObject obj : objects) {
+            if (!StarSystem.class.isAssignableFrom(obj.getClass())) {
+                continue;
+            }
+
+            if (obj == s) {
+                continue;
+            }
+
+            if (result == null || getDistance(result, s) > getDistance((StarSystem)obj, s)) {
+                result = (StarSystem) obj;
+            }
+        }
+
+        return result;
+    }
+
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
         if (background == null) {

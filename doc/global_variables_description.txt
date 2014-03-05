@@ -50,6 +50,7 @@ rogues_beacon.result - invaded/scanned
 
 rogues.zorsan_data - quest for retrieving zorsan data. Either 'forged' or 'real'
 rogues.war_help - if hepled player
+rogues.fuko_alive - if Fuko survived final battle
 ==============================
 
 Relations with Klisk
@@ -120,6 +121,7 @@ Bork
 bork.diplomacy_test = kill/injure/miss - result of initial dialog with bork ambassador
 bork.homeworld - coordinates of bork homeworld
 bork.war_help - if bork agree to send reinforcements
+bork.hrrraka_alive - if Katar Hrrraka survived in final battle
 ==============================
 
 bork blockade quest

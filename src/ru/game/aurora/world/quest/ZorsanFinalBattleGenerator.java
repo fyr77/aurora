@@ -10,6 +10,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LandAI;
@@ -26,10 +27,7 @@ import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.earth.Earth;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,10 +36,6 @@ import java.util.Map;
  * Time: 23:06
  */
 public class ZorsanFinalBattleGenerator extends GameEventListener implements DialogListener {
-
-    private static final Logger logger = LoggerFactory.getLogger(ZorsanFinalBattleGenerator.class);
-
-
     private enum State {
         CREATED,
         REINFORCEMENTS_ARRIVED,
@@ -51,7 +45,11 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         ALL_REINFORCEMENTS_ARRIVED,
         SECOND_WAVE_COMBAT,
         THIRD_WAVE_COMBAT,
+        OVER,
+        RECON_DONE
     }
+
+    private static Logger logger = LoggerFactory.getLogger(ZorsanFinalBattleGenerator.class);
 
     private State state = State.CREATED;
 
@@ -72,6 +70,10 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
     private int dropShipsLanded = 0;
 
     private List<NPCShip> allyShips = new LinkedList<>();
+
+    private StarSystem closestStarSystem = null;
+
+    private int shotsDone = 0;
 
     // if it is not null - space station is being boarded
     // if it becomes signalled - station is captured and destroyed
@@ -155,6 +157,8 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         spaceStationBoardingTimer = new GameTimer(15);
         spaceStationDungeon = new Dungeon(world, new AuroraTiledMap("maps/hum_station.tmx"), solarSystem);
         spaceStationDungeon.getController().setSuccessListener(new IStateChangeListener() {
+            private static final long serialVersionUID = 7759568719556795246L;
+
             @Override
             public void stateChanged(World world) {
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_station_saved.json"));
@@ -340,21 +344,110 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         }
 
         if (state == State.THIRD_WAVE_COMBAT && currentWave.size() == 0) {
-            // todo: end dialogs
+
+            boolean kliskAlive = false;
+
+            boolean borkAlive = false;
+
+            boolean roguesAlive = false;
+
+            boolean voyagerAlive = false;
+
             solarSystem.setCanBeLeft(true);
             for (NPCShip s : allyShips) {
                 if (s.isAlive()) {
                     solarSystem.getShips().remove(s);
+                } else {
+                    continue;
+                }
+
+                if (s.getRace().getName().equals(BorkGenerator.NAME) && "pay".equals(world.getGlobalVariables().get("bork_blockade.result"))) {
+                    world.getGlobalVariables().put("bork.hrrraka_alive", true);
+                    borkAlive = true;
+                } else if (s.getRace().getName().equals(RoguesGenerator.NAME)) {
+                    roguesAlive = true;
+                    world.getGlobalVariables().put("rogues.fuko_alive", true);
+                } else if (s.getName().equals("Voyager")) {
+                    voyagerAlive = true;
+                } else if (s.getRace().getName().equals(KliskGenerator.NAME)) {
+                    kliskAlive = true;
                 }
             }
             world.getGlobalVariables().remove("zorsan.war_preparations");
+
+            closestStarSystem = world.getGalaxyMap().getClosestStarSystem(solarSystem);
+            Map<String, String> flags = new HashMap<>();
+            flags.put("closest_coords", "[" + closestStarSystem.getGlobalMapX() + ", " + closestStarSystem.getGlobalMapY() + "]");
+            flags.put("earth_damage", Integer.toString(dropShipsLanded + shotsDone));
+
+
+            if (borkAlive) {
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_after_hrraka.json"), flags);
+            }
+
+            if (roguesAlive) {
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_after_rogues.json"), flags);
+            }
+
+            if (voyagerAlive) {
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_after_voyager.json"), flags);
+            } else {
+                world.getGlobalVariables().remove("voyager");
+            }
+
+            if (kliskAlive) {
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_after_klisk.json"), flags);
+            }
+
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_after_earth.json"), flags);
+
+            world.getPlayer().getEarthState().getEarthSpecialDialogs().clear();
+
+
+            state = State.OVER;
+        }
+
+        if (state == State.RECON_DONE && world.getTurnCount() - turnNumber > 5) {
+
+            final StoryScreen storyScreen = new StoryScreen("story/obliterator.json");
+            world.addOverlayWindow(storyScreen);
+            storyScreen.setListener(new IStateChangeListener() {
+
+                private static final long serialVersionUID = -7376617022370202993L;
+
+                @Override
+                public void stateChanged(World world) {
+                    world.addOverlayWindow(new StoryScreen("story/alpha_completed.json"));
+                }
+            });
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/obliterator_arrival.json"));
+            world.getListeners().remove(this);
         }
 
 
         return false;
     }
 
-    private void repairAllies() {
+    @Override
+    public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
+        if (ss == closestStarSystem) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_after_recon.json"));
+            world.getGlobalVariables().put("zorsan_recon.completed", true);
+        } else if (ss == solarSystem && world.getGlobalVariables().containsKey("zorsan_recon.completed")) {
+            state = State.RECON_DONE;
+            solarSystem.setBackgroundSprite("obliterator_background");
+            Object oldLocation = world.getGlobalVariables().get("quest.main.obliterator");
+            if (oldLocation != null) {
+                ((StarSystem)oldLocation).setBackgroundSprite(null);
+            }
+            turnNumber = world.getTurnCount();
+        }
+
+        return false;
+    }
+
+    private void repairAllies()
+    {
         for (NPCShip s : allyShips) {
             s.setHp(s.getMaxHP());
         }
@@ -378,9 +471,9 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         NPCShip bigBoss = new NPCShip(0, 0, "zorsan_boss", zorsan, null, "Zorsan Planet Killer", 30);
         currentWave.add(bigBoss);
         solarSystem.getShips().add(bigBoss);
-        bigBoss.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_small_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_boss_cannon"));
+        bigBoss.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_boss_cannon"));
         // todo: add areal damage
-        bigBoss.setPos(-1, -solarSystem.getRadius());
+        bigBoss.setPos(-1, - solarSystem.getRadius());
     }
 
     private void summonSecondAttackWave(World world) {
@@ -420,6 +513,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         ship.enableRepairs(4);
         StarshipWeaponDesc[] descs = weapons.toArray(new StarshipWeaponDesc[weapons.size()]);
         ship.setWeapons(descs);
+        allyShips.add(ship);
         return ship;
     }
 
@@ -464,11 +558,21 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
         //todo: set earth dialog
         world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() + 20);
-        world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_humanity_default.json"));
+        final Dialog earthDialog = Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_humanity_default.json");
+        // hack: show only this earth dialog
+        earthDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = -3608024860992598068L;
+
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                world.getPlayer().getEarthState().getEarthSpecialDialogs().add(earthDialog);
+            }
+        });
+        world.getPlayer().getEarthState().getEarthSpecialDialogs().add(earthDialog);
 
         turnNumber = world.getTurnCount();
+        ZorsanGenerator.removeWarDataDrop();
 
         world.addListener(this);
-        ZorsanGenerator.removeWarDataDrop();
     }
 }

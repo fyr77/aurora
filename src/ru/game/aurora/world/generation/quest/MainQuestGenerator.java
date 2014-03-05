@@ -92,7 +92,7 @@ public class MainQuestGenerator implements WorldGeneratorPart {
                 ss.setBackgroundSprite("obliterator_background");
                 ss.setFirstEnterDialog(Dialog.loadFromFile("dialogs/quest/main/obliterator_encountered.json"));
                 ss.setQuestLocation(true);
-                ss.getVariables().put("quest.main.obliterator", null);
+                ss.getVariables().put("quest.main.obliterator", ss);
                 world.addListener(new GameEventListener() {
                     private static final long serialVersionUID = -8345545783110990443L;
 

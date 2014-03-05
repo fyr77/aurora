@@ -1,0 +1,102 @@
+{
+  "id": "zorsan_battle_after_earth",
+  "iconName": "earth_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "earth_damage",
+              "value": "0",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "earth_damage",
+              "value": "0",
+              "type": "GREATER"
+            },
+            {
+              "name": "earth_damage",
+              "value": "4",
+              "type": "LESS"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "earth_damage",
+              "value": "3",
+              "type": "GREATER"
+            }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  }
+}

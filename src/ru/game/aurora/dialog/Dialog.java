@@ -99,7 +99,12 @@ public class Dialog implements OverlayWindow {
         }
         final String s = "dialogs/" + id;
         boolean hasCustomBundle = Localization.bundleExists(s);
-        return PlaceholderResolver.resolvePlaceholders(Localization.getText(hasCustomBundle ? s : "dialogs", id + "." + currentStatement.id), world.getGlobalVariables());
+        String text = PlaceholderResolver.resolvePlaceholders(Localization.getText(hasCustomBundle ? s : "dialogs", id + "." + currentStatement.id), world.getGlobalVariables());
+        if (flags != null && !flags.isEmpty()) {
+            text = PlaceholderResolver.resolvePlaceholders(text, flags);
+        }
+
+        return text;
     }
 
     public List<String> addAvailableRepliesLocalized(World world) {

@@ -1,0 +1,63 @@
+{
+  "id": "obliterator_arrival",
+  "iconName": "scientist_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "quest.main.obliterator",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "quest.main.obliterator",
+              "type": "NOT_SET"
+            }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  }
+}
