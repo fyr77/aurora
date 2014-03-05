@@ -37,6 +37,7 @@ public class ResourceManager {
     private Map<String, Sound> soundMap;
     private Map<String, Playlist> playlistMap;
     private Map<String, Image> imageMap;
+    private Map<String, Image> flippedCopies; // contains horizontally flipped copies of images from imageMap
     private Map<String, ResourceAnimationData> animationMap;
     private Map<String, String> textMap;
     private Map<String, SpriteSheet> spriteSheetMap;
@@ -50,6 +51,7 @@ public class ResourceManager {
     private ResourceManager() {
         soundMap = new HashMap<>();
         imageMap = new HashMap<>();
+        flippedCopies = new HashMap<>();
         animationMap = new HashMap<>();
         textMap = new HashMap<>();
         spriteSheetMap = new HashMap<>();
@@ -295,6 +297,19 @@ public class ResourceManager {
         Image rz = imageMap.get(ID);
         if (rz == null) {
             logger.warn("Image for id {} not found", ID);
+        }
+        return rz;
+    }
+
+    public final Image getFlippedImage(String id) {
+        Image rz = flippedCopies.get(id);
+        if (rz == null) {
+            Image orig = getImage(id);
+            if (orig == null) {
+                return null;
+            }
+            rz = orig.getFlippedCopy(true, false);
+            flippedCopies.put(id, rz);
         }
         return rz;
     }

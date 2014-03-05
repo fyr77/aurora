@@ -2,6 +2,7 @@ package ru.game.aurora.world;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 
@@ -14,6 +15,8 @@ public class MovableSprite extends Movable {
 
     private String sprite;
 
+    private boolean isFlipped = false;
+
     public MovableSprite(int x, int y, String sprite) {
         super(x, y);
         this.sprite = sprite;
@@ -24,7 +27,20 @@ public class MovableSprite extends Movable {
     }
 
     @Override
+    public void moveLeft() {
+        super.moveLeft();
+        isFlipped = true;
+    }
+
+    @Override
+    public void moveRight() {
+        super.moveRight();
+        isFlipped = false;
+    }
+
+    @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        g.drawImage(ResourceManager.getInstance().getImage(sprite), camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
+        Image image = isFlipped ? ResourceManager.getInstance().getFlippedImage(sprite) : ResourceManager.getInstance().getImage(sprite);
+        g.drawImage(image, camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
     }
 }

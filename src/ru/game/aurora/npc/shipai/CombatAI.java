@@ -43,7 +43,7 @@ public class CombatAI implements NPCShipAI {
         }
 
         // more weapons in range - more chance to shoot
-        if (inRange > 0 && ship.isStationary() || CommonRandom.getRandom().nextDouble() < (float)inRange / ship.getWeapons().length) {
+        if (inRange > 0 && ship.isStationary() || CommonRandom.getRandom().nextDouble() < (float) inRange / ship.getWeapons().length) {
             fireAtTarget(ship, world, currentSystem, distance);
             return;
         }
@@ -66,21 +66,20 @@ public class CombatAI implements NPCShipAI {
         // if all weapons are in range, move closer in a random fashion, so that not all ships gather on single tile
         if (inRange < ship.getWeapons().length || (distance > 1 && CommonRandom.getRandom().nextBoolean())) {
             // randomly move either on X, or on Y, so that all ships do not get grouped on same path within 1-2 tiles
-             if (CommonRandom.getRandom().nextBoolean()) {
-                 if (!moveToTargetOnX(val, ship)) {
-                     moveToTargetOnY(val, ship);
-                 }
-             } else {
-                 if (!moveToTargetOnY(val, ship)) {
-                     moveToTargetOnX(val, ship);
-                 }
-             }
+            if (CommonRandom.getRandom().nextBoolean()) {
+                if (!moveToTargetOnX(val, ship)) {
+                    moveToTargetOnY(val, ship);
+                }
+            } else {
+                if (!moveToTargetOnY(val, ship)) {
+                    moveToTargetOnX(val, ship);
+                }
+            }
         }
 
     }
 
-    private boolean moveToTargetOnX(int val, NPCShip ship)
-    {
+    private boolean moveToTargetOnX(int val, NPCShip ship) {
         if (val * target.getX() < val * ship.getX()) {
             ship.moveLeft();
             return true;
@@ -91,8 +90,7 @@ public class CombatAI implements NPCShipAI {
         return false;
     }
 
-    private boolean moveToTargetOnY(int val, NPCShip ship)
-    {
+    private boolean moveToTargetOnY(int val, NPCShip ship) {
         if (val * target.getY() < val * ship.getY()) {
             ship.moveUp();
             return true;
@@ -108,6 +106,7 @@ public class CombatAI implements NPCShipAI {
             final StarshipWeapon weapon = ship.getWeapons()[i];
             if (weapon.getReloadTimeLeft() <= 0 && weapon.getWeaponDesc().range >= distance) {
                 ship.fire(world, currentSystem, i, target);
+                return;
             }
         }
     }
