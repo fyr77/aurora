@@ -58,7 +58,7 @@ public class CombatAI implements NPCShipAI {
             aggroSum += i;
         }
 
-        if (aggroSum > ship.getHp() * 2) {
+        if (aggroSum > ship.getHp()) {
             val = -1;
         }
 

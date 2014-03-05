@@ -14,6 +14,7 @@ import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LandAI;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.util.GameTimer;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
@@ -115,6 +116,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
                 dropShipsLanded++;
                 if (dropShipsLanded == 1) {
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_first_dropship.json"));
+                    world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_attack_invasion", "news"));
                     attackSpaceStation(world);
                 }
 
@@ -173,6 +175,8 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
         if (dialog.getId().equals("zorsan_battle_before_station_boarding")) {
             spaceStationDungeon.enter(world);
+        } else if (dialog.getId().equals("zorsan_battle_before_start")) {
+            updateWorld(world);
         }
     }
 
@@ -403,6 +407,8 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
             world.getPlayer().getEarthState().getEarthSpecialDialogs().clear();
 
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_attack_victory", "news"));
+
 
             state = State.OVER;
         }
@@ -574,5 +580,8 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         ZorsanGenerator.removeWarDataDrop();
 
         world.addListener(this);
+
+        world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_attack_2", "news"));
+
     }
 }

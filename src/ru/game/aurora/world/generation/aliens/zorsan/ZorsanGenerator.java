@@ -121,7 +121,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
     public static void removeWarDataDrop() {
         for (Iterator<Map.Entry<SpaceObject, Double>> iter = defaultLootTable.entrySet().iterator(); iter.hasNext(); ) {
             Map.Entry<SpaceObject, Double> e = iter.next();
-            if (e instanceof ZorsanWarData) {
+            if (e.getKey() instanceof ZorsanWarData) {
                 iter.remove();
             }
         }

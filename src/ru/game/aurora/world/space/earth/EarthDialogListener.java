@@ -8,11 +8,14 @@ import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.dialog.Statement;
 import ru.game.aurora.gui.EarthProgressScreenController;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.player.earth.PrivateMessage;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
+import ru.game.aurora.world.quest.ZorsanFinalBattleGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -148,6 +151,21 @@ public class EarthDialogListener implements DialogListener {
 
         if (flags.containsKey("zorsan_war_info_update")) {
             world.getGlobalVariables().put("zorsan.war_preparations", 1);
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_attack_1", "news"));
+            world.addListener(new GameEventListener() {
+                private static final long serialVersionUID = -3584085663658592781L;
+                int days;
+                @Override
+                public boolean onTurnEnded(World world) {
+                    if (++days > 500) {
+                        Dialog d = Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_before_start.json");
+                        d.addListener(new ZorsanFinalBattleGenerator());
+                        world.getPlayer().getEarthState().getEarthSpecialDialogs().add(d);
+                        isAlive = false;
+                    }
+                    return false;
+                }
+            });
         }
 
 
