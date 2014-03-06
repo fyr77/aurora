@@ -8,6 +8,7 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.dungeon.KillAllMonstersCondition;
@@ -37,6 +38,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
      * Rogue altar event. Rogues start building an altar on the moon, to pray the Obliterator, that disturbs its gravity field.
      * User can enter this altar as a dungeon, and either kill all rogues and destroy it, or help them fix it.
      */
+    @SuppressWarnings("UnusedDeclaration")
     public static final class RogueAltarWorker extends DungeonMonster {
         private static final long serialVersionUID = -2775935255374086503L;
 
@@ -163,6 +165,8 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
             moon.setNearestFreePoint(entrance, 5, 5);
             moon.getMap().getObjects().add(entrance);
 
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("rogues_altar", "news"));
+
             return false;
         }
     }
@@ -193,6 +197,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                         //todo: finish this quest by following the drone
                         setAi(new LeaveSystemAI());
                         klisk_trade_drone.addMessage("buyAll");
+                        world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("klisk_trader_drone_withdraw", "news"));
                     }
 
                 }
@@ -210,6 +215,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                 world.getGlobalVariables().put("klisk_trader_drone.result", "destroy");
                 world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/encounters/klisk_trade_probe_earth_2.json"));
                 world.getPlayer().getJournal().getQuests().get("klisk_trade_drone").addMessage("destroyed");
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("klisk_trader_drone_destroy", "news"));
             }
         }
     }
@@ -237,6 +243,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
             KliskTradeProbe probe = new KliskTradeProbe(ss.getPlanets()[2].getX() - 1, ss.getPlanets()[2].getY() - 1, world.getRaces().get(KliskGenerator.NAME));
             ss.getShips().add(probe);
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("klisk_trader_drone", "news"));
             return true;
         }
     }
@@ -256,9 +263,11 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         @Override
         public void onAttack(World world, SpaceObject attacker, int dmg) {
             super.onAttack(world, attacker, dmg);
+
             if (hp <= 0) {
                 count--;
                 if (count == 0) {
+                    world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("bork_blockade_destroy", "news"));
                     // all ships destroyed
                     world.getGlobalVariables().put("bork_blockade.result", "destroy");
                     world.getPlayer().getJournal().addQuestEntries("bork_blockade", "destroy");
@@ -309,6 +318,8 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                 ss.setRandomEmptyPosition(ship);
                 ss.getShips().add(ship);
             }
+
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("bork_blockade", "news"));
 
             return true;
         }

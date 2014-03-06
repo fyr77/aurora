@@ -4,6 +4,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
@@ -20,8 +21,7 @@ import java.util.Map;
  * Date: 04.11.13
  * Time: 16:57
  */
-public class RoguesMainDialogListener implements DialogListener
-{
+public class RoguesMainDialogListener implements DialogListener {
     private static final long serialVersionUID = 1;
 
     @Override
@@ -39,6 +39,7 @@ public class RoguesMainDialogListener implements DialogListener
         }
 
         if (flags.containsKey("rogues_altar.withdraw")) {
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("rogues_altar_withdraw", "news"));
             world.getPlayer().getJournal().addQuestEntries("rogues_altar", "withdraw");
             StarSystem humanityHomeworld = world.getRaces().get(HumanityGenerator.NAME).getHomeworld();
 
