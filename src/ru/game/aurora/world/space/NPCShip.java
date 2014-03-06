@@ -47,6 +47,8 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     protected int speed = 3;
 
+    protected boolean isAlive = true;
+
     protected int curSpeed = 3;
 
     protected NPCShipAI ai;
@@ -144,7 +146,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
             }
         }
 
-        if (threatMap.isEmpty()) {
+        if (threatMap.isEmpty() && ai instanceof CombatAI && !isStationary) {
             ai = new LeaveSystemAI();
         }
 
@@ -190,7 +192,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     @Override
     public boolean isAlive() {
-        boolean rz = hp > 0;
+        boolean rz = isAlive && hp > 0;
         if (ai != null) {
             rz &= ai.isAlive();
         }
@@ -440,5 +442,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     @Override
     public boolean canBeShotAt() {
         return true;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 }

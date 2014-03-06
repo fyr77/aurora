@@ -2,18 +2,49 @@
   "id": "rogues_default",
   "iconName": "rogues_dialog",
   "statements": {
+    "102": {
+      "id": 102,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 103,
+          "replyText": "0"
+        }
+      ]
+    },
     "0": {
       "id": 0,
       "replies": [
         {
           "returnValue": 0,
+          "targetStatementId": 101,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "energy_sphere.started",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 1,
-          "replyText": "0"
+          "replyText": "1"
         },
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "1"
+          "replyText": "2"
+        }
+      ]
+    },
+    "103": {
+      "id": 103,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
         }
       ]
     },
@@ -23,6 +54,16 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "101": {
+      "id": 101,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 102,
           "replyText": "0"
         }
       ]

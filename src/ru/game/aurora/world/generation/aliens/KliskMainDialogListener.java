@@ -85,5 +85,12 @@ public class KliskMainDialogListener implements DialogListener {
             }
             world.getGlobalVariables().put("klisk.coordinates_traded", true);
         }
+
+        if (returnCode == 101) {
+            world.getPlayer().changeCredits(world, -6);
+            world.getGlobalVariables().put("energy_sphere.started", 1);
+            world.getPlayer().getJournal().addQuestEntries("energy_sphere", "klisk");
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/energy_sphere_communication.json"));
+        }
     }
 }

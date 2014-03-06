@@ -139,3 +139,9 @@ diplomacy.rogues_visited
 diplomacy.klisk_visited
 
 diplomacy.all_done
+
+===============================
+
+energy sphere quest
+
+energy_sphere.started

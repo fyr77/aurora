@@ -44,7 +44,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart
         private StarSystem spawnedStarSystem = null;
 
         public MeetDamagedRogueEvent(NPCShip ship) {
-            super(1.0, ship);
+            super(Configuration.getDoubleProperty("quest.damaged_rogue_scout.chance"), ship);
             setGroups(EventGroup.ENCOUNTER_SPAWN);
         }
 
