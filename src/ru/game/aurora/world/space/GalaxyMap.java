@@ -13,7 +13,9 @@ import org.newdawn.slick.Input;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
 
@@ -84,7 +86,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         super.enter(world);
         world.getCamera().setTarget(player.getShip());
         if (world.getCurrentStarSystem() != null) {
-            player.getShip().setPos(world.getCurrentStarSystem().getGlobalMapX(), world.getCurrentStarSystem().getGlobalMapY());
+            player.getShip().setPos(world.getCurrentStarSystem().getX(), world.getCurrentStarSystem().getY());
             world.setCurrentStarSystem(null);
         }
         final Nifty nifty = GUI.getInstance().getNifty();
@@ -219,7 +221,7 @@ public class GalaxyMap extends BaseSpaceRoom {
     }
 
     public static double getDistance(StarSystem first, StarSystem second) {
-        return Math.sqrt(Math.pow(first.getGlobalMapX() - second.getGlobalMapX(), 2) + Math.pow(first.getGlobalMapY() - second.getGlobalMapY(), 2));
+        return Math.sqrt(Math.pow(first.getX() - second.getX(), 2) + Math.pow(first.getY() - second.getY(), 2));
     }
 
     public List<GalaxyMapObject> getObjects() {
@@ -232,6 +234,31 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     public void addObjectAndSetTile(GalaxyMapObject object, int x, int y) {
         objects.add(object);
+        object.setPos(x, y);
+        while (map[y][x] != -1) {
+            if (y < tilesY - 1) {
+                ++y;
+            } else {
+                ++x;
+            }
+        }
         map[y][x] = objects.size() - 1;
+    }
+
+    public void addObjectAtDistance(GalaxyMapObject object, Positionable center, int distance)
+    {
+        int x = 0;
+        int y = 0;
+        int iterCount = 0;
+        do {
+            x = CommonRandom.getRandom().nextInt(2 * distance) - distance;
+            y = (int) (Math.sqrt(distance * distance- x * x) * (CommonRandom.getRandom().nextBoolean() ? -1 : 1));
+            if (++iterCount > 5) {
+                logger.warn("Can not find suitable position for space object {}", object);
+                distance--;
+
+            }
+        } while (x >= 0 && x < tilesX && y >= 0 && y < tilesY);
+        addObjectAndSetTile(object, center.getX() + x, center.getY() + y);
     }
 }

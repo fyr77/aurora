@@ -381,7 +381,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
             closestStarSystem = world.getGalaxyMap().getClosestStarSystem(solarSystem);
             Map<String, String> flags = new HashMap<>();
-            flags.put("closest_coords", "[" + closestStarSystem.getGlobalMapX() + ", " + closestStarSystem.getGlobalMapY() + "]");
+            flags.put("closest_coords", closestStarSystem.getCoordsString());
             flags.put("earth_damage", Integer.toString(dropShipsLanded + shotsDone));
 
 

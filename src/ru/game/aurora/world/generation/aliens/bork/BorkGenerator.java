@@ -2,12 +2,14 @@ package ru.game.aurora.world.generation.aliens.bork;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.NextDialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPCShipFactory;
+import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
@@ -132,8 +134,8 @@ public class BorkGenerator implements WorldGeneratorPart {
 
         ss.setPlanets(planets);
         ss.setRadius(Math.max((int) (12 * 1.5), 10));
-        world.getGalaxyMap().addObjectAndSetTile(ss, 13, 20);
-        world.getGlobalVariables().put("bork.homeworld", "[13, 20]");
+        world.getGalaxyMap().addObjectAtDistance(ss, (Positionable) world.getGlobalVariables().get("solar_system"), Configuration.getIntProperty("world.galaxy.bork_homeworld_distance"));
+        world.getGlobalVariables().put("bork.homeworld", ss.getCoordsString());
         borkRace.setHomeworld(ss);
 
         borkRace.setDefaultFactory(new NPCShipFactory() {
@@ -163,7 +165,7 @@ public class BorkGenerator implements WorldGeneratorPart {
          }
          });*/
 
-        world.addListener(new BorkShipGenerator(0.5, 3, null, borkRace.getDefaultFactory(), 10));
+        world.addListener(new BorkShipGenerator(Configuration.getDoubleProperty("encounter.bork_privateers.chance"), 3, null, borkRace.getDefaultFactory(), 10));
 
         world.getRaces().put(borkRace.getName(), borkRace);
     }

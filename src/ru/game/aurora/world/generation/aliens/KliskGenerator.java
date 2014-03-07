@@ -7,6 +7,7 @@
 package ru.game.aurora.world.generation.aliens;
 
 import org.newdawn.slick.Color;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
@@ -19,6 +20,7 @@ import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.util.ProbabilitySet;
+import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -105,8 +107,8 @@ public class KliskGenerator implements WorldGeneratorPart {
 
     private StarSystem generateTargetStarsystemForTradeQuest(World world, AlienRace race) {
         StarSystem ss = WorldGenerator.generateRandomStarSystem(world, 12, 15);
-        world.getGalaxyMap().addObjectAndSetTile(ss, 12, 15);
-        world.getGlobalVariables().put("klisk_trade.coords", "[12, 15]");
+        world.getGalaxyMap().addObjectAtDistance(ss, (Positionable) world.getGlobalVariables().get("solar_system"), 20);
+        world.getGlobalVariables().put("klisk_trade.coords", ss.getCoordsString());
 
         NPCShip spaceStation = race.getDefaultFactory().createShip(STATION);
         ss.setRandomEmptyPosition(spaceStation);
@@ -231,15 +233,13 @@ public class KliskGenerator implements WorldGeneratorPart {
                 return ship;
             }});
             StarSystem kliskHomeworld = generateKliskHomeworld(world, 15, 15, kliskRace);
-            world.getGlobalVariables().put("klisk.homeworld", "[15, 15]");
             kliskRace.setHomeworld(kliskHomeworld);
 
             world.addListener(new StandardAlienShipEvent(kliskRace));
-            world.getGalaxyMap().getObjects().add(kliskHomeworld);
-            world.getGalaxyMap().setTileAt(15, 15, world.getGalaxyMap().getObjects().size() - 1);
-
+            final GalaxyMapObject solar_system = (GalaxyMapObject) world.getGlobalVariables().get("solar_system");
+            world.getGalaxyMap().addObjectAtDistance(kliskHomeworld, solar_system, Configuration.getIntProperty("world.galaxy.klisk_homeworld_distance"));
             world.getRaces().put(kliskRace.getName(), kliskRace);
-
+            world.getGlobalVariables().put("klisk.homeworld", kliskHomeworld.getCoordsString());
 
         }
     }

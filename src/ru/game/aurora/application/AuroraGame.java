@@ -17,6 +17,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.openal.SoundStore;
 import org.slf4j.LoggerFactory;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
@@ -25,8 +26,7 @@ import ru.game.aurora.world.planet.nature.AnimalGenerator;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.LogManager;
 
 
 public class AuroraGame extends NiftyOverlayGame {
@@ -129,7 +129,9 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
-        Logger.getLogger("de.lessvoid.nifty").setLevel(Level.WARNING);
+        LogManager.getLogManager().reset();
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
 
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
         gameContainer.getInput().enableKeyRepeat();

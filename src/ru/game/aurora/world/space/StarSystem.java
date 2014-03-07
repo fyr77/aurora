@@ -748,12 +748,18 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         this.astronomyData = astronomyData;
     }
 
-    public int getGlobalMapX() {
+    public int getX() {
         return globalMapX;
     }
 
-    public int getGlobalMapY() {
+    public int getY() {
         return globalMapY;
+    }
+
+    @Override
+    public void setPos(int newX, int newY) {
+        globalMapX = newX;
+        globalMapY = newY;
     }
 
     public void addEffect(Effect effect) {
@@ -799,5 +805,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public void setCanBeLeft(boolean canBeLeft) {
         this.canBeLeft = canBeLeft;
+    }
+
+    public String getCoordsString()
+    {
+        return String.format("[%d, %d]", globalMapX, globalMapY);
     }
 }
