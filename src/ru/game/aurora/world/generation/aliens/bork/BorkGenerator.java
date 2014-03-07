@@ -11,12 +11,10 @@ import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.generation.quest.EarthInvasionGenerator;
 import ru.game.aurora.world.generation.quest.EmbassiesQuest;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.*;
 
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -72,34 +70,17 @@ public class BorkGenerator implements WorldGeneratorPart {
                 world.addOverlayWindow(nextDialog);
                 nextDialog.setFlags(flags);
 
-                nextDialog.addListener(new DialogListener() {
-                    private static final long serialVersionUID = 8232477058890497167L;
+                BorkDialogListener listener = new BorkDialogListener();
+                nextDialog.addListener(listener);
 
-                    @Override
-                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                        if (flags.containsKey("bork_blockade.withdraw")) {
-                            removeBlockade(world);
-                        }
-
-                    }
-                });
+                Dialog newDefaultDialog = Dialog.loadFromFile("dialogs/bork/bork_planet_default.json");
+                newDefaultDialog.addListener(listener);
+                ((AlienHomeworld) borkRace.getHomeworld().getPlanets()[4].getSatellites().get(0)).setDialog(newDefaultDialog);
             }
         });
         return landDialog;
     }
 
-    private void removeBlockade(World world) {
-        world.getPlayer().getJournal().addQuestEntries("bork_blockade", "withdraw");
-        world.getGlobalVariables().put("bork_blockade.result", "withdraw");
-        StarSystem ss = world.getRaces().get(HumanityGenerator.NAME).getHomeworld();
-        for (Iterator<SpaceObject> iter = ss.getShips().iterator(); iter.hasNext(); ) {
-            SpaceObject so = iter.next();
-            if (so instanceof EarthInvasionGenerator.BorkBlockadeShip) {
-                iter.remove();
-            }
-        }
-
-    }
 
     @Override
     public void updateWorld(World world) {
