@@ -10,8 +10,7 @@ import java.util.List;
  * Date: 17.02.14
  * Time: 17:11
  */
-public class Listenable implements Serializable
-{
+public class Listenable implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private List<IStateChangeListener> listeners = null;
@@ -30,6 +29,9 @@ public class Listenable implements Serializable
     }
 
     public void fireEvent(World world) {
+        if (listeners == null) {
+            return;
+        }
         for (IStateChangeListener listener : listeners) {
             listener.stateChanged(world);
         }

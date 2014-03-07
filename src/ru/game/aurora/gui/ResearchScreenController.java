@@ -63,10 +63,13 @@ public class ResearchScreenController implements ScreenController {
             EngineUtils.setTextForGUIElement(statusLines, Localization.getText("gui", "research.active.status"));
         }
 
+        world.setPaused(true);
+
     }
 
     @Override
     public void onEndScreen() {
+        world.setPaused(false);
     }
 
 

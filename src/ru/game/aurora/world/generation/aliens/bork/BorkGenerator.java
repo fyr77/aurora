@@ -2,6 +2,7 @@ package ru.game.aurora.world.generation.aliens.bork;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
@@ -144,7 +145,7 @@ public class BorkGenerator implements WorldGeneratorPart {
          }
          });*/
 
-        world.addListener(new BorkShipGenerator(0.5, 3, null, borkRace.getDefaultFactory(), 10));
+        world.addListener(new BorkShipGenerator(0.5, 3, null, borkRace.getDefaultFactory(), Configuration.getIntProperty("encounter.bork_pirates.count")));
 
         world.getRaces().put(borkRace.getName(), borkRace);
     }

@@ -504,8 +504,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         reputation = world.getReputation().copy();
         player = world.getPlayer();
         player.getShip().setPos(-radius + 1, 0);
-        // in star system camera is always fixed on center
-        //world.getCamera().setTarget(new BasePositionable(world.getCamera().getNumTilesX() / 2, world.getCamera().getNumTilesY() / 2));
         world.getCamera().setTarget(player.getShip());
         if (background == null) {
             createBackground(world);
@@ -517,6 +515,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         if (firstEnterDialog != null && !visited) {
             world.addOverlayWindow(firstEnterDialog);
         }
+        world.getCamera().resetViewPort();
         visited = true;
     }
 
@@ -526,6 +525,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         if (background == null) {
             createBackground(world);
         }
+        world.getCamera().resetViewPort();
         GUI.getInstance().getNifty().gotoScreen("star_system_gui");
     }
 
@@ -574,7 +574,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                         overlayGraphics.setColor(ANIMAL_COLOR);
                     } else if (OreDeposit.class.isAssignableFrom(po.getClass())) {
                         overlayGraphics.setColor(RESOURCE_COLOR);
-                    } else if (AlienArtifact.class.isAssignableFrom(po.getClass())) {
+                    } else if (AlienArtifact.class.isAssignableFrom(po.getClass()) || DungeonEntrance.class.isAssignableFrom(po.getClass())) {
                         overlayGraphics.setColor(ANOMALY_COLOR);
                     } else {
                         continue;

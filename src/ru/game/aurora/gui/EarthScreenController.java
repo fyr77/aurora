@@ -48,11 +48,12 @@ public class EarthScreenController implements ScreenController {
         for (ListIterator listIterator = privateMessages.listIterator(privateMessages.size()); listIterator.hasPrevious(); ) {
             l.addItem(listIterator.previous());
         }
+        world.setPaused(true);
     }
 
     @Override
     public void onEndScreen() {
-
+        world.setPaused(false);
     }
 
     public void closeScreen() {

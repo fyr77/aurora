@@ -17,8 +17,7 @@ import ru.game.aurora.world.quest.JournalEntry;
  * Date: 19.12.13
  */
 
-public class JournalScreenController implements ScreenController
-{
+public class JournalScreenController implements ScreenController {
     private ListBox<JournalEntry> questList;
 
     private ListBox<JournalEntry> codexList;
@@ -56,26 +55,24 @@ public class JournalScreenController implements ScreenController
         for (JournalEntry e : journal.getCodex().values()) {
             codexList.addItem(e);
         }
-
+        world.setPaused(true);
     }
 
     @Override
     public void onEndScreen() {
-
+        world.setPaused(false);
     }
 
     @NiftyEventSubscriber(pattern = ".*itemsList")
-    public void onItemClicked(final String id, final ListBoxSelectionChangedEvent event)
-    {
+    public void onItemClicked(final String id, final ListBoxSelectionChangedEvent event) {
         if (event.getSelection().isEmpty()) {
             return;
         }
-        EngineUtils.setTextForGUIElement(tg.getSelectedTab().getElement().findElementByName("#message_text"), ((JournalEntry)event.getSelection().get(0)).getFullText(world));
+        EngineUtils.setTextForGUIElement(tg.getSelectedTab().getElement().findElementByName("#message_text"), ((JournalEntry) event.getSelection().get(0)).getFullText(world));
         myWindow.getElement().layoutElements();
     }
 
-    public void closeScreen()
-    {
+    public void closeScreen() {
         GUI.getInstance().popAndSetScreen();
     }
 

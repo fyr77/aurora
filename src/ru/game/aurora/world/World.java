@@ -206,8 +206,7 @@ public class World implements Serializable {
         currentDialog.enter(this);
     }
 
-    public void addOverlayWindow(Dialog d, Map<String, String> flags)
-    {
+    public void addOverlayWindow(Dialog d, Map<String, String> flags) {
         GUI.getInstance().pushCurrentScreen();
         d.enter(this);
         d.setFlags(flags);
@@ -465,4 +464,9 @@ public class World implements Serializable {
     public void setPaused(boolean paused) {
         isPaused = paused;
     }
+
+    public boolean isPaused() {
+        return isPaused;
+    }
+
 }

@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -29,16 +30,19 @@ public abstract class BaseSpaceRoom implements Room {
     @Override
     public void update(GameContainer container, World world) {
         Camera myCamera = world.getCamera();
-        if (container.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            xClick = container.getInput().getMouseX() - myCamera.getViewportX();
-            yClick = container.getInput().getMouseY() - myCamera.getViewportY();
-        }
-        if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            myCamera.setViewportX(container.getInput().getMouseX() - xClick);
-            myCamera.setViewportY(container.getInput().getMouseY() - yClick);
-        }
-        if (container.getInput().isKeyPressed(Input.KEY_HOME)) {
-            myCamera.resetViewPort();
+        if (!world.isPaused() && GUI.getInstance().getNifty().getTopMostPopup() == null) {
+            // do not move camera by mouse if some other window is open
+            if (container.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                xClick = container.getInput().getMouseX() - myCamera.getViewportX();
+                yClick = container.getInput().getMouseY() - myCamera.getViewportY();
+            }
+            if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                myCamera.setViewportX(container.getInput().getMouseX() - xClick);
+                myCamera.setViewportY(container.getInput().getMouseY() - yClick);
+            }
+            if (container.getInput().isKeyPressed(Input.KEY_HOME)) {
+                myCamera.resetViewPort();
+            }
         }
 
         if (!player.getShip().nowMoving()) {
