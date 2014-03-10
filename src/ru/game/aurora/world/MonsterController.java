@@ -52,12 +52,12 @@ public class MonsterController implements Serializable {
         pathFinder = new AStarPathFinder(map, 200, false);   //200 - макс путь
     }
 
-    private void playAttackEffects(World world, BasePositionable other) {
+    private void playAttackEffects(World world, IMovable other) {
 
         if (weapon.getId().equals("melee")) {
-            world.getCurrentDungeon().getController().setCurrentEffect(new ExplosionEffect(other.getX(), other.getY(), "slash", false, false));
+            world.getCurrentDungeon().getController().addEffect(new ExplosionEffect(other.getX(), other.getY(), "slash", false, false));
         } else {
-            world.getCurrentDungeon().getController().setCurrentEffect(new BlasterShotEffect(myMonster, other, world.getCamera(), 800, weapon));
+            world.getCurrentDungeon().getController().addEffect(new BlasterShotEffect(myMonster, other, world.getCamera(), 800, weapon));
         }
         ResourceManager.getInstance().getSound(weapon.getShotSound()).play();
     }

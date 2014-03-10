@@ -19,7 +19,7 @@ import java.util.Set;
  * Time: 12:40
  */
 public class DungeonMonster extends DungeonObject implements IMonster {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private LandingPartyWeapon weapon;
 
@@ -33,7 +33,7 @@ public class DungeonMonster extends DungeonObject implements IMonster {
 
     private MonsterController controller;
 
-    private transient ITileMap owner;
+    private ITileMap owner;
 
     public DungeonMonster(AuroraTiledMap map, int groupId, int objectId) {
         super(map, groupId, objectId);

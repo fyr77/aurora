@@ -42,7 +42,7 @@ public class Movable extends BasePositionable implements IMovable {
         }
     }
 
-    public void setMoveability(boolean m){
+    public void setMoveability(boolean m) {
         canMove = m;
     }
 
@@ -121,5 +121,9 @@ public class Movable extends BasePositionable implements IMovable {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
+    }
+
+    public double getDistanceFromTargetPointWrapped(Positionable other, int width, int height) {
+        return getDistanceWrapped(getTargetX(), getTargetY(), other.getX(), other.getY(), width, height);
     }
 }

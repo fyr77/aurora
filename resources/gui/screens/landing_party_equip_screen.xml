@@ -60,17 +60,6 @@
 
                     <panel childLayout="horizontal">
                         <panel childLayout="vertical" width="45%">
-                            <text id="storageText" style="base-font" align="center" text="${gui.storage}"
-                                  height="32px"/>
-                            <control id="storageList" name="listBox" vertical="optional" horizontal="optional"
-                                     displayItems="10" selection="Single"
-                                     viewConverterClass="ru.game.aurora.gui.StorageViewConverter">
-                                <control name="storage_line"
-                                         controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
-                            </control>
-                        </panel>
-                        <panel/>
-                        <panel childLayout="vertical" width="45%">
                             <text id="inventoryText" style="base-font" align="center" text="${gui.inventory}"
                                   height="32px"/>
                             <control id="inventoryList" name="listBox" vertical="optional" horizontal="optional"
@@ -80,6 +69,18 @@
                                          controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
                             </control>
                         </panel>
+
+                        <panel childLayout="vertical" width="45%">
+                            <text id="storageText" style="base-font" align="center" text="${gui.storage}"
+                                  height="32px"/>
+                            <control id="storageList" name="listBox" vertical="optional" horizontal="optional"
+                                     displayItems="10" selection="Single"
+                                     viewConverterClass="ru.game.aurora.gui.StorageViewConverter">
+                                <control name="storage_line"
+                                         controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
+                            </control>
+                        </panel>
+
                     </panel>
 
 

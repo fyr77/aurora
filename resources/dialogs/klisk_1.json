@@ -392,7 +392,19 @@
     },
     "29": {
       "id": 29,
-      "replies": []
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "[ЕГОР ДОБАВЬ СЮДА СКИДКУ]",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
     },
     "28": {
       "id": 28,
@@ -416,7 +428,13 @@
     },
     "30": {
       "id": 30,
-      "replies": []
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
+        }
+      ]
     },
     "34": {
       "id": 34,
@@ -594,13 +612,7 @@
         {
           "returnValue": 2,
           "targetStatementId": -2,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "",
-              "type": "SET"
-            }
-          ]
+          "replyText": "0"
         },
         {
           "returnValue": 0,
@@ -725,16 +737,22 @@
         {
           "returnValue": 0,
           "targetStatementId": 54,
-          "replyText": "0"
+          "replyText": "0",
+          "flags": {
+            "klisk.knows_about_path_philosophy": "true"
+          }
         },
         {
           "returnValue": 0,
-          "targetStatementId": 55,
-          "replyText": "1"
+          "targetStatementId": 57,
+          "replyText": "1",
+          "flags": {
+            "klisk.knows_about_path_philosophy": "true"
+          }
         },
         {
           "returnValue": 0,
-          "targetStatementId": 56,
+          "targetStatementId": 58,
           "replyText": "2"
         },
         {
@@ -960,13 +978,7 @@
         {
           "returnValue": 3,
           "targetStatementId": -3,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "",
-              "type": "SET"
-            }
-          ]
+          "replyText": "0"
         }
       ]
     },
@@ -1046,16 +1058,9 @@
         {
           "returnValue": 4,
           "targetStatementId": -4,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "",
-              "type": "SET"
-            }
-          ]
+          "replyText": "0"
         }
       ]
     }
-  },
-  "returnValue": 0
+  }
 }

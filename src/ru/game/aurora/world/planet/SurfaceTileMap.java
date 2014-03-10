@@ -132,7 +132,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
 
                 if ((surface[EngineUtils.wrap(i, height)][EngineUtils.wrap(j, width)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {
-                    graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
+                    graphics.drawImage(ResourceManager.getInstance().getImage("stones"), camera.getXCoord(j), camera.getYCoord(i));
                 }
                 if ((surface[EngineUtils.wrap(i, height)][EngineUtils.wrap(j, width)] & SurfaceTypes.MOUNTAINS_MASK) == 0) {
                     boolean left = ((surface[EngineUtils.wrap(i, height)][EngineUtils.wrap(j - 1, width)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
@@ -148,7 +148,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
                     mountainDrawer.drawTile(graphics, camera, i, j, left, right, up, down, downLeft, downRight, upLeft, upRight);
                 }
                 if (allNeighboursAreMountain(EngineUtils.wrap(j, width), EngineUtils.wrap(i + 1, height))) {
-                    graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
+                    graphics.drawImage(ResourceManager.getInstance().getImage("stones"), camera.getXCoord(j), camera.getYCoord(i));
 
                 } else {
                     // draw 2nd floor

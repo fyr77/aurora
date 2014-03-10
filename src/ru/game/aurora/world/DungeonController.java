@@ -69,6 +69,8 @@ public class DungeonController implements Serializable {
 
     private IStateChangeListener successListener;
 
+    private transient List<Effect> effects = new ArrayList<>();
+
     private transient Effect currentEffect = null;
 
     /**
@@ -292,7 +294,7 @@ public class DungeonController implements Serializable {
             // firing
             final int damage = landingParty.calcDamage(world);
 
-            currentEffect = new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), map.getWidthInTiles()), world.getCamera().getYCoordWrapped(target.getY(), map.getHeightInTiles()), world.getCamera(), 800, landingParty.getWeapon());
+            effects.add(new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), map.getWidthInTiles()), world.getCamera().getYCoordWrapped(target.getY(), map.getHeightInTiles()), world.getCamera(), 800, landingParty.getWeapon()));
 
             ResourceManager.getInstance().getSound(landingParty.getWeapon().getShotSound()).play();
 
@@ -326,6 +328,13 @@ public class DungeonController implements Serializable {
         if (container.getInput().isKeyPressed(Input.KEY_HOME)) {
             myCamera.resetViewPort();
         }
+        if (effects == null) {
+            effects = new ArrayList<>();
+        }
+        if (currentEffect == null && !effects.isEmpty()) {
+            currentEffect = effects.remove(0);
+        }
+
         if (currentEffect != null) {
             currentEffect.update(container, world);
             if (currentEffect.isOver()) {
@@ -489,8 +498,11 @@ public class DungeonController implements Serializable {
         }
     }
 
-    public void setCurrentEffect(Effect currentEffect) {
-        this.currentEffect = currentEffect;
+    public void addEffect(Effect currentEffect) {
+        if (effects == null) {
+            effects = new ArrayList<>();
+        }
+        effects.add(currentEffect);
     }
 
     public void setSuccessDialog(Dialog successDialog) {

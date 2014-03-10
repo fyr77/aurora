@@ -117,6 +117,7 @@ public class BorkGenerator implements WorldGeneratorPart {
         world.getGalaxyMap().addObjectAndSetTile(ss, 13, 20);
         world.getGlobalVariables().put("bork.homeworld", "[13, 20]");
         borkRace.setHomeworld(ss);
+        ss.setQuestLocation(true);
 
         borkRace.setDefaultFactory(new NPCShipFactory() {
             private static final long serialVersionUID = 8000558666433188574L;
