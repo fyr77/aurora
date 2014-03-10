@@ -223,6 +223,7 @@ public class WorldGenerator implements Runnable {
         journal.addCodex(new JournalEntry("engineer_dossier", "1"));
         journal.addCodex(new JournalEntry("scientist_dossier", "1"));
         journal.addCodex(new JournalEntry("military_dossier", "1"));
+        journal.addCodex(new JournalEntry("translator_device", "text"));
 
         journal.addQuest(new JournalEntry("colony_search", "start"));
         journal.addQuest(new JournalEntry("last_beacon", "start"));
