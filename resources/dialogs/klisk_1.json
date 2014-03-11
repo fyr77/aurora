@@ -334,7 +334,7 @@
             {
               "name": "credits",
               "value": "0",
-              "type": "NOT_EQUAL"
+              "type": "GREATER"
             }
           ]
         },
@@ -397,12 +397,9 @@
           "returnValue": 0,
           "targetStatementId": 24,
           "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "[ЕГОР ДОБАВЬ СЮДА СКИДКУ]",
-              "type": "SET"
-            }
-          ]
+          "flags": {
+            "klisk.discount": "true"
+          }
         }
       ]
     },

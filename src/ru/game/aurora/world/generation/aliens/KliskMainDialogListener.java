@@ -49,7 +49,9 @@ public class KliskMainDialogListener implements DialogListener {
         }
 
         if (returnCode >= 100 && returnCode <= 500) {
-
+            if (flags.containsKey("klisk.discount")) {
+                world.getGlobalVariables().put("klisk.discount", 10);
+            }
             if (flags.containsKey("klisk.bork_info")) {
                 research = new AlienRaceResearch("bork", world.getRaces().get("Bork"), new JournalEntry("bork", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
@@ -83,6 +85,7 @@ public class KliskMainDialogListener implements DialogListener {
                     new EarthInvasionGenerator().updateWorld(world);
                 }
             }
+            world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("klisk_homeworlds");
             world.getGlobalVariables().put("klisk.coordinates_traded", true);
         }
 

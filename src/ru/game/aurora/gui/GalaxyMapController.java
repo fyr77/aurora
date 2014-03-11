@@ -26,10 +26,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.space.AlienHomeworld;
-import ru.game.aurora.world.space.GalaxyMapScreen;
-import ru.game.aurora.world.space.SpaceObject;
-import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.space.*;
 import ru.game.aurora.world.space.earth.Earth;
 
 public class GalaxyMapController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender {
@@ -133,7 +130,12 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
         Element shipCoordinates = myScreen.findElementByName("ship_coordinates");
         if (shipCoordinates != null) {
-            shipCoordinates.getRenderer(TextRenderer.class).setText(String.format(Localization.getText("gui", "space.ship_coords"), ship.getX(), ship.getY()));
+            String text = String.format(Localization.getText("gui", "space.ship_coords"), ship.getTargetX(), ship.getTargetY());
+            GalaxyMapObject mo = world.getGalaxyMap().getObjectAt(ship.getTargetX(), ship.getTargetY());
+            if (mo != null) {
+                text += "\n" + mo.getName();
+            }
+            shipCoordinates.getRenderer(TextRenderer.class).setText(text);
         }
     }
 
@@ -325,11 +327,19 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
             shuttleDraggableElement.setConstraintY(SizeValue.px(shuttlePosition.getY()));
             return;
         }
+        final Planet planetToScan1 = (Planet) planetToScan;
+        final int x = (int) (planetToScan1.getWidth() * ((shuttleDraggableElement.getX() + shuttleDraggableElement.getWidth() / 2 - landscapePanel.getX()) / (float) landscapePanel.getWidth()));
+        final int y = (int) (planetToScan1.getHeight() * ((shuttleDraggableElement.getY() + shuttleDraggableElement.getHeight() / 2 - landscapePanel.getY()) / (float) landscapePanel.getHeight()));
 
+        if (!planetToScan1.getMap().isTilePassable(x, y)) {
+            //can not place shuttle on an obstacle, revert position
+            shuttleDraggableElement.setConstraintX(SizeValue.px(shuttlePosition.getX()));
+            shuttleDraggableElement.setConstraintY(SizeValue.px(shuttlePosition.getY()));
+            return;
+        }
 
         LandingParty lp = world.getPlayer().getLandingParty();
-        final int x = (int) (((Planet) planetToScan).getWidth() * ((shuttleDraggableElement.getX() + shuttleDraggableElement.getWidth() / 2 - landscapePanel.getX()) / (float) landscapePanel.getWidth()));
-        final int y = (int) (((Planet) planetToScan).getHeight() * ((shuttleDraggableElement.getY() + shuttleDraggableElement.getHeight() / 2 - landscapePanel.getY()) / (float) landscapePanel.getHeight()));
+
         lp.setPos(x, y);
     }
 

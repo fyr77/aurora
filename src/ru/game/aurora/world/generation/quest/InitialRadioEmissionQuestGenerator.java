@@ -245,7 +245,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         // initial research projects and their star system
         StarSystem brownStar = WorldGenerator.generateRandomStarSystem(world, 6, 7);
         brownStar.setStar(new Star(6, new Color(128, 0, 0)));
-        world.getGalaxyMap().addObjectAndSetTile(brownStar, 6, 7);
+        world.getGalaxyMap().addObjectAtDistance(brownStar, (Positionable) world.getGlobalVariables().get("solar_system"), 10);
 
         ResearchProjectDesc starInitialResearch = new StarResearchProject(brownStar);
         starInitialResearch.setReport(new ResearchReport("star_research", "brown_dwarf.report"));
@@ -256,7 +256,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         brownStar = WorldGenerator.generateRandomStarSystem(world, 12, 12);
         brownStar.setStar(new Star(6, new Color(128, 0, 0)));
         brownStar.setQuestLocation(true);
-        world.getGalaxyMap().addObjectAndSetTile(brownStar, 12, 12);
+        world.getGalaxyMap().addObjectAtDistance(brownStar, (Positionable) world.getGlobalVariables().get("solar_system"), 30);
 
         AlienRace rogues = world.getRaces().get("Rogues");
         NPCShip defenceProbe = rogues.getDefaultFactory().createShip(RoguesGenerator.PROBE_SHIP);

@@ -51,4 +51,12 @@ public class BasePositionable implements Positionable {
 
         return Math.sqrt(Math.pow(Math.min(directXDist, wrapXDist), 2) + Math.pow(Math.min(directYDist, wrapYDist), 2));
     }
+
+    @Override
+    public String toString() {
+        return "BasePositionable{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

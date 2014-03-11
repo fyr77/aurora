@@ -180,6 +180,17 @@ public class MainMenuController implements ScreenController {
                             }
                         });
                         break;
+                    case 0:
+                        // set remaining crew relationships
+                        if (!world.getGlobalVariables().containsKey("crew.scientist")) {
+                            world.getGlobalVariables().put("crew.scientist", 0);
+                        }
+                        if (!world.getGlobalVariables().containsKey("crew.engineer")) {
+                            world.getGlobalVariables().put("crew.engineer", 0);
+                        }
+                        if (!world.getGlobalVariables().containsKey("crew.military")) {
+                            world.getGlobalVariables().put("crew.military", 0);
+                        }
                 }
 
                 if (d != null) {

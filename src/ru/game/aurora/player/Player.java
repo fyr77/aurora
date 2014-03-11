@@ -64,7 +64,7 @@ public class Player implements Serializable
     }
 
     public void setShip(AlienRace humanity) {
-        ship = new Ship(humanity, 10, 10);
+        ship = new Ship(humanity, humanity.getHomeworld().getX() + 1, humanity.getHomeworld().getY());
         researchState = new ResearchState(ship.getScientists());
         engineeringState = new EngineeringState(ship.getEngineers());
 

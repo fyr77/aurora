@@ -23,6 +23,6 @@ public class StarResearchProject extends SpaceObjectResearchProject
 
     @Override
     public String getName() {
-        return String.format(super.getName(), starSystem.getGlobalMapX(), starSystem.getGlobalMapY());
+        return String.format(super.getName(), starSystem.getX(), starSystem.getY());
     }
 }

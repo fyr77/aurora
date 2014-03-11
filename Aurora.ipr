@@ -707,11 +707,7 @@
       <entry name="*.ttf" />
       <entry name="*.ogg" />
     </wildcardResourcePatterns>
-    <annotationProcessing>
-      <profile default="true" name="Default" enabled="false">
-        <processorPath useClasspath="true" />
-      </profile>
-    </annotationProcessing>
+    <annotationProcessing enabled="false" useClasspath="true" />
   </component>
   <component name="CopyrightManager" default="">
     <module2copyright />
@@ -1062,6 +1058,7 @@
         <root url="jar://$PROJECT_DIR$/third-party/logback-classic-1.0.13.jar!/" />
         <root url="jar://$PROJECT_DIR$/third-party/logback-core-1.0.13.jar!/" />
         <root url="jar://$PROJECT_DIR$/third-party/slf4j-api-1.7.5.jar!/" />
+        <root url="jar://$PROJECT_DIR$/third-party/jul-to-slf4j-1.7.6.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
