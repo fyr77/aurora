@@ -169,7 +169,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         final int y = player.getShip().getY();
         final int x = player.getShip().getX();
         int idx;
-        if (y >= 0 && x >= 0 && y < tilesY && x < tilesX) {
+        if (isValidCoord(x, y)) {
             idx = map[y][x];
         } else {
             idx = -1;
@@ -248,10 +248,15 @@ public class GalaxyMap extends BaseSpaceRoom {
         map[y][x] = objects.size() - 1;
     }
 
+    public boolean isValidCoord(int x, int y)
+    {
+        return x >= 0 && x < tilesX && y >= 0 && y < tilesY;
+    }
+
     public void addObjectAtDistance(GalaxyMapObject object, Positionable center, int distance)
     {
-        int x = 0;
-        int y = 0;
+        int x;
+        int y;
         int iterCount = 0;
         do {
             x = CommonRandom.getRandom().nextInt(2 * distance) - distance;
@@ -261,7 +266,7 @@ public class GalaxyMap extends BaseSpaceRoom {
                 distance--;
 
             }
-        } while (x >= 0 && x < tilesX && y >= 0 && y < tilesY);
+        } while (!isValidCoord(center.getX() + x, center.getY() + y));
         addObjectAndSetTile(object, center.getX() + x, center.getY() + y);
     }
 }
