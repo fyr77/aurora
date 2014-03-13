@@ -2,6 +2,9 @@ VERSION 0.2.1
 
 IN PROGRESS...
 
+* Fixed crash on world generation
+* Now if no resolution is suitable, select an unsuitable one
+
 ====================================================
 
 VERSION 0.2.0
