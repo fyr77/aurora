@@ -36,7 +36,8 @@ public class MonsterController implements Serializable {
 
     private ITileMap map;
 
-    private transient AStarPathFinder pathFinder;
+    private static AStarPathFinder pathFinder;
+    private static final  int MAX_PATH_LENGTH = 100;
     private Path path;
     private int lastX;
     private int lastY;
@@ -49,7 +50,14 @@ public class MonsterController implements Serializable {
         this.turnsBeforeMove = myMonster.getSpeed();
         this.weapon = myMonster.getWeapon();
 
-        pathFinder = new AStarPathFinder(map, 200, false);   //200 - макс путь
+         checkAndCreatePathFinder();
+    }
+
+    private void checkAndCreatePathFinder()
+    {
+        if (pathFinder == null) {
+            pathFinder = new AStarPathFinder(map, Math.min(MAX_PATH_LENGTH, map.getWidthInTiles() / 4), false);
+        }
     }
 
     private void playAttackEffects(World world, IMovable other) {
@@ -105,9 +113,7 @@ public class MonsterController implements Serializable {
                 }
 
                 if (playerShown) {
-                    if (pathFinder == null) {
-                        pathFinder = new AStarPathFinder(map, 200, false);
-                    }
+                    checkAndCreatePathFinder();
 
                     map.setTilePassable(x, y, true);    //hack (pathfinder cannot find path if starting point is blocked)
                     path = pathFinder.findPath(null, x, y, lastX, lastY);

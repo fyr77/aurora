@@ -121,12 +121,12 @@ public class DialogCSVConverter {
         } else {
             System.out.println("No encoding detected.");
         }
+        fis.close();
         return encoding;
     }
 
     public static void process(String input, String output, String dialogId, String imageId) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(input), detectEncoding(input)));
-        try {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(input), detectEncoding(input)))) {
 
             Map<Integer, Statement> statements = new HashMap<>();
             Context context = new Context(dialogId);
@@ -209,6 +209,7 @@ public class DialogCSVConverter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public static void main(String[] args) throws IOException {

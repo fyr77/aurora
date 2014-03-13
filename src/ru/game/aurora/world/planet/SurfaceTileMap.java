@@ -79,6 +79,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
+        SortedSet<Byte> neighbours = new TreeSet<>(); // sorted becase surface type byte defines surfaces draw order
         for (int i = camera.getTarget().getY() - camera.getPointTileY(camera.getViewportY()) - 1 - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() - camera.getPointTileY(camera.getViewportY()) + camera.getNumTilesY() / 2; ++i) {
             for (int j = camera.getTarget().getX() - camera.getPointTileX(camera.getViewportX()) - 1 - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() - camera.getPointTileX(camera.getViewportX()) + camera.getNumTilesX() / 2; ++j) {
 
@@ -96,7 +97,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
                         , graphics);
 
                 // now draw edges of next sprites
-                Set<Byte> neighbours = new TreeSet<>();
+                neighbours.clear();
                 for (int ii = -1; ii <= 1; ++ii) {
                     for (int jj = -1; jj <= 1; ++jj) {
                         if (ii == jj && ii == 0) {
