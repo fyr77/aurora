@@ -137,6 +137,10 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
             }
             shipCoordinates.getRenderer(TextRenderer.class).setText(text);
         }
+
+        Element ruText = myScreen.findElementByName("resources_text");
+        EngineUtils.setTextForGUIElement(ruText, Localization.getText("gui", "resources") + " " + world.getPlayer().getResourceUnits());
+        EngineUtils.setTextForGUIElement(myScreen.findElementByName("credits_text"), Localization.getText("gui", "credits") + " " + world.getPlayer().getCredits());
     }
 
     @Override

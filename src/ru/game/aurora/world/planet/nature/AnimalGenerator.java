@@ -134,8 +134,8 @@ public class AnimalGenerator {
 
     public void getImageForAnimal(AnimalSpeciesDesc desc) {
         try {
-            plantGenerationParams.tags.clear(); //todo: thread-safe?
-            plantGenerationParams.tags.add(desc.getHomePlanet().getFloraAndFauna().getAnimalsStyleTag());
+            monsterGenerationParams.tags.clear(); //todo: thread-safe?
+            monsterGenerationParams.tags.add(desc.getHomePlanet().getFloraAndFauna().getAnimalsStyleTag());
             monsterGenerationParams.colorMap = ColorUtils.createDefault4TintMap(CollectionUtils.selectRandomElement(supportedColors));
             if (desc.getModifiers().contains(AnimalModifier.LARGE)) {
                 monsterGenerationParams.targetSize = new Size(AuroraGame.tileSize * 2, AuroraGame.tileSize * 2);

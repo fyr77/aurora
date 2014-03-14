@@ -37,10 +37,12 @@ public class EngineUtils {
     }
 
     public static int wrap(int coord, int limit) {
-        if (coord < 0) {
-            return limit + coord;
-        } else if (coord >= limit) {
-            return coord - limit;
+        while (coord < 0 || coord >= limit) {
+            if (coord < 0) {
+                coord = limit + coord;
+            } else if (coord >= limit) {
+                coord = coord - limit;
+            }
         }
         return coord;
     }

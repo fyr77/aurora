@@ -17,6 +17,17 @@
         <layer id="starmap_layer" childLayout="vertical">
             <control name="top_panel" id="top_panel"/>
 
+            <panel height="50px"/>
+
+            <panel childLayout="horizontal" height="120px">
+                <panel width="85%"/>
+                <panel childLayout="vertical" width="*" height="100px" backgroundImage="resources/sprites/gui/side_panel.png"  padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                    <text id="resources_text" text="${gui.resources}" style="base-font" width="*"/>
+                    <panel height="*"/>
+                    <text id="credits_text" text="${gui.credits}" style="base-font" width="*"/>
+                </panel>
+            </panel>
+
             <!-- middle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
                 <panel width="85%"/>
@@ -81,6 +92,17 @@
 
         <layer id="starsystem_layer" childLayout="vertical">
             <control name="top_panel" id="top_panel"/>
+
+            <panel height="50px"/>
+
+            <panel childLayout="horizontal" height="120px">
+                <panel width="85%"/>
+                <panel childLayout="vertical" width="*" height="100px" backgroundImage="resources/sprites/gui/side_panel.png"  padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                    <text id="resources_text" text="${gui.resources}" style="base-font" width="*"/>
+                    <panel height="*"/>
+                    <text id="credits_text" text="${gui.credits}" style="base-font" width="*"/>
+                </panel>
+            </panel>
 
             <!-- midlle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
