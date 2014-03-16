@@ -56,12 +56,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     public void bind(Nifty nifty, Screen screen) {
         myScreen = screen;
         GameLogger.getInstance().addAppender(this);
-        logList = screen.findNiftyControl("log_list", ListBox.class);
-        if (logList != null) {
-            logList.clear();
-            logList.addAllItems(GameLogger.getInstance().getLogItems());
-            logList.setFocusItemByIndex(logList.getItems().size() - 1);
-        }
+
     }
 
     @Override
@@ -71,6 +66,13 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         topPanelController = myScreen.findControl("top_panel", TopPanelController.class);
         updateStats();
         updateWeapons();
+
+        logList = myScreen.findNiftyControl("log_list", ListBox.class);
+        if (logList != null) {
+            logList.clear();
+            logList.addAllItems(GameLogger.getInstance().getLogItems());
+            logList.setFocusItemByIndex(logList.getItems().size() - 1);
+        }
     }
 
     @Override

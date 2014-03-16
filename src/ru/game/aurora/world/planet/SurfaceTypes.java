@@ -31,7 +31,7 @@ public class SurfaceTypes {
 
     public static final byte MOUNTAINS_MASK = 0x20;
 
-    public static final byte VISIBILITY_MASK = (byte) 0x80;
+    public static final byte VISIBILITY_MASK = 0x10;
 
     /**
      * Draws surface tiles in simple form - no sprites, just a square of corresponding color. Used in map screen

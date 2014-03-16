@@ -32,6 +32,8 @@ public class Movable extends BasePositionable implements IMovable {
 
     public Movable(int x, int y) {
         super(x, y);
+        destinationX = x;
+        destinationY = y;
     }
 
     private void startMoving(int destinationX, int destinationY) {
@@ -84,6 +86,13 @@ public class Movable extends BasePositionable implements IMovable {
     @Override
     public void update(GameContainer container, World world) {
         doMove(container);
+    }
+
+    @Override
+    public void setPos(int newX, int newY) {
+        super.setPos(newX, newY);
+        destinationX = newX;
+        destinationY = newY;
     }
 
     protected void doMove(GameContainer container) {
