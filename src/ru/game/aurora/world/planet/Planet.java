@@ -170,6 +170,7 @@ public class Planet extends BasePlanet implements IDungeon {
                 try {
                     if (surface == null) {
                         createSurface();
+                        MonsterController.resetPathfinder(surface);
                     }
 
                 } catch (Exception e) {
@@ -184,7 +185,7 @@ public class Planet extends BasePlanet implements IDungeon {
         GUI.getInstance().getNifty().gotoScreen("surface_gui");
         world.getCamera().setTarget(landingParty);
         world.getCamera().resetViewPort();
-
+        MonsterController.resetPathfinder(surface);
     }
 
 

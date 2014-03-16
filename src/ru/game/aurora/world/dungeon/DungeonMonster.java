@@ -73,7 +73,11 @@ public class DungeonMonster extends DungeonObject implements IMonster {
         hp -= damage;
         if (hp <= 0) {
             // clean obstacle flag
-            owner.setTilePassable(x, y, true);
+            if (!nowMoving()) {
+                owner.setTilePassable(x, y, true);
+            } else {
+                owner.setTilePassable(getTargetX(), getTargetY(), true);
+            }
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), getName()));
             myMap.getObjects().remove(this);
         }

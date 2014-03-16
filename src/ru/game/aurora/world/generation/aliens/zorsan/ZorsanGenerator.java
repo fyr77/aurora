@@ -9,6 +9,11 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.npc.SingleStarsystemShipSpawner;
 import ru.game.aurora.npc.StandardAlienShipEvent;
+import ru.game.aurora.player.earth.EarthResearch;
+import ru.game.aurora.player.earth.PrivateMessage;
+import ru.game.aurora.player.research.ResearchProjectDesc;
+import ru.game.aurora.player.research.ResearchProjectState;
+import ru.game.aurora.util.GameTimer;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -50,14 +55,38 @@ public class ZorsanGenerator implements WorldGeneratorPart {
     }
 
 
+    // makes zorsan hostile to player only after a couple of turns
+    // otherwise player ship gets destroyed almost instantly
+    private static class ZorsanEscapeListener extends GameEventListener implements IStateChangeListener {
+
+        private static final long serialVersionUID = -5333707636208684602L;
+
+        private GameTimer timer = new GameTimer(5);
+
+        @Override
+        public boolean onTurnEnded(World world) {
+            if (timer.update()) {
+                world.getReputation().setHostile(ZorsanGenerator.NAME, HumanityGenerator.NAME);
+                StarSystem currentStarSystem = world.getCurrentStarSystem();
+                if (currentStarSystem != null) {
+                    currentStarSystem.getReputation().setHostile(ZorsanGenerator.NAME, HumanityGenerator.NAME);
+                }
+                world.getReputation().setHostile(HumanityGenerator.NAME, ZorsanGenerator.NAME);
+                isAlive = false;
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void stateChanged(World world) {
+            world.addListener(this);
+        }
+    }
+
     private StarSystem generateHomeworld(World world, int x, int y, final AlienRace race) {
         final BasePlanet[] planets = new BasePlanet[1];
         final StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(2, Color.white), x, y);
-
-        // add a ship to fight with after takeoff
-        NPCShip cruiser = race.getDefaultFactory().createShip(CRUISER_SHIP);
-        cruiser.setPos(4, 2);
-        ss.getShips().add(cruiser);
 
         final Dialog initialHomeworldDialog = Dialog.loadFromFile("dialogs/zorsan/zorsan_homeworld_1.json");
         final Dialog continueDialog = Dialog.loadFromFile("dialogs/zorsan/zorsan_homeworld_2.json");
@@ -73,7 +102,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                if (dialog == initialHomeworldDialog || dialog == continueDialog) {
+                if (dialog.getId().equals(initialHomeworldDialog.getId()) || dialog.getId().equals(continueDialog.getId())) {
                     if (returnCode == 0) {
                         continueDialog.addListener(this);
                         ((AlienHomeworld) planets[0]).setDialog(continueDialog);
@@ -84,7 +113,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                         planetSightseeingDialog.addListener(this);
                         world.addOverlayWindow(planetSightseeingDialog);
                     }
-                } else if (dialog == planetSightseeingDialog) {
+                } else if (dialog.getId().equals(planetSightseeingDialog.getId())) {
 
                     // set as much marines as possible in a landing party
                     LandingParty party = world.getPlayer().getLandingParty();
@@ -96,6 +125,12 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                         ship.setMilitary(ship.getMilitary() - marineCount);
                     }
 
+                    party.setWeapon(ResourceManager.getInstance().getLandingPartyWeapons().getEntity("zorsan_laser"));
+                    world.getPlayer().getInventory().put(ResourceManager.getInstance().getLandingPartyWeapons().getEntity("zorsan_laser"), 1);
+                    ResearchProjectDesc zorsan_crew_weapons = world.getResearchAndDevelopmentProjects().getResearchProjects().get("zorsan_crew_weapons");
+                    if (zorsan_crew_weapons != null) {
+                        world.getPlayer().getResearchState().getCurrentProjects().add(new ResearchProjectState(zorsan_crew_weapons));
+                    }
                     Dungeon dungeon = new Dungeon(world, new AuroraTiledMap("maps/zor_escape.tmx"), ss);
                     dungeon.setEnterDialog(zorsanFinalDialog);
                     dungeon.setSuccessDialog(escapeDialog);
@@ -108,16 +143,22 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     world.getGlobalVariables().put("diplomacy.zorsan_visited", 0);
 
                     zorsanFinalDialog.setFlags(dialog.getFlags()); // pass flags from previous dialog to a next one
-                    world.getReputation().setHostile(race.getName(), HumanityGenerator.NAME);
-                    world.getCurrentStarSystem().getReputation().setHostile(race.getName(), HumanityGenerator.NAME);
+                    dungeon.getController().setSuccessListener(new ZorsanEscapeListener());
+
                     // after this, zorsan become hostile and player has fixed amount of time before they attack earth
                     addWarDataDrop();
+
                 }
             }
         });
 
 
         HomeworldGenerator.setCoord(planets[0], 3);
+
+        // add a ship to fight with after takeoff
+        NPCShip cruiser = race.getDefaultFactory().createShip(CRUISER_SHIP);
+        cruiser.setPos(planets[0].getX() + 6, planets[0].getY() + 5);
+        ss.getShips().add(cruiser);
 
         ss.setPlanets(planets);
         ss.setQuestLocation(true);
@@ -190,6 +231,17 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         world.getReputation().setHostile(BorkGenerator.NAME, NAME);
         world.getReputation().setHostile(RoguesGenerator.NAME, NAME);
         world.getReputation().setHostile(KliskGenerator.NAME, NAME);
+
+        world.getResearchAndDevelopmentProjects().getEarthResearchProjects().put("zorsan_weapons", new EarthResearch("zorsan_weapons", 100) {
+            private static final long serialVersionUID = -7037397500987009921L;
+
+            @Override
+            protected void onCompleted(World world) {
+                // todo: add zorsan ship cannon
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_weapons_reserch", "news"));
+                world.getPlayer().getEarthState().updateTechnologyLevel(5);
+            }
+        });
     }
 
     public static ProbabilitySet<SpaceObject> getDefaultLootTable() {

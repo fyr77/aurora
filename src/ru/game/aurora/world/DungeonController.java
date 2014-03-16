@@ -294,17 +294,32 @@ public class DungeonController implements Serializable {
             // firing
             final int damage = landingParty.calcDamage(world);
 
-            effects.add(new BlasterShotEffect(landingParty, world.getCamera().getXCoordWrapped(target.getX(), map.getWidthInTiles()), world.getCamera().getYCoordWrapped(target.getY(), map.getHeightInTiles()), world.getCamera(), 800, landingParty.getWeapon()));
+            BlasterShotEffect blasterShotEffect = new BlasterShotEffect(
+                    landingParty
+                    , world.getCamera().getXCoordWrapped(target.getX(), map.getWidthInTiles()) + world.getCamera().getTileWidth() / 2
+                    , world.getCamera().getYCoordWrapped(target.getY(), map.getHeightInTiles()) + world.getCamera().getTileHeight() / 2
+                    , world.getCamera()
+                    , 800
+                    , landingParty.getWeapon());
+            effects.add(blasterShotEffect);
 
             ResourceManager.getInstance().getSound(landingParty.getWeapon().getShotSound()).play();
 
-            target.onShotAt(world, damage);
-            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.damage_message"), damage, target.getName()));
-            if (!target.isAlive()) {
-                GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), target.getName()));
-                map.getObjects().remove(target);
-                target = null;
-            }
+            blasterShotEffect.setEndListener(new IStateChangeListener() {
+                private static final long serialVersionUID = -7742240385490245306L;
+
+                @Override
+                public void stateChanged(World world) {
+                    target.onShotAt(world, damage);
+                    GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.damage_message"), damage, target.getName()));
+                    if (!target.isAlive()) {
+                        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), target.getName()));
+                        map.getObjects().remove(target);
+                        target = null;
+                    }
+                }
+            });
+
             world.setUpdatedThisFrame(true);
         }
 

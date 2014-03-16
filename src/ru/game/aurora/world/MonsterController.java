@@ -8,6 +8,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.BlasterShotEffect;
+import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
@@ -37,7 +38,8 @@ public class MonsterController implements Serializable {
     private ITileMap map;
 
     private static AStarPathFinder pathFinder;
-    private static final  int MAX_PATH_LENGTH = 100;
+
+    private static final int MAX_PATH_LENGTH = 100;
     private Path path;
     private int lastX;
     private int lastY;
@@ -49,25 +51,24 @@ public class MonsterController implements Serializable {
         this.myMonster = myMonster;
         this.turnsBeforeMove = myMonster.getSpeed();
         this.weapon = myMonster.getWeapon();
-
-         checkAndCreatePathFinder();
     }
 
-    private void checkAndCreatePathFinder()
-    {
-        if (pathFinder == null) {
-            pathFinder = new AStarPathFinder(map, Math.min(MAX_PATH_LENGTH, map.getWidthInTiles() / 4), false);
-        }
+    public static void resetPathfinder(ITileMap map) {
+        pathFinder = new AStarPathFinder(map, Math.min(MAX_PATH_LENGTH, map.getWidthInTiles() / 3), false);
     }
 
-    private void playAttackEffects(World world, IMovable other) {
+    private Effect playAttackEffects(World world, IMovable other) {
 
-        if (weapon.getId().equals("melee")) {
-            world.getCurrentDungeon().getController().addEffect(new ExplosionEffect(other.getX(), other.getY(), "slash", false, false));
-        } else {
-            world.getCurrentDungeon().getController().addEffect(new BlasterShotEffect(myMonster, other, world.getCamera(), 800, weapon));
-        }
         ResourceManager.getInstance().getSound(weapon.getShotSound()).play();
+        Effect rz;
+        if (weapon.getId().equals("melee")) {
+            rz = new ExplosionEffect(other.getX(), other.getY(), "slash", false, false);
+
+        } else {
+            rz = new BlasterShotEffect(myMonster, other, world.getCamera(), 800, weapon);
+        }
+        world.getCurrentDungeon().getController().addEffect(rz);
+        return rz;
     }
 
     public void update(GameContainer container, World world) {
@@ -88,12 +89,12 @@ public class MonsterController implements Serializable {
             int newX = x + CommonRandom.getRandom().nextInt(2) - 1;
             int newY = y + CommonRandom.getRandom().nextInt(2) - 1;
             // if we want to attack landing party and it is close enough, move closer
+            final LandingParty party = world.getPlayer().getLandingParty();
+            int partyX = party.getX();
+            int partyY = party.getY();
 
             if (myMonster.getBehaviour() == AnimalSpeciesDesc.Behaviour.AGGRESSIVE) {
                 ////////////////////////// attack landing party //////////////////////////////////
-                LandingParty party = world.getPlayer().getLandingParty();
-                int partyX = party.getX();
-                int partyY = party.getY();
 
                 final double distance = map.isWrapped() ? party.getDistanceWrapped(myMonster, map.getWidthInTiles(), map.getHeightInTiles()) : party.getDistance(myMonster);
                 if (weapon != null && distance < 1.5 * weapon.getRange()) { //1.5 because of diagonal cells
@@ -101,9 +102,17 @@ public class MonsterController implements Serializable {
                         // can't shoot because no line of sight
                         return;
                     }
-                    party.subtractHp(world, weapon.getDamage());
-                    GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), myMonster.getName(), weapon.getDamage(), party.getHp()));
-                    playAttackEffects(world, party);
+                    Effect eff = playAttackEffects(world, party);
+                    eff.setEndListener(new IStateChangeListener() {
+                        private static final long serialVersionUID = -7177344379777105885L;
+
+                        @Override
+                        public void stateChanged(World world) {
+                            party.subtractHp(world, weapon.getDamage());
+                            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), myMonster.getName(), weapon.getDamage(), party.getHp()));
+                        }
+                    });
+
                     newX = x;
                     newY = y;
                 } else if (map.lineOfSightExists(x, y, partyX, partyY) && (weapon == null || distance < 5 * weapon.getRange())) {
@@ -113,14 +122,17 @@ public class MonsterController implements Serializable {
                 }
 
                 if (playerShown) {
-                    checkAndCreatePathFinder();
-
-                    map.setTilePassable(x, y, true);    //hack (pathfinder cannot find path if starting point is blocked)
-                    path = pathFinder.findPath(null, x, y, lastX, lastY);
-                    map.setTilePassable(x, y, false);   //hack
+                    // rebuild path only if player moved
+                    if (path == null || lastX != partyX || lastY != partyY) {
+                        lastX = partyX;
+                        lastY = partyY;
+                        map.setTilePassable(x, y, true);    //hack (pathfinder cannot find path if starting point is blocked)
+                        path = pathFinder.findPath(null, x, y, lastX, lastY);
+                        map.setTilePassable(x, y, false);   //hack
+                        pathIndex = 1;
+                    }
 
                     playerShown = false;
-                    pathIndex = 1;
                 }
 
                 if (path != null && path.getLength() > 1) {
@@ -141,15 +153,23 @@ public class MonsterController implements Serializable {
                     if (!po.canBeShotAt() || !DungeonMonster.class.isAssignableFrom(po.getClass())) {
                         continue;
                     }
-                    DungeonMonster po1 = (DungeonMonster) po;
+                    final DungeonMonster po1 = (DungeonMonster) po;
 
                     if (po1.getBehaviour() != AnimalSpeciesDesc.Behaviour.AGGRESSIVE) {
                         continue;
                     }
 
                     if (po1.getDistance(myMonster) < weapon.getRange() && map.lineOfSightExists(x, y, po.getX(), po.getY())) {
-                        po1.onShotAt(world, weapon.getDamage());
-                        playAttackEffects(world, po1);
+
+                        Effect eff = playAttackEffects(world, po1);
+                        eff.setEndListener(new IStateChangeListener() {
+                            private static final long serialVersionUID = 995534841614292836L;
+
+                            @Override
+                            public void stateChanged(World world) {
+                                po1.onShotAt(world, weapon.getDamage());
+                            }
+                        });
                     }
                 }
             }

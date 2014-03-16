@@ -156,7 +156,7 @@
     <property name="imageTileY" value="0"/>
     <property name="speed" value="2"/>
     <property name="tags" value=""/>
-    <property name="weapon" value="plasma"/>
+    <property name="weapon" value="zorsan_laser"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="896" y="512" width="64" height="64">
@@ -167,7 +167,7 @@
     <property name="imageTileY" value="0"/>
     <property name="speed" value="2"/>
     <property name="tags" value=""/>
-    <property name="weapon" value="plasma"/>
+    <property name="weapon" value="zorsan_laser"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1344" y="384" width="64" height="64">
@@ -178,7 +178,7 @@
     <property name="imageTileY" value="0"/>
     <property name="speed" value="2"/>
     <property name="tags" value=""/>
-    <property name="weapon" value="plasma"/>
+    <property name="weapon" value="zorsan_laser"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1536" y="512" width="64" height="64">
@@ -189,7 +189,7 @@
     <property name="imageTileY" value="0"/>
     <property name="speed" value="2"/>
     <property name="tags" value=""/>
-    <property name="weapon" value="plasma"/>
+    <property name="weapon" value="zorsan_laser"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1728" y="832" width="64" height="64">
@@ -200,7 +200,7 @@
     <property name="imageTileY" value="0"/>
     <property name="speed" value="2"/>
     <property name="tags" value=""/>
-    <property name="weapon" value="plasma"/>
+    <property name="weapon" value="zorsan_laser"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="768" y="832" width="64" height="64">
@@ -211,7 +211,7 @@
     <property name="imageTileY" value="0"/>
     <property name="speed" value="2"/>
     <property name="tags" value=""/>
-    <property name="weapon" value="plasma"/>
+    <property name="weapon" value="zorsan_laser"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1216" y="1152" width="64" height="64">
@@ -222,7 +222,7 @@
     <property name="imageTileY" value="0"/>
     <property name="speed" value="2"/>
     <property name="tags" value=""/>
-    <property name="weapon" value="plasma"/>
+    <property name="weapon" value="zorsan_laser"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1472" y="1280" width="64" height="64">
@@ -233,7 +233,7 @@
     <property name="imageTileY" value="0"/>
     <property name="speed" value="2"/>
     <property name="tags" value=""/>
-    <property name="weapon" value="plasma"/>
+    <property name="weapon" value="zorsan_laser"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="1344" y="1536" width="64" height="64">
@@ -244,7 +244,7 @@
     <property name="imageTileY" value="0"/>
     <property name="speed" value="2"/>
     <property name="tags" value=""/>
-    <property name="weapon" value="plasma"/>
+    <property name="weapon" value="zorsan_laser"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="1152" y="128" width="64" height="64">
@@ -345,7 +345,7 @@
     <property name="imageTileY" value="0"/>
     <property name="speed" value="2"/>
     <property name="tags" value=""/>
-    <property name="weapon" value="plasma"/>
+    <property name="weapon" value="zorsan_laser"/>
    </properties>
   </object>
  </objectgroup>

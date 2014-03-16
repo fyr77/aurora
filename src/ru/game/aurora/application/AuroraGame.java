@@ -63,7 +63,6 @@ public class AuroraGame extends NiftyOverlayGame {
         Set<Long> resolutionset = new HashSet<>();
         List<Resolution> result = new ArrayList<>();
 
-        Resolution fallbackResolution = null;
 
         try {
             for (DisplayMode mode : Display.getAvailableDisplayModes()) {
@@ -77,10 +76,6 @@ public class AuroraGame extends NiftyOverlayGame {
                     continue;
                 }
 
-                if (mode.getWidth() % 64 != 0 || mode.getHeight() % 64 != 0) {
-                    fallbackResolution = new Resolution(mode.getWidth(), mode.getHeight());
-                    continue;
-                }
 
                 resolutionset.add((long) mode.getWidth() * mode.getHeight());
                 result.add(new Resolution(mode.getWidth(), mode.getHeight()));
@@ -91,10 +86,6 @@ public class AuroraGame extends NiftyOverlayGame {
         }
         if (result.isEmpty()) {
             logger.error("No suitable resolutions found");
-            if (fallbackResolution != null) {
-                logger.warn("Falling back to non 64-divisible one {}", fallbackResolution);
-                result.add(fallbackResolution);
-            }
         }
         Collections.sort(result);
         return result;
@@ -275,8 +266,7 @@ public class AuroraGame extends NiftyOverlayGame {
         }
     }
 
-    public static void main(String[] args) throws SlickException, IOException
-    {
+    public static void main(String[] args) throws SlickException, IOException {
         try {
             logger.info("Aurora game version " + Version.VERSION + " started");
             final String osName = System.getProperty("os.name");

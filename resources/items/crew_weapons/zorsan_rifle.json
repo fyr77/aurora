@@ -1,0 +1,9 @@
+{
+    "id" : "zorsan_laser",
+    "name" : "zorsan_laser_rifles.name",
+    "range" : 6,
+    "damage" : 3,
+    "image" : "zorsan_crew_laser",
+    "shotImage" : "blaster_shot_red",
+    "shotSound" : "autofire_1"
+}
