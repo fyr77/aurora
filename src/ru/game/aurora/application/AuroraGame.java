@@ -67,8 +67,10 @@ public class AuroraGame extends NiftyOverlayGame {
 
 
         try {
-            for (DisplayMode mode : Display.getAvailableDisplayModes()) {
-                if (!mode.isFullscreenCapable() || mode.getBitsPerPixel() < 32) {
+            final DisplayMode[] availableDisplayModes = Display.getAvailableDisplayModes();
+            logger.info("Available display modes: {}", Arrays.toString(availableDisplayModes));
+            for (DisplayMode mode : availableDisplayModes) {
+                if (!mode.isFullscreenCapable() || mode.getBitsPerPixel() < 24) {
                     continue;
                 }
                 if (mode.getWidth() < 1024 || mode.getHeight() < 768) {
@@ -133,6 +135,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
+
         LogManager.getLogManager().reset();
         SLF4JBridgeHandler.removeHandlersForRootLogger();
         SLF4JBridgeHandler.install();
@@ -145,6 +148,7 @@ public class AuroraGame extends NiftyOverlayGame {
         GUI.init(gameContainer, getNifty());
         GUI.getInstance().getNifty().gotoScreen("main_menu");
         mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
+        resolutionChangeListeners.add(mainMenu);
         try {
             AnimalGenerator.init();
         } catch (FileNotFoundException e) {
@@ -162,6 +166,7 @@ public class AuroraGame extends NiftyOverlayGame {
             SoundStore.get().setSoundVolume(Float.parseFloat(soundVolumeString));
         }
         ResourceManager.getInstance().getPlaylist("background").play();
+
     }
 
     @Override
@@ -176,6 +181,7 @@ public class AuroraGame extends NiftyOverlayGame {
             if (mainMenu != null) {
                 world = mainMenu.update(camera, gameContainer);
                 if (world != null) {
+                    resolutionChangeListeners.add(world);
                     mainMenu = null;
                     if (debugWorldVariables != null) {
                         logger.warn("Adding debug variables");
@@ -314,6 +320,9 @@ public class AuroraGame extends NiftyOverlayGame {
             } else {
                 List<Resolution> supportedResolutions = getAvailableResolutions();
                 // by default, use largest supported resolution available
+                if (supportedResolutions.isEmpty()) {
+                    throw new IllegalStateException("Failed to init engine, no suitable resolutions found");
+                }
                 res = supportedResolutions.get(supportedResolutions.size() - 1);
             }
 

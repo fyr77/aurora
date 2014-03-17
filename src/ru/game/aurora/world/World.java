@@ -474,6 +474,8 @@ public class World implements Serializable, ResolutionChangeListener
 
     @Override
     public void onResolutionChanged(int tilesX, int tilesY, boolean fullscreen) {
+        Camera oldCamera = camera;
         camera = new Camera(0, 0, tilesX, tilesY, AuroraGame.tileSize, AuroraGame.tileSize);
+        camera.setTarget(oldCamera.getTarget());
     }
 }
