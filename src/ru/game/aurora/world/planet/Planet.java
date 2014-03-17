@@ -170,8 +170,8 @@ public class Planet extends BasePlanet implements IDungeon {
                 try {
                     if (surface == null) {
                         createSurface();
-                        MonsterController.resetPathfinder(surface);
                     }
+                    MonsterController.resetPathfinder(surface);
 
                 } catch (Exception e) {
                     logger.error("Failed to generate surface for planet", e);

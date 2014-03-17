@@ -51,6 +51,8 @@ public class AuroraGame extends NiftyOverlayGame {
 
     private static List<Updatable> updatables = new ArrayList<>();
 
+    private static List<ResolutionChangeListener> resolutionChangeListeners = new ArrayList<>();
+
     /*
     Used for debugging purposes, this set of global variables is added to world state when it is loaded/created
      */
@@ -98,15 +100,14 @@ public class AuroraGame extends NiftyOverlayGame {
         camera = new Camera(0, 0, tilesX, tilesY, tileSize, tileSize);
         camera.setTarget(oldCam.getTarget());
 
-        if (world != null) {
-            world.setCamera(camera);
-        }
-
         try {
             app.setDisplayMode(newTilesX * tileSize, newTilesY * tileSize, fullScreen);
             GUI.getInstance().getNifty().resolutionChanged();
         } catch (SlickException e) {
             logger.error("Failed to change display mode", e);
+        }
+        for (ResolutionChangeListener listener : resolutionChangeListeners) {
+            listener.onResolutionChanged(newTilesX, newTilesY, fullScreen);
         }
     }
 
