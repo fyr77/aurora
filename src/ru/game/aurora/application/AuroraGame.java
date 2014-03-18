@@ -304,7 +304,7 @@ public class AuroraGame extends NiftyOverlayGame {
             } catch (IOException e) {
                 throw new SlickException("Failed to load game properties", e);
             }
-
+            SoundStore.get().init();
             final String locale = Configuration.getSystemProperties().getProperty("locale");
             if (locale != null) {
                 Localization.init(Locale.forLanguageTag(locale));

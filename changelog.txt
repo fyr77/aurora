@@ -6,6 +6,7 @@ IN PROGRESS...
 * Now if no resolution is suitable, select an unsuitable one
 + Added zorsan rifle weapon and research projects for it
 * Planet scan window moved to separate screen
+* Music is now loaded in separate threads and stored by SoftReference to prevent excessive memory usage and game start delays
 
 ====================================================
 
