@@ -124,6 +124,7 @@ public class GUI {
         nifty.registerScreenController(new CountrySelectScreenController(world));
         nifty.registerScreenController(new InventoryController(world));
         nifty.registerScreenController(new JournalScreenController(world));
+        nifty.registerScreenController(new PlanetScanController(world));
 
         // load xmls
         nifty.addXml("gui/screens/image_button.xml");
@@ -145,6 +146,7 @@ public class GUI {
         nifty.addXml("gui/screens/intro_dialog.xml");
         nifty.addXml("gui/screens/inventory_screen.xml");
         nifty.addXml("gui/screens/journal_screen.xml");
+        nifty.addXml("gui/screens/planet_scan_screen.xml");
 
         // remove old map controller listener, if it already exists (this is a loaded game). it should actually not be saved at all
         for (Iterator<GameEventListener> iter = world.getListeners().iterator(); iter.hasNext(); ) {

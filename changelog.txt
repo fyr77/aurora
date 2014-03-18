@@ -4,6 +4,8 @@ IN PROGRESS...
 
 * Fixed crash on world generation
 * Now if no resolution is suitable, select an unsuitable one
++ Added zorsan rifle weapon and research projects for it
+* Planet scan window moved to separate screen
 
 ====================================================
 
