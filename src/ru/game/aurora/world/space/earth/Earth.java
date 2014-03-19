@@ -21,7 +21,7 @@ import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.StarSystem;
@@ -30,7 +30,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
-public class Earth extends Planet {
+public class Earth extends BasePlanet
+{
 
     private static final long serialVersionUID = 1L;
 
@@ -43,8 +44,8 @@ public class Earth extends Planet {
     // flags used to control default earth dialog
     private Map<String, String> dialogFlags = new HashMap<>();
 
-    public Earth(World world, StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
-        super(world, owner, cat, atmosphere, size, x, y);
+    public Earth(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
+        super(x, y, size, owner, atmosphere, cat);
         earthDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_dialog.json"));
         progressDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_progress_dialog.json"));
         progressDialog.addListener(new EarthProgressDialogListener(this));
@@ -61,10 +62,6 @@ public class Earth extends Planet {
 
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics g, Camera camera, int tileX, int tileY) {
-        if (!camera.isInViewport(x, y)) {
-            return;
-        }
-
         final Image earth = ResourceManager.getInstance().getImage("earth");
         g.drawImage(earth, camera.getXCoord(x) - earth.getWidth() / 4, camera.getYCoord(y)  -earth.getHeight() / 4);
     }
@@ -95,6 +92,11 @@ public class Earth extends Planet {
             addQuestFlags(world, dialogFlags);
             world.addOverlayWindow(earthDialog, dialogFlags);
         }
+    }
+
+    @Override
+    public void returnTo(World world) {
+        enter(world);
     }
 
     private void addQuestFlags(World world, Map<String, String> flags) {
