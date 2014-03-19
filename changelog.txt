@@ -1,6 +1,12 @@
-VERSION 0.2.1
+VERSION 0.2.2
 
 IN PROGRESS...
+
+===================================================
+
+VERSION 0.2.1
+
+19.03.2014
 
 * Fixed crash on world generation
 * Now if no resolution is suitable, select an unsuitable one
@@ -13,7 +19,7 @@ IN PROGRESS...
 
 VERSION 0.2.0
 
-11.03.2013
+11.03.2014
 
 + New story and dialogs, tons of them
 + Tools to load dialogs from CSV files
