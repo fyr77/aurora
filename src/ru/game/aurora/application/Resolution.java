@@ -1,5 +1,8 @@
 package ru.game.aurora.application;
 
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+
 /**
 * Created with IntelliJ IDEA.
 * User: Egor.Smirnov
@@ -29,7 +32,8 @@ public final class Resolution implements Comparable<Resolution>
     }
 
     public boolean isActive() {
-        return AuroraGame.tilesX * AuroraGame.tileSize == width && AuroraGame.tilesY * AuroraGame.tileSize == height;
+        DisplayMode dm = Display.getDisplayMode();
+        return dm.getWidth() == width && dm.getHeight() == height;
     }
 
     public int getTilesX() {

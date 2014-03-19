@@ -242,7 +242,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 19,
+          "targetStatementId": 21,
           "replyText": "0"
         }
       ]
@@ -267,6 +267,5 @@
         }
       ]
     }
-  },
-  "returnValue": 0
+  }
 }

@@ -540,7 +540,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private static final Color ANIMAL_COLOR = new Color(0, 255, 0, 200);
     private static final Color RESOURCE_COLOR = new Color(255, 255, 0, 200);
-    private static final Color ANOMALY_COLOR = new Color(0, 0, 255, 200);
+    private static final Color ANOMALY_COLOR = new Color(255, 0, 0, 200);
     private static final Color BACKGROUND_COLOR = new Color(0, 0, 0, 200);
 
     private void renderCurrentPlanetSurface(GameContainer container, Graphics g) {

@@ -215,6 +215,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                     case DEFAULT_SHIP:
                         ship = new NPCShip(0, 0, "klisk_ship", kliskRace, null, "Klisk Ship", 15);
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
+                        ship.setSpeed(2);
                         break;
 
                     case TRADE_PROBE:
@@ -222,10 +223,13 @@ public class KliskGenerator implements WorldGeneratorPart {
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"));
                         ship.setStationary(true);
                         ship.setCanBeHailed(false);
+                        ship.setSpeed(2);
                         break;
                     case STATION:
-                        ship = new NPCShip(0, 0, "klisk_station", kliskRace, null, "Klisk station", 20);
+                        ship = new NPCShip(0, 0, "klisk_station", kliskRace, null, "Klisk station", 25);
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
+                        ship.enableRepairs(3);
+                        ship.setSpeed(2);
                         ship.setStationary(true);
                         break;
                     default:
