@@ -31,8 +31,7 @@ import java.util.Map;
  * Player meets a damaged rogues scout in space.
  * Can either help, or destroy it, or sell its coordinates to bork
  */
-public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart
-{
+public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = 1894996386549484298L;
 
     public static class MeetDamagedRogueEvent extends SingleShipEvent {
@@ -75,7 +74,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart
         @Override
         public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
             if (spawnedStarSystem != null) {
-                return  false;
+                return false;
             }
 
             boolean spawned = !ss.isQuestLocation() && super.onPlayerEnterStarSystem(world, ss);
@@ -116,6 +115,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart
                 world.getGlobalVariables().put("rogues.damage_scout_result", "help");
                 damagedRogueScout.setSprite("rogues_scout");
                 damagedRogueScout.setAi(new LeaveSystemAI());
+                damagedRogueScout.setStationary(false);
                 damagedRogueScout.setCaptain(new NPC(
                         new Dialog("rogue_damaged_scout.after_help", "rogues_scar_dialog",
                                 new Statement(0, "", new Reply(0, -1, "end")))
@@ -182,7 +182,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart
                 }
 
                 // remove scout and add explosion
-                for (Iterator<SpaceObject> iter = world.getCurrentStarSystem().getShips().iterator(); iter.hasNext();) {
+                for (Iterator<SpaceObject> iter = world.getCurrentStarSystem().getShips().iterator(); iter.hasNext(); ) {
                     SpaceObject so = iter.next();
                     if (so != damagedRogueScout) {
                         continue;

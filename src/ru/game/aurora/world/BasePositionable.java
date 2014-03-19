@@ -39,12 +39,24 @@ public class BasePositionable implements Positionable {
     }
 
     public double getDistanceWrapped(Positionable other, int width, int height) {
-        int directXDist = Math.abs(x - other.getX());
+        return getDistanceWrapped(x, y, other.getX(), other.getY(), width, height);
+    }
+
+    public double getDistanceWrapped(int x, int y, int otherX, int otherY, int width, int height) {
+        int directXDist = Math.abs(x - otherX);
         int wrapXDist = Math.abs(width - directXDist);
 
-        int directYDist = Math.abs(y - other.getY());
+        int directYDist = Math.abs(y - otherY);
         int wrapYDist = Math.abs(height - directYDist);
 
         return Math.sqrt(Math.pow(Math.min(directXDist, wrapXDist), 2) + Math.pow(Math.min(directYDist, wrapYDist), 2));
+    }
+
+    @Override
+    public String toString() {
+        return "BasePositionable{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 }

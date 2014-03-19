@@ -9,6 +9,7 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.NextDialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPCShipFactory;
+import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
@@ -114,9 +115,10 @@ public class BorkGenerator implements WorldGeneratorPart {
 
         ss.setPlanets(planets);
         ss.setRadius(Math.max((int) (12 * 1.5), 10));
-        world.getGalaxyMap().addObjectAndSetTile(ss, 13, 20);
-        world.getGlobalVariables().put("bork.homeworld", "[13, 20]");
+        world.getGalaxyMap().addObjectAtDistance(ss, (Positionable) world.getGlobalVariables().get("solar_system"), Configuration.getIntProperty("world.galaxy.bork_homeworld_distance"));
+        world.getGlobalVariables().put("bork.homeworld", ss.getCoordsString());
         borkRace.setHomeworld(ss);
+        ss.setQuestLocation(true);
 
         borkRace.setDefaultFactory(new NPCShipFactory() {
             private static final long serialVersionUID = 8000558666433188574L;

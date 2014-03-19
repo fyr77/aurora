@@ -1,7 +1,18 @@
+VERSION 0.2.1
+
+IN PROGRESS...
+
+* Fixed crash on world generation
+* Now if no resolution is suitable, select an unsuitable one
++ Added zorsan rifle weapon and research projects for it
+* Planet scan window moved to separate screen
+* Music is now loaded in separate threads and stored by SoftReference to prevent excessive memory usage and game start delays
+
+====================================================
 
 VERSION 0.2.0
 
-IN PROGRESS...
+11.03.2013
 
 + New story and dialogs, tons of them
 + Tools to load dialogs from CSV files

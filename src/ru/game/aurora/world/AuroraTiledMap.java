@@ -27,7 +27,7 @@ import java.util.List;
  * Map in a format of a TILed EDitor
  */
 public class AuroraTiledMap implements ITileMap {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private List<PlanetObject> objects = new LinkedList<>();
 
@@ -35,13 +35,13 @@ public class AuroraTiledMap implements ITileMap {
 
     private final String mapRef;
 
-    private transient byte[][] flags;
+    private byte[][] flags;
 
     private transient TiledMap map;
 
-    private transient BasePositionable entryPoint;
+    private BasePositionable entryPoint;
 
-    private transient List<BasePositionable> exitPoints;
+    private List<BasePositionable> exitPoints;
 
     private transient IFovAlgorithm fovAlgorithm;
 
@@ -113,6 +113,11 @@ public class AuroraTiledMap implements ITileMap {
     private void loadMap() {
         try {
             map = new TiledMap(mapRef, "resources/maps");
+            if (flags != null) {
+                // loadMap() is called after a game has been loaded
+                // load only map data itself, as all objects are already loaded and contained in game state
+                return;
+            }
             flags = new byte[map.getHeight()][map.getWidth()];
             exitPoints = new ArrayList<>();
 

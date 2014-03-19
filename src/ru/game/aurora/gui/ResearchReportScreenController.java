@@ -62,13 +62,17 @@ public class ResearchReportScreenController implements ScreenController {
         if (research.getMakesAvailable() != null) {
             for (String researchId : research.getMakesAvailable()) {
                 ResearchProjectDesc r = world.getResearchAndDevelopmentProjects().getResearchProjects().get(researchId);
-                nextResearch.addItem(r.getName());
+                if (r != null) {
+                    nextResearch.addItem(r.getName());
+                }
             }
         }
         if (research.getMakesAvailableEngineering() != null) {
             for (String engineeringId : research.getMakesAvailableEngineering()) {
                 EngineeringProject p = world.getResearchAndDevelopmentProjects().getEngineeringProjects().get(engineeringId);
-                nextResearch.addItem(p.getLocalizedName("engineering"));
+                if (p != null) {
+                    nextResearch.addItem(p.getLocalizedName("engineering"));
+                }
             }
         }
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();

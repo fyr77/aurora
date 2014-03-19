@@ -42,7 +42,6 @@ public class HumanityGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
         final AlienRace humans = new AlienRace(NAME, "earth_transport", Dialog.loadFromFile("dialogs/human_ship_default_dialog.json"));
-        world.getPlayer().setShip(humans);
         humans.setTravelDistance(1);
         world.getRaces().put(humans.getName(), humans);
         SingleShipFixedTime listener = new SingleShipFixedTime(4, new AuroraProbe(0, 0), Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_detected.json")));
@@ -51,10 +50,17 @@ public class HumanityGenerator implements WorldGeneratorPart {
 
         // earth
         final StarSystem solarSystem = HomeworldGenerator.createSolarSystem(world, humans);
+        solarSystem.setAstronomyData(0); // everything is explored
         solarSystem.setQuestLocation(true);
         humans.setHomeworld(solarSystem);
-        world.getGalaxyMap().getObjects().add(solarSystem);
-        world.getGalaxyMap().setTileAt(9, 9, world.getGalaxyMap().getObjects().size() - 1);
+        // generate solar system somewhere in lower third of a galaxy
+        world.getGalaxyMap().addObjectAndSetTile(solarSystem
+                , CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesX())
+                , CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesY()) / 3 +  world.getGalaxyMap().getTilesY() / 2);
+        world.getGlobalVariables().put("solar_system", solarSystem);
+
+        world.getPlayer().setShip(humans);
+
 
         humans.setDefaultFactory(new NPCShipFactory() {
             private static final long serialVersionUID = -430786152130330165L;

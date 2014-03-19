@@ -9,6 +9,7 @@ package ru.game.aurora.world.generation.quest;
 import org.newdawn.slick.Color;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
@@ -244,7 +245,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         // initial research projects and their star system
         StarSystem brownStar = WorldGenerator.generateRandomStarSystem(world, 6, 7);
         brownStar.setStar(new Star(6, new Color(128, 0, 0)));
-        world.getGalaxyMap().addObjectAndSetTile(brownStar, 6, 7);
+        world.getGalaxyMap().addObjectAtDistance(brownStar, (Positionable) world.getGlobalVariables().get("solar_system"), 10);
 
         ResearchProjectDesc starInitialResearch = new StarResearchProject(brownStar);
         starInitialResearch.setReport(new ResearchReport("star_research", "brown_dwarf.report"));
@@ -255,7 +256,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         brownStar = WorldGenerator.generateRandomStarSystem(world, 12, 12);
         brownStar.setStar(new Star(6, new Color(128, 0, 0)));
         brownStar.setQuestLocation(true);
-        world.getGalaxyMap().addObjectAndSetTile(brownStar, 12, 12);
+        world.getGalaxyMap().addObjectAtDistance(brownStar, (Positionable) world.getGlobalVariables().get("solar_system"), 30);
 
         AlienRace rogues = world.getRaces().get("Rogues");
         NPCShip defenceProbe = rogues.getDefaultFactory().createShip(RoguesGenerator.PROBE_SHIP);
@@ -266,18 +267,12 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         brownStar.setFirstEnterDialog(Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/rogues/rogue_beacon_found.json")));
 
         Dungeon beaconInternals = new Dungeon(world, new AuroraTiledMap("resources/maps/test.tmx"), brownStar);
-        beaconInternals.getController().setSuccessListener(new IStateChangeListener() {
-            private static final long serialVersionUID = 4018207362752529165L;
 
-            @Override
-            public void stateChanged(World world) {
-                world.getGlobalVariables().put("rogues_beacon.result", "invaded");
-            }
-        });
         beaconInternals.setPlaylistName("dungeon_invasion");
         final Dialog enterDialog = Dialog.loadFromFile("dialogs/rogues/rogues_beacon_landing.json");
         enterDialog.addListener(new DialogListener() {
             private static final long serialVersionUID = -6585091322276759341L;
+
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 world.getGlobalVariables().put("rogues_beacon.result", "scanned");
@@ -285,7 +280,18 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         });
         beaconInternals.setEnterDialog(enterDialog);
         beaconInternals.setSuccessDialog(Dialog.loadFromFile("dialogs/rogues/rogues_beacon_explored.json"));
-        SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon", beaconInternals);
+        final SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon", beaconInternals);
+        beaconInternals.getController().setSuccessListener(new IStateChangeListener() {
+            private static final long serialVersionUID = 4018207362752529165L;
+
+            @Override
+            public void stateChanged(World world) {
+                world.getGlobalVariables().put("rogues_beacon.result", "invaded");
+                ExplosionEffect effect = new ExplosionEffect(beacon.getX(), beacon.getY(), "ship_explosion", false, true);
+                world.getCurrentStarSystem().addEffect(effect);
+                world.getCurrentStarSystem().getShips().remove(beacon);
+            }
+        });
         beacon.setResearchProjectDescs(world.getResearchAndDevelopmentProjects().getResearchProjects().get("beacon"));
         world.addListener(new RoguesStateChanger(world, beaconInternals));
         brownStar.getShips().add(beacon);

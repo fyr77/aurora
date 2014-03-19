@@ -17,6 +17,19 @@
         <layer id="starmap_layer" childLayout="vertical">
             <control name="top_panel" id="top_panel"/>
 
+            <panel height="50px"/>
+
+            <panel childLayout="horizontal" height="120px">
+                <panel width="85%"/>
+                <panel childLayout="vertical" width="*" height="100px"
+                       backgroundImage="resources/sprites/gui/side_panel.png" padding="20,5,20,20"
+                       imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                    <text id="resources_text" text="${gui.resources}" style="base-font" width="*"/>
+                    <panel height="*"/>
+                    <text id="credits_text" text="${gui.credits}" style="base-font" width="*"/>
+                </panel>
+            </panel>
+
             <!-- middle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
                 <panel width="85%"/>
@@ -81,6 +94,19 @@
 
         <layer id="starsystem_layer" childLayout="vertical">
             <control name="top_panel" id="top_panel"/>
+
+            <panel height="50px"/>
+
+            <panel childLayout="horizontal" height="120px">
+                <panel width="85%"/>
+                <panel childLayout="vertical" width="*" height="100px"
+                       backgroundImage="resources/sprites/gui/side_panel.png" padding="20,5,20,20"
+                       imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                    <text id="resources_text" text="${gui.resources}" style="base-font" width="*"/>
+                    <panel height="*"/>
+                    <text id="credits_text" text="${gui.credits}" style="base-font" width="*"/>
+                </panel>
+            </panel>
 
             <!-- midlle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
@@ -206,43 +232,6 @@
         </control>
     </popup>
 
-
-    <popup id="planet_scan" childLayout="absolute">
-        <control id="panet_scan_window" name="window" title="${gui.scan.title}" hideOnClose="true" width="60%"
-                 height="80%"
-                 x="20%" y="10%">
-            <panel childLayout="vertical">
-                <panel childLayout="horizontal" height="266px">
-                    <image filename="resources/sprites/portraits/scientist.png" width="256px" height="256px"/>
-                    <panel width="10px"/>
-                    <panel style="nifty-listbox#scrollpanel" width="*" height="256px" childLayout="horizontal"
-                           padding="5px">
-                        <text width="*" height="256px" id="scan_text" style="base-font" textHAlign="left"
-                              padding="5px"/>
-                    </panel>
-                </panel>
-                <text style="base-font" text="${gui.scan.surface_map}"/>
-                <panel width="100%" height="*" childLayout="horizontal" style="nifty-panel-no-shadow" padding="5px">
-                    <panel id="surfaceMapPanel" width="100%" height="90%" childLayout="absolute"/>
-                </panel>
-                <panel height="10px"/>
-                <panel childLayout="horizontal" height="45px">
-                    <text style="base-font" text="${gui.scan.filter}"/>;
-                    <control id="bioscan_checkbox" name="checkbox" checked="true"/>
-                </panel>
-                <panel childLayout="horizontal" height="45px">
-                    <panel width="85%"/>
-                    <control id="close_button" name="button" label="${gui.ok}" height="45px">
-                        <interact onClick="closeCurrentPopup()"/>
-                    </control>
-                </panel>
-            </panel>
-        </control>
-        <control id="shuttlePosition" name="draggable" revert="false" width="64px" height="64px" childLayout="center"
-                 valign="top">
-            <image filename="resources/sprites/ships/player_shuttle.png" width="64px" height="64px"/>
-        </control>
-    </popup>
 
     <popup id="object_scan" childLayout="absolute">
         <control id="object_scan_window" name="window" title="${gui.scan.title}" hideOnClose="true" width="60%" x="20%"

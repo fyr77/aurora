@@ -106,7 +106,11 @@ public class Animal extends Movable implements PlanetObject, IMonster {
         }
         if (hp <= 0) {
             // clean obstacle flag
-            myPlanet.getSurface().setTilePassable(x, y, true);
+            if (nowMoving()) {
+                myPlanet.getSurface().setTilePassable(getTargetX(), getTargetY(), true);
+            } else {
+                myPlanet.getSurface().setTilePassable(x, y, true);
+            }
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), getName()));
         }
     }

@@ -206,7 +206,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     @Override
     public String getScanDescription(World world) {
-        StringBuilder sb = new StringBuilder(String.format(Localization.getText("gui", "scan.ship.race"), race.getName()));
+        StringBuilder sb = new StringBuilder(String.format(Localization.getText("gui", "scan.ship.race"), race != null ? race.getName() : "Unknown"));
         sb.append('\n');
         sb.append(Localization.getText("gui", "scan.ship.relation_prefix")).append(" ").append(isHostile(world, world.getPlayer().getShip()) ? Localization.getText("gui", "scan.ship.hostile") : Localization.getText("gui", "scan.ship.friendly"));
         return sb.toString();
@@ -240,7 +240,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         if (attacker != null) {
             changeThreat(world, attacker, dmg * 2);   //todo: balance
 
-            if (!currentStarSystem.getReputation().isHostile(race.getName(), attacker.getRace().getName())) {
+            if (race != null && !currentStarSystem.getReputation().isHostile(race.getName(), attacker.getRace().getName())) {
                 currentStarSystem.getReputation().setHostile(race.getName(), attacker.getRace().getName());
             }
         }
@@ -446,5 +446,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     public void setAlive(boolean alive) {
         isAlive = alive;
+    }
+
+    public void setRace(AlienRace race) {
+        this.race = race;
     }
 }

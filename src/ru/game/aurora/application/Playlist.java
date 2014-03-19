@@ -6,9 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,13 +18,14 @@ import java.util.List;
 public class Playlist implements MusicListener {
     private static final Logger logger = LoggerFactory.getLogger(Playlist.class);
 
-    private List<Music> music = new LinkedList<>();
+    private List<DeferredLoadingMusic> music = new ArrayList<>();
 
-    private Iterator<Music> currentMusicIter;
+    private int currentMusicIdx = 0;
 
     private String id;
 
     public Playlist(String id, File musicDir) {
+
         this.id = id;
         logger.info("Loading music from {} for playlist {}", musicDir.getAbsolutePath(), id);
         for (File f : musicDir.listFiles()) {
@@ -34,19 +33,13 @@ public class Playlist implements MusicListener {
                 continue;
             }
 
-            try {
-                Music m = new Music(new FileInputStream(f), f.getName());
-                m.addListener(this);
-                music.add(m);
-            } catch (Exception ex) {
-                logger.error("Failed to load music from " + f.getAbsolutePath(), ex);
-            }
+            music.add(new DeferredLoadingMusic(f, this));
         }
 
         if (music.isEmpty()) {
             logger.warn("No background music loaded");
         } else {
-            currentMusicIter = music.iterator();
+            music.get(0).requestLoad();
         }
     }
 
@@ -55,22 +48,24 @@ public class Playlist implements MusicListener {
     }
 
     public void play() {
-        playNext();
+        int idxToPlay = currentMusicIdx;
+        int idxToLoad = currentMusicIdx + 1;
+        if (idxToLoad == music.size()) {
+            idxToLoad = 0;
+        }
+
+        music.get(idxToPlay).getMusic().play();
+        music.get(idxToLoad).requestLoad();
     }
 
-    private void playNext() {
-        if (currentMusicIter.hasNext()) {
-            Music m = currentMusicIter.next();
-            m.play();
-        } else {
-            currentMusicIter = this.music.iterator();
-            currentMusicIter.next().play();
-        }
-    }
 
     @Override
     public void musicEnded(Music music) {
-        playNext();
+        this.music.get(currentMusicIdx).release();
+        if (++currentMusicIdx == this.music.size()) {
+            currentMusicIdx = 0;
+        }
+        play();
     }
 
     @Override

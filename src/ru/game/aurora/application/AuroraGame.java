@@ -17,6 +17,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.openal.SoundStore;
 import org.slf4j.LoggerFactory;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
@@ -25,8 +26,7 @@ import ru.game.aurora.world.planet.nature.AnimalGenerator;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.LogManager;
 
 
 public class AuroraGame extends NiftyOverlayGame {
@@ -51,6 +51,8 @@ public class AuroraGame extends NiftyOverlayGame {
 
     private static List<Updatable> updatables = new ArrayList<>();
 
+    private static List<ResolutionChangeListener> resolutionChangeListeners = new ArrayList<>();
+
     /*
     Used for debugging purposes, this set of global variables is added to world state when it is loaded/created
      */
@@ -62,27 +64,32 @@ public class AuroraGame extends NiftyOverlayGame {
     public static List<Resolution> getAvailableResolutions() {
         Set<Long> resolutionset = new HashSet<>();
         List<Resolution> result = new ArrayList<>();
+
+
         try {
-            for (DisplayMode mode : Display.getAvailableDisplayModes()) {
-                if (!mode.isFullscreenCapable() || mode.getBitsPerPixel() < 32) {
+            final DisplayMode[] availableDisplayModes = Display.getAvailableDisplayModes();
+            logger.info("Available display modes: {}", Arrays.toString(availableDisplayModes));
+            for (DisplayMode mode : availableDisplayModes) {
+                if (!mode.isFullscreenCapable() || mode.getBitsPerPixel() < 24) {
                     continue;
                 }
                 if (mode.getWidth() < 1024 || mode.getHeight() < 768) {
                     continue;
                 }
-                if (mode.getWidth() % 64 != 0 || mode.getHeight() % 64 != 0) {
-                    continue;
-                }
-
                 if (resolutionset.contains((long) mode.getWidth() * mode.getHeight())) {
                     continue;
                 }
+
+
                 resolutionset.add((long) mode.getWidth() * mode.getHeight());
                 result.add(new Resolution(mode.getWidth(), mode.getHeight()));
             }
         } catch (LWJGLException e) {
             logger.error("Failed to get list of display modes", e);
             throw new RuntimeException(e);
+        }
+        if (result.isEmpty()) {
+            logger.error("No suitable resolutions found");
         }
         Collections.sort(result);
         return result;
@@ -95,15 +102,14 @@ public class AuroraGame extends NiftyOverlayGame {
         camera = new Camera(0, 0, tilesX, tilesY, tileSize, tileSize);
         camera.setTarget(oldCam.getTarget());
 
-        if (world != null) {
-            world.setCamera(camera);
-        }
-
         try {
             app.setDisplayMode(newTilesX * tileSize, newTilesY * tileSize, fullScreen);
             GUI.getInstance().getNifty().resolutionChanged();
         } catch (SlickException e) {
             logger.error("Failed to change display mode", e);
+        }
+        for (ResolutionChangeListener listener : resolutionChangeListeners) {
+            listener.onResolutionChanged(newTilesX, newTilesY, fullScreen);
         }
     }
 
@@ -129,7 +135,10 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
-        Logger.getLogger("de.lessvoid.nifty").setLevel(Level.WARNING);
+
+        LogManager.getLogManager().reset();
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
 
         ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
         gameContainer.getInput().enableKeyRepeat();
@@ -139,6 +148,7 @@ public class AuroraGame extends NiftyOverlayGame {
         GUI.init(gameContainer, getNifty());
         GUI.getInstance().getNifty().gotoScreen("main_menu");
         mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
+        resolutionChangeListeners.add(mainMenu);
         try {
             AnimalGenerator.init();
         } catch (FileNotFoundException e) {
@@ -156,6 +166,7 @@ public class AuroraGame extends NiftyOverlayGame {
             SoundStore.get().setSoundVolume(Float.parseFloat(soundVolumeString));
         }
         ResourceManager.getInstance().getPlaylist("background").play();
+
     }
 
     @Override
@@ -170,6 +181,7 @@ public class AuroraGame extends NiftyOverlayGame {
             if (mainMenu != null) {
                 world = mainMenu.update(camera, gameContainer);
                 if (world != null) {
+                    resolutionChangeListeners.add(world);
                     mainMenu = null;
                     if (debugWorldVariables != null) {
                         logger.warn("Adding debug variables");
@@ -262,59 +274,67 @@ public class AuroraGame extends NiftyOverlayGame {
     }
 
     public static void main(String[] args) throws SlickException, IOException {
-        logger.info("Aurora game version " + Version.VERSION + " started");
-        final String osName = System.getProperty("os.name");
-
-        if (args.length > 0) {
-            if (args[0].equals("-debugVariables")) {
-                debugWorldVariables = new Properties();
-                debugWorldVariables.load(new FileInputStream(args[1]));
-            }
-        }
-
-        String nativePath;
-        if (osName.contains("Windows")) {
-            nativePath = "native/windows";
-        } else if (osName.contains("Linux")) {
-            nativePath = "native/linux";
-        } else if (osName.contains("Mac")) {
-            nativePath = "native/macosx";
-        } else {
-            logger.error("Unsupported os " + osName + ", lwjgl has no native libraries for it");
-            throw new RuntimeException("Unsupported os " + osName + ", lwjgl has no native libraries for it");
-        }
-        logger.info("Setting native lib dir to " + nativePath);
-        addDir(nativePath);
-
         try {
-            Configuration.init();
-        } catch (IOException e) {
-            throw new SlickException("Failed to load game properties", e);
-        }
+            logger.info("Aurora game version " + Version.VERSION + " started");
+            final String osName = System.getProperty("os.name");
 
-        final String locale = Configuration.getSystemProperties().getProperty("locale");
-        if (locale != null) {
-            Localization.init(Locale.forLanguageTag(locale));
-        } else {
-            Localization.init(Locale.getDefault());
-        }
-        Configuration.getSystemProperties().put("locale", Localization.getCurrentLocaleTag());
-        app = new AppGameContainer(new AuroraGame());
-        Resolution res;
-        String resolutionString = Configuration.getSystemProperties().getProperty("screen.resolution");
-        if (resolutionString != null) {
-            res = new Resolution(resolutionString);
-        } else {
-            List<Resolution> supportedResolutions = getAvailableResolutions();
-            // by default, use largest supported resolution available
-            res = supportedResolutions.get(supportedResolutions.size() - 1);
-        }
+            if (args.length > 0) {
+                if (args[0].equals("-debugVariables")) {
+                    debugWorldVariables = new Properties();
+                    debugWorldVariables.load(new FileInputStream(args[1]));
+                }
+            }
 
-        final boolean fullScreen = Boolean.parseBoolean(Configuration.getSystemProperties().getProperty("screen.full_screen", "false"));
-        app.setDisplayMode(res.getWidth(), res.getHeight(), fullScreen);
-        tilesX = res.getTilesX();
-        tilesY = res.getTilesY();
-        app.start();
+            String nativePath;
+            if (osName.contains("Windows")) {
+                nativePath = "native/windows";
+            } else if (osName.contains("Linux")) {
+                nativePath = "native/linux";
+            } else if (osName.contains("Mac")) {
+                nativePath = "native/macosx";
+            } else {
+                logger.error("Unsupported os " + osName + ", lwjgl has no native libraries for it");
+                throw new RuntimeException("Unsupported os " + osName + ", lwjgl has no native libraries for it");
+            }
+            logger.info("Setting native lib dir to " + nativePath);
+            addDir(nativePath);
+
+            try {
+                Configuration.init();
+            } catch (IOException e) {
+                throw new SlickException("Failed to load game properties", e);
+            }
+            SoundStore.get().init();
+            final String locale = Configuration.getSystemProperties().getProperty("locale");
+            if (locale != null) {
+                Localization.init(Locale.forLanguageTag(locale));
+            } else {
+                Localization.init(Locale.getDefault());
+            }
+            Configuration.getSystemProperties().put("locale", Localization.getCurrentLocaleTag());
+            app = new AppGameContainer(new AuroraGame());
+            Resolution res;
+            String resolutionString = Configuration.getSystemProperties().getProperty("screen.resolution");
+            if (resolutionString != null) {
+                res = new Resolution(resolutionString);
+            } else {
+                List<Resolution> supportedResolutions = getAvailableResolutions();
+                // by default, use largest supported resolution available
+                if (supportedResolutions.isEmpty()) {
+                    throw new IllegalStateException("Failed to init engine, no suitable resolutions found");
+                }
+                res = supportedResolutions.get(supportedResolutions.size() - 1);
+            }
+
+            final boolean fullScreen = Boolean.parseBoolean(Configuration.getSystemProperties().getProperty("screen.full_screen", "false"));
+            app.setDisplayMode(res.getWidth(), res.getHeight(), fullScreen);
+            tilesX = res.getTilesX();
+            tilesY = res.getTilesY();
+            app.start();
+        } catch (Exception ex) {
+            logger.error("Failed to init game: ", ex);
+            throw ex;
+        }
     }
 
     public static long getLastFrameTime() {

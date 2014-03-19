@@ -55,12 +55,26 @@ public class JournalScreenController implements ScreenController {
         for (JournalEntry e : journal.getCodex().values()) {
             codexList.addItem(e);
         }
+
+        selectFirstItemInCurrentList();
         world.setPaused(true);
+    }
+
+    private void selectFirstItemInCurrentList() {
+        ListBox currentTabList = tg.getSelectedTab().getElement().findNiftyControl("#itemsList", ListBox.class);
+        if (currentTabList.getSelectedIndices().isEmpty()) {
+            currentTabList.selectItemByIndex(0);
+        }
     }
 
     @Override
     public void onEndScreen() {
         world.setPaused(false);
+    }
+
+    @NiftyEventSubscriber(id = "journal_tabs")
+    public void onTabChanged(final String id, final TabSelectedEvent event) {
+        selectFirstItemInCurrentList();
     }
 
     @NiftyEventSubscriber(pattern = ".*itemsList")

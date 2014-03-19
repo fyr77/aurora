@@ -10,7 +10,9 @@ import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.ResolutionChangeListener;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.*;
 import ru.game.aurora.npc.AlienRace;
@@ -27,7 +29,8 @@ import ru.game.aurora.world.space.StarSystem;
 import java.io.Serializable;
 import java.util.*;
 
-public class World implements Serializable {
+public class World implements Serializable, ResolutionChangeListener
+{
 
     private static final long serialVersionUID = 2L;
 
@@ -469,4 +472,10 @@ public class World implements Serializable {
         return isPaused;
     }
 
+    @Override
+    public void onResolutionChanged(int tilesX, int tilesY, boolean fullscreen) {
+        Camera oldCamera = camera;
+        camera = new Camera(0, 0, tilesX, tilesY, AuroraGame.tileSize, AuroraGame.tileSize);
+        camera.setTarget(oldCamera.getTarget());
+    }
 }

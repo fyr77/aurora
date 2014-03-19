@@ -49,9 +49,9 @@ public class BlasterShotEffect extends Effect {
 
     }
 
-    public BlasterShotEffect(Positionable source, Positionable target, Camera camera, int moveSpeed, LandingPartyWeapon weapon) {
-        this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
-                , new Vector2f(camera.getXCoord(target.getX()) + camera.getTileWidth() / 2, camera.getYCoord(target.getY()) + camera.getTileHeight() / 2)
+    public BlasterShotEffect(IMovable source, IMovable target, Camera camera, int moveSpeed, LandingPartyWeapon weapon) {
+        this(new Vector2f(camera.getXCoord(source.getX()) + source.getOffsetX() + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2 + source.getOffsetY())
+                , new Vector2f(camera.getXCoord(target.getX()) + target.getOffsetX() + camera.getTileWidth() / 2, camera.getYCoord(target.getY()) + target.getOffsetY() + camera.getTileHeight() / 2)
                 ,
                 moveSpeed
                 , weapon);

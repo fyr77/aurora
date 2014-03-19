@@ -30,7 +30,8 @@ import java.util.Map;
  * Date: 23.01.13
  * Time: 16:23
  */
-public class MainMenuController implements ScreenController {
+public class MainMenuController implements ScreenController, ResolutionChangeListener
+{
 
     private WorldGenerator generator;
 
@@ -180,6 +181,17 @@ public class MainMenuController implements ScreenController {
                             }
                         });
                         break;
+                    case 0:
+                        // set remaining crew relationships
+                        if (!world.getGlobalVariables().containsKey("crew.scientist")) {
+                            world.getGlobalVariables().put("crew.scientist", 0);
+                        }
+                        if (!world.getGlobalVariables().containsKey("crew.engineer")) {
+                            world.getGlobalVariables().put("crew.engineer", 0);
+                        }
+                        if (!world.getGlobalVariables().containsKey("crew.military")) {
+                            world.getGlobalVariables().put("crew.military", 0);
+                        }
                 }
 
                 if (d != null) {
@@ -253,5 +265,10 @@ public class MainMenuController implements ScreenController {
 
     public void closeCurrentPopup() {
         GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+    }
+
+    @Override
+    public void onResolutionChanged(int tilesX, int tilesY, boolean fullscreen) {
+        background = new MainMenuBackground(tilesX * AuroraGame.tileSize, tilesY * AuroraGame.tileSize);
     }
 }

@@ -60,9 +60,9 @@ public class WorldGenerator implements Runnable {
     };
 
     private static final WorldGeneratorPart[] alienGenerators = {
-            new KliskGenerator()
+            new HumanityGenerator()
+            , new KliskGenerator()
             , new GardenerGenerator()
-            , new HumanityGenerator()
             , new RoguesGenerator()
             , new BorkGenerator()
             , new ZorsanGenerator()
@@ -223,14 +223,10 @@ public class WorldGenerator implements Runnable {
         journal.addCodex(new JournalEntry("engineer_dossier", "1"));
         journal.addCodex(new JournalEntry("scientist_dossier", "1"));
         journal.addCodex(new JournalEntry("military_dossier", "1"));
+        journal.addCodex(new JournalEntry("translator_device", "text"));
 
         journal.addQuest(new JournalEntry("colony_search", "start"));
         journal.addQuest(new JournalEntry("last_beacon", "start"));
-
-        // initial relationship with crewmembers
-        world.getGlobalVariables().put("crew.engineer", "0");
-        world.getGlobalVariables().put("crew.marine", "0");
-        world.getGlobalVariables().put("crew.scientist", "0");
 
     }
 

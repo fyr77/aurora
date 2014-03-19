@@ -1,0 +1,14 @@
+{
+    "id": "zorsan_crew_weapons",
+    "icon" : "zorsan_crew_laser",
+    "report": {
+        "icon" : "zorsan_crew_laser",
+        "text" :  "zorsan_crew_weapons.report"
+    },
+    "makesAvailable" : [],
+    "makesAvailableEngineering" : ["advanced_lasers"],
+    "earthProgress" : ["zorsan_weapons"],
+    "score" : 50,
+    "progress" : 40,
+    "initialProgress" : 40
+}

@@ -9,6 +9,7 @@ package ru.game.aurora.world.generation.aliens;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
@@ -16,6 +17,7 @@ import ru.game.aurora.dialog.NextDialogListener;
 import ru.game.aurora.npc.*;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.util.ProbabilitySet;
+import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.quest.EmbassiesQuest;
@@ -128,12 +130,11 @@ public class RoguesGenerator implements WorldGeneratorPart {
             }
         });
 
-        StarSystem homeworld = generateRoguesWorld(world, 15, 28, rogueRace);
-        world.getGlobalVariables().put("rogues.homeworld", "[15, 28]");
+        StarSystem homeworld = generateRoguesWorld(world, 0, 0, rogueRace);
+        world.getGalaxyMap().addObjectAtDistance(homeworld, (Positionable) world.getGlobalVariables().get("solar_system"), Configuration.getIntProperty("world.galaxy.rogues_homeworld_distance"));
+        world.getGlobalVariables().put("rogues.homeworld", homeworld.getCoordsString());
         homeworld.setQuestLocation(true);
         rogueRace.setHomeworld(homeworld);
-
-        world.getGalaxyMap().addObjectAndSetTile(homeworld, 15, 28);
         world.addListener(new StandardAlienShipEvent(rogueRace));
         world.addListener(new SingleStarsystemShipSpawner(rogueRace.getDefaultFactory(), 0.3, homeworld));
 

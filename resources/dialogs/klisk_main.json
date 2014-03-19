@@ -35,7 +35,10 @@
               "name": "klisk.coordinates_traded",
               "type": "NOT_SET"
             }
-          ]
+          ],
+          "flags" : {
+              "klisk.coordinates_traded" : true
+          }
         },
         {
           "returnValue": 0,

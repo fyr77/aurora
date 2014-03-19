@@ -63,11 +63,12 @@ public class EngineeringScreenController implements ScreenController {
         projectsList.addAllItems(world.getPlayer().getEngineeringState().getProjects());
         engineeringState = world.getPlayer().getEngineeringState();
         updateLabels();
+        world.setPaused(true);
     }
 
     @Override
     public void onEndScreen() {
-
+        world.setPaused(false);
     }
 
     private void updateLabels() {

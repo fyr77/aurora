@@ -171,6 +171,7 @@ public class Planet extends BasePlanet implements IDungeon {
                     if (surface == null) {
                         createSurface();
                     }
+                    MonsterController.resetPathfinder(surface);
 
                 } catch (Exception e) {
                     logger.error("Failed to generate surface for planet", e);
@@ -184,7 +185,7 @@ public class Planet extends BasePlanet implements IDungeon {
         GUI.getInstance().getNifty().gotoScreen("surface_gui");
         world.getCamera().setTarget(landingParty);
         world.getCamera().resetViewPort();
-
+        MonsterController.resetPathfinder(surface);
     }
 
 
@@ -266,7 +267,7 @@ public class Planet extends BasePlanet implements IDungeon {
 
         checkAndConsumeOxygen();
 
-        if (landingParty.getDistanceWrapped(shuttle, getWidth(), getHeight()) == 0) {
+        if (landingParty.getDistanceFromTargetPointWrapped(shuttle, getWidth(), getHeight()) == 0) {
             if (world.isUpdatedThisFrame()) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.refill_oxygen"));
                 world.getPlayer().getLandingParty().refillOxygen();

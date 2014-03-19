@@ -79,6 +79,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
+        SortedSet<Byte> neighbours = new TreeSet<>(); // sorted becase surface type byte defines surfaces draw order
         for (int i = camera.getTarget().getY() - camera.getPointTileY(camera.getViewportY()) - 1 - camera.getNumTilesY() / 2; i <= camera.getTarget().getY() - camera.getPointTileY(camera.getViewportY()) + camera.getNumTilesY() / 2; ++i) {
             for (int j = camera.getTarget().getX() - camera.getPointTileX(camera.getViewportX()) - 1 - camera.getNumTilesX() / 2; j <= camera.getTarget().getX() - camera.getPointTileX(camera.getViewportX()) + camera.getNumTilesX() / 2; ++j) {
 
@@ -96,7 +97,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
                         , graphics);
 
                 // now draw edges of next sprites
-                Set<Byte> neighbours = new TreeSet<>();
+                neighbours.clear();
                 for (int ii = -1; ii <= 1; ++ii) {
                     for (int jj = -1; jj <= 1; ++jj) {
                         if (ii == jj && ii == 0) {
@@ -132,7 +133,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
 
                 if ((surface[EngineUtils.wrap(i, height)][EngineUtils.wrap(j, width)] & SurfaceTypes.MOUNTAINS_MASK) != 0) {
-                    graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
+                    graphics.drawImage(ResourceManager.getInstance().getImage("stones"), camera.getXCoord(j), camera.getYCoord(i));
                 }
                 if ((surface[EngineUtils.wrap(i, height)][EngineUtils.wrap(j, width)] & SurfaceTypes.MOUNTAINS_MASK) == 0) {
                     boolean left = ((surface[EngineUtils.wrap(i, height)][EngineUtils.wrap(j - 1, width)] & SurfaceTypes.MOUNTAINS_MASK) != 0);
@@ -148,7 +149,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
                     mountainDrawer.drawTile(graphics, camera, i, j, left, right, up, down, downLeft, downRight, upLeft, upRight);
                 }
                 if (allNeighboursAreMountain(EngineUtils.wrap(j, width), EngineUtils.wrap(i + 1, height))) {
-                    graphics.drawImage(ResourceManager.getInstance().getImage("rock"), camera.getXCoord(j), camera.getYCoord(i));
+                    graphics.drawImage(ResourceManager.getInstance().getImage("stones"), camera.getXCoord(j), camera.getYCoord(i));
 
                 } else {
                     // draw 2nd floor
