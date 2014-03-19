@@ -18,7 +18,7 @@ public class LandscapeGenerator {
 
     private static byte getTileForRockPlanet(double value) {
         if (value < -0.5) {
-            return SurfaceTypes.WATER;
+            return SurfaceTypes.WATER | SurfaceTypes.OBSTACLE_MASK;
         }
 
         if (value < -0.1) {
@@ -33,12 +33,12 @@ public class LandscapeGenerator {
             return SurfaceTypes.ROCKS;
         }
 
-        return SurfaceTypes.ROCKS | SurfaceTypes.MOUNTAINS_MASK;
+        return SurfaceTypes.ROCKS | SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
     }
 
     private static byte getTileForIcePlanet(double value) {
         if (value < -0.5) {
-            return SurfaceTypes.WATER;
+            return SurfaceTypes.WATER | SurfaceTypes.OBSTACLE_MASK;
         }
 
         if (value < -0.2) {
@@ -62,7 +62,7 @@ public class LandscapeGenerator {
 
     private static byte getTileForWaterPlanet(double value) {
         if (value < 0.3) {
-            return SurfaceTypes.WATER;
+            return SurfaceTypes.WATER | SurfaceTypes.OBSTACLE_MASK;
         }
         if (value < 0.5) {
             return SurfaceTypes.DIRT;
