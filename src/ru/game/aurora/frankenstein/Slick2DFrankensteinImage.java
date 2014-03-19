@@ -7,16 +7,20 @@
 package ru.game.aurora.frankenstein;
 
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.ImageBuffer;
 import org.newdawn.slick.SlickException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.game.frankenstein.FrankensteinColor;
 import ru.game.frankenstein.FrankensteinImage;
 import ru.game.frankenstein.util.Rectangle;
 import ru.game.frankenstein.util.Size;
 
-import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.util.Map;
 
 public class Slick2DFrankensteinImage implements FrankensteinImage {
@@ -70,12 +74,19 @@ public class Slick2DFrankensteinImage implements FrankensteinImage {
     }
 
     @Override
+    public FrankensteinImage rotate(int angle) {
+        Image newImage = myImage.copy();
+        newImage.rotate((float) Math.toRadians(angle));
+        return new Slick2DFrankensteinImage(newImage);
+    }
+
+    @Override
     public FrankensteinImage getSubImage(Rectangle rectangle) {
         return new Slick2DFrankensteinImage(myImage.getSubImage(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight()));
     }
 
     @Override
-    public FrankensteinImage replaceColors(Map<Color, Integer> colorIntegerMap, Map<Integer, Color> integerColorMap) {
+    public FrankensteinImage replaceColors(Map<? extends FrankensteinColor, Integer> colorIntegerMap, Map<Integer, ? extends FrankensteinColor> integerColorMap) {
         if (colorIntegerMap == null || integerColorMap == null) {
             return this;
         }
@@ -83,13 +94,13 @@ public class Slick2DFrankensteinImage implements FrankensteinImage {
         for (int x = 0; x < myImage.getWidth(); ++x) {
             for (int y = 0; y < myImage.getHeight(); ++y) {
                 org.newdawn.slick.Color c = myImage.getColor(x, y);
-                Color awtColor = new Color(c.r, c.g, c.b);
+                Slick2DColor slickColor = new Slick2DColor(c);
 
-                Integer id = colorIntegerMap.get(awtColor);
+                Integer id = colorIntegerMap.get(slickColor);
                 if (id != null) {
-                    Color newColor = integerColorMap.get(id);
+                    FrankensteinColor newColor = integerColorMap.get(id);
                     if (newColor != null) {
-                        ib.setRGBA(x, y, newColor.getRed(), newColor.getGreen(), newColor.getBlue(), c.getAlpha());
+                        ib.setRGBA(x, y, newColor.getR(), newColor.getG(), newColor.getB(), c.getAlpha());
                         continue;
                     } else {
                         logger.warn("No mapping for base color " + id);
@@ -116,6 +127,76 @@ public class Slick2DFrankensteinImage implements FrankensteinImage {
         }
 
         return new Slick2DFrankensteinImage(myImage.getScaledCopy(targetX, targetY));
+    }
+
+    @Override
+    public FrankensteinImage getShadow() {
+        final int width = myImage.getWidth();
+        final int height = myImage.getHeight();
+
+        BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+
+                final Color c = myImage.getColor(x, y);
+                if (c.getAlpha() != 0) {
+                    bi.setRGB(x, y, 0xa0000000);
+                }
+            }
+        }
+
+
+        AffineTransform transform = new AffineTransform();
+        transform.shear(-0.5, 0);
+        transform.translate(0.25 * myImage.getWidth(), 0);
+        transform.scale(1.0, 0.5);
+        AffineTransformOp shearOp = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+        BufferedImage resultBufferedImage = shearOp.filter(bi, null);
+
+        ImageBuffer buffer = new ImageBuffer(resultBufferedImage.getWidth(), resultBufferedImage.getHeight());
+        final int resultWidth = buffer.getWidth();
+        final int resultHeight = buffer.getHeight();
+        for (int y = 0; y < resultHeight; ++y) {
+            for (int x = 0; x < resultWidth; ++x) {
+                int argb = resultBufferedImage.getRGB(x, y);
+                buffer.setRGBA(x, y, (argb >> 16) & 0xff, (argb >> 8) & 0xff, argb & 0xff, (argb >> 24) & 0xff);
+            }
+        }
+        return new Slick2DFrankensteinImage(new Image(buffer));
+    }
+
+    @Override
+    public FrankensteinImage cropImage() {
+        int leftX = myImage.getWidth();
+        int rightX = 0;
+
+
+        final int height = myImage.getHeight();
+        final int width = myImage.getWidth();
+        int topY = height;
+        int bottomY = 0;
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                if (myImage.getColor(x, y).getAlpha() > 0) {
+                    leftX = Math.min(x, leftX);
+                    rightX = Math.max(x, rightX);
+
+                    topY = Math.min(y, topY);
+                    bottomY = Math.max(y, bottomY);
+                }
+            }
+        }
+
+        if (rightX <= leftX + 1 || bottomY <= topY + 1) {
+            try {
+                return new Slick2DFrankensteinImage(new Image(1, 1));
+            } catch (SlickException e) {
+                logger.error("Error while creating image", e);
+            }
+        }
+
+        return getSubImage(new Rectangle(leftX, topY, rightX - leftX + 1, bottomY - topY + 1));
+
     }
 
     public Image getImpl() {

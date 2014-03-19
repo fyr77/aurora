@@ -7,6 +7,7 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.SizeValue;
+import org.newdawn.slick.Image;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
@@ -55,7 +56,6 @@ public class PlanetScanController implements ScreenController {
         world.setPaused(true);
 
         shuttleDraggableElement.getElement().setVisible(planetToScan instanceof Planet); // only on these planets player can see shuttle and change its position
-
         if (planetToScan instanceof Planet) {
             Planet p = (Planet) planetToScan;
             LandingParty lp = world.getPlayer().getLandingParty();
@@ -72,6 +72,7 @@ public class PlanetScanController implements ScreenController {
 
         if ((planetToScan instanceof Earth) || (planetToScan instanceof AlienHomeworld)) {
             //todo: load custom map
+            EngineUtils.setImageForGUIElement(myWindow.findElementByName("surfaceMapPanel"), (Image)null);
             return;
         }
         if (planetToScan instanceof Planet) {

@@ -7,6 +7,7 @@
 package ru.game.aurora.world.generation.aliens;
 
 import org.newdawn.slick.Color;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
@@ -163,8 +164,9 @@ public class KliskGenerator implements WorldGeneratorPart {
         HomeworldGenerator.setCoord(planets[2], 5);
 
         AlienArtifact a = new AlienArtifact(3, 4, "small_artifact", new ArtifactResearch(new ResearchReport("small_artifact", "klisk_banner.report")));
-        ((Planet) planets[2]).setNearestFreePoint(a, 2, 2);
-        ((Planet) planets[2]).getPlanetObjects().add(a);
+        final Planet planet = (Planet) planets[2];
+        planet.setNearestFreePoint(a, CommonRandom.getRandom().nextInt(planet.getWidth()), CommonRandom.getRandom().nextInt(planet.getHeight()));
+        planet.getPlanetObjects().add(a);
 
         ss.setPlanets(planets);
         ss.setQuestLocation(true);

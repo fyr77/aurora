@@ -1,7 +1,9 @@
 package ru.game.aurora.frankenstein;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import ru.game.frankenstein.FrankensteinColor;
 import ru.game.frankenstein.FrankensteinException;
 import ru.game.frankenstein.FrankensteinImage;
 import ru.game.frankenstein.ImageFactory;
@@ -43,5 +45,10 @@ public class Slick2DImageFactory implements ImageFactory
         } catch (SlickException e) {
             throw new IllegalStateException(e);
         }
+    }
+
+    @Override
+    public FrankensteinColor decodeColor(String value) {
+        return new Slick2DColor(Color.decode(value));
     }
 }

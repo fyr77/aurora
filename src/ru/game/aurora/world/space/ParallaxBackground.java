@@ -113,11 +113,11 @@ public class ParallaxBackground {
         }
     }
 
-    public float getXCoordPoint(Camera camera, int pointX, int planeNumber) {
+    public float getXCoordPoint(Camera camera, float pointX, int planeNumber) {
         return pointX - ((camera.getTarget().getX() - camera.getViewportTilesX() / 2) * camera.getTileWidth() + camera.getTarget().getOffsetX()) / (planeNumber * 2 + 5);
     }
 
-    public float getYCoordPoint(Camera camera, int pointY, int planeNumber) {
+    public float getYCoordPoint(Camera camera, float pointY, int planeNumber) {
         return pointY - ((camera.getTarget().getY() - camera.getViewportTilesY() / 2) * camera.getTileHeight() + camera.getTarget().getOffsetY()) / (planeNumber * 2 + 5);
     }
 
@@ -129,9 +129,11 @@ public class ParallaxBackground {
         for (int i = 0; i < PLANES_COUNT; ++i) {
             for (int j = 0; j < starsPerPlane; ++j) {
                 Star s = stars[i][j];
-                int realX = (int) getXCoordPoint(camera, (int) s.x, i);
-                int realY = (int) getYCoordPoint(camera, (int) s.y, i);
-                graphics.drawImage(s.sprite,realX,realY);
+                float realX = getXCoordPoint(camera, s.x, i);
+                float realY = getYCoordPoint(camera, s.y, i);
+                if (camera.isInViewportScreen(realX, realY)) {
+                    graphics.drawImage(s.sprite,realX,realY);
+                }
             }
         }
     }

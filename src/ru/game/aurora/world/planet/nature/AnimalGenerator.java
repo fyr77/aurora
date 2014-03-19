@@ -1,11 +1,13 @@
 package ru.game.aurora.world.planet.nature;
 
+import org.newdawn.slick.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.frankenstein.Slick2DColor;
 import ru.game.aurora.frankenstein.Slick2DFrankensteinImage;
 import ru.game.aurora.frankenstein.Slick2DImageFactory;
 import ru.game.aurora.util.ProbabilitySet;
@@ -14,14 +16,10 @@ import ru.game.aurora.world.planet.Planet;
 import ru.game.frankenstein.*;
 import ru.game.frankenstein.impl.MonsterPartsLoader;
 import ru.game.frankenstein.util.CollectionUtils;
-import ru.game.frankenstein.util.ColorUtils;
 import ru.game.frankenstein.util.Size;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Generates random alien animals
@@ -66,8 +64,10 @@ public class AnimalGenerator {
         plantGenerator = new MonsterGenerator(imageFactory, plantsPartSet);
 
         monsterGenerationParams = new MonsterGenerationParams(true, false);
+        monsterGenerationParams.shadowType = MonsterGenerationParams.ShadowType.SHADOW_SKEW;
         plantGenerationParams = new MonsterGenerationParams(false, false);
         plantGenerationParams.tags = new HashSet<>();
+        plantGenerationParams.shadowType = MonsterGenerationParams.ShadowType.SHADOW_SKEW;
 
         baseHp = Configuration.getIntProperty("monster.baseHp");
         baseDmg = Configuration.getIntProperty("monster.baseDmg");
@@ -119,7 +119,7 @@ public class AnimalGenerator {
                 , random.nextBoolean()
                 , hp
                 , weapon
-                , 1 + random.nextInt(5),
+                , 1 + random.nextInt(2),
                 ru.game.aurora.util.CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values())
                 , modifiers
         );
@@ -131,12 +131,23 @@ public class AnimalGenerator {
         return result;
     }
 
+    private Map<Integer, Slick2DColor> createDefault4TintMap(Color color)
+    {
+        Map<Integer, Slick2DColor> result = new HashMap<>();
+        result.put(1, new Slick2DColor(color.darker()));
+        result.put(2, new Slick2DColor(color));
+        final Color brighter = color.brighter();
+        result.put(3, new Slick2DColor(brighter));
+        result.put(4, new Slick2DColor(brighter.brighter()));
+
+        return result;
+    }
 
     public void getImageForAnimal(AnimalSpeciesDesc desc) {
         try {
             monsterGenerationParams.tags.clear(); //todo: thread-safe?
             monsterGenerationParams.tags.add(desc.getHomePlanet().getFloraAndFauna().getAnimalsStyleTag());
-            monsterGenerationParams.colorMap = ColorUtils.createDefault4TintMap(CollectionUtils.selectRandomElement(supportedColors));
+            monsterGenerationParams.colorMap = createDefault4TintMap(CollectionUtils.selectRandomElement(supportedColors));
             if (desc.getModifiers().contains(AnimalModifier.LARGE)) {
                 monsterGenerationParams.targetSize = new Size(AuroraGame.tileSize * 2, AuroraGame.tileSize * 2);
             } else if (desc.getModifiers().contains(AnimalModifier.SMALL)) {

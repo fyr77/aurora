@@ -6,7 +6,8 @@
 
 package ru.game.aurora.world.planet.nature;
 
-import java.awt.*;
+import ru.game.aurora.frankenstein.Slick2DColor;
+
 import java.io.Serializable;
 import java.util.Map;
 
@@ -27,7 +28,8 @@ public class PlanetFloraAndFauna implements Serializable
     /**
      * Colors that will be used in plants sprites
      */
-    private Map<Integer, Color> colorMap;
+    @SuppressWarnings("NonSerializableFieldInSerializableClass")
+    private Map<Integer, Slick2DColor> colorMap;
     /**
      * Available animal species descriptions, if any.
      */
@@ -61,11 +63,11 @@ public class PlanetFloraAndFauna implements Serializable
         this.animalSpecies = animalSpecies;
     }
 
-    public Map<Integer, Color> getColorMap() {
+    public Map<Integer, Slick2DColor> getColorMap() {
         return colorMap;
     }
 
-    public void setColorMap(Map<Integer, Color> colorMap) {
+    public void setColorMap(Map<Integer, Slick2DColor> colorMap) {
         this.colorMap = colorMap;
     }
 }

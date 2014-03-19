@@ -8,6 +8,7 @@ package ru.game.aurora.world.space;
 
 
 import de.lessvoid.nifty.controls.Button;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -34,6 +35,8 @@ public class GalaxyMapScreen implements Room {
 
     private GalaxyMap galaxyMap;
 
+    private StarSystem solarSystem;
+
     @Override
     public void enter(World world) {
         galaxyMap = world.getGalaxyMap();
@@ -43,6 +46,7 @@ public class GalaxyMapScreen implements Room {
         myCamera = new Camera(0, 0, galaxyMap.getTilesX(), galaxyMap.getTilesY(), newTileWidth, newTileHeight);
         myCamera.setTarget(new Movable(galaxyMap.getTilesX() / 2, galaxyMap.getTilesY() / 2));
         ship = world.getPlayer().getShip();
+        solarSystem = (StarSystem) world.getGlobalVariables().get("solar_system");
     }
 
     @Override
@@ -65,6 +69,10 @@ public class GalaxyMapScreen implements Room {
                 GalaxyMapObject obj = galaxyMap.getObjectAt(j, i);
                 if (obj != null) {
                     obj.drawOnGlobalMap(container, g, myCamera, j, i);
+                }
+                if (solarSystem == obj) {
+                    g.setColor(Color.yellow);
+                    g.drawString("Solar system", myCamera.getXCoord(j), myCamera.getYCoord(i));
                 }
             }
         }

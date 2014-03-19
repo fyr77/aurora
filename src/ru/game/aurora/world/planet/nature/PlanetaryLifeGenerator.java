@@ -6,13 +6,13 @@
  */
 package ru.game.aurora.world.planet.nature;
 
+import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.frankenstein.Slick2DColor;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.planet.Planet;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 /**
  * Creates and adds plants and animals to a planet
@@ -27,22 +27,22 @@ public class PlanetaryLifeGenerator {
 
     private static final String[] animalStyles = {"style1", "style2"};
 
-    private static Map<Integer, Color> createColorsForPlants() {
-        Map<Integer, Color> result = new HashMap<>();
+    private static Map<Integer, Slick2DColor> createColorsForPlants() {
+        Map<Integer, Slick2DColor> result = new HashMap<>();
         Random r = CommonRandom.getRandom();
         Color trunkColor = new Color(r.nextFloat(), r.nextFloat(), r.nextFloat());
-        result.put(1, trunkColor.darker());
-        result.put(2, trunkColor);
-        result.put(3, trunkColor.brighter());
+        result.put(1, new Slick2DColor(trunkColor.darker()));
+        result.put(2, new Slick2DColor(trunkColor));
+        result.put(3, new Slick2DColor(trunkColor.brighter()));
 
         Color leafColor = new Color(r.nextFloat(), r.nextFloat(), r.nextFloat());
-        result.put(4, leafColor.darker());
-        result.put(5, leafColor);
-        result.put(6, leafColor.brighter());
+        result.put(4, new Slick2DColor(leafColor.darker()));
+        result.put(5, new Slick2DColor(leafColor));
+        result.put(6, new Slick2DColor(leafColor.brighter()));
 
         Color decorColor = new Color(r.nextFloat(), r.nextFloat(), r.nextFloat());
-        result.put(7, decorColor.darker());
-        result.put(8, decorColor);
+        result.put(7, new Slick2DColor(decorColor.darker()));
+        result.put(8, new Slick2DColor(decorColor));
 
         return result;
     }

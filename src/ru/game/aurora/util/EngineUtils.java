@@ -29,7 +29,7 @@ public class EngineUtils {
     }
 
     public static void setImageForGUIElement(Element element, Image image) {
-        element.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(image)));
+        element.getRenderer(ImageRenderer.class).setImage(image != null ? new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(image)): null);
     }
 
     public static void setTextForGUIElement(Element element, String text) {
