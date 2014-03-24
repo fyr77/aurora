@@ -15,7 +15,7 @@ public class InventoryViewConverter implements ListBox.ListBoxViewConverter {
     public void display(Element element, Object o) {
         Multiset.Entry<InventoryItem> item = (Multiset.Entry<InventoryItem>) o;
 
-        EngineUtils.setTextForGUIElement(element.findElementByName("#line-text"), item.getCount() + " " + item.getElement().getName());
+        EngineUtils.setTextForGUIElement(element.findElementByName("#line-text"), " " + item.getCount() + " " + item.getElement().getName());
         EngineUtils.setImageForGUIElement(element.findElementByName("#line-icon"), item.getElement().getImage());
         if (!item.getElement().isUsable()) {
             element.findElementByName("#useButton").hide();

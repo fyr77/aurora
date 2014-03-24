@@ -15,7 +15,7 @@ public class SimpleInventoryViewConverter implements ListBox.ListBoxViewConverte
     @Override
     public void display(Element element, Object o) {
         Multiset.Entry<InventoryItem> item = (Multiset.Entry<InventoryItem>) o;
-        EngineUtils.setTextForGUIElement(element.findElementByName("#invtem"), item.getCount() + " " + item.getElement().getName());
+        EngineUtils.setTextForGUIElement(element.findElementByName("#invtem"), " " + item.getCount() + " " + item.getElement().getName());
     }
 
     @Override

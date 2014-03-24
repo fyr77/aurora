@@ -3,19 +3,19 @@
 
     <controlDefinition name="storage_line">
         <panel childLayout="horizontal" width="100%" align="right">
-            <control id="#item" name="label" align="left" textHAlign="left" width="*"/>
-            <control id="#storage_to_inventory" name="button" width="32px" label="}">
+            <control id="#storage_to_inventory" name="button" width="32px" label="&lt;">
                 <interact onClick="onStorageToInventoryClicked()"/>
             </control>
+            <control id="#item" name="label" align="left" textHAlign="left" width="*"/>
         </panel>
     </controlDefinition>
 
     <controlDefinition name="inventory_line">
         <panel childLayout="horizontal" width="100%" align="right">
-            <control id="#inventory_to_storage" name="button" width="32px" label="{">
+            <control id="#invtem" name="label" align="left" textHAlign="left" width="*"/>
+            <control id="#inventory_to_storage" name="button" width="32px" label="&gt;">
                 <interact onClick="onInventoryToStorageClicked()"/>
             </control>
-            <control id="#invtem" name="label" align="left" textHAlign="left" width="*"/>
         </panel>
     </controlDefinition>
 
@@ -69,6 +69,7 @@
                                          controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
                             </control>
                         </panel>
+                        <panel width="10px"/>
 
                         <panel childLayout="vertical" width="45%">
                             <text id="storageText" style="base-font" align="center" text="${gui.storage}"
@@ -83,6 +84,11 @@
 
                     </panel>
 
+                    <panel height="*"/>
+
+                    <text id="status_text" style="base-font" textHAlign="left" width="80%" wrap="true"/>
+
+                    <panel height="10px"/>
 
                     <panel childLayout="horizontal" height="50px">
                         <panel width="*"/>

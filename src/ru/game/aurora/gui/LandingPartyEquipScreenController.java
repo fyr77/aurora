@@ -15,6 +15,7 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import de.lessvoid.nifty.tools.Color;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
@@ -27,6 +28,9 @@ import ru.game.aurora.world.planet.LandingParty;
 
 
 public class LandingPartyEquipScreenController implements ScreenController {
+
+    private Color redColor = new Color(200, 0, 0, 255);
+
     private World world;
 
     private LandingParty landingParty;
@@ -36,6 +40,8 @@ public class LandingPartyEquipScreenController implements ScreenController {
     private Element myWindow;
 
     private Element weightText;
+
+    private Element statusText;
 
     private ListBox<Multiset.Entry<InventoryItem>> storageList;
 
@@ -55,6 +61,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
         myScreen = screen;
         myWindow = myScreen.findElementByName("equip_window");
         weightText = myScreen.findElementByName("weight_text");
+        statusText= myScreen.findElementByName("status_text");
         storageList = screen.findNiftyControl("storageList", ListBox.class);
         inventoryList = screen.findNiftyControl("inventoryList", ListBox.class);
     }
@@ -153,8 +160,12 @@ public class LandingPartyEquipScreenController implements ScreenController {
         if (!landingParty.canBeLaunched(world)) {
             // disable close buttons, because current party configuration is invalid
             myScreen.findElementByName("close_button").disable();
+            statusText.getRenderer(TextRenderer.class).setColor(redColor);
+            EngineUtils.setTextForGUIElement(statusText, Localization.getText("gui", "landing_party.can_not_launch"));
         } else {
             myScreen.findElementByName("close_button").enable();
+            statusText.getRenderer(TextRenderer.class).setColor(Color.WHITE);
+            EngineUtils.setTextForGUIElement(statusText, Localization.getText("gui", "landing_party.can_launch"));
         }
         updateLabels();
     }

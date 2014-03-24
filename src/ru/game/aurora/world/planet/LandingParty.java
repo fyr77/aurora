@@ -168,11 +168,12 @@ public class LandingParty extends MovableSprite implements GameObject {
      * Returns false if since last party configuration smth has changed and new 'Landing party screen' must be shown
      */
     public boolean canBeLaunched(World world) {
-        if (getMaxWeight() < getInventoryWeight()) {
-            return false;
-        }
         Ship ship = world.getPlayer().getShip();
-        return military <= ship.getMilitary() && science <= ship.getScientists() && engineers <= ship.getEngineers() && getTotalMembers() > 0 && getInventoryWeight() <= getMaxWeight();
+        return military <= ship.getMilitary()
+                && science <= world.getPlayer().getResearchState().getIdleScientists()
+                && engineers <= world.getPlayer().getEngineeringState().getIdleEngineers()
+                && getTotalMembers() > 0
+                && getInventoryWeight() <= getMaxWeight();
     }
 
     public void onLaunch(World world) {
