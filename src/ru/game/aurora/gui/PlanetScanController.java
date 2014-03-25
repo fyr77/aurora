@@ -130,6 +130,11 @@ public class PlanetScanController implements ScreenController {
         closeScreen();
     }
 
+    public void onClick()
+    {
+        shuttleDraggableElement.setFocus();
+    }
+
     public void closeScreen() {
         GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
     }
