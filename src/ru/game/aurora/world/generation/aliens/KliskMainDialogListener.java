@@ -12,6 +12,8 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
+import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.quest.EarthInvasionGenerator;
 import ru.game.aurora.world.quest.JournalEntry;
 
@@ -53,19 +55,19 @@ public class KliskMainDialogListener implements DialogListener {
                 world.getGlobalVariables().put("klisk.discount", 10);
             }
             if (flags.containsKey("klisk.bork_info")) {
-                research = new AlienRaceResearch("bork", world.getRaces().get("Bork"), new JournalEntry("bork", "main"));
+                research = new AlienRaceResearch("bork", world.getRaces().get(BorkGenerator.NAME), new JournalEntry("bork", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
             if (flags.containsKey("klisk.klisk_info")) {
-                research = new AlienRaceResearch("klisk", world.getRaces().get("Klisk"), new JournalEntry("klisk", "main"));
+                research = new AlienRaceResearch("klisk", world.getRaces().get(KliskGenerator.NAME), new JournalEntry("klisk", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
             if (flags.containsKey("klisk.rogues_info")) {
-                research = new AlienRaceResearch("rogues", world.getRaces().get("Rogues"), new JournalEntry("rogues", "main"));
+                research = new AlienRaceResearch("rogues", world.getRaces().get(RoguesGenerator.NAME), new JournalEntry("rogues", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
             if (flags.containsKey("klisk.zorsan_info")) {
-                research = new AlienRaceResearch("zorsan", world.getRaces().get("Zorsan"), new JournalEntry("zorsan", "main"));
+                research = new AlienRaceResearch("zorsan", world.getRaces().get(ZorsanGenerator.NAME), new JournalEntry("zorsan", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
 
