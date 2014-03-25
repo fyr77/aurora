@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.frankenstein.FrankensteinColor;
 import ru.game.frankenstein.FrankensteinImage;
+import ru.game.frankenstein.util.GeometryUtils;
 import ru.game.frankenstein.util.Rectangle;
 import ru.game.frankenstein.util.Size;
 
@@ -44,7 +45,13 @@ public class Slick2DFrankensteinImage implements FrankensteinImage {
 
     @Override
     public FrankensteinImage flip(boolean b, boolean b1) {
-        return new Slick2DFrankensteinImage(myImage.getFlippedCopy(b, b1));
+        try {
+            Image copy = new Image(myImage.getWidth(), myImage.getHeight());
+            copy.getGraphics().drawImage(myImage.getFlippedCopy(b, b1), 0, 0);
+            return new Slick2DFrankensteinImage(copy);
+        } catch (SlickException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -75,14 +82,33 @@ public class Slick2DFrankensteinImage implements FrankensteinImage {
 
     @Override
     public FrankensteinImage rotate(int angle) {
-        Image newImage = myImage.copy();
-        newImage.rotate((float) Math.toRadians(angle));
+        Rectangle rect = GeometryUtils.getRotatedRectangleAABB(myImage.getWidth() / 2, myImage.getHeight() / 2, 0, 0, myImage.getWidth(), myImage.getHeight(), (float) Math.toRadians(angle));
+        Image newImage;
+        try {
+            float oldRot = myImage.getRotation();
+            myImage.setCenterOfRotation(myImage.getWidth() / 2, myImage.getHeight() / 2);
+            myImage.rotate(angle);
+            newImage = new Image(rect.getWidth(), rect.getHeight());
+            newImage.getGraphics().drawImage(myImage, (myImage.getHeight() - myImage.getWidth())/ 2, -(myImage.getHeight() - myImage.getWidth()) / 2);
+            myImage.setRotation(oldRot);
+
+        } catch (SlickException e) {
+            throw new RuntimeException(e);
+        }
+
         return new Slick2DFrankensteinImage(newImage);
     }
 
     @Override
     public FrankensteinImage getSubImage(Rectangle rectangle) {
-        return new Slick2DFrankensteinImage(myImage.getSubImage(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight()));
+        try {
+            Image newImage = new Image(rectangle.getWidth(), rectangle.getHeight());
+            newImage.getGraphics().drawImage(myImage.getSubImage(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight()), 0, 0);
+            return new Slick2DFrankensteinImage(newImage);
+        } catch (SlickException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override
@@ -125,8 +151,13 @@ public class Slick2DFrankensteinImage implements FrankensteinImage {
             targetX = targetSize.width;
             targetY = targetSize.height;
         }
-
-        return new Slick2DFrankensteinImage(myImage.getScaledCopy(targetX, targetY));
+        try {
+            Image image = new Image(targetX, targetY);
+            image.getGraphics().drawImage(myImage.getScaledCopy(targetX, targetY), 0, 0);
+            return new Slick2DFrankensteinImage(image);
+        } catch (SlickException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -137,7 +168,6 @@ public class Slick2DFrankensteinImage implements FrankensteinImage {
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
         for (int y = 0; y < height; ++y) {
             for (int x = 0; x < width; ++x) {
-
                 final Color c = myImage.getColor(x, y);
                 if (c.getAlpha() != 0) {
                     bi.setRGB(x, y, 0xa0000000);
@@ -162,17 +192,17 @@ public class Slick2DFrankensteinImage implements FrankensteinImage {
                 buffer.setRGBA(x, y, (argb >> 16) & 0xff, (argb >> 8) & 0xff, argb & 0xff, (argb >> 24) & 0xff);
             }
         }
-        return new Slick2DFrankensteinImage(new Image(buffer));
+        final Image shadowImage = new Image(buffer);
+        return new Slick2DFrankensteinImage(shadowImage);
     }
 
     @Override
     public FrankensteinImage cropImage() {
-        int leftX = myImage.getWidth();
+        int leftX = getWidth();
         int rightX = 0;
 
-
-        final int height = myImage.getHeight();
-        final int width = myImage.getWidth();
+        final int height = getHeight();
+        final int width = getWidth();
         int topY = height;
         int bottomY = 0;
         for (int y = 0; y < height; ++y) {
