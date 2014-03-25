@@ -55,7 +55,7 @@ public class Condition implements Serializable {
                 if (val == null) {
                     return false;
                 }
-                int worldValue = Integer.parseInt((String) val);
+                int worldValue = Integer.parseInt(val.toString());
                 int myValue = Integer.parseInt(value);
                 return worldValue > myValue;
             }
@@ -63,7 +63,7 @@ public class Condition implements Serializable {
                 if (val == null) {
                     return false;
                 }
-                int worldValue = Integer.parseInt((String) val);
+                int worldValue = Integer.parseInt(val.toString());
                 int myValue = Integer.parseInt(value);
                 return worldValue < myValue;
             }
