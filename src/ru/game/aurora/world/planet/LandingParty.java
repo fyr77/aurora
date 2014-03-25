@@ -10,6 +10,8 @@ import com.google.common.collect.Multiset;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.SurfaceGUIController;
 import ru.game.aurora.player.EarthCountry;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.player.research.projects.Cartography;
@@ -248,6 +250,8 @@ public class LandingParty extends MovableSprite implements GameObject {
         if (world.getPlayer().getMainCountry() == EarthCountry.AMERICA) {
             hp += Configuration.getIntProperty("player.america.hpBonus");
         }
+
+        ((SurfaceGUIController)GUI.getInstance().getNifty().findScreenController(SurfaceGUIController.class.getCanonicalName())).updateStats();
     }
 
     public void subtractHp(World world, int amount) {
@@ -277,6 +281,7 @@ public class LandingParty extends MovableSprite implements GameObject {
             }
             amount -= amountToSubtract;
         }
+        ((SurfaceGUIController)GUI.getInstance().getNifty().findScreenController(SurfaceGUIController.class.getCanonicalName())).updateStats();
     }
 
     public int getHp() {
