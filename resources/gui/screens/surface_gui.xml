@@ -6,13 +6,15 @@
 
             <panel height="30px"/>
             <!-- panel with current troop hp -->
-           <panel childLayout="horizontal" height="120px">
-               <panel width="85%"/>
-               <panel childLayout="horizontal" backgroundImage="resources/sprites/gui/side_panel.png"  padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
-                   <control name="icon_and_count" id="health_count" icon="resources/sprites/gui/health.png" width="128px" height="74px"/>
-                   <panel width="*"/>
-               </panel>
-           </panel>
+            <panel childLayout="horizontal" height="120px">
+                <panel width="85%"/>
+                <panel childLayout="horizontal" backgroundImage="resources/sprites/gui/side_panel.png"
+                       padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                    <control name="icon_and_count" id="health_count" icon="resources/sprites/gui/health.png"
+                             width="128px" height="74px"/>
+                    <panel width="*"/>
+                </panel>
+            </panel>
 
             <!-- midlle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
@@ -24,6 +26,10 @@
                         <control id="inventory_button" name="button" label="${gui.inventory}" width="90%"
                                  height="50px">
                             <interact onClick="openInventory()"/>
+                        </control>
+                        <control id="map_button" name="button" label="${gui.map}" width="90%"
+                                 height="50px">
+                            <interact onClick="openMap()"/>
                         </control>
                         <control id="menu_button" name="button" label="${gui.space.menu}" width="90%" height="50px">
                             <interact onClick="openMenu()"/>

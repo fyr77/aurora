@@ -17,8 +17,8 @@ import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.StarshipWeapon;
-import ru.game.aurora.world.planet.*;
-import ru.game.aurora.world.planet.nature.Animal;
+import ru.game.aurora.world.planet.BasePlanet;
+import ru.game.aurora.world.planet.PlanetCategory;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -114,16 +114,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     private int astronomyData;
 
     private String name;
-
-    /**
-     * If not null, planet surface map should be rendered to an image and assigned to this element
-     */
-    private transient Element surfaceRenderTarget = null;
-
-    /**
-     * If set to true, additianl overlay with object info will be added to rendered planet surface on a scan screen
-     */
-    private transient boolean showOverlay = false;
 
     public StarSystem(String name, Star star, int globalMapX, int globalMapY) {
         this.name = name;
@@ -538,75 +528,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 , planets.length);
     }
 
-    private static final Color ANIMAL_COLOR = new Color(0, 255, 0, 200);
-    private static final Color RESOURCE_COLOR = new Color(255, 255, 0, 200);
-    private static final Color ANOMALY_COLOR = new Color(255, 0, 0, 200);
-    private static final Color BACKGROUND_COLOR = new Color(0, 0, 0, 200);
-
-    private void renderCurrentPlanetSurface(GameContainer container, Graphics g) {
-        g.clear();
-        g.setColor(Color.black);
-        BasePlanet p = getPlanetAtPlayerShipPosition();
-        if (p == null || !(p instanceof Planet)) {
-            return;
-        }
-        Planet planet = (Planet) p;
-        final float newTileWidth = container.getWidth() / (float) planet.getWidth();
-        final float newTileHeight = container.getHeight() / (float) planet.getHeight();
-        Camera myCamera = new Camera(0, 0, planet.getWidth(), planet.getHeight(), newTileWidth, newTileHeight);
-
-        myCamera.setTarget(new Movable(planet.getWidth() / 2, planet.getHeight() / 2));
-        planet.getSurface().drawLandscapeMap(g, myCamera);
-        g.flush();
-        try {
-            if (showOverlay) {
-                // create overlay with info about life and anomalies
-                Image overlay = new Image(container.getWidth(), container.getHeight());
-                Graphics overlayGraphics = overlay.getGraphics();
-                overlayGraphics.setColor(BACKGROUND_COLOR);
-                overlayGraphics.fillRect(0, 0, container.getWidth(), container.getHeight());
-                int maxRadius = container.getHeight() / 10;
-                Random r = new Random(planet.hashCode()); // fixed-seed, so that runs on same planet produce same results
-                for (PlanetObject po : planet.getPlanetObjects()) {
-                    float objectX = myCamera.getXCoord(po.getX());
-                    float objectY = myCamera.getYCoord(po.getY());
-                    if (Animal.class.isAssignableFrom(po.getClass())) {
-                        overlayGraphics.setColor(ANIMAL_COLOR);
-                    } else if (OreDeposit.class.isAssignableFrom(po.getClass())) {
-                        overlayGraphics.setColor(RESOURCE_COLOR);
-                    } else if (AlienArtifact.class.isAssignableFrom(po.getClass()) || DungeonEntrance.class.isAssignableFrom(po.getClass())) {
-                        overlayGraphics.setColor(ANOMALY_COLOR);
-                    } else {
-                        continue;
-                    }
-
-                    float xRadius = r.nextInt(maxRadius) + maxRadius / 2;
-                    float yRadius = r.nextInt(maxRadius) + maxRadius / 2;
-
-                    float ovalX = objectX - xRadius + r.nextInt((int) (xRadius / 2));
-                    float ovalY = objectY - yRadius + r.nextInt((int) (yRadius / 2));
-                    overlayGraphics.fillOval(ovalX, ovalY, xRadius, yRadius);
-                }
-                overlayGraphics.flush();
-                g.drawImage(overlay, 0, 0);
-            }
-            Image image = new Image(container.getWidth(), container.getHeight());
-            g.copyArea(image, 0, 0);
-            EngineUtils.setImageForGUIElement(surfaceRenderTarget, image);
-        } catch (SlickException e) {
-            e.printStackTrace();
-        }
-        g.clear();
-    }
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        if (surfaceRenderTarget != null) {
-            renderCurrentPlanetSurface(container, g);
-            surfaceRenderTarget = null;
-            return;
-        }
-
         if (background != null) {
             background.draw(g, camera);
             if (backgroundSprite != null) {
@@ -794,11 +718,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return background;
     }
 
-    public void setSurfaceRenderTarget(Element surfaceRenderTarget, boolean addOverlay) {
-        this.surfaceRenderTarget = surfaceRenderTarget;
-        this.showOverlay = addOverlay;
-    }
-
     public Reputation getReputation() {
         return reputation;
     }
@@ -807,8 +726,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         this.canBeLeft = canBeLeft;
     }
 
-    public String getCoordsString()
-    {
+    public String getCoordsString() {
         return String.format("[%d, %d]", globalMapX, globalMapY);
     }
 }

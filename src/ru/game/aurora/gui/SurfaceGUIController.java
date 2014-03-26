@@ -35,6 +35,8 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
 
     private transient Element hpElement;
 
+    private transient Element mapButton;
+
     public SurfaceGUIController(World world) {
         this.world = world;
     }
@@ -46,6 +48,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         logList = screen.findNiftyControl("log_list", ListBox.class);
         topPanelController = screen.findControl("top_panel", TopPanelController.class);
         hpElement = screen.findElementByName("health_count").findElementByName("#count");
+        mapButton = screen.findElementByName("map_button");
     }
 
     @Override
@@ -55,6 +58,12 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         logList.addAllItems(GameLogger.getInstance().getLogItems());
         logList.setFocusItemByIndex(logList.getItems().size() - 1);
         updateStats();
+
+        if (world.getCurrentRoom() instanceof Planet) {
+            mapButton.show();
+        } else {
+            mapButton.hide();
+        }
     }
 
     @Override
@@ -96,6 +105,11 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         dungeon.getController().interactWithObject(world);
         world.setUpdatedNextFrame(true);
         updateStats();
+    }
+
+    public void openMap() {
+        GUI.getInstance().pushCurrentScreen();
+        GUI.getInstance().getNifty().gotoScreen("surface_map_screen");
     }
 
     public void nextTargetPressed() {

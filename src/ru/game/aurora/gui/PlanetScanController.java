@@ -8,6 +8,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.SizeValue;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
@@ -15,6 +16,7 @@ import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.AlienHomeworld;
+import ru.game.aurora.world.space.PlanetMapRenderer;
 import ru.game.aurora.world.space.earth.Earth;
 
 /**
@@ -36,6 +38,10 @@ public class PlanetScanController implements ScreenController {
 
     private Draggable shuttleDraggableElement;
 
+    private Element surfaceMapPanel;
+
+    private CheckBox overlayCheckbox;
+
     public PlanetScanController(World world) {
         this.world = world;
     }
@@ -46,6 +52,10 @@ public class PlanetScanController implements ScreenController {
 
         shuttleDraggableElement = screen.findNiftyControl("shuttlePosition", Draggable.class);
         landscapePanel = myWindow.findElementByName("surfaceMapPanel");
+
+        surfaceMapPanel = myWindow.findElementByName("surfaceMapPanel");
+
+        overlayCheckbox = myWindow.findNiftyControl("bioscan_checkbox", CheckBox.class);
     }
 
     @Override
@@ -72,11 +82,18 @@ public class PlanetScanController implements ScreenController {
 
         if ((planetToScan instanceof Earth) || (planetToScan instanceof AlienHomeworld)) {
             //todo: load custom map
-            EngineUtils.setImageForGUIElement(myWindow.findElementByName("surfaceMapPanel"), (Image)null);
+            EngineUtils.setImageForGUIElement(surfaceMapPanel, (Image) null);
             return;
         }
         if (planetToScan instanceof Planet) {
-            world.getCurrentStarSystem().setSurfaceRenderTarget(myWindow.findElementByName("surfaceMapPanel"), myWindow.findNiftyControl("bioscan_checkbox", CheckBox.class).isChecked());
+            Image planetMap = PlanetMapRenderer.createMap(world
+                    , (Planet) planetToScan
+                    , new Rectangle(0, 0, surfaceMapPanel.getWidth(), surfaceMapPanel.getHeight())
+                    , overlayCheckbox.isChecked()
+                    , false
+            );
+            EngineUtils.setImageForGUIElement(surfaceMapPanel, planetMap);
+
         }
     }
 
@@ -87,11 +104,13 @@ public class PlanetScanController implements ScreenController {
 
     @NiftyEventSubscriber(id = "bioscan_checkbox")
     public void scanFilterDisabled(final String id, final CheckBoxStateChangedEvent event) {
-        Element popup = GUI.getInstance().getNifty().getTopMostPopup();
-        if (popup == null) {
-            return;
-        }
-        world.getCurrentStarSystem().setSurfaceRenderTarget(popup.findElementByName("surfaceMapPanel"), popup.findNiftyControl("bioscan_checkbox", CheckBox.class).isChecked());
+        Image planetMap = PlanetMapRenderer.createMap(world
+                , (Planet) planetToScan
+                , new Rectangle(0, 0, surfaceMapPanel.getWidth(), surfaceMapPanel.getHeight())
+                , overlayCheckbox.isChecked()
+                , false
+        );
+        EngineUtils.setImageForGUIElement(surfaceMapPanel, planetMap);
     }
 
     @NiftyEventSubscriber(id = "shuttlePosition")
@@ -130,8 +149,7 @@ public class PlanetScanController implements ScreenController {
         closeScreen();
     }
 
-    public void onClick()
-    {
+    public void onClick() {
         shuttleDraggableElement.setFocus();
     }
 
