@@ -72,11 +72,11 @@ public class PlanetMapRenderer {
             }
             if (showLandingParty) {
                 Image shuttle = ResourceManager.getInstance().getImage("shuttle");
-                g.drawImage(shuttle, myCamera.getXCoord(planet.getShuttle().getX()), myCamera.getYCoord(planet.getShuttle().getY()) - shuttle.getHeight());
+                g.drawImage(shuttle, myCamera.getXCoord(planet.getShuttle().getX()), myCamera.getYCoordWrapped((int) (planet.getShuttle().getY() - shuttle.getHeight() / newTileHeight), planet.getHeight()));
                 Image landing_party = ResourceManager.getInstance().getImage("awayteam");
                 g.drawImage(landing_party
                         , myCamera.getXCoord(world.getPlayer().getLandingParty().getX())
-                        , myCamera.getYCoord(world.getPlayer().getLandingParty().getY()) - landing_party.getHeight()); // -1 so that legs of sprite showed point on map. not its head
+                        , myCamera.getYCoordWrapped((int) (world.getPlayer().getLandingParty().getY() - landing_party.getHeight() / newTileHeight), planet.getHeight())); // -1 so that legs of sprite showed point on map. not its head
             }
             g.flush();
             return result;
