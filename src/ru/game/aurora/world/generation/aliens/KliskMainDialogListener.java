@@ -73,6 +73,7 @@ public class KliskMainDialogListener implements DialogListener {
 
 
             if (flags.containsKey("planet_info")) {
+                world.getPlayer().getJournal().addQuestEntries("colony_search", "klisk_help");
                 if (flags.containsKey("base_info")) {
                     world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("klisk_minimal");
                 } else {
