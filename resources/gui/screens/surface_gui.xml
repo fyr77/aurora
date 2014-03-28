@@ -8,7 +8,10 @@
             <!-- panel with current troop hp -->
            <panel childLayout="horizontal" height="120px">
                <panel width="85%"/>
-               <panel childLayout="horizontal" backgroundImage="resources/sprites/gui/side_panel.png"  padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                   <panel childLayout="vertical" width="*" height="100px"
+                          padding="10px,10px,10px,10px"
+                          backgroundImage="gui/style/panel/aurora-panel-hint.png"
+                          imageMode="resize:8,212,16,8,8,212,16,212,8,212,16,16">
                    <control name="icon_and_count" id="health_count" icon="resources/sprites/gui/health.png" width="128px" height="74px"/>
                    <panel width="*"/>
                </panel>
@@ -19,8 +22,8 @@
                 <panel width="85%"/>
                 <panel childLayout="vertical">
                     <panel height="30%"/>
-                    <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
-                           padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                    <panel childLayout="vertical" backgroundImage="gui/style/panel/aurora-panel-hint.png"
+                           padding="20,5,20,20" imageMode="resize:8,212,16,8,8,212,16,212,8,212,16,16">
                         <control id="inventory_button" name="button" label="${gui.inventory}" width="90%"
                                  height="50px">
                             <interact onClick="openInventory()"/>
@@ -38,7 +41,7 @@
                 <control id="shoot_panel" name="shoot_panel" height="100px"/>
             </panel>
 
-            <panel id="interactPanel" height="100px" childLayout="horizontal" visible="false">
+            <panel id="interactPanel" height="101px" childLayout="horizontal" visible="false">
                 <panel width="40%"/>
                 <panel style="nifty-panel" x="40%" width="200px" childLayout="center" height="100%">
                     <control id="left_button" name="button" label="${gui.surface.interact}" width="90%"
@@ -50,17 +53,18 @@
             </panel>
             <!-- bottom panel containing weapon buttons and log text -->
             <panel height="113px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
-                   imageMode="repeat:0,0,1279,113" padding="20px">
+                   imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69" padding="16px,20px,5px,15px">
                 <control id="weapon_button" name="button" label="${gui.surface.fire}" width="64px" height="64px">
                     <interact onClick="weaponClicked()"/>
                 </control>
-                <panel width="242px"/>
+                <panel width="267px"/>
 
-                <panel width="60%" childLayout="vertical">
-                    <panel height="15px"/>
+                <panel width="*" childLayout="vertical">
+                    <panel height="25px"/>
                     <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3"
-                             selection="Disabled" height="100px"/>
+                             selection="Disabled" height="85px"/>
                 </panel>
+                <panel width="160px"/>
             </panel>
         </layer>
     </screen>

@@ -9,9 +9,9 @@
                     imageMode="resize:6,212,6,6,6,212,6,8,6,212,6,1" childLayout="horizontal"/>
     </style>
 
-    <style id="nifty-window#title" base="base-font">
+    <style id="nifty-window#title" base="button-font">
         <attributes width="*" height="20px" align="center" valign="center" textHAlign="center" textVAlign="center"
-                    visibleToMouse="false" color="#ffff"/>
+                    visibleToMouse="false"/>
     </style>
 
     <style id="nifty-window#content">
