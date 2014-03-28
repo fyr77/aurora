@@ -4,6 +4,7 @@ IN PROGRESS...
 
 + Cheat to skip dungeons
 + Added surface map to planet gui
+* New GUI style
 * Bugfix
 
 ===================================================

@@ -4,24 +4,23 @@
     <!-- style for the button background panel -->
     <!-- +++++++++++++++++++++++++++++++++++++ -->
     <style id="nifty-button#panel">
-        <attributes backgroundImage="gui/style/button/button.png" imageMode="sprite-resize:100,23,0,2,96,2,2,2,96,2,19,2,96,2,2" paddingLeft="7px" paddingRight="7px" width="100px" height="23px" childLayout="center" visibleToMouse="true" />
+        <attributes backgroundImage="gui/style/button/button.png" imageMode="sprite-resize:100,23,0,10,80,10,10,10,80,10,3,10,80,10,10" paddingLeft="7px" paddingRight="7px" width="100px" height="23px" childLayout="center" visibleToMouse="true" />
         <effect>
            <!-- <onHover name="border" color="#822f" post="true" />-->
-            <onHover name="imageOverlay" filename="gui/style/button/button.png" imageMode="sprite-resize:100,23,1,2,96,2,2,2,96,2,19,2,96,2,2" post="true" />
-            <onClick name="imageOverlay" filename="gui/style/button/button.png" imageMode="sprite-resize:100,23,2,2,96,2,2,2,96,2,19,2,96,2,2" post="true" />
-            <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="true" length="150" />
-            <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="true" length="150" />
+            <onHover name="imageOverlayPulsate" filename="gui/style/button/button.png" imageMode="sprite-resize:100,23,1,10,80,10,10,10,80,10,3,10,80,10,10" post="true" />
+            <onClick name="imageOverlay" filename="gui/style/button/button.png" imageMode="sprite-resize:100,23,2,10,80,10,10,10,80,10,3,10,80,10,10" post="true" />
+            <onEnabled name="renderQuad" startColor="#3C2C41" endColor="#99A6A3" post="true" length="150" />
+            <onDisabled name="renderQuad" startColor="#99A6A3" endColor="#3C2C41" post="true" length="150" />
         </effect>
     </style>
 
     <style id="aurora-button#panel">
-        <attributes backgroundImage="gui/style/button/button_1.png" imageMode="sprite-resize:100,23,0,2,96,2,2,2,96,2,19,2,96,2,2" paddingLeft="7px" paddingRight="7px" width="100px" height="23px" childLayout="center" visibleToMouse="true" />
+        <attributes backgroundImage="gui/style/button/button_1.png" imageMode="sprite-resize:100,23,0,10,80,10,10,10,80,10,3,10,80,10,10" padding="8px,8px,8px,8px" width="100px" height="23px" childLayout="center" visibleToMouse="true" />
         <effect>
             <!-- <onHover name="border" color="#822f" post="true" />-->
-            <onHover name="imageOverlay" filename="gui/style/button/button_1.png" imageMode="sprite-resize:100,23,1,2,96,2,2,2,96,2,19,2,96,2,2" post="true" />
-            <onClick name="imageOverlay" filename="gui/style/button/button_1.png" imageMode="sprite-resize:100,23,2,2,96,2,2,2,96,2,19,2,96,2,2" post="true" />
-            <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="true" length="150" />
-            <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="true" length="150" />
+            <onHover name="imageOverlayPulsate" filename="gui/style/button/button_1.png" imageMode="sprite-resize:100,23,1,10,80,10,10,10,80,10,3,10,80,10,10" post="true" />
+            <onClick name="imageOverlay" filename="gui/style/button/button_1.png" imageMode="sprite-resize:100,23,2,10,80,10,10,10,80,10,3,10,80,10,10" post="true" />
+            <onDisabled name="imageOverlay" filename="gui/style/button/no_button.png" imageMode="resize:10,2,10,10,10,2,10,2,10,2,10,10" post="true" />
         </effect>
     </style>
 
@@ -31,8 +30,8 @@
     <style id="nifty-button#text" base="button-font">
         <attributes align="center" valign="center" textHAlign="center" textVAlign="center" visibleToMouse="false"/>
         <effect>
-            <onEnabled name="textColorAnimated" startColor="#8886" endColor="#eeef" post="false" length="150" />
-            <onDisabled name="textColorAnimated" startColor="#eeef" endColor="#8886" post="false" length="150" />
+            <onEnabled name="textColorAnimated" startColor="#99A6A3" endColor="#3C2C41" post="false" length="150" />
+            <onDisabled name="textColorAnimated" startColor="#3C2C41" endColor="#99A6A3" post="false" length="150" />
         </effect>
     </style>
 </nifty-styles>

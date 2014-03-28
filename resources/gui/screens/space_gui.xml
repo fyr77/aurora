@@ -22,40 +22,41 @@
             <panel childLayout="horizontal" height="120px">
                 <panel width="85%"/>
                 <panel childLayout="vertical" width="*" height="100px"
-                       backgroundImage="resources/sprites/gui/side_panel.png" padding="20,5,20,20"
-                       imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
-                    <text id="resources_text" text="${gui.resources}" style="base-font" width="*"/>
+                       padding="18px,16px,26px,8px"
+                       backgroundImage="gui/style/panel/aurora-panel-hint.png"
+                       imageMode="resize:8,212,16,8,8,212,16,212,8,212,16,16">
+                    <text id="resources_text" text="${gui.resources}" style="button-font" width="*"/>
                     <panel height="*"/>
-                    <text id="credits_text" text="${gui.credits}" style="base-font" width="*"/>
+                    <text id="credits_text" text="${gui.credits}" style="button-font" width="*"/>
                 </panel>
             </panel>
 
             <!-- middle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
-                <panel width="85%"/>
+                <panel width="78%"/>
                 <panel childLayout="vertical">
                     <panel height="30%"/>
                     <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
-                           padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                           padding="20,20,20,20" imageMode="resize:74,100,100,96,74,100,100,68,74,100,100,85">
                         <control id="research_button" name="button" label="${gui.space.research}" width="90%"
                                  height="50px">
-                            <interact onClick="openResearchScreen()"/>
+                            <interact onRelease="openResearchScreen()"/>
                         </control>
                         <control id="engineering_button" name="button" label="${gui.space.engineering}" width="90%"
                                  height="50px">
-                            <interact onClick="openEngineeringScreen()"/>
+                            <interact onRelease="openEngineeringScreen()"/>
                         </control>
                         <control id="journal_button" name="button" label="${gui.journal.title}"
                                  width="90%"
                                  height="50px">
-                            <interact onClick="openJournal()"/>
+                            <interact onRelease="openJournal()"/>
                         </control>
                         <control id="starmap_button" name="button" label="${gui.space.galaxy_map}" width="90%"
                                  height="50px">
-                            <interact onClick="openStarMap()"/>
+                            <interact onRelease="openStarMap()"/>
                         </control>
                         <control id="menu_button" name="button" label="${gui.space.menu}" width="90%" height="50px">
-                            <interact onClick="openMenu()"/>
+                            <interact onRelease="openMenu()"/>
                         </control>
                     </panel>
                     <panel height="*"/>
@@ -69,23 +70,22 @@
             <!-- panel containing additional buttons like 'interact' 'land' 'scan' that appear only when needed -->
             <panel id="interactPanel" height="100px" childLayout="horizontal" visible="false">
                 <panel width="40%"/>
-                <panel style="nifty-panel" x="40%" width="200px" childLayout="center" height="100%">
+                <panel style="nifty-panel" width="200px" childLayout="center" height="100%">
                     <control id="left_button" name="button" label="${gui.space.enter_system_button}" width="90%"
-                             height="90%">
+                             height="100%">
                         <interact onClick="enterStarsystem()"/>
                     </control>
-                    <panel width="*"/>
                 </panel>
             </panel>
 
             <!-- bottom panel containing weapon buttons and log text -->
-            <panel height="113px" imageMode="repeat:0,0,1279,113" childLayout="horizontal"
+            <panel height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69" childLayout="horizontal"
                    backgroundImage="sprites/gui/bottom_panel_galaxy.png" padding="40px">
-                <panel width="242px"/>
-
+                <panel width="324px"/>
                 <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3"
-                         selection="Disabled" width="50%" height="100px"/>
-                <text id="ship_coordinates" style="base-font" text="${gui.space.ship_coords}" width="*"/>
+                         selection="Disabled" width="*" height="85px"/>
+                <panel width="70px"/>
+                <text id="ship_coordinates" style="button-font" text="${gui.space.ship_coords}" width="83px"/>
             </panel>
 
         </layer>
@@ -100,41 +100,42 @@
             <panel childLayout="horizontal" height="120px">
                 <panel width="85%"/>
                 <panel childLayout="vertical" width="*" height="100px"
-                       backgroundImage="resources/sprites/gui/side_panel.png" padding="20,5,20,20"
-                       imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
-                    <text id="resources_text" text="${gui.resources}" style="base-font" width="*"/>
+                       padding="18px,16px,26px,8px"
+                       backgroundImage="gui/style/panel/aurora-panel-hint.png"
+                       imageMode="resize:8,212,16,8,8,212,16,212,8,212,16,16">
+                    <text id="resources_text" text="${gui.resources}" style="button-font" width="*"/>
                     <panel height="*"/>
-                    <text id="credits_text" text="${gui.credits}" style="base-font" width="*"/>
+                    <text id="credits_text" text="${gui.credits}" style="button-font" width="*"/>
                 </panel>
             </panel>
 
             <!-- midlle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
-                <panel width="85%"/>
+                <panel width="78%"/>
                 <panel childLayout="vertical">
                     <panel height="30%"/>
                     <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
-                           padding="20,5,20,20" imageMode="resize:24,240,10,24,24,240,10,201,24,240,10,24">
+                           padding="20,20,20,20" imageMode="resize:74,100,100,96,74,100,100,68,74,100,100,85">
                         <control id="research_button" name="button" label="${gui.space.research}" width="90%"
                                  height="50px">
-                            <interact onClick="openResearchScreen()"/>
+                            <interact onRelease="openResearchScreen()"/>
                         </control>
                         <control id="engineering_button" name="button" label="${gui.space.engineering}" width="90%"
                                  height="50px">
-                            <interact onClick="openEngineeringScreen()"/>
+                            <interact onRelease="openEngineeringScreen()"/>
                         </control>
                         <control id="journal_button" name="button" label="${gui.journal.title}"
                                  width="90%"
                                  height="50px">
-                            <interact onClick="openJournal()"/>
+                            <interact onRelease="openJournal()"/>
                         </control>
                         <control id="landing_party_equip_button" name="button" label="${gui.space.landing_party}"
                                  width="90%"
                                  height="50px">
-                            <interact onClick="openLandingPartyScreen()"/>
+                            <interact onRelease="openLandingPartyScreen()"/>
                         </control>
                         <control id="menu_button" name="button" label="${gui.space.menu}" width="90%" height="50px">
-                            <interact onClick="openMenu()"/>
+                            <interact onRelease="openMenu()"/>
                         </control>
                     </panel>
                     <panel height="*"/>
@@ -147,56 +148,58 @@
 
             <!-- panel containing additional buttons like 'interact' 'land' 'scan' that appear only when needed -->
             <panel id="interactPanel" height="100px" childLayout="horizontal" visible="false">
-                <panel width="40%"/>
-                <panel style="nifty-panel" x="40%" width="256px" childLayout="horizontal" height="100%">
-                    <control id="left_button" name="button" label="${gui.space.land}" width="40%" height="90%">
+                <panel width="30%"/>
+                <panel style="nifty-panel" width="35%" childLayout="horizontal" height="100%">
+                    <control id="left_button" name="button" label="${gui.space.land}" width="45%" height="100%">
                         <interact onClick="leftButtonPressed()"/>
                     </control>
                     <panel width="*"/>
-                    <control id="right_button" name="button" label="${gui.space.scan}" width="40%" height="90%">
+                    <control id="right_button" name="button" label="${gui.space.scan}" width="45%" height="100%">
                         <interact onClick="rightButtonPressed()"/>
                     </control>
                 </panel>
             </panel>
 
             <!-- bottom panel containing weapon buttons and log text -->
-            <panel height="113px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
-                   imageMode="repeat:0,0,1279,113" padding="20px">
-                <control id="weapon_0_button" name="image_button" label="Weapon #1" width="64px" height="64px">
+            <panel height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
+                   padding="12px,20px,5px,15px">
+                <control id="weapon_0_button" name="image_button" label="Wep #1" width="64px" height="64px">
                     <interact onClick="weaponClicked(0)"/>
                 </control>
-                <panel width="10px"/>
-                <control id="weapon_1_button" enabled="false" name="image_button" label="Weapon #2" width="64px"
+                <panel width="4px"/>
+                <control id="weapon_1_button" enabled="false" name="image_button" label="Wep #2" width="64px"
                          height="64px">
                     <interact onClick="weaponClicked(1)"/>
                 </control>
-                <panel width="10px"/>
-                <control id="weapon_2_button" enabled="false" name="image_button" label="Weapon #3" width="64px"
+                <panel width="4px"/>
+                <control id="weapon_2_button" enabled="false" name="image_button" label="Wep #3" width="64px"
                          height="64px">
                     <interact onClick="weaponClicked(2)"/>
                 </control>
-                <panel width="10px"/>
-                <control id="weapon_3_button" enabled="false" name="image_button" label="Weapon #4" width="64px"
+                <panel width="4px"/>
+                <control id="weapon_3_button" enabled="false" name="image_button" label="Wep #4" width="64px"
                          height="64px">
                     <interact onClick="weaponClicked(3)"/>
                 </control>
 
-                <panel width="20px"/>
+                <panel width="50px"/>
 
-                <panel width="60%" childLayout="vertical">
-                    <panel height="15px"/>
+                <panel width="*" childLayout="vertical">
+                    <panel height="25px"/>
                     <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3"
-                             selection="Disabled" height="100px"/>
+                             selection="Disabled" height="85px"/>
                 </panel>
 
-                <panel width="20px"/>
+                <panel width="53px"/>
 
                 <panel width="50px" childLayout="vertical">
-                    <panel height="15px"/>
+                    <panel height="25px"/>
                     <control id="next_turn_button" name="button" label="${gui.end_turn}" height="50px">
-                        <interact onClick="nextTurn()"/>
+                        <interact onRelease="nextTurn()"/>
                     </control>
                 </panel>
+
+                <panel width="50px"/>
             </panel>
         </layer>
     </screen>
