@@ -13,10 +13,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
@@ -418,6 +415,9 @@ public class DungeonController implements Serializable {
                     allConditionsSatisfied = false;
                     break;
                 }
+            }
+            if (Configuration.getBooleanProperty("cheat.skipDungeons")) {
+                allConditionsSatisfied = true;
             }
             if (allConditionsSatisfied) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.objectives_completed"));

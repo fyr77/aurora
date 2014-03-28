@@ -177,6 +177,9 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
 
                         @Override
                         public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
+                            if (ss.isQuestLocation()) {
+                                return false;
+                            }
                             isAlive = false;
 
                             NPCShip ship = rogues.getDefaultFactory().createShip(RoguesGenerator.SCOUT_SHIP);
@@ -234,7 +237,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 turns = 360;
                 Dialog defaultDialog = Dialog.loadFromFile("dialogs/rogues/rogues_frame_dialog.json");
                 defaultDialog.addListener(new RoguesMainDialogListener());
-                world.getRaces().get("Rogues").setDefaultDialog(defaultDialog);
+                world.getRaces().get(RoguesGenerator.NAME).setDefaultDialog(defaultDialog);
                 roguesFrame.setCaptain(new NPC(defaultDialog));
             }
         }

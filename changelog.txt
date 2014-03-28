@@ -2,6 +2,10 @@ VERSION 0.2.2
 
 IN PROGRESS...
 
++ Cheat to skip dungeons
++ Added surface map to planet gui
+* Bugfix
+
 ===================================================
 
 VERSION 0.2.1
