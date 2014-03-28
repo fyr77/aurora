@@ -257,6 +257,28 @@
           "flags": {
             "diplomacy_report": "true"
           }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 79,
+          "replyText": "16",
+          "replyConditions": [
+            {
+              "name": "energy_sphere.communicated",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 90,
+          "replyText": "17",
+          "replyConditions": [
+            {
+              "name": "colony_search.explored",
+              "type": "SET"
+            }
+          ]
         }
       ]
     },
@@ -982,6 +1004,16 @@
         }
       ]
     },
+    "79": {
+      "id": 79,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 80,
+          "replyText": "0"
+        }
+      ]
+    },
     "72": {
       "id": 72,
       "replies": [
@@ -1079,6 +1111,243 @@
           "returnValue": 80,
           "targetStatementId": -1,
           "replyText": "2"
+        }
+      ]
+    },
+    "85": {
+      "id": 85,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 86,
+          "replyText": "0"
+        }
+      ]
+    },
+    "84": {
+      "id": 84,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 86,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 85,
+          "replyText": "1"
+        }
+      ]
+    },
+    "87": {
+      "id": 87,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 88,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 89,
+          "replyText": "1"
+        }
+      ]
+    },
+    "86": {
+      "id": 86,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 87,
+          "replyText": "0"
+        }
+      ]
+    },
+    "81": {
+      "id": 81,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 86,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 82,
+          "replyText": "1"
+        }
+      ]
+    },
+    "80": {
+      "id": 80,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 81,
+          "replyText": "0"
+        }
+      ]
+    },
+    "82": {
+      "id": 82,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 86,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 84,
+          "replyText": "1"
+        }
+      ]
+    },
+    "93": {
+      "id": 93,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 94,
+          "replyText": "0"
+        }
+      ]
+    },
+    "92": {
+      "id": 92,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 93,
+          "replyText": "0"
+        }
+      ]
+    },
+    "95": {
+      "id": 95,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 96,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 97,
+          "replyText": "1"
+        }
+      ]
+    },
+    "94": {
+      "id": 94,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "1"
+        }
+      ]
+    },
+    "89": {
+      "id": 89,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "1"
+        }
+      ]
+    },
+    "88": {
+      "id": 88,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "1"
+        }
+      ]
+    },
+    "91": {
+      "id": 91,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 95,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "colony_search.explored_fully",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 92,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "colony_search.explored_fully",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "90": {
+      "id": 90,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 91,
+          "replyText": "0"
+        }
+      ]
+    },
+    "96": {
+      "id": 96,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "1"
+        }
+      ]
+    },
+    "97": {
+      "id": 97,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "1"
         }
       ]
     }
