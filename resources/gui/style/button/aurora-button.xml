@@ -9,8 +9,8 @@
            <!-- <onHover name="border" color="#822f" post="true" />-->
             <onHover name="imageOverlayPulsate" filename="gui/style/button/button.png" imageMode="sprite-resize:100,23,1,10,80,10,10,10,80,10,3,10,80,10,10" post="true" />
             <onClick name="imageOverlay" filename="gui/style/button/button.png" imageMode="sprite-resize:100,23,2,10,80,10,10,10,80,10,3,10,80,10,10" post="true" />
-            <onEnabled name="renderQuad" startColor="#3C2C41" endColor="#99A6A3" post="true" length="150" />
-            <onDisabled name="renderQuad" startColor="#99A6A3" endColor="#3C2C41" post="true" length="150" />
+            <onEnabled name="renderQuad" startColor="#3C2C41" endColor="#99A6A300" post="true" length="150" />
+            <onDisabled name="renderQuad" startColor="#99A6A300" endColor="#3C2C41" post="true" length="150" />
         </effect>
     </style>
 

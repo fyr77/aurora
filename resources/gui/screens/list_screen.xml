@@ -3,7 +3,7 @@
 
     <controlDefinition name="list_screen">
         <panel childLayout="horizontal" width="100%" height="100%">
-            <control id="itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="25" selection="Single" width="45%"/>
+            <control id="itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="23" selection="Single" width="45%"/>
 
             <panel width="10%"/>
             <panel childLayout="vertical">

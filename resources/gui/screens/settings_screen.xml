@@ -4,13 +4,13 @@
             <control id="settings_window" name="window" closeable="false" title="${gui.settings.title}" width="80%"
                      height="80%" x="10%" y="10%">
                 <panel childLayout="vertical">
-                    <text style="base-font" wrap="true" text="${gui.settings.resolution}" width="60%"
+                    <text style="button-font" wrap="true" text="${gui.settings.resolution}" width="60%"
                           textHAlign="left"/>
                     <panel height="10px"/>
                     <control id="resolution_select" name="dropDown"/>
                     <panel height="10px"/>
                     <panel childLayout="horizontal">
-                        <text style="base-font" text="${gui.settings.fullscreen}"/>
+                        <text style="button-font" text="${gui.settings.fullscreen}"/>
                         <panel width="10px"/>
                         <control id="fullscreen" name="checkbox" checked="false"/>
                     </panel>
@@ -18,12 +18,12 @@
                     <panel height="10px"/>
 
                     <!-- music -->
-                    <text style="base-font" wrap="true" text="${gui.settings.music_volume}" width="60%"
+                    <text style="button-font" wrap="true" text="${gui.settings.music_volume}" width="60%"
                           textHAlign="left"/>
                     <control name="horizontalScrollbar" id="music_volume" worldMax="1.0" worldPageSize="0.1"
                              initial="0.5" buttonStepSize="0.1" pageStepSize="0.3"/>
 
-                    <text style="base-font" wrap="true" text="${gui.settings.sound_volume}" width="60%"
+                    <text style="button-font" wrap="true" text="${gui.settings.sound_volume}" width="60%"
                           textHAlign="left"/>
                     <control name="horizontalScrollbar" id="sound_volume" worldMax="1.0" worldPageSize="0.1"
                              initial="0.5" buttonStepSize="0.1" pageStepSize="0.3"/>

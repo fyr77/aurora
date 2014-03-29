@@ -12,9 +12,9 @@
       <onClick name="focus" targetElement="#parent" />
       <onClick name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite:23,23,5" post="true" />
       <onFocus name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite:23,23,4" post="true" />
-	  <onHover name="border" color="#822f" post="true" />
-      <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="true" length="150" />
-      <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="true" length="150" />
+	  <onHover name="border" color="#000000" post="true" />
+      <onEnabled name="renderQuad" startColor="#3C2C41" endColor="#99A6A300" post="true" length="150" />
+      <onDisabled name="renderQuad" startColor="#99A6A300" endColor="#3C2C41" post="true" length="150" />
     </effect>
   </style>
   <style id="nifty-vertical-scrollbar#down">
@@ -23,13 +23,13 @@
       <onClick name="focus" targetElement="#parent" />
       <onClick name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite:23,23,2" post="true" />
       <onFocus name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite:23,23,1" post="true" />
-	  <onHover name="border" color="#822f" post="true" />
-      <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="true" length="150" />
-      <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="true" length="150" />
+	  <onHover name="border" color="#000000" post="true" />
+      <onEnabled name="renderQuad" startColor="#3C2C41" endColor="#99A6A300" post="true" length="150" />
+      <onDisabled name="renderQuad" startColor="#99A6A300" endColor="#3C2C41" post="true" length="150" />
     </effect>
   </style>
   <style id="nifty-vertical-scrollbar#background">
-    <attributes filename="gui/style/scrollbar/scrollbar.png" width="23px" height="*" childLayout="absolute" imageMode="sprite:23,23,12"/>
+    <attributes filename="gui/style/scrollbar/scrollbar.png" width="23px" height="*" childLayout="absolute" imageMode="repeat:276,0,23,23"/>
     <effect>
       <onClick name="focus" targetElement="#parent" />
     </effect>
@@ -41,8 +41,8 @@
       <onClick name="focus" targetElement="#parent#parent" />
       <onFocus name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite-resize:23,23,15,4,15,4,4,4,15,4,15,4,15,4,4" post="true" />
       <onHover name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite-resize:23,23,14,4,15,4,4,4,15,4,15,4,15,4,4" post="true" />
-      <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="true" length="150" />
-      <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="true" length="150" />
+      <onEnabled name="renderQuad" startColor="#3C2C41" endColor="#99A6A300" post="true" length="150" />
+      <onDisabled name="renderQuad" startColor="#99A6A300" endColor="#3C2C41" post="true" length="150" />
     </effect>
   </style>
 
@@ -58,9 +58,9 @@
       <onClick name="focus" targetElement="#parent" />
       <onClick name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite:23,23,8" post="true" />
       <onFocus name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite:23,23,7" post="true" />
-	  <onHover name="border" color="#822f" post="true" />
-      <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="true" length="150" />
-      <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="true" length="150" />
+	  <onHover name="border" color="#000000" post="true" />
+      <onEnabled name="renderQuad" startColor="#3C2C41" endColor="#99A6A300" post="true" length="150" />
+      <onDisabled name="renderQuad" startColor="#99A6A300" endColor="#3C2C41" post="true" length="150" />
     </effect>
   </style>
   <style id="nifty-horizontal-scrollbar#right">
@@ -69,13 +69,13 @@
       <onClick name="focus" targetElement="#parent" />
       <onClick name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite:23,23,11" post="true" />
       <onFocus name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite:23,23,10" post="true" />
-	  <onHover name="border" color="#822f" post="true" />
-      <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="true" length="150" />
-      <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="true" length="150" />
+	  <onHover name="border" color="#000000" post="true" />
+      <onEnabled name="renderQuad" startColor="#3C2C41" endColor="#99A6A300" post="true" length="150" />
+      <onDisabled name="renderQuad" startColor="#99A6A300" endColor="#3C2C41" post="true" length="150" />
     </effect>
   </style>
   <style id="nifty-horizontal-scrollbar#background">
-    <attributes filename="gui/style/scrollbar/scrollbar.png" width="*" height="23px" childLayout="absolute" imageMode="sprite-resize:23,23,16,4,15,4,4,4,15,4,15,4,15,4,4" />
+    <attributes filename="gui/style/scrollbar/scrollbar.png" width="*" height="23px" childLayout="absolute" imageMode="repeat:368,0,23,23" />
     <effect>
       <onClick name="focus" targetElement="#parent" />
     </effect>
@@ -87,8 +87,8 @@
       <onClick name="focus" targetElement="#parent#parent" />
       <onFocus name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite-resize:23,23,19,4,15,4,4,4,15,4,15,4,15,4,4" post="true" />
       <onHover name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite-resize:23,23,18,4,15,4,4,4,15,4,15,4,15,4,4" post="true" />
-      <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="true" length="150" />
-      <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="true" length="150" />
+      <onEnabled name="renderQuad" startColor="#3C2C41" endColor="#99A6A300" post="true" length="150" />
+      <onDisabled name="renderQuad" startColor="#99A6A300" endColor="#3C2C41" post="true" length="150" />
     </effect>
   </style>
 </nifty-styles>

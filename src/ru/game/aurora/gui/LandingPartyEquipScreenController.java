@@ -164,7 +164,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
             EngineUtils.setTextForGUIElement(statusText, Localization.getText("gui", "landing_party.can_not_launch"));
         } else {
             myScreen.findElementByName("close_button").enable();
-            statusText.getRenderer(TextRenderer.class).setColor(Color.WHITE);
+            statusText.getRenderer(TextRenderer.class).setColor(new Color("#3C2C41"));
             EngineUtils.setTextForGUIElement(statusText, Localization.getText("gui", "landing_party.can_launch"));
         }
         updateLabels();

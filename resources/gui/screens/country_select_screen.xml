@@ -6,7 +6,7 @@
                      childLayout="vertical">
                 <control id="RadioGroup-1" name="radioButtonGroup"/>
                 <panel childLayout="vertical" height="100%" width="100%">
-                    <text style="base-font" text="${gui.country_select.title}"/>
+                    <text style="button-font" text="${gui.country_select.title}"/>
                     <panel height="10px"/>
                     <panel childLayout="vertical" backgroundColor="#8001" paddingLeft="7px" paddingRight="7px"
                            paddingTop="4px" paddingBottom="4px" width="90%">
@@ -15,15 +15,15 @@
                         </effect>
                         <panel childLayout="horizontal">
                             <control name="radioButton" id="america" group="RadioGroup-1"/>
-                            <control name="label" text="${gui.country_select.america.label}"/>
+                            <control name="label" style="button-font" text="${gui.country_select.america.label}"/>
                         </panel>
                         <panel childLayout="horizontal">
                             <control name="radioButton" id="europe" group="RadioGroup-1"/>
-                            <control name="label" text="${gui.country_select.europe.label}"/>
+                            <control name="label" style="button-font" text="${gui.country_select.europe.label}"/>
                         </panel>
                         <panel childLayout="horizontal">
                             <control name="radioButton" id="asia" group="RadioGroup-1"/>
-                            <control name="label" text="${gui.country_select.asia.label}"/>
+                            <control name="label" style="button-font" text="${gui.country_select.asia.label}"/>
                         </panel>
                     </panel>
 

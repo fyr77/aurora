@@ -8,7 +8,7 @@
                      x="20%" y="30%">
                 <panel childLayout="vertical" margin="10px">
                     <panel height="30%"/>
-                    <text style="base-font" text="${gui.confirm_exit}" width="100%" textHAlign="center"/>
+                    <text style="button-font" text="${gui.confirm_exit}" width="100%" textHAlign="center"/>
                     <panel height="*"/>
                     <panel childLayout="horizontal" height="50px">
                         <panel width="30%"/>

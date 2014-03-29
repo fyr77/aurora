@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
-
+    <registerEffect name="custom-hint" class="ru.game.aurora.gui.niffy.CustomHint"/>
     <controlDefinition name="button_and_count">
         <panel childLayout="horizontal">
             <panel childLayout="vertical" padding="5px">
@@ -78,16 +78,15 @@
                 </panel>
             </panel>
 
-            <!-- bottom panel containing weapon buttons and log text -->
+            <!-- bottom panel containing log text -->
             <panel height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69" childLayout="horizontal"
-                   backgroundImage="sprites/gui/bottom_panel_galaxy.png" padding="40px">
+                   backgroundImage="sprites/gui/bottom_panel_galaxy.png" padding="20px,40px,20px,20px">
                 <panel width="324px"/>
-                <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3"
-                         selection="Disabled" width="*" height="85px"/>
+                <control id="log_list" name="listBox" vertical="on" horizontal="on" displayItems="3"
+                         selectionMode="Disabled" width="*"/>
                 <panel width="70px"/>
                 <text id="ship_coordinates" style="button-font" text="${gui.space.ship_coords}" width="83px"/>
             </panel>
-
         </layer>
     </screen>
     <screen id="star_system_gui" controller="ru.game.aurora.gui.GalaxyMapController">
@@ -163,31 +162,43 @@
             <!-- bottom panel containing weapon buttons and log text -->
             <panel height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
                    padding="12px,20px,5px,15px">
-                <control id="weapon_0_button" name="image_button" label="Wep #1" width="64px" height="64px">
+                <control id="weapon_0_button" name="image_button" label="" width="64px" height="64px">
                     <interact onClick="weaponClicked(0)"/>
+                    <effect>
+                        <onHover name="custom-hint" targetElement="hint-panel" hintText="Weapon #1"/>
+                    </effect>
                 </control>
                 <panel width="4px"/>
-                <control id="weapon_1_button" enabled="false" name="image_button" label="Wep #2" width="64px"
+                <control id="weapon_1_button" enabled="false" name="image_button" label="" width="64px"
                          height="64px">
                     <interact onClick="weaponClicked(1)"/>
+                    <effect>
+                        <onHover name="custom-hint" targetElement="hint-panel" hintText="Weapon #2"/>
+                    </effect>
                 </control>
                 <panel width="4px"/>
-                <control id="weapon_2_button" enabled="false" name="image_button" label="Wep #3" width="64px"
+                <control id="weapon_2_button" enabled="false" name="image_button" label="" width="64px"
                          height="64px">
                     <interact onClick="weaponClicked(2)"/>
+                    <effect>
+                        <onHover name="custom-hint" targetElement="hint-panel" hintText="Weapon #3"/>
+                    </effect>
                 </control>
                 <panel width="4px"/>
-                <control id="weapon_3_button" enabled="false" name="image_button" label="Wep #4" width="64px"
+                <control id="weapon_3_button" enabled="false" name="image_button" label="" width="64px"
                          height="64px">
                     <interact onClick="weaponClicked(3)"/>
+                    <effect>
+                        <onHover name="custom-hint" targetElement="hint-panel" hintText="Weapon #4"/>
+                    </effect>
                 </control>
 
                 <panel width="50px"/>
 
                 <panel width="*" childLayout="vertical">
-                    <panel height="25px"/>
-                    <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3"
-                             selection="Disabled" height="85px"/>
+                    <panel height="8px"/>
+                    <control id="log_list" name="listBox" vertical="on" horizontal="on" displayItems="3"
+                             selectionMode="Disabled"/>
                 </panel>
 
                 <panel width="53px"/>
@@ -202,6 +213,12 @@
                 <panel width="50px"/>
             </panel>
         </layer>
+        <!--hint layer -->
+        <layer childLayout="absolute">
+            <panel id="hint-panel" visible="false" childLayout="vertical" padding="5px,25px,5px,25px" backgroundColor="#aa7f4dff">
+                <text id="content" style="button-font" text="empty" align="center" valign="center"/>
+            </panel>
+        </layer>
     </screen>
     <popup id="landing_party_lost" childLayout="absolute">
         <control id="landing_party_lost_window" name="window" hideOnClose="true" width="60%" height="350px" x="20%"
@@ -210,7 +227,7 @@
                 <panel height="10px"/>
                 <panel height="256px" childLayout="horizontal">
                     <image width="256px" filename="sprites/gui/crew_death.png"/>
-                    <text width="*" height="256px" text="${gui.landing_party_lost}" style="base-font"/>
+                    <text width="*" height="256px" text="${gui.landing_party_lost}" style="button-font"/>
                 </panel>
                 <panel height="10px"/>
                 <panel childLayout="horizontal" height="45px">
@@ -229,7 +246,7 @@
             <panel childLayout="vertical" margin="10px">
                 <panel height="256px" childLayout="horizontal">
                     <image id="shuttle_image" width="256px" height="256px"/>
-                    <text width="*" height="256px" text="${gui.landing}" style="base-font"/>
+                    <text width="*" height="256px" text="${gui.landing}" style="button-font"/>
                 </panel>
             </panel>
         </control>

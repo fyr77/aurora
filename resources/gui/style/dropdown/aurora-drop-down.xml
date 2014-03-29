@@ -3,25 +3,21 @@
   <style id="nifty-drop-down#panel">
     <attributes childLayout="horizontal" height="23px" focusable="true" visibleToMouse="true" />
     <effect>
-	  <onHover name="border" color="#822f" post="true" />
+	  <onHover name="border" color="#FBAF16" post="true" />
     </effect>
   </style>
 
   <style id="nifty-drop-down#panel-text">
-    <attributes childLayout="center" childClip="true" backgroundColor="#666f" padding="0px,2px" width="*" />
+    <attributes childLayout="center" childClip="true" backgroundColor="#3C2C41" padding="0px,2px" width="*" />
     <effect>
-      <onActive name="border" color="#222f" post="true" inset="1px" />
-      <onFocus name="colorBar" color="#800f" post="true" inset="1px" />
-      <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="true" length="150" />
-      <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="true" length="150" />
+      <onActive name="border" color="#000000" post="true" inset="1px" />
+        <onEnabled name="renderQuad" startColor="#99A6A300" endColor="#3C2C41" post="true" length="150" />
+        <onDisabled name="renderQuad" startColor="#3C2C41" endColor="#99A6A300" post="true" length="150" />
     </effect>
   </style>
 
   <style id="nifty-drop-down#text" base="base-font">
-    <attributes color="#000f" selectionColor="#f00f" visibleToMouse="false" align="left" valign="center" textHAlign="left" height="23px" />
-    <effect>
-      <onFocus name="textColor" post="false" color="#cccf" />
-    </effect>
+    <attributes color="#ffffff" selectionColor="#ffffff" visibleToMouse="false" align="left" valign="center" textHAlign="left" height="23px" />
   </style>
   
   <style id="nifty-drop-down#panel-icon">
@@ -29,13 +25,13 @@
   </style>
 
   <style id="nifty-drop-down#icon">
-    <attributes filename="scrollbar/scrollbar.png" width="23px" height="23px" imageMode="sprite:23,23,0" />
+    <attributes filename="gui/style/scrollbar/scrollbar.png" width="23px" height="23px" imageMode="sprite:23,23,0" />
     <effect>
       <onClick name="focus" targetElement="#parent" />
       <onClick name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite:23,23,2" post="true" />
       <onFocus name="imageOverlay" filename="gui/style/scrollbar/scrollbar.png" imageMode="sprite:23,23,1" post="true" />
-      <onEnabled name="renderQuad" startColor="#2228" endColor="#2220" post="true" length="150" />
-      <onDisabled name="renderQuad" startColor="#2220" endColor="#2228" post="true" length="150" />
+      <onEnabled name="renderQuad" startColor="#3C2C41" endColor="#99A6A300" post="true" length="150" />
+      <onDisabled name="renderQuad" startColor="#99A6A300" endColor="#3C2C41" post="true" length="150" />
     </effect>
   </style>
 

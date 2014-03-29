@@ -23,8 +23,8 @@
                 <panel width="85%"/>
                 <panel childLayout="vertical">
                     <panel height="30%"/>
-                    <panel childLayout="vertical" backgroundImage="gui/style/panel/aurora-panel-hint.png"
-                           padding="20,5,20,20" imageMode="resize:8,212,16,8,8,212,16,212,8,212,16,16">
+                    <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
+                    padding="20,20,20,20" imageMode="resize:74,100,100,96,74,100,100,68,74,100,100,85">
                         <control id="inventory_button" name="button" label="${gui.inventory}" width="90%"
                                  height="50px">
                             <interact onClick="openInventory()"/>
@@ -58,16 +58,16 @@
             </panel>
             <!-- bottom panel containing weapon buttons and log text -->
             <panel height="113px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
-                   imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69" padding="16px,20px,5px,15px">
+                   imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69" padding="12px,20px,5px,15px">
                 <control id="weapon_button" name="button" label="${gui.surface.fire}" width="64px" height="64px">
                     <interact onClick="weaponClicked()"/>
                 </control>
                 <panel width="267px"/>
 
                 <panel width="*" childLayout="vertical">
-                    <panel height="25px"/>
-                    <control id="log_list" name="listBox" vertical="optional" horizontal="optional" displayItems="3"
-                             selection="Disabled" height="85px"/>
+                    <panel height="8px"/>
+                    <control id="log_list" name="listBox" vertical="on" horizontal="on" displayItems="3"
+                             selectionMode="Disabled" />
                 </panel>
                 <panel width="160px"/>
             </panel>
