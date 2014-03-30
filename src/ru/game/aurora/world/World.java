@@ -27,6 +27,8 @@ import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class World implements Serializable, ResolutionChangeListener
@@ -50,6 +52,8 @@ public class World implements Serializable, ResolutionChangeListener
 
     private Player player;
 
+    private Calendar currentDate;
+
     private Reputation reputation;
 
     private transient boolean updatedThisFrame;
@@ -59,6 +63,8 @@ public class World implements Serializable, ResolutionChangeListener
     private transient StarSystemNamesCollection starSystemNamesCollection = new StarSystemNamesCollection();
 
     private transient List<OverlayWindow> overlayWindows = new LinkedList<OverlayWindow>();
+
+    private static DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
 
     private StarSystem currentStarSystem = null;
 
@@ -110,6 +116,7 @@ public class World implements Serializable, ResolutionChangeListener
                 player.getEngineeringState().update(this);
                 player.getEarthState().update(this);
                 turnCount++;
+                currentDate.add(Calendar.DAY_OF_MONTH, 1);
                 EvacuationState es = player.getEarthState().getEvacuationState();
                 if (es != null && es.isGameOver(this)) {
                     es.showEndGameScreen(this);
@@ -470,6 +477,22 @@ public class World implements Serializable, ResolutionChangeListener
 
     public boolean isPaused() {
         return isPaused;
+    }
+
+    public void gameLoaded()
+    {
+        if (currentDate == null) {
+            currentDate = new GregorianCalendar(2100, 1, 1);
+            currentDate.add(Calendar.DAY_OF_MONTH, turnCount);
+        }
+    }
+
+    public Calendar getCurrentDate() {
+        return currentDate;
+    }
+
+    public String getCurrentDateString() {
+        return dateFormat.format(currentDate.getTimeInMillis());
     }
 
     @Override

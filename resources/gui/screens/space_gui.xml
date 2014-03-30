@@ -85,7 +85,12 @@
                 <control id="log_list" name="listBox" vertical="on" horizontal="on" displayItems="3"
                          selectionMode="Disabled" width="*"/>
                 <panel width="70px"/>
-                <text id="ship_coordinates" style="button-font" text="${gui.space.ship_coords}" width="83px"/>
+                <panel childLayout="vertical" width="83px">
+                    <panel height="20px"/>
+                    <text id="stardate_text" style="button-font" width="83px"/>
+                    <panel height="15px"/>
+                    <text id="ship_coordinates" style="button-font" text="${gui.space.ship_coords}" />
+                </panel>
             </panel>
         </layer>
     </screen>
@@ -204,7 +209,9 @@
                 <panel width="53px"/>
 
                 <panel width="50px" childLayout="vertical">
-                    <panel height="25px"/>
+                    <panel height="20px"/>
+                    <text id="stardate_text" style="button-font" textHAlign="center" width="83px"/>
+                    <panel height="10px"/>
                     <control id="next_turn_button" name="button" label="${gui.end_turn}" height="50px">
                         <interact onRelease="nextTurn()"/>
                     </control>

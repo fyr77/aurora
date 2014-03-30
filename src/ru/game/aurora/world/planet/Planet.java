@@ -242,6 +242,7 @@ public class Planet extends BasePlanet implements IDungeon {
 
 
                 world.getCamera().setTarget(landingParty);
+                world.getCamera().resetViewPort();
                 shuttle = null;
                 for (PlanetObject po : surface.getObjects()) {
                     if (po instanceof LandingShuttle) {

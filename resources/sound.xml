@@ -2,6 +2,7 @@
 <resources>
     <resource type="playlist" id="background">resources/music/background</resource>
     <resource type="playlist" id="dungeon_invasion">resources/music/dungeon/invasion</resource>
+    <resource type="playlist" id="dark_corners">resources/music/dungeon/dark_corners</resource>
 
     <resource type="sound" id="laser_1">resources/sounds/shots/laser_1.wav</resource>
     <resource type="sound" id="plasma_1">resources/sounds/shots/plasma_1.wav</resource>

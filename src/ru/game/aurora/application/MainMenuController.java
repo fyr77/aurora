@@ -69,6 +69,7 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
             nifty.showPopup(nifty.getScreen("main_menu"), popup.getId(), null);
             return;
         }
+        loadedState.gameLoaded();
         GUI.getInstance().onWorldLoaded(container, loadedState);
         loadedState.getCurrentRoom().returnTo(loadedState);
     }

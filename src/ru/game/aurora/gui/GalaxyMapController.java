@@ -136,6 +136,9 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         Element ruText = myScreen.findElementByName("resources_text");
         EngineUtils.setTextForGUIElement(ruText, Localization.getText("gui", "resources") + " " + world.getPlayer().getResourceUnits());
         EngineUtils.setTextForGUIElement(myScreen.findElementByName("credits_text"), Localization.getText("gui", "credits") + " " + world.getPlayer().getCredits());
+
+        Element dateText = myScreen.findElementByName("stardate_text");
+        EngineUtils.setTextForGUIElement(dateText, world.getCurrentDateString());
     }
 
     @Override

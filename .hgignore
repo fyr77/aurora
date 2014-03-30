@@ -4,3 +4,5 @@ glob:Aurora.iws
 glob:resources/gui/aurora.xml.old
 syntax: glob
 save.bin
+system.properties
+*.log
