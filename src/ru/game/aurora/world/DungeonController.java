@@ -66,6 +66,8 @@ public class DungeonController implements Serializable {
 
     private IStateChangeListener successListener;
 
+    private int tilesExploredThisTurn = 0;
+
     private transient List<Effect> effects = new ArrayList<>();
 
     private transient Effect currentEffect = null;
@@ -158,8 +160,8 @@ public class DungeonController implements Serializable {
             return;
         }
 
-        int tilesExplored = map.updateVisibility(x, y, 3);
-        landingParty.addCollectedGeodata(tilesExplored);
+        tilesExploredThisTurn = map.updateVisibility(x, y, 3);
+        landingParty.addCollectedGeodata(tilesExploredThisTurn);
 
         if (dy < 0) {
             landingParty.moveUp();
@@ -357,7 +359,7 @@ public class DungeonController implements Serializable {
                 return;
             }
         }
-
+        tilesExploredThisTurn = 0;
         switch (mode) {
             case MODE_MOVE:
                 if (container.getInput().isKeyPressed(Input.KEY_F)) {
@@ -526,5 +528,9 @@ public class DungeonController implements Serializable {
 
     public void setSuccessListener(IStateChangeListener successListener) {
         this.successListener = successListener;
+    }
+
+    public int getTilesExploredThisTurn() {
+        return tilesExploredThisTurn;
     }
 }

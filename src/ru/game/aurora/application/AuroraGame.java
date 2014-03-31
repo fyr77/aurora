@@ -200,7 +200,8 @@ public class AuroraGame extends NiftyOverlayGame {
                     GUI.getInstance().getNifty().gotoScreen("main_menu");
                 }
             }
-            for (Updatable up : updatables) {
+            final List<Updatable> updatables1 = new ArrayList<>(updatables);
+            for (Updatable up : updatables1) {
                 up.update(gameContainer, world);
             }
             gameContainer.getInput().clearKeyPressedRecord();

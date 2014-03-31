@@ -265,6 +265,8 @@ public class Planet extends BasePlanet implements IDungeon {
         }
 
         controller.update(container, world);
+        exploredTiles += controller.getTilesExploredThisTurn();
+        landingParty.addCollectedGeodata(controller.getTilesExploredThisTurn());
 
         checkAndConsumeOxygen();
 
@@ -357,7 +359,7 @@ public class Planet extends BasePlanet implements IDungeon {
 
     @Override
     public ITileMap getMap() {
-        return surface;
+        return getSurface();
     }
 
     @Override

@@ -12,6 +12,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResolutionChangeListener;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.*;
@@ -85,6 +86,7 @@ public class World implements Serializable, ResolutionChangeListener
         currentRoom = galaxyMap = new GalaxyMap(this, sizeX, sizeY);
         researchAndDevelopmentProjects = new RnDSet();
         reputation = new Reputation();
+        currentDate = new GregorianCalendar(Configuration.getIntProperty("world.startYear"), 1, 1);
     }
 
     public Map<String, Serializable> getGlobalVariables() {
@@ -482,7 +484,7 @@ public class World implements Serializable, ResolutionChangeListener
     public void gameLoaded()
     {
         if (currentDate == null) {
-            currentDate = new GregorianCalendar(2100, 1, 1);
+            currentDate = new GregorianCalendar(Configuration.getIntProperty("world.startYear"), 1, 1);
             currentDate.add(Calendar.DAY_OF_MONTH, turnCount);
         }
     }

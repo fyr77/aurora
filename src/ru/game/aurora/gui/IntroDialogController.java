@@ -9,6 +9,7 @@ import de.lessvoid.nifty.layout.align.HorizontalAlign;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.IntroDialog;
@@ -150,6 +151,13 @@ public class IntroDialogController implements ScreenController, Updatable {
 
     @Override
     public void update(GameContainer container, World world) {
+        if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+            GUI.getInstance().popAndSetScreen();
+            if (endListener != null) {
+                endListener.stateChanged(world);
+            }
+            return;
+        }
         if (isTyping) {
             if (actualStringBuilder.length() == desiredString.length()) {
                 isTyping = false;

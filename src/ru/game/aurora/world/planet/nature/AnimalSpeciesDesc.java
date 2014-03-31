@@ -64,6 +64,9 @@ public class AnimalSpeciesDesc implements Serializable {
         FRIENDLY
     }
 
+    // animals can not be friendly
+    public static Behaviour[] animalBehaviours = new Behaviour[] {Behaviour.PASSIVE, Behaviour.SELF_DEFENSIVE, Behaviour.AGGRESSIVE};
+
     private Behaviour behaviour;
 
 

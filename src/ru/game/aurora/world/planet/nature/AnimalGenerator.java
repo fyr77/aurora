@@ -120,7 +120,7 @@ public class AnimalGenerator {
                 , hp
                 , weapon
                 , 1 + random.nextInt(2),
-                ru.game.aurora.util.CollectionUtils.selectRandomElement(AnimalSpeciesDesc.Behaviour.values())
+                ru.game.aurora.util.CollectionUtils.selectRandomElement(AnimalSpeciesDesc.animalBehaviours)
                 , modifiers
         );
 

@@ -2,8 +2,10 @@ VERSION 0.2.2
 
 IN PROGRESS...
 
++ 2 new music tracks
 + Cheat to skip dungeons
 + Added surface map to planet gui
++ Added global game date to interface
 * New GUI style
 * Bugfix
 

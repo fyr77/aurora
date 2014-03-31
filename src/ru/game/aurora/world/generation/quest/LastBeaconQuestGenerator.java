@@ -38,6 +38,7 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart {
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                gardenerShip.setCanBeHailed(false);
                 gardenerShip.warpAwayNextTurn();
                 world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("gardener");
             }

@@ -1,19 +1,17 @@
 package ru.game.aurora.world.generation.quest;
 
+import org.newdawn.slick.Color;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
-import ru.game.aurora.world.planet.InventoryItem;
-import ru.game.aurora.world.planet.OreDeposit;
-import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.PlanetAtmosphere;
-import ru.game.aurora.world.planet.nature.Animal;
-import ru.game.aurora.world.planet.nature.AnimalCorpseItem;
-import ru.game.aurora.world.planet.nature.AnimalModifier;
-import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
+import ru.game.aurora.world.planet.*;
+import ru.game.aurora.world.planet.nature.*;
+import ru.game.aurora.world.space.HomeworldGenerator;
+import ru.game.aurora.world.space.Star;
+import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -40,9 +38,38 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
     // set to true if first suitable planet found, there will be some tough monsters
     private boolean firstPlanetFound = false;
 
+    private StarSystem createStarsystemWithEarthLikePlanet(World world)
+    {
+        BasePlanet[] planets = new BasePlanet[3];
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(1, Color.yellow), 13, 2);
+
+        planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
+        HomeworldGenerator.setCoord(planets[0], 2);
+
+        planets[1] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
+        HomeworldGenerator.setCoord(planets[1], 3);
+
+        planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.BREATHABLE_ATMOSPHERE, 3, 0, 0);
+        final Planet planet = (Planet) planets[2];
+        PlanetaryLifeGenerator.setPlanetHasLife(planet);
+        PlanetaryLifeGenerator.addAnimals(planet);
+        PlanetaryLifeGenerator.addPlants(planet);
+
+        HomeworldGenerator.setCoord(planets[2], 5);
+        planets[2].addSatellite(new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0));
+        ss.setPlanets(planets);
+        ss.setRadius(8);
+        return ss;
+    }
+
     @Override
     public void updateWorld(World world) {
         world.addListener(this);
+
+        // make sure that there is at least one planet suitable for colonization within certain radius from earth
+        StarSystem suitableStarSystem = createStarsystemWithEarthLikePlanet(world);
+        world.getGalaxyMap().addObjectAtDistance(suitableStarSystem, (StarSystem)world.getGlobalVariables().get("solar_system"), 40);
+        world.getGlobalVariables().put("colony_search.klisk_coords", suitableStarSystem.getCoordsString());
     }
 
     private static class PlanetData implements Serializable {

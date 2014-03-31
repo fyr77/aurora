@@ -18,7 +18,9 @@ import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
+import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
+import ru.game.aurora.player.research.projects.AlienRaceResearch;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.Positionable;
@@ -28,6 +30,7 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.EmbassiesQuest;
 import ru.game.aurora.world.planet.*;
+import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.*;
 
 import java.util.Map;
@@ -186,8 +189,14 @@ public class KliskGenerator implements WorldGeneratorPart {
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
                 switch (returnCode) {
-                    case 2:
+                    case 3:
+                        // free info about klisk race
+                        world.getGlobalVariables().put("klisk.klisk_info", true);
+                        ResearchProjectDesc research = new AlienRaceResearch("klisk", world.getRaces().get(KliskGenerator.NAME), new JournalEntry("klisk", "main"));
+                        world.getPlayer().getResearchState().addNewAvailableProject(research);
+                        break;
                     case 4:
+                        // free info about colony planet
                         world.getGlobalVariables().put("klisk.planet_info", true);
                         break;
                     case 10:
