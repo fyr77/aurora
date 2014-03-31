@@ -75,7 +75,14 @@
         {
           "returnValue": 0,
           "targetStatementId": 13,
-          "replyText": "1"
+          "replyText": "1",
+           "replyConditions": [
+              {
+                "name": "klisk_trade.result",
+                "value": "refused",
+                "type": "NOT_EQUAL"
+              }
+            ]
         }
       ]
     },

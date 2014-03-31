@@ -90,22 +90,6 @@ public class Ship extends MovableSprite implements SpaceObject {
         }
     }
 
-    @Override
-    public int getX() {
-        return x;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public void setPos(int newX, int newY) {
-        this.x = newX;
-        this.y = newY;
-    }
-
     public int getScientists() {
         return scientists;
     }
