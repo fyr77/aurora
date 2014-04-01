@@ -113,7 +113,13 @@
         {
           "returnValue": 0,
           "targetStatementId": 7,
-          "replyText": "1"
+          "replyText": "1",
+            "replyConditions": [
+                {
+                    "name": "zorsan.war_preparations",
+                    "type": "SET"
+                }
+            ]
         },
         {
           "returnValue": 0,

@@ -32,6 +32,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
             // player refused to perform trading
             world.getGlobalVariables().put("klisk_trade.result", "refused");
             world.getPlayer().getJournal().addQuestEntries("klisk_trade", "refused");
+            npcStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json")));
             return;
         }
 
@@ -115,6 +116,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
             // player refused to perform trading
             world.getGlobalVariables().put("klisk_trade.result", "refused");
             world.getPlayer().getJournal().addQuestEntries("klisk_trade", "refused");
+            npcStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json")));
             return;
         }
         world.getPlayer().getJournal().addQuestEntries("klisk_trade", "traded");

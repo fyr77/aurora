@@ -147,6 +147,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                 if (returnCode == 0) {
                     // no quest
                     world.getReputation().updateReputation(KliskGenerator.NAME, HumanityGenerator.NAME, -1);
+                    world.getPlayer().getJournal().addQuestEntries("embassies", "klisk_quest_refused");
 
                 } else {
                     // accepts a quest
