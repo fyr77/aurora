@@ -33,6 +33,7 @@ import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.*;
 
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -71,6 +72,16 @@ public class KliskGenerator implements WorldGeneratorPart {
 
                 if (flags.containsKey("klisk_trader_drone.withdraw")) {
                     // remove trader drone
+                    for (Iterator<SpaceObject> iter = ((StarSystem)world.getGlobalVariables().get("solar_system")).getShips().iterator(); iter.hasNext(); ) {
+                        SpaceObject so = iter.next();
+                        if (so.getName().equals("Klisk trade probe")) {
+                            iter.remove();
+                            break;
+                        }
+                    }
+
+                    world.getGlobalVariables().put("klisk_trader_drone.result", "withdraw");
+                    world.getPlayer().getJournal().addQuestEntries("klisk_trader_drone", "withdrawed");
                 }
 
                 if (world.getGlobalVariables().containsKey("klisk_trade.result")) {

@@ -147,7 +147,7 @@ public class BorkGenerator implements WorldGeneratorPart {
          }
          });*/
 
-        world.addListener(new BorkShipGenerator(0.5, 3, null, borkRace.getDefaultFactory(), Configuration.getIntProperty("encounter.bork_pirates.count")));
+        world.addListener(new BorkShipGenerator(Configuration.getDoubleProperty("encounter.bork_pirates_chance"), 3, null, borkRace.getDefaultFactory(), Configuration.getIntProperty("encounter.bork_pirates.count")));
 
         world.getRaces().put(borkRace.getName(), borkRace);
     }
