@@ -1,6 +1,12 @@
-VERSION 0.2.2
+VERSION 0.2.3
 
 IN PROGRESS...
+
+=================================================
+
+VERSION 0.2.2
+
+01.04.2014
 
 + 2 new music tracks
 + Cheat to skip dungeons
