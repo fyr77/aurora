@@ -209,7 +209,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                         break;
                     case 4:
                         // free info about colony planet
-                        world.getGlobalVariables().put("klisk.planet_info", true);
+                        world.getGlobalVariables().put("klisk.planet_info", "0");
                         break;
                     case 10:
                         // decided to take time

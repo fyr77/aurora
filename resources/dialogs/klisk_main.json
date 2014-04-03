@@ -33,7 +33,8 @@
           "replyConditions": [
             {
               "name": "klisk.planet_info",
-              "type": "SET"
+              "type": "EQUAL",
+              "value" : "0"
             },
               {
                   "name": "planet_info",

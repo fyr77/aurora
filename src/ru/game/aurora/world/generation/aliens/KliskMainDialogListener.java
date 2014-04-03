@@ -50,6 +50,11 @@ public class KliskMainDialogListener implements DialogListener {
 ///////
         }
 
+        if (flags.containsKey("planet_info")) {
+            world.getPlayer().getJournal().addQuestEntries("colony_search", "klisk_help");
+            world.getGlobalVariables().put("klisk.planet_info", "1");
+        }
+
         if (returnCode >= 100 && returnCode <= 500) {
             if (flags.containsKey("klisk.discount")) {
                 world.getGlobalVariables().put("klisk.discount", 10);
@@ -72,8 +77,7 @@ public class KliskMainDialogListener implements DialogListener {
             }
 
 
-            if (flags.containsKey("planet_info")) {
-                world.getPlayer().getJournal().addQuestEntries("colony_search", "klisk_help");
+            if (flags.containsKey("planet_info") || world.getGlobalVariables().containsKey("klisk.planet_info")) {
                 if (flags.containsKey("base_info")) {
                     world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("klisk_minimal");
                 } else {
