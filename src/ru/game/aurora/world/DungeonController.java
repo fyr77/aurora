@@ -196,7 +196,8 @@ public class DungeonController implements Serializable {
                 continue;
             }
 
-            if (p.getX() != x || p.getY() != y) {
+            if ((int) BasePositionable.getDistance(x, y, p.getX(), p.getY()) != 0
+                    && (!map.isWrapped() || (int) BasePositionable.getDistanceWrapped(x, y, p.getX(), p.getY(), map.getWidthInTiles(), map.getHeightInTiles()) != 0)) {
                 continue;
             }
             p.onPickedUp(world);

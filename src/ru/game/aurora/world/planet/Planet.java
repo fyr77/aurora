@@ -137,8 +137,24 @@ public class Planet extends BasePlanet implements IDungeon {
         if (surface == null) {
             createSurface();
         }
-        while (!surface.isTilePassable(EngineUtils.wrap(x, surface.getWidthInTiles()), y)) {
-            x++;
+        int radius = 0;
+        outer:
+        while (true) {
+            for (int dy = -radius; dy <= radius; ++dy) {
+                for (int dx = -radius; dx <= radius; ++dx) {
+
+                    if (surface.isTilePassable(EngineUtils.wrap(x + dx, surface.getWidthInTiles()), EngineUtils.wrap(y + dy, surface.getHeightInTiles()))) {
+                        x = x + dx;
+                        y = y + dy;
+                        break outer;
+                    }
+                }
+            }
+            ++radius;
+
+            if (radius >= Math.min(surface.getWidthInTiles(), surface.getHeightInTiles())) {
+                throw new IllegalStateException("Whole planet surface is not passable, can not place object");
+            }
         }
 
         p.setPos(x, y);
