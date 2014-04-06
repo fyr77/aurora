@@ -87,6 +87,18 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
 
     }
 
+    public static void removeScout(World world) {
+        StarSystem target = (StarSystem) world.getGlobalVariables().get("rogues.damaged_scout_found");
+        world.getGlobalVariables().remove("rogues.damaged_scout_found");
+        for (Iterator<SpaceObject> iter = target.getShips().iterator(); iter.hasNext(); ) {
+            SpaceObject so = iter.next();
+            if (so.getName().equals("Rogue scout")) {
+                iter.remove();
+                return;
+            }
+        }
+    }
+
     @Override
     public void updateWorld(World world) {
 

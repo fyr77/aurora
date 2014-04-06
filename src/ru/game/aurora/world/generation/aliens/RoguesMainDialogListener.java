@@ -1,5 +1,6 @@
 package ru.game.aurora.world.generation.aliens;
 
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
@@ -57,6 +58,18 @@ public class RoguesMainDialogListener implements DialogListener {
 
         if (flags.containsKey("war_help")) {
             world.getGlobalVariables().put("rogues.war_help", true);
+        }
+
+        if (returnCode == 200 || returnCode == 202) {
+            world.getPlayer().changeCredits(world, Configuration.getIntProperty("quest.damaged_rogue_scout.reward"));
+            DamagedRoguesScoutEventGenerator.removeScout(world);
+            world.getGlobalVariables().put("rogues.damage_scout_result", "help");
+        }
+
+        if (returnCode == 201) {
+            world.getReputation().updateReputation(RoguesGenerator.NAME, HumanityGenerator.NAME, 1);
+            DamagedRoguesScoutEventGenerator.removeScout(world);
+            world.getGlobalVariables().put("rogues.damage_scout_result", "help");
         }
     }
 }
