@@ -13,6 +13,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.SaveFlagsDialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
@@ -36,7 +37,7 @@ public class AlienHomeworld extends BasePlanet {
 
     private String spriteName;
 
-    private transient Map<String, String> dialogFlags = null;
+    private Map<String, String> dialogFlags = null;
 
     public AlienHomeworld(String spriteName, AlienRace ownerRace, Dialog customDialog, int size, int y, StarSystem owner, PlanetAtmosphere atmosphere, int x, PlanetCategory cat) {
         super(x, y, size, owner, atmosphere, cat);
@@ -56,6 +57,7 @@ public class AlienHomeworld extends BasePlanet {
     public void enter(World world) {
         if (dialogFlags == null) {
             dialogFlags = new HashMap<>();
+            dialog.addListener(new SaveFlagsDialogListener(dialogFlags));
         }
         dialogFlags.put("reputation", String.valueOf(world.getReputation().getReputation(ownerRace.getName(), HumanityGenerator.NAME)));
         world.addOverlayWindow(dialog, dialogFlags);
