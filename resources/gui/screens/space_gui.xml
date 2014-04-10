@@ -79,7 +79,8 @@
             </panel>
 
             <!-- bottom panel containing log text -->
-            <panel height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69" childLayout="horizontal"
+            <panel height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69"
+                   childLayout="horizontal"
                    backgroundImage="sprites/gui/bottom_panel_galaxy.png" padding="20px,40px,20px,20px">
                 <panel width="324px"/>
                 <control id="log_list" name="listBox" vertical="on" horizontal="on" displayItems="3"
@@ -89,7 +90,7 @@
                     <panel height="20px"/>
                     <text id="stardate_text" style="button-font" width="83px"/>
                     <panel height="15px"/>
-                    <text id="ship_coordinates" style="button-font" text="${gui.space.ship_coords}" />
+                    <text id="ship_coordinates" style="button-font" text="${gui.space.ship_coords}"/>
                 </panel>
             </panel>
         </layer>
@@ -165,7 +166,8 @@
             </panel>
 
             <!-- bottom panel containing weapon buttons and log text -->
-            <panel height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
+            <panel height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69"
+                   childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
                    padding="12px,20px,5px,15px">
                 <control id="weapon_0_button" name="image_button" label="" width="64px" height="64px">
                     <interact onClick="weaponClicked(0)"/>
@@ -222,8 +224,10 @@
         </layer>
         <!--hint layer -->
         <layer childLayout="absolute">
-            <panel id="hint-panel" visible="false" childLayout="vertical" padding="5px,25px,5px,25px" backgroundColor="#aa7f4dff">
-                <text id="content" style="button-font" text="empty" align="center" valign="center"/>
+            <panel id="hint-panel" width="200" visible="false" childLayout="vertical" padding="5px,25px,5px,25px"
+                   backgroundColor="#aa7f4dff">
+                <text id="content" style="button-font" width="90%" wrap="true" text="empty" align="center"
+                      valign="center"/>
             </panel>
         </layer>
     </screen>
