@@ -24,11 +24,23 @@
                padding="5,5,5,75"
                childLayout="horizontal">
                 <panel width="25px"/>
-                <control name="icon_and_count" id="sci_count" icon="resources/sprites/gui/sci_count.png" width="100px" height="50px"/>
+                <control name="icon_and_count" id="sci_count" icon="resources/sprites/gui/sci_count.png" width="100px" height="50px">
+                    <effect>
+                        <onHover name="custom-hint" targetElement="hint-panel" hintText="${hints.space.scientists}"/>
+                    </effect>
+                </control>
                 <panel width="10px"/>
-                <control name="icon_and_count" id="engi_count" icon="resources/sprites/gui/engi_count.png" width="100px" height="50px"/>
+                <control name="icon_and_count" id="engi_count" icon="resources/sprites/gui/engi_count.png" width="100px" height="50px">
+                    <effect>
+                        <onHover name="custom-hint" targetElement="hint-panel" hintText="${hints.space.engineers}"/>
+                    </effect>
+                </control>
                 <panel width="10px"/>
-                <control name="icon_and_count" id="mil_count" icon="resources/sprites/gui/mil_count.png" width="100px" height="50px"/>
+                <control name="icon_and_count" id="mil_count" icon="resources/sprites/gui/mil_count.png" width="100px" height="50px">
+                    <effect>
+                        <onHover name="custom-hint" targetElement="hint-panel" hintText="${hints.space.military}"/>
+                    </effect>
+                </control>
             </panel>
         </panel>
     </controlDefinition>

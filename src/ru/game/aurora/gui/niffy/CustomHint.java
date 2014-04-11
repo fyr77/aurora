@@ -1,11 +1,15 @@
 package ru.game.aurora.gui.niffy;
 
-import de.lessvoid.nifty.*;
-import de.lessvoid.nifty.effects.*;
-import de.lessvoid.nifty.elements.*;
-import de.lessvoid.nifty.elements.render.*;
-import de.lessvoid.nifty.render.*;
-import de.lessvoid.nifty.tools.*;
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.effects.EffectImpl;
+import de.lessvoid.nifty.effects.EffectProperties;
+import de.lessvoid.nifty.effects.Falloff;
+import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.render.TextRenderer;
+import de.lessvoid.nifty.render.NiftyRenderEngine;
+import de.lessvoid.nifty.tools.SizeValue;
+import de.lessvoid.nifty.tools.TargetElementResolver;
+import ru.game.aurora.gui.GUI;
 
 /**
  * Date: 29.03.2014
@@ -33,8 +37,9 @@ public class CustomHint implements EffectImpl {
             if (hintText != null) {
                 targetElement.findElementByName("content").getRenderer(TextRenderer.class).setText(hintText);
             }
-            targetElement.setConstraintX(new SizeValue(element.getX() + element.getWidth() - 50 + "px"));
-            targetElement.setConstraintY(new SizeValue(element.getY() + element.getHeight() - 50 + "px"));
+
+            targetElement.setConstraintX(new SizeValue(Math.min(GUI.getInstance().getNifty().getNiftyMouse().getX(), r.getWidth() - targetElement.getWidth() - 10)+ "px"));
+            targetElement.setConstraintY(new SizeValue(Math.min(GUI.getInstance().getNifty().getNiftyMouse().getY(), r.getHeight() - targetElement.getHeight() - 10) + "px"));
             targetElement.show();
             nifty.getCurrentScreen().layoutLayers();
         }
