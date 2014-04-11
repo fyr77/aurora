@@ -604,11 +604,49 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
 
             // drawing rect that shows radius of current weapon
-            g.drawRect((camera.getNumTilesX() / 2 - selectedWeaponRange + 1) * camera.getTileWidth() + camera.getViewportX()
+            /*g.drawRect((camera.getNumTilesX() / 2 - selectedWeaponRange + 1) * camera.getTileWidth() + camera.getViewportX()
                     , (camera.getNumTilesY() / 2 - selectedWeaponRange + 1) * camera.getTileHeight() + camera.getViewportY()
                     , (2 * selectedWeaponRange - 1) * camera.getTileWidth()
                     , (2 * selectedWeaponRange - 1) * camera.getTileHeight());
+            */
 
+            //now it's 'circle'... sort of...
+            float w = camera.getTileWidth();
+            float h = camera.getTileHeight();
+            int vx = camera.getViewportX();
+            int vy = camera.getViewportY();
+            float cx = camera.getNumTilesX()/2;
+            float cy = camera.getNumTilesY()/2;
+            for (int y = -selectedWeaponRange; y < selectedWeaponRange + 1; y++) {
+                for (int x = -selectedWeaponRange; x < selectedWeaponRange + 1; x++) {
+                    if (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= selectedWeaponRange) {
+                        if (Math.sqrt(Math.pow(x - 1, 2) + Math.pow(y, 2)) > selectedWeaponRange) {
+                            g.drawLine((cx + x) * w + vx,
+                                       (cy + y) * h + vy,
+                                       (cx + x) * w + vx,
+                                       (cy + y + 1) * h + vy);
+                        }
+                        if (Math.sqrt(Math.pow(x + 1, 2) + Math.pow(y, 2)) > selectedWeaponRange) {
+                            g.drawLine((cx + x + 1) * w + vx,
+                                       (cy + y) * h + vy,
+                                       (cx + x + 1) * w + vx,
+                                       (cy + y + 1) * h + vy);
+                        }
+                        if (Math.sqrt(Math.pow(x, 2) + Math.pow(y - 1, 2)) > selectedWeaponRange) {
+                            g.drawLine((cx + x) * w + vx,
+                                       (cy + y) * h + vy,
+                                       (cx + x + 1) * w + vx,
+                                       (cy + y) * h + vy);
+                        }
+                        if (Math.sqrt(Math.pow(x, 2) + Math.pow(y + 1, 2)) > selectedWeaponRange) {
+                            g.drawLine((cx + x) * w + vx,
+                                       (cy + y + 1) * h + vy,
+                                       (cx + x + 1) * w + vx,
+                                       (cy + y + 1) * h + vy);
+                        }
+                    }
+                }
+            }
         }
 
         g.setColor(Color.red);
