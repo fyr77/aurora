@@ -55,7 +55,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
         humans.setHomeworld(solarSystem);
         // generate solar system somewhere in lower third of a galaxy
         world.getGalaxyMap().addObjectAndSetTile(solarSystem
-                , CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesX())
+                , CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesX() / 4 + world.getGalaxyMap().getTilesX() / 3)
                 , CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesY()) / 3 +  world.getGalaxyMap().getTilesY() / 2);
         world.getGlobalVariables().put("solar_system", solarSystem);
 

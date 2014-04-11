@@ -131,7 +131,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
         });
 
         StarSystem homeworld = generateRoguesWorld(world, 0, 0, rogueRace);
-        world.getGalaxyMap().addObjectAtDistance(homeworld, (Positionable) world.getGlobalVariables().get("solar_system"), Configuration.getIntProperty("world.galaxy.rogues_homeworld_distance"));
+        world.getGalaxyMap().addObjectAtDistance(homeworld, (Positionable) world.getGlobalVariables().get("solar_system"),20 + CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.galaxy.rogues_homeworld_distance")));
         world.getGlobalVariables().put("rogues.homeworld", homeworld.getCoordsString());
         homeworld.setQuestLocation(true);
         rogueRace.setHomeworld(homeworld);

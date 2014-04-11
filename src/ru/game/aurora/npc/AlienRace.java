@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.npc;
 
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -19,7 +20,7 @@ public class AlienRace implements Serializable {
 
     private StarSystem homeworld;
 
-    private int travelDistance = 5;
+    private int travelDistance = CommonRandom.getRandom().nextInt(55) + 30;
 
     /**
      * Default dialog is used when hailing random encounter ship of this race
@@ -29,6 +30,9 @@ public class AlienRace implements Serializable {
     private String shipSprite;
 
     private NPCShipFactory defaultFactory;
+
+    // set to true after first communication, if set to true - this race are is drawn on global map
+    private boolean isKnown = false;
 
     public AlienRace(String name, String shipSprite, Dialog defaultDialog) {
         this.name = name;
@@ -82,5 +86,13 @@ public class AlienRace implements Serializable {
 
     public void setDefaultDialog(Dialog defaultDialog) {
         this.defaultDialog = defaultDialog;
+    }
+
+    public boolean isKnown() {
+        return isKnown;
+    }
+
+    public void setKnown(boolean known) {
+        isKnown = known;
     }
 }

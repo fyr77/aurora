@@ -283,7 +283,7 @@ public class ResourceManager {
 
         Image image;
         try {
-            image = new Image(path);
+            image = new Image(path, false, Image.FILTER_NEAREST);
         } catch (SlickException e) {
             throw new SlickException("Could not load image", e);
         }

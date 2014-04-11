@@ -13,6 +13,7 @@ import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GlobalThreadPool;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.npc.AlienRaceFirstCommunicationListener;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.CrewChangeListener;
 import ru.game.aurora.world.World;
@@ -78,6 +79,8 @@ public class WorldGenerator implements Runnable {
         for (WorldGeneratorPart part : alienGenerators) {
             part.updateWorld(world);
         }
+
+        world.addListener(new AlienRaceFirstCommunicationListener());
     }
 
     private void createArtifactsAndAnomalies(World world) {

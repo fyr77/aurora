@@ -9,13 +9,23 @@ import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Movable;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.aliens.GardenerGenerator;
+import ru.game.aurora.world.generation.aliens.KliskGenerator;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
+import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,6 +44,16 @@ public class StarMapController implements ScreenController
     private Camera myCamera;
 
     private GalaxyMap galaxyMap;
+
+    private static final Map<String, Color> alienColorMap;
+
+    static {
+        alienColorMap = new HashMap<>();
+        alienColorMap.put(KliskGenerator.NAME, new Color(255, 190, 0, 50));
+        alienColorMap.put(RoguesGenerator.NAME, new Color(89, 81, 113, 50));
+        alienColorMap.put(ZorsanGenerator.NAME, new Color(44, 20, 38, 50));
+        alienColorMap.put(BorkGenerator.NAME, new Color(180, 150, 82, 50));
+    }
 
     public StarMapController(World world) {
         this.world = world;
@@ -55,6 +75,36 @@ public class StarMapController implements ScreenController
                     g.drawString("Solar system", myCamera.getXCoord(j), myCamera.getYCoord(i));
                 }
             }
+        }
+
+        // draw alien areas
+
+        for (AlienRace race : world.getRaces().values()) {
+            if (race.getName().equals(HumanityGenerator.NAME)
+                    || race.getName().equals(GardenerGenerator.NAME)) {
+                continue;
+            }
+
+            final StarSystem homeworld = race.getHomeworld();
+            if (homeworld == null) {
+                continue;
+            }
+            if (!race.isKnown()) {
+             //   continue;
+            }
+
+            Color alienColor = alienColorMap.get(race.getName());
+            if (alienColor == null) {
+                alienColor = Color.gray;
+            }
+            g.setColor(alienColor);
+            final float width = myCamera.getTileWidth() * race.getTravelDistance();
+            final float height = myCamera.getTileHeight() * race.getTravelDistance();
+            g.fillOval(myCamera.getXCoord(homeworld.getX()) - width / 2, myCamera.getYCoord(homeworld.getY()) - height / 2 , width, height);
+            g.setColor(alienColor.brighter());
+            g.drawOval(myCamera.getXCoord(homeworld.getX()) - width / 2, myCamera.getYCoord(homeworld.getY()) - height / 2, width, height);
+            g.setColor(new Color(alienColor.r, alienColor.g, alienColor.b));
+            g.drawString(race.getName(), myCamera.getXCoord(homeworld.getX()), myCamera.getYCoord(homeworld.getY()));
         }
 
     }

@@ -115,7 +115,7 @@ public class BorkGenerator implements WorldGeneratorPart {
 
         ss.setPlanets(planets);
         ss.setRadius(Math.max((int) (12 * 1.5), 10));
-        world.getGalaxyMap().addObjectAtDistance(ss, (Positionable) world.getGlobalVariables().get("solar_system"), Configuration.getIntProperty("world.galaxy.bork_homeworld_distance"));
+        world.getGalaxyMap().addObjectAtDistance(ss, (Positionable) world.getGlobalVariables().get("solar_system"), 20 + CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.galaxy.bork_homeworld_distance")));
         world.getGlobalVariables().put("bork.homeworld", ss.getCoordsString());
         borkRace.setHomeworld(ss);
         ss.setQuestLocation(true);
@@ -135,17 +135,6 @@ public class BorkGenerator implements WorldGeneratorPart {
                 return ship;
             }
         });
-
-
-        /**   mainDialog.setListener(new DialogListener() {
-
-         private static final long serialVersionUID = -4476192487724362451L;
-
-         @Override public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-         // after first dialog swarm becomes hostile
-         borkRace.setRelation(world.getPlayer().getShip().getRace(), 0);
-         }
-         });*/
 
         world.addListener(new BorkShipGenerator(Configuration.getDoubleProperty("encounter.bork_pirates_chance"), 3, null, borkRace.getDefaultFactory(), Configuration.getIntProperty("encounter.bork_pirates.count")));
 

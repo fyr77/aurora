@@ -264,7 +264,7 @@ public class KliskGenerator implements WorldGeneratorPart {
 
             world.addListener(new StandardAlienShipEvent(kliskRace));
             final GalaxyMapObject solar_system = (GalaxyMapObject) world.getGlobalVariables().get("solar_system");
-            world.getGalaxyMap().addObjectAtDistance(kliskHomeworld, solar_system, Configuration.getIntProperty("world.galaxy.klisk_homeworld_distance"));
+            world.getGalaxyMap().addObjectAtDistance(kliskHomeworld, solar_system, 20 + CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.galaxy.klisk_homeworld_distance")));
             world.getRaces().put(kliskRace.getName(), kliskRace);
             world.getGlobalVariables().put("klisk.homeworld", kliskHomeworld.getCoordsString());
 

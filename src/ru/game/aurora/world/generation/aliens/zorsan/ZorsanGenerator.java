@@ -1,6 +1,7 @@
 package ru.game.aurora.world.generation.aliens.zorsan;
 
 import org.newdawn.slick.Color;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
@@ -214,10 +215,10 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         });
 
         StarSystem homeworld = generateHomeworld(world, 3, 8, race);
-        world.getGalaxyMap().addObjectAtDistance(homeworld, (Positionable) world.getGlobalVariables().get("solar_system"), Configuration.getIntProperty("world.galaxy.zorsan_homeworld_distance"));
+        world.getGalaxyMap().addObjectAtDistance(homeworld, (Positionable) world.getGlobalVariables().get("solar_system"),20 + CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.galaxy.zorsan_homeworld_distance")));
         world.getGlobalVariables().put("zorsan.homeworld", homeworld.getCoordsString());
 
-        race.setTravelDistance(5);
+        race.setTravelDistance(50);
         world.addListener(new StandardAlienShipEvent(race));
         race.setHomeworld(homeworld);
         world.addListener(new SingleStarsystemShipSpawner(race.getDefaultFactory(), 0.8, race.getHomeworld()));

@@ -17,10 +17,13 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 public class GardenerGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = -2142318077060757284L;
 
+    public static final String NAME = "Gardeners";
+
     @Override
     public void updateWorld(World world) {
         final Dialog dialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/gardener_default_dialog.json"));
-        AlienRace gardenerRace = new AlienRace("Gardeners", "gardener_ship", dialog);
+
+        AlienRace gardenerRace = new AlienRace(NAME, "gardener_ship", dialog);
 
         world.getRaces().put(gardenerRace.getName(), gardenerRace);
 
