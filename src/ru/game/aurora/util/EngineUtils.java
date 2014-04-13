@@ -29,7 +29,7 @@ public class EngineUtils {
     }
 
     public static void setImageForGUIElement(Element element, Image image) {
-        element.getRenderer(ImageRenderer.class).setImage(image != null ? new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(image)): null);
+        element.getRenderer(ImageRenderer.class).setImage(image != null ? new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(image)) : null);
     }
 
     public static void setTextForGUIElement(Element element, String text) {
@@ -54,11 +54,11 @@ public class EngineUtils {
     public static Color lightenColor(Color color) {
         float[] hsb = new float[3];
         java.awt.Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
-        hsb[0]+=0.05-(Math.random()/10);
-        if (hsb[0]>1) {
-            hsb[0]-=1;
-        } else if (hsb[0]<0) {
-            hsb[0]+=1;
+        hsb[0] += 0.05 - (Math.random() / 10);
+        if (hsb[0] > 1) {
+            hsb[0] -= 1;
+        } else if (hsb[0] < 0) {
+            hsb[0] += 1;
         }
         hsb[2] = (float) Math.min(1.0, hsb[2] * 1.25);
         int rgb = java.awt.Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
@@ -68,10 +68,49 @@ public class EngineUtils {
     public static Color darkenColor(Color color, float coeff) {
         float[] hsb = new float[3];
         java.awt.Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
-        hsb[1]*=(coeff*1.1);
-        hsb[2]*=coeff;
+        hsb[1] *= (coeff * 1.1);
+        hsb[2] *= coeff;
         int rgb = java.awt.Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
         return new Color(rgb);
+    }
+
+    public static void drawTileCircleCentered(Graphics g, Camera camera, int range) {
+        float w = camera.getTileWidth();
+        float h = camera.getTileHeight();
+        int vx = camera.getViewportX();
+        int vy = camera.getViewportY();
+        float cx = camera.getNumTilesX() / 2;
+        float cy = camera.getNumTilesY() / 2;
+        for (int y = -range; y < range + 1; y++) {
+            for (int x = -range; x < range + 1; x++) {
+                if (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= range) {
+                    if (Math.sqrt(Math.pow(x - 1, 2) + Math.pow(y, 2)) > range) {
+                        g.drawLine((cx + x) * w + vx,
+                                (cy + y) * h + vy,
+                                (cx + x) * w + vx,
+                                (cy + y + 1) * h + vy);
+                    }
+                    if (Math.sqrt(Math.pow(x + 1, 2) + Math.pow(y, 2)) > range) {
+                        g.drawLine((cx + x + 1) * w + vx,
+                                (cy + y) * h + vy,
+                                (cx + x + 1) * w + vx,
+                                (cy + y + 1) * h + vy);
+                    }
+                    if (Math.sqrt(Math.pow(x, 2) + Math.pow(y - 1, 2)) > range) {
+                        g.drawLine((cx + x) * w + vx,
+                                (cy + y) * h + vy,
+                                (cx + x + 1) * w + vx,
+                                (cy + y) * h + vy);
+                    }
+                    if (Math.sqrt(Math.pow(x, 2) + Math.pow(y + 1, 2)) > range) {
+                        g.drawLine((cx + x) * w + vx,
+                                (cy + y + 1) * h + vy,
+                                (cx + x + 1) * w + vx,
+                                (cy + y + 1) * h + vy);
+                    }
+                }
+            }
+        }
     }
 
     public static void drawCircleCentered(Graphics graphics, float x, float y, int radius, Color c, boolean filled) {
@@ -85,15 +124,15 @@ public class EngineUtils {
 
     public static void drawDashedCircleCentered(Graphics graphics, float x, float y, int radius, Color c) {
         graphics.setColor(c);
-        int segments = radius/5;
-        if (segments%2==1) {
+        int segments = radius / 5;
+        if (segments % 2 == 1) {
             segments++;
         }
-        float angle = 360/(float)segments;
+        float angle = 360 / (float) segments;
         boolean b = true;
         for (int i = 0; i < segments; ++i) {
             if (b) {
-                graphics.drawArc(x-radius,y-radius,radius*2,radius*2, angle*i,angle*(i+1));
+                graphics.drawArc(x - radius, y - radius, radius * 2, radius * 2, angle * i, angle * (i + 1));
             }
             b = !b;
         }

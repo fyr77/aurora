@@ -463,9 +463,13 @@ public class DungeonController implements Serializable {
 
             landingParty.draw(container, graphics, camera);
 
-            if (mode == MODE_SHOOT && target != null) {
-                // draw target mark
-                graphics.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoordWrapped(target.getX(), map.getWidthInTiles()), camera.getYCoordWrapped(target.getY(), map.getHeightInTiles()));
+            if (mode == MODE_SHOOT) {
+                EngineUtils.drawTileCircleCentered(graphics, camera, landingParty.getWeapon().getRange());
+
+                if (target != null) {
+                    // draw target mark
+                    graphics.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoordWrapped(target.getX(), map.getWidthInTiles()), camera.getYCoordWrapped(target.getY(), map.getHeightInTiles()));
+                }
             }
         }
         if (currentEffect != null) {
