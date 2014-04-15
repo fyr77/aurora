@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+    <registerEffect name="starmap-hint" class="ru.game.aurora.gui.StarmapHintController"/>
     <screen id="star_map_screen" controller="ru.game.aurora.gui.StarMapController">
         <layer childLayout="absolute">
             <control id="star_map_window" name="window" title="${gui.map}" hideOnClose="true" width="90%"
                      height="80%"
                      x="5%" y="10%">
                 <panel childLayout="vertical" width="100%" height="100%">
-                    <panel id="map_panel" childLayout="center" width="100%" height="*"/>
+                    <panel id="map_panel" childLayout="center" width="100%" height="*">
+                        <effect>
+                            <onHover name="starmap-hint" targetElement="starmap-hint-panel"/>
+                        </effect>
+                    </panel>
                     <panel height="10px"/>
                     <panel childLayout="horizontal" height="45px">
                         <panel width="85%"/>
@@ -16,6 +21,20 @@
                     </panel>
                 </panel>
             </control>
+        </layer>
+
+        <!--hint layer -->
+        <layer childLayout="absolute">
+            <panel id="starmap-hint-panel" width="200" visible="false" childLayout="vertical"
+                   padding="5px,25px,5px,25px"
+                   backgroundColor="#aa7f4dff">
+                <text id="star_name" style="button-font" width="90%" wrap="true" text="empty" align="center"
+                      valign="center"/>
+                <text id="explored_progress" style="button-font" width="90%" wrap="true" text="empty" align="center"
+                      valign="center"/>
+                <text id="comment" style="button-font" width="90%" wrap="true" text="empty" align="center"
+                      valign="center"/>
+            </panel>
         </layer>
     </screen>
 </nifty>

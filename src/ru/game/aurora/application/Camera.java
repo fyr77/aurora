@@ -134,11 +134,17 @@ public class Camera implements Serializable {
     }
 
     public int getPointTileX(int x) {
-        return Math.round(x / tileWidth);
+        if (x < viewportX || x > viewportX + viewportTilesX * tileWidth) {
+            return -1;
+        }
+        return Math.round((x - viewportX) / tileWidth);
     }
 
     public int getPointTileY(int y) {
-        return Math.round(y / tileHeight);
+        if (y < viewportY || y > viewportY + viewportTilesY * tileHeight) {
+            return -1;
+        }
+        return Math.round((y - viewportY) / tileHeight);
     }
 
     public IMovable getTarget() {

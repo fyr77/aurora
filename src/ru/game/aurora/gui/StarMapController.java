@@ -11,6 +11,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Movable;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
@@ -33,8 +34,7 @@ import java.util.Map;
  * Date: 31.03.14
  * Time: 17:24
  */
-public class StarMapController implements ScreenController
-{
+public class StarMapController implements ScreenController {
     private World world;
 
     private Element mapPanel;
@@ -90,7 +90,7 @@ public class StarMapController implements ScreenController
                 continue;
             }
             if (!race.isKnown()) {
-             //   continue;
+                //   continue;
             }
 
             Color alienColor = alienColorMap.get(race.getName());
@@ -100,7 +100,7 @@ public class StarMapController implements ScreenController
             g.setColor(alienColor);
             final float width = myCamera.getTileWidth() * race.getTravelDistance();
             final float height = myCamera.getTileHeight() * race.getTravelDistance();
-            g.fillOval(myCamera.getXCoord(homeworld.getX()) - width / 2, myCamera.getYCoord(homeworld.getY()) - height / 2 , width, height);
+            g.fillOval(myCamera.getXCoord(homeworld.getX()) - width / 2, myCamera.getYCoord(homeworld.getY()) - height / 2, width, height);
             g.setColor(alienColor.brighter());
             g.drawOval(myCamera.getXCoord(homeworld.getX()) - width / 2, myCamera.getYCoord(homeworld.getY()) - height / 2, width, height);
             g.setColor(new Color(alienColor.r, alienColor.g, alienColor.b));
@@ -121,6 +121,24 @@ public class StarMapController implements ScreenController
         myCamera.setTarget(new Movable(world.getGalaxyMap().getTilesX() / 2, world.getGalaxyMap().getTilesY() / 2));
     }
 
+    public GalaxyMapObject getGalaxyMapObjectAtMouseCoords() {
+        int x = GUI.getInstance().getNifty().getNiftyMouse().getX() - mapPanel.getX();
+        int y = GUI.getInstance().getNifty().getNiftyMouse().getY() - mapPanel.getY();
+
+        if (!myCamera.isInViewportScreen(x, y)) {
+            return null;
+        }
+
+        x = myCamera.getPointTileX(x);
+        y = myCamera.getPointTileY(y);
+        for (GalaxyMapObject gmo : world.getGalaxyMap().getObjects()) {
+            if (BasePositionable.getDistance(gmo.getX(), gmo.getY(), x, y) < 3) {
+                return gmo;
+            }
+        }
+        return null;
+    }
+
     private Image createGlobalMap() throws SlickException {
         final Ship ship = world.getPlayer().getShip();
 
@@ -128,7 +146,7 @@ public class StarMapController implements ScreenController
         Graphics g = result.getGraphics();
         draw(null, g);
         final Image aurora = ResourceManager.getInstance().getImage("aurora");
-        g.drawImage(aurora, myCamera.getXCoord(ship.getX()) - aurora.getWidth() / 2 , myCamera.getYCoord(ship.getY()) - aurora.getHeight() / 2);
+        g.drawImage(aurora, myCamera.getXCoord(ship.getX()) - aurora.getWidth() / 2, myCamera.getYCoord(ship.getY()) - aurora.getHeight() / 2);
         g.flush();
         return result;
     }
