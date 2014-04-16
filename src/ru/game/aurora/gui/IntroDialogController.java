@@ -80,22 +80,34 @@ public class IntroDialogController implements ScreenController, Updatable {
     private void update() {
         final String bundleId = "intro/" + introDialog.id;
         IntroDialog.Statement currentStatement = introDialog.statements[statement];
-        EngineUtils.setTextForGUIElement(captionText, Localization.getText(bundleId, currentStatement.captionId));
+        EngineUtils.setTextForGUIElement(captionText, currentStatement.captionId != null ? Localization.getText(bundleId, currentStatement.captionId) : "");
         EngineUtils.setTextForGUIElement(mainText, "");
+        if (currentStatement.mainImageId != null) {
+            EngineUtils.setImageForGUIElement(imagePanel, currentStatement.mainImageId);
+        } else {
+            EngineUtils.setImageForGUIElement(imagePanel, introDialog.mainImageId);
+        }
 
         desiredString = Localization.getText(bundleId, currentStatement.textId);
-        if (isLeft) {
-            captionText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.left);
-            mainText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.left);
-            EngineUtils.setImageForGUIElement(leftPortrait, currentStatement.iconName);
-            leftPortrait.setVisible(true);
-            rightPortrait.setVisible(false);
+        if (currentStatement.iconName != null) {
+            if (isLeft) {
+                captionText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.left);
+                mainText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.left);
+                EngineUtils.setImageForGUIElement(leftPortrait, currentStatement.iconName);
+                leftPortrait.setVisible(true);
+                rightPortrait.setVisible(false);
+            } else {
+                captionText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.right);
+                mainText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.right);
+                EngineUtils.setImageForGUIElement(rightPortrait, currentStatement.iconName);
+                leftPortrait.setVisible(false);
+                rightPortrait.setVisible(true);
+            }
         } else {
-            captionText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.right);
-            mainText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.right);
-            EngineUtils.setImageForGUIElement(rightPortrait, currentStatement.iconName);
+            captionText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.center);
+            mainText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.center);
             leftPortrait.setVisible(false);
-            rightPortrait.setVisible(true);
+            rightPortrait.setVisible(false);
         }
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }

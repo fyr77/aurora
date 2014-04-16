@@ -12,13 +12,16 @@ import java.io.Reader;
  */
 public class IntroDialog {
     public static class Statement {
+        public final String mainImageId;
+
         public final String iconName;
 
         public final String captionId;
 
         public final String textId;
 
-        public Statement(String captionId, String iconName, String textId) {
+        public Statement(String mainImageId, String captionId, String iconName, String textId) {
+            this.mainImageId = mainImageId;
             this.captionId = captionId;
             this.iconName = iconName;
             this.textId = textId;
@@ -37,8 +40,7 @@ public class IntroDialog {
         this.statements = statements;
     }
 
-    public static IntroDialog load(String path)
-    {
+    public static IntroDialog load(String path) {
         InputStream is = IntroDialog.class.getClassLoader().getResourceAsStream(path);
         if (is == null) {
             throw new IllegalArgumentException("Can not load intro from null stream");

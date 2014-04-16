@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Creates internal data representation for an intro dialog based on given csv file
  * Csv file should have following format:
- * CAPTION;TEXT;IMAGE
+ * CAPTION;TEXT;PORTRAIT;MAIN IMAGE
  */
 
 public class CSVConverter {
@@ -22,18 +22,23 @@ public class CSVConverter {
     private static IntroDialog.Statement parseLine(Context context, String line) {
         String[] tokens = line.split(delimiter);
 
-        if (tokens.length != 3) {
+        if (tokens.length < 3) {
             System.err.println("Failed to convert line " + context.lineNumber);
             return null;
         }
 
-        final String captionId = context.id + "." + context.lineNumber + ".caption";
+        String captionId = null;
+        if (!tokens[0].isEmpty()) {
+            captionId = context.id + "." + context.lineNumber + ".caption";
+            context.text.put(captionId, tokens[0]);
+        }
+
         final String textId = context.id + "." + context.lineNumber + ".text";
 
-        context.text.put(captionId, tokens[0]);
+
         context.text.put(textId, tokens[1]);
 
-        return new IntroDialog.Statement(captionId, tokens[2], textId);
+        return new IntroDialog.Statement(tokens.length > 3 ? tokens[3] : null, captionId, tokens[2].isEmpty() ? null : tokens[2], textId);
     }
 
     public static void main(String[] args) {
