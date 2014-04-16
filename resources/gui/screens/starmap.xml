@@ -11,10 +11,13 @@
                         <effect>
                             <onHover name="starmap-hint" targetElement="starmap-hint-panel"/>
                         </effect>
+                        <interact onMouseOver="onMouseMoved()"/>
                     </panel>
                     <panel height="10px"/>
                     <panel childLayout="horizontal" height="45px">
                         <panel width="85%"/>
+                        <text id="mouse_pos" style="button-font" width="50px"/>
+                        <panel width="20px"/>
                         <control id="close_button" name="button" label="${gui.close}" height="45px">
                             <interact onClick="closeScreen()"/>
                         </control>

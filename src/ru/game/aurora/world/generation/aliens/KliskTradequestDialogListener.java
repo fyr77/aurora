@@ -1,12 +1,14 @@
 package ru.game.aurora.world.generation.aliens;
 
 import org.newdawn.slick.GameContainer;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
@@ -25,6 +27,14 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
 
     public KliskTradequestDialogListener(StarSystem targetSystem) {
         this.targetSystem = targetSystem;
+    }
+
+    @Override
+    public String getLocalizedMessageForStarSystem(GalaxyMapObject galaxyMapObject) {
+        if (galaxyMapObject == targetSystem) {
+            return Localization.getText("journal", "klisk_trade.title");
+        }
+        return null;
     }
 
     private void processArrival(World world, int returnCode) {
@@ -46,8 +56,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
 
     // this is a quest ship that will be used in target system
     // when it docks with the station, it will reset its dialog to a quest one
-    private class KliskQuestShip extends NPCShip
-    {
+    private class KliskQuestShip extends NPCShip {
 
         private static final long serialVersionUID = -5895915582359778144L;
 

@@ -1,18 +1,18 @@
 package ru.game.aurora.world.generation.quest;
 
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.util.Pair;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
-import ru.game.aurora.world.space.GardenersShip;
-import ru.game.aurora.world.space.NPCShip;
-import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.space.*;
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart {
 
     @Override
     public void updateWorld(World world) {
-        StarSystem lastBeaconLocation = WorldGenerator.generateRandomStarSystem(world, 7, 7, 2);
+        final StarSystem lastBeaconLocation = WorldGenerator.generateRandomStarSystem(world, 7, 7, 2);
         lastBeaconLocation.setFirstEnterDialog(Dialog.loadFromFile("dialogs/gardener_ship_detected.json"));
         lastBeaconLocation.setQuestLocation(true);
         world.getGalaxyMap().addObjectAtDistance(lastBeaconLocation, (Positionable) world.getGlobalVariables().get("solar_system"), 7);
@@ -50,9 +50,29 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart {
 
 
         AlienRace kliskRace = world.getRaces().get("Klisk");
-        NPCShip kliskShip = kliskRace.getDefaultFactory().createShip(KliskGenerator.STATION);
+        final NPCShip kliskShip = kliskRace.getDefaultFactory().createShip(KliskGenerator.STATION);
         lastBeaconLocation.setRandomEmptyPosition(kliskShip);
         lastBeaconLocation.getShips().add(kliskShip);
+
+        world.getListeners().add(new GameEventListener() {
+            private static final long serialVersionUID = -6110311603197327730L;
+
+            @Override
+            public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
+                if (ship == kliskShip) {
+                    isAlive = false;
+                }
+                return false;
+            }
+
+            @Override
+            public String getLocalizedMessageForStarSystem(GalaxyMapObject galaxyMapObject) {
+                if (galaxyMapObject == lastBeaconLocation) {
+                    return Localization.getText("journal", "last_beacon.title");
+                }
+                return null;
+            }
+        });
 
     }
 }

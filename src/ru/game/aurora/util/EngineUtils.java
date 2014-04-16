@@ -123,11 +123,15 @@ public class EngineUtils {
     }
 
     public static void drawDashedCircleCentered(Graphics graphics, float x, float y, int radius, Color c) {
-        graphics.setColor(c);
         int segments = radius / 5;
         if (segments % 2 == 1) {
             segments++;
         }
+        drawDashedCircleCentered(graphics, x, y, radius, c, segments);
+    }
+
+    public static void drawDashedCircleCentered(Graphics graphics, float x, float y, int radius, Color c, int segments) {
+        graphics.setColor(c);
         float angle = 360 / (float) segments;
         boolean b = true;
         for (int i = 0; i < segments; ++i) {

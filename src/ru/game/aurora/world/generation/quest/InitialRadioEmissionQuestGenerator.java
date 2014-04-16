@@ -253,7 +253,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         ResearchProjectDesc starInitialResearch = new StarResearchProject(brownStar);
         starInitialResearch.setReport(new ResearchReport("star_research", "brown_dwarf.report"));
         world.getPlayer().getResearchState().addNewAvailableProject(starInitialResearch);
-
+        starInitialResearch.getTargetStarSystems().add(brownStar);
         // add second quest in chain
 
         brownStar = WorldGenerator.generateRandomStarSystem(world, 12, 12);
@@ -268,6 +268,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         defenceProbe.setHostile(true);
         brownStar.getShips().add(defenceProbe);
         brownStar.setFirstEnterDialog(Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/rogues/rogue_beacon_found.json")));
+
 
         Dungeon beaconInternals = new Dungeon(world, new AuroraTiledMap("resources/maps/test.tmx"), brownStar);
 
@@ -302,6 +303,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         ResearchProjectDesc secondResearch = new StarResearchProject(brownStar);
         secondResearch.setReport(new ResearchReport("star_research", "brown_dwarf_2.report"));
         starInitialResearch.addNextResearch(secondResearch);
+        secondResearch.getTargetStarSystems().add(brownStar);
 
         world.getResearchAndDevelopmentProjects().getEarthResearchProjects().put("solar_energy", new EarthEnergyResearch());
         world.getResearchAndDevelopmentProjects().getResearchProjects().put(secondResearch.getId(), secondResearch);

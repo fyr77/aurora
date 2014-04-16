@@ -115,6 +115,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private String name;
 
+    // information about quests and events in this star system, used in starmap view
+    private transient String messageForStarMap;
+
     public StarSystem(String name, Star star, int globalMapX, int globalMapY) {
         this.name = name;
         this.star = star;
@@ -731,5 +734,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public String getCoordsString() {
         return String.format("[%d, %d]", globalMapX, globalMapY);
+    }
+
+    public String getMessageForStarMap() {
+        return messageForStarMap;
+    }
+
+    public void setMessageForStarMap(String messageForStarMap) {
+        this.messageForStarMap = messageForStarMap;
     }
 }

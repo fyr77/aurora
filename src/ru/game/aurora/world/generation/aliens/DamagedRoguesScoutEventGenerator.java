@@ -20,6 +20,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.quest.JournalEntry;
+import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
@@ -69,6 +70,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
             spawnedStarSystem.getShips().remove(ship);
             world.getGlobalVariables().remove("rogues.damaged_scout_found");
             ship = null;
+            isAlive = false;
         }
 
         @Override
@@ -84,7 +86,13 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
             return spawned;
         }
 
-
+        @Override
+        public String getLocalizedMessageForStarSystem(GalaxyMapObject galaxyMapObject) {
+            if (spawnedStarSystem == galaxyMapObject) {
+                return Localization.getText("journal", "damaged_rogues_scout.title");
+            }
+            return null;
+        }
     }
 
     public static void removeScout(World world) {

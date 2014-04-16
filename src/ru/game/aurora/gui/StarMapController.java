@@ -10,11 +10,9 @@ import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.BasePositionable;
-import ru.game.aurora.world.Movable;
-import ru.game.aurora.world.Ship;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.generation.aliens.GardenerGenerator;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
@@ -41,6 +39,8 @@ public class StarMapController implements ScreenController {
 
     private Element myWindow;
 
+    private Element mouseCoords;
+
     private Camera myCamera;
 
     private GalaxyMap galaxyMap;
@@ -60,6 +60,10 @@ public class StarMapController implements ScreenController {
         galaxyMap = world.getGalaxyMap();
     }
 
+    private void mark(Graphics g, GalaxyMapObject obj) {
+        EngineUtils.drawDashedCircleCentered(g, myCamera.getXCoord(obj.getX()) + myCamera.getTileWidth() / 2, myCamera.getYCoord(obj.getY()) + myCamera.getTileHeight() / 2, (int) (myCamera.getTileHeight() * 4), Color.green, 10);
+    }
+
     private void draw(GameContainer container, Graphics g) {
         g.setBackground(Color.black);
         g.clear();
@@ -67,13 +71,37 @@ public class StarMapController implements ScreenController {
         for (int i = 0; i < galaxyMap.getTilesY(); ++i) {
             for (int j = 0; j < galaxyMap.getTilesX(); ++j) {
                 GalaxyMapObject obj = galaxyMap.getObjectAt(j, i);
-                if (obj != null) {
-                    obj.drawOnGlobalMap(container, g, myCamera, j, i);
+                if (obj == null) {
+                    continue;
+                }
+                obj.drawOnGlobalMap(container, g, myCamera, j, i);
+
+                StringBuilder messageBuilder = new StringBuilder();
+                for (GameEventListener listener : world.getListeners()) {
+                    final String localizedMessageForStarSystem = listener.getLocalizedMessageForStarSystem(obj);
+                    if (localizedMessageForStarSystem != null) {
+                        messageBuilder.append(localizedMessageForStarSystem).append('\n');
+                        mark(g, obj);
+                    }
+                }
+
+                if (obj instanceof StarSystem) {
+                    ((StarSystem) obj).setMessageForStarMap(messageBuilder.toString());
                 }
                 if (solarSystem == obj) {
                     g.setColor(Color.yellow);
                     g.drawString("Solar system", myCamera.getXCoord(j), myCamera.getYCoord(i));
                 }
+            }
+        }
+
+        for (ResearchProjectState activeResearch : world.getPlayer().getResearchState().getCurrentProjects()) {
+            for (StarSystem ss : activeResearch.desc.getTargetStarSystems()) {
+                if (ss.getMessageForStarMap() == null || ss.getMessageForStarMap().isEmpty()) {
+                    mark(g, ss);
+                }
+
+                ss.setMessageForStarMap((ss.getMessageForStarMap() != null ? ss.getMessageForStarMap() + activeResearch.desc.getName() : activeResearch.desc.getName()));
             }
         }
 
@@ -119,6 +147,8 @@ public class StarMapController implements ScreenController {
         myCamera = new Camera(1, 1, world.getGalaxyMap().getTilesX() + 1, world.getGalaxyMap().getTilesY() + 1, newTileWidth, newTileHeight);
 
         myCamera.setTarget(new Movable(world.getGalaxyMap().getTilesX() / 2, world.getGalaxyMap().getTilesY() / 2));
+
+        mouseCoords = myWindow.findElementByName("mouse_pos");
     }
 
     public GalaxyMapObject getGalaxyMapObjectAtMouseCoords() {
@@ -131,12 +161,16 @@ public class StarMapController implements ScreenController {
 
         x = myCamera.getPointTileX(x);
         y = myCamera.getPointTileY(y);
+        double minDist = Double.POSITIVE_INFINITY;
+        GalaxyMapObject result = null;
         for (GalaxyMapObject gmo : world.getGalaxyMap().getObjects()) {
-            if (BasePositionable.getDistance(gmo.getX(), gmo.getY(), x, y) < 3) {
-                return gmo;
+            double newDist = BasePositionable.getDistance(gmo.getX(), gmo.getY(), x, y);
+            if (newDist < minDist) {
+                result = gmo;
+                minDist = newDist;
             }
         }
-        return null;
+        return minDist < 3 ? result : null;
     }
 
     private Image createGlobalMap() throws SlickException {
@@ -169,6 +203,20 @@ public class StarMapController implements ScreenController {
     @Override
     public void onEndScreen() {
         world.setPaused(false);
+    }
+
+    public void onMouseMoved() {
+        int x = GUI.getInstance().getNifty().getNiftyMouse().getX() - mapPanel.getX();
+        int y = GUI.getInstance().getNifty().getNiftyMouse().getY() - mapPanel.getY();
+
+        if (!myCamera.isInViewportScreen(x, y)) {
+            return;
+        }
+
+        x = myCamera.getPointTileX(x);
+        y = myCamera.getPointTileY(y);
+
+        EngineUtils.setTextForGUIElement(mouseCoords, String.format("[%d, %d]", x, y));
     }
 
     @NiftyEventSubscriber(id = "star_map_window")

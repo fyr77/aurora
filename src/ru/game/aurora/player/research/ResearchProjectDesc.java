@@ -11,6 +11,7 @@ import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.world.Listenable;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.space.StarSystem;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -19,8 +20,7 @@ import java.util.List;
 /**
  * Base class for research projects
  */
-public abstract class ResearchProjectDesc extends Listenable
-{
+public abstract class ResearchProjectDesc extends Listenable {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -51,6 +51,12 @@ public abstract class ResearchProjectDesc extends Listenable
      */
     protected List<String> earthProgress;
 
+    /**
+     * If this project requires visiting of specific star systems, this is list of them.
+     * It is used to mark them on a global map.
+     */
+    protected List<StarSystem> targetStarSystems;
+
     protected ResearchProjectDesc(String id, String icon) {
         this.id = id;
         this.icon = icon;
@@ -62,8 +68,7 @@ public abstract class ResearchProjectDesc extends Listenable
         this.report = report;
     }
 
-    public void onCompleted(World world)
-    {
+    public void onCompleted(World world) {
         super.fireEvent(world);
     }
 
@@ -161,5 +166,12 @@ public abstract class ResearchProjectDesc extends Listenable
     @Override
     public String toString() {
         return getName();
+    }
+
+    public List<StarSystem> getTargetStarSystems() {
+        if (targetStarSystems == null) {
+            targetStarSystems = new ArrayList<>();
+        }
+        return targetStarSystems;
     }
 }

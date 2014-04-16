@@ -6,6 +6,7 @@
 package ru.game.aurora.world;
 
 import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -81,6 +82,18 @@ public abstract class GameEventListener implements Serializable {
      */
     public boolean isAlive() {
         return isAlive;
+    }
+
+    /**
+     * Event listeners are often used to create quests and encounters.
+     * Quests usually have a set of quest locations in different star systems.
+     * Player should see such star systems marked on a global map, and as well see a quest-related text
+     * message when hovering over them with mouse.
+     * This method checks if this quest has something to do with the star system, and if that is true - returns a related localized
+     * message string.
+     */
+    public String getLocalizedMessageForStarSystem(GalaxyMapObject galaxyMapObject) {
+        return null;
     }
 
     public Set<EventGroup> getGroups() {

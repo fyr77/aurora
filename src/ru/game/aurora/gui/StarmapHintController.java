@@ -8,6 +8,7 @@ import de.lessvoid.nifty.effects.Falloff;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.render.NiftyRenderEngine;
 import de.lessvoid.nifty.tools.SizeValue;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
@@ -62,8 +63,13 @@ public class StarmapHintController implements EffectImpl {
 
     private void updatePanel(StarSystem objectAtMouseCoords) {
         EngineUtils.setTextForGUIElement(nameText, objectAtMouseCoords.getName());
-        EngineUtils.setTextForGUIElement(exploreText, objectAtMouseCoords.isVisited() ? "Visited" : "Not visited");
-        // todo: quest information
+        EngineUtils.setTextForGUIElement(exploreText, objectAtMouseCoords.isVisited() ? Localization.getText("gui", "starmap.visited") : Localization.getText("gui", "starmap.not_visited"));
+        final String questText = objectAtMouseCoords.getMessageForStarMap();
+        if (questText != null && !questText.isEmpty()) {
+            EngineUtils.setTextForGUIElement(commentsText, Localization.getText("gui", "starmap.marks") + "\n" + questText);
+        } else {
+            EngineUtils.setTextForGUIElement(commentsText, "");
+        }
     }
 
     @Override
