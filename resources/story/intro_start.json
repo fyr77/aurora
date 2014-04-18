@@ -1,0 +1,26 @@
+{
+  "id": "intro_start",
+  "mainImageId": "intro",
+  "statements": [
+    {
+      "mainImageId": "earth_from_space",
+      "textId": "intro_start.1.text"
+    },
+    {
+      "mainImageId": "evacuation-1",
+      "textId": "intro_start.2.text"
+    },
+    {
+      "mainImageId": "presentation",
+      "textId": "intro_start.3.text"
+    },
+    {
+      "mainImageId": "story_meeting",
+      "textId": "intro_start.4.text"
+    },
+    {
+      "mainImageId": "nosignal",
+      "textId": "intro_start.5.text"
+    }
+  ]
+}

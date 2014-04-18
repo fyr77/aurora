@@ -1,0 +1,14 @@
+{
+  "id": "intro_end",
+  "mainImageId": "intro",
+  "statements": [
+    {
+      "mainImageId": "story_beginning",
+      "textId": "intro_end.1.text"
+    },
+    {
+      "mainImageId": "earth_from_space",
+      "textId": "intro_end.2.text"
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.tools.Context;
+import ru.game.aurora.util.EngineUtils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
  * CAPTION;TEXT;PORTRAIT;MAIN IMAGE
  */
 
-public class CSVConverter {
+public class IntroCSVConverter {
 
     private static final String delimiter = ";";
 
@@ -36,14 +37,14 @@ public class CSVConverter {
         final String textId = context.id + "." + context.lineNumber + ".text";
 
 
-        context.text.put(textId, tokens[1]);
+        context.text.put(textId, tokens[2]);
 
-        return new IntroDialog.Statement(tokens.length > 3 ? tokens[3] : null, captionId, tokens[2].isEmpty() ? null : tokens[2], textId);
+        return new IntroDialog.Statement(tokens.length > 3 ? tokens[3] : null, captionId, tokens[1].isEmpty() ? null : tokens[1], textId);
     }
 
     public static void main(String[] args) {
         if (args.length != 4) {
-            System.err.println("Usage: CSVConverter <input file> <intro string id> <main image id> <out dir>");
+            System.err.println("Usage: IntroCSVConverter <input file> <intro string id> <main image id> <out dir>");
             return;
         }
 
@@ -54,7 +55,7 @@ public class CSVConverter {
         }
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(input));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(input), EngineUtils.detectEncoding(input.getAbsolutePath())));
             reader.readLine(); // skip first line with headers
             String line = reader.readLine();
 
@@ -64,10 +65,9 @@ public class CSVConverter {
             while (line != null) {
                 context.lineNumber++;
                 IntroDialog.Statement e = parseLine(context, line);
-                if (e == null) {
-                    continue;
+                if (e != null) {
+                    statements.add(e);
                 }
-                statements.add(e);
                 line = reader.readLine();
             }
 

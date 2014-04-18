@@ -2,12 +2,12 @@ package ru.game.aurora.tools.dialog;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.mozilla.universalchardet.UniversalDetector;
 import ru.game.aurora.dialog.Condition;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.dialog.Statement;
 import ru.game.aurora.tools.Context;
+import ru.game.aurora.util.EngineUtils;
 
 import java.io.*;
 import java.util.*;
@@ -103,30 +103,9 @@ public class DialogCSVConverter {
         return flags;
     }
 
-    private static String detectEncoding(String file) throws IOException {
-        // try detect file encoding first
-        UniversalDetector detector = new UniversalDetector(null);
-
-        InputStream fis = new FileInputStream(file);
-        byte[] buf = new byte[4096];
-
-        int nread;
-        while ((nread = fis.read(buf)) > 0 && !detector.isDone()) {
-            detector.handleData(buf, 0, nread);
-        }
-        detector.dataEnd();
-        String encoding = detector.getDetectedCharset();
-        if (encoding != null) {
-            System.out.println("Detected encoding = " + encoding);
-        } else {
-            System.out.println("No encoding detected.");
-        }
-        fis.close();
-        return encoding;
-    }
 
     public static void process(String input, String output, String dialogId, String imageId) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(input), detectEncoding(input)))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(input), EngineUtils.detectEncoding(input)))) {
 
             Map<Integer, Statement> statements = new HashMap<>();
             Context context = new Context(dialogId);

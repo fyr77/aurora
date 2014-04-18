@@ -8,6 +8,7 @@ import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.layout.align.HorizontalAlign;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import de.lessvoid.nifty.tools.SizeValue;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.AuroraGame;
@@ -17,6 +18,9 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 public class IntroDialogController implements ScreenController, Updatable {
 
@@ -38,6 +42,8 @@ public class IntroDialogController implements ScreenController, Updatable {
 
     private IntroDialog introDialog;
 
+    private Queue<IntroDialog> dialogs = new ArrayDeque<>();
+
     private int statement;
 
     private boolean isLeft = true;
@@ -54,12 +60,8 @@ public class IntroDialogController implements ScreenController, Updatable {
         this.world = world;
     }
 
-    public void setIntroDialog(IntroDialog introDialog) {
-        this.introDialog = introDialog;
-        this.statement = 0;
-        this.isLeft = true;
-        this.isTyping = true;
-        this.actualStringBuilder = new StringBuilder();
+    public void pushDialog(IntroDialog introDialog) {
+        dialogs.add(introDialog);
     }
 
     public void setEndListener(IStateChangeListener endListener) {
@@ -90,24 +92,32 @@ public class IntroDialogController implements ScreenController, Updatable {
 
         desiredString = Localization.getText(bundleId, currentStatement.textId);
         if (currentStatement.iconName != null) {
+            mainText.setConstraintWidth(SizeValue.percent(90));
             if (isLeft) {
                 captionText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.left);
                 mainText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.left);
                 EngineUtils.setImageForGUIElement(leftPortrait, currentStatement.iconName);
                 leftPortrait.setVisible(true);
                 rightPortrait.setVisible(false);
+                leftPortrait.setConstraintWidth(SizeValue.px(256));
+                rightPortrait.setConstraintWidth(SizeValue.px(0));
             } else {
                 captionText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.right);
                 mainText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.right);
                 EngineUtils.setImageForGUIElement(rightPortrait, currentStatement.iconName);
                 leftPortrait.setVisible(false);
                 rightPortrait.setVisible(true);
+                leftPortrait.setConstraintWidth(SizeValue.px(0));
+                rightPortrait.setConstraintWidth(SizeValue.px(256));
             }
         } else {
-            captionText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.center);
-            mainText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.center);
+            captionText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.left);
+            mainText.getRenderer(TextRenderer.class).setTextHAlign(HorizontalAlign.left);
             leftPortrait.setVisible(false);
             rightPortrait.setVisible(false);
+            mainText.setConstraintWidth(SizeValue.percent(100));
+            leftPortrait.setConstraintWidth(SizeValue.px(0));
+            rightPortrait.setConstraintWidth(SizeValue.px(0));
         }
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
@@ -119,10 +129,7 @@ public class IntroDialogController implements ScreenController, Updatable {
             statement++;
             isLeft = !isLeft;
             if (statement >= introDialog.statements.length) {
-                GUI.getInstance().popAndSetScreen();
-                if (endListener != null) {
-                    endListener.stateChanged(world);
-                }
+                dialogEnded();
             } else {
                 update();
                 mainPanel.startEffect(EffectEventId.onCustom, new FadeInEndListener(), "fadeIn");
@@ -135,7 +142,6 @@ public class IntroDialogController implements ScreenController, Updatable {
         @Override
         public void perform() {
             isTyping = true;
-
         }
     }
 
@@ -150,8 +156,14 @@ public class IntroDialogController implements ScreenController, Updatable {
 
     @Override
     public void onStartScreen() {
-        update();
+        this.introDialog = dialogs.poll();
+        this.statement = 0;
+        this.isLeft = true;
+        this.isTyping = true;
+        this.actualStringBuilder = new StringBuilder();
         EngineUtils.setImageForGUIElement(imagePanel, introDialog.mainImageId);
+        update();
+
         AuroraGame.getUpdatables().add(this);
     }
 
@@ -161,13 +173,23 @@ public class IntroDialogController implements ScreenController, Updatable {
         AuroraGame.getUpdatables().remove(this);
     }
 
-    @Override
-    public void update(GameContainer container, World world) {
-        if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+    private void dialogEnded()
+    {
+        if (dialogs.isEmpty()) {
             GUI.getInstance().popAndSetScreen();
             if (endListener != null) {
                 endListener.stateChanged(world);
             }
+        } else {
+            onStartScreen();
+            mainPanel.startEffect(EffectEventId.onCustom, new FadeInEndListener(), "fadeIn");
+        }
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+            dialogEnded();
             return;
         }
         if (isTyping) {

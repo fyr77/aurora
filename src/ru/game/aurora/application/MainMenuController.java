@@ -16,7 +16,6 @@ import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.IntroDialogController;
 import ru.game.aurora.gui.LoadingScreenController;
-import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
@@ -91,11 +90,11 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
             GUI.getInstance().popScreen();
             GUI.getInstance().pushScreen("loading_screen");
 
-            world.addOverlayWindow(new StoryScreen("story/beginning.json"));
-            IntroDialog dialog = IntroDialog.load("story/intro_1.json");
-            GUI.getInstance().pushScreen("story_screen");
+            IntroDialog dialog = IntroDialog.load("story/intro_start.json");
+            GUI.getInstance().pushScreen("dialog_screen");
             IntroDialogController introDialogController = (IntroDialogController) GUI.getInstance().getNifty().findScreenController(IntroDialogController.class.getName());
-            introDialogController.setIntroDialog(dialog);
+            introDialogController.pushDialog(dialog);
+            introDialogController.pushDialog(IntroDialog.load("story/intro_1.json"));
             introDialogController.setEndListener(new IStateChangeListener() {
 
                 private static final long serialVersionUID = -167349630557155374L;

@@ -70,7 +70,8 @@ public class CountrySelectScreenController implements ScreenController {
                 throw new IllegalStateException("Invalid country id " + selectedId);
         }
 
-        introDialogController.setIntroDialog(dialog);
+        introDialogController.pushDialog(dialog);
+        introDialogController.pushDialog(IntroDialog.load("story/intro_end.json"));
         GUI.getInstance().getNifty().gotoScreen("intro_dialog");
     }
 

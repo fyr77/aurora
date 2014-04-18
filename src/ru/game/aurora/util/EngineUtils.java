@@ -11,6 +11,7 @@ import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
+import org.mozilla.universalchardet.UniversalDetector;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import ru.game.aurora.application.Camera;
@@ -19,6 +20,9 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.GUI;
 
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 
@@ -45,6 +49,29 @@ public class EngineUtils {
             }
         }
         return coord;
+    }
+
+
+    public static String detectEncoding(String file) throws IOException {
+        // try detect file encoding first
+        UniversalDetector detector = new UniversalDetector(null);
+
+        InputStream fis = new FileInputStream(file);
+        byte[] buf = new byte[4096];
+
+        int nread;
+        while ((nread = fis.read(buf)) > 0 && !detector.isDone()) {
+            detector.handleData(buf, 0, nread);
+        }
+        detector.dataEnd();
+        String encoding = detector.getDetectedCharset();
+        if (encoding != null) {
+            System.out.println("Detected encoding = " + encoding);
+        } else {
+            System.out.println("No encoding detected.");
+        }
+        fis.close();
+        return encoding;
     }
 
 
