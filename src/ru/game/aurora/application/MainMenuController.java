@@ -158,6 +158,9 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
                                     // player has made a mistake, engineer chief will not be friendly with him
                                     world.getGlobalVariables().put("crew.engineer", -1);
                                 }
+                                if (flags.containsKey("engineer_dinner")) {
+                                    world.getGlobalVariables().put("crew.engineer", 1);
+                                }
                                 // return to initial dialog, if player will want to visit other crewmembers
                                 world.addOverlayWindow(gameStartDialog);
                             }

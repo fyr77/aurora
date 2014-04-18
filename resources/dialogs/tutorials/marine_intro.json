@@ -79,6 +79,16 @@
           "returnValue": 0,
           "targetStatementId": 5,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
         }
       ]
     },
@@ -177,12 +187,12 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 12,
+          "targetStatementId": 10,
           "replyText": "1"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 10,
+          "targetStatementId": 12,
           "replyText": "2"
         }
       ]
@@ -197,18 +207,8 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 14,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 22,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "3"
+          "replyText": "1"
         }
       ]
     },
@@ -232,7 +232,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 18,
+          "targetStatementId": -1,
           "replyText": "0"
         }
       ]
@@ -251,117 +251,11 @@
       "id": 16,
       "replies": [
         {
-          "returnValue": -1,
-          "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
-    "19": {
-      "id": 19,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 20,
-          "replyText": "0"
-        }
-      ]
-    },
-    "18": {
-      "id": 18,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 19,
-          "replyText": "0"
-        }
-      ]
-    },
-    "21": {
-      "id": 21,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 22,
-          "replyText": "0"
-        }
-      ]
-    },
-    "20": {
-      "id": 20,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 21,
-          "replyText": "0"
-        }
-      ]
-    },
-    "23": {
-      "id": 23,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 24,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 25,
-          "replyText": "1"
-        }
-      ]
-    },
-    "22": {
-      "id": 22,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 23,
-          "replyText": "0"
-        }
-      ]
-    },
-    "25": {
-      "id": 25,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 26,
-          "replyText": "0"
-        }
-      ]
-    },
-    "24": {
-      "id": 24,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 26,
-          "replyText": "0"
-        }
-      ]
-    },
-    "27": {
-      "id": 27,
-      "replies": [
-        {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
-    "26": {
-      "id": 26,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 27,
           "replyText": "0"
         }
       ]
     }
-  },
-  "returnValue": 0
+  }
 }
