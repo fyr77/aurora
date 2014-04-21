@@ -20,6 +20,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.*;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
+import ru.game.aurora.world.generation.aliens.zorsan.ZorsanRebelsFirstQuestGenerator;
 import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.*;
@@ -58,6 +59,7 @@ public class WorldGenerator implements Runnable {
             , new EmbassiesQuest()
             , new DamagedRoguesScoutEventGenerator()
             , new EnergySphereEncounterGenerator()
+            , new ZorsanRebelsFirstQuestGenerator.StarsystemGenerator()
     };
 
     private static final WorldGeneratorPart[] alienGenerators = {
@@ -136,16 +138,15 @@ public class WorldGenerator implements Runnable {
         }
     }
 
-    public static StarSystem generateRandomStarSystem(World world, int x, int y, int planetCount) {
+    public static StarSystem generateRandomStarSystem(Star star, World world, int x, int y, int planetCount) {
         final Random r = CommonRandom.getRandom();
 
-        int starSize = StarSystem.possibleSizes[r.nextInt(StarSystem.possibleSizes.length)];
-        Color starColor = StarSystem.possibleColors[r.nextInt(StarSystem.possibleColors.length)];
+
         BasePlanet[] planets = new BasePlanet[planetCount];
         int maxRadius = 0;
-        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(starSize, starColor), x, y);
+        StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), star, x, y);
 
-        int astroData = 20 * starSize;
+        int astroData = 20 * star.size;
 
         final double ringsChance = Configuration.getDoubleProperty("world.starsystem.planetRingsChance");
         final int maxSatellites = Configuration.getIntProperty("world.starsystem.maxSatellites");
@@ -211,6 +212,12 @@ public class WorldGenerator implements Runnable {
     public static StarSystem generateRandomStarSystem(World world, int x, int y) {
         final int planetCount = CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.starsystem.maxPlanets"));
         return generateRandomStarSystem(world, x, y, planetCount);
+    }
+
+    public static StarSystem generateRandomStarSystem(World world, int x, int y, int planets) {
+        int starSize = StarSystem.possibleSizes[CommonRandom.getRandom().nextInt(StarSystem.possibleSizes.length)];
+        Color starColor = StarSystem.possibleColors[CommonRandom.getRandom().nextInt(StarSystem.possibleColors.length)];
+        return generateRandomStarSystem(new Star(starSize, starColor), world, x, y, planets);
     }
 
     private void createQuestWorlds(World world) {

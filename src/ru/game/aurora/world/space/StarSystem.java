@@ -743,4 +743,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     public void setMessageForStarMap(String messageForStarMap) {
         this.messageForStarMap = messageForStarMap;
     }
+
+    public Star getStar() {
+        return star;
+    }
+
 }

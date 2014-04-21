@@ -88,6 +88,8 @@ zorsan.homeworld - string representing star coordinates of a Zorsan homeworld
 zorsan.war_preparations - if player knows that zorsan are going to attack earth. 0 - when learned about it. 1 - after reported to earth
 zorsan.escape - after player has escaped zorsan attack. 0 after escape, 1  after report on earth
 
+
+zorsan_rebels.start_coords - planet where player can meet zorsan rebels
 ==============================
 
 Gardeners
