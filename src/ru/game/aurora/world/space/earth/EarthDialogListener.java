@@ -147,6 +147,7 @@ public class EarthDialogListener implements DialogListener {
 
         if (flags.containsKey("zorsan_war_info_quest")) {
             world.getGlobalVariables().put("zorsan.escape", 1);
+            world.getPlayer().getJournal().addQuestEntries("zorsan_relations", "earth_report");
         }
 
         if (flags.containsKey("zorsan_war_info_update")) {

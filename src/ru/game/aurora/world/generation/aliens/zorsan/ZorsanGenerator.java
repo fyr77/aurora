@@ -149,6 +149,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     // after this, zorsan become hostile and player has fixed amount of time before they attack earth
                     addWarDataDrop();
 
+                    world.getPlayer().getJournal().addQuestEntries("zorsan_relations", "start");
                 }
             }
         });

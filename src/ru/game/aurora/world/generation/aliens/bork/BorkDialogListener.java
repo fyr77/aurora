@@ -42,5 +42,9 @@ public class BorkDialogListener implements DialogListener {
         if (flags.containsKey("bork.war_help")) {
             world.getGlobalVariables().put("bork.war_help", true);
         }
+
+        if (flags.containsKey("zorsan_escape_discussed") && !world.getPlayer().getJournal().getQuests().get("zorsan_relations").contains("bork_info")) {
+            world.getPlayer().getJournal().addQuestEntries("zorsan_relations", "bork_info");
+        }
     }
 }

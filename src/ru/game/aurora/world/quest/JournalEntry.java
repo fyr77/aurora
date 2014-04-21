@@ -33,6 +33,11 @@ public class JournalEntry implements Serializable {
         return id;
     }
 
+    public boolean contains(String id)
+    {
+        return messageIds.contains(id);
+    }
+
     public String getLocalizedCaption() {
         return Localization.getText("journal", id + ".title");
     }
