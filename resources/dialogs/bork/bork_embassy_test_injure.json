@@ -1,6 +1,6 @@
 {
   "id": "bork_embassy_test_injure",
-  "iconName": "bork_dialog",
+  "iconName": "bork_vip_dialog",
   "statements": {
     "0": {
       "id": 0,
@@ -111,7 +111,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 9,
-          "replyText": "3"
+          "replyText": "3",
+          "flags": {
+            "": "true"
+          }
         }
       ]
     },
@@ -324,9 +327,9 @@
           "returnValue": 0,
           "targetStatementId": 21,
           "replyText": "1",
-           "flags": {
-                      "bork_blockade.withdraw": "true"
-                    }
+          "flags": {
+            "": "true"
+          }
         }
       ]
     },

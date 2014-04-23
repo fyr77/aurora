@@ -26,16 +26,16 @@
               "type": "SET"
             },
             {
-                          "name": "zorsan_escape_discussed",
-                          "type": "NOT_SET"
-            } ,
-            {
               "name": "zorsan.war_preparations",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "zorsan_escape_discussed",
               "type": "NOT_SET"
             }
           ],
-          "flags" : {
-            "zorsan_escape_discussed" : "true"
+          "flags": {
+            "zorsan_escape_discussed": "true"
           }
         },
         {

@@ -199,7 +199,7 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
         prefs.put(PREV_ID_KEY, id.getText());
         prefs.put(PREV_IMAGE_KEY, image.getText());
         try {
-            DialogCSVConverter.process(source.getText(), out.getText(), id.getText(), image.getText());
+            DialogCSVConverter.process(source.getText(), out.getText(), null, id.getText(), image.getText());
             log.setText(new String(bos.toByteArray()));
             invalidate();
             System.out.println("====================================");

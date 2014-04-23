@@ -20,6 +20,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.GUI;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,8 +52,11 @@ public class EngineUtils {
         return coord;
     }
 
-
     public static String detectEncoding(String file) throws IOException {
+        return detectEncoding(new File(file));
+    }
+
+    public static String detectEncoding(File file) throws IOException {
         // try detect file encoding first
         UniversalDetector detector = new UniversalDetector(null);
 
