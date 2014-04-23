@@ -1,0 +1,8 @@
+2Клиски встреча на станции, путь к представительству.csv;klisk_station_start;klisk_dialog;klisk
+3РАзговор с диппредом клисков.csv;klisk_station_main;klisk_vip_dialog;klisk
+4Вводный диалог квест сопровождение.csv;klisk_trade_quest_start;klisk_vip_dialog;klisk
+5.1Диалог с капитаном почти перед самым концом.csv;klisk_trade_quest_captain;klisk_vip_dialog;klisk
+5.2Совместная пирушка.csv;klisk_trade_quest_party;klisk_vip_dialog;klisk
+6ПРибытие на станцию, внезапная торговля.csv;klisk_trade_quest_arrival;rogues_dialog;klisk
+7Процесс торговли.csv;klisk_trade_quest_trade;rogues_dialog;klisk
+Дефолтный диалог с диппредом (+конец квеста).csv;klisk_planet_default;klisk_vip_dialog;klisk
