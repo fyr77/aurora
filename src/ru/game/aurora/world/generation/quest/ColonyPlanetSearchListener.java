@@ -54,6 +54,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
         PlanetaryLifeGenerator.setPlanetHasLife(planet);
         PlanetaryLifeGenerator.addAnimals(planet);
         PlanetaryLifeGenerator.addPlants(planet);
+        planet.addOreDeposits(10);
 
         HomeworldGenerator.setCoord(planets[2], 5);
         planets[2].addSatellite(new Planet(world, ss, PlanetCategory.PLANET_ICE, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0));
