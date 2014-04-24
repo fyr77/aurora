@@ -6,6 +6,7 @@
 
     <!-- races -->
     <resource type="playlist" id="Klisk">resources/music/klisk</resource>
+    <resource type="playlist" id="Zorsan">resources/music/zorsan</resource>
 
     <resource type="sound" id="laser_1">resources/sounds/shots/laser_1.wav</resource>
     <resource type="sound" id="plasma_1">resources/sounds/shots/plasma_1.wav</resource>

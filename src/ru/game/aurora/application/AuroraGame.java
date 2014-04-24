@@ -329,6 +329,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
             final boolean fullScreen = Boolean.parseBoolean(Configuration.getSystemProperties().getProperty("screen.full_screen", "false"));
             app.setDisplayMode(res.getWidth(), res.getHeight(), fullScreen);
+            app.setIcons(new String[] {"sprites/icons/icon_32.png", "sprites/icons/icon_16.png"});
             tilesX = res.getTilesX();
             tilesY = res.getTilesY();
             app.start();
