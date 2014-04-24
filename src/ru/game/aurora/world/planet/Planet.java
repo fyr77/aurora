@@ -69,7 +69,7 @@ public class Planet extends BasePlanet implements IDungeon {
         }
         this.surface = new SurfaceTileMap(other.surface);
         this.controller = new DungeonController(world, owner, this);
-        createOreDeposits(size, CommonRandom.getRandom());
+        addOreDeposits(CommonRandom.getRandom().nextInt(40 / size));
         this.world = world;
     }
 
@@ -79,8 +79,6 @@ public class Planet extends BasePlanet implements IDungeon {
     }
 
     private void createSurface() {
-        final Random r = CommonRandom.getRandom();
-
         long start = System.currentTimeMillis();
         int width;
         int height;
@@ -108,7 +106,7 @@ public class Planet extends BasePlanet implements IDungeon {
         surface = new SurfaceTileMap(width, height, LandscapeGenerator.generateLandscapePerlin(category, width, height));
         logger.info("Generated landscape in " + (System.currentTimeMillis() - start));
 
-        createOreDeposits(size, r);
+        addOreDeposits(CommonRandom.getRandom().nextInt(40 / size));
 
         if (floraAndFauna != null) {
             PlanetaryLifeGenerator.addAnimals(this);
@@ -117,8 +115,8 @@ public class Planet extends BasePlanet implements IDungeon {
         controller = new DungeonController(world, owner, this);
     }
 
-    private void createOreDeposits(int size, Random r) {
-        final int resourceDeposits = r.nextInt(40 / size);
+    public void addOreDeposits(int resourceDeposits) {
+        Random r = CommonRandom.getRandom();
         for (int i = 0; i < resourceDeposits; ++i) {
             OreDeposit d = new OreDeposit(this, r.nextInt(10), r.nextInt(10), CollectionUtils.selectRandomElement(OreDeposit.OreType.values()), r.nextInt(3) + 1);
             int oreX;

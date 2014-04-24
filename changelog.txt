@@ -2,6 +2,11 @@ VERSION 0.2.3
 
 IN PROGRESS...
 
++ Star map: hints and quest locations.
++ Music tracks for Klisk and Zorsan races
++ Tool to generate all dialogs in one click
+* New intro
+
 =================================================
 
 VERSION 0.2.2

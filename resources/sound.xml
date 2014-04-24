@@ -4,6 +4,10 @@
     <resource type="playlist" id="dungeon_invasion">resources/music/dungeon/invasion</resource>
     <resource type="playlist" id="dark_corners">resources/music/dungeon/dark_corners</resource>
 
+    <!-- races -->
+    <resource type="playlist" id="Klisk">resources/music/klisk</resource>
+    <resource type="playlist" id="Zorsan">resources/music/zorsan</resource>
+
     <resource type="sound" id="laser_1">resources/sounds/shots/laser_1.wav</resource>
     <resource type="sound" id="plasma_1">resources/sounds/shots/plasma_1.wav</resource>
     <resource type="sound" id="bullet_1">resources/sounds/shots/bullet_1.wav</resource>

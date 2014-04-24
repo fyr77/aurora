@@ -9,9 +9,12 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.*;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
+import ru.game.aurora.music.MusicDialogListener;
+import ru.game.aurora.music.Playlist;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
@@ -218,7 +221,15 @@ public class NPCShip extends MovableSprite implements SpaceObject {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.hail_not_responded"));
             return;
         }
-        world.addOverlayWindow(captain != null ? captain.getCustomDialog() : race.getDefaultDialog());
+
+        final Dialog d = captain != null ? captain.getCustomDialog() : race.getDefaultDialog();
+
+        if (race.getMusic() != null && !race.getMusic().isPlaying()) {
+            d.addListener(new MusicDialogListener(Playlist.getCurrentPlaylist().getId()));
+            race.getMusic().play();
+        }
+
+        world.addOverlayWindow(d);
     }
 
     @Override

@@ -6,12 +6,17 @@
 package ru.game.aurora.npc;
 
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.music.Playlist;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 
-public class AlienRace implements Serializable {
+public class AlienRace implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
 
@@ -33,6 +38,9 @@ public class AlienRace implements Serializable {
 
     // set to true after first communication, if set to true - this race are is drawn on global map
     private boolean isKnown = false;
+
+    // custom music that is played in dialogs
+    private transient Playlist music;
 
     public AlienRace(String name, String shipSprite, Dialog defaultDialog) {
         this.name = name;
@@ -94,5 +102,20 @@ public class AlienRace implements Serializable {
 
     public void setKnown(boolean known) {
         isKnown = known;
+    }
+
+    public Playlist getMusic() {
+        return music;
+    }
+
+    public void setMusic(Playlist music) {
+        this.music = music;
+    }
+
+    private void readObject(ObjectInputStream ois) throws IOException,
+            ClassNotFoundException {
+        ois.defaultReadObject();
+        music = ResourceManager.getInstance().getPlaylist(getName());
+
     }
 }

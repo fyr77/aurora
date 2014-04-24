@@ -193,6 +193,7 @@ public class KliskGenerator implements WorldGeneratorPart {
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile("dialogs/klisk_1.json");
         final AlienRace kliskRace = new AlienRace(NAME, "klisk_ship", mainDialog);
+        kliskRace.setMusic(ResourceManager.getInstance().getPlaylist("Klisk"));
         mainDialog.addListener(new DialogListener() {
 
             private static final long serialVersionUID = 8770464358766507288L;

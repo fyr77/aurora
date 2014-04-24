@@ -13,6 +13,8 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.music.Playlist;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
@@ -212,6 +214,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 // do not keep background
                 background = null;
                 world.onPlayerLeftSystem(this);
+                if (!Playlist.getCurrentPlaylist().getId().equals(Playlist.DEFAULT_PLAYLIST)) {
+                    ResourceManager.getInstance().getPlaylist(Playlist.DEFAULT_PLAYLIST).play();
+                }
                 return;
             } else {
                 if (world.isUpdatedThisFrame()) {
@@ -313,7 +318,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         final Ship playerShip = world.getPlayer().getShip();
         final StarshipWeapon weapon = playerShip.getWeapons().get(selectedWeapon);
 
-        if (target != null && playerShip.getDistance(target) > weapon.getWeaponDesc().range) {
+        if (target != null && (!target.isAlive() || playerShip.getDistance(target) > weapon.getWeaponDesc().range)) {
             // target moved out of range
             target = null;
         }
@@ -491,6 +496,15 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return visited;
     }
 
+    private void checkAndStartCustomMusic(World world)
+    {
+        for (AlienRace race : world.getRaces().values()) {
+            if (race.getHomeworld() == this && race.getMusic() != null) {
+                race.getMusic().play();
+            }
+        }
+    }
+
     @Override
     public void enter(World world) {
         super.enter(world);
@@ -510,6 +524,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
         world.getCamera().resetViewPort();
         visited = true;
+        checkAndStartCustomMusic(world);
     }
 
     @Override
@@ -520,6 +535,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
         world.getCamera().resetViewPort();
         GUI.getInstance().getNifty().gotoScreen("star_system_gui");
+        checkAndStartCustomMusic(world);
     }
 
     private void createBackground(World world) {
@@ -601,19 +617,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         if (mode == MODE_SHOOT) {
-            if (target != null) {
+            if (target != null && target.isAlive()) {
                 // draw target mark
                 g.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoord(target.getX()), camera.getYCoord(target.getY()));
             }
 
-            // drawing rect that shows radius of current weapon
-            /*g.drawRect((camera.getNumTilesX() / 2 - selectedWeaponRange + 1) * camera.getTileWidth() + camera.getViewportX()
-                    , (camera.getNumTilesY() / 2 - selectedWeaponRange + 1) * camera.getTileHeight() + camera.getViewportY()
-                    , (2 * selectedWeaponRange - 1) * camera.getTileWidth()
-                    , (2 * selectedWeaponRange - 1) * camera.getTileHeight());
-            */
-
-            //now it's 'circle'... sort of...
             EngineUtils.drawTileCircleCentered(g, camera, selectedWeaponRange);
         }
 
