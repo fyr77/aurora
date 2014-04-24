@@ -22,6 +22,8 @@ import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 
@@ -99,7 +101,8 @@ public class DialogController implements ScreenController {
             if (prevScreen != null) {
                 GUI.getInstance().getNifty().gotoScreen(prevScreen);
             }
-            for (DialogListener listener : d.getListeners()) {
+            final List<DialogListener> listeners = new ArrayList<>(d.getListeners());
+            for (DialogListener listener : listeners) {
                 listener.onDialogEnded(world, d, d.getReturnValue(), d.getFlags());
             }
             d.enter(world);

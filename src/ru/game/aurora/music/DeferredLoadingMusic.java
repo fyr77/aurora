@@ -5,11 +5,12 @@
  * Time: 21:30
  */
 
-package ru.game.aurora.application;
+package ru.game.aurora.music;
 
 import org.newdawn.slick.Music;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.game.aurora.application.GlobalThreadPool;
 
 import java.io.File;
 import java.io.FileInputStream;

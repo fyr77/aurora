@@ -1,4 +1,4 @@
-package ru.game.aurora.application;
+package ru.game.aurora.music;
 
 import org.newdawn.slick.Music;
 import org.newdawn.slick.MusicListener;
@@ -15,8 +15,13 @@ import java.util.List;
  * Date: 26.01.14
  * Time: 17:35
  */
-public class Playlist implements MusicListener {
+public class Playlist implements MusicListener
+{
+    public static final String DEFAULT_PLAYLIST = "background";
+
     private static final Logger logger = LoggerFactory.getLogger(Playlist.class);
+
+    private static Playlist currentPlaylist = null;
 
     private List<DeferredLoadingMusic> music = new ArrayList<>();
 
@@ -56,6 +61,7 @@ public class Playlist implements MusicListener {
 
         music.get(idxToPlay).getMusic().play();
         music.get(idxToLoad).requestLoad();
+        currentPlaylist = this;
     }
 
 
@@ -71,5 +77,14 @@ public class Playlist implements MusicListener {
     @Override
     public void musicSwapped(Music music, Music music2) {
 
+    }
+
+    public boolean isPlaying()
+    {
+        return currentPlaylist == this;
+    }
+
+    public static Playlist getCurrentPlaylist() {
+        return currentPlaylist;
     }
 }

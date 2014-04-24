@@ -9,6 +9,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import ru.game.aurora.music.Playlist;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
 

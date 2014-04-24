@@ -13,6 +13,8 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.music.Playlist;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
@@ -212,6 +214,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
                 // do not keep background
                 background = null;
                 world.onPlayerLeftSystem(this);
+                if (!Playlist.getCurrentPlaylist().getId().equals(Playlist.DEFAULT_PLAYLIST)) {
+                    ResourceManager.getInstance().getPlaylist(Playlist.DEFAULT_PLAYLIST).play();
+                }
                 return;
             } else {
                 if (world.isUpdatedThisFrame()) {
@@ -491,6 +496,15 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return visited;
     }
 
+    private void checkAndStartCustomMusic(World world)
+    {
+        for (AlienRace race : world.getRaces().values()) {
+            if (race.getHomeworld() == this && race.getMusic() != null) {
+                race.getMusic().play();
+            }
+        }
+    }
+
     @Override
     public void enter(World world) {
         super.enter(world);
@@ -510,6 +524,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
         world.getCamera().resetViewPort();
         visited = true;
+        checkAndStartCustomMusic(world);
     }
 
     @Override
@@ -520,6 +535,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
         world.getCamera().resetViewPort();
         GUI.getInstance().getNifty().gotoScreen("star_system_gui");
+        checkAndStartCustomMusic(world);
     }
 
     private void createBackground(World world) {
