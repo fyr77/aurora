@@ -318,7 +318,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         final Ship playerShip = world.getPlayer().getShip();
         final StarshipWeapon weapon = playerShip.getWeapons().get(selectedWeapon);
 
-        if (target != null && playerShip.getDistance(target) > weapon.getWeaponDesc().range) {
+        if (target != null && (!target.isAlive() || playerShip.getDistance(target) > weapon.getWeaponDesc().range)) {
             // target moved out of range
             target = null;
         }
@@ -617,19 +617,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         if (mode == MODE_SHOOT) {
-            if (target != null) {
+            if (target != null && target.isAlive()) {
                 // draw target mark
                 g.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoord(target.getX()), camera.getYCoord(target.getY()));
             }
 
-            // drawing rect that shows radius of current weapon
-            /*g.drawRect((camera.getNumTilesX() / 2 - selectedWeaponRange + 1) * camera.getTileWidth() + camera.getViewportX()
-                    , (camera.getNumTilesY() / 2 - selectedWeaponRange + 1) * camera.getTileHeight() + camera.getViewportY()
-                    , (2 * selectedWeaponRange - 1) * camera.getTileWidth()
-                    , (2 * selectedWeaponRange - 1) * camera.getTileHeight());
-            */
-
-            //now it's 'circle'... sort of...
             EngineUtils.drawTileCircleCentered(g, camera, selectedWeaponRange);
         }
 
