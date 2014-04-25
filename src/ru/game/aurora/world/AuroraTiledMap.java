@@ -195,12 +195,12 @@ public class AuroraTiledMap implements ITileMap {
 
     @Override
     public int getWidthInTiles() {
-        return map.getWidth();
+        return getMap().getWidth();
     }
 
     @Override
     public int getHeightInTiles() {
-        return map.getHeight();
+        return getMap().getHeight();
     }
 
     @Override
