@@ -64,12 +64,16 @@ public class RoguesMainDialogListener implements DialogListener {
             world.getPlayer().changeCredits(world, Configuration.getIntProperty("quest.damaged_rogue_scout.reward"));
             DamagedRoguesScoutEventGenerator.removeScout(world);
             world.getGlobalVariables().put("rogues.damage_scout_result", "help");
+            world.getGlobalVariables().remove("rogues.damage_scout_crew_saved");
+            world.getGlobalVariables().remove("rogues.damage_scout_found");
         }
 
         if (returnCode == 201) {
             world.getReputation().updateReputation(RoguesGenerator.NAME, HumanityGenerator.NAME, 1);
             DamagedRoguesScoutEventGenerator.removeScout(world);
             world.getGlobalVariables().put("rogues.damage_scout_result", "help");
+            world.getGlobalVariables().remove("rogues.damage_scout_crew_saved");
+            world.getGlobalVariables().remove("rogues.damage_scout_found");
         }
     }
 }
