@@ -12,7 +12,6 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPCShipFactory;
-import ru.game.aurora.npc.SingleShipFixedTime;
 import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.player.earth.EarthResearch;
@@ -21,7 +20,6 @@ import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
-import ru.game.aurora.world.quest.AuroraProbe;
 import ru.game.aurora.world.space.*;
 
 import java.util.List;
@@ -44,9 +42,11 @@ public class HumanityGenerator implements WorldGeneratorPart {
         final AlienRace humans = new AlienRace(NAME, "earth_transport", Dialog.loadFromFile("dialogs/human_ship_default_dialog.json"));
         humans.setTravelDistance(1);
         world.getRaces().put(humans.getName(), humans);
-        SingleShipFixedTime listener = new SingleShipFixedTime(4, new AuroraProbe(0, 0), Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_detected.json")));
-        listener.setGroups(GameEventListener.EventGroup.ENCOUNTER_SPAWN);
-        world.addListener(listener);
+
+        //todo: restore
+        //SingleShipFixedTime listener = new SingleShipFixedTime(4, new AuroraProbe(0, 0), Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_detected.json")));
+        //listener.setGroups(GameEventListener.EventGroup.ENCOUNTER_SPAWN);
+        //world.addListener(listener);
 
         // earth
         final StarSystem solarSystem = HomeworldGenerator.createSolarSystem(world, humans);
