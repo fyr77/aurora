@@ -21,6 +21,9 @@ import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
 import java.util.Map;
 
 /**
@@ -29,8 +32,7 @@ import java.util.Map;
  * Date: 23.01.13
  * Time: 16:23
  */
-public class MainMenuController implements ScreenController, ResolutionChangeListener
-{
+public class MainMenuController implements ScreenController, ResolutionChangeListener {
 
     private WorldGenerator generator;
 
@@ -113,6 +115,27 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
     public void exitGame() {
         AuroraGame.showExitConfirmation();
     }
+
+    public void openBlog() {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(URI.create("http://auroraroguelike.wordpress.com"));
+            } catch (IOException e) {
+                logger.error("Failed to open blog uri", e);
+            }
+        }
+    }
+
+    public void openTracker() {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(URI.create("https://bitbucket.org/e_smirnov/aurora/issues"));
+            } catch (IOException e) {
+                logger.error("Failed to open bugtracker uri", e);
+            }
+        }
+    }
+
 
     public void openSettings() {
         GUI.getInstance().pushCurrentScreen();

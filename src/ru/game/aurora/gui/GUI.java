@@ -88,7 +88,7 @@ public class GUI {
     private GUI(GameContainer con, Nifty n) {
         this.nifty = n;
         Localization.registerGUIBungles(nifty);
-
+        nifty.registerMouseCursor("hand", "gui/images/icon-hand-clean-md.png", 0, 0);
         hackUnicodeFont("dpix_8pt.ttf");
         nifty.registerScreenController(new MainMenuController(con));
         nifty.registerScreenController(new LoadingScreenController());
