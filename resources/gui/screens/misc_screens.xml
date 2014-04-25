@@ -11,7 +11,7 @@
                     <text style="button-font" text="${gui.confirm_exit}" width="100%" textHAlign="center"/>
                     <panel height="*"/>
                     <panel childLayout="horizontal" height="50px">
-                        <panel width="30%"/>
+                        <panel width="*"/>
                         <control id="exit_button" name="button" label="${gui.ok}" width="150px" height="45px">
                             <interact onClick="exitGame()"/>
                         </control>
@@ -19,6 +19,7 @@
                         <control id="cancel_button" name="button" label="${gui.cancel}" width="150px" height="45px">
                             <interact onClick="closeScreen()"/>
                         </control>
+                        <panel width="*"/>
                     </panel>
                     <panel height="10px"/>
                 </panel>
