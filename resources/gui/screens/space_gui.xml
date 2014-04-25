@@ -20,8 +20,8 @@
             <panel height="50px"/>
 
             <panel childLayout="horizontal" height="120px">
-                <panel width="85%"/>
-                <panel childLayout="vertical" width="*" height="100px"
+                <panel width="*"/>
+                <panel childLayout="vertical" width="160px" height="100px"
                        padding="18px,16px,26px,8px"
                        backgroundImage="gui/style/panel/aurora-panel-hint.png"
                        imageMode="resize:8,212,16,8,8,212,16,212,8,212,16,16">
@@ -30,13 +30,14 @@
                     <text id="credits_text" text="${gui.credits}" style="button-font" width="*"/>
                 </panel>
             </panel>
+            <panel height="50px"/>
 
             <!-- middle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
-                <panel width="78%"/>
-                <panel childLayout="vertical">
-                    <panel height="30%"/>
-                    <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
+                <panel width="*"/>
+                <panel width="216px" childLayout="vertical">
+                    <panel height="*"/>
+                    <panel height="290px" childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
                            padding="20,20,20,20" imageMode="resize:74,100,100,96,74,100,100,68,74,100,100,85">
                         <control id="research_button" name="button" label="${gui.space.research}" width="90%"
                                  height="50px">
@@ -64,18 +65,19 @@
             </panel>
 
 
-            <panel height="100px" childLayout="center">
-                <control id="shoot_panel" name="shoot_panel" height="100px" width="*"/>
+            <panel height="70px" childLayout="center">
+                <control id="shoot_panel" name="shoot_panel" width="*"/>
             </panel>
             <!-- panel containing additional buttons like 'interact' 'land' 'scan' that appear only when needed -->
-            <panel id="interactPanel" height="100px" childLayout="horizontal" visible="false">
-                <panel width="40%"/>
+            <panel id="interactPanel" height="70px" childLayout="horizontal" visible="false">
+                <panel width="*"/>
                 <panel style="nifty-panel" width="200px" childLayout="center" height="100%">
                     <control id="left_button" name="button" label="${gui.space.enter_system_button}" width="90%"
                              height="100%">
                         <interact onClick="enterStarsystem()"/>
                     </control>
                 </panel>
+                <panel width="*"/>
             </panel>
 
             <!-- bottom panel containing log text -->
@@ -103,8 +105,8 @@
             <panel height="50px"/>
 
             <panel childLayout="horizontal" height="120px">
-                <panel width="85%"/>
-                <panel childLayout="vertical" width="*" height="100px"
+                <panel width="*"/>
+                <panel childLayout="vertical" width="160px" height="100px"
                        padding="18px,16px,26px,8px"
                        backgroundImage="gui/style/panel/aurora-panel-hint.png"
                        imageMode="resize:8,212,16,8,8,212,16,212,8,212,16,16">
@@ -113,13 +115,14 @@
                     <text id="credits_text" text="${gui.credits}" style="button-font" width="*"/>
                 </panel>
             </panel>
+            <panel height="50px"/>
 
             <!-- midlle panel contains list of buttons to the right -->
             <panel height="*" childLayout="horizontal">
-                <panel width="78%"/>
-                <panel childLayout="vertical">
-                    <panel height="30%"/>
-                    <panel childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
+                <panel width="*"/>
+                <panel width="216px" childLayout="vertical">
+                    <panel height="*"/>
+                    <panel height="290px" childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
                            padding="20,20,20,20" imageMode="resize:74,100,100,96,74,100,100,68,74,100,100,85">
                         <control id="research_button" name="button" label="${gui.space.research}" width="90%"
                                  height="50px">
@@ -159,22 +162,23 @@
                 </panel>
             </panel>
 
-            <panel height="100px" childLayout="center">
-                <control id="shoot_panel" name="shoot_panel" height="100px"/>
+            <panel height="70px" childLayout="center">
+                <control id="shoot_panel" name="shoot_panel"/>
             </panel>
 
             <!-- panel containing additional buttons like 'interact' 'land' 'scan' that appear only when needed -->
-            <panel id="interactPanel" height="100px" childLayout="horizontal" visible="false">
-                <panel width="30%"/>
-                <panel style="nifty-panel" width="35%" childLayout="horizontal" height="100%">
-                    <control id="left_button" name="button" label="${gui.space.land}" width="45%" height="100%">
+            <panel id="interactPanel" height="70px" childLayout="horizontal" visible="false">
+                <panel width="*"/>
+                <panel style="nifty-panel" width="334px" childLayout="horizontal" height="100%">
+                    <control id="left_button" name="button" label="${gui.space.land}" width="150px" height="100%">
                         <interact onClick="leftButtonPressed()"/>
                     </control>
-                    <panel width="*"/>
-                    <control id="right_button" name="button" label="${gui.space.scan}" width="45%" height="100%">
+                    <panel width="10px"/>
+                    <control id="right_button" name="button" label="${gui.space.scan}" width="150px" height="100%">
                         <interact onClick="rightButtonPressed()"/>
                     </control>
                 </panel>
+                <panel width="*"/>
             </panel>
 
             <!-- bottom panel containing weapon buttons and log text -->
