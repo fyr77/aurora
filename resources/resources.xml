@@ -62,8 +62,10 @@
     <resource type="image" id="zorsan_transport">sprites/ships/zorsan_transport.png</resource>
     <resource type="image" id="zorsan_station">sprites/ships/zorsan_station.png</resource>
     <resource type="image" id="zorsan_boss">sprites/ships/zorsan_boss.png</resource>
+    <resource type="image" id="zorsan_warrior">sprites/planet_objects/zorsan.png</resource>
     <resource type="image" id="zorsan_dialog">sprites/portraits/zorsan.png</resource>
     <resource type="image" id="zorsan_leader_dialog">sprites/portraits/zorsan_leader.png</resource>
+    <resource type="image" id="rebel_leader_dialog">sprites/portraits/zorguevara.png</resource>
 
     <!-- rogues -->
     <resource type="image" id="rogues_probe">sprites/ships/rogues_probe.png</resource>

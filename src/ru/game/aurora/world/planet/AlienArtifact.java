@@ -14,6 +14,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
@@ -27,6 +28,9 @@ public class AlienArtifact extends BasePositionable implements PlanetObject
     private int remainingData = 10;
 
     private ArtifactResearch resultResearch;
+
+    // optional dialog is shown when this artifact is used for first time
+    private Dialog firstUseDialog = null;
 
     private ArtifactSamples samples = new ArtifactSamples();
 
@@ -89,6 +93,12 @@ public class AlienArtifact extends BasePositionable implements PlanetObject
 
     @Override
     public void onPickedUp(World world) {
+        if (firstUseDialog != null) {
+            world.addOverlayWindow(firstUseDialog);
+            firstUseDialog = null;
+            return;
+        }
+
         if (remainingData <= 0) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.artifact.already_explored"));
             return;
@@ -133,4 +143,7 @@ public class AlienArtifact extends BasePositionable implements PlanetObject
         g.drawImage(ResourceManager.getInstance().getImage(spriteName), camera.getXCoord(x), camera.getYCoord(y));
     }
 
+    public void setFirstUseDialog(Dialog firstUseDialog) {
+        this.firstUseDialog = firstUseDialog;
+    }
 }

@@ -59,7 +59,7 @@ public class WorldGenerator implements Runnable {
             , new EmbassiesQuest()
             , new DamagedRoguesScoutEventGenerator()
             , new EnergySphereEncounterGenerator()
-            , new ZorsanRebelsFirstQuestGenerator.StarsystemGenerator()
+            , new ZorsanRebelsFirstQuestGenerator()
     };
 
     private static final WorldGeneratorPart[] alienGenerators = {
