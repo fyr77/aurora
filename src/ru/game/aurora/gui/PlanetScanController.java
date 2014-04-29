@@ -122,15 +122,19 @@ public class PlanetScanController implements ScreenController {
     public void onShuttleDragEnded(final String id, final DraggableDragCanceledEvent event) {
         Element shuttleDraggableElement = GUI.getInstance().getNifty().getTopMostPopup().findElementByName("shuttlePosition");
 
-        if (landscapePanel.getX() > shuttleDraggableElement.getX() || landscapePanel.getY() > shuttleDraggableElement.getY()) {
+        final int spriteCenterX = shuttleDraggableElement.getX() + shuttleDraggableElement.getWidth() / 2;
+        final int spriteCenterY = shuttleDraggableElement.getY() + shuttleDraggableElement.getHeight() / 2;
+
+        if (landscapePanel.getX() > spriteCenterX || landscapePanel.getY() > spriteCenterY) {
             //revert position
             shuttleDraggableElement.setConstraintX(SizeValue.px(shuttlePosition.getX()));
             shuttleDraggableElement.setConstraintY(SizeValue.px(shuttlePosition.getY()));
             return;
         }
         final Planet planetToScan1 = (Planet) planetToScan;
-        final int x = (int) (planetToScan1.getWidth() * ((shuttleDraggableElement.getX() + shuttleDraggableElement.getWidth() / 2 - landscapePanel.getX()) / (float) landscapePanel.getWidth()));
-        final int y = (int) (planetToScan1.getHeight() * ((shuttleDraggableElement.getY() + shuttleDraggableElement.getHeight() / 2 - landscapePanel.getY()) / (float) landscapePanel.getHeight()));
+
+        final int x = (int) (planetToScan1.getWidth() * ((spriteCenterX - landscapePanel.getX()) / (float) landscapePanel.getWidth()));
+        final int y = (int) (planetToScan1.getHeight() * ((spriteCenterY - landscapePanel.getY()) / (float) landscapePanel.getHeight()));
 
         if (!planetToScan1.getMap().isTilePassable(x, y)) {
             //can not place shuttle on an obstacle, revert position

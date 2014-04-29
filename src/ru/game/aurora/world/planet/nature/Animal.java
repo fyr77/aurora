@@ -52,7 +52,7 @@ public class Animal extends Movable implements PlanetObject, IMonster {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        if (desc.getImage() == null || desc.getDeadImage() == null) {
+        if (desc.getImage() == null || (desc.isCanBePickedUp() && desc.getDeadImage() == null)) {
             AnimalGenerator.getInstance().getImageForAnimal(desc);
         }
         final Image image = hp > 0 ? desc.getImage() : desc.getDeadImage();
@@ -112,6 +112,10 @@ public class Animal extends Movable implements PlanetObject, IMonster {
                 myPlanet.getSurface().setTilePassable(x, y, true);
             }
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), getName()));
+            if (!desc.isCanBePickedUp()) {
+                // this alien leaves no corpse
+                pickedUp = true;
+            }
         }
     }
 
@@ -124,7 +128,7 @@ public class Animal extends Movable implements PlanetObject, IMonster {
 
     @Override
     public boolean isAlive() {
-        // object is alive untill picked up, even if animal is actually dead
+        // object is alive until picked up, even if animal is actually dead
         return !pickedUp;
     }
 

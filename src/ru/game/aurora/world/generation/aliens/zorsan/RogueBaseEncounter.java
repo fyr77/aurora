@@ -7,7 +7,6 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.NPC;
-import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
@@ -30,6 +29,8 @@ public class RogueBaseEncounter extends GameEventListener
 
     private NPCShip station;
 
+    private boolean isInSystemWithStation = false;
+
     public RogueBaseEncounter(Dialog dialog) {
         setGroups(EventGroup.ENCOUNTER_SPAWN);
         chance = Configuration.getDoubleProperty("quest.zorsan_rebels.rogue_base_chance");
@@ -43,8 +44,6 @@ public class RogueBaseEncounter extends GameEventListener
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 station.setCanBeHailed(false);
-                station.setAi(new LeaveSystemAI());
-                isAlive = false;
             }
         });
         station.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_small_cannon"));
@@ -52,7 +51,7 @@ public class RogueBaseEncounter extends GameEventListener
 
     @Override
     public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
-        if (ss.getStar().color != Color.red || ss.getStar().size != 0) {
+        if (ss.getStar().color != Color.red || ss.getStar().size != 1) {
             return false;
         }
 
@@ -62,7 +61,16 @@ public class RogueBaseEncounter extends GameEventListener
 
         ss.setRandomEmptyPosition(station);
         ss.getShips().add(station);
-
+        isInSystemWithStation = true;
         return true;
+    }
+
+    @Override
+    public boolean onPlayerLeftStarSystem(World world, StarSystem ss) {
+        if (isInSystemWithStation) {
+            ss.getShips().remove(station);
+            isAlive = false;
+        }
+        return false;
     }
 }

@@ -9,6 +9,7 @@
 package ru.game.aurora.world.generation.aliens.zorsan;
 
 import org.newdawn.slick.Color;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
@@ -126,7 +127,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
         final AlienRace alienRace = world.getRaces().get(ZorsanGenerator.NAME);
         int travelDistance = alienRace.getTravelDistance();
 
-        boolean redGiantFound = false;
+        int redGiantsFound = 0;
 
         boolean artifactPlaced = false;
 
@@ -146,11 +147,10 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
             }
 
             if (ss.getStar().color == Color.red && ss.getStar().size == 1) {
-                redGiantFound = true;
-                continue;
+                ++redGiantsFound;
             }
 
-            if (redGiantFound && artifactPlaced) {
+            if (redGiantsFound >= 3 && artifactPlaced) {
                 break;
             }
 
@@ -177,9 +177,10 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
             world.getGalaxyMap().addObjectAtDistance(ss, alienRace.getHomeworld(), alienRace.getTravelDistance() + 5);
         }
 
-        if (!redGiantFound) {
+        while (redGiantsFound <= 3) {
             StarSystem ss = WorldGenerator.generateRandomStarSystem(new Star(1, Color.red), world, 10, 10, 3);
-            world.getGalaxyMap().addObjectAtDistance(ss, alienRace.getHomeworld(), alienRace.getTravelDistance() - 5);
+            world.getGalaxyMap().addObjectAtDistance(ss, alienRace.getHomeworld(), alienRace.getTravelDistance() - CommonRandom.getRandom().nextInt(alienRace.getTravelDistance() / 2));
+            ++redGiantsFound;
         }
 
         world.addListener(this);
@@ -196,19 +197,23 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
                     , "Zorsan"
                     , false
                     , false
-                    , 10
+                    , 7
                     , ResourceManager.getInstance().getLandingPartyWeapons().getEntity("zorsan_laser")
                     , 1
                     , AnimalSpeciesDesc.Behaviour.AGGRESSIVE
                     , Collections.<AnimalModifier>emptySet()
             );
             desc.setImages(ResourceManager.getInstance().getImage("zorsan_warrior"), null);
+            desc.setCanBePickedUp(false);
             for (int i = 0; i < enemies; ++i) {
                 Animal animal = new Animal(targetPlanet, 0, 0, desc);
-                targetPlanet.setNearestFreePoint(animal, artifact.getX() + i, artifact.getY());
+                targetPlanet.setNearestFreePoint(animal, artifact.getX() + CommonRandom.getRandom().nextInt(4), artifact.getY() + CommonRandom.getRandom().nextInt(4));
                 targetPlanet.getPlanetObjects().add(animal);
             }
             isAlive = false;
+            // without this zorsan will immediately shoot twice
+            world.setUpdatedThisFrame(false);
+            world.setUpdatedNextFrame(false);
         } else {
             world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "planet");
             Dialog stationDialog = Dialog.loadFromFile("dialogs/zorsan/rebels/intro/station_dialog.json");
@@ -218,14 +223,21 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
 
                 @Override
                 public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                    if (returnCode == 1) {
-                        // refused
-                        world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "refused");
-                        flags.put("rebels_reject", "");
-                    } else {
-                        world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "agreed");
-                        flags.put("rebels_continue", "");
-                        world.getPlayer().changeCredits(world, 5);
+                    if (dialog.getId().equals("station_dialog")) {
+                        Dialog leaderDialog = Dialog.loadFromFile("dialogs/zorsan/rebels/intro/rebel_leader_dialog.json");
+                        leaderDialog.addListener(this);
+                        world.addOverlayWindow(leaderDialog);
+                        return;
+                    } else if (dialog.getId().equals("rebel_leader_dialog")) {
+                        if (returnCode == 1) {
+                            // refused
+                            world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "refused");
+                            flags.put("rebels_reject", "");
+                        } else {
+                            world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "agreed");
+                            flags.put("rebels_continue", "");
+                            world.getPlayer().changeCredits(world, 5);
+                        }
                     }
 
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/rebels/intro/henry_dialog.json"), flags);
