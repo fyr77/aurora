@@ -3,7 +3,24 @@
 
     <screen id="main_menu" controller="ru.game.aurora.application.MainMenuController">
         <layer id="layer" childLayout="horizontal">
-            <panel width="*"/>
+            <panel width="20px"/>
+            <panel width="*" childLayout="vertical">
+                <panel height="*"/>
+                <text style="base-font" text="${gui.main_menu.blog_link}" textHAlign="right">
+                    <interact onClick="openBlog()"/>
+                    <effect>
+                        <onHover name="changeMouseCursor" id="hand"/>
+                    </effect>
+                </text>
+                <panel height="10px"/>
+                <text style="base-font" text="${gui.main_menu.bug_link}" textHAlign="right">
+                    <interact onClick="openTracker()"/>
+                    <effect>
+                        <onHover name="changeMouseCursor" id="hand"/>
+                    </effect>
+                </text>
+                <panel height="20px"/>
+            </panel>
             <panel id="panel" width="512px" childLayout="vertical">
                 <panel height="5%"/>
                 <panel backgroundImage="resources/sprites/gui/logo.png" width="512px" height="256px"/>
