@@ -6,19 +6,28 @@
  */
 package ru.game.aurora.player.earth;
 
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.player.engineering.ShipUpgrade;
+import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
+import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
+import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
+import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class EarthState implements Serializable
 {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private List<PrivateMessage> messages = new LinkedList<>();
+
+    private List<ShipUpgrade> availableUpgrades = new ArrayList<>();
 
     private int technologyLevel = 0;
 
@@ -27,6 +36,14 @@ public class EarthState implements Serializable
     // quest dialogs that override default earth dialog
     // ordered in a queue, as there may be more than one at a time
     private Queue<Dialog> earthSpecialDialogs = new LinkedList<>();
+
+    public EarthState()
+    {
+        availableUpgrades.add(new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon")));
+        availableUpgrades.add(new LabUpgrade());
+        availableUpgrades.add(new WorkshopUpgrade());
+        availableUpgrades.add(new BarracksUpgrade());
+    }
 
     public void updateTechnologyLevel(int value) {
         technologyLevel += value;
@@ -52,5 +69,13 @@ public class EarthState implements Serializable
         if (evacuationState != null) {
             evacuationState.update(world);
         }
+    }
+
+    public List<ShipUpgrade> getAvailableUpgrades() {
+        return availableUpgrades;
+    }
+
+    public int getTechnologyLevel() {
+        return technologyLevel;
     }
 }
