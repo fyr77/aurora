@@ -12,10 +12,14 @@ import ru.game.aurora.world.World;
  * Time: 17:14
  */
 
-public class LabUpgrade implements ShipUpgrade
-{
-
+public class LabUpgrade extends ShipUpgrade {
     static final int size = Configuration.getIntProperty("upgrades.lab.crew");
+
+    private static final long serialVersionUID = 4448865642175738742L;
+
+    public LabUpgrade() {
+        super("lab_upgrade", "scientist_dialog", "upgrades");
+    }
 
     @Override
     public void onInstalled(World world, Ship ship) {

@@ -11,11 +11,14 @@ import ru.game.aurora.world.World;
  * Date: 30.04.14
  * Time: 17:34
  */
-public class WorkshopUpgrade implements ShipUpgrade
-{
+public class WorkshopUpgrade extends ShipUpgrade {
     static final int size = Configuration.getIntProperty("upgrades.workshop.crew");
 
     private static final long serialVersionUID = 1L;
+
+    public WorkshopUpgrade() {
+        super("workshop_upgrade", "engineer_dialog", "upgrades");
+    }
 
     @Override
     public void onInstalled(World world, Ship ship) {

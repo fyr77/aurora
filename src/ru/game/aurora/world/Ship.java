@@ -17,12 +17,17 @@ import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.engineering.ShipUpgrade;
+import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
+import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
+import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
+import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Ship extends MovableSprite implements SpaceObject {
@@ -59,14 +64,45 @@ public class Ship extends MovableSprite implements SpaceObject {
 
     private List<ShipUpgrade> upgrades = new ArrayList<>();
 
+    private int freeSpace;
+
     public Ship(AlienRace humanity, int x, int y) {
         super(x, y, "aurora");
         this.humanity = humanity;
         name = "Hawking";
         hull = maxHull = 10;
-        weapons.add(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"), StarshipWeapon.MOUNT_ALL));
+        scientists = BASE_SCIENTISTS;
+        military = BASE_MILITARY;
+        engineers = BASE_ENGINEERS;
+
+        freeSpace = Configuration.getIntProperty("upgrades.ship_free_space");
+
+        addUpgrade(null, new LabUpgrade());
+        addUpgrade(null, new BarracksUpgrade());
+        addUpgrade(null, new WorkshopUpgrade());
+        addUpgrade(null, new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon")));
     }
 
+    public void addUpgrade(World world, ShipUpgrade upgrade) {
+        if (freeSpace < upgrade.getSpace()) {
+            throw new IllegalArgumentException("Upgrade can not be installed because thiere is not enough space");
+        }
+        freeSpace -= upgrade.getSpace();
+        upgrade.onInstalled(world, this);
+        upgrades.add(upgrade);
+    }
+
+    public void removeUpgrade(World world, ShipUpgrade upgrade) {
+        for (Iterator<ShipUpgrade> iterator = upgrades.iterator(); iterator.hasNext(); ) {
+            ShipUpgrade u = iterator.next();
+            if (u.equals(upgrade)) {
+                iterator.remove();
+                u.onRemoved(world, this);
+                freeSpace += u.getSpace();
+                break;
+            }
+        }
+    }
 
     @Override
     public void update(GameContainer container, World world) {

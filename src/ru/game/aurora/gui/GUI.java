@@ -114,12 +114,12 @@ public class GUI {
         nifty.registerScreenController(new StoryScreenController(world));
         nifty.registerScreenController(new ResearchReportScreenController(world));
         nifty.registerScreenController(new EarthProgressScreenController(world));
+        nifty.registerScreenController(new LandingPartyEquipScreenController(world));
         nifty.registerScreenController(new EarthScreenController(world));
         nifty.registerScreenController(new EngineeringScreenController(world));
         nifty.registerScreenController(new FailScreenController(world));
         final SurfaceGUIController surfaceGUIController = new SurfaceGUIController(world);
         nifty.registerScreenController(surfaceGUIController);
-        nifty.registerScreenController(new LandingPartyEquipScreenController(world));
         nifty.registerScreenController(new IntroDialogController(world));
         nifty.registerScreenController(new CountrySelectScreenController(world));
         nifty.registerScreenController(new InventoryController(world));

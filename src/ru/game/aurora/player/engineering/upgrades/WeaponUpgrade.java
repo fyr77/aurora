@@ -15,11 +15,13 @@ import java.util.Iterator;
  * Time: 16:52
  */
 
-public class WeaponUpgrade implements ShipUpgrade
-{
+public class WeaponUpgrade extends ShipUpgrade {
+    private static final long serialVersionUID = 7410869118141240436L;
+
     private final StarshipWeaponDesc weaponDesc;
 
     public WeaponUpgrade(StarshipWeaponDesc weaponDesc) {
+        super(weaponDesc.id, weaponDesc.image, "weapons");
         this.weaponDesc = weaponDesc;
     }
 

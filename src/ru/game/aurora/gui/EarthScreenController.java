@@ -20,6 +20,7 @@ import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.earth.PrivateMessage;
+import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.world.World;
 
 import java.util.List;
@@ -31,6 +32,13 @@ public class EarthScreenController implements ScreenController {
 
     private Element messagesList;
 
+    private ListBox<ShipUpgrade> storageList;
+
+    private ListBox<ShipUpgrade> inventoryList;
+
+    private Element shipYardTab;
+
+
     public EarthScreenController(World world) {
         this.world = world;
     }
@@ -38,17 +46,33 @@ public class EarthScreenController implements ScreenController {
     @Override
     public void bind(Nifty nifty, Screen screen) {
         messagesList = screen.findElementByName("messages_list");
+        shipYardTab = screen.findElementByName("shipyard");
+        storageList = shipYardTab.findNiftyControl("storageList", ListBox.class);
+        inventoryList = shipYardTab.findNiftyControl("inventoryList", ListBox.class);
     }
 
     @Override
     public void onStartScreen() {
+        fillMessages();
+        fillUpgrades();
+        world.setPaused(true);
+    }
+
+    private void fillUpgrades() {
+        storageList.clear();
+        inventoryList.clear();
+
+        storageList.addAllItems(world.getPlayer().getEarthState().getAvailableUpgrades());
+        inventoryList.addAllItems(world.getPlayer().getShip().getUpgrades());
+    }
+
+    private void fillMessages() {
         ListBox l = messagesList.findNiftyControl("itemsList", ListBox.class);
         l.clear();
         List<PrivateMessage> privateMessages = world.getPlayer().getEarthState().getMessages();
         for (ListIterator listIterator = privateMessages.listIterator(privateMessages.size()); listIterator.hasPrevious(); ) {
             l.addItem(listIterator.previous());
         }
-        world.setPaused(true);
     }
 
     @Override

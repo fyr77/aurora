@@ -1,9 +1,8 @@
 package ru.game.aurora.player.engineering;
 
+import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
-
-import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,11 +10,23 @@ import java.io.Serializable;
  * Date: 30.04.14
  * Time: 16:45
  */
-public interface ShipUpgrade extends Serializable
-{
-    public void onInstalled(World world, Ship ship);
+public abstract class ShipUpgrade extends ItemWithTextAndImage {
+    private final String localizationGroup;
 
-    public void onRemoved(World world, Ship ship);
+    private static final long serialVersionUID = 5654574535197600236L;
 
-    public int getSpace();
+    public ShipUpgrade(String id, String icon, String localizationGroup) {
+        super(id, icon);
+        this.localizationGroup = localizationGroup;
+    }
+
+    public abstract void onInstalled(World world, Ship ship);
+
+    public abstract void onRemoved(World world, Ship ship);
+
+    public abstract int getSpace();
+
+    public String getLocalizationGroup() {
+        return localizationGroup;
+    }
 }
