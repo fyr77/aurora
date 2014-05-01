@@ -224,7 +224,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
         final Dialog d = captain != null ? captain.getCustomDialog() : race.getDefaultDialog();
 
-        if (race.getMusic() != null && !race.getMusic().isPlaying()) {
+        if (race != null && race.getMusic() != null && !race.getMusic().isPlaying()) {
             d.addListener(new MusicDialogListener(Playlist.getCurrentPlaylist().getId()));
             race.getMusic().play();
         }

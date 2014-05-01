@@ -148,6 +148,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
                     // after this, zorsan become hostile and player has fixed amount of time before they attack earth
                     addWarDataDrop();
+                    ((AlienHomeworld) planets[0]).setCanBeCommunicated(false);
 
                     world.getPlayer().getJournal().addQuestEntries("zorsan_relations", "start");
                 }
@@ -216,7 +217,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         });
 
         StarSystem homeworld = generateHomeworld(world, 3, 8, race);
-        world.getGalaxyMap().addObjectAtDistance(homeworld, (Positionable) world.getGlobalVariables().get("solar_system"),20 + CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.galaxy.zorsan_homeworld_distance")));
+        world.getGalaxyMap().addObjectAtDistance(homeworld, (Positionable) world.getGlobalVariables().get("solar_system"), 20 + CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.galaxy.zorsan_homeworld_distance")));
         world.getGlobalVariables().put("zorsan.homeworld", homeworld.getCoordsString());
 
         race.setTravelDistance(50);

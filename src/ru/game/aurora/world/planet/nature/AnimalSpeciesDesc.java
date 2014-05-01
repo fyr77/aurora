@@ -27,10 +27,6 @@ public class AnimalSpeciesDesc implements Serializable {
 
     private Set<AnimalModifier> modifiers;
 
-    private boolean isCarnivorous;
-
-    private boolean isHerbivorous;
-
     private int hp;
 
     /**
@@ -43,6 +39,8 @@ public class AnimalSpeciesDesc implements Serializable {
     private transient Image image;
 
     private transient Image deadImage;
+
+    private boolean canBePickedUp = true;
 
     public static enum Behaviour {
         /**
@@ -97,8 +95,6 @@ public class AnimalSpeciesDesc implements Serializable {
         this.homePlanet = homePlanet;
         this.name = name;
         this.weapon = weapon;
-        isCarnivorous = carnivorous;
-        isHerbivorous = herbivorous;
         this.hp = hp;
         this.speed = speed;
         this.behaviour = behaviour;
@@ -156,5 +152,13 @@ public class AnimalSpeciesDesc implements Serializable {
 
     public void setArmor(int armor) {
         this.armor = armor;
+    }
+
+    public boolean isCanBePickedUp() {
+        return canBePickedUp;
+    }
+
+    public void setCanBePickedUp(boolean canBePickedUp) {
+        this.canBePickedUp = canBePickedUp;
     }
 }

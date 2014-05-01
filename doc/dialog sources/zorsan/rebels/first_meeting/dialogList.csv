@@ -1,0 +1,6 @@
+1Диалог с Сарой.csv;courier_encountered;engineer_dialog;zorsan/rebels/intro
+2Встреча с кораблем.csv;courier_dialog;zorsan_dialog;zorsan/rebels/intro
+3Диалог на планете.csv;planet_dialog;zorsan_dialog;zorsan/rebels/intro
+4Найденная станция.csv;station_dialog;zorsan_dialog;zorsan/rebels/intro
+5Диалог с лидером повстанцев.csv;rebel_leader_dialog;zorsan_rebel_dialog;zorsan/rebels/intro
+6Генри диалог завершает квест.csv;henry_dialog;marine_dialog;zorsan/rebels/intro

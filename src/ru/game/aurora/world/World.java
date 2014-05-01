@@ -35,7 +35,7 @@ import java.util.*;
 public class World implements Serializable, ResolutionChangeListener
 {
 
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 3L;
 
     private Camera camera;
 
@@ -63,7 +63,7 @@ public class World implements Serializable, ResolutionChangeListener
 
     private transient StarSystemNamesCollection starSystemNamesCollection = new StarSystemNamesCollection();
 
-    private transient List<OverlayWindow> overlayWindows = new LinkedList<OverlayWindow>();
+    private transient List<OverlayWindow> overlayWindows = new LinkedList<>();
 
     private static DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
 
@@ -71,11 +71,11 @@ public class World implements Serializable, ResolutionChangeListener
 
     private int turnCount = 0;
 
-    private List<GameEventListener> listeners = new LinkedList<GameEventListener>();
+    private List<GameEventListener> listeners = new LinkedList<>();
 
-    private Map<String, AlienRace> races = new HashMap<String, AlienRace>();
+    private Map<String, AlienRace> races = new HashMap<>();
 
-    private Map<String, Serializable> globalVariables = new HashMap<String, Serializable>();
+    private Map<String, Serializable> globalVariables = new HashMap<>();
 
     private RnDSet researchAndDevelopmentProjects;
 
@@ -483,10 +483,7 @@ public class World implements Serializable, ResolutionChangeListener
 
     public void gameLoaded()
     {
-        if (currentDate == null) {
-            currentDate = new GregorianCalendar(Configuration.getIntProperty("world.startYear"), 1, 1);
-            currentDate.add(Calendar.DAY_OF_MONTH, turnCount);
-        }
+
     }
 
     public Calendar getCurrentDate() {

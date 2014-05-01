@@ -132,16 +132,9 @@ public class IntroDialogController implements ScreenController, Updatable {
                 dialogEnded();
             } else {
                 update();
-                mainPanel.startEffect(EffectEventId.onCustom, new FadeInEndListener(), "fadeIn");
+                mainPanel.startEffect(EffectEventId.onCustom, null, "fadeIn");
+                isTyping = true;
             }
-        }
-    }
-
-    private class FadeInEndListener implements EndNotify {
-
-        @Override
-        public void perform() {
-            isTyping = true;
         }
     }
 
@@ -150,6 +143,9 @@ public class IntroDialogController implements ScreenController, Updatable {
             EngineUtils.setTextForGUIElement(mainText, desiredString);
             isTyping = false;
         } else {
+            if (mainPanel.isEffectActive(EffectEventId.onCustom)) {
+                return;
+            }
             mainPanel.startEffect(EffectEventId.onCustom, new FadeOutEndListener(), "fadeOut");
         }
     }
@@ -173,8 +169,7 @@ public class IntroDialogController implements ScreenController, Updatable {
         AuroraGame.getUpdatables().remove(this);
     }
 
-    private void dialogEnded()
-    {
+    private void dialogEnded() {
         if (dialogs.isEmpty()) {
             GUI.getInstance().popAndSetScreen();
             if (endListener != null) {
@@ -182,7 +177,7 @@ public class IntroDialogController implements ScreenController, Updatable {
             }
         } else {
             onStartScreen();
-            mainPanel.startEffect(EffectEventId.onCustom, new FadeInEndListener(), "fadeIn");
+            mainPanel.startEffect(EffectEventId.onCustom, null, "fadeIn");
         }
     }
 

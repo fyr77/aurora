@@ -16,21 +16,27 @@ import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.player.engineering.ShipUpgrade;
+import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
+import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
+import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
+import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Ship extends MovableSprite implements SpaceObject {
 
-    public static final int MAX_SCIENTISTS = 20;
-    public static final int MAX_ENGINEERS = 10;
-    public static final int MAX_MILITARY = 15;
+    public static final int BASE_SCIENTISTS = 5;
+    public static final int BASE_ENGINEERS = 5;
+    public static final int BASE_MILITARY = 5;
 
-    private static final long serialVersionUID = 1;
+    private static final long serialVersionUID = 2;
 
     private int hull;
 
@@ -38,26 +44,65 @@ public class Ship extends MovableSprite implements SpaceObject {
 
     private int maxHull;
 
-    private int scientists = MAX_SCIENTISTS;
+    private int scientists;
 
-    private int engineers = MAX_ENGINEERS;
+    private int engineers;
 
-    private int military = MAX_MILITARY;
+    private int military;
 
-    private List<StarshipWeapon> weapons = new ArrayList<StarshipWeapon>();
+    private int maxMilitary;
+
+    private int maxScientists;
+
+    private int maxEngineers;
+
+    private List<StarshipWeapon> weapons = new ArrayList<>();
 
     private AlienRace humanity;
 
-    private Multiset<InventoryItem> storage = HashMultiset.<InventoryItem>create();
+    private Multiset<InventoryItem> storage = HashMultiset.create();
+
+    private List<ShipUpgrade> upgrades = new ArrayList<>();
+
+    private int freeSpace;
 
     public Ship(AlienRace humanity, int x, int y) {
         super(x, y, "aurora");
         this.humanity = humanity;
         name = "Hawking";
         hull = maxHull = 10;
-        weapons.add(new StarshipWeapon(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"), StarshipWeapon.MOUNT_ALL));
+        scientists = BASE_SCIENTISTS;
+        military = BASE_MILITARY;
+        engineers = BASE_ENGINEERS;
+
+        freeSpace = Configuration.getIntProperty("upgrades.ship_free_space");
+
+        addUpgrade(null, new LabUpgrade());
+        addUpgrade(null, new BarracksUpgrade());
+        addUpgrade(null, new WorkshopUpgrade());
+        addUpgrade(null, new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon")));
     }
 
+    public void addUpgrade(World world, ShipUpgrade upgrade) {
+        if (freeSpace < upgrade.getSpace()) {
+            throw new IllegalArgumentException("Upgrade can not be installed because thiere is not enough space");
+        }
+        freeSpace -= upgrade.getSpace();
+        upgrade.onInstalled(world, this);
+        upgrades.add(upgrade);
+    }
+
+    public void removeUpgrade(World world, ShipUpgrade upgrade) {
+        for (Iterator<ShipUpgrade> iterator = upgrades.iterator(); iterator.hasNext(); ) {
+            ShipUpgrade u = iterator.next();
+            if (u.equals(upgrade)) {
+                iterator.remove();
+                u.onRemoved(world, this);
+                freeSpace += u.getSpace();
+                break;
+            }
+        }
+    }
 
     @Override
     public void update(GameContainer container, World world) {
@@ -178,13 +223,13 @@ public class Ship extends MovableSprite implements SpaceObject {
     }
 
     public int getLostCrewMembers() {
-        return Ship.MAX_ENGINEERS + Ship.MAX_MILITARY + Ship.MAX_SCIENTISTS - getTotalCrew();
+        return maxEngineers + maxMilitary + maxScientists - getTotalCrew();
     }
 
     public void refillCrew(World world) {
-        scientists = Ship.MAX_SCIENTISTS;
-        engineers = Ship.MAX_ENGINEERS;
-        military = Ship.MAX_MILITARY;
+        scientists = maxScientists;
+        engineers = maxEngineers;
+        military = maxMilitary;
         world.onCrewChanged();
     }
 
@@ -204,5 +249,33 @@ public class Ship extends MovableSprite implements SpaceObject {
         if (!itemAlreadyInStorage) {
             storage.add(o, amount);
         }
+    }
+
+    public List<ShipUpgrade> getUpgrades() {
+        return upgrades;
+    }
+
+    public int getMaxMilitary() {
+        return maxMilitary;
+    }
+
+    public void setMaxMilitary(int maxMilitary) {
+        this.maxMilitary = maxMilitary;
+    }
+
+    public int getMaxScientists() {
+        return maxScientists;
+    }
+
+    public void setMaxScientists(int maxScientists) {
+        this.maxScientists = maxScientists;
+    }
+
+    public int getMaxEngineers() {
+        return maxEngineers;
+    }
+
+    public void setMaxEngineers(int maxEngineers) {
+        this.maxEngineers = maxEngineers;
     }
 }

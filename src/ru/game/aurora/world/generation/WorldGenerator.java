@@ -59,7 +59,7 @@ public class WorldGenerator implements Runnable {
             , new EmbassiesQuest()
             , new DamagedRoguesScoutEventGenerator()
             , new EnergySphereEncounterGenerator()
-            , new ZorsanRebelsFirstQuestGenerator.StarsystemGenerator()
+            , new ZorsanRebelsFirstQuestGenerator()
     };
 
     private static final WorldGeneratorPart[] alienGenerators = {
@@ -151,8 +151,11 @@ public class WorldGenerator implements Runnable {
         final double ringsChance = Configuration.getDoubleProperty("world.starsystem.planetRingsChance");
         final int maxSatellites = Configuration.getIntProperty("world.starsystem.maxSatellites");
 
+        int prevRadius = StarSystem.STAR_SCALE_FACTOR;
+
         for (int i = 0; i < planetCount; ++i) {
-            int radius = r.nextInt(planetCount * StarSystem.PLANET_SCALE_FACTOR) + StarSystem.STAR_SCALE_FACTOR;
+            int radius = prevRadius + r.nextInt(StarSystem.PLANET_SCALE_FACTOR) + StarSystem.PLANET_SCALE_FACTOR;
+            prevRadius = radius;
             maxRadius = Math.max(radius, maxRadius);
             int planetX = r.nextInt(2 * radius) - radius;
 
