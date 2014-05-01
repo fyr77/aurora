@@ -37,6 +37,8 @@ public class AlienHomeworld extends BasePlanet {
 
     private String spriteName;
 
+    private boolean canBeCommunicated = true;
+
     private Map<String, String> dialogFlags = null;
 
     public AlienHomeworld(String spriteName, AlienRace ownerRace, Dialog customDialog, int size, int y, StarSystem owner, PlanetAtmosphere atmosphere, int x, PlanetCategory cat) {
@@ -55,6 +57,9 @@ public class AlienHomeworld extends BasePlanet {
 
     @Override
     public void enter(World world) {
+        if (!canBeCommunicated) {
+            return;
+        }
         if (dialogFlags == null) {
             dialogFlags = new HashMap<>();
             dialog.addListener(new SaveFlagsDialogListener(dialogFlags));
@@ -95,5 +100,9 @@ public class AlienHomeworld extends BasePlanet {
 
     public void setDialog(Dialog dialog) {
         this.dialog = dialog;
+    }
+
+    public void setCanBeCommunicated(boolean canBeCommunicated) {
+        this.canBeCommunicated = canBeCommunicated;
     }
 }
