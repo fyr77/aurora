@@ -278,4 +278,8 @@ public class Ship extends MovableSprite implements SpaceObject {
     public void setMaxEngineers(int maxEngineers) {
         this.maxEngineers = maxEngineers;
     }
+
+    public int getFreeSpace() {
+        return freeSpace;
+    }
 }

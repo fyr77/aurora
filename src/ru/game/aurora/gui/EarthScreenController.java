@@ -9,6 +9,7 @@ package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.elements.Element;
@@ -21,6 +22,7 @@ import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.engineering.ShipUpgrade;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 
 import java.util.List;
@@ -56,6 +58,7 @@ public class EarthScreenController implements ScreenController {
         fillMessages();
         fillUpgrades();
         world.setPaused(true);
+        updateShipyardLabels();
     }
 
     private void fillUpgrades() {
@@ -82,6 +85,7 @@ public class EarthScreenController implements ScreenController {
 
     public void closeScreen() {
         GUI.getInstance().getNifty().gotoScreen("star_system_gui");
+        world.getPlayer().getShip().refillCrew(world);
     }
 
     @NiftyEventSubscriber(id = "itemsList")
@@ -100,4 +104,53 @@ public class EarthScreenController implements ScreenController {
         messagesList.layoutElements();
     }
 
+    private void updateShipyardLabels()
+    {
+        Element sciCountElement = shipYardTab.findElementByName("sci_count").findElementByName("#count");
+        Element engiCountElement = shipYardTab.findElementByName("engi_count").findElementByName("#count");
+        Element milCountElement = shipYardTab.findElementByName("mil_count").findElementByName("#count");
+
+        EngineUtils.setTextForGUIElement(sciCountElement, String.valueOf(world.getPlayer().getShip().getMaxScientists()));
+        EngineUtils.setTextForGUIElement(engiCountElement, String.valueOf(world.getPlayer().getShip().getMaxEngineers()));
+        EngineUtils.setTextForGUIElement(milCountElement, String.valueOf(world.getPlayer().getShip().getMaxMilitary()));
+    }
+
+    public void onShipToShipyardClicked()
+    {
+        ShipUpgrade su = inventoryList.getFocusItem();
+        inventoryList.removeItemByIndex(inventoryList.getFocusItemIndex());
+        world.getPlayer().getShip().removeUpgrade(world, su);
+        updateShipyardLabels();
+    }
+
+    public void onShipyardToShipClicked()
+    {
+        ShipUpgrade su = storageList.getFocusItem();
+        if (su.getSpace() > world.getPlayer().getShip().getFreeSpace()) {
+            return;
+        }
+        inventoryList.addItem(su);
+        world.getPlayer().getShip().addUpgrade(world, su);
+        updateShipyardLabels();
+    }
+
+
+
+    //это - очень сильное колдунство. onClicked занят ниже. Поэтому тут - onReleased. Костыль
+    @NiftyEventSubscriber(pattern = ".*storage_to_inventory")
+    public void onReleased(String id, ButtonClickedEvent event) {
+        int numericId = Integer.parseInt(id.split("#")[0]);
+        ListBox itemsList = storageList;
+        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
+        itemsList.setFocusItemByIndex(numericId);
+    }
+
+    //костыль к костылю. YO DAWG
+    @NiftyEventSubscriber(pattern = ".*inventory_to_storage")
+    public void onPrimaryReleased(String id, ButtonClickedEvent event) {
+        int numericId = Integer.parseInt(id.split("#")[0]);
+        ListBox itemsList = inventoryList;
+        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
+        itemsList.setFocusItemByIndex(numericId);
+    }
 }

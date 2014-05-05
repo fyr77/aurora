@@ -22,7 +22,7 @@ public class WorkshopUpgrade extends ShipUpgrade {
 
     @Override
     public void onInstalled(World world, Ship ship) {
-        ship.setEngineers(ship.getMaxEngineers() + size);
+        ship.setMaxEngineers(ship.getMaxEngineers() + size);
     }
 
     @Override
