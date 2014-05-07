@@ -25,6 +25,7 @@ import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -40,6 +41,10 @@ public class EarthScreenController implements ScreenController {
 
     private Element shipYardTab;
 
+    private Element upgradeImage;
+
+    private Element upgradeText;
+
 
     public EarthScreenController(World world) {
         this.world = world;
@@ -51,6 +56,8 @@ public class EarthScreenController implements ScreenController {
         shipYardTab = screen.findElementByName("shipyard");
         storageList = shipYardTab.findNiftyControl("storageList", ListBox.class);
         inventoryList = shipYardTab.findNiftyControl("inventoryList", ListBox.class);
+        upgradeText = shipYardTab.findElementByName("upgrade_text");
+        upgradeImage = shipYardTab.findElementByName("upgrade_icon");
     }
 
     @Override
@@ -88,22 +95,6 @@ public class EarthScreenController implements ScreenController {
         world.getPlayer().getShip().refillCrew(world);
     }
 
-    @NiftyEventSubscriber(id = "itemsList")
-    public void onListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent event) {
-        Element imagePanel = messagesList.findElementByName("selectedItemImg");
-
-        TextRenderer tr = messagesList.findElementByName("selectedItemText").getRenderer(TextRenderer.class);
-        if (event.getSelection().isEmpty()) {
-            tr.setText("<No item selected>");
-            imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage("no_image"))));
-            return;
-        }
-        PrivateMessage pm = (PrivateMessage) event.getSelection().get(0);
-        tr.setText(pm.getLocalizedText("private_messages"));
-        imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(pm.getIcon()))));
-        messagesList.layoutElements();
-    }
-
     private void updateShipyardLabels()
     {
         Element sciCountElement = shipYardTab.findElementByName("sci_count").findElementByName("#count");
@@ -113,6 +104,20 @@ public class EarthScreenController implements ScreenController {
         EngineUtils.setTextForGUIElement(sciCountElement, String.valueOf(world.getPlayer().getShip().getMaxScientists()));
         EngineUtils.setTextForGUIElement(engiCountElement, String.valueOf(world.getPlayer().getShip().getMaxEngineers()));
         EngineUtils.setTextForGUIElement(milCountElement, String.valueOf(world.getPlayer().getShip().getMaxMilitary()));
+
+        List<ShipUpgrade> selected = new ArrayList<>();
+        selected.addAll(inventoryList.getSelection());
+        selected.addAll(storageList.getSelection());
+        if (!selected.isEmpty()) {
+            ShipUpgrade su = selected.get(0);
+            EngineUtils.setTextForGUIElement(upgradeText, su.getLocalizedText(su.getLocalizationGroup()));
+            EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), su.getLocalizedName(su.getLocalizationGroup()));
+            EngineUtils.setImageForGUIElement(upgradeImage, su.getIcon());
+        } else {
+            EngineUtils.setTextForGUIElement(upgradeText, "");
+            EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), "");
+            EngineUtils.setImageForGUIElement(upgradeImage, "no_image");
+        }
     }
 
     public void onShipToShipyardClicked()
@@ -134,6 +139,12 @@ public class EarthScreenController implements ScreenController {
         updateShipyardLabels();
     }
 
+    private void deselectAll(ListBox<ShipUpgrade> l)
+    {
+        for (Integer i : l.getSelectedIndices()) {
+            l.deselectItemByIndex(i);
+        }
+    }
 
 
     //это - очень сильное колдунство. onClicked занят ниже. Поэтому тут - onReleased. Костыль
@@ -143,6 +154,8 @@ public class EarthScreenController implements ScreenController {
         ListBox itemsList = storageList;
         numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
         itemsList.setFocusItemByIndex(numericId);
+        itemsList.selectItemByIndex(numericId);
+        deselectAll(inventoryList);
     }
 
     //костыль к костылю. YO DAWG
@@ -152,5 +165,39 @@ public class EarthScreenController implements ScreenController {
         ListBox itemsList = inventoryList;
         numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
         itemsList.setFocusItemByIndex(numericId);
+        itemsList.selectItemByIndex(numericId);
+        deselectAll(storageList);
+    }
+
+    @NiftyEventSubscriber(pattern = ".*List")
+    public void onListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent event) {
+        if (event.getSelectionIndices().isEmpty()) {
+            return;
+        }
+
+        if (id.equals(inventoryList.getId()) || id.equals(storageList.getId())) {
+            ShipUpgrade su = (ShipUpgrade) event.getSelection().get(0);
+            EngineUtils.setTextForGUIElement(upgradeText, su.getLocalizedText(su.getLocalizationGroup()));
+            EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), su.getLocalizedName(su.getLocalizationGroup()));
+            EngineUtils.setImageForGUIElement(upgradeImage, su.getIcon());
+            return;
+        }
+
+
+        if (id.equals("itemsList")) {
+            Element imagePanel = messagesList.findElementByName("selectedItemImg");
+
+            TextRenderer tr = messagesList.findElementByName("selectedItemText").getRenderer(TextRenderer.class);
+            if (event.getSelection().isEmpty()) {
+                tr.setText("<No item selected>");
+                imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage("no_image"))));
+                return;
+            }
+            PrivateMessage pm = (PrivateMessage) event.getSelection().get(0);
+            tr.setText(pm.getLocalizedText("private_messages"));
+            imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(pm.getIcon()))));
+            messagesList.layoutElements();
+        }
+
     }
 }

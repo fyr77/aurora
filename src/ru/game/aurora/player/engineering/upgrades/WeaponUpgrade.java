@@ -45,4 +45,12 @@ public class WeaponUpgrade extends ShipUpgrade {
     public int getSpace() {
         return weaponDesc.size;
     }
+
+    @Override
+    public String getLocalizedText(String group) {
+        StringBuilder sb = new StringBuilder(super.getLocalizedText(group));
+        sb.append('\n').append('\n');
+        sb.append("RNG: ").append(weaponDesc.range).append(", DMG: ").append(weaponDesc.damage).append(", RLD:").append(weaponDesc.reloadTurns);
+        return sb.toString();
+    }
 }
