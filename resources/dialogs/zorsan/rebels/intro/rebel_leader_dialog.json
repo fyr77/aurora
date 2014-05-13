@@ -10,7 +10,8 @@
           "targetStatementId": 1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "1": {
       "id": 1,
@@ -20,7 +21,8 @@
           "targetStatementId": 2,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "2": {
       "id": 2,
@@ -304,6 +306,21 @@
     },
     "20": {
       "id": 20,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "1"
+        }
+      ]
+    },
+    "22": {
+      "id": 22,
       "replies": [
         {
           "returnValue": 0,
