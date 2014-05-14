@@ -16,18 +16,15 @@ import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class EarthState implements Serializable
 {
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 3L;
 
     private List<PrivateMessage> messages = new LinkedList<>();
 
-    private List<ShipUpgrade> availableUpgrades = new ArrayList<>();
+    private Set<ShipUpgrade> availableUpgrades = new HashSet<>();
 
     private int technologyLevel = 0;
 
@@ -71,7 +68,7 @@ public class EarthState implements Serializable
         }
     }
 
-    public List<ShipUpgrade> getAvailableUpgrades() {
+    public Set<ShipUpgrade> getAvailableUpgrades() {
         return availableUpgrades;
     }
 
