@@ -47,8 +47,8 @@ public class WeaponUpgrade extends ShipUpgrade {
     }
 
     @Override
-    public String getLocalizedText(String group) {
-        StringBuilder sb = new StringBuilder(super.getLocalizedText(group));
+    public String getLocalizedDescription() {
+        StringBuilder sb = new StringBuilder(super.getLocalizedDescription());
         sb.append('\n').append('\n');
         sb.append("RNG: ").append(weaponDesc.range).append(", DMG: ").append(weaponDesc.damage).append(", RLD:").append(weaponDesc.reloadTurns);
         return sb.toString();

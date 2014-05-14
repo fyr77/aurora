@@ -9,5 +9,7 @@
     "image" : "ship_laser",
     "reloadTurns" : 0,
     "explosionAnimation" : "rocket_explosion",
-    "particlesAnimation" : "rocket_particles"
+    "particlesAnimation" : "rocket_particles",
+    "size" : 10
+
 }

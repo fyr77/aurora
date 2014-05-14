@@ -8,5 +8,6 @@
     "range" : 3,
     "reloadTurns" : 1,
     "explosionAnimation" : "plasma_explosion",
-    "particlesAnimation" : "plasma_particles"
+    "particlesAnimation" : "plasma_particles",
+    "size" : 30
 }

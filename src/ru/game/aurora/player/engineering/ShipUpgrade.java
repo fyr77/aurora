@@ -1,5 +1,6 @@
 package ru.game.aurora.player.engineering;
 
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
@@ -28,5 +29,13 @@ public abstract class ShipUpgrade extends ItemWithTextAndImage {
 
     public String getLocalizationGroup() {
         return localizationGroup;
+    }
+
+    public String getLocalizedDescription() {
+        StringBuilder sb = new StringBuilder(super.getLocalizedText(localizationGroup));
+        sb.append("\n");
+        sb.append(Localization.getText("gui", "shipyard.upgrade_space"));
+        sb.append(" ").append(getSpace());
+        return sb.toString();
     }
 }
