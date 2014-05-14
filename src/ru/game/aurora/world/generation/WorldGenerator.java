@@ -30,6 +30,7 @@ import ru.game.aurora.world.quest.Journal;
 import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.space.earth.EarthUpgradeUnlocker;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -240,6 +241,8 @@ public class WorldGenerator implements Runnable {
 
         journal.addQuest(new JournalEntry("colony_search", "start"));
         journal.addQuest(new JournalEntry("last_beacon", "start"));
+
+        world.addListener(new EarthUpgradeUnlocker());
 
     }
 

@@ -37,4 +37,22 @@ public class ItemWithTextAndImage implements Serializable {
     public String getLocalizedText(String group) {
         return Localization.getText(group, id + ".desc");
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ItemWithTextAndImage that = (ItemWithTextAndImage) o;
+
+        return !(icon != null ? !icon.equals(that.icon) : that.icon != null) && !(id != null ? !id.equals(that.id) : that.id != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (icon != null ? icon.hashCode() : 0);
+        return result;
+    }
 }
