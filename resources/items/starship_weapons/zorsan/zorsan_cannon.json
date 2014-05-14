@@ -8,5 +8,6 @@
     "image" : "",
     "shotSound" : "autofire_1",
     "reloadTurns" : 0,
-    "explosionAnimation" : "blaster_explosion_red"
+    "explosionAnimation" : "blaster_explosion_red",
+    "size" : 25
 }

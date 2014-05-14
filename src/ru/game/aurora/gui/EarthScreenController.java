@@ -19,7 +19,9 @@ import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.gui.niffy.ProgressBarControl;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.util.EngineUtils;
@@ -45,6 +47,8 @@ public class EarthScreenController implements ScreenController {
 
     private Element upgradeText;
 
+    private ProgressBarControl freeSpace;
+
 
     public EarthScreenController(World world) {
         this.world = world;
@@ -58,6 +62,7 @@ public class EarthScreenController implements ScreenController {
         inventoryList = shipYardTab.findNiftyControl("inventoryList", ListBox.class);
         upgradeText = shipYardTab.findElementByName("upgrade_text");
         upgradeImage = shipYardTab.findElementByName("upgrade_icon");
+        freeSpace = shipYardTab.findControl("free_space", ProgressBarControl.class);
     }
 
     @Override
@@ -95,8 +100,7 @@ public class EarthScreenController implements ScreenController {
         world.getPlayer().getShip().refillCrew(world);
     }
 
-    private void updateShipyardLabels()
-    {
+    private void updateShipyardLabels() {
         Element sciCountElement = shipYardTab.findElementByName("sci_count").findElementByName("#count");
         Element engiCountElement = shipYardTab.findElementByName("engi_count").findElementByName("#count");
         Element milCountElement = shipYardTab.findElementByName("mil_count").findElementByName("#count");
@@ -110,7 +114,7 @@ public class EarthScreenController implements ScreenController {
         selected.addAll(storageList.getSelection());
         if (!selected.isEmpty()) {
             ShipUpgrade su = selected.get(0);
-            EngineUtils.setTextForGUIElement(upgradeText, su.getLocalizedText(su.getLocalizationGroup()));
+            EngineUtils.setTextForGUIElement(upgradeText, su.getLocalizedDescription());
             EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), su.getLocalizedName(su.getLocalizationGroup()));
             EngineUtils.setImageForGUIElement(upgradeImage, su.getIcon());
         } else {
@@ -118,18 +122,20 @@ public class EarthScreenController implements ScreenController {
             EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), "");
             EngineUtils.setImageForGUIElement(upgradeImage, "no_image");
         }
+
+        final int freeSpace1 = world.getPlayer().getShip().getFreeSpace();
+        freeSpace.setProgress((100 - (float) freeSpace1) / 100.0f);
+        freeSpace.setText(Localization.getText("gui", "shipyard.remaining_space") + " " + freeSpace1);
     }
 
-    public void onShipToShipyardClicked()
-    {
+    public void onShipToShipyardClicked() {
         ShipUpgrade su = inventoryList.getFocusItem();
         inventoryList.removeItemByIndex(inventoryList.getFocusItemIndex());
         world.getPlayer().getShip().removeUpgrade(world, su);
         updateShipyardLabels();
     }
 
-    public void onShipyardToShipClicked()
-    {
+    public void onShipyardToShipClicked() {
         ShipUpgrade su = storageList.getFocusItem();
         if (su.getSpace() > world.getPlayer().getShip().getFreeSpace()) {
             return;
@@ -139,8 +145,7 @@ public class EarthScreenController implements ScreenController {
         updateShipyardLabels();
     }
 
-    private void deselectAll(ListBox<ShipUpgrade> l)
-    {
+    private void deselectAll(ListBox<ShipUpgrade> l) {
         for (Integer i : l.getSelectedIndices()) {
             l.deselectItemByIndex(i);
         }
@@ -177,7 +182,7 @@ public class EarthScreenController implements ScreenController {
 
         if (id.equals(inventoryList.getId()) || id.equals(storageList.getId())) {
             ShipUpgrade su = (ShipUpgrade) event.getSelection().get(0);
-            EngineUtils.setTextForGUIElement(upgradeText, su.getLocalizedText(su.getLocalizationGroup()));
+            EngineUtils.setTextForGUIElement(upgradeText, su.getLocalizedDescription());
             EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), su.getLocalizedName(su.getLocalizationGroup()));
             EngineUtils.setImageForGUIElement(upgradeImage, su.getIcon());
             return;

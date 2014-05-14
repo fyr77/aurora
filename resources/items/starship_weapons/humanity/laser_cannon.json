@@ -9,5 +9,6 @@
     "shotSound" : "laser_1",
     "reloadTurns" : 1,
     "explosionAnimation" : "blaster_explosion",
-    "particlesAnimation" : "blaster_particles"
+    "particlesAnimation" : "blaster_particles",
+    "size" : 20
 }

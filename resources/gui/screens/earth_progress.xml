@@ -59,42 +59,51 @@
                             <panel height="10px"/>
                             <panel childLayout="horizontal" width="100%" height="276px">
 
-                                <panel childLayout="vertical" width="100px"  style="nifty-panel-no-shadow" >
+                                <panel childLayout="vertical" width="100px" style="nifty-panel-no-shadow">
                                     <text text="${gui.crew}" style="base-font"/>
                                     <panel height="10px"/>
-                                    <control name="icon_and_count" id="sci_count" icon="resources/sprites/gui/sci_count.png" width="100px" height="50px">
+                                    <control name="icon_and_count" id="sci_count"
+                                             icon="resources/sprites/gui/sci_count.png" width="100px" height="50px">
                                         <effect>
-                                            <onHover name="custom-hint" targetElement="hint-panel" hintText="${hints.space.scientists}"/>
+                                            <onHover name="custom-hint" targetElement="hint-panel"
+                                                     hintText="${hints.space.scientists}"/>
                                         </effect>
                                     </control>
                                     <panel width="10px"/>
-                                    <control name="icon_and_count" id="engi_count" icon="resources/sprites/gui/engi_count.png" width="100px" height="50px">
+                                    <control name="icon_and_count" id="engi_count"
+                                             icon="resources/sprites/gui/engi_count.png" width="100px" height="50px">
                                         <effect>
-                                            <onHover name="custom-hint" targetElement="hint-panel" hintText="${hints.space.engineers}"/>
+                                            <onHover name="custom-hint" targetElement="hint-panel"
+                                                     hintText="${hints.space.engineers}"/>
                                         </effect>
                                     </control>
                                     <panel width="10px"/>
-                                    <control name="icon_and_count" id="mil_count" icon="resources/sprites/gui/mil_count.png" width="100px" height="50px">
+                                    <control name="icon_and_count" id="mil_count"
+                                             icon="resources/sprites/gui/mil_count.png" width="100px" height="50px">
                                         <effect>
-                                            <onHover name="custom-hint" targetElement="hint-panel" hintText="${hints.space.military}"/>
+                                            <onHover name="custom-hint" targetElement="hint-panel"
+                                                     hintText="${hints.space.military}"/>
                                         </effect>
                                     </control>
                                 </panel>
                                 <panel width="10px"/>
 
-                                <panel childLayout="horizontal"  style="nifty-panel-no-shadow">
+                                <panel childLayout="horizontal" style="nifty-panel-no-shadow">
                                     <image id="upgrade_icon" width="256px" height="256px"/>
                                     <panel width="10px"/>
                                     <panel width="*" childLayout="vertical" padding="10px">
                                         <text id="upgrade_name" style="bold-font" textHAlign="left"/>
                                         <panel height="10px"/>
-                                        <text width="100%" wrap="true" style="base-font" textHAlign="left" id="upgrade_text"/>
+                                        <text width="100%" wrap="true" style="base-font" textHAlign="left"
+                                              id="upgrade_text"/>
                                     </panel>
                                     <panel width="5px"/>
                                 </panel>
                                 <panel width="5px"/>
 
                             </panel>
+                            <panel height="10px"/>
+                            <control id="free_space" name="progressbar" width="90%" height="40px"/>
                             <!-- inventory and upgrades -->
                             <panel height="10px"/>
 
@@ -110,9 +119,12 @@
                                         <control name="shipyard_line"
                                                  controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
                                             <effect>
-                                                <onCustom customKey="focus" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
-                                                <onCustom customKey="select" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
-                                                <onCustom customKey="select" name="textColor" post="false" color="#fc0f" neverStopRendering="true" timeType="infinite" />
+                                                <onCustom customKey="focus" name="colorBar" post="false" color="#444f"
+                                                          neverStopRendering="true" timeType="infinite"/>
+                                                <onCustom customKey="select" name="colorBar" post="false" color="#444f"
+                                                          neverStopRendering="true" timeType="infinite"/>
+                                                <onCustom customKey="select" name="textColor" post="false" color="#fc0f"
+                                                          neverStopRendering="true" timeType="infinite"/>
                                             </effect>
                                             <interact onClick="listBoxItemClicked()"/>
                                         </control>
@@ -131,9 +143,12 @@
                                         <control name="ship_line"
                                                  controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
                                             <effect>
-                                                <onCustom customKey="focus" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
-                                                <onCustom customKey="select" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
-                                                <onCustom customKey="select" name="textColor" post="false" color="#fc0f" neverStopRendering="true" timeType="infinite" />
+                                                <onCustom customKey="focus" name="colorBar" post="false" color="#444f"
+                                                          neverStopRendering="true" timeType="infinite"/>
+                                                <onCustom customKey="select" name="colorBar" post="false" color="#444f"
+                                                          neverStopRendering="true" timeType="infinite"/>
+                                                <onCustom customKey="select" name="textColor" post="false" color="#fc0f"
+                                                          neverStopRendering="true" timeType="infinite"/>
                                             </effect>
                                             <interact onClick="listBoxItemClicked()"/>
                                         </control>
