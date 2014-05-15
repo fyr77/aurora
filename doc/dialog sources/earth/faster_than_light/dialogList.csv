@@ -1,0 +1,5 @@
+1Диалог на земле.csv;ftl_start;earth_dialog;quest/faster_than_light
+2.Вход в систему.csv;ftl_enter;scientist_dialog;quest/faster_than_light
+3Звезду начинает колбасить.csv;ftl_star_explode;scientist_dialog;quest/faster_than_light
+4Аврора-2 не может достигнуть границы.csv;ftl_hyperspace_border_expand;scientist_dialog;quest/faster_than_light
+5Выпрыгнули и спаслись.csv;ftl_escaped;scientist_dialog;quest/faster_than_light

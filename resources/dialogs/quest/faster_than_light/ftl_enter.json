@@ -1,0 +1,16 @@
+{
+  "id": "ftl_enter",
+  "iconName": "scientist_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  }
+}
