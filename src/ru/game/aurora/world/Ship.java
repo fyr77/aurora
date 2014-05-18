@@ -13,8 +13,6 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.ExplosionEffect;
-import ru.game.aurora.gui.FailScreenController;
-import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.engineering.ShipUpgrade;
@@ -184,17 +182,7 @@ public class Ship extends MovableSprite implements SpaceObject {
             ExplosionEffect ship_explosion = new ExplosionEffect(x, y, "ship_explosion", false, true);
             ship_explosion.getAnim().setSpeed(0.5f);
             ((StarSystem) world.getCurrentRoom()).addEffect(ship_explosion);
-            ship_explosion.setEndListener(new IStateChangeListener() {
-
-                private static final long serialVersionUID = -5155503207553019512L;
-
-                @Override
-                public void stateChanged(World world) {
-                    GUI.getInstance().getNifty().gotoScreen("fail_screen");
-                    FailScreenController controller = (FailScreenController) GUI.getInstance().getNifty().findScreenController(FailScreenController.class.getCanonicalName());
-                    controller.set("ship_destroyed_gameover", "ship_destroyed");
-                }
-            });
+            ship_explosion.setEndListener(new GameOverEffectListener());
 
         }
     }
@@ -307,4 +295,5 @@ public class Ship extends MovableSprite implements SpaceObject {
     public int getFreeSpace() {
         return freeSpace;
     }
+
 }

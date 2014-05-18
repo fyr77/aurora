@@ -148,3 +148,7 @@ diplomacy.all_done
 energy sphere quest
 
 energy_sphere.started
+
+=============================
+
+ftl.coords - target star system for Faster Than Light quest

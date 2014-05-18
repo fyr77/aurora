@@ -26,6 +26,7 @@ import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.*;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
+import ru.game.aurora.world.quest.FasterThanLightQuestGenerator;
 import ru.game.aurora.world.quest.Journal;
 import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.Star;
@@ -61,6 +62,7 @@ public class WorldGenerator implements Runnable {
             , new DamagedRoguesScoutEventGenerator()
             , new EnergySphereEncounterGenerator()
             , new ZorsanRebelsFirstQuestGenerator()
+            , new FasterThanLightQuestGenerator()
     };
 
     private static final WorldGeneratorPart[] alienGenerators = {
