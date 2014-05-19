@@ -14,13 +14,11 @@ import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
 import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
 import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
-import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.SpaceObject;
@@ -71,16 +69,20 @@ public class Ship extends MovableSprite implements SpaceObject {
         this.humanity = humanity;
         name = "Hawking";
         hull = maxHull = 10;
-        scientists = BASE_SCIENTISTS;
-        military = BASE_MILITARY;
-        engineers = BASE_ENGINEERS;
+        maxScientists = scientists = BASE_SCIENTISTS;
+        maxMilitary = military = BASE_MILITARY;
+        maxEngineers = engineers = BASE_ENGINEERS;
 
         freeSpace = Configuration.getIntProperty("upgrades.ship_free_space");
 
-        addUpgrade(null, new LabUpgrade());
-        addUpgrade(null, new BarracksUpgrade());
-        addUpgrade(null, new WorkshopUpgrade());
-        addUpgrade(null, new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon")));
+    }
+
+    public void installInitialUpgrades(World world)
+    {
+        addUpgrade(world, new LabUpgrade());
+        addUpgrade(world, new BarracksUpgrade());
+        addUpgrade(world, new WorkshopUpgrade());
+        addUpgrade(world, new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon")));
     }
 
     public void addUpgrade(World world, ShipUpgrade upgrade) {
@@ -217,27 +219,6 @@ public class Ship extends MovableSprite implements SpaceObject {
     }
 
     public void refillCrew(World world) {
-
-        // check and remove extra scientists and engineers, if new crew size is smaller
-        int totalScientists = world.getPlayer().getResearchState().getIdleScientists();
-        for (ResearchProjectState rps : world.getPlayer().getResearchState().getCurrentProjects()) {
-            if (totalScientists + rps.scientists > maxScientists) {
-                rps.scientists = maxScientists - totalScientists;
-            } else {
-                totalScientists += rps.scientists;
-            }
-        }
-
-        int totalEngineers = world.getPlayer().getEngineeringState().getIdleEngineers();
-        for (EngineeringProject eps : world.getPlayer().getEngineeringState().getProjects()) {
-            if (totalEngineers + eps.getEngineersAssigned() > maxEngineers) {
-                eps.changeEngineers(maxEngineers - totalEngineers - eps.getEngineersAssigned());
-            } else {
-                totalEngineers += eps.getEngineersAssigned();
-            }
-        }
-        world.getPlayer().getEngineeringState().getHullRepairs().engineersAssigned = 0;
-
 
         scientists = maxScientists;
         engineers = maxEngineers;

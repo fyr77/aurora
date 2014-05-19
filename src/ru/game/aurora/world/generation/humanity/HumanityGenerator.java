@@ -59,7 +59,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
                 , CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesY()) / 3 +  world.getGalaxyMap().getTilesY() / 2);
         world.getGlobalVariables().put("solar_system", solarSystem);
 
-        world.getPlayer().setShip(humans);
+        world.getPlayer().setShip(world, humans);
 
 
         humans.setDefaultFactory(new NPCShipFactory() {

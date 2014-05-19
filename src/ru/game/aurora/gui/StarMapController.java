@@ -118,7 +118,7 @@ public class StarMapController implements ScreenController {
                 continue;
             }
             if (!race.isKnown()) {
-                //   continue;
+                continue;
             }
 
             Color alienColor = alienColorMap.get(race.getName());

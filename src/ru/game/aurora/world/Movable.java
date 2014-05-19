@@ -12,7 +12,7 @@ import ru.game.aurora.application.Camera;
 
 public class Movable extends BasePositionable implements IMovable {
 
-    private static final long serialVersionUID = 6904064070429741009L;
+    private static final long serialVersionUID = 1L;
 
     private boolean isMoving = false;
 
@@ -22,18 +22,21 @@ public class Movable extends BasePositionable implements IMovable {
 
     private int destinationX, destinationY;
 
-    private static int MOVE_FRAMES = 4;
+    private static final int MOVE_FRAMES = 4;
 
     private int currentFrame = 0;
 
-    private static int FRAME_DURATION = 20; //ms
+    private static final int FRAME_DURATION = 20; //ms
 
     private long lastCall;
+
+    private int movementSpeed;
 
     public Movable(int x, int y) {
         super(x, y);
         destinationX = x;
         destinationY = y;
+        movementSpeed = 1;
     }
 
     private void startMoving(int destinationX, int destinationY) {
@@ -50,22 +53,22 @@ public class Movable extends BasePositionable implements IMovable {
 
     @Override
     public void moveUp() {
-        startMoving(x, y - 1);
+        startMoving(x, y - movementSpeed);
     }
 
     @Override
     public void moveDown() {
-        startMoving(x, y + 1);
+        startMoving(x, y + movementSpeed);
     }
 
     @Override
     public void moveRight() {
-        startMoving(x + 1, y);
+        startMoving(x + movementSpeed, y);
     }
 
     @Override
     public void moveLeft() {
-        startMoving(x - 1, y);
+        startMoving(x - movementSpeed, y);
     }
 
     @Override
@@ -134,5 +137,13 @@ public class Movable extends BasePositionable implements IMovable {
 
     public double getDistanceFromTargetPointWrapped(Positionable other, int width, int height) {
         return getDistanceWrapped(getTargetX(), getTargetY(), other.getX(), other.getY(), width, height);
+    }
+
+    public int getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    public void setMovementSpeed(int movementSpeed) {
+        this.movementSpeed = movementSpeed;
     }
 }

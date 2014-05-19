@@ -136,6 +136,7 @@
     <resource type="image" id="bullet_shot">sprites/effects/bullet_shot.png</resource>
     <resource type="animation" id="ship_explosion" tw="64" th="64" duration="100">sprites/effects/explosion.png
     </resource>
+    <resource type="animation" id="solar_wind" tw="64" th="64" duration="100">sprites/effects/solar_wind.png</resource>
     <resource type="animation" id="plasma_explosion" tw="16" th="16" duration="100">sprites/effects/plasma_explosion.png
     </resource>
     <resource type="animation" id="blaster_explosion_red" tw="16" th="16" duration="100">

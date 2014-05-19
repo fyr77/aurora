@@ -7,16 +7,19 @@
 
 package ru.game.aurora.world.quest;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.projects.StarResearchProject;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
@@ -41,17 +44,68 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
 
     private ExplodingStar explodingStar;
 
+    private class SolarWind extends BaseSpaceObject
+    {
+        private static final long serialVersionUID = 1;
+
+        private transient Animation myAnim;
+
+        private boolean alive = true;
+
+        public SolarWind(int x, int y) {
+            super(x, y);
+        }
+
+        private void loadAnim()
+        {
+            myAnim = ResourceManager.getInstance().getAnimation("solar_wind").copy();
+            myAnim.setLooping(true);
+            myAnim.setAutoUpdate(true);
+        }
+
+        @Override
+        public void draw(GameContainer container, Graphics graphics, Camera camera) {
+            if (myAnim == null) {
+                loadAnim();
+            }
+            graphics.drawAnimation(myAnim, camera.getXCoord(x), camera.getYCoord(y));
+        }
+
+        @Override
+        public void update(GameContainer container, World world) {
+            if (getDistance(explodingStar) < explodingStar.radius) {
+                alive = false;
+            }
+        }
+
+        @Override
+        public boolean isAlive() {
+            return alive;
+        }
+
+        @Override
+        public String getScanDescription(World world) {
+            return Localization.getText("journal", "ftl.solar_wind.desc");
+        }
+
+        @Override
+        public void onContact(World world) {
+            world.getPlayer().getShip().setMovementSpeed(world.getPlayer().getShip().getMovementSpeed() + 1);
+            alive = false;
+        }
+    }
+
     private class ExplodingStar extends BaseSpaceObject
     {
-        private static final long serialVersionUID = 1621176923244251636L;
+        private static final long serialVersionUID = 1L;
 
-        int radius = 0;
+        float radius = 0;
 
-        int radiusIncrement = 1;
+        float radiusIncrement = 0.5f;
 
         boolean growing = false;
 
-        Color color = Color.red;
+        Color color = new Color(255, 255, 255);
 
         public ExplodingStar() {
             super(0, 0);
@@ -60,7 +114,7 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
         @Override
         public void draw(GameContainer container, Graphics graphics, Camera camera) {
             if (growing) {
-                EngineUtils.drawCircleCentered(graphics, camera.getXCoord(0), camera.getYCoord(0), radius, color, true);
+                EngineUtils.drawCircleCentered(graphics, camera.getXCoord(0) + camera.getTileWidth() / 2, camera.getYCoord(0) + camera.getTileHeight() / 2, (int) (radius * camera.getTileWidth()), color, true);
             }
         }
 
@@ -68,22 +122,48 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
         public void update(GameContainer container, World world) {
             if (growing && world.isUpdatedThisFrame()) {
                 radius += radiusIncrement;
-
-                if (radius == 3) {
+                color.b = color.g = Math.max(0, color.g - (radiusIncrement * 5.0f) / 255.0f);
+                if (radius == 1.5f) {
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/faster_than_light/ftl_star_explode.json"));
                     ++state;
                 }
                 final Ship ship = world.getPlayer().getShip();
 
-                if ((targetSystem.getRadius() - Math.max(Math.abs(ship.getX()), ship.getY()) < 4) && radiusIncrement == 1) {
-                    targetSystem.setRadius(targetSystem.getRadius() + 10);
+                if (radius == 3.0f) {
+                    targetSystem.setRadius(targetSystem.getRadius() + 4);
+                    radiusIncrement = 1;
+                }
+
+                if (radius == 6f) {
+                    targetSystem.setRadius(targetSystem.getRadius() + 4);
+                }
+
+                if (radius == 7f) {
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/faster_than_light/ftl_hyperspace_border_expand.json"));
                     world.getPlayer().getJournal().addQuestEntries("ftl", "run");
-                    radiusIncrement = 3;
+                    targetSystem.setRadius(targetSystem.getRadius() + 1);
+                    radiusIncrement = 1.5f;
+
+                    int solarWindCount = Configuration.getIntProperty("quest.ftl.solar_wind_count");
+                    for (int i = 0; i < solarWindCount; ++i) {
+                        SolarWind sw = new SolarWind(0, 0);
+                        do {
+                            targetSystem.setRandomEmptyPosition(sw);
+                        } while (sw.getDistance(explodingStar) < explodingStar.radius);
+
+                        targetSystem.getShips().add(sw);
+                    }
+
                 }
+
+                if (radius > 8f) {
+                    targetSystem.setRadius(targetSystem.getRadius() + 1);
+                }
+
 
                 if (ship.getDistance(this) < radius) {
                     Effect effect = new ExplosionEffect(ship.getX(), ship.getY(), "ship_explosion", false, true);
+                    targetSystem.addEffect(effect);
                     effect.setEndListener(new GameOverEffectListener());
                 }
             }
@@ -125,6 +205,9 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
             world.getGalaxyMap().setTileAt(targetSystem.getX(), targetSystem.getY(), -1);
             isAlive = false;
             world.getPlayer().getJournal().addQuestEntries("ftl", "escape");
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("ftl", "news"));
+            world.getPlayer().getShip().setPos(world.getPlayer().getShip().getX() - 10, world.getPlayer().getShip().getY() - 5);
+            world.getPlayer().getShip().setMovementSpeed(1);
         }
 
         return false;
@@ -136,6 +219,7 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
 
         targetSystem = WorldGenerator.generateRandomStarSystem(world, 0, 0, 0);
         targetSystem.setQuestLocation(true);
+        targetSystem.setRadius(12);
         explodingStar = new ExplodingStar();
         targetSystem.getShips().add(explodingStar);
         world.getGalaxyMap().addObjectAtDistance(targetSystem, (Positionable) world.getGlobalVariables().get("solar_system"), 50);
@@ -155,7 +239,7 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
 
     @Override
     public String getLocalizedMessageForStarSystem(GalaxyMapObject galaxyMapObject) {
-        if (galaxyMapObject == targetSystem) {
+        if (galaxyMapObject == targetSystem && state >= 2) {
             return Localization.getText("journal", "ftl.title");
         }
         return null;

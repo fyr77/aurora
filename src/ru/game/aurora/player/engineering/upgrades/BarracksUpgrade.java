@@ -23,11 +23,13 @@ public class BarracksUpgrade extends ShipUpgrade {
     @Override
     public void onInstalled(World world, Ship ship) {
         ship.setMaxMilitary(ship.getMaxMilitary() + size);
+        world.onCrewChanged();
     }
 
     @Override
     public void onRemoved(World world, Ship ship) {
         ship.setMaxMilitary(ship.getMaxMilitary() - size);
+        world.onCrewChanged();
     }
 
     @Override

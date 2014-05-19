@@ -63,10 +63,11 @@ public class Player implements Serializable
         landingParty = new LandingParty(0, 0, defaultWeapon, 2, 2, 4, Configuration.getIntProperty("player.landing_party.defaultHP"));
     }
 
-    public void setShip(AlienRace humanity) {
+    public void setShip(World world, AlienRace humanity) {
+        researchState = new ResearchState(Ship.BASE_SCIENTISTS);
+        engineeringState = new EngineeringState(Ship.BASE_ENGINEERS);
         ship = new Ship(humanity, humanity.getHomeworld().getX() + 1, humanity.getHomeworld().getY());
-        researchState = new ResearchState(ship.getScientists());
-        engineeringState = new EngineeringState(ship.getEngineers());
+        ship.installInitialUpgrades(world);
 
         engineeringState.addNewEngineeringProject(new MedpacksCraft(3));  //добавим проекты для крафта аптечек и баллонов
         engineeringState.addNewEngineeringProject(new CylindersCraft(3));

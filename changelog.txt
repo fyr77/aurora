@@ -1,4 +1,4 @@
-VERSION 0.2.3
+VERSION 0.3.0
 
 IN PROGRESS...
 
@@ -6,6 +6,8 @@ IN PROGRESS...
 + Music tracks for Klisk and Zorsan races
 + Tool to generate all dialogs in one click
 * New intro
++ Ship upgrade system
++ New quests
 
 =================================================
 
