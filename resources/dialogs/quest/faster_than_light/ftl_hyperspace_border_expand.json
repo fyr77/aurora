@@ -50,7 +50,8 @@
           "targetStatementId": 5,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog"
     },
     "5": {
       "id": 5,
