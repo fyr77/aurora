@@ -6,8 +6,6 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
-import ru.game.aurora.dialog.Reply;
-import ru.game.aurora.dialog.Statement;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
@@ -137,8 +135,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
                 damagedRogueScout.setAi(new LeaveSystemAI());
                 damagedRogueScout.setStationary(false);
                 damagedRogueScout.setCaptain(new NPC(
-                        new Dialog("rogue_damaged_scout.after_help", "rogues_scar_dialog",
-                                new Statement(0, "", new Reply(0, -1, "end")))
+                        Dialog.loadFromFile("dialogs/rogues/rogue_damaged_scout.after_help.json")
                 ));
             }
 

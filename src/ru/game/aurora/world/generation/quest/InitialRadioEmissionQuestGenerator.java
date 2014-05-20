@@ -267,7 +267,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         defenceProbe.setAi(new CombatAI(world.getPlayer().getShip()));
         defenceProbe.setHostile(true);
         brownStar.getShips().add(defenceProbe);
-        brownStar.setFirstEnterDialog(Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/rogues/rogue_beacon_found.json")));
+        brownStar.setFirstEnterDialog(Dialog.loadFromFile("dialogs/rogues/rogue_beacon_found.json"));
 
 
         Dungeon beaconInternals = new Dungeon(world, new AuroraTiledMap("resources/maps/test.tmx"), brownStar);

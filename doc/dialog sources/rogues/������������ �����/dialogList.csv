@@ -1,0 +1,5 @@
+Дефолтный диалог после спасения.csv;rogue_damaged_scout.after_help;rogues_scar_dialog;rogues
+Корабль взорвался.csv;rogues_damaged_scout_exploded;marine_dialog;rogues
+Сломанный корабль Бродяг.csv;rogues_damaged_scout;rogues_scar_dialog;rogues
+Спасенные бродяги (починил корабль).csv;rogues_damaged_scout_repaired;rogues_scar_dialog;rogues
+Спасенные бродяги (спас шаттлом).csv;rogues_damaged_scout_shuttle;rogues_scar_dialog;rogues

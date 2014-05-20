@@ -6,6 +6,7 @@
 package ru.game.aurora.dialog;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -21,19 +22,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.Modifier;
 import java.util.*;
 
 public class Dialog implements OverlayWindow {
 
     private static final Logger logger = LoggerFactory.getLogger(Dialog.class);
 
-    private static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = 4L;
 
-    private String id;
+    private List<DialogListener> listeners;
 
-    private String iconName;
+    private String fileName;
 
-    private Map<Integer, Statement> statements = new HashMap<>();
+    private transient String id;
+
+    private transient String iconName;
+
+    private transient Map<Integer, Statement> statements = null;
 
     // replies can set these flags, which can later be checked
     private transient Map<String, String> flags = new HashMap<>();
@@ -45,23 +51,13 @@ public class Dialog implements OverlayWindow {
     /**
      * Replies that are available for current statement based on current world state.
      */
-    private List<Reply> availableReplies;
-
-    private List<DialogListener> listeners;
+    private transient List<Reply> availableReplies;
 
     // dialog can start from different statements, based on world conditions
-    private Map<Integer, Condition> firstStatements;
+    private transient Map<Integer, Condition> firstStatements;
 
     public Dialog() {
         // for gson
-    }
-
-    public Dialog(String id, String iconName, Statement... statements) {
-        this.id = id;
-        this.iconName = iconName;
-        for (Statement s : statements) {
-            this.statements.put(s.id, s);
-        }
     }
 
     public Dialog(String id, String iconName, Map<Integer, Statement> statements) {
@@ -72,13 +68,6 @@ public class Dialog implements OverlayWindow {
 
     public String getId() {
         return id;
-    }
-
-    public Dialog(String id, String iconName, Map<Integer, Statement> statements, Map<Integer, Condition> firstStatements) {
-        this.id = id;
-        this.iconName = iconName;
-        this.statements = statements;
-        this.firstStatements = firstStatements;
     }
 
     public void addListener(DialogListener listener) {
@@ -133,6 +122,9 @@ public class Dialog implements OverlayWindow {
 
     @Override
     public void enter(World world) {
+        if (statements == null) {
+            load(fileName);
+        }
         if (firstStatements == null || firstStatements.isEmpty()) {
             currentStatement = statements.get(0);
         } else {
@@ -161,6 +153,9 @@ public class Dialog implements OverlayWindow {
 
     @Override
     public void update(GameContainer container, World world) {
+        if (statements == null) {
+            enter(world);
+        }
         if (currentStatement == null) {
             return;
         }
@@ -198,6 +193,9 @@ public class Dialog implements OverlayWindow {
     }
 
     public String getIconName() {
+        if (statements == null) {
+            load(fileName);
+        }
         return iconName;
     }
 
@@ -206,7 +204,18 @@ public class Dialog implements OverlayWindow {
     }
 
     public Statement getCurrentStatement() {
+        if (statements == null) {
+            load(fileName);
+        }
         return currentStatement;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     @Override
@@ -219,11 +228,14 @@ public class Dialog implements OverlayWindow {
         return currentStatement == null;
     }
 
-    public static Dialog loadFromFile(InputStream is) {
+    private void load(String path) {
+        InputStream is = Dialog.class.getClassLoader().getResourceAsStream(path);
         if (is == null) {
-            throw new IllegalArgumentException("Can not load dialog from null stream");
+            logger.error("Failed to load dialog from " + path + ", maybe it does not exist");
+            throw new IllegalArgumentException();
         }
-        Gson gson = new Gson();
+        logger.info("Reading dialog from " + path);
+        Gson gson = new GsonBuilder().excludeFieldsWithModifiers(Modifier.STATIC).create();
         Reader reader = new InputStreamReader(is);
         Dialog d = gson.fromJson(reader, Dialog.class);
         try {
@@ -231,17 +243,19 @@ public class Dialog implements OverlayWindow {
         } catch (IOException e) {
             throw new RuntimeException("Failed to read dialog", e);
         }
-        return d;
+
+        statements = d.statements;
+        id = d.id;
+        iconName = d.iconName;
+
+        currentStatement = statements.get(0);
+        fileName = path;
     }
 
     public static Dialog loadFromFile(String path) {
-        InputStream is = Dialog.class.getClassLoader().getResourceAsStream(path);
-        if (is == null) {
-            logger.error("Failed to load dialog from " + path + ", maybe it does not exist");
-            throw new IllegalArgumentException();
-        }
-        logger.info("Reading dialog from " + path);
-        return loadFromFile(is);
+        Dialog d = new Dialog();
+        d.load(path);
+        return d;
     }
 
     public int getReturnValue() {
@@ -249,6 +263,11 @@ public class Dialog implements OverlayWindow {
     }
 
     public void putStatement(Statement stmt) {
+        if (this.statements == null) {
+            if (this.fileName != null) {
+
+            }
+        }
         this.statements.put(stmt.id, stmt);
     }
 

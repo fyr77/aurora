@@ -29,7 +29,7 @@ public class AuroraProbe extends NPCShip {
     public AuroraProbe(int x, int y) {
         super(x, y, "probe", null, null, "Probe-X513M", 5);
         setAi(null);
-        dialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_1_found.json"));
+        dialog = Dialog.loadFromFile("dialogs/quest/aurora_probe_1_found.json");
     }
 
     @Override

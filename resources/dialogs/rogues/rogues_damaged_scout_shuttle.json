@@ -78,5 +78,7 @@
       ],
       "customIcon": "marine_dialog"
     }
-  }
+  },
+  "flags": {},
+  "returnValue": 0
 }

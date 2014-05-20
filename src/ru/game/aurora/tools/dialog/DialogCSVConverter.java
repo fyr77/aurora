@@ -10,6 +10,7 @@ import ru.game.aurora.tools.Context;
 import ru.game.aurora.util.EngineUtils;
 
 import java.io.*;
+import java.lang.reflect.Modifier;
 import java.util.*;
 
 /**
@@ -172,7 +173,7 @@ public class DialogCSVConverter {
 
             System.out.println("Saving structure");
             // save dialog structure file
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithModifiers(Modifier.STATIC).create();
             FileWriter writer = new FileWriter(new File(outDir, dialogId + ".json"));
             gson.toJson(dialog, writer);
             writer.close();

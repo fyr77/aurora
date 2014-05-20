@@ -30,8 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
-public class Earth extends BasePlanet
-{
+public class Earth extends BasePlanet {
 
     private static final long serialVersionUID = 1L;
 
@@ -46,8 +45,8 @@ public class Earth extends BasePlanet
 
     public Earth(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
         super(x, y, size, owner, atmosphere, cat);
-        earthDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_dialog.json"));
-        progressDialog = Dialog.loadFromFile(Earth.class.getClassLoader().getResourceAsStream("dialogs/earth_progress_dialog.json"));
+        earthDialog = Dialog.loadFromFile("dialogs/earth_dialog.json");
+        progressDialog = Dialog.loadFromFile("dialogs/earth_progress_dialog.json");
         progressDialog.addListener(new EarthProgressDialogListener(this));
         earthDialog.addListener(new EarthDialogListener(this));
     }
@@ -63,7 +62,7 @@ public class Earth extends BasePlanet
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics g, Camera camera, int tileX, int tileY) {
         final Image earth = ResourceManager.getInstance().getImage("earth");
-        g.drawImage(earth, camera.getXCoord(x) - earth.getWidth() / 4, camera.getYCoord(y)  -earth.getHeight() / 4);
+        g.drawImage(earth, camera.getXCoord(x) - earth.getWidth() / 4, camera.getYCoord(y) - earth.getHeight() / 4);
     }
 
     @Override

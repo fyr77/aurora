@@ -86,7 +86,7 @@ public class BorkGenerator implements WorldGeneratorPart {
 
     @Override
     public void updateWorld(World world) {
-        Dialog mainDialog = Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/bork/bork_default_not_aggressive.json"));
+        Dialog mainDialog = Dialog.loadFromFile("dialogs/bork/bork_default_not_aggressive.json");
         mainDialog.addListener(new BorkShipDialogListener());
         // TODO: generate agressive bork ships
         final AlienRace borkRace = new AlienRace(NAME, "bork_ship", mainDialog);

@@ -1,19 +1,14 @@
 {
   "id": "rogues_damaged_scout_exploded",
-  "iconName": "rogues_dialog",
+  "iconName": "marine_dialog",
   "statements": {
     "0": {
       "id": 0,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 3,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
           "targetStatementId": 1,
-          "replyText": "1"
+          "replyText": "0"
         }
       ]
     },
@@ -22,30 +17,12 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 2,
-          "replyText": "0"
-        }
-      ]
-    },
-    "2": {
-      "id": 2,
-      "replies": [
-        {
-          "returnValue": 1,
-          "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
-    "3": {
-      "id": 3,
-      "replies": [
-        {
-          "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "0"
         }
       ]
     }
-  }
+  },
+  "flags": {},
+  "returnValue": 0
 }
