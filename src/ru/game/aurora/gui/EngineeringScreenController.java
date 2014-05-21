@@ -21,6 +21,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.engineering.EngineeringState;
 import ru.game.aurora.player.engineering.HullRepairs;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 
 
@@ -61,6 +62,7 @@ public class EngineeringScreenController implements ScreenController {
         window.setVisible(true);
         projectsList.clear();
         projectsList.addAllItems(world.getPlayer().getEngineeringState().getProjects());
+        EngineUtils.resetScrollbarX(projectsList);
         engineeringState = world.getPlayer().getEngineeringState();
         updateLabels();
         world.setPaused(true);

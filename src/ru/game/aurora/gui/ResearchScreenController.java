@@ -53,10 +53,12 @@ public class ResearchScreenController implements ScreenController {
         ListBox l = availableResearch.findNiftyControl("itemsList", ListBox.class);
         l.clear();
         l.addAllItems(world.getPlayer().getResearchState().getCurrentProjects());
+        EngineUtils.resetScrollbarX(l);
 
         l = completedResearch.findNiftyControl("itemsList", ListBox.class);
         l.clear();
         l.addAllItems(world.getPlayer().getResearchState().getCompletedProjects());
+        EngineUtils.resetScrollbarX(l);
 
         Element statusLines = tg.getSelectedTab().getElement().findElementByName("statusStrings");
         if (statusLines != null) {

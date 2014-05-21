@@ -79,11 +79,15 @@ public class EarthScreenController implements ScreenController {
 
         storageList.addAllItems(new ArrayList<>(world.getPlayer().getEarthState().getAvailableUpgrades()));
         inventoryList.addAllItems(world.getPlayer().getShip().getUpgrades());
+
+        EngineUtils.resetScrollbarX(storageList);
+        EngineUtils.resetScrollbarX(inventoryList);
     }
 
     private void fillMessages() {
         ListBox l = messagesList.findNiftyControl("itemsList", ListBox.class);
         l.clear();
+        EngineUtils.resetScrollbarX(l);
         List<PrivateMessage> privateMessages = world.getPlayer().getEarthState().getMessages();
         for (ListIterator listIterator = privateMessages.listIterator(privateMessages.size()); listIterator.hasPrevious(); ) {
             l.addItem(listIterator.previous());

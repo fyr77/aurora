@@ -6,6 +6,8 @@
  */
 package ru.game.aurora.util;
 
+import de.lessvoid.nifty.controls.ListBox;
+import de.lessvoid.nifty.controls.scrollbar.ScrollbarControl;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.elements.render.TextRenderer;
@@ -301,4 +303,10 @@ public class EngineUtils {
         return new Image(ib);
     }
 
+    public static void resetScrollbarX(ListBox listBox) {
+        ScrollbarControl sc = listBox.getElement().findControl("#horizontal-scrollbar", ScrollbarControl.class);
+        if (sc != null) {
+            sc.setValue(0);
+        }
+    }
 }

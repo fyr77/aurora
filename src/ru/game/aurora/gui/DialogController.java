@@ -11,7 +11,6 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
-import de.lessvoid.nifty.controls.scrollbar.ScrollbarControl;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
@@ -68,10 +67,7 @@ public class DialogController implements ScreenController {
         EngineUtils.setImageForGUIElement(imagePanel, dialog.getCurrentStatement().customIcon == null ? dialog.getIconName() : dialog.getCurrentStatement().customIcon);
         EngineUtils.setTextForGUIElement(npcText, dialog.getLocalizedNPCText(world));
         // reset horizontal scrollbar
-        ScrollbarControl sc = replies.getElement().findControl("#horizontal-scrollbar", ScrollbarControl.class);
-        if (sc != null) {
-            sc.setValue(0);
-        }
+        EngineUtils.resetScrollbarX(replies);
         if (!replies.getItems().isEmpty()) {
             replies.clear();
         }
