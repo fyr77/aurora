@@ -6,3 +6,5 @@ syntax: glob
 save.bin
 system.properties
 *.log
+changelog.txt.orig
+**.orig

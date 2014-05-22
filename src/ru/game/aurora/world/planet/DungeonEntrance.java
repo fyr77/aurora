@@ -38,6 +38,12 @@ public class DungeonEntrance extends BasePositionable implements PlanetObject
         this.dungeon = dungeon;
     }
 
+    @Override
+    public ScanGroup getScanGroup() {
+        return ScanGroup.OTHER;
+    }
+
+
     /**
      * Locks this dungeon. Player can not enter it, and is shown a message instead
      */

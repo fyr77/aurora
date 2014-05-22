@@ -24,7 +24,9 @@ public class SurfaceTypes {
 
     public static final byte ROCKS = 0x05;
 
-    public static final byte SNOW = 0x06;
+    public static final byte ASPHALT = 0x07;
+
+    public static final byte SNOW = 0x08;
 
 
     public static final byte OBSTACLE_MASK = 0x40;
@@ -56,6 +58,9 @@ public class SurfaceTypes {
                 break;
             case SurfaceTypes.WATER:
                 color = Color.blue;
+                break;
+            case SurfaceTypes.ASPHALT:
+                color = Color.darkGray;
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported surface tile type " + type);
@@ -92,6 +97,9 @@ public class SurfaceTypes {
                 break;
             case SurfaceTypes.WATER:
                 spriteName = "water_tile_1";
+                break;
+            case SurfaceTypes.ASPHALT:
+                spriteName = "asph";
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported surface tile type " + type);

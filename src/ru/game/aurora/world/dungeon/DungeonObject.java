@@ -55,6 +55,11 @@ public class DungeonObject extends Movable implements PlanetObject {
     }
 
     @Override
+    public ScanGroup getScanGroup() {
+        return null;
+    }
+
+    @Override
     public boolean canBePickedUp() {
         return false;
     }

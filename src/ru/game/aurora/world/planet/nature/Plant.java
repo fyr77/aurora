@@ -43,6 +43,12 @@ public class Plant extends BasePositionable implements PlanetObject
     }
 
     @Override
+    public ScanGroup getScanGroup() {
+        return null;
+    }
+
+
+    @Override
     public boolean canBeShotAt() {
         return false;
     }

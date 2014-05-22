@@ -15,6 +15,7 @@ import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
+import ru.game.aurora.world.generation.quest.ColonizationListener;
 import ru.game.aurora.world.quest.ZorsanFinalBattleGenerator;
 
 import java.util.HashMap;
@@ -148,6 +149,11 @@ public class EarthDialogListener implements DialogListener {
         if (flags.containsKey("zorsan_war_info_quest")) {
             world.getGlobalVariables().put("zorsan.escape", 1);
             world.getPlayer().getJournal().addQuestEntries("zorsan_relations", "earth_report");
+        }
+
+        if (flags.containsKey("colony_info_dumped")) {
+            world.getGlobalVariables().remove("colony_search.explored");
+            world.addListener(new ColonizationListener(world));
         }
 
         if (flags.containsKey("zorsan_war_info_update")) {

@@ -2,6 +2,7 @@
 <resources>
     <!-- tiles -->
     <resource type="image" id="rock">sprites/tiles/rock-1.png</resource>
+    <resource type="image" id="asph">sprites/tiles/asph/c.png</resource>
     <resource type="image" id="stones">sprites/tiles/stonetext.png</resource>
     <resource type="image" id="sand_tile_1">sprites/tiles/sand-1.png</resource>
     <resource type="image" id="snow_tile_1">sprites/tiles/snowtext.png</resource>
@@ -86,5 +87,18 @@
     <resource type="image" id="snow_13">sprites/tiles/snow/tiles_0013.png</resource>
     <resource type="image" id="snow_14">sprites/tiles/snow/tiles_0014.png</resource>
     <resource type="image" id="snow_15">sprites/tiles/snow/tiles_0015.png</resource>
+
+    <resource type="image" id="asph_4">sprites/tiles/asph/tiles_0004.png</resource>
+    <resource type="image" id="asph_5">sprites/tiles/asph/tiles_0005.png</resource>
+    <resource type="image" id="asph_6">sprites/tiles/asph/tiles_0006.png</resource>
+    <resource type="image" id="asph_7">sprites/tiles/asph/tiles_0007.png</resource>
+    <resource type="image" id="asph_8">sprites/tiles/asph/tiles_0008.png</resource>
+    <resource type="image" id="asph_9">sprites/tiles/asph/tiles_0009.png</resource>
+    <resource type="image" id="asph_10">sprites/tiles/asph/tiles_0010.png</resource>
+    <resource type="image" id="asph_11">sprites/tiles/asph/tiles_0011.png</resource>
+    <resource type="image" id="asph_12">sprites/tiles/asph/tiles_0012.png</resource>
+    <resource type="image" id="asph_13">sprites/tiles/asph/tiles_0013.png</resource>
+    <resource type="image" id="asph_14">sprites/tiles/asph/tiles_0014.png</resource>
+    <resource type="image" id="asph_15">sprites/tiles/asph/tiles_0015.png</resource>
 
 </resources>

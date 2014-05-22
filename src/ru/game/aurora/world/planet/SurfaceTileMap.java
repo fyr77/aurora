@@ -70,6 +70,8 @@ public class SurfaceTileMap implements ITileMap, Serializable {
         drawers.put(SurfaceTypes.DIRT, new TileDrawer("sand", SurfaceTypes.DIRT));
         drawers.put(SurfaceTypes.ICE, new TileDrawer("ice", SurfaceTypes.ICE));
         drawers.put(SurfaceTypes.SNOW, new TileDrawer("snow", SurfaceTypes.SNOW));
+        drawers.put(SurfaceTypes.ASPHALT, new TileDrawer("asph", SurfaceTypes.ASPHALT));
+
     }
 
     @Override
@@ -311,5 +313,9 @@ public class SurfaceTileMap implements ITileMap, Serializable {
     @Override
     public void visit(int i, int i1) {
         // not implemented, has custom view logic
+    }
+
+    public byte[][] getSurface() {
+        return surface;
     }
 }

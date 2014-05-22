@@ -77,6 +77,11 @@ public class AlienArtifact extends BasePositionable implements PlanetObject
     }
 
     @Override
+    public ScanGroup getScanGroup() {
+        return ScanGroup.OTHER;
+    }
+
+    @Override
     public boolean canBePickedUp() {
         return true;
     }

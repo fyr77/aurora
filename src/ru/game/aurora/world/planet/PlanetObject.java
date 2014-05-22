@@ -13,6 +13,15 @@ import ru.game.aurora.world.World;
  * Base interface for objects that are located on planet surface
  */
 public interface PlanetObject extends Positionable, GameObject {
+    public static enum ScanGroup
+    {
+        BIO,
+        RESOURCE,
+        OTHER
+    }
+
+    public ScanGroup getScanGroup();
+
     public boolean canBePickedUp();
 
     public boolean canBeShotAt();

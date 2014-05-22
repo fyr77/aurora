@@ -12,7 +12,6 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.Movable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.*;
-import ru.game.aurora.world.planet.nature.Animal;
 
 import java.util.Random;
 
@@ -50,11 +49,11 @@ public class PlanetMapRenderer {
                 for (PlanetObject po : planet.getPlanetObjects()) {
                     float objectX = myCamera.getXCoord(po.getX());
                     float objectY = myCamera.getYCoord(po.getY());
-                    if (Animal.class.isAssignableFrom(po.getClass())) {
+                    if (po.getScanGroup() == PlanetObject.ScanGroup.BIO) {
                         overlayGraphics.setColor(ANIMAL_COLOR);
-                    } else if (OreDeposit.class.isAssignableFrom(po.getClass())) {
+                    } else if (po.getScanGroup() == PlanetObject.ScanGroup.RESOURCE) {
                         overlayGraphics.setColor(RESOURCE_COLOR);
-                    } else if (AlienArtifact.class.isAssignableFrom(po.getClass()) || DungeonEntrance.class.isAssignableFrom(po.getClass())) {
+                    } else if (po.getScanGroup() == PlanetObject.ScanGroup.OTHER) {
                         overlayGraphics.setColor(ANOMALY_COLOR);
                     } else {
                         continue;

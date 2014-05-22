@@ -26,6 +26,11 @@ public class LandingShuttle extends BasePositionable implements PlanetObject
     }
 
     @Override
+    public ScanGroup getScanGroup() {
+        return null;
+    }
+
+    @Override
     public boolean canBePickedUp() {
         return true;
     }

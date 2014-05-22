@@ -94,6 +94,12 @@ public class Animal extends Movable implements PlanetObject, IMonster {
     }
 
     @Override
+    public ScanGroup getScanGroup() {
+        return ScanGroup.BIO;
+    }
+
+
+    @Override
     public void onShotAt(World world, int damage) {
         if (desc.getModifiers().contains(AnimalModifier.ARMOR)) {
             damage = Math.max(0, damage - desc.getArmor());

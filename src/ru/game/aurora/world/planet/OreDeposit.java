@@ -133,6 +133,12 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
     }
 
     @Override
+    public ScanGroup getScanGroup() {
+        return ScanGroup.RESOURCE;
+    }
+
+
+    @Override
     public void onShotAt(World world, int damage) {
 
     }

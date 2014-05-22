@@ -130,6 +130,27 @@ public class Planet extends BasePlanet implements IDungeon {
         }
     }
 
+    public BasePositionable findPassableRegion(int regionWidth, int regionHeight)
+    {
+        getSurface();
+        short[][] customMap = new short[surface.getHeightInTiles()][surface.getWidthInTiles()];
+
+        for (int y = 1; y < surface.getHeightInTiles(); ++y) {
+            for (int x = 1; x < surface.getWidthInTiles(); ++x) {
+                customMap[y][x] = (short) (customMap[y - 1][x] + customMap[y][x - 1] - customMap[y - 1][x - 1] + (surface.isTilePassable(x - 1, y - 1) ? 1 : 0));
+            }
+        }
+
+        for (int y = regionHeight; y < surface.getHeightInTiles(); y += 2) {
+            for (int x = regionWidth; x < surface.getWidthInTiles(); x += 2) {
+                if (customMap[y][x] - customMap[y - regionHeight][x] - customMap[y][x - regionWidth] + customMap[y - regionHeight][x - regionWidth] == regionHeight * regionWidth) {
+                    return new BasePositionable(x - regionWidth, y - regionHeight);
+                }
+            }
+        }
+
+        throw new IllegalArgumentException("Given planet does not have a passable terrain of " + regionWidth + "x" + regionHeight + " size ");
+    }
 
     public void setNearestFreePoint(Positionable p, int x, int y) {
         if (surface == null) {

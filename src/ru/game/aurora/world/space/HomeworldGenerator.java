@@ -10,6 +10,7 @@ import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.quest.ColonizationListener;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.earth.Earth;
 
@@ -32,6 +33,8 @@ public class HomeworldGenerator {
         // mercury
         planets[0] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
         setCoord(planets[0], 2);
+
+        new ColonizationListener(world).modifyPlanet((Planet) planets[0]);
 
         // venus
         planets[1] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
