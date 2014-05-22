@@ -1,6 +1,6 @@
 {
   "id": "colony_first_party_arrival",
-  "iconName": "earth_ship_dialog",
+  "iconName": "colonist_dialog",
   "statements": {
     "0": {
       "id": 0,
@@ -119,5 +119,7 @@
         }
       ]
     }
-  }
+  },
+  "flags": {},
+  "returnValue": 0
 }

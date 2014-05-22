@@ -172,6 +172,8 @@ public class MonsterController implements Serializable {
                         });
                     }
                 }
+                // do not move
+                return;
             }
 
             if (map.isTilePassable(newX, newY)) {

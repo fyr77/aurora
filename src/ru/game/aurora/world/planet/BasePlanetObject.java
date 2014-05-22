@@ -3,7 +3,7 @@ package ru.game.aurora.world.planet;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
 
@@ -13,11 +13,10 @@ import ru.game.aurora.world.World;
  * Date: 22.05.14
  * Time: 14:52
  */
-public class BasePlanetObject extends BasePositionable implements PlanetObject
-{
+public class BasePlanetObject extends BasePositionable implements PlanetObject {
     private static final long serialVersionUID = 4531335829876484566L;
 
-    protected String image;
+    protected Drawable drawable;
 
     protected Planet myPlanet;
 
@@ -25,13 +24,19 @@ public class BasePlanetObject extends BasePositionable implements PlanetObject
 
     public BasePlanetObject(int x, int y, String image, Planet myPlanet) {
         super(x, y);
-        this.image = image;
+        this.drawable = new Drawable(image);
+        this.myPlanet = myPlanet;
+    }
+
+    public BasePlanetObject(int x, int y, String tileset, int tileX, int tileY, Planet myPlanet) {
+        super(x, y);
+        this.drawable = new Drawable(tileset, tileX, tileY);
         this.myPlanet = myPlanet;
     }
 
     public BasePlanetObject(int x, int y, String image, Planet myPlanet, ScanGroup scanGroup) {
         super(x, y);
-        this.image = image;
+        this.drawable = new Drawable(image);
         this.myPlanet = myPlanet;
         this.scanGroup = scanGroup;
     }
@@ -75,7 +80,7 @@ public class BasePlanetObject extends BasePositionable implements PlanetObject
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        graphics.drawImage(ResourceManager.getInstance().getImage(image), camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
+        graphics.drawImage(drawable.getImage(), camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
     }
 
     @Override
