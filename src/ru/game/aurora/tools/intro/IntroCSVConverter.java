@@ -9,6 +9,7 @@ import ru.game.aurora.util.EngineUtils;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Creates internal data representation for an intro dialog based on given csv file
@@ -88,8 +89,16 @@ public class IntroCSVConverter {
 
             System.out.println("Saving localization");
             // save localizations
-            FileWriter localizationWriter = new FileWriter(new File(outDir, args[1] + "_localization.properties"));
+            FileWriter localizationWriter = new FileWriter(new File(outDir, args[1] + "_ru.properties"));
             context.text.store(localizationWriter, null);
+            localizationWriter.close();
+
+            localizationWriter = new FileWriter(new File(outDir, args[1] + "_en.properties"));
+            for (Map.Entry<Object, Object> entry : context.text.entrySet()) {
+                localizationWriter.write(entry.getKey() + "=" + entry.getValue());
+                localizationWriter.write('\n');
+            }
+
             localizationWriter.close();
 
         } catch (IOException e) {

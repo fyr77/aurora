@@ -89,7 +89,7 @@ public class BatchDialogConverter {
 
     public static void main(String[] args) throws IOException {
         BatchDialogConverter converter = new BatchDialogConverter(new File("resources/localization"), new File("resources/dialogs"));
-        converter.processDialogsInFolder(new File("doc/dialog sources/earth/faster_than_light"));
+        converter.processDialogsInFolder(new File("doc/dialog sources"));
         logger.info("Errors: " + converter.errorCount);
     }
 }
