@@ -23,6 +23,8 @@ public class Playlist implements MusicListener
 
     private static Playlist currentPlaylist = null;
 
+    private static Playlist nextPlaylist = null;
+
     private List<DeferredLoadingMusic> music = new ArrayList<>();
 
     private int currentMusicIdx = 0;
@@ -53,15 +55,21 @@ public class Playlist implements MusicListener
     }
 
     public void play() {
-        int idxToPlay = currentMusicIdx;
-        int idxToLoad = currentMusicIdx + 1;
-        if (idxToLoad == music.size()) {
-            idxToLoad = 0;
+        if (currentPlaylist == this || currentPlaylist == null) {
+            int idxToPlay = currentMusicIdx;
+            int idxToLoad = currentMusicIdx + 1;
+            if (idxToLoad == music.size()) {
+                idxToLoad = 0;
+            }
+
+            music.get(idxToPlay).getMusic().play();
+            music.get(idxToLoad).requestLoad();
+            currentPlaylist = this;
+        } else {
+            currentPlaylist.getCurrentMusic().fade(1000, 0, true);
+            nextPlaylist = this;
         }
 
-        music.get(idxToPlay).getMusic().play();
-        music.get(idxToLoad).requestLoad();
-        currentPlaylist = this;
     }
 
 
@@ -71,7 +79,12 @@ public class Playlist implements MusicListener
         if (++currentMusicIdx == this.music.size()) {
             currentMusicIdx = 0;
         }
-        play();
+        if (nextPlaylist != null) {
+            currentPlaylist = nextPlaylist;
+            nextPlaylist.play();
+        } else {
+            play();
+        }
     }
 
     @Override
@@ -86,5 +99,14 @@ public class Playlist implements MusicListener
 
     public static Playlist getCurrentPlaylist() {
         return currentPlaylist;
+    }
+
+    public Music getCurrentMusic()
+    {
+        if (currentPlaylist != this) {
+            return null;
+        }
+
+        return music.get(currentMusicIdx).getMusic();
     }
 }

@@ -314,6 +314,7 @@ public class AuroraGame extends NiftyOverlayGame {
             }
             Configuration.getSystemProperties().put("locale", Localization.getCurrentLocaleTag());
             app = new AppGameContainer(new AuroraGame());
+            app.setUpdateOnlyWhenVisible(false);
             Resolution res;
             String resolutionString = Configuration.getSystemProperties().getProperty("screen.resolution");
             if (resolutionString != null) {
