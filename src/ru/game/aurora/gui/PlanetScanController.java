@@ -125,7 +125,10 @@ public class PlanetScanController implements ScreenController {
         final int spriteCenterX = shuttleDraggableElement.getX() + shuttleDraggableElement.getWidth() / 2;
         final int spriteCenterY = shuttleDraggableElement.getY() + shuttleDraggableElement.getHeight() / 2;
 
-        if (landscapePanel.getX() > spriteCenterX || landscapePanel.getY() > spriteCenterY) {
+        if (landscapePanel.getX() > spriteCenterX
+                || landscapePanel.getY() > spriteCenterY
+                || landscapePanel.getX() + landscapePanel.getWidth() < spriteCenterX
+                || landscapePanel.getY() + landscapePanel.getHeight() < spriteCenterY) {
             //revert position
             shuttleDraggableElement.setConstraintX(SizeValue.px(shuttlePosition.getX()));
             shuttleDraggableElement.setConstraintY(SizeValue.px(shuttlePosition.getY()));
