@@ -12,14 +12,13 @@ import ru.game.aurora.npc.SingleStarsystemShipSpawner;
 import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.PrivateMessage;
+import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.util.GameTimer;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
-import ru.game.aurora.world.generation.aliens.KliskGenerator;
-import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.EmbassiesQuest;
@@ -131,6 +130,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     ResearchProjectDesc zorsan_crew_weapons = world.getResearchAndDevelopmentProjects().getResearchProjects().get("zorsan_crew_weapons");
                     if (zorsan_crew_weapons != null) {
                         world.getPlayer().getResearchState().getCurrentProjects().add(new ResearchProjectState(zorsan_crew_weapons));
+                        zorsan_crew_weapons.addEarthProgressResearch("zorsan_weapons");
                     }
                     Dungeon dungeon = new Dungeon(world, new AuroraTiledMap("maps/zor_escape.tmx"), ss);
                     dungeon.setEnterDialog(zorsanFinalDialog);
@@ -225,24 +225,20 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         race.setHomeworld(homeworld);
         world.addListener(new SingleStarsystemShipSpawner(race.getDefaultFactory(), 0.8, race.getHomeworld()));
         world.getRaces().put(race.getName(), race);
-        addWarDataDrop();
 
-        // zorsan are hostile to anyone
+        // zorsan are hostile to bork
         world.getReputation().setHostile(NAME, BorkGenerator.NAME);
-        world.getReputation().setHostile(NAME, RoguesGenerator.NAME);
-        world.getReputation().setHostile(NAME, KliskGenerator.NAME);
         world.getReputation().setHostile(BorkGenerator.NAME, NAME);
-        world.getReputation().setHostile(RoguesGenerator.NAME, NAME);
-        world.getReputation().setHostile(KliskGenerator.NAME, NAME);
 
         world.getResearchAndDevelopmentProjects().getEarthResearchProjects().put("zorsan_weapons", new EarthResearch("zorsan_weapons", 100) {
             private static final long serialVersionUID = -7037397500987009921L;
 
             @Override
             protected void onCompleted(World world) {
-                // todo: add zorsan ship cannon
+                world.getPlayer().getEarthState().getAvailableUpgrades().add(new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("zorsan_laser")));
+                world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/zorsan_cannon_unlocked.json"));
                 world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_weapons_reserch", "news"));
-                world.getPlayer().getEarthState().updateTechnologyLevel(5);
+                world.getPlayer().getEarthState().updateTechnologyLevel(100);
             }
         });
     }

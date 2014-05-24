@@ -60,8 +60,19 @@ public class ProgressBarControl implements Controller {
         progressTextElement.getRenderer(TextRenderer.class).setText(progressText);
     }
 
-    public void setText(String text)
-    {
+    public void setText(String text) {
         progressTextElement.getRenderer(TextRenderer.class).setText(text);
+    }
+
+    public void setEnabled(boolean enabled) {
+        if (enabled) {
+            progressBarElement.enable();
+        } else {
+            progressBarElement.disable();
+        }
+    }
+
+    public boolean isEnabled() {
+        return progressBarElement.isEnabled();
     }
 }

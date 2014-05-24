@@ -20,6 +20,7 @@ import ru.game.aurora.world.IDungeon;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetAtmosphere;
 
 
 public class SurfaceGUIController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender {
@@ -53,17 +54,24 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
 
     @Override
     public void onStartScreen() {
-        updateStats();
+
         logList.clear();
         logList.addAllItems(GameLogger.getInstance().getLogItems());
         logList.setFocusItemByIndex(logList.getItems().size() - 1);
-        updateStats();
+
 
         if (world.getCurrentRoom() instanceof Planet) {
             mapButton.show();
+            if (((Planet) world.getCurrentRoom()).getAtmosphere() == PlanetAtmosphere.BREATHABLE_ATMOSPHERE) {
+                topPanelController.setProgressBarEnabled(Localization.getText("gui", "surface.breathable_atmosphere"), false);
+            } else {
+                topPanelController.setProgressBarEnabled("", true);
+            }
         } else {
             mapButton.hide();
+            topPanelController.setProgressBarEnabled("", true);
         }
+        updateStats();
     }
 
     @Override
@@ -74,7 +82,9 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     public void updateStats() {
         final LandingParty landingParty = world.getPlayer().getLandingParty();
         topPanelController.setCrewStats(landingParty.getScience(), landingParty.getEngineers(), landingParty.getMilitary());
-        topPanelController.setProgress(Localization.getText("gui", "surface.remaining_oxygen") + " " + landingParty.getOxygen(), landingParty.getOxygen() / (float) LandingParty.MAX_OXYGEN);
+        if (topPanelController.isProgressBarEnabled()) {
+            topPanelController.setProgress(Localization.getText("gui", "surface.remaining_oxygen") + " " + landingParty.getOxygen(), landingParty.getOxygen() / (float) LandingParty.MAX_OXYGEN);
+        }
         EngineUtils.setTextForGUIElement(hpElement, Integer.toString(world.getPlayer().getLandingParty().getHp()));
     }
 

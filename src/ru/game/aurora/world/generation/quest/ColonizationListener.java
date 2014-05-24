@@ -106,6 +106,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
 
 
         AnimalSpeciesDesc guard = new AnimalSpeciesDesc(planet, "Marine", false, false, 10, ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault"), 1, AnimalSpeciesDesc.Behaviour.FRIENDLY, Collections.<AnimalModifier>emptySet());
+        guard.setCanBePickedUp(false);
         guard.setImages(ResourceManager.getInstance().getSpriteSheet("humanity_tileset").getSprite(1, 9), ResourceManager.getInstance().getImage("no_image"));
         planet.getPlanetObjects().add(new Animal(planet, colonyCenter.getX() + 9, colonyCenter.getY() + 7, guard));
         if (world.getGlobalVariables().containsKey("colony_search.explored_fully")) {

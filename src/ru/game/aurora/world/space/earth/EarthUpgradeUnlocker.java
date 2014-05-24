@@ -24,7 +24,7 @@ public class EarthUpgradeUnlocker extends GameEventListener {
     public boolean onReturnToEarth(World world) {
         final int technologyLevel = world.getPlayer().getEarthState().getTechnologyLevel();
 
-        if (technologyLevel > 250 && prevTechValue <= 250) {
+        if (technologyLevel > 450 && prevTechValue <= 450) {
 
             // unlock missiles
             Dialog d = Dialog.loadFromFile("dialogs/missiles_unlocked.json");

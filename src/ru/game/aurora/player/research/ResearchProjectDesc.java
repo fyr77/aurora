@@ -7,7 +7,6 @@
 package ru.game.aurora.player.research;
 
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.world.Listenable;
 import ru.game.aurora.world.World;
@@ -86,11 +85,11 @@ public abstract class ResearchProjectDesc extends Listenable {
         makesAvailableEngineering.add(desc.getId());
     }
 
-    public void addEarthProgressResearch(EarthResearch r) {
+    public void addEarthProgressResearch(String id) {
         if (earthProgress == null) {
             earthProgress = new ArrayList<String>();
         }
-        earthProgress.add(r.getId());
+        earthProgress.add(id);
     }
 
     public List<String> getMakesAvailable() {

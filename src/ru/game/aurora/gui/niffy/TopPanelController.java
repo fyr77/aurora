@@ -17,8 +17,7 @@ import ru.game.aurora.util.EngineUtils;
 import java.util.Properties;
 
 
-public class TopPanelController implements Controller
-{
+public class TopPanelController implements Controller {
     private ProgressBarControl progressBarControl;
 
     private Element sciCountElement;
@@ -52,16 +51,25 @@ public class TopPanelController implements Controller
         return false;
     }
 
-    public void setProgress(String text, float value)
-    {
+    public void setProgress(String text, float value) {
         progressBarControl.setProgress(value);
         progressBarControl.setText(text);
     }
 
-    public void setCrewStats(int sci, int engi, int mil)
-    {
+    public void setCrewStats(int sci, int engi, int mil) {
         EngineUtils.setTextForGUIElement(sciCountElement, String.valueOf(sci));
         EngineUtils.setTextForGUIElement(engiCountElement, String.valueOf(engi));
         EngineUtils.setTextForGUIElement(milCountElement, String.valueOf(mil));
+    }
+
+    public void setProgressBarEnabled(String text, boolean enabled) {
+        if (!enabled) {
+            setProgress(text, 1);
+        }
+        progressBarControl.setEnabled(enabled);
+    }
+
+    public boolean isProgressBarEnabled() {
+        return progressBarControl.isEnabled();
     }
 }
