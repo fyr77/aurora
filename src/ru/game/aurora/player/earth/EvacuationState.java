@@ -107,7 +107,7 @@ public class EvacuationState implements Serializable {
      * It must contain an earth-like planet with breathable atmosphere and life
      */
     private void findSuitableStarSystem(GalaxyMap map, final StarSystem solarSystem) {
-        List<StarSystem> suitableStarSystems = new LinkedList<StarSystem>();
+        List<StarSystem> suitableStarSystems = new LinkedList<>();
         for (GalaxyMapObject o : map.getObjects()) {
             if (!(o instanceof StarSystem)) {
                 continue;

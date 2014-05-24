@@ -51,7 +51,7 @@ public class GUI {
      */
     private void hackUnicodeFont(String name) {
         UnicodeSlickRenderFont font = (UnicodeSlickRenderFont) nifty.createFont(name);
-        Field field = null;
+        Field field;
         try {
             field = AbstractSlickRenderFont.class.getDeclaredField("internalFont");
             field.setAccessible(true);

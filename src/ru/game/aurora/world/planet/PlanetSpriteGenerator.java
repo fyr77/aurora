@@ -60,11 +60,7 @@ public class PlanetSpriteGenerator {
 
             PlanetSpriteParameters that = (PlanetSpriteParameters) o;
 
-            if (hasAtmosphere != that.hasAtmosphere) return false;
-            if (size != that.size) return false;
-            if (cat != that.cat) return false;
-
-            return true;
+            return hasAtmosphere == that.hasAtmosphere && size == that.size && cat == that.cat;
         }
 
         @Override

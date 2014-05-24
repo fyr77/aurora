@@ -52,7 +52,7 @@ public class CountrySelectScreenController implements ScreenController {
 
         IntroDialogController introDialogController = (IntroDialogController) GUI.getInstance().getNifty().findScreenController(IntroDialogController.class.getCanonicalName());
         introDialogController.setEndListener(null);
-        IntroDialog dialog = null;
+        IntroDialog dialog;
         switch (selectedId) {
             case "america":
                 dialog = IntroDialog.load("story/intro_am.json");

@@ -79,9 +79,4 @@ public class SpaceDebris extends BaseSpaceObject {
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
         graphics.drawImage(ResourceManager.getInstance().getImage("debris"), camera.getXCoord(x), camera.getYCoord(y));
     }
-
-    @Override
-    public void update(GameContainer container, World world) {
-
-    }
 }

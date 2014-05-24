@@ -14,7 +14,7 @@ import java.util.*;
 public class ProbabilitySet<T> extends AbstractMap<T, Double> implements Serializable {
 
     @SuppressWarnings({"NonSerializableFieldInSerializableClass"})
-    private Map<T, Double> entries = new HashMap<T, Double>();
+    private Map<T, Double> entries = new HashMap<>();
 
     private Random random;
 

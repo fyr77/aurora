@@ -41,7 +41,7 @@ public class BuildersRuinGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
         // select 10 random star systems
-        Set<StarSystem> updatedSystems = new HashSet<StarSystem>();
+        Set<GalaxyMapObject> updatedSystems = new HashSet<>();
         for (int i = 0; i < Math.min(SYSTEMS, world.getGalaxyMap().getObjects().size()); ++i) {
             final GalaxyMapObject obj = CollectionUtils.selectRandomElement(world.getGalaxyMap().getObjects());
             if (StarSystem.class.isAssignableFrom(obj.getClass()) && !updatedSystems.contains(obj)) {
@@ -51,7 +51,7 @@ public class BuildersRuinGenerator implements WorldGeneratorPart {
                         updateStarSystem((StarSystem) obj);
                     }
                 });
-                updatedSystems.add((StarSystem) obj);
+                updatedSystems.add(obj);
             }
         }
 

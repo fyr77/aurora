@@ -111,27 +111,31 @@ public class RoguesGenerator implements WorldGeneratorPart {
 
             @Override
             public NPCShip createShip(int shipType) {
+                NPCShip ship;
                 switch (shipType) {
                     case SCOUT_SHIP: {
-                        NPCShip ship = new NPCShip(0, 0, "rogues_scout", rogueRace, null, "Rogues scout", 14);
+                        ship = new NPCShip(0, 0, "rogues_scout", rogueRace, null, "Rogues scout", 14);
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), ResourceManager.getInstance().getWeapons().getEntity("long_range_plasma_cannon"));
-                        return ship;
+                        break;
                     }
                     case PROBE_SHIP: {
-                        NPCShip ship = new NPCShip(0, 0, "rogues_probe", rogueRace, null, "Rogues probe", 6);
+                        ship = new NPCShip(0, 0, "rogues_probe", rogueRace, null, "Rogues probe", 6);
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("long_range_plasma_cannon"));
                         ship.setStationary(true);
                         ship.setCanBeHailed(false);
-                        return ship;
+                        break;
                     }
                     default:
                         throw new IllegalArgumentException("Unsupported ship type for Rogues race: " + shipType);
                 }
+                ship.setLoot(defaultLootTable);
+                return ship;
+
             }
         });
 
         StarSystem homeworld = generateRoguesWorld(world, 0, 0, rogueRace);
-        world.getGalaxyMap().addObjectAtDistance(homeworld, (Positionable) world.getGlobalVariables().get("solar_system"),20 + CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.galaxy.rogues_homeworld_distance")));
+        world.getGalaxyMap().addObjectAtDistance(homeworld, (Positionable) world.getGlobalVariables().get("solar_system"), 20 + CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.galaxy.rogues_homeworld_distance")));
         world.getGlobalVariables().put("rogues.homeworld", homeworld.getCoordsString());
         homeworld.setQuestLocation(true);
         rogueRace.setHomeworld(homeworld);

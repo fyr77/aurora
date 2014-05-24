@@ -166,11 +166,6 @@ public class Camera implements Serializable {
         return x >= 0 && x < getNumTilesX() * tileWidth && y >= 0 && y < getNumTilesY() * tileHeight;
     }
 
-    public void drawBound() {
-        //engine.setColor(JGColor.blue);
-        //engine.drawRect(viewportX, viewportY, viewportTilesX * tileWidth, viewportTilesY * tileHeight, false, false);
-    }
-
     public int getViewportX() {
         return viewportX;
     }

@@ -113,11 +113,6 @@ public class SpaceHulk extends BaseSpaceObject {
     }
 
     @Override
-    public void update(GameContainer container, World world) {
-        // nothing
-    }
-
-    @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
         graphics.drawImage(ResourceManager.getInstance().getImage(image), camera.getXCoord(x), camera.getYCoord(y));
     }

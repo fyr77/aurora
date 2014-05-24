@@ -24,8 +24,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Player implements Serializable
-{
+public class Player implements Serializable {
 
     private static final long serialVersionUID = 3L;
 
@@ -45,7 +44,7 @@ public class Player implements Serializable
 
     private Journal journal = new Journal();
 
-    private Map<InventoryItem, Integer> inventory = new HashMap<InventoryItem, Integer>();
+    private Map<InventoryItem, Integer> inventory = new HashMap<>();
 
     // main country in Aurora project, defines some bonuses
     private EarthCountry mainCountry = EarthCountry.AMERICA;

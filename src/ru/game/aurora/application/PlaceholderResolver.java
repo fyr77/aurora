@@ -10,14 +10,12 @@ import java.util.regex.Pattern;
 /**
  * Replaces placeholders like ${id} with their values
  */
-public class PlaceholderResolver
-{
+public class PlaceholderResolver {
     private static Pattern pattern = Pattern.compile("\\$\\{([\\w\\.]+)\\}");
 
     private static final Logger logger = LoggerFactory.getLogger(PlaceholderResolver.class);
 
-    public static String resolvePlaceholders(String originalString, Map<String, ? extends Object> values)
-    {
+    public static String resolvePlaceholders(String originalString, Map<String, ?> values) {
         Matcher matcher = pattern.matcher(originalString);
         StringBuilder resultBuilder = new StringBuilder();
         int index = 0;

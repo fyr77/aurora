@@ -27,7 +27,7 @@ public class DeferredLoadingMusic {
 
     private Music strongRef = null;
 
-    private SoftReference<Music> softReference = new SoftReference<Music>(null);
+    private SoftReference<Music> softReference = new SoftReference<>(null);
 
     private final File myFile;
 

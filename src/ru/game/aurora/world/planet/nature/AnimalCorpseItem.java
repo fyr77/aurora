@@ -12,7 +12,6 @@ import ru.game.aurora.world.planet.InventoryItem;
  * User: Egor.Smirnov
  * Date: 25.10.13
  * Time: 14:18
- * To change this template use File | Settings | File Templates.
  */
 public class AnimalCorpseItem implements InventoryItem {
 

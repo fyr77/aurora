@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* Created with IntelliJ IDEA.
-* User: Egor.Smirnov
-* Date: 12.03.13
-* Time: 15:32
-* To change this template use File | Settings | File Templates.
-*/
+ * Created with IntelliJ IDEA.
+ * User: Egor.Smirnov
+ * Date: 12.03.13
+ * Time: 15:32
+ * To change this template use File | Settings | File Templates.
+ */
 public class Statement implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,9 +40,8 @@ public class Statement implements Serializable {
         this.customIcon = customIcon;
     }
 
-    public List<Reply> getAvailableReplies(World world, Map<String, String> flags)
-    {
-        List<Reply> rz = new ArrayList<Reply>(replies.length);
+    public List<Reply> getAvailableReplies(World world, Map<String, String> flags) {
+        List<Reply> rz = new ArrayList<>(replies.length);
         for (Reply r : replies) {
             if (r.isVisible(world, flags)) {
                 rz.add(r);

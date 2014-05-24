@@ -239,7 +239,6 @@ public class AuroraGame extends NiftyOverlayGame {
                 mainMenu.draw(graphics);
             } else {
                 world.draw(gameContainer, graphics);
-                world.getCamera().drawBound();
             }
 
             lastFrameTime = gameContainer.getTime();

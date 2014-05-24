@@ -30,7 +30,7 @@ public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
 
     private Gson gson = new Gson();
 
-    private Map<String, T> entities = new HashMap<String, T>();
+    private Map<String, T> entities = new HashMap<>();
 
     public JsonConfigManager(Class<T> eClass, String resourceFolder) {
         this.entityClass = eClass;

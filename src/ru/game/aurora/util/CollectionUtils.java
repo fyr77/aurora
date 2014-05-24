@@ -48,14 +48,14 @@ public abstract class CollectionUtils {
             return Collections.emptyList();
         }
         T elem = selectRandomElement(coll);
-        List<T> rz = new LinkedList<T>();
+        List<T> rz = new LinkedList<>();
         rz.add(elem);
         return rz;
     }
 
     public static <T> List<T> selectRandomElementToCollection(T[] array) {
         T t = selectRandomElement(array);
-        List<T> rz = new ArrayList<T>();
+        List<T> rz = new ArrayList<>();
         if (t == null) {
             return rz;
         }
@@ -77,7 +77,7 @@ public abstract class CollectionUtils {
             throw new IllegalArgumentException();
         }
 
-        Set<K> result = new HashSet<K>();
+        Set<K> result = new HashSet<>();
         for (Map.Entry<K, V> entry : map.entrySet()) {
             if (entry.getValue().equals(val)) {
                 result.add(entry.getKey());
@@ -87,7 +87,7 @@ public abstract class CollectionUtils {
     }
 
     public static <E> List<E> toList(E... elems) {
-        List<E> rz = new LinkedList<E>();
+        List<E> rz = new LinkedList<>();
         Collections.addAll(rz, elems);
         return rz;
     }

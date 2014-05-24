@@ -40,7 +40,7 @@ public class LandingParty extends MovableSprite implements GameObject {
 
     private int collectedGeodata = 0;
 
-    private Multiset<InventoryItem> inventory = HashMultiset.<InventoryItem>create();
+    private Multiset<InventoryItem> inventory = HashMultiset.create();
 
     private final int MAX_HP;
 
@@ -87,13 +87,13 @@ public class LandingParty extends MovableSprite implements GameObject {
 
     public int getInventoryWeight() {
         int totalWeight = 0;
-        for (InventoryItem i:inventory) {
+        for (InventoryItem i : inventory) {
             totalWeight += i.getWeight();
         }
         return totalWeight;
     }
 
-    public void overWeightTest(){
+    public void overWeightTest() {
         boolean overWeight;
         overWeight = getMaxWeight() < getInventoryWeight();
         if (overWeight) {
@@ -251,7 +251,7 @@ public class LandingParty extends MovableSprite implements GameObject {
             hp += Configuration.getIntProperty("player.america.hpBonus");
         }
 
-        ((SurfaceGUIController)GUI.getInstance().getNifty().findScreenController(SurfaceGUIController.class.getCanonicalName())).updateStats();
+        ((SurfaceGUIController) GUI.getInstance().getNifty().findScreenController(SurfaceGUIController.class.getCanonicalName())).updateStats();
     }
 
     public void subtractHp(World world, int amount) {
@@ -281,7 +281,7 @@ public class LandingParty extends MovableSprite implements GameObject {
             }
             amount -= amountToSubtract;
         }
-        ((SurfaceGUIController)GUI.getInstance().getNifty().findScreenController(SurfaceGUIController.class.getCanonicalName())).updateStats();
+        ((SurfaceGUIController) GUI.getInstance().getNifty().findScreenController(SurfaceGUIController.class.getCanonicalName())).updateStats();
     }
 
     public int getHp() {

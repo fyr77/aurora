@@ -36,7 +36,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private transient ParallaxBackground background;
 
-    private List<GalaxyMapObject> objects = new ArrayList<GalaxyMapObject>();
+    private List<GalaxyMapObject> objects = new ArrayList<>();
 
     private transient GalaxyMapScreen fullMapScreen = new GalaxyMapScreen();
 
@@ -186,8 +186,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         world.setUpdatedThisFrame(true);
     }
 
-    public StarSystem getClosestStarSystem(StarSystem s)
-    {
+    public StarSystem getClosestStarSystem(StarSystem s) {
         StarSystem result = null;
         for (GalaxyMapObject obj : objects) {
             if (!StarSystem.class.isAssignableFrom(obj.getClass())) {
@@ -198,7 +197,7 @@ public class GalaxyMap extends BaseSpaceRoom {
                 continue;
             }
 
-            if (result == null || getDistance(result, s) > getDistance((StarSystem)obj, s)) {
+            if (result == null || getDistance(result, s) > getDistance((StarSystem) obj, s)) {
                 result = (StarSystem) obj;
             }
         }
@@ -248,19 +247,17 @@ public class GalaxyMap extends BaseSpaceRoom {
         map[y][x] = objects.size() - 1;
     }
 
-    public boolean isValidCoord(int x, int y)
-    {
+    public boolean isValidCoord(int x, int y) {
         return x >= 0 && x < tilesX && y >= 0 && y < tilesY;
     }
 
-    public void addObjectAtDistance(GalaxyMapObject object, Positionable center, int distance)
-    {
+    public void addObjectAtDistance(GalaxyMapObject object, Positionable center, int distance) {
         int x;
         int y;
         int iterCount = 0;
         do {
             x = CommonRandom.getRandom().nextInt(2 * distance) - distance;
-            y = (int) (Math.sqrt(distance * distance- x * x) * (CommonRandom.getRandom().nextBoolean() ? -1 : 1));
+            y = (int) (Math.sqrt(distance * distance - x * x) * (CommonRandom.getRandom().nextBoolean() ? -1 : 1));
             if (++iterCount > 5) {
                 logger.warn("Can not find suitable position for space object {}", object);
                 distance--;

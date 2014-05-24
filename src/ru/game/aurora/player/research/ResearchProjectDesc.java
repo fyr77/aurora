@@ -73,7 +73,7 @@ public abstract class ResearchProjectDesc extends Listenable {
 
     public void addNextResearch(ResearchProjectDesc desc) {
         if (makesAvailable == null) {
-            makesAvailable = new LinkedList<String>();
+            makesAvailable = new LinkedList<>();
         }
         makesAvailable.add(desc.getId());
     }
@@ -87,7 +87,7 @@ public abstract class ResearchProjectDesc extends Listenable {
 
     public void addEarthProgressResearch(String id) {
         if (earthProgress == null) {
-            earthProgress = new ArrayList<String>();
+            earthProgress = new ArrayList<>();
         }
         earthProgress.add(id);
     }

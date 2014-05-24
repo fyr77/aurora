@@ -32,8 +32,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class World implements Serializable, ResolutionChangeListener
-{
+public class World implements Serializable, ResolutionChangeListener {
 
     private static final long serialVersionUID = 3L;
 
@@ -125,7 +124,7 @@ public class World implements Serializable, ResolutionChangeListener
                     return;
                 }
                 // to prevent concurrent modification if some of listeners adds new ones
-                List<GameEventListener> oldListeners = new LinkedList<GameEventListener>(listeners);
+                List<GameEventListener> oldListeners = new LinkedList<>(listeners);
                 for (GameEventListener listener : oldListeners) {
                     listener.onTurnEnded(this);
                 }
@@ -301,7 +300,7 @@ public class World implements Serializable, ResolutionChangeListener
 
     public void onPlayerShipDamaged() {
         Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
-        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        List<GameEventListener> newList = new LinkedList<>(listeners);
         for (GameEventListener l : newList) {
 
             boolean alreadyCalledThisGroup = false;
@@ -324,7 +323,7 @@ public class World implements Serializable, ResolutionChangeListener
 
     public void onCrewChanged() {
         Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
-        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        List<GameEventListener> newList = new LinkedList<>(listeners);
         for (GameEventListener l : newList) {
 
             boolean alreadyCalledThisGroup = false;
@@ -347,7 +346,7 @@ public class World implements Serializable, ResolutionChangeListener
 
     public void onPlayerReturnToEarth() {
         Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
-        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        List<GameEventListener> newList = new LinkedList<>(listeners);
         for (GameEventListener l : newList) {
 
             boolean alreadyCalledThisGroup = false;
@@ -408,7 +407,7 @@ public class World implements Serializable, ResolutionChangeListener
 
     public void onPlayerContactedAlienShip(SpaceObject ship) {
         Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
-        List<GameEventListener> newList = new LinkedList<GameEventListener>(listeners);
+        List<GameEventListener> newList = new LinkedList<>(listeners);
         for (GameEventListener l : newList) {
 
             boolean alreadyCalledThisGroup = false;
@@ -481,8 +480,7 @@ public class World implements Serializable, ResolutionChangeListener
         return isPaused;
     }
 
-    public void gameLoaded()
-    {
+    public void gameLoaded() {
 
     }
 

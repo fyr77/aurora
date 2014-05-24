@@ -265,7 +265,9 @@ public class Dialog implements OverlayWindow {
     public void putStatement(Statement stmt) {
         if (this.statements == null) {
             if (this.fileName != null) {
-
+                load(this.fileName);
+            } else {
+                this.statements = new HashMap<>();
             }
         }
         this.statements.put(stmt.id, stmt);

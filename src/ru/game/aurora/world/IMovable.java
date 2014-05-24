@@ -5,7 +5,6 @@ package ru.game.aurora.world;
  * User: User
  * Date: 17.11.13
  * Time: 18:57
- * To change this template use File | Settings | File Templates.
  */
 public interface IMovable extends Positionable, GameObject {
     void moveUp();

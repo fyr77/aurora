@@ -18,7 +18,7 @@ import java.util.Map;
 public class TileDrawer {
     private final String tileName;
 
-    private Map<Integer, String> sprites = new HashMap<Integer, String>();
+    private Map<Integer, String> sprites = new HashMap<>();
 
     private byte mySurfaceType;
 
