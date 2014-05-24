@@ -3,7 +3,7 @@
   "mainImageId": "intro",
   "statements": [
     {
-      "iconName": "usa_leader",
+      "iconName": "europe_leader",
       "captionId": "intro_1.1.caption",
       "textId": "intro_1.1.text"
     },
@@ -18,12 +18,12 @@
       "textId": "intro_1.3.text"
     },
     {
-      "iconName": "europe_leader",
+      "iconName": "usa_leader",
       "captionId": "intro_1.4.caption",
       "textId": "intro_1.4.text"
     },
     {
-      "iconName": "usa_leader",
+      "iconName": "europe_leader",
       "captionId": "intro_1.5.caption",
       "textId": "intro_1.5.text"
     },
@@ -33,44 +33,9 @@
       "textId": "intro_1.6.text"
     },
     {
-      "iconName": "usa_leader",
+      "iconName": "europe_leader",
       "captionId": "intro_1.7.caption",
       "textId": "intro_1.7.text"
-    },
-    {
-      "iconName": "asia_leader",
-      "captionId": "intro_1.8.caption",
-      "textId": "intro_1.8.text"
-    },
-    {
-      "iconName": "europe_leader",
-      "captionId": "intro_1.9.caption",
-      "textId": "intro_1.9.text"
-    },
-    {
-      "iconName": "asia_leader",
-      "captionId": "intro_1.10.caption",
-      "textId": "intro_1.10.text"
-    },
-    {
-      "iconName": "usa_leader",
-      "captionId": "intro_1.11.caption",
-      "textId": "intro_1.11.text"
-    },
-    {
-      "iconName": "europe_leader",
-      "captionId": "intro_1.12.caption",
-      "textId": "intro_1.12.text"
-    },
-    {
-      "iconName": "usa_leader",
-      "captionId": "intro_1.13.caption",
-      "textId": "intro_1.13.text"
-    },
-    {
-      "iconName": "europe_leader",
-      "captionId": "intro_1.14.caption",
-      "textId": "intro_1.14.text"
     }
   ]
 }

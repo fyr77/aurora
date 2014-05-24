@@ -1,8 +1,8 @@
-2Клиски встреча на станции, путь к представительству.csv;klisk_station_start;klisk_dialog;klisk
-3РАзговор с диппредом клисков.csv;klisk_station_main;klisk_vip_dialog;klisk
-4Вводный диалог квест сопровождение.csv;klisk_trade_quest_start;klisk_vip_dialog;klisk
-5.1Диалог с капитаном почти перед самым концом.csv;klisk_trade_quest_captain;klisk_vip_dialog;klisk
-5.2Совместная пирушка.csv;klisk_trade_quest_party;klisk_vip_dialog;klisk
-6ПРибытие на станцию, внезапная торговля.csv;klisk_trade_quest_arrival;rogues_dialog;klisk
-7Процесс торговли.csv;klisk_trade_quest_trade;rogues_dialog;klisk
-Дефолтный диалог с диппредом (+конец квеста).csv;klisk_planet_default;klisk_vip_dialog;klisk
+2РљР»РёСЃРєРё РІСЃС‚СЂРµС‡Р° РЅР° СЃС‚Р°РЅС†РёРё, РїСѓС‚СЊ Рє РїСЂРµРґСЃС‚Р°РІРёС‚РµР»СЊСЃС‚РІСѓ.csv;klisk_station_start;klisk_dialog;klisk
+3Р РђР·РіРѕРІРѕСЂ СЃ РґРёРїРїСЂРµРґРѕРј РєР»РёСЃРєРѕРІ.csv;klisk_station_main;klisk_vip_dialog;klisk
+4Р’РІРѕРґРЅС‹Р№ РґРёР°Р»РѕРі РєРІРµСЃС‚ СЃРѕРїСЂРѕРІРѕР¶РґРµРЅРёРµ.csv;klisk_trade_quest_start;klisk_vip_dialog;klisk
+5.1Р”РёР°Р»РѕРі СЃ РєР°РїРёС‚Р°РЅРѕРј РїРѕС‡С‚Рё РїРµСЂРµРґ СЃР°РјС‹Рј РєРѕРЅС†РѕРј.csv;klisk_trade_quest_captain;klisk_vip_dialog;klisk
+5.2РЎРѕРІРјРµСЃС‚РЅР°СЏ РїРёСЂСѓС€РєР°.csv;klisk_trade_quest_party;klisk_vip_dialog;klisk
+6РџР РёР±С‹С‚РёРµ РЅР° СЃС‚Р°РЅС†РёСЋ, РІРЅРµР·Р°РїРЅР°СЏ С‚РѕСЂРіРѕРІР»СЏ.csv;klisk_trade_quest_arrival;rogues_dialog;klisk
+7РџСЂРѕС†РµСЃСЃ С‚РѕСЂРіРѕРІР»Рё.csv;klisk_trade_quest_trade;rogues_dialog;klisk
+Р”РµС„РѕР»С‚РЅС‹Р№ РґРёР°Р»РѕРі СЃ РґРёРїРїСЂРµРґРѕРј (+РєРѕРЅРµС† РєРІРµСЃС‚Р°).csv;klisk_planet_default;klisk_vip_dialog;klisk
