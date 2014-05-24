@@ -19,6 +19,8 @@ import java.io.Serializable;
  * Processed geodata gives more Research points when returning science results to Earth.
  */
 public class Geodata implements Serializable {
+    private static final long serialVersionUID = 8595341321476584280L;
+
     private int raw = 0;
 
     private int processed = 0;

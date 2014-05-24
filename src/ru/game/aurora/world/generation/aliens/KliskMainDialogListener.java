@@ -94,6 +94,11 @@ public class KliskMainDialogListener implements DialogListener {
             }
             world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("klisk_homeworlds");
             world.getGlobalVariables().put("klisk.coordinates_traded", true);
+
+            world.getRaces().get(ZorsanGenerator.NAME).setKnown(true);
+            world.getRaces().get(BorkGenerator.NAME).setKnown(true);
+            world.getRaces().get(RoguesGenerator.NAME).setKnown(true);
+            world.getRaces().get(KliskGenerator.NAME).setKnown(true);
         }
 
         if (returnCode == 101) {

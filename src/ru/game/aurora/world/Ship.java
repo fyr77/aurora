@@ -111,9 +111,7 @@ public class Ship extends MovableSprite implements SpaceObject {
         super.update(container, world);
         if (world.isUpdatedThisFrame()) {
             for (StarshipWeapon weapon : weapons) {
-                if (weapon.getReloadTimeLeft() > 0) {
-                    weapon.setReloadTimeLeft(weapon.getReloadTimeLeft() - 1);
-                }
+                weapon.reload();
             }
         }
     }

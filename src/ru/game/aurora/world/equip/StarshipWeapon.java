@@ -46,12 +46,8 @@ public class StarshipWeapon implements Serializable {
         return mountPosition;
     }
 
-    public void setReloadTimeLeft(int reloadTimeLeft) {
-        this.reloadTimeLeft = reloadTimeLeft;
-    }
-
     public void fire() {
-        reloadTimeLeft = weaponDesc.reloadTurns;
+        reloadTimeLeft = weaponDesc.reloadTurns + 1; // +1 because reload is called at same frame as shooting
     }
 
     public void reload() {

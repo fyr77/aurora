@@ -385,7 +385,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             ResourceManager.getInstance().getSound(weapon.getWeaponDesc().shotSound).play();
 
 
-            weapon.setReloadTimeLeft(weapon.getWeaponDesc().reloadTurns);
+            weapon.fire();
             world.setUpdatedThisFrame(true);
 
             onWeaponButtonPressed(world, selectedWeapon);
@@ -496,8 +496,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return visited;
     }
 
-    private void checkAndStartCustomMusic(World world)
-    {
+    private void checkAndStartCustomMusic(World world) {
         for (AlienRace race : world.getRaces().values()) {
             if (race.getHomeworld() == this && race.getMusic() != null) {
                 race.getMusic().play();
