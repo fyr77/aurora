@@ -1,6 +1,12 @@
-VERSION 0.3.0
+VERSION 0.3.1
 
 IN PROGRESS...
+
+===============================================
+
+VERSION 0.3.0
+
+25.05.2014
 
 + Star map: hints and quest locations.
 + Music tracks for all races
