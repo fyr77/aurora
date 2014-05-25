@@ -1,6 +1,9 @@
 package ru.game.aurora.world.dungeon;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
@@ -19,7 +22,7 @@ import java.util.Set;
  * Time: 12:40
  */
 public class DungeonMonster extends DungeonObject implements IMonster {
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 3L;
 
     private LandingPartyWeapon weapon;
 
@@ -28,6 +31,8 @@ public class DungeonMonster extends DungeonObject implements IMonster {
     private int speed;
 
     private int hp;
+
+    private final int maxHp;
 
     private AnimalSpeciesDesc.Behaviour behaviour;
 
@@ -40,7 +45,7 @@ public class DungeonMonster extends DungeonObject implements IMonster {
         owner = map;
         weapon = ResourceManager.getInstance().getLandingPartyWeapons().getEntity(map.getMap().getObjectProperty(groupId, objectId, "weapon", null));
         speed = Integer.parseInt(map.getMap().getObjectProperty(groupId, objectId, "speed", "0"));
-        hp = Integer.parseInt(map.getMap().getObjectProperty(groupId, objectId, "hp", "1"));
+        maxHp = hp = Integer.parseInt(map.getMap().getObjectProperty(groupId, objectId, "hp", "1"));
         behaviour = AnimalSpeciesDesc.Behaviour.valueOf(map.getMap().getObjectProperty(groupId, objectId, "behaviour", "AGGRESSIVE"));
         final String tagsString = map.getMap().getObjectProperty(groupId, objectId, "tags", null);
         if (tagsString != null) {
@@ -113,5 +118,22 @@ public class DungeonMonster extends DungeonObject implements IMonster {
 
     public void setBehaviour(AnimalSpeciesDesc.Behaviour behaviour) {
         this.behaviour = behaviour;
+    }
+
+    @Override
+    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+        super.draw(container, graphics, camera);
+        String hpText;
+        if (hp < 100) {
+            hpText = Integer.toString(Math.max(0, hp));
+        } else {
+            hpText = "N/A";
+        }
+        if (hp < maxHp / 4) {
+            graphics.setColor(Color.red);
+        } else {
+            graphics.setColor(Color.white);
+        }
+        graphics.drawString(hpText, camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
     }
 }

@@ -54,7 +54,7 @@ public class SpaceHulk extends BaseSpaceObject {
         this.name = name;
         this.image = image;
         this.dungeon = dungeon;
-        this.dungeon.getController().setSuccessListener(new IStateChangeListener() {
+        this.dungeon.getController().addListener(new IStateChangeListener() {
 
             private static final long serialVersionUID = 4039714175367179410L;
 

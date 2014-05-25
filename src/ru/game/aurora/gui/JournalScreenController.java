@@ -46,16 +46,16 @@ public class JournalScreenController implements ScreenController {
     public void onStartScreen() {
         myWindow.getElement().setVisible(true);
         Journal journal = world.getPlayer().getJournal();
+        EngineUtils.resetScrollbarX(questList);
         questList.clear();
         for (JournalEntry e : journal.getQuests().values()) {
             questList.addItem(e);
         }
-        EngineUtils.resetScrollbarX(questList);
+        EngineUtils.resetScrollbarX(codexList);
         codexList.clear();
         for (JournalEntry e : journal.getCodex().values()) {
             codexList.addItem(e);
         }
-        EngineUtils.resetScrollbarX(codexList);
         selectFirstItemInCurrentList();
         world.setPaused(true);
     }

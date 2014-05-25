@@ -60,9 +60,9 @@ public class EngineeringScreenController implements ScreenController {
     @Override
     public void onStartScreen() {
         window.setVisible(true);
+        EngineUtils.resetScrollbarX(projectsList);
         projectsList.clear();
         projectsList.addAllItems(world.getPlayer().getEngineeringState().getProjects());
-        EngineUtils.resetScrollbarX(projectsList);
         engineeringState = world.getPlayer().getEngineeringState();
         updateLabels();
         world.setPaused(true);

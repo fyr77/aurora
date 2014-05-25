@@ -51,20 +51,22 @@ public class ResearchScreenController implements ScreenController {
     public void onStartScreen() {
         window.setVisible(true);
         ListBox l = availableResearch.findNiftyControl("itemsList", ListBox.class);
+        EngineUtils.resetScrollbarX(l);
         l.clear();
         l.addAllItems(world.getPlayer().getResearchState().getCurrentProjects());
-        EngineUtils.resetScrollbarX(l);
+        l.getElement().layoutElements();
 
         l = completedResearch.findNiftyControl("itemsList", ListBox.class);
+        EngineUtils.resetScrollbarX(l);
         l.clear();
         l.addAllItems(world.getPlayer().getResearchState().getCompletedProjects());
-        EngineUtils.resetScrollbarX(l);
+        l.getElement().layoutElements();
 
         Element statusLines = tg.getSelectedTab().getElement().findElementByName("statusStrings");
         if (statusLines != null) {
             EngineUtils.setTextForGUIElement(statusLines, Localization.getText("gui", "research.active.status"));
         }
-
+        window.layoutElements();
         world.setPaused(true);
 
     }

@@ -144,7 +144,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     world.getGlobalVariables().put("diplomacy.zorsan_visited", 0);
 
                     zorsanFinalDialog.setFlags(dialog.getFlags()); // pass flags from previous dialog to a next one
-                    dungeon.getController().setSuccessListener(new ZorsanEscapeListener());
+                    dungeon.getController().addListener(new ZorsanEscapeListener());
 
                     // after this, zorsan become hostile and player has fixed amount of time before they attack earth
                     addWarDataDrop();

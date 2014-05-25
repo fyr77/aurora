@@ -74,14 +74,12 @@ public class EarthScreenController implements ScreenController {
     }
 
     private void fillUpgrades() {
-        storageList.clear();
-        inventoryList.clear();
-
-        storageList.addAllItems(new ArrayList<>(world.getPlayer().getEarthState().getAvailableUpgrades()));
-        inventoryList.addAllItems(world.getPlayer().getShip().getUpgrades());
-
         EngineUtils.resetScrollbarX(storageList);
         EngineUtils.resetScrollbarX(inventoryList);
+        storageList.clear();
+        inventoryList.clear();
+        storageList.addAllItems(new ArrayList<>(world.getPlayer().getEarthState().getAvailableUpgrades()));
+        inventoryList.addAllItems(world.getPlayer().getShip().getUpgrades());
     }
 
     private void fillMessages() {

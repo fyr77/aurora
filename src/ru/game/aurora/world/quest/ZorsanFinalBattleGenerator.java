@@ -158,7 +158,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         spaceStation.setCaptain(new NPC(boardingDialog));
         spaceStationBoardingTimer = new GameTimer(15);
         spaceStationDungeon = new Dungeon(world, new AuroraTiledMap("maps/hum_station.tmx"), solarSystem);
-        spaceStationDungeon.getController().setSuccessListener(new IStateChangeListener() {
+        spaceStationDungeon.getController().addListener(new IStateChangeListener() {
             private static final long serialVersionUID = 7759568719556795246L;
 
             @Override
@@ -444,7 +444,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             solarSystem.setBackgroundSprite("obliterator_background");
             Object oldLocation = world.getGlobalVariables().get("quest.main.obliterator");
             if (oldLocation != null) {
-                ((StarSystem)oldLocation).setBackgroundSprite(null);
+                ((StarSystem) oldLocation).setBackgroundSprite(null);
             }
             turnNumber = world.getTurnCount();
         }
@@ -452,8 +452,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         return false;
     }
 
-    private void repairAllies()
-    {
+    private void repairAllies() {
         for (NPCShip s : allyShips) {
             s.setHp(s.getMaxHP());
         }
@@ -479,7 +478,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         solarSystem.getShips().add(bigBoss);
         bigBoss.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_boss_cannon"));
         // todo: add areal damage
-        bigBoss.setPos(-1, - solarSystem.getRadius());
+        bigBoss.setPos(-1, -solarSystem.getRadius());
     }
 
     private void summonSecondAttackWave(World world) {

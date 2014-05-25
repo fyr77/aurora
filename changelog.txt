@@ -3,11 +3,13 @@ VERSION 0.3.0
 IN PROGRESS...
 
 + Star map: hints and quest locations.
-+ Music tracks for Klisk and Zorsan races
++ Music tracks for all races
 + Tool to generate all dialogs in one click
 * New intro
 + Ship upgrade system
 + New quests
++ In-game links for blog and bugtracker
++ Hints for interface items, tooltips with weapon parameters
 
 =================================================
 

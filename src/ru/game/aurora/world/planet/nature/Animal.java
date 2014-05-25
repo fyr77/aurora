@@ -1,5 +1,6 @@
 package ru.game.aurora.world.planet.nature;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -57,6 +58,19 @@ public class Animal extends Movable implements PlanetObject, IMonster {
         }
         final Image image = hp > 0 ? desc.getImage() : desc.getDeadImage();
         graphics.drawImage(image, camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
+
+        String hpText;
+        if (hp < 100) {
+            hpText = Integer.toString(Math.max(0, hp));
+        } else {
+            hpText = "N/A";
+        }
+        if (hp < desc.getHp() / 4) {
+            graphics.setColor(Color.red);
+        } else {
+            graphics.setColor(Color.white);
+        }
+        graphics.drawString(hpText, camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
     }
 
     public AnimalSpeciesDesc getDesc() {

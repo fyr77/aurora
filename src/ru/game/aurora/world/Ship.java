@@ -67,7 +67,7 @@ public class Ship extends MovableSprite implements SpaceObject {
     public Ship(AlienRace humanity, int x, int y) {
         super(x, y, "aurora");
         this.humanity = humanity;
-        name = "Hawking";
+        name = "Aurora-2";
         hull = maxHull = 10;
         maxScientists = scientists = BASE_SCIENTISTS;
         maxMilitary = military = BASE_MILITARY;

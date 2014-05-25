@@ -32,9 +32,9 @@ import java.util.List;
 /**
  * Contains logic for player landing party movement and combat
  */
-public class DungeonController implements Serializable {
+public class DungeonController extends Listenable implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     /**
      * Mode for moving. Arrows control landing party movement.
@@ -63,8 +63,6 @@ public class DungeonController implements Serializable {
     private IDungeon myDungeon;
 
     private Dialog successDialog;
-
-    private IStateChangeListener successListener;
 
     private int tilesExploredThisTurn = 0;
 
@@ -464,6 +462,7 @@ public class DungeonController implements Serializable {
             landingParty.draw(container, graphics, camera);
 
             if (mode == MODE_SHOOT) {
+                graphics.setColor(Color.yellow);
                 EngineUtils.drawTileCircleCentered(graphics, camera, landingParty.getWeapon().getRange());
 
                 if (target != null) {
@@ -503,9 +502,7 @@ public class DungeonController implements Serializable {
 
     public void returnToPrevRoom(boolean conditionsSatisfied) {
         if (conditionsSatisfied) {
-            if (successListener != null) {
-                successListener.stateChanged(world);
-            }
+            fireEvent(world);
         }
         world.setCurrentRoom(prevRoom);
         prevRoom.returnTo(world);
@@ -529,10 +526,6 @@ public class DungeonController implements Serializable {
 
     public void setSuccessDialog(Dialog successDialog) {
         this.successDialog = successDialog;
-    }
-
-    public void setSuccessListener(IStateChangeListener successListener) {
-        this.successListener = successListener;
     }
 
     public int getTilesExploredThisTurn() {
