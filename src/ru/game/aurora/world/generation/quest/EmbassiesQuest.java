@@ -6,6 +6,8 @@ import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.KliskGenerator;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.SpaceObject;
 
 import java.util.Map;
@@ -16,18 +18,16 @@ import java.util.Map;
  * Date: 14.02.14
  * Time: 18:04
  */
-public class EmbassiesQuest implements WorldGeneratorPart
-{
+public class EmbassiesQuest implements WorldGeneratorPart {
 
     private static final long serialVersionUID = 5270614859809196286L;
 
-    public static void updateJournal(World world, String key)
-    {
+    public static void updateJournal(World world, String key) {
         world.getPlayer().getJournal().addQuestEntries("embassies", key);
         if (world.getGlobalVariables().containsKey("diplomacy.klisk_visited")
-            && world.getGlobalVariables().containsKey("diplomacy.bork_visited")
-            && world.getGlobalVariables().containsKey("diplomacy.zorsan_visited")
-            && world.getGlobalVariables().containsKey("diplomacy.rogues_visited")) {
+                && world.getGlobalVariables().containsKey("diplomacy.bork_visited")
+                && world.getGlobalVariables().containsKey("diplomacy.zorsan_visited")
+                && world.getGlobalVariables().containsKey("diplomacy.rogues_visited")) {
             world.getPlayer().getJournal().addQuestEntries("embassies", "end");
         }
     }
@@ -41,10 +41,16 @@ public class EmbassiesQuest implements WorldGeneratorPart
 
         private int counter = 0;
 
+        private boolean kliskContacted = false;
+
         @Override
         public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
-            if (ship.getRace() != world.getRaces().get("Humanity")) {
-                if (++counter < 3) {
+            if (ship.getRace() != world.getRaces().get(HumanityGenerator.NAME)) {
+                if (ship.getRace() == world.getRaces().get(KliskGenerator.NAME)) {
+                    kliskContacted = true;
+                }
+
+                if (++counter < 3 || !kliskContacted) {
                     return false;
                 }
 
@@ -79,6 +85,7 @@ public class EmbassiesQuest implements WorldGeneratorPart
             return false;
         }
     }
+
     @Override
     public void updateWorld(World world) {
         world.addListener(new FirstContactListener());
