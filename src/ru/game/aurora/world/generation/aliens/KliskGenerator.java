@@ -72,7 +72,7 @@ public class KliskGenerator implements WorldGeneratorPart {
 
                 if (flags.containsKey("klisk_trader_drone.withdraw")) {
                     // remove trader drone
-                    for (Iterator<SpaceObject> iter = ((StarSystem)world.getGlobalVariables().get("solar_system")).getShips().iterator(); iter.hasNext(); ) {
+                    for (Iterator<SpaceObject> iter = ((StarSystem) world.getGlobalVariables().get("solar_system")).getShips().iterator(); iter.hasNext(); ) {
                         SpaceObject so = iter.next();
                         if (so.getName().equals("Klisk trade probe")) {
                             iter.remove();
@@ -101,6 +101,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                     EmbassiesQuest.updateJournal(world, "klisk_" + tradeResult);
                     world.getReputation().updateReputation(KliskGenerator.NAME, HumanityGenerator.NAME, repDelta);
                     world.getGlobalVariables().remove("klisk_trade.result");
+                    world.getGlobalVariables().put("klisk_trade.quest_result", tradeResult);
                 }
 
             }
@@ -259,15 +260,16 @@ public class KliskGenerator implements WorldGeneratorPart {
                 }
                 ship.setLoot(defaultLootTable);
                 return ship;
-            }});
-            StarSystem kliskHomeworld = generateKliskHomeworld(world, 15, 15, kliskRace);
-            kliskRace.setHomeworld(kliskHomeworld);
+            }
+        });
+        StarSystem kliskHomeworld = generateKliskHomeworld(world, 15, 15, kliskRace);
+        kliskRace.setHomeworld(kliskHomeworld);
 
-            world.addListener(new StandardAlienShipEvent(kliskRace));
-            final GalaxyMapObject solar_system = (GalaxyMapObject) world.getGlobalVariables().get("solar_system");
-            world.getGalaxyMap().addObjectAtDistance(kliskHomeworld, solar_system, 20 + CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.galaxy.klisk_homeworld_distance")));
-            world.getRaces().put(kliskRace.getName(), kliskRace);
-            world.getGlobalVariables().put("klisk.homeworld", kliskHomeworld.getCoordsString());
+        world.addListener(new StandardAlienShipEvent(kliskRace));
+        final GalaxyMapObject solar_system = (GalaxyMapObject) world.getGlobalVariables().get("solar_system");
+        world.getGalaxyMap().addObjectAtDistance(kliskHomeworld, solar_system, 20 + CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.galaxy.klisk_homeworld_distance")));
+        world.getRaces().put(kliskRace.getName(), kliskRace);
+        world.getGlobalVariables().put("klisk.homeworld", kliskHomeworld.getCoordsString());
 
-        }
     }
+}

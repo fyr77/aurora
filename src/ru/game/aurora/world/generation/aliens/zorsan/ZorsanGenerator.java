@@ -130,7 +130,6 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     ResearchProjectDesc zorsan_crew_weapons = world.getResearchAndDevelopmentProjects().getResearchProjects().get("zorsan_crew_weapons");
                     if (zorsan_crew_weapons != null) {
                         world.getPlayer().getResearchState().getCurrentProjects().add(new ResearchProjectState(zorsan_crew_weapons));
-                        zorsan_crew_weapons.addEarthProgressResearch("zorsan_weapons");
                     }
                     Dungeon dungeon = new Dungeon(world, new AuroraTiledMap("maps/zor_escape.tmx"), ss);
                     dungeon.setEnterDialog(zorsanFinalDialog);
@@ -235,7 +234,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
             @Override
             protected void onCompleted(World world) {
-                world.getPlayer().getEarthState().getAvailableUpgrades().add(new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("zorsan_laser")));
+                world.getPlayer().getEarthState().getAvailableUpgrades().add(new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon")));
                 world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/zorsan_cannon_unlocked.json"));
                 world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_weapons_reserch", "news"));
                 world.getPlayer().getEarthState().updateTechnologyLevel(100);

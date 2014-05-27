@@ -6,6 +6,9 @@
  */
 package ru.game.aurora.application;
 
+/**
+ * Contains game version string, that is shown in main menu and in screen caption.
+ */
 public final class Version {
-    public static final String VERSION = "0.3.0";
+    public static final String VERSION = "0.3.1";
 }

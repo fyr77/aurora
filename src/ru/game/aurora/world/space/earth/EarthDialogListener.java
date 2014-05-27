@@ -89,16 +89,19 @@ public class EarthDialogListener implements DialogListener {
             // give reward for diplomacy quest
             int score = 0;
 
-            switch ((String)world.getGlobalVariables().get("klisk_trade.result")) {
-                case "perfect":
-                    score += 2;
-                    break;
-                case "good":
-                    score += 1;
-                    break;
+            //TODO: remove this condition in next major release
+            if (world.getGlobalVariables().containsKey("klisk_trade.quest_result")) {
+                switch ((String) world.getGlobalVariables().get("klisk_trade.quest_result")) {
+                    case "perfect":
+                        score += 2;
+                        break;
+                    case "good":
+                        score += 1;
+                        break;
+                }
             }
 
-            switch ((String)world.getGlobalVariables().get("bork.diplomacy_test")) {
+            switch ((String) world.getGlobalVariables().get("bork.diplomacy_test")) {
                 case "injure":
                     score += 2;
                     break;
@@ -162,6 +165,7 @@ public class EarthDialogListener implements DialogListener {
             world.addListener(new GameEventListener() {
                 private static final long serialVersionUID = -3584085663658592781L;
                 int days;
+
                 @Override
                 public boolean onTurnEnded(World world) {
                     if (++days > 500) {

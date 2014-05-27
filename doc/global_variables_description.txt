@@ -77,6 +77,7 @@ klisk.homeworld - coordinates of klisk homeworld
 quest with trading klisk goods
 
 klisk_trade.result - "perfect" if player has followed codex, "good" if he has chosen money, "bad" if he has broken codex, "refused" if he refused to trade, null if quest is not yet completed
+klisk_trade.quest_result - same as above, first value is removed after quest completion, second value is saved
 klisk_trade.coords - coordinates of target system
 
 
