@@ -113,8 +113,8 @@ public abstract class BasePlanet extends BasePositionable implements Room, Galax
     }
 
 
-    public StringBuilder getScanText() {
-        return null;
+    public String getScanText() {
+        return "";
     }
 
     @Override

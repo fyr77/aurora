@@ -197,7 +197,7 @@ public class Earth extends BasePlanet {
     }
 
     @Override
-    public StringBuilder getScanText() {
-        return new StringBuilder(Localization.getText("races", "Humans.homeworld.description"));
+    public String getScanText() {
+        return Localization.getText("races", "Humans.homeworld.description");
     }
 }

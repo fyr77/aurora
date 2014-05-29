@@ -78,7 +78,7 @@ public class PlanetScanController implements ScreenController {
             GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
         }
 
-        EngineUtils.setTextForGUIElement(myWindow.findElementByName("scan_text"), planetToScan.getScanText().toString());
+        EngineUtils.setTextForGUIElement(myWindow.findElementByName("scan_text"), planetToScan.getScanText());
 
         if ((planetToScan instanceof Earth) || (planetToScan instanceof AlienHomeworld)) {
             //todo: load custom map

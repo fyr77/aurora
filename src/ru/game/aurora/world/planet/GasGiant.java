@@ -10,6 +10,7 @@ package ru.game.aurora.world.planet;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -45,5 +46,10 @@ public class GasGiant extends BasePlanet {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    }
+
+    @Override
+    public String getScanText() {
+        return Localization.getText("gui", "scan.gas_giant");
     }
 }
