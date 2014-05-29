@@ -47,7 +47,7 @@ public class WorkshopUpgrade extends ShipUpgrade {
                 break;
             }
             int projectScientistsToRemove = Math.min(engineersToRemove, epr.getEngineersAssigned());
-            epr.changeEngineers(-projectScientistsToRemove);
+            epr.changeEngineers(-projectScientistsToRemove, world);
             engineersToRemove -= projectScientistsToRemove;
         }
         world.onCrewChanged();

@@ -1,5 +1,6 @@
 package ru.game.aurora.player.engineering.projects;
 
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.MedPack;
@@ -15,13 +16,13 @@ public class MedpacksCraft extends EngineeringProject {
     private static final int progress = 10; //как долго будет идти создание аптечек
 
     public MedpacksCraft(int amount) {
-        super("medpacks_craft", "medpack");
-        remainingProgress = progress;
+        super("medpacks_craft", "medpack", progress);
         this.amount = amount;
     }
 
     @Override
     public void onCompleted(World world) {
+        super.onCompleted(world);
         world.getPlayer().getShip().addItem(new MedPack(), amount);
         remainingProgress = progress;
     }
@@ -29,5 +30,10 @@ public class MedpacksCraft extends EngineeringProject {
     @Override
     public boolean isRepeatable() {
         return true;
+    }
+
+    @Override
+    public int getCost() {
+        return Configuration.getIntProperty("engineering.craft_cost.medpack");
     }
 }

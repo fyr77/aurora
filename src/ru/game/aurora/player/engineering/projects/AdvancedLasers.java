@@ -16,17 +16,16 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
 
-
 public class AdvancedLasers extends EngineeringProject {
     private static final long serialVersionUID = -6929677248004188022L;
 
     public AdvancedLasers() {
-        super("advanced_lasers", "ship_laser2");
-        remainingProgress = 10;
+        super("advanced_lasers", "ship_laser2", 10);
     }
 
     @Override
     public void onCompleted(World world) {
+        super.onCompleted(world);
         Ship ship = world.getPlayer().getShip();
         final StarshipWeaponDesc upgraded_cannon = ResourceManager.getInstance().getWeapons().getEntity("laser_cannon2");
         GameLogger.getInstance().logMessage(Localization.getText("engineering", "advanced_lasers.end_message"));
@@ -36,7 +35,11 @@ public class AdvancedLasers extends EngineeringProject {
                 ship.getWeapons().set(idx, new StarshipWeapon(upgraded_cannon, sw.getMountPosition()));
             }
         }
-
         world.getPlayer().getEarthState().getAvailableUpgrades().add(new WeaponUpgrade(upgraded_cannon));
+    }
+
+    @Override
+    public int getCost() {
+        return 0;
     }
 }

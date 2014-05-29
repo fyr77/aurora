@@ -6,7 +6,6 @@
  */
 package ru.game.aurora.player.engineering;
 
-
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
@@ -20,9 +19,11 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
     protected int engineersAssigned;
 
     protected int remainingProgress;
+    private boolean projectStarted = false;
 
-    public EngineeringProject(String id, String icon) {
+    public EngineeringProject(String id, String icon, int length) {
         super(id, icon);
+        remainingProgress = length;
     }
 
     public boolean update(World world) {
@@ -39,7 +40,11 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
         return true;
     }
 
-    public void changeEngineers(int amount) {
+    public void changeEngineers(int amount, World world) {
+        if (!projectStarted) {
+            world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() - getCost());
+            projectStarted = true;
+        }
         engineersAssigned += amount;
     }
 
@@ -47,7 +52,9 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
         return engineersAssigned;
     }
 
-    public abstract void onCompleted(World world);
+    public void onCompleted(World world) {
+        projectStarted = false;
+    }
 
     @Override
     public String toString() {
@@ -57,4 +64,9 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
     public boolean isRepeatable() {
         return false;
     }
+
+    /**
+     * @return project cost (0 if project have no cost)
+     */
+    public abstract int getCost();
 }

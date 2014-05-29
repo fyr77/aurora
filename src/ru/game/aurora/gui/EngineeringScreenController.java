@@ -148,7 +148,16 @@ public class EngineeringScreenController implements ScreenController {
             return;
         }
         EngineeringProject ep = (EngineeringProject) event.getSelection().get(0);
-        tr.setText(ep.getLocalizedText("engineering"));
+        String info = ep.getLocalizedText("engineering");
+        if (ep.getCost() > 0) {
+            info = info + "\n\n";
+            if (ep.getCost() > world.getPlayer().getResourceUnits()) {
+                info = info + Localization.getText("gui", "logging.not_enough_resources");
+            } else {
+                info = info + String.format(Localization.getText("gui", "engineering.resource_cost"), ep.getCost());
+            }
+        }
+        tr.setText(info);
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(ep.getIcon()))));
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
@@ -163,10 +172,12 @@ public class EngineeringScreenController implements ScreenController {
             return;
         }
         EngineeringProject rp = (EngineeringProject) avail.getSelection().get(0);
-        rp.changeEngineers(1);
+        if (rp.getCost() > world.getPlayer().getResourceUnits()) {
+            return;
+        }
+        rp.changeEngineers(1, world);
         world.getPlayer().getEngineeringState().setIdleEngineers(idleEngineers - 1);
         avail.refresh();
-
     }
 
     public void onDecreaseEngineersButtonClicked() {
@@ -178,7 +189,7 @@ public class EngineeringScreenController implements ScreenController {
         if (ep.getEngineersAssigned() == 0) {
             return;
         }
-        ep.changeEngineers(-1);
+        ep.changeEngineers(-1, world);
         world.getPlayer().getEngineeringState().setIdleEngineers(world.getPlayer().getEngineeringState().getIdleEngineers() + 1);
         avail.refresh();
     }

@@ -40,7 +40,7 @@ public class EngineeringState implements Serializable {
                     iter.remove();
                 }
                 addIdleEngineers(ep.getEngineersAssigned());
-                ep.changeEngineers(-ep.getEngineersAssigned());
+                ep.changeEngineers(-ep.getEngineersAssigned(), world);
             }
         }
     }
