@@ -34,6 +34,10 @@ public class ImageButtonController extends ButtonControl
 
     public void setImage(Image image)
     {
-        imageRenderer.setImage(new NiftyImage(nifty.getRenderEngine(), new ImageSlickRenderImage(image)));
+        if (image == null) {
+            imageRenderer.setImage(null);
+        } else {
+            imageRenderer.setImage(new NiftyImage(nifty.getRenderEngine(), new ImageSlickRenderImage(image)));
+        }
     }
 }

@@ -1,5 +1,7 @@
 package ru.game.aurora.player.engineering.upgrades;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
@@ -15,7 +17,10 @@ import java.util.Iterator;
  * Time: 16:52
  */
 
-public class WeaponUpgrade extends ShipUpgrade {
+public class WeaponUpgrade extends ShipUpgrade
+{
+    private static final Logger logger = LoggerFactory.getLogger(WeaponUpgrade.class);
+
     private static final long serialVersionUID = 7410869118141240436L;
 
     private final StarshipWeaponDesc weaponDesc;
@@ -28,17 +33,20 @@ public class WeaponUpgrade extends ShipUpgrade {
     @Override
     public void onInstalled(World world, Ship ship) {
         ship.getWeapons().add(new StarshipWeapon(weaponDesc, StarshipWeapon.MOUNT_ALL));
+        logger.info("Installing new weapon " + weaponDesc.getId());
     }
 
     @Override
     public void onRemoved(World world, Ship ship) {
+        logger.info("Removing weapon " + weaponDesc.getId());
         for (Iterator<StarshipWeapon> iterator = ship.getWeapons().iterator(); iterator.hasNext(); ) {
             StarshipWeapon sw = iterator.next();
             if (sw.getWeaponDesc().equals(weaponDesc)) {
                 iterator.remove();
-                break;
+                return;
             }
         }
+        logger.warn("Failed to remove weapon, as it is not installed on a ship");
     }
 
     @Override
@@ -52,5 +60,12 @@ public class WeaponUpgrade extends ShipUpgrade {
         sb.append('\n').append('\n');
         sb.append("RNG: ").append(weaponDesc.range).append(", DMG: ").append(weaponDesc.damage).append(", RLD:").append(weaponDesc.reloadTurns);
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "WeaponUpgrade{" +
+                "weapon=" + weaponDesc.getId() +
+                '}';
     }
 }

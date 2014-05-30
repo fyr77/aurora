@@ -174,6 +174,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
                 effects.get(0).getParameters().setProperty("hintText", hintText);
                 //buttonControl.getElement().getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(world.getPlayer().getShip().getWeapons().get(i).getWeaponDesc().image))));
             } else {
+                buttonControl.setImage(null);
                 buttonControl.disable();
             }
         }

@@ -144,9 +144,8 @@ public class WorldGenerator implements Runnable {
     public static StarSystem generateRandomStarSystem(Star star, World world, int x, int y, int planetCount) {
         final Random r = CommonRandom.getRandom();
 
-
         BasePlanet[] planets = new BasePlanet[planetCount];
-        int maxRadius = 0;
+
         StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), star, x, y);
 
         int astroData = 20 * star.size;
@@ -155,6 +154,7 @@ public class WorldGenerator implements Runnable {
         final int maxSatellites = Configuration.getIntProperty("world.starsystem.maxSatellites");
 
         int prevRadius = StarSystem.STAR_SCALE_FACTOR;
+        int maxRadius = prevRadius;
 
         for (int i = 0; i < planetCount; ++i) {
             int radius = prevRadius + r.nextInt(StarSystem.PLANET_SCALE_FACTOR) + StarSystem.PLANET_SCALE_FACTOR;
