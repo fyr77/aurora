@@ -36,6 +36,7 @@ public class AdvancedLasers extends EngineeringProject {
             }
         }
         world.getPlayer().getEarthState().getAvailableUpgrades().add(new WeaponUpgrade(upgraded_cannon));
+        world.getGlobalVariables().put("earth.advanced_lasers", true);
     }
 
     @Override
