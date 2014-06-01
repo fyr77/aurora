@@ -37,8 +37,7 @@ import java.util.Map;
 /**
  * After some time from successive escape from zorsan homeworld, player meets zorsan ship, that asks him to join rebels
  */
-public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implements WorldGeneratorPart, DialogListener
-{
+public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implements WorldGeneratorPart, DialogListener {
     private static final long serialVersionUID = -7613551870732796318L;
 
     private int starsystemCount = 4;
@@ -71,19 +70,18 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
         if (ss.isQuestLocation()) {
             return false;
         }
-        if (starsystemCount --> 0) {
+        if (starsystemCount-- > 0) {
             return false;
         }
 
         world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/rebels/intro/courier_encountered.json"));
 
-        final NPCShip ship = world.getRaces().get(ZorsanGenerator.NAME).getDefaultFactory().createShip(0);
+        final NPCShip ship = world.getRaces().get(ZorsanGenerator.NAME).getDefaultFactory().createShip(world, 0);
         ship.setRace(null);
         ship.setAi(null);
 
         Dialog courierDialog = Dialog.loadFromFile("dialogs/zorsan/rebels/intro/courier_dialog.json");
-        courierDialog.addListener(new DialogListener()
-        {
+        courierDialog.addListener(new DialogListener() {
 
             private static final long serialVersionUID = 2455530990003907513L;
 
@@ -108,12 +106,11 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
     // makes sure that there is at least 1 red giant starsystem for roaming base
     // prepares planet for intro
 
-    private void placeArtifact(World world, StarSystem ss)
-    {
+    private void placeArtifact(World world, StarSystem ss) {
 
         artifact = new AlienArtifact(10, 20, "builders_pyramid", new ArtifactResearch(new ResearchReport("builders_ruins", "builder_ruins.report")));
-        ((Planet)ss.getPlanets()[0]).setNearestFreePoint(artifact, 10, 20);
-        ((Planet)ss.getPlanets()[0]).getPlanetObjects().add(artifact);
+        ((Planet) ss.getPlanets()[0]).setNearestFreePoint(artifact, 10, 20);
+        ((Planet) ss.getPlanets()[0]).getPlanetObjects().add(artifact);
 
         Dialog planetDialog = Dialog.loadFromFile("dialogs/zorsan/rebels/intro/planet_dialog.json");
         planetDialog.addListener(this);

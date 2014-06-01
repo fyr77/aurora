@@ -1,5 +1,6 @@
 package ru.game.aurora.npc;
 
+import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
 
 import java.io.Serializable;
@@ -14,5 +15,5 @@ public interface NPCShipFactory extends Serializable {
      * Generally, all races should define shipType=0 as their default most-common ship, that should be used in default
      * ship spawn events.
      */
-    public NPCShip createShip(int shipType);
+    public NPCShip createShip(World world, int shipType);
 }

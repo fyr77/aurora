@@ -41,7 +41,7 @@ public class SingleStarsystemShipSpawner extends GameEventListener {
             return false;
         }
 
-        NPCShip ship = factory.createShip(0);
+        NPCShip ship = factory.createShip(world, 0);
         ss.setRandomEmptyPosition(ship);
         ss.getShips().add(ship);
         return true;

@@ -182,6 +182,7 @@ public class EarthDialogListener implements DialogListener {
 
         //reset dialog state
         earth.getEarthDialog().enter(world);
+        world.getPlayer().getShip().fullRepair(world);
 
     }
 }

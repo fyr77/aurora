@@ -38,7 +38,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
     }
 
     @Override
-    public void updateWorld(World world) {
+    public void updateWorld(final World world) {
         final AlienRace humans = new AlienRace(NAME, "earth_transport", Dialog.loadFromFile("dialogs/human_ship_default_dialog.json"));
         humans.setTravelDistance(1);
         world.getRaces().put(humans.getName(), humans);
@@ -67,9 +67,13 @@ public class HumanityGenerator implements WorldGeneratorPart {
             private static final long serialVersionUID = -430786152130330165L;
 
             @Override
-            public NPCShip createShip(int shipType) {
+            public NPCShip createShip(World world, int shipType) {
                 NPCShip ship = new NPCShip(0, 0, "earth_transport", humans, null, "Humanity ship", 8);
-                ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"));
+                if (world.getGlobalVariables().containsKey("earth.advanced_lasers")) {
+                    ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon2"));
+                } else {
+                    ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"));
+                }
                 ship.setSpeed(2);
                 ship.setAi(new LandAI(solarSystem.getPlanets()[CommonRandom.getRandom().nextInt(solarSystem.getPlanets().length)]));
                 ship.setLoot(defaultLootTable);

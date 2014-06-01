@@ -158,7 +158,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         HomeworldGenerator.setCoord(planets[0], 3);
 
         // add a ship to fight with after takeoff
-        NPCShip cruiser = race.getDefaultFactory().createShip(CRUISER_SHIP);
+        NPCShip cruiser = race.getDefaultFactory().createShip(world, CRUISER_SHIP);
         cruiser.setPos(planets[0].getX() + 6, planets[0].getY() + 5);
         ss.getShips().add(cruiser);
 
@@ -190,7 +190,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
 
             @Override
-            public NPCShip createShip(int shipType) {
+            public NPCShip createShip(World world, int shipType) {
                 NPCShip ship;
                 switch (shipType) {
                     case SCOUT_SHIP: {

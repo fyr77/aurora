@@ -153,3 +153,9 @@ energy_sphere.started
 =============================
 
 ftl.coords - target star system for Faster Than Light quest
+
+===========================
+
+Humanity
+
+earth.advanced_lasers - set by some research, humanity weapons are more powerful

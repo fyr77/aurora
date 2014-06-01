@@ -29,8 +29,7 @@ public class HullRepairs implements Serializable {
 
     private int currentWorkRemaining = WORK_FOR_POINT;
 
-    private int getRealPointCost(World world)
-    {
+    private int getRealPointCost(World world) {
         int result = POINT_RES_COST;
         if (world.getPlayer().getMainCountry() == EarthCountry.EUROPE) {
             result = (int) Math.floor(result * Configuration.getDoubleProperty("player.europe.engineeringPriceMultiplier"));
@@ -71,6 +70,14 @@ public class HullRepairs implements Serializable {
 
             world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() - pointResCost);
         }
+    }
+
+    public void cancel(World world) {
+        world.getPlayer().getEngineeringState().setIdleEngineers(world.getPlayer().getEngineeringState().getIdleEngineers() + engineersAssigned);
+        // return resources for all points
+        world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() + remainingPoints * getRealPointCost(world));
+        remainingPoints = 0;
+        resetProgress();
     }
 
     public int calcResCost(World world) {

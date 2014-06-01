@@ -244,6 +244,12 @@ public class Ship extends MovableSprite implements SpaceObject {
         }
     }
 
+    public void fullRepair(World world) {
+        hull = maxHull;
+        world.getPlayer().getEngineeringState().getHullRepairs().cancel(world);
+
+    }
+
     public List<ShipUpgrade> getUpgrades() {
         return upgrades;
     }

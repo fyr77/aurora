@@ -1,8 +1,8 @@
 {
     "id" : "bork_missiles",
     "damage" : 1,
-    "name": "missiles.name",
-    "desc": "missiles.desc",
+    "name": "humanity_missiles.name",
+    "desc": "humanity_missiles.desc",
     "shotSprite" : "missile_shot",
     "shotSound" : "missile_1",
     "range" : 12,

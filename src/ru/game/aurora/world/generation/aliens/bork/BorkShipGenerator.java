@@ -71,7 +71,7 @@ public class BorkShipGenerator extends GameEventListener {
 
         if (!ss.isVisited() && CommonRandom.getRandom().nextDouble() < chance && count-- > 0) {
             for (int i = 0; i < starshipsPerSystem; ++i) {
-                NPCShip ship = factory.createShip(0);
+                NPCShip ship = factory.createShip(world, 0);
                 ship.setRace(null); // so that destroying these pirates will not reduce relationship with bork
                 ss.setRandomEmptyPosition(ship);
                 ship.setCaptain(new NPC(d));

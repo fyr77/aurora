@@ -182,12 +182,12 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                             }
                             isAlive = false;
 
-                            NPCShip ship = rogues.getDefaultFactory().createShip(RoguesGenerator.SCOUT_SHIP);
+                            NPCShip ship = rogues.getDefaultFactory().createShip(world, RoguesGenerator.SCOUT_SHIP);
                             final Ship playerShip = world.getPlayer().getShip();
                             ship.setPos(playerShip.getX() + 1, playerShip.getY());
                             ss.getShips().add(ship);
 
-                            NPCShip defenceProbe = rogues.getDefaultFactory().createShip(RoguesGenerator.PROBE_SHIP);
+                            NPCShip defenceProbe = rogues.getDefaultFactory().createShip(world, RoguesGenerator.PROBE_SHIP);
                             defenceProbe.setPos(playerShip.getX(), playerShip.getY() + 1);
                             ss.getShips().add(defenceProbe);
 
@@ -262,7 +262,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         world.getGalaxyMap().addObjectAtDistance(brownStar, (Positionable) world.getGlobalVariables().get("solar_system"), 30);
 
         AlienRace rogues = world.getRaces().get("Rogues");
-        NPCShip defenceProbe = rogues.getDefaultFactory().createShip(RoguesGenerator.PROBE_SHIP);
+        NPCShip defenceProbe = rogues.getDefaultFactory().createShip(world, RoguesGenerator.PROBE_SHIP);
         defenceProbe.setPos(2, 1);
         defenceProbe.setAi(new CombatAI(world.getPlayer().getShip()));
         defenceProbe.setHostile(true);

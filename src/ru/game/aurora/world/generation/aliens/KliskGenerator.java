@@ -111,7 +111,7 @@ public class KliskGenerator implements WorldGeneratorPart {
     }
 
     private void beginTradeQuest(World world, AlienHomeworld kliskPlanet, final StarSystem targetSystem) {
-        NPCShip ship = world.getRaces().get(KliskGenerator.NAME).getDefaultFactory().createShip(0);
+        NPCShip ship = world.getRaces().get(KliskGenerator.NAME).getDefaultFactory().createShip(world, 0);
         ship.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_ship_default.json")));
 
         ship.setAi(new LeaveSystemAI());
@@ -126,7 +126,7 @@ public class KliskGenerator implements WorldGeneratorPart {
         world.getGalaxyMap().addObjectAtDistance(ss, (Positionable) world.getGlobalVariables().get("solar_system"), 20);
         world.getGlobalVariables().put("klisk_trade.coords", ss.getCoordsString());
 
-        NPCShip spaceStation = race.getDefaultFactory().createShip(STATION);
+        NPCShip spaceStation = race.getDefaultFactory().createShip(world, STATION);
         ss.setRandomEmptyPosition(spaceStation);
         ss.getShips().add(spaceStation);
         spaceStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json")));
@@ -231,7 +231,7 @@ public class KliskGenerator implements WorldGeneratorPart {
             private static final long serialVersionUID = 5473066320214324094L;
 
             @Override
-            public NPCShip createShip(int shipType) {
+            public NPCShip createShip(World world, int shipType) {
 
                 NPCShip ship;
                 switch (shipType) {

@@ -50,7 +50,7 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart {
 
 
         AlienRace kliskRace = world.getRaces().get("Klisk");
-        final NPCShip kliskShip = kliskRace.getDefaultFactory().createShip(KliskGenerator.STATION);
+        final NPCShip kliskShip = kliskRace.getDefaultFactory().createShip(world, KliskGenerator.STATION);
         lastBeaconLocation.setRandomEmptyPosition(kliskShip);
         lastBeaconLocation.getShips().add(kliskShip);
 

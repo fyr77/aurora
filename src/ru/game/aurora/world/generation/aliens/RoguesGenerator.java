@@ -92,7 +92,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
         ss.getShips().add(frame);
 
         for (int i = 0; i < 3; ++i) {
-            NPCShip probe = roguesRace.getDefaultFactory().createShip(RoguesGenerator.PROBE_SHIP);
+            NPCShip probe = roguesRace.getDefaultFactory().createShip(world, RoguesGenerator.PROBE_SHIP);
             probe.setPos(CommonRandom.getRandom().nextInt(6) - 3, CommonRandom.getRandom().nextInt(6) - 3);
             probe.setAi(new LeaveSystemAI());
             ss.getShips().add(probe);
@@ -110,7 +110,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
             private static final long serialVersionUID = 1334986755758313061L;
 
             @Override
-            public NPCShip createShip(int shipType) {
+            public NPCShip createShip(World world, int shipType) {
                 NPCShip ship;
                 switch (shipType) {
                     case SCOUT_SHIP: {

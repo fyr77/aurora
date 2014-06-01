@@ -124,7 +124,7 @@ public class BorkGenerator implements WorldGeneratorPart {
             private static final long serialVersionUID = 8000558666433188574L;
 
             @Override
-            public NPCShip createShip(int shipId) {
+            public NPCShip createShip(World world, int shipId) {
                 NPCShip ship = new NPCShip(0, 0, "bork_ship", borkRace, null, "Bork ship", 5);
                 if (CommonRandom.getRandom().nextInt(3) == 1) {
                     // some random bork ships carry a missile launcher
