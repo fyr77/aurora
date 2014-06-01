@@ -111,11 +111,11 @@
 
                     <panel childLayout="horizontal" height="50px">
                         <panel width="*"/>
-                        <control id="close_button" name="button" label="${gui.ok}" width="150px" height="45px">
+                        <control id="ok_button" name="button" label="${gui.ok}" width="150px" height="45px">
                             <interact onClick="ok()"/>
                         </control>
                         <panel width="20px"/>
-                        <control id="close_button" name="button" label="${gui.cancel}" width="150px" height="45px">
+                        <control id="cancel_button" name="button" label="${gui.cancel}" width="150px" height="45px">
                             <interact onClick="cancel()"/>
                         </control>
 

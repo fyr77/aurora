@@ -73,8 +73,14 @@ public class LandingPartyEquipScreenController implements ScreenController {
         final LandingParty worldLandingParty = world.getPlayer().getLandingParty();
         if (worldLandingParty == null) {
             localLandingParty = new LandingParty(0, 0, ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault"), 1, 1, 1, Configuration.getIntProperty("player.landing_party.defaultHP"));
+            myScreen.findNiftyControl("cancel_button", Button.class).disable();
         } else {
             localLandingParty = new LandingParty(worldLandingParty);
+            if (localLandingParty.canBeLaunched(world)) {
+                myScreen.findNiftyControl("cancel_button", Button.class).enable();
+            } else {
+                myScreen.findNiftyControl("cancel_button", Button.class).disable();
+            }
         }
 
         shipStorage = HashMultiset.create(world.getPlayer().getShip().getStorage());
@@ -172,11 +178,11 @@ public class LandingPartyEquipScreenController implements ScreenController {
 
         if (!localLandingParty.canBeLaunched(world)) {
             // disable close buttons, because current party configuration is invalid
-            myScreen.findElementByName("close_button").disable();
+            myScreen.findElementByName("ok_button").disable();
             statusText.getRenderer(TextRenderer.class).setColor(redColor);
             EngineUtils.setTextForGUIElement(statusText, Localization.getText("gui", "landing_party.can_not_launch"));
         } else {
-            myScreen.findElementByName("close_button").enable();
+            myScreen.findElementByName("ok_button").enable();
             statusText.getRenderer(TextRenderer.class).setColor(new Color("#3C2C41"));
             EngineUtils.setTextForGUIElement(statusText, Localization.getText("gui", "landing_party.can_launch"));
         }
