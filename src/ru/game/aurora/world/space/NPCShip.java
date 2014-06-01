@@ -8,7 +8,10 @@ package ru.game.aurora.world.space;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import ru.game.aurora.application.*;
+import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
@@ -295,11 +298,8 @@ public class NPCShip extends MovableSprite implements SpaceObject {
                 }
             }
         });
+        e.setStartSound(weaponDesc.shotSound);
         ss.addEffect(e);
-
-        ResourceManager.getInstance().getSound(weaponDesc.shotSound).play();
-
-
     }
 
     @Deprecated

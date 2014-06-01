@@ -7,6 +7,7 @@
 
 package ru.game.aurora.gui;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
@@ -29,11 +30,15 @@ import ru.game.aurora.world.planet.LandingParty;
 
 public class LandingPartyEquipScreenController implements ScreenController {
 
+    // used in rendering warning text
     private Color redColor = new Color(200, 0, 0, 255);
 
     private World world;
 
-    private LandingParty landingParty;
+    // copy of a players landing party
+    // if player closes the screen using 'ok' button, original landing party is replaced by this object,
+    // otherwise it is discarded
+    private LandingParty localLandingParty;
 
     private Screen myScreen;
 
@@ -47,13 +52,10 @@ public class LandingPartyEquipScreenController implements ScreenController {
 
     private ListBox<Multiset.Entry<InventoryItem>> inventoryList;
 
+    private Multiset<InventoryItem> shipStorage;
+
     public LandingPartyEquipScreenController(World world) {
         this.world = world;
-        landingParty = world.getPlayer().getLandingParty();
-        if (landingParty == null) {
-            landingParty = new LandingParty(0, 0, ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault"), 1, 1, 1, Configuration.getIntProperty("player.landing_party.defaultHP"));
-            world.getPlayer().setLandingParty(landingParty);
-        }
     }
 
     @Override
@@ -61,21 +63,30 @@ public class LandingPartyEquipScreenController implements ScreenController {
         myScreen = screen;
         myWindow = myScreen.findElementByName("equip_window");
         weightText = myScreen.findElementByName("weight_text");
-        statusText= myScreen.findElementByName("status_text");
+        statusText = myScreen.findElementByName("status_text");
         storageList = screen.findNiftyControl("storageList", ListBox.class);
         inventoryList = screen.findNiftyControl("inventoryList", ListBox.class);
     }
 
     @Override
     public void onStartScreen() {
+        final LandingParty worldLandingParty = world.getPlayer().getLandingParty();
+        if (worldLandingParty == null) {
+            localLandingParty = new LandingParty(0, 0, ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault"), 1, 1, 1, Configuration.getIntProperty("player.landing_party.defaultHP"));
+        } else {
+            localLandingParty = new LandingParty(worldLandingParty);
+        }
+
+        shipStorage = HashMultiset.create(world.getPlayer().getShip().getStorage());
+
         myWindow.setVisible(true);
         world.setPaused(true);
         Scrollbar scrollbar = myScreen.findNiftyControl("scientists_count", Scrollbar.class);
-        scrollbar.setValue(landingParty.getScience());
+        scrollbar.setValue(localLandingParty.getScience());
         scrollbar = myScreen.findNiftyControl("engineers_count", Scrollbar.class);
-        scrollbar.setValue(landingParty.getEngineers());
+        scrollbar.setValue(localLandingParty.getEngineers());
         scrollbar = myScreen.findNiftyControl("military_count", Scrollbar.class);
-        scrollbar.setValue(landingParty.getMilitary());
+        scrollbar.setValue(localLandingParty.getMilitary());
 
         DropDown weaponSelect = myScreen.findNiftyControl("weapon_select", DropDown.class);
         weaponSelect.clear();
@@ -90,12 +101,12 @@ public class LandingPartyEquipScreenController implements ScreenController {
     }
 
     private void updateLabels() {
-        myScreen.findElementByName("scientists_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.scientists") + " " + landingParty.getScience());
-        myScreen.findElementByName("engineers_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.engineers") + " " + landingParty.getEngineers());
-        myScreen.findElementByName("military_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.military") + " " + landingParty.getMilitary());
-        myScreen.findElementByName("total_count").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.total") + " " + landingParty.getTotalMembers() + " / 10");
+        myScreen.findElementByName("scientists_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.scientists") + " " + localLandingParty.getScience());
+        myScreen.findElementByName("engineers_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.engineers") + " " + localLandingParty.getEngineers());
+        myScreen.findElementByName("military_count_text").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.military") + " " + localLandingParty.getMilitary());
+        myScreen.findElementByName("total_count").getRenderer(TextRenderer.class).setText(Localization.getText("gui", "landing_party.total") + " " + localLandingParty.getTotalMembers() + " / 10");
 
-        EngineUtils.setTextForGUIElement(weightText, String.format(Localization.getText("gui", "landing_party.weight"), landingParty.getInventoryWeight(), landingParty.getMaxWeight()));
+        EngineUtils.setTextForGUIElement(weightText, String.format(Localization.getText("gui", "landing_party.weight"), localLandingParty.getInventoryWeight(), localLandingParty.getMaxWeight()));
     }
 
     @Override
@@ -109,7 +120,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
             return;
         }
         final LandingPartyWeapon weapon = (LandingPartyWeapon) event.getSelection();
-        landingParty.setWeapon(weapon);
+        localLandingParty.setWeapon(weapon);
 
         EngineUtils.setImageForGUIElement(myScreen.findElementByName("selected_weapon_img"), weapon.getImage());
         myScreen.findElementByName("selected_weapon_text").getRenderer(TextRenderer.class).setText(weapon.getName());
@@ -121,43 +132,45 @@ public class LandingPartyEquipScreenController implements ScreenController {
         final Ship ship = world.getPlayer().getShip();
         switch (scrollbarId) {
             case "scientists_count": {
-                int oldVal = landingParty.getScience();
-                landingParty.setScience((int) event.getValue());
-                if (landingParty.getTotalMembers() > 10 || landingParty.getScience() > ship.getScientists()) {
-                    if (oldVal > ship.getScientists()) {
+                int oldVal = localLandingParty.getScience();
+                localLandingParty.setScience((int) event.getValue());
+                final int idleScientists = world.getPlayer().getResearchState().getIdleScientists();
+                if (localLandingParty.getTotalMembers() > 10 || localLandingParty.getScience() > idleScientists) {
+                    if (oldVal > idleScientists) {
                         oldVal = 0;
                     }
                     event.getScrollbar().setValue(oldVal);
-                    landingParty.setScience(oldVal);
+                    localLandingParty.setScience(oldVal);
                 }
                 break;
             }
             case "engineers_count": {
-                int oldVal = landingParty.getEngineers();
-                landingParty.setEngineers((int) event.getValue());
-                if (landingParty.getTotalMembers() > 10 || landingParty.getEngineers() > ship.getEngineers()) {
-                    if (oldVal > ship.getEngineers()) {
+                int oldVal = localLandingParty.getEngineers();
+                localLandingParty.setEngineers((int) event.getValue());
+                final int idleEngineers = world.getPlayer().getEngineeringState().getIdleEngineers();
+                if (localLandingParty.getTotalMembers() > 10 || localLandingParty.getEngineers() > idleEngineers) {
+                    if (oldVal > idleEngineers) {
                         oldVal = 0;
                     }
                     event.getScrollbar().setValue(oldVal);
-                    landingParty.setEngineers(oldVal);
+                    localLandingParty.setEngineers(oldVal);
                 }
                 break;
             }
             default:
-                int oldVal = landingParty.getMilitary();
-                landingParty.setMilitary((int) event.getValue());
-                if (landingParty.getTotalMembers() > 10 || landingParty.getMilitary() > ship.getMilitary()) {
+                int oldVal = localLandingParty.getMilitary();
+                localLandingParty.setMilitary((int) event.getValue());
+                if (localLandingParty.getTotalMembers() > 10 || localLandingParty.getMilitary() > ship.getMilitary()) {
                     if (oldVal > ship.getMilitary()) {
                         oldVal = 0;
                     }
                     event.getScrollbar().setValue(oldVal);
-                    landingParty.setMilitary(oldVal);
+                    localLandingParty.setMilitary(oldVal);
                 }
                 break;
         }
 
-        if (!landingParty.canBeLaunched(world)) {
+        if (!localLandingParty.canBeLaunched(world)) {
             // disable close buttons, because current party configuration is invalid
             myScreen.findElementByName("close_button").disable();
             statusText.getRenderer(TextRenderer.class).setColor(redColor);
@@ -170,13 +183,21 @@ public class LandingPartyEquipScreenController implements ScreenController {
         updateLabels();
     }
 
-    public void closeScreen() {
+    public void ok() {
         GUI.getInstance().popAndSetScreen();
+        world.getPlayer().setLandingParty(localLandingParty);
+        world.getPlayer().getShip().getStorage().clear();
+        world.getPlayer().getShip().getStorage().addAll(shipStorage);
+    }
+
+    public void cancel() {
+        GUI.getInstance().popAndSetScreen();
+        localLandingParty = null;
     }
 
     public void onStorageToInventoryClicked() {
-        world.getPlayer().getLandingParty().pickUp(storageList.getFocusItem().getElement(), 1);
-        world.getPlayer().getShip().getStorage().setCount(storageList.getFocusItem().getElement(), storageList.getFocusItem().getCount() - 1);
+        localLandingParty.pickUp(storageList.getFocusItem().getElement(), 1);
+        shipStorage.remove(storageList.getFocusItem().getElement());
         if (storageList.getFocusItem().getCount() == 0) {
             storageList.removeItem(storageList.getFocusItem());
         }
@@ -184,8 +205,8 @@ public class LandingPartyEquipScreenController implements ScreenController {
     }
 
     public void onInventoryToStorageClicked() {
-        world.getPlayer().getShip().addItem(inventoryList.getFocusItem().getElement(), 1);
-        world.getPlayer().getLandingParty().getInventory().setCount(inventoryList.getFocusItem().getElement(), inventoryList.getFocusItem().getCount() - 1);
+        shipStorage.add(inventoryList.getFocusItem().getElement());
+        localLandingParty.getInventory().setCount(inventoryList.getFocusItem().getElement(), inventoryList.getFocusItem().getCount() - 1);
         if (inventoryList.getFocusItem().getCount() == 0) {
             inventoryList.removeItem(inventoryList.getFocusItem());
         }
@@ -194,11 +215,11 @@ public class LandingPartyEquipScreenController implements ScreenController {
 
     private void refreshLists() {
         storageList.clear();
-        for (Multiset.Entry<InventoryItem> entry : world.getPlayer().getShip().getStorage().entrySet()) {
+        for (Multiset.Entry<InventoryItem> entry : shipStorage.entrySet()) {
             storageList.addItem(entry);
         }
         inventoryList.clear();
-        for (Multiset.Entry<InventoryItem> entry : world.getPlayer().getLandingParty().getInventory().entrySet()) {
+        for (Multiset.Entry<InventoryItem> entry : localLandingParty.getInventory().entrySet()) {
             inventoryList.addItem(entry);
         }
         updateLabels();

@@ -66,6 +66,9 @@ public class MonsterController implements Serializable {
 
         } else {
             rz = new BlasterShotEffect(myMonster, other, world.getCamera(), 800, weapon);
+            if (weapon.getShotSound() != null) {
+                rz.setStartSound(weapon.getShotSound());
+            }
         }
         world.getCurrentDungeon().getController().addEffect(rz);
         return rz;

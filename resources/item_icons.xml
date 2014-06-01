@@ -17,6 +17,7 @@
     <resource type="image" id="ship_rocket">sprites/weapons/ship/rocket_iso.png</resource>
     <resource type="image" id="ship_laser">sprites/weapons/ship/laser1_iso.png</resource>
     <resource type="image" id="ship_laser2">sprites/weapons/ship/laser2_iso.png</resource>
+    <resource type="image" id="zorsan_ship_laser">sprites/weapons/ship/zorsan1_iso.png</resource>
 
     <!-- item icons -->
 

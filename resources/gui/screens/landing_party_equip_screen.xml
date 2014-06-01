@@ -1,5 +1,5 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
-
+    <registerEffect name="custom-hint" class="ru.game.aurora.gui.niffy.CustomHint"/>
 
     <controlDefinition name="storage_line">
         <panel childLayout="horizontal" width="100%" align="right">
@@ -27,15 +27,30 @@
                     <text style="button-font" id="scientists_count_text" text="${gui.landing_party.scientists}"
                           textHAlign="left"/>
                     <control id="scientists_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1"
-                             initial="1" buttonStepSize="1" pageStepSize="1"/>
+                             initial="1" buttonStepSize="1" pageStepSize="1">
+                        <effect>
+                            <onHover name="custom-hint" targetElement="hint-panel"
+                                     hintText="${gui.landing_party.scientists_hint}"/>
+                        </effect>
+                    </control>
                     <text style="button-font" text="${gui.landing_party.engineers}" id="engineers_count_text"
                           textHAlign="left"/>
                     <control id="engineers_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1" initial="1"
-                             buttonStepSize="1" pageStepSize="1"/>
+                             buttonStepSize="1" pageStepSize="1">
+                        <effect>
+                            <onHover name="custom-hint" targetElement="hint-panel"
+                                     hintText="${gui.landing_party.engineers_hint}"/>
+                        </effect>
+                    </control>
                     <text style="button-font" text="${gui.landing_party.military}" id="military_count_text"
                           textHAlign="left"/>
                     <control id="military_count" name="horizontalScrollbar" worldMax="11" worldPageSize="1" initial="1"
-                             buttonStepSize="1" pageStepSize="1"/>
+                             buttonStepSize="1" pageStepSize="1">
+                        <effect>
+                            <onHover name="custom-hint" targetElement="hint-panel"
+                                     hintText="${gui.landing_party.military_hint}"/>
+                        </effect>
+                    </control>
                     <text id="total_count" style="button-font" text="Total crew: 0/10" textHAlign="left"/>
 
                     <panel height="10px"/>
@@ -45,7 +60,8 @@
                     <panel height="64px" childLayout="horizontal">
                         <image id="selected_weapon_img" width="64px" height="64px"/>
                         <panel width="10px"/>
-                        <text id="selected_weapon_text" style="button-font" text="Weapon descirption" textHAlign="left"/>
+                        <text id="selected_weapon_text" style="button-font" text="Weapon descirption"
+                              textHAlign="left"/>
                     </panel>
 
                     <panel height="10px"/>
@@ -54,7 +70,12 @@
 
                     <panel height="10px"/>
 
-                    <text style="button-font" id="weight_text" textHAlign="left"/>
+                    <text style="button-font" id="weight_text" textHAlign="left">
+                        <effect>
+                            <onHover name="custom-hint" targetElement="hint-panel"
+                                     hintText="${gui.landing_party.weight_hint}"/>
+                        </effect>
+                    </text>
 
                     <panel height="10px"/>
 
@@ -91,11 +112,23 @@
                     <panel childLayout="horizontal" height="50px">
                         <panel width="*"/>
                         <control id="close_button" name="button" label="${gui.ok}" width="150px" height="45px">
-                            <interact onClick="closeScreen()"/>
+                            <interact onClick="ok()"/>
                         </control>
+                        <panel width="20px"/>
+                        <control id="close_button" name="button" label="${gui.cancel}" width="150px" height="45px">
+                            <interact onClick="cancel()"/>
+                        </control>
+
                     </panel>
                 </panel>
             </control>
+        </layer>
+        <layer childLayout="absolute">
+            <panel id="hint-panel" width="200" visible="false" childLayout="vertical" padding="5px,25px,5px,25px"
+                   backgroundColor="#aa7f4dff">
+                <text id="content" style="button-font" width="90%" wrap="true" text="empty" align="center"
+                      valign="center"/>
+            </panel>
         </layer>
     </screen>
 </nifty>

@@ -428,6 +428,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         if (currentEffect == null && !effects.isEmpty()) {
             currentEffect = effects.remove();
+            if (currentEffect != null && currentEffect.getStartSound() != null) {
+                ResourceManager.getInstance().getSound(currentEffect.getStartSound()).play();
+            }
         }
         if (currentEffect != null) {
             currentEffect.update(container, world);

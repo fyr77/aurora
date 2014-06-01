@@ -299,6 +299,9 @@ public class DungeonController extends Listenable implements Serializable {
                     , world.getCamera()
                     , 800
                     , landingParty.getWeapon());
+            if (landingParty.getWeapon().getShotSound() != null) {
+                blasterShotEffect.setStartSound(landingParty.getWeapon().getShotSound());
+            }
             effects.add(blasterShotEffect);
 
             ResourceManager.getInstance().getSound(landingParty.getWeapon().getShotSound()).play();
@@ -346,6 +349,9 @@ public class DungeonController extends Listenable implements Serializable {
         }
         if (currentEffect == null && !effects.isEmpty()) {
             currentEffect = effects.remove(0);
+            if (currentEffect != null && currentEffect.getStartSound() != null) {
+                ResourceManager.getInstance().getSound(currentEffect.getStartSound()).play();
+            }
         }
 
         if (currentEffect != null) {

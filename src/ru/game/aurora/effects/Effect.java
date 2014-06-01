@@ -23,6 +23,8 @@ public abstract class Effect extends BasePositionable implements GameObject, Com
 
     private DrawOrder order;
 
+    private String startSound;
+
     public static final int HIGHEST_PRIORITY = 10;
 
     public static final int HIGH_PRIORITY = 5;
@@ -65,5 +67,13 @@ public abstract class Effect extends BasePositionable implements GameObject, Com
     @Override
     public int compareTo(Effect o) {
         return o.priority - priority;
+    }
+
+    public String getStartSound() {
+        return startSound;
+    }
+
+    public void setStartSound(String startSound) {
+        this.startSound = startSound;
     }
 }

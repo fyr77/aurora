@@ -246,6 +246,7 @@ public class WorldGenerator implements Runnable {
 
         world.addListener(new EarthUpgradeUnlocker());
 
+
     }
 
     // perform some fast initialization in gui thread

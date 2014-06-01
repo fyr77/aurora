@@ -16,8 +16,10 @@ import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.planet.Cylinders;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.LandingParty;
+import ru.game.aurora.world.planet.MedPack;
 import ru.game.aurora.world.quest.Journal;
 
 import java.io.Serializable;
@@ -60,6 +62,8 @@ public class Player implements Serializable {
         final LandingPartyWeapon defaultWeapon = ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault");
         inventory.put(defaultWeapon, 1);
         landingParty = new LandingParty(0, 0, defaultWeapon, 2, 2, 4, Configuration.getIntProperty("player.landing_party.defaultHP"));
+        landingParty.pickUp(new MedPack(), 3);   //Santa's gifts
+        landingParty.pickUp(new Cylinders(), 3);
     }
 
     public void setShip(World world, AlienRace humanity) {

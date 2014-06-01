@@ -61,8 +61,15 @@ public class LandingParty extends MovableSprite implements GameObject {
         this.MAX_HP = maxHp;
         this.hp = maxHp;
         oxygen = 100;
-        pickUp(new MedPack(), 3);   //Santa's gifts
-        pickUp(new Cylinders(), 3);
+    }
+
+    public LandingParty(LandingParty other) {
+        this(other.x, other.y, other.weapon, other.military, other.science, other.engineers, other.hp);
+        this.oxygen = other.oxygen;
+        this.inventory = HashMultiset.create();
+        for (InventoryItem i : other.inventory) {
+            this.inventory.add(i);
+        }
     }
 
     @Override
