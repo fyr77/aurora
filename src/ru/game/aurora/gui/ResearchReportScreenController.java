@@ -22,11 +22,12 @@ import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.World;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 
 public class ResearchReportScreenController implements ScreenController {
     private World world;
-
-    private ResearchProjectDesc research;
 
     private Window window;
 
@@ -36,12 +37,14 @@ public class ResearchReportScreenController implements ScreenController {
 
     private ListBox nextResearch;
 
+    private Queue<ResearchProjectDesc> reportsToShow = new LinkedList<>();
+
     public ResearchReportScreenController(World world) {
         this.world = world;
     }
 
-    public void setResearch(ResearchProjectDesc research) {
-        this.research = research;
+    public void addResearch(ResearchProjectDesc researchProjectDesc) {
+        reportsToShow.add(researchProjectDesc);
     }
 
     @Override
@@ -52,9 +55,9 @@ public class ResearchReportScreenController implements ScreenController {
         nextResearch = screen.findNiftyControl("new_research", ListBox.class);
     }
 
-    @Override
-    public void onStartScreen() {
-        world.setPaused(true);
+    private void showNextReport() {
+        ResearchProjectDesc research = reportsToShow.remove();
+
         window.setTitle(research.getName() + " report");
         icon.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(research.getReport().icon))));
         text.getRenderer(TextRenderer.class).setText(research.getReport().getText());
@@ -79,11 +82,21 @@ public class ResearchReportScreenController implements ScreenController {
     }
 
     @Override
+    public void onStartScreen() {
+        world.setPaused(true);
+        showNextReport();
+    }
+
+    @Override
     public void onEndScreen() {
         world.setPaused(false);
     }
 
     public void closeScreen() {
-        GUI.getInstance().popAndSetScreen();
+        if (reportsToShow.isEmpty()) {
+            GUI.getInstance().popAndSetScreen();
+        } else {
+            showNextReport();
+        }
     }
 }

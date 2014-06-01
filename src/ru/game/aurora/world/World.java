@@ -242,10 +242,13 @@ public class World implements Serializable, ResolutionChangeListener {
     }
 
     public void addOverlayWindow(ResearchProjectDesc s) {
-        GUI.getInstance().pushCurrentScreen();
         Nifty nifty = GUI.getInstance().getNifty();
-        ((ResearchReportScreenController) nifty.getScreen("research_report_screen").getScreenController()).setResearch(s);
-        nifty.gotoScreen("research_report_screen");
+        ((ResearchReportScreenController) nifty.getScreen("research_report_screen").getScreenController()).addResearch(s);
+
+        if (!nifty.getCurrentScreen().getScreenId().equals("research_report_screen")) {
+            GUI.getInstance().pushCurrentScreen();
+            nifty.gotoScreen("research_report_screen");
+        }
     }
 
     public int getTurnCount() {
