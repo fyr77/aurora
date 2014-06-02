@@ -77,8 +77,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     private BasePlanet[] planets;
 
-    private boolean hasAsteroidBelt = false;
-    private AsteroidBelt asteroidBelt;
+    private AsteroidBelt asteroidBelt = null;
 
     private int globalMapX;
 
@@ -135,7 +134,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     }
 
     public void setAsteroidBelt(int innerRadius, int width) {
-        hasAsteroidBelt = true;
         asteroidBelt = new AsteroidBelt(innerRadius, width);
     }
 
@@ -606,12 +604,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         //belt
-        if (hasAsteroidBelt) {
+        if (asteroidBelt != null) {
             for (int x = -radius; x < radius; x++) {
                 for (int y = -radius; y < radius; y++) {
                     if (camera.isInViewport(x, y)) {
                         long dist = Math.round(Math.sqrt(Math.pow(0 - x, 2) + Math.pow(0 - y, 2)));
-                        if (dist >= asteroidBelt.innerRadius && dist < asteroidBelt.innerRadius + asteroidBelt.width){
+                        if (dist >= asteroidBelt.innerRadius && dist < asteroidBelt.innerRadius + asteroidBelt.width) {
                             Image asteroidSprite = ResourceManager.getInstance().getImage("asteroids");
                             g.drawImage(asteroidSprite, camera.getXCoord(x), camera.getYCoord(y));
                         }
@@ -781,10 +779,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         return star;
     }
 
-    private class AsteroidBelt implements Serializable {
+    private static class AsteroidBelt implements Serializable {
         private static final long serialVersionUID = 652085640285216434L;
-        private int innerRadius;
-        private int width;
+
+        private final int innerRadius;
+
+        private final int width;
 
         public AsteroidBelt(int innerRadius, int width) {
             this.innerRadius = innerRadius;

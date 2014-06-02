@@ -82,7 +82,6 @@ public class Ship extends MovableSprite implements SpaceObject {
         addUpgrade(world, new BarracksUpgrade());
         addUpgrade(world, new WorkshopUpgrade());
         addUpgrade(world, new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon")));
-        addUpgrade(world, new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon")));
         refillCrew(world);
     }
 
