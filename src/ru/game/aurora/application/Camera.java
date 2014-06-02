@@ -155,7 +155,7 @@ public class Camera implements Serializable {
      * Check that center of given tile is now on screen
      */
     public boolean isInViewport(int tileX, int tileY) {
-        return Math.abs(target.getX() - tileX) <= getNumTilesX() / 2 && Math.abs(target.getY() - tileY) <= getNumTilesY() / 2;
+        return Math.abs(target.getX() - tileX - (viewportX / tileWidth)) <= (getNumTilesX() / 2 + 1) && Math.abs(target.getY() - tileY - (viewportY / tileHeight)) <= (getNumTilesY() / 2 + 1);
     }
 
     public boolean isInViewportAbs(float absX, float absY) {
