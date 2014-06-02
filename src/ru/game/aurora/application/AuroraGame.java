@@ -95,21 +95,21 @@ public class AuroraGame extends NiftyOverlayGame {
         return result;
     }
 
-    public static void changeResolution(int newTilesX, int newTilesY, boolean fullScreen) {
-        tilesX = newTilesX;
-        tilesY = newTilesY;
+    public static void changeResolution(Resolution res, boolean fullScreen) {
+        tilesX = res.getTilesX();
+        tilesY = res.getTilesY();
         Camera oldCam = camera;
         camera = new Camera(0, 0, tilesX, tilesY, tileSize, tileSize);
         camera.setTarget(oldCam.getTarget());
 
         try {
-            app.setDisplayMode(newTilesX * tileSize, newTilesY * tileSize, fullScreen);
+            app.setDisplayMode(res.getWidth(), res.getHeight(), fullScreen);
             GUI.getInstance().getNifty().resolutionChanged();
         } catch (SlickException e) {
             logger.error("Failed to change display mode", e);
         }
         for (ResolutionChangeListener listener : resolutionChangeListeners) {
-            listener.onResolutionChanged(newTilesX, newTilesY, fullScreen);
+            listener.onResolutionChanged(tilesX, tilesY, fullScreen);
         }
     }
 
