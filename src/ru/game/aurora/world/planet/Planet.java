@@ -416,7 +416,8 @@ public class Planet extends BasePlanet implements IDungeon {
     @Override
     public String getScanText() {
         StringBuilder sb = new StringBuilder(Localization.getText("gui", "scan.planetary_data")).append('\n');
-        sb.append(Localization.getText("gui", "scan.atmosphere")).append(' ').append(getAtmosphere()).append('\n');
+        sb.append(Localization.getText("gui", "scan.atmosphere")).append(' ');
+        sb.append(Localization.getText("gui", "atmosphere." + getAtmosphere().descriptionKey())).append('\n');
 
         String sizeText;
         switch (getSize()) {

@@ -3,12 +3,15 @@ package ru.game.aurora.gui;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.*;
+import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.SizeValue;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
+import ru.game.aurora.application.Localization;
+import ru.game.aurora.gui.niffy.CustomHint;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
@@ -42,6 +45,8 @@ public class PlanetScanController implements ScreenController {
 
     private CheckBox overlayCheckbox;
 
+    private Element atmosphereHint;
+
     public PlanetScanController(World world) {
         this.world = world;
     }
@@ -56,6 +61,8 @@ public class PlanetScanController implements ScreenController {
         surfaceMapPanel = myWindow.findElementByName("surfaceMapPanel");
 
         overlayCheckbox = myWindow.findNiftyControl("bioscan_checkbox", CheckBox.class);
+
+        atmosphereHint = myWindow.findElementByName("scan_text");
     }
 
     @Override
@@ -76,6 +83,9 @@ public class PlanetScanController implements ScreenController {
             shuttleDraggableElement.getElement().setConstraintX(SizeValue.px(shuttlePosition.getX()));
             shuttleDraggableElement.getElement().setConstraintY(SizeValue.px(shuttlePosition.getY()));
             GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
+
+            atmosphereHint.getEffects(EffectEventId.onHover, CustomHint.class).get(0).getParameters().setProperty("hintText",
+                    Localization.getText("hints", "atmosphere." + p.getAtmosphere().descriptionKey()));
         }
 
         EngineUtils.setTextForGUIElement(myWindow.findElementByName("scan_text"), planetToScan.getScanText());
@@ -93,7 +103,6 @@ public class PlanetScanController implements ScreenController {
                     , false
             );
             EngineUtils.setImageForGUIElement(surfaceMapPanel, planetMap);
-
         }
     }
 

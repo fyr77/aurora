@@ -262,15 +262,30 @@ public class LandingParty extends MovableSprite implements GameObject {
     }
 
     public void subtractHp(World world, int amount) {
+        boolean depressurization;
         while (amount > 0) {
+            depressurization = false;
             int amountToSubtract = Math.min(hp, amount);
             if (amountToSubtract < 0) {
                 break;
             }
             hp -= amountToSubtract;
+            if ((hp != 0) && (world.getCurrentRoom() instanceof Planet)) {
+                PlanetAtmosphere atmosphere = ((Planet) world.getCurrentRoom()).getAtmosphere();
+                if ((atmosphere == PlanetAtmosphere.AGGRESSIVE_ATMOSPHERE) || (atmosphere == PlanetAtmosphere.NO_ATMOSPHERE)) {
+                    double rnd = Math.random();
+                    if (rnd <= Configuration.getDoubleProperty("world.planet.dyingChanceBecauseOfAtmosphere")) {
+                        hp = 0;
+                        depressurization = true;
+                        GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.party_member_died_due_to_depressurization"));
+                    }
+                }
+            }
             if (hp == 0) {
                 // landing party member killed
-                GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.party_member_killed"));
+                if (!depressurization) {
+                    GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.party_member_killed"));
+                }
                 if (military > 0) {
                     military--;
                 } else if (engineers > 0) {
