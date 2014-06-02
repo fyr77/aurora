@@ -278,7 +278,10 @@
               "name": "colony_search.explored",
               "type": "SET"
             }
-          ]
+          ],
+          "flags": {
+            "colony_info_dumped": "true"
+          }
         }
       ]
     },
