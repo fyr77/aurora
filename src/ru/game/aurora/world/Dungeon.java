@@ -106,7 +106,6 @@ public class Dungeon implements Room, IDungeon {
         } else {
             world.addOverlayWindow(enterDialog);
         }
-        world.onPlayerEnteredDungeon(this);
     }
 
     private void enterImpl(World world) {
@@ -125,6 +124,7 @@ public class Dungeon implements Room, IDungeon {
             ResourceManager.getInstance().getPlaylist(playlistName).play();
         }
 
+        world.onPlayerEnteredDungeon(this);
     }
 
     @Override

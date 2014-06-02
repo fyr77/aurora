@@ -70,7 +70,7 @@ public class SettingsScreenController implements ScreenController {
     public void applySettings() {
         Resolution res = resolutionDropDown.getSelection();
         if (!res.isActive()) {
-            AuroraGame.changeResolution(res.getTilesX(), res.getTilesY(), fullScreen.isChecked());
+            AuroraGame.changeResolution(res, fullScreen.isChecked());
         } else {
             AuroraGame.setFullScreen(fullScreen.isChecked());
         }
