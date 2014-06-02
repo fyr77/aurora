@@ -123,7 +123,7 @@ public class EarthDialogListener implements DialogListener {
             Map<String, String> flagsForNextDialog = new HashMap<>();
             if (score >= 3) {
                 flagsForNextDialog.put("flag_good", null);
-            } else if (score >= 1) {
+            } else if (score >= 0) {
                 flagsForNextDialog.put("flag_ok", null);
             } else {
                 flagsForNextDialog.put("flag_bad", null);
