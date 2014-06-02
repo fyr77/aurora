@@ -143,6 +143,7 @@ public class WorldGenerator implements Runnable {
 
     public static StarSystem generateRandomStarSystem(Star star, World world, int x, int y, int planetCount) {
         final Random r = CommonRandom.getRandom();
+        boolean belt = false;
 
         BasePlanet[] planets = new BasePlanet[planetCount];
 
@@ -156,7 +157,8 @@ public class WorldGenerator implements Runnable {
         int prevRadius = StarSystem.STAR_SCALE_FACTOR;
         int maxRadius = prevRadius;
 
-        for (int i = 0; i < planetCount; ++i) {
+        int i = 0;
+        while (i < planetCount) {
             int radius = prevRadius + r.nextInt(StarSystem.PLANET_SCALE_FACTOR) + StarSystem.PLANET_SCALE_FACTOR;
             prevRadius = radius;
             maxRadius = Math.max(radius, maxRadius);
@@ -172,7 +174,17 @@ public class WorldGenerator implements Runnable {
                 if (i < 2) {
                     cat = PlanetCategory.PLANET_ROCK;
                 } else {
-                    planets[i] = new GasGiant(planetX, planetY, ss);
+                    double rnd = Math.random();
+                    if (rnd < Configuration.getDoubleProperty("world.starsystem.asteroidBeltChance") && (planetCount > 1) && !belt) {
+                        int width = r.nextInt(2) + 1;
+                        belt = true;
+                        planetCount--;
+                        ss.setAsteroidBelt(radius, width);
+                        prevRadius += (width - 1);
+                    } else {
+                        planets[i] = new GasGiant(planetX, planetY, ss);
+                    }
+                    ++i;
                     continue;
                 }
             }
@@ -206,7 +218,13 @@ public class WorldGenerator implements Runnable {
                 }
 
             }
-
+            ++i;
+        }
+        if (belt) {
+            //удалить последний элемент
+            BasePlanet[] newPlanetsArray = new BasePlanet[planetCount];
+            System.arraycopy(planets, 0, newPlanetsArray, 0, newPlanetsArray.length);
+            planets = newPlanetsArray.clone();
         }
         ss.setPlanets(planets);
         astroData += r.nextInt(30);

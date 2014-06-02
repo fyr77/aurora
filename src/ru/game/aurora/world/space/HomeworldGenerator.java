@@ -26,7 +26,7 @@ public class HomeworldGenerator {
     public static StarSystem createSolarSystem(World world, AlienRace humanRace) {
         // todo: gas giants and other planets
 
-        BasePlanet[] planets = new BasePlanet[6];
+        BasePlanet[] planets = new BasePlanet[8];
         StarSystem ss = new StarSystem("Solar system", new Star(2, Color.yellow), 9, 9);
 
         // mercury
@@ -46,18 +46,29 @@ public class HomeworldGenerator {
         planets[3] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
         setCoord(planets[3], 7);
 
+        ss.setAsteroidBelt(10, 3);
+
         // jupiter
         planets[4] = new GasGiant(0, 0, ss);
-        setCoord(planets[4], 9);
+        setCoord(planets[4], 15);
+        planets[4].addSatellite(new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0));
 
         // saturn
         planets[5] = new GasGiant(0, 0, ss);
-        setCoord(planets[5], 12);
+        setCoord(planets[5], 18);
         planets[5].setRings(1);
         planets[5].addSatellite(new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0));
 
+        //uranus
+        planets[6] = new GasGiant(0, 0, ss);
+        setCoord(planets[6], 21);
+
+        //neptune
+        planets[7] = new GasGiant(0, 0, ss);
+        setCoord(planets[7], 24);
+
         ss.setPlanets(planets);
-        ss.setRadius(Math.max((int) (12 * 1.5), 10));
+        ss.setRadius(26);
 
         NPCShip spaceStation = new NPCShip(planets[2].getX() + 1, planets[2].getY() - 1, "earth_station", humanRace, null, "Orbital Scaffold", 25);
         if (spaceStation.getDistance(Moon) == 0) { // check that it does not intersect with moon
@@ -70,6 +81,4 @@ public class HomeworldGenerator {
 
         return ss;
     }
-
-
 }
