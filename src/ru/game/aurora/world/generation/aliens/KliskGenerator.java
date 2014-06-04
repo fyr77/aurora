@@ -153,7 +153,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                 } else {
                     // accepts a quest
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_start.json"));
-                    world.getGlobalVariables().put("klisk_trade.result", 1); // hack to enable required statement in space station dialog
+                    world.getGlobalVariables().put("klisk_trade.started", 1);
                     beginTradeQuest(world, kliskPlanet, targetSystemForQuest);
                 }
 

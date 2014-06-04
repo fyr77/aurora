@@ -16,9 +16,8 @@
           "replyText": "1",
           "replyConditions": [
             {
-              "name": "klisk_trade.result",
-              "value" : "1",
-              "type": "EQUAL"
+              "name": "klisk_trade.started",
+              "type": "SET"
             }
           ]
         },

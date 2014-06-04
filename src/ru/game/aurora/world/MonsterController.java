@@ -118,7 +118,10 @@ public class MonsterController implements Serializable {
 
                     newX = x;
                     newY = y;
-                } else if (map.lineOfSightExists(x, y, partyX, partyY) && (weapon == null || distance < 5 * weapon.getRange())) {
+                } else if (map.lineOfSightExists(x, y, partyX, partyY)
+                        && (weapon == null
+                        || distance < 5 * weapon.getRange())
+                        || (weapon.getId().equals("melee") && distance < 15)) {
                     lastX = partyX;
                     lastY = partyY;
                     playerShown = true;
