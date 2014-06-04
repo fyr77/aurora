@@ -145,8 +145,6 @@ public class WorldGenerator implements Runnable {
         final Random r = CommonRandom.getRandom();
         boolean belt = false;
 
-        BasePlanet[] planets = new BasePlanet[planetCount];
-
         StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), star, x, y);
 
         int astroData = 20 * star.size;
@@ -157,8 +155,9 @@ public class WorldGenerator implements Runnable {
         int prevRadius = StarSystem.STAR_SCALE_FACTOR;
         int maxRadius = prevRadius;
 
-        int i = 0;
-        while (i < planetCount) {
+        List<BasePlanet> planetList = new ArrayList<>(planetCount);
+
+        for (int i = 0; i < planetCount; ++i) {
             int radius = prevRadius + r.nextInt(StarSystem.PLANET_SCALE_FACTOR) + StarSystem.PLANET_SCALE_FACTOR;
             prevRadius = radius;
             maxRadius = Math.max(radius, maxRadius);
@@ -171,7 +170,7 @@ public class WorldGenerator implements Runnable {
             PlanetCategory cat = CollectionUtils.selectRandomElement(PlanetCategory.values());
             if (cat == PlanetCategory.GAS_GIANT) {
                 // no gas giants on inner orbits
-                if (i < 2) {
+                if (planetList.size() < 2) {
                     cat = PlanetCategory.PLANET_ROCK;
                 } else {
                     double rnd = Math.random();
@@ -182,13 +181,12 @@ public class WorldGenerator implements Runnable {
                         ss.setAsteroidBelt(radius, width);
                         prevRadius += (width - 1);
                     } else {
-                        planets[i] = new GasGiant(planetX, planetY, ss);
+                        planetList.add(new GasGiant(planetX, planetY, ss));
                     }
-                    ++i;
                     continue;
                 }
             }
-            planets[i] = new Planet(
+            final Planet e = new Planet(
                     world,
                     ss
                     , cat
@@ -198,14 +196,16 @@ public class WorldGenerator implements Runnable {
                     , planetY
             );
             if (atmosphere != PlanetAtmosphere.NO_ATMOSPHERE) {
-                PlanetaryLifeGenerator.setPlanetHasLife((Planet) planets[i]);
+                PlanetaryLifeGenerator.setPlanetHasLife(e);
             }
+            planetList.add(e);
+
 
             // only large planets have rings and satellites
 
             if (planetSize <= 2) {
                 if (r.nextDouble() < ringsChance) {
-                    planets[i].setRings(r.nextInt(Configuration.getIntProperty("world.starsystem.ringsTypes")) + 1);
+                    e.setRings(r.nextInt(Configuration.getIntProperty("world.starsystem.ringsTypes")) + 1);
                 }
 
                 int satelliteCount = r.nextInt(maxSatellites);
@@ -214,19 +214,13 @@ public class WorldGenerator implements Runnable {
                     astroData += 10;
                     cat = CollectionUtils.selectRandomElement(satelliteCategories);
                     final Planet satellite = new Planet(world, ss, cat, atmosphere, 4, 0, 0);
-                    planets[i].addSatellite(satellite);
+                    e.addSatellite(satellite);
                 }
 
             }
-            ++i;
         }
-        if (belt) {
-            //удалить последний элемент
-            BasePlanet[] newPlanetsArray = new BasePlanet[planetCount];
-            System.arraycopy(planets, 0, newPlanetsArray, 0, newPlanetsArray.length);
-            planets = newPlanetsArray.clone();
-        }
-        ss.setPlanets(planets);
+
+        ss.setPlanets(planetList.toArray(new BasePlanet[planetList.size()]));
         astroData += r.nextInt(30);
         ss.setAstronomyData(astroData);
         ss.setRadius(Math.max((int) (maxRadius * 1.5), 10));

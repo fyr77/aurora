@@ -61,7 +61,7 @@ public class GardenersShip extends NPCShip implements SpaceObject {
         spriteAlpha = alpha;
     }
 
-    public void warpAway (World world, StarSystem ss) {
+    public void warpAway(World world, StarSystem ss) {
         final WarpEffect warpEffect = new WarpEffect(this);
         ss.addEffect(warpEffect);
         // show dialog after first wrap seen by player
@@ -77,9 +77,10 @@ public class GardenersShip extends NPCShip implements SpaceObject {
             });
             world.getGlobalVariables().remove("gardeners.first_warp");
         }
+        isAlive = false;
     }
 
-    public void warpAwayNextTurn () {
+    public void warpAwayNextTurn() {
         timeToLeave = true;
     }
 }
