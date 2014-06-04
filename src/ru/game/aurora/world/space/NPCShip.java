@@ -104,13 +104,14 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
         super.update(container, world);
 
+        if (!world.isUpdatedThisFrame()) {
+            return;
+        }
+
         if (weapons != null) {
             for (StarshipWeapon w : weapons) {
                 w.reload();
             }
-        }
-        if (!world.isUpdatedThisFrame()) {
-            return;
         }
         curSpeed--;
         if (repairTimer != null && hp < maxHP && repairTimer.update()) {
