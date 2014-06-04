@@ -82,8 +82,6 @@ public class DungeonController extends Listenable implements Serializable {
         this.myDungeon = myDungeon;
         this.prevRoom = prevRoom;
         this.world = world;
-        this.landingParty = world.getPlayer().getLandingParty();
-
         this.isWrap = myDungeon.getMap().isWrapped();
         this.map = myDungeon.getMap();
     }
@@ -333,6 +331,7 @@ public class DungeonController extends Listenable implements Serializable {
 
     public void update(GameContainer container, World world) {
         Camera myCamera = world.getCamera();
+        this.landingParty = world.getPlayer().getLandingParty();
         if (container.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
             xClick = container.getInput().getMouseX() - myCamera.getViewportX();
             yClick = container.getInput().getMouseY() - myCamera.getViewportY();
