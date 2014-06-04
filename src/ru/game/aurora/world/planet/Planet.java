@@ -69,7 +69,7 @@ public class Planet extends BasePlanet implements IDungeon {
         }
         this.surface = new SurfaceTileMap(other.surface);
         this.controller = new DungeonController(world, owner, this);
-        addOreDeposits(CommonRandom.getRandom().nextInt(40 / size));
+        addOreDeposits(1 + CommonRandom.getRandom().nextInt(40 / size));
         this.world = world;
     }
 
@@ -130,8 +130,7 @@ public class Planet extends BasePlanet implements IDungeon {
         }
     }
 
-    public BasePositionable findPassableRegion(int regionWidth, int regionHeight)
-    {
+    public BasePositionable findPassableRegion(int regionWidth, int regionHeight) {
         getSurface();
         short[][] customMap = new short[surface.getHeightInTiles()][surface.getWidthInTiles()];
 

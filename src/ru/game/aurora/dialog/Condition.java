@@ -48,9 +48,9 @@ public class Condition implements Serializable {
             case NOT_SET:
                 return !flags.containsKey(name) && !world.getGlobalVariables().containsKey(name);
             case EQUAL:
-                return (val != null && val.equals(value));
+                return (val != null && val.toString().equals(value));
             case NOT_EQUAL:
-                return (val == null || !val.equals(value));
+                return (val == null || !val.toString().equals(value));
             case GREATER: {
                 if (val == null) {
                     return false;
