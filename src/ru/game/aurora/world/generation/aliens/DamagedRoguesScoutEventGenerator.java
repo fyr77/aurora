@@ -96,6 +96,9 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
     public static void removeScout(World world) {
         StarSystem target = (StarSystem) world.getGlobalVariables().get("rogues.damaged_scout_found");
         world.getGlobalVariables().remove("rogues.damaged_scout_found");
+        if (target == null) {
+            return;
+        }
         for (Iterator<SpaceObject> iter = target.getShips().iterator(); iter.hasNext(); ) {
             SpaceObject so = iter.next();
             if (so.getName().equals("Rogue scout")) {
@@ -144,7 +147,6 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
 
                 if (dialog == initialDialog) {
                     if (returnCode == 0) {
-                        world.getGlobalVariables().put("rogues.damaged_scout_found", world.getCurrentStarSystem());
                         return;
                     }
 
@@ -155,6 +157,8 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
                     if (returnCode == 2) {
                         saveByShuttle(world);
                     }
+
+                    world.getGlobalVariables().put("rogues.damaged_scout_found", world.getCurrentStarSystem());
                 }
 
                 if (dialog == saveByResourceDialog) {
