@@ -16,6 +16,7 @@ import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.PlanetObject;
 import ru.game.aurora.world.planet.SurfaceTypes;
+import ru.game.aurora.world.planet.TileDrawer;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -165,7 +166,7 @@ public class AuroraTiledMap implements ITileMap {
                     }
                     graphics.drawImage(image, camera.getXCoord(j), camera.getYCoord(i));
                 }
-
+                TileDrawer.drawFoWEdges(graphics, camera, flags, i, j, map.getWidth(), map.getHeight());
             }
         }
     }

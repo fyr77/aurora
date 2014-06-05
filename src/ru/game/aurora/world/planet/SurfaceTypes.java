@@ -75,7 +75,7 @@ public class SurfaceTypes {
     }
 
     /**
-     * Draws surface tiles in simple form - no sprites, just a square of corresponding color. Used in map screen
+     * Draws surface tiles
      */
     public static void drawDetailed(byte type, float screenX, float screenY, float width, float heght, Graphics graphics) {
         String spriteName;

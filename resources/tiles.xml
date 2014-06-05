@@ -101,4 +101,12 @@
     <resource type="image" id="asph_14">sprites/tiles/asph/tiles_0014.png</resource>
     <resource type="image" id="asph_15">sprites/tiles/asph/tiles_0015.png</resource>
 
+    <resource type="image" id="fow_left">sprites/tiles/fow/left.png</resource>
+    <resource type="image" id="fow_right">sprites/tiles/fow/right.png</resource>
+    <resource type="image" id="fow_up">sprites/tiles/fow/up.png</resource>
+    <resource type="image" id="fow_down">sprites/tiles/fow/down.png</resource>
+    <resource type="image" id="fow_lu">sprites/tiles/fow/lu.png</resource>
+    <resource type="image" id="fow_ld">sprites/tiles/fow/ld.png</resource>
+    <resource type="image" id="fow_ru">sprites/tiles/fow/ru.png</resource>
+    <resource type="image" id="fow_rd">sprites/tiles/fow/rd.png</resource>
 </resources>

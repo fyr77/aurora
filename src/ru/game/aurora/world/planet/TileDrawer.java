@@ -97,4 +97,45 @@ public class TileDrawer {
 
         drawTile(graphics, camera, tileY, tileX, left, right, up, down, downLeft, downRight, upLeft, upRight);
     }
+
+    public static void drawFoWEdges(Graphics graphics, Camera camera, byte[][] surface, int tileY, int tileX, int width, int height) {
+        {
+            boolean left = ((surface[EngineUtils.wrap(tileY, height)][EngineUtils.wrap(tileX - 1, width)] & SurfaceTypes.VISIBILITY_MASK) == 0);
+            boolean right = ((surface[EngineUtils.wrap(tileY, height)][EngineUtils.wrap(tileX + 1, width)] & SurfaceTypes.VISIBILITY_MASK) == 0);
+            boolean up = ((surface[EngineUtils.wrap(tileY - 1, height)][EngineUtils.wrap(tileX, width)] & SurfaceTypes.VISIBILITY_MASK) == 0);
+            boolean down = ((surface[EngineUtils.wrap(tileY + 1, height)][EngineUtils.wrap(tileX, width)] & SurfaceTypes.VISIBILITY_MASK) == 0);
+            //corners
+            boolean lu = ((surface[EngineUtils.wrap(tileY - 1, height)][EngineUtils.wrap(tileX - 1, width)] & SurfaceTypes.VISIBILITY_MASK) == 0);
+            boolean ld = ((surface[EngineUtils.wrap(tileY + 1, height)][EngineUtils.wrap(tileX - 1, width)] & SurfaceTypes.VISIBILITY_MASK) == 0);
+            boolean ru = ((surface[EngineUtils.wrap(tileY - 1, height)][EngineUtils.wrap(tileX + 1, width)] & SurfaceTypes.VISIBILITY_MASK) == 0);
+            boolean rd = ((surface[EngineUtils.wrap(tileY + 1, height)][EngineUtils.wrap(tileX + 1, width)] & SurfaceTypes.VISIBILITY_MASK) == 0);
+
+            if (left) {
+                graphics.drawImage(ResourceManager.getInstance().getImage("fow_left"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+            } else {
+                if (lu && !up) {
+                    graphics.drawImage(ResourceManager.getInstance().getImage("fow_lu"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                }
+                if (ld && !down) {
+                    graphics.drawImage(ResourceManager.getInstance().getImage("fow_ld"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                }
+            }
+            if (right) {
+                graphics.drawImage(ResourceManager.getInstance().getImage("fow_right"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+            } else {
+                if (ru && !up) {
+                    graphics.drawImage(ResourceManager.getInstance().getImage("fow_ru"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                }
+                if (rd && !down) {
+                    graphics.drawImage(ResourceManager.getInstance().getImage("fow_rd"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                }
+            }
+            if (up) {
+                graphics.drawImage(ResourceManager.getInstance().getImage("fow_up"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+            }
+            if (down) {
+                graphics.drawImage(ResourceManager.getInstance().getImage("fow_down"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+            }
+        }
+    }
 }
