@@ -109,4 +109,13 @@
     <resource type="image" id="fow_ld">sprites/tiles/fow/ld.png</resource>
     <resource type="image" id="fow_ru">sprites/tiles/fow/ru.png</resource>
     <resource type="image" id="fow_rd">sprites/tiles/fow/rd.png</resource>
+    <resource type="image" id="fow_c">sprites/tiles/fow/c.png</resource>
+    <resource type="image" id="fow_ldi">sprites/tiles/fow/ldi.png</resource>
+    <resource type="image" id="fow_ldu">sprites/tiles/fow/ldu.png</resource>
+    <resource type="image" id="fow_lud">sprites/tiles/fow/lud.png</resource>
+    <resource type="image" id="fow_lui">sprites/tiles/fow/lui.png</resource>
+    <resource type="image" id="fow_lur">sprites/tiles/fow/lur.png</resource>
+    <resource type="image" id="fow_rdi">sprites/tiles/fow/rdi.png</resource>
+    <resource type="image" id="fow_rud">sprites/tiles/fow/rud.png</resource>
+    <resource type="image" id="fow_rui">sprites/tiles/fow/rui.png</resource>
 </resources>

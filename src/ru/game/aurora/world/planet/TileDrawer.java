@@ -111,30 +111,60 @@ public class TileDrawer {
             boolean rd = ((surface[EngineUtils.wrap(tileY + 1, height)][EngineUtils.wrap(tileX + 1, width)] & SurfaceTypes.VISIBILITY_MASK) == 0);
 
             if (left) {
-                graphics.drawImage(ResourceManager.getInstance().getImage("fow_left"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                if (up) {
+                    if (down) {
+                        if (right) {
+                            graphics.drawImage(ResourceManager.getInstance().getImage("fow_c"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                        } else {
+                            graphics.drawImage(ResourceManager.getInstance().getImage("fow_lud"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                        }
+                    } else {
+                        graphics.drawImage(ResourceManager.getInstance().getImage("fow_lui"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                    }
+                } else if (down) {
+                    if (right) {
+                        graphics.drawImage(ResourceManager.getInstance().getImage("fow_ldr"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                    } else {
+                        graphics.drawImage(ResourceManager.getInstance().getImage("fow_ldi"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                    }
+                } else {
+                    if (right) {
+                        graphics.drawImage(ResourceManager.getInstance().getImage("fow_right"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                    }
+                    graphics.drawImage(ResourceManager.getInstance().getImage("fow_left"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                }
+            } else if (right) {
+                if (up) {
+                    if (down) {
+                        graphics.drawImage(ResourceManager.getInstance().getImage("fow_rud"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                    } else {
+                        graphics.drawImage(ResourceManager.getInstance().getImage("fow_rui"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                    }
+                } else if (down) {
+                    graphics.drawImage(ResourceManager.getInstance().getImage("fow_rdi"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                } else {
+                    graphics.drawImage(ResourceManager.getInstance().getImage("fow_right"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                }
+            } else if (up) {
+                if (down) {
+                    graphics.drawImage(ResourceManager.getInstance().getImage("fow_down"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                }
+                graphics.drawImage(ResourceManager.getInstance().getImage("fow_up"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+            } else if (down) {
+                graphics.drawImage(ResourceManager.getInstance().getImage("fow_down"), camera.getXCoord(tileX), camera.getYCoord(tileY));
             } else {
-                if (lu && !up) {
+                if (lu) {
                     graphics.drawImage(ResourceManager.getInstance().getImage("fow_lu"), camera.getXCoord(tileX), camera.getYCoord(tileY));
                 }
-                if (ld && !down) {
+                if (ld) {
                     graphics.drawImage(ResourceManager.getInstance().getImage("fow_ld"), camera.getXCoord(tileX), camera.getYCoord(tileY));
                 }
-            }
-            if (right) {
-                graphics.drawImage(ResourceManager.getInstance().getImage("fow_right"), camera.getXCoord(tileX), camera.getYCoord(tileY));
-            } else {
-                if (ru && !up) {
+                if (ru) {
                     graphics.drawImage(ResourceManager.getInstance().getImage("fow_ru"), camera.getXCoord(tileX), camera.getYCoord(tileY));
                 }
-                if (rd && !down) {
+                if (rd) {
                     graphics.drawImage(ResourceManager.getInstance().getImage("fow_rd"), camera.getXCoord(tileX), camera.getYCoord(tileY));
                 }
-            }
-            if (up) {
-                graphics.drawImage(ResourceManager.getInstance().getImage("fow_up"), camera.getXCoord(tileX), camera.getYCoord(tileY));
-            }
-            if (down) {
-                graphics.drawImage(ResourceManager.getInstance().getImage("fow_down"), camera.getXCoord(tileX), camera.getYCoord(tileY));
             }
         }
     }
