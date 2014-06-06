@@ -117,6 +117,9 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
         @Override
         public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
+            if (count < 0) {
+                return false;
+            }
             final AlienRace humanity = world.getRaces().get(HumanityGenerator.NAME);
             if (ss == humanity.getHomeworld()) {
                 ++count;
@@ -124,8 +127,13 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                 return true;
             }
 
-            return count < 4 || !world.getPlayer().getEarthState().getEarthSpecialDialogs().isEmpty() || process(world, ss);
+            if (count < 4 || !world.getPlayer().getEarthState().getEarthSpecialDialogs().isEmpty()) {
+                return false;
+            }
 
+
+            count = -1;
+            return process(world, ss);
         }
 
         protected abstract boolean process(World world, StarSystem ss);
