@@ -151,10 +151,14 @@ public class EngineeringScreenController implements ScreenController {
         String info = ep.getLocalizedText("engineering");
         if (ep.getCost() > 0) {
             info = info + "\n\n";
-            if (ep.getCost() > world.getPlayer().getResourceUnits()) {
-                info = info + Localization.getText("gui", "logging.not_enough_resources");
+            if (ep.isProjectStarted()) {
+                info = info + String.format(Localization.getText("gui", "engineering.upgrade_in_progress"), ep.getRemainingDays(world));
             } else {
-                info = info + String.format(Localization.getText("gui", "engineering.resource_cost"), ep.getCost());
+                if (ep.getCost() > world.getPlayer().getResourceUnits()) {
+                    info = info + Localization.getText("gui", "logging.not_enough_resources");
+                } else {
+                    info = info + String.format(Localization.getText("gui", "engineering.resource_cost"), ep.getCost());
+                }
             }
         }
         tr.setText(info);
@@ -172,7 +176,7 @@ public class EngineeringScreenController implements ScreenController {
             return;
         }
         EngineeringProject rp = (EngineeringProject) avail.getSelection().get(0);
-        if (rp.getCost() > world.getPlayer().getResourceUnits()) {
+        if (!rp.isProjectStarted() && rp.getCost() > world.getPlayer().getResourceUnits()) {
             return;
         }
         rp.changeEngineers(1, world);
