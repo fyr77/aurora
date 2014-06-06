@@ -119,7 +119,11 @@ public class TileDrawer {
                             graphics.drawImage(ResourceManager.getInstance().getImage("fow_lud"), camera.getXCoord(tileX), camera.getYCoord(tileY));
                         }
                     } else {
-                        graphics.drawImage(ResourceManager.getInstance().getImage("fow_lui"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                        if (right) {
+                            graphics.drawImage(ResourceManager.getInstance().getImage("fow_lur"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                        } else {
+                            graphics.drawImage(ResourceManager.getInstance().getImage("fow_lui"), camera.getXCoord(tileX), camera.getYCoord(tileY));
+                        }
                     }
                 } else if (down) {
                     if (right) {

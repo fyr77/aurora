@@ -111,7 +111,7 @@
     <resource type="image" id="fow_rd">sprites/tiles/fow/rd.png</resource>
     <resource type="image" id="fow_c">sprites/tiles/fow/c.png</resource>
     <resource type="image" id="fow_ldi">sprites/tiles/fow/ldi.png</resource>
-    <resource type="image" id="fow_ldr">sprites/tiles/fow/ldu.png</resource>
+    <resource type="image" id="fow_ldr">sprites/tiles/fow/ldr.png</resource>
     <resource type="image" id="fow_lud">sprites/tiles/fow/lud.png</resource>
     <resource type="image" id="fow_lui">sprites/tiles/fow/lui.png</resource>
     <resource type="image" id="fow_lur">sprites/tiles/fow/lur.png</resource>
