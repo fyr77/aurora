@@ -1,12 +1,19 @@
-VERSION 0.3.1
+VERSION 0.3.2
 
 IN PROGRESS...
+
+=============================================
+
+VERSION 0.3.1
+
+06.06.2014
 
 * Bugfixes
 * Crafting of items on board of ship now requires resources
 * Improvements for landing party screen (cancel button and hints)
 + Star systems can now have asteroid fields
 + Chance for crew members to die on aggressive planets from any wound
+* Nicer fog of war border
 
 ===============================================
 
