@@ -92,7 +92,7 @@ public class EngineeringScreenController implements ScreenController {
     }
 
     public void onHullPointsIncreased() {
-        if (world.getPlayer().getShip().getHull() + engineeringState.getHullRepairs().remainingPoints <= world.getPlayer().getShip().getMaxHull()) {
+        if (world.getPlayer().getShip().getHull() + engineeringState.getHullRepairs().remainingPoints < world.getPlayer().getShip().getMaxHull()) {
             if (HullRepairs.POINT_RES_COST > world.getPlayer().getResourceUnits()) {
                 return;
             }
@@ -115,7 +115,7 @@ public class EngineeringScreenController implements ScreenController {
     }
 
     public void onEngineersIncreased() {
-        if (engineeringState.getIdleEngineers() > 0) {
+        if (engineeringState.getIdleEngineers() > 0 && engineeringState.getHullRepairs().remainingPoints > 0) {
             engineeringState.getHullRepairs().engineersAssigned++;
             engineeringState.setIdleEngineers(engineeringState.getIdleEngineers() - 1);
             updateLabels();
