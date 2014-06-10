@@ -24,6 +24,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
+import ru.game.aurora.world.planet.PlanetSpriteGenerator;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.HashMap;
@@ -39,6 +40,10 @@ public class Earth extends BasePlanet {
     private Dialog progressDialog;
 
     private int lastVisitTurn = 0;
+
+    private transient Image earthImage = null;
+    private int oldX = 0;
+    private int oldY = 0;
 
     // flags used to control default earth dialog
     private Map<String, String> dialogFlags = new HashMap<>();
@@ -61,8 +66,16 @@ public class Earth extends BasePlanet {
 
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics g, Camera camera, int tileX, int tileY) {
-        final Image earth = ResourceManager.getInstance().getImage("earth");
-        g.drawImage(earth, camera.getXCoord(x) - earth.getWidth() / 4, camera.getYCoord(y) - earth.getHeight() / 4);
+        if ((earthImage == null) || x != oldX || y != oldY) {
+            earthImage = ResourceManager.getInstance().getImage("earth");
+            double theta = Math.atan2(y, x);
+            float shadowXFactor = (float) (0.5 - Math.cos(theta) * 0.25);
+            float shadowYFactor = (float) (0.5 - Math.sin(theta) * 0.25);
+            earthImage = PlanetSpriteGenerator.shadowPlanet(earthImage, shadowXFactor, shadowYFactor);
+            oldX = x;
+            oldY = y;
+        }
+        g.drawImage(earthImage, camera.getXCoord(x) - earthImage.getWidth() / 4, camera.getYCoord(y) - earthImage.getHeight() / 4);
     }
 
     @Override
