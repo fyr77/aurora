@@ -27,10 +27,7 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
     }
 
     public boolean update(World world) {
-        int realSpeed = engineersAssigned;
-        if (world.getPlayer().getMainCountry() == EarthCountry.EUROPE) {
-            realSpeed = (int) Math.ceil(realSpeed * Configuration.getDoubleProperty("player.europe.engineeringSpeedMultiplier"));
-        }
+        int realSpeed = getRealSpeed(world);
         remainingProgress -= realSpeed;
         if (remainingProgress <= 0) {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.engineering_project_completed"), getLocalizedName("engineering")));
@@ -38,6 +35,22 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
             return false;
         }
         return true;
+    }
+
+    public String getRemainingDays(World world) {
+        final int realSpeed = getRealSpeed(world);
+        if (realSpeed == 0) {
+            return "INF";
+        }
+        return String.valueOf(remainingProgress / realSpeed);
+    }
+
+    private int getRealSpeed(World world) {
+        int realSpeed = engineersAssigned;
+        if (world.getPlayer().getMainCountry() == EarthCountry.EUROPE) {
+            realSpeed = (int) Math.ceil(realSpeed * Configuration.getDoubleProperty("player.europe.engineeringSpeedMultiplier"));
+        }
+        return realSpeed;
     }
 
     public void changeEngineers(int amount, World world) {
@@ -54,6 +67,8 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
 
     public void onCompleted(World world) {
         projectStarted = false;
+        world.getPlayer().getEngineeringState().addIdleEngineers(engineersAssigned);
+        engineersAssigned = 0;
     }
 
     @Override
@@ -69,4 +84,8 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
      * @return project cost (0 if project have no cost)
      */
     public abstract int getCost();
+
+    public boolean isProjectStarted() {
+        return projectStarted;
+    }
 }

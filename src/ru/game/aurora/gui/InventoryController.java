@@ -35,7 +35,6 @@ public class InventoryController implements ScreenController {
 
     public InventoryController(World world) {
         this.world = world;
-        landingParty = world.getPlayer().getLandingParty();
     }
 
     @Override
@@ -47,6 +46,7 @@ public class InventoryController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        landingParty = world.getPlayer().getLandingParty();
         myWindow.setVisible(true);
         items.clear();
         for (Multiset.Entry<InventoryItem> entry : landingParty.getInventory().entrySet()) {
@@ -69,8 +69,7 @@ public class InventoryController implements ScreenController {
         closeScreen();
     }
 
-    private void updateWeight()
-    {
+    private void updateWeight() {
         EngineUtils.setTextForGUIElement(weightText, String.format(Localization.getText("gui", "landing_party.weight"), landingParty.getInventoryWeight(), landingParty.getMaxWeight()));
     }
 
