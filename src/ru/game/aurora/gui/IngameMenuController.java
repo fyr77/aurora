@@ -56,7 +56,12 @@ public class IngameMenuController implements Controller {
         GUI.getInstance().getNifty().gotoScreen("settings_screen");
     }
 
+    public void mainMenu() {
+        GUI.getInstance().closeIngameMenu();
+        AuroraGame.showExitConfirmation(true);
+    }
+
     public void exitGame() {
-        AuroraGame.showExitConfirmation();
+        AuroraGame.showExitConfirmation(false);
     }
 }

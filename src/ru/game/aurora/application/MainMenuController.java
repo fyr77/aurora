@@ -113,7 +113,7 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
     }
 
     public void exitGame() {
-        AuroraGame.showExitConfirmation();
+        AuroraGame.showExitConfirmation(false);
     }
 
     public void openBlog() {

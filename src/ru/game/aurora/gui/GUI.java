@@ -92,6 +92,7 @@ public class GUI {
         hackUnicodeFont("dpix_8pt.ttf");
         nifty.registerScreenController(new MainMenuController(con));
         nifty.registerScreenController(new LoadingScreenController());
+        nifty.registerScreenController(new ExitConfirmationScreenController());
         nifty.addXml("gui/screens/main_menu.xml");
         nifty.addXml("gui/screens/misc_screens.xml");
         nifty.addXml("gui/screens/loading_screen.xml");

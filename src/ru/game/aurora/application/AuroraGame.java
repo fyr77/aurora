@@ -18,6 +18,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.openal.SoundStore;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
+import ru.game.aurora.gui.ExitConfirmationScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
@@ -35,7 +36,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
     private static World world;
 
-    private MainMenuController mainMenu;
+    private static MainMenuController mainMenu;
 
     public static final int tileSize = 64;
 
@@ -194,10 +195,7 @@ public class AuroraGame extends NiftyOverlayGame {
             } else {
                 world.update(gameContainer);
                 if (world.isGameOver()) {
-                    mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
-                    mainMenu.reset();
-                    world = null;
-                    GUI.getInstance().getNifty().gotoScreen("main_menu");
+                    goToMainMenu();
                 }
             }
             final List<Updatable> updatables1 = new ArrayList<>(updatables);
@@ -211,8 +209,16 @@ public class AuroraGame extends NiftyOverlayGame {
         }
     }
 
-    public static void showExitConfirmation() {
+    public static void goToMainMenu() {
+        mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
+        mainMenu.reset();
+        world = null;
+        GUI.getInstance().getNifty().gotoScreen("main_menu");
+    }
+
+    public static void showExitConfirmation(boolean goToMainMenu) {
         GUI.getInstance().pushCurrentScreen();
+        ((ExitConfirmationScreenController) GUI.getInstance().getNifty().findScreenController(ExitConfirmationScreenController.class.getCanonicalName())).setGoToMainMenu(goToMainMenu);
         GUI.getInstance().getNifty().gotoScreen("exit_confirmation_screen");
     }
 
@@ -223,7 +229,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
     @Override
     public boolean closeRequested() {
-        showExitConfirmation();
+        showExitConfirmation(false);
         return false;
     }
 

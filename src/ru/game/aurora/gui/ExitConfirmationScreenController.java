@@ -13,6 +13,8 @@ import ru.game.aurora.application.AuroraGame;
  */
 public class ExitConfirmationScreenController implements ScreenController {
 
+    private boolean goToMainMenu = false;
+
     @Override
     public void bind(Nifty nifty, Screen screen) {
     }
@@ -30,6 +32,14 @@ public class ExitConfirmationScreenController implements ScreenController {
     }
 
     public void exitGame() {
-        AuroraGame.exitGame();
+        if (!goToMainMenu) {
+            AuroraGame.exitGame();
+        } else {
+            AuroraGame.goToMainMenu();
+        }
+    }
+
+    public void setGoToMainMenu(boolean goToMainMenu) {
+        this.goToMainMenu = goToMainMenu;
     }
 }
