@@ -171,7 +171,7 @@ public class WorldGenerator implements Runnable {
             if (cat == PlanetCategory.GAS_GIANT) {
                 // no gas giants on inner orbits
                 if (planetList.size() < 2) {
-                    cat = PlanetCategory.PLANET_ROCK;
+                    cat = r.nextBoolean() ? PlanetCategory.PLANET_ROCK : PlanetCategory.PLANET_FULL_STONE;
                 } else {
                     double rnd = Math.random();
                     if (rnd < Configuration.getDoubleProperty("world.starsystem.asteroidBeltChance") && (planetCount > 1) && !belt) {

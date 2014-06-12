@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.frankenstein.Slick2DColor;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.space.StarSystem;
@@ -49,6 +50,8 @@ public class PlanetSpriteGenerator {
 
         public float shadowXFactor, shadowYFactor;
 
+        public ColorCafe plantsColor = null;
+
         private PlanetSpriteParameters(BasePlanet planet) {
             this.hasAtmosphere = (planet.getAtmosphere() != PlanetAtmosphere.NO_ATMOSPHERE);
             this.cat = planet.category;
@@ -56,6 +59,12 @@ public class PlanetSpriteGenerator {
             double theta = Math.atan2(planet.getY(), planet.getX());
             shadowXFactor = (float) (0.5 - Math.cos(theta) * 0.25);
             shadowYFactor = (float) (0.5 - Math.sin(theta) * 0.25);
+            if (planet instanceof Planet) {
+                if (((Planet) planet).getFloraAndFauna() != null) {
+                    Slick2DColor leafColor = ((Planet) planet).getFloraAndFauna().getColorMap().get(5);
+                    plantsColor = new ColorCafe(leafColor.getR(), leafColor.getG(), leafColor.getB(), 255);
+                }
+            }
         }
 
         @Override
@@ -65,7 +74,11 @@ public class PlanetSpriteGenerator {
 
             PlanetSpriteParameters that = (PlanetSpriteParameters) o;
 
-            return hasAtmosphere == that.hasAtmosphere && size == that.size && cat == that.cat;
+            boolean shadowPositionNearlySame =
+                    (Math.abs(that.shadowXFactor - shadowXFactor) < 0.1) &&
+                    (Math.abs(that.shadowYFactor - shadowYFactor) < 0.1);
+
+            return hasAtmosphere == that.hasAtmosphere && size == that.size && cat == that.cat && shadowPositionNearlySame;
         }
 
         @Override
@@ -112,6 +125,16 @@ public class PlanetSpriteGenerator {
         renderer.addGradientPoint(-0.2000, new ColorCafe(183, 111, 161, 255));
         renderer.addGradientPoint(0.5000, new ColorCafe(194, 161, 118, 255));
         renderer.addGradientPoint(1.0000, new ColorCafe(251, 233, 193, 255));
+    }
+
+    private void setFullStonePlanetGradients(RendererImage renderer) throws ExceptionInvalidParam {
+        renderer.addGradientPoint(-1.0000, new ColorCafe(50, 50, 70, 255));
+        renderer.addGradientPoint(-0.9, new ColorCafe(70, 80, 80, 255));
+        renderer.addGradientPoint(-0.7000, new ColorCafe(100, 100, 100, 255));
+        renderer.addGradientPoint(-0.500, new ColorCafe(140, 140, 140, 255));
+        renderer.addGradientPoint(0.000, new ColorCafe(200, 180, 180, 255));
+        renderer.addGradientPoint(0.500, new ColorCafe(128, 128, 128, 255));
+        renderer.addGradientPoint(1.0000, new ColorCafe(255, 255, 255, 255));
     }
 
     private void setRockPlanetGradients(RendererImage renderer) throws ExceptionInvalidParam {
@@ -196,6 +219,9 @@ public class PlanetSpriteGenerator {
             renderer.clearGradient();
 
             switch (params.cat) {
+                case PLANET_FULL_STONE:
+                    setFullStonePlanetGradients(renderer);
+                    break;
                 case PLANET_ROCK:
                     setRockPlanetGradients(renderer);
                     break;
@@ -210,6 +236,10 @@ public class PlanetSpriteGenerator {
                     break;
                 default:
                     throw new IllegalArgumentException("Can not generate sprite for planet category" + params.cat);
+            }
+
+            if (params.plantsColor != null) {
+                renderer.addGradientPoint(0.200, params.plantsColor);
             }
 
             renderer.render();
@@ -314,7 +344,12 @@ public class PlanetSpriteGenerator {
             for (int x = 0; x < s; x++) {
                 double dx = s * shadowXFactor - x;
                 double d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2)) / (s / 8);
-                if (d < 1) d = 1;
+                d -= 1.3;
+                if (d < 1) {
+                    d = 1;
+                } else {
+                    d = 2 * d - 1;
+                }
                 Color c = new Color(source[y * s + x], true);
                 Color newC = new Color((int) (c.getRed() / d),(int) (c.getGreen() / d), (int) (c.getBlue() / d), c.getAlpha());
                 dest[y * s + x] = newC.getRGB();

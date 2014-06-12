@@ -16,6 +16,26 @@ public class LandscapeGenerator {
     // noise generation is rather slow, so generate noise SCALE_FACTOR times smaller than planet surface size, and then stretch
     private static final int SCALE_FACTOR = 2;
 
+    private static byte getTileForFullStonePlanet(double value) {
+        if (value < -0.5) {
+            return SurfaceTypes.STONES;
+        }
+
+        if (value < -0.1) {
+            return SurfaceTypes.STONES;
+        }
+
+        if (value < 0.2) {
+            return SurfaceTypes.ROCKS;
+        }
+
+        if (value < 0.4) {
+            return SurfaceTypes.ROCKS;
+        }
+
+        return SurfaceTypes.ROCKS | SurfaceTypes.MOUNTAINS_MASK | SurfaceTypes.OBSTACLE_MASK;
+    }
+
     private static byte getTileForRockPlanet(double value) {
         if (value < -0.5) {
             return SurfaceTypes.WATER | SurfaceTypes.OBSTACLE_MASK;
@@ -89,6 +109,9 @@ public class LandscapeGenerator {
                 byte tile;
                 final double noiseValue = noiseMap.getValue(x, y);
                 switch (cat) {
+                    case PLANET_FULL_STONE:
+                        tile = getTileForFullStonePlanet(noiseValue);
+                        break;
                     case PLANET_ROCK:
                         tile = getTileForRockPlanet(noiseValue);
                         break;

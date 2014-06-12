@@ -8,6 +8,8 @@ package ru.game.aurora.world.planet;
 public enum PlanetCategory {
     GAS_GIANT,
 
+    PLANET_FULL_STONE(SurfaceTypes.DIRT, SurfaceTypes.ROCKS, SurfaceTypes.STONES),
+
     PLANET_ROCK(SurfaceTypes.WATER, SurfaceTypes.DIRT, SurfaceTypes.ROCKS, SurfaceTypes.STONES),
 
     PLANET_ICE(SurfaceTypes.WATER, SurfaceTypes.ICE, SurfaceTypes.STONES, SurfaceTypes.ROCKS, SurfaceTypes.SNOW),

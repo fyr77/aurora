@@ -13,6 +13,9 @@ public class BasePositionable implements Positionable {
 
     protected int y;
 
+    protected int oldX = 0;
+    protected int oldY = 0;
+
     public BasePositionable(int x, int y) {
         this.x = x;
         this.y = y;
@@ -30,6 +33,8 @@ public class BasePositionable implements Positionable {
 
     @Override
     public void setPos(int newX, int newY) {
+        oldX = x;
+        oldY = y;
         x = newX;
         y = newY;
     }

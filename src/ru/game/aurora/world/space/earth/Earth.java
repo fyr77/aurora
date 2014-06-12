@@ -42,8 +42,6 @@ public class Earth extends BasePlanet {
     private int lastVisitTurn = 0;
 
     private transient Image earthImage = null;
-    private int oldX = 0;
-    private int oldY = 0;
 
     // flags used to control default earth dialog
     private Map<String, String> dialogFlags = new HashMap<>();

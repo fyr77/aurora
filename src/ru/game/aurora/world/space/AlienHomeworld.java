@@ -43,8 +43,6 @@ public class AlienHomeworld extends BasePlanet {
     private Map<String, String> dialogFlags = null;
 
     private transient Image planetImage = null;
-    private int oldX = 0;
-    private int oldY = 0;
 
     public AlienHomeworld(String spriteName, AlienRace ownerRace, Dialog customDialog, int size, int y, StarSystem owner, PlanetAtmosphere atmosphere, int x, PlanetCategory cat) {
         super(x, y, size, owner, atmosphere, cat);

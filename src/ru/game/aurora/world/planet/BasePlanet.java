@@ -119,8 +119,10 @@ public abstract class BasePlanet extends BasePositionable implements Room, Galax
 
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
-        if (sprite == null) {
+        if ((sprite == null) || x != oldX || y != oldY) {
             sprite = PlanetSpriteGenerator.getInstance().createPlanetSprite(camera, this);
+            oldX = x;
+            oldY = y;
         }
         // draw planetary rings in 2 steps - first part that is behind planet, then planet itself, then part before planet
         // draw rings shifted on 1/10 of planet diameter - looks nicer

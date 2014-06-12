@@ -39,7 +39,7 @@ public class HomeworldGenerator {
 
         planets[2] = new Earth(ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.BREATHABLE_ATMOSPHERE, 3, 0, 0);
         setCoord(planets[2], 5);
-        Planet Moon = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
+        Planet Moon = new Planet(world, ss, PlanetCategory.PLANET_FULL_STONE, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0);
         planets[2].addSatellite(Moon);
 
         // mars
