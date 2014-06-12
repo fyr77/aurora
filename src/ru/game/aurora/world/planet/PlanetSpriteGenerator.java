@@ -11,8 +11,8 @@ import libnoiseforjava.util.ColorCafe;
 import libnoiseforjava.util.ImageCafe;
 import libnoiseforjava.util.NoiseMap;
 import libnoiseforjava.util.RendererImage;
+import org.newdawn.slick.*;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.ImageBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
@@ -21,10 +21,10 @@ import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.awt.Color;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.awt.image.RescaleOp;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,10 +47,15 @@ public class PlanetSpriteGenerator {
 
         public final int size;
 
-        private PlanetSpriteParameters(boolean hasAtmosphere, PlanetCategory cat, int size) {
-            this.hasAtmosphere = hasAtmosphere;
-            this.cat = cat;
-            this.size = size;
+        public float shadowXFactor, shadowYFactor;
+
+        private PlanetSpriteParameters(BasePlanet planet) {
+            this.hasAtmosphere = (planet.getAtmosphere() != PlanetAtmosphere.NO_ATMOSPHERE);
+            this.cat = planet.category;
+            this.size = planet.size;
+            double theta = Math.atan2(planet.getY(), planet.getX());
+            shadowXFactor = (float) (0.5 - Math.cos(theta) * 0.25);
+            shadowYFactor = (float) (0.5 - Math.sin(theta) * 0.25);
         }
 
         @Override
@@ -82,40 +87,8 @@ public class PlanetSpriteGenerator {
         return instance;
     }
 
-    public Image createPlanetSprite(Camera camera, PlanetCategory cat, int size, boolean hasAtmosphere) {
-        return createPlanetSprite(camera, new PlanetSpriteParameters(hasAtmosphere, cat, size));
-    }
-
-    /**
-     * Create mask with a shadow.
-     * Mask is a black circle with an excluded smaller circle inside it
-     *
-     * @param radius    circle radius
-     * @param solX      center of excluded circle
-     * @param solY      center of excluded circle
-     * @param solRadius radius of excluded circle
-     * @return
-     */
-    private BufferedImage createMask(float radius, int solX, int solY, int solRadius) {
-        BufferedImage result = new BufferedImage((int) (2 * radius), (int) (2 * radius), BufferedImage.TYPE_4BYTE_ABGR);
-        final float diameter = 2 * radius;
-        for (int i = 0; i < diameter; ++i) {
-            for (int j = 0; j < diameter; ++j) {
-
-                if (Math.pow(radius - i, 2) + Math.pow(radius - j, 2) > radius * radius) {
-                    continue;
-                }
-
-                if (Math.pow(solX - i, 2) + Math.pow(solY - j, 2) < solRadius * solRadius) {
-                    continue;
-                }
-
-                result.setRGB(i, j, 0xFF000000);
-            }
-        }
-
-        return result;
-
+    public Image createPlanetSprite(Camera camera, BasePlanet planet) {
+        return createPlanetSprite(camera, new PlanetSpriteParameters(planet));
     }
 
     private Image createPlanetSprite(Camera cam, PlanetSpriteParameters params) {
@@ -189,9 +162,19 @@ public class PlanetSpriteGenerator {
         AffineTransform scaleTransform = AffineTransform.getScaleInstance(scaleX, scaleY);
         AffineTransformOp bilinearScaleOp = new AffineTransformOp(scaleTransform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 
-        return bilinearScaleOp.filter(
-                image,
-                new BufferedImage((int) width, (int) height, image.getType()));
+        BufferedImage result = bilinearScaleOp.filter(image, new BufferedImage((int) width, (int) height, image.getType()));
+        //"округлить" растянутый спрайт
+        double radius = width / 2 - 1;
+        for (int y = 0; y < height; y++) {
+            double kY = height / 2 - y + 0.5;
+            for (int x = 0; x < width; x++) {
+                double kX = width / 2 - x + 0.5;
+                if (Math.sqrt( Math.pow(kX, 2) +  Math.pow(kY, 2)) > radius) {
+                    result.setRGB(x, y, 0x00000000);
+                }
+            }
+        }
+        return result;
     }
 
     private Image createPlanetSpriteImpl(Camera cam, PlanetSpriteParameters params) {
@@ -231,34 +214,9 @@ public class PlanetSpriteGenerator {
 
             renderer.render();
 
-            BufferedImage result = new BufferedImage(noiseWidth, noiseHeight, BufferedImage.TYPE_4BYTE_ABGR);
-            for (int i = 0; i < noiseWidth; ++i) {
-                for (int j = 0; j < noiseHeight; ++j) {
-
-                    if (Math.pow(noiseWidth / 2 - i, 2) + Math.pow(noiseHeight / 2 - j, 2) > Math.pow(noiseWidth / 2, 2)) {
-                        continue;
-                    }
-
-                    ColorCafe c = image.getValue(i, j);
-                    int rgb = 0xFF000000 | c.getRed() << 16 | c.getGreen() << 8 | c.getBlue();
-                    result.setRGB(i, j, rgb);
-                }
-            }
-
+            BufferedImage result = convertToPlanetSprite(image, params.shadowXFactor, params.shadowYFactor);
             // scale image up
             result = getScaledImage(result, width, height);
-
-            // todo: mask based on position relative to sun
-            BufferedImage firstMask = createMask(radius, (int) (0.75 * width), (int) (0.75 * height), (int) (0.2 * width));
-            BufferedImage secondMask = createMask(radius, (int) (0.75 * width), (int) (0.75 * height), (int) (0.6 * width));
-
-            float[] scales = {1f, 1f, 1f, 0.4f};
-            float[] offsets = new float[4];
-            RescaleOp rop = new RescaleOp(scales, offsets, null);
-
-            /* Draw the image, applying the filter */
-            result.createGraphics().drawImage(firstMask, rop, 0, 0);
-            result.createGraphics().drawImage(secondMask, rop, 0, 0);
 
             if (params.hasAtmosphere) {
                 // draw atmosphere 'glow' surrounding the planet
@@ -284,5 +242,119 @@ public class PlanetSpriteGenerator {
             logger.error("Failed to create sprite for planet", ex);
         }
         return null;
+    }
+
+    private static BufferedImage convertToPlanetSprite(ImageCafe source, float shadowXFactor, float shadowYFactor) {
+        int w = source.getWidth();
+        int h = source.getHeight();
+        BufferedImage destination = new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR);
+        int[] s = new int[w * h];
+
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                ColorCafe c = source.getValue(x, y);
+                s[y * w + x] = 0xFF000000 | c.getRed() << 16 | c.getGreen() << 8 | c.getBlue();
+            }
+        }
+        int[] fe = fisheye(shadowPlanet(s, shadowXFactor, shadowYFactor), w, h);
+        //1 - чтобы убрать торчащие пиксели
+        for (int y = 1; y < h; y++) {
+            for (int x = 1; x < w; x++) {
+                if (Math.pow(w / 2 - x, 2) + Math.pow(w / 2 - y, 2) <= Math.pow(w / 2, 2)) {
+                    destination.setRGB(x, y, fe[y * w + x]);
+                }
+            }
+        }
+        return destination;
+    }
+
+    /**
+     * Затемняет спрайт планеты.
+     *
+     * @param source            Спрайт. Ширина должна быть равна высоте.
+     * @param shadowXFactor     координата X (от 0.0 до 1.0) - положение самой освещённой точки
+     * @param shadowYFactor     координата Y (от 0.0 до 1.0) - положение самой освещённой точки
+     *
+     * @return                  Затемнённой спрайт
+     */
+    public static Image shadowPlanet(Image source, float shadowXFactor, float shadowYFactor) {
+        int s = source.getWidth();
+        int[] sourceArray = new int[s * s];
+        for (int y = 0; y < s; y++) {
+            for (int x = 0; x < s; x++) {
+                org.newdawn.slick.Color c = source.getColor(x, y);
+                sourceArray[y * s + x] = 0xFF000000 | c.getRed() << 16 | c.getGreen() << 8 | c.getBlue();
+            }
+        }
+        int[] resultArray = shadowPlanet(sourceArray, shadowXFactor, shadowYFactor);
+        Image result = null;
+        try {
+            result = new Image(s, s);
+            for (int y = 0; y < s; y++) {
+                for (int x = 0; x < s; x++) {
+                    org.newdawn.slick.Color c = new org.newdawn.slick.Color(resultArray[y * s + x]);
+                    if (source.getColor(x, y).getAlpha() == 255) {
+                        result.getGraphics().setColor(c);
+                        result.getGraphics().fillRect(x, y, 1f, 1f);
+                    }
+                }
+            }
+            result.getGraphics().flush();
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private static int[] shadowPlanet(int[] source, float shadowXFactor, float shadowYFactor) {
+        int[] dest = new int[source.length];
+        int s = (int) Math.sqrt(source.length);
+        for (int y = 0; y < s; y++) {
+            double dy = s * shadowYFactor - y;
+            for (int x = 0; x < s; x++) {
+                double dx = s * shadowXFactor - x;
+                double d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2)) / (s / 8);
+                if (d < 1) d = 1;
+                Color c = new Color(source[y * s + x], true);
+                Color newC = new Color((int) (c.getRed() / d),(int) (c.getGreen() / d), (int) (c.getBlue() / d), c.getAlpha());
+                dest[y * s + x] = newC.getRGB();
+            }
+        }
+        return dest;
+    }
+
+    private static int[] fisheye(int[] srcpixels, double w, double h) {
+    /*
+     *    Fish eye effect
+     *    tejopa, 2012-04-29
+     *    http://popscan.blogspot.com
+     *    http://www.eemeli.de
+     */
+        int[] dstpixels = new int[(int)(w * h)];
+        for (int y = 0; y < h; y++) {
+            double ny = ((2 * y) / h) - 1;
+            double ny2 = ny * ny;
+            for (int x = 0; x < w; x++) {
+                double nx = ((2 * x)/ w) - 1;
+                double nx2 = nx * nx;
+                double r = Math.sqrt(nx2 + ny2);
+                if (0.0 <= r && r <= 1.0) {
+                    double nr = Math.sqrt(1.0 - r * r);
+                    nr = (r + (1.0 - nr)) / 2.0;
+                    if (nr <= 1.0) {
+                        double theta = Math.atan2(ny, nx);
+                        double nxn = nr * Math.cos(theta);
+                        double nyn = nr * Math.sin(theta);
+                        int x2 = (int)(((nxn + 1) * w) / 2.0);
+                        int y2 = (int)(((nyn + 1) * h) / 2.0);
+                        int srcpos = (int)(y2 * w + x2);
+                        if (srcpos >= 0 & srcpos < w * h) {
+                            dstpixels[(int)(y * w + x)] = srcpixels[srcpos];
+                        }
+                    }
+                }
+            }
+        }
+        return dstpixels;
     }
 }

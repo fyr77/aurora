@@ -20,6 +20,7 @@ import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
+import ru.game.aurora.world.planet.PlanetSpriteGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +42,10 @@ public class AlienHomeworld extends BasePlanet {
 
     private Map<String, String> dialogFlags = null;
 
+    private transient Image planetImage = null;
+    private int oldX = 0;
+    private int oldY = 0;
+
     public AlienHomeworld(String spriteName, AlienRace ownerRace, Dialog customDialog, int size, int y, StarSystem owner, PlanetAtmosphere atmosphere, int x, PlanetCategory cat) {
         super(x, y, size, owner, atmosphere, cat);
         this.ownerRace = ownerRace;
@@ -51,8 +56,16 @@ public class AlienHomeworld extends BasePlanet {
 
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
-        Image img = ResourceManager.getInstance().getImage(spriteName);
-        graphics.drawImage(img, camera.getXCoord(x) - img.getWidth() / 2 + camera.getTileWidth() / 2, camera.getYCoord(y) - img.getHeight() / 2 + camera.getTileHeight() / 2);
+        if ((planetImage == null) || x != oldX || y != oldY) {
+            planetImage = ResourceManager.getInstance().getImage(spriteName);
+            double theta = Math.atan2(y, x);
+            float shadowXFactor = (float) (0.5 - Math.cos(theta) * 0.25);
+            float shadowYFactor = (float) (0.5 - Math.sin(theta) * 0.25);
+            planetImage = PlanetSpriteGenerator.shadowPlanet(planetImage, shadowXFactor, shadowYFactor);
+            oldX = x;
+            oldY = y;
+        }
+        graphics.drawImage(planetImage, camera.getXCoord(x) - planetImage.getWidth() / 2 + camera.getTileWidth() / 2, camera.getYCoord(y) - planetImage.getHeight() / 2 + camera.getTileHeight() / 2);
     }
 
     @Override
