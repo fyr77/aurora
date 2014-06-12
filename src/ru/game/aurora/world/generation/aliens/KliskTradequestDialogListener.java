@@ -30,7 +30,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
     }
 
     @Override
-    public String getLocalizedMessageForStarSystem(GalaxyMapObject galaxyMapObject) {
+    public String getLocalizedMessageForStarSystem(World world, GalaxyMapObject galaxyMapObject) {
         if (galaxyMapObject == targetSystem) {
             return Localization.getText("journal", "klisk_trade.title");
         }

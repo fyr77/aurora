@@ -92,7 +92,7 @@ public abstract class GameEventListener implements Serializable {
      * This method checks if this quest has something to do with the star system, and if that is true - returns a related localized
      * message string.
      */
-    public String getLocalizedMessageForStarSystem(GalaxyMapObject galaxyMapObject) {
+    public String getLocalizedMessageForStarSystem(World world, GalaxyMapObject galaxyMapObject) {
         return null;
     }
 

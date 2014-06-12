@@ -54,7 +54,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
 
 
     @Override
-    public String getLocalizedMessageForStarSystem(GalaxyMapObject galaxyMapObject) {
+    public String getLocalizedMessageForStarSystem(World world, GalaxyMapObject galaxyMapObject) {
         if (messagePassed && galaxyMapObject == targetPlanet.getOwner()) {
             return Localization.getText("journal", "zorsan_rebels.title");
         }

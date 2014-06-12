@@ -78,7 +78,7 @@ public class StarMapController implements ScreenController {
 
                 StringBuilder messageBuilder = new StringBuilder();
                 for (GameEventListener listener : world.getListeners()) {
-                    final String localizedMessageForStarSystem = listener.getLocalizedMessageForStarSystem(obj);
+                    final String localizedMessageForStarSystem = listener.getLocalizedMessageForStarSystem(world, obj);
                     if (localizedMessageForStarSystem != null) {
                         messageBuilder.append(localizedMessageForStarSystem).append('\n');
                         mark(g, obj);

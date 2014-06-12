@@ -85,7 +85,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public String getLocalizedMessageForStarSystem(GalaxyMapObject galaxyMapObject) {
+        public String getLocalizedMessageForStarSystem(World world, GalaxyMapObject galaxyMapObject) {
             if (spawnedStarSystem == galaxyMapObject) {
                 return Localization.getText("journal", "damaged_rogues_scout.title");
             }

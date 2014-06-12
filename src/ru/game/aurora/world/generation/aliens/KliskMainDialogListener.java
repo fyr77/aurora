@@ -44,7 +44,11 @@ public class KliskMainDialogListener implements DialogListener {
 // initial quest - trading of race information
 
             case 500:
-                world.getPlayer().changeCredits(world, 7);
+                if (flags.containsKey("base_info")) {
+                    world.getPlayer().changeCredits(world, 5);
+                } else {
+                    world.getPlayer().changeCredits(world, 10);
+                }
                 break;
 
 ///////

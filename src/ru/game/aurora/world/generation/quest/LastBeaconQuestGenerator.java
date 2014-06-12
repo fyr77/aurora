@@ -49,7 +49,7 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart {
         lastBeaconLocation.getShips().add(gardenerShip);
 
 
-        AlienRace kliskRace = world.getRaces().get("Klisk");
+        AlienRace kliskRace = world.getRaces().get(KliskGenerator.NAME);
         final NPCShip kliskShip = kliskRace.getDefaultFactory().createShip(world, KliskGenerator.STATION);
         lastBeaconLocation.setRandomEmptyPosition(kliskShip);
         lastBeaconLocation.getShips().add(kliskShip);
@@ -66,7 +66,7 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart {
             }
 
             @Override
-            public String getLocalizedMessageForStarSystem(GalaxyMapObject galaxyMapObject) {
+            public String getLocalizedMessageForStarSystem(World world, GalaxyMapObject galaxyMapObject) {
                 if (galaxyMapObject == lastBeaconLocation) {
                     return Localization.getText("journal", "last_beacon.title");
                 }

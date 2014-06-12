@@ -53,7 +53,7 @@
             }
           ],
           "flags": {
-            "": "true"
+            "klisk.coordinates_traded": "true"
           }
         },
         {
@@ -354,9 +354,9 @@
       "id": 14,
       "replies": [
         {
-          "returnValue": 0,
           "targetStatementId": 15,
-          "replyText": "0"
+          "replyText": "0",
+          "returnValue" : 500
         },
         {
           "returnValue": 0,

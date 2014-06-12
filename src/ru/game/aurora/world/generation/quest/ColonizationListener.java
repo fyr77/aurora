@@ -1,6 +1,7 @@
 package ru.game.aurora.world.generation.quest;
 
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
@@ -11,6 +12,7 @@ import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.Animal;
 import ru.game.aurora.world.planet.nature.AnimalModifier;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
+import ru.game.aurora.world.space.GalaxyMapObject;
 
 import java.util.Collections;
 import java.util.Map;
@@ -130,5 +132,17 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         }
 
         return false;
+    }
+
+    @Override
+    public String getLocalizedMessageForStarSystem(World world, GalaxyMapObject galaxyMapObject) {
+        if (world.getGlobalVariables().containsKey("colony_search.coords")) {
+            Planet p = (Planet) world.getGlobalVariables().get("colony_search.coords");
+            if (p.getOwner() == galaxyMapObject) {
+                return Localization.getText("journal", "colony_search.map_label");
+            }
+        }
+
+        return null;
     }
 }

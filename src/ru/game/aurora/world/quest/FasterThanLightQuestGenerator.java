@@ -232,7 +232,7 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
     }
 
     @Override
-    public String getLocalizedMessageForStarSystem(GalaxyMapObject galaxyMapObject) {
+    public String getLocalizedMessageForStarSystem(World world, GalaxyMapObject galaxyMapObject) {
         if (galaxyMapObject == targetSystem && state >= 2) {
             return Localization.getText("journal", "ftl.title");
         }
