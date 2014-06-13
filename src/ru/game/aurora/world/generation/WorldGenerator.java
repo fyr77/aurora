@@ -181,7 +181,7 @@ public class WorldGenerator implements Runnable {
                         ss.setAsteroidBelt(radius, width);
                         prevRadius += (width - 1);
                     } else {
-                        planetList.add(new GasGiant(planetX, planetY, ss));
+                        planetList.add(new GasGiant(planetX, planetY, ss, CollectionUtils.selectRandomElement(PlanetCategory.GasGiantColors.values())));
                     }
                     continue;
                 }

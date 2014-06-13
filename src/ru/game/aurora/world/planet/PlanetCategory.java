@@ -16,8 +16,6 @@ public enum PlanetCategory {
 
     PLANET_WATER(SurfaceTypes.WATER, SurfaceTypes.STONES, SurfaceTypes.DIRT);
 
-
-
     private PlanetCategory(Byte... availableSurfaceTypes) {
         this.availableSurfaceTypes = availableSurfaceTypes;
     }
@@ -25,4 +23,9 @@ public enum PlanetCategory {
     // not byte, as it is used to call generic method selectRandomElement()
     public final Byte[] availableSurfaceTypes;
 
+    public static enum GasGiantColors {
+        YELLOW,
+        BLUE,
+        RED
+    }
 }

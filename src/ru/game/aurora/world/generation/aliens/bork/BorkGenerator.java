@@ -106,7 +106,7 @@ public class BorkGenerator implements WorldGeneratorPart {
         planets[3] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
         HomeworldGenerator.setCoord(planets[3], 7);
 
-        planets[4] = new GasGiant(0, 0, ss);
+        planets[4] = new GasGiant(0, 0, ss, PlanetCategory.GasGiantColors.RED);
         HomeworldGenerator.setCoord(planets[4], 9);
         planets[4].setRings(1);
 
