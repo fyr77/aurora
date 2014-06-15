@@ -37,14 +37,17 @@ public class BorkDialogListener implements DialogListener {
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
         if (flags.containsKey("bork_blockade.withdraw")) {
             removeBlockade(world);
+            flags.remove("bork_blockade.withdraw");
         }
 
         if (flags.containsKey("bork.war_help")) {
             world.getGlobalVariables().put("bork.war_help", true);
+            flags.remove("bork.war_help");
         }
 
         if (flags.containsKey("zorsan_escape_discussed") && !world.getPlayer().getJournal().getQuests().get("zorsan_relations").contains("bork_info")) {
             world.getPlayer().getJournal().addQuestEntries("zorsan_relations", "bork_info");
+            flags.remove("zorsan_escape_discussed");
         }
     }
 }

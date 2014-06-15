@@ -50,14 +50,17 @@ public class RoguesMainDialogListener implements DialogListener {
                     ((DungeonEntrance) po).setLocked("rogues_altar_abandoned");
                 }
             }
+            flags.remove("rogues_altar.withdraw");
         }
 
         if (flags.containsKey("zorsan.quest") && !world.getGlobalVariables().containsKey("zorsan.war_preparations")) {
             ZorsanGenerator.addWarDataDrop();
+            flags.remove("zorsan.quest");
         }
 
         if (flags.containsKey("war_help")) {
             world.getGlobalVariables().put("rogues.war_help", true);
+            flags.remove("war_help");
         }
 
         if (returnCode == 200 || returnCode == 202) {
