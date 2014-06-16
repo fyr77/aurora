@@ -11,8 +11,7 @@ import java.io.Serializable;
  * Date: 19.03.14
  * Time: 15:56
  */
-public class Slick2DColor implements FrankensteinColor, Serializable
-{
+public class Slick2DColor implements FrankensteinColor, Serializable {
     private static final long serialVersionUID = 7371175836249657696L;
 
     private Color color;
@@ -39,5 +38,26 @@ public class Slick2DColor implements FrankensteinColor, Serializable
     @Override
     public int getAlpha() {
         return color.getAlpha();
+    }
+
+    @Override
+    public String toString() {
+        return color.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Slick2DColor that = (Slick2DColor) o;
+
+        return color.equals(that.color);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return color.hashCode();
     }
 }
