@@ -51,7 +51,11 @@ public class AstronomyResearch extends ResearchProjectDesc
             return Localization.getText("research", "astronomy.paused");
         }
 
-        return String.format(Localization.getText("research", "astronomy.status"), ss.getAstronomyData(), ss.getAstronomyData() / (float) scientists);
+        if (ss.getAstronomyData() > 0) {
+            return String.format(Localization.getText("research", "astronomy.status"), ss.getAstronomyData(), ss.getAstronomyData() / (float) scientists);
+        } else {
+            return Localization.getText("research", "astronomy.all_data_collected");
+        }
     }
 
     @Override
