@@ -285,7 +285,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         beaconInternals.setEnterDialog(enterDialog);
         beaconInternals.setSuccessDialog(Dialog.loadFromFile("dialogs/rogues/rogues_beacon_explored.json"));
         final SpaceHulk beacon = new SpaceHulk(1, 1, "Beacon", "rogues_beacon", beaconInternals);
-        beaconInternals.getController().addListener(new IStateChangeListener() {
+        beaconInternals.getController().addListener(new IStateChangeListener<World>() {
             private static final long serialVersionUID = 4018207362752529165L;
 
             @Override

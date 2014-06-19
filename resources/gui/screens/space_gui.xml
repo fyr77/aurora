@@ -279,6 +279,10 @@
         </control>
     </popup>
 
+    <popup id="target_selection_popup" childLayout="absolute">
+        <control name="interaction_target_selector" id="interaction_target_selector"/>
+    </popup>
+
 
     <popup id="object_scan" childLayout="absolute">
         <control id="object_scan_window" name="window" title="${gui.scan.title}" hideOnClose="true" width="60%" x="20%"

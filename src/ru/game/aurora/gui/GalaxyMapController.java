@@ -18,9 +18,11 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.niffy.CustomHint;
 import ru.game.aurora.gui.niffy.ImageButtonController;
+import ru.game.aurora.gui.niffy.InteractionTargetSelectorController;
 import ru.game.aurora.gui.niffy.TopPanelController;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
@@ -226,34 +228,38 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     public void leftButtonPressed() {
         StarSystem currentStarSystem = world.getCurrentStarSystem();
         if (currentStarSystem != null) {
-            if (currentStarSystem.getPlanetAtPlayerShipPosition() != null) {
-                land();
-                return;
-            }
-            SpaceObject so = currentStarSystem.getSpaceObjectAtPlayerShipPosition();
-            if (so != null) {
-                so.onContact(world);
-                world.onPlayerContactedAlienShip(so);
-            }
+            currentStarSystem.interactWithObjectAtShipPosition(world);
         }
     }
 
     public void rightButtonPressed() {
         if (world.getCurrentStarSystem() != null) {
-            BasePlanet planet = world.getCurrentStarSystem().getPlanetAtPlayerShipPosition();
-            if (planet != null) {
-                scanPlanet(planet);
+            List<SpaceObject> objects = world.getCurrentStarSystem().getSpaceObjectAtPlayerShipPosition();
+            if (objects.isEmpty()) {
+                return;
+            }
+            if (objects.size() == 1) {
+                if (BasePlanet.class.isAssignableFrom(objects.get(0).getClass())) {
+                    scanPlanet((BasePlanet) objects.get(0));
+                } else {
+                    scanObject(objects.get(0));
+                }
+                return;
             }
 
-            SpaceObject spaceObject = world.getCurrentStarSystem().getSpaceObjectAtPlayerShipPosition();
-            if (spaceObject != null) {
-                scanObject(spaceObject);
-            }
+            InteractionTargetSelectorController.open(new IStateChangeListener<SpaceObject>() {
+                private static final long serialVersionUID = -8114467555795780919L;
+
+                @Override
+                public void stateChanged(SpaceObject param) {
+                    if (BasePlanet.class.isAssignableFrom(param.getClass())) {
+                        scanPlanet((BasePlanet) param);
+                    } else {
+                        scanObject(param);
+                    }
+                }
+            }, objects);
         }
-    }
-
-    private void land() {
-        world.getCurrentStarSystem().landOnCurrentPlanet(world);
     }
 
     private void scanObject(SpaceObject object) {
@@ -270,6 +276,8 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
             return;
         }
         GUI.getInstance().pushCurrentScreen();
+        PlanetScanController psc = (PlanetScanController) GUI.getInstance().getNifty().findScreenController(PlanetScanController.class.getCanonicalName());
+        psc.setPlanetToScan(planet);
         GUI.getInstance().getNifty().gotoScreen("planet_scan_screen");
     }
 

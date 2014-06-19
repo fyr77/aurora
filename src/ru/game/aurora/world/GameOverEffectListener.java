@@ -9,7 +9,7 @@ import ru.game.aurora.gui.GUI;
 * Date: 16.05.14
 * Time: 15:27
 */
-public class GameOverEffectListener implements IStateChangeListener {
+public class GameOverEffectListener implements IStateChangeListener<World> {
 
     private static final long serialVersionUID = -5155503207553019512L;
 

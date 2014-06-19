@@ -57,7 +57,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
     // makes zorsan hostile to player only after a couple of turns
     // otherwise player ship gets destroyed almost instantly
-    private static class ZorsanEscapeListener extends GameEventListener implements IStateChangeListener {
+    private static class ZorsanEscapeListener extends GameEventListener implements IStateChangeListener<World> {
 
         private static final long serialVersionUID = -5333707636208684602L;
 

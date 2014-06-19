@@ -7,10 +7,7 @@
 
 package ru.game.aurora.world.quest;
 
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.*;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
@@ -29,7 +26,7 @@ import ru.game.aurora.world.space.StarSystem;
 import java.util.Map;
 
 
-public class FasterThanLightQuestGenerator extends GameEventListener implements WorldGeneratorPart, DialogListener, IStateChangeListener {
+public class FasterThanLightQuestGenerator extends GameEventListener implements WorldGeneratorPart, DialogListener, IStateChangeListener<World> {
     private static final long serialVersionUID = 5277056878029046570L;
 
     private final int requiredTechLevel;
@@ -87,6 +84,11 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
             world.getPlayer().getShip().setMovementSpeed(world.getPlayer().getShip().getMovementSpeed() + 1);
             GameLogger.getInstance().logMessage(Localization.getText("journal", "ftl.solar_wind_used"));
             alive = false;
+        }
+
+        @Override
+        public Image getImage() {
+            return myAnim.getCurrentFrame();
         }
     }
 
