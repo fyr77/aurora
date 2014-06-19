@@ -106,6 +106,11 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
         }
 
         @Override
+        public String getScanDescription(World world) {
+            return Localization.getText("journal", "ftl.star.desc");
+        }
+
+        @Override
         public void draw(GameContainer container, Graphics graphics, Camera camera) {
             if (growing) {
                 EngineUtils.drawCircleCentered(graphics, camera.getXCoord(0) + camera.getTileWidth() / 2, camera.getYCoord(0) + camera.getTileHeight() / 2, (int) (radius * camera.getTileWidth()), color, true);
