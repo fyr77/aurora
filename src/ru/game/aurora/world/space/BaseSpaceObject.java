@@ -2,7 +2,9 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.World;
@@ -104,5 +106,10 @@ public class BaseSpaceObject extends BasePositionable implements SpaceObject {
     @Override
     public boolean canBeShotAt() {
         return false;
+    }
+
+    @Override
+    public Image getImage() {
+        return ResourceManager.getInstance().getImage("no_image");
     }
 }

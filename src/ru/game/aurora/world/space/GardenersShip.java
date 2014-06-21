@@ -66,7 +66,7 @@ public class GardenersShip extends NPCShip implements SpaceObject {
         ss.addEffect(warpEffect);
         // show dialog after first wrap seen by player
         if (world.getGlobalVariables().containsKey("gardeners.first_warp")) {
-            warpEffect.setEndListener(new IStateChangeListener() {
+            warpEffect.setEndListener(new IStateChangeListener<World>() {
 
                 private static final long serialVersionUID = -4524072912665603030L;
 

@@ -130,6 +130,7 @@ public class GUI {
         nifty.registerScreenController(new StarMapController(world));
 
         // load xmls
+        nifty.addXml("gui/screens/interaction_target_selection_control.xml");
         nifty.addXml("gui/screens/image_button.xml");
         nifty.addXml("gui/screens/shoot_panel.xml");
         nifty.addXml("gui/screens/progress_bar.xml");

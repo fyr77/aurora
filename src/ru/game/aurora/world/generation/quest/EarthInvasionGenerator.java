@@ -60,7 +60,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
             // add a victory condition
             myMap.getVictoryConditions().add(new KillAllMonstersCondition("guard"));
-            world.getCurrentDungeon().getController().addListener(new IStateChangeListener() {
+            world.getCurrentDungeon().getController().addListener(new IStateChangeListener<World>() {
 
                 private static final long serialVersionUID = 6517626927654743737L;
 

@@ -65,10 +65,13 @@ public class PlanetScanController implements ScreenController {
         atmosphereHint = myWindow.findElementByName("scan_text");
     }
 
+    public void setPlanetToScan(BasePlanet planetToScan) {
+        this.planetToScan = planetToScan;
+    }
+
     @Override
     public void onStartScreen() {
         myWindow.setVisible(true);
-        planetToScan = world.getCurrentStarSystem().getPlanetAtPlayerShipPosition();
 
         world.setPaused(true);
 
@@ -180,6 +183,6 @@ public class PlanetScanController implements ScreenController {
 
     public void land() {
         closeScreen();
-        world.getCurrentStarSystem().landOnCurrentPlanet(world);
+        planetToScan.enter(world);
     }
 }

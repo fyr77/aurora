@@ -2,6 +2,7 @@ package ru.game.aurora.world.space;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
@@ -77,6 +78,11 @@ public class SpaceDebris extends BaseSpaceObject {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        graphics.drawImage(ResourceManager.getInstance().getImage("debris"), camera.getXCoord(x), camera.getYCoord(y));
+        graphics.drawImage(getImage(), camera.getXCoord(x), camera.getYCoord(y));
+    }
+
+    @Override
+    public Image getImage() {
+        return ResourceManager.getInstance().getImage("debris");
     }
 }

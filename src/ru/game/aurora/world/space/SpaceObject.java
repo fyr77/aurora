@@ -6,6 +6,7 @@
  */
 package ru.game.aurora.world.space;
 
+import org.newdawn.slick.Image;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.IMovable;
@@ -22,6 +23,8 @@ public interface SpaceObject extends GameObject, IMovable {
     public boolean isAlive();
 
     public String getName();
+
+    public Image getImage();
 
     /**
      * This text will be shown to a player when he is scanning this object

@@ -304,7 +304,7 @@ public class DungeonController extends Listenable implements Serializable {
 
             ResourceManager.getInstance().getSound(landingParty.getWeapon().getShotSound()).play();
 
-            blasterShotEffect.setEndListener(new IStateChangeListener() {
+            blasterShotEffect.setEndListener(new IStateChangeListener<World>() {
                 private static final long serialVersionUID = -7742240385490245306L;
 
                 @Override

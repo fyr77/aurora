@@ -89,7 +89,7 @@ public class EvacuationState implements Serializable {
             ss = new StoryScreen("story/evacuation_ending_normal.json");
         }
 
-        ss.setListener(new IStateChangeListener() {
+        ss.setListener(new IStateChangeListener<World>() {
 
             private static final long serialVersionUID = 2069156686330555730L;
 

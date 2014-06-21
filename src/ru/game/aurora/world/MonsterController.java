@@ -106,7 +106,7 @@ public class MonsterController implements Serializable {
                         return;
                     }
                     Effect eff = playAttackEffects(world, party);
-                    eff.setEndListener(new IStateChangeListener() {
+                    eff.setEndListener(new IStateChangeListener<World>() {
                         private static final long serialVersionUID = -7177344379777105885L;
 
                         @Override
@@ -168,7 +168,7 @@ public class MonsterController implements Serializable {
                     if (po1.getDistance(myMonster) < weapon.getRange() && map.lineOfSightExists(x, y, po.getX(), po.getY())) {
 
                         Effect eff = playAttackEffects(world, po1);
-                        eff.setEndListener(new IStateChangeListener() {
+                        eff.setEndListener(new IStateChangeListener<World>() {
                             private static final long serialVersionUID = 995534841614292836L;
 
                             @Override

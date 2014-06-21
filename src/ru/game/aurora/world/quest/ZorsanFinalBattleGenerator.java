@@ -158,7 +158,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         spaceStation.setCaptain(new NPC(boardingDialog));
         spaceStationBoardingTimer = new GameTimer(15);
         spaceStationDungeon = new Dungeon(world, new AuroraTiledMap("maps/hum_station.tmx"), solarSystem);
-        spaceStationDungeon.getController().addListener(new IStateChangeListener() {
+        spaceStationDungeon.getController().addListener(new IStateChangeListener<World>() {
             private static final long serialVersionUID = 7759568719556795246L;
 
             @Override
@@ -417,7 +417,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
             final StoryScreen storyScreen = new StoryScreen("story/obliterator.json");
             world.addOverlayWindow(storyScreen);
-            storyScreen.setListener(new IStateChangeListener() {
+            storyScreen.setListener(new IStateChangeListener<World>() {
 
                 private static final long serialVersionUID = -7376617022370202993L;
 

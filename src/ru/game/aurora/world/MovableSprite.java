@@ -13,7 +13,7 @@ import ru.game.aurora.application.ResourceManager;
 public class MovableSprite extends Movable {
     private static final long serialVersionUID = -5465459906103379544L;
 
-    private String sprite;
+    protected String sprite;
 
     private boolean isFlipped = false;
 
@@ -40,7 +40,11 @@ public class MovableSprite extends Movable {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera) {
-        Image image = isFlipped ? ResourceManager.getInstance().getFlippedImage(sprite) : ResourceManager.getInstance().getImage(sprite);
-        g.drawImage(image, camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
+        g.drawImage(getImage(), camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
+    }
+
+    public Image getImage()
+    {
+        return isFlipped ? ResourceManager.getInstance().getFlippedImage(sprite) : ResourceManager.getInstance().getImage(sprite);
     }
 }
