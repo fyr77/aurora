@@ -79,7 +79,7 @@ public abstract class BasePlanet extends BaseSpaceObject implements Room, Galaxy
 
     @Override
     public String getName() {
-        return null;
+        return "Planet";
     }
 
     public StarSystem getOwner() {
@@ -152,5 +152,4 @@ public abstract class BasePlanet extends BaseSpaceObject implements Room, Galaxy
         world.setCurrentRoom(this);
         enter(world);
     }
-
 }

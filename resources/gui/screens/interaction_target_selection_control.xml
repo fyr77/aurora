@@ -3,20 +3,21 @@
     <controlDefinition name="interact-line-with-image">
         <panel childLayout="horizontal" width="100%" align="center" padding="5px">
             <image id="#line-icon" width="64px" height="64px"/>
-            <text id="#line-text" style="base-font" align="left" textHAlign="left" height="64px" width="200px" wrap="true"/>
-            <control id="#useButton" name="button" label="${gui.select}" width="120px" height="64px">
-                <interact onClick="selectPressed()"/>
-            </control>
+            <text id="#line-text" style="base-font" align="left" textHAlign="left" height="64px" width="200px"
+                  wrap="true"/>
+            <control id="#useButton" name="button" label="${gui.select}" width="120px" height="64px"/>
         </panel>
 
     </controlDefinition>
 
 
-    <controlDefinition name="interaction_target_selector" controller="ru.game.aurora.gui.niffy.InteractionTargetSelectorController">
+    <controlDefinition name="interaction_target_selector"
+                       controller="ru.game.aurora.gui.niffy.InteractionTargetSelectorController">
         <panel childLayout="absolute">
-            <control id="target_selection_window" name="window" title="${gui.target_selection.caption}" hideOnClose="true" width="100px" height="20%" x="10%" y="10%">
+            <control id="#target_selection_window" name="window" title="${gui.target_selection.caption}"
+                     hideOnClose="true" width="100%" height="100%" x="10%" y="10%">
                 <panel childLayout="center">
-                    <control id="objects" name="listBox" vertical="optional" horizontal="off" selection="Single"
+                    <control id="#objects" name="listBox" vertical="optional" horizontal="off" selection="Single"
                              displayItems="8"
                              viewConverterClass="ru.game.aurora.gui.niffy.InteractionTargetSelectionViewConverter">
                         <control name="interact-line-with-image"

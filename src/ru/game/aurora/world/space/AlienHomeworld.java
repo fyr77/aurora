@@ -116,4 +116,14 @@ public class AlienHomeworld extends BasePlanet {
     public void setCanBeCommunicated(boolean canBeCommunicated) {
         this.canBeCommunicated = canBeCommunicated;
     }
+
+    @Override
+    public Image getImage() {
+        return planetImage;
+    }
+
+    @Override
+    public String getName() {
+        return getRace().getName() + " homeworld";
+    }
 }

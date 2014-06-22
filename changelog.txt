@@ -2,6 +2,9 @@ VERSION 0.3.2
 
 IN PROGRESS...
 
+* Target selection popup
+* Realistic planet shading
+
 =============================================
 
 VERSION 0.3.1

@@ -70,7 +70,7 @@ public class HomeworldGenerator {
         ss.setPlanets(planets);
         ss.setRadius(26);
 
-        NPCShip spaceStation = new NPCShip(planets[2].getX() + 1, planets[2].getY() - 1, "earth_station", humanRace, null, "Orbital Scaffold", 25);
+        NPCShip spaceStation = new NPCShip(planets[2].getX(), planets[2].getY(), "earth_station", humanRace, null, "Orbital Scaffold", 25);
         if (spaceStation.getDistance(Moon) == 0) { // check that it does not intersect with moon
             spaceStation.setPos(spaceStation.getX(), spaceStation.getY() + 1);
         }

@@ -128,14 +128,16 @@
                                  height="50px">
                             <interact onRelease="openResearchScreen()"/>
                             <effect>
-                                <onHover name="custom-hint" targetElement="hint-panel" hintText="${hints.space.research}"/>
+                                <onHover name="custom-hint" targetElement="hint-panel"
+                                         hintText="${hints.space.research}"/>
                             </effect>
                         </control>
                         <control id="engineering_button" name="button" label="${gui.space.engineering}" width="90%"
                                  height="50px">
                             <interact onRelease="openEngineeringScreen()"/>
                             <effect>
-                                <onHover name="custom-hint" targetElement="hint-panel" hintText="${hints.space.engineering}"/>
+                                <onHover name="custom-hint" targetElement="hint-panel"
+                                         hintText="${hints.space.engineering}"/>
                             </effect>
                         </control>
                         <control id="journal_button" name="button" label="${gui.journal.title}"
@@ -143,7 +145,8 @@
                                  height="50px">
                             <interact onRelease="openJournal()"/>
                             <effect>
-                                <onHover name="custom-hint" targetElement="hint-panel" hintText="${hints.space.journal}"/>
+                                <onHover name="custom-hint" targetElement="hint-panel"
+                                         hintText="${hints.space.journal}"/>
                             </effect>
                         </control>
                         <control id="landing_party_equip_button" name="button" label="${gui.space.landing_party}"
@@ -151,7 +154,8 @@
                                  height="50px">
                             <interact onRelease="openLandingPartyScreen()"/>
                             <effect>
-                                <onHover name="custom-hint" targetElement="hint-panel" hintText="${hints.space.landing_party}"/>
+                                <onHover name="custom-hint" targetElement="hint-panel"
+                                         hintText="${hints.space.landing_party}"/>
                             </effect>
                         </control>
                         <control id="menu_button" name="button" label="${gui.space.menu}" width="90%" height="50px">
@@ -280,7 +284,7 @@
     </popup>
 
     <popup id="target_selection_popup" childLayout="absolute">
-        <control name="interaction_target_selector" id="interaction_target_selector"/>
+        <control name="interaction_target_selector" id="interaction_target_selector" width="30%" height="40%"/>
     </popup>
 
 

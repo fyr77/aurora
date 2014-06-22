@@ -211,4 +211,14 @@ public class Earth extends BasePlanet {
     public String getScanText() {
         return Localization.getText("races", "Humans.homeworld.description");
     }
+
+    @Override
+    public String getName() {
+        return "Earth";
+    }
+
+    @Override
+    public Image getImage() {
+        return earthImage;
+    }
 }

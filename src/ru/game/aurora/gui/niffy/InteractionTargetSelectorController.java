@@ -25,8 +25,7 @@ import java.util.List;
 import java.util.Properties;
 
 
-public class InteractionTargetSelectorController implements Controller
-{
+public class InteractionTargetSelectorController implements Controller {
     private Element myWindow;
 
     private ListBox<SpaceObject> listBox;
@@ -35,30 +34,27 @@ public class InteractionTargetSelectorController implements Controller
 
     private static String popupId;
 
-    public static void open(IStateChangeListener<SpaceObject> selectionListener, List<SpaceObject> so)
-    {
+    public static void open(IStateChangeListener<SpaceObject> selectionListener, List<SpaceObject> so) {
         final Nifty nifty = GUI.getInstance().getNifty();
-        Element target_selection_popup = nifty.findPopupByName("target_selection_popup");
-        if (target_selection_popup == null) {
-            target_selection_popup = nifty.createPopup("target_selection_popup");
-            popupId = target_selection_popup.getId();
-        }
-        nifty.showPopup(nifty.getCurrentScreen(), popupId, null);
+        Element target_selection_popup = nifty.createPopup("target_selection_popup");
+        popupId = target_selection_popup.getId();
         InteractionTargetSelectorController controller = target_selection_popup.findControl("interaction_target_selector", InteractionTargetSelectorController.class);
         controller.setCallback(selectionListener);
         controller.setObjects(so);
+        nifty.showPopup(nifty.getCurrentScreen(), popupId, null);
+
     }
 
-    public void setObjects(List<SpaceObject> objects)
-    {
+    public void setObjects(List<SpaceObject> objects) {
         listBox.clear();
         listBox.addAllItems(objects);
+        myWindow.layoutElements();
     }
 
     @Override
     public void bind(Nifty nifty, Screen screen, Element element, Properties parameter, Attributes controlDefinitionAttributes) {
-        myWindow = element.findControl("target_selection_window", WindowControl.class).getElement();
-        listBox = element.findNiftyControl("objects", ListBox.class);
+        myWindow = element.findControl("#target_selection_window", WindowControl.class).getElement();
+        listBox = element.findNiftyControl("#objects", ListBox.class);
 
     }
 
@@ -80,25 +76,23 @@ public class InteractionTargetSelectorController implements Controller
         return false;
     }
 
-    public void selectPressed()
-    {
-        if (callback != null) {
-            callback.stateChanged(listBox.getSelection().get(0));
-            callback = null;
-        }
-        GUI.getInstance().getNifty().closePopup(popupId);
-    }
 
+    @NiftyEventSubscriber(pattern = ".*target_selection_window")
     public void onClose(String id, WindowClosedEvent event) {
-        myWindow.show();
-        GUI.getInstance().getNifty().closePopup(popupId);
+        GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
     }
 
     @NiftyEventSubscriber(pattern = ".*Button")
     public void onClicked(String id, ButtonClickedEvent event) {
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        numericId -= Integer.parseInt(listBox.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        listBox.setFocusItemByIndex(numericId);
+        // hack: this method is called twice for some reason, second call to closePopup leads to a crash
+        if (callback != null) {
+            int numericId = Integer.parseInt(id.split("#")[0]);
+            numericId -= Integer.parseInt(listBox.getElement().findElementByName("#child-root").getElements().get(0).getId());
+            final int finalNumericId = numericId;
+            GUI.getInstance().getNifty().closePopup(popupId);
+            callback.stateChanged(listBox.getItems().get(finalNumericId));
+            callback = null;
+        }
     }
 
     public void setCallback(IStateChangeListener<SpaceObject> callback) {
