@@ -234,7 +234,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
     public void rightButtonPressed() {
         if (world.getCurrentStarSystem() != null) {
-            List<SpaceObject> objects = world.getCurrentStarSystem().getSpaceObjectAtPlayerShipPosition();
+            List<SpaceObject> objects = world.getCurrentStarSystem().getSpaceObjectsAtPosition(world.getPlayer().getShip());
             if (objects.isEmpty()) {
                 return;
             }

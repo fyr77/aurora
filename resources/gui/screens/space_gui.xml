@@ -284,7 +284,7 @@
     </popup>
 
     <popup id="target_selection_popup" childLayout="absolute">
-        <control name="interaction_target_selector" id="interaction_target_selector" width="30%" height="40%"/>
+        <control name="interaction_target_selector" id="interaction_target_selector" width="400px" height="40%"/>
     </popup>
 
 

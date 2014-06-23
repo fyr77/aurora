@@ -3,8 +3,7 @@
     <controlDefinition name="interact-line-with-image">
         <panel childLayout="horizontal" width="100%" align="center" padding="5px">
             <image id="#line-icon" width="64px" height="64px"/>
-            <text id="#line-text" style="base-font" align="left" textHAlign="left" height="64px" width="200px"
-                  wrap="true"/>
+            <text id="#line-text" style="base-font" align="left" textHAlign="center" textVAlign="center" height="64px" width="170"/>
             <control id="#useButton" name="button" label="${gui.select}" width="120px" height="64px"/>
         </panel>
 
@@ -17,8 +16,8 @@
             <control id="#target_selection_window" name="window" title="${gui.target_selection.caption}"
                      hideOnClose="true" width="100%" height="100%" x="10%" y="10%">
                 <panel childLayout="center">
-                    <control id="#objects" name="listBox" vertical="optional" horizontal="off" selection="Single"
-                             displayItems="8"
+                    <control id="#objects" name="listBox" vertical="optional" horizontal="optional" selection="Single"
+                             displayItems="4"
                              viewConverterClass="ru.game.aurora.gui.niffy.InteractionTargetSelectionViewConverter">
                         <control name="interact-line-with-image"
                                  controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>

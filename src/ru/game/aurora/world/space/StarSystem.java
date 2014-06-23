@@ -231,7 +231,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
-        final List<SpaceObject> spaceObjectAtPlayerShipPosition = getSpaceObjectAtPlayerShipPosition();
+        final List<SpaceObject> spaceObjectAtPlayerShipPosition = getSpaceObjectsAtPosition(player.getShip());
 
 
         // if user ship is at planet, show additional gui panel
@@ -254,7 +254,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public void interactWithObjectAtShipPosition(final World world)
     {
-        final List<SpaceObject> spaceObjectAtPlayerShipPosition = getSpaceObjectAtPlayerShipPosition();
+        final List<SpaceObject> spaceObjectAtPlayerShipPosition = getSpaceObjectsAtPosition(world.getPlayer().getShip());
 
         if (spaceObjectAtPlayerShipPosition.isEmpty()) {
             return;
@@ -276,10 +276,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
 
 
-    public List<SpaceObject> getSpaceObjectAtPlayerShipPosition() {
+    public List<SpaceObject> getSpaceObjectsAtPosition(Positionable pos) {
         List<SpaceObject> rz = new ArrayList<>();
-        int x = player.getShip().getX();
-        int y = player.getShip().getY();
+        int x = pos.getX();
+        int y = pos.getY();
         for (SpaceObject p : ships) {
             if (x == p.getX() && y == p.getY()) {
                 rz.add(p);
@@ -311,7 +311,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
     }
 
-    public void updateShoot(World world, boolean next, boolean prev, boolean shoot) {
+    public void updateShoot(final World world, boolean next, boolean prev, boolean shoot) {
         if (ships.isEmpty()) {
             // nothing to shoot at
             return;
@@ -369,31 +369,54 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             // firing
             final int damage = weapon.getWeaponDesc().damage;
 
-            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, target.getName()));
+            List<SpaceObject> targetsAtSamePosition = getSpaceObjectsAtPosition(target);
 
-            BlasterShotEffect e = new BlasterShotEffect(playerShip, target, world.getCamera(), 800, weapon);
-            e.setEndListener(new IStateChangeListener<World>() {
-                private static final long serialVersionUID = 8150717419595750398L;
-
-                @Override
-                public void stateChanged(World world) {
-                    target.onAttack(world, playerShip, damage);
-                    if (!target.isAlive()) {
-                        GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
-                        target = null;
-                    }
+            for (Iterator<SpaceObject> iterator = targetsAtSamePosition.iterator(); iterator.hasNext(); ) {
+                SpaceObject so = iterator.next();
+                if (!so.canBeShotAt()) {
+                    iterator.remove();
                 }
-            });
-            effects.add(e);
+            }
 
-            ResourceManager.getInstance().getSound(weapon.getWeaponDesc().shotSound).play();
-
-
-            weapon.fire();
-            world.setUpdatedThisFrame(true);
-
-            onWeaponButtonPressed(world, selectedWeapon);
+            if (targetsAtSamePosition.size() <= 1) {
+                doFire(world, target, playerShip, weapon, damage);
+            } else {
+                InteractionTargetSelectorController.open(new IStateChangeListener<SpaceObject>() {
+                    private static final long serialVersionUID = 1084963569632582987L;
+                    @Override
+                    public void stateChanged(SpaceObject param) {
+                        doFire(world, param, playerShip, weapon, damage);
+                    }
+                }, targetsAtSamePosition);
+            }
         }
+    }
+
+    private void doFire(World world, final SpaceObject targetObject, final Ship playerShip, StarshipWeapon weapon, final int damage) {
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, target.getName()));
+
+        BlasterShotEffect e = new BlasterShotEffect(playerShip, targetObject, world.getCamera(), 800, weapon);
+        e.setEndListener(new IStateChangeListener<World>() {
+            private static final long serialVersionUID = 8150717419595750398L;
+
+            @Override
+            public void stateChanged(World world) {
+                targetObject.onAttack(world, playerShip, damage);
+                if (!target.isAlive()) {
+                    GameLogger.getInstance().logMessage(targetObject.getName() + " " + Localization.getText("gui", "space.destroyed"));
+                    target = null;
+                }
+            }
+        });
+        effects.add(e);
+
+        ResourceManager.getInstance().getSound(weapon.getWeaponDesc().shotSound).play();
+
+
+        weapon.fire();
+        world.setUpdatedThisFrame(true);
+
+        onWeaponButtonPressed(world, selectedWeapon);
     }
 
     @Override
@@ -487,7 +510,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("interactPanel");
         if (scanLandPanel != null) {
             boolean landPanelVisible = scanLandPanel.isVisible();
-            if (!shipAtSameCoords && landPanelVisible && getSpaceObjectAtPlayerShipPosition().isEmpty()) {
+            if (!shipAtSameCoords && landPanelVisible && getSpaceObjectsAtPosition(player.getShip()).isEmpty()) {
                 scanLandPanel.setVisible(false);
             } else if (shipAtSameCoords && !landPanelVisible) {
                 Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
