@@ -62,8 +62,6 @@ public class World implements Serializable, ResolutionChangeListener {
 
     private transient StarSystemNamesCollection starSystemNamesCollection = new StarSystemNamesCollection();
 
-    private transient List<OverlayWindow> overlayWindows = new LinkedList<>();
-
     private static DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
 
     private StarSystem currentStarSystem = null;
@@ -97,17 +95,6 @@ public class World implements Serializable, ResolutionChangeListener {
     }
 
     public void update(GameContainer container) {
-        if (overlayWindows != null && !overlayWindows.isEmpty()) {
-            Iterator<OverlayWindow> iter = overlayWindows.iterator();
-            OverlayWindow w = iter.next();
-            w.update(container, this);
-            if (w.isOver()) {
-                iter.remove();
-            }
-            // only one active overlay window
-            return;
-        }
-
         final Nifty nifty = GUI.getInstance().getNifty();
         if (!isPaused) {
             // update game world
@@ -161,20 +148,11 @@ public class World implements Serializable, ResolutionChangeListener {
             } else {
                 GUI.getInstance().showIngameMenu();
             }
-            return;
         }
-
-        if (container.getInput().isKeyPressed(Input.KEY_F1)) {
-            addOverlayWindow(new HelpScreen());
-        }
-
     }
 
     public void draw(GameContainer container, Graphics graphics) {
         currentRoom.draw(container, graphics, camera);
-        if (overlayWindows != null && !overlayWindows.isEmpty()) {
-            overlayWindows.get(0).draw(container, graphics, camera);
-        }
     }
 
     public Camera getCamera() {
@@ -207,14 +185,6 @@ public class World implements Serializable, ResolutionChangeListener {
 
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
-    }
-
-    public void addOverlayWindow(OverlayWindow currentDialog) {
-        if (overlayWindows == null) {
-            overlayWindows = new LinkedList<>();
-        }
-        overlayWindows.add(currentDialog);
-        currentDialog.enter(this);
     }
 
     public void addOverlayWindow(Dialog d, Map<String, String> flags) {

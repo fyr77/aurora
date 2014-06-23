@@ -14,10 +14,11 @@ import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import org.mozilla.universalchardet.UniversalDetector;
-import org.newdawn.slick.*;
-import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.ImageBuffer;
 import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.GUIConstants;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.GUI;
 
@@ -195,101 +196,6 @@ public class EngineUtils {
             }
         }
         return new Image(ib);
-    }
-
-    public static void drawRectWithBorder(Graphics graphics, Rectangle rectangle, Camera camera, Color borderColor, Color fillColor) {
-        graphics.setColor(fillColor);
-        drawRect(graphics, rectangle, camera, true);
-        graphics.setColor(borderColor);
-        drawRect(graphics, rectangle, camera, false);
-    }
-
-    public static void drawRectWithBorderAndText(Graphics graphics, Rectangle rectangle, Camera camera, String text) {
-        drawRectWithBorderAndText(graphics, rectangle, camera, Color.yellow, GUIConstants.backgroundColor, text, GUIConstants.dialogFont, Color.white, false);
-    }
-
-    public static void drawRectWithBorderAndText(Graphics graphics, Rectangle rectangle, Camera camera, Color borderColor, Color fillColor, String text, Font font, Color textColor, boolean aligned) {
-        drawRectWithBorder(graphics, rectangle, camera, borderColor, fillColor);
-        if (!aligned) {
-            drawString(graphics, text, ((rectangle.getX() + 1) * camera.getTileWidth()), ((rectangle.getY() + 0.5f) * camera.getTileHeight()), ((rectangle.getWidth() - 2) * camera.getTileHeight()), font, textColor);
-        } else {
-            drawSingleStringAligned(graphics, text, font, textColor, (int) ((rectangle.getX()) * camera.getTileWidth()), (int) ((rectangle.getY()) * camera.getTileHeight()), (int) ((int) (rectangle.getWidth()) * camera.getTileWidth()), (int) (rectangle.getHeight() * camera.getTileHeight()));
-        }
-    }
-
-    /**
-     * Draws a rect specified by tile coordinates
-     */
-    public static void drawRect(Graphics engine, Rectangle rectangle, Camera camera, boolean filled) {
-        if (filled) {
-            engine.fillRect(camera.getRelativeX(rectangle.getX()), camera.getRelativeY(rectangle.getY()), rectangle.getWidth() * camera.getTileWidth(), rectangle.getHeight() * camera.getTileHeight());
-        } else {
-            engine.drawRect(camera.getRelativeX(rectangle.getX()), camera.getRelativeY(rectangle.getY()), rectangle.getWidth() * camera.getTileWidth(), rectangle.getHeight() * camera.getTileHeight());
-        }
-    }
-
-
-    /**
-     * Draws string at given coord, wrapping it if necessary (if it exceeds width pixels)
-     * Returns nubmer of lines actually printed
-     */
-    public static int drawString(Graphics g, String s, float x, float y, float width, Font font, Color color) {
-
-        int lineHeight = font.getLineHeight();
-
-        float curX = x;
-        float curY = y;
-
-        String[] words = s.split(" ");
-        int lines = 1;
-
-        g.setFont(font);
-        g.setColor(color);
-        final int spaceWidth = font.getWidth(" ");
-        for (String word : words) {
-            // Find out thw width of the word.
-            int wordWidth = font.getWidth(word);
-
-            // If text exceeds the width, then move to next line.
-            if (curX + wordWidth >= x + width) {
-                curY += lineHeight;
-                curX = x;
-                lines++;
-            }
-
-            g.drawString(word, curX, curY);
-
-            // Move over to the right for next word.
-            curX += wordWidth + spaceWidth;
-
-            if (word.contains("\n")) {
-                curY += lineHeight;
-                curX = x;
-                lines++;
-            }
-        }
-        return lines;
-    }
-
-    public static void drawSingleStringAligned(Graphics g, String s, Font font, Color color, int x, int y, int width, int height) {
-        final int lineHeight = font.getLineHeight();
-        final int lineWidth = font.getWidth(s);
-
-        final int textStartX = x + (width - lineWidth) / 2;
-        final int textStartY = y + (height + lineHeight) / 2;
-
-        g.setFont(font);
-        g.setColor(color);
-        g.drawString(s, textStartX, textStartY);
-    }
-
-    public static boolean checkRectanglePressed(GameContainer container, Camera camera, Rectangle rect) {
-        if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            final float mouseX = container.getInput().getMouseX() / camera.getTileWidth();
-            final float mouseY = container.getInput().getMouseY() / camera.getTileHeight();
-            return rect.contains(mouseX, mouseY);
-        }
-        return false;
     }
 
     public static Image createImage(BufferedImage source) {
