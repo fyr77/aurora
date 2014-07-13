@@ -219,7 +219,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     @Override
     public void onContact(World world) {
-        if (!canBeHailed || isHostile) {
+        if (!isCanBeHailed() || isHostile) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.hail_not_responded"));
             return;
         }
@@ -240,14 +240,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         hp -= dmg;
         final StarSystem currentStarSystem = world.getCurrentStarSystem();
         if (hp <= 0) {
-            GameLogger.getInstance().logMessage(getName() + " " + Localization.getText("gui", "space.destroyed"));
-            currentStarSystem.addEffect(new ExplosionEffect(x, y, "ship_explosion", false, true));
-
-            if (loot != null) {
-                if (CommonRandom.getRandom().nextBoolean()) {
-                    currentStarSystem.getShips().add(new SpaceDebris(x, y, loot));
-                }
-            }
+            explode(currentStarSystem);
         }
 
 
@@ -256,6 +249,18 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
             if (race != null && !currentStarSystem.getReputation().isHostile(race.getName(), attacker.getRace().getName())) {
                 currentStarSystem.getReputation().setHostile(race.getName(), attacker.getRace().getName());
+            }
+        }
+    }
+
+    public void explode(StarSystem currentStarSystem) {
+        hp = 0;
+        GameLogger.getInstance().logMessage(getName() + " " + Localization.getText("gui", "space.destroyed"));
+        currentStarSystem.addEffect(new ExplosionEffect(x, y, "ship_explosion", false, true));
+
+        if (loot != null) {
+            if (CommonRandom.getRandom().nextBoolean()) {
+                currentStarSystem.getShips().add(new SpaceDebris(x, y, loot));
             }
         }
     }
