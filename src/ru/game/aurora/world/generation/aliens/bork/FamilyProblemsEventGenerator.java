@@ -35,6 +35,8 @@ public class FamilyProblemsEventGenerator extends GameEventListener implements W
 
     private NPCShip fatherShip;
 
+    int dialogResult = -1;
+
     public FamilyProblemsEventGenerator() {
         chance = Configuration.getDoubleProperty("quest.bork_family_problems");
         setGroups(EventGroup.ENCOUNTER_SPAWN);
@@ -96,7 +98,9 @@ public class FamilyProblemsEventGenerator extends GameEventListener implements W
 
         @Override
         public boolean isCanBeHailed() {
-            return !communicated && !stupidBrotherShip.isAlive() && !smartBrotherShip.isAlive();
+            return !communicated
+                    && (dialogResult == 5 || dialogResult == 6 ||
+                    (!stupidBrotherShip.isAlive() && !smartBrotherShip.isAlive()));
         }
 
         @Override
@@ -156,7 +160,7 @@ public class FamilyProblemsEventGenerator extends GameEventListener implements W
 
         }
         finalizeShips();
-
+        dialogResult = returnCode;
     }
 
     private void finalizeShips() {
