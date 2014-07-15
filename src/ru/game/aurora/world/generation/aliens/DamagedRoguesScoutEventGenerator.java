@@ -146,19 +146,14 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
                 if (dialog == initialDialog) {
-                    if (returnCode == 0) {
-                        return;
-                    }
-
                     if (returnCode == 1) {
                         saveByResources(world);
-                    }
-
-                    if (returnCode == 2) {
+                    } else if (returnCode == 2) {
                         saveByShuttle(world);
+                    } else {
+                        world.getGlobalVariables().put("rogues.damaged_scout_found", world.getCurrentStarSystem());
                     }
-
-                    world.getGlobalVariables().put("rogues.damaged_scout_found", world.getCurrentStarSystem());
+                    return;
                 }
 
                 if (dialog == saveByResourceDialog) {
