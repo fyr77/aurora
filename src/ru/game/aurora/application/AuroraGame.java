@@ -315,7 +315,7 @@ public class AuroraGame extends NiftyOverlayGame {
             if (locale != null) {
                 Localization.init(Locale.forLanguageTag(locale));
             } else {
-                Localization.init(Locale.getDefault());
+                Localization.init(Locale.forLanguageTag("ru"));
             }
             Configuration.getSystemProperties().put("locale", Localization.getCurrentLocaleTag());
             app = new AppGameContainer(new AuroraGame());

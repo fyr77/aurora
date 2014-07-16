@@ -183,6 +183,7 @@ public class PlanetScanController implements ScreenController {
 
     public void land() {
         closeScreen();
+        world.setCurrentRoom(planetToScan);
         planetToScan.enter(world);
     }
 }
