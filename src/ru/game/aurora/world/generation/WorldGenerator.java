@@ -30,7 +30,6 @@ import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.quest.FasterThanLightQuestGenerator;
 import ru.game.aurora.world.quest.Journal;
 import ru.game.aurora.world.quest.JournalEntry;
-import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.earth.EarthUpgradeUnlocker;
@@ -260,19 +259,6 @@ public class WorldGenerator implements Runnable {
         journal.addQuest(new JournalEntry("last_beacon", "start"));
 
         world.addListener(new EarthUpgradeUnlocker());
-
-        StarSystem ss = (StarSystem) world.getGlobalVariables().get("solar_system");
-
-        NPCShip borkShip = world.getRaces().get(BorkGenerator.NAME).getDefaultFactory().createShip(world, 0);
-        NPCShip kliskShip = world.getRaces().get(KliskGenerator.NAME).getDefaultFactory().createShip(world, 0);
-        borkShip.setStationary(true);
-        kliskShip.setStationary(true);
-        ss.getShips().add(borkShip);
-        ss.getShips().add(kliskShip);
-        borkShip.setPos(5, 5);
-        kliskShip.setPos(5, 5);
-
-
     }
 
     // perform some fast initialization in gui thread
