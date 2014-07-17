@@ -330,7 +330,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog"
     },
     "22": {
       "id": 22,
@@ -752,7 +753,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog"
     },
     "53": {
       "id": 53,
@@ -983,7 +985,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog"
     },
     "78": {
       "id": 78,

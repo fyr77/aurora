@@ -76,7 +76,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     },
     "6": {
       "id": 6,
@@ -204,7 +204,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     },
     "11": {
       "id": 11,
@@ -239,7 +239,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     },
     "12": {
       "id": 12,
@@ -274,7 +274,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     },
     "13": {
       "id": 13,
@@ -309,7 +309,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     },
     "14": {
       "id": 14,
@@ -344,7 +344,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     },
     "15": {
       "id": 15,
@@ -379,7 +379,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     },
     "17": {
       "id": 17,
@@ -414,7 +414,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     },
     "16": {
       "id": 16,
@@ -449,7 +449,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     },
     "19": {
       "id": 19,
@@ -484,7 +484,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     },
     "18": {
       "id": 18,
@@ -547,7 +547,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": " больше мы ничего не выяснили.\""
     },
     "20": {
       "id": 20,
@@ -582,7 +583,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     },
     "23": {
       "id": 23,
@@ -789,7 +790,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "energy_sphere_dialog"
+      "customIcon": "engergy_sphere_dialog"
     }
   },
   "flags": {},
