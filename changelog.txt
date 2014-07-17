@@ -1,6 +1,12 @@
+VERSION 0.4.0
+
+IN PROGRESS
+
+=============================================
+
 VERSION 0.3.2
 
-IN PROGRESS...
+17.07.2014
 
 * Target selection popup
 * Realistic planet shading
