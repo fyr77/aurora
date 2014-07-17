@@ -49,6 +49,9 @@ public class DeferredLoadingMusic {
             return strongRef;
         }
 
+        if (loadingFuture == null) {
+            requestLoad();
+        }
         try {
             strongRef = loadingFuture.get();
             softReference = new SoftReference<>(strongRef);
@@ -61,6 +64,7 @@ public class DeferredLoadingMusic {
     }
 
     public void requestLoad() {
+        logger.debug("Requested loading of music " + myFile);
         strongRef = softReference.get();
         if (strongRef != null) {
             return;
@@ -72,6 +76,7 @@ public class DeferredLoadingMusic {
                 try (FileInputStream fis = new FileInputStream(myFile)) {
                     Music rz = new Music(fis, myFile.getName());
                     rz.addListener(myPlaylist);
+                    logger.debug("Music {} loaded", myFile);
                     return rz;
                 } catch (Exception e) {
                     logger.error("Failed to load music from file " + myFile, e);

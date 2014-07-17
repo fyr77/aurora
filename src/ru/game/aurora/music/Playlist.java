@@ -55,33 +55,37 @@ public class Playlist implements MusicListener
     }
 
     public void play() {
+        logger.debug("play() called for playlist {}", id);
         if (currentPlaylist == this || currentPlaylist == null) {
             int idxToPlay = currentMusicIdx;
             int idxToLoad = currentMusicIdx + 1;
             if (idxToLoad == music.size()) {
                 idxToLoad = 0;
             }
-
+            logger.info("Playing music {}", music.get(idxToPlay));
             music.get(idxToPlay).getMusic().play();
             music.get(idxToLoad).requestLoad();
             currentPlaylist = this;
         } else {
-            currentPlaylist.getCurrentMusic().fade(1000, 0, true);
+            currentPlaylist.getCurrentMusic().fade(1001, 0, true);
             nextPlaylist = this;
+            music.get(currentMusicIdx).requestLoad();
+            logger.debug("Switching from playlist {} to {}", currentPlaylist.getId(), id);
         }
-
     }
 
 
     @Override
     public void musicEnded(Music music) {
+        logger.debug("Music faded out");
         this.music.get(currentMusicIdx).release();
         if (++currentMusicIdx == this.music.size()) {
             currentMusicIdx = 0;
         }
         if (nextPlaylist != null) {
             currentPlaylist = nextPlaylist;
-            nextPlaylist.play();
+            nextPlaylist = null;
+            currentPlaylist.play();
         } else {
             play();
         }
@@ -89,7 +93,7 @@ public class Playlist implements MusicListener
 
     @Override
     public void musicSwapped(Music music, Music music2) {
-
+        logger.debug("Music swapped");
     }
 
     public boolean isPlaying()
