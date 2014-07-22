@@ -40,7 +40,6 @@ public class EarthDialogListener implements DialogListener {
     @Override
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
-        earth.getDialogFlags().putAll(flags);
         if (returnCode == 1) {
             // player has chosen to dump research info
 
@@ -184,7 +183,7 @@ public class EarthDialogListener implements DialogListener {
             });
         }
 
-
+        earth.getDialogFlags().putAll(flags);
         //reset dialog state
         earth.getEarthDialog().enter(world);
         world.getPlayer().getShip().fullRepair(world);

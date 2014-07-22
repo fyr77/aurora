@@ -13,7 +13,7 @@
 ;По поводу инопланетян на Луне. Помог им починить алтарь. Затем был кем-то вроде почетного зрителя. Потом они улетели, больше проблем с ними не будет.;52;rogues_altar.result=help && !rogues_altar_reported;;rogues_altar_reported
 ;Я разобрался с чужими на Луне. Уничтожил их агрегат, не стал церемониться.;55;rogues_altar.result=destroy && !rogues_altar_reported;;rogues_altar_reported
 ;Мартан, срочно. Очень важное. Связано с зорсанами.;58;zorsan.escape=0;;
-;Я добыл важную информацию по поводу зорсан.;62;zorsan.war_preparations=0;;
+;Я добыл важную информацию по поводу зорсан.;62;zorsan.war_preparations=0;;zorsan_war_info_update
 ;Дипломатическую миссию я закончил.;69;diplomacy.all_done=0 && !diplomacy_report;;diplomacy_report
 ;Не порадовать. У меня тут кое-какая проблема с главным научным терминалом.;79;energy_sphere.communicated;;
 ;Мы нашли отличную планету для колонизации.;90;colony_search.explored;;colony_info_dumped

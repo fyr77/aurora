@@ -237,7 +237,10 @@
               "value": "0",
               "type": "EQUAL"
             }
-          ]
+          ],
+          "flags": {
+            "zorsan_war_info_update": "true"
+          }
         },
         {
           "returnValue": 0,
