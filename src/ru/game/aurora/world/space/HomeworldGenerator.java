@@ -49,22 +49,22 @@ public class HomeworldGenerator {
         ss.setAsteroidBelt(10, 3);
 
         // jupiter
-        planets[4] = new GasGiant(0, 0, ss);
+        planets[4] = new GasGiant(0, 0, ss, PlanetCategory.GasGiantColors.YELLOW);
         setCoord(planets[4], 15);
         planets[4].addSatellite(new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0));
 
         // saturn
-        planets[5] = new GasGiant(0, 0, ss);
+        planets[5] = new GasGiant(0, 0, ss, PlanetCategory.GasGiantColors.YELLOW);
         setCoord(planets[5], 18);
         planets[5].setRings(1);
         planets[5].addSatellite(new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.NO_ATMOSPHERE, 4, 0, 0));
 
         //uranus
-        planets[6] = new GasGiant(0, 0, ss);
+        planets[6] = new GasGiant(0, 0, ss, PlanetCategory.GasGiantColors.BLUE);
         setCoord(planets[6], 21);
 
         //neptune
-        planets[7] = new GasGiant(0, 0, ss);
+        planets[7] = new GasGiant(0, 0, ss, PlanetCategory.GasGiantColors.BLUE);
         setCoord(planets[7], 24);
 
         ss.setPlanets(planets);

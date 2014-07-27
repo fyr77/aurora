@@ -16,6 +16,7 @@ import org.newdawn.slick.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.frankenstein.Slick2DColor;
 import ru.game.aurora.util.CollectionUtils;
@@ -27,10 +28,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Generates planetary sprite for use on star system view.
@@ -52,6 +50,8 @@ public class PlanetSpriteGenerator {
 
         public ColorCafe plantsColor = null;
 
+        public PlanetCategory.GasGiantColors ggColor = null;
+
         private PlanetSpriteParameters(BasePlanet planet) {
             this.hasAtmosphere = (planet.getAtmosphere() != PlanetAtmosphere.NO_ATMOSPHERE);
             this.cat = planet.category;
@@ -62,8 +62,11 @@ public class PlanetSpriteGenerator {
             if (planet instanceof Planet) {
                 if (((Planet) planet).getFloraAndFauna() != null) {
                     Slick2DColor leafColor = ((Planet) planet).getFloraAndFauna().getColorMap().get(5);
-                    plantsColor = new ColorCafe(leafColor.getR(), leafColor.getG(), leafColor.getB(), 255);
+                    this.plantsColor = new ColorCafe(leafColor.getR(), leafColor.getG(), leafColor.getB(), 255);
                 }
+            }
+            if (planet instanceof GasGiant) {
+                this.ggColor = ((GasGiant) planet).getColor();
             }
         }
 
@@ -78,7 +81,9 @@ public class PlanetSpriteGenerator {
                     (Math.abs(that.shadowXFactor - shadowXFactor) < 0.1) &&
                     (Math.abs(that.shadowYFactor - shadowYFactor) < 0.1);
 
-            return hasAtmosphere == that.hasAtmosphere && size == that.size && cat == that.cat && shadowPositionNearlySame;
+            boolean ggEq = (that.ggColor == ggColor);
+
+            return hasAtmosphere == that.hasAtmosphere && size == that.size && cat == that.cat && shadowPositionNearlySame && ggEq;
         }
 
         @Override
@@ -207,42 +212,86 @@ public class PlanetSpriteGenerator {
             float height = 2 * radius;
 
             double scale = Configuration.getDoubleProperty("world.planet.spriteGenerator.scale");
-            final int noiseWidth = (int) Math.ceil(width / (float) scale);
-            final int noiseHeight = (int) Math.ceil(height / (float) scale);
-            NoiseMap heightMap = noiseGeneratorWrapper.buildNoiseMap(noiseWidth, noiseHeight);
 
-            RendererImage renderer = new RendererImage();
-            ImageCafe image = new ImageCafe(noiseWidth, noiseHeight);
-            renderer.setSourceNoiseMap(heightMap);
-            renderer.setDestImage(image);
+            final int imageWidth = (int) Math.ceil(width / (float) scale);
+            final int imageHeight = (int) Math.ceil(height / (float) scale);
+            ImageCafe image = new ImageCafe(imageWidth, imageHeight);
 
-            renderer.clearGradient();
+            if (params.cat != PlanetCategory.GAS_GIANT) {
+                NoiseMap heightMap = noiseGeneratorWrapper.buildNoiseMap(imageWidth, imageHeight);
 
-            switch (params.cat) {
-                case PLANET_FULL_STONE:
-                    setFullStonePlanetGradients(renderer);
-                    break;
-                case PLANET_ROCK:
-                    setRockPlanetGradients(renderer);
-                    break;
-                case PLANET_ICE:
-                    setIcePlanetGradients(renderer);
-                    break;
-                case PLANET_WATER:
-                    setWaterPlanetGradients(renderer);
-                    break;
-                case GAS_GIANT:
-                    setGasGiantGradients(renderer);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Can not generate sprite for planet category" + params.cat);
+                RendererImage renderer = new RendererImage();
+
+                renderer.setSourceNoiseMap(heightMap);
+                renderer.setDestImage(image);
+
+                renderer.clearGradient();
+
+                switch (params.cat) {
+                    case PLANET_FULL_STONE:
+                        setFullStonePlanetGradients(renderer);
+                        break;
+                    case PLANET_ROCK:
+                        setRockPlanetGradients(renderer);
+                        break;
+                    case PLANET_ICE:
+                        setIcePlanetGradients(renderer);
+                        break;
+                    case PLANET_WATER:
+                        setWaterPlanetGradients(renderer);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Can not generate sprite for planet category" + params.cat);
+                }
+
+                if (params.plantsColor != null) {
+                    renderer.addGradientPoint(0.200, params.plantsColor);
+                }
+
+                renderer.render();
+            } else {
+                Random r = CommonRandom.getRandom();
+                int startR = 70;
+                int startG = 70;
+                int startB = 70;
+                switch (params.ggColor) {
+                    case RED:
+                        startR = 140;
+                        break;
+                    case BLUE:
+                        startB = 160;
+                        break;
+                    case YELLOW:
+                        startR = 160;
+                        startG = 120;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unknown type of gas giant: " + params.ggColor);
+                }
+                int red = startR;
+                int green = startG;
+                int blue = startB;
+                for (int y = 0; y < image.getHeight(); y++) {
+                    red = red + r.nextInt(30) - 15;
+                    green = green + r.nextInt(30) - 15;
+                    blue = blue + r.nextInt(30) - 15;
+                    if (
+                            Math.abs(startR - red) > 50 ||
+                            Math.abs(startG - green) > 50 ||
+                            Math.abs(startB - blue) > 50 ||
+                            Math.abs(red - green) > (Math.abs(startR - startG) + 15) ||
+                            Math.abs(red - blue) > (Math.abs(startR - startB) + 15) ||
+                            Math.abs(blue - green) > (Math.abs(startB - startG) + 15))  {
+                        red = startR;
+                        green = startG;
+                        blue = startB;
+                    }
+                    ColorCafe col = new ColorCafe(red, green, blue, 255);
+                    for (int x = 0; x < image.getWidth(); x++) {
+                        image.setValue(x, y, col);
+                    }
+                }
             }
-
-            if (params.plantsColor != null) {
-                renderer.addGradientPoint(0.200, params.plantsColor);
-            }
-
-            renderer.render();
 
             BufferedImage result = convertToPlanetSprite(image, params.shadowXFactor, params.shadowYFactor);
             // scale image up
