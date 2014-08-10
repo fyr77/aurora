@@ -54,7 +54,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
      */
     private boolean isQuestLocation = false;
 
-    private SpaceObject target;
+    private GameObject target;
 
     private boolean visited = false;
 
@@ -105,7 +105,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     // size of star system. moving out of radius from the star initiates return to global map
     private int radius;
 
-    private List<SpaceObject> ships = new ArrayList<>();
+    private List<GameObject> ships = new ArrayList<>();
 
     /**
      * Variables available for quest logic
@@ -180,7 +180,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
      * his rep with other races will not decrease
      */
     private void checkAndSynchronizeReputation(World world) {
-        for (SpaceObject so : ships) {
+        for (GameObject so : ships) {
             if (so instanceof NPCShip) {
                 world.getReputation().merge(reputation);
                 return;
@@ -231,7 +231,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             }
         }
 
-        final List<SpaceObject> spaceObjectAtPlayerShipPosition = getSpaceObjectsAtPosition(player.getShip());
+        final List<GameObject> spaceObjectAtPlayerShipPosition = getGameObjectsAtPosition(player.getShip());
 
 
         // if user ship is at planet, show additional gui panel
@@ -240,9 +240,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             boolean landPanelVisible = scanLandPanel.isVisible();
             if (landPanelVisible && spaceObjectAtPlayerShipPosition.isEmpty()) {
                 scanLandPanel.setVisible(false);
-            } else if (!landPanelVisible) {
+            } else if (!landPanelVisible && !spaceObjectAtPlayerShipPosition.isEmpty()) {
                 Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
-                leftButton.setText(Localization.getText("gui", "space.land"));
+                leftButton.setText(spaceObjectAtPlayerShipPosition.get(0).getInteractMessage());
                 scanLandPanel.setVisible(true);
             }
         }
@@ -252,35 +252,33 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
     }
 
-    public void interactWithObjectAtShipPosition(final World world)
-    {
-        final List<SpaceObject> spaceObjectAtPlayerShipPosition = getSpaceObjectsAtPosition(world.getPlayer().getShip());
+    public void interactWithObjectAtShipPosition(final World world) {
+        final List<GameObject> spaceObjectAtPlayerShipPosition = getGameObjectsAtPosition(world.getPlayer().getShip());
 
         if (spaceObjectAtPlayerShipPosition.isEmpty()) {
             return;
         }
         if (spaceObjectAtPlayerShipPosition.size() == 1) {
-            spaceObjectAtPlayerShipPosition.get(0).onContact(world);
+            spaceObjectAtPlayerShipPosition.get(0).interact(world);
             return;
         }
 
-        InteractionTargetSelectorController.open(new IStateChangeListener<SpaceObject>() {
+        InteractionTargetSelectorController.open(new IStateChangeListener<GameObject>() {
             private static final long serialVersionUID = -8114467555795780919L;
 
             @Override
-            public void stateChanged(SpaceObject param) {
-                param.onContact(world);
+            public void stateChanged(GameObject param) {
+                param.interact(world);
             }
         }, spaceObjectAtPlayerShipPosition);
     }
 
 
-
-    public List<SpaceObject> getSpaceObjectsAtPosition(Positionable pos) {
-        List<SpaceObject> rz = new ArrayList<>();
+    public List<GameObject> getGameObjectsAtPosition(Positionable pos) {
+        List<GameObject> rz = new ArrayList<>();
         int x = pos.getX();
         int y = pos.getY();
-        for (SpaceObject p : ships) {
+        for (GameObject p : ships) {
             if (x == p.getX() && y == p.getY()) {
                 rz.add(p);
             }
@@ -317,7 +315,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             return;
         }
         int targetIdx = 0;
-        List<SpaceObject> availableTargets = new ArrayList<>();
+        List<GameObject> availableTargets = new ArrayList<>();
 
         final Ship playerShip = world.getPlayer().getShip();
         final StarshipWeapon weapon = playerShip.getWeapons().get(selectedWeapon);
@@ -328,8 +326,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         //TODO: firing sectors
-        for (SpaceObject spaceObject : ships) {
-            if (spaceObject.canBeShotAt() && weapon.getWeaponDesc().range >= playerShip.getDistance(spaceObject) && playerShip.getRace() != spaceObject.getRace()) {
+        for (GameObject spaceObject : ships) {
+            if (spaceObject.canBeAttacked() && weapon.getWeaponDesc().range >= playerShip.getDistance(spaceObject) && playerShip.getRace() != spaceObject.getRace()) {
                 availableTargets.add(spaceObject);
                 if (target == null) {
                     target = spaceObject;
@@ -369,11 +367,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             // firing
             final int damage = weapon.getWeaponDesc().damage;
 
-            List<SpaceObject> targetsAtSamePosition = getSpaceObjectsAtPosition(target);
+            List<GameObject> targetsAtSamePosition = getGameObjectsAtPosition(target);
 
-            for (Iterator<SpaceObject> iterator = targetsAtSamePosition.iterator(); iterator.hasNext(); ) {
-                SpaceObject so = iterator.next();
-                if (!so.canBeShotAt()) {
+            for (Iterator<GameObject> iterator = targetsAtSamePosition.iterator(); iterator.hasNext(); ) {
+                GameObject so = iterator.next();
+                if (!so.canBeAttacked()) {
                     iterator.remove();
                 }
             }
@@ -381,10 +379,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             if (targetsAtSamePosition.size() <= 1) {
                 doFire(world, target, playerShip, weapon, damage);
             } else {
-                InteractionTargetSelectorController.open(new IStateChangeListener<SpaceObject>() {
+                InteractionTargetSelectorController.open(new IStateChangeListener<GameObject>() {
                     private static final long serialVersionUID = 1084963569632582987L;
+
                     @Override
-                    public void stateChanged(SpaceObject param) {
+                    public void stateChanged(GameObject param) {
                         doFire(world, param, playerShip, weapon, damage);
                     }
                 }, targetsAtSamePosition);
@@ -392,7 +391,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
     }
 
-    private void doFire(World world, final SpaceObject targetObject, final Ship playerShip, StarshipWeapon weapon, final int damage) {
+    private void doFire(World world, final GameObject targetObject, final Ship playerShip, StarshipWeapon weapon, final int damage) {
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, target.getName()));
 
         BlasterShotEffect e = new BlasterShotEffect(playerShip, targetObject, world.getCamera(), 800, weapon);
@@ -491,8 +490,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         }
 
         boolean shipAtSameCoords = false;
-        List<SpaceObject> shipsCopy = new LinkedList<>(ships); //to prevent CMO
-        for (SpaceObject ship : shipsCopy) {
+        List<GameObject> shipsCopy = new LinkedList<>(ships); //to prevent CMO
+        for (GameObject ship : shipsCopy) {
             if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
                 shipAtSameCoords = true;
             }
@@ -500,8 +499,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             ship.update(container, world);
         }
 
-        for (Iterator<SpaceObject> iter = ships.iterator(); iter.hasNext(); ) {
-            SpaceObject ship = iter.next();
+        for (Iterator<GameObject> iter = ships.iterator(); iter.hasNext(); ) {
+            GameObject ship = iter.next();
             if (!ship.isAlive()) {
                 iter.remove();
             }
@@ -510,7 +509,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("interactPanel");
         if (scanLandPanel != null) {
             boolean landPanelVisible = scanLandPanel.isVisible();
-            if (!shipAtSameCoords && landPanelVisible && getSpaceObjectsAtPosition(player.getShip()).isEmpty()) {
+            if (!shipAtSameCoords && landPanelVisible && getGameObjectsAtPosition(player.getShip()).isEmpty()) {
                 scanLandPanel.setVisible(false);
             } else if (shipAtSameCoords && !landPanelVisible) {
                 Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
@@ -567,6 +566,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         checkAndStartCustomMusic(world);
     }
 
+    @Override
+    public ITileMap getMap() {
+        return null;
+    }
+
     private void createBackground(World world) {
         background = new ParallaxBackground(
                 radius * 3 * (int) world.getCamera().getTileWidth()
@@ -578,7 +582,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
 
     @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
+    public void draw(GameContainer container, Graphics g, Camera camera, World world) {
         if (background != null) {
             background.draw(g, camera);
             if (backgroundSprite != null) {
@@ -641,7 +645,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         // now draw effects that are beyond starships
         if (currentEffect != null && currentEffect.getOrder() == Effect.DrawOrder.BACK) {
-            currentEffect.draw(container, g, camera);
+            currentEffect.draw(container, g, camera, world);
         }
 
 
@@ -652,9 +656,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             selectedWeaponRange = 0;
         }
         g.setColor(Color.red);
-        for (SpaceObject ship : ships) {
-            ship.draw(container, g, camera);
-            if (mode == MODE_SHOOT && ship.canBeShotAt() && player.getShip().getDistance(ship) < selectedWeaponRange && player.getShip().getRace() != ship.getRace()) {
+        for (GameObject ship : ships) {
+            ship.draw(container, g, camera, world);
+            if (mode == MODE_SHOOT && ship.canBeAttacked() && player.getShip().getDistance(ship) < selectedWeaponRange && player.getShip().getRace() != ship.getRace()) {
                 // every targetable ship is surrounded by rectangle
                 g.drawRect(camera.getXCoord(ship.getX()), camera.getYCoord(ship.getY()), camera.getTileWidth(), camera.getTileHeight());
             }
@@ -673,10 +677,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         g.drawRect(camera.getXCoord(-radius), camera.getYCoord(-radius), 2 * radius * camera.getTileWidth(), 2 * radius * camera.getTileHeight());
         g.setColor(Color.white);
 
-        player.getShip().draw(container, g, camera);
+        player.getShip().draw(container, g, camera, world);
 
         if (currentEffect != null && currentEffect.getOrder() == Effect.DrawOrder.FRONT) {
-            currentEffect.draw(container, g, camera);
+            currentEffect.draw(container, g, camera, world);
         }
     }
 
@@ -697,7 +701,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
             object.setPos(x, y);
             isEmpty = true;
             // check that there are no planets or other objects at this position
-            for (SpaceObject obj : ships) {
+            for (GameObject obj : ships) {
                 if (obj == object) {
                     continue;
                 }
@@ -718,7 +722,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         } while (!isEmpty);
     }
 
-    public List<SpaceObject> getShips() {
+    public List<GameObject> getShips() {
         return ships;
     }
 

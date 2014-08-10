@@ -133,7 +133,7 @@ public class Dungeon implements Room, IDungeon {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         map.draw(container, graphics, camera);
         controller.draw(container, graphics, camera);
     }

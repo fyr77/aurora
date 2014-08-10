@@ -24,7 +24,6 @@ import ru.game.aurora.player.research.RnDSet;
 import ru.game.aurora.world.generation.StarSystemNamesCollection;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
@@ -152,7 +151,7 @@ public class World implements Serializable, ResolutionChangeListener {
     }
 
     public void draw(GameContainer container, Graphics graphics) {
-        currentRoom.draw(container, graphics, camera);
+        currentRoom.draw(container, graphics, camera, this);
     }
 
     public Camera getCamera() {
@@ -378,7 +377,7 @@ public class World implements Serializable, ResolutionChangeListener {
     }
 
 
-    public void onPlayerContactedAlienShip(SpaceObject ship) {
+    public void onPlayerContactedAlienShip(GameObject ship) {
         Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
         List<GameEventListener> newList = new LinkedList<>(listeners);
         for (GameEventListener l : newList) {

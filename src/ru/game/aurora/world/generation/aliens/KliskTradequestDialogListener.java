@@ -7,10 +7,10 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.NPCShip;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Map;
@@ -85,7 +85,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
 
         npcStation = null;
 
-        for (SpaceObject so : targetSystem.getShips()) {
+        for (GameObject so : targetSystem.getShips()) {
             if (so instanceof NPCShip) {
                 npcStation = (NPCShip) so;
                 break;

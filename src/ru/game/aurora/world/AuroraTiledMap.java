@@ -14,7 +14,6 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.world.dungeon.DungeonObject;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
-import ru.game.aurora.world.planet.PlanetObject;
 import ru.game.aurora.world.planet.SurfaceTypes;
 import ru.game.aurora.world.planet.TileDrawer;
 
@@ -30,7 +29,7 @@ import java.util.List;
 public class AuroraTiledMap implements ITileMap {
     private static final long serialVersionUID = 2L;
 
-    private List<PlanetObject> objects = new LinkedList<>();
+    private List<GameObject> objects = new LinkedList<>();
 
     private List<IVictoryCondition> victoryConditions = new ArrayList<>();
 
@@ -59,7 +58,7 @@ public class AuroraTiledMap implements ITileMap {
     }
 
     @Override
-    public List<PlanetObject> getObjects() {
+    public List<GameObject> getObjects() {
         return objects;
     }
 
@@ -89,7 +88,7 @@ public class AuroraTiledMap implements ITileMap {
                     Constructor ctor = clazz.getConstructor(AuroraTiledMap.class, int.class, int.class);
                     Object obj = ctor.newInstance(this, groupId, objectId);
                     if (DungeonObject.class.isAssignableFrom(clazz)) {
-                        objects.add((PlanetObject) obj);
+                        objects.add((GameObject) obj);
                     } else if (IVictoryCondition.class.isAssignableFrom(clazz)) {
                         victoryConditions.add((IVictoryCondition) obj);
                     }

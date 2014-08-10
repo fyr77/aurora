@@ -13,6 +13,7 @@ import ru.game.aurora.npc.SingleShipEvent;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -20,7 +21,6 @@ import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.NPCShip;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Iterator;
@@ -99,8 +99,8 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
         if (target == null) {
             return;
         }
-        for (Iterator<SpaceObject> iter = target.getShips().iterator(); iter.hasNext(); ) {
-            SpaceObject so = iter.next();
+        for (Iterator<GameObject> iter = target.getShips().iterator(); iter.hasNext(); ) {
+            GameObject so = iter.next();
             if (so.getName().equals("Rogue scout")) {
                 iter.remove();
                 return;
@@ -198,8 +198,8 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
                 }
 
                 // remove scout and add explosion
-                for (Iterator<SpaceObject> iter = world.getCurrentStarSystem().getShips().iterator(); iter.hasNext(); ) {
-                    SpaceObject so = iter.next();
+                for (Iterator<GameObject> iter = world.getCurrentStarSystem().getShips().iterator(); iter.hasNext(); ) {
+                    GameObject so = iter.next();
                     if (so != damagedRogueScout) {
                         continue;
                     }

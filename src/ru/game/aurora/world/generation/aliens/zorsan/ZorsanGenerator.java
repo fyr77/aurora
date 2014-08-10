@@ -46,7 +46,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
     public static final int CRUISER_SHIP = 1;
 
-    private static final ProbabilitySet<SpaceObject> defaultLootTable;
+    private static final ProbabilitySet<GameObject> defaultLootTable;
 
     static {
         defaultLootTable = new ProbabilitySet<>();
@@ -173,8 +173,8 @@ public class ZorsanGenerator implements WorldGeneratorPart {
     }
 
     public static void removeWarDataDrop() {
-        for (Iterator<Map.Entry<SpaceObject, Double>> iter = defaultLootTable.entrySet().iterator(); iter.hasNext(); ) {
-            Map.Entry<SpaceObject, Double> e = iter.next();
+        for (Iterator<Map.Entry<GameObject, Double>> iter = defaultLootTable.entrySet().iterator(); iter.hasNext(); ) {
+            Map.Entry<GameObject, Double> e = iter.next();
             if (e.getKey() instanceof ZorsanWarData) {
                 iter.remove();
             }
@@ -242,7 +242,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         });
     }
 
-    public static ProbabilitySet<SpaceObject> getDefaultLootTable() {
+    public static ProbabilitySet<GameObject> getDefaultLootTable() {
         return defaultLootTable;
     }
 }

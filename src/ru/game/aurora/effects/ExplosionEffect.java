@@ -54,7 +54,7 @@ public class ExplosionEffect extends Effect {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         float drawX = x;
         float drawY = y;
         if (!screenCoords) {

@@ -7,8 +7,9 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.world.BasePositionable;
+import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.Dungeon;
+import ru.game.aurora.world.ScanGroup;
 import ru.game.aurora.world.World;
 
 /**
@@ -17,8 +18,7 @@ import ru.game.aurora.world.World;
  * Date: 09.01.14
  * Time: 15:07
  */
-public class DungeonEntrance extends BasePositionable implements PlanetObject
-{
+public class DungeonEntrance extends BaseGameObject {
     private static final long serialVersionUID = 2L;
 
     private String sprite;
@@ -47,28 +47,18 @@ public class DungeonEntrance extends BasePositionable implements PlanetObject
     /**
      * Locks this dungeon. Player can not enter it, and is shown a message instead
      */
-    public void setLocked(String messageId)
-    {
+    public void setLocked(String messageId) {
         canBeEntered = false;
         messageIdIfCanNotEnter = messageId;
     }
 
     @Override
-    public boolean canBePickedUp() {
+    public boolean canBeInteracted() {
         return true;
     }
 
     @Override
-    public boolean canBeShotAt() {
-        return false;
-    }
-
-    @Override
-    public void onShotAt(World world, int damage) {
-    }
-
-    @Override
-    public void onPickedUp(World world) {
+    public void interact(World world) {
         if (canBeEntered) {
             dungeon.enter(world);
         } else {
@@ -87,11 +77,7 @@ public class DungeonEntrance extends BasePositionable implements PlanetObject
     }
 
     @Override
-    public void printStatusInfo() {
-    }
-
-    @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         final Image image = ResourceManager.getInstance().getImage(sprite);
         graphics.drawImage(image, camera.getXCoordWrapped(x, myPlanet.getWidth()) - image.getWidth() / 2, camera.getYCoordWrapped(y, myPlanet.getHeight()) - image.getHeight() / 2);
     }

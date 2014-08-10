@@ -13,7 +13,6 @@ import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.LandingParty;
-import ru.game.aurora.world.planet.PlanetObject;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 
 import java.io.Serializable;
@@ -153,10 +152,10 @@ public class MonsterController implements Serializable {
                 /////////////////////////////////////////////////////////////////////////
             } else if (myMonster.getBehaviour() == AnimalSpeciesDesc.Behaviour.FRIENDLY && myMonster.getWeapon() != null) {
                 // find some AGGRESSIVE target nearby
-                List<PlanetObject> tmpList = new ArrayList<>(map.getObjects());
-                for (PlanetObject po : tmpList) {
+                List<GameObject> tmpList = new ArrayList<>(map.getObjects());
+                for (GameObject po : tmpList) {
 
-                    if (!po.canBeShotAt() || !DungeonMonster.class.isAssignableFrom(po.getClass())) {
+                    if (!po.canBeAttacked() || !DungeonMonster.class.isAssignableFrom(po.getClass())) {
                         continue;
                     }
                     final DungeonMonster po1 = (DungeonMonster) po;
@@ -173,7 +172,7 @@ public class MonsterController implements Serializable {
 
                             @Override
                             public void stateChanged(World world) {
-                                po1.onShotAt(world, weapon.getDamage());
+                                po1.onAttack(world, myMonster, weapon.getDamage());
                             }
                         });
                     }

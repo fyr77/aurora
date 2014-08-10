@@ -5,18 +5,16 @@
  */
 package ru.game.aurora.world.planet;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.world.BasePositionable;
+import ru.game.aurora.world.BaseGameObject;
+import ru.game.aurora.world.ScanGroup;
 import ru.game.aurora.world.World;
 
-public class OreDeposit extends BasePositionable implements PlanetObject {
-    private static final long serialVersionUID = -407383614466292775L;
+public class OreDeposit extends BaseGameObject {
+    private static final long serialVersionUID = 1L;
 
     public static class OreUnit implements InventoryItem {
         private static final long serialVersionUID = -5597582503966190176L;
@@ -123,13 +121,8 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
 
 
     @Override
-    public boolean canBePickedUp() {
+    public boolean canBeInteracted() {
         return true;
-    }
-
-    @Override
-    public boolean canBeShotAt() {
-        return false;
     }
 
     @Override
@@ -139,12 +132,7 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
 
 
     @Override
-    public void onShotAt(World world, int damage) {
-
-    }
-
-    @Override
-    public void onPickedUp(World world) {
+    public void interact(World world) {
         final int miningPower = world.getPlayer().getLandingParty().calcMiningPower();
         currentMiningProgress -= miningPower;
         if (currentMiningProgress <= 0) {
@@ -170,17 +158,4 @@ public class OreDeposit extends BasePositionable implements PlanetObject {
         return type.name();
     }
 
-    @Override
-    public void printStatusInfo() {
-    }
-
-    @Override
-    public void update(GameContainer container, World world) {
-
-    }
-
-    @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
-        g.drawImage(ResourceManager.getInstance().getImage(type.getSpriteName()), camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
-    }
 }

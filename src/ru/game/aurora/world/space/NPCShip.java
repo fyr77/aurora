@@ -8,8 +8,11 @@ package ru.game.aurora.world.space;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import ru.game.aurora.application.*;
+import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
@@ -23,10 +26,7 @@ import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.util.GameTimer;
 import ru.game.aurora.util.ProbabilitySet;
-import ru.game.aurora.world.IStateChangeListener;
-import ru.game.aurora.world.MovableSprite;
-import ru.game.aurora.world.Ship;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
 
@@ -35,9 +35,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-public class NPCShip extends MovableSprite implements SpaceObject {
+public class NPCShip extends BaseGameObject {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     protected AlienRace race;
 
@@ -50,8 +50,6 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     protected String name;
 
     protected int speed = 3;
-
-    protected boolean isAlive = true;
 
     protected int curSpeed = 3;
 
@@ -69,12 +67,12 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     private GameTimer repairTimer = null;
 
     // map of loot that can be dropped by this ship, with its chances
-    private ProbabilitySet<SpaceObject> loot;
+    private ProbabilitySet<GameObject> loot;
 
-    private transient Map<SpaceObject, Integer> threatMap = new WeakHashMap<>();
+    private transient Map<GameObject, Integer> threatMap = new WeakHashMap<>();
 
     public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name, int hp) {
-        super(x, y, sprite);
+        super(x, y, new Drawable(sprite));
         this.race = race;
         this.captain = captain;
         this.name = name;
@@ -85,7 +83,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         this.speed = speed;
     }
 
-    public void setLoot(ProbabilitySet<SpaceObject> loot) {
+    public void setLoot(ProbabilitySet<GameObject> loot) {
         this.loot = loot;
     }
 
@@ -128,8 +126,8 @@ public class NPCShip extends MovableSprite implements SpaceObject {
             threatMap = new HashMap<>();
         }
 
-        for (SpaceObject so : ss.getShips()) {
-            if (so.canBeShotAt() && !threatMap.containsKey(so) && isHostile(world, so)) {
+        for (GameObject so : ss.getShips()) {
+            if (so.canBeAttacked() && !threatMap.containsKey(so) && isHostile(world, so)) {
                 threatMap.put(so, 0);
             }
         }
@@ -140,7 +138,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         updateThreatMap(world);
 
         while (!threatMap.isEmpty()) {
-            SpaceObject mostThreatTarget = getMostThreatTarget();
+            GameObject mostThreatTarget = getMostThreatTarget();
             if (mostThreatTarget != null) {
                 if (!mostThreatTarget.isAlive()) {
                     threatMap.remove(mostThreatTarget);
@@ -165,8 +163,8 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
-        super.draw(container, g, camera);
+    public void draw(GameContainer container, Graphics g, Camera camera, World world) {
+        super.draw(container, g, camera, world);
         if (hp < 3) {
             g.setColor(Color.red);
         } else {
@@ -185,7 +183,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
      * Returns true if this ship is hostile to player
      * Hostile ships can not be hailed and will attack player when they see it
      */
-    public boolean isHostile(World world, SpaceObject object) {
+    public boolean isHostile(World world, GameObject object) {
         return (object instanceof Ship && isHostile)
                 || (race != null && object.getRace() != null && world.getCurrentStarSystem().getReputation().isHostile(race.getName(), object.getRace().getName()));
     }
@@ -206,10 +204,10 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
     @Override
     public String getName() {
+        //todo: localize
         return name;
     }
 
-    @Override
     public String getScanDescription(World world) {
         StringBuilder sb = new StringBuilder(String.format(Localization.getText("gui", "scan.ship.race"), race != null ? race.getName() : "Unknown"));
         sb.append('\n');
@@ -218,7 +216,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     }
 
     @Override
-    public void onContact(World world) {
+    public void interact(World world) {
         if (!isCanBeHailed() || isHostile) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.hail_not_responded"));
             return;
@@ -235,8 +233,9 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         world.addOverlayWindow(d);
     }
 
+
     @Override
-    public void onAttack(World world, SpaceObject attacker, int dmg) {
+    public void onAttack(World world, GameObject attacker, int dmg) {
         hp -= dmg;
         final StarSystem currentStarSystem = world.getCurrentStarSystem();
         if (hp <= 0) {
@@ -280,7 +279,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         }
     }
 
-    public void fire(World world, StarSystem ss, int weaponIdx, final SpaceObject target) {
+    public void fire(World world, StarSystem ss, int weaponIdx, final GameObject target) {
         weapons[weaponIdx].fire();
         final StarshipWeaponDesc weaponDesc = weapons[weaponIdx].getWeaponDesc();
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.attack")
@@ -381,7 +380,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     }
 
     //изменяем значение агро для цели. Если цели нет в списке - добавляем.
-    public void changeThreat(World world, SpaceObject target, int amount) {
+    public void changeThreat(World world, GameObject target, int amount) {
         if (threatMap == null) {
             threatMap = new WeakHashMap<>();
         }
@@ -405,12 +404,12 @@ public class NPCShip extends MovableSprite implements SpaceObject {
 
 
     //цель для атаки
-    public SpaceObject getMostThreatTarget() {
+    public GameObject getMostThreatTarget() {
         if (!threatMap.isEmpty()) {
-            SpaceObject mostThreat = threatMap.keySet().iterator().next();
+            GameObject mostThreat = threatMap.keySet().iterator().next();
             int maxValue = threatMap.get(mostThreat);
-            for (Iterator<Map.Entry<SpaceObject, Integer>> iterator = threatMap.entrySet().iterator(); iterator.hasNext(); ) {
-                Map.Entry<SpaceObject, Integer> entry = iterator.next();
+            for (Iterator<Map.Entry<GameObject, Integer>> iterator = threatMap.entrySet().iterator(); iterator.hasNext(); ) {
+                Map.Entry<GameObject, Integer> entry = iterator.next();
                 if (!entry.getKey().isAlive()) {
                     iterator.remove();
                     continue;
@@ -430,7 +429,7 @@ public class NPCShip extends MovableSprite implements SpaceObject {
     public void updateThreatMap(World world) {
         for (Object o : threatMap.entrySet()) {
             Map.Entry entry = (Map.Entry) o;
-            SpaceObject ship = (SpaceObject) entry.getKey();
+            GameObject ship = (GameObject) entry.getKey();
             if (ship.isAlive()) {
                 //немного уменьшается агро каждой цели
                 changeThreat(world, ship, -1);  //todo: balance
@@ -451,12 +450,12 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         return maxHP;
     }
 
-    public Map<SpaceObject, Integer> getThreatMap() {
+    public Map<GameObject, Integer> getThreatMap() {
         return threatMap;
     }
 
     @Override
-    public boolean canBeShotAt() {
+    public boolean canBeAttacked() {
         return true;
     }
 
@@ -468,8 +467,4 @@ public class NPCShip extends MovableSprite implements SpaceObject {
         this.race = race;
     }
 
-    @Override
-    public Image getImage() {
-        return ResourceManager.getInstance().getImage(sprite);
-    }
 }

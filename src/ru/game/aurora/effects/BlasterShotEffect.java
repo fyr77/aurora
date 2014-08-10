@@ -122,7 +122,7 @@ public class BlasterShotEffect extends Effect {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         graphics.drawImage(myImage, currentPos.x - myImage.getWidth() / 2, currentPos.y - myImage.getHeight() / 2);
     }
 

@@ -6,8 +6,7 @@
  */
 package ru.game.aurora.effects;
 
-import ru.game.aurora.world.BasePositionable;
-import ru.game.aurora.world.GameObject;
+import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 
@@ -15,9 +14,9 @@ import ru.game.aurora.world.World;
  * Effects are short animations that are shown after some game events occur. E.g. blaster shot.
  * While effect is shown, all other game activity is paused
  */
-public abstract class Effect extends BasePositionable implements GameObject, Comparable<Effect> {
+public abstract class Effect extends BaseGameObject implements Comparable<Effect> {
 
-    private static final long serialVersionUID = -4599033590718591085L;
+    private static final long serialVersionUID = 1L;
 
     private int priority;
 

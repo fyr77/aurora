@@ -18,8 +18,8 @@ import de.lessvoid.nifty.input.NiftyInputEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.xml.xpp3.Attributes;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.IStateChangeListener;
-import ru.game.aurora.world.space.SpaceObject;
 
 import java.util.List;
 import java.util.Properties;
@@ -28,13 +28,13 @@ import java.util.Properties;
 public class InteractionTargetSelectorController implements Controller {
     private Element myWindow;
 
-    private ListBox<SpaceObject> listBox;
+    private ListBox<GameObject> listBox;
 
-    private IStateChangeListener<SpaceObject> callback;
+    private IStateChangeListener<GameObject> callback;
 
     private static String popupId;
 
-    public static void open(IStateChangeListener<SpaceObject> selectionListener, List<SpaceObject> so) {
+    public static void open(IStateChangeListener<GameObject> selectionListener, List<GameObject> so) {
         final Nifty nifty = GUI.getInstance().getNifty();
         Element target_selection_popup = nifty.createPopup("target_selection_popup");
         popupId = target_selection_popup.getId();
@@ -45,7 +45,7 @@ public class InteractionTargetSelectorController implements Controller {
 
     }
 
-    public void setObjects(List<SpaceObject> objects) {
+    public void setObjects(List<GameObject> objects) {
         listBox.clear();
         listBox.addAllItems(objects);
         myWindow.layoutElements();
@@ -95,7 +95,7 @@ public class InteractionTargetSelectorController implements Controller {
         }
     }
 
-    public void setCallback(IStateChangeListener<SpaceObject> callback) {
+    public void setCallback(IStateChangeListener<GameObject> callback) {
         this.callback = callback;
     }
 }

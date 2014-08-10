@@ -10,9 +10,9 @@ package ru.game.aurora.world.quest;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 /**
@@ -24,8 +24,6 @@ public class AuroraProbe extends NPCShip {
 
     private Dialog dialog;
 
-    private boolean contacted = false;
-
     public AuroraProbe(int x, int y) {
         super(x, y, "probe", null, null, "Probe-X513M", 5);
         setAi(null);
@@ -33,14 +31,14 @@ public class AuroraProbe extends NPCShip {
     }
 
     @Override
-    public boolean isHostile(World world, SpaceObject object) {
+    public boolean isHostile(World world, GameObject object) {
         return false;
     }
 
     @Override
-    public void onContact(World world) {
+    public void interact(World world) {
         world.addOverlayWindow(dialog);
-        contacted = true;
+        isAlive = false;
 
         world.getPlayer().getResearchState().addNewAvailableProject(world.getResearchAndDevelopmentProjects().getResearchProjects().get("probe"));
 
@@ -49,11 +47,6 @@ public class AuroraProbe extends NPCShip {
         GameLogger.getInstance().logMessage(String.format(Localization.getText("research", "probe.astro_data_retrieved"), curSystem.getAstronomyData()));
         curSystem.setAstronomyData(0);
         world.getPlayer().getResearchState().addProcessedAstroData(remainingAstroData);
-    }
-
-    @Override
-    public boolean isAlive() {
-        return !contacted;
     }
 
     @Override

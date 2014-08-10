@@ -167,8 +167,8 @@ public class Earth extends BasePlanet {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
-        owner.draw(container, g, camera);
+    public void draw(GameContainer container, Graphics g, Camera camera, World world) {
+        owner.draw(container, g, camera, world);
     }
 
     public int getLastVisitTurn() {

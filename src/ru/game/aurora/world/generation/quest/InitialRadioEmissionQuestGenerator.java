@@ -26,7 +26,10 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesMainDialogListener;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.space.*;
+import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.space.SpaceHulk;
+import ru.game.aurora.world.space.Star;
+import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Map;
 
@@ -130,7 +133,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         private RoguesStateChanger(World world, Dungeon beacon) {
             rogues = world.getRaces().get("Rogues");
             this.roguesBase = rogues.getHomeworld();
-            for (SpaceObject s : roguesBase.getShips()) {
+            for (GameObject s : roguesBase.getShips()) {
                 if (s.getName().equals("Rogues Frame")) {
                     roguesFrame = (NPCShip) s;
                     break;

@@ -6,7 +6,7 @@ package ru.game.aurora.world;
  * Date: 17.11.13
  * Time: 18:57
  */
-public interface IMovable extends Positionable, GameObject {
+public interface IMovable extends Positionable {
     void moveUp();
 
     void moveDown();

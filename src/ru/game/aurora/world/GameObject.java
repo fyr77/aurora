@@ -5,14 +5,34 @@
  */
 package ru.game.aurora.world;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import ru.game.aurora.application.Camera;
+import org.newdawn.slick.Image;
+import ru.game.aurora.npc.AlienRace;
 
 import java.io.Serializable;
 
-public interface GameObject extends Serializable, Updatable {
+public interface GameObject extends Serializable, Updatable, IMovable, IDrawable {
 
-    public void draw(GameContainer container, Graphics graphics, Camera camera);
+
+    public Image getImage();
+
+    public String getName();
+
+    public boolean canBeInteracted();
+
+    public void interact(World world);
+
+    public String getInteractMessage();
+
+    public boolean canBeAttacked();
+
+    public void onAttack(World world, GameObject attacker, int damaged);
+
+    public boolean isAlive();
+
+    public AlienRace getRace();
+
+    public String getScanDescription(World world);
+
+    public ScanGroup getScanGroup();
 
 }

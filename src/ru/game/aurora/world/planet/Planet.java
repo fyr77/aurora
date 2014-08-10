@@ -179,7 +179,7 @@ public class Planet extends BasePlanet implements IDungeon {
     }
 
 
-    public List<PlanetObject> getPlanetObjects() {
+    public List<GameObject> getPlanetObjects() {
         return getSurface().getObjects();
     }
 
@@ -279,7 +279,7 @@ public class Planet extends BasePlanet implements IDungeon {
                 world.getCamera().setTarget(landingParty);
                 world.getCamera().resetViewPort();
                 shuttle = null;
-                for (PlanetObject po : surface.getObjects()) {
+                for (GameObject po : surface.getObjects()) {
                     if (po instanceof LandingShuttle) {
                         shuttle = (LandingShuttle) po;
                     }
@@ -337,7 +337,7 @@ public class Planet extends BasePlanet implements IDungeon {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
 
         if (surfaceGenerationFuture != null) {
             final Element topMostPopup = GUI.getInstance().getNifty().getTopMostPopup();
@@ -445,5 +445,10 @@ public class Planet extends BasePlanet implements IDungeon {
 
     public int getExploredTiles() {
         return exploredTiles;
+    }
+
+    @Override
+    public String getInteractMessage() {
+        return Localization.getText("gui", "space.land");
     }
 }

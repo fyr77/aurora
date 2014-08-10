@@ -22,7 +22,6 @@ import ru.game.aurora.gui.GUI;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
-import ru.game.aurora.world.planet.PlanetObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -73,7 +72,7 @@ public class DungeonController extends Listenable implements Serializable {
     /**
      * When in fire mode, this is currently selected target
      */
-    private transient PlanetObject target = null;
+    private transient GameObject target = null;
 
     private int xClick;
     private int yClick;
@@ -185,10 +184,10 @@ public class DungeonController extends Listenable implements Serializable {
         int x = world.getPlayer().getLandingParty().getX();
         int y = world.getPlayer().getLandingParty().getY();
         // check if can pick up smth
-        for (Iterator<PlanetObject> iter = map.getObjects().iterator(); iter.hasNext(); ) {
-            PlanetObject p = iter.next();
+        for (Iterator<GameObject> iter = map.getObjects().iterator(); iter.hasNext(); ) {
+            GameObject p = iter.next();
 
-            if (!p.canBePickedUp()) {
+            if (!p.canBeInteracted()) {
                 continue;
             }
 
@@ -196,7 +195,7 @@ public class DungeonController extends Listenable implements Serializable {
                     && (!map.isWrapped() || (int) BasePositionable.getDistanceWrapped(x, y, p.getX(), p.getY(), map.getWidthInTiles(), map.getHeightInTiles()) != 0)) {
                 continue;
             }
-            p.onPickedUp(world);
+            p.interact(world);
             world.setUpdatedThisFrame(true);
             // some items (like ore deposits) can be picked up more than once, do not remove them in this case
             if (!p.isAlive()) {
@@ -233,15 +232,15 @@ public class DungeonController extends Listenable implements Serializable {
             return;
         }
         int targetIdx = 0;
-        List<PlanetObject> availableTargets = new ArrayList<>();
+        List<GameObject> availableTargets = new ArrayList<>();
 
         if (target != null && (!target.isAlive() || getRange(landingParty, target) > landingParty.getWeapon().getRange())) {
             // target moved out of range
             target = null;
         }
 
-        for (PlanetObject planetObject : map.getObjects()) {
-            if (!planetObject.canBeShotAt()) {
+        for (GameObject planetObject : map.getObjects()) {
+            if (!planetObject.canBeAttacked()) {
                 continue;
             }
             if (!map.isTileVisible(planetObject.getX(), planetObject.getY())) {
@@ -309,7 +308,7 @@ public class DungeonController extends Listenable implements Serializable {
 
                 @Override
                 public void stateChanged(World world) {
-                    target.onShotAt(world, damage);
+                    target.onAttack(world, landingParty, damage);
                     GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.damage_message"), damage, target.getName()));
                     if (!target.isAlive()) {
                         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), target.getName()));
@@ -390,9 +389,9 @@ public class DungeonController extends Listenable implements Serializable {
         }
         // should always be done after player update, so that world.isUpdatedThisFrame() flag is set
         boolean isAtObject = false;
-        for (PlanetObject a : new ArrayList<>(map.getObjects())) {
+        for (GameObject a : new ArrayList<>(map.getObjects())) {
             a.update(container, world);
-            if (getDistance(landingParty, a) == 0 && a.canBePickedUp()) {
+            if (getDistance(landingParty, a) == 0 && a.canBeInteracted()) {
                 isAtObject = true;
             }
         }
@@ -447,24 +446,20 @@ public class DungeonController extends Listenable implements Serializable {
         if (landingParty != null) {
 
             graphics.setColor(Color.red);
-            for (PlanetObject a : map.getObjects()) {
+            for (GameObject a : map.getObjects()) {
                 // draw only if tile under this animal is visible
                 if (map.isTileVisible(a.getX(), a.getY())) {
-                    a.draw(container, graphics, camera);
+                    a.draw(container, graphics, camera, world);
 
                     // in shoot mode, all available targets are surrounded with red square
-                    if (mode == MODE_SHOOT && a.canBeShotAt() && getDistance(landingParty, a) < landingParty.getWeapon().getRange()) {
+                    if (mode == MODE_SHOOT && a.canBeAttacked() && getDistance(landingParty, a) < landingParty.getWeapon().getRange()) {
                         graphics.drawRect(camera.getXCoordWrapped(a.getX(), map.getWidthInTiles()), camera.getYCoordWrapped(a.getY(), map.getHeightInTiles()), camera.getTileWidth(), camera.getTileHeight());
                     }
                 }
 
-                if (a.getX() == landingParty.getX() && a.getY() == landingParty.getY()) {
-                    a.printStatusInfo();
-                }
-
             }
 
-            landingParty.draw(container, graphics, camera);
+            landingParty.draw(container, graphics, camera, world);
 
             if (mode == MODE_SHOOT) {
                 graphics.setColor(Color.yellow);
@@ -477,7 +472,7 @@ public class DungeonController extends Listenable implements Serializable {
             }
         }
         if (currentEffect != null) {
-            currentEffect.draw(container, graphics, camera);
+            currentEffect.draw(container, graphics, camera, world);
         }
     }
 

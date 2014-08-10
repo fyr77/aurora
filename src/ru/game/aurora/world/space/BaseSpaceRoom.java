@@ -72,7 +72,7 @@ public abstract class BaseSpaceRoom implements Room {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
-        player.getShip().draw(container, g, camera);
+    public void draw(GameContainer container, Graphics g, Camera camera, World world) {
+        player.getShip().draw(container, g, camera, world);
     }
 }

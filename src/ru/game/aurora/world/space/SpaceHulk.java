@@ -8,14 +8,9 @@
 package ru.game.aurora.world.space;
 
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.research.ResearchProjectDesc;
+import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.Dungeon;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
@@ -26,12 +21,10 @@ import ru.game.aurora.world.World;
  * Can contain something valuable, like resources, materials for research etc.
  * In future versions will contain enemies and location similar to planet
  */
-public class SpaceHulk extends BaseSpaceObject {
-    private static final long serialVersionUID = 1L;
+public class SpaceHulk extends BaseGameObject {
+    private static final long serialVersionUID = 2L;
 
     private String name;
-
-    private String image;
 
     // dialog that is shown to player when interacting with hulk
     private Dialog onInteractDialog;
@@ -45,15 +38,13 @@ public class SpaceHulk extends BaseSpaceObject {
     private Dungeon dungeon;
 
     public SpaceHulk(int x, int y, String name, String image) {
-        super(x, y);
+        super(x, y, image);
         this.name = name;
-        this.image = image;
     }
 
     public SpaceHulk(int x, int y, String name, String image, Dungeon dungeon) {
-        super(x, y);
+        super(x, y, image);
         this.name = name;
-        this.image = image;
         this.dungeon = dungeon;
         this.dungeon.getController().addListener(new IStateChangeListener<World>() {
 
@@ -73,7 +64,7 @@ public class SpaceHulk extends BaseSpaceObject {
     }
 
     @Override
-    public void onContact(World world) {
+    public void interact(World world) {
         if (explored) {
             return;
         }
@@ -89,33 +80,8 @@ public class SpaceHulk extends BaseSpaceObject {
     }
 
     @Override
-    public void onAttack(World world, SpaceObject attacker, int dmg) {
-        // nothing
-    }
-
-    @Override
-    public boolean isAlive() {
-        return true;
-    }
-
-    @Override
     public String getName() {
         return name;
-    }
-
-    @Override
-    public String getScanDescription(World world) {
-        return null;
-    }
-
-    @Override
-    public AlienRace getRace() {
-        return null;
-    }
-
-    @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        graphics.drawImage(getImage(), camera.getXCoord(x), camera.getYCoord(y));
     }
 
     public void setOnInteractDialog(Dialog onInteractDialog) {
@@ -124,10 +90,5 @@ public class SpaceHulk extends BaseSpaceObject {
 
     public void setResearchProjectDescs(ResearchProjectDesc... descs) {
         this.researchProjectDescs = descs;
-    }
-
-    @Override
-    public Image getImage() {
-        return ResourceManager.getInstance().getImage(image);
     }
 }

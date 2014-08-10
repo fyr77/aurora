@@ -16,10 +16,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.GUI;
-import ru.game.aurora.world.Movable;
-import ru.game.aurora.world.Room;
-import ru.game.aurora.world.Ship;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 
 /**
  * Global map of the galaxy, all stars in single screen
@@ -55,6 +52,11 @@ public class GalaxyMapScreen implements Room {
     }
 
     @Override
+    public ITileMap getMap() {
+        return null;
+    }
+
+    @Override
     public void update(GameContainer container, World world) {
         if (container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(Input.KEY_ESCAPE) || container.getInput().isKeyPressed(Input.KEY_M)) {
             world.setCurrentRoom(world.getGalaxyMap());
@@ -63,7 +65,7 @@ public class GalaxyMapScreen implements Room {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
+    public void draw(GameContainer container, Graphics g, Camera camera, World world) {
         for (int i = 0; i < galaxyMap.getTilesY(); ++i) {
             for (int j = 0; j < galaxyMap.getTilesX(); ++j) {
                 GalaxyMapObject obj = galaxyMap.getObjectAt(j, i);

@@ -3,12 +3,13 @@ package ru.game.aurora.world.generation.quest;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
-import ru.game.aurora.world.BasePositionable;
-import ru.game.aurora.world.GameEventListener;
-import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.*;
+import ru.game.aurora.world.*;
+import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetNPC;
+import ru.game.aurora.world.planet.SurfaceTypes;
 import ru.game.aurora.world.planet.nature.Animal;
 import ru.game.aurora.world.planet.nature.AnimalModifier;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
@@ -92,19 +93,19 @@ public class ColonizationListener extends GameEventListener implements DialogLis
             }
         }
 
-        planet.getPlanetObjects().add(new BasePlanetObject(colonyCenter.getX() + 2, colonyCenter.getY() + 2, "colony_boxes", planet, PlanetObject.ScanGroup.OTHER));
-        planet.getPlanetObjects().add(new BasePlanetObject(colonyCenter.getX() + 2, colonyCenter.getY() + 3, "colony_boxes", planet, PlanetObject.ScanGroup.OTHER));
-        planet.getPlanetObjects().add(new BasePlanetObject(colonyCenter.getX() + 3, colonyCenter.getY() + 4, "colony_tractor", planet, PlanetObject.ScanGroup.OTHER));
+        planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 2, colonyCenter.getY() + 2, new Drawable("colony_boxes"), null, ScanGroup.OTHER));
+        planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 2, colonyCenter.getY() + 3, new Drawable("colony_boxes"), null, ScanGroup.OTHER));
+        planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 3, colonyCenter.getY() + 4, new Drawable("colony_tractor"), null, ScanGroup.OTHER));
 
         // workers
-        planet.getPlanetObjects().add(new BasePlanetObject(colonyCenter.getX() + 3, colonyCenter.getY() + 5, "humanity_tileset", 0, 6, planet));
-        planet.getPlanetObjects().add(new BasePlanetObject(colonyCenter.getX() + 4, colonyCenter.getY() + 2, "humanity_tileset", 0, 6, planet));
+        planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 3, colonyCenter.getY() + 5, new Drawable("humanity_tileset", 0, 6)));
+        planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 4, colonyCenter.getY() + 2, new Drawable("humanity_tileset", 0, 6)));
 
-        planet.getPlanetObjects().add(new BasePlanetObject(colonyCenter.getX() + 6, colonyCenter.getY() + 8, "colony_tent", planet, PlanetObject.ScanGroup.OTHER));
-        planet.getPlanetObjects().add(new BasePlanetObject(colonyCenter.getX() + 7, colonyCenter.getY() + 8, "colony_smalltent", planet, PlanetObject.ScanGroup.OTHER));
-        planet.getPlanetObjects().add(new BasePlanetObject(colonyCenter.getX() + 8, colonyCenter.getY() + 8, "colony_house1", planet));
-        planet.getPlanetObjects().add(new BasePlanetObject(colonyCenter.getX() + 5, colonyCenter.getY() + 10, "humanity_tileset", 2, 6, planet));
-        planet.getPlanetObjects().add(new BasePlanetObject(colonyCenter.getX() + 7, colonyCenter.getY() + 10, "colony_tractor", planet));
+        planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 6, colonyCenter.getY() + 8, new Drawable("colony_tent"), null, ScanGroup.OTHER));
+        planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 7, colonyCenter.getY() + 8, new Drawable("colony_smalltent"), null, ScanGroup.OTHER));
+        planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 8, colonyCenter.getY() + 8, new Drawable("colony_house1"), null, null));
+        planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 5, colonyCenter.getY() + 10, new Drawable("humanity_tileset", 2, 6)));
+        planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 7, colonyCenter.getY() + 10, new Drawable("colony_tractor"), null, null));
 
 
         AnimalSpeciesDesc guard = new AnimalSpeciesDesc(planet, "Marine", false, false, 10, ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault"), 1, AnimalSpeciesDesc.Behaviour.FRIENDLY, Collections.<AnimalModifier>emptySet());
@@ -116,7 +117,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
             planet.getPlanetObjects().add(new Animal(planet, colonyCenter.getX() + 7, colonyCenter.getY() + 3, guard));
         }
 
-        chief = new PlanetNPC(colonyCenter.getX() + 8, colonyCenter.getY() + 9, "colony_colonist", planet);
+        chief = new PlanetNPC(colonyCenter.getX() + 8, colonyCenter.getY() + 9, "colony_colonist");
         chief.setDialog(Dialog.loadFromFile("dialogs/quest/colony_search/colony_default.json"));
         planet.getPlanetObjects().add(chief);
 

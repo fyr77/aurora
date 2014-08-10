@@ -11,9 +11,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.*;
 import ru.game.aurora.player.Player;
+import ru.game.aurora.world.BaseGameObject;
+import ru.game.aurora.world.ITileMap;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.space.BaseSpaceObject;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class BasePlanet extends BaseSpaceObject implements Room, GalaxyMapObject {
+public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyMapObject {
     private static final long serialVersionUID = 1L;
     protected StarSystem owner;
     protected PlanetCategory category;
@@ -143,7 +144,7 @@ public abstract class BasePlanet extends BaseSpaceObject implements Room, Galaxy
     }
 
     @Override
-    public void onContact(World world) {
+    public void interact(World world) {
         if (category == PlanetCategory.GAS_GIANT) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.can_not_land"));
             return;
@@ -151,5 +152,10 @@ public abstract class BasePlanet extends BaseSpaceObject implements Room, Galaxy
         GameLogger.getInstance().logMessage(Localization.getText("gui", "landing"));
         world.setCurrentRoom(this);
         enter(world);
+    }
+
+    @Override
+    public ITileMap getMap() {
+        return null;
     }
 }

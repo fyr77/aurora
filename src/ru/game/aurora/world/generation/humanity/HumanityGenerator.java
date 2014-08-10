@@ -18,9 +18,13 @@ import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
-import ru.game.aurora.world.space.*;
+import ru.game.aurora.world.space.HomeworldGenerator;
+import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.space.SpaceDebris;
+import ru.game.aurora.world.space.StarSystem;
 
 import java.util.List;
 
@@ -29,7 +33,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
 
     public static final String NAME = "Humanity";
 
-    private static final ProbabilitySet<SpaceObject> defaultLootTable;
+    private static final ProbabilitySet<GameObject> defaultLootTable;
 
     static {
         defaultLootTable = new ProbabilitySet<>();

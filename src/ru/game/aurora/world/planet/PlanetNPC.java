@@ -1,6 +1,8 @@
 package ru.game.aurora.world.planet;
 
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.World;
 
 /**
@@ -9,17 +11,17 @@ import ru.game.aurora.world.World;
  * Date: 22.05.14
  * Time: 21:14
  */
-public class PlanetNPC extends BasePlanetObject {
-    private static final long serialVersionUID = -6116517352597757135L;
+public class PlanetNPC extends BaseGameObject {
+    private static final long serialVersionUID = 1L;
 
     private Dialog dialog;
 
-    public PlanetNPC(int x, int y, String tileset, int tileX, int tileY, Planet myPlanet) {
-        super(x, y, tileset, tileX, tileY, myPlanet);
+    public PlanetNPC(int x, int y, String tileset, int tileX, int tileY) {
+        super(x, y, new Drawable(tileset, tileX, tileY));
     }
 
-    public PlanetNPC(int x, int y, String image, Planet myPlanet) {
-        super(x, y, image, myPlanet);
+    public PlanetNPC(int x, int y, String image) {
+        super(x, y, image);
     }
 
     public Dialog getDialog() {
@@ -31,12 +33,12 @@ public class PlanetNPC extends BasePlanetObject {
     }
 
     @Override
-    public void onPickedUp(World world) {
+    public void interact(World world) {
         world.addOverlayWindow(dialog);
     }
 
     @Override
-    public boolean canBePickedUp() {
+    public boolean canBeInteracted() {
         return true;
     }
 }

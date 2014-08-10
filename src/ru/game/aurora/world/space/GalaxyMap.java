@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.world.ITileMap;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.Room;
 import ru.game.aurora.world.World;
@@ -69,7 +70,11 @@ public class GalaxyMap extends BaseSpaceRoom {
         background.setBaseWidth(2); // smaller size of background stars so that they are not messed with real stars
     }
 
-    public int[][] getMap() {
+    public ITileMap getMap() {
+        return null;
+    }
+
+    public int[][] getInternalMap() {
         return map;
     }
 
@@ -206,9 +211,9 @@ public class GalaxyMap extends BaseSpaceRoom {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         if (background == null) {
-            createBackground(world.getCamera(), tilesX, tilesY);
+            createBackground(this.world.getCamera(), tilesX, tilesY);
         }
         background.draw(graphics, camera);
         for (int i = 0; i < tilesY; ++i) {
@@ -219,7 +224,7 @@ public class GalaxyMap extends BaseSpaceRoom {
                 }
             }
         }
-        super.draw(container, graphics, camera);
+        super.draw(container, graphics, camera, world);
     }
 
     public static double getDistance(StarSystem first, StarSystem second) {

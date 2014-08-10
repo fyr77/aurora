@@ -28,7 +28,7 @@ public class BigMommyShotEffect extends BlasterShotEffect {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         graphics.drawAnimation(animation, currentPos.x, currentPos.y);
     }
 

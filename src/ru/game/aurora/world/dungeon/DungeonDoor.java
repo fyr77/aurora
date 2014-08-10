@@ -67,6 +67,7 @@ public class DungeonDoor extends DungeonObject {
             return ResourceManager.getInstance().getSpriteSheet(imageOpenName).getSprite(imageOpenTileX, imageOpenTileY);
         }
     }
+
     private Image getImageClose() {
         if (imageCloseTileX < 0) {
             //this is a standalone image
@@ -77,7 +78,7 @@ public class DungeonDoor extends DungeonObject {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         if (imageOpen == null) {
             imageOpen = getImageOpen();
         }

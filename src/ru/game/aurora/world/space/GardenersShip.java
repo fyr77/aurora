@@ -8,6 +8,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.WarpEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 
@@ -16,8 +17,7 @@ import ru.game.aurora.world.World;
  * Time: 21:36
  */
 
-public class GardenersShip extends NPCShip implements SpaceObject {
-
+public class GardenersShip extends NPCShip {
     private static final long serialVersionUID = -1613654729672880450L;
 
     private String sprite;
@@ -41,7 +41,7 @@ public class GardenersShip extends NPCShip implements SpaceObject {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
+    public void draw(GameContainer container, Graphics g, Camera camera, World world) {
         org.newdawn.slick.Image img;
         img = ResourceManager.getInstance().getImage(sprite);
         if (spriteAlpha == 0.0f) {
@@ -53,7 +53,7 @@ public class GardenersShip extends NPCShip implements SpaceObject {
     }
 
     @Override
-    public void onAttack(World world, SpaceObject attacker, int dmg) {
+    public void onAttack(World world, GameObject attacker, int dmg) {
         warpAway(world, world.getCurrentStarSystem());
     }
 

@@ -69,12 +69,12 @@ public class DungeonMonster extends DungeonObject implements IMonster {
     }
 
     @Override
-    public boolean canBeShotAt() {
+    public boolean canBeAttacked() {
         return behaviour != AnimalSpeciesDesc.Behaviour.FRIENDLY && hp > 0;
     }
 
     @Override
-    public void onShotAt(World world, int damage) {
+    public void onAttack(World world, GameObject attacker, int damage) {
         hp -= damage;
         if (hp <= 0) {
             // clean obstacle flag
@@ -84,7 +84,7 @@ public class DungeonMonster extends DungeonObject implements IMonster {
                 owner.setTilePassable(getTargetX(), getTargetY(), true);
             }
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), getName()));
-            myMap.getObjects().remove(this);
+            world.getCurrentRoom().getMap().getObjects().remove(this);
         }
     }
 
@@ -121,8 +121,8 @@ public class DungeonMonster extends DungeonObject implements IMonster {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
-        super.draw(container, graphics, camera);
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
+        super.draw(container, graphics, camera, world);
         String hpText;
         if (hp < 100) {
             hpText = Integer.toString(Math.max(0, hp));

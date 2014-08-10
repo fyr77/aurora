@@ -7,7 +7,6 @@ package ru.game.aurora.world;
 
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMapObject;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
@@ -45,7 +44,7 @@ public abstract class GameEventListener implements Serializable {
         return false;
     }
 
-    public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
+    public boolean onPlayerContactedOtherShip(World world, GameObject ship) {
         return false;
     }
 

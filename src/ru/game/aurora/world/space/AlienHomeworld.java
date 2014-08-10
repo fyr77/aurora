@@ -91,7 +91,7 @@ public class AlienHomeworld extends BasePlanet {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         // nothing
     }
 

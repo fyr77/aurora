@@ -13,7 +13,6 @@ import rlforj.los.ILosBoard;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
-import ru.game.aurora.world.planet.PlanetObject;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -23,7 +22,7 @@ import java.util.List;
  * Interface for different tile map formats.
  */
 public interface ITileMap extends Serializable, ILosBoard, TileBasedMap {
-    public List<PlanetObject> getObjects();
+    public List<GameObject> getObjects();
 
     public void draw(GameContainer container, Graphics graphics, Camera camera);
 

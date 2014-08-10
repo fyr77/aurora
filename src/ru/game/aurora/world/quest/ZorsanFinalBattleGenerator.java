@@ -24,7 +24,6 @@ import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.NPCShip;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.earth.Earth;
 
@@ -456,7 +455,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         for (NPCShip s : allyShips) {
             s.setHp(s.getMaxHP());
         }
-        for (SpaceObject s : solarSystem.getShips()) {
+        for (GameObject s : solarSystem.getShips()) {
             if (s instanceof NPCShip && s.getRace().getName().equals(HumanityGenerator.NAME)) {
                 ((NPCShip) s).setHp(((NPCShip) s).getMaxHP());
             }
@@ -552,7 +551,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             solarSystem.getShips().add(defender);
         }
 
-        for (SpaceObject so : solarSystem.getShips()) {
+        for (GameObject so : solarSystem.getShips()) {
             if (so.getName().equals("Orbital Scaffold")) {
                 spaceStation = (NPCShip) so;
                 break;

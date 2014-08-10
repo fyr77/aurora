@@ -4,11 +4,11 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.space.SpaceObject;
 
 import java.util.Map;
 
@@ -44,7 +44,7 @@ public class EmbassiesQuest implements WorldGeneratorPart {
         private boolean kliskContacted = false;
 
         @Override
-        public boolean onPlayerContactedOtherShip(World world, SpaceObject ship) {
+        public boolean onPlayerContactedOtherShip(World world, GameObject ship) {
             if (ship.getRace() != world.getRaces().get(HumanityGenerator.NAME)) {
                 if (ship.getRace() == world.getRaces().get(KliskGenerator.NAME)) {
                     kliskContacted = true;

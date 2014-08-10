@@ -5,7 +5,9 @@
  */
 package ru.game.aurora.world;
 
-public interface Room extends GameObject {
+import java.io.Serializable;
+
+public interface Room extends Updatable, Serializable, IDrawable {
     /**
      * Called when player enters this room from some other room. Should reset room state (e.g. put player on a starting position) and open gui.
      */
@@ -15,4 +17,7 @@ public interface Room extends GameObject {
      * Called when player returns to this room from internal room. Should not reset room state, only open gui; Also called when game is loaded
      */
     public void returnTo(World world);
+
+    public ITileMap getMap();
+
 }

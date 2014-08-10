@@ -8,8 +8,8 @@ package ru.game.aurora.world.dungeon;
 
 
 import ru.game.aurora.world.AuroraTiledMap;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.PlanetObject;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -36,7 +36,7 @@ public class KillAllMonstersCondition implements IVictoryCondition {
 
     @Override
     public boolean isSatisfied(World world) {
-        for (PlanetObject po : world.getCurrentDungeon().getMap().getObjects()) {
+        for (GameObject po : world.getCurrentDungeon().getMap().getObjects()) {
             if (DungeonMonster.class.isAssignableFrom(po.getClass())) {
                 if (tags == null) {
                     return false;
@@ -45,7 +45,7 @@ public class KillAllMonstersCondition implements IVictoryCondition {
                     if (dm.getTags() == null) {
                         continue;
                     }
-                    for (String tag: tags) {
+                    for (String tag : tags) {
                         if (dm.getTags().contains(tag)) {
                             return false;
                         }

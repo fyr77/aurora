@@ -9,8 +9,8 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.AuroraTiledMap;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.PlanetObject;
 
 /**
  * Date: 06.10.13
@@ -36,9 +36,9 @@ public class DungeonButton extends DungeonObject {
     private String door;
 
     @Override
-    public void onPickedUp(World world) {
+    public void interact(World world) {
         if (isPressed()) {
-           setState(false);
+            setState(false);
         } else {
             setState(true);
         }
@@ -46,7 +46,7 @@ public class DungeonButton extends DungeonObject {
         GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.button.pressed"));
 
         //search for associated door and change state for it
-        for (PlanetObject po : world.getCurrentDungeon().getMap().getObjects()) {
+        for (GameObject po : world.getCurrentDungeon().getMap().getObjects()) {
             if (DungeonDoor.class.isAssignableFrom(po.getClass())) {
                 DungeonDoor dd = (DungeonDoor) po;
                 if (dd.getDoorName().equals(door)) {
@@ -73,7 +73,7 @@ public class DungeonButton extends DungeonObject {
     }
 
     @Override
-    public boolean canBePickedUp() {
+    public boolean canBeInteracted() {
         return true;
     }
 
@@ -96,7 +96,7 @@ public class DungeonButton extends DungeonObject {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         if (imageNormal == null) {
             imageNormal = getImageNormal();
         }

@@ -1,16 +1,14 @@
 package ru.game.aurora.world;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.AuroraGame;
-import ru.game.aurora.application.Camera;
 
 /**
  * Date: 11.11.13
  * Time: 0:05
  */
 
-public class Movable extends BasePositionable implements IMovable {
+public class Movable extends BasePositionable implements IMovable, Updatable {
 
     private static final long serialVersionUID = 1L;
 
@@ -129,10 +127,6 @@ public class Movable extends BasePositionable implements IMovable {
     @Override
     public int getTargetY() {
         return destinationY;
-    }
-
-    @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
     }
 
     public double getDistanceFromTargetPointWrapped(Positionable other, int width, int height) {

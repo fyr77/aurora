@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.PlaceholderResolver;
+import ru.game.aurora.world.ITileMap;
 import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
 
@@ -152,6 +153,11 @@ public class Dialog implements OverlayWindow {
     }
 
     @Override
+    public ITileMap getMap() {
+        return null;
+    }
+
+    @Override
     public void update(GameContainer container, World world) {
         if (statements == null) {
             enter(world);
@@ -219,7 +225,7 @@ public class Dialog implements OverlayWindow {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
 
     }
 

@@ -15,15 +15,14 @@ import ru.game.aurora.gui.SurfaceGUIController;
 import ru.game.aurora.player.EarthCountry;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.player.research.projects.Cartography;
-import ru.game.aurora.world.GameObject;
-import ru.game.aurora.world.MovableSprite;
+import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 
 import java.util.Iterator;
 
-public class LandingParty extends MovableSprite implements GameObject {
+public class LandingParty extends BaseGameObject {
     public static final int MAX_OXYGEN = 100;
 
     private static final long serialVersionUID = 2;
@@ -72,22 +71,6 @@ public class LandingParty extends MovableSprite implements GameObject {
         }
     }
 
-    @Override
-    public int getX() {
-        return x;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public void setPos(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
     public int getMaxWeight() {
         return engineers * 2 + science; //Инженеры - крепкие ребята, учёные - не очень, солдаты таскают своё оружие
     }
@@ -110,7 +93,6 @@ public class LandingParty extends MovableSprite implements GameObject {
     }
 
     public void consumeOxygen() {
-        //todo: depend on team size?
         oxygen--;
         if (oxygen == 50) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.oxygen.half_empty"));

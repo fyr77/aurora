@@ -17,6 +17,7 @@ import ru.game.aurora.dialog.NextDialogListener;
 import ru.game.aurora.npc.*;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.util.ProbabilitySet;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -38,7 +39,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
 
     public static final int PROBE_SHIP = 1;
 
-    private static final ProbabilitySet<SpaceObject> defaultLootTable;
+    private static final ProbabilitySet<GameObject> defaultLootTable;
 
     static {
         defaultLootTable = new ProbabilitySet<>();

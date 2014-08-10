@@ -21,14 +21,10 @@ import ru.game.aurora.gui.niffy.ImageButtonController;
 import ru.game.aurora.gui.niffy.InteractionTargetSelectorController;
 import ru.game.aurora.gui.niffy.TopPanelController;
 import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.GameEventListener;
-import ru.game.aurora.world.IStateChangeListener;
-import ru.game.aurora.world.Ship;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.space.GalaxyMapObject;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.List;
@@ -234,7 +230,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
     public void rightButtonPressed() {
         if (world.getCurrentStarSystem() != null) {
-            List<SpaceObject> objects = world.getCurrentStarSystem().getSpaceObjectsAtPosition(world.getPlayer().getShip());
+            List<GameObject> objects = world.getCurrentStarSystem().getGameObjectsAtPosition(world.getPlayer().getShip());
             if (objects.isEmpty()) {
                 return;
             }
@@ -247,11 +243,11 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
                 return;
             }
 
-            InteractionTargetSelectorController.open(new IStateChangeListener<SpaceObject>() {
+            InteractionTargetSelectorController.open(new IStateChangeListener<GameObject>() {
                 private static final long serialVersionUID = -8114467555795780919L;
 
                 @Override
-                public void stateChanged(SpaceObject param) {
+                public void stateChanged(GameObject param) {
                     if (BasePlanet.class.isAssignableFrom(param.getClass())) {
                         scanPlanet((BasePlanet) param);
                     } else {
@@ -262,7 +258,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         }
     }
 
-    private void scanObject(SpaceObject object) {
+    private void scanObject(GameObject object) {
         final Nifty nifty = GUI.getInstance().getNifty();
         Element popup = nifty.createPopup("object_scan");
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);

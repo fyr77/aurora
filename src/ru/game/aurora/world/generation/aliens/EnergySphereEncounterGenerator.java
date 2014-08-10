@@ -7,11 +7,11 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.space.NPCShip;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 /**
@@ -20,14 +20,12 @@ import ru.game.aurora.world.space.StarSystem;
  * Date: 06.03.14
  * Time: 14:37
  */
-public class EnergySphereEncounterGenerator extends GameEventListener implements WorldGeneratorPart
-{
+public class EnergySphereEncounterGenerator extends GameEventListener implements WorldGeneratorPart {
     private static final long serialVersionUID = 6518695819057473616L;
 
     private double chance;
 
-    private static class EnergySphere extends NPCShip
-    {
+    private static class EnergySphere extends NPCShip {
 
         private static final long serialVersionUID = -3650001508545188680L;
 
@@ -38,12 +36,12 @@ public class EnergySphereEncounterGenerator extends GameEventListener implements
         }
 
         @Override
-        public void onAttack(World world, SpaceObject attacker, int dmg) {
+        public void onAttack(World world, GameObject attacker, int dmg) {
             // ignores attacks
         }
 
         @Override
-        public void onContact(World world) {
+        public void interact(World world) {
             // has contacted with player
             world.getGlobalVariables().put("energy_sphere.started", "0");
             // reset all research progress
@@ -60,7 +58,7 @@ public class EnergySphereEncounterGenerator extends GameEventListener implements
         public void update(GameContainer container, World world) {
             super.update(container, world);
             if (getDistance(world.getPlayer().getShip()) <= 1) {
-                onContact(world);
+                interact(world);
             }
         }
     }

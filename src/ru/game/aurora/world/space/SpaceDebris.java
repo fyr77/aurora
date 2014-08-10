@@ -7,17 +7,19 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.util.ProbabilitySet;
+import ru.game.aurora.world.BaseGameObject;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 
 /**
  * Space debris are left after a ship is destroyed
  */
-public class SpaceDebris extends BaseSpaceObject {
-    public static class ResourceDebris extends BaseSpaceObject {
+public class SpaceDebris extends BaseGameObject {
+    public static class ResourceDebris extends BaseGameObject {
 
-        private static final long serialVersionUID = -7839504515681696314L;
+        private static final long serialVersionUID = 1L;
 
         private int amount;
 
@@ -27,7 +29,7 @@ public class SpaceDebris extends BaseSpaceObject {
         }
 
         @Override
-        public void onContact(World world) {
+        public void interact(World world) {
             world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() + amount);
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.debris.message"), amount));
         }
@@ -35,30 +37,18 @@ public class SpaceDebris extends BaseSpaceObject {
 
     private static final long serialVersionUID = 7779753986433190967L;
 
-    private ProbabilitySet<SpaceObject> dropList;
+    private ProbabilitySet<GameObject> dropList;
 
-    private boolean pickedUp = false;
-
-    public SpaceDebris(int x, int y, ProbabilitySet<SpaceObject> dropList) {
-        super(x, y);
+    public SpaceDebris(int x, int y, ProbabilitySet<GameObject> dropList) {
+        super(x, y, new Drawable("debris"));
         this.dropList = dropList;
     }
 
     @Override
-    public void onContact(World world) {
-        pickedUp = true;
-        SpaceObject loot = dropList.getRandom();
-        loot.onContact(world);
-    }
-
-    @Override
-    public void onAttack(World world, SpaceObject attacker, int dmg) {
-
-    }
-
-    @Override
-    public boolean isAlive() {
-        return !pickedUp;
+    public void interact(World world) {
+        isAlive = false;
+        GameObject loot = dropList.getRandom();
+        loot.interact(world);
     }
 
     @Override
@@ -72,12 +62,7 @@ public class SpaceDebris extends BaseSpaceObject {
     }
 
     @Override
-    public AlienRace getRace() {
-        return null;
-    }
-
-    @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         graphics.drawImage(getImage(), camera.getXCoord(x), camera.getYCoord(y));
     }
 

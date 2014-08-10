@@ -6,7 +6,7 @@ import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 /**
  * Something that can attack player landing party
  */
-public interface IMonster extends IMovable {
+public interface IMonster extends GameObject {
     public int getHp();
 
     public void changeHp(int amount);
@@ -14,8 +14,6 @@ public interface IMonster extends IMovable {
     public int getSpeed();
 
     public LandingPartyWeapon getWeapon();
-
-    public String getName();
 
     public AnimalSpeciesDesc.Behaviour getBehaviour();
 }

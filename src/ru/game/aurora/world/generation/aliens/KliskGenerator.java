@@ -23,6 +23,7 @@ import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.util.ProbabilitySet;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
@@ -51,7 +52,7 @@ public class KliskGenerator implements WorldGeneratorPart {
 
     public static final int STATION = 2;
 
-    private static final ProbabilitySet<SpaceObject> defaultLootTable;
+    private static final ProbabilitySet<GameObject> defaultLootTable;
 
     static {
         defaultLootTable = new ProbabilitySet<>();
@@ -72,8 +73,8 @@ public class KliskGenerator implements WorldGeneratorPart {
 
                 if (flags.containsKey("klisk_trader_drone.withdraw")) {
                     // remove trader drone
-                    for (Iterator<SpaceObject> iter = ((StarSystem) world.getGlobalVariables().get("solar_system")).getShips().iterator(); iter.hasNext(); ) {
-                        SpaceObject so = iter.next();
+                    for (Iterator<GameObject> iter = ((StarSystem) world.getGlobalVariables().get("solar_system")).getShips().iterator(); iter.hasNext(); ) {
+                        GameObject so = iter.next();
                         if (so.getName().equals("Klisk trade probe")) {
                             iter.remove();
                             break;

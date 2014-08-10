@@ -18,11 +18,9 @@ import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.DungeonEntrance;
 import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.PlanetObject;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.NPCShip;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Map;
@@ -47,19 +45,19 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public void onShotAt(World world, int damage) {
+        public void onAttack(World world, GameObject attacker, int damage) {
             if (getBehaviour() == AnimalSpeciesDesc.Behaviour.AGGRESSIVE) {
                 return;
             }
             // make all monsters aggressive
-            for (PlanetObject obj : myMap.getObjects()) {
+            for (GameObject obj : world.getCurrentRoom().getMap().getObjects()) {
                 if (DungeonMonster.class.isAssignableFrom(obj.getClass())) {
                     ((DungeonMonster) obj).setBehaviour(AnimalSpeciesDesc.Behaviour.AGGRESSIVE);
                 }
             }
 
             // add a victory condition
-            myMap.getVictoryConditions().add(new KillAllMonstersCondition("guard"));
+            world.getCurrentRoom().getMap().getVictoryConditions().add(new KillAllMonstersCondition("guard"));
             world.getCurrentDungeon().getController().addListener(new IStateChangeListener<World>() {
 
                 private static final long serialVersionUID = 6517626927654743737L;
@@ -74,12 +72,12 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public boolean canBePickedUp() {
+        public boolean canBeInteracted() {
             return true;
         }
 
         @Override
-        public void onPickedUp(World world) {
+        public void interact(World world) {
             if (!world.getGlobalVariables().containsKey("rogues_altar.earth_communicated")) {
                 world.getGlobalVariables().put("rogues_altar.moon_checked", true);
                 world.getPlayer().getJournal().addQuestEntries("rogues_altar", "desc", "comm");
@@ -96,7 +94,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                 public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                     if (returnCode == 1) {
                         // player decided to fight rogues, make them aggressive
-                        onShotAt(world, 0);
+                        onAttack(world, RogueAltarWorker.this, 0);
                     }
                 }
             });
@@ -217,7 +215,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public void onAttack(World world, SpaceObject attacker, int dmg) {
+        public void onAttack(World world, GameObject attacker, int dmg) {
             super.onAttack(world, attacker, dmg);
             if (hp <= 0) {
                 world.getGlobalVariables().put("klisk_trader_drone.result", "destroy");
@@ -269,7 +267,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public void onAttack(World world, SpaceObject attacker, int dmg) {
+        public void onAttack(World world, GameObject attacker, int dmg) {
             super.onAttack(world, attacker, dmg);
 
             if (hp <= 0) {
@@ -285,8 +283,8 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public void onContact(World world) {
-            super.onContact(world);
+        public void interact(World world) {
+            super.interact(world);
             if (!communicated) {
                 world.getPlayer().getJournal().addQuestEntries("bork_blockade", "comm");
                 world.getGlobalVariables().put("bork_blockade.communicated", true);

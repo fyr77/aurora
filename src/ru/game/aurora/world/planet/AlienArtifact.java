@@ -7,23 +7,19 @@
 
 package ru.game.aurora.world.planet;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
-import ru.game.aurora.world.BasePositionable;
+import ru.game.aurora.world.BaseGameObject;
+import ru.game.aurora.world.ScanGroup;
 import ru.game.aurora.world.World;
 
-public class AlienArtifact extends BasePositionable implements PlanetObject
-{
+public class AlienArtifact extends BaseGameObject {
 
     private static final long serialVersionUID = 1533202973059805452L;
-    private String spriteName;
 
     private int remainingData = 10;
 
@@ -34,8 +30,7 @@ public class AlienArtifact extends BasePositionable implements PlanetObject
 
     private ArtifactSamples samples = new ArtifactSamples();
 
-    public final class ArtifactSamples implements InventoryItem
-    {
+    public final class ArtifactSamples implements InventoryItem {
         private static final long serialVersionUID = 4883589185683400708L;
 
         @Override
@@ -71,8 +66,7 @@ public class AlienArtifact extends BasePositionable implements PlanetObject
     }
 
     public AlienArtifact(int x, int y, String spriteName, ArtifactResearch resultResearch) {
-        super(x, y);
-        this.spriteName = spriteName;
+        super(x, y, spriteName);
         this.resultResearch = resultResearch;
     }
 
@@ -82,22 +76,17 @@ public class AlienArtifact extends BasePositionable implements PlanetObject
     }
 
     @Override
-    public boolean canBePickedUp() {
+    public boolean canBeInteracted() {
         return true;
     }
 
     @Override
-    public boolean canBeShotAt() {
+    public boolean canBeAttacked() {
         return false;
     }
 
     @Override
-    public void onShotAt(World world, int damage) {
-
-    }
-
-    @Override
-    public void onPickedUp(World world) {
+    public void interact(World world) {
         if (firstUseDialog != null) {
             world.addOverlayWindow(firstUseDialog);
             firstUseDialog = null;
@@ -122,30 +111,8 @@ public class AlienArtifact extends BasePositionable implements PlanetObject
     }
 
     @Override
-    public boolean isAlive() {
-        return true;
-    }
-
-    @Override
     public String getName() {
         return null;
-    }
-
-    @Override
-    public void printStatusInfo() {
-        if (remainingData > 0) {
-            // GameLogger.getInstance().addStatusMessage("Press <enter> to examine artifact");
-        }
-    }
-
-    @Override
-    public void update(GameContainer container, World world) {
-
-    }
-
-    @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
-        g.drawImage(ResourceManager.getInstance().getImage(spriteName), camera.getXCoord(x), camera.getYCoord(y));
     }
 
     public void setFirstUseDialog(Dialog firstUseDialog) {

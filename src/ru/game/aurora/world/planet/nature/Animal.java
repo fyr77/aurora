@@ -7,13 +7,9 @@ import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.world.IMonster;
-import ru.game.aurora.world.MonsterController;
-import ru.game.aurora.world.Movable;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.PlanetObject;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,7 +17,7 @@ import ru.game.aurora.world.planet.PlanetObject;
  * Date: 04.12.12
  * Time: 17:00
  */
-public class Animal extends Movable implements PlanetObject, IMonster {
+public class Animal extends BaseGameObject implements IMonster {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,7 +48,7 @@ public class Animal extends Movable implements PlanetObject, IMonster {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         if (desc.getImage() == null || (desc.isCanBePickedUp() && desc.getDeadImage() == null)) {
             AnimalGenerator.getInstance().getImageForAnimal(desc);
         }
@@ -98,12 +94,12 @@ public class Animal extends Movable implements PlanetObject, IMonster {
     }
 
     @Override
-    public boolean canBePickedUp() {
+    public boolean canBeInteracted() {
         return hp <= 0;
     }
 
     @Override
-    public boolean canBeShotAt() {
+    public boolean canBeAttacked() {
         return hp > 0;
     }
 
@@ -114,7 +110,7 @@ public class Animal extends Movable implements PlanetObject, IMonster {
 
 
     @Override
-    public void onShotAt(World world, int damage) {
+    public void onAttack(World world, GameObject attacker, int damage) {
         if (desc.getModifiers().contains(AnimalModifier.ARMOR)) {
             damage = Math.max(0, damage - desc.getArmor());
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.armor_consumed_damage"), desc.getArmor()));
@@ -140,7 +136,7 @@ public class Animal extends Movable implements PlanetObject, IMonster {
     }
 
     @Override
-    public void onPickedUp(World world) {
+    public void interact(World world) {
         pickedUp = true;
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.picked_up"), getName()));
         world.getPlayer().getLandingParty().pickUp(new AnimalCorpseItem(desc), 1);
@@ -164,12 +160,6 @@ public class Animal extends Movable implements PlanetObject, IMonster {
     @Override
     public AnimalSpeciesDesc.Behaviour getBehaviour() {
         return (desc.getBehaviour() == AnimalSpeciesDesc.Behaviour.SELF_DEFENSIVE && wasAttacked) ? AnimalSpeciesDesc.Behaviour.AGGRESSIVE : desc.getBehaviour();
-    }
-
-    @Override
-    public void printStatusInfo() {
-        if (hp <= 0) {
-        }
     }
 
 

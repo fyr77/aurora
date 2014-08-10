@@ -12,6 +12,7 @@ import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.engineering.ShipUpgrade;
@@ -21,14 +22,13 @@ import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.InventoryItem;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Ship extends MovableSprite implements SpaceObject {
+public class Ship extends BaseGameObject {
 
     public static final int BASE_SCIENTISTS = 5;
     public static final int BASE_ENGINEERS = 5;
@@ -65,7 +65,7 @@ public class Ship extends MovableSprite implements SpaceObject {
     private int freeSpace;
 
     public Ship(AlienRace humanity, int x, int y) {
-        super(x, y, "aurora");
+        super(x, y, new Drawable("aurora"));
         this.humanity = humanity;
         name = "Aurora-2";
         hull = maxHull = 10;
@@ -129,9 +129,9 @@ public class Ship extends MovableSprite implements SpaceObject {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics g, Camera camera) {
+    public void draw(GameContainer container, Graphics g, Camera camera, World world) {
         if (hull > 0) {
-            super.draw(container, g, camera);
+            super.draw(container, g, camera, world);
         }
     }
 
@@ -167,12 +167,9 @@ public class Ship extends MovableSprite implements SpaceObject {
         return weapons;
     }
 
-    @Override
-    public void onContact(World world) {
-    }
 
     @Override
-    public void onAttack(World world, SpaceObject attacker, int dmg) {
+    public void onAttack(World world, GameObject attacker, int dmg) {
         if (Configuration.getBooleanProperty("cheat.invulnerability")) {
             return;
         }
@@ -198,17 +195,12 @@ public class Ship extends MovableSprite implements SpaceObject {
     }
 
     @Override
-    public String getScanDescription(World world) {
-        return null;
-    }
-
-    @Override
     public AlienRace getRace() {
         return humanity;
     }
 
     @Override
-    public boolean canBeShotAt() {
+    public boolean canBeAttacked() {
         return true;
     }
 

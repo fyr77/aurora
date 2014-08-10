@@ -7,6 +7,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.ITileMap;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 
@@ -28,7 +29,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
     /**
      * Animals that are located on planet surface.
      */
-    private List<PlanetObject> planetObjects = new ArrayList<>();
+    private List<GameObject> planetObjects = new ArrayList<>();
 
 
     /**
@@ -75,7 +76,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
     }
 
     @Override
-    public List<PlanetObject> getObjects() {
+    public List<GameObject> getObjects() {
         return planetObjects;
     }
 

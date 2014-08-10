@@ -6,21 +6,21 @@
 package ru.game.aurora.npc.shipai;
 
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.space.NPCShip;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 /**
  * Simple AI that will follow its target and attack with all possible weapons
  */
 public class CombatAI implements NPCShipAI {
-    private static final long serialVersionUID = -8406568455196600324L;
+    private static final long serialVersionUID = 1L;
 
-    private SpaceObject target;
+    private GameObject target;
 
-    public CombatAI(SpaceObject target) {
+    public CombatAI(GameObject target) {
         this.target = target;
     }
 

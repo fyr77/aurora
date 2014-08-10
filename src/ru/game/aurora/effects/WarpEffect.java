@@ -64,7 +64,7 @@ public class WarpEffect extends Effect {
     }
 
     @Override
-    public void draw(GameContainer container, Graphics graphics, Camera camera) {
+    public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         ship.setAlpha(alpha);
         //32 - shipSize/2
         graphics.drawAnimation(anim, camera.getXCoord(curX) - (anim.getWidth() / 2) + 32, camera.getYCoord(curY) - (anim.getHeight() / 2) + 32);

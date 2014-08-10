@@ -9,9 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Movable;
+import ru.game.aurora.world.ScanGroup;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.*;
+import ru.game.aurora.world.planet.Planet;
 
 import java.util.Random;
 
@@ -46,14 +48,14 @@ public class PlanetMapRenderer {
                 overlayGraphics.fillRect(0, 0, container.getWidth(), container.getHeight());
                 int maxRadius = (int) (container.getHeight() / 10);
                 Random r = new Random(planet.hashCode()); // fixed-seed, so that runs on same planet produce same results
-                for (PlanetObject po : planet.getPlanetObjects()) {
+                for (GameObject po : planet.getPlanetObjects()) {
                     float objectX = myCamera.getXCoord(po.getX());
                     float objectY = myCamera.getYCoord(po.getY());
-                    if (po.getScanGroup() == PlanetObject.ScanGroup.BIO) {
+                    if (po.getScanGroup() == ScanGroup.BIO) {
                         overlayGraphics.setColor(ANIMAL_COLOR);
-                    } else if (po.getScanGroup() == PlanetObject.ScanGroup.RESOURCE) {
+                    } else if (po.getScanGroup() == ScanGroup.RESOURCE) {
                         overlayGraphics.setColor(RESOURCE_COLOR);
-                    } else if (po.getScanGroup() == PlanetObject.ScanGroup.OTHER) {
+                    } else if (po.getScanGroup() == ScanGroup.OTHER) {
                         overlayGraphics.setColor(ANOMALY_COLOR);
                     } else {
                         continue;

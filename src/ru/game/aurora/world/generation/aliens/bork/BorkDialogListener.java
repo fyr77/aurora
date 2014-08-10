@@ -2,10 +2,10 @@ package ru.game.aurora.world.generation.aliens.bork;
 
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.EarthInvasionGenerator;
-import ru.game.aurora.world.space.SpaceObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Iterator;
@@ -24,8 +24,8 @@ public class BorkDialogListener implements DialogListener {
         world.getPlayer().getJournal().addQuestEntries("bork_blockade", "withdraw");
         world.getGlobalVariables().put("bork_blockade.result", "withdraw");
         StarSystem ss = world.getRaces().get(HumanityGenerator.NAME).getHomeworld();
-        for (Iterator<SpaceObject> iter = ss.getShips().iterator(); iter.hasNext(); ) {
-            SpaceObject so = iter.next();
+        for (Iterator<GameObject> iter = ss.getShips().iterator(); iter.hasNext(); ) {
+            GameObject so = iter.next();
             if (so instanceof EarthInvasionGenerator.BorkBlockadeShip) {
                 iter.remove();
             }
