@@ -72,6 +72,21 @@ public class IntroCSVConverter {
                 line = reader.readLine();
             }
 
+            // check for english localization
+            String[] split = args[0].split("\\.");
+            Context englishContext = new Context(args[1]);
+            File englishFile = new File(split[0] + "_en." + split[1]);
+            if (englishFile.exists() && englishFile.isFile()) {
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(englishFile)));
+                reader.readLine(); // skip first line with headers
+                line = reader.readLine();
+                while (line != null) {
+                    englishContext.lineNumber++;
+                    parseLine(englishContext, line);
+                    line = reader.readLine();
+                }
+            }
+
             System.out.println("CSV parsed");
             IntroDialog introDialog = new IntroDialog(args[1], args[2], (IntroDialog.Statement[]) statements.toArray(new IntroDialog.Statement[statements.size()]));
 
@@ -90,11 +105,14 @@ public class IntroCSVConverter {
             System.out.println("Saving localization");
             // save localizations
             FileWriter localizationWriter = new FileWriter(new File(outDir, args[1] + "_ru.properties"));
-            context.text.store(localizationWriter, null);
+            for (Map.Entry<Object, Object> entry : context.text.entrySet()) {
+                localizationWriter.write(entry.getKey() + "=" + entry.getValue());
+                localizationWriter.write('\n');
+            }
             localizationWriter.close();
 
             localizationWriter = new FileWriter(new File(outDir, args[1] + "_en.properties"));
-            for (Map.Entry<Object, Object> entry : context.text.entrySet()) {
+            for (Map.Entry<Object, Object> entry : englishContext.text.entrySet()) {
                 localizationWriter.write(entry.getKey() + "=" + entry.getValue());
                 localizationWriter.write('\n');
             }

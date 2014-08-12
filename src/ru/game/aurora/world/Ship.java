@@ -38,8 +38,6 @@ public class Ship extends BaseGameObject {
 
     private int hull;
 
-    private final String name;
-
     private int maxHull;
 
     private int scientists;
