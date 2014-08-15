@@ -58,6 +58,9 @@ public class Localization {
     }
 
     public static String getText(String bundleId, String textId) {
+        if (bundleId == null || textId == null) {
+            return "";
+        }
         ResourceBundle bundle = ResourceBundle.getBundle(getBundleName(bundleId), currentLocale, utf8Control);
         if (!bundle.containsKey(textId)) {
             logger.warn("Localization key {}:{} not found", bundleId, textId);

@@ -89,6 +89,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
 
         NPCShip frame = new NPCShip(2, 2, "rogues_frame", roguesRace, null, "Rogues Frame", Integer.MAX_VALUE);
         frame.setCaptain(new NPC(createFrameDialog(frame)));
+        frame.setScanDescription("races", "Rogues.mothership.description");
         frame.setAi(null);
         ss.getShips().add(frame);
 

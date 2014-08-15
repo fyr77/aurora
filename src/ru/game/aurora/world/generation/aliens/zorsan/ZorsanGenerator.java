@@ -38,7 +38,7 @@ import java.util.Map;
  * Time: 18:17
  */
 public class ZorsanGenerator implements WorldGeneratorPart {
-    public static final String NAME = "zorsan";
+    public static final String NAME = "Zorsan";
 
     private static final long serialVersionUID = 1083992211652099884L;
 

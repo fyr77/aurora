@@ -20,6 +20,10 @@ public class BaseGameObject extends MovableSprite implements GameObject {
 
     protected ScanGroup scanGroup;
 
+    protected String scanTextId;
+
+    protected String scanTextBundle;
+
     public BaseGameObject() {
         super(0, 0, null);
     }
@@ -83,11 +87,16 @@ public class BaseGameObject extends MovableSprite implements GameObject {
 
     @Override
     public String getScanDescription(World world) {
-        return null;
+        return Localization.getText(scanTextBundle, scanTextId);
     }
 
     public void setSprite(String sprite) {
         drawable = new Drawable(sprite);
+    }
+
+    public void setScanDescription(String bundle, String id) {
+        scanTextBundle = bundle;
+        scanTextId = id;
     }
 
     @Override
