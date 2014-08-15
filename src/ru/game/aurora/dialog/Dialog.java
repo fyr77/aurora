@@ -67,6 +67,15 @@ public class Dialog implements OverlayWindow {
         this.statements = statements;
     }
 
+    public Dialog(String id, String iconName, Collection<Statement> statements) {
+        this.id = id;
+        this.iconName = iconName;
+        this.statements = new HashMap<>();
+        for (Statement st : statements) {
+            this.statements.put(st.id, st);
+        }
+    }
+
     public String getId() {
         return id;
     }

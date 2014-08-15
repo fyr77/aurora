@@ -21,6 +21,7 @@
     <orderEntry type="library" name="juniversalchardet-1.0.3" level="project" />
     <orderEntry type="library" name="jogg-0.0.7" level="project" />
     <orderEntry type="library" name="jorbis-0.0.15" level="project" />
+    <orderEntry type="library" name="commons-lang3-3.3.2" level="project" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">
