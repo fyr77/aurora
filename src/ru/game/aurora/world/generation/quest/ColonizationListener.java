@@ -7,6 +7,7 @@ import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.world.*;
+import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetNPC;
 import ru.game.aurora.world.planet.SurfaceTypes;
@@ -108,7 +109,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 7, colonyCenter.getY() + 10, new Drawable("colony_tractor"), null, null));
 
 
-        AnimalSpeciesDesc guard = new AnimalSpeciesDesc(planet, "Marine", false, false, 10, ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault"), 1, AnimalSpeciesDesc.Behaviour.FRIENDLY, Collections.<AnimalModifier>emptySet());
+        AnimalSpeciesDesc guard = new AnimalSpeciesDesc(planet, "Marine", false, false, 10, ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault"), 1, MonsterBehaviour.FRIENDLY, Collections.<AnimalModifier>emptySet());
         guard.setCanBePickedUp(false);
         guard.setImages(ResourceManager.getInstance().getSpriteSheet("humanity_tileset").getSprite(1, 9), ResourceManager.getInstance().getImage("no_image"));
         planet.getPlanetObjects().add(new Animal(planet, colonyCenter.getX() + 9, colonyCenter.getY() + 7, guard));

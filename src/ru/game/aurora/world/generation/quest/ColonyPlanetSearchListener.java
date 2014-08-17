@@ -38,8 +38,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
     // set to true if first suitable planet found, there will be some tough monsters
     private boolean firstPlanetFound = false;
 
-    private StarSystem createStarsystemWithEarthLikePlanet(World world)
-    {
+    private StarSystem createStarsystemWithEarthLikePlanet(World world) {
         BasePlanet[] planets = new BasePlanet[3];
         StarSystem ss = new StarSystem(world.getStarSystemNamesCollection().popName(), new Star(1, Color.yellow), 13, 2);
 
@@ -69,7 +68,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
 
         // make sure that there is at least one planet suitable for colonization within certain radius from earth
         StarSystem suitableStarSystem = createStarsystemWithEarthLikePlanet(world);
-        world.getGalaxyMap().addObjectAtDistance(suitableStarSystem, (StarSystem)world.getGlobalVariables().get("solar_system"), 40);
+        world.getGalaxyMap().addObjectAtDistance(suitableStarSystem, (StarSystem) world.getGlobalVariables().get("solar_system"), 40);
         world.getGlobalVariables().put("colony_search.klisk_coords", suitableStarSystem.getCoordsString());
     }
 
@@ -165,7 +164,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
                 , 25
                 , new LandingPartyWeapon("melee", 6, 1, "", "", "", "melee_1")
                 , 2
-                , AnimalSpeciesDesc.Behaviour.AGGRESSIVE
+                , MonsterBehaviour.AGGRESSIVE
                 , modifierSet
         );
         desc.setArmor(1);

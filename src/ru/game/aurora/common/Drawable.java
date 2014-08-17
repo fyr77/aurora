@@ -68,4 +68,26 @@ public class Drawable implements Serializable {
         }
         return flippedCopy;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Drawable drawable = (Drawable) o;
+
+        if (tx != drawable.tx) return false;
+        if (ty != drawable.ty) return false;
+        if (id != null ? !id.equals(drawable.id) : drawable.id != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + tx;
+        result = 31 * result + ty;
+        return result;
+    }
 }

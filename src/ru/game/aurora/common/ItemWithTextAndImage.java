@@ -15,15 +15,15 @@ public class ItemWithTextAndImage implements Serializable {
 
     protected final String id;
 
-    protected final String icon;
+    protected final Drawable drawable;
 
-    public ItemWithTextAndImage(String id, String icon) {
+    public ItemWithTextAndImage(String id, Drawable drawable) {
         this.id = id;
-        this.icon = icon;
+        this.drawable = drawable;
     }
 
-    public String getIcon() {
-        return icon;
+    public Drawable getDrawable() {
+        return drawable;
     }
 
     public String getId() {
@@ -45,14 +45,16 @@ public class ItemWithTextAndImage implements Serializable {
 
         ItemWithTextAndImage that = (ItemWithTextAndImage) o;
 
-        return !(icon != null ? !icon.equals(that.icon) : that.icon != null) && !(id != null ? !id.equals(that.id) : that.id != null);
+        if (drawable != null ? !drawable.equals(that.drawable) : that.drawable != null) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
 
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (icon != null ? icon.hashCode() : 0);
+        result = 31 * result + (drawable != null ? drawable.hashCode() : 0);
         return result;
     }
 }

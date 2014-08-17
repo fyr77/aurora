@@ -25,6 +25,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.AlienArtifact;
+import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.nature.Animal;
 import ru.game.aurora.world.planet.nature.AnimalModifier;
@@ -197,7 +198,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
                     , 7
                     , ResourceManager.getInstance().getLandingPartyWeapons().getEntity("zorsan_laser")
                     , 1
-                    , AnimalSpeciesDesc.Behaviour.AGGRESSIVE
+                    , MonsterBehaviour.AGGRESSIVE
                     , Collections.<AnimalModifier>emptySet()
             );
             desc.setImages(ResourceManager.getInstance().getImage("zorsan_warrior"), null);

@@ -1,0 +1,12 @@
+{
+    id: "melee_drone",
+    hp: 12,
+    drawable: {
+        id: "rogues_tileset",
+        tx: 7,
+        ty: 0
+    },
+    turnsBetweenMoves: 1,
+    weaponId: "melee",
+    behaviour: "AGGRESSIVE"
+}

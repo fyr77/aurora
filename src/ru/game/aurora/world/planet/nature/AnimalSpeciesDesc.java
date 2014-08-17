@@ -9,6 +9,7 @@ package ru.game.aurora.world.planet.nature;
 
 import org.newdawn.slick.Image;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.Planet;
 
 import java.io.Serializable;
@@ -42,30 +43,10 @@ public class AnimalSpeciesDesc implements Serializable {
 
     private boolean canBePickedUp = true;
 
-    public static enum Behaviour {
-        /**
-         * Will not react on attacks or will run away
-         */
-        PASSIVE,
-        /**
-         * Will not react on landing party until attacked
-         */
-        SELF_DEFENSIVE,
-        /**
-         * Will attack any human on sight
-         */
-        AGGRESSIVE,
-
-        /**
-         * Will attack monsters with AGGRESSIVE behaviour
-         */
-        FRIENDLY
-    }
-
     // animals can not be friendly
-    public static Behaviour[] animalBehaviours = new Behaviour[] {Behaviour.PASSIVE, Behaviour.SELF_DEFENSIVE, Behaviour.AGGRESSIVE};
+    public static MonsterBehaviour[] animalBehaviours = new MonsterBehaviour[]{MonsterBehaviour.PASSIVE, MonsterBehaviour.SELF_DEFENSIVE, MonsterBehaviour.AGGRESSIVE};
 
-    private Behaviour behaviour;
+    private MonsterBehaviour behaviour;
 
 
     // research attributes
@@ -89,7 +70,7 @@ public class AnimalSpeciesDesc implements Serializable {
             , int hp
             , LandingPartyWeapon weapon
             , int speed
-            , Behaviour behaviour
+            , MonsterBehaviour behaviour
             , Set<AnimalModifier> modifiers
     ) {
         this.homePlanet = homePlanet;
@@ -101,7 +82,7 @@ public class AnimalSpeciesDesc implements Serializable {
         this.modifiers = modifiers;
     }
 
-    public Behaviour getBehaviour() {
+    public MonsterBehaviour getBehaviour() {
         return behaviour;
     }
 

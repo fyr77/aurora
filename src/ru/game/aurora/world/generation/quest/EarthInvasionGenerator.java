@@ -17,8 +17,8 @@ import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.DungeonEntrance;
+import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
@@ -46,13 +46,13 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
         @Override
         public void onAttack(World world, GameObject attacker, int damage) {
-            if (getBehaviour() == AnimalSpeciesDesc.Behaviour.AGGRESSIVE) {
+            if (getBehaviour() == MonsterBehaviour.AGGRESSIVE) {
                 return;
             }
             // make all monsters aggressive
             for (GameObject obj : world.getCurrentRoom().getMap().getObjects()) {
                 if (DungeonMonster.class.isAssignableFrom(obj.getClass())) {
-                    ((DungeonMonster) obj).setBehaviour(AnimalSpeciesDesc.Behaviour.AGGRESSIVE);
+                    ((DungeonMonster) obj).setBehaviour(MonsterBehaviour.AGGRESSIVE);
                 }
             }
 

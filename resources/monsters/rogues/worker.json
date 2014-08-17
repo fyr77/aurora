@@ -1,0 +1,12 @@
+{
+    id: "rogue_worker",
+    hp: 10,
+    drawable: {
+        id: "rogues_tileset",
+        tx: 0,
+        ty: 8
+    },
+    turnsBetweenMoves: 2,
+    weaponId: "plasma",
+    behaviour: "PASSIVE"
+}

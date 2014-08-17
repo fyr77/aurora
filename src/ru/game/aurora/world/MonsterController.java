@@ -13,7 +13,7 @@ import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.LandingParty;
-import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
+import ru.game.aurora.world.planet.MonsterBehaviour;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class MonsterController implements Serializable {
             int partyX = party.getX();
             int partyY = party.getY();
 
-            if (myMonster.getBehaviour() == AnimalSpeciesDesc.Behaviour.AGGRESSIVE) {
+            if (myMonster.getBehaviour() == MonsterBehaviour.AGGRESSIVE) {
                 ////////////////////////// attack landing party //////////////////////////////////
 
                 final double distance = map.isWrapped() ? party.getDistanceWrapped(myMonster, map.getWidthInTiles(), map.getHeightInTiles()) : party.getDistance(myMonster);
@@ -150,7 +150,7 @@ public class MonsterController implements Serializable {
                 }
 
                 /////////////////////////////////////////////////////////////////////////
-            } else if (myMonster.getBehaviour() == AnimalSpeciesDesc.Behaviour.FRIENDLY && myMonster.getWeapon() != null) {
+            } else if (myMonster.getBehaviour() == MonsterBehaviour.FRIENDLY && myMonster.getWeapon() != null) {
                 // find some AGGRESSIVE target nearby
                 List<GameObject> tmpList = new ArrayList<>(map.getObjects());
                 for (GameObject po : tmpList) {
@@ -160,7 +160,7 @@ public class MonsterController implements Serializable {
                     }
                     final DungeonMonster po1 = (DungeonMonster) po;
 
-                    if (po1.getBehaviour() != AnimalSpeciesDesc.Behaviour.AGGRESSIVE) {
+                    if (po1.getBehaviour() != MonsterBehaviour.AGGRESSIVE) {
                         continue;
                     }
 
@@ -192,7 +192,7 @@ public class MonsterController implements Serializable {
                 } else if (newY > y) {
                     myMonster.moveDown();
                 }
-                if (myMonster.getBehaviour() != AnimalSpeciesDesc.Behaviour.FRIENDLY) {
+                if (myMonster.getBehaviour() != MonsterBehaviour.FRIENDLY) {
                     // hack: friendly monsters do not block path
                     map.setTilePassable(myMonster.getTargetX(), myMonster.getTargetY(), false);
                 }
