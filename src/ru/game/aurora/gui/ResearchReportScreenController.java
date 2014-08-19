@@ -27,7 +27,7 @@ import java.util.Queue;
 
 
 public class ResearchReportScreenController implements ScreenController {
-    private World world;
+    private final World world;
 
     private Window window;
 
@@ -37,7 +37,7 @@ public class ResearchReportScreenController implements ScreenController {
 
     private ListBox nextResearch;
 
-    private Queue<ResearchProjectDesc> reportsToShow = new LinkedList<>();
+    private final Queue<ResearchProjectDesc> reportsToShow = new LinkedList<>();
 
     public ResearchReportScreenController(World world) {
         this.world = world;

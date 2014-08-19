@@ -25,12 +25,12 @@ public abstract class ResearchProjectDesc extends Listenable {
     /**
      * unique id
      */
-    protected String id;
+    protected final String id;
 
     /**
      * 256x256 icon id
      */
-    protected String icon;
+    protected final String icon;
 
     /**
      * Optional report that will be shown to player when research is completed

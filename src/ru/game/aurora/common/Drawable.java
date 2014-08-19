@@ -76,11 +76,8 @@ public class Drawable implements Serializable {
 
         Drawable drawable = (Drawable) o;
 
-        if (tx != drawable.tx) return false;
-        if (ty != drawable.ty) return false;
-        if (id != null ? !id.equals(drawable.id) : drawable.id != null) return false;
+        return tx == drawable.tx && ty == drawable.ty && !(id != null ? !id.equals(drawable.id) : drawable.id != null);
 
-        return true;
     }
 
     @Override

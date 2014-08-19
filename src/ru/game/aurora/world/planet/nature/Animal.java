@@ -24,15 +24,15 @@ public class Animal extends BaseGameObject implements IMonster {
 
     private int hp;
 
-    private AnimalSpeciesDesc desc;
+    private final AnimalSpeciesDesc desc;
 
-    private Planet myPlanet;
+    private final Planet myPlanet;
 
     private boolean pickedUp = false;
 
     private boolean wasAttacked = false;
 
-    private MonsterController controller;
+    private final MonsterController controller;
 
     public Animal(Planet p, int x, int y, AnimalSpeciesDesc desc) {
         super(x, y);

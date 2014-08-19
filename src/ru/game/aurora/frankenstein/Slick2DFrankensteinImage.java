@@ -25,7 +25,7 @@ import java.awt.image.BufferedImage;
 import java.util.Map;
 
 public class Slick2DFrankensteinImage implements FrankensteinImage {
-    private Image myImage;
+    private final Image myImage;
 
     private static final Logger logger = LoggerFactory.getLogger(Slick2DFrankensteinImage.class);
 

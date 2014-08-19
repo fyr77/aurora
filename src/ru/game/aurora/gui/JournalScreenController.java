@@ -22,7 +22,7 @@ public class JournalScreenController implements ScreenController {
 
     private ListBox<JournalEntry> codexList;
 
-    private World world;
+    private final World world;
 
     private TabGroup tg;
 

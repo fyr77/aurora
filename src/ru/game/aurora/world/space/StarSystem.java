@@ -105,19 +105,19 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     // size of star system. moving out of radius from the star initiates return to global map
     private int radius;
 
-    private List<GameObject> ships = new ArrayList<>();
+    private final List<GameObject> ships = new ArrayList<>();
 
     /**
      * Variables available for quest logic
      */
-    private Map<String, Serializable> variables = new HashMap<>();
+    private final Map<String, Serializable> variables = new HashMap<>();
 
     /**
      * How many unexplored data for Astronomy research this star system contains
      */
     private int astronomyData;
 
-    private String name;
+    private final String name;
 
     // information about quests and events in this star system, used in starmap view
     private transient String messageForStarMap;

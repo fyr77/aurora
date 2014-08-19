@@ -16,15 +16,15 @@ public class WarpEffect extends Effect {
 
     private static final long serialVersionUID = 1L;
 
-    private transient Animation anim;
+    private final transient Animation anim;
 
     private boolean secondExplosion = false; //true when first effect is over
 
-    private int curX;   //coordinates for animation
+    private final int curX;   //coordinates for animation
 
-    private int curY;
+    private final int curY;
 
-    private GardenersShip ship;
+    private final GardenersShip ship;
 
     private float alpha;
 

@@ -12,7 +12,7 @@ import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 public class AnimalResearch extends ResearchProjectDesc {
     private static final long serialVersionUID = 1225992442980351059L;
 
-    private AnimalSpeciesDesc desc;
+    private final AnimalSpeciesDesc desc;
 
     private int progress = 100;
 

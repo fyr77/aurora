@@ -33,7 +33,7 @@ import java.util.Map;
  * Time: 17:24
  */
 public class StarMapController implements ScreenController {
-    private World world;
+    private final World world;
 
     private Element mapPanel;
 
@@ -43,7 +43,7 @@ public class StarMapController implements ScreenController {
 
     private Camera myCamera;
 
-    private GalaxyMap galaxyMap;
+    private final GalaxyMap galaxyMap;
 
     private static final Map<String, Color> alienColorMap;
 
@@ -189,7 +189,7 @@ public class StarMapController implements ScreenController {
     public void onStartScreen() {
         myWindow.setVisible(true);
 
-        Image map = null;
+        Image map;
         try {
             map = createGlobalMap();
         } catch (SlickException e) {

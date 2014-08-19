@@ -21,22 +21,22 @@ public class PlantSpeciesDesc implements Serializable {
     /**
      * This plant will grow only on this type of tiles
      */
-    private byte preferredSurfaceType;
+    private final byte preferredSurfaceType;
 
     /**
      * This plant will grow somewhere around given latitude
      * Value from 0 (Equator) to 1 (Pole)
      */
-    private double preferredLatitude;
+    private final double preferredLatitude;
 
-    private double areaHeight;
+    private final double areaHeight;
 
-    private String name = "Unknown alien plant";
+    private final String name = "Unknown alien plant";
 
-    private PlanetFloraAndFauna myFlora;
+    private final PlanetFloraAndFauna myFlora;
 
     // probability of this plant to be generated on a tile, if all other conditions match
-    private double baseProbability;
+    private final double baseProbability;
 
     private boolean growsOnWater = false;
 

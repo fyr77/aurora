@@ -61,7 +61,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
         private static final long serialVersionUID = -5333707636208684602L;
 
-        private GameTimer timer = new GameTimer(5);
+        private final GameTimer timer = new GameTimer(5);
 
         @Override
         public boolean onTurnEnded(World world) {

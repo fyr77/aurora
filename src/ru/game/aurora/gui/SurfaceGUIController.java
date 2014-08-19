@@ -26,7 +26,7 @@ import ru.game.aurora.world.planet.PlanetAtmosphere;
 public class SurfaceGUIController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender {
     private static final long serialVersionUID = -7781914700046409079L;
 
-    private World world;
+    private final World world;
 
     private transient Screen myScreen;
 

@@ -17,7 +17,7 @@ public class AnimalCorpseItem implements InventoryItem {
 
     private static final long serialVersionUID = 1L;
 
-    AnimalSpeciesDesc desc;
+    final AnimalSpeciesDesc desc;
 
     public AnimalCorpseItem(AnimalSpeciesDesc desc) {
         this.desc = desc;

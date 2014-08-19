@@ -20,9 +20,9 @@ public class Localization {
 
     private static Locale currentLocale;
 
-    private static String[] supportedLocales = {"ru", "en"};
+    private static final String[] supportedLocales = {"ru", "en"};
 
-    private static UTF8Control utf8Control = new UTF8Control();
+    private static final UTF8Control utf8Control = new UTF8Control();
 
     public static String getCurrentLocaleTag() {
         return currentLocale.toLanguageTag();

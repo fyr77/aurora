@@ -11,7 +11,7 @@ import libnoiseforjava.util.NoiseMap;
 
 public class LandscapeGenerator {
 
-    private static PerlinNoiseGeneratorWrapper noiseGeneratorWrapper = new PerlinNoiseGeneratorWrapper();
+    private static final PerlinNoiseGeneratorWrapper noiseGeneratorWrapper = new PerlinNoiseGeneratorWrapper();
 
     // noise generation is rather slow, so generate noise SCALE_FACTOR times smaller than planet surface size, and then stretch
     private static final int SCALE_FACTOR = 2;

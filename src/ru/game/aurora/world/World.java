@@ -47,33 +47,33 @@ public class World implements Serializable, ResolutionChangeListener {
     // if true, current room is not updated
     private boolean isPaused;
 
-    private GalaxyMap galaxyMap;
+    private final GalaxyMap galaxyMap;
 
-    private Player player;
+    private final Player player;
 
-    private Calendar currentDate;
+    private final Calendar currentDate;
 
-    private Reputation reputation;
+    private final Reputation reputation;
 
     private transient boolean updatedThisFrame;
 
     private transient boolean updatedNextFrame;
 
-    private transient StarSystemNamesCollection starSystemNamesCollection = new StarSystemNamesCollection();
+    private final transient StarSystemNamesCollection starSystemNamesCollection = new StarSystemNamesCollection();
 
-    private static DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+    private static final DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
 
     private StarSystem currentStarSystem = null;
 
     private int turnCount = 0;
 
-    private List<GameEventListener> listeners = new LinkedList<>();
+    private final List<GameEventListener> listeners = new LinkedList<>();
 
-    private Map<String, AlienRace> races = new HashMap<>();
+    private final Map<String, AlienRace> races = new HashMap<>();
 
-    private Map<String, Serializable> globalVariables = new HashMap<>();
+    private final Map<String, Serializable> globalVariables = new HashMap<>();
 
-    private RnDSet researchAndDevelopmentProjects;
+    private final RnDSet researchAndDevelopmentProjects;
 
 
     public World(int sizeX, int sizeY) {

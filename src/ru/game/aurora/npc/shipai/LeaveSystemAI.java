@@ -20,7 +20,7 @@ public class LeaveSystemAI implements NPCShipAI {
 
     private int dirX;
 
-    private int dirY;
+    private final int dirY;
 
     public LeaveSystemAI() {
         dirY = CommonRandom.getRandom().nextInt(3) - 1;

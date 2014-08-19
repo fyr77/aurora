@@ -50,7 +50,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
 
     private State state = State.INITED;
 
-    private long time;
+    private final long time;
 
     public ColonizationListener(World world) {
         time = world.getTurnCount();

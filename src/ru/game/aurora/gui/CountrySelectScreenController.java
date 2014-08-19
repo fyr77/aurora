@@ -20,7 +20,7 @@ import ru.game.aurora.world.World;
  */
 public class CountrySelectScreenController implements ScreenController {
 
-    private World world;
+    private final World world;
 
     private Element textElement;
 

@@ -5,7 +5,6 @@ package ru.game.aurora.world.planet;
  * User: User
  * Date: 15.08.14
  * Time: 23:21
- * To change this template use File | Settings | File Templates.
  */
 public enum MonsterBehaviour {
     /**

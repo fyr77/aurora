@@ -18,7 +18,7 @@ public class DungeonObject extends BaseGameObject {
 
     private static final long serialVersionUID = 2L;
 
-    private String name;
+    private final String name;
 
     public DungeonObject(AuroraTiledMap map, int groupId, int objectId) {
         super(map.getMap().getObjectX(groupId, objectId) / AuroraGame.tileSize

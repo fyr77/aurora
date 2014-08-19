@@ -21,7 +21,7 @@ import java.util.Map;
 public class KliskTradequestDialogListener extends GameEventListener implements DialogListener {
     private static final long serialVersionUID = -1387556231542083021L;
 
-    private StarSystem targetSystem;
+    private final StarSystem targetSystem;
 
     private NPCShip npcStation;
 
@@ -61,7 +61,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
 
         private static final long serialVersionUID = -5895915582359778144L;
 
-        private NPCShip target;
+        private final NPCShip target;
 
         public KliskQuestShip(World world, NPCShip target, int x, int y) {
             super(x, y, "klisk_ship", world.getRaces().get(KliskGenerator.NAME), new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_ship_default.json")), "Klisk ship", 15);

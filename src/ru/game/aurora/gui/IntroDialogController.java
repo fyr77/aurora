@@ -24,7 +24,7 @@ import java.util.Queue;
 
 public class IntroDialogController implements ScreenController, Updatable {
 
-    private World world;
+    private final World world;
 
     private long lastLetterTime;
 
@@ -42,7 +42,7 @@ public class IntroDialogController implements ScreenController, Updatable {
 
     private IntroDialog introDialog;
 
-    private Queue<IntroDialog> dialogs = new ArrayDeque<>();
+    private final Queue<IntroDialog> dialogs = new ArrayDeque<>();
 
     private int statement;
 

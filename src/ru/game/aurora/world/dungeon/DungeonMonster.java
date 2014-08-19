@@ -29,11 +29,11 @@ public class DungeonMonster extends DungeonObject implements IMonster {
 
     private int hp;
 
-    private MonsterController controller;
+    private final MonsterController controller;
 
-    private ITileMap owner;
+    private final ITileMap owner;
 
-    private MonsterDesc desc;
+    private final MonsterDesc desc;
 
     private MonsterBehaviour behaviour;
 

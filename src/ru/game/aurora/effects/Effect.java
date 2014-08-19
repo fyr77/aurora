@@ -18,9 +18,9 @@ public abstract class Effect extends BaseGameObject implements Comparable<Effect
 
     private static final long serialVersionUID = 1L;
 
-    private int priority;
+    private final int priority;
 
-    private DrawOrder order;
+    private final DrawOrder order;
 
     private String startSound;
 

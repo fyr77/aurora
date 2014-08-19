@@ -17,7 +17,7 @@ import java.util.Map;
 public class EarthProgressDialogListener implements DialogListener {
     private static final long serialVersionUID = 266428070604878318L;
 
-    private Earth earth;
+    private final Earth earth;
 
     public EarthProgressDialogListener(Earth earth) {
         this.earth = earth;

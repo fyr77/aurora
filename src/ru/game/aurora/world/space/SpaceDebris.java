@@ -21,7 +21,7 @@ public class SpaceDebris extends BaseGameObject {
 
         private static final long serialVersionUID = 1L;
 
-        private int amount;
+        private final int amount;
 
         public ResourceDebris(int amount) {
             super(0, 0);
@@ -37,7 +37,7 @@ public class SpaceDebris extends BaseGameObject {
 
     private static final long serialVersionUID = 7779753986433190967L;
 
-    private ProbabilitySet<GameObject> dropList;
+    private final ProbabilitySet<GameObject> dropList;
 
     public SpaceDebris(int x, int y, ProbabilitySet<GameObject> dropList) {
         super(x, y, new Drawable("debris"));

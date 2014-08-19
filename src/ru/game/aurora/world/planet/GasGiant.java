@@ -17,7 +17,7 @@ import ru.game.aurora.world.space.StarSystem;
 public class GasGiant extends BasePlanet {
     private static final long serialVersionUID = 1L;
 
-    private PlanetCategory.GasGiantColors color;
+    private final PlanetCategory.GasGiantColors color;
 
     public GasGiant(int x, int y, StarSystem owner, PlanetCategory.GasGiantColors color) {
         super(x, y, 1, owner, PlanetAtmosphere.NO_ATMOSPHERE, PlanetCategory.GAS_GIANT);

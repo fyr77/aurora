@@ -118,13 +118,13 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
     }
 
     private static class RoguesStateChanger extends GameEventListener implements DialogListener {
-        private AlienRace rogues;
+        private final AlienRace rogues;
 
-        private StarSystem roguesBase;
+        private final StarSystem roguesBase;
 
         private NPCShip roguesFrame;
 
-        private Dungeon beacon;
+        private final Dungeon beacon;
 
         private int turns = -1;
 

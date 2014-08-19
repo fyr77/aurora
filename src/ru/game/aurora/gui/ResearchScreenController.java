@@ -25,7 +25,7 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 
 public class ResearchScreenController implements ScreenController {
-    private World world;
+    private final World world;
 
     private Element availableResearch;
 

@@ -36,7 +36,7 @@ public class StoryScreen implements Serializable {
 
     private static final Gson gson = new Gson();
 
-    private StoryElement[] screens;
+    private final StoryElement[] screens;
 
     private int currentScreen;
 

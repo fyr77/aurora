@@ -30,14 +30,14 @@ public class BorkShipGenerator extends GameEventListener {
 
     private int count = 0;
 
-    private NPCShipFactory factory;
+    private final NPCShipFactory factory;
 
-    private int starshipsPerSystem;
+    private final int starshipsPerSystem;
 
     // optional dialog that will appear when player enters star system and notifies about presence of event starship
-    private Dialog dialog;
+    private final Dialog dialog;
 
-    private double chance;
+    private final double chance;
 
 
     public BorkShipGenerator(double chance, int count, Dialog dialog, NPCShipFactory factory, int starshipsPerSystem) {

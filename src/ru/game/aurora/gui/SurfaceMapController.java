@@ -22,7 +22,7 @@ import ru.game.aurora.world.space.PlanetMapRenderer;
  * Time: 14:36
  */
 public class SurfaceMapController implements ScreenController {
-    private World world;
+    private final World world;
 
     private Element mapPanel;
 

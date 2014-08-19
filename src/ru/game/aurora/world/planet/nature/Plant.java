@@ -12,7 +12,6 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.planet.Planet;
 
 
 public class Plant extends BaseGameObject {
@@ -20,12 +19,9 @@ public class Plant extends BaseGameObject {
 
     private PlantSpeciesDesc desc;
 
-    private Planet myPlanet;
-
-    public Plant(int x, int y, PlantSpeciesDesc desc, Planet myPlanet) {
+    public Plant(int x, int y, PlantSpeciesDesc desc) {
         super(x, y);
         this.desc = desc;
-        this.myPlanet = myPlanet;
     }
 
     public PlantSpeciesDesc getDesc() {

@@ -11,9 +11,9 @@ import java.util.TreeMap;
 public class Journal implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private SortedMap<String, JournalEntry> quests = new TreeMap<>();
+    private final SortedMap<String, JournalEntry> quests = new TreeMap<>();
 
-    private SortedMap<String, JournalEntry> codex = new TreeMap<>();
+    private final SortedMap<String, JournalEntry> codex = new TreeMap<>();
 
     public Map<String, JournalEntry> getQuests() {
         return quests;

@@ -45,9 +45,9 @@ public class NPCShip extends BaseGameObject {
 
     protected int hp;
 
-    protected int maxHP;
+    protected final int maxHP;
 
-    protected String name;
+    protected final String name;
 
     protected int speed = 3;
 

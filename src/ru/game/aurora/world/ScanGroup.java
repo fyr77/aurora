@@ -5,7 +5,6 @@ package ru.game.aurora.world;
  * User: User
  * Date: 29.07.14
  * Time: 16:06
- * To change this template use File | Settings | File Templates.
  */
 public enum ScanGroup {
     BIO,

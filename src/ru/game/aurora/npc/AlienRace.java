@@ -32,7 +32,7 @@ public class AlienRace implements Serializable
      */
     private Dialog defaultDialog;
 
-    private String shipSprite;
+    private final String shipSprite;
 
     private NPCShipFactory defaultFactory;
 

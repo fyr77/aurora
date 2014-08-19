@@ -10,7 +10,7 @@ import java.util.Map;
 public class NextDialogListener implements DialogListener {
     private static final long serialVersionUID = 6141684215868408536L;
 
-    private Dialog nextDialog;
+    private final Dialog nextDialog;
 
     public NextDialogListener(Dialog nextDialog) {
         this.nextDialog = nextDialog;

@@ -15,7 +15,7 @@ public class BaseResearchWithFixedProgress extends ResearchProjectDesc implement
 
     protected int progress;
 
-    protected int score;
+    protected final int score;
 
     protected final int initialProgress;
 

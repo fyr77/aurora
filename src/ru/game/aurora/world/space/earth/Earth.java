@@ -35,16 +35,16 @@ public class Earth extends BasePlanet {
 
     private static final long serialVersionUID = 1L;
 
-    private Dialog earthDialog;
+    private final Dialog earthDialog;
 
-    private Dialog progressDialog;
+    private final Dialog progressDialog;
 
     private int lastVisitTurn = 0;
 
     private transient Image earthImage = null;
 
     // flags used to control default earth dialog
-    private Map<String, String> dialogFlags = new HashMap<>();
+    private final Map<String, String> dialogFlags = new HashMap<>();
 
     public Earth(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
         super(x, y, size, owner, atmosphere, cat);

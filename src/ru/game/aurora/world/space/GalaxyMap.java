@@ -37,7 +37,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private transient ParallaxBackground background;
 
-    private List<GalaxyMapObject> objects = new ArrayList<>();
+    private final List<GalaxyMapObject> objects = new ArrayList<>();
 
     private transient GalaxyMapScreen fullMapScreen = new GalaxyMapScreen();
 

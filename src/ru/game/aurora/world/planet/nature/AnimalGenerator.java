@@ -45,7 +45,7 @@ public class AnimalGenerator {
 
     private double rangeAttackChance;
 
-    private ProbabilitySet<AnimalModifier> modifierProbabilitySet = new ProbabilitySet<>();
+    private final ProbabilitySet<AnimalModifier> modifierProbabilitySet = new ProbabilitySet<>();
 
     public static void init() throws FileNotFoundException {
         instance = new AnimalGenerator();

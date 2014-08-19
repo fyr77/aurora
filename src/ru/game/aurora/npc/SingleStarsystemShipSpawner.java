@@ -19,11 +19,11 @@ import ru.game.aurora.world.space.StarSystem;
 public class SingleStarsystemShipSpawner extends GameEventListener {
     private static final long serialVersionUID = 3478980636928820446L;
 
-    private NPCShipFactory factory;
+    private final NPCShipFactory factory;
 
-    private double probability;
+    private final double probability;
 
-    private StarSystem targetSystem;
+    private final StarSystem targetSystem;
 
     public SingleStarsystemShipSpawner(NPCShipFactory factory, double probability, StarSystem targetSystem) {
         this.factory = factory;

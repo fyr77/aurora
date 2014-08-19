@@ -29,9 +29,9 @@ import java.util.List;
 public class AuroraTiledMap implements ITileMap {
     private static final long serialVersionUID = 2L;
 
-    private List<GameObject> objects = new LinkedList<>();
+    private final List<GameObject> objects = new LinkedList<>();
 
-    private List<IVictoryCondition> victoryConditions = new ArrayList<>();
+    private final List<IVictoryCondition> victoryConditions = new ArrayList<>();
 
     private final String mapRef;
 

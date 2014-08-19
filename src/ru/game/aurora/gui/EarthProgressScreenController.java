@@ -25,7 +25,7 @@ import java.util.List;
 
 
 public class EarthProgressScreenController implements ScreenController {
-    private World world;
+    private final World world;
 
     private ListBox results;
 
@@ -33,7 +33,7 @@ public class EarthProgressScreenController implements ScreenController {
 
     private RenderFont listFont;
 
-    private List<Pair<String, String>> data = new LinkedList<>();
+    private final List<Pair<String, String>> data = new LinkedList<>();
 
     private int totalScore;
 

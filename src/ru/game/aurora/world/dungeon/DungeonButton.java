@@ -19,12 +19,12 @@ import ru.game.aurora.world.World;
 public class DungeonButton extends DungeonObject {
     private static final long serialVersionUID = 6393069794553306363L;
 
-    private String imageNormalName;
+    private final String imageNormalName;
     private int imageNormalTileX = -1;
     private int imageNormalTileY = -1;
     private transient Image imageNormal = null;
 
-    private String imagePressName;
+    private final String imagePressName;
     private int imagePressTileX = -1;
     private int imagePressTileY = -1;
     private transient Image imagePress = null;
@@ -33,7 +33,7 @@ public class DungeonButton extends DungeonObject {
     private boolean state;
 
     //name of associated door object
-    private String door;
+    private final String door;
 
     @Override
     public void interact(World world) {

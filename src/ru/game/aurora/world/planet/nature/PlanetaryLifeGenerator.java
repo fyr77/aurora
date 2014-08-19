@@ -97,7 +97,7 @@ public class PlanetaryLifeGenerator {
                 }
                 final PlantSpeciesDesc desc = CollectionUtils.selectRandomElement(availablePlants);
                 if (CommonRandom.getRandom().nextDouble() <= desc.getBaseProbability()) {
-                    planet.getPlanetObjects().add(new Plant(j, i, desc, planet));
+                    planet.getPlanetObjects().add(new Plant(j, i, desc));
                 }
             }
         }

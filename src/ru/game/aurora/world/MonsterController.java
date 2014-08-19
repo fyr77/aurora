@@ -28,13 +28,13 @@ import java.util.List;
 public class MonsterController implements Serializable {
     private static final long serialVersionUID = -8278864000200488198L;
 
-    private IMonster myMonster;
+    private final IMonster myMonster;
 
     private int turnsBeforeMove;
 
-    private LandingPartyWeapon weapon;
+    private final LandingPartyWeapon weapon;
 
-    private ITileMap map;
+    private final ITileMap map;
 
     private static AStarPathFinder pathFinder;
 
@@ -119,8 +119,8 @@ public class MonsterController implements Serializable {
                     newY = y;
                 } else if (map.lineOfSightExists(x, y, partyX, partyY)
                         && (weapon == null
-                        || distance < 5 * weapon.getRange())
-                        || (weapon.getId().equals("melee") && distance < 15)) {
+                        || distance < 5 * weapon.getRange()
+                        || (weapon.getId().equals("melee") && distance < 15))) {
                     lastX = partyX;
                     lastY = partyY;
                     playerShown = true;

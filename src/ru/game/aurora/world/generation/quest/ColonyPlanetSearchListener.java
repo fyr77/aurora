@@ -82,11 +82,11 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
         public boolean dialogShown = false;
     }
 
-    private Map<Planet, PlanetData> planetDataMap = new HashMap<>();
+    private final Map<Planet, PlanetData> planetDataMap = new HashMap<>();
 
     private Planet currentPlanet = null;
 
-    private int targetTiles;
+    private final int targetTiles;
 
     public ColonyPlanetSearchListener() {
         targetTiles = Configuration.getIntProperty("quest.colony_search.requiredTiles");

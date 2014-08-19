@@ -15,7 +15,7 @@ public enum AnimalModifier {
     TOUGH(0.3),
     REGEN(0.1);
     // probability of this modifier to apply, used in ProbabilitySet
-    public double weight;
+    public final double weight;
 
     private AnimalModifier(double weight) {
         this.weight = weight;

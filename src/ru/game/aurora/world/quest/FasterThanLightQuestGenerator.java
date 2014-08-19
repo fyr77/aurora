@@ -100,7 +100,7 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
 
         boolean growing = false;
 
-        Color color = new Color(255, 255, 255);
+        final Color color = new Color(255, 255, 255);
 
         public ExplodingStar() {
             super(0, 0);

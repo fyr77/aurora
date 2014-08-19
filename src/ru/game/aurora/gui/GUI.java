@@ -22,7 +22,7 @@ import java.util.Iterator;
 import java.util.Stack;
 
 public class GUI {
-    private Nifty nifty;
+    private final Nifty nifty;
 
     private static GUI instance;
 
@@ -32,7 +32,7 @@ public class GUI {
 
     private GameContainer containerInstance;
 
-    private Stack<String> screens = new Stack<>();
+    private final Stack<String> screens = new Stack<>();
 
     public static void init(GameContainer con, Nifty n) {
         instance = new GUI(con, n);

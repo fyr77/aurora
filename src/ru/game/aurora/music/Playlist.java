@@ -25,11 +25,11 @@ public class Playlist implements MusicListener
 
     private static Playlist nextPlaylist = null;
 
-    private List<DeferredLoadingMusic> music = new ArrayList<>();
+    private final List<DeferredLoadingMusic> music = new ArrayList<>();
 
     private int currentMusicIdx = 0;
 
-    private String id;
+    private final String id;
 
     public Playlist(String id, File musicDir) {
 

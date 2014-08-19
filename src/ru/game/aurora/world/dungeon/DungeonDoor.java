@@ -16,12 +16,12 @@ import ru.game.aurora.world.World;
 public class DungeonDoor extends DungeonObject {
     private static final long serialVersionUID = -1572145819737469957L;
 
-    private String imageOpenName;
+    private final String imageOpenName;
     private int imageOpenTileX = -1;
     private int imageOpenTileY = -1;
     private transient Image imageOpen = null;
 
-    private String imageCloseName;
+    private final String imageCloseName;
     private int imageCloseTileX = -1;
     private int imageCloseTileY = -1;
     private transient Image imageClose = null;
@@ -33,7 +33,7 @@ public class DungeonDoor extends DungeonObject {
         return doorName;
     }
 
-    private String doorName;
+    private final String doorName;
 
     public DungeonDoor(AuroraTiledMap map, int groupId, int objectId) {
         super(map, groupId, objectId);

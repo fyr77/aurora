@@ -18,7 +18,7 @@ import ru.game.aurora.world.space.StarSystem;
 public class SingleShipFixedTime extends GameEventListener {
     private static final long serialVersionUID = 6541906542086925960L;
 
-    private int x;
+    private final int x;
 
     private int count = 0;
 

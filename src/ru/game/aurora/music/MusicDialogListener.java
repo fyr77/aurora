@@ -19,7 +19,7 @@ public class MusicDialogListener implements DialogListener
 {
     private static final long serialVersionUID = 2456396838423391188L;
 
-    private String id;
+    private final String id;
 
     public MusicDialogListener(String id) {
         this.id = id;

@@ -21,18 +21,18 @@ import java.util.Random;
  */
 public class MainMenuBackground {
 
-    private ParallaxBackground.Star[][] stars;
+    private final ParallaxBackground.Star[][] stars;
 
     private static final int STARS_PER_PLANE = 30;
 
     private long elapsed;
 
-    private int width;
+    private final int width;
 
-    Image s0; //sprites for stars
-    Image s1;
-    Image s2;
-    Image s3;
+    final Image s0; //sprites for stars
+    final Image s1;
+    final Image s2;
+    final Image s3;
 
     public MainMenuBackground(int width, int height) {
         s0 = ResourceManager.getInstance().getImage("stars_s0");

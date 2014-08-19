@@ -21,9 +21,9 @@ public class SpaceObjectResearchProject extends BaseResearchWithFixedProgress {
 
     private static final long serialVersionUID = 2376161445036847151L;
 
-    protected StarSystem starSystem;
+    protected final StarSystem starSystem;
 
-    protected BasePositionable position;
+    protected final BasePositionable position;
 
     public SpaceObjectResearchProject(String id, String icon, int initialProgress, StarSystem starSystem, BasePositionable object) {
         super(id, icon, initialProgress, 50);

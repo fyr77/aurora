@@ -33,7 +33,7 @@ import java.util.ListIterator;
 
 public class EarthScreenController implements ScreenController {
 
-    private World world;
+    private final World world;
 
     private Element messagesList;
 

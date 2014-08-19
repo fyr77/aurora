@@ -22,20 +22,20 @@ public class AnimalSpeciesDesc implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
-    private String name;
+    private final String name;
 
-    private Planet homePlanet;
+    private final Planet homePlanet;
 
-    private Set<AnimalModifier> modifiers;
+    private final Set<AnimalModifier> modifiers;
 
-    private int hp;
+    private final int hp;
 
     /**
      * Turns between animal moves
      */
-    private int speed;
+    private final int speed;
 
-    private LandingPartyWeapon weapon;
+    private final LandingPartyWeapon weapon;
 
     private transient Image image;
 
@@ -44,9 +44,9 @@ public class AnimalSpeciesDesc implements Serializable {
     private boolean canBePickedUp = true;
 
     // animals can not be friendly
-    public static MonsterBehaviour[] animalBehaviours = new MonsterBehaviour[]{MonsterBehaviour.PASSIVE, MonsterBehaviour.SELF_DEFENSIVE, MonsterBehaviour.AGGRESSIVE};
+    public static final MonsterBehaviour[] animalBehaviours = new MonsterBehaviour[]{MonsterBehaviour.PASSIVE, MonsterBehaviour.SELF_DEFENSIVE, MonsterBehaviour.AGGRESSIVE};
 
-    private MonsterBehaviour behaviour;
+    private final MonsterBehaviour behaviour;
 
 
     // research attributes
@@ -59,7 +59,7 @@ public class AnimalSpeciesDesc implements Serializable {
     /**
      * True if dead animal was brought to ship and examined
      */
-    private boolean outopsyMade = false;
+    private final boolean outopsyMade = false;
 
     private int armor;
 

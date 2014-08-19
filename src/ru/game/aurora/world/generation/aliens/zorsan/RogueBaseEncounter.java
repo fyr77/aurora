@@ -25,9 +25,9 @@ public class RogueBaseEncounter extends GameEventListener
 
     private static final long serialVersionUID = 1L;
 
-    private double chance;
+    private final double chance;
 
-    private NPCShip station;
+    private final NPCShip station;
 
     private boolean isInSystemWithStation = false;
 

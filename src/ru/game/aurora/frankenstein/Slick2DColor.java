@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Slick2DColor implements FrankensteinColor, Serializable {
     private static final long serialVersionUID = 7371175836249657696L;
 
-    private Color color;
+    private final Color color;
 
     public Slick2DColor(Color color) {
         this.color = color;

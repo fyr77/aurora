@@ -29,7 +29,7 @@ import java.util.Map;
 public class EnterpriseEncounterCreator extends GameEventListener {
     private static final long serialVersionUID = 2077112120543067387L;
 
-    private int turnCount;
+    private final int turnCount;
 
     private boolean isAlive = true;
 

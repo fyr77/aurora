@@ -34,21 +34,21 @@ public class ResourceManager {
 
     private static final String SPRITE_SHEET_REF = "__SPRITE_SHEET_";
 
-    private static ResourceManager _instance = new ResourceManager();
+    private static final ResourceManager _instance = new ResourceManager();
 
-    private Map<String, Sound> soundMap;
-    private Map<String, Playlist> playlistMap;
-    private Map<String, Image> imageMap;
-    private Map<String, Image> flippedCopies; // contains horizontally flipped copies of images from imageMap
-    private Map<String, ResourceAnimationData> animationMap;
-    private Map<String, String> textMap;
-    private Map<String, SpriteSheet> spriteSheetMap;
+    private final Map<String, Sound> soundMap;
+    private final Map<String, Playlist> playlistMap;
+    private final Map<String, Image> imageMap;
+    private final Map<String, Image> flippedCopies; // contains horizontally flipped copies of images from imageMap
+    private final Map<String, ResourceAnimationData> animationMap;
+    private final Map<String, String> textMap;
+    private final Map<String, SpriteSheet> spriteSheetMap;
 
-    private JsonConfigManager<StarshipWeaponDesc> weapons = new JsonConfigManager<>(StarshipWeaponDesc.class, "resources/items/starship_weapons");
+    private final JsonConfigManager<StarshipWeaponDesc> weapons = new JsonConfigManager<>(StarshipWeaponDesc.class, "resources/items/starship_weapons");
 
-    private JsonConfigManager<LandingPartyWeapon> landingPartyWeapons = new JsonConfigManager<>(LandingPartyWeapon.class, "resources/items/crew_weapons");
+    private final JsonConfigManager<LandingPartyWeapon> landingPartyWeapons = new JsonConfigManager<>(LandingPartyWeapon.class, "resources/items/crew_weapons");
 
-    private JsonConfigManager<MonsterDesc> monsterDescs= new JsonConfigManager<>(MonsterDesc.class, "resources/monsters");
+    private final JsonConfigManager<MonsterDesc> monsterDescs= new JsonConfigManager<>(MonsterDesc.class, "resources/monsters");
 
     private static final Logger logger = LoggerFactory.getLogger(ResourceManager.class);
 

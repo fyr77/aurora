@@ -20,7 +20,7 @@ public class Cartography extends ResearchProjectDesc
 {
     private static final long serialVersionUID = 4588596463836210769L;
 
-    private Geodata geodata;
+    private final Geodata geodata;
 
     public Cartography(Geodata geodata) {
         super("cartography", "cartography_research");

@@ -9,13 +9,13 @@ import java.util.Properties;
 */
 public final class Context<E>
 {
-    public String id;
+    public final String id;
 
     public int lineNumber = 0;
 
-    public Properties text = new Properties();
+    public final Properties text = new Properties();
 
-    public List<E> statements = new LinkedList<>();
+    public final List<E> statements = new LinkedList<>();
 
     public Context(String id) {
         this.id = id;

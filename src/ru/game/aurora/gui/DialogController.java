@@ -27,9 +27,9 @@ import java.util.Stack;
 
 
 public class DialogController implements ScreenController {
-    private World world;
+    private final World world;
 
-    private Stack<Dialog> dialogs = new Stack<>();
+    private final Stack<Dialog> dialogs = new Stack<>();
 
     private Element imagePanel;
 

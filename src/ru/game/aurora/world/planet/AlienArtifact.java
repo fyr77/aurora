@@ -23,12 +23,12 @@ public class AlienArtifact extends BaseGameObject {
 
     private int remainingData = 10;
 
-    private ArtifactResearch resultResearch;
+    private final ArtifactResearch resultResearch;
 
     // optional dialog is shown when this artifact is used for first time
     private Dialog firstUseDialog = null;
 
-    private ArtifactSamples samples = new ArtifactSamples();
+    private final ArtifactSamples samples = new ArtifactSamples();
 
     public final class ArtifactSamples implements InventoryItem {
         private static final long serialVersionUID = 4883589185683400708L;

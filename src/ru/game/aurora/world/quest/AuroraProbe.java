@@ -22,7 +22,7 @@ import ru.game.aurora.world.space.StarSystem;
 public class AuroraProbe extends NPCShip {
     private static final long serialVersionUID = -579871001131587178L;
 
-    private Dialog dialog;
+    private final Dialog dialog;
 
     public AuroraProbe(int x, int y) {
         super(x, y, "probe", null, null, "Probe-X513M", 5);

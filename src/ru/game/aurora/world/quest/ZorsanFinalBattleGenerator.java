@@ -49,7 +49,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         RECON_DONE
     }
 
-    private static Logger logger = LoggerFactory.getLogger(ZorsanFinalBattleGenerator.class);
+    private static final Logger logger = LoggerFactory.getLogger(ZorsanFinalBattleGenerator.class);
 
     private State state = State.CREATED;
 
@@ -65,15 +65,15 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
     private Earth earth;
 
-    private List<NPCShip> currentWave = new LinkedList<>();
+    private final List<NPCShip> currentWave = new LinkedList<>();
 
     private int dropShipsLanded = 0;
 
-    private List<NPCShip> allyShips = new LinkedList<>();
+    private final List<NPCShip> allyShips = new LinkedList<>();
 
     private StarSystem closestStarSystem = null;
 
-    private int shotsDone = 0;
+    private final int shotsDone = 0;
 
     // if it is not null - space station is being boarded
     // if it becomes signalled - station is captured and destroyed

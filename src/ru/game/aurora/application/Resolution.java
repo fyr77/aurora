@@ -12,8 +12,8 @@ import org.lwjgl.opengl.DisplayMode;
 */
 public final class Resolution implements Comparable<Resolution>
 {
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     public Resolution(int width, int height) {
         this.width = width;

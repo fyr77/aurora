@@ -32,11 +32,11 @@ import java.util.Map;
 public class AlienHomeworld extends BasePlanet {
     private static final long serialVersionUID = -1818088878360415965L;
 
-    private AlienRace ownerRace;
+    private final AlienRace ownerRace;
 
     private Dialog dialog;
 
-    private String spriteName;
+    private final String spriteName;
 
     private boolean canBeCommunicated = true;
 

@@ -24,17 +24,17 @@ import ru.game.aurora.world.space.StarSystem;
 public class BlasterShotEffect extends Effect {
     private static final long serialVersionUID = 7969961076017675842L;
 
-    protected Vector2f currentPos;
+    protected final Vector2f currentPos;
 
-    private Vector2f movementDir;
+    private final Vector2f movementDir;
 
-    private Vector2f target;
+    private final Vector2f target;
 
-    private int moveSpeed;
+    private final int moveSpeed;
 
     private boolean isOver = false;
 
-    private transient Image myImage;
+    private final transient Image myImage;
 
     private String particlesAnimation;
 

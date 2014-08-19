@@ -29,7 +29,7 @@ import ru.game.aurora.world.space.earth.Earth;
  * Time: 17:32
  */
 public class PlanetScanController implements ScreenController {
-    private World world;
+    private final World world;
 
     private BasePositionable shuttlePosition;
 

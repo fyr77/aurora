@@ -12,7 +12,6 @@ import java.util.Map;
  * User: Egor.Smirnov
  * Date: 12.03.13
  * Time: 15:32
- * To change this template use File | Settings | File Templates.
  */
 public class Statement implements Serializable {
 

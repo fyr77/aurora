@@ -22,14 +22,14 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int width;
+    private final int width;
 
-    private int height;
+    private final int height;
 
     /**
      * Animals that are located on planet surface.
      */
-    private List<GameObject> planetObjects = new ArrayList<>();
+    private final List<GameObject> planetObjects = new ArrayList<>();
 
 
     /**
@@ -44,7 +44,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
      * 0 - reserved
      * tttt - tile type
      */
-    private byte[][] surface;
+    private final byte[][] surface;
 
     public SurfaceTileMap(int width, int height, byte[][] surface) {
         this.height = height;
@@ -61,9 +61,9 @@ public class SurfaceTileMap implements ITileMap, Serializable {
         }
     }
 
-    private static TileDrawer mountainDrawer = new TileDrawer("mountains", (byte) 0);
+    private static final TileDrawer mountainDrawer = new TileDrawer("mountains", (byte) 0);
 
-    private static Map<Byte, TileDrawer> drawers = new HashMap<>();
+    private static final Map<Byte, TileDrawer> drawers = new HashMap<>();
 
     static {
         drawers.put(SurfaceTypes.ROCKS, new TileDrawer("rock", SurfaceTypes.ROCKS));

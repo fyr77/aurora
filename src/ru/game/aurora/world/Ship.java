@@ -38,7 +38,7 @@ public class Ship extends BaseGameObject {
 
     private int hull;
 
-    private int maxHull;
+    private final int maxHull;
 
     private int scientists;
 
@@ -52,13 +52,13 @@ public class Ship extends BaseGameObject {
 
     private int maxEngineers;
 
-    private List<StarshipWeapon> weapons = new ArrayList<>();
+    private final List<StarshipWeapon> weapons = new ArrayList<>();
 
-    private AlienRace humanity;
+    private final AlienRace humanity;
 
-    private Multiset<InventoryItem> storage = HashMultiset.create();
+    private final Multiset<InventoryItem> storage = HashMultiset.create();
 
-    private List<ShipUpgrade> upgrades = new ArrayList<>();
+    private final List<ShipUpgrade> upgrades = new ArrayList<>();
 
     private int freeSpace;
 

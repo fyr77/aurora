@@ -12,7 +12,7 @@ import ru.game.aurora.world.planet.MedPack;
 public class MedpacksCraft extends EngineeringProject {
     private static final long serialVersionUID = -2561453708074000488L;
 
-    private int amount; //сколько делать аптечек за один "проект"
+    private final int amount; //сколько делать аптечек за один "проект"
     private static final int progress = 10; //как долго будет идти создание аптечек
 
     public MedpacksCraft(int amount) {

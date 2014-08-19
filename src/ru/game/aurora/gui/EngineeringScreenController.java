@@ -26,7 +26,7 @@ import ru.game.aurora.world.World;
 
 
 public class EngineeringScreenController implements ScreenController {
-    private World world;
+    private final World world;
 
     EngineeringState engineeringState;
 

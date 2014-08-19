@@ -20,7 +20,7 @@ import ru.game.aurora.world.World;
 public class GardenersShip extends NPCShip {
     private static final long serialVersionUID = -1613654729672880450L;
 
-    private String sprite;
+    private final String sprite;
 
     private float spriteAlpha = 1.0f;
 

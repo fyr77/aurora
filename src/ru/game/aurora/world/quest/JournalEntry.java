@@ -16,9 +16,9 @@ import java.util.Set;
 public class JournalEntry implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private final String id;
 
-    private Set<String> messageIds = new LinkedHashSet<>();
+    private final Set<String> messageIds = new LinkedHashSet<>();
 
     public JournalEntry(String id) {
         this.id = id;

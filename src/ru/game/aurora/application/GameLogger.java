@@ -17,9 +17,9 @@ public class GameLogger {
 
     public static final int MAX_LOG_ENTRIES = 50;
 
-    private List<String> logItems = new ArrayList<>(MAX_LOG_ENTRIES);
+    private final List<String> logItems = new ArrayList<>(MAX_LOG_ENTRIES);
 
-    private List<LoggerAppender> appenders = new ArrayList<>();
+    private final List<LoggerAppender> appenders = new ArrayList<>();
 
     private static final GameLogger instance = new GameLogger();
 

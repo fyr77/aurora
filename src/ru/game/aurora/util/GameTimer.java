@@ -14,7 +14,7 @@ public class GameTimer implements Serializable {
 
     private int count;
 
-    private int limit;
+    private final int limit;
 
     public GameTimer(int limit) {
         this.limit = limit;

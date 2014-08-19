@@ -18,7 +18,7 @@ public class OreDeposit extends BaseGameObject {
 
     public static class OreUnit implements InventoryItem {
         private static final long serialVersionUID = -5597582503966190176L;
-        private OreType type;
+        private final OreType type;
 
         public OreUnit(OreType type) {
             this.type = type;
@@ -102,13 +102,13 @@ public class OreDeposit extends BaseGameObject {
         }
     }
 
-    private OreType type;
+    private final OreType type;
 
     private int currentMiningProgress;
 
     private int amount;
 
-    private Planet myPlanet;
+    private final Planet myPlanet;
 
 
     public OreDeposit(Planet myPlanet, int x, int y, OreType type, int amount) {

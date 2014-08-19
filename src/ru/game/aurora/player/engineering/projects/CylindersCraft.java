@@ -12,7 +12,7 @@ import ru.game.aurora.world.planet.Cylinders;
 public class CylindersCraft extends EngineeringProject {
     private static final long serialVersionUID = -7257363608665894778L;
 
-    private int amount;
+    private final int amount;
     private static final int progress = 10;
 
     public CylindersCraft(int amount) {

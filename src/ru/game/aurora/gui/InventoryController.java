@@ -27,7 +27,7 @@ public class InventoryController implements ScreenController {
 
     private ListBox<Multiset.Entry<InventoryItem>> items;
 
-    private World world;
+    private final World world;
 
     private Element weightText;
 

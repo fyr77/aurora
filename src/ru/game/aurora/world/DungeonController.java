@@ -45,21 +45,21 @@ public class DungeonController extends Listenable implements Serializable {
      */
     private static final int MODE_SHOOT = 1;
 
-    private Room prevRoom;
+    private final Room prevRoom;
     /**
      * Current mode
      */
     private int mode = MODE_MOVE;
 
-    private ITileMap map;
+    private final ITileMap map;
 
-    private boolean isWrap;
+    private final boolean isWrap;
 
-    private World world;
+    private final World world;
 
     private LandingParty landingParty;
 
-    private IDungeon myDungeon;
+    private final IDungeon myDungeon;
 
     private Dialog successDialog;
 

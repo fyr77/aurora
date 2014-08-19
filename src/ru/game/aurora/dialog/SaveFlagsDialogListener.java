@@ -14,7 +14,7 @@ import java.util.Map;
 public class SaveFlagsDialogListener implements DialogListener {
     private static final long serialVersionUID = 1L;
 
-    private Map<String, String> target;
+    private final Map<String, String> target;
 
     public SaveFlagsDialogListener(Map<String, String> target) {
         this.target = target;

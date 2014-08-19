@@ -16,7 +16,7 @@ import libnoiseforjava.util.NoiseMapBuilderPlane;
 
 public class PerlinNoiseGeneratorWrapper
 {
-    private Perlin p = new Perlin();
+    private final Perlin p = new Perlin();
 
     private int seedIncrementer = 0;
 

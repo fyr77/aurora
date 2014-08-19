@@ -22,12 +22,12 @@ public class Camera implements Serializable {
     private int viewportX;
     private int viewportY;
 
-    private int initialViewportX;
-    private int initialViewportY;
+    private final int initialViewportX;
+    private final int initialViewportY;
 
-    private float tileWidth;
+    private final float tileWidth;
 
-    private float tileHeight;
+    private final float tileHeight;
 
     /**
      * Object camera is following
@@ -37,9 +37,9 @@ public class Camera implements Serializable {
     /**
      * Number of tiles that are actually drawn
      */
-    private int viewportTilesX;
+    private final int viewportTilesX;
 
-    private int viewportTilesY;
+    private final int viewportTilesY;
 
     public Camera(int viewportX, int viewportY, int vieportWidth, int viewportHeight, float tileWidth, float tileHeight) {
         this.viewportX = viewportX;

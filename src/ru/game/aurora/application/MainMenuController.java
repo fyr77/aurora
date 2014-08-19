@@ -39,11 +39,11 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
     private World loadedState = null;
 
 
-    private GameContainer container;
+    private final GameContainer container;
 
-    private Animation upperEngine;
+    private final Animation upperEngine;
 
-    private Animation lowerEngine;
+    private final Animation lowerEngine;
 
     private MainMenuBackground background;
 

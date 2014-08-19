@@ -38,15 +38,15 @@ public class Player implements Serializable {
 
     private EngineeringState engineeringState;
 
-    private EarthState earthState;
+    private final EarthState earthState;
 
     private int resourceUnits = 5;
 
     private int credits = 0;
 
-    private Journal journal = new Journal();
+    private final Journal journal = new Journal();
 
-    private Map<InventoryItem, Integer> inventory = new HashMap<>();
+    private final Map<InventoryItem, Integer> inventory = new HashMap<>();
 
     // main country in Aurora project, defines some bonuses
     private EarthCountry mainCountry = EarthCountry.AMERICA;

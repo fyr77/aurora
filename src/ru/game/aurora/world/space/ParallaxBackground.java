@@ -26,9 +26,9 @@ public class ParallaxBackground {
 
     public static class Star {
         public float x;
-        public float y;
-        public Color color;
-        public int baseSize;
+        public final float y;
+        public final Color color;
+        public final int baseSize;
         public Image sprite;
 
         public Star(float x, float y, Color color, int baseSize) {
@@ -45,18 +45,18 @@ public class ParallaxBackground {
     /**
      * Real number of star per plane, depends on system size
      */
-    private int starsPerPlane;
+    private final int starsPerPlane;
 
-    private Star[][] stars;
+    private final Star[][] stars;
 
     private static final Random r = new Random();
 
     private float baseWidth = 3;
 
-    Image s0; //sprites for stars
-    Image s1;
-    Image s2;
-    Image s3;
+    final Image s0; //sprites for stars
+    final Image s1;
+    final Image s2;
+    final Image s3;
 
     public ParallaxBackground(float width, float height, float centerX, float centerY, int density) {
         s0 = ResourceManager.getInstance().getImage("stars_s0");

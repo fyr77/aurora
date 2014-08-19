@@ -31,7 +31,7 @@ import java.util.Map;
 public class EarthDialogListener implements DialogListener {
     private static final long serialVersionUID = 6653410057967364076L;
 
-    private Earth earth;
+    private final Earth earth;
 
     public EarthDialogListener(Earth earth) {
         this.earth = earth;

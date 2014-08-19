@@ -16,7 +16,7 @@ public class AlienRaceResearch extends BaseResearchWithFixedProgress
 {
     private static final long serialVersionUID = -5140126328244757862L;
 
-    private JournalEntry entry;
+    private final JournalEntry entry;
 
     public AlienRaceResearch(String id, AlienRace race, JournalEntry entry) {
         super(id, race.getDefaultDialog().getIconName(), new ResearchReport(race.getDefaultDialog().getIconName(), "race_research.report"), 50, 50);

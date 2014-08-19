@@ -15,7 +15,7 @@ import ru.game.aurora.world.World;
  * Time: 13:35
  */
 public class FailScreenController implements ScreenController {
-    private World world;
+    private final World world;
 
     private Element text;
 

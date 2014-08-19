@@ -11,8 +11,9 @@ import libnoiseforjava.util.ColorCafe;
 import libnoiseforjava.util.ImageCafe;
 import libnoiseforjava.util.NoiseMap;
 import libnoiseforjava.util.RendererImage;
-import org.newdawn.slick.*;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.ImageBuffer;
+import org.newdawn.slick.SlickException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
@@ -23,7 +24,7 @@ import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.space.StarSystem;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -46,7 +47,8 @@ public class PlanetSpriteGenerator {
 
         public final int size;
 
-        public float shadowXFactor, shadowYFactor;
+        public final float shadowXFactor;
+        public final float shadowYFactor;
 
         public ColorCafe plantsColor = null;
 
@@ -95,9 +97,9 @@ public class PlanetSpriteGenerator {
         }
     }
 
-    private Map<PlanetSpriteParameters, Collection<Image>> cache = new HashMap<>();
+    private final Map<PlanetSpriteParameters, Collection<Image>> cache = new HashMap<>();
 
-    private PerlinNoiseGeneratorWrapper noiseGeneratorWrapper = new PerlinNoiseGeneratorWrapper();
+    private final PerlinNoiseGeneratorWrapper noiseGeneratorWrapper = new PerlinNoiseGeneratorWrapper();
 
     private static final PlanetSpriteGenerator instance = new PlanetSpriteGenerator();
 

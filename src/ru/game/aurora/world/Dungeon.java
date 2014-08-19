@@ -17,9 +17,9 @@ import java.util.Map;
 public class Dungeon implements Room, IDungeon {
     private static final long serialVersionUID = 2L;
 
-    private ITileMap map;
+    private final ITileMap map;
 
-    private DungeonController controller;
+    private final DungeonController controller;
 
     private Dialog enterDialog;
 

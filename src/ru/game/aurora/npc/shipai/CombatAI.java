@@ -18,7 +18,7 @@ import ru.game.aurora.world.space.StarSystem;
 public class CombatAI implements NPCShipAI {
     private static final long serialVersionUID = 1L;
 
-    private GameObject target;
+    private final GameObject target;
 
     public CombatAI(GameObject target) {
         this.target = target;

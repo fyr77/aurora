@@ -14,7 +14,7 @@ import ru.game.aurora.world.World;
 public class LandingShuttle extends BaseGameObject {
     private static final long serialVersionUID = -6432856422423659187L;
 
-    private Planet myPlanet;
+    private final Planet myPlanet;
 
     public LandingShuttle(Planet planet, int x, int y) {
         super(x, y);

@@ -19,7 +19,7 @@ import ru.game.aurora.world.World;
 public class BigMommyShotEffect extends BlasterShotEffect {
     private static final long serialVersionUID = 5526660301767290658L;
 
-    private transient Animation animation;
+    private final transient Animation animation;
 
     public BigMommyShotEffect(Positionable source, int targetScreenX, int targetScreenY, Camera camera, int moveSpeed) {
         super(source, targetScreenX, targetScreenY, camera, moveSpeed, "blaster_shot");

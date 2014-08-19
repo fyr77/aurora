@@ -24,7 +24,7 @@ import ru.game.aurora.world.World;
 public class SpaceHulk extends BaseGameObject {
     private static final long serialVersionUID = 2L;
 
-    private String name;
+    private final String name;
 
     // dialog that is shown to player when interacting with hulk
     private Dialog onInteractDialog;

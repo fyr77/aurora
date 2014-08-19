@@ -48,10 +48,7 @@ public class ItemWithTextAndImage implements Serializable, JsonConfigManager.Ent
 
         ItemWithTextAndImage that = (ItemWithTextAndImage) o;
 
-        if (drawable != null ? !drawable.equals(that.drawable) : that.drawable != null) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-
-        return true;
+        return !(drawable != null ? !drawable.equals(that.drawable) : that.drawable != null) && !(id != null ? !id.equals(that.id) : that.id != null);
     }
 
     @Override

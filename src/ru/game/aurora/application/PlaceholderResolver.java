@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * Replaces placeholders like ${id} with their values
  */
 public class PlaceholderResolver {
-    private static Pattern pattern = Pattern.compile("\\$\\{([\\w\\.]+)\\}");
+    private static final Pattern pattern = Pattern.compile("\\$\\{([\\w\\.]+)\\}");
 
     private static final Logger logger = LoggerFactory.getLogger(PlaceholderResolver.class);
 

@@ -23,7 +23,7 @@ import ru.game.aurora.world.World;
 
 
 public class StoryScreenController implements ScreenController {
-    private World world;
+    private final World world;
 
     private StoryScreen story;
 

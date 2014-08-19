@@ -30,11 +30,11 @@ public class ResearchState implements Serializable {
 
     private int idleScientists;
 
-    private List<ResearchProjectDesc> completedProjects = new ArrayList<>();
+    private final List<ResearchProjectDesc> completedProjects = new ArrayList<>();
 
-    private List<ResearchProjectState> currentProjects = new ArrayList<>();
+    private final List<ResearchProjectState> currentProjects = new ArrayList<>();
 
-    private Geodata geodata = new Geodata();
+    private final Geodata geodata = new Geodata();
 
     private int processedAstroData;
 

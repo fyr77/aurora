@@ -25,7 +25,7 @@ import java.util.Map;
 public class KliskMainDialogListener implements DialogListener {
     private static final long serialVersionUID = -2351530187782245878L;
 
-    private AlienRace kliskRace;
+    private final AlienRace kliskRace;
 
     public KliskMainDialogListener(AlienRace kliskRace) {
         this.kliskRace = kliskRace;

@@ -16,14 +16,12 @@ import java.util.Map;
 
 // draws tiles with beautiful borders between
 public class TileDrawer {
-    private final String tileName;
 
-    private Map<Integer, String> sprites = new HashMap<>();
+    private final Map<Integer, String> sprites = new HashMap<>();
 
-    private byte mySurfaceType;
+    private final byte mySurfaceType;
 
     public TileDrawer(String tileName, byte mySurfaceType) {
-        this.tileName = tileName;
         this.mySurfaceType = mySurfaceType;
 
         sprites.put(31, tileName + "_4");

@@ -56,7 +56,7 @@ public class Reputation implements Serializable
 
     private static final long serialVersionUID = 1L;
 
-    private Map<RepKey, Integer> entries = new HashMap<>();
+    private final Map<RepKey, Integer> entries = new HashMap<>();
 
     public static final int HOSTILE_REPUTATION = 0;
 

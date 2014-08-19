@@ -18,7 +18,7 @@ import java.util.List;
 public class StarSystemNamesCollection {
     private static final Logger logger = LoggerFactory.getLogger(StarSystemNamesCollection.class);
 
-    private List<String> names = new LinkedList<>();
+    private final List<String> names = new LinkedList<>();
 
     public StarSystemNamesCollection() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("star_names.txt")))) {

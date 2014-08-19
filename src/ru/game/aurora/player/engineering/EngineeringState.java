@@ -19,11 +19,11 @@ public class EngineeringState implements Serializable {
 
     private int idleEngineers;
 
-    private HullRepairs hullRepairs;
+    private final HullRepairs hullRepairs;
 
-    private List<EngineeringProject> projects = new LinkedList<>();
+    private final List<EngineeringProject> projects = new LinkedList<>();
 
-    private Set<String> completedProjectNames = new HashSet<>();
+    private final Set<String> completedProjectNames = new HashSet<>();
 
     public EngineeringState(int idleEngineers) {
         this.idleEngineers = idleEngineers;

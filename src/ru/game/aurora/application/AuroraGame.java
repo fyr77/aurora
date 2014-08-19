@@ -50,9 +50,9 @@ public class AuroraGame extends NiftyOverlayGame {
 
     private static AppGameContainer app;
 
-    private static Set<Updatable> updatables = new HashSet<>();
+    private static final Set<Updatable> updatables = new HashSet<>();
 
-    private static List<ResolutionChangeListener> resolutionChangeListeners = new ArrayList<>();
+    private static final List<ResolutionChangeListener> resolutionChangeListeners = new ArrayList<>();
 
     /*
     Used for debugging purposes, this set of global variables is added to world state when it is loaded/created

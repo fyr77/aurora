@@ -19,11 +19,11 @@ public class RnDSet implements Serializable {
 
     private static final long serialVersionUID = 1;
 
-    private Map<String, ResearchProjectDesc> researchProjects = new HashMap<>();
+    private final Map<String, ResearchProjectDesc> researchProjects = new HashMap<>();
 
-    private Map<String, EarthResearch> earthResearchProjects = new HashMap<>();
+    private final Map<String, EarthResearch> earthResearchProjects = new HashMap<>();
 
-    private Map<String, EngineeringProject> engineeringProjects = new HashMap<>();
+    private final Map<String, EngineeringProject> engineeringProjects = new HashMap<>();
 
     public RnDSet() {
         JsonConfigManager<BaseResearchWithFixedProgress> rp = new JsonConfigManager<>(BaseResearchWithFixedProgress.class, "resources/items/research");

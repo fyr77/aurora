@@ -24,9 +24,9 @@ import java.util.List;
 
 public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyMapObject {
     private static final long serialVersionUID = 1L;
-    protected StarSystem owner;
-    protected PlanetCategory category;
-    protected PlanetAtmosphere atmosphere;
+    protected final StarSystem owner;
+    protected final PlanetCategory category;
+    protected final PlanetAtmosphere atmosphere;
     /**
      * If planet has rings, this value is non-zero index of rings sprite
      */
@@ -35,7 +35,7 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
      * Planet size type. 1 is largest, 4 is smallest.
      * Planet image size on global map and dimensions of planet surface depends on it.
      */
-    protected int size;
+    protected final int size;
 
     protected List<BasePlanet> satellites;
 

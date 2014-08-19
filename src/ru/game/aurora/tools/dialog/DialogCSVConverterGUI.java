@@ -43,9 +43,9 @@ public class DialogCSVConverterGUI extends JFrame implements ActionListener {
 
     private static final String PREV_IMAGE_KEY = "prevImage";
 
-    private transient Preferences prefs = Preferences.userNodeForPackage(DialogCSVConverterGUI.class);
+    private final transient Preferences prefs = Preferences.userNodeForPackage(DialogCSVConverterGUI.class);
 
-    private ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    private final transient ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
     public DialogCSVConverterGUI() throws FileNotFoundException {
         super("Aurora dialog converter");

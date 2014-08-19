@@ -12,7 +12,7 @@ public class ResearchProjectState implements Serializable {
 
     private static final long serialVersionUID = 6821542618978499031L;
 
-    public ResearchProjectDesc desc;
+    public final ResearchProjectDesc desc;
 
     public int scientists;
 

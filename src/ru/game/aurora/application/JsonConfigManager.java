@@ -26,11 +26,11 @@ public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
         public String getId();
     }
 
-    private Class<T> entityClass;
+    private final Class<T> entityClass;
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
-    private Map<String, T> entities = new HashMap<>();
+    private final Map<String, T> entities = new HashMap<>();
 
     public JsonConfigManager(Class<T> eClass, String resourceFolder) {
         this.entityClass = eClass;

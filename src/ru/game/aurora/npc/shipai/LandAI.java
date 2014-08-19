@@ -20,7 +20,7 @@ public class LandAI implements NPCShipAI
 {
     private static final long serialVersionUID = 1;
 
-    private Positionable target;
+    private final Positionable target;
 
     private boolean hasLanded = false;
 

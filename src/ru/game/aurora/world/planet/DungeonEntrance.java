@@ -21,11 +21,11 @@ import ru.game.aurora.world.World;
 public class DungeonEntrance extends BaseGameObject {
     private static final long serialVersionUID = 2L;
 
-    private String sprite;
+    private final String sprite;
 
-    private Dungeon dungeon;
+    private final Dungeon dungeon;
 
-    private Planet myPlanet;
+    private final Planet myPlanet;
 
     private boolean canBeEntered = true;
 

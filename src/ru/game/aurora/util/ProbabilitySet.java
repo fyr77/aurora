@@ -14,9 +14,9 @@ import java.util.*;
 public class ProbabilitySet<T> extends AbstractMap<T, Double> implements Serializable {
 
     @SuppressWarnings({"NonSerializableFieldInSerializableClass"})
-    private Map<T, Double> entries = new HashMap<>();
+    private final Map<T, Double> entries = new HashMap<>();
 
-    private Random random;
+    private final Random random;
 
     private static final long serialVersionUID = -2548275137421202393L;
 

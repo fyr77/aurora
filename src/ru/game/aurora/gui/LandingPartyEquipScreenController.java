@@ -31,9 +31,9 @@ import ru.game.aurora.world.planet.LandingParty;
 public class LandingPartyEquipScreenController implements ScreenController {
 
     // used in rendering warning text
-    private Color redColor = new Color(200, 0, 0, 255);
+    private final Color redColor = new Color(200, 0, 0, 255);
 
-    private World world;
+    private final World world;
 
     // copy of a players landing party
     // if player closes the screen using 'ok' button, original landing party is replaced by this object,

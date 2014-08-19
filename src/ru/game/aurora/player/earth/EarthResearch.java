@@ -18,7 +18,7 @@ public abstract class EarthResearch extends GameEventListener {
 
     protected boolean completed = false;
 
-    protected String id;
+    protected final String id;
 
     public EarthResearch(String id, int length) {
         this.id = id;

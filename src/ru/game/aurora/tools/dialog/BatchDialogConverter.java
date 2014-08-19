@@ -16,9 +16,9 @@ import java.io.*;
 // csv format is
 // input file name;id;portrait;output dir relative to output root
 public class BatchDialogConverter {
-    private File outputRoot;
+    private final File outputRoot;
 
-    private File outputLocalizationRoot;
+    private final File outputLocalizationRoot;
 
     private static final Logger logger = LoggerFactory.getLogger(BatchDialogConverter.class);
 

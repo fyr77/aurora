@@ -56,7 +56,7 @@ public class Planet extends BasePlanet implements IDungeon {
 
     private DungeonController controller;
 
-    private World world;
+    private final World world;
 
     // total amount of all tiles explored on this planet
     private int exploredTiles = 0;
