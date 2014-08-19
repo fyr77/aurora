@@ -11,10 +11,7 @@ import de.lessvoid.nifty.slick2d.NiftyOverlayGame;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.openal.SoundStore;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
@@ -339,6 +336,9 @@ public class AuroraGame extends NiftyOverlayGame {
             app.setIcons(new String[]{"sprites/icons/icon_32.png", "sprites/icons/icon_16.png"});
             tilesX = res.getTilesX();
             tilesY = res.getTilesY();
+
+            SaveGameManager.init();
+
             app.start();
         } catch (Exception ex) {
             logger.error("Failed to init game: ", ex);
@@ -348,5 +348,12 @@ public class AuroraGame extends NiftyOverlayGame {
 
     public static long getLastFrameTime() {
         return lastFrameTime;
+    }
+
+    public static Image takeScreenshot() throws SlickException, IOException {
+        Image img = new Image(app.getWidth(), app.getHeight());
+        app.getGraphics().copyArea(img, 0, 0);
+        return img;
+
     }
 }

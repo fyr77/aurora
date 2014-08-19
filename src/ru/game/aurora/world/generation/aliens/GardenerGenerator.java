@@ -21,7 +21,7 @@ public class GardenerGenerator implements WorldGeneratorPart {
 
     @Override
     public void updateWorld(World world) {
-        final Dialog dialog = Dialog.loadFromFile("dialogs/gardener_default_dialog.json");
+        final Dialog dialog = Dialog.loadFromFile("dialogs/gardener_1.json");
 
         AlienRace gardenerRace = new AlienRace(NAME, "gardener_ship", dialog);
 

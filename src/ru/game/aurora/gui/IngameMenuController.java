@@ -47,7 +47,7 @@ public class IngameMenuController implements Controller {
 
     public void saveGame() {
         continueGame();
-        SaveGameManager.saveGame(GUI.getInstance().getWorldInstance());
+        SaveGameManager.saveGame(SaveGameManager.getAutosaveSlot(), GUI.getInstance().getWorldInstance());
         GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.game_saved"));
     }
 

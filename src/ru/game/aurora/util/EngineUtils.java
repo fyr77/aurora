@@ -209,6 +209,23 @@ public class EngineUtils {
         return new Image(ib);
     }
 
+    public static BufferedImage convertToBufferedImage(Image im)
+    {
+        final int width = im.getWidth();
+        final int height = im.getHeight();
+
+        BufferedImage rz = new BufferedImage(width, im.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
+                Color c = im.getColor(x, y);
+
+                rz.setRGB(x, y, (c.getBlue() << 16) | (c.getGreen() << 8) | c.getRed());
+            }
+        }
+
+        return rz;
+    }
+
     public static void resetScrollbarX(ListBox listBox) {
         ScrollbarControl sc = listBox.getElement().findControl("#horizontal-scrollbar", ScrollbarControl.class);
         if (sc != null) {
