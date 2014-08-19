@@ -9,6 +9,7 @@ package ru.game.aurora.player.engineering;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.player.EarthCountry;
 import ru.game.aurora.world.World;
@@ -22,7 +23,7 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
     private boolean projectStarted = false;
 
     public EngineeringProject(String id, String icon, int length) {
-        super(id, icon);
+        super(id, new Drawable(icon));
         remainingProgress = length;
     }
 

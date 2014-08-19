@@ -162,7 +162,7 @@ public class EngineeringScreenController implements ScreenController {
             }
         }
         tr.setText(info);
-        imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(ep.getIcon()))));
+        imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ep.getDrawable().getImage())));
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
 

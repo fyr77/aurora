@@ -6,11 +6,13 @@
  */
 package ru.game.aurora.common;
 
+import ru.game.aurora.application.JsonConfigManager;
 import ru.game.aurora.application.Localization;
 
 import java.io.Serializable;
 
-public class ItemWithTextAndImage implements Serializable {
+public class ItemWithTextAndImage implements Serializable, JsonConfigManager.EntityWithId
+{
     private static final long serialVersionUID = 1L;
 
     protected final String id;
@@ -26,6 +28,7 @@ public class ItemWithTextAndImage implements Serializable {
         return drawable;
     }
 
+    @Override
     public String getId() {
         return id;
     }

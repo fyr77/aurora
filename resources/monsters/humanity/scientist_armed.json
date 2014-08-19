@@ -1,0 +1,12 @@
+{
+    "id": "scientist_armed",
+    "hp": 3,
+    "drawable": {
+        "id": "humanity_tileset",
+        "tx": 2,
+        "ty": 9
+    },
+    "turnsBetweenMoves": 2,
+    "weaponId": "assault",
+    "behaviour": "FRIENDLY"
+}

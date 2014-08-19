@@ -1,6 +1,7 @@
 package ru.game.aurora.player.engineering;
 
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
@@ -17,7 +18,7 @@ public abstract class ShipUpgrade extends ItemWithTextAndImage {
     private static final long serialVersionUID = 5654574535197600236L;
 
     public ShipUpgrade(String id, String icon, String localizationGroup) {
-        super(id, icon);
+        super(id, new Drawable(icon));
         this.localizationGroup = localizationGroup;
     }
 

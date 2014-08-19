@@ -29,9 +29,9 @@ public class MonsterDesc extends ItemWithTextAndImage {
 
     private transient Image deadImage;
 
-    private boolean canBePickedUp;
+    public boolean canBePickedUp;
 
-    private MonsterBehaviour behaviour;
+    public MonsterBehaviour behaviour;
 
     public MonsterDesc(String id, Drawable drawable) {
         super(id, drawable);

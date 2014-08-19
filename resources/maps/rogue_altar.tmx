@@ -30,37 +30,22 @@
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="640" y="576" width="64" height="64">
    <properties>
     <property name="behaviour" value="PASSIVE"/>
-    <property name="hp" value="5"/>
-    <property name="image" value="rogues_tileset"/>
-    <property name="imageTileX" value="3"/>
-    <property name="imageTileY" value="0"/>
-    <property name="speed" value="2"/>
+    <property name="id" value="plasma_drone"/>
     <property name="tags" value="guard"/>
-    <property name="weapon" value="plasma"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="384" y="576" width="64" height="64">
    <properties>
     <property name="behaviour" value="PASSIVE"/>
-    <property name="hp" value="5"/>
-    <property name="image" value="rogues_tileset"/>
-    <property name="imageTileX" value="3"/>
-    <property name="imageTileY" value="0"/>
-    <property name="speed" value="2"/>
+    <property name="id" value="plasma_drone"/>
     <property name="tags" value="guard"/>
-    <property name="weapon" value="plasma"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="29" x="640" y="192" width="64" height="64">
    <properties>
     <property name="behaviour" value="PASSIVE"/>
-    <property name="hp" value="5"/>
-    <property name="image" value="rogues_tileset"/>
-    <property name="imageTileX" value="0"/>
-    <property name="imageTileY" value="7"/>
-    <property name="speed" value="1"/>
+    <property name="id" value="melee_drone"/>
     <property name="tags" value="guard"/>
-    <property name="weapon" value="melee"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonButton" gid="25" x="896" y="128" width="64" height="64">
@@ -80,37 +65,22 @@
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="896" y="321" width="64" height="64">
    <properties>
     <property name="behaviour" value="PASSIVE"/>
-    <property name="hp" value="5"/>
-    <property name="image" value="rogues_tileset"/>
-    <property name="imageTileX" value="3"/>
-    <property name="imageTileY" value="0"/>
-    <property name="speed" value="2"/>
+    <property name="id" value="plasma_drone"/>
     <property name="tags" value="guard"/>
-    <property name="weapon" value="plasma"/>
    </properties>
   </object>
   <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="4" x="260" y="320" width="64" height="64">
    <properties>
     <property name="behaviour" value="PASSIVE"/>
-    <property name="hp" value="5"/>
-    <property name="image" value="rogues_tileset"/>
-    <property name="imageTileX" value="3"/>
-    <property name="imageTileY" value="0"/>
-    <property name="speed" value="2"/>
+    <property name="id" value="plasma_drone"/>
     <property name="tags" value="guard"/>
-    <property name="weapon" value="plasma"/>
    </properties>
   </object>
   <object name="rogue" type="ru.game.aurora.world.generation.quest.EarthInvasionGenerator$RogueAltarWorker" gid="33" x="832" y="128" width="64" height="64">
    <properties>
     <property name="behaviour" value="PASSIVE"/>
-    <property name="hp" value="10"/>
-    <property name="image" value="rogues_tileset"/>
-    <property name="imageTileX" value="0"/>
-    <property name="imageTileY" value="8"/>
-    <property name="speed" value="2"/>
+    <property name="id" value="rogue_worker"/>
     <property name="tags" value="guard"/>
-    <property name="weapon" value="plasma"/>
    </properties>
   </object>
  </objectgroup>

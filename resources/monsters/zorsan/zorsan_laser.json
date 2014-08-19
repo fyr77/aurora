@@ -1,0 +1,12 @@
+{
+    "id": "zorsan_laser",
+    "hp": 7,
+    "drawable": {
+        "id": "zorsna_tileset",
+        "tx": 3,
+        "ty": 0
+    },
+    "turnsBetweenMoves": 2,
+    "weaponId": "zorsan_laser",
+    "behaviour": "AGGRESSIVE"
+}

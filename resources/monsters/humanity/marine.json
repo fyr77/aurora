@@ -1,0 +1,12 @@
+{
+    "id": "marine",
+    "hp": 6,
+    "drawable": {
+        "id": "humanity_tileset",
+        "tx": 1,
+        "ty": 9
+    },
+    "turnsBetweenMoves": 2,
+    "weaponId": "assault",
+    "behaviour": "FRIENDLY"
+}

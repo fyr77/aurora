@@ -10,6 +10,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.planet.MonsterBehaviour;
+import ru.game.aurora.world.planet.MonsterDesc;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -24,29 +25,24 @@ import java.util.Set;
 public class DungeonMonster extends DungeonObject implements IMonster {
     private static final long serialVersionUID = 3L;
 
-    private LandingPartyWeapon weapon;
-
     private Set<String> tags = null;
 
-    private int speed;
-
     private int hp;
-
-    private final int maxHp;
-
-    private MonsterBehaviour behaviour;
 
     private MonsterController controller;
 
     private ITileMap owner;
 
+    private MonsterDesc desc;
+
+    private MonsterBehaviour behaviour;
+
     public DungeonMonster(AuroraTiledMap map, int groupId, int objectId) {
         super(map, groupId, objectId);
         owner = map;
-        weapon = ResourceManager.getInstance().getLandingPartyWeapons().getEntity(map.getMap().getObjectProperty(groupId, objectId, "weapon", null));
-        speed = Integer.parseInt(map.getMap().getObjectProperty(groupId, objectId, "speed", "0"));
-        maxHp = hp = Integer.parseInt(map.getMap().getObjectProperty(groupId, objectId, "hp", "1"));
-        behaviour = MonsterBehaviour.valueOf(map.getMap().getObjectProperty(groupId, objectId, "behaviour", "AGGRESSIVE"));
+        // overrider behaviour set in desc,
+        desc = ResourceManager.getInstance().getMonsterDescs().getEntity(map.getMap().getObjectProperty(groupId, objectId, "id", null));
+        behaviour = MonsterBehaviour.valueOf(map.getMap().getObjectProperty(groupId, objectId, "behaviour", desc.behaviour.name()));
         final String tagsString = map.getMap().getObjectProperty(groupId, objectId, "tags", null);
         if (tagsString != null) {
             tags = new HashSet<>();
@@ -104,12 +100,12 @@ public class DungeonMonster extends DungeonObject implements IMonster {
 
     @Override
     public int getSpeed() {
-        return speed;
+        return desc.turnsBetweenMoves;
     }
 
     @Override
     public LandingPartyWeapon getWeapon() {
-        return weapon;
+        return ResourceManager.getInstance().getLandingPartyWeapons().getEntity(desc.weaponId);
     }
 
     public MonsterBehaviour getBehaviour() {
@@ -129,7 +125,7 @@ public class DungeonMonster extends DungeonObject implements IMonster {
         } else {
             hpText = "N/A";
         }
-        if (hp < maxHp / 4) {
+        if (hp < desc.hp / 4) {
             graphics.setColor(Color.red);
         } else {
             graphics.setColor(Color.white);

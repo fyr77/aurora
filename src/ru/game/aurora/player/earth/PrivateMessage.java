@@ -7,6 +7,7 @@
 
 package ru.game.aurora.player.earth;
 
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
 
 public class PrivateMessage extends ItemWithTextAndImage {
@@ -15,7 +16,7 @@ public class PrivateMessage extends ItemWithTextAndImage {
     private boolean isRead;
 
     public PrivateMessage(String id, String icon) {
-        super(id, icon);
+        super(id, new Drawable(icon));
     }
 
     public boolean isRead() {

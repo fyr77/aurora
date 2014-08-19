@@ -118,7 +118,7 @@ public class EarthScreenController implements ScreenController {
             ShipUpgrade su = selected.get(0);
             EngineUtils.setTextForGUIElement(upgradeText, su.getLocalizedDescription());
             EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), su.getLocalizedName(su.getLocalizationGroup()));
-            EngineUtils.setImageForGUIElement(upgradeImage, su.getIcon());
+            EngineUtils.setImageForGUIElement(upgradeImage, su.getDrawable().getImage());
         } else {
             EngineUtils.setTextForGUIElement(upgradeText, "");
             EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), "");
@@ -186,7 +186,7 @@ public class EarthScreenController implements ScreenController {
             ShipUpgrade su = (ShipUpgrade) event.getSelection().get(0);
             EngineUtils.setTextForGUIElement(upgradeText, su.getLocalizedDescription());
             EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), su.getLocalizedName(su.getLocalizationGroup()));
-            EngineUtils.setImageForGUIElement(upgradeImage, su.getIcon());
+            EngineUtils.setImageForGUIElement(upgradeImage, su.getDrawable().getImage());
             return;
         }
 
@@ -202,7 +202,7 @@ public class EarthScreenController implements ScreenController {
             }
             PrivateMessage pm = (PrivateMessage) event.getSelection().get(0);
             tr.setText(pm.getLocalizedText("private_messages"));
-            imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(pm.getIcon()))));
+            imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(pm.getDrawable().getImage())));
             messagesList.layoutElements();
         }
 

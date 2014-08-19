@@ -1,12 +1,12 @@
 {
-    id: "plasma_drone",
-    hp: 12,
-    drawable: {
-        id: "rogues_tileset",
-        tx: 3,
-        ty: 0
+    "id": "plasma_drone",
+    "hp": 12,
+    "drawable": {
+        "id": "rogues_tileset",
+        "tx": 3,
+        "ty": 0
     },
-    turnsBetweenMoves: 3,
-    weaponId: "plasma",
-    behaviour: "AGGRESSIVE"
+    "turnsBetweenMoves": 3,
+    "weaponId": "plasma",
+    "behaviour": "AGGRESSIVE"
 }

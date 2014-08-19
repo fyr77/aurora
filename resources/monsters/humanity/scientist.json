@@ -1,0 +1,11 @@
+{
+    "id": "scientist",
+    "hp": 3,
+    "drawable": {
+        "id": "humanity_tileset",
+        "tx": 2,
+        "ty": 6
+    },
+    "turnsBetweenMoves": 2,
+    "behaviour": "FRIENDLY"
+}

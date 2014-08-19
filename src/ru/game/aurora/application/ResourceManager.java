@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 import ru.game.aurora.music.Playlist;
 import ru.game.aurora.world.equip.LandingPartyWeapon;
 import ru.game.aurora.world.equip.StarshipWeaponDesc;
+import ru.game.aurora.world.planet.MonsterDesc;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -46,6 +47,8 @@ public class ResourceManager {
     private JsonConfigManager<StarshipWeaponDesc> weapons = new JsonConfigManager<>(StarshipWeaponDesc.class, "resources/items/starship_weapons");
 
     private JsonConfigManager<LandingPartyWeapon> landingPartyWeapons = new JsonConfigManager<>(LandingPartyWeapon.class, "resources/items/crew_weapons");
+
+    private JsonConfigManager<MonsterDesc> monsterDescs= new JsonConfigManager<>(MonsterDesc.class, "resources/monsters");
 
     private static final Logger logger = LoggerFactory.getLogger(ResourceManager.class);
 
@@ -368,5 +371,9 @@ public class ResourceManager {
 
     public JsonConfigManager<LandingPartyWeapon> getLandingPartyWeapons() {
         return landingPartyWeapons;
+    }
+
+    public JsonConfigManager<MonsterDesc> getMonsterDescs() {
+        return monsterDescs;
     }
 }
