@@ -173,21 +173,36 @@ public class AuroraGame extends NiftyOverlayGame {
         nifty.loadControlFile("nifty-default-controls.xml");
     }
 
+    public static void onGameLoaded(World loaded) {
+        if (world != null) {
+            resolutionChangeListeners.remove(world);
+        }
+        world = loaded;
+        resolutionChangeListeners.add(world);
+        mainMenu = null;
+        if (debugWorldVariables != null) {
+            logger.warn("Adding debug variables");
+            for (Map.Entry<Object, Object> e : debugWorldVariables.entrySet()) {
+                world.getGlobalVariables().put((String) e.getKey(), (Serializable) e.getValue());
+            }
+
+        }
+
+        GUI.getInstance().onWorldLoaded(app, world);
+        world.getCurrentRoom().returnTo(world);
+    }
+
+    public static boolean isGameRunning() {
+        return world != null;
+    }
+
     @Override
     protected void updateGame(GameContainer gameContainer, int i) throws SlickException {
         try {
             if (mainMenu != null) {
-                world = mainMenu.update(camera, gameContainer);
-                if (world != null) {
-                    resolutionChangeListeners.add(world);
-                    mainMenu = null;
-                    if (debugWorldVariables != null) {
-                        logger.warn("Adding debug variables");
-                        for (Map.Entry<Object, Object> e : debugWorldVariables.entrySet()) {
-                            world.getGlobalVariables().put((String) e.getKey(), (Serializable) e.getValue());
-                        }
-
-                    }
+                World loadedWorld = mainMenu.update(camera, gameContainer);
+                if (loadedWorld != null) {
+                    onGameLoaded(loadedWorld);
                 }
             } else {
                 world.update(gameContainer);
@@ -352,8 +367,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
     public static Image takeScreenshot() throws SlickException, IOException {
         Image img = new Image(app.getWidth(), app.getHeight());
-        app.getGraphics().copyArea(img, 0, 0);
+        world.draw(app, img.getGraphics());
         return img;
-
     }
 }

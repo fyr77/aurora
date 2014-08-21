@@ -63,7 +63,7 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
 
     // these methods are specified in screen xml description and called using reflection
     public void loadGame() {
-        final Nifty nifty = GUI.getInstance().getNifty();
+        /*final Nifty nifty = GUI.getInstance().getNifty();
         loadedState = SaveGameManager.loadGame(SaveGameManager.getAutosaveSlot());
         if (loadedState == null) {
             Element popup = nifty.createPopup("load_failed");
@@ -72,7 +72,9 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
         }
         loadedState.gameLoaded();
         GUI.getInstance().onWorldLoaded(container, loadedState);
-        loadedState.getCurrentRoom().returnTo(loadedState);
+        loadedState.getCurrentRoom().returnTo(loadedState);*/
+        GUI.getInstance().pushCurrentScreen();
+        GUI.getInstance().getNifty().gotoScreen("saveload_screen");
     }
 
     public void newGame() {

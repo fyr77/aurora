@@ -14,7 +14,7 @@ import ru.game.aurora.world.ScanGroup;
 import ru.game.aurora.world.World;
 
 public class OreDeposit extends BaseGameObject {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     public static class OreUnit implements InventoryItem {
         private static final long serialVersionUID = -5597582503966190176L;
@@ -108,12 +108,8 @@ public class OreDeposit extends BaseGameObject {
 
     private int amount;
 
-    private final Planet myPlanet;
-
-
     public OreDeposit(Planet myPlanet, int x, int y, OreType type, int amount) {
-        super(x, y);
-        this.myPlanet = myPlanet;
+        super(x, y, type.getSpriteName());
         this.currentMiningProgress = type.getMineTime();
         this.type = type;
         this.amount = amount;

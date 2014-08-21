@@ -17,7 +17,7 @@ public class LandingShuttle extends BaseGameObject {
     private final Planet myPlanet;
 
     public LandingShuttle(Planet planet, int x, int y) {
-        super(x, y);
+        super(x, y, "shuttle");
         this.myPlanet = planet;
     }
 

@@ -9,10 +9,7 @@ package ru.game.aurora.world.generation;
 import org.newdawn.slick.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.GlobalThreadPool;
-import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.*;
 import ru.game.aurora.npc.AlienRaceFirstCommunicationListener;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.CrewChangeListener;
@@ -259,6 +256,8 @@ public class WorldGenerator implements Runnable {
         journal.addQuest(new JournalEntry("last_beacon", "start"));
 
         world.addListener(new EarthUpgradeUnlocker());
+
+        world.addListener(new SaveGameManager.Autosaver());
     }
 
     // perform some fast initialization in gui thread

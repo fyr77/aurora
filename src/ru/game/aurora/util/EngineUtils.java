@@ -209,8 +209,7 @@ public class EngineUtils {
         return new Image(ib);
     }
 
-    public static BufferedImage convertToBufferedImage(Image im)
-    {
+    public static BufferedImage convertToBufferedImage(Image im) {
         final int width = im.getWidth();
         final int height = im.getHeight();
 
@@ -219,7 +218,7 @@ public class EngineUtils {
             for (int y = 0; y < height; ++y) {
                 Color c = im.getColor(x, y);
 
-                rz.setRGB(x, y, (c.getBlue() << 16) | (c.getGreen() << 8) | c.getRed());
+                rz.setRGB(x, y, (c.getRed() << 16) | (c.getGreen() << 8) | c.getBlue());
             }
         }
 

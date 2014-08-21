@@ -8,11 +8,14 @@ package ru.game.aurora.application;
 import org.newdawn.slick.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.game.aurora.gui.GUI;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.space.GalaxyMap;
+import ru.game.aurora.world.space.StarSystem;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Date;
@@ -20,13 +23,23 @@ import java.util.Date;
 public class SaveGameManager {
     private static final Logger logger = LoggerFactory.getLogger(SaveGameManager.class);
 
-    private static final int SLOTS = 5;
+    private static final int SLOTS = 4;
 
-    private static final int SCREEN_SIZE = 128;
+    public static final int SCREEN_SIZE = 128;
 
     private static SaveGameSlot[] slots = new SaveGameSlot[SLOTS];
 
     private static SaveGameSlot autosaveSlot;
+
+    public static class Autosaver extends GameEventListener {
+        private static final long serialVersionUID = -5194873367259385934L;
+
+        @Override
+        public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
+            SaveGameManager.saveGame(SaveGameManager.autosaveSlot, world);
+            return false;
+        }
+    }
 
     public static final class SaveGameSlot implements Serializable
     {
@@ -36,9 +49,17 @@ public class SaveGameManager {
 
         public Date date;
 
+        public String gameDate;
+
+        public String gameLocation;
+
         public byte[] screenshot;
 
         public byte[] saveData;
+
+        public boolean isAutosave = false;
+
+        private transient Image screenshotImage;
 
         public SaveGameSlot(String fileName) {
             this.fileName = fileName;
@@ -49,6 +70,23 @@ public class SaveGameManager {
             return saveData != null;
         }
 
+        public Image getScreenshot() {
+            if (screenshotImage == null) {
+                if (screenshot == null) {
+                    screenshotImage = ResourceManager.getInstance().getImage("no_image");
+                } else {
+
+                    try {
+                        BufferedImage read = ImageIO.read(new ByteArrayInputStream(screenshot));
+                        screenshotImage = EngineUtils.createImage(read);
+                    } catch (IOException e) {
+                        logger.error("Failed to read image", e);
+                        screenshotImage = ResourceManager.getInstance().getImage("no_image");
+                    }
+                }
+            }
+            return screenshotImage;
+        }
     }
 
     public static void init() throws IOException {
@@ -85,6 +123,7 @@ public class SaveGameManager {
             ois.close();
         } else {
             autosaveSlot = new SaveGameSlot(autosaveFileName);
+            autosaveSlot.isAutosave = true;
         }
 
     }
@@ -93,19 +132,26 @@ public class SaveGameManager {
         try {
 
             // take a screenshot
-            GUI.getInstance().pushCurrentScreen();
-            GUI.getInstance().getNifty().gotoScreen("empty_screen");
+
+            if (world.getCurrentStarSystem() != null) {
+                slot.gameLocation = world.getCurrentStarSystem().getName();
+            } else if (world.getCurrentRoom().getClass().equals(GalaxyMap.class)) {
+                slot.gameLocation = Localization.getText("gui", "space.galaxy_map");
+            }
+
+            slot.gameDate = world.getCurrentDateString();
             Image screen = AuroraGame.takeScreenshot();
-            GUI.getInstance().popAndSetScreen();
 
-            Image scaled = screen.getScaledCopy(SCREEN_SIZE, SCREEN_SIZE);
-            screen.destroy();
-            BufferedImage bi = EngineUtils.convertToBufferedImage(scaled);
-            scaled.destroy();
-
+            BufferedImage bi = EngineUtils.convertToBufferedImage(screen);
+            BufferedImage resizedImage = new BufferedImage(SCREEN_SIZE, SCREEN_SIZE, BufferedImage.TYPE_3BYTE_BGR);
+            Graphics2D g = resizedImage.createGraphics();
+            g.drawImage(bi, 0, 0, SCREEN_SIZE, SCREEN_SIZE, null);
+            g.dispose();
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ImageIO.write(bi, "JPG", bos);
+            ImageIO.write(resizedImage, "JPG", bos);
             slot.screenshot = bos.toByteArray();
+            screen.destroy();
+            slot.screenshotImage = EngineUtils.createImage(resizedImage);
 
             bos.reset();
             ObjectOutputStream oos = new ObjectOutputStream(bos);
