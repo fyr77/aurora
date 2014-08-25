@@ -92,7 +92,7 @@ public class DungeonController extends Listenable implements Serializable {
     private void updateMove(GameContainer container, World world) {
         if (landingParty.nowMoving()) {
             landingParty.update(container, world);
-            if (isWrap) {
+            if (!landingParty.nowMoving() && isWrap) {
                 landingParty.setPos(EngineUtils.wrap(landingParty.getX(), map.getWidthInTiles()), EngineUtils.wrap(landingParty.getY(), map.getHeightInTiles()));
             }
             return;
