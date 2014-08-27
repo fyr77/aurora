@@ -15,6 +15,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
 import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
@@ -24,9 +25,7 @@ import ru.game.aurora.world.equip.StarshipWeapon;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.StarSystem;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Ship extends BaseGameObject {
 
@@ -34,7 +33,7 @@ public class Ship extends BaseGameObject {
     public static final int BASE_ENGINEERS = 5;
     public static final int BASE_MILITARY = 5;
 
-    private static final long serialVersionUID = 2;
+    private static final long serialVersionUID = 3;
 
     private int hull;
 
@@ -60,6 +59,8 @@ public class Ship extends BaseGameObject {
 
     private final List<ShipUpgrade> upgrades = new ArrayList<>();
 
+    private Map<String, CrewMember> crewMembers = new HashMap<>();
+
     private int freeSpace;
 
     public Ship(AlienRace humanity, int x, int y) {
@@ -75,11 +76,28 @@ public class Ship extends BaseGameObject {
 
     }
 
+    public void addCrewMember(World world, CrewMember member) {
+        crewMembers.put(member.getId(), member);
+        member.onAdded(world);
+    }
+
+    public void removeCrewMember(World world, String id) {
+        CrewMember cm = crewMembers.remove(id);
+        if (cm != null) {
+            cm.onRemoved(world);
+        }
+    }
+
+    public Map<String, CrewMember> getCrewMembers() {
+        return crewMembers;
+    }
+
     public void installInitialUpgrades(World world) {
         addUpgrade(world, new LabUpgrade());
         addUpgrade(world, new BarracksUpgrade());
         addUpgrade(world, new WorkshopUpgrade());
         addUpgrade(world, new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon")));
+
         refillCrew(world);
     }
 
