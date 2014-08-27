@@ -13,6 +13,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.CrewMember;
@@ -97,6 +98,10 @@ public class Ship extends BaseGameObject {
         addUpgrade(world, new BarracksUpgrade());
         addUpgrade(world, new WorkshopUpgrade());
         addUpgrade(world, new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon")));
+
+        addCrewMember(world, new CrewMember("henry", "marine_dialog", Dialog.loadFromFile("dialogs/tutorials/marine_intro.json")));
+        addCrewMember(world, new CrewMember("gordon", "scientist_dialog", Dialog.loadFromFile("dialogs/tutorials/scientist_intro.json")));
+        addCrewMember(world, new CrewMember("sarah", "engineer_dialog", Dialog.loadFromFile("dialogs/tutorials/engineer_intro.json")));
 
         refillCrew(world);
     }

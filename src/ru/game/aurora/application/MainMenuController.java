@@ -63,16 +63,6 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
 
     // these methods are specified in screen xml description and called using reflection
     public void loadGame() {
-        /*final Nifty nifty = GUI.getInstance().getNifty();
-        loadedState = SaveGameManager.loadGame(SaveGameManager.getAutosaveSlot());
-        if (loadedState == null) {
-            Element popup = nifty.createPopup("load_failed");
-            nifty.showPopup(nifty.getScreen("main_menu"), popup.getId(), null);
-            return;
-        }
-        loadedState.gameLoaded();
-        GUI.getInstance().onWorldLoaded(container, loadedState);
-        loadedState.getCurrentRoom().returnTo(loadedState);*/
         GUI.getInstance().pushCurrentScreen();
         GUI.getInstance().getNifty().gotoScreen("saveload_screen");
     }
@@ -275,13 +265,12 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
     @Override
     public void onStartScreen() {
         background = new MainMenuBackground(AuroraGame.tilesX * AuroraGame.tileSize, AuroraGame.tilesY * AuroraGame.tileSize);
-        boolean saveAvailable = SaveGameManager.getAutosaveSlot().isLoaded();
 
         final Element loadGameButton = GUI.getInstance().getNifty().getCurrentScreen().findElementByName("panel").findElementByName("continue_game_button");
-        if (!saveAvailable) {
-            loadGameButton.disable();
-        } else {
+        if (SaveGameManager.hasSaves()) {
             loadGameButton.enable();
+        } else {
+            loadGameButton.disable();
         }
     }
 

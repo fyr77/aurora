@@ -37,7 +37,7 @@
                 <panel width="*"/>
                 <panel width="216px" childLayout="vertical">
                     <panel height="*"/>
-                    <panel height="290px" childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
+                    <panel height="340px" childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
                            padding="20,20,20,20" imageMode="resize:74,100,100,96,74,100,100,68,74,100,100,85">
                         <control id="research_button" name="button" label="${gui.space.research}" width="90%"
                                  height="50px">
@@ -46,6 +46,10 @@
                         <control id="engineering_button" name="button" label="${gui.space.engineering}" width="90%"
                                  height="50px">
                             <interact onRelease="openEngineeringScreen()"/>
+                        </control>
+                        <control id="ship_button" name="button" label="${gui.ship.title}" width="90%"
+                                 height="50px">
+                            <interact onRelease="openShipScreen()"/>
                         </control>
                         <control id="journal_button" name="button" label="${gui.journal.title}"
                                  width="90%"
@@ -122,7 +126,7 @@
                 <panel width="*"/>
                 <panel width="216px" childLayout="vertical">
                     <panel height="*"/>
-                    <panel height="290px" childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
+                    <panel height="340px" childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
                            padding="20,20,20,20" imageMode="resize:74,100,100,96,74,100,100,68,74,100,100,85">
                         <control id="research_button" name="button" label="${gui.space.research}" width="90%"
                                  height="50px">
@@ -139,6 +143,10 @@
                                 <onHover name="custom-hint" targetElement="hint-panel"
                                          hintText="${hints.space.engineering}"/>
                             </effect>
+                        </control>
+                        <control id="ship_button" name="button" label="${gui.ship.title}" width="90%"
+                                 height="50px">
+                            <interact onRelease="openShipScreen()"/>
                         </control>
                         <control id="journal_button" name="button" label="${gui.journal.title}"
                                  width="90%"

@@ -89,6 +89,20 @@ public class SaveGameManager {
         }
     }
 
+    public static boolean hasSaves() {
+        if (autosaveSlot.isLoaded()) {
+            return true;
+        }
+
+        for (SaveGameSlot slot : slots) {
+            if (slot.isLoaded()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static void init() throws IOException {
         File saveDir = new File("saves");
         if (!saveDir.exists()) {

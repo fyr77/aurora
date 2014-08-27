@@ -23,6 +23,11 @@ public class CrewMember extends ItemWithTextAndImage {
         super(id, new Drawable(image));
     }
 
+    public CrewMember(String id, String image, Dialog dialog) {
+        super(id, new Drawable(image));
+        this.dialog = dialog;
+    }
+
     public boolean hasAction() {
         return dialog != null;
     }

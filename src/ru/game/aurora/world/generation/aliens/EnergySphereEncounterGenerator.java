@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.world.GameEventListener;
@@ -52,6 +53,7 @@ public class EnergySphereEncounterGenerator extends GameEventListener implements
             isAlive = false;
 
             world.getPlayer().getJournal().addQuestEntries("energy_sphere", "start");
+            world.getPlayer().getShip().addCrewMember(world, new CrewMember("energy_sphere", "energy_sphere_dialog"));
         }
 
         @Override

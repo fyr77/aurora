@@ -127,6 +127,7 @@ public class GUI {
         nifty.registerScreenController(new InventoryController(world));
         nifty.registerScreenController(new JournalScreenController(world));
         nifty.registerScreenController(new PlanetScanController(world));
+        nifty.registerScreenController(new ShipScreenController(world));
         nifty.registerScreenController(new SurfaceMapController(world));
         nifty.registerScreenController(new StarMapController(world));
 
@@ -148,6 +149,7 @@ public class GUI {
         nifty.addXml("gui/screens/engineering_screen.xml");
         nifty.addXml("gui/screens/surface_gui.xml");
         nifty.addXml("gui/screens/landing_party_equip_screen.xml");
+        nifty.addXml("gui/screens/ship.xml");
         nifty.addXml("gui/screens/intro_dialog.xml");
         nifty.addXml("gui/screens/inventory_screen.xml");
         nifty.addXml("gui/screens/journal_screen.xml");

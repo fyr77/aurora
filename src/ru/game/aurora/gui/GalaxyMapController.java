@@ -90,9 +90,9 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         GUI.getInstance().getNifty().gotoScreen("engineering_screen");
     }
 
-    public void openLandingPartyScreen() {
+    public void openShipScreen() {
         GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
+        GUI.getInstance().getNifty().gotoScreen("ship_screen");
     }
 
     public void openJournal() {
