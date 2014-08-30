@@ -18,7 +18,10 @@ public class InventoryViewConverter implements ListBox.ListBoxViewConverter {
         EngineUtils.setTextForGUIElement(element.findElementByName("#line-text"), " " + item.getCount() + " " + item.getElement().getName());
         EngineUtils.setImageForGUIElement(element.findElementByName("#line-icon"), item.getElement().getImage());
         if (!item.getElement().isUsable()) {
-            element.findElementByName("#useButton").hide();
+            Element useButton = element.findElementByName("#useButton");
+            if (useButton != null) {
+                useButton.hide();
+            }
         }
     }
 

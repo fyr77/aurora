@@ -16,6 +16,19 @@
 
     </controlDefinition>
 
+    <controlDefinition name="line-with-text-and-image">
+        <panel childLayout="horizontal" width="100%" align="center" padding="5px">
+            <panel width="138px" height="128px" childLayout="center" style="nifty-panel-noshadow">
+                <image id="#line-icon" width="128px" height="128px"/>
+            </panel>
+            <panel width="*" height="138px" childLayout="center" padding="5px">
+                <text id="#line-text" style="base-font" textVAlign="center" textHAlign="left" height="80%" width="90%"
+                      wrap="true"/>
+            </panel>
+        </panel>
+
+    </controlDefinition>
+
     <screen id="ship_screen" controller="ru.game.aurora.gui.ShipScreenController">
         <layer childLayout="absolute">
             <control id="ship_window" name="window" hideOnClose="true" title="${gui.ship.title}" width="80%"
@@ -31,6 +44,37 @@
                                      viewConverterClass="ru.game.aurora.gui.CrewMemberViewConverter">
                                 <control name="officer-line"
                                          controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
+                            </control>
+                        </control>
+
+                        <control id="inventory" name="tab" caption="${gui.ship.inventory.title}" childLayout="vertical">
+                            <control id="items" name="listBox" vertical="optional" horizontal="off"
+                                     selection="Single"
+                                     displayItems="4"
+                                     viewConverterClass="ru.game.aurora.gui.InventoryViewConverter">
+                                <control name="line-with-text-and-image"
+                                         controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
+                            </control>
+                        </control>
+
+                        <control id="modules" name="tab" caption="${gui.ship.modules.title}" childLayout="center">
+                            <control id="modulesList" name="listBox" vertical="optional" horizontal="optional"
+                                     displayItems="4" selection="Single"
+                                     viewConverterClass="ru.game.aurora.player.engineering.ShipUpgradeViewConverter2"
+                                     visibleToMouse="true"
+                                    >
+                                <control name="line-with-text-and-image"
+                                         controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
+                                    <effect>
+                                        <onCustom customKey="focus" name="colorBar" post="false" color="#444f"
+                                                  neverStopRendering="true" timeType="infinite"/>
+                                        <onCustom customKey="select" name="colorBar" post="false" color="#444f"
+                                                  neverStopRendering="true" timeType="infinite"/>
+                                        <onCustom customKey="select" name="textColor" post="false" color="#fc0f"
+                                                  neverStopRendering="true" timeType="infinite"/>
+                                    </effect>
+                                    <interact onClick="listBoxItemClicked()"/>
+                                </control>
                             </control>
                         </control>
                     </control>
