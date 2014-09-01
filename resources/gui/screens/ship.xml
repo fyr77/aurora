@@ -18,11 +18,11 @@
 
     <controlDefinition name="line-with-text-and-image">
         <panel childLayout="horizontal" width="100%" align="center" padding="5px">
-            <panel width="138px" height="128px" childLayout="center" style="nifty-panel-noshadow">
-                <image id="#line-icon" width="128px" height="128px"/>
+            <panel width="$sizeWithMargin" height="$sizeWithMargin" childLayout="center" style="nifty-panel-noshadow">
+                <image id="#line-icon" width="$size" height="$size"/>
             </panel>
-            <panel width="*" height="138px" childLayout="center" padding="5px">
-                <text id="#line-text" style="base-font" textVAlign="center" textHAlign="left" height="80%" width="90%"
+            <panel width="*" height="$sizeWithMargin" childLayout="center" padding="5px">
+            <text id="#line-text" style="base-font" textVAlign="center" textHAlign="left" height="80%" width="90%"
                       wrap="true"/>
             </panel>
         </panel>
@@ -47,35 +47,49 @@
                             </control>
                         </control>
 
-                        <control id="inventory" name="tab" caption="${gui.ship.inventory.title}" childLayout="vertical">
-                            <control id="items" name="listBox" vertical="optional" horizontal="off"
-                                     selection="Single"
-                                     displayItems="4"
-                                     viewConverterClass="ru.game.aurora.gui.InventoryViewConverter">
-                                <control name="line-with-text-and-image"
-                                         controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
-                            </control>
+                        <control id="inventory" name="tab" caption="${gui.ship.inventory.title}" childLayout="center">
+                            <panel childLayout="vertical" width="100%" height="100%">
+                                <panel height="80px" width="100%" childLayout="horizontal">
+                                    <control name="icon_and_count_with_shadow" id="cred_count"
+                                             icon="resources/sprites/gui/credit.png" width="150px" height="64px">
+                                        <effect>
+                                            <onHover name="custom-hint" targetElement="hint-panel"
+                                                     hintText="${hints.credits}"/>
+                                        </effect>
+                                    </control>
+                                    <panel width="10px"/>
+                                    <control name="icon_and_count_with_shadow" id="res_count"
+                                             icon="resources/sprites/gui/resources.png" width="150px" height="64px">
+                                        <effect>
+                                            <onHover name="custom-hint" targetElement="hint-panel"
+                                                     hintText="${hints.resources}"/>
+                                        </effect>
+                                    </control>
+                                </panel>
+                                <control id="items" name="listBox" vertical="optional" horizontal="off"
+                                         selection="Single"
+                                         displayItems="6"
+                                         viewConverterClass="ru.game.aurora.gui.InventoryViewConverter">
+                                    <control name="line-with-text-and-image"
+                                             controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"
+                                             size="64" sizeWithMargin="74"/>
+                                </control>
+                            </panel>
                         </control>
 
-                        <control id="modules" name="tab" caption="${gui.ship.modules.title}" childLayout="center">
-                            <control id="modulesList" name="listBox" vertical="optional" horizontal="optional"
-                                     displayItems="4" selection="Single"
-                                     viewConverterClass="ru.game.aurora.player.engineering.ShipUpgradeViewConverter2"
-                                     visibleToMouse="true"
-                                    >
-                                <control name="line-with-text-and-image"
-                                         controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
-                                    <effect>
-                                        <onCustom customKey="focus" name="colorBar" post="false" color="#444f"
-                                                  neverStopRendering="true" timeType="infinite"/>
-                                        <onCustom customKey="select" name="colorBar" post="false" color="#444f"
-                                                  neverStopRendering="true" timeType="infinite"/>
-                                        <onCustom customKey="select" name="textColor" post="false" color="#fc0f"
-                                                  neverStopRendering="true" timeType="infinite"/>
-                                    </effect>
-                                    <interact onClick="listBoxItemClicked()"/>
+                        <control id="modules" name="tab" caption="${gui.ship.modules.title}" childLayout="vertical">
+                            <panel childLayout="center">
+                                <control id="modulesList" name="listBox" vertical="optional" horizontal="off"
+                                         displayItems="4" selection="Single"
+                                         viewConverterClass="ru.game.aurora.player.engineering.ShipUpgradeViewConverter2"
+                                         visibleToMouse="true"
+                                        >
+                                    <control name="line-with-text-and-image"
+                                             controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"
+                                             size="128" sizeWithMargin="138">
+                                    </control>
                                 </control>
-                            </control>
+                            </panel>
                         </control>
                     </control>
 
