@@ -20,7 +20,7 @@ public class LabUpgrade extends ShipUpgrade {
     private static final long serialVersionUID = 4448865642175738742L;
 
     public LabUpgrade() {
-        super("lab_upgrade", "scientist_dialog", "upgrades");
+        super("lab_upgrade", "lab_module", "upgrades");
     }
 
     @Override

@@ -19,7 +19,7 @@ public class WorkshopUpgrade extends ShipUpgrade {
     private static final long serialVersionUID = 1L;
 
     public WorkshopUpgrade() {
-        super("workshop_upgrade", "engineer_dialog", "upgrades");
+        super("workshop_upgrade", "workshop_module", "upgrades");
     }
 
     @Override

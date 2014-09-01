@@ -17,7 +17,7 @@ public class BarracksUpgrade extends ShipUpgrade {
     private static final long serialVersionUID = 1L;
 
     public BarracksUpgrade() {
-        super("barracks_upgrade", "marine_dialog", "upgrades");
+        super("barracks_upgrade", "barracks_module", "upgrades");
     }
 
     @Override
