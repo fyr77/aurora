@@ -8,6 +8,7 @@ package ru.game.aurora.player.earth;
 
 
 import ru.game.aurora.gui.StoryScreen;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
@@ -47,7 +48,7 @@ public class EvacuationState implements Serializable {
 
     public EvacuationState(World world) {
         this.turnObliteratorArrives = world.getTurnCount() + OBLITERATOR_TURNS;
-        findSuitableStarSystem(world.getGalaxyMap(), world.getRaces().get("Humanity").getHomeworld());
+        findSuitableStarSystem(world.getGalaxyMap(), ((AlienRace) world.getFactions().get("Humanity")).getHomeworld());
     }
 
     public void update(World world) {

@@ -23,12 +23,9 @@ import java.util.Map;
  * Processes outcome of default dialog with Klisk race
  */
 public class KliskMainDialogListener implements DialogListener {
-    private static final long serialVersionUID = -2351530187782245878L;
+    private static final long serialVersionUID = 1L;
 
-    private final AlienRace kliskRace;
-
-    public KliskMainDialogListener(AlienRace kliskRace) {
-        this.kliskRace = kliskRace;
+    public KliskMainDialogListener() {
     }
 
 
@@ -65,19 +62,19 @@ public class KliskMainDialogListener implements DialogListener {
                 world.getGlobalVariables().put("klisk.discount", 10);
             }
             if (flags.containsKey("klisk.bork_info")) {
-                research = new AlienRaceResearch("bork", world.getRaces().get(BorkGenerator.NAME), new JournalEntry("bork", "main"));
+                research = new AlienRaceResearch("bork", (AlienRace) world.getFactions().get(BorkGenerator.NAME), new JournalEntry("bork", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
             if (flags.containsKey("klisk.klisk_info")) {
-                research = new AlienRaceResearch("klisk", world.getRaces().get(KliskGenerator.NAME), new JournalEntry("klisk", "main"));
+                research = new AlienRaceResearch("klisk", (AlienRace) world.getFactions().get(KliskGenerator.NAME), new JournalEntry("klisk", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
             if (flags.containsKey("klisk.rogues_info")) {
-                research = new AlienRaceResearch("rogues", world.getRaces().get(RoguesGenerator.NAME), new JournalEntry("rogues", "main"));
+                research = new AlienRaceResearch("rogues", (AlienRace) world.getFactions().get(RoguesGenerator.NAME), new JournalEntry("rogues", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
             if (flags.containsKey("klisk.zorsan_info")) {
-                research = new AlienRaceResearch("zorsan", world.getRaces().get(ZorsanGenerator.NAME), new JournalEntry("zorsan", "main"));
+                research = new AlienRaceResearch("zorsan", (AlienRace) world.getFactions().get(ZorsanGenerator.NAME), new JournalEntry("zorsan", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
 
@@ -100,10 +97,10 @@ public class KliskMainDialogListener implements DialogListener {
             world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("klisk_homeworlds");
             world.getGlobalVariables().put("klisk.coordinates_traded", true);
 
-            world.getRaces().get(ZorsanGenerator.NAME).setKnown(true);
-            world.getRaces().get(BorkGenerator.NAME).setKnown(true);
-            world.getRaces().get(RoguesGenerator.NAME).setKnown(true);
-            world.getRaces().get(KliskGenerator.NAME).setKnown(true);
+            ((AlienRace) world.getFactions().get(ZorsanGenerator.NAME)).setKnown(true);
+            ((AlienRace) world.getFactions().get(BorkGenerator.NAME)).setKnown(true);
+            ((AlienRace) world.getFactions().get(RoguesGenerator.NAME)).setKnown(true);
+            ((AlienRace) world.getFactions().get(KliskGenerator.NAME)).setKnown(true);
         }
 
         if (returnCode == 101) {

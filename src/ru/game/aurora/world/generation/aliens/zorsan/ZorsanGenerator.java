@@ -223,7 +223,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         world.addListener(new StandardAlienShipEvent(race));
         race.setHomeworld(homeworld);
         world.addListener(new SingleStarsystemShipSpawner(race.getDefaultFactory(), 0.8, race.getHomeworld()));
-        world.getRaces().put(race.getName(), race);
+        world.getFactions().put(race.getName(), race);
 
         // zorsan are hostile to bork
         world.getReputation().setHostile(NAME, BorkGenerator.NAME);

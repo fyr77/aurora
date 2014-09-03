@@ -45,7 +45,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
     public void updateWorld(final World world) {
         final AlienRace humans = new AlienRace(NAME, "earth_transport", Dialog.loadFromFile("dialogs/human_ship_default_dialog.json"));
         humans.setTravelDistance(1);
-        world.getRaces().put(humans.getName(), humans);
+        world.getFactions().put(humans.getName(), humans);
 
         //todo: restore
         //SingleShipFixedTime listener = new SingleShipFixedTime(4, new AuroraProbe(0, 0), Dialog.loadFromFile(getClass().getClassLoader().getResourceAsStream("dialogs/quest/aurora_probe_detected.json")));

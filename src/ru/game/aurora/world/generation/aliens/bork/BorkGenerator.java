@@ -46,7 +46,7 @@ public class BorkGenerator implements WorldGeneratorPart {
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 Dialog nextDialog;
-                AlienRace humanity = world.getRaces().get(HumanityGenerator.NAME);
+                AlienRace humanity = (AlienRace) world.getFactions().get(HumanityGenerator.NAME);
                 String variableValue;
                 switch (returnCode) {
                     case 1:
@@ -138,6 +138,6 @@ public class BorkGenerator implements WorldGeneratorPart {
 
         world.addListener(new BorkShipGenerator(Configuration.getDoubleProperty("encounter.bork_pirates_chance"), 3, null, borkRace.getDefaultFactory(), Configuration.getIntProperty("encounter.bork_pirates.count")));
 
-        world.getRaces().put(borkRace.getName(), borkRace);
+        world.getFactions().put(borkRace.getName(), borkRace);
     }
 }

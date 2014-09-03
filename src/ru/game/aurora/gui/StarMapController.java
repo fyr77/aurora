@@ -10,6 +10,7 @@ import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
@@ -107,7 +108,11 @@ public class StarMapController implements ScreenController {
 
         // draw alien areas
 
-        for (AlienRace race : world.getRaces().values()) {
+        for (Faction faction : world.getFactions().values()) {
+            if (!(faction instanceof AlienRace)) {
+                continue;
+            }
+            AlienRace race = (AlienRace) faction;
             if (race.getName().equals(HumanityGenerator.NAME)
                     || race.getName().equals(GardenerGenerator.NAME)) {
                 continue;

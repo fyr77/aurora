@@ -112,7 +112,7 @@ public class KliskGenerator implements WorldGeneratorPart {
     }
 
     private void beginTradeQuest(World world, AlienHomeworld kliskPlanet, final StarSystem targetSystem) {
-        NPCShip ship = world.getRaces().get(KliskGenerator.NAME).getDefaultFactory().createShip(world, 0);
+        NPCShip ship = ((AlienRace) world.getFactions().get(KliskGenerator.NAME)).getDefaultFactory().createShip(world, 0);
         ship.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_ship_default.json")));
 
         ship.setAi(new LeaveSystemAI());
@@ -207,7 +207,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                     case 3:
                         // free info about klisk race
                         world.getGlobalVariables().put("klisk.klisk_info", true);
-                        ResearchProjectDesc research = new AlienRaceResearch("klisk", world.getRaces().get(KliskGenerator.NAME), new JournalEntry("klisk", "main"));
+                        ResearchProjectDesc research = new AlienRaceResearch("klisk", (AlienRace) world.getFactions().get(KliskGenerator.NAME), new JournalEntry("klisk", "main"));
                         world.getPlayer().getResearchState().addNewAvailableProject(research);
                         break;
                     case 4:
@@ -224,7 +224,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                 }
 
                 Dialog newDefaultDialog = Dialog.loadFromFile("dialogs/klisk_main.json");
-                newDefaultDialog.addListener(new KliskMainDialogListener(kliskRace));
+                newDefaultDialog.addListener(new KliskMainDialogListener());
                 kliskRace.setDefaultDialog(newDefaultDialog);
             }
         });
@@ -269,7 +269,7 @@ public class KliskGenerator implements WorldGeneratorPart {
         world.addListener(new StandardAlienShipEvent(kliskRace));
         final GalaxyMapObject solar_system = (GalaxyMapObject) world.getGlobalVariables().get("solar_system");
         world.getGalaxyMap().addObjectAtDistance(kliskHomeworld, solar_system, 20 + CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.galaxy.klisk_homeworld_distance")));
-        world.getRaces().put(kliskRace.getName(), kliskRace);
+        world.getFactions().put(kliskRace.getName(), kliskRace);
         world.getGlobalVariables().put("klisk.homeworld", kliskHomeworld.getCoordsString());
 
     }

@@ -144,7 +144,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
         world.addListener(new StandardAlienShipEvent(rogueRace));
         world.addListener(new SingleStarsystemShipSpawner(rogueRace.getDefaultFactory(), 0.3, homeworld));
 
-        world.getRaces().put(rogueRace.getName(), rogueRace);
+        world.getFactions().put(rogueRace.getName(), rogueRace);
     }
 
 }

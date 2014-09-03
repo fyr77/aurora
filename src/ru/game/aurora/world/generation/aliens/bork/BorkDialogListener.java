@@ -2,6 +2,7 @@ package ru.game.aurora.world.generation.aliens.bork;
 
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
@@ -23,7 +24,7 @@ public class BorkDialogListener implements DialogListener {
     private void removeBlockade(World world) {
         world.getPlayer().getJournal().addQuestEntries("bork_blockade", "withdraw");
         world.getGlobalVariables().put("bork_blockade.result", "withdraw");
-        StarSystem ss = world.getRaces().get(HumanityGenerator.NAME).getHomeworld();
+        StarSystem ss = ((AlienRace) world.getFactions().get(HumanityGenerator.NAME)).getHomeworld();
         for (Iterator<GameObject> iter = ss.getShips().iterator(); iter.hasNext(); ) {
             GameObject so = iter.next();
             if (so instanceof EarthInvasionGenerator.BorkBlockadeShip) {

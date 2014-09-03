@@ -54,6 +54,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
 
         @Override
         protected void onCompleted(World world) {
+            AlienRace humanity = (AlienRace) world.getFactions().get(HumanityGenerator.NAME);
             // begin construction of a beacon near the sun
             final EarthState earthState = world.getPlayer().getEarthState();
             if (state == 0) {
@@ -68,7 +69,6 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 ));
 
 
-                final AlienRace humanity = world.getRaces().get("Humanity");
                 construction = new NPCShip(0, 1, "earth_construction", humanity, null, "Icarus #1", 25);
                 construction.setStationary(true);
                 construction.setAi(null);
@@ -80,8 +80,6 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 state = 1;
             } else if (state == 1) {
                 // finish construction
-                final AlienRace humanity = world.getRaces().get("Humanity");
-
                 // replace station sprite
                 humanity.getHomeworld().getShips().remove(construction);
                 construction = new NPCShip(0, 1, "icarus_station", humanity, null, "Icarus #1", 25);
@@ -131,7 +129,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         private int fine = -1;
 
         private RoguesStateChanger(World world, Dungeon beacon) {
-            rogues = world.getRaces().get("Rogues");
+            rogues = (AlienRace) world.getFactions().get(RoguesGenerator.NAME);
             this.roguesBase = rogues.getHomeworld();
             for (GameObject s : roguesBase.getShips()) {
                 if (s.getName().equals("Rogues Frame")) {
@@ -168,7 +166,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 // change rogues default dialog
                 Dialog d = Dialog.loadFromFile("dialogs/rogues/search_beacon_attackers.json");
                 d.addListener(this);
-                world.getRaces().get("Rogues").setDefaultDialog(d);
+                ((AlienRace) world.getFactions().get(RoguesGenerator.NAME)).setDefaultDialog(d);
                 return true;
             }
             if (turns == 0) {
@@ -240,7 +238,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 turns = 360;
                 Dialog defaultDialog = Dialog.loadFromFile("dialogs/rogues/rogues_frame_dialog.json");
                 defaultDialog.addListener(new RoguesMainDialogListener());
-                world.getRaces().get(RoguesGenerator.NAME).setDefaultDialog(defaultDialog);
+                ((AlienRace) world.getFactions().get(RoguesGenerator.NAME)).setDefaultDialog(defaultDialog);
                 roguesFrame.setCaptain(new NPC(defaultDialog));
             }
         }
@@ -264,7 +262,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         brownStar.setQuestLocation(true);
         world.getGalaxyMap().addObjectAtDistance(brownStar, (Positionable) world.getGlobalVariables().get("solar_system"), 30);
 
-        AlienRace rogues = world.getRaces().get("Rogues");
+        AlienRace rogues = (AlienRace) world.getFactions().get("Rogues");
         NPCShip defenceProbe = rogues.getDefaultFactory().createShip(world, RoguesGenerator.PROBE_SHIP);
         defenceProbe.setPos(2, 1);
         defenceProbe.setAi(new CombatAI(world.getPlayer().getShip()));

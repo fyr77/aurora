@@ -16,7 +16,7 @@ import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResolutionChangeListener;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.*;
-import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.earth.EvacuationState;
 import ru.game.aurora.player.research.ResearchProjectDesc;
@@ -69,7 +69,7 @@ public class World implements Serializable, ResolutionChangeListener {
 
     private final List<GameEventListener> listeners = new LinkedList<>();
 
-    private final Map<String, AlienRace> races = new HashMap<>();
+    private final Map<String, Faction> factions = new HashMap<>();
 
     private final Map<String, Serializable> globalVariables = new HashMap<>();
 
@@ -428,8 +428,8 @@ public class World implements Serializable, ResolutionChangeListener {
         this.currentStarSystem = currentStarSystem;
     }
 
-    public Map<String, AlienRace> getRaces() {
-        return races;
+    public Map<String, Faction> getFactions() {
+        return factions;
     }
 
     public StarSystemNamesCollection getStarSystemNamesCollection() {

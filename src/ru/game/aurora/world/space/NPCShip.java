@@ -20,6 +20,7 @@ import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.music.MusicDialogListener;
 import ru.game.aurora.music.Playlist;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
@@ -38,8 +39,6 @@ import java.util.WeakHashMap;
 public class NPCShip extends BaseGameObject {
 
     private static final long serialVersionUID = 2L;
-
-    protected AlienRace race;
 
     protected NPC captain;
 
@@ -71,9 +70,9 @@ public class NPCShip extends BaseGameObject {
 
     private transient Map<GameObject, Integer> threatMap = new WeakHashMap<>();
 
-    public NPCShip(int x, int y, String sprite, AlienRace race, NPC captain, String name, int hp) {
+    public NPCShip(int x, int y, String sprite, Faction race, NPC captain, String name, int hp) {
         super(x, y, new Drawable(sprite));
-        this.race = race;
+        this.faction = race;
         this.captain = captain;
         this.name = name;
         this.maxHP = this.hp = hp;
@@ -185,12 +184,7 @@ public class NPCShip extends BaseGameObject {
      */
     public boolean isHostile(World world, GameObject object) {
         return (object instanceof Ship && isHostile)
-                || (race != null && object.getRace() != null && world.getCurrentStarSystem().getReputation().isHostile(race.getName(), object.getRace().getName()));
-    }
-
-    @Override
-    public AlienRace getRace() {
-        return race;
+                || (faction != null && faction.isHostileTo(world, object));
     }
 
     @Override
@@ -209,10 +203,7 @@ public class NPCShip extends BaseGameObject {
     }
 
     public String getScanDescription(World world) {
-        StringBuilder sb = new StringBuilder(String.format(Localization.getText("gui", "scan.ship.race"), race != null ? race.getName() : "Unknown"));
-        sb.append('\n');
-        sb.append(Localization.getText("gui", "scan.ship.relation_prefix")).append(" ").append(isHostile(world, world.getPlayer().getShip()) ? Localization.getText("gui", "scan.ship.hostile") : Localization.getText("gui", "scan.ship.friendly"));
-        return sb.toString();
+        return String.format(Localization.getText("gui", "scan.ship.race"), faction != null ? faction.getName() : "Unknown") + '\n' + Localization.getText("gui", "scan.ship.relation_prefix") + " " + (isHostile(world, world.getPlayer().getShip()) ? Localization.getText("gui", "scan.ship.hostile") : Localization.getText("gui", "scan.ship.friendly"));
     }
 
     @Override
@@ -223,14 +214,21 @@ public class NPCShip extends BaseGameObject {
         }
 
         world.onPlayerContactedAlienShip(this);
-        final Dialog d = captain != null ? captain.getCustomDialog() : race.getDefaultDialog();
-
-        if (race != null && race.getMusic() != null && !race.getMusic().isPlaying()) {
-            d.addListener(new MusicDialogListener(Playlist.getCurrentPlaylist().getId()));
-            race.getMusic().play();
+        if (captain != null) {
+            world.addOverlayWindow(captain.getCustomDialog());
+            return;
         }
 
-        world.addOverlayWindow(d);
+        if (faction != null && (faction instanceof AlienRace)) {
+            AlienRace race = (AlienRace) faction;
+            Dialog d = race.getDefaultDialog();
+            if (race.getMusic() != null && !race.getMusic().isPlaying()) {
+                d.addListener(new MusicDialogListener(Playlist.getCurrentPlaylist().getId()));
+                race.getMusic().play();
+            }
+            world.addOverlayWindow(d);
+        }
+
     }
 
 
@@ -246,8 +244,8 @@ public class NPCShip extends BaseGameObject {
         if (attacker != null) {
             changeThreat(world, attacker, dmg * 2);   //todo: balance
 
-            if (race != null && !currentStarSystem.getReputation().isHostile(race.getName(), attacker.getRace().getName())) {
-                currentStarSystem.getReputation().setHostile(race.getName(), attacker.getRace().getName());
+            if (faction != null && !currentStarSystem.getReputation().isHostile(faction.getName(), attacker.getFaction().getName())) {
+                currentStarSystem.getReputation().setHostile(faction.getName(), attacker.getFaction().getName());
             }
         }
     }
@@ -463,8 +461,5 @@ public class NPCShip extends BaseGameObject {
         isAlive = alive;
     }
 
-    public void setRace(AlienRace race) {
-        this.race = race;
-    }
 
 }

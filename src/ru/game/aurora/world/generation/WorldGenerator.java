@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.*;
 import ru.game.aurora.npc.AlienRaceFirstCommunicationListener;
+import ru.game.aurora.npc.factions.FreeForAllFaction;
+import ru.game.aurora.npc.factions.NeutralFaction;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.CrewChangeListener;
 import ru.game.aurora.world.World;
@@ -84,6 +86,8 @@ public class WorldGenerator implements Runnable {
             part.updateWorld(world);
         }
 
+        world.getFactions().put("freeforall", new FreeForAllFaction());
+        world.getFactions().put("neutral", new NeutralFaction());
         world.addListener(new AlienRaceFirstCommunicationListener());
     }
 

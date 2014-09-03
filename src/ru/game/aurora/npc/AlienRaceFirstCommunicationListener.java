@@ -16,9 +16,9 @@ public class AlienRaceFirstCommunicationListener extends GameEventListener {
 
     @Override
     public boolean onPlayerContactedOtherShip(World world, GameObject ship) {
-        AlienRace race = ship.getRace();
-        if (race != null) {
-            race.setKnown(true);
+        Faction faction = ship.getFaction();
+        if (faction != null && faction instanceof AlienRace) {
+            ((AlienRace) faction).setKnown(true);
         }
         return false;
     }

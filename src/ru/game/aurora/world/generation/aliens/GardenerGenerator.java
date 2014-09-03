@@ -25,7 +25,7 @@ public class GardenerGenerator implements WorldGeneratorPart {
 
         AlienRace gardenerRace = new AlienRace(NAME, "gardener_ship", dialog);
 
-        world.getRaces().put(gardenerRace.getName(), gardenerRace);
+        world.getFactions().put(gardenerRace.getName(), gardenerRace);
 
         world.getGlobalVariables().put("gardeners.first_warp", true);
     }

@@ -9,14 +9,14 @@ import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.music.Playlist;
+import ru.game.aurora.world.GameObject;
+import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 
-public class AlienRace implements Serializable
-{
+public class AlienRace implements Faction {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,8 +52,18 @@ public class AlienRace implements Serializable
         return defaultDialog;
     }
 
+    @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean isHostileTo(World world, GameObject object) {
+        StarSystem currentSystem = world.getCurrentStarSystem();
+        if (currentSystem != null) {
+            return currentSystem.getReputation().isHostile(name, object.getFaction().getName());
+        }
+        return world.getReputation().isHostile(name, object.getFaction().getName());
     }
 
     public void setName(String name) {

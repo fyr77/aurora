@@ -13,6 +13,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.NPCShipFactory;
+import ru.game.aurora.npc.factions.PirateFaction;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
@@ -72,7 +73,7 @@ public class BorkShipGenerator extends GameEventListener {
         if (!ss.isVisited() && CommonRandom.getRandom().nextDouble() < chance && count-- > 0) {
             for (int i = 0; i < starshipsPerSystem; ++i) {
                 NPCShip ship = factory.createShip(world, 0);
-                ship.setRace(null); // so that destroying these pirates will not reduce relationship with bork
+                ship.setFaction(world.getFactions().get(PirateFaction.NAME)); // so that destroying these pirates will not reduce relationship with bork
                 ss.setRandomEmptyPosition(ship);
                 ship.setCaptain(new NPC(d));
                 ss.getShips().add(ship);

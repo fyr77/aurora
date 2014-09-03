@@ -45,8 +45,8 @@ public class EmbassiesQuest implements WorldGeneratorPart {
 
         @Override
         public boolean onPlayerContactedOtherShip(World world, GameObject ship) {
-            if (ship.getRace() != world.getRaces().get(HumanityGenerator.NAME)) {
-                if (ship.getRace() == world.getRaces().get(KliskGenerator.NAME)) {
+            if (ship.getFaction() != world.getFactions().get(HumanityGenerator.NAME)) {
+                if (ship.getFaction() == world.getFactions().get(KliskGenerator.NAME)) {
                     kliskContacted = true;
                 }
 

@@ -33,7 +33,7 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart {
         world.getGalaxyMap().addObjectAtDistance(lastBeaconLocation, (Positionable) world.getGlobalVariables().get("solar_system"), 7);
         world.getGlobalVariables().put("last_beacon.coords", new Pair<>(lastBeaconLocation.getX(), lastBeaconLocation.getY()));
 
-        AlienRace gardenerRace = world.getRaces().get("Gardeners");
+        AlienRace gardenerRace = (AlienRace) world.getFactions().get("Gardeners");
         final GardenersShip gardenerShip = new GardenersShip(0, 0, gardenerRace.getShipSprite(), gardenerRace, null, "Sequoia");
         gardenerShip.setAi(null);
         final Dialog dialog = Dialog.loadFromFile("dialogs/gardener_1.json");
@@ -53,7 +53,7 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart {
         lastBeaconLocation.getShips().add(gardenerShip);
 
 
-        AlienRace kliskRace = world.getRaces().get(KliskGenerator.NAME);
+        AlienRace kliskRace = (AlienRace) world.getFactions().get(KliskGenerator.NAME);
         final NPCShip kliskShip = kliskRace.getDefaultFactory().createShip(world, KliskGenerator.STATION);
         lastBeaconLocation.setRandomEmptyPosition(kliskShip);
         lastBeaconLocation.getShips().add(kliskShip);

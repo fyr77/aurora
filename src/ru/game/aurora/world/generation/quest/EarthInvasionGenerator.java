@@ -6,6 +6,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.earth.PrivateMessage;
@@ -118,7 +119,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
             if (count < 0) {
                 return false;
             }
-            final AlienRace humanity = world.getRaces().get(HumanityGenerator.NAME);
+            final AlienRace humanity = (AlienRace) world.getFactions().get(HumanityGenerator.NAME);
             if (ss == humanity.getHomeworld()) {
                 ++count;
             } else {
@@ -184,7 +185,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
     private static final class KliskTradeProbe extends NPCShip {
         private static final long serialVersionUID = -8830393993027489642L;
 
-        public KliskTradeProbe(int x, int y, AlienRace klisk) {
+        public KliskTradeProbe(int x, int y, Faction klisk) {
             super(x, y, "klisk_drone", klisk, null, "Klisk trade probe", 7);
 
             Dialog commDialog = Dialog.loadFromFile("dialogs/encounters/klisk_trade_probe_comm.json");
@@ -247,7 +248,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
             });
             world.getPlayer().getEarthState().getEarthSpecialDialogs().add(earthDialog);
 
-            KliskTradeProbe probe = new KliskTradeProbe(ss.getPlanets()[2].getX() - 1, ss.getPlanets()[2].getY() - 1, world.getRaces().get(KliskGenerator.NAME));
+            KliskTradeProbe probe = new KliskTradeProbe(ss.getPlanets()[2].getX() - 1, ss.getPlanets()[2].getY() - 1, world.getFactions().get(KliskGenerator.NAME));
             ss.getShips().add(probe);
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("klisk_trader_drone", "news"));
             return true;
@@ -263,7 +264,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         private static boolean communicated = false;
 
         public BorkBlockadeShip(int x, int y, World world) {
-            super(x, y, "bork_ship", world.getRaces().get(BorkGenerator.NAME), new NPC(Dialog.loadFromFile("dialogs/encounters/bork_blockade_contact.json")), "Bork ship", 5);
+            super(x, y, "bork_ship", world.getFactions().get(BorkGenerator.NAME), new NPC(Dialog.loadFromFile("dialogs/encounters/bork_blockade_contact.json")), "Bork ship", 5);
         }
 
         @Override

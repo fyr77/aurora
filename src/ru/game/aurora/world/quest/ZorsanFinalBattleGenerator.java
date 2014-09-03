@@ -186,7 +186,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             final int ships = Configuration.getIntProperty("quest.zorsan_final_battle.klisk_ships");
 
             for (int i = 0; i < ships; ++i) {
-                NPCShip probe = world.getRaces().get(KliskGenerator.NAME).getDefaultFactory().createShip(world, KliskGenerator.TRADE_PROBE);
+                NPCShip probe = ((AlienRace) world.getFactions().get(KliskGenerator.NAME)).getDefaultFactory().createShip(world, KliskGenerator.TRADE_PROBE);
                 probe.setCanBeHailed(false);
                 probe.setStationary(false);
                 probe.setSpeed(2);
@@ -201,7 +201,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             final int ships = Configuration.getIntProperty("quest.zorsan_final_battle.bork_ships");
 
             for (int i = 0; i < ships; ++i) {
-                NPCShip ship = world.getRaces().get(BorkGenerator.NAME).getDefaultFactory().createShip(world, 0);
+                NPCShip ship = ((AlienRace) world.getFactions().get(BorkGenerator.NAME)).getDefaultFactory().createShip(world, 0);
                 ship.setCanBeHailed(false);
                 ship.setPos(2 + i, i);
                 solarSystem.getShips().add(ship);
@@ -216,9 +216,10 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_rogues_arrive.json"));
 
             final int ships = Configuration.getIntProperty("quest.zorsan_final_battle.rogues_ships");
+            AlienRace rogues = (AlienRace) world.getFactions().get(RoguesGenerator.NAME);
             for (int i = 0; i < ships; ++i) {
-                NPCShip ship = world.getRaces().get(RoguesGenerator.NAME).getDefaultFactory().createShip(world, RoguesGenerator.SCOUT_SHIP);
-                NPCShip probe = world.getRaces().get(RoguesGenerator.NAME).getDefaultFactory().createShip(world, RoguesGenerator.PROBE_SHIP);
+                NPCShip ship = rogues.getDefaultFactory().createShip(world, RoguesGenerator.SCOUT_SHIP);
+                NPCShip probe = rogues.getDefaultFactory().createShip(world, RoguesGenerator.PROBE_SHIP);
                 ship.setCanBeHailed(false);
                 probe.setPos(earth.getX() + i, earth.getY() + i - 1);
                 ship.setPos(earth.getX() - 2 + i, earth.getY() + i);
@@ -234,7 +235,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             final int ships = Configuration.getIntProperty("quest.zorsan_final_battle.bork_event_ships");
 
             for (int i = 0; i < ships; ++i) {
-                NPCShip ship = world.getRaces().get(BorkGenerator.NAME).getDefaultFactory().createShip(world, 0);
+                NPCShip ship = ((AlienRace) world.getFactions().get(BorkGenerator.NAME)).getDefaultFactory().createShip(world, 0);
                 ship.setCanBeHailed(false);
                 ship.setPos(2 + i, i);
                 solarSystem.getShips().add(ship);
@@ -364,15 +365,15 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
                     continue;
                 }
 
-                if (s.getRace().getName().equals(BorkGenerator.NAME) && "pay".equals(world.getGlobalVariables().get("bork_blockade.result"))) {
+                if (s.getFaction().getName().equals(BorkGenerator.NAME) && "pay".equals(world.getGlobalVariables().get("bork_blockade.result"))) {
                     world.getGlobalVariables().put("bork.hrrraka_alive", true);
                     borkAlive = true;
-                } else if (s.getRace().getName().equals(RoguesGenerator.NAME)) {
+                } else if (s.getFaction().getName().equals(RoguesGenerator.NAME)) {
                     roguesAlive = true;
                     world.getGlobalVariables().put("rogues.fuko_alive", true);
                 } else if (s.getName().equals("Voyager")) {
                     voyagerAlive = true;
-                } else if (s.getRace().getName().equals(KliskGenerator.NAME)) {
+                } else if (s.getFaction().getName().equals(KliskGenerator.NAME)) {
                     kliskAlive = true;
                 }
             }
@@ -456,7 +457,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             s.setHp(s.getMaxHP());
         }
         for (GameObject s : solarSystem.getShips()) {
-            if (s instanceof NPCShip && s.getRace().getName().equals(HumanityGenerator.NAME)) {
+            if (s instanceof NPCShip && s.getFaction().getName().equals(HumanityGenerator.NAME)) {
                 ((NPCShip) s).setHp(((NPCShip) s).getMaxHP());
             }
         }
@@ -522,8 +523,8 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
     }
 
     public void updateWorld(World world) {
-        humanity = world.getRaces().get(HumanityGenerator.NAME);
-        zorsan = world.getRaces().get(ZorsanGenerator.NAME);
+        humanity = ((AlienRace) world.getFactions().get(HumanityGenerator.NAME));
+        zorsan = ((AlienRace) world.getFactions().get(ZorsanGenerator.NAME));
         solarSystem = humanity.getHomeworld();
         earth = (Earth) solarSystem.getPlanets()[2];
         solarSystem.setCanBeLeft(false);

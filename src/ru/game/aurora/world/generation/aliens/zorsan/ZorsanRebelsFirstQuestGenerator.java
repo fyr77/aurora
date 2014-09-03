@@ -17,6 +17,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
+import ru.game.aurora.npc.factions.NeutralFaction;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
@@ -77,8 +78,8 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
 
         world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/rebels/intro/courier_encountered.json"));
 
-        final NPCShip ship = world.getRaces().get(ZorsanGenerator.NAME).getDefaultFactory().createShip(world, 0);
-        ship.setRace(null);
+        final NPCShip ship = ((AlienRace) world.getFactions().get(ZorsanGenerator.NAME)).getDefaultFactory().createShip(world, 0);
+        ship.setFaction(world.getFactions().get(NeutralFaction.NAME));
         ship.setAi(null);
 
         Dialog courierDialog = Dialog.loadFromFile("dialogs/zorsan/rebels/intro/courier_dialog.json");
@@ -122,7 +123,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
     @Override
     public void updateWorld(World world) {
 
-        final AlienRace alienRace = world.getRaces().get(ZorsanGenerator.NAME);
+        final AlienRace alienRace = (AlienRace) world.getFactions().get(ZorsanGenerator.NAME);
         int travelDistance = alienRace.getTravelDistance();
 
         int redGiantsFound = 0;

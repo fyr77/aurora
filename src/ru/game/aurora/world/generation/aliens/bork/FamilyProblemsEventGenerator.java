@@ -11,6 +11,7 @@ import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
@@ -47,9 +48,9 @@ public class FamilyProblemsEventGenerator extends GameEventListener implements W
         if (ss.isQuestLocation() || CommonRandom.getRandom().nextDouble() > chance) {
             return false;
         }
-        smartBrotherShip = world.getRaces().get(BorkGenerator.NAME).getDefaultFactory().createShip(world, 0);
+        smartBrotherShip = ((AlienRace) world.getFactions().get(BorkGenerator.NAME)).getDefaultFactory().createShip(world, 0);
         smartBrotherShip.setPos(-1, 2);
-        stupidBrotherShip = world.getRaces().get(BorkGenerator.NAME).getDefaultFactory().createShip(world, 0);
+        stupidBrotherShip = ((AlienRace) world.getFactions().get(BorkGenerator.NAME)).getDefaultFactory().createShip(world, 0);
         stupidBrotherShip.setPos(-1, 4);
         fatherShip = new BorkFatherShip(1, 3, "bork_ship_large", "Fathers ship", 20);
         fatherShip.setStationary(true);

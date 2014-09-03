@@ -15,7 +15,6 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.ExplosionEffect;
-import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
@@ -54,8 +53,6 @@ public class Ship extends BaseGameObject {
 
     private final List<StarshipWeapon> weapons = new ArrayList<>();
 
-    private final AlienRace humanity;
-
     private final Multiset<InventoryItem> storage = HashMultiset.create();
 
     private final List<ShipUpgrade> upgrades = new ArrayList<>();
@@ -64,9 +61,8 @@ public class Ship extends BaseGameObject {
 
     private int freeSpace;
 
-    public Ship(AlienRace humanity, int x, int y) {
+    public Ship(int x, int y) {
         super(x, y, new Drawable("aurora"));
-        this.humanity = humanity;
         name = "Aurora-2";
         hull = maxHull = 10;
         maxScientists = scientists = BASE_SCIENTISTS;
@@ -213,11 +209,6 @@ public class Ship extends BaseGameObject {
     @Override
     public String getName() {
         return name;
-    }
-
-    @Override
-    public AlienRace getRace() {
-        return humanity;
     }
 
     @Override

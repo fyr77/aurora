@@ -69,7 +69,7 @@ public class Player implements Serializable {
     public void setShip(World world, AlienRace humanity) {
         researchState = new ResearchState(Ship.BASE_SCIENTISTS);
         engineeringState = new EngineeringState(Ship.BASE_ENGINEERS);
-        ship = new Ship(humanity, humanity.getHomeworld().getX() + 1, humanity.getHomeworld().getY());
+        ship = new Ship(humanity.getHomeworld().getX() + 1, humanity.getHomeworld().getY());
         ship.installInitialUpgrades(world);
 
         engineeringState.addNewEngineeringProject(new MedpacksCraft(3));  //добавим проекты для крафта аптечек и баллонов

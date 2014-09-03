@@ -9,7 +9,7 @@ package ru.game.aurora.world;
 
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.Drawable;
-import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Faction;
 
 public class BaseGameObject extends MovableSprite implements GameObject {
     private static final long serialVersionUID = 3321667334477000255L;
@@ -23,6 +23,8 @@ public class BaseGameObject extends MovableSprite implements GameObject {
     protected String scanTextId;
 
     protected String scanTextBundle;
+
+    protected Faction faction;
 
     public BaseGameObject() {
         super(0, 0, null);
@@ -81,11 +83,6 @@ public class BaseGameObject extends MovableSprite implements GameObject {
     }
 
     @Override
-    public AlienRace getRace() {
-        return null;
-    }
-
-    @Override
     public String getScanDescription(World world) {
         return Localization.getText(scanTextBundle, scanTextId);
     }
@@ -102,5 +99,14 @@ public class BaseGameObject extends MovableSprite implements GameObject {
     @Override
     public ScanGroup getScanGroup() {
         return scanGroup;
+    }
+
+    @Override
+    public Faction getFaction() {
+        return faction;
+    }
+
+    public void setFaction(Faction faction) {
+        this.faction = faction;
     }
 }

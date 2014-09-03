@@ -5,6 +5,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
@@ -42,7 +43,7 @@ public class RoguesMainDialogListener implements DialogListener {
         if (flags.containsKey("rogues_altar.withdraw")) {
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("rogues_altar_withdraw", "news"));
             world.getPlayer().getJournal().addQuestEntries("rogues_altar", "withdraw");
-            StarSystem humanityHomeworld = world.getRaces().get(HumanityGenerator.NAME).getHomeworld();
+            StarSystem humanityHomeworld = ((AlienRace) world.getFactions().get(HumanityGenerator.NAME)).getHomeworld();
 
             Planet moon = (Planet) humanityHomeworld.getPlanets()[2].getSatellites().get(0);
             for (GameObject po : moon.getPlanetObjects()) {

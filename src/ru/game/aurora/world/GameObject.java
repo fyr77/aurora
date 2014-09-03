@@ -6,7 +6,7 @@
 package ru.game.aurora.world;
 
 import org.newdawn.slick.Image;
-import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Faction;
 
 import java.io.Serializable;
 
@@ -29,10 +29,10 @@ public interface GameObject extends Serializable, Updatable, IMovable, IDrawable
 
     public boolean isAlive();
 
-    public AlienRace getRace();
-
     public String getScanDescription(World world);
 
     public ScanGroup getScanGroup();
+
+    public Faction getFaction();
 
 }

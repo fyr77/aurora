@@ -111,7 +111,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
     @Override
     public void updateWorld(World world) {
 
-        final AlienRace rogueRace = world.getRaces().get(RoguesGenerator.NAME);
+        final AlienRace rogueRace = (AlienRace) world.getFactions().get(RoguesGenerator.NAME);
 
         final NPCShip damagedRogueScout = new NPCShip(0, 0, "rogues_scout_damaged", rogueRace, null, "Rogue scout", 2);
         // event with meeting a damaged rogue ship asking for help

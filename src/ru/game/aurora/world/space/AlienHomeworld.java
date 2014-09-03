@@ -124,6 +124,6 @@ public class AlienHomeworld extends BasePlanet {
 
     @Override
     public String getName() {
-        return getRace().getName() + " homeworld";
+        return getFaction().getName() + " homeworld";
     }
 }

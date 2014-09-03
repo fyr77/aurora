@@ -16,6 +16,7 @@ import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.niffy.InteractionTargetSelectorController;
 import ru.game.aurora.music.Playlist;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
@@ -327,7 +328,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
         //TODO: firing sectors
         for (GameObject spaceObject : ships) {
-            if (spaceObject.canBeAttacked() && weapon.getWeaponDesc().range >= playerShip.getDistance(spaceObject) && playerShip.getRace() != spaceObject.getRace()) {
+            if (spaceObject.canBeAttacked() && weapon.getWeaponDesc().range >= playerShip.getDistance(spaceObject) && playerShip.getFaction() != spaceObject.getFaction()) {
                 availableTargets.add(spaceObject);
                 if (target == null) {
                     target = spaceObject;
@@ -526,7 +527,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
     }
 
     private void checkAndStartCustomMusic(World world) {
-        for (AlienRace race : world.getRaces().values()) {
+        for (Faction faction : world.getFactions().values()) {
+            if (!(faction instanceof AlienRace)) {
+                continue;
+            }
+            AlienRace race = (AlienRace) faction;
             if (race.getHomeworld() == this && race.getMusic() != null) {
                 race.getMusic().play();
             }
@@ -658,7 +663,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
         g.setColor(Color.red);
         for (GameObject ship : ships) {
             ship.draw(container, g, camera, world);
-            if (mode == MODE_SHOOT && ship.canBeAttacked() && player.getShip().getDistance(ship) < selectedWeaponRange && player.getShip().getRace() != ship.getRace()) {
+            if (mode == MODE_SHOOT && ship.canBeAttacked() && player.getShip().getDistance(ship) < selectedWeaponRange && player.getShip().getFaction() != ship.getFaction()) {
                 // every targetable ship is surrounded by rectangle
                 g.drawRect(camera.getXCoord(ship.getX()), camera.getYCoord(ship.getY()), camera.getTileWidth(), camera.getTileHeight());
             }
