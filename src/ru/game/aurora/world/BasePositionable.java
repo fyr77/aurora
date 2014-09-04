@@ -47,6 +47,11 @@ public class BasePositionable implements Positionable {
         return getDistanceWrapped(x, y, other.getX(), other.getY(), width, height);
     }
 
+    public static double getDistance(Positionable first, Positionable second) {
+        return getDistance(first.getX(), first.getY(), second.getX(), second.getY());
+    }
+
+
     public static double getDistance(int x, int y, int otherX, int otherY) {
         return Math.sqrt(Math.pow(x - otherX, 2) + Math.pow(y - otherY, 2));
     }

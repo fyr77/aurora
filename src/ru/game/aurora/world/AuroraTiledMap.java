@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
+import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import rlforj.los.IFovAlgorithm;
 import rlforj.los.ILosAlgorithm;
@@ -17,6 +18,7 @@ import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.SurfaceTypes;
 import ru.game.aurora.world.planet.TileDrawer;
 
+import java.lang.ref.SoftReference;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,6 +48,8 @@ public class AuroraTiledMap implements ITileMap {
     private transient IFovAlgorithm fovAlgorithm;
 
     private transient ILosAlgorithm losAlgorithm;
+
+    protected transient SoftReference<AStarPathFinder> pathfinder;
 
     public AuroraTiledMap(String mapRef) {
         this.mapRef = mapRef;
@@ -271,5 +275,16 @@ public class AuroraTiledMap implements ITileMap {
     @Override
     public void visit(int i, int i1) {
         flags[i1][i] |= SurfaceTypes.VISIBILITY_MASK;
+    }
+
+
+    @Override
+    public AStarPathFinder getPathFinder() {
+        AStarPathFinder pf = pathfinder != null ? pathfinder.get() : null;
+        if (pf == null) {
+            pf = new AStarPathFinder(this, 100, false);
+            pathfinder = new SoftReference<AStarPathFinder>(pf);
+        }
+        return pf;
     }
 }

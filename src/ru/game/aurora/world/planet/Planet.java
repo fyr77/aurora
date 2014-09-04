@@ -206,7 +206,6 @@ public class Planet extends BasePlanet implements IDungeon {
                     if (surface == null) {
                         createSurface();
                     }
-                    MonsterController.resetPathfinder(surface);
 
                 } catch (Exception e) {
                     logger.error("Failed to generate surface for planet", e);
@@ -220,7 +219,6 @@ public class Planet extends BasePlanet implements IDungeon {
         GUI.getInstance().getNifty().gotoScreen("surface_gui");
         world.getCamera().setTarget(landingParty);
         world.getCamera().resetViewPort();
-        MonsterController.resetPathfinder(surface);
     }
 
 

@@ -2,6 +2,7 @@ package ru.game.aurora.world.planet;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
@@ -12,6 +13,7 @@ import ru.game.aurora.world.ITileMap;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 
 import java.io.Serializable;
+import java.lang.ref.SoftReference;
 import java.util.*;
 
 /**
@@ -31,6 +33,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
      */
     private final List<GameObject> planetObjects = new ArrayList<>();
 
+    protected transient SoftReference<AStarPathFinder> pathfinder;
 
     /**
      * Tiles with planet surface.
@@ -317,5 +320,16 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
     public byte[][] getSurface() {
         return surface;
+    }
+
+
+    @Override
+    public AStarPathFinder getPathFinder() {
+        AStarPathFinder pf = pathfinder != null ? pathfinder.get() : null;
+        if (pf == null) {
+            pf = new AStarPathFinder(this, getWidthInTiles(), false);
+            pathfinder = new SoftReference<AStarPathFinder>(pf);
+        }
+        return pf;
     }
 }

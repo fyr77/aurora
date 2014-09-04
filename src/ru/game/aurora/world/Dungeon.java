@@ -79,7 +79,6 @@ public class Dungeon implements Room, IDungeon {
         if (playlistName != null) {
             ResourceManager.getInstance().getPlaylist(playlistName).play();
         }
-        MonsterController.resetPathfinder(map);
     }
 
     @Override
@@ -119,7 +118,6 @@ public class Dungeon implements Room, IDungeon {
         int tilesExplored = map.updateVisibility(landingParty.getX(), landingParty.getY(), 2);
         landingParty.addCollectedGeodata(tilesExplored);
 
-        MonsterController.resetPathfinder(map);
         if (playlistName != null) {
             ResourceManager.getInstance().getPlaylist(playlistName).play();
         }

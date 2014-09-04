@@ -15,13 +15,11 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.gui.GUI;
-import ru.game.aurora.world.ITileMap;
-import ru.game.aurora.world.Positionable;
-import ru.game.aurora.world.Room;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -231,7 +229,12 @@ public class GalaxyMap extends BaseSpaceRoom {
         return Math.sqrt(Math.pow(first.getX() - second.getX(), 2) + Math.pow(first.getY() - second.getY(), 2));
     }
 
-    public List<GalaxyMapObject> getObjects() {
+    @Override
+    public List<GameObject> getObjects() {
+        return Collections.emptyList();
+    }
+
+    public List<GalaxyMapObject> getGalaxyMapObjects() {
         return objects;
     }
 
@@ -270,5 +273,15 @@ public class GalaxyMap extends BaseSpaceRoom {
             }
         } while (!isValidCoord(center.getX() + x, center.getY() + y));
         addObjectAndSetTile(object, center.getX() + x, center.getY() + y);
+    }
+
+    @Override
+    public int getWidthInTiles() {
+        return tilesX;
+    }
+
+    @Override
+    public int getHeightInTiles() {
+        return tilesY;
     }
 }

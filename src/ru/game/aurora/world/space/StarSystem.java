@@ -29,7 +29,7 @@ import java.io.Serializable;
 import java.util.*;
 
 @SuppressWarnings("InstanceVariableMayNotBeInitializedByReadObject")
-public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
+public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileMap {
 
     public static final Color[] possibleColors = {Color.red, Color.white, Color.yellow, new Color(122, 155, 243)};
 
@@ -807,6 +807,21 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject {
 
     public Star getStar() {
         return star;
+    }
+
+    @Override
+    public List<GameObject> getObjects() {
+        return ships;
+    }
+
+    @Override
+    public int getWidthInTiles() {
+        return radius * 2;
+    }
+
+    @Override
+    public int getHeightInTiles() {
+        return radius * 2;
     }
 
     private static class AsteroidBelt implements Serializable {

@@ -43,7 +43,7 @@ public class BuildersRuinGenerator implements WorldGeneratorPart {
         // select 10 random star systems
         Set<GalaxyMapObject> updatedSystems = new HashSet<>();
         for (int i = 0; i < Math.min(SYSTEMS, world.getGalaxyMap().getObjects().size()); ++i) {
-            final GalaxyMapObject obj = CollectionUtils.selectRandomElement(world.getGalaxyMap().getObjects());
+            final GalaxyMapObject obj = CollectionUtils.selectRandomElement(world.getGalaxyMap().getGalaxyMapObjects());
             if (StarSystem.class.isAssignableFrom(obj.getClass()) && !updatedSystems.contains(obj)) {
                 GlobalThreadPool.getExecutor().submit(new Runnable() {
                     @Override

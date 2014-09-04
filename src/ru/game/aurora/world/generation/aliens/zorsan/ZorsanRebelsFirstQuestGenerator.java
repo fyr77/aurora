@@ -130,7 +130,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
 
         boolean artifactPlaced = false;
 
-        for (GalaxyMapObject gmo : world.getGalaxyMap().getObjects()) {
+        for (GalaxyMapObject gmo : world.getGalaxyMap().getGalaxyMapObjects()) {
             if (!StarSystem.class.isAssignableFrom(gmo.getClass())) {
                 continue;
             }

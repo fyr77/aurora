@@ -168,7 +168,7 @@ public class StarMapController implements ScreenController {
         y = myCamera.getPointTileY(y);
         double minDist = Double.POSITIVE_INFINITY;
         GalaxyMapObject result = null;
-        for (GalaxyMapObject gmo : world.getGalaxyMap().getObjects()) {
+        for (GalaxyMapObject gmo : world.getGalaxyMap().getGalaxyMapObjects()) {
             double newDist = BasePositionable.getDistance(gmo.getX(), gmo.getY(), x, y);
             if (newDist < minDist) {
                 result = gmo;

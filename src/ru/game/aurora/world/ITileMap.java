@@ -8,6 +8,7 @@ package ru.game.aurora.world;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 import rlforj.los.ILosBoard;
 import ru.game.aurora.application.Camera;
@@ -56,4 +57,6 @@ public interface ITileMap extends Serializable, ILosBoard, TileBasedMap {
     public Collection<BasePositionable> getExitPoints();
 
     public Collection<IVictoryCondition> getVictoryConditions();
+
+    public AStarPathFinder getPathFinder();
 }

@@ -13,16 +13,16 @@ import java.util.List;
 public class Listenable implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private List<IStateChangeListener> listeners = null;
+    private List<IStateChangeListener<World>> listeners = null;
 
-    public void addListener(IStateChangeListener listener) {
+    public void addListener(IStateChangeListener<World> listener) {
         if (listeners == null) {
             listeners = new ArrayList<>();
         }
         listeners.add(listener);
     }
 
-    public void removeListener(IStateChangeListener listener) {
+    public void removeListener(IStateChangeListener<World> listener) {
         if (listeners != null) {
             listeners.remove(listener);
         }
@@ -32,7 +32,7 @@ public class Listenable implements Serializable {
         if (listeners == null) {
             return;
         }
-        for (IStateChangeListener listener : listeners) {
+        for (IStateChangeListener<World> listener : listeners) {
             listener.stateChanged(world);
         }
     }

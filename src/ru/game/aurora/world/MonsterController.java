@@ -1,7 +1,6 @@
 package ru.game.aurora.world;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.Path;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
@@ -36,9 +35,6 @@ public class MonsterController implements Serializable {
 
     private final ITileMap map;
 
-    private static AStarPathFinder pathFinder;
-
-    private static final int MAX_PATH_LENGTH = 100;
     private Path path;
     private int lastX;
     private int lastY;
@@ -50,10 +46,6 @@ public class MonsterController implements Serializable {
         this.myMonster = myMonster;
         this.turnsBeforeMove = myMonster.getSpeed();
         this.weapon = myMonster.getWeapon();
-    }
-
-    public static void resetPathfinder(ITileMap map) {
-        pathFinder = new AStarPathFinder(map, Math.min(MAX_PATH_LENGTH, map.getWidthInTiles() / 3), false);
     }
 
     private Effect playAttackEffects(World world, IMovable other) {
@@ -132,7 +124,7 @@ public class MonsterController implements Serializable {
                         lastX = partyX;
                         lastY = partyY;
                         map.setTilePassable(x, y, true);    //hack (pathfinder cannot find path if starting point is blocked)
-                        path = pathFinder.findPath(null, x, y, lastX, lastY);
+                        path = map.getPathFinder().findPath(null, x, y, lastX, lastY);
                         map.setTilePassable(x, y, false);   //hack
                         pathIndex = 1;
                     }

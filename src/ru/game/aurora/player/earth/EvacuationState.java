@@ -109,7 +109,7 @@ public class EvacuationState implements Serializable {
      */
     private void findSuitableStarSystem(GalaxyMap map, final StarSystem solarSystem) {
         List<StarSystem> suitableStarSystems = new LinkedList<>();
-        for (GalaxyMapObject o : map.getObjects()) {
+        for (GalaxyMapObject o : map.getGalaxyMapObjects()) {
             if (!(o instanceof StarSystem)) {
                 continue;
             }

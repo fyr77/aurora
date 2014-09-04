@@ -118,7 +118,7 @@ public class WorldGenerator implements Runnable {
 
                         synchronized (world) {
                             final int idx = world.getGalaxyMap().getObjects().size();
-                            world.getGalaxyMap().getObjects().add(ss);
+                            world.getGalaxyMap().getGalaxyMapObjects().add(ss);
                             world.getGalaxyMap().setTileAt(x, y, idx);
                         }
                     } catch (Throwable t) {
