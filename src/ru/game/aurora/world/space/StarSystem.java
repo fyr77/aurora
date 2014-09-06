@@ -20,7 +20,7 @@ import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
-import ru.game.aurora.world.equip.StarshipWeapon;
+import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.BasePlanet;
 
 import java.io.IOException;
@@ -319,16 +319,16 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         List<GameObject> availableTargets = new ArrayList<>();
 
         final Ship playerShip = world.getPlayer().getShip();
-        final StarshipWeapon weapon = playerShip.getWeapons().get(selectedWeapon);
+        final WeaponInstance weapon = playerShip.getWeapons().get(selectedWeapon);
 
-        if (target != null && (!target.isAlive() || playerShip.getDistance(target) > weapon.getWeaponDesc().range)) {
+        if (target != null && (!target.isAlive() || playerShip.getDistance(target) > weapon.getWeaponDesc().getRange())) {
             // target moved out of range
             target = null;
         }
 
         //TODO: firing sectors
         for (GameObject spaceObject : ships) {
-            if (spaceObject.canBeAttacked() && weapon.getWeaponDesc().range >= playerShip.getDistance(spaceObject) && playerShip.getFaction() != spaceObject.getFaction()) {
+            if (spaceObject.canBeAttacked() && weapon.getWeaponDesc().getRange() >= playerShip.getDistance(spaceObject) && playerShip.getFaction() != spaceObject.getFaction()) {
                 availableTargets.add(spaceObject);
                 if (target == null) {
                     target = spaceObject;
@@ -366,7 +366,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
             }
 
             // firing
-            final int damage = weapon.getWeaponDesc().damage;
+            final int damage = weapon.getWeaponDesc().getDamage();
 
             List<GameObject> targetsAtSamePosition = getGameObjectsAtPosition(target);
 
@@ -392,7 +392,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         }
     }
 
-    private void doFire(World world, final GameObject targetObject, final Ship playerShip, StarshipWeapon weapon, final int damage) {
+    private void doFire(World world, final GameObject targetObject, final Ship playerShip, WeaponInstance weapon, final int damage) {
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, target.getName()));
 
         BlasterShotEffect e = new BlasterShotEffect(playerShip, targetObject, world.getCamera(), 800, weapon);
@@ -656,7 +656,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
 
         final int selectedWeaponRange;
         if (mode == MODE_SHOOT) {
-            selectedWeaponRange = player.getShip().getWeapons().get(selectedWeapon).getWeaponDesc().range;
+            selectedWeaponRange = player.getShip().getWeapons().get(selectedWeapon).getWeaponDesc().getRange();
         } else {
             selectedWeaponRange = 0;
         }

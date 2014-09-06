@@ -1,14 +1,13 @@
 {
-    "id" : "zorsan_small_cannon",
-    "damage" : 1,
+    "id": "zorsan_small_cannon",
+    "damage": 1,
     "name": "",
     "desc": "",
-    "shotSprite" : "blaster_shot_red",
-    "range" : 5,
-    "image" : "",
-    "shotSound" : "autofire_1",
-    "reloadTurns" : 0,
-    "explosionAnimation" : "blaster_explosion_red",
-    "size" : 15
+    "shotSprite": "blaster_shot_red",
+    "range": 5,
+    "shotSound": "autofire_1",
+    "reloadTurns": 0,
+    "explosionAnimation": "blaster_explosion_red",
+    "size": 15
 
 }

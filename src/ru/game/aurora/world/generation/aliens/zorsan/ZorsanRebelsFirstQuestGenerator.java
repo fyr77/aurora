@@ -197,7 +197,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
                     , false
                     , false
                     , 7
-                    , ResourceManager.getInstance().getLandingPartyWeapons().getEntity("zorsan_laser")
+                    , ResourceManager.getInstance().getWeapons().getEntity("zorsan_laser_rifles")
                     , 1
                     , MonsterBehaviour.AGGRESSIVE
                     , Collections.<AnimalModifier>emptySet()

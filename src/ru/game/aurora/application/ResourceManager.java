@@ -10,8 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import ru.game.aurora.music.Playlist;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
-import ru.game.aurora.world.equip.StarshipWeaponDesc;
+import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.MonsterDesc;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -44,11 +43,13 @@ public class ResourceManager {
     private final Map<String, String> textMap;
     private final Map<String, SpriteSheet> spriteSheetMap;
 
-    private final JsonConfigManager<StarshipWeaponDesc> weapons = new JsonConfigManager<>(StarshipWeaponDesc.class, "resources/items/starship_weapons");
+    private final JsonConfigManager<WeaponDesc> weapons = new JsonConfigManager<>(
+            WeaponDesc.class
+            , "resources/items/starship_weapons"
+            , "resources/items/crew_weapons"
+    );
 
-    private final JsonConfigManager<LandingPartyWeapon> landingPartyWeapons = new JsonConfigManager<>(LandingPartyWeapon.class, "resources/items/crew_weapons");
-
-    private final JsonConfigManager<MonsterDesc> monsterDescs= new JsonConfigManager<>(MonsterDesc.class, "resources/monsters");
+    private final JsonConfigManager<MonsterDesc> monsterDescs = new JsonConfigManager<>(MonsterDesc.class, "resources/monsters");
 
     private static final Logger logger = LoggerFactory.getLogger(ResourceManager.class);
 
@@ -365,12 +366,8 @@ public class ResourceManager {
 
     }
 
-    public JsonConfigManager<StarshipWeaponDesc> getWeapons() {
+    public JsonConfigManager<WeaponDesc> getWeapons() {
         return weapons;
-    }
-
-    public JsonConfigManager<LandingPartyWeapon> getLandingPartyWeapons() {
-        return landingPartyWeapons;
     }
 
     public JsonConfigManager<MonsterDesc> getMonsterDescs() {

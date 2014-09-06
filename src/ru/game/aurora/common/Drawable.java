@@ -18,9 +18,9 @@ public class Drawable implements Serializable {
 
     private String id;
 
-    private int tx;
+    private int tx = -1;
 
-    private int ty;
+    private int ty = -1;
 
     private transient Image flippedCopy;
 

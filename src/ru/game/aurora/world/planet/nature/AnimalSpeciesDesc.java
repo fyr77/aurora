@@ -8,7 +8,7 @@ package ru.game.aurora.world.planet.nature;
 
 
 import org.newdawn.slick.Image;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.Planet;
 
@@ -35,7 +35,7 @@ public class AnimalSpeciesDesc implements Serializable {
      */
     private final int speed;
 
-    private final LandingPartyWeapon weapon;
+    private final WeaponDesc weapon;
 
     private transient Image image;
 
@@ -68,7 +68,7 @@ public class AnimalSpeciesDesc implements Serializable {
             , boolean carnivorous
             , boolean herbivorous
             , int hp
-            , LandingPartyWeapon weapon
+            , WeaponDesc weapon
             , int speed
             , MonsterBehaviour behaviour
             , Set<AnimalModifier> modifiers
@@ -106,7 +106,7 @@ public class AnimalSpeciesDesc implements Serializable {
         return speed;
     }
 
-    public LandingPartyWeapon getWeapon() {
+    public WeaponDesc getWeapon() {
         return weapon;
     }
 

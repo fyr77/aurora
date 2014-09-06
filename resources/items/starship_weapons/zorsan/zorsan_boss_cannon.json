@@ -1,12 +1,11 @@
 {
-    "id" : "zorsan_boss_cannon",
-    "damage" : 6,
+    "id": "zorsan_boss_cannon",
+    "damage": 6,
     "name": "",
     "desc": "",
-    "shotSprite" : "blaster_shot_red",
-    "range" : 12,
-    "image" : "",
-    "shotSound" : "autofire_1",
-    "reloadTurns" : 5,
-    "explosionAnimation" : "ship_explosion"
+    "shotSprite": "blaster_shot_red",
+    "range": 12,
+    "shotSound": "autofire_1",
+    "reloadTurns": 5,
+    "explosionAnimation": "ship_explosion"
 }

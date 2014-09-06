@@ -1,14 +1,13 @@
 {
-    "id" : "klisk_small_laser",
-    "damage" : 2,
+    "id": "klisk_small_laser",
+    "damage": 2,
     "name": "",
     "desc": "",
-    "shotSprite" : "blaster_shot",
-    "shotSound" : "laser_1",
-    "range" : 5,
-    "image" : "ship_laser",
-    "reloadTurns" : 1,
-    "explosionAnimation" : "blaster_explosion",
-    "particlesAnimation" : "blaster_particles",
-    "size" : 15
+    "shotSprite": "blaster_shot",
+    "shotSound": "laser_1",
+    "range": 5,
+    "reloadTurns": 1,
+    "explosionAnimation": "blaster_explosion",
+    "particlesAnimation": "blaster_particles",
+    "size": 15
 }

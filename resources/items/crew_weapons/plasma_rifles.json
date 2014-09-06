@@ -1,9 +1,12 @@
 {
-    "id" : "plasma",
-    "name" : "plasma_rifles.name",
-    "range" : 5,
-    "damage" : 4,
-    "image" : "crew_laser",
-    "shotImage" : "plasma_shot",
-    "shotSound" : "plasma_1"
+    "id": "plasma_rifles",
+    "range": 5,
+    "damage": 4,
+    "drawable": {
+        "id": "crew_laser",
+        "tx": -1,
+        "ty": -1
+    },
+    "shotImage": "plasma_shot",
+    "shotSound": "plasma_1"
 }

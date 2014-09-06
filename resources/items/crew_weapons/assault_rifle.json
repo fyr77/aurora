@@ -1,9 +1,13 @@
 {
-    "id" : "assault",
-    "name" : "assault_rifles.name",
-    "range" : 6,
-    "damage" : 1,
-    "image" : "crew_rifle",
-    "shotImage" : "bullet_shot",
-    "shotSound" : "bullet_1"
+    "id": "assault",
+    "name": "assault_rifles.name",
+    "range": 6,
+    "damage": 1,
+    "drawable": {
+        "id": "crew_rifle",
+        "tx": -1,
+        "ty": -1
+    },
+    "shotImage": "bullet_shot",
+    "shotSound": "bullet_1"
 }

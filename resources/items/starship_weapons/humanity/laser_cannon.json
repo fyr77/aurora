@@ -5,7 +5,11 @@
     "desc": "laser_cannon.desc",
     "shotSprite" : "blaster_shot",
     "range" : 5,
-    "image" : "ship_laser",
+    "drawable": {
+        "id": "ship_laser",
+        "tx": -1,
+        "ty": -1
+    },
     "shotSound" : "laser_1",
     "reloadTurns" : 1,
     "explosionAnimation" : "blaster_explosion",

@@ -15,14 +15,13 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.niffy.CustomHint;
 import ru.game.aurora.gui.niffy.ImageButtonController;
 import ru.game.aurora.gui.niffy.InteractionTargetSelectorController;
 import ru.game.aurora.gui.niffy.TopPanelController;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
-import ru.game.aurora.world.equip.StarshipWeaponDesc;
+import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
@@ -164,15 +163,15 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
             }
             if (i < world.getPlayer().getShip().getWeapons().size()) {
                 buttonControl.enable();
-                final StarshipWeaponDesc weaponDesc = world.getPlayer().getShip().getWeapons().get(i).getWeaponDesc();
-                buttonControl.setImage(ResourceManager.getInstance().getImage(weaponDesc.image));
+                final WeaponDesc weaponDesc = world.getPlayer().getShip().getWeapons().get(i).getWeaponDesc();
+                buttonControl.setImage(weaponDesc.getImage());
                 // update hint
                 List<Effect> effects = buttonControl.getElement().getEffects(EffectEventId.onHover, CustomHint.class);
                 final String hintText = String.format(Localization.getText("gui", "space.weapon_tooltip")
-                        , Localization.getText("weapons", weaponDesc.name)
-                        , weaponDesc.damage
-                        , weaponDesc.range
-                        , weaponDesc.reloadTurns);
+                        , Localization.getText("weapons", weaponDesc.getName())
+                        , weaponDesc.getDamage()
+                        , weaponDesc.getRange()
+                        , weaponDesc.getReloadTurns());
 
                 effects.get(0).getParameters().setProperty("hintText", hintText);
                 //buttonControl.getElement().getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage(world.getPlayer().getShip().getWeapons().get(i).getWeaponDesc().image))));

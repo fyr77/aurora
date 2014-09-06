@@ -1,9 +1,8 @@
 {
-    "id" : "melee",
-    "name" : "melee_weapon.name",
-    "range" : 1,
-    "damage" : 7,
-    "image" : "crew_laser",
-    "shotImage" : "plasma_shot",
-    "shotSound" : "melee_1"
+    "id": "melee",
+    "name": "melee_weapon.name",
+    "range": 1,
+    "damage": 7,
+    "shotImage": "plasma_shot",
+    "shotSound": "melee_1"
 }

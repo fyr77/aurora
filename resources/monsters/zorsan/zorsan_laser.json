@@ -7,6 +7,6 @@
         "ty": 0
     },
     "turnsBetweenMoves": 2,
-    "weaponId": "zorsan_laser",
+    "weaponId": "zorsan_laser_rifles",
     "behaviour": "AGGRESSIVE"
 }

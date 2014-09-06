@@ -9,8 +9,8 @@ package ru.game.aurora.world.equip;
 
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.JsonConfigManager;
-import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.common.Drawable;
+import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
@@ -22,32 +22,36 @@ import java.io.Serializable;
  * Damage is calculated as [party combat strength] * [weapon damage],
  * where combat strength is 1 * number of military + 1/3 * (number of engineers and scientists)
  */
-public class LandingPartyWeapon implements Serializable, JsonConfigManager.EntityWithId, InventoryItem {
+public class WeaponDesc extends ItemWithTextAndImage implements Serializable, JsonConfigManager.EntityWithId, InventoryItem {
 
     private static final long serialVersionUID = 3L;
-
-    private final String id;
 
     private final int damage;
 
     private final int range;
 
-    private final String name;
-
-    private final String image;
-
     private final String shotImage;
 
-    private final String shotSound;
+    private final int reloadTurns;
 
-    public LandingPartyWeapon(String id, int damage, int range, String name, String image, String shotImage, String shotSound) {
-        this.id = id;
+    public final String shotSound;
+
+    public final String explosionAnimation;
+
+    public final String particlesAnimation;
+
+    public final int size;
+
+    public WeaponDesc(String id, Drawable drawable, int damage, int range, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
+        super(id, drawable);
         this.damage = damage;
         this.range = range;
-        this.name = name;
-        this.image = image;
         this.shotImage = shotImage;
         this.shotSound = shotSound;
+        this.reloadTurns = reloadTurns;
+        this.explosionAnimation = explosionAnimation;
+        this.particlesAnimation = particlesAnimation;
+        this.size = size;
     }
 
     public int getDamage() {
@@ -56,10 +60,6 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
 
     public int getRange() {
         return range;
-    }
-
-    public String getName() {
-        return Localization.getText("weapons", name);
     }
 
     @Override
@@ -78,16 +78,7 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
 
     @Override
     public int getWeight() {
-        return 0;
-    }
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    public Image getImage() {
-        return ResourceManager.getInstance().getImage(image);
+        return size;
     }
 
     public String getShotImage() {
@@ -101,5 +92,19 @@ public class LandingPartyWeapon implements Serializable, JsonConfigManager.Entit
     @Override
     public String toString() {
         return getName() + " " + damage + " DMG, " + range + " RNG";
+    }
+
+    @Override
+    public String getName() {
+        return getLocalizedName("weapons");
+    }
+
+    @Override
+    public Image getImage() {
+        return drawable.getImage();
+    }
+
+    public int getReloadTurns() {
+        return reloadTurns;
     }
 }

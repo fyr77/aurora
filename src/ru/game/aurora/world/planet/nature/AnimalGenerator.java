@@ -11,7 +11,7 @@ import ru.game.aurora.frankenstein.Slick2DColor;
 import ru.game.aurora.frankenstein.Slick2DFrankensteinImage;
 import ru.game.aurora.frankenstein.Slick2DImageFactory;
 import ru.game.aurora.util.ProbabilitySet;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.frankenstein.*;
 import ru.game.frankenstein.impl.MonsterPartsLoader;
@@ -85,7 +85,7 @@ public class AnimalGenerator {
         int hp = 2 * baseDmg + random.nextInt(baseDmg);
         int dmg = (int) Math.ceil(((baseHp / 2.0 - baseHp / 3.0) * random.nextDouble() + baseHp / 3.0));
 
-        LandingPartyWeapon weapon;
+        WeaponDesc weapon;
         boolean ranged = random.nextDouble() < rangeAttackChance;
         int range = 3;
 
@@ -107,9 +107,9 @@ public class AnimalGenerator {
         }
 
         if (ranged) {
-            weapon = new LandingPartyWeapon("claw", dmg, range, "", "", "bullet_shot", "bullet_1");
+            weapon = new WeaponDesc("claw", null, dmg, range, "bullet_shot", "bullet_1", 0, null, null, 0);
         } else {
-            weapon = new LandingPartyWeapon("melee", dmg, 1, "", "", "", "melee_1");
+            weapon = new WeaponDesc("melee", null, dmg, 1, "", "", 0, "melee_1", null, 0);
         }
 
         AnimalSpeciesDesc result = new AnimalSpeciesDesc(
@@ -131,8 +131,7 @@ public class AnimalGenerator {
         return result;
     }
 
-    private Map<Integer, Slick2DColor> createDefault4TintMap(Color color)
-    {
+    private Map<Integer, Slick2DColor> createDefault4TintMap(Color color) {
         Map<Integer, Slick2DColor> result = new HashMap<>();
         result.put(1, new Slick2DColor(color.darker()));
         result.put(2, new Slick2DColor(color));

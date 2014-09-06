@@ -22,6 +22,11 @@ public abstract class ShipUpgrade extends ItemWithTextAndImage {
         this.localizationGroup = localizationGroup;
     }
 
+    public ShipUpgrade(String id, Drawable d, String localizationGroup) {
+        super(id, d);
+        this.localizationGroup = localizationGroup;
+    }
+
     public abstract void onInstalled(World world, Ship ship);
 
     public abstract void onRemoved(World world, Ship ship);

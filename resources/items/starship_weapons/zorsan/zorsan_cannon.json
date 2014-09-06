@@ -5,7 +5,11 @@
     "desc": "zorsan_cannon.desc",
     "shotSprite" : "blaster_shot_red",
     "range" : 6,
-    "image" : "zorsan_ship_laser",
+    "drawable": {
+        "id": "zorsan_ship_laser",
+        "tx": -1,
+        "ty": -1
+    },
     "shotSound" : "autofire_1",
     "reloadTurns" : 1,
     "explosionAnimation" : "blaster_explosion_red",

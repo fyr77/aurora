@@ -17,7 +17,7 @@ import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.util.GameTimer;
 import ru.game.aurora.world.*;
-import ru.game.aurora.world.equip.StarshipWeaponDesc;
+import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
@@ -497,7 +497,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
     }
 
     private NPCShip createVoyager(World world) {
-        List<StarshipWeaponDesc> weapons = new LinkedList<>();
+        List<WeaponDesc> weapons = new LinkedList<>();
         //default weapons
         weapons.add(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon2"));
         weapons.add(ResourceManager.getInstance().getWeapons().getEntity("humanity_missiles"));
@@ -516,7 +516,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         ship.setSpeed(2);
         ship.setPos(earth.getX() + CommonRandom.getRandom().nextInt(8) - 2, earth.getY() + CommonRandom.getRandom().nextInt(6) - 3);
         ship.enableRepairs(4);
-        StarshipWeaponDesc[] descs = weapons.toArray(new StarshipWeaponDesc[weapons.size()]);
+        WeaponDesc[] descs = weapons.toArray(new WeaponDesc[weapons.size()]);
         ship.setWeapons(descs);
         allyShips.add(ship);
         return ship;

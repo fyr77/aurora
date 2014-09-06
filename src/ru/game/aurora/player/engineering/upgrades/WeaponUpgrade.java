@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.equip.StarshipWeapon;
-import ru.game.aurora.world.equip.StarshipWeaponDesc;
+import ru.game.aurora.world.equip.WeaponDesc;
+import ru.game.aurora.world.equip.WeaponInstance;
 
 import java.util.Iterator;
 
@@ -17,30 +17,29 @@ import java.util.Iterator;
  * Time: 16:52
  */
 
-public class WeaponUpgrade extends ShipUpgrade
-{
+public class WeaponUpgrade extends ShipUpgrade {
     private static final Logger logger = LoggerFactory.getLogger(WeaponUpgrade.class);
 
     private static final long serialVersionUID = 7410869118141240436L;
 
-    private final StarshipWeaponDesc weaponDesc;
+    private final WeaponDesc weaponDesc;
 
-    public WeaponUpgrade(StarshipWeaponDesc weaponDesc) {
-        super(weaponDesc.id, weaponDesc.image, "weapons");
+    public WeaponUpgrade(WeaponDesc weaponDesc) {
+        super(weaponDesc.getId(), weaponDesc.getDrawable(), "weapons");
         this.weaponDesc = weaponDesc;
     }
 
     @Override
     public void onInstalled(World world, Ship ship) {
-        ship.getWeapons().add(new StarshipWeapon(weaponDesc, StarshipWeapon.MOUNT_ALL));
+        ship.getWeapons().add(new WeaponInstance(weaponDesc));
         logger.info("Installing new weapon " + weaponDesc.getId());
     }
 
     @Override
     public void onRemoved(World world, Ship ship) {
         logger.info("Removing weapon " + weaponDesc.getId());
-        for (Iterator<StarshipWeapon> iterator = ship.getWeapons().iterator(); iterator.hasNext(); ) {
-            StarshipWeapon sw = iterator.next();
+        for (Iterator<WeaponInstance> iterator = ship.getWeapons().iterator(); iterator.hasNext(); ) {
+            WeaponInstance sw = iterator.next();
             if (sw.getWeaponDesc().equals(weaponDesc)) {
                 iterator.remove();
                 return;
@@ -56,10 +55,7 @@ public class WeaponUpgrade extends ShipUpgrade
 
     @Override
     public String getLocalizedDescription() {
-        StringBuilder sb = new StringBuilder(super.getLocalizedDescription());
-        sb.append('\n').append('\n');
-        sb.append("RNG: ").append(weaponDesc.range).append(", DMG: ").append(weaponDesc.damage).append(", RLD:").append(weaponDesc.reloadTurns);
-        return sb.toString();
+        return super.getLocalizedDescription() + '\n' + '\n' + "RNG: " + weaponDesc.getRange() + ", DMG: " + weaponDesc.getDamage() + ", RLD:" + weaponDesc.getReloadTurns();
     }
 
     @Override

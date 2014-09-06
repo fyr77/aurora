@@ -1,15 +1,14 @@
 {
-    "id" : "simple_cannon",
-    "damage" : 1,
+    "id": "simple_cannon",
+    "damage": 1,
     "name": "simple_cannon.name",
     "desc": "simple_cannon.desc",
-    "shotSprite" : "bullet_shot",
-    "shotSound" : "bullet_1",
-    "range" : 2,
-    "image" : "ship_laser",
-    "reloadTurns" : 0,
-    "explosionAnimation" : "rocket_explosion",
-    "particlesAnimation" : "rocket_particles",
-    "size" : 10
+    "shotSprite": "bullet_shot",
+    "shotSound": "bullet_1",
+    "range": 2,
+    "reloadTurns": 0,
+    "explosionAnimation": "rocket_explosion",
+    "particlesAnimation": "rocket_particles",
+    "size": 10
 
 }

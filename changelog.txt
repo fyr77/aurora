@@ -2,6 +2,10 @@ VERSION 0.4.0
 
 IN PROGRESS
 
+* Global refactoring of game object classes
++ Ship inventory screen
++ Officer dialog system
+
 =============================================
 
 VERSION 0.3.2

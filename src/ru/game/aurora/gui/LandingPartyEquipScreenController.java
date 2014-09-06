@@ -23,7 +23,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.LandingParty;
 
@@ -72,7 +72,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
     public void onStartScreen() {
         final LandingParty worldLandingParty = world.getPlayer().getLandingParty();
         if (worldLandingParty == null) {
-            localLandingParty = new LandingParty(0, 0, ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault"), 1, 1, 1, Configuration.getIntProperty("player.landing_party.defaultHP"));
+            localLandingParty = new LandingParty(0, 0, ResourceManager.getInstance().getWeapons().getEntity("assault"), 1, 1, 1, Configuration.getIntProperty("player.landing_party.defaultHP"));
             myScreen.findNiftyControl("cancel_button", Button.class).disable();
         } else {
             localLandingParty = new LandingParty(worldLandingParty);
@@ -97,7 +97,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
         DropDown weaponSelect = myScreen.findNiftyControl("weapon_select", DropDown.class);
         weaponSelect.clear();
         for (InventoryItem item : world.getPlayer().getInventory().keySet()) {
-            if (item instanceof LandingPartyWeapon) {
+            if (item instanceof WeaponDesc) {
                 weaponSelect.addItem(item);
             }
         }
@@ -125,7 +125,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
         if (event.getSelection() == null) {
             return;
         }
-        final LandingPartyWeapon weapon = (LandingPartyWeapon) event.getSelection();
+        final WeaponDesc weapon = (WeaponDesc) event.getSelection();
         localLandingParty.setWeapon(weapon);
 
         EngineUtils.setImageForGUIElement(myScreen.findElementByName("selected_weapon_img"), weapon.getImage());

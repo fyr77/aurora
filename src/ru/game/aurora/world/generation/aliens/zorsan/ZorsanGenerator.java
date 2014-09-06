@@ -125,8 +125,8 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                         ship.setMilitary(ship.getMilitary() - marineCount);
                     }
 
-                    party.setWeapon(ResourceManager.getInstance().getLandingPartyWeapons().getEntity("zorsan_laser"));
-                    world.getPlayer().getInventory().put(ResourceManager.getInstance().getLandingPartyWeapons().getEntity("zorsan_laser"), 1);
+                    party.setWeapon(ResourceManager.getInstance().getWeapons().getEntity("zorsan_laser_rifles"));
+                    world.getPlayer().getInventory().put(ResourceManager.getInstance().getWeapons().getEntity("zorsan_laser_rifles"), 1);
                     ResearchProjectDesc zorsan_crew_weapons = world.getResearchAndDevelopmentProjects().getResearchProjects().get("zorsan_crew_weapons");
                     if (zorsan_crew_weapons != null) {
                         world.getPlayer().getResearchState().getCurrentProjects().add(new ResearchProjectState(zorsan_crew_weapons));

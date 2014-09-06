@@ -7,6 +7,6 @@
         "ty": 8
     },
     "turnsBetweenMoves": 2,
-    "weaponId": "plasma",
+    "weaponId": "plasma_rifles",
     "behaviour": "PASSIVE"
 }

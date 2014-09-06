@@ -1,9 +1,13 @@
 {
-    "id" : "zorsan_laser",
-    "name" : "zorsan_laser_rifles.name",
-    "range" : 6,
-    "damage" : 3,
-    "image" : "zorsan_crew_laser",
-    "shotImage" : "blaster_shot_red",
-    "shotSound" : "autofire_1"
+    "id": "zorsan_laser_rifles",
+    "name": "zorsan_laser_rifles.name",
+    "range": 6,
+    "damage": 3,
+    "drawable": {
+        "id": "zorsan_crew_laser",
+        "tx": -1,
+        "ty": -1
+    },
+    "shotImage": "blaster_shot_red",
+    "shotSound": "autofire_1"
 }

@@ -18,7 +18,7 @@ import ru.game.aurora.player.research.projects.Cartography;
 import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.equip.WeaponDesc;
 
 import java.util.Iterator;
 
@@ -35,7 +35,7 @@ public class LandingParty extends BaseGameObject {
 
     private int oxygen;
 
-    private LandingPartyWeapon weapon;
+    private WeaponDesc weapon;
 
     private int collectedGeodata = 0;
 
@@ -51,7 +51,7 @@ public class LandingParty extends BaseGameObject {
         this.hp = maxHp;
     }
 
-    public LandingParty(int x, int y, LandingPartyWeapon weapon, int military, int science, int engineers, int maxHp) {
+    public LandingParty(int x, int y, WeaponDesc weapon, int military, int science, int engineers, int maxHp) {
         super(x, y, "awayteam");
         this.military = military;
         this.science = science;
@@ -109,7 +109,7 @@ public class LandingParty extends BaseGameObject {
         return oxygen;
     }
 
-    public LandingPartyWeapon getWeapon() {
+    public WeaponDesc getWeapon() {
         return weapon;
     }
 
@@ -292,7 +292,7 @@ public class LandingParty extends BaseGameObject {
         return hp;
     }
 
-    public void setWeapon(LandingPartyWeapon weapon) {
+    public void setWeapon(WeaponDesc weapon) {
         this.weapon = weapon;
     }
 

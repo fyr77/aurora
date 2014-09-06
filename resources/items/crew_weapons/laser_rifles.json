@@ -1,9 +1,13 @@
 {
-    "id" : "laser",
-    "name" : "laser_rifles.name",
-    "range" : 6,
-    "damage" : 2,
-    "image" : "crew_laser",
-    "shotImage" : "blaster_shot",
-    "shotSound" : "laser_1"
+    "id": "laser_rifles",
+    "name": "laser_rifles.name",
+    "range": 6,
+    "damage": 2,
+    "drawable": {
+        "id": "crew_laser",
+        "tx": -1,
+        "ty": -1
+    },
+    "shotImage": "blaster_shot",
+    "shotSound": "laser_1"
 }

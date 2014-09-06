@@ -6,7 +6,11 @@
     "shotSprite" : "missile_shot",
     "shotSound" : "missile_1",
     "range" : 12,
-    "image" : "ship_rocket",
+    "drawable": {
+        "id": "ship_rocket",
+        "tx": -1,
+        "ty": -1
+    },
     "reloadTurns" : 3,
     "explosionAnimation" : "rocket_explosion",
     "particlesAnimation" : "rocket_particles",

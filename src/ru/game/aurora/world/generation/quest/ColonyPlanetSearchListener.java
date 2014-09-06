@@ -5,7 +5,7 @@ import ru.game.aurora.application.Configuration;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.*;
@@ -162,7 +162,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
                 , true
                 , false
                 , 25
-                , new LandingPartyWeapon("melee", 6, 1, "", "", "", "melee_1")
+                , new WeaponDesc("melee", null, 6, 1, "", "", 0, "melee_1", null, 0)
                 , 2
                 , MonsterBehaviour.AGGRESSIVE
                 , modifierSet

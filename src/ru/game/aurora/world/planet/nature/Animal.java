@@ -1,5 +1,6 @@
 package ru.game.aurora.world.planet.nature;
 
+import com.google.common.collect.Lists;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -8,9 +9,12 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.*;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.Planet;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,11 +38,18 @@ public class Animal extends BaseGameObject implements IMonster {
 
     private final MonsterController controller;
 
+    private List<WeaponInstance> weapons;
+
     public Animal(Planet p, int x, int y, AnimalSpeciesDesc desc) {
         super(x, y);
         this.desc = desc;
         this.myPlanet = p;
         this.hp = desc.getHp();
+        if (desc.getWeapon() != null) {
+            this.weapons = Lists.newArrayList(new WeaponInstance(desc.getWeapon()));
+        } else {
+            this.weapons = Collections.emptyList();
+        }
         controller = new MonsterController(p.getMap(), this);
     }
 
@@ -80,18 +91,13 @@ public class Animal extends BaseGameObject implements IMonster {
     }
 
     @Override
-    public void changeHp(int amount) {
-        this.hp += amount;
-    }
-
-    @Override
     public int getSpeed() {
         return desc.getSpeed();
     }
 
     @Override
-    public LandingPartyWeapon getWeapon() {
-        return desc.getWeapon();
+    public List<WeaponInstance> getWeapons() {
+        return weapons;
     }
 
     @Override

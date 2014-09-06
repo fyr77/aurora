@@ -8,13 +8,11 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.*;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.MonsterDesc;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,6 +35,8 @@ public class DungeonMonster extends DungeonObject implements IMonster {
 
     private MonsterBehaviour behaviour;
 
+    private List<WeaponInstance> weapons = new ArrayList<>();
+
     public DungeonMonster(AuroraTiledMap map, int groupId, int objectId) {
         super(map, groupId, objectId);
         owner = map;
@@ -49,6 +49,10 @@ public class DungeonMonster extends DungeonObject implements IMonster {
             Collections.addAll(tags, tagsString.split(","));
         }
         controller = new MonsterController(map, this);
+
+        if (desc.weaponId != null) {
+            weapons.add(new WeaponInstance(ResourceManager.getInstance().getWeapons().getEntity(desc.weaponId)));
+        }
     }
 
     @Override
@@ -94,18 +98,13 @@ public class DungeonMonster extends DungeonObject implements IMonster {
     }
 
     @Override
-    public void changeHp(int amount) {
-        hp += amount;
-    }
-
-    @Override
     public int getSpeed() {
         return desc.turnsBetweenMoves;
     }
 
     @Override
-    public LandingPartyWeapon getWeapon() {
-        return ResourceManager.getInstance().getLandingPartyWeapons().getEntity(desc.weaponId);
+    public List<WeaponInstance> getWeapons() {
+        return weapons;
     }
 
     public MonsterBehaviour getBehaviour() {

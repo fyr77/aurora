@@ -21,7 +21,7 @@ import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
 import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
 import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
-import ru.game.aurora.world.equip.StarshipWeapon;
+import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -51,7 +51,7 @@ public class Ship extends BaseGameObject {
 
     private int maxEngineers;
 
-    private final List<StarshipWeapon> weapons = new ArrayList<>();
+    private final List<WeaponInstance> weapons = new ArrayList<>();
 
     private final Multiset<InventoryItem> storage = HashMultiset.create();
 
@@ -127,7 +127,7 @@ public class Ship extends BaseGameObject {
     public void update(GameContainer container, World world) {
         super.update(container, world);
         if (world.isUpdatedThisFrame()) {
-            for (StarshipWeapon weapon : weapons) {
+            for (WeaponInstance weapon : weapons) {
                 weapon.reload();
             }
         }
@@ -180,7 +180,7 @@ public class Ship extends BaseGameObject {
         return scientists + engineers + military;
     }
 
-    public List<StarshipWeapon> getWeapons() {
+    public List<WeaponInstance> getWeapons() {
         return weapons;
     }
 

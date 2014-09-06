@@ -8,7 +8,7 @@ package ru.game.aurora.npc.shipai;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.equip.StarshipWeapon;
+import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -26,7 +26,7 @@ public class CombatAI implements NPCShipAI {
 
     @Override
     public void update(NPCShip ship, World world, StarSystem currentSystem) {
-        if (ship.getWeapons() == null || ship.getWeapons().length == 0 || !target.isAlive()) {
+        if (ship.getWeapons() == null || ship.getWeapons().size() == 0 || !target.isAlive()) {
             // no weapons / no target - flee
             ship.setAi(new LeaveSystemAI());
             return;
@@ -35,15 +35,15 @@ public class CombatAI implements NPCShipAI {
         double distance = ship.getDistance(target);
 
         int inRange = 0;
-        for (int i = 0; i < ship.getWeapons().length; ++i) {
-            final StarshipWeapon weapon = ship.getWeapons()[i];
-            if (weapon.getWeaponDesc().range >= distance) {
+        for (int i = 0; i < ship.getWeapons().size(); ++i) {
+            final WeaponInstance weapon = ship.getWeapons().get(i);
+            if (weapon.getWeaponDesc().getRange() >= distance) {
                 inRange++;
             }
         }
 
         // more weapons in range - more chance to shoot
-        if (inRange > 0 && ship.isStationary() || CommonRandom.getRandom().nextDouble() < (float) inRange / ship.getWeapons().length) {
+        if (inRange > 0 && ship.isStationary() || CommonRandom.getRandom().nextDouble() < (float) inRange / ship.getWeapons().size()) {
             fireAtTarget(ship, world, currentSystem, distance);
             return;
         }
@@ -64,7 +64,7 @@ public class CombatAI implements NPCShipAI {
 
         // not all weapons fired because too far, move closer
         // if all weapons are in range, move closer in a random fashion, so that not all ships gather on single tile
-        if (inRange < ship.getWeapons().length || (distance > 1 && CommonRandom.getRandom().nextBoolean())) {
+        if (inRange < ship.getWeapons().size() || (distance > 1 && CommonRandom.getRandom().nextBoolean())) {
             // randomly move either on X, or on Y, so that all ships do not get grouped on same path within 1-2 tiles
             if (CommonRandom.getRandom().nextBoolean()) {
                 if (!moveToTargetOnX(val, ship)) {
@@ -102,9 +102,9 @@ public class CombatAI implements NPCShipAI {
     }
 
     private void fireAtTarget(NPCShip ship, World world, StarSystem currentSystem, double distance) {
-        for (int i = 0; i < ship.getWeapons().length; ++i) {
-            final StarshipWeapon weapon = ship.getWeapons()[i];
-            if (weapon.getReloadTimeLeft() <= 0 && weapon.getWeaponDesc().range >= distance) {
+        for (int i = 0; i < ship.getWeapons().size(); ++i) {
+            final WeaponInstance weapon = ship.getWeapons().get(i);
+            if (weapon.getReloadTimeLeft() <= 0 && weapon.getWeaponDesc().getRange() >= distance) {
                 ship.fire(world, currentSystem, i, target);
                 return;
             }

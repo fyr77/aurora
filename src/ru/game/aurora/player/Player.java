@@ -15,7 +15,7 @@ import ru.game.aurora.player.engineering.projects.MedpacksCraft;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.Cylinders;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.LandingParty;
@@ -59,7 +59,7 @@ public class Player implements Serializable {
 
     public Player() {
         earthState = new EarthState();
-        final LandingPartyWeapon defaultWeapon = ResourceManager.getInstance().getLandingPartyWeapons().getEntity("assault");
+        final WeaponDesc defaultWeapon = ResourceManager.getInstance().getWeapons().getEntity("assault");
         inventory.put(defaultWeapon, 1);
         landingParty = new LandingParty(0, 0, defaultWeapon, 2, 2, 4, Configuration.getIntProperty("player.landing_party.defaultHP"));
         landingParty.pickUp(new MedPack(), 3);   //Santa's gifts

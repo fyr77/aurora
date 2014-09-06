@@ -28,15 +28,13 @@ import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.util.GameTimer;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.*;
-import ru.game.aurora.world.equip.StarshipWeapon;
-import ru.game.aurora.world.equip.StarshipWeaponDesc;
+import ru.game.aurora.world.equip.WeaponDesc;
+import ru.game.aurora.world.equip.WeaponInstance;
+import ru.game.aurora.world.planet.MonsterBehaviour;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.*;
 
-public class NPCShip extends BaseGameObject {
+public class NPCShip extends BaseGameObject implements IMonster {
 
     private static final long serialVersionUID = 2L;
 
@@ -58,7 +56,7 @@ public class NPCShip extends BaseGameObject {
 
     protected boolean canBeHailed = true;
 
-    protected StarshipWeapon[] weapons;
+    protected List<WeaponInstance> weapons;
 
     // this ship can not move
     private boolean isStationary;
@@ -104,7 +102,7 @@ public class NPCShip extends BaseGameObject {
         }
 
         if (weapons != null) {
-            for (StarshipWeapon w : weapons) {
+            for (WeaponInstance w : weapons) {
                 w.reload();
             }
         }
@@ -262,39 +260,46 @@ public class NPCShip extends BaseGameObject {
         }
     }
 
-    public StarshipWeapon[] getWeapons() {
+    public List<WeaponInstance> getWeapons() {
         return weapons;
     }
 
-    public void setWeapons(StarshipWeapon... weapons) {
-        this.weapons = weapons;
+    @Override
+    public MonsterBehaviour getBehaviour() {
+        return null;
     }
 
-    public void setWeapons(StarshipWeaponDesc... weaponDescs) {
-        this.weapons = new StarshipWeapon[weaponDescs.length];
-        for (int i = 0; i < weaponDescs.length; ++i) {
-            this.weapons[i] = new StarshipWeapon(weaponDescs[i], StarshipWeapon.MOUNT_ALL);
+    public void setWeapons(WeaponInstance... weapons) {
+        this.weapons = new ArrayList<>(weapons.length);
+        Collections.addAll(this.weapons, weapons);
+    }
+
+    public void setWeapons(WeaponDesc... weaponDescs) {
+        this.weapons = new ArrayList<>(weaponDescs.length);
+        for (WeaponDesc weaponDesc : weaponDescs) {
+            this.weapons.add(new WeaponInstance(weaponDesc));
         }
     }
 
     public void fire(World world, StarSystem ss, int weaponIdx, final GameObject target) {
-        weapons[weaponIdx].fire();
-        final StarshipWeaponDesc weaponDesc = weapons[weaponIdx].getWeaponDesc();
+        final WeaponInstance weaponInstance = weapons.get(weaponIdx);
+        weaponInstance.fire();
+        final WeaponDesc weaponDesc = weaponInstance.getWeaponDesc();
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.attack")
                 , getName()
                 , target.getName()
-                , Localization.getText("weapons", weaponDesc.name)
-                , weaponDesc.damage
+                , Localization.getText("weapons", weaponDesc.getName())
+                , weaponDesc.getDamage()
         ));
 
 
-        Effect e = new BlasterShotEffect(this, target, world.getCamera(), 800, weapons[weaponIdx]);
+        Effect e = new BlasterShotEffect(this, target, world.getCamera(), 800, weaponInstance);
         e.setEndListener(new IStateChangeListener<World>() {
             private static final long serialVersionUID = -3379281638297845046L;
 
             @Override
             public void stateChanged(World world) {
-                target.onAttack(world, NPCShip.this, weaponDesc.damage);
+                target.onAttack(world, NPCShip.this, weaponDesc.getDamage());
                 if (!target.isAlive()) {
                     GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
                 }
@@ -442,6 +447,11 @@ public class NPCShip extends BaseGameObject {
 
     public int getHp() {
         return hp;
+    }
+
+    @Override
+    public int getSpeed() {
+        return speed;
     }
 
     public int getMaxHP() {

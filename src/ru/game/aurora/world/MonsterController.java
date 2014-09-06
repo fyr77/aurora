@@ -10,7 +10,8 @@ import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.world.dungeon.DungeonMonster;
-import ru.game.aurora.world.equip.LandingPartyWeapon;
+import ru.game.aurora.world.equip.WeaponDesc;
+import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.MonsterBehaviour;
 
@@ -31,7 +32,7 @@ public class MonsterController implements Serializable {
 
     private int turnsBeforeMove;
 
-    private final LandingPartyWeapon weapon;
+    private final WeaponInstance weapon;
 
     private final ITileMap map;
 
@@ -45,10 +46,10 @@ public class MonsterController implements Serializable {
         this.map = map;
         this.myMonster = myMonster;
         this.turnsBeforeMove = myMonster.getSpeed();
-        this.weapon = myMonster.getWeapon();
+        weapon = !myMonster.getWeapons().isEmpty() ? myMonster.getWeapons().get(0) : null;
     }
 
-    private Effect playAttackEffects(World world, IMovable other) {
+    private Effect playAttackEffects(World world, IMovable other, WeaponDesc weapon) {
 
         ResourceManager.getInstance().getSound(weapon.getShotSound()).play();
         Effect rz;
@@ -75,6 +76,11 @@ public class MonsterController implements Serializable {
         if (!world.isUpdatedThisFrame()) {
             return;
         }
+
+        if (weapon != null) {
+            weapon.reload();
+        }
+
         if (--turnsBeforeMove == 0) {
             turnsBeforeMove = myMonster.getSpeed();
             final int x = myMonster.getX();
@@ -91,19 +97,22 @@ public class MonsterController implements Serializable {
                 ////////////////////////// attack landing party //////////////////////////////////
 
                 final double distance = map.isWrapped() ? party.getDistanceWrapped(myMonster, map.getWidthInTiles(), map.getHeightInTiles()) : party.getDistance(myMonster);
-                if (weapon != null && distance < 1.5 * weapon.getRange()) { //1.5 because of diagonal cells
+                if (weapon != null && distance < 1.5 * weapon.getWeaponDesc().getRange()) { //1.5 because of diagonal cells
                     if (!map.lineOfSightExists(x, y, partyX, partyY)) {
                         // can't shoot because no line of sight
                         return;
                     }
-                    Effect eff = playAttackEffects(world, party);
+                    if (!weapon.isReady()) {
+                        return;
+                    }
+                    Effect eff = playAttackEffects(world, party, weapon.getWeaponDesc());
                     eff.setEndListener(new IStateChangeListener<World>() {
                         private static final long serialVersionUID = -7177344379777105885L;
 
                         @Override
                         public void stateChanged(World world) {
-                            party.subtractHp(world, weapon.getDamage());
-                            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), myMonster.getName(), weapon.getDamage(), party.getHp()));
+                            party.subtractHp(world, weapon.getWeaponDesc().getDamage());
+                            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), myMonster.getName(), weapon.getWeaponDesc().getDamage(), party.getHp()));
                         }
                     });
 
@@ -111,8 +120,8 @@ public class MonsterController implements Serializable {
                     newY = y;
                 } else if (map.lineOfSightExists(x, y, partyX, partyY)
                         && (weapon == null
-                        || distance < 5 * weapon.getRange()
-                        || (weapon.getId().equals("melee") && distance < 15))) {
+                        || distance < 5 * weapon.getWeaponDesc().getRange()
+                        || (weapon.getWeaponDesc().getId().equals("melee") && distance < 15))) {
                     lastX = partyX;
                     lastY = partyY;
                     playerShown = true;
@@ -142,7 +151,7 @@ public class MonsterController implements Serializable {
                 }
 
                 /////////////////////////////////////////////////////////////////////////
-            } else if (myMonster.getBehaviour() == MonsterBehaviour.FRIENDLY && myMonster.getWeapon() != null) {
+            } else if (myMonster.getBehaviour() == MonsterBehaviour.FRIENDLY && weapon != null) {
                 // find some AGGRESSIVE target nearby
                 List<GameObject> tmpList = new ArrayList<>(map.getObjects());
                 for (GameObject po : tmpList) {
@@ -156,15 +165,15 @@ public class MonsterController implements Serializable {
                         continue;
                     }
 
-                    if (po1.getDistance(myMonster) < weapon.getRange() && map.lineOfSightExists(x, y, po.getX(), po.getY())) {
+                    if (po1.getDistance(myMonster) < weapon.getWeaponDesc().getRange() && map.lineOfSightExists(x, y, po.getX(), po.getY())) {
 
-                        Effect eff = playAttackEffects(world, po1);
+                        Effect eff = playAttackEffects(world, po1, weapon.getWeaponDesc());
                         eff.setEndListener(new IStateChangeListener<World>() {
                             private static final long serialVersionUID = 995534841614292836L;
 
                             @Override
                             public void stateChanged(World world) {
-                                po1.onAttack(world, myMonster, weapon.getDamage());
+                                po1.onAttack(world, myMonster, weapon.getWeaponDesc().getDamage());
                             }
                         });
                     }

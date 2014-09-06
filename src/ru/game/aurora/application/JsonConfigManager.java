@@ -32,14 +32,16 @@ public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
 
     private final Map<String, T> entities = new HashMap<>();
 
-    public JsonConfigManager(Class<T> eClass, String resourceFolder) {
+    public JsonConfigManager(Class<T> eClass, String... resourceFolders) {
         this.entityClass = eClass;
-        File dir = new File(resourceFolder);
-        if (!dir.exists() || !dir.isDirectory()) {
-            throw new IllegalArgumentException("Directory " + dir.getAbsolutePath() + " does not exist");
-        }
+        for (String resourceFolder : resourceFolders) {
+            File dir = new File(resourceFolder);
+            if (!dir.exists() || !dir.isDirectory()) {
+                throw new IllegalArgumentException("Directory " + dir.getAbsolutePath() + " does not exist");
+            }
 
-        processDir(dir);
+            processDir(dir);
+        }
     }
 
     private void processDir(File dir) {
@@ -56,6 +58,9 @@ public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
         try {
             FileReader reader = new FileReader(f);
             T entity = gson.fromJson(reader, entityClass);
+            if (entities.containsKey(entity.getId())) {
+                logger.warn("Duplicated entry with id " + entity.getId());
+            }
             entities.put(entity.getId(), entity);
         } catch (Exception e) {
             logger.error("Failed to read entity from " + f.getPath(), e);
