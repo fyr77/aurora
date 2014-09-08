@@ -60,6 +60,9 @@ public class AlienRace implements Faction {
     @Override
     public boolean isHostileTo(World world, GameObject object) {
         StarSystem currentSystem = world.getCurrentStarSystem();
+        if (object.getFaction() == null) {
+            return false;
+        }
         if (currentSystem != null) {
             return currentSystem.getReputation().isHostile(name, object.getFaction().getName());
         }
