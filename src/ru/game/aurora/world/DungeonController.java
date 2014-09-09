@@ -19,13 +19,13 @@ import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.niffy.InteractionTargetSelectorController;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -180,13 +180,12 @@ public class DungeonController extends Listenable implements Serializable {
         world.setUpdatedThisFrame(true);
     }
 
-    public void interactWithObject(World world) {
+    public void interactWithObject(final World world) {
         int x = world.getPlayer().getLandingParty().getX();
         int y = world.getPlayer().getLandingParty().getY();
         // check if can pick up smth
-        for (Iterator<GameObject> iter = map.getObjects().iterator(); iter.hasNext(); ) {
-            GameObject p = iter.next();
-
+        List<GameObject> gameObjectsAtPlayerPosition = new ArrayList<>();
+        for (GameObject p : map.getObjects()) {
             if (!p.canBeInteracted()) {
                 continue;
             }
@@ -195,19 +194,39 @@ public class DungeonController extends Listenable implements Serializable {
                     && (!map.isWrapped() || (int) BasePositionable.getDistanceWrapped(x, y, p.getX(), p.getY(), map.getWidthInTiles(), map.getHeightInTiles()) != 0)) {
                 continue;
             }
+            gameObjectsAtPlayerPosition.add(p);
+
+        }
+
+        if (gameObjectsAtPlayerPosition.isEmpty()) {
+            return;
+        }
+
+        if (gameObjectsAtPlayerPosition.size() == 1) {
+            final GameObject p = gameObjectsAtPlayerPosition.get(0);
             p.interact(world);
             world.setUpdatedThisFrame(true);
             // some items (like ore deposits) can be picked up more than once, do not remove them in this case
             if (!p.isAlive()) {
-                iter.remove();
+                map.getObjects().remove(p);
             }
+            return;
         }
 
-        for (BasePositionable exitPoint : map.getExitPoints()) {
-            if (getDistance(exitPoint, landingParty) == 0) {
-                returnToPrevRoom(map.getVictoryConditions().isEmpty());
+        InteractionTargetSelectorController.open(new IStateChangeListener<GameObject>() {
+            private static final long serialVersionUID = -8114467555795780919L;
+
+            @Override
+            public void stateChanged(GameObject param) {
+                param.interact(world);
+                world.setUpdatedThisFrame(true);
+                // some items (like ore deposits) can be picked up more than once, do not remove them in this case
+                if (!param.isAlive()) {
+                    map.getObjects().remove(param);
+                }
             }
-        }
+        }, gameObjectsAtPlayerPosition);
+
     }
 
     private int getDist(int first, int second, int total) {
@@ -394,12 +413,6 @@ public class DungeonController extends Listenable implements Serializable {
         for (GameObject a : new ArrayList<>(map.getObjects())) {
             a.update(container, world);
             if (getDistance(landingParty, a) == 0 && a.canBeInteracted()) {
-                isAtObject = true;
-            }
-        }
-
-        for (BasePositionable exitPoint : map.getExitPoints()) {
-            if (getDistance(landingParty, exitPoint) == 0) {
                 isAtObject = true;
             }
         }

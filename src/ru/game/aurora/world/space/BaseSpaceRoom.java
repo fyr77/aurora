@@ -134,11 +134,6 @@ public abstract class BaseSpaceRoom implements Room, ITileMap {
     }
 
     @Override
-    public Collection<BasePositionable> getExitPoints() {
-        return null;
-    }
-
-    @Override
     public Collection<IVictoryCondition> getVictoryConditions() {
         return null;
     }

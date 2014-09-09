@@ -13,6 +13,7 @@ import rlforj.los.PrecisePermissive;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.world.dungeon.DungeonObject;
+import ru.game.aurora.world.dungeon.ExitPoint;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.SurfaceTypes;
@@ -21,7 +22,6 @@ import ru.game.aurora.world.planet.TileDrawer;
 import java.lang.ref.SoftReference;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,8 +42,6 @@ public class AuroraTiledMap implements ITileMap {
     private transient TiledMap map;
 
     private BasePositionable entryPoint;
-
-    private List<BasePositionable> exitPoints;
 
     private transient IFovAlgorithm fovAlgorithm;
 
@@ -82,7 +80,7 @@ public class AuroraTiledMap implements ITileMap {
                 break;
             }
             case "exitPoint": {
-                exitPoints.add(new BasePositionable(getXCoord(map.getObjectX(groupId, objectId)), getYCoord(map.getObjectY(groupId, objectId))));
+                objects.add(new ExitPoint(getXCoord(map.getObjectX(groupId, objectId)), getYCoord(map.getObjectY(groupId, objectId))));
                 break;
             }
             default:
@@ -123,7 +121,6 @@ public class AuroraTiledMap implements ITileMap {
                 return;
             }
             flags = new byte[map.getHeight()][map.getWidth()];
-            exitPoints = new ArrayList<>();
 
             for (int i = 0; i < map.getObjectGroupCount(); ++i) {
                 for (int j = 0; j < map.getObjectCount(i); ++j) {
@@ -250,11 +247,6 @@ public class AuroraTiledMap implements ITileMap {
             loadMap();
         }
         return entryPoint;
-    }
-
-    @Override
-    public Collection<BasePositionable> getExitPoints() {
-        return exitPoints;
     }
 
     @Override

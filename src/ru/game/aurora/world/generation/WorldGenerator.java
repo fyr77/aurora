@@ -117,7 +117,7 @@ public class WorldGenerator implements Runnable {
                         StarSystem ss = generateRandomStarSystem(world, x, y);
 
                         synchronized (world) {
-                            final int idx = world.getGalaxyMap().getObjects().size();
+                            final int idx = world.getGalaxyMap().getGalaxyMapObjects().size();
                             world.getGalaxyMap().getGalaxyMapObjects().add(ss);
                             world.getGalaxyMap().setTileAt(x, y, idx);
                         }

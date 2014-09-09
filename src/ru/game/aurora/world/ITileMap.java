@@ -54,8 +54,6 @@ public interface ITileMap extends Serializable, ILosBoard, TileBasedMap {
      */
     public BasePositionable getEntryPoint();
 
-    public Collection<BasePositionable> getExitPoints();
-
     public Collection<IVictoryCondition> getVictoryConditions();
 
     public AStarPathFinder getPathFinder();

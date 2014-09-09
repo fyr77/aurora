@@ -223,11 +223,6 @@ public class SurfaceTileMap implements ITileMap, Serializable {
     }
 
     @Override
-    public Collection<BasePositionable> getExitPoints() {
-        return Collections.emptyList();
-    }
-
-    @Override
     public Collection<IVictoryCondition> getVictoryConditions() {
         return Collections.emptyList();
     }
