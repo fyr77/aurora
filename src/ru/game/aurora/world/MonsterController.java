@@ -6,6 +6,7 @@ import ru.game.aurora.application.*;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.equip.WeaponInstance;
@@ -93,8 +94,8 @@ public class MonsterController implements Serializable {
 
         if (--turnsBeforeMove == 0) {
             turnsBeforeMove = myMonster.getSpeed();
-            final int x = myMonster.getX();
-            final int y = myMonster.getY();
+            final int x = map.isWrapped() ? EngineUtils.wrap(myMonster.getX(), map.getWidthInTiles()) : myMonster.getX();
+            final int y = map.isWrapped() ? EngineUtils.wrap(myMonster.getY(), map.getHeightInTiles()) : myMonster.getY();
 
             int newX = x + CommonRandom.getRandom().nextInt(2) - 1;
             int newY = y + CommonRandom.getRandom().nextInt(2) - 1;
