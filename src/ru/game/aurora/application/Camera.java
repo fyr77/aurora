@@ -91,7 +91,7 @@ public class Camera implements Serializable {
     }
 
     public float getXCoordWrapped(int tileX, int totalTilesX) {
-        final int targetX = target.getX();
+        final float targetX = target.getX() + target.getOffsetX();
         if (totalTilesX - Math.abs(targetX - tileX) > viewportTilesX / 2) {
             return getXCoord(tileX);
         }
@@ -104,7 +104,7 @@ public class Camera implements Serializable {
     }
 
     public float getYCoordWrapped(int tileY, int totalTilesY) {
-        final int targetY = target.getY();
+        final float targetY = target.getY() + target.getOffsetY();
         if (totalTilesY - Math.abs(targetY - tileY) > viewportTilesY / 2) {
             return getYCoord(tileY);
         }

@@ -2,10 +2,7 @@ package ru.game.aurora.world;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.util.pathfinding.Path;
-import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
@@ -57,7 +54,20 @@ public class MonsterController implements Serializable {
             rz = new ExplosionEffect(other.getX(), other.getY(), "slash", false, false);
 
         } else {
-            rz = new BlasterShotEffect(myMonster, other, world.getCamera(), 800, weapon);
+            final Camera camera = world.getCamera();
+            float targetScreenX;
+            float targetScreenY;
+
+            if (map.isWrapped()) {
+                targetScreenX = camera.getXCoordWrapped(other.getX(), map.getWidthInTiles());
+                targetScreenY = camera.getYCoordWrapped(other.getY(), map.getHeightInTiles());
+            } else {
+                targetScreenX = camera.getXCoord(other.getX());
+                targetScreenY = camera.getYCoord(other.getY());
+            }
+            targetScreenX += other.getOffsetX() + camera.getTileWidth() / 2;
+            targetScreenY += other.getOffsetY() + camera.getTileHeight() / 2;
+            rz = new BlasterShotEffect(myMonster, targetScreenX, targetScreenY, camera, 800, weapon, map);
             if (weapon.getShotSound() != null) {
                 rz.setStartSound(weapon.getShotSound());
             }

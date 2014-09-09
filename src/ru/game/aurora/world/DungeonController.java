@@ -295,7 +295,9 @@ public class DungeonController extends Listenable implements Serializable {
                     , world.getCamera().getYCoordWrapped(target.getY(), map.getHeightInTiles()) + world.getCamera().getTileHeight() / 2
                     , world.getCamera()
                     , 800
-                    , landingParty.getWeapon());
+                    , landingParty.getWeapon()
+                    , map
+            );
             if (landingParty.getWeapon().getShotSound() != null) {
                 blasterShotEffect.setStartSound(landingParty.getWeapon().getShotSound());
             }

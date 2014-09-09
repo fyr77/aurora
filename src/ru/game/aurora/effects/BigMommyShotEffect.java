@@ -21,8 +21,8 @@ public class BigMommyShotEffect extends BlasterShotEffect {
 
     private final transient Animation animation;
 
-    public BigMommyShotEffect(Positionable source, int targetScreenX, int targetScreenY, Camera camera, int moveSpeed) {
-        super(source, targetScreenX, targetScreenY, camera, moveSpeed, "blaster_shot");
+    public BigMommyShotEffect(World world, Positionable source, int targetScreenX, int targetScreenY, Camera camera, int moveSpeed) {
+        super(source, targetScreenX, targetScreenY, camera, moveSpeed, "blaster_shot", world.getCurrentStarSystem());
         animation = ResourceManager.getInstance().getAnimation("big_mommy");
         animation.setLooping(false);
     }

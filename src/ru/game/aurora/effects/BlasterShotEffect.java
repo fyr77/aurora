@@ -14,6 +14,7 @@ import org.newdawn.slick.geom.Vector2f;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.IMovable;
+import ru.game.aurora.world.ITileMap;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.WeaponDesc;
@@ -58,16 +59,20 @@ public class BlasterShotEffect extends Effect {
 
     }
 
-    public BlasterShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, WeaponDesc weapon) {
-        this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
+    public BlasterShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, WeaponDesc weapon, ITileMap map) {
+        this(new Vector2f(
+                    (map.isWrapped() ? camera.getXCoordWrapped(source.getX(), map.getWidthInTiles()) : camera.getXCoord(source.getX())) + camera.getTileWidth() / 2
+                    , (map.isWrapped() ? camera.getYCoordWrapped(source.getY(), map.getHeightInTiles()) : camera.getYCoord(source.getY())) + camera.getTileHeight() / 2)
                 , new Vector2f(targetScreenX, targetScreenY)
                 ,
                 moveSpeed
                 , weapon);
     }
 
-    public BlasterShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, String weaponSprite) {
-        this(new Vector2f(camera.getXCoord(source.getX()) + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2)
+    public BlasterShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, String weaponSprite, ITileMap map) {
+        this(new Vector2f(
+                (map.isWrapped() ? camera.getXCoordWrapped(source.getX(), map.getWidthInTiles()) : camera.getXCoord(source.getX())) + camera.getTileWidth() / 2
+                , (map.isWrapped() ? camera.getYCoordWrapped(source.getY(), map.getHeightInTiles()) : camera.getYCoord(source.getY())) + camera.getTileHeight() / 2)
                 , new Vector2f(targetScreenX, targetScreenY)
                 , moveSpeed
                 ,

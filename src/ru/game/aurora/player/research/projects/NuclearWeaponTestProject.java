@@ -47,7 +47,7 @@ public class NuclearWeaponTestProject extends ResearchProjectDesc {
         // calculate background location with Obliterator sprite
         int x = (int) ss.getBackground().getXCoordPoint(world.getCamera(), 200, -1);
         int y = (int) ss.getBackground().getYCoordPoint(world.getCamera(), 100, -1);
-        effect = new BigMommyShotEffect(world.getPlayer().getShip(), x, y, world.getCamera(), 100);
+        effect = new BigMommyShotEffect(world, world.getPlayer().getShip(), x, y, world.getCamera(), 100);
         ss.addEffect(effect);
 
 
