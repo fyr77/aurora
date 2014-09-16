@@ -190,6 +190,7 @@ public class AuroraGame extends NiftyOverlayGame {
 
         GUI.getInstance().onWorldLoaded(app, world);
         world.getCurrentRoom().returnTo(world);
+        world.setPaused(false);
     }
 
     public static boolean isGameRunning() {
