@@ -3,7 +3,7 @@
     "damage": 4,
     "name": "",
     "desc": "",
-    "shotSprite": "blaster_shot",
+    "shotImage": "blaster_shot",
     "shotSound": "laser_1",
     "range": 7,
     "reloadTurns": 1,

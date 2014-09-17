@@ -3,7 +3,7 @@
     "damage" : 4,
     "name": "plasma_cannon.name",
     "desc": "plasma_cannon.desc",
-    "shotSprite" : "plasma_shot",
+    "shotImage": "plasma_shot",
     "shotSound" : "plasma_1",
     "range" : 3,
     "reloadTurns" : 1,

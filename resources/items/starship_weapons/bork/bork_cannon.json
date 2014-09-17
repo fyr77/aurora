@@ -3,7 +3,7 @@
     "damage": 1,
     "name": "simple_cannon.name",
     "desc": "simple_cannon.desc",
-    "shotSprite": "bullet_shot",
+    "shotImage": "bullet_shot",
     "shotSound": "bullet_1",
     "range": 3,
 

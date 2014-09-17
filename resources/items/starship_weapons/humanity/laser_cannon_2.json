@@ -1,18 +1,18 @@
 {
-    "id" : "laser_cannon2",
-    "damage" : 3,
+    "id": "laser_cannon2",
+    "damage": 3,
     "name": "laser_cannon2.name",
     "desc": "laser_cannon2.desc",
-    "shotSprite" : "blaster_shot",
-    "range" : 5,
+    "shotImage": "blaster_shot",
+    "range": 5,
     "drawable": {
         "id": "ship_laser2",
         "tx": -1,
         "ty": -1
     },
-    "shotSound" : "laser_1",
-    "reloadTurns" : 1,
-    "explosionAnimation" : "blaster_explosion",
-    "particlesAnimation" : "blaster_particles",
+    "shotSound": "laser_1",
+    "reloadTurns": 1,
+    "explosionAnimation": "blaster_explosion",
+    "particlesAnimation": "blaster_particles",
     "size": 20
 }

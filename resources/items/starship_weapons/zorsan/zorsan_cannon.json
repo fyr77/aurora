@@ -3,7 +3,7 @@
     "damage" : 3,
     "name": "zorsan_cannon.name",
     "desc": "zorsan_cannon.desc",
-    "shotSprite" : "blaster_shot_red",
+    "shotImage": "blaster_shot_red",
     "range" : 6,
     "drawable": {
         "id": "zorsan_ship_laser",

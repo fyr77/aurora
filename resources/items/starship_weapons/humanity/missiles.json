@@ -1,18 +1,18 @@
 {
-    "id" : "humanity_missiles",
-    "damage" : 1,
+    "id": "humanity_missiles",
+    "damage": 1,
     "name": "humanity_missiles.name",
     "desc": "humanity_missiles.desc",
-    "shotSprite" : "missile_shot",
-    "shotSound" : "missile_1",
-    "range" : 12,
+    "shotImage": "missile_shot",
+    "shotSound": "missile_1",
+    "range": 12,
     "drawable": {
         "id": "ship_rocket",
         "tx": -1,
         "ty": -1
     },
-    "reloadTurns" : 3,
-    "explosionAnimation" : "rocket_explosion",
-    "particlesAnimation" : "rocket_particles",
-    "size" : 30
+    "reloadTurns": 3,
+    "explosionAnimation": "rocket_explosion",
+    "particlesAnimation": "rocket_particles",
+    "size": 30
 }

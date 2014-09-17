@@ -3,7 +3,7 @@
     "damage": 1,
     "name": "",
     "desc": "",
-    "shotSprite": "blaster_shot_red",
+    "shotImage": "blaster_shot_red",
     "range": 5,
     "shotSound": "autofire_1",
     "reloadTurns": 0,
