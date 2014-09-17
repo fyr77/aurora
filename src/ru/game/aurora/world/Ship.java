@@ -22,6 +22,7 @@ import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
 import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
 import ru.game.aurora.world.equip.WeaponInstance;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -61,8 +62,9 @@ public class Ship extends BaseGameObject {
 
     private int freeSpace;
 
-    public Ship(int x, int y) {
+    public Ship(World world, int x, int y) {
         super(x, y, new Drawable("aurora"));
+        setFaction(world.getFactions().get(HumanityGenerator.NAME));
         name = "Aurora-2";
         hull = maxHull = 10;
         maxScientists = scientists = BASE_SCIENTISTS;

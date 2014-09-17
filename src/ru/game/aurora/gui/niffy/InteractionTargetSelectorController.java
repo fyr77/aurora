@@ -65,6 +65,7 @@ public class InteractionTargetSelectorController implements Controller {
     @Override
     public void onStartScreen() {
         myWindow.setVisible(true);
+        GUI.getInstance().getWorldInstance().setPaused(true);
     }
 
     @Override
@@ -80,6 +81,7 @@ public class InteractionTargetSelectorController implements Controller {
     @NiftyEventSubscriber(pattern = ".*target_selection_window")
     public void onClose(String id, WindowClosedEvent event) {
         GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+        GUI.getInstance().getWorldInstance().setPaused(false);
     }
 
     @NiftyEventSubscriber(pattern = ".*Button")
@@ -92,6 +94,7 @@ public class InteractionTargetSelectorController implements Controller {
             GUI.getInstance().getNifty().closePopup(popupId);
             callback.stateChanged(listBox.getItems().get(finalNumericId));
             callback = null;
+            GUI.getInstance().getWorldInstance().setPaused(false);
         }
     }
 

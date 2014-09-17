@@ -8,12 +8,17 @@ public class MoveToTargetTask extends AITask {
 
     private Positionable target;
 
+    private int prevX;
+
+    private int prevY;
+
     private Path path;
 
     private int pathIndex = -1;
 
-    protected MoveToTargetTask(int priority) {
+    public MoveToTargetTask(int priority, Positionable target) {
         super(priority);
+        this.target = target;
     }
 
     @Override
@@ -26,7 +31,9 @@ public class MoveToTargetTask extends AITask {
         final ITileMap map = world.getCurrentRoom().getMap();
         int newX, newY;
 
-        if (path == null) {
+        if ((path == null) || (target.getX() != prevX) || (target.getY() != prevY)) {
+            prevX = target.getX();
+            prevY = target.getY();
             path = map.getPathFinder().findPath(null, myObject.getX(), myObject.getY(), target.getX(), target.getY());
         }
 

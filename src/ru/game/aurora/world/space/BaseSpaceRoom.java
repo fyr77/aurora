@@ -173,7 +173,7 @@ public abstract class BaseSpaceRoom implements Room, ITileMap {
         AStarPathFinder pf = pathfinder != null ? pathfinder.get() : null;
         if (pf == null) {
             pf = new AStarPathFinder(this, getWidthInTiles(), false);
-            pathfinder = new SoftReference<AStarPathFinder>(pf);
+            pathfinder = new SoftReference<>(pf);
         }
         return pf;
     }

@@ -573,7 +573,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
 
     @Override
     public ITileMap getMap() {
-        return null;
+        return this;
     }
 
     private void createBackground(World world) {
@@ -598,13 +598,14 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         }
 
 
-        g.setColor(star.color);
-
         final float starX = camera.getXCoord(0) + (camera.getTileWidth() / 2);
         final float starY = camera.getYCoord(0) + camera.getTileHeight() / 2;
 
-        final Image starImage = star.getImage();
-        g.drawImage(starImage, starX - starImage.getWidth() / 2, starY - starImage.getHeight() / 2);
+        if (star != null) {
+            g.setColor(star.color);
+            final Image starImage = star.getImage();
+            g.drawImage(starImage, starX - starImage.getWidth() / 2, starY - starImage.getHeight() / 2);
+        }
 
         // first draw all orbits
         for (BasePlanet p : planets) {
@@ -678,8 +679,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
             EngineUtils.drawTileCircleCentered(g, camera, selectedWeaponRange);
         }
 
-        g.setColor(Color.red);
-        g.drawRect(camera.getXCoord(-radius), camera.getYCoord(-radius), 2 * radius * camera.getTileWidth(), 2 * radius * camera.getTileHeight());
+        if (canBeLeft) {
+            g.setColor(Color.red);
+            g.drawRect(camera.getXCoord(-radius), camera.getYCoord(-radius), 2 * radius * camera.getTileWidth(), 2 * radius * camera.getTileHeight());
+        }
         g.setColor(Color.white);
 
         player.getShip().draw(container, g, camera, world);
@@ -693,7 +696,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
      * Sets random position of a given object within this star system.
      * Not within sun, not near borders, on an empty spot
      */
-    public void setRandomEmptyPosition(BasePositionable object) {
+    public void setRandomEmptyPosition(Positionable object) {
         final double maxRadius = Configuration.getDoubleProperty("world.starsystem.objectMaxRadius") * radius;
         final double minRadius = Configuration.getDoubleProperty("world.starsystem.objectMinRadius") * radius;
         int orbit;
@@ -710,7 +713,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
                 if (obj == object) {
                     continue;
                 }
-                if (object.getDistance(obj) == 0) {
+                if (BasePositionable.getDistance(obj, object) == 0) {
                     isEmpty = false;
                     break;
                 }
@@ -718,7 +721,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
 
             if (isEmpty) {
                 for (BasePlanet p : planets) {
-                    if (object.getDistance(p) == 0) {
+                    if (p.getDistance(object) == 0) {
                         isEmpty = false;
                         break;
                     }

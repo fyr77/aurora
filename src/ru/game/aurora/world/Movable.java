@@ -12,13 +12,13 @@ public class Movable extends BasePositionable implements IMovable, Updatable {
 
     private static final long serialVersionUID = 1L;
 
-    private boolean isMoving = false;
+    protected boolean isMoving = false;
 
     private boolean canMove = true;
 
     private float offsetX, offsetY;
 
-    private int destinationX, destinationY;
+    protected int destinationX, destinationY;
 
     private static final int MOVE_FRAMES = 4;
 

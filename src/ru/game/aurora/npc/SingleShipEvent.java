@@ -9,8 +9,8 @@ package ru.game.aurora.npc;
 
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
 /**
@@ -22,9 +22,9 @@ public class SingleShipEvent extends GameEventListener {
 
     protected final double chance;
 
-    protected NPCShip ship;
+    protected GameObject ship;
 
-    public SingleShipEvent(double chance, NPCShip ship) {
+    public SingleShipEvent(double chance, GameObject ship) {
         this.chance = chance;
         this.ship = ship;
     }
