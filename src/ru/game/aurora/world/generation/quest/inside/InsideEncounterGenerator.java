@@ -4,10 +4,9 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
+import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.SingleShipEvent;
 import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.GameObject;
@@ -20,6 +19,7 @@ import ru.game.aurora.world.space.StarSystem;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  */
@@ -34,6 +34,10 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         private int planetsDestroyed = 0;
 
         private StarSystem entranceLocation;
+
+        private boolean firstAttackMessageShown = false;
+
+        private boolean firstDestroyMessageShown = false;
 
         private final Color backgroundColor = new Color(125, 32, 34);
 
@@ -72,9 +76,15 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
                 checkCells(world);
                 if (!isAlive) {
                     ++planetsDestroyed;
+                    if (!firstDestroyMessageShown) {
+                        world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/inside_first_destroyed.json"));
+                        firstDestroyMessageShown = true;
+                    }
                     if (planetsDestroyed > Configuration.getIntProperty("quest.inside.planets_to_destroy")) {
                         world.setCurrentRoom(entranceLocation);
                         entranceLocation.returnTo(world);
+                        world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/inside_leave.json"));
+                        world.getPlayer().getJournal().addQuestEntries("inside", "end_bad"); //todo: good ending
                     }
                 }
             }
@@ -101,7 +111,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
                 agressive = true;
                 if (lastCall == 0) {
                     lastCall = container.getTime();
-                } else if (lastCall > (container.getTime() - 1000)) {
+                } else if (lastCall > (container.getTime() - 700)) {
                     return;
                 }
 
@@ -143,6 +153,11 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
                 if (target.getDistance(this) <= 1) {
                     target.onAttack(world, this, Configuration.getIntProperty("quest.inside.cell_damage"));
                     onAttack(world, this, Integer.MAX_VALUE);
+                    if (!firstAttackMessageShown) {
+                        world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/inside_first_damage.json"));
+                        world.getPlayer().getJournal().addQuestEntries("inside", "attacked");
+                        firstAttackMessageShown = true;
+                    }
                     isAlive = false;
                 }
 
@@ -200,11 +215,18 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         }
 
         @Override
+        public String getScanDescription(World world) {
+            return Localization.getText("journal", "inside.scan_desc");
+        }
+
+        @Override
         public void interact(World world) {
             ParallelWorld pw = new ParallelWorld(world, world.getCurrentStarSystem());
             pw.enter(world);
             world.setCurrentRoom(pw);
             isAlive = false;
+            world.getPlayer().getJournal().addQuestEntries("inside", "enter");
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/inside_entered.json"));
         }
 
         @Override
@@ -216,6 +238,19 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
 
     @Override
     public void updateWorld(World world) {
-        world.addListener(new SingleShipEvent(Configuration.getDoubleProperty("quest.inside.chance"), new Entrance()));
+        final Dialog starsystemEnterDialog = Dialog.loadFromFile("dialogs/encounters/inside_entrance_detected.json");
+        starsystemEnterDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = -4264540383261831865L;
+
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                world.getPlayer().getJournal().addQuestEntries("inside", "start");
+            }
+        });
+        world.addListener(new SingleShipEvent(
+                Configuration.getDoubleProperty("quest.inside.chance")
+                , new Entrance()
+                , starsystemEnterDialog
+        ));
     }
 }

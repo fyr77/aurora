@@ -1,0 +1,5 @@
+1Вызывает Гордон.csv;inside_entrance_detected;scientist_dialog;./encounters
+2Диалог с Гордоном после перемещения корабля.csv;inside_entered;scientist_dialog;./encounters
+3После уничтожения первого сгустка.csv;inside_first_destroyed;scientist_dialog;./encounters
+4После первых повреждений.csv;inside_first_damage;engineer_dialog;./encounters
+5Спасение.csv;inside_leave;scientist_dialog;./encounters
