@@ -188,6 +188,11 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         }
 
         @Override
+        public boolean turnIsADay() {
+            return false;
+        }
+
+        @Override
         public void draw(GameContainer container, Graphics g, Camera camera, World world) {
             g.setColor(backgroundColor);
             g.fillRect(0, 0, container.getWidth(), container.getHeight());

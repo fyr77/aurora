@@ -5,6 +5,8 @@ IN PROGRESS
 * Global refactoring of game object classes
 + Ship inventory screen
 + Officer dialog system
++ "Inside" encounter
+* Dungeons now do not advance turn count and star date
 
 =============================================
 

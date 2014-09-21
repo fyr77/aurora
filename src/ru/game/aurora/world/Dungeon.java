@@ -147,6 +147,11 @@ public class Dungeon implements Room, IDungeon {
     }
 
     @Override
+    public boolean turnIsADay() {
+        return false;
+    }
+
+    @Override
     public boolean isCommanderInParty() {
         return isCommanderInParty;
     }

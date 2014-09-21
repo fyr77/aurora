@@ -20,4 +20,10 @@ public interface Room extends Updatable, Serializable, IDrawable {
 
     public ITileMap getMap();
 
+    /**
+     * If true, each turn in this room will increase current game date.
+     * Is false for small encounters like dungeons.
+     */
+    public boolean turnIsADay();
+
 }

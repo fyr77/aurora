@@ -576,6 +576,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         return this;
     }
 
+    @Override
+    public boolean turnIsADay() {
+        return true;
+    }
+
     private void createBackground(World world) {
         background = new ParallaxBackground(
                 radius * 3 * (int) world.getCamera().getTileWidth()

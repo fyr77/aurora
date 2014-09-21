@@ -167,6 +167,11 @@ public class Dialog implements OverlayWindow {
     }
 
     @Override
+    public boolean turnIsADay() {
+        return false;
+    }
+
+    @Override
     public void update(GameContainer container, World world) {
         if (statements == null) {
             enter(world);

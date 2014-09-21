@@ -102,8 +102,10 @@ public class World implements Serializable, ResolutionChangeListener {
                 player.getResearchState().update(this);
                 player.getEngineeringState().update(this);
                 player.getEarthState().update(this);
-                turnCount++;
-                currentDate.add(Calendar.DAY_OF_MONTH, 1);
+                if (currentRoom.turnIsADay()) {
+                    currentDate.add(Calendar.DAY_OF_MONTH, 1);
+                    turnCount++;
+                }
                 EvacuationState es = player.getEarthState().getEvacuationState();
                 if (es != null && es.isGameOver(this)) {
                     es.showEndGameScreen(this);
@@ -454,10 +456,6 @@ public class World implements Serializable, ResolutionChangeListener {
 
     public void gameLoaded() {
 
-    }
-
-    public Calendar getCurrentDate() {
-        return currentDate;
     }
 
     public String getCurrentDateString() {

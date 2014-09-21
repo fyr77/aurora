@@ -57,6 +57,11 @@ public class GalaxyMapScreen implements Room {
     }
 
     @Override
+    public boolean turnIsADay() {
+        return true;
+    }
+
+    @Override
     public void update(GameContainer container, World world) {
         if (container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(Input.KEY_ESCAPE) || container.getInput().isKeyPressed(Input.KEY_M)) {
             world.setCurrentRoom(world.getGalaxyMap());

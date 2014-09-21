@@ -158,4 +158,9 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
     public ITileMap getMap() {
         return null;
     }
+
+    @Override
+    public boolean turnIsADay() {
+        return true;
+    }
 }

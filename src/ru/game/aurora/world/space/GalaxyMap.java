@@ -72,6 +72,11 @@ public class GalaxyMap extends BaseSpaceRoom {
         return null;
     }
 
+    @Override
+    public boolean turnIsADay() {
+        return true;
+    }
+
     public int[][] getInternalMap() {
         return map;
     }
