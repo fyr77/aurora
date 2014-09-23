@@ -2,6 +2,7 @@ package ru.game.aurora.world.generation.aliens.bork;
 
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.DamagedRoguesScoutEventGenerator;
@@ -16,8 +17,7 @@ import java.util.Map;
  */
 
 
-public class BorkShipDialogListener implements DialogListener
-{
+public class BorkShipDialogListener implements DialogListener {
     private static final long serialVersionUID = -338473827627208845L;
 
     @Override
@@ -32,7 +32,7 @@ public class BorkShipDialogListener implements DialogListener
             }
 
             world.getReputation().updateReputation(BorkGenerator.NAME, HumanityGenerator.NAME, 1);
-            world.getPlayer().changeCredits(world, returnCode - 100);
+            world.getPlayer().changeResource(world, Resources.CREDITS, returnCode - 100);
         }
     }
 }

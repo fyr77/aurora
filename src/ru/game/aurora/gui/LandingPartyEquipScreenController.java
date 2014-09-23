@@ -96,7 +96,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
 
         DropDown weaponSelect = myScreen.findNiftyControl("weapon_select", DropDown.class);
         weaponSelect.clear();
-        for (InventoryItem item : world.getPlayer().getInventory().keySet()) {
+        for (InventoryItem item : world.getPlayer().getInventory().elementSet()) {
             if (item instanceof WeaponDesc) {
                 weaponSelect.addItem(item);
             }

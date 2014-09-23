@@ -31,4 +31,9 @@
     <resource type="image" id="ore_box">sprites/items/ore.png</resource>
     <resource type="image" id="artifact_boxes">sprites/items/boxes.png</resource>
     <resource type="image" id="medpack">sprites/items/medkit.png</resource>
+
+    <resource type="image" id="bio_remains">sprites/items/bio_remains.png</resource>
+    <resource type="image" id="credits_icon">sprites/gui/credit.png</resource>
+    <resource type="image" id="ru_icon">sprites/gui/resources.png</resource>
+
 </resources>

@@ -8,6 +8,7 @@ import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.SingleShipEvent;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Ship;
@@ -197,6 +198,15 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
             g.setColor(backgroundColor);
             g.fillRect(0, 0, container.getWidth(), container.getHeight());
             super.draw(container, g, camera, world);
+        }
+    }
+
+    private static class BioCellsItem extends BaseGameObject {
+        private static final long serialVersionUID = 8752939890229707029L;
+
+        @Override
+        public void interact(World world) {
+            world.getPlayer().changeResource(world, Resources.CELLS_FROM_PARALLEL_WORLD, CommonRandom.getRandom().nextInt(3));
         }
     }
 

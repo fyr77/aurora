@@ -11,6 +11,7 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.SingleShipEvent;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.GameObject;
@@ -163,7 +164,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
                         world.getGlobalVariables().remove("rogues.damaged_scout_found");
                     } else {
                         // player decided to help for reward
-                        world.getPlayer().changeCredits(world, 5);
+                        world.getPlayer().changeResource(world, Resources.CREDITS, 5);
                         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.credits_received"), 5));
                         world.getReputation().updateReputation(rogueRace.getName(), HumanityGenerator.NAME, 1);
                         world.getGlobalVariables().remove("rogues.damaged_scout_found");

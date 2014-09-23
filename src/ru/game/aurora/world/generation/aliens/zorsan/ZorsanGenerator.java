@@ -126,7 +126,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     }
 
                     party.setWeapon(ResourceManager.getInstance().getWeapons().getEntity("zorsan_laser_rifles"));
-                    world.getPlayer().getInventory().put(ResourceManager.getInstance().getWeapons().getEntity("zorsan_laser_rifles"), 1);
+                    world.getPlayer().getInventory().add(ResourceManager.getInstance().getWeapons().getEntity("zorsan_laser_rifles"));
                     ResearchProjectDesc zorsan_crew_weapons = world.getResearchAndDevelopmentProjects().getResearchProjects().get("zorsan_crew_weapons");
                     if (zorsan_crew_weapons != null) {
                         world.getPlayer().getResearchState().getCurrentProjects().add(new ResearchProjectState(zorsan_crew_weapons));

@@ -5,6 +5,8 @@
  */
 package ru.game.aurora.player;
 
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
@@ -23,8 +25,6 @@ import ru.game.aurora.world.planet.MedPack;
 import ru.game.aurora.world.quest.Journal;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Player implements Serializable {
 
@@ -40,13 +40,9 @@ public class Player implements Serializable {
 
     private final EarthState earthState;
 
-    private int resourceUnits = 5;
-
-    private int credits = 0;
-
     private final Journal journal = new Journal();
 
-    private final Map<InventoryItem, Integer> inventory = new HashMap<>();
+    private final Multiset<InventoryItem> inventory = HashMultiset.create();
 
     // main country in Aurora project, defines some bonuses
     private EarthCountry mainCountry = EarthCountry.AMERICA;
@@ -60,7 +56,7 @@ public class Player implements Serializable {
     public Player() {
         earthState = new EarthState();
         final WeaponDesc defaultWeapon = ResourceManager.getInstance().getWeapons().getEntity("assault");
-        inventory.put(defaultWeapon, 1);
+        inventory.add(defaultWeapon, 1);
         landingParty = new LandingParty(0, 0, defaultWeapon, 2, 2, 4, Configuration.getIntProperty("player.landing_party.defaultHP"));
         landingParty.pickUp(new MedPack(), 3);   //Santa's gifts
         landingParty.pickUp(new Cylinders(), 3);
@@ -93,11 +89,11 @@ public class Player implements Serializable {
     }
 
     public int getResourceUnits() {
-        return resourceUnits;
+        return inventory.count(Resources.RU);
     }
 
     public void setResourceUnits(int resourceUnits) {
-        this.resourceUnits = resourceUnits;
+        inventory.setCount(Resources.RU, resourceUnits);
     }
 
     public EarthState getEarthState() {
@@ -108,13 +104,19 @@ public class Player implements Serializable {
         return engineeringState;
     }
 
-    public void changeCredits(World world, int delta) {
-        credits += delta;
-        world.getGlobalVariables().put("credits", credits);
+    public void changeResource(World world, Resources type, int delta) {
+        if (delta > 0) {
+            inventory.add(type, delta);
+        } else {
+            inventory.remove(type, delta);
+        }
+        if (type == Resources.CREDITS) {
+            world.getGlobalVariables().put("credits", inventory.count(Resources.CREDITS));
+        }
     }
 
     public int getCredits() {
-        return credits;
+        return inventory.count(Resources.CREDITS);
     }
 
     public void increaseFailCount() {
@@ -125,7 +127,7 @@ public class Player implements Serializable {
         return failsCount;
     }
 
-    public Map<InventoryItem, Integer> getInventory() {
+    public Multiset<InventoryItem> getInventory() {
         return inventory;
     }
 

@@ -19,6 +19,7 @@ import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.factions.NeutralFaction;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.world.GameEventListener;
@@ -235,7 +236,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
                         } else {
                             world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "agreed");
                             flags.put("rebels_continue", "");
-                            world.getPlayer().changeCredits(world, 5);
+                            world.getPlayer().changeResource(world, Resources.CREDITS, 5);
                         }
                     }
 

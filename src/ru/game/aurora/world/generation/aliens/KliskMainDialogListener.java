@@ -10,6 +10,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
@@ -42,9 +43,9 @@ public class KliskMainDialogListener implements DialogListener {
 
             case 500:
                 if (flags.containsKey("base_info")) {
-                    world.getPlayer().changeCredits(world, 5);
+                    world.getPlayer().changeResource(world, Resources.CREDITS, 5);
                 } else {
-                    world.getPlayer().changeCredits(world, 10);
+                    world.getPlayer().changeResource(world, Resources.CREDITS, 10);
                 }
                 break;
 
@@ -104,7 +105,7 @@ public class KliskMainDialogListener implements DialogListener {
         }
 
         if (returnCode == 101) {
-            world.getPlayer().changeCredits(world, -6);
+            world.getPlayer().changeResource(world, Resources.CREDITS, -6);
             world.getGlobalVariables().put("energy_sphere.started", 1);
             world.getPlayer().getJournal().addQuestEntries("energy_sphere", "klisk");
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/energy_sphere_communication.json"));

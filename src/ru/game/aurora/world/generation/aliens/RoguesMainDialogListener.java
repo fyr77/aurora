@@ -6,6 +6,7 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
@@ -36,7 +37,7 @@ public class RoguesMainDialogListener implements DialogListener {
                 return;
             }
 
-            world.getPlayer().changeCredits(world, -fine);
+            world.getPlayer().changeResource(world, Resources.CREDITS, -fine);
             world.getGlobalVariables().remove("rogues.fine");
         }
 
@@ -65,7 +66,7 @@ public class RoguesMainDialogListener implements DialogListener {
         }
 
         if (returnCode == 200 || returnCode == 202) {
-            world.getPlayer().changeCredits(world, Configuration.getIntProperty("quest.damaged_rogue_scout.reward"));
+            world.getPlayer().changeResource(world, Resources.CREDITS, Configuration.getIntProperty("quest.damaged_rogue_scout.reward"));
             DamagedRoguesScoutEventGenerator.removeScout(world);
             world.getGlobalVariables().put("rogues.damage_scout_result", "help");
             world.getGlobalVariables().remove("rogues.damage_scout_crew_saved");

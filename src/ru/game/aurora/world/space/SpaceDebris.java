@@ -40,7 +40,11 @@ public class SpaceDebris extends BaseGameObject {
     private final ProbabilitySet<GameObject> dropList;
 
     public SpaceDebris(int x, int y, ProbabilitySet<GameObject> dropList) {
-        super(x, y, new Drawable("debris"));
+        this(x, y, "debris", dropList);
+    }
+
+    public SpaceDebris(int x, int y, String imageId, ProbabilitySet<GameObject> dropList) {
+        super(x, y, new Drawable(imageId));
         this.dropList = dropList;
     }
 
