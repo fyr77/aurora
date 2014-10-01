@@ -104,7 +104,7 @@ public class Player implements Serializable {
         return engineeringState;
     }
 
-    public void changeResource(World world, Resources type, int delta) {
+    public void changeResource(World world, InventoryItem type, int delta) {
         if (delta > 0) {
             inventory.add(type, delta);
         } else {

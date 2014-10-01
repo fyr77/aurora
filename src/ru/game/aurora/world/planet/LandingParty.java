@@ -234,12 +234,21 @@ public class LandingParty extends BaseGameObject {
         return inventory;
     }
 
-    public void resetHp(World world) {
-        hp = MAX_HP;
+    public int getMaxHP(World world) {
+        int rz = MAX_HP;
         if (world.getPlayer().getMainCountry() == EarthCountry.AMERICA) {
-            hp += Configuration.getIntProperty("player.america.hpBonus");
+            rz += Configuration.getIntProperty("player.america.hpBonus");
         }
+        return rz;
+    }
 
+    public void resetHp(World world) {
+        hp = getMaxHP(world);
+        ((SurfaceGUIController) GUI.getInstance().getNifty().findScreenController(SurfaceGUIController.class.getCanonicalName())).updateStats();
+    }
+
+    public void addHP(World world, int amount) {
+        hp = Math.min(getMaxHP(world), hp + amount);
         ((SurfaceGUIController) GUI.getInstance().getNifty().findScreenController(SurfaceGUIController.class.getCanonicalName())).updateStats();
     }
 

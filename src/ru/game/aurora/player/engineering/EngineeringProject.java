@@ -12,7 +12,12 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.player.EarthCountry;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.InventoryItem;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class EngineeringProject extends ItemWithTextAndImage {
     private static final long serialVersionUID = -7083477407612327469L;
@@ -56,10 +61,25 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
 
     public void changeEngineers(int amount, World world) {
         if (!projectStarted) {
-            world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() - getCost());
+            spendResources(world);
             projectStarted = true;
         }
         engineersAssigned += amount;
+    }
+
+    public void spendResources(World world) {
+        for (Map.Entry<InventoryItem, Integer> price : getCost().entrySet()) {
+            world.getPlayer().changeResource(world, price.getKey(), -price.getValue());
+        }
+    }
+
+    public boolean checkEnoughResources(World world) {
+        for (Map.Entry<InventoryItem, Integer> price : getCost().entrySet()) {
+            if (world.getPlayer().getInventory().count(price.getKey()) < price.getValue()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public int getEngineersAssigned() {
@@ -81,10 +101,15 @@ public abstract class EngineeringProject extends ItemWithTextAndImage {
         return false;
     }
 
+    protected Map<InventoryItem, Integer> getSimpleResourceCost(Resources res, int amount) {
+        Map<InventoryItem, Integer> map = new HashMap<>();
+        map.put(res, amount);
+        return map;
+    }
     /**
      * @return project cost (0 if project have no cost)
      */
-    public abstract int getCost();
+    public abstract Map<InventoryItem, Integer> getCost();
 
     public boolean isProjectStarted() {
         return projectStarted;

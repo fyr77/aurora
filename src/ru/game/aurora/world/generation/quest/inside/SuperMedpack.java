@@ -1,0 +1,61 @@
+package ru.game.aurora.world.generation.quest.inside;
+
+import org.newdawn.slick.Image;
+import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.player.engineering.EngineeringProject;
+import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.InventoryItem;
+import ru.game.aurora.world.planet.UsableItem;
+
+import java.util.Map;
+
+/**
+ * Super medpack crafted from biodata from parallel world
+ */
+public class SuperMedpack extends UsableItem {
+    private static final long serialVersionUID = 7731141908856823318L;
+
+    @Override
+    public String getName() {
+        return "Super medpack";
+    }
+
+    @Override
+    public void useIt(World world, int amount) {
+        world.getPlayer().getLandingParty().resetHp(world);
+    }
+
+    @Override
+    public Image getImage() {
+        return ResourceManager.getInstance().getImage("medpack");
+    }
+
+    @Override
+    public void onReturnToShip(World world, int amount) {
+
+    }
+
+    @Override
+    public boolean isDumpable() {
+        return false;
+    }
+
+    @Override
+    public boolean isUsable() {
+        return true;
+    }
+
+    public static class SuperMedpackCraftProject extends EngineeringProject {
+
+        private static final long serialVersionUID = 7590398157274520538L;
+
+        public SuperMedpackCraftProject(String id, String icon, int length) {
+            super(id, icon, length);
+        }
+
+        @Override
+        public Map<InventoryItem, Integer> getCost() {
+            return null;
+        }
+    }
+}

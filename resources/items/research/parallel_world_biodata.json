@@ -1,0 +1,14 @@
+{
+    "id": "parallel_world_bio_data",
+    "icon": "bio_research",
+    "report": {
+        "icon": "bio_research",
+        "text": "parallel_world_bio_data.report"
+    },
+    "makesAvailable": [],
+    "makesAvailableEngineering": ["super_medpack"],
+    "earthProgress": [],
+    "score": 50,
+    "progress": 40,
+    "initialProgress": 40
+}

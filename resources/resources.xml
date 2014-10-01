@@ -111,6 +111,7 @@
     <!-- research icons -->
     <resource type="image" id="cartography_research">sprites/research_icons/cartography.png</resource>
     <resource type="image" id="autopsy_research">sprites/research_icons/autopsy.png</resource>
+    <resource type="image" id="bio_research">sprites/research_icons/bio_research.png</resource>
     <resource type="image" id="astronomy_research">sprites/research_icons/astronomy.png</resource>
     <resource type="image" id="artifact_research">sprites/research_icons/artifact.png</resource>
     <resource type="image" id="probe_research">sprites/research_icons/probe_research.png</resource>

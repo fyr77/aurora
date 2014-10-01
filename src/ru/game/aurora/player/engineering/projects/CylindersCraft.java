@@ -1,6 +1,7 @@
 package ru.game.aurora.player.engineering.projects;
 
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.Cylinders;
@@ -33,7 +34,7 @@ public class CylindersCraft extends EngineeringProject {
     }
 
     @Override
-    public int getCost() {
-        return Configuration.getIntProperty("engineering.craft_cost.cylinders");
+    public java.util.Map<ru.game.aurora.world.planet.InventoryItem, Integer> getCost() {
+        return getSimpleResourceCost(Resources.RU, Configuration.getIntProperty("engineering.craft_cost.cylinders"));
     }
 }

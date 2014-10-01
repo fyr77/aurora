@@ -9,6 +9,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.SingleShipEvent;
 import ru.game.aurora.player.Resources;
+import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Ship;
@@ -207,6 +208,10 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         @Override
         public void interact(World world) {
             world.getPlayer().changeResource(world, Resources.CELLS_FROM_PARALLEL_WORLD, CommonRandom.getRandom().nextInt(3));
+            ResearchProjectDesc research = world.getResearchAndDevelopmentProjects().getResearchProjects().remove("parallel_world_bio_data");
+            if (research != null) {
+                world.getPlayer().getResearchState().addNewAvailableProject(research);
+            }
         }
     }
 
@@ -267,5 +272,9 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
                 , new Entrance()
                 , starsystemEnterDialog
         ));
+
+        world.getResearchAndDevelopmentProjects().getEngineeringProjects().put(
+                "super_medpack"
+                , new SuperMedpack.SuperMedpackCraftProject("super_medpack_craft", "medpack", 10));
     }
 }

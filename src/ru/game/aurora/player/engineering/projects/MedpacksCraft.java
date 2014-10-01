@@ -1,9 +1,14 @@
 package ru.game.aurora.player.engineering.projects;
 
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.MedPack;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Date: 23.12.13
@@ -33,7 +38,9 @@ public class MedpacksCraft extends EngineeringProject {
     }
 
     @Override
-    public int getCost() {
-        return Configuration.getIntProperty("engineering.craft_cost.medpack");
+    public java.util.Map<ru.game.aurora.world.planet.InventoryItem, Integer> getCost() {
+        Map<InventoryItem, Integer> priceMap = new HashMap<>();
+        priceMap.put(Resources.RU, Configuration.getIntProperty("engineering.craft_cost.medpack"));
+        return priceMap;
     }
 }

@@ -16,6 +16,8 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.equip.WeaponInstance;
 
+import java.util.Collections;
+
 public class AdvancedLasers extends EngineeringProject {
     private static final long serialVersionUID = -6929677248004188022L;
 
@@ -40,7 +42,7 @@ public class AdvancedLasers extends EngineeringProject {
     }
 
     @Override
-    public int getCost() {
-        return 0;
+    public java.util.Map<ru.game.aurora.world.planet.InventoryItem, Integer> getCost() {
+        return Collections.emptyMap();
     }
 }
