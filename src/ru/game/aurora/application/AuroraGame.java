@@ -338,12 +338,11 @@ public class AuroraGame extends NiftyOverlayGame {
             if (resolutionString != null) {
                 res = new Resolution(resolutionString);
             } else {
-                List<Resolution> supportedResolutions = getAvailableResolutions();
-                // by default, use largest supported resolution available
-                if (supportedResolutions.isEmpty()) {
-                    throw new IllegalStateException("Failed to init engine, no suitable resolutions found");
+                DisplayMode desktopMode = Display.getDesktopDisplayMode();
+                res = new Resolution(desktopMode.getWidth(), desktopMode.getHeight());
+                if (Math.abs(1.0f - Display.getPixelScaleFactor()) > 0.00001) {
+                    logger.warn("This display has a pixel scale factor of {}, resolution may be incorrect", Display.getPixelScaleFactor());
                 }
-                res = supportedResolutions.get(supportedResolutions.size() - 1);
             }
 
             final boolean fullScreen = Boolean.parseBoolean(Configuration.getSystemProperties().getProperty("screen.full_screen", "false"));
@@ -354,6 +353,9 @@ public class AuroraGame extends NiftyOverlayGame {
             tilesY = res.getTilesY();
 
             SaveGameManager.init();
+
+            // make sure that system.properties appears even if game later crashes on startup
+            Configuration.saveSystemProperties();
 
             app.start();
         } catch (Exception ex) {
