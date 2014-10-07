@@ -67,27 +67,4 @@
         <layer/>
     </screen>
 
-    <popup id="load_failed" childLayout="absolute">
-        <control id="load_failed_window" name="window" hideOnClose="true" title="${gui.error_caption}" width="60%"
-                 height="350px" x="20%"
-                 y="30%">
-            <panel childLayout="vertical">
-                <panel height="10px"/>
-                <panel height="256px" childLayout="horizontal">
-                    <image width="256px" filename="sprites/gui/crew_death.png"/>
-                    <panel width="10px"/>
-                    <text width="60%" height="256px" wrap="true" textHAlign="center" textVAlign="center"
-                          text="${gui.main_menu.save_corrupted}" style="base-font"/>
-                </panel>
-                <panel height="10px"/>
-                <panel childLayout="horizontal" height="45px">
-                    <panel width="85%"/>
-                    <control id="close_button" name="button" label="Ok" height="45px">
-                        <interact onClick="closeCurrentPopup()"/>
-                    </control>
-                </panel>
-            </panel>
-        </control>
-    </popup>
-
 </nifty>

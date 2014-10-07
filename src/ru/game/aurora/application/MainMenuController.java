@@ -111,7 +111,7 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
     public void openBlog() {
         if (Desktop.isDesktopSupported()) {
             try {
-                Desktop.getDesktop().browse(URI.create("http://auroraroguelike.wordpress.com"));
+                Desktop.getDesktop().browse(URI.create("http://auroraroguelike.com"));
             } catch (IOException e) {
                 logger.error("Failed to open blog uri", e);
             }
