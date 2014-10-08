@@ -21,4 +21,9 @@ public abstract class UsableItem implements InventoryItem {
     public int getWeight() {
         return 1;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return getClass().equals(o.getClass());
+    }
 }

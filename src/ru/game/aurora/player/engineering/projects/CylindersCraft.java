@@ -24,7 +24,7 @@ public class CylindersCraft extends EngineeringProject {
     @Override
     public void onCompleted(World world) {
         super.onCompleted(world);
-        world.getPlayer().getShip().addItem(new Cylinders(), amount);
+        world.getPlayer().getInventory().add(new Cylinders(), amount);
         remainingProgress = progress;
     }
 

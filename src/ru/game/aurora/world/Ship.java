@@ -5,8 +5,6 @@
  */
 package ru.game.aurora.world;
 
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Multiset;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
@@ -23,7 +21,6 @@ import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.*;
@@ -53,8 +50,6 @@ public class Ship extends BaseGameObject {
     private int maxEngineers;
 
     private final List<WeaponInstance> weapons = new ArrayList<>();
-
-    private final Multiset<InventoryItem> storage = HashMultiset.create();
 
     private final List<ShipUpgrade> upgrades = new ArrayList<>();
 
@@ -229,24 +224,6 @@ public class Ship extends BaseGameObject {
         military = maxMilitary;
 
         world.onCrewChanged();
-    }
-
-    public Multiset<InventoryItem> getStorage() {
-        return storage;
-    }
-
-    public void addItem(InventoryItem o, int amount) {
-        Boolean itemAlreadyInStorage = false;
-        for (Multiset.Entry<InventoryItem> entry : storage.entrySet()) {
-            if (entry.getElement().getName().equals(o.getName())) {
-                storage.setCount(entry.getElement(), entry.getCount() + amount);
-                itemAlreadyInStorage = true;
-                break;
-            }
-        }
-        if (!itemAlreadyInStorage) {
-            storage.add(o, amount);
-        }
     }
 
     public void fullRepair(World world) {

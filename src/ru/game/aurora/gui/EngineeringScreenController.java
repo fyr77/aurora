@@ -23,6 +23,9 @@ import ru.game.aurora.player.engineering.EngineeringState;
 import ru.game.aurora.player.engineering.HullRepairs;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.InventoryItem;
+
+import java.util.Map;
 
 
 public class EngineeringScreenController implements ScreenController {
@@ -149,15 +152,18 @@ public class EngineeringScreenController implements ScreenController {
         }
         EngineeringProject ep = (EngineeringProject) event.getSelection().get(0);
         String info = ep.getLocalizedText("engineering");
-        if (!ep.getCost().isEmpty()) {
+        final Map<InventoryItem, Integer> cost = ep.getCost();
+        if (!cost.isEmpty()) {
             info = info + "\n\n";
+            for (Map.Entry<InventoryItem, Integer> entry : cost.entrySet()) {
+                info += entry.getKey().getName() + ": " + entry.getValue() + "\n";
+            }
+
             if (ep.isProjectStarted()) {
                 info = info + String.format(Localization.getText("gui", "engineering.upgrade_in_progress"), ep.getRemainingDays(world));
             } else {
                 if (!ep.checkEnoughResources(world)) {
                     info = info + Localization.getText("gui", "logging.not_enough_resources");
-                } else {
-                    info = info + String.format(Localization.getText("gui", "engineering.resource_cost"), ep.getCost());
                 }
             }
         }

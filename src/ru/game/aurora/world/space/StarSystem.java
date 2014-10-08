@@ -697,14 +697,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         }
     }
 
-    /**
-     * Sets random position of a given object within this star system.
-     * Not within sun, not near borders, on an empty spot
-     */
-    public void setRandomEmptyPosition(Positionable object) {
-        final double maxRadius = Configuration.getDoubleProperty("world.starsystem.objectMaxRadius") * radius;
-        final double minRadius = Configuration.getDoubleProperty("world.starsystem.objectMinRadius") * radius;
+    public void setRandomEmptyPosition(Positionable object, double minRadius, double maxRadius) {
         int orbit;
+
+        minRadius *= radius;
+        maxRadius *= radius;
 
         boolean isEmpty;
         do {
@@ -733,6 +730,16 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
                 }
             }
         } while (!isEmpty);
+    }
+
+    /**
+     * Sets random position of a given object within this star system.
+     * Not within sun, not near borders, on an empty spot
+     */
+    public void setRandomEmptyPosition(Positionable object) {
+        final double maxRadius = Configuration.getDoubleProperty("world.starsystem.objectMaxRadius");
+        final double minRadius = Configuration.getDoubleProperty("world.starsystem.objectMinRadius");
+        setRandomEmptyPosition(object, minRadius, maxRadius);
     }
 
     public List<GameObject> getShips() {
