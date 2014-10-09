@@ -80,7 +80,7 @@ public class DialogCSVConverter {
             final String replyTextId = textId + "." + i;
             context.text.put(replyTextId, replyString[1]);
             replies[i] = new Reply(
-                    replyString.length >= 5 && !replyString[4].isEmpty() ? Integer.parseInt(replyString[4]) : 0
+                    replyString.length >= 5 && !replyString[4].isEmpty() ? Integer.parseInt(replyString[4].trim()) : 0
                     , Integer.parseInt(replyString[2])
                     , Integer.toString(i)
                     , replyString.length > 3 && !replyString[3].isEmpty() ? parseConditions(replyString[3]) : null

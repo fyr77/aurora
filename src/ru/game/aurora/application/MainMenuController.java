@@ -135,86 +135,14 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
     }
 
     private Dialog createInitialDialog() {
-        final Dialog gameStartDialog = Dialog.loadFromFile("dialogs/tutorials/game_start_tutorial.json");
+        final Dialog gameStartDialog = Dialog.loadFromFile("dialogs/game_start_tutorial.json");
         gameStartDialog.addListener(new DialogListener() {
             private static final long serialVersionUID = 3479062521122587288L;
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                Dialog d = null;
-                switch (returnCode) {
-                    case 3:
-                        d = Dialog.loadFromFile("dialogs/tutorials/marine_intro.json");
-                        world.getGlobalVariables().put("crew.military", 1);
-                        d.addListener(new DialogListener() {
-                            private static final long serialVersionUID = -7928559144883640398L;
-
-                            @Override
-                            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                                if (returnCode == -1) {
-                                    // player has made a mistake, military chief will not be friendly with him
-                                    world.getGlobalVariables().put("crew.military", -1);
-                                }
-                                // return to initial dialog, if player will want to visit other crewmembers
-                                world.addOverlayWindow(gameStartDialog);
-                            }
-                        });
-                        break;
-                    case 2:
-                        d = Dialog.loadFromFile("dialogs/tutorials/engineer_intro.json");
-                        world.getGlobalVariables().put("crew.engineer", 1);
-                        d.addListener(new DialogListener() {
-
-                            private static final long serialVersionUID = -5149956426932570110L;
-
-                            @Override
-                            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                                if (returnCode == -1) {
-                                    // player has made a mistake, engineer chief will not be friendly with him
-                                    world.getGlobalVariables().put("crew.engineer", -1);
-                                }
-                                if (flags.containsKey("engineer_dinner")) {
-                                    world.getGlobalVariables().put("crew.engineer", 1);
-                                }
-                                // return to initial dialog, if player will want to visit other crewmembers
-                                world.addOverlayWindow(gameStartDialog);
-                            }
-                        });
-                        break;
-
-                    case 1:
-                        d = Dialog.loadFromFile("dialogs/tutorials/scientist_intro.json");
-                        world.getGlobalVariables().put("crew.scientist", 1);
-                        d.addListener(new DialogListener() {
-                            private static final long serialVersionUID = 3028202497230253046L;
-
-                            @Override
-                            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                                if (returnCode == -1) {
-                                    // player has made a mistake, engineer chief will not be friendly with him
-                                    world.getGlobalVariables().put("crew.scientist", -1);
-                                }
-                                // return to initial dialog, if player will want to visit other crewmembers
-                                world.addOverlayWindow(gameStartDialog);
-                            }
-                        });
-                        break;
-                    case 0:
-                        // set remaining crew relationships
-                        if (!world.getGlobalVariables().containsKey("crew.scientist")) {
-                            world.getGlobalVariables().put("crew.scientist", 0);
-                        }
-                        if (!world.getGlobalVariables().containsKey("crew.engineer")) {
-                            world.getGlobalVariables().put("crew.engineer", 0);
-                        }
-                        if (!world.getGlobalVariables().containsKey("crew.military")) {
-                            world.getGlobalVariables().put("crew.military", 0);
-                        }
-                }
-
-                if (d != null) {
-                    // player decided to visit one of his crew mates
-                    world.addOverlayWindow(d);
+                if (returnCode != 0) {
+                    GUI.getInstance().getNifty().gotoScreen("ship_screen");
                 }
             }
         });
