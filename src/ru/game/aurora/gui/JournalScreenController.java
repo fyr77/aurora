@@ -18,7 +18,9 @@ import ru.game.aurora.world.quest.JournalEntry;
  */
 
 public class JournalScreenController implements ScreenController {
-    private ListBox<JournalEntry> questList;
+    private ListBox<JournalEntry> activeQuests;
+
+    private ListBox<JournalEntry> completedQuests;
 
     private ListBox<JournalEntry> codexList;
 
@@ -36,9 +38,11 @@ public class JournalScreenController implements ScreenController {
     public void bind(Nifty nifty, Screen screen) {
         myWindow = screen.findNiftyControl("journal_window", Window.class);
         tg = screen.findNiftyControl("journal_tabs", TabGroup.class);
-        Element questTab = screen.findElementByName("quest_tab");
+        Element activeQuestTab = screen.findElementByName("active_quest_tab");
+        Element completedQuestTab = screen.findElementByName("completed_quest_tab");
         Element codexTab = screen.findElementByName("codex_tab");
-        questList = questTab.findNiftyControl("#itemsList", ListBox.class);
+        activeQuests = activeQuestTab.findNiftyControl("#itemsList", ListBox.class);
+        completedQuests = completedQuestTab.findNiftyControl("#itemsList", ListBox.class);
         codexList = codexTab.findNiftyControl("#itemsList", ListBox.class);
     }
 
@@ -46,10 +50,16 @@ public class JournalScreenController implements ScreenController {
     public void onStartScreen() {
         myWindow.getElement().setVisible(true);
         Journal journal = world.getPlayer().getJournal();
-        EngineUtils.resetScrollbarX(questList);
-        questList.clear();
+        EngineUtils.resetScrollbarX(activeQuests);
+        EngineUtils.resetScrollbarX(completedQuests);
+        activeQuests.clear();
+        completedQuests.clear();
         for (JournalEntry e : journal.getQuests().values()) {
-            questList.addItem(e);
+            if (e.isCompleted()) {
+                completedQuests.addItem(e);
+            } else {
+                activeQuests.addItem(e);
+            }
         }
         EngineUtils.resetScrollbarX(codexList);
         codexList.clear();

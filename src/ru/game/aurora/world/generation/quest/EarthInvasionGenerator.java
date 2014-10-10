@@ -67,6 +67,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                 public void stateChanged(World world) {
                     world.getGlobalVariables().put("rogues_altar.result", "destroy");
                     world.getPlayer().getJournal().addQuestEntries("rogues_altar", "destroy");
+                    world.getPlayer().getJournal().questCompleted("rogues_altar");
                     world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/rogues_altar_destroyed.json"));
                 }
             });
@@ -278,6 +279,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                     // all ships destroyed
                     world.getGlobalVariables().put("bork_blockade.result", "destroy");
                     world.getPlayer().getJournal().addQuestEntries("bork_blockade", "destroy");
+                    world.getPlayer().getJournal().questCompleted("bork_blockade");
                     world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/encounters/bork_blockade_destroyed.json"));
                 }
             }

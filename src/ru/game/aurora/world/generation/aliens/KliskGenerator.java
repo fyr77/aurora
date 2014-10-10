@@ -99,6 +99,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                             repDelta = -1;
                             break;
                     }
+                    world.getPlayer().getJournal().questCompleted("klisk_trade");
                     EmbassiesQuest.updateJournal(world, "klisk_" + tradeResult);
                     world.getReputation().updateReputation(KliskGenerator.NAME, HumanityGenerator.NAME, repDelta);
                     world.getGlobalVariables().remove("klisk_trade.result");

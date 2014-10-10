@@ -233,6 +233,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
                             // refused
                             world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "refused");
                             flags.put("rebels_reject", "");
+                            world.getPlayer().getJournal().questCompleted("zorsan_rebels");
                         } else {
                             world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "agreed");
                             flags.put("rebels_continue", "");

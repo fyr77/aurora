@@ -84,7 +84,12 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
                         world.setCurrentRoom(entranceLocation);
                         entranceLocation.returnTo(world);
                         world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/inside_leave.json"));
-                        world.getPlayer().getJournal().addQuestEntries("inside", "end_bad"); //todo: good ending
+                        if (world.getPlayer().getInventory().count(Resources.CELLS_FROM_PARALLEL_WORLD) > 0) {
+                            world.getPlayer().getJournal().addQuestEntries("inside", "end_good");
+                        } else {
+                            world.getPlayer().getJournal().addQuestEntries("inside", "end_bad");
+                        }
+                        world.getPlayer().getJournal().questCompleted("inside");
                     }
                 }
             }

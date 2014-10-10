@@ -23,6 +23,7 @@ public class BorkDialogListener implements DialogListener {
 
     private void removeBlockade(World world) {
         world.getPlayer().getJournal().addQuestEntries("bork_blockade", "withdraw");
+        world.getPlayer().getJournal().questCompleted("bork_blockade");
         world.getGlobalVariables().put("bork_blockade.result", "withdraw");
         StarSystem ss = ((AlienRace) world.getFactions().get(HumanityGenerator.NAME)).getHomeworld();
         for (Iterator<GameObject> iter = ss.getShips().iterator(); iter.hasNext(); ) {

@@ -44,6 +44,7 @@ public class RoguesMainDialogListener implements DialogListener {
         if (flags.containsKey("rogues_altar.withdraw")) {
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("rogues_altar_withdraw", "news"));
             world.getPlayer().getJournal().addQuestEntries("rogues_altar", "withdraw");
+            world.getPlayer().getJournal().questCompleted("rogues_altar");
             StarSystem humanityHomeworld = ((AlienRace) world.getFactions().get(HumanityGenerator.NAME)).getHomeworld();
 
             Planet moon = (Planet) humanityHomeworld.getPlanets()[2].getSatellites().get(0);

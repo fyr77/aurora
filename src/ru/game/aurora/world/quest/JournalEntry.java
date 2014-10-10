@@ -18,6 +18,8 @@ public class JournalEntry implements Serializable {
 
     private final String id;
 
+    private boolean isCompleted = false;
+
     private final Set<String> messageIds = new LinkedHashSet<>();
 
     public JournalEntry(String id) {
@@ -33,8 +35,7 @@ public class JournalEntry implements Serializable {
         return id;
     }
 
-    public boolean contains(String id)
-    {
+    public boolean contains(String id) {
         return messageIds.contains(id);
     }
 
@@ -65,5 +66,13 @@ public class JournalEntry implements Serializable {
     @Override
     public String toString() {
         return getLocalizedCaption();
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 }
