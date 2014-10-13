@@ -1,0 +1,75 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+version = '0.4.0'
+
+compileJava {
+    options.encoding = 'utf-8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+//        resources {
+//            srcDir 'resources'
+//        }
+    }
+}
+
+applicationDistribution.from('resources') {
+    into 'bin\\resources'
+}
+
+applicationDistribution.from('native') {
+    into 'bin\\native'
+}
+
+/*
+this hack used due to relative path to game resources. Instead of having resources in jar
+we have all of them in 'resources' folder. It's unable to set working directory so we have
+to copy all the stuff into 'bin' directory
+
+*/
+startScripts {
+    classpath += files('src/dist/placeholder')
+    doLast {
+        def windowsScriptFile = file getWindowsScript()
+        def unixScriptFile = file getUnixScript()
+        windowsScriptFile.text = windowsScriptFile.text.replace('%APP_HOME%\\lib\\placeholder', '%APP_HOME%\\bin\\resources')
+        unixScriptFile.text = unixScriptFile.text.replace('$APP_HOME/lib/placeholder', '$APP_HOME/bin/resources')
+    }
+}
+
+dependencies {
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'org.bushe:eventbus:1.4'
+    compile fileTree(dir: 'third-party', include: ['frankenstein-core.jar'])
+    compile 'com.google.code.gson:gson:2.2.2'
+    compile 'com.google.guava:guava:15.0'
+    compile fileTree(dir: 'third-party', include: ['jgame-jre.jar'])
+    compile fileTree(dir: 'third-party', include: ['jinput.jar'])
+    compile fileTree(dir: 'third-party', include: ['jogg-0.0.7.jar']) // look for newer version?
+    compile fileTree(dir: 'third-party', include: ['jorbis-0.0.15.jar']) // this one is exists in maven from 15 version
+    compile 'org.slf4j:jul-to-slf4j:1.7.6'
+    compile fileTree(dir: 'third-party', include: ['juniversalchardet-1.0.3.jar']) // look for newer version?
+    compile fileTree(dir: 'third-party', include: ['Libnoiseforjava-master.jar']) // create fork and publish it
+    compile 'ch.qos.logback:logback-classic:1.0.13'
+    compile 'ch.qos.logback:logback-core:1.0.13'
+    compile 'org.lwjgl.lwjgl:lwjgl-platform:2.9.1:'
+    compile fileTree(dir: 'third-party', include: ['lwjgl.jar']) // look for version
+    compile fileTree(dir: 'third-party', include: ['nifty-1.3.2.jar']) // look for version
+    compile fileTree(dir: 'third-party', include: ['nifty-default-controls-1.3.2.jar']) // look for version
+    compile fileTree(dir: 'third-party', include: ['nifty-slick-renderer-1.3.2.jar']) // look for version
+    compile fileTree(dir: 'third-party', include: ['nifty-style-back-1.3.2.jar']) // look for correct jar
+    compile fileTree(dir: 'third-party', include: ['rlforj.0.3.jar']) // look for correct jar
+    compile 'org.slf4j:slf4j-api:1.7.5'
+    compile fileTree(dir: 'third-party', include: ['slick.jar']) // look for correct jar
+    compile fileTree(dir: 'third-party', include: ['TWL.jar']) // look for correct jar
+    compile fileTree(dir: 'third-party', include: ['xpp3-1.1.4c.jar']) // look for correct jar
+}
