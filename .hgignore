@@ -2,6 +2,8 @@ glob:*Thumbs.db
 glob:out/*
 glob:Aurora.iws
 glob:resources/gui/aurora.xml.old
+glob:build/*
+glob:.gradle/*
 syntax: glob
 save.bin
 system.properties
