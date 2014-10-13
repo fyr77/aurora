@@ -31,6 +31,11 @@ public class Cylinders extends UsableItem {
     }
 
     @Override
+    public double getPrice() {
+        return 0;
+    }
+
+    @Override
     public void onReturnToShip(World world, int amount) {
 
     }

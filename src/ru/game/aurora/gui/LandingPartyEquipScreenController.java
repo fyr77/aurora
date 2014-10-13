@@ -83,7 +83,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
             }
         }
 
-        shipStorage = HashMultiset.create(world.getPlayer().getShip().getStorage());
+        shipStorage = HashMultiset.create(world.getPlayer().getInventory());
 
         myWindow.setVisible(true);
         world.setPaused(true);
@@ -192,8 +192,8 @@ public class LandingPartyEquipScreenController implements ScreenController {
     public void ok() {
         GUI.getInstance().popAndSetScreen();
         world.getPlayer().setLandingParty(localLandingParty);
-        world.getPlayer().getShip().getStorage().clear();
-        world.getPlayer().getShip().getStorage().addAll(shipStorage);
+        world.getPlayer().getInventory().clear();
+        world.getPlayer().getInventory().addAll(shipStorage);
     }
 
     public void cancel() {

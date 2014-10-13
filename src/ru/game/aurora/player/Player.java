@@ -57,6 +57,7 @@ public class Player implements Serializable {
         earthState = new EarthState();
         final WeaponDesc defaultWeapon = ResourceManager.getInstance().getWeapons().getEntity("assault");
         inventory.add(defaultWeapon, 1);
+        inventory.add(Resources.RU, Configuration.getIntProperty("player.initial_resources"));
         landingParty = new LandingParty(0, 0, defaultWeapon, 2, 2, 4, Configuration.getIntProperty("player.landing_party.defaultHP"));
         landingParty.pickUp(new MedPack(), 3);   //Santa's gifts
         landingParty.pickUp(new Cylinders(), 3);
@@ -108,7 +109,7 @@ public class Player implements Serializable {
         if (delta > 0) {
             inventory.add(type, delta);
         } else {
-            inventory.remove(type, delta);
+            inventory.remove(type, -delta);
         }
         if (type == Resources.CREDITS) {
             world.getGlobalVariables().put("credits", inventory.count(Resources.CREDITS));

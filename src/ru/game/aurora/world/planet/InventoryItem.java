@@ -15,6 +15,8 @@ public interface InventoryItem extends Serializable {
 
     public Image getImage();
 
+    public double getPrice();
+
     public void onReturnToShip(World world, int amount);
 
     /**

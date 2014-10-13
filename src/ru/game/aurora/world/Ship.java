@@ -5,8 +5,6 @@
  */
 package ru.game.aurora.world;
 
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Multiset;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
@@ -14,7 +12,9 @@ import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.ExplosionEffect;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
@@ -23,7 +23,6 @@ import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
-import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.*;
@@ -53,8 +52,6 @@ public class Ship extends BaseGameObject {
     private int maxEngineers;
 
     private final List<WeaponInstance> weapons = new ArrayList<>();
-
-    private final Multiset<InventoryItem> storage = HashMultiset.create();
 
     private final List<ShipUpgrade> upgrades = new ArrayList<>();
 
@@ -97,9 +94,59 @@ public class Ship extends BaseGameObject {
         addUpgrade(world, new WorkshopUpgrade());
         addUpgrade(world, new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon")));
 
-        addCrewMember(world, new CrewMember("henry", "marine_dialog", Dialog.loadFromFile("dialogs/tutorials/marine_intro.json")));
-        addCrewMember(world, new CrewMember("gordon", "scientist_dialog", Dialog.loadFromFile("dialogs/tutorials/scientist_intro.json")));
-        addCrewMember(world, new CrewMember("sarah", "engineer_dialog", Dialog.loadFromFile("dialogs/tutorials/engineer_intro.json")));
+        final CrewMember henry = new CrewMember("henry", "marine_dialog", Dialog.loadFromFile("dialogs/tutorials/marine_intro.json"));
+        henry.getDialog().addListener(new DialogListener() {
+            private static final long serialVersionUID = 3549779197430081181L;
+
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                henry.setDialog(null);
+                GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
+                if (returnCode == -1) {
+                    // player has made a mistake, military chief will not be friendly with him
+                    henry.changeReputation(-1);
+                }
+            }
+
+        });
+        addCrewMember(world, henry);
+
+        final CrewMember gordon = new CrewMember("gordon", "scientist_dialog", Dialog.loadFromFile("dialogs/tutorials/scientist_intro.json"));
+        gordon.getDialog().addListener(new DialogListener() {
+
+            private static final long serialVersionUID = -6342424301808982996L;
+
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                gordon.setDialog(null);
+                GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
+                if (returnCode == -1) {
+                    // player has made a mistake, engineer chief will not be friendly with him
+                    gordon.changeReputation(-1);
+                }
+            }
+        });
+        addCrewMember(world, gordon);
+
+        final CrewMember sarah = new CrewMember("sarah", "engineer_dialog", Dialog.loadFromFile("dialogs/tutorials/engineer_intro.json"));
+        sarah.getDialog().addListener(new DialogListener() {
+            private static final long serialVersionUID = -7547662576268159641L;
+
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                sarah.setDialog(null);
+                GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
+                if (returnCode == -1) {
+                    // player has made a mistake, engineer chief will not be friendly with him
+                    sarah.changeReputation(-1);
+                }
+                if (flags.containsKey("engineer_dinner")) {
+                    world.getGlobalVariables().put("crew.engineer", 1);
+                    sarah.changeReputation(5);
+                }
+            }
+        });
+        addCrewMember(world, sarah);
 
         refillCrew(world);
     }
@@ -229,24 +276,6 @@ public class Ship extends BaseGameObject {
         military = maxMilitary;
 
         world.onCrewChanged();
-    }
-
-    public Multiset<InventoryItem> getStorage() {
-        return storage;
-    }
-
-    public void addItem(InventoryItem o, int amount) {
-        Boolean itemAlreadyInStorage = false;
-        for (Multiset.Entry<InventoryItem> entry : storage.entrySet()) {
-            if (entry.getElement().getName().equals(o.getName())) {
-                storage.setCount(entry.getElement(), entry.getCount() + amount);
-                itemAlreadyInStorage = true;
-                break;
-            }
-        }
-        if (!itemAlreadyInStorage) {
-            storage.add(o, amount);
-        }
     }
 
     public void fullRepair(World world) {

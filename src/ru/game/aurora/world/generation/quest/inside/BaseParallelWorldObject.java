@@ -7,6 +7,7 @@ import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.space.SpaceDebris;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -125,6 +126,11 @@ public class BaseParallelWorldObject extends BaseGameObject {
                 return;
             }
             c.collapse();
+        }
+        if (circles.size() <= damaged) {
+            if (CommonRandom.getRandom().nextBoolean()) {
+                world.getCurrentStarSystem().getObjects().add(new SpaceDebris(x, y, "bio_remains", new InsideEncounterGenerator.BioCellsItem()));
+            }
         }
     }
 

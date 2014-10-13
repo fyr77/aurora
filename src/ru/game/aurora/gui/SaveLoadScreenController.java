@@ -75,6 +75,11 @@ public class SaveLoadScreenController implements ScreenController {
 
     public void loadPressed() {
         World world = SaveGameManager.loadGame(slots.getFocusItem());
+        if (world == null) {
+            Nifty nifty = GUI.getInstance().getNifty();
+            Element popup = nifty.createPopup("load_failed");
+            nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
+        }
         world.gameLoaded();
         AuroraGame.onGameLoaded(world);
     }

@@ -4,6 +4,8 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.ShipScreenController;
 import ru.game.aurora.world.World;
 
 import java.util.HashMap;
@@ -38,6 +40,8 @@ public class CrewMember extends ItemWithTextAndImage {
 
     public void setDialog(Dialog dialog) {
         this.dialog = dialog;
+        // reload crew member list, so that buttons are refreshed
+        ((ShipScreenController) GUI.getInstance().getNifty().findScreenController(ShipScreenController.class.getCanonicalName())).refresh();
     }
 
     public void changeReputation(int amount) {
@@ -59,5 +63,9 @@ public class CrewMember extends ItemWithTextAndImage {
 
     public void onRemoved(World world) {
         // nothing
+    }
+
+    public Dialog getDialog() {
+        return dialog;
     }
 }

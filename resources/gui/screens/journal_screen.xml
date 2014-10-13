@@ -19,12 +19,18 @@
                 <panel childLayout="vertical">
 
                     <!-- tabs -->
-                    <control id="journal_tabs" name="tabGroup" buttonWidth="30%" buttonHeight="30px" height="650px">
-                        <control id="active_projects" name="tab" caption="${gui.journal.quest.title}" childLayout="center">
-                            <control name="journal_control" id="quest_tab" />
+                    <control id="journal_tabs" name="tabGroup" buttonWidth="300px" buttonHeight="30px" height="650px">
+                        <control id="active_quests" name="tab" caption="${gui.journal.active_quest.title}"
+                                 childLayout="center">
+                            <control name="journal_control" id="active_quest_tab"/>
                         </control>
-                        <control id="completed_projects" name="tab" caption="${gui.journal.codex.title}">
-                            <control name="journal_control" id="codex_tab" />
+                        <control id="completed_quests" name="tab" caption="${gui.journal.completed_quest.title}"
+                                 childLayout="center">
+                            <control name="journal_control" id="completed_quest_tab"/>
+                        </control>
+
+                        <control id="codex" name="tab" caption="${gui.journal.codex.title}">
+                        <control name="journal_control" id="codex_tab" />
                         </control>
                     </control>
 

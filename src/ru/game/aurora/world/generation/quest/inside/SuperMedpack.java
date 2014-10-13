@@ -2,6 +2,7 @@ package ru.game.aurora.world.generation.quest.inside;
 
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
@@ -31,6 +32,11 @@ public class SuperMedpack extends UsableItem {
     }
 
     @Override
+    public double getPrice() {
+        return 0;
+    }
+
+    @Override
     public void onReturnToShip(World world, int amount) {
 
     }
@@ -55,7 +61,14 @@ public class SuperMedpack extends UsableItem {
 
         @Override
         public Map<InventoryItem, Integer> getCost() {
-            return null;
+            Map<InventoryItem, Integer> cost = getSimpleResourceCost(Resources.RU, 5);
+            cost.put(Resources.CELLS_FROM_PARALLEL_WORLD, 1);
+            return cost;
+        }
+
+        @Override
+        public void onCompleted(World world) {
+            world.getPlayer().getInventory().add(new SuperMedpack(), 1);
         }
     }
 }

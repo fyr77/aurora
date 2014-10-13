@@ -28,7 +28,7 @@ public class MedpacksCraft extends EngineeringProject {
     @Override
     public void onCompleted(World world) {
         super.onCompleted(world);
-        world.getPlayer().getShip().addItem(new MedPack(), amount);
+        world.getPlayer().getInventory().add(new MedPack(), amount);
         remainingProgress = progress;
     }
 

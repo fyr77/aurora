@@ -30,6 +30,8 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
 
     private final int range;
 
+    private final int price;
+
     private final String shotImage;
 
     private final int reloadTurns;
@@ -42,10 +44,11 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
 
     public final int size;
 
-    public WeaponDesc(String id, Drawable drawable, int damage, int range, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
+    public WeaponDesc(String id, Drawable drawable, int damage, int range, int price, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
         super(id, drawable);
         this.damage = damage;
         this.range = range;
+        this.price = price;
         this.shotImage = shotImage;
         this.shotSound = shotSound;
         this.reloadTurns = reloadTurns;
@@ -102,6 +105,11 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
     @Override
     public Image getImage() {
         return drawable.getImage();
+    }
+
+    @Override
+    public double getPrice() {
+        return price;
     }
 
     public int getReloadTurns() {

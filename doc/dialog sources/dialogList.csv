@@ -5,3 +5,4 @@ Martan_1.csv;earth_first_return_1;earth_dialog;.
 Гордон - первая встреча с садовниками.csv;gardener_ship_detected;scientist_dialog;.
 Клиск торговля.csv;klisk_main;klisk_dialog;.
 Садовник диалог.csv;gardener_1;gardener_dialog;.
+game_start.csv;game_start_tutorial;interior_dialog;.

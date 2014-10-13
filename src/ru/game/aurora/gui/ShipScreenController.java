@@ -2,6 +2,8 @@ package ru.game.aurora.gui;
 
 import com.google.common.collect.Multiset;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
@@ -47,8 +49,7 @@ public class ShipScreenController implements ScreenController {
 
     }
 
-    @Override
-    public void onStartScreen() {
+    public void refresh() {
         crewMemberListBox.clear();
         List<CrewMember> l = new ArrayList<>();
         final Ship ship = world.getPlayer().getShip();
@@ -60,9 +61,14 @@ public class ShipScreenController implements ScreenController {
 
         inventory.clear();
         List<Multiset.Entry<InventoryItem>> ll = new ArrayList<>();
-        ll.addAll(ship.getStorage().entrySet());
+        ll.addAll(world.getPlayer().getInventory().entrySet());
         inventory.addAllItems(ll);
 
+    }
+
+    @Override
+    public void onStartScreen() {
+        refresh();
         myScreen.layoutLayers();
         world.setPaused(true);
 
@@ -77,5 +83,18 @@ public class ShipScreenController implements ScreenController {
 
     public void closeScreen() {
         GUI.getInstance().popAndSetScreen();
+    }
+
+    public void callOfficerPressed() {
+        crewMemberListBox.getFocusItem().interact(world);
+        myScreen.layoutLayers();
+        crewMemberListBox.refresh();
+    }
+
+    @NiftyEventSubscriber(pattern = ".*callButton")
+    public void onCallButtonClicked(String id, ButtonClickedEvent event) {
+        int numericId = Integer.parseInt(id.split("#")[0]);
+        numericId -= Integer.parseInt(crewMemberListBox.getElement().findElementByName("#child-root").getElements().get(0).getId());
+        crewMemberListBox.setFocusItemByIndex(numericId);
     }
 }

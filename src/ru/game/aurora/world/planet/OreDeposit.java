@@ -35,6 +35,11 @@ public class OreDeposit extends BaseGameObject {
         }
 
         @Override
+        public double getPrice() {
+            return 0;
+        }
+
+        @Override
         public void onReturnToShip(World world, int amount) {
             final int resAmount = amount * type.getResCountForUnit();
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.resources_transfer"), amount, type.name(), resAmount));

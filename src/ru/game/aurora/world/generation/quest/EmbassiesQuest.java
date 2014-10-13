@@ -29,6 +29,7 @@ public class EmbassiesQuest implements WorldGeneratorPart {
                 && world.getGlobalVariables().containsKey("diplomacy.zorsan_visited")
                 && world.getGlobalVariables().containsKey("diplomacy.rogues_visited")) {
             world.getPlayer().getJournal().addQuestEntries("embassies", "end");
+            world.getPlayer().getJournal().questCompleted("embassies");
         }
     }
 

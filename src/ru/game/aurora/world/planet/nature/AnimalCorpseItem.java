@@ -34,6 +34,11 @@ public class AnimalCorpseItem implements InventoryItem {
     }
 
     @Override
+    public double getPrice() {
+        return 0.05;
+    }
+
+    @Override
     public void onReturnToShip(World world, int amount) {
         if (!desc.isOutopsyMade() && !world.getPlayer().getResearchState().containsResearchFor(desc)) {
             // this type of alien animal has never been seen before, add new research

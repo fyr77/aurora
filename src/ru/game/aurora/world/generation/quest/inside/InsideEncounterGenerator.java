@@ -9,11 +9,9 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.SingleShipEvent;
 import ru.game.aurora.player.Resources;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.ResearchProjectDesc;
-import ru.game.aurora.world.BaseGameObject;
-import ru.game.aurora.world.GameObject;
-import ru.game.aurora.world.Ship;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.space.StarSystem;
@@ -86,7 +84,12 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
                         world.setCurrentRoom(entranceLocation);
                         entranceLocation.returnTo(world);
                         world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/inside_leave.json"));
-                        world.getPlayer().getJournal().addQuestEntries("inside", "end_bad"); //todo: good ending
+                        if (world.getPlayer().getInventory().count(Resources.CELLS_FROM_PARALLEL_WORLD) > 0) {
+                            world.getPlayer().getJournal().addQuestEntries("inside", "end_good");
+                        } else {
+                            world.getPlayer().getJournal().addQuestEntries("inside", "end_bad");
+                        }
+                        world.getPlayer().getJournal().questCompleted("inside");
                     }
                 }
             }
@@ -151,7 +154,6 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
                     moveUp();
                 }
 
-
                 if (target.getDistance(this) <= 1) {
                     target.onAttack(world, this, Configuration.getIntProperty("quest.inside.cell_damage"));
                     onAttack(world, this, Integer.MAX_VALUE);
@@ -176,14 +178,14 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         public ParallelWorld(World world, StarSystem entranceLocation) {
             super(null, null, 0, 0);
             setPlanets(new BasePlanet[0]);
-            setRadius(40);
+            setRadius(50);
             this.entranceLocation = entranceLocation;
             setQuestLocation(true);
 
             final int planetCount = Configuration.getIntProperty("quest.inside.planets");
             for (int i = 0; i < planetCount; ++i) {
                 final ParallelWorldPlanet pp = new ParallelWorldPlanet(world);
-                setRandomEmptyPosition(pp);
+                setRandomEmptyPosition(pp, 0.2, 1.5);
                 getObjects().add(pp);
             }
             setCanBeLeft(false);
@@ -202,7 +204,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         }
     }
 
-    private static class BioCellsItem extends BaseGameObject {
+    public static class BioCellsItem extends BaseGameObject {
         private static final long serialVersionUID = 8752939890229707029L;
 
         @Override
@@ -221,7 +223,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         private transient Animation myAnim;
 
         private void loadAnim() {
-            myAnim = ResourceManager.getInstance().getAnimation("solar_wind").copy();
+            myAnim = ResourceManager.getInstance().getAnimation("black_hole").copy();
             myAnim.setLooping(true);
             myAnim.setAutoUpdate(true);
         }
@@ -243,6 +245,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         public void interact(World world) {
             ParallelWorld pw = new ParallelWorld(world, world.getCurrentStarSystem());
             pw.enter(world);
+            world.getPlayer().getShip().setPos(0, 0);
             world.setCurrentRoom(pw);
             isAlive = false;
             world.getPlayer().getJournal().addQuestEntries("inside", "enter");
@@ -275,6 +278,15 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
 
         world.getResearchAndDevelopmentProjects().getEngineeringProjects().put(
                 "super_medpack"
-                , new SuperMedpack.SuperMedpackCraftProject("super_medpack_craft", "medpack", 10));
+                , new SuperMedpack.SuperMedpackCraftProject("super_medpack_craft", "super_medpack", 10));
+
+        world.getResearchAndDevelopmentProjects().getResearchProjects().get("parallel_world_bio_data").addListener(new IStateChangeListener<World>() {
+            private static final long serialVersionUID = -3766979340652869635L;
+
+            @Override
+            public void stateChanged(World param) {
+                param.getPlayer().getEarthState().getMessages().add(new PrivateMessage("inside", "news"));
+            }
+        });
     }
 }
