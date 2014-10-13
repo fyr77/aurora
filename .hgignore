@@ -4,6 +4,8 @@ glob:Aurora.iws
 glob:resources/gui/aurora.xml.old
 glob:build/*
 glob:.gradle/*
+glob:*.iml
+glob:*.iws
 syntax: glob
 save.bin
 system.properties
