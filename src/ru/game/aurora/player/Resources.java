@@ -17,6 +17,11 @@ public enum Resources implements InventoryItem {
         }
 
         @Override
+        public double getPrice() {
+            return 0;
+        }
+
+        @Override
         public void onReturnToShip(World world, int amount) {
         }
 
@@ -47,6 +52,11 @@ public enum Resources implements InventoryItem {
         }
 
         @Override
+        public double getPrice() {
+            return 0;
+        }
+
+        @Override
         public boolean isDumpable() {
             return true;
         }
@@ -70,6 +80,11 @@ public enum Resources implements InventoryItem {
         @Override
         public void onReturnToShip(World world, int amount) {
 
+        }
+
+        @Override
+        public double getPrice() {
+            return 0;
         }
 
         @Override
