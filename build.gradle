@@ -30,6 +30,8 @@ applicationDistribution.from('native') {
     into 'bin\\native'
 }
 
+mainClassName = 'ru.game.aurora.application.AuroraGame'
+
 /*
 this hack used due to relative path to game resources. Instead of having resources in jar
 we have all of them in 'resources' folder. It's unable to set working directory so we have
