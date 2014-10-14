@@ -54,7 +54,6 @@ dependencies {
     compile fileTree(dir: 'third-party', include: ['frankenstein-core.jar'])
     compile 'com.google.code.gson:gson:2.2.2'
     compile 'com.google.guava:guava:15.0'
-    compile fileTree(dir: 'third-party', include: ['jgame-jre.jar'])
     compile fileTree(dir: 'third-party', include: ['jinput.jar'])
     compile fileTree(dir: 'third-party', include: ['jogg-0.0.7.jar']) // look for newer version?
     compile fileTree(dir: 'third-party', include: ['jorbis-0.0.15.jar']) // this one is exists in maven from 15 version
@@ -72,6 +71,5 @@ dependencies {
     compile fileTree(dir: 'third-party', include: ['rlforj.0.3.jar']) // look for correct jar
     compile 'org.slf4j:slf4j-api:1.7.5'
     compile fileTree(dir: 'third-party', include: ['slick.jar']) // look for correct jar
-    compile fileTree(dir: 'third-party', include: ['TWL.jar']) // look for correct jar
     compile fileTree(dir: 'third-party', include: ['xpp3-1.1.4c.jar']) // look for correct jar
 }
