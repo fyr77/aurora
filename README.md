@@ -19,3 +19,6 @@ The game resources (music, sounds, art etc) can not be used outside of this proj
 If you want to contribute, you can create a fork and then send me a pull request.
 There are no specific code conventions here, however code should be clean and commented where necessary.
 
+### Special thanks to ###
+
+[JProfiler](http://www.ej-technologies.com/products/jprofiler/overview.html) for providing a free open-source license for our project.
