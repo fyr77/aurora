@@ -38,6 +38,7 @@ public class ResourceManager {
     private final Map<String, Sound> soundMap;
     private final Map<String, Playlist> playlistMap;
     private final Map<String, Image> imageMap;
+    private final Map<String, String> imageFileMap;
     private final Map<String, Image> flippedCopies; // contains horizontally flipped copies of images from imageMap
     private final Map<String, ResourceAnimationData> animationMap;
     private final Map<String, String> textMap;
@@ -56,6 +57,7 @@ public class ResourceManager {
     private ResourceManager() {
         soundMap = new HashMap<>();
         imageMap = new HashMap<>();
+        imageFileMap = new HashMap<>();
         flippedCopies = new HashMap<>();
         animationMap = new HashMap<>();
         textMap = new HashMap<>();
@@ -283,9 +285,10 @@ public class ResourceManager {
     }
 
     public Image loadImage(String id, String path) throws SlickException {
-        if (path == null || path.length() == 0)
+       if (path == null || path.length() == 0)
             throw new SlickException("Image resource [" + id + "] has invalid path");
 
+        this.imageFileMap.put(id, path);
         Image image;
         try {
             image = new Image(path, false, Image.FILTER_NEAREST);
@@ -293,15 +296,25 @@ public class ResourceManager {
             throw new SlickException("Could not load image", e);
         }
 
-        this.imageMap.put(id, image);
-
         return image;
     }
 
     public final Image getImage(String ID) {
         Image rz = imageMap.get(ID);
         if (rz == null) {
-            logger.warn("Image for id {} not found", ID);
+            String imagePath = imageFileMap.get(ID);
+            if (imagePath != null) {
+                try {
+                    rz = new Image(imagePath, false, Image.FILTER_NEAREST);
+                    imageMap.put(ID, rz);
+                } catch (SlickException e) {
+                    logger.error("Failed to load image " + imagePath);
+                    return null;
+                }
+
+            } else {
+                logger.warn("Image for id {} not found", ID);
+            }
         }
         return rz;
     }
