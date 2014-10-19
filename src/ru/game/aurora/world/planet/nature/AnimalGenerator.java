@@ -109,7 +109,7 @@ public class AnimalGenerator {
         if (ranged) {
             weapon = new WeaponDesc("claw", null, dmg, range, 0, "bullet_shot", "bullet_1", 0, null, null, 0);
         } else {
-            weapon = new WeaponDesc("melee", null, dmg, 1, 0, "", "", 0, "melee_1", null, 0);
+            weapon = new WeaponDesc("melee", null, dmg, 1, 0, "", "melee_1", 0, "melee_1", null, 0);
         }
 
         AnimalSpeciesDesc result = new AnimalSpeciesDesc(
