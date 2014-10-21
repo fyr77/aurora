@@ -1,0 +1,14 @@
+Диалог по выбору КЛЮЧЕВОЙ.csv;henry_default;marine_dialog;crew/henry
+Первая встреча с Садовником.csv;henry_about_gardener;marine_dialog;crew/henry
+После зорсанского покушения.csv;henry_zorsan_embassy;marine_dialog;crew/henry
+После встречи с торговцем клисков.csv;henry_first_contact;marine_dialog;crew/henry
+Известие о том, что зорсаны собирают флот.csv;henry_zorsan_war_preparations;marine_dialog;crew/henry
+Перед финальной битвой.csv;henry_final_battle;marine_dialog;crew/henry
+Мнение Генри об офицерах Фронтц и Гордоне.csv;henry_about_officers;marine_dialog;crew/henry
+Внутри - совет.csv;henry_inside;marine_dialog;crew/henry
+Впечатления от службы.csv;henry_service;marine_dialog;crew/henry
+Скучаешь по семье.csv;henry_family;merine_dialog;crew/henry
+Про религию.csv;henry_religion;marine_dialog;crew/henry
+Личное время.csv;henry_private_time;marine_dialog;crew/henry
+Тайны прошлого 1.csv;henry_secrets_1;marine_dialog;crew/henry
+Вопрос о личной жизни.csv;henry_private_life;marine_dialog;crew/henry
