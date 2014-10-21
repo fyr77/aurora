@@ -229,6 +229,10 @@ public class Ship extends BaseGameObject {
         return scientists + engineers + military;
     }
 
+    public int getMaxCrew() {
+        return maxEngineers + maxMilitary + maxScientists;
+    }
+
     public List<WeaponInstance> getWeapons() {
         return weapons;
     }
@@ -266,7 +270,7 @@ public class Ship extends BaseGameObject {
     }
 
     public int getLostCrewMembers() {
-        return maxEngineers + maxMilitary + maxScientists - getTotalCrew();
+        return getMaxCrew() - getTotalCrew();
     }
 
     public void refillCrew(World world) {
@@ -282,6 +286,11 @@ public class Ship extends BaseGameObject {
         hull = maxHull;
         world.getPlayer().getEngineeringState().getHullRepairs().cancel(world);
 
+    }
+
+    public void setDefaultCrewDialogs(World world)
+    {
+        //todo: implement
     }
 
     public List<ShipUpgrade> getUpgrades() {

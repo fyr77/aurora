@@ -56,6 +56,7 @@ rogues.fuko_alive - if Fuko survived final battle
 
 Relations with Klisk
 
+klisk.first_contact - after initial dialog with klisk is completed
 quest.main.klisk_evacuation_help - Klisk are helping with evacuating Earth. Klisk ships will appear in solar system.
 
 klisk.discount - player has a one-time 10% discount
@@ -96,6 +97,7 @@ zorsan_rebels.start_coords - planet where player can meet zorsan rebels
 Gardeners
 
 gardeners.first_warp - if set, and gardener ship is warping away, a dialog will be shown. After dialog variable will be removed
+gardeners.first_contact - set after first contact with gardener race
 
 ==============================
 
@@ -153,6 +155,10 @@ energy_sphere.started
 =============================
 
 ftl.coords - target star system for Faster Than Light quest
+
+===========================
+
+inside.in_parallel_universe
 
 ===========================
 

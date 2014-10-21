@@ -6,6 +6,7 @@ import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.ShipScreenController;
+import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 
 import java.util.HashMap;
@@ -53,6 +54,19 @@ public class CrewMember extends ItemWithTextAndImage {
     public void interact(World world) {
         Map<String, String> additionalFlags = new HashMap<>();
         additionalFlags.put("reputation", String.valueOf(reputation));
+        additionalFlags.put("turn", String.valueOf(world.getTurnCount()));
+
+        // this is a ship condition, that can be used in tutorials and some dialogs
+        String condition;
+        final Ship ship = world.getPlayer().getShip();
+        if (ship.getHull() > ship.getMaxHull() * 0.6 && ship.getTotalCrew() > ship.getMaxCrew() * 0.6) {
+            condition = "ok";
+        } else if (ship.getHull() > ship.getMaxHull() * 0.3 && ship.getTotalCrew() > ship.getMaxCrew() * 0.3) {
+            condition = "bad";
+        } else {
+            condition = "very_bad";
+        }
+        additionalFlags.put("condition", condition);
         dialog.setFlags(additionalFlags);
         world.addOverlayWindow(dialog);
     }
