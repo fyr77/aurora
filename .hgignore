@@ -13,3 +13,4 @@ system.properties
 *.log
 changelog.txt.orig
 **.orig
+.idea/*
