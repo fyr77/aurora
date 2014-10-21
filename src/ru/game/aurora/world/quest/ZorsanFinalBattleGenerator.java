@@ -12,6 +12,7 @@ import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.StoryScreen;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.player.earth.PrivateMessage;
@@ -411,6 +412,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
 
             state = State.OVER;
+            world.getPlayer().getShip().setDefaultCrewDialogs(world);
         }
 
         if (state == State.RECON_DONE && world.getTurnCount() - turnNumber > 5) {
@@ -590,6 +592,16 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         world.addListener(this);
 
         world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_attack_2", "news"));
+
+        final CrewMember henry = world.getPlayer().getShip().getCrewMembers().get("henry");
+        Dialog d = Dialog.loadFromFile("dialogs/crew/henry/henry_final_battle.json");
+        d.addListener(new DialogListener() {
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                henry.setDialog(null);
+            }
+        });
+        henry.setDialog(d);
 
     }
 }

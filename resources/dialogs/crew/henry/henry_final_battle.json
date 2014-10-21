@@ -1,0 +1,193 @@
+{
+  "id": "henry_final_battle",
+  "iconName": "marine_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3"
+        },
+        {
+          "returnValue": -1,
+          "targetStatementId": -1,
+          "replyText": "4"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        },
+        {
+          "returnValue": -1,
+          "targetStatementId": -1,
+          "replyText": "3"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3"
+        },
+        {
+          "returnValue": -1,
+          "targetStatementId": -1,
+          "replyText": "4"
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "1"
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        },
+        {
+          "returnValue": -1,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        },
+        {
+          "returnValue": -1,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

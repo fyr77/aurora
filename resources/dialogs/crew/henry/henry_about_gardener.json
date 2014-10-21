@@ -1,0 +1,183 @@
+{
+  "id": "henry_about_gardener",
+  "iconName": "marine_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "4"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "2"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0"
+        }
+      ]
+    },
+    "99": {
+      "id": 99,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "4"
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

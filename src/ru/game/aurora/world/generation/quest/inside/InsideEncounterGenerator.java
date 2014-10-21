@@ -90,6 +90,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
                             world.getPlayer().getJournal().addQuestEntries("inside", "end_bad");
                         }
                         world.getPlayer().getJournal().questCompleted("inside");
+                        world.getGlobalVariables().remove("inside.in_parallel_universe");
                     }
                 }
             }
@@ -250,6 +251,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
             isAlive = false;
             world.getPlayer().getJournal().addQuestEntries("inside", "enter");
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/inside_entered.json"));
+            world.getGlobalVariables().put("inside.in_parallel_universe", true);
         }
 
         @Override

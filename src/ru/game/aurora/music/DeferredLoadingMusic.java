@@ -73,15 +73,11 @@ public class DeferredLoadingMusic {
         loadingFuture = GlobalThreadPool.getExecutor().submit(new Callable<Music>() {
             @Override
             public Music call() throws Exception {
-                try (FileInputStream fis = new FileInputStream(myFile)) {
-                    Music rz = new Music(fis, myFile.getName());
-                    rz.addListener(myPlaylist);
-                    logger.debug("Music {} loaded", myFile);
-                    return rz;
-                } catch (Exception e) {
-                    logger.error("Failed to load music from file " + myFile, e);
-                }
-                return null;
+                Music rz = new Music(myFile.getAbsolutePath(), false);
+
+                rz.addListener(myPlaylist);
+                logger.debug("Music {} loaded", myFile);
+                return rz;
             }
         });
     }

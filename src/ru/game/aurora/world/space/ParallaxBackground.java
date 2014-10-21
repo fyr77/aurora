@@ -40,29 +40,104 @@ public class ParallaxBackground {
         public void setSprite(Image sprite) {
             this.sprite = sprite;
         }
+
+        @Override
+        public String toString() {
+            return "Star{" +
+                    "x=" + x +
+                    ", y=" + y +
+                    ", color=" + color +
+                    '}';
+        }
     }
 
     /**
      * Real number of star per plane, depends on system size
      */
-    private final int starsPerPlane;
+    protected final int starsPerPlane;
 
-    private final Star[][] stars;
+    protected final Star[][] stars;
 
     private static final Random r = new Random();
 
     private float baseWidth = 3;
 
-    final Image s0; //sprites for stars
-    final Image s1;
-    final Image s2;
-    final Image s3;
+    private static class StarCacheKey
+    {
+        int spriteIdx;
+
+        Color baseColor;
+
+        private StarCacheKey(int spriteIdx, Color baseColor) {
+            this.spriteIdx = spriteIdx;
+            this.baseColor = baseColor;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            StarCacheKey that = (StarCacheKey) o;
+
+            return spriteIdx == that.spriteIdx && !(baseColor != null ? !baseColor.equals(that.baseColor) : that.baseColor != null);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = spriteIdx;
+            result = 31 * result + (baseColor != null ? baseColor.hashCode() : 0);
+            return result;
+        }
+    }
+
+    private static Map<StarCacheKey, Image> sprites = new HashMap<>();
+
+    private Image getImage(int spriteIdx, Color baseColor)
+    {
+        StarCacheKey key = new StarCacheKey(spriteIdx, baseColor);
+        Image star_image = sprites.get(key);
+        if (star_image != null) {
+            return star_image;
+        }
+
+        Map<Color, Color> colorMap = new HashMap<>();
+        //select colors for star
+        if (baseColor == Color.red) {
+            colorMap.put(new Color(0, 113, 61, 255), new Color(95,29,18));
+            colorMap.put(new Color(134, 197, 86, 255), new Color(221,102,61));
+        } else if (baseColor == Color.white) {
+            colorMap.put(new Color(0, 113, 61, 255), new Color(56,56,56));
+            colorMap.put(new Color(134, 197, 86, 255), new Color(141,141,141));
+        } else if (baseColor == Color.yellow) {
+            colorMap.put(new Color(0, 113, 61, 255), new Color(113,91,0));
+            colorMap.put(new Color(134, 197, 86, 255), new Color(194,190,57));
+        } else {
+            colorMap.put(new Color(0, 113, 61, 255), new Color(0,42,113));
+            colorMap.put(new Color(134, 197, 86, 255), new Color(86,128,197));
+        }
+
+        //select sprite for star
+        switch (spriteIdx) {
+            case 2:
+                star_image = EngineUtils.replaceColors(ResourceManager.getInstance().getImage("stars_s1"), colorMap);
+                break;
+            case 3:
+                star_image = EngineUtils.replaceColors(ResourceManager.getInstance().getImage("stars_s2"), colorMap);
+                break;
+            case 4:
+                star_image = EngineUtils.replaceColors(ResourceManager.getInstance().getImage("stars_s3"), colorMap);
+                break;
+            default:
+                star_image = EngineUtils.replaceColors(ResourceManager.getInstance().getImage("stars_s0"), colorMap);
+                break;
+        }
+
+        sprites.put(key, star_image);
+        return star_image;
+    }
 
     public ParallaxBackground(float width, float height, float centerX, float centerY, int density) {
-        s0 = ResourceManager.getInstance().getImage("stars_s0");
-        s1 = ResourceManager.getInstance().getImage("stars_s1");
-        s2 = ResourceManager.getInstance().getImage("stars_s2");
-        s3 = ResourceManager.getInstance().getImage("stars_s3");
         if (density == 0) {
             density = 1;
         }
@@ -70,43 +145,8 @@ public class ParallaxBackground {
         stars = new Star[PLANES_COUNT][starsPerPlane];
         for (int i = 0; i < PLANES_COUNT; ++i) {
             for (int j = 0; j < starsPerPlane; ++j) {
-                Star newStar;
-                Image star_image;
-                Map<Color, Color> colorMap = new HashMap<>();
-
-                newStar = new Star(r.nextFloat() * 2 * width - centerX - width, r.nextFloat() * 2 * height - centerY - height, CollectionUtils.selectRandomElement(StarSystem.possibleColors), r.nextInt((int) baseWidth) + 1);
-
-                //select colors for star
-                if (newStar.color == Color.red) {
-                    colorMap.put(new Color(0, 113, 61, 255), new Color(95,29,18));
-                    colorMap.put(new Color(134, 197, 86, 255), new Color(221,102,61));
-                } else if (newStar.color == Color.white) {
-                    colorMap.put(new Color(0, 113, 61, 255), new Color(56,56,56));
-                    colorMap.put(new Color(134, 197, 86, 255), new Color(141,141,141));
-                } else if (newStar.color == Color.yellow) {
-                    colorMap.put(new Color(0, 113, 61, 255), new Color(113,91,0));
-                    colorMap.put(new Color(134, 197, 86, 255), new Color(194,190,57));
-                } else {
-                    colorMap.put(new Color(0, 113, 61, 255), new Color(0,42,113));
-                    colorMap.put(new Color(134, 197, 86, 255), new Color(86,128,197));
-                }
-
-                //select sprite for star
-                switch (i) {
-                    case 2:
-                        star_image = EngineUtils.replaceColors(s1, colorMap);
-                        break;
-                    case 3:
-                        star_image = EngineUtils.replaceColors(s2, colorMap);
-                        break;
-                    case 4:
-                        star_image = EngineUtils.replaceColors(s3, colorMap);
-                        break;
-                    default:
-                        star_image = EngineUtils.replaceColors(s0, colorMap);
-                        break;
-                }
-
+                Star newStar = new Star(r.nextFloat() * 2 * width - centerX - width, r.nextFloat() * 2 * height - centerY - height, CollectionUtils.selectRandomElement(StarSystem.possibleColors), r.nextInt((int) baseWidth) + 1);
+                Image star_image = getImage(i, newStar.color);
                 newStar.setSprite(star_image);
                 stars[i][j] = newStar;
             }

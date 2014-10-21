@@ -48,7 +48,6 @@ public class MonsterController implements Serializable {
     }
 
     private Effect playAttackEffects(World world, IMovable other, WeaponDesc weapon) {
-
         ResourceManager.getInstance().getSound(weapon.getShotSound()).play();
         Effect rz;
         if (weapon.getId().equals("melee")) {
@@ -108,7 +107,7 @@ public class MonsterController implements Serializable {
                 ////////////////////////// attack landing party //////////////////////////////////
 
                 final double distance = map.isWrapped() ? party.getDistanceWrapped(myMonster, map.getWidthInTiles(), map.getHeightInTiles()) : party.getDistance(myMonster);
-                if (weapon != null && distance < 1.5 * weapon.getWeaponDesc().getRange()) { //1.5 because of diagonal cells
+                if (weapon != null && distance < Math.max(10, 1.5 * weapon.getWeaponDesc().getRange())) { //1.5 because of diagonal cells, 10 because melee monsters have attack range 1
                     if (!map.lineOfSightExists(x, y, partyX, partyY)) {
                         // can't shoot because no line of sight
                         return;
