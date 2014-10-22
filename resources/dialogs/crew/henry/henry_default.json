@@ -89,6 +89,10 @@
             {
               "name": "gardeners.first_contact",
               "type": "SET"
+            },
+            {
+              "name": "gardener_dialog",
+              "type": "NOT_SET"
             }
           ],
           "flags": {
@@ -103,6 +107,10 @@
             {
               "name": "zorsan.escape",
               "type": "SET"
+            },
+            {
+              "name": "zorsan_embassy",
+              "type": "NOT_SET"
             }
           ],
           "flags": {
@@ -117,6 +125,10 @@
             {
               "name": "klisk.first_contact",
               "type": "SET"
+            },
+            {
+              "name": "first_contact",
+              "type": "NOT_SET"
             }
           ],
           "flags": {
@@ -131,6 +143,10 @@
             {
               "name": "zorsan.war_preparations",
               "type": "SET"
+            },
+            {
+              "name": "zorsan_war_preparations",
+              "type": "NOT_SET"
             }
           ],
           "flags": {
@@ -141,6 +157,12 @@
           "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "about_officers",
+              "type": "NOT_SET"
+            }
+          ],
           "flags": {
             "about_officers": "true"
           }
@@ -159,6 +181,12 @@
           "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "henry_secrets_1",
+              "type": "NOT_SET"
+            }
+          ],
           "flags": {
             "henry_secrets_1": "true"
           }
@@ -167,6 +195,12 @@
           "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "henry_private_life",
+              "type": "NOT_SET"
+            }
+          ],
           "flags": {
             "henry_private_life": "true"
           }
@@ -179,6 +213,10 @@
             {
               "name": "zorsan.escape",
               "type": "SET"
+            },
+            {
+              "name": "henry_family",
+              "type": "NOT_SET"
             }
           ],
           "flags": {
@@ -189,6 +227,12 @@
           "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "henry_religion",
+              "type": "SET"
+            }
+          ],
           "flags": {
             "henry_religion": "true"
           }
@@ -202,6 +246,10 @@
               "name": "turn",
               "value": "100",
               "type": "GREATER"
+            },
+            {
+              "name": "henry_private_time",
+              "type": "NOT_SET"
             }
           ],
           "flags": {

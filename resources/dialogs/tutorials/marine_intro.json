@@ -86,7 +86,7 @@
           "replyText": "1"
         },
         {
-          "returnValue": 0,
+          "returnValue": 1,
           "targetStatementId": -1,
           "replyText": "2"
         }
@@ -100,7 +100,8 @@
           "targetStatementId": 6,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": " они действительно способны на что угодно - только прикажите.\""
     },
     "6": {
       "id": 6,
@@ -126,7 +127,7 @@
       "id": 8,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 1,
           "targetStatementId": -1,
           "replyText": "0"
         },
@@ -206,7 +207,7 @@
           "replyText": "0"
         },
         {
-          "returnValue": 0,
+          "returnValue": 1,
           "targetStatementId": -1,
           "replyText": "1"
         }
@@ -231,7 +232,7 @@
       "id": 15,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 1,
           "targetStatementId": -1,
           "replyText": "0"
         }
@@ -251,11 +252,13 @@
       "id": 16,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 1,
           "targetStatementId": -1,
           "replyText": "0"
         }
       ]
     }
-  }
+  },
+  "flags": {},
+  "returnValue": 0
 }

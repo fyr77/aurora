@@ -22,6 +22,8 @@ public class CrewMember extends ItemWithTextAndImage {
 
     private Dialog dialog;
 
+    private Map<String, String> dialogFlags = new HashMap<>();
+
     public CrewMember(String id, String image) {
         super(id, new Drawable(image));
     }
@@ -55,7 +57,7 @@ public class CrewMember extends ItemWithTextAndImage {
         Map<String, String> additionalFlags = new HashMap<>();
         additionalFlags.put("reputation", String.valueOf(reputation));
         additionalFlags.put("turn", String.valueOf(world.getTurnCount()));
-
+        additionalFlags.putAll(dialogFlags);
         // this is a ship condition, that can be used in tutorials and some dialogs
         String condition;
         final Ship ship = world.getPlayer().getShip();
@@ -67,8 +69,11 @@ public class CrewMember extends ItemWithTextAndImage {
             condition = "very_bad";
         }
         additionalFlags.put("condition", condition);
-        dialog.setFlags(additionalFlags);
-        world.addOverlayWindow(dialog);
+        world.addOverlayWindow(dialog, additionalFlags);
+    }
+
+    public Map<String, String> getDialogFlags() {
+        return dialogFlags;
     }
 
     public void onAdded(World world) {
