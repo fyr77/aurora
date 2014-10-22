@@ -1,0 +1,84 @@
+<JWrapper>
+
+    <!-- The name of the app bundle -->
+    <BundleName>Aurora RL</BundleName>
+
+    <!-- The specification for one app within the bundle -->
+    <App>
+        <Name>Aurora RL</Name>
+        <MainClass>ru.game.aurora.application.AuroraGame</MainClass>
+        <LogoPNG>jwrapper/resources/sprites/icons/icon_32.png</LogoPNG>
+    </App>
+
+    <SupportedLanguages>ru</SupportedLanguages>
+
+    <!-- App is a per-user app, it won't elevate and install for all users and the shared config folder will be per-user -->
+    <InstallType>{installType}</InstallType>
+
+    <!-- Splash and Logo -->
+    <SplashPNG>jwrapper/resources/sprites/icons/icon_32.png</SplashPNG>
+    <BundleLogoPNG>jwrapper/resources/sprites/icons/icon_32.png</BundleLogoPNG>
+
+    <!-- JVM options (e.g. extra memory) -->
+    <JvmOptions>
+
+    </JvmOptions>
+
+    <SkipMacOS>true</SkipMacOS>
+    <SkipLinux>true</SkipLinux>
+
+    <!-- The JREs JWrapper should use for Windows, Linux32, Linux64... -->
+    <Windows32JRE>{jwrapperHome}/JRE-1.7/win32/jre1.7.0_05</Windows32JRE>
+    <Windows64JRE>{jwrapperHome}/JRE-1.7/win32/jre1.7.0_05</Windows64JRE>
+    <!--<Linux32JRE>JRE-1.7/linux/jre1.7.0_13</Linux32JRE>-->
+    <!--<Linux64JRE>JRE-1.7/linuxx64/jre1.7.0_13</Linux64JRE>-->
+    <!--<Mac64JRE>JRE-1.7/macos64/jre1.7.0_45.jre</Mac64JRE>-->
+
+    <!-- The files that the app wants to bundle, here we have just one which is a JAR file and we specify that it should be on the launch classpath -->
+    <File>jwrapper/native</File>
+
+    <File>jwrapper/resources</File>
+
+
+    <!--TODO: this should be generated dynamically-->
+    <File classpath='yes'>jwrapper/aurora-0.4.0.jar</File>
+
+    <File classpath='yes'>jwrapper/eventbus-1.4.jar</File>
+
+    <File classpath='yes'>jwrapper/frankenstein-core.jar</File>
+
+    <File classpath='yes'>jwrapper/gson-2.2.2.jar</File>
+
+    <File classpath='yes'>jwrapper/guava-15.0.jar</File>
+
+    <File classpath='yes'>jwrapper/jinput.jar</File>
+
+    <File classpath='yes'>jwrapper/jogg-0.0.7.jar</File>
+
+    <File classpath='yes'>jwrapper/jorbis-0.0.15.jar</File>
+
+    <File classpath='yes'>jwrapper/jul-to-slf4j-1.7.6.jar</File>
+
+    <File classpath='yes'>jwrapper/Libnoiseforjava-master.jar</File>
+
+    <File classpath='yes'>jwrapper/logback-classic-1.0.13.jar</File>
+
+    <File classpath='yes'>jwrapper/logback-core-1.0.13.jar</File>
+
+    <File classpath='yes'>jwrapper/lwjgl.jar</File>
+
+    <File classpath='yes'>jwrapper/nifty-1.3.2.jar</File>
+
+    <File classpath='yes'>jwrapper/nifty-default-controls-1.3.2.jar</File>
+
+    <File classpath='yes'>jwrapper/nifty-slick-renderer-1.3.2.jar</File>
+
+    <File classpath='yes'>jwrapper/rlforj.0.3.jar</File>
+
+    <File classpath='yes'>jwrapper/slf4j-api-1.7.6.jar</File>
+
+    <File classpath='yes'>jwrapper/slick.jar</File>
+
+    <File classpath='yes'>jwrapper/xpp3-1.1.4c.jar</File>
+
+</JWrapper>

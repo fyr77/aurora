@@ -77,7 +77,7 @@ dependencies {
     compile fileTree(dir: 'third-party', include: ['xpp3-1.1.4c.jar']) // look for correct jar
 }
 
-task exe {
+task winExe {
     def jwrapperBuildDir = buildDir.path + '\\jwrapper'
     def descriptorFileName = 'jwrapper-aurora.xml'
     copy {
@@ -106,7 +106,13 @@ task exe {
         def newContent = descriptorFile.text.replaceAll("\\{jwrapperHome\\}", jwrapperHome)
                 .replaceAll("\\{installType\\}", installType)
         descriptorFile.write(newContent)
+
+        exec {
+            workingDir buildDir
+            commandLine 'cmd', '/c', 'java', '-jar', jwrapperHome.replace(":/", ":\\") + '\\' + jwrapperJar, descriptorFileName
+        }
+
     }
 }
 
-exe.dependsOn jar
+winExe.dependsOn jar

@@ -10,6 +10,7 @@ glob:Aurora.ipr
 syntax: glob
 save.bin
 system.properties
+gradle.properties
 *.log
 changelog.txt.orig
 **.orig
