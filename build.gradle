@@ -16,9 +16,6 @@ sourceSets {
         java {
             srcDir 'src'
         }
-//        resources {
-//            srcDir 'resources'
-//        }
     }
 }
 
@@ -28,6 +25,12 @@ applicationDistribution.from('resources') {
 
 applicationDistribution.from('native') {
     into 'bin\\native'
+}
+
+jar {
+    manifest {
+        from 'src\\META-INF\\MANIFEST.MF'
+    }
 }
 
 mainClassName = 'ru.game.aurora.application.AuroraGame'
@@ -73,3 +76,27 @@ dependencies {
     compile fileTree(dir: 'third-party', include: ['slick.jar']) // look for correct jar
     compile fileTree(dir: 'third-party', include: ['xpp3-1.1.4c.jar']) // look for correct jar
 }
+
+task exe {
+    def jwrapperBuildDir = buildDir.path + '\\jwrapper'
+    copy {
+        from 'native'
+        into jwrapperBuildDir + '\\native'
+    }
+    copy {
+        from 'resources'
+        into jwrapperBuildDir + '\\resrouces'
+    }
+    copy {
+        from configurations.runtime
+        into jwrapperBuildDir
+    }
+    doLast {
+        copy {
+            from buildDir.path + '\\libs'
+            into jwrapperBuildDir
+        }
+    }
+}
+
+exe.dependsOn jar
