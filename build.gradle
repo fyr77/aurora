@@ -79,13 +79,14 @@ dependencies {
 
 task exe {
     def jwrapperBuildDir = buildDir.path + '\\jwrapper'
+    def descriptorFileName = 'jwrapper-aurora.xml'
     copy {
         from 'native'
         into jwrapperBuildDir + '\\native'
     }
     copy {
         from 'resources'
-        into jwrapperBuildDir + '\\resrouces'
+        into jwrapperBuildDir + '\\resources'
     }
     copy {
         from configurations.runtime
@@ -96,6 +97,15 @@ task exe {
             from buildDir.path + '\\libs'
             into jwrapperBuildDir
         }
+        copy {
+            from descriptorFileName
+            into buildDir
+        }
+
+        def descriptorFile = new File(buildDir.path + '\\' + descriptorFileName)
+        def newContent = descriptorFile.text.replaceAll("\\{jwrapperHome\\}", jwrapperHome)
+                .replaceAll("\\{installType\\}", installType)
+        descriptorFile.write(newContent)
     }
 }
 
