@@ -1,7 +1,7 @@
 # README #
 
 Aurora - a space exploration roguelike game, inspired by Star Control 2, Prospector and Space Rangers.
-Take command of a large scout spaceship, with dozens of scientists, engineers and marines on board, and start your jouney in outer space. Collect everything valuable and bring back to Earth, for humanity sake.
+Take command of a large scout spaceship, with dozens of scientists, engineers and marines on board, and start your journey in outer space. Collect everything valuable and bring back to Earth, for humanity sake.
 
 ### How to start? ###
 
