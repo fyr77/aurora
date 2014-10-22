@@ -203,7 +203,7 @@ public class KliskGenerator implements WorldGeneratorPart {
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-
+                world.getGlobalVariables().put("klisk.first_contact", true);
                 switch (returnCode) {
                     case 3:
                         // free info about klisk race

@@ -6,6 +6,7 @@ import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.ShipScreenController;
+import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 
 import java.util.HashMap;
@@ -20,6 +21,8 @@ public class CrewMember extends ItemWithTextAndImage {
     private int reputation;
 
     private Dialog dialog;
+
+    private Map<String, String> dialogFlags = new HashMap<>();
 
     public CrewMember(String id, String image) {
         super(id, new Drawable(image));
@@ -53,8 +56,24 @@ public class CrewMember extends ItemWithTextAndImage {
     public void interact(World world) {
         Map<String, String> additionalFlags = new HashMap<>();
         additionalFlags.put("reputation", String.valueOf(reputation));
-        dialog.setFlags(additionalFlags);
-        world.addOverlayWindow(dialog);
+        additionalFlags.put("turn", String.valueOf(world.getTurnCount()));
+        additionalFlags.putAll(dialogFlags);
+        // this is a ship condition, that can be used in tutorials and some dialogs
+        String condition;
+        final Ship ship = world.getPlayer().getShip();
+        if (ship.getHull() > ship.getMaxHull() * 0.6 && ship.getTotalCrew() > ship.getMaxCrew() * 0.6) {
+            condition = "ok";
+        } else if (ship.getHull() > ship.getMaxHull() * 0.3 && ship.getTotalCrew() > ship.getMaxCrew() * 0.3) {
+            condition = "bad";
+        } else {
+            condition = "very_bad";
+        }
+        additionalFlags.put("condition", condition);
+        world.addOverlayWindow(dialog, additionalFlags);
+    }
+
+    public Map<String, String> getDialogFlags() {
+        return dialogFlags;
     }
 
     public void onAdded(World world) {

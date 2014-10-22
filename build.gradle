@@ -51,6 +51,10 @@ startScripts {
     }
 }
 
+applicationDefaultJvmArgs = [
+	"-Xmx300m"
+]
+
 dependencies {
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'org.bushe:eventbus:1.4'

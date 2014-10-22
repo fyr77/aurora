@@ -45,8 +45,6 @@ public class Playlist implements MusicListener
 
         if (music.isEmpty()) {
             logger.warn("No background music loaded");
-        } else {
-            music.get(0).requestLoad();
         }
     }
 

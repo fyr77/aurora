@@ -16,6 +16,7 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.CrewMember;
+import ru.game.aurora.npc.crew.HenryMainDialogListener;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
 import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
@@ -100,7 +101,9 @@ public class Ship extends BaseGameObject {
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                henry.setDialog(null);
+                if (returnCode != 0) {
+                    setHenryDefaultDialog();
+                }
                 GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
                 if (returnCode == -1) {
                     // player has made a mistake, military chief will not be friendly with him
@@ -229,6 +232,10 @@ public class Ship extends BaseGameObject {
         return scientists + engineers + military;
     }
 
+    public int getMaxCrew() {
+        return maxEngineers + maxMilitary + maxScientists;
+    }
+
     public List<WeaponInstance> getWeapons() {
         return weapons;
     }
@@ -266,7 +273,7 @@ public class Ship extends BaseGameObject {
     }
 
     public int getLostCrewMembers() {
-        return maxEngineers + maxMilitary + maxScientists - getTotalCrew();
+        return getMaxCrew() - getTotalCrew();
     }
 
     public void refillCrew(World world) {
@@ -282,6 +289,20 @@ public class Ship extends BaseGameObject {
         hull = maxHull;
         world.getPlayer().getEngineeringState().getHullRepairs().cancel(world);
 
+    }
+
+    private void setHenryDefaultDialog()
+    {
+        CrewMember henry = crewMembers.get("henry");
+        Dialog defaultDialog = Dialog.loadFromFile("dialogs/crew/henry/henry_default.json");
+        defaultDialog.addListener(new HenryMainDialogListener(henry));
+        henry.setDialog(defaultDialog);
+    }
+
+    public void setDefaultCrewDialogs(World world)
+    {
+        //todo: implement
+        setHenryDefaultDialog();
     }
 
     public List<ShipUpgrade> getUpgrades() {

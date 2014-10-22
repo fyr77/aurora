@@ -72,22 +72,22 @@
         }
       ]
     },
-    "5": {
-      "id": 5,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 6,
-          "replyText": "0"
-        }
-      ]
-    },
     "99": {
       "id": 99,
       "replies": [
         {
           "returnValue": 0,
           "targetStatementId": 8,
+          "replyText": "0"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
           "replyText": "0"
         }
       ]
@@ -180,7 +180,8 @@
           "targetStatementId": 14,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": " от его слов веет жаром и чуть ли не священным фанатизмом:* Вы не понимаете!! Никто не понимает!! Это…. Другое!! Мир, где значение числа Пи равно четырем! Мир - живая клетка! Мир где Вселенной нет и пяти миллиардов лет!!!\""
     },
     "14": {
       "id": 14,
@@ -192,5 +193,7 @@
         }
       ]
     }
-  }
+  },
+  "flags": {},
+  "returnValue": 0
 }

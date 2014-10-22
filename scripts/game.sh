@@ -1,3 +1,3 @@
 #!/bin/bash
 
-java -cp "resources:." -jar Aurora.jar
+java -Xmx300m -cp "resources:." -jar Aurora.jar
