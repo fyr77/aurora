@@ -1,0 +1,14 @@
+Разговор с Садовникм.csv;gordon_gardener;scientist_dialog;crew/gordon
+Покушение.csv;gordon_zorsan_escape;scientist_dialog;crew/gordon
+Диалог по выбору КЛЮЧЕВОЙ ГОРДОН.csv;gordon_default;scientist_dialog;crew/gordon
+Мнение об инопланетянах.csv;gordon_about_aliens;scientist_dialog;crew/gordon
+Нас ждет война.csv;gordon_zorsan_war_preparations;scientist_dialog;crew/gordon
+Мнение об офицерах.csv;gordon_about_officers;scientist_dialog;crew/gordon
+Синий шар - совет.csv;gordon_energy_sphere;scientist_dialog;crew/gordon
+Внутри - совет.csv;gordon_inside;scientist_dialog;crew/gordon
+Расскажи о себе.csv;gordon_about_himself;scientist_dialog;crew/gordon
+Личное время.csv;gordon_private_time;scientist_dialog;crew/gordon
+Впечатления от службы.csv;gordon_about_service;scientist_dialog;crew/gordon
+ПЕРИОД ПОЛУРАСПАДА.csv;gordon_parallel_worlds_1;scientist_dialog;crew/gordon
+Финальная битва.csv;gordon_zorsan_battle;scientist_dialog;crew/gordon
+

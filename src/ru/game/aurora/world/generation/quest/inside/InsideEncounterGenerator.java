@@ -91,6 +91,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
                         }
                         world.getPlayer().getJournal().questCompleted("inside");
                         world.getGlobalVariables().remove("inside.in_parallel_universe");
+                        world.getGlobalVariables().put("inside.completed", true);
                     }
                 }
             }

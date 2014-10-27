@@ -121,6 +121,9 @@ public class Ship extends BaseGameObject {
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                if (returnCode != 0) {
+                    setGordonDefaultDialog();
+                }
                 gordon.setDialog(null);
                 GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
                 if (returnCode == -1) {
@@ -297,6 +300,14 @@ public class Ship extends BaseGameObject {
         Dialog defaultDialog = Dialog.loadFromFile("dialogs/crew/henry/henry_default.json");
         defaultDialog.addListener(new HenryMainDialogListener(henry));
         henry.setDialog(defaultDialog);
+    }
+
+    private void setGordonDefaultDialog()
+    {
+        CrewMember gordon = crewMembers.get("gordon");
+        Dialog defaultDialog = Dialog.loadFromFile("dialogs/crew/gordon/gordon_default.json");
+        defaultDialog.addListener(new HenryMainDialogListener(gordon));
+        gordon.setDialog(defaultDialog);
     }
 
     public void setDefaultCrewDialogs(World world)

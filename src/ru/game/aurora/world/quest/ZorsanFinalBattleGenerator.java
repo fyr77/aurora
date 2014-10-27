@@ -603,5 +603,15 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         });
         henry.setDialog(d);
 
+        final CrewMember gordon = world.getPlayer().getShip().getCrewMembers().get("gordon");
+        d = Dialog.loadFromFile("dialogs/crew/gordon/gordon_zorsan_battle.json");
+        d.addListener(new DialogListener() {
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                gordon.setDialog(null);
+            }
+        });
+        henry.setDialog(d);
+
     }
 }

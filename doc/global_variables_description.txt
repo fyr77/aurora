@@ -32,10 +32,11 @@ diplomacy.flag - true if quest is active
 ==============================
 Crew relationship
 
-crew.engineer - store state of a relationship with chief engineer
-crew.scientist
-crew.military
+Gordon:
+parallel_worlds = state of dialogs with parallel worlds, 1 after tutorial, 2 after gordon_parallel_worlds_1
 
+Sarah:
+engineer.dinner - if asked her for a dinner
 
 ==============================
 
@@ -159,6 +160,10 @@ ftl.coords - target star system for Faster Than Light quest
 ===========================
 
 inside.in_parallel_universe
+inside.completed
+===========================
+
+red_meat.attached
 
 ===========================
 
