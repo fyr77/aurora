@@ -16,12 +16,12 @@
     <InstallType>{installType}</InstallType>
 
     <!-- Splash and Logo -->
-    <SplashPNG>jwrapper/resources/sprites/icons/icon_32.png</SplashPNG>
+    <SplashPNG>jwrapper/resources/sprites/gui/banner.png</SplashPNG>
     <BundleLogoPNG>jwrapper/resources/sprites/icons/icon_32.png</BundleLogoPNG>
 
     <!-- JVM options (e.g. extra memory) -->
     <JvmOptions>
-
+		<JvmOption>-Xmx256m</JvmOption>
     </JvmOptions>
 
     <SkipMacOS>true</SkipMacOS>

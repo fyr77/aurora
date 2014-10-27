@@ -15,3 +15,4 @@ gradle.properties
 changelog.txt.orig
 **.orig
 .idea/*
+gradle.properties
