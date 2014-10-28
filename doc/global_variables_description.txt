@@ -36,7 +36,7 @@ Gordon:
 parallel_worlds = state of dialogs with parallel worlds, 1 after tutorial, 2 after gordon_parallel_worlds_1
 
 Sarah:
-engineer.dinner - if asked her for a dinner
+engineer_dinner - if asked her for a dinner
 
 ==============================
 

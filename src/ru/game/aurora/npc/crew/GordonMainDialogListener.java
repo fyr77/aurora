@@ -26,6 +26,12 @@ public class GordonMainDialogListener extends BaseCrewDialogListener
             if (flags.containsKey("parallel_worlds")) {
                 crewMember.getDialogFlags().put("parallel_worlds", "1");
             }
+
+            if (returnCode != 0) {
+                Dialog defaultDialog = Dialog.loadFromFile("dialogs/crew/gordon/gordon_default.json");
+                defaultDialog.addListener(this);
+                crewMember.setDialog(defaultDialog);
+            }
         }
         else {
             if (returnCode != -1) {
@@ -79,6 +85,7 @@ public class GordonMainDialogListener extends BaseCrewDialogListener
 
         if (checkFlagAndShowDialog(world, flags, "parallel_worlds", "dialogs/crew/gordon/gordon_parallel_worlds_1.json")) {
             crewMember.getDialogFlags().put("parallel_worlds", "2");
+            crewMember.changeReputation(1);
             return;
         }
 

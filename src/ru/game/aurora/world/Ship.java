@@ -16,7 +16,9 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.CrewMember;
+import ru.game.aurora.npc.crew.GordonMainDialogListener;
 import ru.game.aurora.npc.crew.HenryMainDialogListener;
+import ru.game.aurora.npc.crew.SarahMainDialogListener;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
 import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
@@ -96,62 +98,15 @@ public class Ship extends BaseGameObject {
         addUpgrade(world, new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon")));
 
         final CrewMember henry = new CrewMember("henry", "marine_dialog", Dialog.loadFromFile("dialogs/tutorials/marine_intro.json"));
-        henry.getDialog().addListener(new DialogListener() {
-            private static final long serialVersionUID = 3549779197430081181L;
-
-            @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                if (returnCode != 0) {
-                    setHenryDefaultDialog();
-                }
-                GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
-                if (returnCode == -1) {
-                    // player has made a mistake, military chief will not be friendly with him
-                    henry.changeReputation(-1);
-                }
-            }
-
-        });
+        henry.getDialog().addListener(new HenryMainDialogListener(henry));
         addCrewMember(world, henry);
 
         final CrewMember gordon = new CrewMember("gordon", "scientist_dialog", Dialog.loadFromFile("dialogs/tutorials/scientist_intro.json"));
-        gordon.getDialog().addListener(new DialogListener() {
-
-            private static final long serialVersionUID = -6342424301808982996L;
-
-            @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                if (returnCode != 0) {
-                    setGordonDefaultDialog();
-                }
-                gordon.setDialog(null);
-                GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
-                if (returnCode == -1) {
-                    // player has made a mistake, engineer chief will not be friendly with him
-                    gordon.changeReputation(-1);
-                }
-            }
-        });
+        gordon.getDialog().addListener(new GordonMainDialogListener(gordon));
         addCrewMember(world, gordon);
 
         final CrewMember sarah = new CrewMember("sarah", "engineer_dialog", Dialog.loadFromFile("dialogs/tutorials/engineer_intro.json"));
-        sarah.getDialog().addListener(new DialogListener() {
-            private static final long serialVersionUID = -7547662576268159641L;
-
-            @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                sarah.setDialog(null);
-                GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
-                if (returnCode == -1) {
-                    // player has made a mistake, engineer chief will not be friendly with him
-                    sarah.changeReputation(-1);
-                }
-                if (flags.containsKey("engineer_dinner")) {
-                    world.getGlobalVariables().put("crew.engineer", 1);
-                    sarah.changeReputation(5);
-                }
-            }
-        });
+        sarah.getDialog().addListener(new SarahMainDialogListener(sarah));
         addCrewMember(world, sarah);
 
         refillCrew(world);
@@ -310,10 +265,20 @@ public class Ship extends BaseGameObject {
         gordon.setDialog(defaultDialog);
     }
 
+    private void setSarahDefaultDialog()
+    {
+        CrewMember sarah = crewMembers.get("sarah");
+        Dialog defaultDialog = Dialog.loadFromFile("dialogs/crew/sarah/sarah_default.json");
+        defaultDialog.addListener(new HenryMainDialogListener(sarah));
+        sarah.setDialog(defaultDialog);
+    }
+
     public void setDefaultCrewDialogs(World world)
     {
         //todo: implement
         setHenryDefaultDialog();
+        setGordonDefaultDialog();
+        setSarahDefaultDialog();
     }
 
     public List<ShipUpgrade> getUpgrades() {

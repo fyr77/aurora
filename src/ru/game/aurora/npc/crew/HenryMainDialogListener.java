@@ -21,6 +21,12 @@ public class HenryMainDialogListener extends BaseCrewDialogListener
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
         if (dialog.getId().equals("henry_default")) {
             processDefaultDialog(world, dialog, returnCode, flags);
+        } else if (dialog.getId().equals("marine_tutorial")) {
+            if (returnCode != 0) {
+                Dialog defaultDialog = Dialog.loadFromFile("dialogs/crew/henry/henry_default.json");
+                defaultDialog.addListener(this);
+                crewMember.setDialog(defaultDialog);
+            }
         } else {
             if (returnCode != -1) {
                 // this was some secondary dialog, return to main one
@@ -104,6 +110,7 @@ public class HenryMainDialogListener extends BaseCrewDialogListener
         if (flags.containsKey("henry_secrets_1")) {
             loadAndShowDialog(world, "dialogs/crew/henry/henry_secrets_1.json");
             crewMember.getDialogFlags().put("henry_secrets_1", "");
+            crewMember.changeReputation(1);
             return;
         }
 
