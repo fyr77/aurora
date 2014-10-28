@@ -65,7 +65,6 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private void createBackground(Camera cam, int tilesX, int tilesY) {
         background = new ParallaxBackground(tilesX * cam.getTileWidth(), tilesY * cam.getTileHeight(), cam.getTileWidth() * tilesX / 2, cam.getTileHeight() * tilesY / 2, 15);
-        background.setBaseWidth(2); // smaller size of background stars so that they are not messed with real stars
     }
 
     public ITileMap getMap() {

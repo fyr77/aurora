@@ -14,6 +14,10 @@
     <resource type="image" id="stars_s1">sprites/space_objects/s1.png</resource>
     <resource type="image" id="stars_s2">sprites/space_objects/s2.png</resource>
     <resource type="image" id="stars_s3">sprites/space_objects/s3.png</resource>
+    <resource type="image" id="nebula1">sprites/space_objects/cloud1.png</resource>
+    <resource type="image" id="nebula2">sprites/space_objects/cloud2.png</resource>
+    <resource type="image" id="nebula3">sprites/space_objects/cloud3.png</resource>
+    <resource type="image" id="nebula4">sprites/space_objects/cloud4.png</resource>
     <resource type="animation" id="menu_engine_top" tw="200" th="128" duration="100">sprites/gui/trail_1.png</resource>
     <resource type="animation" id="menu_engine_bottom" tw="200" th="128" duration="100">sprites/gui/trail_2.png
     </resource>

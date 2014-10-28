@@ -8,6 +8,7 @@ package ru.game.aurora.world.space;
 import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Point;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
@@ -68,6 +69,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
      * Special background sprite that will be drawn between parallax background and planets pane
      */
     private String backgroundSprite;
+
+    private String backgroundNebula;
+    private Point nebulaOffset;
 
     /**
      * Current mode
@@ -594,6 +598,19 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera, World world) {
         if (background != null) {
+            if (backgroundNebula != null) {
+                final Random r = CommonRandom.getRandom();
+                Image nebula = ResourceManager.getInstance().getImage(backgroundNebula);
+                //Если отрисовка происходит впервые - задаём случайное положение спрайта туманности (зависит от разрешения)
+                if (nebulaOffset == null) {
+                    nebulaOffset = new Point(
+                            r.nextFloat() * (camera.getViewportTilesX() * camera.getTileWidth() - nebula.getWidth()),
+                            r.nextFloat() * (camera.getViewportTilesY() * camera.getTileHeight() - nebula.getHeight()));
+                }
+                float x = background.getXCoordPoint(camera, 0, ParallaxBackground.PLANES_COUNT + 1) + nebulaOffset.getX();
+                float y = background.getYCoordPoint(camera, 0, ParallaxBackground.PLANES_COUNT + 1) + nebulaOffset.getY();
+                g.drawImage(nebula, x, y);
+            }
             background.draw(g, camera);
             if (backgroundSprite != null) {
                 float x = background.getXCoordPoint(camera, -100, -1);
@@ -794,6 +811,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
 
     public void setBackgroundSprite(String backgroundSprite) {
         this.backgroundSprite = backgroundSprite;
+    }
+
+    public void setBackgroundNebula(String nebulaSprite) {
+        this.backgroundNebula = nebulaSprite;
     }
 
     public ParallaxBackground getBackground() {
