@@ -28,14 +28,12 @@ public class ParallaxBackground {
         public float x;
         public final float y;
         public final Color color;
-        public final int baseSize;
         public Image sprite;
 
-        public Star(float x, float y, Color color, int baseSize) {
+        public Star(float x, float y, Color color) {
             this.x = x;
             this.y = y;
             this.color = color;
-            this.baseSize = baseSize;
         }
         public void setSprite(Image sprite) {
             this.sprite = sprite;
@@ -59,8 +57,6 @@ public class ParallaxBackground {
     protected final Star[][] stars;
 
     private static final Random r = new Random();
-
-    private float baseWidth = 3;
 
     private static class StarCacheKey
     {
@@ -145,7 +141,7 @@ public class ParallaxBackground {
         stars = new Star[PLANES_COUNT][starsPerPlane];
         for (int i = 0; i < PLANES_COUNT; ++i) {
             for (int j = 0; j < starsPerPlane; ++j) {
-                Star newStar = new Star(r.nextFloat() * 2 * width - centerX - width, r.nextFloat() * 2 * height - centerY - height, CollectionUtils.selectRandomElement(StarSystem.possibleColors), r.nextInt((int) baseWidth) + 1);
+                Star newStar = new Star(r.nextFloat() * 2 * width - centerX - width, r.nextFloat() * 2 * height - centerY - height, CollectionUtils.selectRandomElement(StarSystem.possibleColors));
                 Image star_image = getImage(i, newStar.color);
                 newStar.setSprite(star_image);
                 stars[i][j] = newStar;
@@ -159,10 +155,6 @@ public class ParallaxBackground {
 
     public float getYCoordPoint(Camera camera, float pointY, int planeNumber) {
         return pointY - ((camera.getTarget().getY() - camera.getViewportTilesY() / 2) * camera.getTileHeight() + camera.getTarget().getOffsetY()) / (planeNumber * 2 + 5);
-    }
-
-    public void setBaseWidth(float baseWidth) {
-        this.baseWidth = baseWidth;
     }
 
     public void draw(Graphics graphics, Camera camera) {

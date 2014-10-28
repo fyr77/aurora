@@ -229,6 +229,10 @@ public class WorldGenerator implements Runnable {
         astroData += r.nextInt(30);
         ss.setAstronomyData(astroData);
         ss.setRadius(Math.max((int) (maxRadius * 1.5), 10));
+
+        int rndNeb = r.nextInt(Configuration.getIntProperty("world.starsystem.nebulaeTypes")) + 1;
+        ss.setBackgroundNebula("nebula" + rndNeb);
+
         return ss;
     }
 
