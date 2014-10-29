@@ -1,0 +1,369 @@
+{
+  "id": "sarah_default",
+  "iconName": "engineer_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 996,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "condition",
+              "value": "very_bad",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 997,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "condition",
+              "value": "bad",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "condition",
+              "value": "ok",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": -1,
+          "targetStatementId": -1,
+          "replyText": "4"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "gardeners.first_contact",
+              "type": "SET"
+            },
+            {
+              "name": "gardener_first_contact",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "gardener_first_contact": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "zorsan.escape",
+              "type": "SET"
+            },
+            {
+              "name": "zorsan_escape",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "zorsan_escape": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "turn",
+              "value": "1000",
+              "type": "GREATER"
+            },
+            {
+              "name": "klisk.first_contact",
+              "type": "SET"
+            },
+            {
+              "name": "about_aliens",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "about_aliens": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "zorsan.war_preparations",
+              "type": "SET"
+            },
+            {
+              "name": "zorsan_war_preparations",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "zorsan_war_preparations": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "\"файл \"\"Как работается\"\"\"",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "6",
+          "replyConditions": [
+            {
+              "name": "about_officers",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "about_officers": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "7",
+          "replyConditions": [
+            {
+              "name": "rogues.damaged_scout_found",
+              "type": "SET"
+            },
+            {
+              "name": "damaged_scout",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "damaged_scout": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "8",
+          "replyConditions": [
+            {
+              "name": "inside.in_parallel_universe",
+              "type": "SET"
+            },
+            {
+              "name": "inside",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "inside": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "9"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "sarah_past",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "sarah_past": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "about_herself",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "about_herself": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "service",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "turn",
+              "value": "80",
+              "type": "GREATER"
+            }
+          ],
+          "flags": {
+            "service": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "family",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "turn",
+              "value": "100",
+              "type": "GREATER"
+            }
+          ],
+          "flags": {
+            "family": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "religion",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "religion": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "private_time",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "turn",
+              "value": "150",
+              "type": "GREATER"
+            }
+          ],
+          "flags": {
+            "private_time": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "6",
+          "replyConditions": [
+            {
+              "name": "engineer_dinner",
+              "type": "SET"
+            },
+            {
+              "name": "engineer_dinner_shown",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "engineer_dinner_shown": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "7"
+        }
+      ]
+    },
+    "997": {
+      "id": 997,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        }
+      ]
+    },
+    "996": {
+      "id": 996,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

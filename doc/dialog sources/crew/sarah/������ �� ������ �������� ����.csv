@@ -22,11 +22,11 @@
 ;Сара, ты уже видишь, где мы оказались. Мне нужен твой совет.;-1;inside.in_parallel_universe && !inside;;inside
 ;Вернемся к другим вопросам.;0;;;
 5;Обо мне? *криво, но задорно улыбается.* Ну надо же… Что такое, капитан?;;;;
-;Выбиться из простой деревни в инженера на космическом корабле… удивительно!;;!sarah_past;;sarah_past
-;Сара, расскажи о себе?;;!about_herself;;about_herself
-;Какие впечатления от службы на корабле?;;!service && turn > 80;;service
-;Скучаешь по семье?;;!family && turn > 100;;family
-;Не так уж часто я сталкиваюсь с иудеями.;;!religion;;religion
-;Как проводишь личное время?;;!private_time && turn > 150;;private_time
-;Сара, насчет совместного ужина…;;engineer_dinner && !engineer_dinner_shown;;engineer_dinner_shown
+;Выбиться из простой деревни в инженера на космическом корабле… удивительно!;-1;!sarah_past;;sarah_past
+;Сара, расскажи о себе?;-1;!about_herself;;about_herself
+;Какие впечатления от службы на корабле?;-1;!service && turn > 80;;service
+;Скучаешь по семье?;-1;!family && turn > 100;;family
+;Не так уж часто я сталкиваюсь с иудеями.;-1;!religion;;religion
+;Как проводишь личное время?;-1;!private_time && turn > 150;;private_time
+;Сара, насчет совместного ужина…;-1;engineer_dinner && !engineer_dinner_shown;;engineer_dinner_shown
 ;Вернемся к другим вопросам.;0;;;

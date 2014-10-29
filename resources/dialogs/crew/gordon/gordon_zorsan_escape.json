@@ -1,0 +1,83 @@
+{
+  "id": "gordon_zorsan_escape",
+  "iconName": "scientist_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

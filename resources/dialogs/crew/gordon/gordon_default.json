@@ -1,0 +1,308 @@
+{
+  "id": "gordon_default",
+  "iconName": "scientist_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "condition",
+              "value": "ok",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 997,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "condition",
+              "value": "bad",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 996,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "condition",
+              "value": "very_bad",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": -1,
+          "targetStatementId": -1,
+          "replyText": "4"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "gardener.first_contact",
+              "type": "SET"
+            },
+            {
+              "name": "gardener_first_contact",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "gardener_first_contact": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "zorsan.escape",
+              "type": "SET"
+            },
+            {
+              "name": "zorsan_escape",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "zorsan_escape": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "turn",
+              "value": "1000",
+              "type": "GREATER"
+            },
+            {
+              "name": "klisk.first_contact",
+              "type": "SET"
+            },
+            {
+              "name": "about_aliens",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "about_aliens": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "zorsan.war_preparations",
+              "type": "SET"
+            },
+            {
+              "name": "zorsan_war_preparations",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "zorsan_war_preparations": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "about_officers",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "about_officers": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "6",
+          "replyConditions": [
+            {
+              "name": "energy_sphere.started",
+              "type": "SET"
+            },
+            {
+              "name": "energy_sphere",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "energy_sphere": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "7",
+          "replyConditions": [
+            {
+              "name": "inside.in_parallel_universe",
+              "type": "SET"
+            },
+            {
+              "name": "inside",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "inside": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "8"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "about_himself",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "about_himself": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "parallel_worlds",
+              "value": "1",
+              "type": "EQUAL"
+            }
+          ],
+          "flags": {
+            "parallel_worlds": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "turn",
+              "value": "200",
+              "type": "GREATER"
+            },
+            {
+              "name": "about_service",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "about_service": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "turn",
+              "value": "100",
+              "type": "GREATER"
+            },
+            {
+              "name": "private_time",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "private_time": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "4"
+        }
+      ]
+    },
+    "997": {
+      "id": 997,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        }
+      ]
+    },
+    "996": {
+      "id": 996,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}
