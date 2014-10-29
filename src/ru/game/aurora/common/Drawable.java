@@ -38,8 +38,6 @@ public class Drawable implements Serializable {
         this.id = id;
         this.tx = tx;
         this.ty = ty;
-
-        loadImage();
     }
 
     private void loadImage() {
