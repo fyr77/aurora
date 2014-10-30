@@ -230,8 +230,20 @@ public class WorldGenerator implements Runnable {
         ss.setAstronomyData(astroData);
         ss.setRadius(Math.max((int) (maxRadius * 1.5), 10));
 
-        int rndNeb = r.nextInt(Configuration.getIntProperty("world.starsystem.nebulaeTypes")) + 1;
-        ss.setBackgroundNebula("nebula" + rndNeb);
+        int rndNeb1 = r.nextInt(Configuration.getIntProperty("world.starsystem.nebulaeTypes") + 1); //0 - без туманности
+        int rndNeb2;
+        if (rndNeb1 == 0) {
+            rndNeb2 = r.nextInt(Configuration.getIntProperty("world.starsystem.nebulaeTypes") + 1);
+        } else {
+            rndNeb2 = rndNeb1;
+            //туманности не должны быть одинаковыми
+            while (rndNeb2 == rndNeb1) {
+                rndNeb2 = r.nextInt(Configuration.getIntProperty("world.starsystem.nebulaeTypes") + 1);
+            }
+        }
+
+        if (rndNeb1 != 0) ss.setBackgroundNebula1("nebula" + rndNeb1);
+        if (rndNeb2 != 0) ss.setBackgroundNebula2("nebula" + rndNeb2);
 
         return ss;
     }
