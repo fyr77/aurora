@@ -66,6 +66,7 @@ public class WorldGenerator implements Runnable {
             , new FasterThanLightQuestGenerator()
             , new FamilyProblemsEventGenerator()
             , new InsideEncounterGenerator()
+            , new RedMeatEncounterGenerator()
     };
 
     private static final WorldGeneratorPart[] alienGenerators = {

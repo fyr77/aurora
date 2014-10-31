@@ -14,6 +14,7 @@
 ;Хотелось бы поговорить о тебе.;5;;;
 ;Этот инопланетянин, садовник. Ты знаешь о чем мы с ним говорили. Что скажешь?;-1;gardeners.first_contact && !gardener_first_contact;;gardener_first_contact
 ;На Зорсане меня пытались убить.;-1;zorsan.escape && !zorsan_escape;;zorsan_escape
+;По поводу этой гауптвахты;-1;red_meat_prison && !red_meat_prison_discussed;;
 ;Что скажешь насчет всех этих инопланетян? Мы уже не раз их видели. Космос - довольно населенное местечко.;-1;turn > 1000 && klisk.first_contact && !about_aliens;;about_aliens
 ;Зорсаны готовят флот, для нападения на Землю. Нас ждет война.;-1;zorsan.war_preparations && !zorsan_war_preparations;;zorsan_war_preparations
 ;И как работается в новых условиях? Ты довольна тем, что служишь тут?;-1;"файл ""Как работается""";;

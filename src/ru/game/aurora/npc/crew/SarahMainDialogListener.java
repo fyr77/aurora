@@ -28,6 +28,10 @@ public class SarahMainDialogListener extends BaseCrewDialogListener
                 crewMember.setDialog(defaultDialog);
             }
 
+        } else if (dialog.getId().equals("sarah_red_meat_prison")) {
+            if (flags.containsKey("insult")) {
+                crewMember.changeReputation(-1);
+            }
         } else if (returnCode != -1) {
             // this was some secondary dialog, return to main one
             crewMember.interact(world);
@@ -82,6 +86,10 @@ public class SarahMainDialogListener extends BaseCrewDialogListener
         }
 
         if (checkFlagAndShowDialog(world, flags, "engineer_dinner_shown", "dialogs/crew/sarah/sarah_about_dinner.json")) {
+            return;
+        }
+
+        if (checkFlagAndShowDialog(world, flags, "red_meat_prison_discussed", "dialogs/crew/sarah/sarah_red_meat_prison.json")) {
             return;
         }
 

@@ -1,0 +1,14 @@
+{
+    "id": "red_meat",
+    "icon": "bio_research",
+    "report": {
+        "icon": "bio_research",
+        "text": "red_meat.report"
+    },
+    "makesAvailable": [],
+    "makesAvailableEngineering": [],
+    "earthProgress": [],
+    "score": 30,
+    "progress": 80,
+    "initialProgress": 80
+}

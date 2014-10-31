@@ -40,7 +40,7 @@ public class Ship extends BaseGameObject {
 
     private int hull;
 
-    private final int maxHull;
+    private int maxHull;
 
     private int scientists;
 
@@ -311,6 +311,12 @@ public class Ship extends BaseGameObject {
 
     public int getFreeSpace() {
         return freeSpace;
+    }
+
+    public void changeMaxHull(int amount)
+    {
+        maxHull += amount;
+        hull = Math.min(hull, maxHull);
     }
 
 }

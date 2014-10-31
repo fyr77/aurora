@@ -106,6 +106,10 @@ public class HenryMainDialogListener extends BaseCrewDialogListener
             return;
         }
 
+        if (checkFlagAndShowDialog(world, flags, "red_meat_prison_discussed", "dialogs/crew/henry/henry_red_meat_prison.json")) {
+            return;
+        }
+
 
         if (flags.containsKey("henry_secrets_1")) {
             loadAndShowDialog(world, "dialogs/crew/henry/henry_secrets_1.json");

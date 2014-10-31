@@ -15,6 +15,7 @@
 4;Я весь внимание, капитан.;;;;
 ;Хотелось бы поговорить о тебе.;5;;;
 ;Лишкевич, ты знаешь содержание моего разговора с этим инопланетянином, Садовником. Мне нужна твое мнение.;-1;gardeners.first_contact && !gardener_dialog;;gardener_dialog
+;По поводу этой гауптвахты;-1;red_meat_prison && !red_meat_prison_discussed;;
 ;На Зорсане меня пытались убить.;-1;zorsan.escape && !zorsan_embassy;;zorsan_embassy
 ;Вот представь себе - инопланетяне! И даже разумные! Конечно, они встречались еще первой Авроре, но… я в некотором замешательстве. Что думаешь на этот счет?;-1;klisk.first_contact && !first_contact;;first_contact
 ;Ты уже знаешь, нас ждет война - зорсаны готовят флот, для нападения на Землю.;-1;zorsan.war_preparations && !zorsan_war_preparations;;zorsan_war_preparations

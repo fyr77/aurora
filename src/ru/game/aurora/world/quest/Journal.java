@@ -39,9 +39,12 @@ public class Journal implements Serializable {
         }
     }
 
-    public void questCompleted(String entryId) {
+    public void questCompleted(String entryId, String... messages) {
         JournalEntry je = quests.get(entryId);
         if (je != null) {
+            for (String m : messages) {
+                je.addMessage(m);
+            }
             je.setCompleted(true);
         }
     }

@@ -1,0 +1,8 @@
+2Гордон - после того, как игрок уничтожит биомассу.csv;red_meat_destroyed;scientist_dialog;encounters/red_meat
+Вход в родной мир инопланетян.csv;red_meat_alien_homeworld;interior_dialog;encounters/red_meat
+Вход в солнечную систему.csv;red_meat_solar_system;scientist_dialog;encounters/red_meat
+Диалог с Гордоном сразу после облепления корабля.csv;red_meat_started;scientist_dialog;encounters/red_meat
+Нытье Генри 1.csv;red_meat_henry_1;marine_dialog;encounters/red_meat
+Нытье Генри 2.csv;red_meat_henry_2;marine_dialog;encounters/red_meat
+Нытье Сары 2.csv;red_meat_sarah_1;engineer_dialog;encounters/red_meat
+Гауптвахта.csv;red_meat_officer_call;interior_dialog;encounters/red_meat

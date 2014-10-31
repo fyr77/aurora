@@ -8,6 +8,8 @@ IN PROGRESS
 + "Inside" encounter
 * Dungeons now do not advance turn count and star date
 * Split journal quest tab into 'completed' and 'active' tabs
+* New officer portraits
+* Events that can be met only in given range from solar system
 
 =============================================
 

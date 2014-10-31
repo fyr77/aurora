@@ -37,6 +37,10 @@ parallel_worlds = state of dialogs with parallel worlds, 1 after tutorial, 2 aft
 
 Sarah:
 engineer_dinner - if asked her for a dinner
+red_meat_prison - if sent to prison for making experiments
+
+Henry:
+red_meat_prison - if sent to prison for making experiments
 
 ==============================
 
