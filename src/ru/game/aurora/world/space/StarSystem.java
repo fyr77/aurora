@@ -70,8 +70,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
      */
     private String backgroundSprite;
 
-    private String backgroundNebula;
-    private Point nebulaOffset;
+    private String backgroundNebula1;
+    private Point nebula1Offset;
+    private String backgroundNebula2;
+    private Point nebula2Offset;
 
     /**
      * Current mode
@@ -598,18 +600,30 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera, World world) {
         if (background != null) {
-            if (backgroundNebula != null) {
+            if (backgroundNebula1 != null) {
                 final Random r = CommonRandom.getRandom();
-                Image nebula = ResourceManager.getInstance().getImage(backgroundNebula);
+                Image nebula1 = ResourceManager.getInstance().getImage(backgroundNebula1);
                 //Если отрисовка происходит впервые - задаём случайное положение спрайта туманности (зависит от разрешения)
-                if (nebulaOffset == null) {
-                    nebulaOffset = new Point(
-                            r.nextFloat() * (camera.getViewportTilesX() * camera.getTileWidth() - nebula.getWidth()),
-                            r.nextFloat() * (camera.getViewportTilesY() * camera.getTileHeight() - nebula.getHeight()));
+                if (nebula1Offset == null) {
+                    nebula1Offset = new Point(
+                            r.nextFloat() * (camera.getViewportTilesX() * camera.getTileWidth() - nebula1.getWidth()),
+                            r.nextFloat() * (camera.getViewportTilesY() * camera.getTileHeight() - nebula1.getHeight()));
                 }
-                float x = background.getXCoordPoint(camera, 0, ParallaxBackground.PLANES_COUNT + 1) + nebulaOffset.getX();
-                float y = background.getYCoordPoint(camera, 0, ParallaxBackground.PLANES_COUNT + 1) + nebulaOffset.getY();
-                g.drawImage(nebula, x, y);
+                float x = background.getXCoordPoint(camera, 0, ParallaxBackground.PLANES_COUNT + 1) + nebula1Offset.getX();
+                float y = background.getYCoordPoint(camera, 0, ParallaxBackground.PLANES_COUNT + 1) + nebula1Offset.getY();
+                g.drawImage(nebula1, x, y);
+            }
+            if (backgroundNebula2 != null) {
+                final Random r = CommonRandom.getRandom();
+                Image nebula2 = ResourceManager.getInstance().getImage(backgroundNebula2);
+                if (nebula2Offset == null) {
+                    nebula2Offset = new Point(
+                            r.nextFloat() * (camera.getViewportTilesX() * camera.getTileWidth() - nebula2.getWidth()),
+                            r.nextFloat() * (camera.getViewportTilesY() * camera.getTileHeight() - nebula2.getHeight()));
+                }
+                float x = background.getXCoordPoint(camera, 0, ParallaxBackground.PLANES_COUNT + 1) + nebula2Offset.getX();
+                float y = background.getYCoordPoint(camera, 0, ParallaxBackground.PLANES_COUNT + 1) + nebula2Offset.getY();
+                g.drawImage(nebula2, x, y);
             }
             background.draw(g, camera);
             if (backgroundSprite != null) {
@@ -813,8 +827,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         this.backgroundSprite = backgroundSprite;
     }
 
-    public void setBackgroundNebula(String nebulaSprite) {
-        this.backgroundNebula = nebulaSprite;
+    public void setBackgroundNebula1(String nebula1Sprite) {
+        this.backgroundNebula1 = nebula1Sprite;
+    }
+
+    public void setBackgroundNebula2(String nebula2Sprite) {
+        this.backgroundNebula2 = nebula2Sprite;
     }
 
     public ParallaxBackground getBackground() {
