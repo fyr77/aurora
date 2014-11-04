@@ -128,9 +128,12 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
     private class Spore extends NPCShip
     {
 
-        public Spore(int x, int y) {
-            super(x, y, "spore", null, null, "Spore", 20);
+        public Spore(World world) {
+            super(0, 0, "spore", null, null, "Spore", 20);
+            setStationary(true);
+            setAi(new LandAI(world.getPlayer().getShip()));
             enableRepairs(1);
+            setSpeed(1);
         }
 
         @Override
@@ -138,8 +141,8 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
             super.update(container, world);
 
             final double playerDistance = getDistance(world.getPlayer().getShip());
-            if (playerDistance < 15 && ai == null) {
-                setAi(new LandAI(world.getPlayer().getShip()));
+            if (playerDistance < 15 && isStationary()) {
+                setStationary(false);
             }
 
             if (playerDistance <= 1) {
@@ -156,6 +159,7 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
                 world.addListener(new MainListener());
 
                 world.getPlayer().getShip().changeMaxHull(1);
+                world.getPlayer().getShip().setHull(world.getPlayer().getShip().getHull() + 1);
                 world.getPlayer().getResearchState().addNewAvailableProject(world.getResearchAndDevelopmentProjects().getResearchProjects().remove("red_meat"));
                 turnsSinceInfection = 0;
             }
@@ -164,7 +168,7 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
 
     @Override
     public void updateWorld(World world) {
-        final SingleShipEvent listener = new SingleShipEvent(Configuration.getDoubleProperty("quest.red_meat.chance"), new Spore(0, 0));
+        final SingleShipEvent listener = new SingleShipEvent(Configuration.getDoubleProperty("quest.red_meat.chance"), new Spore(world));
         world.addListener(listener);
         listener.setMinRange(Configuration.getIntProperty("quest.red_meat.minDist"));
     }
