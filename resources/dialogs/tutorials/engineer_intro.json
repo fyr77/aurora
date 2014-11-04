@@ -316,7 +316,7 @@
           "replyText": "0"
         },
         {
-          "returnValue": 0,
+          "returnValue": -1,
           "targetStatementId": -1,
           "replyText": "1"
         }
@@ -336,7 +336,7 @@
       "id": 21,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": -1,
           "targetStatementId": -1,
           "replyText": "0",
           "flags": {

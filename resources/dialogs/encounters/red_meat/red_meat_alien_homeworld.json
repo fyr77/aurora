@@ -1,0 +1,18 @@
+{
+  "id": "red_meat_alien_homeworld",
+  "iconName": "interior_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

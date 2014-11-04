@@ -105,6 +105,21 @@
           "replyText": "2",
           "replyConditions": [
             {
+              "name": "red_meat_prison",
+              "type": "SET"
+            },
+            {
+              "name": "red_meat_prison_discussed",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3",
+          "replyConditions": [
+            {
               "name": "zorsan.escape",
               "type": "SET"
             },
@@ -120,7 +135,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "3",
+          "replyText": "4",
           "replyConditions": [
             {
               "name": "klisk.first_contact",
@@ -138,7 +153,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "4",
+          "replyText": "5",
           "replyConditions": [
             {
               "name": "zorsan.war_preparations",
@@ -156,7 +171,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "5",
+          "replyText": "6",
           "replyConditions": [
             {
               "name": "about_officers",
@@ -170,7 +185,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 0,
-          "replyText": "6"
+          "replyText": "7"
         }
       ]
     },

@@ -1,0 +1,28 @@
+{
+  "id": "red_meat_officer_call",
+  "iconName": "interior_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

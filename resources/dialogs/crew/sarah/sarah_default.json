@@ -113,6 +113,21 @@
           "replyText": "3",
           "replyConditions": [
             {
+              "name": "red_meat_prison",
+              "type": "SET"
+            },
+            {
+              "name": "red_meat_prison_discussed",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "4",
+          "replyConditions": [
+            {
               "name": "turn",
               "value": "1000",
               "type": "GREATER"
@@ -133,7 +148,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "4",
+          "replyText": "5",
           "replyConditions": [
             {
               "name": "zorsan.war_preparations",
@@ -151,7 +166,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "5",
+          "replyText": "6",
           "replyConditions": [
             {
               "name": "\"файл \"\"Как работается\"\"\"",
@@ -162,7 +177,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "6",
+          "replyText": "7",
           "replyConditions": [
             {
               "name": "about_officers",
@@ -176,7 +191,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "7",
+          "replyText": "8",
           "replyConditions": [
             {
               "name": "rogues.damaged_scout_found",
@@ -194,7 +209,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "8",
+          "replyText": "9",
           "replyConditions": [
             {
               "name": "inside.in_parallel_universe",
@@ -212,7 +227,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 0,
-          "replyText": "9"
+          "replyText": "10"
         }
       ]
     },

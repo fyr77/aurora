@@ -142,6 +142,7 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 if (returnCode != 0) {
+                    GUI.getInstance().pushScreen("loading_screen");
                     GUI.getInstance().getNifty().gotoScreen("ship_screen");
                 }
             }
