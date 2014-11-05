@@ -41,14 +41,16 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
 
             for (Faction f : world.getFactions().values()) {
                 if (f instanceof AlienRace && ((AlienRace) f).getHomeworld() == ss) {
+                    world.getGalaxyMap().returnTo(world);
+                    world.setCurrentRoom(world.getGalaxyMap());
+
                     if (f.getName().equals(HumanityGenerator.NAME)) {
                         world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/red_meat/red_meat_solar_system.json"));
                     } else {
                         world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/red_meat/red_meat_alien_homeworld.json"));
+                        world.getPlayer().getJournal().addQuestEntries("red_meat", "alien_contact");
                     }
-                    world.getGalaxyMap().returnTo(world);
-                    world.setCurrentRoom(world.getGalaxyMap());
-                    world.getPlayer().getJournal().addQuestEntries("red_meat", "alien_contact");
+
                 }
             }
 
@@ -89,11 +91,16 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
             }
 
             turnsSinceInfection++;
-            if (turnsSinceInfection == 20) {
+            if (turnsSinceInfection == 2) {
+                Dialog startDialog = Dialog.loadFromFile("dialogs/encounters/red_meat/red_meat_started.json");
+                startDialog.addListener(RedMeatEncounterGenerator.this);
+                world.addOverlayWindow(startDialog);
+                world.getPlayer().getJournal().addQuestEntries("red_meat", "start");
+            } else if (turnsSinceInfection == 20) {
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/red_meat/red_meat_henry_1.json"));
-            } else if (turnsSinceInfection == 40) {
+            } else if (turnsSinceInfection == 60) {
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/red_meat/red_meat_sarah_1.json"));
-            }if (turnsSinceInfection == 80) {
+            }if (turnsSinceInfection == 110) {
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/red_meat/red_meat_henry_2.json"));
             }
             return false;
@@ -150,12 +157,7 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
                 isAlive = false;
                 world.getPlayer().getShip().setSprite("aurora_corrupted");
                 world.getGlobalVariables().put("red_meat.attached", true);
-
-                Dialog startDialog = Dialog.loadFromFile("dialogs/encounters/red_meat/red_meat_started.json");
-                startDialog.addListener(RedMeatEncounterGenerator.this);
-                world.addOverlayWindow(startDialog);
-                world.getPlayer().getJournal().addQuestEntries("red_meat.start");
-
+                // todo: change crew default dialogs here
                 world.addListener(new MainListener());
 
                 world.getPlayer().getShip().changeMaxHull(1);

@@ -78,7 +78,7 @@ public class DialogCSVConverter {
         for (int i = 0; i < replyStrings.size(); ++i) {
             String[] replyString = replyStrings.get(i);
             final String replyTextId = textId + "." + i;
-            context.text.put(replyTextId, replyString[1]);
+            context.text.put(replyTextId, StringEscapeUtils.unescapeCsv(replyString[1]));
             replies[i] = new Reply(
                     replyString.length >= 5 && !replyString[4].isEmpty() ? Integer.parseInt(replyString[4].trim()) : 0
                     , Integer.parseInt(replyString[2])
@@ -87,7 +87,7 @@ public class DialogCSVConverter {
                     , replyString.length >= 6 ? parseFlags(replyString[5]) : null);
         }
 
-        context.text.put(textId, stmtStrings[1]);
+        context.text.put(textId, StringEscapeUtils.unescapeCsv(stmtStrings[1]));
         if (replies.length == 0) {
             throw new IllegalStateException("Empty reply list at line " + context.lineNumber);
         }
