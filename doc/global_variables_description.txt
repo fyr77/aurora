@@ -9,6 +9,7 @@ player.country - which country player has chosen as a primary contributor to Aur
 credits - amount of credits player has
 voyager - Voyager ship object
 solar_system - points to StarSystem object
+skipHelp - if set, no help popups will be show
 
 ==============================
 Main quest:

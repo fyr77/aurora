@@ -133,6 +133,7 @@ public class GUI {
 
         // load xmls
         nifty.addXml("gui/screens/interaction_target_selection_control.xml");
+        nifty.addXml("gui/screens/help_popup.xml");
         nifty.addXml("gui/screens/image_button.xml");
         nifty.addXml("gui/screens/shoot_panel.xml");
         nifty.addXml("gui/screens/progress_bar.xml");

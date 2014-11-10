@@ -14,6 +14,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.HelpPopupControl;
 import ru.game.aurora.gui.IntroDialogController;
 import ru.game.aurora.gui.LoadingScreenController;
 import ru.game.aurora.util.EngineUtils;
@@ -162,6 +163,8 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
                 world.setCamera(camera);
                 world.getCurrentRoom().enter(world);
                 // add them here and not in world generator, as gui must be created first
+                HelpPopupControl.setHelpIds("start", "galaxy_map", "galaxy_map_2", "galaxy_map_3");
+                HelpPopupControl.showHelp();
                 return world;
             }
 
