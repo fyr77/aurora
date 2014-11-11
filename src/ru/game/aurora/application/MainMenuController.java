@@ -37,9 +37,6 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
 
     private WorldGenerator generator;
 
-    private World loadedState = null;
-
-
     private final GameContainer container;
 
     private final Animation upperEngine;
@@ -171,7 +168,7 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
             return null;
         }
 
-        return loadedState;
+        return null;
     }
 
 
@@ -212,7 +209,6 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
 
     public void reset() {
         generator = null;
-        loadedState = null;
     }
 
     public void closeCurrentPopup() {

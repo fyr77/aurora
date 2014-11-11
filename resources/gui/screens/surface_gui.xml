@@ -72,5 +72,10 @@
                 <panel width="160px"/>
             </panel>
         </layer>
+        <layer id="help_layer" childLayout="absolute">
+            <panel width="100%" height="100%" childLayout="absolute">
+                <control id="help_popup" name="help_popup"  width="45%" height="35%" x="10%" y="10%" visible="false"/>
+            </panel>
+        </layer>
     </screen>
 </nifty>

@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import ru.game.aurora.gui.ExitConfirmationScreenController;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.HelpPopupControl;
 import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
@@ -204,6 +205,8 @@ public class AuroraGame extends NiftyOverlayGame {
                 World loadedWorld = mainMenu.update(camera, gameContainer);
                 if (loadedWorld != null) {
                     onGameLoaded(loadedWorld);
+                    // hack: show initial help on new game start
+                    HelpPopupControl.showHelp();
                 }
             } else {
                 world.update(gameContainer);

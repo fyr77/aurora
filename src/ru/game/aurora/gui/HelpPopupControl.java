@@ -12,10 +12,7 @@ import de.lessvoid.xml.xpp3.Attributes;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.util.EngineUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class HelpPopupControl implements Controller {
 
@@ -31,11 +28,28 @@ public class HelpPopupControl implements Controller {
 
     private Button prevButton;
 
+    public static void setHelpIds(Collection<String> ids)
+    {
+        helpMesageIds.clear();
+        currentIdx = 0;
+        helpMesageIds.addAll(ids);
+    }
+
     public static void setHelpIds(String... ids)
     {
         helpMesageIds.clear();
         currentIdx = 0;
         Collections.addAll(helpMesageIds, ids);
+    }
+
+    public static void addHelpIds(String... ids)
+    {
+        Collections.addAll(helpMesageIds, ids);
+    }
+
+    public static void showHelp(String... ids) {
+        setHelpIds(ids);
+        showHelp();
     }
 
     public static void showHelp()
@@ -103,7 +117,7 @@ public class HelpPopupControl implements Controller {
     {
         prevButton.enable();
         currentIdx++;
-        if (currentIdx >= helpMesageIds.size()) {
+        if (currentIdx >= helpMesageIds.size() || skipHelp.isChecked()) {
             hideHelp();
             if (skipHelp.isChecked()) {
                 GUI.getInstance().getWorldInstance().getGlobalVariables().put("skipHelp", true);
