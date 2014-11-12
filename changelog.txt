@@ -10,6 +10,7 @@ IN PROGRESS
 * Split journal quest tab into 'completed' and 'active' tabs
 * New officer portraits
 * Events that can be met only in given range from solar system
++ Help popups
 
 =============================================
 

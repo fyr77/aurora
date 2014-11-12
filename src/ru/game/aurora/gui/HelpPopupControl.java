@@ -1,10 +1,7 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.controls.Button;
-import de.lessvoid.nifty.controls.CheckBox;
-import de.lessvoid.nifty.controls.Controller;
-import de.lessvoid.nifty.controls.ScrollPanel;
+import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.input.NiftyInputEvent;
 import de.lessvoid.nifty.screen.Screen;
@@ -58,12 +55,12 @@ public class HelpPopupControl implements Controller {
             return;
         }
 
-        GUI.getInstance().getNifty().getCurrentScreen().findElementByName("help_popup").show();
+        GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("help_window", Window.class).getElement().show();
     }
 
     public static void hideHelp()
     {
-        GUI.getInstance().getNifty().getCurrentScreen().findElementByName("help_popup").hide();
+        GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("help_window", Window.class).getElement().hide();
     }
 
     @Override
