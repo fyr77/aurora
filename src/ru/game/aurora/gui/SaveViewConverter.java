@@ -19,7 +19,8 @@ public class SaveViewConverter implements ListBox.ListBoxViewConverter<SaveGameM
 
     private String buildString(SaveGameManager.SaveGameSlot item) {
         if (!item.isLoaded()) {
-            return Localization.getText("gui", "saveload.empty_slot");
+            return item.isAutosave ? Localization.getText("gui", "saveload.autosave") + "\n" : ""
+                    + Localization.getText("gui", "saveload.empty_slot");
         }
         return (item.isAutosave ? Localization.getText("gui", "saveload.autosave") + "\n" : "")
                 + item.date.toString() + "\n"
