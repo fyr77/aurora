@@ -6,7 +6,10 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.ListBox;
+import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.effects.Effect;
 import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.elements.Element;
@@ -289,5 +292,11 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         world.getGalaxyMap().enterStarsystemAtPlayerCoordinates();
     }
 
+    @NiftyEventSubscriber(id = "help_window")
+    public void onHelpClose(final String id, final WindowClosedEvent event) {
+        if (event.getWindow().getElement().findNiftyControl("skipHelp", CheckBox.class).isChecked()) {
+            GUI.getInstance().getWorldInstance().getGlobalVariables().put("skipHelp", true);
+        }
+    }
 
 }

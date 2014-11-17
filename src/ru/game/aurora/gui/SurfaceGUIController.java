@@ -7,7 +7,10 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.ListBox;
+import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -146,5 +149,12 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     public void openInventory() {
         GUI.getInstance().pushCurrentScreen();
         GUI.getInstance().getNifty().gotoScreen("inventory_screen");
+    }
+
+    @NiftyEventSubscriber(id = "help_window")
+    public void onHelpClose(final String id, final WindowClosedEvent event) {
+        if (event.getWindow().getElement().findNiftyControl("skipHelp", CheckBox.class).isChecked()) {
+            GUI.getInstance().getWorldInstance().getGlobalVariables().put("skipHelp", true);
+        }
     }
 }
