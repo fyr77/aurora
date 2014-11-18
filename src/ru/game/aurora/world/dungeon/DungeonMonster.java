@@ -7,6 +7,7 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.MonsterBehaviour;
@@ -42,17 +43,19 @@ public class DungeonMonster extends DungeonObject implements IMonster {
         owner = map;
         // overrider behaviour set in desc,
         desc = ResourceManager.getInstance().getMonsterDescs().getEntity(map.getMap().getObjectProperty(groupId, objectId, "id", null));
+        hp = desc.hp;
+        drawable = desc.getDrawable();
         behaviour = MonsterBehaviour.valueOf(map.getMap().getObjectProperty(groupId, objectId, "behaviour", desc.behaviour.name()));
         final String tagsString = map.getMap().getObjectProperty(groupId, objectId, "tags", null);
         if (tagsString != null) {
             tags = new HashSet<>();
             Collections.addAll(tags, tagsString.split(","));
         }
-        controller = new MonsterController(map, this);
-
         if (desc.weaponId != null) {
             weapons.add(new WeaponInstance(ResourceManager.getInstance().getWeapons().getEntity(desc.weaponId)));
         }
+
+        controller = new MonsterController(map, this);
     }
 
     @Override

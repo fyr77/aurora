@@ -23,10 +23,6 @@ public class DungeonObject extends BaseGameObject {
     public DungeonObject(AuroraTiledMap map, int groupId, int objectId) {
         super(map.getMap().getObjectX(groupId, objectId) / AuroraGame.tileSize
                 , map.getMap().getObjectY(groupId, objectId) / AuroraGame.tileSize - 1
-                , new Drawable(map.getMap().getObjectProperty(groupId, objectId, "image", null)
-                , Integer.parseInt(map.getMap().getObjectProperty(groupId, objectId, "imageTileX", "-1"))
-                , Integer.parseInt(map.getMap().getObjectProperty(groupId, objectId, "imageTileY", "-1"))
-        )
         ); // -1 because Y coord in editor starts from 1
         this.name = map.getMap().getObjectName(groupId, objectId);
     }

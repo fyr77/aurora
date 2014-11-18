@@ -35,6 +35,8 @@ public class TutorialGenerator implements WorldGeneratorPart {
 
             private int count = -1;
 
+            private boolean repairTutorialShown = false;
+
             private boolean starSystemTutorialShown = false;
 
             private boolean spaceCombatTutorialShown = false;
@@ -97,7 +99,10 @@ public class TutorialGenerator implements WorldGeneratorPart {
 
             @Override
             public boolean onPlayerShipDamaged(World world) {
-                count = 2;
+                if (!repairTutorialShown) {
+                    count = 2;
+                    repairTutorialShown = true;
+                }
                 return false;
             }
 

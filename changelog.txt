@@ -13,6 +13,7 @@ IN PROGRESS
 * New ship art
 * Events that can be met only in given range from solar system
 + Help popups
+* Dungeon monster descriptions now moved to json out of map files
 
 =============================================
 

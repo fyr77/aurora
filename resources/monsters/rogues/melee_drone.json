@@ -3,8 +3,8 @@
     "hp": 12,
     "drawable": {
         "id": "rogues_tileset",
-        "tx": 7,
-        "ty": 0
+        "tx": 0,
+        "ty": 7
     },
     "turnsBetweenMoves": 1,
     "weaponId": "melee",
