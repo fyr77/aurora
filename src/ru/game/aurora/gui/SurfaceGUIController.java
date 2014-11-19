@@ -153,7 +153,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
 
     @NiftyEventSubscriber(id = "help_window")
     public void onHelpClose(final String id, final WindowClosedEvent event) {
-        if (event.getWindow().getElement().findNiftyControl("skipHelp", CheckBox.class).isChecked()) {
+        if (GUI.getInstance().getNifty().getCurrentScreen().findControl("help_popup", HelpPopupControl.class).isHelpSkipChecked()) {
             GUI.getInstance().getWorldInstance().getGlobalVariables().put("skipHelp", true);
         }
     }

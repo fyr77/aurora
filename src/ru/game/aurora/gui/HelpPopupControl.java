@@ -1,7 +1,6 @@
 package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.input.NiftyInputEvent;
@@ -55,7 +54,7 @@ public class HelpPopupControl implements Controller {
         if (GUI.getInstance().getWorldInstance().getGlobalVariables().containsKey("skipHelp")) {
             return;
         }
-
+        GUI.getInstance().getNifty().getCurrentScreen().findControl("help_popup", HelpPopupControl.class).update();
         GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("help_window", Window.class).getElement().show();
     }
 
@@ -109,6 +108,7 @@ public class HelpPopupControl implements Controller {
         }
         ScrollPanel sp = myElement.findNiftyControl("scrollbarPanelId", ScrollPanel.class);
         sp.setVerticalPos(0);
+        GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
 
     public void nextHelp()
@@ -123,5 +123,9 @@ public class HelpPopupControl implements Controller {
         } else {
             update();
         }
+    }
+
+    public boolean isHelpSkipChecked() {
+        return skipHelp.isChecked();
     }
 }
