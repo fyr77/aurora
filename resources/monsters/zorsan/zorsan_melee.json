@@ -2,7 +2,7 @@
     "id": "zorsan_melee",
     "hp": 7,
     "drawable": {
-        "id": "zorsna_tileset",
+        "id": "zorsan_tileset",
         "tx": 0,
         "ty": 7
     },
