@@ -87,4 +87,8 @@ public class CrewMember extends ItemWithTextAndImage {
     public Dialog getDialog() {
         return dialog;
     }
+
+    public int getReputation() {
+        return reputation;
+    }
 }

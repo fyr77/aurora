@@ -570,7 +570,18 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         solarSystem.getShips().add(voyager);
         world.getGlobalVariables().put("voyager", voyager);
 
-        world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_crew_before_attack.json"));
+        final CrewMember henry = world.getPlayer().getShip().getCrewMembers().get("henry");
+        henry.setDialog(null);
+
+        final CrewMember gordon = world.getPlayer().getShip().getCrewMembers().get("gordon");
+        gordon.setDialog(null);
+
+        final CrewMember sarah = world.getPlayer().getShip().getCrewMembers().get("sarah");
+        sarah.setDialog(null);
+
+        final Dialog crewBeforeAttackDialog = Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_crew_before_attack.json");
+        crewBeforeAttackDialog.getFlags().put("crew.engineer", String.valueOf(sarah.getReputation()));
+        world.addOverlayWindow(crewBeforeAttackDialog);
 
         //todo: set earth dialog
         world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() + 20);
@@ -593,35 +604,8 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
         world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_attack_2", "news"));
 
-        final CrewMember henry = world.getPlayer().getShip().getCrewMembers().get("henry");
-        Dialog d = Dialog.loadFromFile("dialogs/crew/henry/henry_final_battle.json");
-        d.addListener(new DialogListener() {
-            @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                henry.setDialog(null);
-            }
-        });
-        henry.setDialog(d);
 
-        final CrewMember gordon = world.getPlayer().getShip().getCrewMembers().get("gordon");
-        d = Dialog.loadFromFile("dialogs/crew/gordon/gordon_zorsan_battle.json");
-        d.addListener(new DialogListener() {
-            @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                gordon.setDialog(null);
-            }
-        });
-        henry.setDialog(d);
 
-        final CrewMember sarah = world.getPlayer().getShip().getCrewMembers().get("sarah");
-        d = Dialog.loadFromFile("dialogs/crew/sarah/sarah_zorsan_final_battle.json");
-        d.addListener(new DialogListener() {
-            @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                gordon.setDialog(null);
-            }
-        });
-        sarah.setDialog(d);
-
+        repairAllies();
     }
 }
