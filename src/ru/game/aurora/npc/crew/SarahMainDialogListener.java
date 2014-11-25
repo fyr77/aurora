@@ -16,7 +16,7 @@ public class SarahMainDialogListener extends BaseCrewDialogListener
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
         if (dialog.getId().equals("sarah_default")) {
             processDefaultDialog(world, dialog, returnCode, flags);
-        } else if (dialog.getId().equals("engineer_tutorial")) {
+        } else if (dialog.getId().equals("engineer_intro")) {
             if (flags.containsKey("engineer_dinner")) {
                 crewMember.getDialogFlags().put("engineer_dinner", "");
                 crewMember.changeReputation(4);

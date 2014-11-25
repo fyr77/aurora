@@ -736,7 +736,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
 
         boolean isEmpty;
         do {
-            orbit = (int) (CommonRandom.getRandom().nextDouble() * (maxRadius - minRadius) + minRadius);
+            orbit = Math.max(1, (int) (CommonRandom.getRandom().nextDouble() * (maxRadius - minRadius) + minRadius));
             final int x = CommonRandom.getRandom().nextInt(2 * orbit) - orbit;
             final int y = (int) (Math.sqrt(orbit * orbit - x * x) * (CommonRandom.getRandom().nextBoolean() ? -1 : 1));
             object.setPos(x, y);
