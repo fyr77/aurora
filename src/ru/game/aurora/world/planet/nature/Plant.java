@@ -30,7 +30,7 @@ public class Plant extends BaseGameObject {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
-        if (drawable == null) {
+        if (drawable == null || drawable.getImage() == null) {
             drawable = new Drawable(desc.getImage());
         }
         super.draw(container, graphics, camera, world);
