@@ -21,7 +21,7 @@ public class HenryMainDialogListener extends BaseCrewDialogListener
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
         if (dialog.getId().equals("henry_default")) {
             processDefaultDialog(world, dialog, returnCode, flags);
-        } else if (dialog.getId().equals("marine_tutorial")) {
+        } else if (dialog.getId().equals("marine_intro")) {
             if (returnCode != 0) {
                 Dialog defaultDialog = Dialog.loadFromFile("dialogs/crew/henry/henry_default.json");
                 defaultDialog.addListener(this);

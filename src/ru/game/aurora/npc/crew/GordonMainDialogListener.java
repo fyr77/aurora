@@ -22,7 +22,7 @@ public class GordonMainDialogListener extends BaseCrewDialogListener
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
         if (dialog.getId().equals("gordon_default")) {
             processDefaultDialog(world, dialog, returnCode, flags);
-        } else if (dialog.getId().equals("scientist_tutorial")) {
+        } else if (dialog.getId().equals("scientist_intro")) {
             if (flags.containsKey("parallel_worlds")) {
                 crewMember.getDialogFlags().put("parallel_worlds", "1");
             }
@@ -83,7 +83,7 @@ public class GordonMainDialogListener extends BaseCrewDialogListener
             return;
         }
 
-        if (checkFlagAndShowDialog(world, flags, "parallel_worlds", "dialogs/crew/gordon/gordon_parallel_worlds_1.json")) {
+        if (checkFlagAndShowDialog(world, flags, "parallel_worlds_2", "dialogs/crew/gordon/gordon_parallel_worlds_1.json")) {
             crewMember.getDialogFlags().put("parallel_worlds", "2");
             crewMember.changeReputation(1);
             return;

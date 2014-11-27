@@ -30,7 +30,7 @@ public abstract class BaseCrewDialogListener implements DialogListener
 
     protected boolean checkFlagAndShowDialog(World world, Map<String, String> flags, String flag, String dialog)
     {
-        if (flags.containsKey(flag)) {
+        if (flags.containsKey(flag) && !crewMember.getDialogFlags().containsKey(flag)) {
             loadAndShowDialog(world, dialog);
             crewMember.getDialogFlags().put(flag, "");
             return true;
