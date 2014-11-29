@@ -81,6 +81,12 @@ public class Playlist implements MusicListener
             currentMusicIdx = 0;
         }
         if (nextPlaylist != null) {
+            if (nextPlaylist == this) {
+                nextPlaylist = null;
+                play();
+                return;
+            }
+            release();
             currentPlaylist = nextPlaylist;
             nextPlaylist = null;
             currentPlaylist.play();
@@ -110,5 +116,12 @@ public class Playlist implements MusicListener
         }
 
         return music.get(currentMusicIdx).getMusic();
+    }
+
+    private void release()
+    {
+        for (DeferredLoadingMusic m: music) {
+            m.release();
+        }
     }
 }
