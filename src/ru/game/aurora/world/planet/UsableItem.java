@@ -26,4 +26,9 @@ public abstract class UsableItem implements InventoryItem {
     public boolean equals(Object o) {
         return getClass().equals(o.getClass());
     }
+
+    @Override
+    public int hashCode() {
+        return getClass().getCanonicalName().hashCode();
+    }
 }
