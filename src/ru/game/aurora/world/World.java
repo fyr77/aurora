@@ -99,12 +99,12 @@ public class World implements Serializable, ResolutionChangeListener {
             // update game world
             currentRoom.update(container, this);
             if (isUpdatedThisFrame()) {
-                player.getResearchState().update(this);
-                player.getEngineeringState().update(this);
-                player.getEarthState().update(this);
                 if (currentRoom.turnIsADay()) {
                     currentDate.add(Calendar.DAY_OF_MONTH, 1);
                     turnCount++;
+                    player.getResearchState().update(this);
+                    player.getEngineeringState().update(this);
+                    player.getEarthState().update(this);
                 }
                 EvacuationState es = player.getEarthState().getEvacuationState();
                 if (es != null && es.isGameOver(this)) {
