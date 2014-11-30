@@ -236,10 +236,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 fine = returnCode;
                 world.getGlobalVariables().put("rogues.fine", fine);
                 turns = 360;
-                Dialog defaultDialog = Dialog.loadFromFile("dialogs/rogues/rogues_frame_dialog.json");
-                defaultDialog.addListener(new RoguesMainDialogListener());
-                ((AlienRace) world.getFactions().get(RoguesGenerator.NAME)).setDefaultDialog(defaultDialog);
-                roguesFrame.setCaptain(new NPC(defaultDialog));
+                ((AlienRace) world.getFactions().get(RoguesGenerator.NAME)).setDefaultDialog(Dialog.loadFromFile("dialogs/rogues/rogues_default.json"));
             }
         }
     }

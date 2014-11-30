@@ -3,8 +3,10 @@ package ru.game.aurora.world.generation.quest;
 import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.music.Playlist;
 import ru.game.aurora.npc.*;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.world.GameEventListener;
@@ -43,7 +45,7 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
                 if (f instanceof AlienRace && ((AlienRace) f).getHomeworld() == ss) {
                     world.getGalaxyMap().returnTo(world);
                     world.setCurrentRoom(world.getGalaxyMap());
-
+                    world.onPlayerLeftSystem(ss);
                     if (f.getName().equals(HumanityGenerator.NAME)) {
                         world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/red_meat/red_meat_solar_system.json"));
                     } else {
@@ -61,6 +63,7 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/red_meat/red_meat_solar_system.json"));
                     world.getGalaxyMap().returnTo(world);
                     world.setCurrentRoom(world.getGalaxyMap());
+                    world.onPlayerLeftSystem(ss);
                 }
             }
             return false;

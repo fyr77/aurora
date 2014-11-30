@@ -227,9 +227,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
                 // do not keep background
                 background = null;
                 world.onPlayerLeftSystem(this);
-                if (!Playlist.getCurrentPlaylist().getId().equals(Playlist.DEFAULT_PLAYLIST)) {
-                    ResourceManager.getInstance().getPlaylist(Playlist.DEFAULT_PLAYLIST).play();
-                }
                 return;
             } else {
                 if (world.isUpdatedThisFrame()) {
@@ -532,18 +529,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         return visited;
     }
 
-    private void checkAndStartCustomMusic(World world) {
-        for (Faction faction : world.getFactions().values()) {
-            if (!(faction instanceof AlienRace)) {
-                continue;
-            }
-            AlienRace race = (AlienRace) faction;
-            if (race.getHomeworld() == this && race.getMusic() != null) {
-                race.getMusic().play();
-            }
-        }
-    }
-
     @Override
     public void enter(World world) {
         super.enter(world);
@@ -563,7 +548,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         }
         world.getCamera().resetViewPort();
         visited = true;
-        checkAndStartCustomMusic(world);
     }
 
     @Override
@@ -574,7 +558,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         }
         world.getCamera().resetViewPort();
         GUI.getInstance().getNifty().gotoScreen("star_system_gui");
-        checkAndStartCustomMusic(world);
     }
 
     @Override

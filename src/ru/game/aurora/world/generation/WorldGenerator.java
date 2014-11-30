@@ -10,6 +10,7 @@ import org.newdawn.slick.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.*;
+import ru.game.aurora.music.StarSystemMusicChangeListener;
 import ru.game.aurora.npc.AlienRaceFirstCommunicationListener;
 import ru.game.aurora.npc.factions.FreeForAllFaction;
 import ru.game.aurora.npc.factions.NeutralFaction;
@@ -281,6 +282,7 @@ public class WorldGenerator implements Runnable {
         world.addListener(new EarthUpgradeUnlocker());
 
         world.addListener(new SaveGameManager.Autosaver());
+        world.addListener(new StarSystemMusicChangeListener());
     }
 
     // perform some fast initialization in gui thread

@@ -73,8 +73,7 @@ public class DeferredLoadingMusic {
         loadingFuture = GlobalThreadPool.getExecutor().submit(new Callable<Music>() {
             @Override
             public Music call() throws Exception {
-                Music rz = new Music(myFile.getAbsolutePath(), false);
-
+                Music rz = new Music(myFile.getAbsolutePath(), true);
                 rz.addListener(myPlaylist);
                 logger.debug("Music {} loaded", myFile);
                 return rz;
@@ -87,4 +86,10 @@ public class DeferredLoadingMusic {
         loadingFuture = null;
     }
 
+    @Override
+    public String toString() {
+        return "DeferredLoadingMusic{" +
+                "myFile=" + myFile +
+                '}';
+    }
 }

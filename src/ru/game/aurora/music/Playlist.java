@@ -75,6 +75,16 @@ public class Playlist implements MusicListener
 
     @Override
     public void musicEnded(Music music) {
+        if (music.getPosition() < 0.001) {
+            // this is a bug, straming music is not yet loaded, but fired a music ended event
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            music.play();
+            return;
+        }
         logger.debug("Music faded out");
         this.music.get(currentMusicIdx).release();
         if (++currentMusicIdx == this.music.size()) {

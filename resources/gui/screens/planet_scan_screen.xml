@@ -13,7 +13,7 @@
                         <panel width="10px"/>
                         <panel style="nifty-listbox#scrollpanel" width="*" height="256px" childLayout="horizontal"
                                padding="5px">
-                            <text width="*" height="256px" id="scan_text" style="base-font" textHAlign="left" padding="5px">
+                            <text width="95%" height="256px" wrap="true" id="scan_text" style="base-font" textHAlign="left" padding="10px">
                                 <effect>
                                     <onHover name="custom-hint" targetElement="hint-panel" hintText="${hints.atmosphere.no_atmosphere}"/>
                                 </effect>
