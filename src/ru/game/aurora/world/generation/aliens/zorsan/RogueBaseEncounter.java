@@ -8,10 +8,12 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -51,12 +53,20 @@ public class RogueBaseEncounter extends GameEventListener
 
     @Override
     public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
-        if (ss.getStar().color != Color.red || ss.getStar().size != 1) {
+        if (!ss.getStar().color.equals(Color.red) || ss.getStar().size != 1) {
             return false;
         }
 
         if (CommonRandom.getRandom().nextDouble() > chance) {
             return false;
+        }
+
+        // remove all zorsan ships
+        for (Iterator<GameObject> iterator = ss.getShips().iterator(); iterator.hasNext(); ) {
+            GameObject s = iterator.next();
+            if (s.getFaction().getName().equals(ZorsanGenerator.NAME)) {
+                iterator.remove();
+            }
         }
 
         ss.setRandomEmptyPosition(station);

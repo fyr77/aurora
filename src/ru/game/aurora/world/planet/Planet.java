@@ -161,9 +161,11 @@ public class Planet extends BasePlanet implements IDungeon {
             for (int dy = -radius; dy <= radius; ++dy) {
                 for (int dx = -radius; dx <= radius; ++dx) {
 
-                    if (surface.isTilePassable(EngineUtils.wrap(x + dx, surface.getWidthInTiles()), EngineUtils.wrap(y + dy, surface.getHeightInTiles()))) {
-                        x = x + dx;
-                        y = y + dy;
+                    final int xCandidate = EngineUtils.wrap(x + dx, surface.getWidthInTiles());
+                    final int yCandidate = EngineUtils.wrap(y + dy, surface.getHeightInTiles());
+                    if (surface.isTilePassable(xCandidate, yCandidate)) {
+                        x = xCandidate;
+                        y = yCandidate;
                         break outer;
                     }
                 }

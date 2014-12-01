@@ -245,6 +245,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
                 }
             });
             world.addListener(new RogueBaseEncounter(stationDialog));
+            isAlive = false;
         }
 
 

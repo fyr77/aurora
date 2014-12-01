@@ -64,4 +64,8 @@ public class WeaponUpgrade extends ShipUpgrade {
                 "weapon=" + weaponDesc.getId() +
                 '}';
     }
+
+    public WeaponDesc getWeaponDesc() {
+        return weaponDesc;
+    }
 }

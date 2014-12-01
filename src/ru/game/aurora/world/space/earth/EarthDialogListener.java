@@ -147,6 +147,8 @@ public class EarthDialogListener implements DialogListener {
             // player has reported results of diplomacy quest
             world.getGlobalVariables().put("diplomacy.all_done", 1);
             flags.remove("diplomacy_report");
+            flags.remove("diplomacy.all_done");
+            earth.getDialogFlags().remove("diplomacy.all_done");
         }
 
         if (flags.containsKey("zorsan_war_info_quest")) {
