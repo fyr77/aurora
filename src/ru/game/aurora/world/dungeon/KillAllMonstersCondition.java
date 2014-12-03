@@ -10,6 +10,7 @@ package ru.game.aurora.world.dungeon;
 import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.MonsterBehaviour;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -38,6 +39,9 @@ public class KillAllMonstersCondition implements IVictoryCondition {
     public boolean isSatisfied(World world) {
         for (GameObject po : world.getCurrentDungeon().getMap().getObjects()) {
             if (DungeonMonster.class.isAssignableFrom(po.getClass())) {
+                if (((DungeonMonster)po).getBehaviour() == MonsterBehaviour.FRIENDLY) {
+                    continue;
+                }
                 if (tags == null) {
                     return false;
                 } else {

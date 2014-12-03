@@ -46,15 +46,6 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
     public static final int CRUISER_SHIP = 1;
 
-    private static final ProbabilitySet<GameObject> defaultLootTable;
-
-    static {
-        defaultLootTable = new ProbabilitySet<>();
-        defaultLootTable.put(new SpaceDebris.ResourceDebris(5), 1.0);
-        defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
-    }
-
-
     // makes zorsan hostile to player only after a couple of turns
     // otherwise player ship gets destroyed almost instantly
     private static class ZorsanEscapeListener extends GameEventListener implements IStateChangeListener<World> {
@@ -146,7 +137,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     dungeon.getController().addListener(new ZorsanEscapeListener());
 
                     // after this, zorsan become hostile and player has fixed amount of time before they attack earth
-                    addWarDataDrop();
+                    addWarDataDrop(world);
                     ((AlienHomeworld) planets[0]).setCanBeCommunicated(false);
 
                     world.getPlayer().getJournal().addQuestEntries("zorsan_relations", "start");
@@ -168,12 +159,12 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         return ss;
     }
 
-    public static void addWarDataDrop() {
-        defaultLootTable.put(new ZorsanWarData(), 10.3);
+    public static void addWarDataDrop(World world) {
+        ((AlienRace)world.getFactions().get(NAME)).getDefaultLootTable().put(new ZorsanWarData(), 10.3);
     }
 
-    public static void removeWarDataDrop() {
-        for (Iterator<Map.Entry<GameObject, Double>> iter = defaultLootTable.entrySet().iterator(); iter.hasNext(); ) {
+    public static void removeWarDataDrop(World world) {
+        for (Iterator<Map.Entry<GameObject, Double>> iter = ((AlienRace)world.getFactions().get(NAME)).getDefaultLootTable().entrySet().iterator(); iter.hasNext(); ) {
             Map.Entry<GameObject, Double> e = iter.next();
             if (e.getKey() instanceof ZorsanWarData) {
                 iter.remove();
@@ -210,7 +201,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                         throw new IllegalArgumentException("Unsupported ship type for Zorsan race: " + shipType);
                 }
 
-                ship.setLoot(defaultLootTable);
+                ship.setLoot(race.getDefaultLootTable());
                 return ship;
             }
         });
@@ -242,7 +233,4 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         });
     }
 
-    public static ProbabilitySet<GameObject> getDefaultLootTable() {
-        return defaultLootTable;
-    }
 }

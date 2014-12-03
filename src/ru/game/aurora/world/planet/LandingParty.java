@@ -63,7 +63,7 @@ public class LandingParty extends BaseGameObject {
     }
 
     public LandingParty(LandingParty other) {
-        this(other.x, other.y, other.weapon, other.military, other.science, other.engineers, other.hp);
+        this(other.x, other.y, other.weapon, other.military, other.science, other.engineers, other.MAX_HP);
         this.oxygen = other.oxygen;
         this.inventory = HashMultiset.create();
         for (InventoryItem i : other.inventory) {

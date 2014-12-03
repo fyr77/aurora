@@ -7,25 +7,25 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 16,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "reputation",
-              "value": "7",
-              "type": "LESS"
-            }
-          ]
-        },
-        {
-          "returnValue": 0,
           "targetStatementId": 27,
-          "replyText": "1",
+          "replyText": "0",
           "replyConditions": [
             {
               "name": "reputation",
               "value": "6",
               "type": "GREATER"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "reputation",
+              "value": "7",
+              "type": "LESS"
             }
           ]
         },
@@ -76,13 +76,13 @@
           "returnValue": 0,
           "targetStatementId": 13,
           "replyText": "1",
-           "replyConditions": [
-              {
-                "name": "klisk_trade.result",
-                "value": "refused",
-                "type": "NOT_EQUAL"
-              }
-            ]
+          "replyConditions": [
+            {
+              "name": "klisk_trade.result",
+              "value": "refused",
+              "type": "NOT_EQUAL"
+            }
+          ]
         }
       ]
     },
@@ -91,135 +91,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 4,
-          "replyText": "0"
-        }
-      ]
-    },
-    "4": {
-      "id": 4,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 5,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "klisk_trader_drone.communicated",
-              "type": "SET"
-            }
-          ]
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 7,
-          "replyText": "1",
-            "replyConditions": [
-                {
-                    "name": "zorsan.war_preparations",
-                    "type": "SET"
-                }
-            ]
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "2"
-        }
-      ]
-    },
-    "5": {
-      "id": 5,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 6,
-          "replyText": "0"
-        }
-      ]
-    },
-    "6": {
-      "id": 6,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 7,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "zorsan.war_preparations",
-              "type": "SET"
-            }
-          ]
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "1"
-        }
-      ]
-    },
-    "7": {
-      "id": 7,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 8,
-          "replyText": "0"
-        }
-      ]
-    },
-    "8": {
-      "id": 8,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 9,
-          "replyText": "0"
-        }
-      ]
-    },
-    "9": {
-      "id": 9,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 10,
-          "replyText": "0"
-        }
-      ]
-    },
-    "10": {
-      "id": 10,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 11,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 12,
-          "replyText": "1"
-        }
-      ]
-    },
-    "11": {
-      "id": 11,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
-    "12": {
-      "id": 12,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 27,
           "replyText": "0"
         }
       ]
@@ -418,7 +290,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 4,
+          "targetStatementId": 3,
           "replyText": "0"
         }
       ]
@@ -434,6 +306,10 @@
             {
               "name": "zorsan.war_preparations",
               "type": "SET"
+            },
+            {
+              "name": "klisk.war_help",
+              "type": "NOT_SET"
             }
           ]
         },
@@ -552,7 +428,13 @@
         {
           "returnValue": 0,
           "targetStatementId": 34,
-          "replyText": "1"
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "klisk_trader_drone.communicated",
+              "type": "SET"
+            }
+          ]
         }
       ]
     },
@@ -567,7 +449,13 @@
         {
           "returnValue": 0,
           "targetStatementId": 34,
-          "replyText": "1"
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "klisk_trader_drone.communicated",
+              "type": "SET"
+            }
+          ]
         }
       ]
     },
@@ -581,5 +469,7 @@
         }
       ]
     }
-  }
+  },
+  "flags": {},
+  "returnValue": 0
 }

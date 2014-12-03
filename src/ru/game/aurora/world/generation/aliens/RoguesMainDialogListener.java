@@ -57,7 +57,7 @@ public class RoguesMainDialogListener implements DialogListener {
         }
 
         if (flags.containsKey("zorsan.quest") && !world.getGlobalVariables().containsKey("zorsan.war_preparations")) {
-            ZorsanGenerator.addWarDataDrop();
+            ZorsanGenerator.addWarDataDrop(world);
             flags.remove("zorsan.quest");
         }
 

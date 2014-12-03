@@ -52,14 +52,6 @@ public class KliskGenerator implements WorldGeneratorPart {
 
     public static final int STATION = 2;
 
-    private static final ProbabilitySet<GameObject> defaultLootTable;
-
-    static {
-        defaultLootTable = new ProbabilitySet<>();
-        defaultLootTable.put(new SpaceDebris.ResourceDebris(5), 1.0);
-        defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
-    }
-
     private Dialog createDefaultKliskPlanetDialog(World world) {
         Dialog d = Dialog.loadFromFile("dialogs/klisk/klisk_planet_default.json");
         d.addListener(new DialogListener() {
@@ -260,7 +252,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                     default:
                         throw new IllegalArgumentException("Klisk race does not define ship of type " + shipType);
                 }
-                ship.setLoot(defaultLootTable);
+                ship.setLoot(kliskRace.getDefaultLootTable());
                 return ship;
             }
         });

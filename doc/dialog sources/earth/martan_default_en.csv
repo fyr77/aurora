@@ -1,1 +1,196 @@
-0;Well, you're back. Any good news?;;;;;We've brought some presents from deep space. We're transmitting the received data.;-1;;1;;Nothing, just joined the party to have a rest and do some repair works.;-1;;;;I heard you have a job for me. Something concerning the science division's order. ;4;quest_value_n;;;I'm ready to report that the scientists' mission is accomplished.;8;rogues_beacon.result  && !beacon_reported;;beacon_reported;The problem with borks is solved. I had a conversation with a smart bork. By the way, he's their resident minister. He set things right.;20;bork_blockade.result=withdraw && !bork_blockade_reported;;bork_blockade_reported;The problem with borks is solved. I've got, what they needed. It wasn't a fair square, but there things you need to do for saving your home planet.;21;bork_blockade.result=pay && !bork_blockade_reported;;bork_blockade_reported;I have solved the problem with borks. However, probably, you already know it.;24;bork_blockade.result=destroy && !bork_blockade_reported;;bork_blockade_reported;The problem with the bot is solved. I came to agreement with klisks' big boss. Nothing to it.;36;klisk_trader_drone.result=withdraw && !klisk_trader_drone_reported;;klisk_trader_drone_reported;The problem with the bot is solved. I had to go trought some expenses. I bought all of the test versions and then I went for a bot to the central storage... It won't come back here.;37;klisk_trader_drone.result=buy && !klisk_trader_drone_reported;;klisk_trader_drone_reported;There's no bot on orbit already. I had to... Ehm... In a few words, we set the fur flying.;39;klisk_trader_drone.result=destroy && !klisk_trader_drone_reported;;klisk_trader_drone_reported;As for the aliens on the Moon. I had a conversation with their elder, he recalled them in the end.;51;rogues_altar.result=withdraw && !rogues_altar_reported;;rogues_altar_reported;As for the aliens on the Moon, I helped them to fix their chanpel. Then I was kind of an honorable viewer. Then they flew away, so we won't have troubles with them anymore.;52;rogues_altar.result=help && !rogues_altar_reported;;rogues_altar_reported;I've set things right with aliens on the Moon. I destroyed their aggregate.;55;rogues_altar.result=destroy && !rogues_altar_reported;;rogues_altar_reported;Martan, urgently. It's very important and about zorsans.;58;zorsan.escape=0;;;I've got an important information about zorsans.;62;zorsan.war_preparations=0;;;I've finished the diplomatic mission.;69;diplomacy.all_done=0 && !diplomacy_report;;diplomacy_report;I have nothing to make you happy. I have a trouble with the main scientific terminal.;79;energy_sphere.communicated;;;We've found an excellent planet for a future colonization.;90;colony_search.explored;;colony_info_dumped4;Yeah, you're right. Scientists want you to help them in some things.;;;;;I'm all ears.;6;;;6;Well, there's almost nothing to say. There are three neutron stars that have extremely unusual rays. The only thing you need is to explore its influence over the systems of their navigation. Make an observation in the space, explore any planet... No need in doing your best, just the needful minimum, and then you may return.;;;;;On it. Anything else?;7;;;7;There's an unknown object that is close to one of them, it has a stronger radiation. It's too hard to see it from here - it's tiny. It'd be great, if you check that as well.;;;;;Confirmed, again. Send the main information to the science division of the Aurora-2. I have to go now.;-1;;;8;Oh. In such case I'm ready to listen.;;;;;Nothing special. The information about the radiation is sent to the science division. As well as about the object. It's a space cemetery of rogues. I guess, honored rogues are buried there. It's a sacred place, well-protected, we didn't even try to get into it.;9;rogues_beacon.result=scanned;;;All the information is sent to the scientists, but it's not important already. The most important thing is an amazing technology that gives an opportunity to recycle solar emission into a chip electrical energy.;10;rogues_beacon.result=invaded;;9;Yes. You hit the right road, when you didn't do it. Well done, my friend. Anything else?;;;;;Just a couple of things.;0;;;;No, nothing serious.;-1;;;10;Seriously? Where have you found this?;;;;;You told me about the object near the star, do you remember that? It turned out to be a space cemetery of rogues. Nothing unusual, yet it functioned using the energy of that star.;11;;;11;So, you looted the cemetery, didn't you? So if the needed equipment is carried out of there, then it is destroyed, am I right?;;;;;Unfortunately. So it goes. The result is worth the effort.;12;;;12;I see. *Martan is frowning* I totally understand you. There goes the worst: I understand you and do encourage your decisions. I think people won't share my attitude. Congratulations, Mr. Whole Planet's Hero. I hope you didn't leave an evidence?;;;;;A beacon was burnt by flying in the star. There is certainly no evidence. But what was that? Did I hear a sarcasm? Ah... fine. Whatever. I hope you will leave this girly things behind, when I arrive here next time.;13;;;13;Me too. Anything else?;;;;;Just a couple of things.;0;;;;No, nothing serious.;-1;;;20;Really? Good. You've made that. Commanders will be satisfied. You can go if it's all you wanted to tell me.;;;;;No, nothing. I gotta go. Have a lot to do.;-1;;;;I have some things to arrange.;0;;;21;*Martan narrows his eyes* I won't say I approve such a method of solving problems. I suppose that the rest of the pirates won't flock in for the sake of profit.;;;;;We had no choice, Martan.;22;;;22;You should know better, but... *Martan noddles*;;;;;But?;23;;;23;Nothing. Any other questions?;;;;;No, nothing. I gotta go. Have a lot to do.;-1;;;;I have some things to arrange.;0;;;24;Oh, I know. A greater part of the planet saw it.;;;;;I had nothing else to do.;25;;;25;Good, but have you watched the TV? People are panicking, and different prophets are predicting the end of the days. It didn't worth it.;;;;;And I'm telling you one more time: I had no choice.;26;;;26;No spells no, why do you worry? The main thing is that everything is OK... kinda OK. Simply saying, you should have tried to do that quieter. If we had wanted to destroy blockade, we would have launched a couple of more powerful rockets. We're not so helpless.;;;;;Nothing you can do now. You are always being unsatisfied. Fine. I have some questions for you.;0;;;;You are always being unsatisfied. You know, I feel, you are too one-sided and narrow-minded. Anyway, fine. It's done, we can change nothing. I have to fly away.;-1;;;36;That's a good decision. See, you are getting useful contacts. Brilliant. Commanders will be satisfied. Do you have something else to say?;;;;;Yes, just a couple of things.;0;;;;No, nothing. I gotta go now.;-1;;;37;Oh, and what? Are there any valuable things?;;;;;You can go to our hatchway and look there. Or do I look like I have the list of all things?;38;;;38;Thank you, but space will have to wait me for a little while. *Martan smiles* Anything else?;;;;;Yes, just a couple of things.;0;;;;No, nothing. I have to go now.;-1;;;39;I see. Maybe that's why the connection isn't stable. Everything that was badly protected has been burnt. The rest is rattling and reeking.;;;;;Oh, God damn it.;41;;;41;Nah. *Martan waved his hand* That's good we don't have this trash on orbit anymore. I simply didn't expect this... Well. Do you have something else?;;;;;No, nothing. I gotta go.;-1;;;;Yes, just a couple of things.;0;;;51;Alright then. I see you are getting acquainted with new people. Not bad. *Martan harrumphs* Any other questions?;;;;;No, nothing else. See ya.;-1;;;;Yes, I still have some questions.;0;;;52;So, did you enjoy the show? Really interesting.;;;;;Prior, what's his name‰;53;;;53;David Koresh.;;;;;Yes, him. That was close to his performances, but softer a bit.;54;;;54;Heh, interesting. Okay. I'll tell the commanders about your success. Any other questions?;;;;;No, nothing. I gotta go.;-1;;;;Yes, just a couple of things. ;0;;;55;Thank you. Now I know whom to thank. Have you read the news? Miami has flooded. Palms from Cuba had been torn off, then they were thrown down in Carolina. The scary-house named after Stephen King has been destroyed in Maine.;;;;;You shouldn't have mentioned the last one. Is it so important?;56;;;56;Maine has suffered a lot, don't worry. We can't change what we've done, but... Damn it! Could you please be a little bit more careful?;;;;;As you've already said - we can't change anything.;57;;;57;Yes. Commanders are on the rampage... Okay. It's gonna be alright. It always calms down and then everything gets alright. Do you want something?;;;;;No, nothing. I gotta go.;-1;;;;Yup, just a few questions.;0;;;58;Zorsans? Who are they? What is happening?;;;;;They are alien race... one of them. Doesn't matter. They tried to trap me during the diplomatic reception.;59;;;59;*Martan frowns and puts his elbows on a table. Then leans forward a bit* What? Well. Is it serious?;;;;;Don't really know. After I had escaped I flew here. It wasn't simple.;60;!zorsan.war_preparations;;;I had found the information before I got back.;61;zorsan.war_preparations;;60;That's bad. You need to know what we need to be afraid of in the case of an attack. We can't make mistakes. *Martan is looking at you without a word. You're looking at him. It's about seven seconds of silence when Martan finally says* That is an order.;;;;;Oh, sure. Right. I'll figured that out.;-1;;;zorsan_war_info_quest61;And what? I'm all ears. Is it serious?;;;;;I suppose, yes. Check out the documents at your computer. I sent them, when we were landing.;62;;;zorsan_war_info_update62;*Martan is looking through data for a few minutes. When he lifts his head up, you can see his fearful glance* You... You... Do you know what that means?!!;;;;;Yes. We can expect their attack less than in a couple of years. The most technologically developed race in deep space... Things look so bad.;63;;;63;*Martan wipes off the sweat from his forehead* Damn... We need to... to send it to analysts right now! And to commanders! That's a change of plans... Argh!Need to speed it up.;;;;;What to speed up?;64;;;64;Voyager. To speed the Voyager up. Never mind... You'll have a different task.;;;;;I'm all ears.;67;;;;W-w-wait, what's the Voyager?;65;;;65;Just another spaceship. I can't tell you more. ;;;;;What good will an another Aurora do, when they bring all of there their forces?;66;;;66;It isn't the Aurora. It's the Voyager. Again, you'll have a different task.;;;;;I'm listening to you.;67;;;67;Basically, it's the same. Need to make contracts of diplomatic relationship with all those... *Martan waves his hands* borks, klisks? You know what I mean. We need their help. ;;;;;I see. Don't know their reaction yet, but I'll do my best. What about my full powers?;68;;;68;Now just persuade them into sending their representatives here for a temporary accomodation. Then it'll be our turn. See, that's not hard. ;;;;;Okay. Then I have to go. Time is precious. ;-1;;;69;Next.;;;;;As for the borks.;70;!bork_flag;;bork_flag;As for the klisks. ;74;!klisk_flag;;klisk_flag;As for the rogues.;78;!rogues_flag;;rogues_flag;Enough, the rest I'll read in a written report.;-1;;80;70;Borks... they are big and dumb, aren't they? Am I right? Never mind, do it.;;;;;Everything is okay. They promised to send us a representative, and, in addition, they'll help in holding off an attack. ;72;bork.diplomacy_test=injure;;;Well... that depends. We talked with them about a cooperation, they even promised to help us in defending, but I'm in doubt they can really do something worthwile. Nevertheless,  every little bit helps.;72;bork.diplomacy_test=miss;;;I'll be brief - we've failed.;71;bork.diplomacy_test=kill;;71;I'll be brief, too. Jesus Christ! Will you continue?;;;;;As for the klisks.;74;!klisk_flag;;klisk_flag;As for the rogues.;78;!rogues_flag;;rogues_flag;That's all. ;-1;;80;72;Good. What's the help?;;;;;Don't know yet. This question is brought up for discussion for Elders Board. I need to pay them a visit again.;69;;;74;Giant snails. Yuck! What's wrong with them?;;;;;They are okay. Their representative will be here... I don't know when, that's a complicated question. As for the help, they gave us three battleship's gun platforms. We researched them a bit while we were transfering them here. They are very powerful. Though, they are considered to be old-fashioned. Unfortunately, they won't fit the Aurora-2 - they are too large for it, also the spaceship doesn't have enough energy for them.;77;klisk_trade.result=perfect;;; We discussed with them terms of the cooperation. I wasted a lot of time, trying to do it. ;76;klisk_trade.result=good;;;We had a conversation, yet we didn't come to an agreement.;76;!klisk_trade.result;;;I'm so sorry, but we failed to come to an agreement.;75;klisk_trade.result=bad;;75;So bad. Okay, we didn't lose everything. Continue.;;;;;As for the rogues. ;78;!rogues_flag;;rogues_flag;As for the borks.;70;!bork_flag;;bork_flag;That's it. ;-1;;80;76;Fine, anything else?;;;;;As for the rogues. ;78;;;rogues_flag;As for the borks.;70;!bork_flag;;bork_flag;That's all.;-1;;;77;"Gun platforms? *Martan gave me a cunning smile* I call it ""the irony of our creation""... Don't mind. Continue. ";;;;;As for the rogues.;78;!rogues_flag;;rogues_flag;As for the borks.;70;!bork_flag;;bork_flag;That's it.;-1;;80;78;Rogues? Why do they call themselves in such a silly way?..;;;;;Silly or not - that's not my trouble. The main thing is they agreed to cooperate with us and gave us some kind of help. Great stuff: schemes of spaceships and rare details. Don't know yet how to use it.;69;rogues.zorsan_data=forged;;;That's not important. They agreed to cooperate, but, unfortunately, didn't manage to help in war.;69;rogues.zorsan_data!=forged;;79;What? That's strange. They promised to give us some kind of an unseen confidence... *Martan winces and hands a sheet of paper* You know, I'm not surprised. Tell me more about your problem. We have at least five of them for you. We'll replace them all at once.;;;;;The terminal is not the point, but I have one creature more on my spaceship because of it. And I can't chase it away.;80;;;80;Then use the force!;;;;;That doesn't work out, too. You know, this creature doesn't detect us. It doesn't see us, we're too different.;81;;;81;*Martan is silent, he expects you to continue*;;;;;So, here it is. Take the terminal and give me a new one.;86;;;;To be brief. It is a blue semitransparent sphere. Made of something that looks like fog, but that's not fog.;82;;;82;"*giving a glance: ""Probably overworked""*";;;;;So, here it is. Take the terminal and give me a new one.;86;;;;This sphere is compatible with our main scientific terminal. For such creatures it's kinda way of life. We tried to switch the terminal off, but it continued working. Maybe that sphere can power it somehow. The only thing we can do now is to throw it away in space.;84;;;84;"*""you're probably overworked, but that's interesting""*";;;;;And that's the end! Just change the terminal, nothing more. I don't need troubles on the spaceship.;86;;;;Klisks helped me to contact that sphere. We had a conversation, nothing unusual. He refuses to go away, and we can't hurt him, he can't hurt us. That's the good news.;85;;;85;Is that all?;;;;;I suppose. So, what? Will you change it?;86;;;86;I told you I could. It's a simple task. But here's the situation. You have a creature on your spaceship. It is harmless, smart and it powers devices. Here comes an academic interest. ;;;;;So, take it to Earth.;87;;;87;What happens if you meet his congeners? Your new acquaintance might help you. Though, I don't know how exactly... but, anyway. What's the profit of this sphere on Earth? *Martan becomes silent, after a while he takes a pen* It's up to you.;;;;;You know, you're right. Let this creature stay on the spaceship. No one knows what might happen next.;88;;;;Oh, no. Just change the terminal and do anything you want with the old one. I have more than two hundred people on board, I don't need troubles.;89;;;88;That's a good decision.;;;;;No. I gotta go.;-1;;;;I still have a few questions.;0;;;89;Right. Good choice. Anything else?;;;;;No. I have to go now.;-1;;;;I still have a few questions.;0;;;90;Hm? Excellent... *Martan gets distracted, puts some information into the computer* I hope, your people have already sent them to the science division, haven't they?;;;;;Sure, everything is okay.;91;;;91;So, then we just have to bring colonists to the planet. You'll do it, but a little bit later, when everything is prepared. It makes me wonder, how does it look like? Tell me, please. I don't want to search the information.;;;;;Just a simple planet. A little bit unusual, but it's normal, nothing special.;95;!colony_search.explored_fully;;;Nothig unusual, but one thing... There are rather aggressive creatures.;92;colony_search.explored_fully;;92;What do you mean?;;;;;Literally, aggressive and strong. It will be hard for colonists if they aren't well-armed.;93;;;93;*Martan shakes his head and picks up the phone. Frowns unwittingly* We need to take a control of the preparation... everything can happen. I don't want our guys to be torn apart.;;;;;Yes, it would be horrible.;94;;;94;I'll look into it... Come back in a few months, you'll take the colonists. Anything else?;;;;;Nothing.;-1;;;;A few questions more.;0;;;95;Hm, it seems to be too calm. Have you investigated it properly?;;;;;Yes.;96;;;;Not sure, but it doesn't mean anything.;97;;;96;Well, okay then. Come back in a few months, you'll take the colonists. Any other questions?;;;;;No, no questions.;-1;;;;There are a few questions left.;0;;;97;*Martan narrows his eyes, looks at himself* Not really, then okay... If something goes wrong, you are responsible for everything. Do you have any other questions?;;;;;No, no questions.;-1;;;;A few questions more.;0;;;
+0;Well, you're back. Any good news?;;;;
+;We've brought some presents from deep space. We're transmitting the received data.;-1;;1;
+;Nothing, just joined the party to have a rest and do some repair works.;-1;;;
+;I heard you have a job for me. Something concerning the science division's order. ;4;quest_value_n;;
+;I'm ready to report that the scientists' mission is accomplished.;8;rogues_beacon.result  && !beacon_reported;;beacon_reported
+;The problem with borks is solved. I had a conversation with a smart bork. By the way, he's their resident minister. He set things right.;20;bork_blockade.result=withdraw && !bork_blockade_reported;;bork_blockade_reported
+;The problem with borks is solved. I've got, what they needed. It wasn't a fair square, but there things you need to do for saving your home planet.;21;bork_blockade.result=pay && !bork_blockade_reported;;bork_blockade_reported
+;I have solved the problem with borks. However, probably, you already know it.;24;bork_blockade.result=destroy && !bork_blockade_reported;;bork_blockade_reported
+;The problem with the bot is solved. I came to agreement with klisks' big boss. Nothing to it.;36;klisk_trader_drone.result=withdraw && !klisk_trader_drone_reported;;klisk_trader_drone_reported
+;The problem with the bot is solved. I had to go trought some expenses. I bought all of the test versions and then I went for a bot to the central storage... It won't come back here.;37;klisk_trader_drone.result=buy && !klisk_trader_drone_reported;;klisk_trader_drone_reported
+;There's no bot on orbit already. I had to... Ehm... In a few words, we set the fur flying.;39;klisk_trader_drone.result=destroy && !klisk_trader_drone_reported;;klisk_trader_drone_reported
+;As for the aliens on the Moon. I had a conversation with their elder, he recalled them in the end.;51;rogues_altar.result=withdraw && !rogues_altar_reported;;rogues_altar_reported
+;As for the aliens on the Moon, I helped them to fix their chanpel. Then I was kind of an honorable viewer. Then they flew away, so we won't have troubles with them anymore.;52;rogues_altar.result=help && !rogues_altar_reported;;rogues_altar_reported
+;I've set things right with aliens on the Moon. I destroyed their aggregate.;55;rogues_altar.result=destroy && !rogues_altar_reported;;rogues_altar_reported
+;Martan, urgently. It's very important and about zorsans.;58;zorsan.escape=0;;
+;I've got an important information about zorsans.;62;zorsan.war_preparations=0;;
+;I've finished the diplomatic mission.;69;diplomacy.all_done=0 && !diplomacy_report;;diplomacy_report
+;I have nothing to make you happy. I have a trouble with the main scientific terminal.;79;energy_sphere.communicated;;
+;We've found an excellent planet for a future colonization.;90;colony_search.explored;;colony_info_dumped
+4;Yeah, you're right. Scientists want you to help them in some things.;;;;
+;I'm all ears.;6;;;
+6;Well, there's almost nothing to say. There are three neutron stars that have extremely unusual rays. The only thing you need is to explore its influence over the systems of their navigation. Make an observation in the space, explore any planet... No need in doing your best, just the needful minimum, and then you may return.;;;;
+;On it. Anything else?;7;;;
+7;There's an unknown object that is close to one of them, it has a stronger radiation. It's too hard to see it from here - it's tiny. It'd be great, if you check that as well.;;;;
+;Confirmed, again. Send the main information to the science division of the Aurora-2. I have to go now.;-1;;;
+8;Oh. In such case I'm ready to listen.;;;;
+;Nothing special. The information about the radiation is sent to the science division. As well as about the object. It's a space cemetery of rogues. I guess, honored rogues are buried there. It's a sacred place, well-protected, we didn't even try to get into it.;9;rogues_beacon.result=scanned;;
+;All the information is sent to the scientists, but it's not important already. The most important thing is an amazing technology that gives an opportunity to recycle solar emission into a chip electrical energy.;10;rogues_beacon.result=invaded;;
+9;Yes. You hit the right road, when you didn't do it. Well done, my friend. Anything else?;;;;
+;Just a couple of things.;0;;;
+;No, nothing serious.;-1;;;
+10;Seriously? Where have you found this?;;;;
+;You told me about the object near the star, do you remember that? It turned out to be a space cemetery of rogues. Nothing unusual, yet it functioned using the energy of that star.;11;;;
+11;So, you looted the cemetery, didn't you? So if the needed equipment is carried out of there, then it is destroyed, am I right?;;;;
+;Unfortunately. So it goes. The result is worth the effort.;12;;;
+12;I see. *Martan is frowning* I totally understand you. There goes the worst: I understand you and do encourage your decisions. I think people won't share my attitude. Congratulations, Mr. Whole Planet's Hero. I hope you didn't leave an evidence?;;;;
+;A beacon was burnt by flying in the star. There is certainly no evidence. But what was that? Did I hear a sarcasm? Ah... fine. Whatever. I hope you will leave this girly things behind, when I arrive here next time.;13;;;
+13;Me too. Anything else?;;;;
+;Just a couple of things.;0;;;
+;No, nothing serious.;-1;;;
+20;Really? Good. You've made that. Commanders will be satisfied. You can go if it's all you wanted to tell me.;;;;
+;No, nothing. I gotta go. Have a lot to do.;-1;;;
+;I have some things to arrange.;0;;;
+21;*Martan narrows his eyes* I won't say I approve such a method of solving problems. I suppose that the rest of the pirates won't flock in for the sake of profit.;;;;
+;We had no choice, Martan.;22;;;
+22;You should know better, but... *Martan noddles*;;;;
+;But?;23;;;
+23;Nothing. Any other questions?;;;;
+;No, nothing. I gotta go. Have a lot to do.;-1;;;
+;I have some things to arrange.;0;;;
+24;Oh, I know. A greater part of the planet saw it.;;;;
+;I had nothing else to do.;25;;;
+25;Good, but have you watched the TV? People are panicking, and different prophets are predicting the end of the days. It didn't worth it.;;;;
+;And I'm telling you one more time: I had no choice.;26;;;
+26;No spells no, why do you worry? The main thing is that everything is OK... kinda OK. Simply saying, you should have tried to do that quieter. If we had wanted to destroy blockade, we would have launched a couple of more powerful rockets. We're not so helpless.;;;;
+;Nothing you can do now. You are always being unsatisfied. Fine. I have some questions for you.;0;;;
+;You are always being unsatisfied. You know, I feel, you are too one-sided and narrow-minded. Anyway, fine. It's done, we can change nothing. I have to fly away.;-1;;;
+36;That's a good decision. See, you are getting useful contacts. Brilliant. Commanders will be satisfied. Do you have something else to say?;;;;
+;Yes, just a couple of things.;0;;;
+;No, nothing. I gotta go now.;-1;;;
+37;Oh, and what? Are there any valuable things?;;;;
+;You can go to our hatchway and look there. Or do I look like I have the list of all things?;38;;;
+38;Thank you, but space will have to wait me for a little while. *Martan smiles* Anything else?;;;;
+;Yes, just a couple of things.;0;;;
+;No, nothing. I have to go now.;-1;;;
+39;I see. Maybe that's why the connection isn't stable. Everything that was badly protected has been burnt. The rest is rattling and reeking.;;;;
+;Oh, God damn it.;41;;;
+41;Nah. *Martan waved his hand* That's good we don't have this trash on orbit anymore. I simply didn't expect this... Well. Do you have something else?;;;;
+;No, nothing. I gotta go.;-1;;;
+;Yes, just a couple of things.;0;;;
+51;Alright then. I see you are getting acquainted with new people. Not bad. *Martan harrumphs* Any other questions?;;;;
+;No, nothing else. See ya.;-1;;;
+;Yes, I still have some questions.;0;;;
+52;So, did you enjoy the show? Really interesting.;;;;
+;Prior, what's his name‰;53;;;
+53;David Koresh.;;;;
+;Yes, him. That was close to his performances, but softer a bit.;54;;;
+54;Heh, interesting. Okay. I'll tell the commanders about your success. Any other questions?;;;;
+;No, nothing. I gotta go.;-1;;;
+;Yes, just a couple of things. ;0;;;
+55;Thank you. Now I know whom to thank. Have you read the news? Miami has flooded. Palms from Cuba had been torn off, then they were thrown down in Carolina. The scary-house named after Stephen King has been destroyed in Maine.;;;;
+;You shouldn't have mentioned the last one. Is it so important?;56;;;
+56;Maine has suffered a lot, don't worry. We can't change what we've done, but... Damn it! Could you please be a little bit more careful?;;;;
+;As you've already said - we can't change anything.;57;;;
+57;Yes. Commanders are on the rampage... Okay. It's gonna be alright. It always calms down and then everything gets alright. Do you want something?;;;;
+;No, nothing. I gotta go.;-1;;;
+;Yup, just a few questions.;0;;;
+58;Zorsans? Who are they? What is happening?;;;;
+;They are alien race... one of them. Doesn't matter. They tried to trap me during the diplomatic reception.;59;;;
+59;*Martan frowns and puts his elbows on a table. Then leans forward a bit* What? Well. Is it serious?;;;;
+;Don't really know. After I had escaped I flew here. It wasn't simple.;60;!zorsan.war_preparations;;
+;I had found the information before I got back.;61;zorsan.war_preparations;;
+60;That's bad. You need to know what we need to be afraid of in the case of an attack. We can't make mistakes. *Martan is looking at you without a word. You're looking at him. It's about seven seconds of silence when Martan finally says* That is an order.;;;;
+;Oh, sure. Right. I'll figured that out.;-1;;;zorsan_war_info_quest
+61;And what? I'm all ears. Is it serious?;;;;
+;I suppose, yes. Check out the documents at your computer. I sent them, when we were landing.;62;;;zorsan_war_info_update
+62;*Martan is looking through data for a few minutes. When he lifts his head up, you can see his fearful glance* You... You... Do you know what that means?!!;;;;
+;Yes. We can expect their attack less than in a couple of years. The most technologically developed race in deep space... Things look so bad.;63;;;
+63;*Martan wipes off the sweat from his forehead* Damn... We need to... to send it to analysts right now! And to commanders! That's a change of plans... Argh!Need to speed it up.;;;;
+;What to speed up?;64;;;
+64;Voyager. To speed the Voyager up. Never mind... You'll have a different task.;;;;
+;I'm all ears.;67;;;
+;W-w-wait, what's the Voyager?;65;;;
+65;Just another spaceship. I can't tell you more. ;;;;
+;What good will an another Aurora do, when they bring all of there their forces?;66;;;
+66;It isn't the Aurora. It's the Voyager. Again, you'll have a different task.;;;;
+;I'm listening to you.;67;;;
+67;Basically, it's the same. Need to make contracts of diplomatic relationship with all those... *Martan waves his hands* borks, klisks? You know what I mean. We need their help. ;;;;
+;I see. Don't know their reaction yet, but I'll do my best. What about my full powers?;68;;;
+68;Now just persuade them into sending their representatives here for a temporary accomodation. Then it'll be our turn. See, that's not hard. ;;;;
+;Okay. Then I have to go. Time is precious. ;-1;;;
+69;Next.;;;;
+;As for the borks.;70;!bork_flag;;bork_flag
+;As for the klisks. ;74;!klisk_flag;;klisk_flag
+;As for the rogues.;78;!rogues_flag;;rogues_flag
+;Enough, the rest I'll read in a written report.;-1;;80;
+70;Borks... they are big and dumb, aren't they? Am I right? Never mind, do it.;;;;
+;Everything is okay. They promised to send us a representative, and, in addition, they'll help in holding off an attack. ;72;bork.diplomacy_test=injure;;
+;Well... that depends. We talked with them about a cooperation, they even promised to help us in defending, but I'm in doubt they can really do something worthwile. Nevertheless,  every little bit helps.;72;bork.diplomacy_test=miss;;
+;I'll be brief - we've failed.;71;bork.diplomacy_test=kill;;
+71;I'll be brief, too. Jesus Christ! Will you continue?;;;;
+;As for the klisks.;74;!klisk_flag;;klisk_flag
+;As for the rogues.;78;!rogues_flag;;rogues_flag
+;That's all. ;-1;;80;
+72;Good. ;;;;
+;Indeed. ;69;!bork.war_help;;
+;Moreover, they agreed to provide military support for us in our conflict with Zorsan!;69;bork.war_help;;
+74;Giant snails. Yuck! What's wrong with them?;;;;
+;They are okay. Their representative will be here... I don't know when, that's a complicated question. ;76;klisk_trade.result=perfect;;
+; We discussed with them terms of the cooperation. I wasted a lot of time, trying to do it. ;76;klisk_trade.result=good;;
+;We had a conversation, yet we didn't come to an agreement.;76;!klisk_trade.result;;
+;I'm so sorry, but we failed to come to an agreement.;75;klisk_trade.result=bad;;
+75;So bad. Okay, we didn't lose everything. Continue.;;;;
+;As for the rogues. ;78;!rogues_flag;;rogues_flag
+;As for the borks.;70;!bork_flag;;bork_flag
+;That's it. ;-1;;80;
+76;Fine, anything else?;;;;
+;As for the help, they gave us three battleship's gun platforms. We researched them a bit while we were transfering them here. They are very powerful. Though, they are considered to be old-fashioned. Unfortunately, they won't fit the Aurora-2 - they are too large for it, also the spaceship doesn't have enough energy for them.;77;klisk.war_help;;
+;As for the rogues. ;78;;;rogues_flag
+;As for the borks.;70;!bork_flag;;bork_flag
+;That's all.;-1;;;
+77;"Gun platforms? *Martan gave me a cunning smile* I call it ""the irony of our creation""... Don't mind. Continue. ";;;;
+;As for the rogues.;78;!rogues_flag;;rogues_flag
+;As for the borks.;70;!bork_flag;;bork_flag
+;That's it.;-1;;80;
+78;Rogues? Why do they call themselves in such a silly way?..;;;;
+;That's not important. They agreed to cooperate.;69;!rogues.zorsan_data;;rogues_flag
+;Silly or not - that's not my trouble. The main thing is they agreed to cooperate with us and gave us some kind of help. Great stuff: schemes of spaceships and rare details. Don't know yet how to use it.;69;rogues.zorsan_data=forged;;
+;That's not important. They agreed to cooperate, but, unfortunately, didn't manage to help in war.;69;rogues.zorsan_data!=forged;;
+79;What? That's strange. They promised to give us some kind of an unseen confidence... *Martan winces and hands a sheet of paper* You know, I'm not surprised. Tell me more about your problem. We have at least five of them for you. We'll replace them all at once.;;;;
+;The terminal is not the point, but I have one creature more on my spaceship because of it. And I can't chase it away.;80;;;
+80;Then use the force!;;;;
+;That doesn't work out, too. You know, this creature doesn't detect us. It doesn't see us, we're too different.;81;;;
+81;*Martan is silent, he expects you to continue*;;;;
+;So, here it is. Take the terminal and give me a new one.;86;;;
+;To be brief. It is a blue semitransparent sphere. Made of something that looks like fog, but that's not fog.;82;;;
+82;"*giving a glance: ""Probably overworked""*";;;;
+;So, here it is. Take the terminal and give me a new one.;86;;;
+;This sphere is compatible with our main scientific terminal. For such creatures it's kinda way of life. We tried to switch the terminal off, but it continued working. Maybe that sphere can power it somehow. The only thing we can do now is to throw it away in space.;84;;;
+84;"*""you're probably overworked, but that's interesting""*";;;;
+;And that's the end! Just change the terminal, nothing more. I don't need troubles on the spaceship.;86;;;
+;Klisks helped me to contact that sphere. We had a conversation, nothing unusual. He refuses to go away, and we can't hurt him, he can't hurt us. That's the good news.;85;;;
+85;Is that all?;;;;
+;I suppose. So, what? Will you change it?;86;;;
+86;I told you I could. It's a simple task. But here's the situation. You have a creature on your spaceship. It is harmless, smart and it powers devices. Here comes an academic interest. ;;;;
+;So, take it to Earth.;87;;;
+87;What happens if you meet his congeners? Your new acquaintance might help you. Though, I don't know how exactly... but, anyway. What's the profit of this sphere on Earth? *Martan becomes silent, after a while he takes a pen* It's up to you.;;;;
+;You know, you're right. Let this creature stay on the spaceship. No one knows what might happen next.;88;;;
+;Oh, no. Just change the terminal and do anything you want with the old one. I have more than two hundred people on board, I don't need troubles.;89;;;
+88;That's a good decision.;;;;
+;No. I gotta go.;-1;;;
+;I still have a few questions.;0;;;
+89;Right. Good choice. Anything else?;;;;
+;No. I have to go now.;-1;;;
+;I still have a few questions.;0;;;
+90;Hm? Excellent... *Martan gets distracted, puts some information into the computer* I hope, your people have already sent them to the science division, haven't they?;;;;
+;Sure, everything is okay.;91;;;
+91;So, then we just have to bring colonists to the planet. You'll do it, but a little bit later, when everything is prepared. It makes me wonder, how does it look like? Tell me, please. I don't want to search the information.;;;;
+;Just a simple planet. A little bit unusual, but it's normal, nothing special.;95;!colony_search.explored_fully;;
+;Nothig unusual, but one thing... There are rather aggressive creatures.;92;colony_search.explored_fully;;
+92;What do you mean?;;;;
+;Literally, aggressive and strong. It will be hard for colonists if they aren't well-armed.;93;;;
+93;*Martan shakes his head and picks up the phone. Frowns unwittingly* We need to take a control of the preparation... everything can happen. I don't want our guys to be torn apart.;;;;
+;Yes, it would be horrible.;94;;;
+94;I'll look into it... Come back in a few months, you'll take the colonists. Anything else?;;;;
+;Nothing.;-1;;;
+;A few questions more.;0;;;
+95;Hm, it seems to be too calm. Have you investigated it properly?;;;;
+;Yes.;96;;;
+;Not sure, but it doesn't mean anything.;97;;;
+96;Well, okay then. Come back in a few months, you'll take the colonists. Any other questions?;;;;
+;No, no questions.;-1;;;
+;There are a few questions left.;0;;;
+97;*Martan narrows his eyes, looks at himself* Not really, then okay... If something goes wrong, you are responsible for everything. Do you have any other questions?;;;;
+;No, no questions.;-1;;;
+;A few questions more.;0;;;

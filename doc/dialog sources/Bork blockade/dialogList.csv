@@ -1,2 +1,3 @@
 Борки блокада диалог с военным при входе в систему.csv;bork_blockade_enter;marine_dialog;encounters
 Борки блокада диалог.csv;bork_blockade_contact;bork_vip_dialog;encounters
+4Earth_dialog.csv;bork_blockade_earth;earth_dialog;encounters

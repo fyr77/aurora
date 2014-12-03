@@ -132,6 +132,7 @@ public class BorkGenerator implements WorldGeneratorPart {
                 } else {
                     ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("bork_cannon"));
                 }
+                ship.setLoot(borkRace.getDefaultLootTable());
                 return ship;
             }
         });

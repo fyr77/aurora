@@ -13,6 +13,10 @@
             {
               "name": "bork_blockade.communicated",
               "type": "SET"
+            },
+            {
+              "name": "bork_blockade.withdraw",
+              "type": "NOT_SET"
             }
           ]
         },

@@ -7,6 +7,7 @@
 package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.Color;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.ExplosionEffect;
@@ -21,6 +22,7 @@ import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.StarResearchProject;
 import ru.game.aurora.world.*;
+import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
@@ -83,6 +85,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 // replace station sprite
                 humanity.getHomeworld().getShips().remove(construction);
                 construction = new NPCShip(0, 1, "icarus_station", humanity, null, "Icarus #1", 25);
+                construction.getWeapons().add(new WeaponInstance(ResourceManager.getInstance().getWeapons().getEntity("humanity_missiles")));
                 construction.setAi(null);
                 humanity.getHomeworld().getShips().add(construction);
 

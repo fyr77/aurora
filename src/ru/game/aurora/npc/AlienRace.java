@@ -9,8 +9,10 @@ import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.music.Playlist;
+import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.space.SpaceDebris;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ public class AlienRace implements Faction {
 
     private String name;
 
+    private ProbabilitySet<GameObject> defaultLootTable;
 
     private StarSystem homeworld;
 
@@ -46,6 +49,10 @@ public class AlienRace implements Faction {
         this.name = name;
         this.shipSprite = shipSprite;
         this.defaultDialog = defaultDialog;
+
+        defaultLootTable = new ProbabilitySet<>();
+        defaultLootTable.put(new SpaceDebris.ResourceDebris(5), 1.0);
+        defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
     }
 
     public Dialog getDefaultDialog() {
@@ -130,5 +137,9 @@ public class AlienRace implements Faction {
         ois.defaultReadObject();
         music = ResourceManager.getInstance().getPlaylist(getName());
 
+    }
+
+    public ProbabilitySet<GameObject> getDefaultLootTable() {
+        return defaultLootTable;
     }
 }

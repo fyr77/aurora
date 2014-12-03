@@ -93,7 +93,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             super(x, y, "zorsan_transport", zorsan, null, "Zorsan transport", 25);
             setSpeed(1);
             setAi(new LandAI(target));
-            setLoot(ZorsanGenerator.getDefaultLootTable());
+            setLoot(zorsan.getDefaultLootTable());
         }
 
         @Override
@@ -598,7 +598,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         world.getPlayer().getEarthState().getEarthSpecialDialogs().add(earthDialog);
 
         turnNumber = world.getTurnCount();
-        ZorsanGenerator.removeWarDataDrop();
+        ZorsanGenerator.removeWarDataDrop(world);
 
         world.addListener(this);
 

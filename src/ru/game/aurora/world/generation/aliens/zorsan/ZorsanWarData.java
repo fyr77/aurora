@@ -38,7 +38,7 @@ public class ZorsanWarData extends BaseGameObject {
     @Override
     public void interact(World world) {
         world.getPlayer().getResearchState().addNewAvailableProject(new ZorsanWarDataResearch());
-        ZorsanGenerator.removeWarDataDrop();
+        ZorsanGenerator.removeWarDataDrop(world);
         world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/zorsan_war_data_collected.json"));
     }
 }

@@ -50,6 +50,10 @@ public class ShipScreenController implements ScreenController {
     }
 
     public void refresh() {
+        if (crewMemberListBox == null) {
+            //rare case - refresh() is called before this screen was opened for first time
+            return;
+        }
         crewMemberListBox.clear();
         List<CrewMember> l = new ArrayList<>();
         final Ship ship = world.getPlayer().getShip();
