@@ -95,7 +95,7 @@ public class KliskMainDialogListener implements DialogListener {
                     new EarthInvasionGenerator().updateWorld(world);
                 }
             }
-            world.getPlayer().getJournal().getQuests().get("last_beacon").addMessage("klisk_homeworlds");
+            world.getPlayer().getJournal().questCompleted("last_beacon", "klisk_homeworlds", "end");
             world.getGlobalVariables().put("klisk.coordinates_traded", true);
 
             ((AlienRace) world.getFactions().get(ZorsanGenerator.NAME)).setKnown(true);

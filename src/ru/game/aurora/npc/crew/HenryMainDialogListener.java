@@ -39,70 +39,48 @@ public class HenryMainDialogListener extends BaseCrewDialogListener
 
         // dialogs about quests and encounters
 
-        if (flags.containsKey("gardener_dialog")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_about_gardener.json");
-            crewMember.getDialogFlags().put("gardener_dialog", "");
+        if (checkFlagAndShowDialog(world, flags, "gardener_dialog", "dialogs/crew/henry/henry_about_gardener.json")) {
             return;
         }
 
-        if (flags.containsKey("zorsan_embassy")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_zorsan_embassy.json");
-            crewMember.getDialogFlags().put("zorsan_embassy", "");
+        if (checkFlagAndShowDialog(world, flags, "zorsan_embassy", "dialogs/crew/henry/henry_zorsan_embassy.json")) {
             return;
         }
 
-        if (flags.containsKey("first_contact")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_first_contact.json");
-            crewMember.getDialogFlags().put("first_contact", "");
+        if (checkFlagAndShowDialog(world, flags, "first_contact", "dialogs/crew/henry/henry_first_contact.json")) {
             return;
         }
 
-        if (flags.containsKey("zorsan_war_preparations")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_zorsan_war_preparations.json");
-            crewMember.getDialogFlags().put("zorsan_war_preparations", "");
+        if (checkFlagAndShowDialog(world, flags, "zorsan_war_preparations", "dialogs/crew/henry/henry_zorsan_war_preparations.json")) {
             return;
         }
 
-        if (flags.containsKey("about_officers")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_about_officers.json");
-            crewMember.getDialogFlags().put("about_officers", "");
+        if (checkFlagAndShowDialog(world, flags, "about_officers", "dialogs/crew/henry/henry_about_officers.json")) {
             return;
         }
 
-        if (flags.containsKey("inside")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_inside.json");
-            crewMember.getDialogFlags().put("inside", "");
+        if (checkFlagAndShowDialog(world, flags, "inside", "dialogs/crew/henry/henry_inside.json")) {
             return;
         }
 
         // additional dialogs
-        if (flags.containsKey("service")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_service.json");
-            crewMember.getDialogFlags().put("service", "");
+        if (checkFlagAndShowDialog(world, flags, "service", "dialogs/crew/henry/henry_service.json")) {
             return;
         }
 
-        if (flags.containsKey("henry_family")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_family.json");
-            crewMember.getDialogFlags().put("henry_family", "");
+        if (checkFlagAndShowDialog(world, flags, "henry_family", "dialogs/crew/henry/henry_family.json")) {
             return;
         }
 
-        if (flags.containsKey("henry_religion")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_religion.json");
-            crewMember.getDialogFlags().put("henry_religion", "");
+        if (checkFlagAndShowDialog(world, flags, "henry_religion", "dialogs/crew/henry/henry_religion.json")) {
             return;
         }
 
-        if (flags.containsKey("henry_private_life")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_private_life.json");
-            crewMember.getDialogFlags().put("henry_private_life", "");
+        if (checkFlagAndShowDialog(world, flags, "henry_private_life", "dialogs/crew/henry/henry_private_life.json")) {
             return;
         }
 
-        if (flags.containsKey("henry_private_time")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_private_time.json");
-            crewMember.getDialogFlags().put("henry_private_time", "");
+        if (checkFlagAndShowDialog(world, flags, "henry_private_time", "dialogs/crew/henry/henry_private_time.json")) {
             return;
         }
 
@@ -111,9 +89,7 @@ public class HenryMainDialogListener extends BaseCrewDialogListener
         }
 
 
-        if (flags.containsKey("henry_secrets_1")) {
-            loadAndShowDialog(world, "dialogs/crew/henry/henry_secrets_1.json");
-            crewMember.getDialogFlags().put("henry_secrets_1", "");
+        if (checkFlagAndShowDialog(world, flags, "henry_secrets_1", "dialogs/crew/henry/henry_secrets_1.json")) {
             crewMember.changeReputation(1);
             return;
         }

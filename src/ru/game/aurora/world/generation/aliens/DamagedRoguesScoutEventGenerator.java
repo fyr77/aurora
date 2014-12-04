@@ -139,7 +139,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
                 damagedRogueScout.setAi(new LeaveSystemAI());
                 damagedRogueScout.setStationary(false);
                 damagedRogueScout.setCaptain(new NPC(
-                        Dialog.loadFromFile("dialogs/rogues/rogue_damaged_scout.after_help.json")
+                        Dialog.loadFromFile("dialogs/rogues/rogue_damaged_scout_after_help.json")
                 ));
             }
 
@@ -158,7 +158,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
                 }
 
                 if (dialog == saveByResourceDialog) {
-                    if (returnCode == 1) {
+                    if (returnCode == 0) {
                         // player decided to help without reward
                         world.getReputation().updateReputation(rogueRace.getName(), HumanityGenerator.NAME, 2);
                         world.getGlobalVariables().remove("rogues.damaged_scout_found");

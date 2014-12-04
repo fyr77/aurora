@@ -146,7 +146,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
                 continue;
             }
 
-            if (ss.getStar().color == Color.red && ss.getStar().size == 1) {
+            if (ss.getStar().color.equals(Color.red) && ss.getStar().size == 1) {
                 ++redGiantsFound;
             }
 
@@ -190,7 +190,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
         if (returnCode == 1) {
             // zorsan attack
-            world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "attack");
+            world.getPlayer().getJournal().questCompleted("zorsan_rebels", "attack");
             final int enemies = Configuration.getIntProperty("quest.zorsan_rebels.intro.enemies");
             AnimalSpeciesDesc desc = new AnimalSpeciesDesc(
                     targetPlanet
@@ -231,9 +231,8 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
                     } else if (dialog.getId().equals("rebel_leader_dialog")) {
                         if (returnCode == 1) {
                             // refused
-                            world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "refused");
+                            world.getPlayer().getJournal().questCompleted("zorsan_rebels", "refused");
                             flags.put("rebels_reject", "");
-                            world.getPlayer().getJournal().questCompleted("zorsan_rebels");
                         } else {
                             world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "agreed");
                             flags.put("rebels_continue", "");

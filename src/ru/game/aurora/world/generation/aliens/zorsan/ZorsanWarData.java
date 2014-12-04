@@ -27,7 +27,7 @@ public class ZorsanWarData extends BaseGameObject {
         @Override
         public void onCompleted(World world) {
             world.getGlobalVariables().put("zorsan.war_preparations", 0);
-            world.getPlayer().getJournal().addQuestEntries("zorsan_relations", "war_data");
+            world.getPlayer().getJournal().questCompleted("zorsan_relations", "war_data");
         }
     }
 
