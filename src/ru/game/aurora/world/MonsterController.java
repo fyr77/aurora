@@ -186,6 +186,7 @@ public class MonsterController implements Serializable {
                                 po1.onAttack(world, myMonster, weapon.getWeaponDesc().getDamage());
                             }
                         });
+                        break;
                     }
                 }
                 // do not move

@@ -873,4 +873,26 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
             this.width = width;
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StarSystem that = (StarSystem) o;
+
+        if (globalMapX != that.globalMapX) return false;
+        if (globalMapY != that.globalMapY) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = globalMapX;
+        result = 31 * result + globalMapY;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
 }

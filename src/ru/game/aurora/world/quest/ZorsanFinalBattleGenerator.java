@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
@@ -24,6 +25,7 @@ import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
+import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.earth.Earth;
@@ -384,6 +386,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             Map<String, String> flags = new HashMap<>();
             flags.put("closest_coords", closestStarSystem.getCoordsString());
             flags.put("earth_damage", Integer.toString(dropShipsLanded + shotsDone));
+            world.getPlayer().getJournal().addQuestEntries("zorsan_battle_after_recon", "start");
 
 
             if (borkAlive) {
@@ -437,11 +440,21 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
     }
 
     @Override
+    public String getLocalizedMessageForStarSystem(World world, GalaxyMapObject galaxyMapObject) {
+        if (galaxyMapObject.equals(closestStarSystem)) {
+            return Localization.getText("journal", "zorsan_battle_after_recon.title");
+        }
+        return null;
+    }
+
+    @Override
     public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
-        if (ss == closestStarSystem) {
+        if (ss.equals(closestStarSystem)) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_after_recon.json"));
             world.getGlobalVariables().put("zorsan_recon.completed", true);
-        } else if (ss == solarSystem && world.getGlobalVariables().containsKey("zorsan_recon.completed")) {
+            world.getPlayer().getJournal().questCompleted("zorsan_battle_after_recon", "end");
+            closestStarSystem = null;
+        } else if (ss.equals(solarSystem) && world.getGlobalVariables().containsKey("zorsan_recon.completed")) {
             state = State.RECON_DONE;
             solarSystem.setBackgroundSprite("obliterator_background");
             Object oldLocation = world.getGlobalVariables().get("quest.main.obliterator");
@@ -580,8 +593,9 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         sarah.setDialog(null);
 
         final Dialog crewBeforeAttackDialog = Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_crew_before_attack.json");
-        crewBeforeAttackDialog.getFlags().put("crew.engineer", String.valueOf(sarah.getReputation()));
-        world.addOverlayWindow(crewBeforeAttackDialog);
+        Map<String, String> flags = new HashMap<>();
+        flags.put("crew.engineer", String.valueOf(sarah.getReputation()));
+        world.addOverlayWindow(crewBeforeAttackDialog, flags);
 
         //todo: set earth dialog
         world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() + 20);
