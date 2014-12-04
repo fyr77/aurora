@@ -75,6 +75,8 @@ public class World implements Serializable, ResolutionChangeListener {
 
     private final RnDSet researchAndDevelopmentProjects;
 
+    // to distinguish save games made by different players
+    private final UUID uuid;
 
     public World(int sizeX, int sizeY) {
         player = new Player();
@@ -83,6 +85,7 @@ public class World implements Serializable, ResolutionChangeListener {
         researchAndDevelopmentProjects = new RnDSet();
         reputation = new Reputation();
         currentDate = new GregorianCalendar(Configuration.getIntProperty("world.startYear"), 1, 1);
+        uuid = UUID.randomUUID();
     }
 
     public Map<String, Serializable> getGlobalVariables() {
@@ -467,5 +470,9 @@ public class World implements Serializable, ResolutionChangeListener {
         Camera oldCamera = camera;
         camera = new Camera(0, 0, tilesX, tilesY, AuroraGame.tileSize, AuroraGame.tileSize);
         camera.setTarget(oldCamera.getTarget());
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 }
