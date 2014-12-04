@@ -281,7 +281,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
 
     @Override
     public boolean blocked(PathFindingContext pathFindingContext, int i, int i2) {
-        return isTilePassable(EngineUtils.wrap(i, width), EngineUtils.wrap(i2, height));
+        return !isTilePassable(EngineUtils.wrap(i, width), EngineUtils.wrap(i2, height));
     }
 
     @Override
