@@ -68,6 +68,7 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
     public void newGame() {
         generator = new WorldGenerator();
         World world = generator.initWorld();
+        world.checkCheats();
 
         GUI.getInstance().onWorldLoaded(container, world);
         new Thread(generator).start();

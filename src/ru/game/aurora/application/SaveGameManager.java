@@ -191,7 +191,7 @@ public class SaveGameManager {
             ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(slot.saveData));
             World rz = (World) ois.readObject();
             ois.close();
-
+            rz.checkCheats();
             return rz;
         } catch (Exception e) {
             logger.error("Failed to load game", e);

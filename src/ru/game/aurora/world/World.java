@@ -78,6 +78,8 @@ public class World implements Serializable, ResolutionChangeListener {
     // to distinguish save games made by different players
     private final UUID uuid;
 
+    private boolean cheatsUsed = false;
+
     public World(int sizeX, int sizeY) {
         player = new Player();
         updatedThisFrame = false;
@@ -474,5 +476,11 @@ public class World implements Serializable, ResolutionChangeListener {
 
     public UUID getUuid() {
         return uuid;
+    }
+
+    public void checkCheats() {
+        if (Configuration.getBooleanProperty("cheat.invulnerability") || Configuration.getBooleanProperty("cheat.skipDungeons")) {
+            cheatsUsed = true;
+        }
     }
 }
