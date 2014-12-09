@@ -1,0 +1,30 @@
+0;I read it. Maybe I'm mistaken, but… *Gordon frowns.* How do I put it? You called it strange. But it is not strange. That creature didn't strike me that way.;
+;Why not?;1
+;I wanted to ask you about a different thing. The Gardener said he had seen Aurora 1. Do you think it's true? ;2
+;What is the Philosophy of the Path?;6
+;So that's what you think… Okay. I'm glad I know your opinion about this. Over and out. ;-1
+1;We could understand it. W-w-which means it isn't that different from us, psychologically speaking.;
+;I wanted to ask you about a different thing. The Gardener said he had seen Aurora 1. Do you think it's true? ;2
+;What is the Philosophy of the Path?;6
+;So that's what you think… Okay. I'm glad I know your opinion about this. Over and out. ;-1
+2;I w-wouldn't take it seriously. We do not have the time. ;
+;Yeah. True. You're right.;3
+;You're right, of course, but don't you want to help our guys? ;4
+;Gordon, we have to save our comrades. ;5
+3;*Gordon nods.*;
+;You didn't think the Gardener was weird. Why is that?;1
+;What is the Philosophy of the Path?;6
+;So that's what you think… Okay. I'm glad I know your opinion about this. Over and out. ;-1
+4;But… what about the rest of the planet?;
+;You didn't think the Gardener was weird. Why is that?;1
+;What is the Philosophy of the Path?;6
+;So that's what you think… Okay. I'm glad I know your opinion about this. Over and out. ;-1
+5;But… if we were to try to find them, how would we do that? We… we would just vanish! We would let everyone down! C-Captain, that would be... irrational. ;
+;You didn't think the Gardener was weird. Why is that?;1
+;What is the Philosophy of the Path?;6
+;So that's what you think… Okay. I'm glad I know your opinion about this. Over and out. ;-1
+6;Apparently, it's s-s-some code of conduct, a lifestyle… maybe even something religious. Who would have thought? I thought s-s-space was no place for such things... ;
+;You didn't think the Gardener was weird. Why is that?;1
+;I wanted to ask you about a different thing. The Gardener said he had seen Aurora 1. Do you think it's true? ;2
+;What is the Philosophy of the Path?;6
+;So that's what you think… Okay. I'm glad I know your opinion about this. Over and out. ;-1
