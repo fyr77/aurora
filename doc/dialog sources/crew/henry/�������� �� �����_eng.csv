@@ -1,0 +1,12 @@
+0;*Henry thinks for a few secons.* Actually… *He speaks slowly, drawlingly, musingly.* We aren't very close, Captain. ;;;
+;Why not?;1;;
+1;I spent all my life in the military, in special forces. I mean... *Henry shrugs.* I think it was the wrong thing to do. I haven't had a real conversation with my children for a very long time. I remember my leave a year and a half ago. We'd watch Captain Shepherd with them a lot.;;;
+;I think it's unpleasant for you. I'm sorry I brought it up. ;4;;
+;Captain Shepherd?;2;;
+2;Yeah, Captain Shepherd. Those movies about the spacecraft captain, there's also a bunch of aliens serving with him. I don't remember the plot, something about saving the Earth.;;;
+;I think I remember something like that.;3;;
+3;*Henry smirks.* It's not too hard to remember it, considering that we have all the movies in our home cinema. So we watched them with my kids. *He sighs.* Now it seems a bit ironic. ;;;
+;I think it's unpleasant for you. I'm sorry I brought it up. ;4;;
+4;It's okay. It's not unpleasant. They're happy, so am I. And it's too early to change anything, anyway. ;;;
+;Let's talk about something else.;-1;;
+;Too bad, but I have to leave you be now. Over and out. ;-1;;-1
