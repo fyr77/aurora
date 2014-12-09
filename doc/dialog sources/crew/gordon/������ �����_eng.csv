@@ -1,0 +1,26 @@
+0;*Gordon frowns thoughfully.* I work a lot. Well… sometimes I go to the gym. Or to the firing range. Sometimes people ask me to go the movies with them, but that doesn't happen often.;
+;Isn't it hard, working so much?;1
+;The gym?;2
+;You go to the firing range? Your dossier says you don't like violence. ;3
+;You don't like the movies?;4
+;I'm glad to know you aren't getting bored. Over and out.;-1
+1;What… what's so hard about it? It's my job.;
+;The gym?;2
+;You go to the firing range? Your dossier says you don't like violence. ;3
+;You don't like the movies?;4
+;I'm glad to know you aren't getting bored. Over and out.;-1
+2;Yeah. Sedentary lifestyle h-h-has a negative impact on your system. Sometimes you have to b-blow some steam off.;
+;Isn't it hard, working so much?;1
+;You go to the firing range? Your dossier says you don't like violence. ;3
+;You don't like the movies?;4
+;I'm glad to know you aren't getting bored. Over and out.;-1
+3;But guns don't kill people. People kill people, or sometimes it's aliens. And sh-sh-shooting guns calms me down. ;
+;Isn't it hard, working so much?;1
+;The gym?;2
+;You don't like the movies?;4
+;I'm glad to know you aren't getting bored. Over and out.;-1
+4;No… they're just very stupid. Real space is much w-w-weirder than any science fiction. ;
+;Isn't it hard, working so much?;1
+;The gym?;2
+;You go to the firing range? Your dossier says you don't like violence. ;3
+;I'm glad to know you aren't getting bored. Over and out.;-1

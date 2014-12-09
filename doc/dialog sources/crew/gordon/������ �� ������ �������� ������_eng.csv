@@ -1,0 +1,28 @@
+0;C-C-Captain?;;;;
+;I want to talk to you about something.;4;;;
+;Give me a report about the state of the lab and the personnel.;3;condition=ok;;
+;Give me a report about the state of the lab and the personnel.;997;condition=bad;;
+;Give me a report about the state of the lab and the personnel.;996;condition=very_bad;;
+;Nevermind, just checking. Over and out.;-1;;-1;
+3;*Gordon nods, adjusting his glasses.* It's okay, the research is going well, can't complain about anything. My reports concerning the research are on your desk. ;;;;
+;Great. Glad to hear that.;0;;;
+997;There are some… *stutters* some problems, but the work goes on. If only you sent a couple of repairmen here…;;;;
+;I'll give the order.;0;;;
+996;It's bad! We can't work! The lab is falling apart! Do something! ;;;;
+;Stop panicking! We're taking measures already. ;0;;;
+4;Ready to lis-sten.;;;;
+;I want to talk about you.;5;;;
+;Gordon, I've given you the steno and the recording of my conversation with the Gardener. What do you think?  ;-1;gardener.first_contact && !gardener_first_contact;;gardener_first_contact
+;Did you know that they tried to kill me on Zorsan? ;-1;zorsan.escape && !zorsan_escape;;zorsan_escape
+;Imagine that, aliens! And they're intelligent! Of course, the first Aurora found some, too, but… I'm at a loss here. What do you think about this? ;-1;turn > 1000 && klisk.first_contact && !about_aliens;;about_aliens
+;You already know that we're going to war. The Zorsan are preparing a fleet to attack Earth. ;-1;zorsan.war_preparations && !zorsan_war_preparations;;zorsan_war_preparations
+;What do you think about Sara Frontz and Henry Liszkiewicz? ;-1;!about_officers;;about_officers
+;That blue sphere in your lab. What do we do with it? ;-1;energy_sphere.started && !energy_sphere;;energy_sphere
+;I don't think I have to tell you what is happening. Where are we and how do we fight in here? ;-1;inside.in_parallel_universe && !inside;;inside
+;Let's get back to the other questions.;0;;;
+5;About me? *Gordon intertwines his fingers and cracks his knuckles nervously.* W-what is it?  ;;;;
+;Tell me about yourself.;-1;!about_himself;;about_himself
+;About what we were talking about. That project of yours: phases one and two. I want to know the details. ;-1;parallel_worlds=1;;parallel_worlds_2
+;What are your impressions about serving on this ship?;-1;turn > 200 && !about_service;;about_service
+;What do you do in your spare time?;-1;turn>100 && !private_time;;private_time
+;Let's get back to the other questions.;0;;;
