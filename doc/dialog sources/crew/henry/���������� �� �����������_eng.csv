@@ -1,0 +1,9 @@
+0;It's okay, Captain. You did the right thing. Discipline should take priority on a ship. ;
+;You agree with my decision?;1
+;If you understand that, why did you start that experiment? Why didn't you report it to me? ;2
+1;Absolutely. If there's an infraction, there should be punishment. Of course, it depends on the circumstances, but not in this case. I follow the same principle with my troops.;
+;If you understand that, why did you start that experiment? Why didn't you report it to me? ;2
+2;*Henry gazes straight into your eyes.* The idea popped up too suddenly, and you were busy with something.  ;
+;Is that all?;3
+3;Yes. Permission to go?;
+;Granted.;-1

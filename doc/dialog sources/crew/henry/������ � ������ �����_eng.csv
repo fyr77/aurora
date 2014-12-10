@@ -1,0 +1,32 @@
+0;I think I told you I don't want to discuss my past already. And you have my dossier for the rest, Captain. ;;;
+;That's not what I meant. Just tell me about yourself. Consider it a psychological inquiry. ;1;;
+;Huh. Okay, then. Let's talk about something else. ;-1;;
+;Too bad. In that case, I'll leave you be. Over and out. ;-1;;
+1;Oh. So that's what you meant. *Henry nods.* My name is Henry Liszkiewicz, I am fifty-three years old. Married, three children: my oldest daughter is twenty-seven, my youngest son is eight. I've served in the military for as long as I can remember.;;;
+;Fifty-three years old. Don't you think you're too old for all this? I'm sorry if I offended you. ;2;;
+;Tell me about your family.;4;;
+;What can you tell me about the military?;6;;
+;Short and concise, typical military fashion. I'd listen some more, but I'm too busy. ;-1;;
+;That's all for now, I'm busy. Over and out.;-1;;-1
+2;*Shakes his head no.* No, no, it's okay. If I were too old, they'd discharge me, right? Yes, old gold rarely shines. But it's still gold. ;;;
+;That's poetic.;3;;
+3;Really? *Smiles.* Maybe I'm finally getting old. ;;;
+;Tell me about your family.;4;;
+;What can you tell me about the military?;6;;
+;Short and concise, typical military fashion. I'd listen some more, but I'm too busy. ;-1;;
+;That's all for now, I'm busy. Over and out.;-1;;
+4;What exactly can I tell you? Nothing comes to mind, Captain. I met Megan when I was, twenty-three years old. And a year later we got married. And... *Henry shuffles nervously. This is, perhaps, the first time you see him do it so openly.* I don't know. i think that's it?;;;
+;And the children?;5;;
+5;Children… *He shuffles again.* They're my children. I love them, they love me. But I had more success in the military. ;;;
+;Fifty-three years old. Don't you think you're too old for all this? I'm sorry if I offended you. ;2;;
+;What can you tell me about the military?;6;;
+;Short and concise, typical military fashion. I'd listen some more, but I'm too busy. ;-1;;
+;That's all for now, I'm busy. Over and out.;-1;;-1
+6;First, I was in the Navy. USS Heinlein, have you heard about it? Named after the righter. Then I served with the SEALs as a lieutenant. I served there until they transferred me to Marcinko's Boys. And that's how it was until I got attached to Aurora 2.   ;;;
+;Wow. Must have been really exciting.;7;;
+7;I'll tell you the truth, Captain, I can't talk about a lot of it. Can you say it was exciting? That's up to you to decide. I think you can. If I didn't, I wouldn't have been a soldier, would I? ;;;
+;Fifty-three years old. Don't you think you're too old for all this? I'm sorry if I offended you. ;2;;
+;Tell me about your family.;4;;
+;What can you tell me about the military?;6;;
+;Short and concise, typical military fashion. I'd listen some more, but I'm too busy. ;-1;;
+;That's all for now, I'm busy. Over and out.;-1;;-1

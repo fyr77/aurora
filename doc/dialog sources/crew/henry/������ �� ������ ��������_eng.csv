@@ -1,0 +1,30 @@
+0;Captain?;;;;
+;I want to discuss something with you.;4;;;
+;Give me a report on the condition of assets you are entrusted with. ;996;condition=very_bad;;
+;Give me a report on the condition of assets you are entrusted with. ;997;condition=bad;;
+;Give me a report on the condition of assets you are entrusted with. ;3;condition=ok;;
+;No, nevermind. Just checking in. Over and out.;-1;;;
+2;In that case, I'm waiting for you in my office. Walk past the main barracks and it's there, you can't miss it. ;;;;
+;Great. Over and out, Liszkiewicz, I'll be right there. ;-1;;;
+3;*Henry turns away from the camera, looks at a different screen, and gives you a quick report.* The combat unit is at full strength, so is the emergency response team. The main battle systems are fine. To put it simply, we're ready for war, Captain. You can consult my report for more details, it is already in your possession. ;;;;
+;Great. Glad to hear it.;0;;;
+997;*Henry hastily looks at something on a diferent screen.* The combat unit is partially under strength, Captain. You want my recommendation? The best option would be going back to Earth and enlisting more troops. But, normal operation is possible even without that. There are more details in my report, as usual. You already have it.  ;;;;
+;Thank you, Liszkiewicz. I'll think about it.;0;;;
+996;*Henry frowns, and you can tell how things are from his look.* Major casualties, Captain. I strongly encourage you to get back to Earth. Avoid conflict, put off all operations. This is my opinion, sir.;;;;
+;Okay. I got you.;0;;;
+4;I am all ears, Captain.;;;;
+;I'd like to talk about you.;5;;;
+;Liszkiewicz, you know the gist of my conversation with that alien, the Gardener. I need your opinion. ;-1;gardeners.first_contact && !gardener_dialog;;gardener_dialog
+;About that military prison…;-1;red_meat_prison && !red_meat_prison_discussed;;
+;They tried to kill me on Zorsan.;-1;zorsan.escape && !zorsan_embassy;;zorsan_embassy
+;Imagine that, aliens! And they're intelligent! Of course, the first Aurora found some, too, but… I'm at a loss here. What do you think about this? ;-1;klisk.first_contact && !first_contact;;first_contact
+;You already know that we're going to war. The Zorsan are preparing a fleet to attack Earth. ;-1;zorsan.war_preparations && !zorsan_war_preparations;;zorsan_war_preparations
+;What do you think about officers Frontz, and, uh… What's his last name again? ;-1;!about_officers;;about_officers
+;Let's get back to the other questions.;0;;;
+5;*Henry is surprised.* I'm listening.;;;;
+;Why is it that you don't like to talk about your history with the military?;-1;!henry_secrets_1;;henry_secrets_1
+;Liszkiewicz, tell me about yourself.;-1;!henry_private_life;;henry_private_life
+;Do you miss your family?;-1;zorsan.escape && !henry_family;;henry_family
+;The dossier says you're Catholic.;-1;henry_religion;;henry_religion
+;What do you do in your time off?;-1;turn>100 && !henry_private_time;;henry_private_time
+;Let's get back to the other questions.;0;;;

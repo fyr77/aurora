@@ -1,0 +1,12 @@
+0;I kn-know. It'll be tough.;
+;Why do you think that?;1
+1;The Zorsan are a formiddable foe. F-from the looks of things, we'll have to ask other dev-v-veloped alien peoples for help. ;
+;So you think we can't take them on alone?;2
+;Do you think we can trust aliens?;3
+;That's a reasonable opinion. I'm glad I heard it. Over and out. ;-1
+2;No… no… I didn't mean… it would be h-h-harder to do. More dangerous. More c-casualties.;
+;Do you think we can trust aliens?;3
+;That's a reasonable opinion. I'm glad I heard it. Over and out. ;-1
+3;Maybe we c-c-can't, but can we do it alone? I'm not that confident. I'm c-cautious. But I'm not afraid. ;
+;So you think we can't take them on alone?;2
+;That's a reasonable opinion. I'm glad I heard it. Over and out. ;-1

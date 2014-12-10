@@ -1,0 +1,36 @@
+0;What do you want me to tell you? I… I… I don't know what to say! You have read the dossier, is that not enough?;
+;Your dossier doesn't say anything about your family. ;1
+;You were there at an excavation job for UAC? The same UAC that tried to colonize Mars? ;4
+;Your dossier says you've been to ICS-34.;6
+;How about we forget about the dossier? Tell me about yourself in your own words. ;8
+;Nevermind, I changed my mind. Over and out. ;-1
+1;I don't have a family. ;
+;Why not?;2
+2;*Gordon coughs into his fist quietly.* I… I don't have anyone. Parents or… any other relatives. I am an orphan. ;
+;Oh. Sorry for bringing it up.;3
+3;*Gordon nods.*;
+;You were there at an excavation job for UAC? The same UAC that tried to colonize Mars? ;4
+;Your dossier says you've been to ICS-34.;6
+;How about we forget about the dossier? Tell me about yourself in your own words. ;8
+;Nevermind, I changed my mind. Over and out. ;-1
+4;*Nods.* Algeria. It was in Algeria. We found some materials that were supposedly extraterrestrial. Experimented on them. ;
+;What kind of experiments?;5
+5;Irradiation, resonating… uhm… lots of things, all in all. But it never lead to anything. The company lost money yet again. ;
+;Your dossier doesn't say anything about your family. ;1
+;Your dossier says you've been to ICS-34.;6
+;How about we forget about the dossier? Tell me about yourself in your own words. ;8
+;Nevermind, I changed my mind. Over and out. ;-1
+6;*Nods.*;
+;And what did you do there, exactly?;7
+7;Mostly experiments on animals. Insects, reptiles, fish.;
+;Your dossier doesn't say anything about your family. ;1
+;You were there at an excavation job for UAC? The same UAC that tried to colonize Mars? ;4
+;How about we forget about the dossier? Tell me about yourself in your own words. ;8
+;Nevermind, I changed my mind. Over and out. ;-1
+8;I... Captain, I don't know w-what to tell you. *Gordon shrugs nervously, which looks like jerking his shoulders up and down.* I am not very good at... this. I mean, I'm a good scientist. I have a PhD in Theoretical Physics, and I'm a professor of microbiology. I d-don't know what else to tell you...;
+;It looks like scientific work is your entire life. ;9
+9;*Gordon shrugs again.* I-I guess. ;
+;Your dossier doesn't say anything about your family. ;1
+;You were there at an excavation job for UAC? The same UAC that tried to colonize Mars? ;4
+;Your dossier says you've been to ICS-34.;6
+;Nevermind, I changed my mind. Over and out. ;-1

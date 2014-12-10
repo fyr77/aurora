@@ -1,0 +1,19 @@
+0;What can I tell you about them? Gordon… well… he's weird, but I like him. Officer Liszkiewicz, well… he's weird, too. But a bit too much.;
+;Explain that bit about Gordon.;1
+;What's wrong with Henry?;4
+;Got it. I'll keep that in mind.;-1
+1;I said he was weird. So fancy and everything. Imagine that, the other day I saw him telling some gal about superstring theory! *Sarah giggles.* She walked up and tried to hit on him, and he's telling her about physics and superstrings! Haha!;
+;Maybe he's just passionate about what he does.;2
+2;Could be. Like I said, he's weird, but cute. I liked men like him when I was about sixteen. ;
+;And what about Henry?;4
+;What kind of men do you like now?;3
+;Got it. That's enough for now.;-1
+3;*Sarah smiles and almost purrs.* Strong, assertive, and those who know what they want from life.;
+;And what about Henry?;4
+;Got it. That's enough for now.;-1
+4;Too strict. Too… cold. Too… I don't know. Cap, have you ever seen movies about monks? Well, Liszkiewicz is like that. Cold, humble, angry.;
+;Angry?;5
+5;Yeah. *Sarah nods.* I don't mean angry like as a person, just angry like a soldier. I'm a bit afraid of him, to be honest... But the troops respect him.;
+;Explain that bit about Gordon.;1
+;What's wrong with Henry?;4
+;Got it. I'll keep that in mind.;-1

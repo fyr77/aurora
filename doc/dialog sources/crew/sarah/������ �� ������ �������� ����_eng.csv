@@ -1,0 +1,33 @@
+0;Cap?;;;;
+;I want to talk.;4;;;
+;Frontz, report on the state of the ship.;996;condition=very_bad;;
+;Frontz, report on the state of the ship.;997;condition=bad;;
+;Frontz, report on the state of the ship.;3;condition=ok;;
+;No, nothing. Just checking in. Over and out.;-1;;-1;
+3;What? The state? *Sarah shrugs, looking at some other screen.* It's all right and more. The ship functions at 101% capacity, heh.;;;;
+;Great. Glad to hear that.;0;;;
+997;Weeell… *Sarah rubs her chin while looking at some information screens and frowns.* Actually, it could have been better. We're functioning okay, but we should get fixed up a bit.;;;;
+;I'll think about it.;0;;;
+996;Cap, we're f… ahem, sorry. *She's embarrassed.* We're able to fly, as you can see, but we should stay out of serious trouble, we could get blown up. If you wanted to order some repairs, now's the perfect time.;;;;
+;I'll do everything in my power.;0;;;
+4;Yeah?;;;;
+;I wanted to talk about you.;5;;;
+;That alien, the Gardener. You know what he and I talked about. What do you think?;-1;gardeners.first_contact && !gardener_first_contact;;gardener_first_contact
+;They tried to kill me on Zorsan.;-1;zorsan.escape && !zorsan_escape;;zorsan_escape
+;About that military prison…;-1;red_meat_prison && !red_meat_prison_discussed;;
+;What do you think about all those aliens? We've met them more than once. Space is pretty well populated.;-1;turn > 1000 && klisk.first_contact && !about_aliens;;about_aliens
+;The Zorsan are preparing a fleet to attack Earth. We're going to war.;-1;zorsan.war_preparations && !zorsan_war_preparations;;zorsan_war_preparations
+;So how's working in the new conditions? Are you glad you're serving here?;-1;"???? ""??? ??????????""";;
+;What do you think about Liszkiewicz and Gordon?;-1;!about_officers;;about_officers
+;There's some Rogue ship that survived a crash. Should we help them?;-1;rogues.damaged_scout_found && !damaged_scout;;damaged_scout
+;Sarah, you can see where we are. I need your advice.;-1;inside.in_parallel_universe && !inside;;inside
+;Let's get back to the other questions.;0;;;
+5;About me? *She gives you a crooked, but teasing smile.* Well I'll be… What is it, Captain?;;;;
+;You made it from living in some simple village to being an engineer on a space shit… Incredible!;-1;!sarah_past;;sarah_past
+;Sarah, tell be about yourself.;-1;!about_herself;;about_herself
+;What are your impressions about serving on this ship?;-1;!service && turn > 80;;service
+;Do you miss your family?;-1;!family && turn > 100;;family
+;It's not often that I come across Jews.;-1;!religion;;religion
+;What do you do in your spare time?;-1;!private_time && turn > 150;;private_time
+;Sarah, about having dinner together…;-1;engineer_dinner && !engineer_dinner_shown;;engineer_dinner_shown
+;Let's get back to the other questions.;0;;;

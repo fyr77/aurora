@@ -1,0 +1,12 @@
+0;Oh, Cap… The only thing I understood was that the guy had seen the first Aurora. And after that it's all gibberish. He's alien. Maybe it's okay that we can't understand him?;
+;What do you think?;1
+1;I don't think anything. *Sarah shrugs.* Maybe he's seen the Aurora 1, maybe he hasn't. We don't have time for that, anyway, right? And about the rest of it, like I said, Cap: I didn't understand anything. All that Philosophy of the Path business is a bunch of baloney to me.;
+;I see, Sarah. You're right. We have a different mission.;2
+;Yes, I understand. But stilll… if he's seen the Aurora 1, that might help our search… ;3
+;So you say we leave our people behind?;4
+2;*Sarah smiles and nods.*;
+;That's all for now. Over and out.;-1
+3;What can you do? Our planet is more important.;
+;Yes. Of course. That's all for now.;-1
+4;No, Cap, are you serious? I'd love to help our guys myself, but the planet is more important! It would be a bit stupid. Even the crew of the Aurora 1 would disapprove.;
+;Probably. But I still think we can't leave our people behind. That's all for now. Over and out.;-1
