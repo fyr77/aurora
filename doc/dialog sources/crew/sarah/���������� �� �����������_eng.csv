@@ -1,0 +1,10 @@
+0;I can't question the captain's decisions. If the captain has decided something going by his experience, the circumstances, and the regulations, his crew must follow.;;;;
+;I didn't want to do it, but Henry and you just didn't leave me a choice. ;1;;;
+;I'm glad you understand. And try not to forget about subordination next time.;-1;;;
+1;We've done something useful with minimal risk. And this is the reward we get?;;;;
+;If I didn't punish you, tomorrow one of Gordon's scientists will blow up the reactor to test some theory of his. And he'll have the best of intentions, too. ;2;;;
+2;As I already said, you're the captain and you're free to do anything on your ship as long as it doesn't contradict the law. Permission to go? I have some business to attend to.;;;;
+;I hope it's not another attempt to blow up my ship?;3;;;
+;You're implacable. You can go.;-1;;;
+3;If I wanted to do that, I would have done it a long time ago. *She goes out to the corridor briskly. It seems she is insulted by your last remark.*;;;;
+;...;-1;;;insult

@@ -1,0 +1,42 @@
+0;It's just wonderful here! I'd never guess that working on a space ship would be so interesting. You know, the other day we waited until Flint to have a shower and turned off the gravitation in there. Woooh, that sure was something!;
+;Cool. Is it always that fun over there?;1
+;Who's Flint?;2
+;Turn off the gravity? Isn't that dangerous?;3
+;So you like to fool around during work hours?;5
+;Yeah. I don't even know what to say. I guess I won't say anything. Over and out, Frontz.;-1
+1;The important thing is you have to know what to turn off and in what order. And the joke about the tennis ball inside the space suit's oxygen tube never gets old! *She adds hastily.* That's a joke! I mean, what, a tennis ball? It won't even fit into there.;
+;Who's Flint?;2
+;Turn off the gravity? Isn't that dangerous?;3
+;So you like to fool around during work hours?;5
+;Yeah. I don't even know what to say. I guess I won't say anything. Over and out, Frontz.;-1
+2;Chief mechanic in the third maintenance compartment. So he walks into the shower, and we go, whoosh! And he spins around for five minutes, while balls of water float around him. He was really angry, of course. But then he was okay.;
+;Cool. Is it always that fun over there?;1
+;Turn off the gravity? Isn't that dangerous?;3
+;So you like to fool around during work hours?;5
+;Yeah. I don't even know what to say. I guess I won't say anything. Over and out, Frontz.;-1
+3;Of course not, Cap. The Aurora is built for that! Our ship is built for many things. Trust me.;
+;Like what?;4
+4;We can get fueled by certain stars. And even fly around in the atmosphere, did you know that? The first Aurora couldn't do that! *Sara thinks for a bit and adds.* And you only have to drain the waste storage tanks every four years. Domestic waste, chemical, biological... Ew. ;
+;Cool. Is it always that fun over there?;1
+;Who's Flint?;2
+;So you like to fool around during work hours?;5
+;Yeah. I don't even know what to say. I guess I won't say anything. Over and out, Frontz.;-1
+5;Cap, come on. The ship is functioning okay, which means that we're doing our jobs. What's wrong with having a bit of fun? *Sarah's face falls a bit.*;
+;No, it's okay. Sorry.;6
+;I just think it's a bit weird.;7
+;At work, you work.;8
+6;Maybe you're right. I shouldn't have fooled around so blatantly. *Sarah gives you a guilty smile.* ;
+;Is it always that fun over there?;1
+;Who's Flint?;2
+;Turn off the gravity? Isn't that dangerous?;3
+;Yeah. I don't even know what to say. I guess I won't say anything. Over and out, Frontz.;-1
+7;Everyone is weird. Especially us. And actually, when Flint cooled off, he didn't look annoyed! He said it was one of the best ways to shower he's ever seen. So there.;
+;Is it always that fun over there?;1
+;Who's Flint?;2
+;Turn off the gravity? Isn't that dangerous?;3
+;Yeah. I don't even know what to say. I guess I won't say anything. Over and out, Frontz.;-1
+8;Aye aye, Captain. *Sarah's lips are pursed into a tight line.*;
+;Is it always that fun over there?;1
+;Who's Flint?;2
+;Turn off the gravity? Isn't that dangerous?;3
+;Yeah. I don't even know what to say. I guess I won't say anything. Over and out, Frontz.;-1

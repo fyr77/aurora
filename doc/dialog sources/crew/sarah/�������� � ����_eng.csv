@@ -1,0 +1,51 @@
+0;I'm Sarah Frontz. I have five brothers and five sisters, and my mom and dad. I was born in the Flava Kibbutz, served in the army, then they sent me to a university, I got my PhD... Caaaap! This is boring as hell. I'm a great engineer, that's pretty much it.;
+;Kibbutz?;1
+;Tell me about the army.;3
+;How were your student years?;5
+;Wow, I'm talking to a doctor of sciences.;7
+;And what happened after that?;10
+;Okay, that's all for now. Over and out, Sarah.;-1
+1;Yeah, a Kibbutz. It's a sort of… uhhh… a village where everyone lives together and works together. And it had religious overtones in our case. Mom says we used to live in the city, but Dad took us there because of work…;
+;What was your father's job?;2
+2;Cap, I don't even remember, to be honest. *Sarah shrugs and looks into the camera without blinking.* It was a long time ago.;
+;Tell me about the army.;3
+;How were your student years?;5
+;Wow, I'm talking to a doctor of sciences.;7
+;And what happened after that?;10
+;Okay, that's all for now. Over and out, Sarah.;-1
+3;I liked the army, it was very fun. They taught me to shoot and to repair armor. Have I told you how we were stuck far away from the base once, and we spent the entire day changing the tank's track? And it was forty grades Celsius that day! And we were just six girls!;
+;And how did it all end?;4
+4;We got boiled and died. *She grimaces, but stops it right away.* Captain, what do you think? Of course we changed it.;
+;Kibbutz?;1
+;How were your student years?;5
+;Wow, I'm talking to a doctor of sciences.;7
+;And what happened after that?;10
+;Okay, that's all for now. Over and out, Sarah.;-1
+5;More boring than the army. But useful. That's where I started inventing things. Cap, did you know I took part in designing our hyperjump engines? ;
+;You invented them?!;6
+6;"Ahem! *Sarah mimics choking on something.* I said I ""took part."" The entire university was working on them, me included. Something about transforming the energy and breaking through the weakening gravity fields of stars... too long to explain, too many words. But in general, yeah, I liked my student years.";
+;Kibbutz?;1
+;Tell me about the army.;3
+;Wow, I'm talking to a doctor of sciences.;7
+;And what happened after that?;10
+;Okay, that's all for now. Over and out, Sarah.;-1
+7;And I'm talking to a captain who probably has statues of him erected on Earth while he's still alive. Who's the lucky one here? ;
+;Seriously, they're doing that?;8
+8;I don't know for sure, but probably. But that's not how you know you're famous. You know you're famous when they tell jokes about you. Or make pornos.;
+;Pornos about me? Hm…;9
+9;Cap, don't get distracted, we're not done yet. *Sara smirks sarcastically.* ;
+;Kibbutz?;1
+;Tell me about the army.;3
+;How were your student years?;5
+;Wow, I'm talking to a doctor of sciences.;7
+;And what happened after that?;10
+;Okay, that's all for now. Over and out, Sarah.;-1
+10;I worked, invented things, and then bam! And I was here. So it goes.;
+;That was pretty brief.;11
+11;I don't like thinking about the past. It's better to look into the future, yeah?;
+;Kibbutz?;1
+;Tell me about the army.;3
+;How were your student years?;5
+;Wow, I'm talking to a doctor of sciences.;7
+;And what happened after that?;10
+;Okay, that's all for now. Over and out, Sarah.;-1

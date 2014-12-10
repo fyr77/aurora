@@ -1,0 +1,7 @@
+0;That's terrible! How did that happen? What's going to happen now?;
+;It happened during a diplomatic meeting.;1
+;I don't think that's their customary welcome. I think it smells of war.;2
+1;Those bastards! It's a good thing you kicked their asses. But… *Sarah bites her lip a bit.* What's going to happen now? What can we expect?;
+;I don't think that's their customary welcome. I think it smells of war.;2
+2;Is our planet ready for war? Can… can we survive that? Who are those Zorsan, anyway? What can we expect from them?;
+;I don't know. Looks like we're going to have to find out. That's what I'm going to do, Sarah. Over and out.;-1
