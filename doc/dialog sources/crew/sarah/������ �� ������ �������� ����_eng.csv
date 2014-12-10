@@ -19,7 +19,7 @@
 ;The Zorsan are preparing a fleet to attack Earth. We're going to war.;-1;zorsan.war_preparations && !zorsan_war_preparations;;zorsan_war_preparations
 ;So how's working in the new conditions? Are you glad you're serving here?;-1;"???? ""??? ??????????""";;
 ;What do you think about Liszkiewicz and Gordon?;-1;!about_officers;;about_officers
-;There's some vagabond ship that survived a crash. Should we help them?;-1;rogues.damaged_scout_found && !damaged_scout;;damaged_scout
+;There's some Rogue ship that survived a crash. Should we help them?;-1;rogues.damaged_scout_found && !damaged_scout;;damaged_scout
 ;Sarah, you can see where we are. I need your advice.;-1;inside.in_parallel_universe && !inside;;inside
 ;Let's get back to the other questions.;0;;;
 5;About me? *She gives you a crooked, but teasing smile.* Well I'll be… What is it, Captain?;;;;
