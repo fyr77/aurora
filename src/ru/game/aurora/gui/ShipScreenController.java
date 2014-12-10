@@ -5,6 +5,7 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
+import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -29,6 +30,8 @@ public class ShipScreenController implements ScreenController {
 
     private Screen myScreen;
 
+    private Element myWindow;
+
     private Element credCountElement;
 
     private Element resCountElement;
@@ -43,6 +46,7 @@ public class ShipScreenController implements ScreenController {
         modulesListBox = screen.findNiftyControl("modules", ListBox.class);
         inventory = screen.findNiftyControl("items", ListBox.class);
         myScreen = screen;
+        myWindow = screen.findElementByName("ship_window");
 
         credCountElement = myScreen.findElementByName("cred_count").findElementByName("#count");
         resCountElement = myScreen.findElementByName("res_count").findElementByName("#count");
@@ -72,6 +76,7 @@ public class ShipScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        myWindow.show();
         refresh();
         myScreen.layoutLayers();
         world.setPaused(true);
@@ -100,5 +105,10 @@ public class ShipScreenController implements ScreenController {
         int numericId = Integer.parseInt(id.split("#")[0]);
         numericId -= Integer.parseInt(crewMemberListBox.getElement().findElementByName("#child-root").getElements().get(0).getId());
         crewMemberListBox.setFocusItemByIndex(numericId);
+    }
+
+    @NiftyEventSubscriber(id = "ship_window")
+    public void onClose(final String id, final WindowClosedEvent event) {
+        closeScreen();
     }
 }
