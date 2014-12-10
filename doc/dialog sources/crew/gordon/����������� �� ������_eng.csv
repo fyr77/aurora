@@ -1,22 +1,22 @@
-0;I like it here. *Gordon says nothing after that.*;;0
-;And that's it?;1;
-;Right. I think that's all.;-1;
-1;And... What else is there?;;1
-;How do you find your coworkers?;2;
-;So, working in space is just some trifle not worth mentioning, then? ;4;
-;You sound like you never left Earth. As if every scientist in the world gets a chance to work aboard this ship.;5;
-;Nothing, nevermind. That'll be all.;-1;
-2;Great people and most intelligent scientists! Working with them is surprisingly e-e-exciting! Doctor Fischerman p-p-p... *Gordon giggles.* painted the lab cat blue the other day! ;;2
-;Wow. What for?;3;
-3;What do you mean, what for? *Gordon opens one of his eyes wide and squints the other one.* It was a regular cat, and then it was blue. There was a ruckus. We were trying tooo... t-to understand what had happened all day. And Fischerman only admitted to it at night! *Gordon giggles again.* ;;3
-;So, working in space is just some trifle not worth mentioning, then? ;4;
-;You sound like you never left Earth. As if every scientist in the world gets a chance to work aboard this ship.;5;
-;That'll be all.;-1;
-4;I've… I've worked at ICS-34. I'm used to being in space. ;;4
-;You sound like you never left Earth. As if every scientist in the world gets a chance to work aboard this ship.;5;
-;How do you find your coworkers?;2;
-;That'll be all.;-1;
-5;*Gordon nods.* Yes. I like it here. Excellent equipment, datab-b-base, op-p-portunities... And so many things to study! Aliens, planets, it's... it's beautiful. I will admit, it was more boring on Earth. ;;5
-;How do you find your coworkers?;2;
-;So, working in space is just some trifle not worth mentioning, then? ;4;
-;Nothing, nevermind. That'll be all.;-1;
+0;I like it here. *Gordon says nothing after that.*;
+;And that's it?;1
+;Right. I think that's all.;-1
+1;And... What else is there?;
+;How do you find your coworkers?;2
+;So, working in space is just some trifle not worth mentioning, then? ;4
+;You sound like you never left Earth. As if every scientist in the world gets a chance to work aboard this ship.;5
+;Nothing, nevermind. That'll be all.;-1
+2;Great people and most intelligent scientists! Working with them is surprisingly e-e-exciting! Doctor Fischerman p-p-p... *Gordon giggles.* painted the lab cat blue the other day! ;
+;Wow. What for?;3
+3;What do you mean, what for? *Gordon opens one of his eyes wide and squints the other one.* It was a regular cat, and then it was blue. There was a ruckus. We were trying tooo... t-to understand what had happened all day. And Fischerman only admitted to it at night! *Gordon giggles again.* ;
+;So, working in space is just some trifle not worth mentioning, then? ;4
+;You sound like you never left Earth. As if every scientist in the world gets a chance to work aboard this ship.;5
+;That'll be all.;-1
+4;I've… I've worked at ICS-34. I'm used to being in space. ;
+;You sound like you never left Earth. As if every scientist in the world gets a chance to work aboard this ship.;5
+;How do you find your coworkers?;2
+;That'll be all.;-1
+5;*Gordon nods.* Yes. I like it here. Excellent equipment, datab-b-base, op-p-portunities... And so many things to study! Aliens, planets, it's... it's beautiful. I will admit, it was more boring on Earth. ;
+;How do you find your coworkers?;2
+;So, working in space is just some trifle not worth mentioning, then? ;4
+;Nothing, nevermind. That'll be all.;-1

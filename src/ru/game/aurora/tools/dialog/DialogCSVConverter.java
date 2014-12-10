@@ -107,7 +107,9 @@ public class DialogCSVConverter {
 
 
     private static Context<Statement> parseFile(File inputFile, String dialogId) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), EngineUtils.detectEncoding(inputFile)))) {
+        final String charsetName = EngineUtils.detectEncoding(inputFile);
+        try (BufferedReader reader =
+                     (charsetName != null ? new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), charsetName)) : new BufferedReader(new InputStreamReader(new FileInputStream(inputFile))))) {
             Context<Statement> context = new Context<>(dialogId);
             System.out.println(String.format("Processing input %s with id %s", inputFile.getName(), dialogId));
             String[] stmtLine = reader.readLine().split(delimiter);
@@ -157,6 +159,10 @@ public class DialogCSVConverter {
         Context<Statement> englishContext = null;
         String[] nameSplit = input.split("\\.");
         File englishFile = new File(nameSplit[0] + "_en." + nameSplit[1]);
+        if (englishFile.exists()) {
+            englishContext = parseFile(englishFile, dialogId);
+        }
+        englishFile = new File(nameSplit[0] + "_eng." + nameSplit[1]);
         if (englishFile.exists()) {
             englishContext = parseFile(englishFile, dialogId);
         }
