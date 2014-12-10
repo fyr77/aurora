@@ -321,6 +321,8 @@ public class AuroraGame extends NiftyOverlayGame {
             logger.info("Setting native lib dir to " + nativePath);
             addDir(nativePath);
 
+            logger.info("Application class path is: " + System.getProperty("java.class.path"));
+
             try {
                 Configuration.init();
             } catch (IOException e) {
