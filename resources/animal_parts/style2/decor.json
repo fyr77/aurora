@@ -10,7 +10,7 @@
                 ]
             }
         ],
-        "imageId": "animal_parts/style2/dec6.png",
+        "imageId": "style2/dec6.png",
         "tags" : [
             "style2"
         ]
@@ -27,7 +27,7 @@
             }
         ],
 		"tags" : ["style2"],
-        "imageId": "animal_parts/style2/dec7.png"
+        "imageId": "style2/dec7.png"
     },
     {
         "type": "MONSTER_DECORATION",
@@ -40,7 +40,7 @@
                 ]
             }
         ],
-        "imageId": "animal_parts/style2/dec8.png",
+        "imageId": "style2/dec8.png",
         "tags" : [
                 "style2"
         ]
@@ -57,6 +57,6 @@
             }
         ],
 		"tags" : ["style2"],
-        "imageId": "animal_parts/style2/dec9.png"
+        "imageId": "style2/dec9.png"
     }
 ]

@@ -1,21 +1,25 @@
 {
     "partFiles" : [
-        "resources/animal_parts/style1/bodies.json"
-        , "resources/animal_parts/style1/limbs.json"
-        , "resources/animal_parts/style1/eyes.json"
-        , "resources/animal_parts/style1/mouths.json"
+        "style1/bodies.json"
+        , "style1/limbs.json"
+        , "style1/eyes.json"
+        , "style1/mouths.json"
 		
-		, "resources/animal_parts/style2/bodies.json"
-        , "resources/animal_parts/style2/limbs.json"
-        , "resources/animal_parts/style2/decor.json"		
+		, "style2/bodies.json"
+        , "style2/limbs.json"
+        , "style2/decor.json"
+
+        , "style3/bodies.json"
+        , "style3/limbs.json"
+        , "style3/decor.json"
     ],
 
     "bloodImages" : [
-        "resources/animal_parts/blood.png"
-        , "resources/animal_parts/blood2.png"
+        "blood.png"
+        , "blood2.png"
     ],
 
-    "shadowImage" :  "resources/animal_parts/shadow.png",
+    "shadowImage" :  "shadow.png",
 
     "defaultColors" : {
         "0x0033381a": 1,

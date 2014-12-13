@@ -12,7 +12,7 @@
 
         ],
 		"tags" : ["style1"],
-        "imageId" : "animal_parts/style1/limb1.png"
+        "imageId" : "style1/limb1.png"
     },
     {
         "type": "MONSTER_LIMB",
@@ -26,7 +26,7 @@
             }
         ],
 		"tags" : ["style1"],
-        "imageId" : "animal_parts/style1/limb2.png"
+        "imageId" : "style1/limb2.png"
     },
     {
         "type": "MONSTER_LIMB",
@@ -40,7 +40,7 @@
             }
         ],
 		"tags" : ["style1"],
-        "imageId" : "animal_parts/style1/limb3.png"
+        "imageId" : "style1/limb3.png"
     },
     {
         "type": "MONSTER_LIMB",
@@ -54,7 +54,7 @@
             }
         ],
 		"tags" : ["style1"],
-        "imageId" : "animal_parts/style1/limb4.png"
+        "imageId" : "style1/limb4.png"
     },
     {
         "type": "MONSTER_LIMB",
@@ -68,7 +68,7 @@
             }
         ],
 		"tags" : ["style1"],
-        "imageId" : "animal_parts/style1/limb5.png"
+        "imageId" : "style1/limb5.png"
     },
     {
         "type": "MONSTER_LIMB",
@@ -82,7 +82,7 @@
             }
         ],
 		"tags" : ["style1"],
-        "imageId" : "animal_parts/style1/limb6.png"
+        "imageId" : "style1/limb6.png"
     },
     {
         "type": "MONSTER_LIMB",
@@ -96,7 +96,7 @@
             }
         ],
 		"tags" : ["style1"],
-        "imageId" : "animal_parts/style1/limb7.png"
+        "imageId" : "style1/limb7.png"
     },
     {
         "type": "MONSTER_LIMB",
@@ -110,6 +110,6 @@
             }
         ],
 		"tags" : ["style1"],
-        "imageId" : "animal_parts/style1/limb8.png"
+        "imageId" : "style1/limb8.png"
     }
 ]

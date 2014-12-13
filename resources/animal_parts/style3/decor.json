@@ -3,60 +3,47 @@
         "type": "MONSTER_DECORATION",
         "attachmentPoints" : [
             {
-                "x": 14,
+                "x": 8,
                 "y" : 8,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
         ],
-        "imageId": "style1/dec3.png",
+        "imageId": "style3/dec10.png",
         "tags" : [
-            "carnivore", "predator", "style1"
+            "style3"
         ]
     },
     {
         "type": "MONSTER_DECORATION",
         "attachmentPoints" : [
             {
-                "x": 16,
-                "y": 11,
+                "x": 8,
+                "y": 8,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
         ],
-		"tags" : ["style1"],
-        "imageId": "style1/mouth.png"
+		"tags" : ["style3"],
+        "imageId": "style3/dec11.png"
     },
     {
         "type": "MONSTER_DECORATION",
         "attachmentPoints" : [
             {
-                "x": 12,
-                "y": 9,
+                "x": 8,
+                "y": 8,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
         ],
-        "imageId": "style1/mouth1.png",
+        "imageId": "style3/dec12.png",
         "tags" : [
-                "carnivore", "predator", "style1"
+                "style3"
         ]
-    },
-    {
-        "type": "MONSTER_DECORATION",
-        "attachmentPoints" : [
-            {
-                "x": 7,
-                "y": 9,
-                "availableTypes" : [
-                    "MONSTER_BODY"
-                ]
-            }
-        ],
-		"tags" : ["style1"],
-        "imageId": "style1/mouth2.png"
     }
+  
 ]

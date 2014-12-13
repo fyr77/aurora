@@ -3,85 +3,103 @@
         "type": "MONSTER_LIMB",
         "attachmentPoints" : [
             {
-                "x": 29,
-                "y" : 3,
+                "x": 28,
+                "y" : 5,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
 
         ],
-		"tags" : ["style2"],
-        "imageId" : "style2/limb9.png"
+		"tags" : ["style3"],
+        "imageId" : "style3/limb15.png"
     },
     {
         "type": "MONSTER_LIMB",
         "attachmentPoints" : [
             {
                 "x": 28,
-                "y" : 16,
+                "y" : 6,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
         ],
-		"tags" : ["style2"],
-        "imageId" : "style2/limb10.png"
-    },
-    {
-        "type": "MONSTER_LIMB",
-        "attachmentPoints" : [
-            {
-                "x": 28,
-                "y" : 27,
-                "availableTypes" : [
-                    "MONSTER_BODY"
-                ]
-            }
-        ],
-		"tags" : ["style2"],
-        "imageId" : "style2/limb11.png"
+		"tags" : ["style3"],
+        "imageId" : "style3/limb16.png"
     },
     {
         "type": "MONSTER_LIMB",
         "attachmentPoints" : [
             {
                 "x": 29,
-                "y" : 16,
+                "y" : 10,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
         ],
-		"tags" : ["style2"],
-        "imageId" : "style2/limb12.png"
+		"tags" : ["style3"],
+        "imageId" : "style3/limb17.png"
     },
     {
         "type": "MONSTER_LIMB",
         "attachmentPoints" : [
             {
-                "x": 28,
-                "y" : 16,
+                "x": 29,
+                "y" : 10,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
             }
         ],
-		"tags" : ["style2"],
-        "imageId" : "style2/limb13.png"
+		"tags" : ["style3"],
+        "imageId" : "style3/limb18.png"
     },
+	
+	{
+        "type": "MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 29,
+                "y" : 10,
+                "availableTypes" : [
+                    "MONSTER_BODY"
+                ]
+            },
+			{
+                "x": 17,
+                "y" : 26,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }
+        ],
+		"tags" : ["style3"],
+        "imageId" : "style3/limb18.png"
+    },
+	
     {
         "type": "MONSTER_LIMB",
         "attachmentPoints" : [
             {
                 "x": 28,
-                "y" : 17,
+                "y" : 6,
                 "availableTypes" : [
                     "MONSTER_BODY"
                 ]
-            }
+            }, 
+			{
+				"x" : 5,
+				"y" : 30,
+				"availableTypes" : [
+                    "MONSTER_LIMB"
+                ]
+				
+			}
         ],
-		"tags" : ["style2"],
-        "imageId" : "style2/limb14.png"
+		"tags" : ["style3"],
+        "imageId" : "style3/limb16.png"
     }
+    
 ]
