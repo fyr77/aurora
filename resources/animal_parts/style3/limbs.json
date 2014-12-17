@@ -7,6 +7,7 @@
                 "y" : 5,
                 "availableTypes" : [
                     "MONSTER_BODY"
+					, "MONSTER_LIMB"
                 ]
             }
 
@@ -22,6 +23,7 @@
                 "y" : 6,
                 "availableTypes" : [
                     "MONSTER_BODY"
+					, "MONSTER_LIMB"
                 ]
             }
         ],
@@ -36,6 +38,7 @@
                 "y" : 10,
                 "availableTypes" : [
                     "MONSTER_BODY"
+					, "MONSTER_LIMB"
                 ]
             }
         ],
@@ -50,6 +53,7 @@
                 "y" : 10,
                 "availableTypes" : [
                     "MONSTER_BODY"
+					, "MONSTER_LIMB"
                 ]
             }
         ],
@@ -65,11 +69,13 @@
                 "y" : 10,
                 "availableTypes" : [
                     "MONSTER_BODY"
+					, "MONSTER_LIMB"
                 ]
             },
 			{
                 "x": 17,
                 "y" : 26,
+				"groupId" : "limb_decor",
                 "availableTypes" : [
                     "MONSTER_DECORATION"
                 ]
@@ -77,29 +83,7 @@
         ],
 		"tags" : ["style3"],
         "imageId" : "style3/limb18.png"
-    },
-	
-    {
-        "type": "MONSTER_LIMB",
-        "attachmentPoints" : [
-            {
-                "x": 28,
-                "y" : 6,
-                "availableTypes" : [
-                    "MONSTER_BODY"
-                ]
-            }, 
-			{
-				"x" : 5,
-				"y" : 30,
-				"availableTypes" : [
-                    "MONSTER_LIMB"
-                ]
-				
-			}
-        ],
-		"tags" : ["style3"],
-        "imageId" : "style3/limb16.png"
     }
+
     
 ]

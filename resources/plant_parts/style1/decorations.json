@@ -11,7 +11,7 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/style1/flower1.png",
+        "imageId" : "style1/flower1.png",
         "tags" : ["style1"]
     },
 	{
@@ -26,7 +26,7 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/style1/flower2.png",
+        "imageId" : "style1/flower2.png",
         "tags" : ["style1"]
     },
 	{
@@ -41,7 +41,7 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/style1/flower3.png",
+        "imageId" : "style1/flower3.png",
         "tags" : ["style1"]
     },
 	{
@@ -56,7 +56,7 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/style1/flower4.png",
+        "imageId" : "style1/flower4.png",
         "tags" : ["style1"]
     },
    
@@ -72,7 +72,7 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/style1/flower5.png",
+        "imageId" : "style1/flower5.png",
         "tags" : ["style1"]
     },
 	
@@ -88,7 +88,7 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/style1/flower6.png",
+        "imageId" : "style1/flower6.png",
         "tags" : ["style1"]
     },
 	
@@ -104,7 +104,7 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/style1/flower7.png",
+        "imageId" : "style1/flower7.png",
         "tags" : ["style1"]
     },
 	{
@@ -119,7 +119,7 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/style1/flower8.png",
+        "imageId" : "style1/flower8.png",
         "tags" : ["style1"]
     },
 	{
@@ -134,7 +134,7 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/style1/flower9.png",
+        "imageId" : "style1/flower9.png",
         "tags" : ["style1"]
     }
 ]

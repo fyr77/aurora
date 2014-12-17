@@ -19,7 +19,7 @@
             }
 
         ],
-        "imageId" : "plant_parts/style2/branch7.png",
+        "imageId" : "style2/branch7.png",
         "tags" : ["style2"]
 
     },
@@ -59,7 +59,7 @@
             }	 
 
         ],
-        "imageId" : "plant_parts/style2/branch8.png",
+        "imageId" : "style2/branch8.png",
         "tags" : ["style2"]
 
     },
@@ -117,7 +117,7 @@
             },
 
         ],
-        "imageId" : "plant_parts/style2/tree4.png",
+        "imageId" : "style2/tree4.png",
         "tags" : ["style2"]
     },
 	
@@ -125,7 +125,7 @@
         "type":"MONSTER_BODY",
         "attachmentPoints" : [
         ],
-        "imageId" : "plant_parts/style2/tree4.png",
+        "imageId" : "style2/tree4.png",
         "tags" : ["style2"]
     },
 	
@@ -141,7 +141,7 @@
                 ]
             }
         ],
-        "imageId" : "plant_parts/style2/flower10.png",
+        "imageId" : "style2/flower10.png",
         "tags" : ["style2"]
     },
     {
@@ -157,7 +157,7 @@
             }
 
         ],
-        "imageId" : "plant_parts/style2/flower11.png",
+        "imageId" : "style2/flower11.png",
         "tags" : ["style2"]
     },
 
@@ -174,7 +174,7 @@
             }
 
         ],
-        "imageId" : "plant_parts/style2/flower12.png",
+        "imageId" : "style2/flower12.png",
         "tags" : ["style2"]
     }
 ]

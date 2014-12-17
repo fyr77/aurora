@@ -1,13 +1,14 @@
 {
     "partFiles" : [
-        "resources/plant_parts/style1/trunks.json"
-        , "resources/plant_parts/style1/branches.json"
-        , "resources/plant_parts/style1/decorations.json"
-		, "resources/plant_parts/style2/parts.json"
-		, "resources/plant_parts/style3/parts.json"
+        "style1/trunks.json"
+        , "style1/branches.json"
+        , "style1/decorations.json"
+		, "style2/parts.json"
+		, "style3/parts.json"
+		, "style4/parts.json"
     ],
 
-    "shadowImage" : "resources/animal_parts/shadow.png",
+    "shadowImage" : "../animal_parts/shadow.png",
 
 
     "defaultColors" : {

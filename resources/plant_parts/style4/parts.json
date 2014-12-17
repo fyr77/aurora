@@ -1,0 +1,301 @@
+[
+    {
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 8,
+                "y" : 8,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+        ],
+        "imageId" : "style4/flower1.png",
+        "tags" : ["style4"]
+    },
+    {
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 8,
+                "y" : 8,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+
+        ],
+        "imageId" : "style4/flower2.png",
+        "tags" : ["style4"]
+    },
+	
+	  {
+        "type":"MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 9,
+                "y" : 38,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			 {
+                "x": 50,
+                "y" : 16,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			 {
+                "x": 59,
+                "y" : 35,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }
+        ],
+        "imageId" : "style4/leaves1.png",
+        "tags" : ["style4"]
+    },
+	
+	  {
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 8,
+                "y" : 8,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+
+        ],
+        "imageId" : "style4/flower3.png",
+        "tags" : ["style4"]
+    },
+
+    {
+        "type":"MONSTER_DECORATION",
+        "attachmentPoints" : [
+            {
+                "x": 8,
+                "y" : 8,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+					"MONSTER_LIMB"
+                ]
+            }
+
+        ],
+        "imageId" : "style4/flower4.png",
+        "tags" : ["style4"]
+    },
+
+    {
+        "type":"MONSTER_LIMB",
+        "attachmentPoints" : [
+            {
+                "x": 36,
+                "y" : 55,
+                "availableTypes" : [
+                    "MONSTER_BODY",
+                ]
+            }
+        ],
+        "imageId" : "style4/leaves2.png",
+        "tags" : ["style4"]
+    }, 
+	{
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 14,
+                "y" : 7,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ]
+            }
+        ],
+        "imageId" : "style4/trunk1.png",
+        "tags" : ["style4"]
+    },
+	
+	{
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 3,
+                "y" : 16,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+            {
+                "x": 20,
+                "y" : 2,
+                "angle" : 90,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+					, "MONSTER_LIMB"
+                ]
+            }
+
+        ],
+        "imageId" : "style4/trunk2.png",
+        "tags" : ["style4"]
+    },
+	{
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 11,
+                "y" : 2,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ],
+				"groupId" : "leaves2"
+            },
+            {
+                "x": 24,
+                "y" : 16,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ],
+				"groupId" : "leaves2"
+            },
+			 {
+                "x": 12,
+                "y" : 26,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+				
+            },
+			{
+                "x": 10,
+                "y" : 45,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+				
+            },
+			{
+                "x": 21,
+                "y" : 46,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+				
+            }
+        ],
+        "imageId" : "style4/trunk3.png",
+        "tags" : ["style4"]
+    },
+	
+	{
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 7,
+                "y" : 7,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ],
+				"groupId" : "leaves2"
+            },
+            {
+                "x": 25,
+                "y" : 18,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ],
+				"groupId" : "leaves2"
+            },
+			 {
+                "x": 14,
+                "y" : 33,
+                "angle" : 0,
+				"groupId" : "leaves2",
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+				
+            },
+			{
+                "x": 5,
+                "y" : 41,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+				
+            }
+        ],
+        "imageId" : "style4/trunk1.png",
+        "tags" : ["style4"]
+    },
+
+	
+	{
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 17,
+                "y" : 5,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_LIMB"
+                ]
+            }
+        ],
+        "imageId" : "style4/trunk4.png",
+        "tags" : ["style4"]
+    },
+	
+	{
+        "type":"MONSTER_BODY",
+        "attachmentPoints" : [
+            {
+                "x": 9,
+                "y" : 38,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			 {
+                "x": 50,
+                "y" : 16,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            },
+			 {
+                "x": 59,
+                "y" : 35,
+                "angle" : 0,
+                "availableTypes" : [
+                    "MONSTER_DECORATION"
+                ]
+            }
+        ],
+        "imageId" : "style4/leaves1.png",
+        "tags" : ["style4"]
+    }
+]

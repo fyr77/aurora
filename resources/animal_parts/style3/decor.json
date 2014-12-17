@@ -7,6 +7,7 @@
                 "y" : 8,
                 "availableTypes" : [
                     "MONSTER_BODY"
+					, "MONSTER_LIMB"
                 ]
             }
         ],
@@ -23,6 +24,7 @@
                 "y": 8,
                 "availableTypes" : [
                     "MONSTER_BODY"
+					, "MONSTER_LIMB"
                 ]
             }
         ],
@@ -37,6 +39,7 @@
                 "y": 8,
                 "availableTypes" : [
                     "MONSTER_BODY"
+					, "MONSTER_LIMB"
                 ]
             }
         ],
