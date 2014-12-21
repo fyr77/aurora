@@ -2,6 +2,7 @@ package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
@@ -79,6 +80,7 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
 
             if (world.getCurrentStarSystem() != null && ship.getX() == 0 && ship.getY() == 0) {
                 turnsInSun++;
+                GameLogger.getInstance().logMessage(Localization.getText("journal", "burns." + turnsInSun));
             } else {
                 turnsInSun = 0;
             }
