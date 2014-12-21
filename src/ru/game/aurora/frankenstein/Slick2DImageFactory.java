@@ -9,6 +9,7 @@ import ru.game.frankenstein.FrankensteinImage;
 import ru.game.frankenstein.ImageFactory;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
@@ -19,11 +20,17 @@ import java.io.InputStream;
  */
 public class Slick2DImageFactory implements ImageFactory
 {
+    private final File root;
+
+    public Slick2DImageFactory(File root) {
+        this.root = root;
+    }
+
     @Override
     public FrankensteinImage loadImage(String s) throws FrankensteinException {
         try {
-            return new Slick2DFrankensteinImage(new Image(s));
-        } catch (SlickException e) {
+            return new Slick2DFrankensteinImage(new Image(new FileInputStream(new File(root, s)), s, false));
+        } catch (Exception e) {
             throw new FrankensteinException("Failed to load image", e);
         }
     }

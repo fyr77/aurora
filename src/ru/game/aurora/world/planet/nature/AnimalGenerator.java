@@ -18,6 +18,7 @@ import ru.game.frankenstein.impl.MonsterPartsLoader;
 import ru.game.frankenstein.util.CollectionUtils;
 import ru.game.frankenstein.util.Size;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
@@ -56,28 +57,33 @@ public class AnimalGenerator {
     }
 
     public AnimalGenerator() throws FileNotFoundException {
-        ImageFactory imageFactory = new Slick2DImageFactory();
-        MonsterPartsSet monsterPartsSet = MonsterPartsLoader.loadFromJSON(imageFactory, getClass().getClassLoader().getResourceAsStream("animal_parts/parts_library.json"));
-        monsterGenerator = new MonsterGenerator(imageFactory, monsterPartsSet);
+        try {
+            ImageFactory imageFactory = new Slick2DImageFactory(new File("resources/animal_parts"));
+            MonsterPartsSet monsterPartsSet = MonsterPartsLoader.loadFromJSON(imageFactory, new File("resources/animal_parts/parts_library.json"));
+            monsterGenerator = new MonsterGenerator(imageFactory, monsterPartsSet);
 
-        MonsterPartsSet plantsPartSet = MonsterPartsLoader.loadFromJSON(imageFactory, getClass().getClassLoader().getResourceAsStream("plant_parts/parts_library.json"));
-        plantGenerator = new MonsterGenerator(imageFactory, plantsPartSet);
+            imageFactory = new Slick2DImageFactory(new File("resources/plant_parts"));
+            MonsterPartsSet plantsPartSet = MonsterPartsLoader.loadFromJSON(imageFactory, new File("resources/plant_parts/parts_library.json"));
+            plantGenerator = new MonsterGenerator(imageFactory, plantsPartSet);
 
-        monsterGenerationParams = new MonsterGenerationParams(true, false);
-        monsterGenerationParams.shadowType = MonsterGenerationParams.ShadowType.SHADOW_SKEW;
-        plantGenerationParams = new MonsterGenerationParams(false, false);
-        plantGenerationParams.tags = new HashSet<>();
-        plantGenerationParams.shadowType = MonsterGenerationParams.ShadowType.SHADOW_SKEW;
+            monsterGenerationParams = new MonsterGenerationParams(true, false);
+            monsterGenerationParams.shadowType = MonsterGenerationParams.ShadowType.SHADOW_SKEW;
+            plantGenerationParams = new MonsterGenerationParams(false, false);
+            plantGenerationParams.tags = new HashSet<>();
+            plantGenerationParams.shadowType = MonsterGenerationParams.ShadowType.SHADOW_SKEW;
 
-        baseHp = Configuration.getIntProperty("monster.baseHp");
-        baseDmg = Configuration.getIntProperty("monster.baseDmg");
-        rangeAttackChance = Configuration.getDoubleProperty("monster.shootChance");
+            baseHp = Configuration.getIntProperty("monster.baseHp");
+            baseDmg = Configuration.getIntProperty("monster.baseDmg");
+            rangeAttackChance = Configuration.getDoubleProperty("monster.shootChance");
 
-        modifierProbabilitySet.put(null, 2.0);
-        for (AnimalModifier m : AnimalModifier.values()) {
-            modifierProbabilitySet.put(m, m.weight);
+            modifierProbabilitySet.put(null, 2.0);
+            for (AnimalModifier m : AnimalModifier.values()) {
+                modifierProbabilitySet.put(m, m.weight);
+            }
+        } catch (FrankensteinException ex) {
+            logger.error("Failed to initialize monster generator");
+            throw new RuntimeException(ex);
         }
-
     }
 
     public AnimalSpeciesDesc generateMonster(Planet home) {

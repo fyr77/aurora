@@ -229,6 +229,15 @@ public class Slick2DFrankensteinImage implements FrankensteinImage {
 
     }
 
+    @Override
+    public void destroy() {
+        try {
+            myImage.destroy();
+        } catch (SlickException e) {
+            logger.error("Failed to release image", e);
+        }
+    }
+
     public Image getImpl() {
         return myImage;
     }
