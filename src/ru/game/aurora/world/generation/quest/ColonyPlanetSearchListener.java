@@ -50,6 +50,8 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
 
         planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.BREATHABLE_ATMOSPHERE, 3, 0, 0);
         final Planet planet = (Planet) planets[2];
+        final int colonySize = Configuration.getIntProperty("quest.colony_search.colony_max_size");
+        planet.ensureFreeSpace(colonySize, colonySize);
         PlanetaryLifeGenerator.setPlanetHasLife(planet);
         PlanetaryLifeGenerator.addAnimals(planet);
         PlanetaryLifeGenerator.addPlants(planet);
@@ -92,7 +94,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
         targetTiles = Configuration.getIntProperty("quest.colony_search.requiredTiles");
     }
 
-    private Planet checkCurrentPlanet(Planet p) {
+    private Planet checkCurrentPlanet(World world, Planet p) {
         if (p.getOwner().isQuestLocation()) {
             return null;
         }
@@ -103,12 +105,17 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
             return null;
         }
 
+        final int colonySize = Configuration.getIntProperty("quest.colony_search.colony_max_size");
+        if (p.findPassableRegion(colonySize, colonySize) == null) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/colony_search/colony_planet_not_enough_space.json"));
+            return null;
+        }
         return p;
     }
 
     @Override
     public boolean onPlayerLandedPlanet(World world, Planet planet) {
-        currentPlanet = checkCurrentPlanet(planet);
+        currentPlanet = checkCurrentPlanet(world, planet);
         if (currentPlanet != null) {
             PlanetData data = planetDataMap.get(currentPlanet);
             if (data == null) {

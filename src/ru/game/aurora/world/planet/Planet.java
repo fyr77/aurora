@@ -115,6 +115,17 @@ public class Planet extends BasePlanet implements IDungeon {
         controller = new DungeonController(world, owner, this);
     }
 
+    // re-generate planet surface untill it has a width x height passable rectangle
+    public void ensureFreeSpace(int width, int height)
+    {
+        if (surface != null) {
+            throw new IllegalStateException("ensureFreeSpace can not be called after surface is generated");
+        }
+        do {
+            createSurface();
+        } while (findPassableRegion(width, height) == null);
+    }
+
     public void addOreDeposits(int resourceDeposits) {
         Random r = CommonRandom.getRandom();
         for (int i = 0; i < resourceDeposits; ++i) {
