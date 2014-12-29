@@ -112,6 +112,7 @@ public class GUI {
         // first register controllers
         nifty.registerScreenController(galaxyMapController);
         nifty.registerScreenController(new ResearchScreenController(world));
+        nifty.registerScreenController(new TradeScreenController(world));
         nifty.registerScreenController(new DialogController(world));
         nifty.registerScreenController(new StoryScreenController(world));
         nifty.registerScreenController(new ResearchReportScreenController(world));
@@ -144,6 +145,7 @@ public class GUI {
         nifty.addXml("gui/screens/list_screen.xml");
         nifty.addXml("gui/screens/research_screen.xml");
         nifty.addXml("gui/screens/ingame_menu.xml");
+        nifty.addXml("gui/screens/trade_screen.xml");
         nifty.addXml("gui/screens/dialog_screen.xml");
         nifty.addXml("gui/screens/story_screen.xml");
         nifty.addXml("gui/screens/earth_progress.xml");

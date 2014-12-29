@@ -7,12 +7,14 @@
 package ru.game.aurora.world.generation.humanity;
 
 
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.npc.NPCShipFactory;
-import ru.game.aurora.npc.StandardAlienShipEvent;
+import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.TradeScreenController;
+import ru.game.aurora.npc.*;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.PrivateMessage;
@@ -21,6 +23,7 @@ import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.HomeworldGenerator;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.SpaceDebris;
@@ -41,6 +44,20 @@ public class HumanityGenerator implements WorldGeneratorPart {
         defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
     }
 
+    private class TradeShip extends NPCShip
+    {
+
+        public TradeShip(Faction race) {
+            super(0, 0, "earth_transport", race, null, "", 5);
+            setStationary(true);
+        }
+
+        @Override
+        public void interact(World world) {
+            TradeScreenController.openTrade("earth_ship_dialog", HashMultiset.<InventoryItem>create());
+        }
+    }
+
     @Override
     public void updateWorld(final World world) {
         final AlienRace humans = new AlienRace(NAME, "earth_transport", Dialog.loadFromFile("dialogs/human_ship_default_dialog.json"));
@@ -57,6 +74,10 @@ public class HumanityGenerator implements WorldGeneratorPart {
         solarSystem.setAstronomyData(0); // everything is explored
         solarSystem.setQuestLocation(true);
         humans.setHomeworld(solarSystem);
+        NPCShip trader = new TradeShip(humans);
+        solarSystem.setRandomEmptyPosition(trader);
+        solarSystem.getShips().add(trader);
+
         // generate solar system somewhere in lower third of a galaxy
         world.getGalaxyMap().addObjectAndSetTile(
                 solarSystem

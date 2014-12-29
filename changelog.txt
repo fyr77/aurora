@@ -1,6 +1,13 @@
+VERSION 0.4.1
+
+IN PROGRESS...
+
+
+=============================================
+
 VERSION 0.4.0
 
-IN PROGRESS
+05.12.2014
 
 * Global refactoring of game object classes
 + Ship inventory screen
