@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
-    <controlDefinition name="ship_line">
-        <panel childLayout="horizontal" width="100%" align="right">
-            <control id="#inventory_to_storage" name="button" width="32px" label="${gui.trade.sell}">
+    <controlDefinition name="trade_ship_line">
+        <panel childLayout="horizontal" width="100%" align="right" height="74px" padding="5px">
+            <image id="#line-icon" width="64px" height="64px"/>
+            <control id="#line-text" name="label" align="left" height="64px" textVAlign="center" textHAlign="left" width="*"/>
+            <control id="#inventory_to_storage" name="button" width="100px" height="64px" label="${gui.trade.sell}">
                 <interact onClick="onSellClicked()"/>
             </control>
-            <control id="#item" name="label" align="left" textHAlign="left" width="*"/>
+
         </panel>
     </controlDefinition>
 
-    <controlDefinition name="merchant_line">
-        <panel childLayout="horizontal" width="100%" align="right">
-            <control id="#item" name="label" align="left" textHAlign="left" width="*"/>
-            <control id="#storage_to_inventory" name="button" width="32px" label="${gui.trade.buy}">
+    <controlDefinition name="trade_merchant_line">
+        <panel childLayout="horizontal" width="100%" height="74px" padding="5px" align="right">
+            <control id="#storage_to_inventory" name="button" width="100px"  height="64px" label="${gui.trade.buy}">
                 <interact onClick="onBuyClicked()"/>
             </control>
+            <image id="#line-icon" width="64px" height="64px"/>
+            <control id="#line-text" name="label" align="left" height="64px" textVAlign="center" textHAlign="left" width="*"/>
         </panel>
     </controlDefinition>
 
     <screen id="trade_screen" controller="ru.game.aurora.gui.TradeScreenController">
 
         <layer childLayout="absolute">
-            <control id="trade_window" name="window" title="${gui.trade.title}" closeable="false" width="80%" height="90%"
+            <control id="trade_window" name="window" title="${gui.trade.title}" closeable="false" width="90%" height="97%"
                      x="10%" y="5%"
                      padding="8px,8px,8px,8px">
                 <panel childLayout="vertical">
@@ -44,17 +47,16 @@
                     </control>
                     <!-- inventory and upgrades -->
                     <panel height="10px"/>
+                    <panel childLayout="horizontal">
 
-                    <panel childLayout="horizontal" height="60%">
-                        <panel childLayout="vertical" width="45%">
-                            <text id="inventoryText" style="button-font" align="center" text="${gui.trade.merchant}"
+                        <panel childLayout="vertical" width="49%">
+                            <text id="storageText" style="button-font" align="center" text="${gui.ship}"
                                   height="32px"/>
-                            <control id="merchantList" name="listBox" vertical="optional" horizontal="optional"
-                                     displayItems="10" selection="Single"
-                                     viewConverterClass="ru.game.aurora.gui.InventoryViewConverter"
+                            <control id="inventoryList" name="listBox" vertical="optional" horizontal="optional"
+                                     displayItems="4" selection="Single"
                                      visibleToMouse="true"
-                                    >
-                                <control name="merchant_line"
+                                     viewConverterClass="ru.game.aurora.gui.InventoryViewConverter">
+                                <control name="trade_ship_line"
                                          controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
                                     <effect>
                                         <onCustom customKey="focus" name="colorBar" post="false" color="#444f"
@@ -68,17 +70,17 @@
                                 </control>
                             </control>
                         </panel>
+                        <panel width="*"/>
 
-                        <panel height="10px"/>
-
-                        <panel childLayout="vertical" width="45%">
-                            <text id="storageText" style="button-font" align="center" text="${gui.ship}"
+                        <panel childLayout="vertical" width="49%">
+                            <text id="inventoryText" style="button-font" align="center" text="${gui.trade.merchant}"
                                   height="32px"/>
-                            <control id="inventoryList" name="listBox" vertical="optional" horizontal="optional"
-                                     displayItems="10" selection="Single"
+                            <control id="merchantList" name="listBox" vertical="optional" horizontal="optional"
+                                     displayItems="4" selection="Single"
+                                     viewConverterClass="ru.game.aurora.gui.InventoryViewConverter"
                                      visibleToMouse="true"
-                                     viewConverterClass="ru.game.aurora.gui.InventoryViewConverter">
-                                <control name="ship_line"
+                                    >
+                                <control name="trade_merchant_line"
                                          controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
                                     <effect>
                                         <onCustom customKey="focus" name="colorBar" post="false" color="#444f"
@@ -94,17 +96,15 @@
                         </panel>
 
                     </panel>
-
-
-
-                    <panel height="10px"/>
-                    <panel childLayout="horizontal">
-                        <panel width="75%"/>
+                    <panel height="*"/>
+                    <panel childLayout="horizontal" height="50px">
+                        <panel width="85%"/>
                         <control id="close_button" name="button" label="Close" width="150px" height="45px">
                             <interact onClick="closeScreen()"/>
                         </control>
                     </panel>
-                </panel>
+
+                    </panel>
             </control>
         </layer>
     </screen>

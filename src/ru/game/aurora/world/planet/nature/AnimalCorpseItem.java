@@ -3,6 +3,7 @@ package ru.game.aurora.world.planet.nature;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.research.projects.AnimalResearch;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
@@ -60,6 +61,11 @@ public class AnimalCorpseItem implements InventoryItem {
     @Override
     public int getWeight() {
         return 1;
+    }
+
+    @Override
+    public boolean canBeSoldTo(Faction faction) {
+        return false;
     }
 
     @Override

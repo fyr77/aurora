@@ -12,6 +12,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
 import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.ScanGroup;
@@ -67,6 +68,11 @@ public class AlienArtifact extends BaseGameObject {
         @Override
         public int getWeight() {
             return 0;
+        }
+
+        @Override
+        public boolean canBeSoldTo(Faction faction) {
+            return false;
         }
     }
 

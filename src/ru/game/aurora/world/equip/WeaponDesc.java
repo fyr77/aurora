@@ -11,6 +11,7 @@ import org.newdawn.slick.Image;
 import ru.game.aurora.application.JsonConfigManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
@@ -82,6 +83,11 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
     @Override
     public int getWeight() {
         return size;
+    }
+
+    @Override
+    public boolean canBeSoldTo(Faction faction) {
+        return false;
     }
 
     public String getShotImage() {

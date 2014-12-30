@@ -3,6 +3,7 @@ package ru.game.aurora.player;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
@@ -39,6 +40,11 @@ public enum Resources implements InventoryItem {
         public int getWeight() {
             return 0;
         }
+
+        @Override
+        public boolean canBeSoldTo(Faction faction) {
+            return false;
+        }
     },
     CREDITS(Localization.getText("gui", "credits")) {
         @Override
@@ -70,6 +76,11 @@ public enum Resources implements InventoryItem {
         public int getWeight() {
             return 0;
         }
+
+        @Override
+        public boolean canBeSoldTo(Faction faction) {
+            return false;
+        }
     },
     CELLS_FROM_PARALLEL_WORLD(Localization.getText("journal", "inside.bio_remains_name")) {
         @Override
@@ -84,7 +95,7 @@ public enum Resources implements InventoryItem {
 
         @Override
         public double getPrice() {
-            return 0;
+            return 0.5;
         }
 
         @Override
@@ -100,6 +111,11 @@ public enum Resources implements InventoryItem {
         @Override
         public int getWeight() {
             return 0;
+        }
+
+        @Override
+        public boolean canBeSoldTo(Faction faction) {
+            return true;
         }
     };
 

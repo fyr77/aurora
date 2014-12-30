@@ -9,6 +9,7 @@ import org.newdawn.slick.Image;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.ScanGroup;
 import ru.game.aurora.world.World;
@@ -59,6 +60,11 @@ public class OreDeposit extends BaseGameObject {
         @Override
         public int getWeight() {
             return 1;
+        }
+
+        @Override
+        public boolean canBeSoldTo(Faction faction) {
+            return false;
         }
 
         @Override

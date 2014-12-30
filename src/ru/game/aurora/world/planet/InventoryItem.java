@@ -6,6 +6,7 @@
 package ru.game.aurora.world.planet;
 
 import org.newdawn.slick.Image;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
@@ -27,4 +28,6 @@ public interface InventoryItem extends Serializable {
     public boolean isUsable();
 
     public int getWeight();
+
+    public boolean canBeSoldTo(Faction faction);
 }

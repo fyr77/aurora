@@ -27,6 +27,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 
@@ -230,5 +233,14 @@ public class EngineUtils {
         if (sc != null) {
             sc.setValue(0);
         }
+    }
+
+    // stupid nifty requires a List in add() method
+    // it is fixed to Collection in 1.4.0, but that version has some other problems and can not be used right now
+    public static <E> void  addAll(ListBox<E> listBox, Collection<E> items)
+    {
+        List<E> list = new ArrayList<>(items.size());
+        list.addAll(items);
+        listBox.addAllItems(list);
     }
 }

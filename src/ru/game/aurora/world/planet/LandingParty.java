@@ -10,9 +10,12 @@ import com.google.common.collect.Multiset;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.SurfaceGUIController;
 import ru.game.aurora.player.EarthCountry;
+import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.player.research.projects.Cartography;
 import ru.game.aurora.world.BaseGameObject;
@@ -44,6 +47,12 @@ public class LandingParty extends BaseGameObject {
     private final int MAX_HP;
 
     private int hp;
+
+    private static final SellOnlyInventoryItem geodataKey = new SellOnlyInventoryItem(
+            "research"
+            , "cartography.geodata_item"
+            , new Drawable("cartography_research")
+            , Configuration.getDoubleProperty("trade.geodata_price"));
 
     public LandingParty(int maxHp) {
         super(0, 0, "awayteam");
@@ -176,12 +185,14 @@ public class LandingParty extends BaseGameObject {
 
     public void onReturnToShip(World world) {
         if (collectedGeodata > 0) {
-            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.collect_geodata"), getCollectedGeodata()));
+            final int collectedGeodata1 = getCollectedGeodata();
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.collect_geodata"), collectedGeodata1));
             final ResearchState researchState = world.getPlayer().getResearchState();
             if (researchState.getGeodata().getRaw() == 0) {
                 researchState.addNewAvailableProject(new Cartography(researchState.getGeodata()));
             }
-            researchState.getGeodata().addRawData(getCollectedGeodata());
+            researchState.getGeodata().addRawData(collectedGeodata1);
+            world.getPlayer().changeResource(world, geodataKey, collectedGeodata1);
             setCollectedGeodata(0);
         }
 

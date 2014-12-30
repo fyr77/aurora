@@ -2,6 +2,7 @@ package ru.game.aurora.world.planet;
 
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.InventoryController;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.World;
 
 /**
@@ -30,5 +31,10 @@ public abstract class UsableItem implements InventoryItem {
     @Override
     public int hashCode() {
         return getClass().getCanonicalName().hashCode();
+    }
+
+    @Override
+    public boolean canBeSoldTo(Faction faction) {
+        return false;
     }
 }
