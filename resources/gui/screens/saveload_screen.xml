@@ -72,6 +72,30 @@
         </control>
     </popup>
 
+    <popup id="really_load" childLayout="absolute">
+        <control id="really_load_window" name="window" closable="false" hideOnClose="true" width="60%" height="350px"
+                 x="20%"
+                 y="30%">
+            <panel childLayout="vertical">
+                <panel height="10px"/>
+                <panel height="256px" childLayout="horizontal">
+                    <image width="256px" filename="sprites/research_icons/star_research.png"/>
+                    <text width="*" height="256px" text="${gui.saveload.load_confirm}" style="button-font"/>
+                </panel>
+                <panel height="10px"/>
+                <panel childLayout="horizontal" height="45px">
+                    <panel width="65%"/>
+                    <control id="close_button" name="button" label="${gui.ok}" height="45px">
+                        <interact onClick="doLoad()"/>
+                    </control>
+                    <control id="close_button" name="button" label="${gui.cancel}" height="45px">
+                        <interact onClick="closePopup()"/>
+                    </control>
+                </panel>
+            </panel>
+        </control>
+    </popup>
+
     <popup id="load_failed" childLayout="absolute">
         <control id="load_failed_window" name="window" hideOnClose="true" title="${gui.error_caption}" width="60%"
                  height="350px" x="20%"

@@ -66,6 +66,18 @@ public class SaveLoadScreenController implements ScreenController {
         closeScreen();
     }
 
+    public void doLoad() {
+        World world = SaveGameManager.loadGame(slots.getFocusItem());
+        if (world == null) {
+            Nifty nifty = GUI.getInstance().getNifty();
+            Element popup = nifty.createPopup("load_failed");
+            nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
+            return;
+        }
+        world.gameLoaded();
+        AuroraGame.onGameLoaded(world);
+    }
+
     public void closePopup() {
         Element topMostPopup = GUI.getInstance().getNifty().getTopMostPopup();
         if (topMostPopup != null) {
@@ -74,14 +86,17 @@ public class SaveLoadScreenController implements ScreenController {
     }
 
     public void loadPressed() {
-        World world = SaveGameManager.loadGame(slots.getFocusItem());
-        if (world == null) {
-            Nifty nifty = GUI.getInstance().getNifty();
-            Element popup = nifty.createPopup("load_failed");
-            nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
+        if (!slots.getFocusItem().isLoaded()) {
+            return;
         }
-        world.gameLoaded();
-        AuroraGame.onGameLoaded(world);
+
+        if (GUI.getInstance().getWorldInstance() != null) {
+            Nifty nifty = GUI.getInstance().getNifty();
+            Element popup = nifty.createPopup("really_load");
+            nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
+        } else {
+            doLoad();
+        }
     }
 
     //magic
