@@ -460,7 +460,7 @@ public class World implements Serializable, ResolutionChangeListener {
     }
 
     public void gameLoaded() {
-
+        GUI.getInstance().resetIngameMenu();
     }
 
     public String getCurrentDateString() {

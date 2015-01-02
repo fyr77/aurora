@@ -201,7 +201,14 @@ public class GUI {
         worldInstance.setPaused(true);
     }
 
+    public void resetIngameMenu() {
+        ingameMenuInstance = null;
+    }
+
     public void closeIngameMenu() {
+        if (ingameMenuInstance == null) {
+            return;
+        }
         nifty.closePopup(ingameMenuInstance.getId());
         ingameMenuInstance = null;
         worldInstance.setPaused(false);

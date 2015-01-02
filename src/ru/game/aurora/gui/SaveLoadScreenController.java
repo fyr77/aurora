@@ -67,6 +67,7 @@ public class SaveLoadScreenController implements ScreenController {
     }
 
     public void doLoad() {
+        closePopup();
         World world = SaveGameManager.loadGame(slots.getFocusItem());
         if (world == null) {
             Nifty nifty = GUI.getInstance().getNifty();
