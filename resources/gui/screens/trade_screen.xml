@@ -3,7 +3,7 @@
     <controlDefinition name="trade_ship_line">
         <panel childLayout="horizontal" width="100%" align="right" height="74px" padding="5px">
             <image id="#line-icon" width="64px" height="64px"/>
-            <control id="#line-text" name="label" align="left" height="64px" textVAlign="center" textHAlign="left" width="*"/>
+            <control id="#line-text" name="label" align="left" wrap="true" height="64px" textVAlign="center" textHAlign="left" width="*"/>
             <control id="#inventory_to_storage" name="button" width="100px" height="64px" label="${gui.trade.sell}">
                 <interact onClick="onSellClicked()"/>
             </control>
@@ -17,7 +17,7 @@
                 <interact onClick="onBuyClicked()"/>
             </control>
             <image id="#line-icon" width="64px" height="64px"/>
-            <control id="#line-text" name="label" align="left" height="64px" textVAlign="center" textHAlign="left" width="*"/>
+            <control id="#line-text" name="label" align="left" wrap="true" height="64px" textVAlign="center" textHAlign="left" width="*"/>
         </panel>
     </controlDefinition>
 
@@ -36,7 +36,7 @@
                             <text id="itemName" style="bold-font" textHAlign="left"/>
                             <panel height="10px"/>
                             <text width="100%" wrap="true" style="base-font" textHAlign="left"
-                                  id="upgrade_text"/>
+                                  id="itemDescription"/>
                         </panel>
                         <panel width="10px"/>
                         <image id="trader_image" width="256px" height="256px"/>

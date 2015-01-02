@@ -22,7 +22,12 @@ public class Cylinders extends UsableItem {
 
     @Override
     public String getName() {
-        return "Oxygen";
+        return Localization.getText("items", "oxygen.name");
+    }
+
+    @Override
+    public String getDescription() {
+        return Localization.getText("items", "oxygen.desc");
     }
 
     @Override

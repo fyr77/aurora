@@ -1,6 +1,7 @@
 package ru.game.aurora.world.generation.quest.inside;
 
 import org.newdawn.slick.Image;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.engineering.EngineeringProject;
@@ -18,7 +19,12 @@ public class SuperMedpack extends UsableItem {
 
     @Override
     public String getName() {
-        return "Super medpack";
+        return Localization.getText("items", "supermedpack.name");
+    }
+
+    @Override
+    public String getDescription() {
+        return Localization.getText("items", "supermedpack.desc");
     }
 
     @Override
@@ -28,7 +34,7 @@ public class SuperMedpack extends UsableItem {
 
     @Override
     public Image getImage() {
-        return ResourceManager.getInstance().getImage("medpack");
+        return ResourceManager.getInstance().getImage("super_medpack");
     }
 
     @Override

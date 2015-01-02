@@ -37,4 +37,9 @@ public abstract class UsableItem implements InventoryItem {
     public boolean canBeSoldTo(Faction faction) {
         return false;
     }
+
+    @Override
+    public String getDescription() {
+        return null;
+    }
 }

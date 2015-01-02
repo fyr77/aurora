@@ -7,13 +7,16 @@
 package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.Color;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
+import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.EarthState;
 import ru.game.aurora.player.earth.PrivateMessage;
@@ -295,6 +298,9 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 ExplosionEffect effect = new ExplosionEffect(beacon.getX(), beacon.getY(), "ship_explosion", false, true);
                 world.getCurrentStarSystem().addEffect(effect);
                 world.getCurrentStarSystem().getShips().remove(beacon);
+                world.getPlayer().getInventory().add(new SellOnlyInventoryItem(
+                        "items", "rogue_beacon_data", new Drawable("technology_research"), Configuration.getIntProperty("quest.rogues_beacon.price"), RoguesGenerator.NAME
+                ), 1);
             }
         });
         beacon.setResearchProjectDescs(world.getResearchAndDevelopmentProjects().getResearchProjects().get("beacon"));

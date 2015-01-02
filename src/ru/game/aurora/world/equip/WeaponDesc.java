@@ -109,6 +109,11 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
     }
 
     @Override
+    public String getDescription() {
+        return getLocalizedText("weapons");
+    }
+
+    @Override
     public Image getImage() {
         return drawable.getImage();
     }

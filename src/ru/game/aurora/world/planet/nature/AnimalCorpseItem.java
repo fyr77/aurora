@@ -30,6 +30,11 @@ public class AnimalCorpseItem implements InventoryItem {
     }
 
     @Override
+    public String getDescription() {
+        return null;
+    }
+
+    @Override
     public Image getImage() {
         return desc.getDeadImage();
     }

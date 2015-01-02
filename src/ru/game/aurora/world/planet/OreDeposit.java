@@ -31,6 +31,11 @@ public class OreDeposit extends BaseGameObject {
         }
 
         @Override
+        public String getDescription() {
+            return null;
+        }
+
+        @Override
         public Image getImage() {
             return ResourceManager.getInstance().getImage(type.getSpriteName());
         }

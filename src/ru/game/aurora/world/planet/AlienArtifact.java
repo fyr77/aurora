@@ -40,6 +40,11 @@ public class AlienArtifact extends BaseGameObject {
         }
 
         @Override
+        public String getDescription() {
+            return null;
+        }
+
+        @Override
         public Image getImage() {
             return ResourceManager.getInstance().getImage("artifact_boxes");
         }

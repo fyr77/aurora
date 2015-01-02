@@ -11,8 +11,11 @@ import ru.game.aurora.world.World;
 
 import java.io.Serializable;
 
-public interface InventoryItem extends Serializable {
+public interface InventoryItem extends Serializable
+{
     public String getName();
+
+    public String getDescription();
 
     public Image getImage();
 

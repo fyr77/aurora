@@ -25,7 +25,12 @@ public class MedPack extends UsableItem {
 
     @Override
     public String getName() {
-        return "medpack";
+        return Localization.getText("items", "medpack.name");
+    }
+
+    @Override
+    public String getDescription() {
+        return Localization.getText("items", "supermedpack.desc");
     }
 
     @Override

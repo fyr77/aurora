@@ -13,6 +13,11 @@ import ru.game.aurora.world.planet.InventoryItem;
 public enum Resources implements InventoryItem {
     RU("RU") {
         @Override
+        public String getDescription() {
+            return null;
+        }
+
+        @Override
         public Image getImage() {
             return ResourceManager.getInstance().getImage("ru_icon");
         }
@@ -47,6 +52,11 @@ public enum Resources implements InventoryItem {
         }
     },
     CREDITS(Localization.getText("gui", "credits")) {
+        @Override
+        public String getDescription() {
+            return null;
+        }
+
         @Override
         public Image getImage() {
             return ResourceManager.getInstance().getImage("credits_icon");
@@ -83,6 +93,11 @@ public enum Resources implements InventoryItem {
         }
     },
     CELLS_FROM_PARALLEL_WORLD(Localization.getText("journal", "inside.bio_remains_name")) {
+        @Override
+        public String getDescription() {
+            return Localization.getText("items", "parallel_world_cells.desc");
+        }
+
         @Override
         public Image getImage() {
             return ResourceManager.getInstance().getImage("bio_remains");

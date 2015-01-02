@@ -10,12 +10,16 @@ package ru.game.aurora.world.generation.humanity;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.TradeScreenController;
 import ru.game.aurora.npc.*;
 import ru.game.aurora.npc.shipai.LandAI;
+import ru.game.aurora.player.Resources;
+import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.util.ProbabilitySet;
@@ -23,6 +27,7 @@ import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.space.HomeworldGenerator;
 import ru.game.aurora.world.space.NPCShip;
@@ -54,7 +59,12 @@ public class HumanityGenerator implements WorldGeneratorPart {
 
         @Override
         public void interact(World world) {
-            TradeScreenController.openTrade("earth_ship_dialog", HashMultiset.<InventoryItem>create());
+            Multiset<InventoryItem> inventoryItems = HashMultiset.<InventoryItem>create();
+            inventoryItems.add(Resources.CELLS_FROM_PARALLEL_WORLD, 5);
+            inventoryItems.add(new SellOnlyInventoryItem(
+                            "items", "rogue_beacon_data", new Drawable("technology_research"), Configuration.getIntProperty("quest.rogues_beacon.price"), RoguesGenerator.NAME
+                    ));
+            TradeScreenController.openTrade("klisk_dialog", inventoryItems);
         }
     }
 

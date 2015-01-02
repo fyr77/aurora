@@ -39,6 +39,11 @@ public class SellOnlyInventoryItem extends ItemWithTextAndImage implements Inven
     }
 
     @Override
+    public String getDescription() {
+        return getLocalizedText(localizationGroup);
+    }
+
+    @Override
     public Image getImage() {
         return super.getDrawable().getImage();
     }
