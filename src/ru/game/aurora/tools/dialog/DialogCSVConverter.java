@@ -91,7 +91,12 @@ public class DialogCSVConverter {
         if (replies.length == 0) {
             throw new IllegalStateException("Empty reply list at line " + context.lineNumber);
         }
-        return new Statement(stmtId, stmtStrings.length > 2 ? stmtStrings[2] : null, null, replies);
+
+        String customIcon = stmtStrings.length > 2 ? stmtStrings[2] : null;
+        if (customIcon != null && customIcon.isEmpty()) {
+            customIcon = null;
+        }
+        return new Statement(stmtId, customIcon, null, replies);
     }
 
     private static Map<String, String> parseFlags(String s) {
