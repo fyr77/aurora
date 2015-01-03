@@ -14,7 +14,6 @@ import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.TradeScreenController;
 import ru.game.aurora.npc.*;
 import ru.game.aurora.npc.shipai.LandAI;
@@ -62,7 +61,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
             Multiset<InventoryItem> inventoryItems = HashMultiset.<InventoryItem>create();
             inventoryItems.add(Resources.CELLS_FROM_PARALLEL_WORLD, 5);
             inventoryItems.add(new SellOnlyInventoryItem(
-                            "items", "rogue_beacon_data", new Drawable("technology_research"), Configuration.getIntProperty("quest.rogues_beacon.price"), RoguesGenerator.NAME
+                            "items", "rogue_beacon_data", new Drawable("technology_research"), Configuration.getIntProperty("quest.rogues_beacon.price"), true, RoguesGenerator.NAME
                     ));
             TradeScreenController.openTrade("klisk_dialog", inventoryItems);
         }

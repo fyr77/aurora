@@ -55,9 +55,14 @@ public class AlienArtifact extends BaseGameObject {
         }
 
         @Override
-        public void onReturnToShip(World world, int amount) {
+        public void onReceived(World world, int amount) {
             resultResearch.setSpeedModifier(amount / 10.0); // research speed depends on how many data had been collected
             world.getPlayer().getResearchState().addNewAvailableProject(resultResearch);
+        }
+
+        @Override
+        public void onLost(World world, int amount) {
+
         }
 
         @Override
@@ -67,6 +72,11 @@ public class AlienArtifact extends BaseGameObject {
 
         @Override
         public boolean isUsable() {
+            return false;
+        }
+
+        @Override
+        public boolean isUnique() {
             return false;
         }
 

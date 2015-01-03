@@ -461,6 +461,9 @@ public class World implements Serializable, ResolutionChangeListener {
 
     public void gameLoaded() {
         GUI.getInstance().resetIngameMenu();
+        if (player.getUniqueItemsPurchased() == null) {
+            player.setUniqueItemsPurchased(new HashSet<String>());
+        }
     }
 
     public String getCurrentDateString() {

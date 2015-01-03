@@ -45,12 +45,17 @@ public class AnimalCorpseItem implements InventoryItem {
     }
 
     @Override
-    public void onReturnToShip(World world, int amount) {
+    public void onReceived(World world, int amount) {
         if (!desc.isOutopsyMade() && !world.getPlayer().getResearchState().containsResearchFor(desc)) {
             // this type of alien animal has never been seen before, add new research
             GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.new_animal_research") + " " + desc.getName());
             world.getPlayer().getResearchState().addNewAvailableProject(new AnimalResearch(desc));
         }
+    }
+
+    @Override
+    public void onLost(World world, int amount) {
+
     }
 
     @Override
@@ -60,6 +65,11 @@ public class AnimalCorpseItem implements InventoryItem {
 
     @Override
     public boolean isUsable() {
+        return false;
+    }
+
+    @Override
+    public boolean isUnique() {
         return false;
     }
 

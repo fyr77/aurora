@@ -10,7 +10,7 @@ import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
-
+// todo: make an abstract base class
 public interface InventoryItem extends Serializable
 {
     public String getName();
@@ -21,7 +21,9 @@ public interface InventoryItem extends Serializable
 
     public double getPrice();
 
-    public void onReturnToShip(World world, int amount);
+    public void onReceived(World world, int amount);
+
+    public void onLost(World world, int amount);
 
     /**
      * If this item is automatically transfered from landing party to a ship
@@ -29,6 +31,8 @@ public interface InventoryItem extends Serializable
     public boolean isDumpable();
 
     public boolean isUsable();
+
+    public boolean isUnique();
 
     public int getWeight();
 

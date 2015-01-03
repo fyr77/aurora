@@ -10,7 +10,6 @@ import com.google.common.collect.Multiset;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.SurfaceGUIController;
@@ -52,7 +51,7 @@ public class LandingParty extends BaseGameObject {
             "research"
             , "cartography.geodata_item"
             , new Drawable("cartography_research")
-            , Configuration.getDoubleProperty("trade.geodata_price"));
+            , Configuration.getDoubleProperty("trade.geodata_price"), false);
 
     public LandingParty(int maxHp) {
         super(0, 0, "awayteam");
@@ -198,7 +197,7 @@ public class LandingParty extends BaseGameObject {
 
         for (Iterator<Multiset.Entry<InventoryItem>> iter = inventory.entrySet().iterator(); iter.hasNext(); ) {
             Multiset.Entry<InventoryItem> o = iter.next();
-            o.getElement().onReturnToShip(world, o.getCount());
+            o.getElement().onReceived(world, o.getCount());
             if (o.getElement().isDumpable()) {
                 iter.remove();
             }

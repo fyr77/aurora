@@ -28,7 +28,17 @@ public enum Resources implements InventoryItem {
         }
 
         @Override
-        public void onReturnToShip(World world, int amount) {
+        public void onReceived(World world, int amount) {
+
+        }
+        @Override
+        public boolean isUnique() {
+            return false;
+        }
+
+        @Override
+        public void onLost(World world, int amount) {
+
         }
 
         @Override
@@ -62,14 +72,21 @@ public enum Resources implements InventoryItem {
             return ResourceManager.getInstance().getImage("credits_icon");
         }
 
-        @Override
-        public void onReturnToShip(World world, int amount) {
 
-        }
 
         @Override
         public double getPrice() {
             return 0;
+        }
+
+        @Override
+        public void onReceived(World world, int amount) {
+
+        }
+
+        @Override
+        public void onLost(World world, int amount) {
+
         }
 
         @Override
@@ -79,6 +96,11 @@ public enum Resources implements InventoryItem {
 
         @Override
         public boolean isUsable() {
+            return false;
+        }
+
+        @Override
+        public boolean isUnique() {
             return false;
         }
 
@@ -104,13 +126,23 @@ public enum Resources implements InventoryItem {
         }
 
         @Override
-        public void onReturnToShip(World world, int amount) {
-
+        public boolean isUnique() {
+            return false;
         }
 
         @Override
         public double getPrice() {
             return 0.5;
+        }
+
+        @Override
+        public void onReceived(World world, int amount) {
+
+        }
+
+        @Override
+        public void onLost(World world, int amount) {
+
         }
 
         @Override

@@ -43,11 +43,6 @@ public class SuperMedpack extends UsableItem {
     }
 
     @Override
-    public void onReturnToShip(World world, int amount) {
-
-    }
-
-    @Override
     public boolean isDumpable() {
         return false;
     }

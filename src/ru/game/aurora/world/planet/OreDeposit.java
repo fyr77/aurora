@@ -46,10 +46,15 @@ public class OreDeposit extends BaseGameObject {
         }
 
         @Override
-        public void onReturnToShip(World world, int amount) {
+        public void onReceived(World world, int amount) {
             final int resAmount = amount * type.getResCountForUnit();
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.resources_transfer"), amount, type.name(), resAmount));
             world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() + resAmount);
+        }
+
+        @Override
+        public void onLost(World world, int amount) {
+
         }
 
         @Override
@@ -59,6 +64,11 @@ public class OreDeposit extends BaseGameObject {
 
         @Override
         public boolean isUsable() {
+            return false;
+        }
+
+        @Override
+        public boolean isUnique() {
             return false;
         }
 

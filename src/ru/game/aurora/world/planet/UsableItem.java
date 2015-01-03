@@ -42,4 +42,19 @@ public abstract class UsableItem implements InventoryItem {
     public String getDescription() {
         return null;
     }
+
+    @Override
+    public void onReceived(World world, int amount) {
+        world.getPlayer().getInventory().add(this, amount);
+    }
+
+    @Override
+    public void onLost(World world, int amount) {
+        world.getPlayer().getInventory().remove(this, amount);
+    }
+
+    @Override
+    public boolean isUnique() {
+        return false;
+    }
 }

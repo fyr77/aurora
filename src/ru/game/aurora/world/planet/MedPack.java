@@ -43,10 +43,6 @@ public class MedPack extends UsableItem {
         return 0;
     }
 
-    @Override
-    public void onReturnToShip(World world, int amount) {
-
-    }
 
     @Override
     public boolean isDumpable() {

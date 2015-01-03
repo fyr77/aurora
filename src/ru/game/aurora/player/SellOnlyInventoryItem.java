@@ -20,13 +20,16 @@ public class SellOnlyInventoryItem extends ItemWithTextAndImage implements Inven
 
     private final String localizationGroup;
 
+    private final boolean isUnique;
+
     // if set, can not be sold to these factions
     private Set<String> factionFilter;
 
-    public SellOnlyInventoryItem(String localizationGroup, String id, Drawable drawable, double price, String... factionFilter) {
+    public SellOnlyInventoryItem(String localizationGroup, String id, Drawable drawable, double price, boolean isUnique, String... factionFilter) {
         super(id, drawable);
         this.price = price;
         this.localizationGroup = localizationGroup;
+        this.isUnique = isUnique;
         if (factionFilter.length > 0) {
             this.factionFilter = new HashSet<>();
             Collections.addAll(this.factionFilter, factionFilter);
@@ -54,8 +57,13 @@ public class SellOnlyInventoryItem extends ItemWithTextAndImage implements Inven
     }
 
     @Override
-    public void onReturnToShip(World world, int amount) {
+    public void onReceived(World world, int amount) {
+        // do nothing, such items are not reflected in your inventory
+    }
 
+    @Override
+    public void onLost(World world, int amount) {
+        world.getPlayer().getInventory().remove(this, amount);
     }
 
     @Override
@@ -66,6 +74,11 @@ public class SellOnlyInventoryItem extends ItemWithTextAndImage implements Inven
     @Override
     public boolean isUsable() {
         return false;
+    }
+
+    @Override
+    public boolean isUnique() {
+        return isUnique;
     }
 
     @Override
@@ -85,6 +98,6 @@ public class SellOnlyInventoryItem extends ItemWithTextAndImage implements Inven
 
     @Override
     public boolean canBeSoldTo(Faction faction) {
-        return factionFilter == null || !factionFilter.contains(faction.getName());
+        return faction == null || factionFilter == null || !factionFilter.contains(faction.getName());
     }
 }

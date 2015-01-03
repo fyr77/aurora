@@ -67,7 +67,13 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
     }
 
     @Override
-    public void onReturnToShip(World world, int amount) {
+    public void onReceived(World world, int amount) {
+
+    }
+
+    @Override
+    public void onLost(World world, int amount) {
+
     }
 
     @Override
@@ -77,6 +83,11 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
 
     @Override
     public boolean isUsable() {
+        return false;
+    }
+
+    @Override
+    public boolean isUnique() {
         return false;
     }
 

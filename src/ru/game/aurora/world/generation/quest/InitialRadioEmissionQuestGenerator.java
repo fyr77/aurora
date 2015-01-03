@@ -14,7 +14,6 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.earth.EarthResearch;
@@ -29,7 +28,6 @@ import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
-import ru.game.aurora.world.generation.aliens.RoguesMainDialogListener;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.SpaceHulk;
@@ -299,7 +297,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 world.getCurrentStarSystem().addEffect(effect);
                 world.getCurrentStarSystem().getShips().remove(beacon);
                 world.getPlayer().getInventory().add(new SellOnlyInventoryItem(
-                        "items", "rogue_beacon_data", new Drawable("technology_research"), Configuration.getIntProperty("quest.rogues_beacon.price"), RoguesGenerator.NAME
+                        "items", "rogue_beacon_data", new Drawable("technology_research"), Configuration.getIntProperty("quest.rogues_beacon.price"), true, RoguesGenerator.NAME
                 ), 1);
             }
         });

@@ -25,6 +25,8 @@ import ru.game.aurora.world.planet.MedPack;
 import ru.game.aurora.world.quest.Journal;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Player implements Serializable {
 
@@ -46,6 +48,9 @@ public class Player implements Serializable {
 
     // main country in Aurora project, defines some bonuses
     private EarthCountry mainCountry = EarthCountry.AMERICA;
+
+    // set of unique items player has purchased, such items will not be shown in shops
+    private Set<String> uniqueItemsPurchased = new HashSet<>();
 
     /**
      * Number of times player has returned to Earth without enough research data
@@ -142,5 +147,13 @@ public class Player implements Serializable {
 
     public void setMainCountry(EarthCountry mainCountry) {
         this.mainCountry = mainCountry;
+    }
+
+    public Set<String> getUniqueItemsPurchased() {
+        return uniqueItemsPurchased;
+    }
+
+    public void setUniqueItemsPurchased(Set<String> uniqueItemsPurchased) {
+        this.uniqueItemsPurchased = uniqueItemsPurchased;
     }
 }

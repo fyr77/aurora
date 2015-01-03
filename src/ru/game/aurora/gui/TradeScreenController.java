@@ -4,6 +4,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.controls.listbox.ListBoxControl;
@@ -17,6 +18,8 @@ import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
+import ru.game.aurora.npc.Faction;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.util.EngineUtils;
@@ -49,6 +52,8 @@ public class TradeScreenController implements ScreenController
 
     private Multiset<InventoryItem> merchantInventory;
 
+    private Faction merchantFaction;
+
     public TradeScreenController(World world) {
         this.world = world;
     }
@@ -77,6 +82,13 @@ public class TradeScreenController implements ScreenController
             if (e.getElement().getPrice() < 0.00001) {
                 continue;
             }
+            if (!e.getElement().canBeSoldTo(merchantFaction)) {
+                continue;
+            }
+
+            if (e.getElement().isUnique() && world.getPlayer().getUniqueItemsPurchased().contains(e.getElement().getName())) {
+                continue;
+            }
             listBox.addItem(e);
         }
     }
@@ -86,12 +98,17 @@ public class TradeScreenController implements ScreenController
         world.setPaused(true);
         EngineUtils.setImageForGUIElement(merchantPortrait, merchantImage.getImage());
         EngineUtils.setImageForGUIElement(itemImage, "no_image");
-        EngineUtils.setTextForGUIElement(creditCount, String.valueOf(world.getPlayer().getCredits()));
+        updateLists();
+    }
+
+    private void updateLists() {
         inventoryList.clear();
         addWithFilter(inventoryList, world.getPlayer().getInventory());
 
         merchantList.clear();
         addWithFilter(merchantList, merchantInventory);
+        EngineUtils.setTextForGUIElement(creditCount, String.valueOf(world.getPlayer().getCredits()));
+
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
 
@@ -105,11 +122,35 @@ public class TradeScreenController implements ScreenController
     }
 
     public void onSellClicked() {
+        Multiset.Entry<InventoryItem> entry = inventoryList.getSelection().get(0);
+        int amountToSell = 1;
+        if (entry.getElement().getPrice() < 1) {
+            // sold by stack
+            amountToSell = entry.getCount();
+        }
 
+        entry.getElement().onLost(world, amountToSell);
+        world.getPlayer().changeResource(world, Resources.CREDITS, (int) (amountToSell * entry.getElement().getPrice()));
+        updateLists();
     }
 
     public void onBuyClicked() {
+        Multiset.Entry<InventoryItem> entry = merchantList.getSelection().get(0);
+        int amountToBuy = 1;
+        if (entry.getElement().getPrice() < 1) {
+            // sold by stack
+            amountToBuy = entry.getCount();
+        }
 
+        final int totalPrice = (int) (amountToBuy * entry.getElement().getPrice());
+        if (world.getPlayer().getCredits() < totalPrice) {
+            return;
+        }
+
+        entry.getElement().onReceived(world, amountToBuy);
+        world.getPlayer().changeResource(world, Resources.CREDITS, -(int) (amountToBuy * entry.getElement().getPrice()));
+        world.getPlayer().getUniqueItemsPurchased().add(entry.getElement().getName());
+        updateLists();
     }
 
 
@@ -147,5 +188,22 @@ public class TradeScreenController implements ScreenController
             EngineUtils.setTextForGUIElement(itemDesc, "");
         }
         EngineUtils.setImageForGUIElement(itemImage, su.getElement().getImage());
+    }
+
+
+    @NiftyEventSubscriber(pattern = ".*storage_to_inventory")
+    public void onReleased(String id, ButtonClickedEvent event) {
+        int numericId = Integer.parseInt(id.split("#")[0]);
+        ListBox itemsList = merchantList;
+        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
+        itemsList.selectItemByIndex(numericId);
+    }
+
+    @NiftyEventSubscriber(pattern = ".*inventory_to_storage")
+    public void onPrimaryReleased(String id, ButtonClickedEvent event) {
+        int numericId = Integer.parseInt(id.split("#")[0]);
+        ListBox itemsList = inventoryList;
+        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
+        itemsList.selectItemByIndex(numericId);
     }
 }
