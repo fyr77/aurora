@@ -34,7 +34,7 @@ public abstract class UsableItem implements InventoryItem {
     }
 
     @Override
-    public boolean canBeSoldTo(Faction faction) {
+    public boolean canBeSoldTo(World world, Faction faction) {
         return false;
     }
 

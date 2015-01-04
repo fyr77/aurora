@@ -57,7 +57,7 @@ public enum Resources implements InventoryItem {
         }
 
         @Override
-        public boolean canBeSoldTo(Faction faction) {
+        public boolean canBeSoldTo(World world, Faction faction) {
             return false;
         }
     },
@@ -110,7 +110,7 @@ public enum Resources implements InventoryItem {
         }
 
         @Override
-        public boolean canBeSoldTo(Faction faction) {
+        public boolean canBeSoldTo(World world, Faction faction) {
             return false;
         }
     },
@@ -161,7 +161,7 @@ public enum Resources implements InventoryItem {
         }
 
         @Override
-        public boolean canBeSoldTo(Faction faction) {
+        public boolean canBeSoldTo(World world, Faction faction) {
             return true;
         }
     };

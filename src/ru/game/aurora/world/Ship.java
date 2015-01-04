@@ -50,6 +50,9 @@ public class Ship extends BaseGameObject {
 
     private int maxMilitary;
 
+    // is added to all weapons ranges
+    private int rangeBuff;
+
     private int maxScientists;
 
     private int maxEngineers;
@@ -319,4 +322,7 @@ public class Ship extends BaseGameObject {
         hull = Math.min(hull, maxHull);
     }
 
+    public void changeRangeBuff(int delta) {
+        this.rangeBuff += delta;
+    }
 }

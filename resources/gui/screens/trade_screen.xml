@@ -3,7 +3,9 @@
     <controlDefinition name="trade_ship_line">
         <panel childLayout="horizontal" width="100%" align="right" height="74px" padding="5px">
             <image id="#line-icon" width="64px" height="64px"/>
+            <panel width="5px"/>
             <control id="#line-text" name="label" align="left" wrap="true" height="64px" textVAlign="center" textHAlign="left" width="*"/>
+            <panel width="5px"/>
             <control id="#inventory_to_storage" name="button" width="100px" height="64px" label="${gui.trade.sell}">
                 <interact onClick="onSellClicked()"/>
             </control>
@@ -16,7 +18,9 @@
             <control id="#storage_to_inventory" name="button" width="100px"  height="64px" label="${gui.trade.buy}">
                 <interact onClick="onBuyClicked()"/>
             </control>
+            <panel width="5px"/>
             <image id="#line-icon" width="64px" height="64px"/>
+            <panel width="5px"/>
             <control id="#line-text" name="label" align="left" wrap="true" height="64px" textVAlign="center" textHAlign="left" width="*"/>
         </panel>
     </controlDefinition>
@@ -24,26 +28,30 @@
     <screen id="trade_screen" controller="ru.game.aurora.gui.TradeScreenController">
 
         <layer childLayout="absolute">
-            <control id="trade_window" name="window" title="${gui.trade.title}" closeable="false" width="90%" height="97%"
-                     x="10%" y="5%"
+            <control id="trade_window" name="window" title="${gui.trade.title}" closeable="false" width="98%" height="97%"
+                     x="1%" y="1%"
                      padding="8px,8px,8px,8px">
                 <panel childLayout="vertical">
                     <panel height="10px"/>
                     <panel childLayout="horizontal" height="266px" padding="5px">
-                        <image id="itemImage" width="256px" height="256px"/>
+                        <panel childLayout="center" width="266px" height="266px" style="nifty-panel-no-shadow">
+                            <image id="itemImage" width="256px" height="256px"/>
+                        </panel>
                         <panel width="10px"/>
-                        <panel width="*" height="256px" childLayout="vertical" padding="10px" style="nifty-panel-no-shadow">
+                        <panel width="*" height="266px" childLayout="vertical" padding="10px" style="nifty-panel-no-shadow">
                             <text id="itemName" style="bold-font" textHAlign="left" width="90%" height="50px"/>
                             <panel height="10px"/>
                             <text width="90%" wrap="true" style="base-font" textHAlign="left" height="*"
                                   id="itemDescription"/>
                         </panel>
                         <panel width="10px"/>
-                        <image id="trader_image" width="256px" height="256px"/>
+                        <panel childLayout="center" width="266px" height="266px" style="nifty-panel-no-shadow">
+                            <image id="trader_image" width="256px" height="256px"/>
+                        </panel>
                     </panel>
                     <panel height="10px"/>
-                    <control name="icon_and_count" id="credits_count"
-                             icon="resources/sprites/gui/credit.png" width="100px" height="50px">
+                    <control name="icon_and_count_with_shadow" id="credits_count"
+                             icon="resources/sprites/gui/credit.png" width="128px" height="64px">
                     </control>
                     <!-- inventory and upgrades -->
                     <panel height="10px"/>
@@ -104,7 +112,7 @@
                         </control>
                     </panel>
 
-                    </panel>
+                </panel>
             </control>
         </layer>
     </screen>

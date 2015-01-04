@@ -36,5 +36,5 @@ public interface InventoryItem extends Serializable
 
     public int getWeight();
 
-    public boolean canBeSoldTo(Faction faction);
+    public boolean canBeSoldTo(World world, Faction faction);
 }

@@ -1,6 +1,9 @@
 package ru.game.aurora.world.generation.aliens.zorsan;
 
+import ru.game.aurora.application.Configuration;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.world.BaseGameObject;
@@ -28,6 +31,14 @@ public class ZorsanWarData extends BaseGameObject {
         public void onCompleted(World world) {
             world.getGlobalVariables().put("zorsan.war_preparations", 0);
             world.getPlayer().getJournal().questCompleted("zorsan_relations", "war_data");
+            world.getPlayer().getInventory().add(new SellOnlyInventoryItem(
+                    "items"
+                    , "zorsan_war_data"
+                    , new Drawable("probe_research")
+                    , Configuration.getDoubleProperty("quest.zorsan_war_data.price")
+                    , true
+                    , ZorsanGenerator.NAME
+            ));
         }
     }
 

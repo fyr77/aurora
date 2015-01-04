@@ -97,7 +97,7 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
     }
 
     @Override
-    public boolean canBeSoldTo(Faction faction) {
+    public boolean canBeSoldTo(World world, Faction faction) {
         return false;
     }
 

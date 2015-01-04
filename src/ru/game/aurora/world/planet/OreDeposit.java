@@ -78,7 +78,7 @@ public class OreDeposit extends BaseGameObject {
         }
 
         @Override
-        public boolean canBeSoldTo(Faction faction) {
+        public boolean canBeSoldTo(World world, Faction faction) {
             return false;
         }
 

@@ -82,6 +82,7 @@ public class WorldGenerator implements Runnable {
     private static final WorldGeneratorPart[] otherGenerators = {
             new BuildersRuinGenerator()
             , new TutorialGenerator()
+            , new ResearchProjectsGenerator()
     };
 
     private void createAliens(World world) {

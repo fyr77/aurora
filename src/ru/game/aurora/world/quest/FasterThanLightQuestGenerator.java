@@ -9,10 +9,12 @@ package ru.game.aurora.world.quest;
 
 import org.newdawn.slick.*;
 import ru.game.aurora.application.*;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
+import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.projects.StarResearchProject;
 import ru.game.aurora.util.EngineUtils;
@@ -209,6 +211,14 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("ftl", "news"));
             world.getPlayer().getShip().setPos(world.getPlayer().getShip().getX() - 10, world.getPlayer().getShip().getY() - 5);
             world.getPlayer().getShip().setMovementSpeed(1);
+
+            world.getPlayer().getInventory().add(new SellOnlyInventoryItem(
+               "journal"
+                    , "ftl.item"
+                    , new Drawable("star_research")
+                    , Configuration.getDoubleProperty("quest.ftl.price")
+                    , true
+            ));
         }
 
         return false;

@@ -6,16 +6,22 @@
  */
 package ru.game.aurora.world.generation.aliens;
 
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.gui.TradeScreenController;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Resources;
+import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.quest.EarthInvasionGenerator;
+import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.quest.JournalEntry;
 
 import java.util.Map;
@@ -29,6 +35,17 @@ public class KliskMainDialogListener implements DialogListener {
     public KliskMainDialogListener() {
     }
 
+    private Multiset<InventoryItem> defaultTradeInventory;
+
+    public Multiset<InventoryItem> getDefaultTradeInventory() {
+        if (defaultTradeInventory == null) {
+            defaultTradeInventory = HashMultiset.create();
+            defaultTradeInventory.add(new KliskTradeItems.AdvancedRadarsSellItem());
+            defaultTradeInventory.add(new KliskTradeItems.AlienAlloysSellItem());
+            defaultTradeInventory.add(new KliskTradeItems.ResourceSellItem());
+        }
+        return defaultTradeInventory;
+    }
 
     @Override
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
@@ -36,7 +53,7 @@ public class KliskMainDialogListener implements DialogListener {
         switch (returnCode) {
             case 1:
             case 2:
-                GameLogger.getInstance().logMessage("Trade coming soon");
+                TradeScreenController.openTrade("klisk_dialog", getDefaultTradeInventory(), world.getFactions().get(KliskGenerator.NAME));
                 break;
 
 // initial quest - trading of race information

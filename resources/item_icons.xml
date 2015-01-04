@@ -24,6 +24,8 @@
     <resource type="image" id="lab_module">sprites/modules/lab.png</resource>
     <resource type="image" id="workshop_module">sprites/modules/workshop.png</resource>
     <resource type="image" id="barracks_module">sprites/modules/barracks.png</resource>
+    <resource type="image" id="antenna_module">sprites/modules/antenna.png</resource>
+    <resource type="image" id="hull_module">sprites/modules/hull.png</resource>
 
     <!-- item icons -->
 

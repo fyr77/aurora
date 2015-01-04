@@ -1,7 +1,7 @@
 package ru.game.aurora.gui;
 
-import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
+import com.sun.org.apache.xpath.internal.operations.Mult;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
@@ -9,24 +9,15 @@ import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.controls.listbox.ListBoxControl;
 import de.lessvoid.nifty.elements.Element;
-import de.lessvoid.nifty.elements.render.ImageRenderer;
-import de.lessvoid.nifty.elements.render.TextRenderer;
-import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
-import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.Resources;
-import ru.game.aurora.player.earth.PrivateMessage;
-import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TradeScreenController implements ScreenController
@@ -82,7 +73,7 @@ public class TradeScreenController implements ScreenController
             if (e.getElement().getPrice() < 0.00001) {
                 continue;
             }
-            if (!e.getElement().canBeSoldTo(merchantFaction)) {
+            if (!e.getElement().canBeSoldTo(world, merchantFaction)) {
                 continue;
             }
 
@@ -154,12 +145,17 @@ public class TradeScreenController implements ScreenController
     }
 
 
-    public static void openTrade(String merchantImage, Multiset<InventoryItem> merchantInventory) {
+    public static void openTrade(String merchantImage, Multiset<InventoryItem> merchantInventory, Faction merchantFaction) {
         GUI.getInstance().pushCurrentScreen();
         final TradeScreenController tradeScreenController = (TradeScreenController) GUI.getInstance().getNifty().findScreenController(TradeScreenController.class.getCanonicalName());
         tradeScreenController.setMerchantImage(new Drawable(merchantImage));
         tradeScreenController.merchantInventory = merchantInventory;
+        tradeScreenController.merchantFaction = merchantFaction;
         GUI.getInstance().getNifty().gotoScreen("trade_screen");
+    }
+
+    public static void openTrade(String merchantImage, Multiset<InventoryItem> merchantInventory) {
+        openTrade(merchantImage, merchantInventory, null);
     }
 
     @NiftyEventSubscriber(pattern = ".*List")

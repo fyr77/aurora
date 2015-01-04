@@ -97,7 +97,7 @@ public class SellOnlyInventoryItem extends ItemWithTextAndImage implements Inven
     }
 
     @Override
-    public boolean canBeSoldTo(Faction faction) {
+    public boolean canBeSoldTo(World world, Faction faction) {
         return faction == null || factionFilter == null || !factionFilter.contains(faction.getName());
     }
 }

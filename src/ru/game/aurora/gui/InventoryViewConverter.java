@@ -32,7 +32,21 @@ public class InventoryViewConverter implements ListBox.ListBoxViewConverter<Mult
     }
 
     private String getText(Multiset.Entry<InventoryItem> item) {
-        return " " + item.getCount() + " " + item.getElement().getName() + (showPrice ? " x" + item.getElement().getPrice() + "CR = " + (item.getCount() * item.getElement().getPrice() + " CR") : "");
+
+        String rz= " ";
+        if (item.getCount() > 1) {
+            rz += item.getCount() + " ";
+        }
+
+        rz += item.getElement().getName();
+        if (showPrice) {
+            if (item.getCount() > 1) {
+                rz += " x" + item.getElement().getPrice() + "CR = " + (item.getCount() * item.getElement().getPrice() + " CR");
+            } else {
+                rz += " " + item.getElement().getPrice() + " CR";
+            }
+        }
+        return rz;
     }
 
     @Override
