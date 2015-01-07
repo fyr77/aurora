@@ -1,0 +1,19 @@
+0;*As you're trying to set up a communication line, Henry interrupts you abruptly.* Captain. Wait. ;marine_dialog;;;
+;God damn it, Liszkiewicz. What is it?;1;;;
+1;I've studied all the available information about those Borks. I think I should escort you there personally. ;marine_dialog;;;
+;Why?;2;;;
+2;I think I understand these creatures somewhat. From a military standpoint, I understand how they act. I could be useful. ;marine_dialog;;;
+;With all due respect, Henry, your station is on this ship. ;3;;;
+;Hm… Sounds reasonable. All right, get ready. ;4;;;henry.taken
+3;Roger that. *Henry goes off the comms.* ;marine_dialog;;;
+;And now I need to contact the planet. ;5;;;
+4;Roger that. I'll meet you at the shuttle. ;;;;
+;And now I need to contact the planet. ;5;;;
+5;*The planet responds quickly. Surprisingly so, especially for Borks.* Ahem... *the speaker clears his throat.* Vessel with no identification code, pirates are not allowed to land. I repeat, pirates are not allowed to land. I repeat! Not allowed to land! I REPEAT! NOT! ALLOWED!! TO LAND!! ;;;;
+;We aren't pirates. This is Aurora 2, homeport Earth. We are on a diplomatic mission. ;6;;;
+6;Oh. If that's true, well, like, sorry for being so rude. *You don't notice any change in his voice. The speaker shounds just as loud, rude, and pushy.* I don't know if you know that, but you can't get Bork pirates to understand anything unless you repeat it a few times. So you're seriously on a diplomatic mission? ;;;;
+;They don't get much more serious.;7;;;
+7;Well, then, like... Oh, here it is. *you can hear quiet roaring and rustling of paper* I'm sorry, took me a long time to find this. Anyway, you are cleared for landing, but we're going to have to scan your ship, no way around that. If you really are diplomats, you'll be taken to the embassy with all due care and mad props... ahem, respect. With all due respect. And, uh... Oh, right. Forgot about that. You can bring weapons if they're part of your ceremonial dress. No more than seven Bo- I mean, creatures, are permitted in your delegation.;;;;
+;Great. Can we land already? ;8;;;
+8;Of course! Welcome to Shypshyar… Wait, you call it Sypsya, right? Shypshyar? Sypsya? Whatever. We pronounce it Shypshyar, you pronounce it Sypsya. Ah, crap! Sorry. Over and out. *silence* ;;;;
+;I wonder if they're all like that. What a funny people. Right, we have to take off. ;-1;;;

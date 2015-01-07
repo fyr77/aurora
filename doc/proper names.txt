@@ -25,3 +25,5 @@
 Американский Альянс -- American Alliance
 Азиатский Союз -- Asian Union
 Европейское Объединение -- European Alliance
+Совет Ветеранов -- Veteran Council
+Торнур -- Tornur

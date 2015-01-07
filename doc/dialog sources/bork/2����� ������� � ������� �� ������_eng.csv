@@ -1,0 +1,33 @@
+0;*Bork cities are very strange. You can see that out of your shuttle window as you land. You only realize why moments before landing: their buildings are surprisingly large and wide, but there are almost no skyscrapers. The few that are there obviously were not built by the Borks.* ;;;;
+;…;1;;;
+1;*You land. As you exit the shuttle, you see... something. Some kind of armored vehicle that reminds you of a limo with a track drive. Five Borks come out to meet you. The leader walks up to you.* Hello. *He speaks rather quietly which, coupled with his coarse voice, certainly makes an impression.* Aurora 2? Earth?;;;;
+;Yes. And these are my people. We have weapons, but they are part of our ceremonial dresses. ;2;;;
+2;*The Bork eyes your holster carefully. In it is a good old intermediate caliber Sun Eagle. The rest have the same gun.* Looks nice. What is it? Laser? Plasma? Magnetic acceleration?;;;;
+;"Something similar to the last thing you named. We call it ""firearms."" The slug is accelerated by the energy of explosive gasses. ";3;;;
+3;*The Bork nods, you can see interest in his eyes.* Curious… But let's not talk about that now. Let's get into the transport. ;;;;
+;…;4;;;
+4;*The transport is very cozy, despite looking pretty rough on the outside. The seats are soft and very spacious, designed with Borks in mind. The only downside is the small windows... but then again, they are only small for a Bork.* You will be driven there. The driver can show you around the city, if you'd like. *The Bork leader is about to leave, but then he adds.* Oh, right, speaking of the driver. *He speaks quietly and confidentially, almost whispering.* He is not very smart. Not as bad as most of those outside of this planet, but still... Speak simply and assertively. *He walks off and addresses the driver.* Gun it. ;;;;
+;…;5;;;
+5;*The car takes off and goes to what passes for a freeway around here. The driver speaks to you.* Ho! Heh... Well, who's the boss here? You want to take a look at this town or do we go straight to the embassy? ;;;;
+;Let's see the city.;8;;;bork.city_view
+;I don't want to waste any time. The embassy.;-1;;;
+;Henry, what do you say?;6;henry.taken;;
+6;*Henry looks out of the window thoughtfully and speaks quietly and pensively.* I don't know. On one hand, they could be hinting that we should see the city. On the other, it could be a test: will we waste our time on nonsense? Or it could be something completely differenty and I'm just paranoid, Captain. Who knows?;marine_dialog;;;
+;So you're not against the idea?;7;;;
+7;I'm not for or against it. I'm just telling you what I think. You know, maybe we shouldn't go straight to the embassy. Just so we can plot an escape route should anything happen, if nothing else. ;marine_dialog;;;
+;Let's see the city.;8;;;bork.city_view
+;I don't want to waste any time. The embassy.;-1;;;
+8;*You drive around the outskirts of the city aimlessly for about a half-hour. The driver just talks about random things, he is not a great guide. The Borks are a rowdy people. You see random fights breaking out all over the place, but no one pays them any attention.* Yeah, this is kind of a noisy district, heh... I can drive you around city center. It's on our way, anyway. ;;;;
+;Let's stay here.;9;;;
+;Go to the center.;12;;;
+;That's enough, let's go to the embassy.;-1;;;
+9;Sure thing. *He brakes a bit and you're going slower now. No one pays any attention to your car. Either the Borks aren't curious at all, or vehicles of this sort are a common sight on these streets. The outskirts are clean which, coupled with the low-rise buildings, gives it something of a village vibe.* ;;;;
+;…;10;;;
+10;*Getting closer to the center, you drive by a really big fight. Several people are fighting. There is a lot of shouting and screaming, blades shine out. During all this, a local law enforcement agent is standing around and instigating someone with gleeful roaring. This lasts for about thirty seconds. Everything changes abruptly when one of the fighters deliberately stabs another in the... apparently, that is his neck. He falls down and is in no hurry to get back up. The policeman jumps up to the first one and tases him in a sensitive body part, which makes him fall unconscious.* ;;;;
+;What did he do that for?;11;;;
+11;*The driver doesn't answer right away. Only now you realize that he has opened the window slightly and is shaking his fist at it.* Huh? Oh. Right. Yeah, you can wave your shiv around all you want, we're all Borks, we like to have some fun. But no deaths! We don't like it like that, in front of everyone. Dumbass. What did he do that in front of the officer for? He should've done it later, the two of them, or at least be sneaky about it... Meh. Now, back in the day, I... *You get to hear a story full of blood, alcohol, and sex. Probably made up.*;;;;
+;Go to the center.;12;;;
+12;*The driver takes you to a district that looks a lot more posh. He hasn't become a better guide, so you only hear the bare minimum of useful information. But then the Bork pulls up next to some obelisk and speaks reverently.* That's the memorial. Our guys fighting the Zorsan. It was hard.;;;;
+;So who won?;13;;;
+13;What? We did, of course! We did!.. *The driver waves his fists around. The car swerves. One of the passers-by tosses a rock at his windshield and shouts something. The driver calls back.* No, YOUR mother! Yours!! ;;;;
+;All right, that's enough tourism. Let's go to the embassy.;-1;;;
