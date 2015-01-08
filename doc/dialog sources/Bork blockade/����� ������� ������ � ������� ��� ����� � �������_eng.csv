@@ -1,0 +1,10 @@
+0;*Henry walks into your office. He is cold and calm as usual. In his hands is a small tablet.* Captain, permission to report? ;
+;No need to be so official about it, Liszkiewicz. This isn't the military. ;1
+1;Noted. We have a small problem: Earth is being blockaded. ;
+;What?!;2
+2;Earth is being blockaded. *Henry shows you the tablet calmly.* Here. Seven ships are orbiting the planet, and going by the calculations made by the analytics department, they are there with the purpose of blocking space flight around Earth. ;
+;What?.. Where?.. All right, what's the threat level? What are they doing apart from just bumbling around the orbit?;3
+3;Threat level unknown, we don't know anything about ships of that type. But judging from their size and the activity of the onboard systems, they aren't very dangerous. The actions of those ships are pretty strange, too: they checked out a satellite, and when they were done, they sent it back.;
+;Hm… Weird. Any suggestions? ;4
+4;I already authorized activating the weapons systems, all we need is to train our sights and receive an order. Although I think we shouldn't be so hasty, there's always things to shoot. I'd advise you to try to resolve this peacefully, Captain. ;
+;Well, then, I'll take your advice into account, but be ready for a small skirmish just in case. Thank you for your report, Henry. ;-1
