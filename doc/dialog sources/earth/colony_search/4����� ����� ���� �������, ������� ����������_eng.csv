@@ -1,0 +1,21 @@
+0;*Airlock. Last preparations. The colonist leader is a bulky man of about fifty years with a small gut. He doesn't look like a man used to overcoming hardships.* Captain. I see you've come to see us off. ;;
+;That's right. Well, are you ready for hardships?;1;colony_search.explored_fully
+;Of course. Bring me back a souvenir.;3;!colony_search.explored_fully
+1;Sure we are. That little pet you brought back with you... *He lets out a laugh and his gut trembles under his suit.* If the entire fauna is like that, it definitely won't be easy. It's a good thing we're armed to the teeth. Do you think all that - the planet, the resources - is worth it?;;
+;Of course it is, damn it.;5;
+;Is it worth fighting for? Yes. Is it worth dying for? We'll see about that. ;2;
+;Nothing is worth dying for.;7;
+2;*The smile leaves his pudgy face.* I don't understand. ;;
+;You don't have to. It's time for take-off.;-1;
+3;A couple of flowers and a rabbit skin?;;
+;If you want.;4;
+4;*The man laughs and gets into the shuttle. The door closes behind him. You had better leave the airlock.* ;;
+;…;-1;
+5;Ha! That's what I think, too. *He claps.* Good luck! You should know that this is a great beginning, Captain! ;;
+;Beginning of what?;6;
+6;*He can't hear you anymore. The shuttle door closes.* ;;
+;*Leave the airlock.*;-1;
+7;I don't think you're right, Captain. Sometimes it's necessary. ;;
+;What can I do? This is how I am.;9;
+9;*The colonist leader shakes his head and gets into the shuttle. The door closes. Time to leave the airlock.* ;;
+;…;-1;
