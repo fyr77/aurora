@@ -1,0 +1,26 @@
+0;Hmm, let me think…;;
+;…;80;flag_good
+;…;180;flag_ok
+;…;280;flag_bad
+80;Well, then. You've done a great job. This is proof that we were right to assign you to the mission. I think... *Martan narrows his eyes and smiles.* I think I can tell you. ;;
+;Tell me what?;81;
+81;All the weaponry and spare parts your aliens have given us will be used to upgrade the Voyager. I've mentioned it, remember? ;;
+;Yeah. And you still haven't told me what it is.;82;
+82;The Voyager is our flagship. Three times as big as the Aurora 2, equipped with state of the art weaponry based on the railgun principle. The bleeding edge of our military technology. ;;
+;Sounds cool. But it's hard to imagine it.;83;
+83;With alien tech, the Voyager will become the ace in our sleeve. ;;
+;The ace capable of destroying the enemy's entire fleet? ;84;
+84;Could be. Do you doubt it? ;;
+;I do. But there's no choice. If that's over with, what are my orders? ;85;
+85;Try to find something out about the attacker's plans. But don't forget about intel and research. You can go. Oh, and they sent you something from the science department. I ordered it to be shipped to the Aurora 2, to the engineering deck. ;;
+;Some good news, at least. Okay. I'm leaving. ;-1;
+180;I see you've done a good job, although it's far from perfect. All right. I think you'll want to know how we're going to use the help we received.;;
+;And how?;81;
+280;The situation is terrible. Whether it's your fault or the aliens', I don't know… But that doesn't matter anymore. Not all is lost.;;
+;Not all?;86;
+86;Not all. We still have a chance. And that chance is the Voyager. I've mentioned it. ;;
+;Yeah, it's some kind of ship. I remember. ;87;
+87;It's not just a ship. It's a space flagship with the newest weaponry. A very powerful thing, but we only have the one, and I doubt our latest weaponry will impress those Zorsan too much. *Martan sighs.* If only your talks had gone well, we'd... Damn it. I can't even imagine what it would have given us. ;;
+;I'm really sorry. You can't change anything… In any case, this isn't the time to lose heart. Any new orders?;88;
+88;If you can, get a line on the attacker's plans. But don't risk yourself, and especially don't risk the Aurora 2. If we lose it, too, that's it. And don't forget about exploration and research. That is all. You can go. ;;
+;Again, I'm sorry, Martan. I know it won't help anything, but still. ;-1;
