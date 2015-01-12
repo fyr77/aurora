@@ -1,0 +1,45 @@
+0;*The Bork Diplomatic Representative's office is very lavish and a bit scary. You get this impression because of the numerous carved elements that are literally everywhere, from top to bottom. The owner himself, apparently, feels right at home in this ambiance, and he looks pretty lively.*;;;;
+;Hello.;1;;;
+1;*The Bork stands up. He seems unreasonably wide: must be because of his suit. Hi nods at you and sits back.* Take a seat. Glad to see you... ahuh! *It sounded a lot like trying to stifle a laugh.*;;;;
+;Glad to see you, too.;2;;;
+2;You can call me Kartar. I am authorized to represent my country during diplomatic talks. I want to apologize right away for what happened in my waiting room... uff... *That grunt that sounds like a stifled laugh again.* I propose you state the purpose of your visit. ;;;;
+;Let's talk about that a bit later. That Bork was definitely trying to provoke a fight, he wasn't acting normal. Something was up. ;3;henry.taken;;
+;Okay. I come on a diplomatic mission. Have you received the information packet from our ship? ;8;;;
+3;Wow. You can tell what's normal for a Bork and what isn't? I thought dancing was your passion. ;;;;
+;Great joke, but almost out of place. Let's talk about serious business. Have you received the information packet from my ship? ;8;;;
+;"If my homeland says ""dance,"" I say ""affirmative."" Heh. No. Actually, I bought some intel from the Klisks and I know something about how Borks are now.";4;klisk.bork_info;;
+4;*The Bork becomes more serious.* Wise decision. But, alas, you're wrong. You should have bought intel about the Klisk Code. Or the Obliterator. *Suddenly, he grunts and scratches the back of his head.* Can't come up with anything about the Zorsan. Well, something to make talking to them a bit easier. *He speaks quietly after that, almost silently. You can't make anything out.* ;;;;
+;Klisk Code? What about it?;5;;;
+;What is the Obliterator?;6;;;
+;What, are the Zorsan hard to talk to?;7;;;
+;Well, then, seems like I wasted some money. Let's get to business. Have you received the information packet from my ship? ;8;;;
+5;Weeeell… Let's just say it's very illogical. Completely unsuited for creatures that, one might say… have the reputation of being galactic merchants. ;;;;
+;What is the Obliterator?;6;;;
+;What, are the Zorsan hard to talk to?;7;;;
+;All right, let's say my money went to waste. Let's get to business. Have you received the information packet from my ship? ;8;;;
+6;Oh, you don't know what it is yet? Who am I to ruin the surprise for you, then? *The Bork grins.* ;;;;
+;Klisk Code? What about it?;5;;;
+;What, are the Zorsan hard to talk to?;7;;;
+;All right, let's say my money went to waste. Let's get to business. Have you received the information packet from my ship? ;8;;;
+7;They think they're better than everybody. Absolutely everybody. Yes, trust me: it's hard to talk to them. ;;;;
+;Klisk Code? What about it?;5;;;
+;What is the Obliterator?;6;;;
+;All right, let's say my money went to waste. Let's get to business. Have you received the information packet from my ship? ;8;;;
+8;Yes, I have. Moreover, it's already been studied by the authorities, and we have a decision ready. ;;;;
+;I can't wait to hear it.;9;;;
+9;Let's just say, I doubt the cooperation between our governments will be very productive... but we'll at least become better dancers. *Kartar roars in laughter, not even trying to hide it this time.* ;;;;
+;Even though I'm glad to have a positive response, I can only say one thing: you have a stupid sense of humor.;10;;;
+10;I'm perfectly happy with it. *Kartar bares his teeth again, showing you who the boss here is.* Do you have anything else or can we consider this meeting over? ;;;;
+;No, I've discussed all I wanted with you. When will you send an ambassador to Earth? ;-1;;;
+;"There is something. My planet is being blockaded by a Bork fleet. Someone named Hrrraka is in charge of it. He said ""smart Borks"" could give him a ""spot,"" and then he'll lift the blockade. Can you help me? ";11;bork_blockade.communicated;;hrakka_flag
+;I have something very important. My planet is in danger. The Zorsan are getting together a fleet to occupy it. I don't have to tell you what the consequences will be like. We need help. ;12;zorsan.war_preparations;;zorsan_flag
+11;Your planet is possibly blockaded by pirates. Unfortunately, I can't help you with anything. I have no influence over lowlifes and outlaws. Is there anything else? ;;;;
+;No, I've discussed all I wanted with you. When will you send an ambassador to Earth? ;-1;;;
+;I have something very important. My planet is in danger. The Zorsan are getting together a fleet to occupy it. I don't have to tell you what the consequences will be like. We need help. ;12;zorsan.war_preparations && !zorsan_flag;;zorsan_flag
+12;*The Bork frowns.* That's really bad. Even worse because any serious help will be taken by the Zorsan as an excuse for a conflict. We have just gotten out of a struggle with them, we can't afford a new war. ;;;;
+;So you won't help my people in any way?;13;;;
+13;I never said that. Send me the necessary information about it. I'll pass it over to the Veteran Council. The decision is up to them. I'll tell you right away that the decision will take at least two months.;;;;
+;That is a long time. But beggars can't be choosers. I hope you'll help us. ;14;;;
+14;All's possible. Did you have anything else? ;;;;
+;"There is something. My planet is being blockaded by a Bork fleet. Someone named Hrrraka is in charge of it. He said ""smart Borks"" could give him a ""spot,"" and then he'll lift the blockade. Can you help me? ";11;bork_blockade.communicated && !hrakka_flag;;hrakka_flag
+;No, I've discussed all I wanted with you. When will you send an ambassador to Earth? ;-1;;;

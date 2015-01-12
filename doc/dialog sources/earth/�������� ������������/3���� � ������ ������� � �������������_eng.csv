@@ -1,0 +1,9 @@
+0;*Gordon calls you. His expression is that of primal fear.* Captain! Next to the Sun!! Ship!! ;;
+;Calm down and start from the beginning.;1;
+1;*Gordon is gasping and waving his hands.* Giant ship!! Next to the Sun!!;;
+;Right. I think that reminds me of something. Isn't it that thing we've seen in deep space already? ;2;quest.main.obliterator
+;Right. Calm down. I don't understand what you're talking about, but we'll get closer and check it out. Try to calm down and get yourself together. Get to it. Over and out.;2;!quest.main.obliterator
+2;"*When you get to the observation room, you can see what scared Gordon so much. And there's a lot to be scared of.  A giant ship the size of an actual planet. It looks like a giant, weirdly elongated egg that... the easiest way to put it is ""it is in space."" It just is. As if it has always been there, next to the Sun. It is made from smooth gray metal that doesn't seem to have any seams. When you look back, you see almost the entire crew of the Aurora crowded behind you. In front of everyone are Gordon, Sarah, and Henry. The first one is frightened. The second one is so pale she looks white as chalk. The last one, keeping his head cool, asks you.* Captain. Do you know what it is?";;
+;I think… I think I have an idea.;3;
+3;*Everyone looks at you, waiting for you to continue.*;;
+;This is the Obliterator.;-1;

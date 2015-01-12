@@ -1,0 +1,10 @@
+0;Captain?;
+;Henry?;1
+1;"Weapons control has made a complaint. *Henry is brief and calm.* They're saying some, quote, ""filthy meaty thing"" has jammed the gun barrels.";
+;Is that a problem?;2
+2;"No. This, repeat, ""filthy meaty thing"" burns off right after the first shot, and it doesn't damage the system itself. It's just that people don't really like working in those conditions.";
+;Gordon says we'll just have to bear it: you can't clean that thing off with normal means.;4
+4;And how long do we have to bear it?;
+;Until we find a solution. Will that be all? ;5
+5;Affirmative. *Henry nods and goes offline.* ;
+;Over and out.;-1

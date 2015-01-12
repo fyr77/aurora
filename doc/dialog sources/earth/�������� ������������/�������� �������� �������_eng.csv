@@ -1,0 +1,13 @@
+0;*Henry calls you. He looks tired.* Captain. There isn't anyone in the system. ;
+;You sure?;1
+1;I contacted officer Frontz, Captain. She turned on the widest-range scanners there are. She couldn't find anything suspicious. ;
+;That's great. You think we should go home or check that system out after all? ;2
+2;I think… *Henry hesitates. His left eye jerks a bit.* I think we have to check it out. At least give it a look. And then go straight home. ;
+;Great. Over and out.;-1
+;Are you okay? You look terrible.;3
+3;I'm really tired.;
+;Go get some sleep, then! Military action is over. You can get some rest. ;4
+4;*Henry looks at the camera blearily and gets up.* I'll check if the assault team is ready. Just in case. Permission to get to it? ;
+;You're really stubborn, you know that? Granted. Just try not to burn out. ;5
+5;*Henry smiles and goes offline.*;
+;….;-1

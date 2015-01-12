@@ -1,0 +1,13 @@
+0;I think you can tell me about what's happening around the planet. ;;
+;You mean the blockade?;1;
+1;What else? We are completely blocked from going to space: they intercept everything, check it, and send it back. Who are they? What the hell? ;;
+;They're Borks. Most of them are very aggressive and not very smart. ;2;
+2;What do they want from us, then? ;;
+;They want to rob Klisk ships, but the main trading spots are already taken. So they came here. ;3;bork_blockade.communicated
+;Why the hell knows? They probably want to rob. I should contact them and find out. ;4;!bork_blockade.communicated
+3;And it doesn't bother them that those Klisks, whoever they are, don't trade with us at all yet? ;;
+;I told you: the Borks aren't very smart. ;4;
+4;Well, it's not my place to tell you how to deal with this. They just have to go. ;;
+;My rules of engagement? ;5;
+5;However you want them. But keep in mind that a full-scale fire show on Earth's orbit will cause panic on the planet. Do we really need that? ;;
+;I'll try to avoid doing that, but I can't promise you anything. All right, I have to go. ;-1;

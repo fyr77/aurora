@@ -1,0 +1,35 @@
+0;*None of your people are asking you anything. Either they're giving you time to rest, or they don't feel comfortable doing it in front of the Borks. Henry approaches you at the Aurora.* Are you okay, Captain? ;;
+;More or less.;1;
+1;How did it go?;;
+;Better than what I expected. Earth and Sypsyar are officially working together now. We also signed an agreement about exchanging ambassadors. The Borks will send theirs in a week.;2;injure
+;So-so. We did agree to cooperate, and they're sending their ambassador to us soon… But apparently that's the most we can achieve for now. ;7;miss
+;Terrible, Henry. I don't think we can hope to work together with the Borks. ;11;kill
+2;Great, Cap. How did you manage that?;;
+;I guess I was good in there. And the information about Earth… We have to give a bonus to whoever composed that packet. ;3;
+;It's because of what happened in the waiting room.;4;henry.taken
+3;Congratulations, then, Captain. Earth will be happy.;;
+;They'll have a reason. All right, Henry. Go back to your room. We both have a ton of work to do. ;-1;
+4;What do you mean?;;
+;You said it yourself: that Bork wasn't acting like a normal Bork. And then, talking to the Diplomatic Representative, I realized he was behind it all. ;5;
+5;*Henry understands instantly.* So you think it was some kind of test? The Diplomatic Representative wanted to see your reaction to... to what? ;;
+;That's what I don't understand. My reaction to violence? To danger? Maybe to strange behavior of a typical stupid Bork? It's hard to understand. I only know the representative is very cruel. Although he's pretty easy to talk to. ;6;
+6;The people he's working for are very lucky, then. ;;
+;You think so? I won't argue with you, I have business to attend to. I think you do, too. ;-1;
+7;Well, that's better than nothing. A half-empty glass is half-full. ;;
+;Yeah, that's what I think, too. But it could have been better. I wonder where I screwed up. ;10;
+;That's true, but I think it's all because of what happened in the waiting room. ;8;henry.taken
+8;Why do you think that?;;
+;Because of talking to that big wig. I have a feeling that he was behind it. It could have been a test. One I didn't pass, obviously. ;9;
+9;Could be. The Borks like deciseviness and violence, Captain. You didn't show either. ;;
+;I guess I learned my lesson… I have to go. So do you, I think. ;-1;
+10;You'll have time to think about it, Captain. I have to go to the barracks. ;;
+;See you, Liszkiewicz.;-1;
+11;That's really bad. Why… *Henry stutters.* couldn't you? ;;
+;I don't know! No idea! Stupid day. Stupid planet. Stupid Borks. ;14;
+;I think it's because of what happened in the waiting room.;12;henry.taken
+12;I think so, too. The Borks like decisiveness and violence, but you didn't have to kill that Bork. ;;
+;He attacked me, and I was defending myself. I think the Diplomatic Representative was behind it. ;13;
+13;In that case, the people he's working for are lucky. ;;
+;You approve of his actions? Wow. I'm not going to say anything, I'll think about it when I ahve a minute, but… See you, Henry. ;-1;
+14;Maybe our relationship with the Borks will get better in the future. ;;
+;I hope it does. All right, Henry, I have to go. ;-1;

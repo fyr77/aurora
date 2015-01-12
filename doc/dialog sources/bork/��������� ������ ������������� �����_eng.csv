@@ -1,0 +1,28 @@
+0;*The Bork you hailed looks at you with a peaceful bloodthirsty grin.* Unmarked ship, I'm reading you. What do you want? ;;
+;There's a Rogue ship we tried to blow up but couldn't. It'll keel over if you look at it wrong, and there's a lot of valuable cargo inside. ;100;rogues.damaged_scout_found
+;Aurora 2, homeport Earth. Just being polite. ;1;
+1;Roger that, thanks. And now, goodbye and goodluck. Don't clog up our comms any more. ;;
+;…;-1;
+100;*Grunts gutturally.* What?!;;
+;I said, a Rogue ship. Badly damaged, with valuable cargo. I can sell you the info. ;103;
+;You really are like bricks… All right, I'll put it simply. You give me credits! I give you ship! Good ship! Easy haul! Arrrrr! ;103;
+103;*Just as you finish your sentence the Bork puts his paw into his mouth and claws around inside, looking very professional at what he does.* ;;
+;I said, a Rogue ship. Badly damaged, with valuable cargo. I can sell you the info. ;103;
+;You really are like bricks… All right, I'll put it simply. You give me credits! I give you ship! Good ship! Easy haul! Arrrrr! ;105;
+105;"Arrrhaharhrhar?!! *Your experience with the Borks helps you translate this: ""What an interesting proposal! I want details.""*";;
+;A Rogue ship. Carrying stuff. You give me money, I give you info. ;106;
+106;"Wha?! Hrruara?! *It could mean ""How much do you want?""* ";;
+;Five credits will be enough.;-1;105
+;Ten.;-1;110
+;Fifteen.;108;
+;Twenty credits.;108;
+108;Aaaarg! Nah. Too much!! I don't have that. ;;
+;Five credits will be enough.;-1;105
+;Ten.;-1;110
+;Twenty credits.;109;
+109;Arrrgh?! Hurrr… Hahahahahaha! *The Bork laughs for about ten seconds. He's right, twenty credits is too much. What were you thinking?* ;;
+;Five credits will be enough.;110;105
+;Ten.;110;110
+110;Hrrum. Good. You give coordinates. I give money. ;;
+;What? You know what, I changed my mind. I don't trust you.;-1;0
+;Good. I sent you the coordinates.;-1;
