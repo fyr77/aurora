@@ -19,7 +19,6 @@
             <control id="inventory_window" name="window" hideOnClose="true" title="${gui.inventory.title}" width="80%"
                      height="80%" x="10%" y="10%">
                 <panel childLayout="vertical">
-
                     <control id="items" name="listBox" vertical="optional" horizontal="off" selection="Single"
                              displayItems="8"
                              viewConverterClass="ru.game.aurora.gui.InventoryViewConverter">
@@ -29,7 +28,9 @@
 
                     <panel height="10px"/>
 
-                    <text style="base-font" id="weight_text" textHAlign="left"/>
+                    <panel padding="5px" width="40%" height="50px" childLayout="horizontal" style="nifty-panel-no-shadow">
+                        <text style="base-font" id="weight_text" textHAlign="left" textVAlign="center" height="100%" width="90%"/>
+                    </panel>
 
                     <!-- close button panel -->
                     <panel height="10px"/>

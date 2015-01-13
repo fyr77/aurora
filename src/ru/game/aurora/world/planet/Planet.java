@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world.planet;
 
+import com.google.common.collect.Multiset;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.Animation;
@@ -23,6 +24,7 @@ import ru.game.aurora.world.planet.nature.PlanetFloraAndFauna;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Future;
@@ -320,6 +322,15 @@ public class Planet extends BasePlanet implements IDungeon {
             if (world.isUpdatedThisFrame()) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.refill_oxygen"));
                 world.getPlayer().getLandingParty().refillOxygen();
+                // dump dumpable cargo
+                for (Iterator<Multiset.Entry<InventoryItem>> iter = landingParty.getInventory().entrySet().iterator(); iter.hasNext(); ) {
+                    Multiset.Entry<InventoryItem> o = iter.next();
+                    if (o.getElement().isDumpable()) {
+                        GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.dump_item") + " " + o.getCount() + " " + o.getElement().getName());
+                        o.getElement().onReceived(world, o.getCount());
+                        iter.remove();
+                    }
+                }
             }
             if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
                 leavePlanet(world);
