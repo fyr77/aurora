@@ -1,0 +1,14 @@
+0;*Gordon calls you himself. He looks very tired, there are huge circles under his eyes, and his normally pale skin has become especially white.* C... *He stutters, covers his mouth with his hand, and speaks again, monotonously.* Captain. We can... we can get out.;
+;I'm listening.;1
+1;Breaches in the system, you understand? Very high instability. Massive and fast increase in entropy will cause another wormhole for sure, like the one through which we got here. ;
+;Got it. Gordon, you look terrible. ;2
+;Increase in entropy? And how do we do it? ;3
+2;*He grimaces.* It's my job. ;
+;Increase in entropy? And how do we do it? ;3
+3;By chaotically changing the structure of the system. *Gordon cleans his glasses.* The easiest way is destruction. I've taken part in similar experiments before. To cause breaches in various systems, we would use massive bombardments with neutrons. ;
+;So, to put it simply, I have to break everything I can?;4
+4;Yes. Metaphorically speaking, we have to... *Gordon sighs and grimaces, speaking more loudly now.* We have to kill this universe. *He realizes that he's being overly dramatic and adds.* Make a piece of it dead. Destroy everything that's in your reach. ;
+;Great, got it. Over and out. Go get some rest, huh? ;-1
+;I think it'll take a lot of time. Any ideas? ;5
+5;None. Keep us supplied with similar samples, maybe we'll make something of it. Or maybe we won't. Who knows? Whatever the case, I'll send a list of the necessary samples to your private mail. Take a look at your journal when you can, Captain.;
+;Okay. Time to get to work. And you go get some rest or something, Gordon.;-1

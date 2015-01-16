@@ -1,0 +1,25 @@
+0;*Gordon places an urgent call to you. A very urgent one: this channel is reserved for extremely important messages. Apparently, something serious has happened.*;
+;Report! What happened?;1
+1;Ca… C… *Gordon waves his hands around. He looks crazed.* It! Breach! Breach breach breach!! *Respected scientists standing behind him look pretty much the same way. All in all, the atmosphere in the lab is heated.* ;
+;What is it?;2
+2;C-C-Captain! We've encountered a Type 1 space breach! Minimal radiation, minimal possibility of harmful effect. We have to study it as soon as possible!! You only get such chances once in your life!!;
+;Gordon, the emergency channel is for emergency goddamn messages.;3
+;And what is it, exactly?;4
+;Study it? Are you sure it's safe?;7
+;Right. You have my okay.;-1
+3;*Gordon turns red and looks at the floor.*;
+;And what is it, exactly?;4
+;Study it? Are you sure it's safe?;7
+;Right. You have my okay.;-1
+4;It's… It's like a black hole, but… A portal to a… But not exactly a portal, you know? A thing that, theoretically, can... well... do you understand?;
+;No.;5
+5;Well, it's like a window, but we're outside of it, and inside is something absolutely, completely different!;
+;I still don't understand. And I probably won't.;6
+6;*Gordon waves his hands around and mutters something. There are a lot of formulas and scientific terms in what he is saying.*;
+;Gordon, the emergency channel is for emergency goddamn messages.;3
+;Study it? Are you sure it's safe?;7
+;Right. You have my okay.;-1
+7;Yes! Absolutely nothing destructive will happen to us! ;
+;Gordon, the emergency channel is for emergency goddamn messages.;3
+;Study it? Are you sure it's safe?;4
+;Right. You have my okay.;-1

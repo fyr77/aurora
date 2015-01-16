@@ -1,0 +1,20 @@
+0;*Gordon is white as a sheet.*;
+;Gordon. Trust me, I'm calm and not angry. Do you believe me?;1
+1;Y-yes.;
+;But if you don't explain where we are, I'll start getting angry. Explain it in layman's terms.;2
+2;*Gordon looks away, apparently to check some data, and then speaks. He is confident, although he is probably scared.* We're in another world, Captain. There.;
+;Good. Now tell me how to get out of here. ;3
+3;I d-d-d-don't know, Captain. *It looks like he doesn't like the look on your face, because he quickly adds…* Captain, don't! I... it's my fault! But…;
+;Enough. I'm not going to blame you for it. In any case, I'm the Captain and the responsibility is on me. Gordon, I don't know how, but we have to get out of here. What do you know about this place?;5
+5;In essence... *Gordon rubs the bridge of his nose and turns to look at the data again.* Yes... In essence, we aren't in space. I mean, we're not in a vacuum. The Aurora 2 is inside an organic liquid of unknown composition. We cannot study its composition yet. But it does contain some simple proteins. That's all we've managed to find out. And... Yeah... Another thing...;
+;What?;6
+6;Apparently, this liquid… It's… It's alive. *Gordon adds after a moment.* We're in a universe that is a living organism, Captain.;
+;It's… it's impossible. It's scientifically impossible!;7
+7;*You hear a mad scream from behind Gordon's back.* SHOVE YOUR SCIENCE WHERE THE SUN DON'T SHINE! *The one screaming this - a respectable-looking frail old man - drops to the floor and has a breakdown. Gordon is embarrassed.* Well... it's a different world... everything is different. Captain, we need time to study it. Try to investigate the terrain and the situation. ;
+;Got it. Calm down your coworker. And when he comes to, tell him that we're taking a fine out of his next paycheck. Is that all? ;8
+8;No, Captain. This world has… curious laws of physics. W-we'll study it some more, but it seems that… That here, even time flows differently. ;
+;What do you mean, differently? I don't feel anything different. I can't see a Me From The Future.;9
+9;I can't explain anything… B-but you better prepare yourself for our physics laws having n-no effect on the inhabitants of this world!;
+;I don't understand anything, but okay. Is that all? ;10
+10;*Gordon nods.*;
+;In that case, over and out. Make a report if anything happens.;-1
