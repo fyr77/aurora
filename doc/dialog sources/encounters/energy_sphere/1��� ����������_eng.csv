@@ -1,0 +1,114 @@
+0;*Someone is calling you from the science department. It's Gordon. The look on his face is a mixture of fear and childish happiness.* Captain! We... we need you.;;;;
+;Will you look at that. What happened there?;1;;;
+1;We… Uhhh… You have to see it. There. It's very important!;;;;
+;All right, I'll be right over. I hope it's REALLY important.;5;;;
+;What do you mean, I have to see it? Be more precise.;2;;;
+2;Well, here… Something… *Gordon waves his hands around, his glasses glisten.* Attached itself to the computer! Something foreign, an alien!;;;;
+;Wow, I really have to see it. I'm on my way.;5;;;
+;Wait. And why are you calling me? It's not safe. Contact Liszkiewicz, isolate the computer… Well, follow the procedure.;3;;;
+3;It's… it's safe, Captain. It's not attacking anyone. The soldiers are there already, but nothing is happening. We need you to make a decision!;;;;
+;Wow, I really have to see it. I'm on my way.;5;;;
+;"Well, get that ""something"" off, then, Gordon! Can't you do anything yourselves?";4;;;
+4;It won't come off! *Gordon looks wounded. Apparently, you'll have to go Research Deck after all.*;;;;
+;All right, wait for me. But know this: if you distracted me for nothing…;5;;;
+5;"*Gordon was right. It's not just an alien, it's a blue faintly glowing sphere about two meters in diameter. And it didn't ""attach"" itself to just any computer, it's the main computing terminal of the Aurora! Oh wow.*";engergy_sphere_dialog;;;
+;All right, my dear scientists, would you kindly explain to me what this is?;6;;;
+6;*The white coats are silent. Gordon steps forward.* It's an alien. And it's… *He grabs his head.* It's here!;;;;
+;And what do we do with it?;9;;;
+;Why do you even think this sphere is alive?;8;;;
+;Well, shoo it off! Shoot it, push it… How do you work with those disgusting things?;7;;;
+7;*One of the soldiers answers.* We tried, Captain, it doesn't work. Although we didn't use anything too powerful, this is a lab, after all.;;;;
+;So what do we do with it?;9;;;
+;Why do you even think this sphere is alive?;8;;;
+8;*One of the scientists speaks up.* It reacts to standard behavioral tests like a living being! Of course, it's hard to say anything about its having conscience, but... *His voice peters out gradually, turning into excited mumbling.*;;;;
+;So what do we do with it?;9;;;
+;Well, shoo it off! Shoot it, push it… How do you work with those disgusting things?;7;;;
+9;It's hard to say, Captain. *Gordon takes off his glasses and begins cleaning them with the sleeve of his coat.* This creature ignores all attempts to contact it. It's like we... don't exist, as far as it's concerned. *He walks up to the sphere and puts his hand in it. The sphere doesn't react in any way. Neither does his hand, obviously.* ;;;;
+;*take your gun out and shoot the sphere*;10;!sphere_shoot;;sphere_shoot
+;*touch the sphere, too*;19;!sphere_touch;;sphere_touch
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+10;*The gun roars, the scientists jump back, the soldiers crouch. The bullet pierces soft polymer floor and gets stuck in the hard foundation. The sphere doesn't even flinch.*;engergy_sphere_dialog;;;
+;*shoot again*;11;;;
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+11;*The second bullet goes right through the center of the sphere. The scientists back up even more. The soldiers look at you curiously. The bullet is stuck in the floor again. The sphere doesn't care.*;engergy_sphere_dialog;;;
+;*shoot it once more*;12;;;
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+12;"*If the sphere could talk, it probably would have said something like ""What, again?"" The soldiers giggle politely. The look on the scientists' faces is... indescribable. There's a third hole in the floor. The sphere doesn't care, by the way.";engergy_sphere_dialog;;;
+;*can't go wrong with a fourth shot*;13;;;
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+13;*Look, this is a lab, not a shooting gallery! The sphere doesn't react to your shots, stop ruining the floor! You're just making yourself look stupid.*;engergy_sphere_dialog;;;
+;*fifth time*;14;;;
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+14;*You're just taking the piss. The sphere doesn't care. It doesn't react to any physical stimuli! Your men are looking at you like at a complete idiot. And there are five holes in the floor. By the way, do you know how much these polymers cost?* ;engergy_sphere_dialog;;;
+;*shot number six*;15;;;
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+15;*There is a distinct smell of gunpowder in the lab. One of the scientists faints. One of the soldiers is laughing heartily. And you still won't leave it alone, will you? The sphere doesn't care, by the way. And it never will. You can shoot it with a grenade launcher and it won't care.* ;engergy_sphere_dialog;;;
+;*bang!*;16;;;
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+16;*You're definitely taking the piss! The sphere isn't paying you any attention.*;engergy_sphere_dialog;;;
+;*shoot it for the eighth time*;17;;;
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+17;*You're out of ammo. And don't even hope that you have some more.*;engergy_sphere_dialog;;;
+;No, I have some more!;18;;;
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+18;*Everyone arounds you eyes you with caution and aloof wonderment. And they should! Their Captain just wasted seven shots, and now he's talking to himself. Okay. It's time to finish your joke.*;;;;
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+19;*You feel some kind of sticky fog on your fingers, but this feeling passes quickly. Your hand doesn't even smell of anything.*;engergy_sphere_dialog;;;
+;*take out your gun and shoot the sphere*;10;!sphere_shoot;;sphere_shoot
+;*put your hand into the sphere and hold it there*;20;;;
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+20;*Sticky fog and nothing else. You take your hand out and the feeling passes instantly.*;engergy_sphere_dialog;;;
+;*take out your gun and shoot the sphere*;10;!sphere_shoot;;sphere_shoot
+;What do the dials inside this creature say?;21;;;
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+21;*One of the scientists answers. It's some shabbily dressed old man with a very young look in his eyes.* We are only reading standard behavioral reactions, Captain. It just proves that it's alive. We haven't found out anything else.;;;;
+;*take out your gun and shoot the sphere*;10;!sphere_shoot;;sphere_shoot
+;And what do you say, personally?;22;;;
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+22;Uhm... *The old man is confused. He plucks at a lock of his gray hair nervously, adjusts his scarf and his hat... Is that how scientists dress? Will you look at that! He has Ph.D., but he looks like a redneck.* Honestly, these are just my conjectures. I may be wrong, but... I think it's some other kind of life form. So different we simply cannot make contact. *Right after this phrase the scientists start a lively discussion, which gradually turns into an intellectual shouting fest, and then into uppity quacking.* ;;;;
+;*take out your gun and shoot the sphere*;10;!sphere_shoot;;sphere_shoot
+;Look, if this sphere is so passionate about our terminal, just turn it off. Maybe this thing will fly away?;23;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+23;*Dead silence falls on the scientists. Gordon is talking for everyone.* But... but there's research going on there! It'll ruin all of our work! Calculations, notes, monitoring data... We'll have to do it all over again! ;;;;
+;*take out your gun and shoot the sphere*;10;!sphere_shoot;;sphere_shoot
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Wait. And if this creature breaks something? Something serious? ;24;;;
+;Yeah… We definitely need to find something out about this thing. But from who?;-1;;;
+24;*There is no definite answer. The responsibility, as always, lies on the boss.* ;;;;
+;*take out your gun and shoot the sphere*;10;!sphere_shoot;;sphere_shoot
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Turn off the terminal! That's an order.;25;;;
+;Okay, damn it, whatever. We definitely have to find something out about that thing. But from who?;-1;;;
+25;*Gordon personally turns off the main research terminal. As soon as the server lights stop blinking, the sphere shakes slightly, but visibly. It swiftly goes to the side, and then up. It looks like it's about to leave.*;;;;
+;Well, see?;26;;;
+26;*And see they do. They see the sphere latch back onto the terminal after it turns on again. Gordon's face widens, he jumps up to the back panel and quickly plucks away every power cable he can. It's useless. The terminal boots up again and starts analyzing the data.* ;engergy_sphere_dialog;;;
+;*take out your gun and shoot the sphere*;10;!sphere_shoot;;sphere_shoot
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Okay. Apparently, this thing powers the terminal.;27;;;
+;I see, it was useless. We definitely have to find something out about that thing. But from who?;-1;;;
+27;*Gordon nods. The scientists are silent. The soldiers look at the terminal with some sort of religious fervor.*;;;;
+;*take out your gun and shoot the sphere*;10;!sphere_shoot;;sphere_shoot
+;*touch the sphere*;19;!sphere_touch;;sphere_touch
+;Damn it. We definitely have to find something out about this thing. But from who? Okay, I'll think this over in my office. Meanwhile, set up a watch.;-1;;;
