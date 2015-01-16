@@ -1,0 +1,108 @@
+0;*The Klisk gets there pretty soon. Your crews reactions to him are... various. The scientists look at him with interest. The soldiers, with reserved, unhealthy curiosity. There don't seem to be any engineers at Science Deck.;
+;…;1
+1;*Oh! And the sphere is here, too, and it reacts to him in the usual way: it doesn't.*;
+;…;2
+2;Well, then, human captain, is that the thing? *The Klisk hovers over to the sphere and lowers his grav platform a bit. You realize  that it's very thick, with a myriad of various compartments to store things.* ;
+;That's right. What do you think?;3
+3;*The Klisk breathes in and lets out a fast barrage of clicks. You can hear exclamations from where the scientists are crowded. Must be scientific curiosity.* A bit small. Must be young... Uhm... I'll get to it. Please, uh... give me some space. *Embarrassed clicks.*;
+;Of course.;4
+4;*After that, the Klisks opens one of the compartments with his delicate fingers and takes out a... device. A mechanism. It's hard to describe, but you can see lots of shiny metal and floppy wires. Then, putting the device next to himself, the Klisk massages some lump above his eye. And then, as a complete surprise to you, he pierces it with a sharp, needle-like part of the mechanism connected to it with a long cord. Sticky blood oozes out of the wound. Apparently, Klisk blood is transparent and sludgy.* Pull this out of me when you're done talking.;
+;What?;5
+5;*The scientists regard the performance with obvious curiosity. The Klisk, clicking nervously, pushed the mechanism closer to the sphere. You can't see any obvious effects of the mechanism, but then the sphere ripples slightly. The terminal flickers and shuts down. The Klisk's eye rolls inside and he speaks with a voice that obviously isn't his.* See. Who. See. ;
+;*keep silent and wait a little*;6
+;Are you okay?;7
+;Right, let me guess. It's the sphere speaking.;8
+;*take the needle out of the Klisk*;17
+6;*The terminal keeps flickering. The Klisk keeps talking with a strange voice.* See. You. Not. See. It. *Sudden chaotic clicking.* Surprise. Anger. Irritation. Fear.;energy_sphere_dialog
+;Are you okay?;7
+;Right, let me guess. It's the sphere speaking.;8
+;*take the needle out of the Klisk*;17
+7;You. Know. Captain. Humans.;energy_sphere_dialog
+;*keep silent and wait a little*;6
+;So you must be the sphere.;8
+;*take the needle out of the Klisk*;17
+8;Sphere.;energy_sphere_dialog
+;What are you?;9
+;Why is your speech so weird?;10
+;Why do you interact with the terminal?;11
+;I want you to leave my ship.;14
+;Why can't you talk to us without any middlemen?;16
+;*take the needle out of the Klisk*;17
+9;Sphere. Blue. Space. Float. Fly. Search. Far. Search. Far.;energy_sphere_dialog
+;Why is your speech so weird?;10
+;Why do you interact with the terminal?;12
+;I want you to leave my ship.;14
+;Why can't you talk to us without any middlemen?;16
+;*take the needle out of the Klisk*;17
+10;*silence*;energy_sphere_dialog
+;Hey. Why is your speech so weird?;11
+;What are you?;9
+;Why do you interact with the terminal?;14
+;I want you to leave my ship.;14
+;Why can't you talk to us without any middlemen?;16
+;*take the needle out of the Klisk*;17
+11;*Silence. The ripples on the sphere is a little more pronounced now, but that's it.*;energy_sphere_dialog
+;What are you?;9
+;Hey. Why is your speech so weird?;10
+;Why do you interact with the terminal?;12
+;I want you to leave my ship.;14
+;Why can't you talk to us without any middlemen?;16
+;*take the needle out of the Klisk*;17
+12;Interact. Sphere. Terminal. Necessity. Easy. Friendship. Love. Connection. Relationship. ;energy_sphere_dialog
+;Friendship? Love? Are you in love with my terminal?;13
+13;No. Friendship. Love. Connection. Relationship. Necessity. ;energy_sphere_dialog
+;What are you?;9
+;Hey. Why is your speech so weird?;10
+;Why do you interact with the terminal?;12
+;I want you to leave my ship.;14
+;Why can't you talk to us without any middlemen?;16
+;*take the needle out of the Klisk*;17
+14;Terminal. Me. Terminal. Me. Connection. ;energy_sphere_dialog
+;So you go wherever the terminal is. What if I throw it into deep space?;15
+15;Terminal. Me. Terminal. Me. Connection. ;energy_sphere_dialog
+;Okay. So you refuse to leave my ship. What if I damage you?;18
+;What are you?;9
+;Hey. Why is your speech so weird?;10
+;Why do you interact with the terminal?;12
+;Why can't you talk to us without any middlemen?;16
+;*take the needle out of the Klisk*;17
+16;Different.;
+;What are you?;9
+;Hey. Why is your speech so weird?;10
+;Why do you interact with the terminal?;11
+;I want you to leave my ship.;14
+;*take the needle out of the Klisk*;17
+17;*The terminal stops flickering. The sphere stops rippling. The Klisk clicks chaotically in panic, but he stops doing it very soon. He takes out some kind of syringe out of a different compartment, lightning fast. He injects it right where the needle was before you jerked it out. He clisks with relief.* Are you satisfied, Captain?;energy_sphere_dialog
+;Yes.;21
+;I didn't find out anything useful.;22
+18;Ha. Ha. Ha. Ha. Ha.;energy_sphere_dialog
+;Are you taking the piss?;19
+19;Yes.;energy_sphere_dialog
+;What if I shoot this Klisk?;20
+;What are you?;9
+;Hey. Why is your speech so weird?;10
+;Why do you interact with the terminal?;11
+;I want you to leave my ship.;14
+;*take the needle out of the Klisk*;17
+20;Ha. Ha. Ha. Ha. Ha. Stupid. *No emotion. This doesn't seem to be an insult.*;energy_sphere_dialog
+;What are you?;9
+;Hey. Why is your speech so weird?;10
+;Why do you interact with the terminal?;11
+;I want you to leave my ship.;14
+;*take the needle out of the Klisk*;17
+21;In that case, you didn't waste your money. *The Klisk starts getting his things and packing the tech back into his platform.*;
+;Did it hurt?;23
+;Pleasure working with you.;26
+22;Too bad, but I warned you, human captain. *The Klisk starts getting his things and packing the tech back into his platform.* What can you do?;
+;Did it hurt?;23
+;Pleasure working with you.;26
+23;You mean the translation session? No, of course not. It wasn't pleasant, but you can't call it pain. ;
+;What was it? Why was the sphere speaking through you?;24
+;Pleasure working with you.;26
+24;It's pretty simple. *The Klisk is done getting his things and is clicking contently.* The sphere doesn't perceive the world the way we do. For it to be able to talk to you, I just... let it go through me. I think you can say that. ;
+;Can you elaborate?;25
+;Very interesting, but… Well, pleasure working with you.;26
+25;I can't. *He is still clicking contently, but you can tell the Klisk isn't going to divulge any more.*;
+;Got it. Well, it's been a pleasure working with you.;26
+26;Of course. It was a pleasure for me, too.;
+;…;-1
