@@ -1,0 +1,21 @@
+0;Captain, this thing just blew up next to us and damaged the outer hull badly!;
+;What the hell was that? Gordon, what do you say?;1
+1;It looks like some kind of defense mechanism! Something like… white blood cells! They detect a threat to the organism in us and try to destroy us!;scientist_dialog
+;Hm… Tell me…;2
+2;*Yes?*;scientist_dialog
+;As I understand, trying to reason with them is pointless? ;3
+;So we'll have to keep destroying them before they destroy us. ;4
+;So we're basically space flu, then?;5
+3;"We tried to hail them, but they don't respond. If they really are something like ""cells"" of a living organism, they won't: they aren't sapient.";
+;Right. And what about…;2
+;Okay, let's take care of it. Over and out.;-1
+4;Exactly, Cap. It's a good thing our weapons work in here.;
+;Can you try to slap together something more powerful?;6
+;Right. And what about…;2
+;Okay, let's take care of it. Over and out.;-1
+5;"Exactly! And that's our hope! This ""organism's"" immune system should try to rid itself of us if it can't destroy us! I've had experience with this, before Project Aurora.";scientist_dialog
+;Right. And what about…;2
+;Okay, let's take care of it. Over and out.;-1
+6;I doubt it. First we'll have to study the space around us well, and we don't have time! We have to get out of here now!;scientist_dialog
+;Right. And what about…;2
+;Okay, let's take care of it. Over and out.;-1
