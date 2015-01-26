@@ -1,0 +1,6 @@
+0;*Sarah comes in with a report.* Hey, Cap. Something important happened.;
+;I'm happy to see you too, Frontz. What is it?;1
+1;Something completely jams all of our comm lines every two hours. I mean, I've filtered the signal out and it doesn't bother us anymore-;
+;I'm sorry for interrupting, Sarah, but why do I need to know this? I don't know anything about communications.;2
+2;That's what I'm talking about: the source of the interference is somewhere on the orbit of Earth.;
+;Hm. Interesting. I doubt it's anything serious, could be some new satellite… Oh, you can go now.;-1

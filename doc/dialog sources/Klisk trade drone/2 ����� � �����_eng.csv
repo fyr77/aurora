@@ -1,0 +1,27 @@
+0;*For the first few seconds of the call you only hear a strange tune. Then a Klisk voice speaks, metallic and lifeless.* A Hakazar Corporation trade bot greets you. Hakazar: Be Ahead! Glad to make your acquaintance. The list of goods will be provided on demand. I ask you to phrase your queries simply and concisely for easier processing by the AI.;;;
+;So, it's you jamming all the communication lines?;1;;
+1;*beep* The standard advertisement is transmitted over every possible channel over a set interval of time.;;;
+;Well, I'll be. Okay, over and out.;-1;;
+;Can you cancel the advertisement?;3;;
+3;*beep* Canceling the advertisement is not among the functions the trading bot can perform.;;;
+;Can I return the bot?;4;;
+4;Returning to the warehouse is impossible until all the samples are sold out.;;;
+;No one will buy them, this planet isn't advanced enough.;5;;
+5;*beep* *long beep* Query not understood.;;;
+;Your goods won't sell here, the clients don't have any credits.;6;;
+6;*the long beep again* Query not understood. If rephrasing it is impossible, contact the closest representative of the Hakazar Company.;;;
+;I don't have time for this. I have to attack you.;7;;
+;Representative of the Hakazar Company? Okay... Where do I find one?;8;;
+;All the samples?.. How much do they cost?;10;;
+7;The bot is equipped with defense systems. The advanced AI is capable of fighting at the level of an experienced captain.;;;
+;Yeah, yeah, go to hell, you pile of scrap. *changing the line* Liszkiewicz, power to the weapons.;-1;;
+;Hey, no, that's not what I wanted. It was a joke.;6;;
+8;This trading bot does not have such information.;;;
+;Who does?;9;;
+9;Query not understood. If rephrasing it is impossible, contact the closest representative of the Hakazar Company.;;;
+;I smell bureaucracy, just like home. Over and out, damn it.;-1;;
+;Hey, but how am I supposed to find him, then?;6;;
+10;In case of a wholesale deal, the price of all the samples will be 10 credits.;;;
+;I'm buying.;-1;credits>9;1
+;Can you give me a discount?;6;;
+;You'll have to wait, but I'll be back. Over and out.;-1;;
