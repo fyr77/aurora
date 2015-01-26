@@ -1,0 +1,115 @@
+0;*Only when you get closer to the station do you realize just how big it is. It's hard to imagine how this great structure was built.*;interior_dialog
+;….;1
+1;*The pilot finds the correct dock very easily. The docking itself was even easier. The dock turns out to be an all-purpose one, suitable for ships of various types. The small shuttle lands steadily and safely. The airlock closes. The dock is filled with air. There are slight overtones of machine oil in it, and even slighter ones of spice from the Klisks coming out to meet you.* Human captain? *A... fat snail on a floating platform addresses you.*;interior_dialog
+;Yes, it's me. It's the first time I've seen a Klisk up close.;2
+2;Same for me with the humans. You're very fragile. *The Klisk speaks with earnest curiosity.* I'm sorry for asking, I'm sure it's bad taste... Tell me, how does it feel, being so unbalanced?;
+;Unbalanced?;3
+3;*The Klisk jerks an antenna and points to your soldiers' legs with his hand.* This. Those… walking thing. You balance on them. Isn't it uncomfortable?;
+;I could ask you the same question.;4
+4;The antigrav is very comfortable.;
+;Good. Let's get to business.;7
+;No, I'm talking about moving around without an antigrav. Can't be very comfortable. Otherwise, why would you even need antigravs?;5
+5;You're wrong, it's very comfortable. You're steady, it's soft. And the antigravs… *The Klisk clicks without any rhythm. It must mean embarrassment.* Slime.;
+;Don't tell me any more. Are you supposed to accompany us there?;7
+;What slime?;6
+6;*The Klisk hangs a part of his body from the platform with a bit of effort. You can see that the Klisks' stomachs are silky and soft, and also very muscular. But that is one thing. Another is that there is a thin stream of snot-like greenish slime dripping on the dock floor from the silky part. The spicy smell becomes more obvious. You wonder if anyone would want to lick it.* It's uncouth in public places.;
+;Interesting sight. You have added considerably to my knowledge of the Klisks. But, we have business. Are you supposed to take me somewhere?;7
+7;I'll take you to the Vortangu Corporation office. Our diplomatic representative is its member. It's a long way. We'll have to cross two segments of the station.;
+;Good. We'll follow you. Let's get it over with as soon as possible.;16
+;Is the station segmented?;10
+;Corporation?;13
+;Your station is so big…;8
+8;Yes. The planet cannot be influenced from the outside. Because of that, our main industrial complexes are located right here. Are you surprised?;
+;No, that in itself isn't surprising. Many processes are more efficient in zero gravity conditions, and even delivering cargo isn't much of a problem. We use similar methods ourselves. But what matters is the difference in scale! I mean, the size itself. Your station is... colossal!;9
+9;We're very proud of it ourselves. *The Klisk really does look very proud of it.*;
+;Let's get to it, then? We'll follow you. We don't want to waste too much time.;16
+;"""Segments."" Is your station segmented?";10
+;What was that about corporations?;13
+10;Yes. That's how it was built. The segments are big.;
+;And how did you build it? It's mind-boggling.;11
+;It's time to move out. Let's not waste any more time.;16
+;What was that about corporations?;13
+11;If you mean the technology, I'm not authorized to sell them. *The clicks are louder now.* If you mean the motivation, it's the teachings of the Code. The knowledge in it built it.;
+;I don't understand.;12
+;It's time to move out. Let's not waste any more time.;16
+;What was that about corporations?;13
+12;You aren't Klisk.;
+;And?;14
+;It's time to move out. Let's not waste any more time.;16
+;Tell me about the corporations.;13
+13;Vortangu. Hakazar. Falronek. Porakef. Trokanfe. The Code unites them and gives them the wisdom to trade wisely and rule Kliskada.;
+;Wait a second. The Code is a union of corporations?;15
+;It's time to move out. We'll follow you.;16
+14;You aren't Klisk.;
+;It's time to move out. Let's not waste any more time.;16
+;Tell me about the corporations.;13
+15;*Clicks of laughter.* What nonsense! Of course not. The Code is the Code. The Conglomerate of Corporations is a ruling organ. Corporatocracy. ;
+;I think I get it, but I don't understand anything. Right. I think we've wasted enough time talking. We have to move. You go ahead, we'll follow you.;16
+16;Of course. *The Klisk turns his rear part to you and moves ahead a little bit.* But we'll have to walk a little. It's forbidden to use passenger transport in the docks.;
+;We're okay with that.;17
+;*Follow the Klisk silently, trying to get there as soon as possible.*;24
+17;*The Klisk isn't moving slowly at all: his platform effortlessly reaches the speed of a briskly walking man, letting him stay in front without getting too far ahead. You leave the dock. The ceiling instantly becomes lower, but not by much. The atmosphere is very industrial. There are metal walls with traces of corrosion, muffled Klisk clicking here and there, and the air smells of some kind of oil. About three hundred meters ahead and behind you are gates to different docks.*;interior_dialog
+;…;18
+18;*You pass a dock gate. It's closed. The next one is open, and you can see a heated discussion going on inside. Some Klisk is clicking like mad and cursing loudly. The other one (apparently, he has just docked) is making excuses, saying something about a stupid Bork who got into a fight and crashed his ship.* ;interior_dialog
+;…;20
+;What's going on there?;19
+19;How should I kn- *Your escort turns to the dock and stops.* Wait, no, I do recognize the situation. The guard of an important shipment is dead. It's all right, they'll find a replacement soon. Borks. Borks are dumb. But if you want a guard, they're your best bet.;
+;…;20
+20;*You only leave the docks in forty minutes, approaching a massive door. The Klisk looks pleased with your walk. He floats over to the door and says something into... his platform. A few seconds later, the door opens.*;interior_dialog
+;Wow, holy hell!;21
+21;*No one can blame you for being surprised. Wherever you look, there are some kinds of factories. And their noise. And their smell. But in any case, it looks more like a very bad neighborhood in some city than a space station segment. Only the gigantic door and the same metal floor remind you that you are inside an artificial structure.* I see our station has impressed you.;interior_dialog
+;It looks bigger from the inside than from the outside. ;22
+22;It's possible. As far as I know, the ceilings are… concealed. I can't say with what, it's not my specialty. Optical illusions.;
+;Hm. I get it, then.;23
+23;*There is a lot of noise everywhere, but there are few actual Klisks. And the ones that are there don't look like your escort at all. Some of them move around the floor on their own, leaving a sticky, oily, shiny trail behind them. Some of them get around using a different kind of platforms with powerful manipulator limbs.*;
+;…;24
+24;*After a half-hour of walking, you reach something that looks like a small tram. It's empty, and it looks brand new.* Get in, please. *The doors open. The inside is very spacious and well-lit, but there isn't anything that looks like a seat or a chair.*;interior_dialog
+;Is it going to take long?;25
+25;Possibly. *The doors shut. The tram takes off very softly and accelerates quickly. The shock absorbers creak, the engine hums. The Klisk escort lands his antigrav and squeezes in a bit. It seems like he intends to get some shut-eye.*;
+;You don't want to be disturbed?;26
+;What, is this going to be a long ride?;27
+;It's kind of unusual. Is this an industrial neighborhood?;28
+;*wait and look out of the window*;29
+;*try to get some sleep standing up*;31
+26;I don't mind.;
+;What, is this going to be a long ride?;27
+;It's kind of unusual. Is this an industrial neighborhood?;28
+;*wait and look out of the window*;29
+;*try to get some sleep standing up*;31
+27;At least two hours. The station is very big. The biggest segment is the industrial one. We're in it right now.;
+;You don't want to be disturbed?;26
+;It's kind of unusual. Is this an industrial neighborhood?;28
+;*wait and look out of the window*;29
+;*try to get some sleep standing up*;31
+28;Yes. The industrial segment. It's almost completely automated, there are only 20 Klisk employees… *The escort clicks quickly and abruptly and squirms again.*;
+;You don't want to be disturbed?;26
+;*wait and look out of the window*;29
+;What, is this going to be a long ride?;27
+;*try to get some sleep standing up*;31
+29;*The Klisk escort jerks a couple of times and falls asleep. The tram is going fast, but it really is a long time before it reaches the end of the segment. It is there that you see the difference. There are many more Klisks in the residential neighborhoods. It's noisy, too, but it's the noise of a normal city, not of an industrial zone.*;alien_city_dialog
+;*try to get some sleep standing up*;31
+;*continue looking out of the window*;30
+30;"*Going into the residential neighborhood, the tram rails suddenly arch quite high up, and now the tram is riding at a pretty steep elevation. It's swaying a bit more now. The view out of the window isn't as good now, but you can still see that the residential segment is pretty busy. There are cars, Klisks on antigravs, Klisks on simpler platforms, Klisks ""on foot."" Sometimes you can see Rogues. A couple of Borks in expensive-looking clothes are sitting on a bench near a fountain and talking about something.*";alien_city_dialog
+;….;31
+31;"*Another hour and another couple of segments. The one you are in now reminds you of a regular financial district in an Earthside city. The buildings are packed very densely; there doesn't seem to be a distinction between traffic and pedestrial areas here. You can only see living beings if you look inside the windows of giant local complexes. The tram stops at a special platform next to one of those. ""Vortangu"" is written on the wall. It means you're there. The Klisk floats up nimbly, as if he was never asleep. Again, he's in front and you're behind him.* I hope the ride didn't bore you.";alien_city_dialog
+;Not really. But let's go.;32
+32;*A hundred meters from the platform is the entrance to the Vortangu Company courtyeard. A massive gate opens, revealing it to you. The Klisk floats in nonchalantly, not marveling at anyhing, but there are definitely things for a foreigner to gawk at. Two statues in the center of the big room. One is a strange symbol, the other is some Klisk, life-size. At least once a minute some company employee will stop to bow to the first statue, and then the second one.*;alien_city_dialog
+;Wait. What is this? What are those statues and why does everyone keep bowing to them?;33
+;*follow the escort silently*;36
+33;This? *The Klisk stops and clicks rarely and loudly. His voice starts to sound respectful.* This is the Symbol of the Code. You have to respect the Code. The second one is Mr Eloo Vortangu. He is the founder of the Vortangu Company. The Code says that apart from the letter of the Code, you have to respect an esteemed Klisk who found wealth and success following the Code. Every time we walk past these two symbols, we bow to them.;
+;Interesting, but we have to go on.;36
+;So what, you have to bow to them? Is this some kind of religion?;34
+34;No. *In the background, a Klisk with a particularly well-decorated antigrav lowers himself and touches the pedestal with his antennae.* We don't have to. The statues are just statues.;
+;Let's go on, then.;36
+;Why do you do it, then?;35
+35;You have to respect the Code. And the Code says that a Klisk who has gotten lucky because of the Code deserves respect.;
+;You don't have to, but… Weird. Right. Let's go on.;36
+36;*You go through a rather normal door and go down some of the building's hallways. Then you're in an elevator. Then you're in the hallways again. There is nothing to note here. Everything is very wide, made with Klisks and their floating platforms in mind, but this is where the differences end. Wherever you look, the Klisks are doing normal office jobs like on Earth, there isn't much of a difference. In fact, it's so similar that it feels strange.* We're there.;
+;Right. Do I go in?;37
+37;*There is a massive door in front of you. There is nothing of note about it, except the fact that there is no glass in it. It's opaque.* Yes, you go in. As you understand, you will talk with Mr Eroloa alone. Do you want to know anything about him?;
+;No, there's no need. I've wasted enough time already.;-1
+;I'm listening.;38
+38;*The escort thinks for a bit, then he clicks rapidly, then he speaks up.* He's very old. Serious about tradition. But not afraid of anything new.;
+;So how do I carry myself with him?;39
+39;*The Klisk throws his hand up and jerks his antennae.* I don't know.;
+;In that case, I'm going in. Guys, wish me luck.;-1

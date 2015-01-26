@@ -1,0 +1,26 @@
+0;*The escort takes you to the dock where you witnessed a heated argument on the way to Eroloa. There is some kind of shuttle there, too. Next to it is a Klisk on a richly decorated antigrav. Apparently, he's waiting for you.*;
+;…;1
+1;*The escort leaves and the Klisk floats over to you. Up close you can see that he's not all well: his hand is trembling, his antennae are jerking slightly, and his eyes are bloodshot.* I'm Dlorou Harten. Or just Dlorou. You're the human captain, I know that. You're to escort us.;
+;That's right. Is the cargo that important?;2
+;Are you expecting an attack?;3
+;Where are we going, anyway?;4
+;Exactly. Let's not waste any time. Are we taking off?;6
+2;*Dlorou clicks in surprise.* Important cargo? Why would you think that? It's trash ready for recycling. Spare parts for heave machinery. Second-hand microchips. Some raw oil for scientific experiments.;
+;Are you expecting an attack?;3
+;Where are we going, anyway?;4
+;I think it's time to take off.;6
+3;No, of course not. *Dlorou tries to click, but he can't, his body just shudders a little.* What attack? The Borks only attack rich caravans... What we're carrying is trash to them.;
+;Where are we going, anyway?;4
+;I think it's time to take off.;6
+;Trash? Not important cargo?;2
+4;A small co-owned station at the orbit of star XH-201, its coordinates are ${klisk_trade.coords}. We co-own it with the Rogues. The station and the system.;
+;I think it's time to take off.;6
+;That's right. Is the cargo that important?;2
+;Are you expecting an attack?;3
+6;Yeah. *The Klisk lets out muffed grunts. You can hear sloshing and cracking in his antennae.*;
+;Are you okay?;7
+7;A bit under the weather. Don't pay it any mind.;
+;It doesn't look like you're just a bit under the weather.;8
+;Okay, let's take off.;-1
+8;*Dlorou gets angry.* Trust me, that's exactly what it is. I'll know. The Code says that he who treats himself too softly becomes soft.;
+;Okay, let's take off.;-1

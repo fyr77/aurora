@@ -1,0 +1,25 @@
+0;*Your hail is answered almost immediately. It's some Rogue, looking pretty worn-out.* Orbital station XH-201. I recognize Dlorou's transport ship, but I don't recognize yours.;;;
+;Aurora 2, homeport Earth. Not many people know us. We're humans.;1;;
+1;I've heard something about you. Connect me to Dlorou.;;;
+;Sure.;2;;
+2;*Dlorou's ship takes its time to respond. When it does, a voice you don't recognize is speaking.* Oh… Human captain? Is that you?;klisk_dialog;;
+;Yes, it's me. Where is Mr Harten?;3;;
+3;Something's wrong with him! He's been like this for hours! He's unconscious, his vitals are pretty low!;klisk_dialog;;
+;Goddamn it. I knew it would end like this. Okay. I'll handle the arrival. As soon as we dock, take Dlorou to the hospital.;4;;
+4;*You click back to the station channel.* Dlo… This isn't Dlorou! Human captain, what's going on?;;;
+;Dlorou Harten is sick. He's been unconscious for hours, and he can't respond. He needs medical attention urgently.;5;;
+5;Dlorou? Sick? Damn it. Must have taken off sick again… Right. I'm opening the port for you, come dock. I hope it's nothing serious.;;;
+;I hope so, too. Over and out.;6;;
+6;*You aren't needed at the station, so you spend the couple of hours it takes to dock and take care of other things in your office. You're distracted from important documents by a call.* Human captain? Human captain?;;;
+;Yes, I'm listening. Oh. It's you. Is Dlorou okay?;7;;
+7;He's fine… But he won't be conscious for some time.;;;
+;I'm very sorry. What did you want?;8;;
+8;Goods. Someone has to do the deal, declare the transaction and all that... *The Rogue throws his long arms up, and looks positively sorry. In fact, you'd say he looks morose in this case.*;;;
+;You want me to do it?;9;;
+9;You're the highest ranking officer after Dlorou. Apart from that, it'll make the entire thing go over faster. If you don't do it, both of us will have to wait until Dlorou comes to. But if you agree to do it, you can get it over with quickly, hand Dlorou over to the ship's sick bay, and head back.;;;
+;Uh, no. I don't know the first thing about Klisk trading, and I don't think I ever will. I'm sorry, but I can't help you in any way. We'd better wait.;10;;
+;Well… If no one else can do it, all right. Do I come over to the station?;11;;
+10;Too bad. But I understand.;;;
+;Over and out.;-1;;
+11;Yes. The deals are done personally. Please be so kind as to come to the dock where Dlorou's ship is.;;;
+;I'll be there in about forty minutes. Over and out.;-1;;1

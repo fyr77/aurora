@@ -1,0 +1,35 @@
+0;*It takes three whole hours to dock the ships. Then you wasted forty minutes deciding where to throw the main part of the party. In the end, you gather in the Aurora's giant dining room. The Klisks are eating their food, and the humans theirs. Communication isn't going swimmingly: neither of the parties are used to having such neighbors. But it gets better over time.*;interior_dialog
+;…;1
+1;*When the official part is over, Dlorou shows you around his ship personally. It's a transport ship, heavily armored and well-armed. The tour concludes in his captain's quarters.* And this is the brain of the ship. My office.;
+;Hm. It's big.;2
+2;That's right. *Dlorou sits at his table, landing the antigrav platform smoothly.* When forty percent of your body is a flying piece of metal, you need a lot of space. Do you drink?;
+;What?;3
+3;I've been learning about you humans… Ethanol. We drink it to cloud our minds, too. You drink ethanol, but some people don't. Do you drink?;
+;Pour it.;4
+;I don't, but I'll have some with you.;4
+;Oh, me… I don't drink, thank you. But if you want to, I won't get in your way. I'll have something with no alcohol.;5
+4;*Dlorou takes out a small jar from the drawer. He pours two glasses. Judging from the smell, it's weak wine.* It wouldn't have been unethical to do this in front of the main crew. They can't drink. Well... *Dlorou gets ready to drink.* To the success of our venture.;
+;And to luck. After all, no one's attacked us.;6
+5;*Dlorou pours himself some kind of wine, and something like fruit juice for you. It's sour and a little bitter.* To the success of our venture.;
+;Yeah, you're right. I'm glad no one's attacked us.;6
+6;Ha. *Dlorou tries to click sarcastically, but he can't, going back to wheezing loudly.* Why? Space is a very calm place. Especially if you're transporting trash. Did you think that if you have gun, you'll definitely have to use it?;
+;But why did you need a guard if there was never any danger of a raid?;8
+;"I think you're still ""under the weather.""";7
+7;It'll pass. Just…;
+;Okay. But why did you need a guard if there was never any danger of a raid?;8
+8;If we actually were attacked but didn't have a guard with us, I wouldn't have gotten my insurance. That's it. Besides... *You begin to hear respect in Dlorou's voice.* The Code says that it is better to try too hard and make a fool of yourself than to not try at all and lose everything. This time everything's gone pretty well, and we'll be there soon. It could have turned out different.;
+;"I think you're still ""under the weather.""";7
+;The Code. The Klisks mention it all the time. I still don't understand what it is, exactly.;9
+9;Do you? Don't try. No one understands it. The Code is the Code. We are what we are thanks to it.;
+;Really? It looks a lot like a religion, or some kind of a set of rules.;10
+10;You take it too superficially, human captain... *Dlorou finishes his glass and pours himself some more wine.* You take the Code as something strict. Something unchangeable. I... I don't know how to put it. It just isn't so.;
+;Wait, wait, wait. What is it, then, that Code of yours? A book? A scroll? You trade using it, but how do you do it? It all looks very illogical.;11
+11;*Dlorou grunts, but then he smiles.* We've touched upon trade. I can tell a bit more about it. *Dlorou takes a sip from the glass.* It really is simple. You exchange similar things, no more and no less. Anyone can understand this. Take our case, for example. Spare parts for recycling and tools. Trading it means the same amount of spare parts and tools that are needed on Kliskada. However, if the right amount or the right kind of goods is not available, you have to trade it for money. Nothing else, since it is forbidden by the Code.;
+;Hm. And what about weapons? Or technology?;13
+;Would you take a lot of money for that?;12
+12;No, of course not. I have regular goods, I can't take much for transporting them.;
+;What about microchips, and spare parts for lathes?;13
+13;Same thing. Similar things for similar things. Or money.;
+;It does sound simple. But the Code doesn't only talk about commerce. It also regulates your normal lives.;14
+14;Why can't you understand? *Dlorou gets angry.* It doesn't! It just... *He coughs even harder. He empties the glass in one swig, and then makes it clear that the conversation is over.* Enough about this. I'm not in the condition to talk about such things.;
+;In that case, I won't take up any more of your time. Get well!;-1

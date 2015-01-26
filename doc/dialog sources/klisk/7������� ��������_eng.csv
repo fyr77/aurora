@@ -1,0 +1,43 @@
+0;*The airlock doors close behind your shuttle. Dlorou's transport ship takes up almost all of the space. You can see that the cargo hold doors are open and ready for a shipment. The now-familiar Rogue from the call is standing nearby. He's talking about something with some Klisk.*;interior_dialog;;;
+;…;1;;;
+1;*The shuttle lands. You approach the two.* Oh, human captain… I'm glad you've decided to do the deal.;;;;
+;Of course. What do I have to do?;2;;;
+2;It's simple. Mr Harkla has all the documents, *the Klisk nods* he's Mr Dlorou's first mate. You only need to pick the goods you want loaded in return for the ones you unloaded, and sign the papers for it.;;;;
+;Why can't Harkla pick the necessary goods?;3;;;
+3;He isn't authorized to.;;;;
+;And if the stupid Bork was here instead of me, the one who was supposed to be the guard before I showed up?;4;;;
+4;We would have waited until Dlorou got better. But the Bork isn't here. You are.;;;;
+;You know, I'm not going to take responsibility for someone else's shipment. Thank you, that won't be necessary. Harkla, you take care of it. I'll be in my quarters.;5;;;
+;Okay. Let's get to it.;6;;;
+5;Okay. But we'll have to wait until Dlorou is better anyway.;;;;
+;Well, we'll wait, then.;-1;;;
+;What? Damn it. Okay. I don't want to stick around too long. Let's get this over with.;6;;;
+6;*Harkla hands over the papers and goes back into Dlorou's ship to oversee the shipment. The Rogue takes out the cargo manifest and reads it monotonously.* Trash for recycling, one thousand.;;;;
+;And? What do I choose from? I don't know anything about this.;7;;;
+7;Oh, I'm sorry. *The Rogue is embarrassed.* Of course. We can offer you the same kind of trash in return, for it to be recycled at Kliskada, since we don't work with it. Or I could give you its worth in money, or barter it for something.;;;;
+;Let's start over, then. But now list everything.;8;;;
+8;*The Rogue nods.* Trash for recycling, one thousand. In return: trash of a different kind, hah... Or geological equipment... it's very expensive, but we need to sell it off urgently, which is why we're selling it, three hundred. There are central processors, Zorsan made, seven hundred. There is also some Bork weaponry, two hundred, you understand that it isn't cheap. Or we could give you money.;;;;
+;Load the trash.;9;;;first_good
+;I'll take the money.;10;;;first_money
+;Expensive equipment? Load it. And don't let Dlorou tell you I didn't do my best.;10;;;
+;Central processors? Sounds intriguing.;10;;;
+;Weapons are always good. Load them.;10;;;
+9;Eight hundred is less than one thousand. We need to add something.;;;;
+;Throw in some credits for Dlorou.;10;;;
+;Load the equpiment.;10;;;
+;Throw in some processors… I'm joking! Load them carefully.;10;;;
+;Throw in a few rifles.;10;;;
+10;Great. Now... spare parts for lathes for producing spaceships. Five thousand. In return: gold ore, five thousand. Or money. Or... *He rummages around in the papers.* There. Or lathes for asteroid mining. And random things, like, consumer goods... Ten thousand, they're light and compact. And pharmaceutical drugs, three thousand.;;;;
+;Load the gold ore.;11;;;
+;Money, of course.;11;;;second_money
+;Lathes for lathes? I think it's a wise decision.;11;;;second_good
+;Give me the consumer goods.;11;;;
+;Pharmaceuticals? Hmmm. Not bad. Load them.;11;;;
+11;And the last thing. Second-hand microchips, one thousand five hundred. In return: new microchips, seven hundred. Money. Energy crystals, one thousand. *Noticing your confusion, the Rogue adds.* For autonomous work of mining modules. They use them at colonies. Colonizing equipment, seven hundred. Radioactive elements, two thousand.;;;;
+;The microchips, of course.;12;;;third_good
+;Money.;12;;;third_money
+;Energy crystals? Oh. I can't resist.;12;;;
+;Colonizing equipment.;12;;;
+;Radioactive elements. I hope they're sealed well.;12;;;
+12;That's it, then. *The Rogue signs the document, gets your signature, and smiles.* I'm happy with the deal. I hope you are, too.;;;;
+;Yeah, you hope. But I'm happy it was over so soon. I have to go.;-1;;1;
