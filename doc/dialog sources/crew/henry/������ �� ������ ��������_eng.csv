@@ -4,8 +4,6 @@
 ;Give me a report on the condition of assets you are entrusted with. ;997;condition=bad;;
 ;Give me a report on the condition of assets you are entrusted with. ;3;condition=ok;;
 ;No, nevermind. Just checking in. Over and out.;-1;;;
-2;In that case, I'm waiting for you in my office. Walk past the main barracks and it's there, you can't miss it. ;;;;
-;Great. Over and out, Liszkiewicz, I'll be right there. ;-1;;;
 3;*Henry turns away from the camera, looks at a different screen, and gives you a quick report.* The combat unit is at full strength, so is the emergency response team. The main battle systems are fine. To put it simply, we're ready for war, Captain. You can consult my report for more details, it is already in your possession. ;;;;
 ;Great. Glad to hear it.;0;;;
 997;*Henry hastily looks at something on a diferent screen.* The combat unit is partially under strength, Captain. You want my recommendation? The best option would be going back to Earth and enlisting more troops. But, normal operation is possible even without that. There are more details in my report, as usual. You already have it.  ;;;;
