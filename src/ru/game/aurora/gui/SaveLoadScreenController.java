@@ -103,8 +103,6 @@ public class SaveLoadScreenController implements ScreenController {
     //magic
     @NiftyEventSubscriber(pattern = ".*Button")
     public void onClicked(String id, ButtonClickedEvent event) {
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        numericId -= Integer.parseInt(slots.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        slots.setFocusItemByIndex(numericId);
+        slots.selectItem((SaveGameManager.SaveGameSlot) event.getButton().getElement().getParent().getUserData());
     }
 }

@@ -25,6 +25,10 @@ public class SellOnlyInventoryItem extends ItemWithTextAndImage implements Inven
     // if set, can not be sold to these factions
     private Set<String> factionFilter;
 
+    public SellOnlyInventoryItem(String localizationGroup, String id, String image, double price, boolean isUnique, String... factionFilter) {
+        this(localizationGroup, id, new Drawable(image), price, isUnique, factionFilter);
+    }
+
     public SellOnlyInventoryItem(String localizationGroup, String id, Drawable drawable, double price, boolean isUnique, String... factionFilter) {
         super(id, drawable);
         this.price = price;

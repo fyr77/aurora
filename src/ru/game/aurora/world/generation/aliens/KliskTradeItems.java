@@ -2,10 +2,12 @@ package ru.game.aurora.world.generation.aliens;
 
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.common.Drawable;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.engineering.ShipUpgrade;
+import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 
@@ -73,7 +75,28 @@ public class KliskTradeItems
 
         @Override
         public boolean canBeSoldTo(World world, Faction faction) {
-            return true;//world.getResearchAndDevelopmentProjects().getResearchProjects().containsKey("alien_alloys");
+            return world.getResearchAndDevelopmentProjects().getResearchProjects().containsKey("alien_alloys");
+        }
+    }
+
+    public static class ScienceTheorySellItem extends SellOnlyInventoryItem
+    {
+
+        private static final long serialVersionUID = 1L;
+
+        final String name;
+
+        public ScienceTheorySellItem(String name)
+        {
+            super("research", "alien_" + name, "technology_research", Configuration.getDoubleProperty("trade.theory_price"), true);
+            this.name = name;
+        }
+
+        @Override
+        public void onReceived(World world, int amount) {
+            world.getPlayer().getResearchState().getCompletedProjects().add(new BaseResearchWithFixedProgress(name, "technology_research", 0, 150));
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/crew/gordon/science_theories/gordon_science_theories_" + name + ".json"));
+            world.getPlayer().getShip().getCrewMembers().get("gordon").changeReputation(1);
         }
     }
 }

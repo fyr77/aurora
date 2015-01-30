@@ -63,9 +63,8 @@ public class JournalScreenController implements ScreenController {
         }
         EngineUtils.resetScrollbarX(codexList);
         codexList.clear();
-        for (JournalEntry e : journal.getCodex().values()) {
-            codexList.addItem(e);
-        }
+
+        codexList.addAllItems(journal.getCodex().values());
         selectFirstItemInCurrentList();
         world.setPaused(true);
     }

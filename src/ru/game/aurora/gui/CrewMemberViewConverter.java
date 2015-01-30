@@ -25,4 +25,9 @@ public class CrewMemberViewConverter
     public int getWidth(Element element, CrewMember o) {
         return 512;
     }
+
+    @Override
+    public int getHeight(Element element, CrewMember crewMember) {
+        return 138;
+    }
 }

@@ -30,4 +30,11 @@ public class EngineeringListViewConverter implements ListBox.ListBoxViewConverte
         final TextRenderer textRenderer = text.getRenderer(TextRenderer.class);
         return 64 + ((textRenderer.getFont() == null) ? 0 : textRenderer.getFont().getWidth(getText(item)));
     }
+
+    @Override
+    public int getHeight(Element element, Object o) {
+        final Element text = element.findElementByName("#name_text");
+        final TextRenderer textRenderer = text.getRenderer(TextRenderer.class);
+        return textRenderer.getFont().getHeight();
+    }
 }

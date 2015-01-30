@@ -189,17 +189,11 @@ public class TradeScreenController implements ScreenController
 
     @NiftyEventSubscriber(pattern = ".*storage_to_inventory")
     public void onReleased(String id, ButtonClickedEvent event) {
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        ListBox itemsList = merchantList;
-        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        itemsList.selectItemByIndex(numericId);
+        merchantList.selectItem((Multiset.Entry<InventoryItem>) event.getButton().getElement().getParent().getUserData());
     }
 
     @NiftyEventSubscriber(pattern = ".*inventory_to_storage")
     public void onPrimaryReleased(String id, ButtonClickedEvent event) {
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        ListBox itemsList = inventoryList;
-        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        itemsList.selectItemByIndex(numericId);
+        inventoryList.selectItem((Multiset.Entry<InventoryItem>) event.getButton().getElement().getParent().getUserData());
     }
 }

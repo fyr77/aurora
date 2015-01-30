@@ -43,6 +43,10 @@ public class KliskMainDialogListener implements DialogListener {
             defaultTradeInventory.add(new KliskTradeItems.AdvancedRadarsSellItem());
             defaultTradeInventory.add(new KliskTradeItems.AlienAlloysSellItem());
             defaultTradeInventory.add(new KliskTradeItems.ResourceSellItem());
+            defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("math"));
+            defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("physics"));
+            defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("biology"));
+            defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("chemistry"));
         }
         return defaultTradeInventory;
     }

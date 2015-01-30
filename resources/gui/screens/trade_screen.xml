@@ -55,13 +55,13 @@
                     </control>
                     <!-- inventory and upgrades -->
                     <panel height="10px"/>
-                    <panel childLayout="horizontal">
+                    <panel childLayout="horizontal" height="*">
 
                         <panel childLayout="vertical" width="49%">
                             <text id="storageText" style="button-font" align="center" text="${gui.ship}"
                                   height="32px"/>
                             <control id="inventoryList" name="listBox" vertical="optional" horizontal="optional"
-                                     displayItems="4" selection="Single"
+                                     height="95%" selection="Single"
                                      visibleToMouse="true"
                                      viewConverterClass="ru.game.aurora.gui.InventoryViewConverter">
                                 <control name="trade_ship_line"
@@ -84,7 +84,7 @@
                             <text id="inventoryText" style="button-font" align="center" text="${gui.trade.merchant}"
                                   height="32px"/>
                             <control id="merchantList" name="listBox" vertical="optional" horizontal="optional"
-                                     displayItems="4" selection="Single"
+                                     height="95%" selection="Single"
                                      viewConverterClass="ru.game.aurora.gui.InventoryViewConverter"
                                      visibleToMouse="true"
                                     >
@@ -104,8 +104,7 @@
                         </panel>
 
                     </panel>
-                    <panel height="*"/>
-                    <panel childLayout="horizontal" height="50px">
+                    <panel childLayout="horizontal" height="80px">
                         <panel width="85%"/>
                         <control id="close_button" name="button" label="Close" width="150px" height="45px">
                             <interact onClick="closeScreen()"/>

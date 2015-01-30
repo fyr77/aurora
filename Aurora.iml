@@ -5,9 +5,12 @@
     <output-test url="file://$MODULE_DIR$/build/classes/test" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/native" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
@@ -20,9 +23,6 @@
     <orderEntry type="library" exported="" name="Gradle: juniversalchardet-1.0.3" level="project" />
     <orderEntry type="library" exported="" name="Gradle: Libnoiseforjava-master" level="project" />
     <orderEntry type="library" exported="" name="Gradle: lwjgl" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: nifty-1.3.2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: nifty-default-controls-1.3.2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: nifty-slick-renderer-1.3.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: rlforj.0.3" level="project" />
     <orderEntry type="library" exported="" name="Gradle: slick" level="project" />
     <orderEntry type="library" exported="" name="Gradle: xpp3-1.1.4c" level="project" />
@@ -34,6 +34,9 @@
     <orderEntry type="library" exported="" name="Gradle: logback-classic-1.0.13" level="project" />
     <orderEntry type="library" exported="" name="Gradle: logback-core-1.0.13" level="project" />
     <orderEntry type="library" exported="" name="Gradle: slf4j-api-1.7.6" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: nifty-1.3.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: nifty-default-controls-1.3.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: nifty-slick-renderer-1.3.4-SNAPSHOT" level="project" />
   </component>
 </module>
 

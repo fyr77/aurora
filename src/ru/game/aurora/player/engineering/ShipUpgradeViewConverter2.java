@@ -21,4 +21,9 @@ public class ShipUpgradeViewConverter2 implements ListBox.ListBoxViewConverter<S
         return ((textRenderer.getFont() == null) ? 0 : textRenderer.getFont().getWidth(item.getLocalizedDescription())
                 + item.getDrawable().getImage().getWidth());
     }
+
+    @Override
+    public int getHeight(Element element, ShipUpgrade shipUpgrade) {
+        return 138;
+    }
 }

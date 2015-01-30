@@ -71,9 +71,9 @@ dependencies {
     compile 'ch.qos.logback:logback-core:1.0.13'
     compile 'org.lwjgl.lwjgl:lwjgl-platform:2.9.1:'
     compile fileTree(dir: 'third-party', include: ['lwjgl.jar']) // look for version
-    compile fileTree(dir: 'third-party', include: ['nifty-1.3.2.jar']) // look for version
-    compile fileTree(dir: 'third-party', include: ['nifty-default-controls-1.3.2.jar']) // look for version
-    compile fileTree(dir: 'third-party', include: ['nifty-slick-renderer-1.3.2.jar']) // look for version
+    compile fileTree(dir: 'third-party', include: ['nifty-1.3.4-SNAPSHOT.jar']) // look for version
+    compile fileTree(dir: 'third-party', include: ['nifty-default-controls-1.3.4-SNAPSHOT.jar']) // look for version
+    compile fileTree(dir: 'third-party', include: ['nifty-slick-renderer-1.3.4-SNAPSHOT.jar']) // look for version
     compile fileTree(dir: 'third-party', include: ['nifty-style-back-1.3.2.jar']) // look for correct jar
     compile fileTree(dir: 'third-party', include: ['rlforj.0.3.jar']) // look for correct jar
     compile 'org.slf4j:slf4j-api:1.7.5'

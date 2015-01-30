@@ -47,10 +47,16 @@ public class SaveViewConverter implements ListBox.ListBoxViewConverter<SaveGameM
         } else {
             element.findElementByName("#loadButton").enable();
         }
+        element.setUserData(item);
     }
 
     @Override
     public int getWidth(Element element, SaveGameManager.SaveGameSlot item) {
-        return SaveGameManager.SCREEN_SIZE + 400 + 2 * 150 + 20;
+        return SaveGameManager.SCREEN_SIZE + 400 + 2 * 150 + 20 + 100;
+    }
+
+    @Override
+    public int getHeight(Element element, SaveGameManager.SaveGameSlot saveGameSlot) {
+        return 138;
     }
 }

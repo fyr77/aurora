@@ -2,7 +2,7 @@
 
     <controlDefinition name="journal_control">
         <panel childLayout="horizontal" width="100%" height="100%">
-            <control id="#itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="25" selection="Single" width="30%"/>
+            <control id="#itemsList" name="listBox" vertical="optional" horizontal="optional" height="100%" selection="Single" width="30%"/>
             <panel width="10px"/>
 
             <control name="scrollPanel" horizontal="false" height="100%">

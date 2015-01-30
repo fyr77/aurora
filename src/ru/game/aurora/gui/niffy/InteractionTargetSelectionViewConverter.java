@@ -28,4 +28,9 @@ public class InteractionTargetSelectionViewConverter implements ListBox.ListBoxV
         return ((textRenderer.getFont() == null) ? 0 : textRenderer.getFont().getWidth(o.getName())
                 + ((o.getImage() == null) ? 0 : o.getImage().getWidth()));
     }
+
+    @Override
+    public int getHeight(Element element, GameObject gameObject) {
+        return 64;
+    }
 }

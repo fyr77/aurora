@@ -29,6 +29,7 @@ public class InventoryViewConverter implements ListBox.ListBoxViewConverter<Mult
                 useButton.hide();
             }
         }
+        element.setUserData(o);
     }
 
     private String getText(Multiset.Entry<InventoryItem> item) {
@@ -55,5 +56,10 @@ public class InventoryViewConverter implements ListBox.ListBoxViewConverter<Mult
         final TextRenderer textRenderer = text.getRenderer(TextRenderer.class);
         return ((textRenderer.getFont() == null) ? 0 : textRenderer.getFont().getWidth(getText(o)))
                 + ((o.getElement().getImage() == null) ? 0 : o.getElement().getImage().getWidth());
+    }
+
+    @Override
+    public int getHeight(Element element, Multiset.Entry<InventoryItem> inventoryItemEntry) {
+        return 64;
     }
 }
