@@ -19,7 +19,7 @@
             <control id="itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="25" selection="Single" width="*" viewConverterClass="ru.game.aurora.gui.ResearchListViewConverter">
                 <control name="research_line" controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
                     <effect>
-                        <onCustom customKey="focus" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
+                        <onCustom customKey="hover" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
                         <onCustom customKey="select" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
                         <onCustom customKey="select" name="textColor" post="false" color="#fc0f" neverStopRendering="true" timeType="infinite" />
                     </effect>

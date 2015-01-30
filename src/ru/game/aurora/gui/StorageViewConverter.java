@@ -29,7 +29,7 @@ public class StorageViewConverter implements ListBox.ListBoxViewConverter {
 
     @Override
     public int getHeight(Element element, Object o) {
-        final Element text = element.findElementByName("#name_text");
+        final Element text = element.findElementByName("#item");
         final TextRenderer textRenderer = text.getRenderer(TextRenderer.class);
         return textRenderer.getFont().getHeight();
     }
