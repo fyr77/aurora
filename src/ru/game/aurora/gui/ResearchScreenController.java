@@ -154,12 +154,7 @@ public class ResearchScreenController implements ScreenController {
     // works for increase/decrease scientists buttons, makes item in list selected (by default clicking on button does not select item in list)
     @NiftyEventSubscriber(pattern = ".*crease_scientists")
     public void onClicked(String id, ButtonClickedEvent event) {
-
-        int numericId = Integer.parseInt(id.split("#")[0]);
         ListBox itemsList = availableResearch.findNiftyControl("itemsList", ListBox.class);
-        // hack. No idea how ids are distributed between list elements, they seem to start from arbitrary number and be sorted in ascending order
-        // so in order to get index of clicked element, must subtract from its id id of the first one
-        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        itemsList.selectItemByIndex(numericId);
+        itemsList.selectItem(event.getButton().getElement().getParent().getUserData());
     }
 }

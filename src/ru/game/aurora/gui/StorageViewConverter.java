@@ -17,6 +17,7 @@ public class StorageViewConverter implements ListBox.ListBoxViewConverter {
     public void display(Element element, Object o) {
         Multiset.Entry<InventoryItem> item = (Multiset.Entry<InventoryItem>) o;
         EngineUtils.setTextForGUIElement(element.findElementByName("#item"), item.getCount() + " " + item.getElement().getName());
+        element.setUserData(o);
     }
 
     @Override

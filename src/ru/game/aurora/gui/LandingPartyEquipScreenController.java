@@ -202,19 +202,23 @@ public class LandingPartyEquipScreenController implements ScreenController {
     }
 
     public void onStorageToInventoryClicked() {
-        localLandingParty.pickUp(storageList.getFocusItem().getElement(), 1);
-        shipStorage.remove(storageList.getFocusItem().getElement());
-        if (storageList.getFocusItem().getCount() == 0) {
-            storageList.removeItem(storageList.getFocusItem());
+        final Multiset.Entry<InventoryItem> inventoryItemEntry = storageList.getSelection().get(0);
+        final InventoryItem element = inventoryItemEntry.getElement();
+        localLandingParty.pickUp(element, 1);
+        shipStorage.remove(element);
+        if (inventoryItemEntry.getCount() == 0) {
+            storageList.removeItem(inventoryItemEntry);
         }
         refreshLists();
     }
 
     public void onInventoryToStorageClicked() {
-        shipStorage.add(inventoryList.getFocusItem().getElement());
-        localLandingParty.getInventory().setCount(inventoryList.getFocusItem().getElement(), inventoryList.getFocusItem().getCount() - 1);
-        if (inventoryList.getFocusItem().getCount() == 0) {
-            inventoryList.removeItem(inventoryList.getFocusItem());
+        final Multiset.Entry<InventoryItem> inventoryItemEntry = inventoryList.getSelection().get(0);
+        final InventoryItem element = inventoryItemEntry.getElement();
+        shipStorage.add(element);
+        localLandingParty.getInventory().setCount(element, inventoryItemEntry.getCount() - 1);
+        if (inventoryItemEntry.getCount() == 0) {
+            inventoryList.removeItem(inventoryItemEntry);
         }
         refreshLists();
     }
@@ -231,21 +235,14 @@ public class LandingPartyEquipScreenController implements ScreenController {
         updateLabels();
     }
 
-    //это - очень сильное колдунство. onClicked занят ниже. Поэтому тут - onReleased. Костыль
     @NiftyEventSubscriber(pattern = ".*storage_to_inventory")
     public void onReleased(String id, ButtonClickedEvent event) {
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        ListBox itemsList = storageList;
-        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        itemsList.setFocusItemByIndex(numericId);
+        storageList.selectItem((Multiset.Entry<InventoryItem>) event.getButton().getElement().getParent().getUserData());
     }
 
     //костыль к костылю. YO DAWG
     @NiftyEventSubscriber(pattern = ".*inventory_to_storage")
     public void onPrimaryReleased(String id, ButtonClickedEvent event) {
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        ListBox itemsList = inventoryList;
-        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        itemsList.setFocusItemByIndex(numericId);
+        inventoryList.selectItem((Multiset.Entry<InventoryItem>) event.getButton().getElement().getParent().getUserData());
     }
 }
