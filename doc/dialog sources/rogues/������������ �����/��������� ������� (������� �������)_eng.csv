@@ -1,0 +1,9 @@
+0;Praised be the Devourer, we're saved!;;;
+;Glad to have been of help. Are you sure you're okay?;3;;
+;Hey, hey, the Devourer didn't save you, I did. My crew. We risked our lives for you, and it would have been nice to be rewarded for it.;1;;
+1;S-sorry… *The Rogue is embarrassed.* It's an expression. Yes, thank you for saving us. I'll never forget it. Hoorkata Famrana is now your friend. Or a very good acquaintance.;;;
+;I don't know, I would have preferred some a more palpable sign of friendship.;2;;
+2;W-w-what? Money? Oh… yeah… Five credits, human. I'm sending it over. It's all I have on me. But I'll always be happy to help you!;;;
+;Five credits… yeah. Okay. I think  both of us have to go now. Over and out.;-1;;1
+3;N-n-not exactly. But that's not your problem anymore. You've helped us enough already, and Hoorkata Famrana will never forget that! By the Devourer, you have a good friend now, human captain!;;;
+;I'm flattered. Right. Good luck. It's time for me to go.;-1;;
