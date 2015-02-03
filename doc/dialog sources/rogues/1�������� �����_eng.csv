@@ -1,0 +1,119 @@
+0;Greetings, unknown ship. If you're a friend or simply not hostile, identify yourself and you'll be let through.;
+;What a strange greeting. My ship is Aurora 2, homeport Earth. We're human. We come on a diplomatic mission.;1
+;Negative, I just came under the defense of your guns. Over and out.;-1
+1;Humans… I've heard about you. Your request will be passed over to the Secretariat of Elder Hoor. You'll have to wait. But meanwhile, you can dock, I'll unseal the lock.;
+;Oh. Of course.;2
+2;*In an hour, the shuttle is already at the mothership. The airlock closes. A thick massive door creaks, and several Rogues walk in.* Human captain? I see it's you. Your uniform is most beautiful, just like ours.;
+;Hello. Yes, I'm the boss. Unfortunately, no one has told me anything about the procedure of the meeting or the group size, so I took five lightly armed man with me. Is this acceptable?;3
+3;Absolutely. *The Rogue gives you a strange smile, which makes his face very human.* Elder Hoor has cleared his schedule fo you and will be glad to receive you. My name is Foornoot. I am Elder Hoor's First Secretary, and I am pleased to greet you on behalf of everyone on this ship. *The Rogue crosses his arms on his chest, clutching his shoulders with his abnormally long fingers, and bows to you.* By the Essence of the Devourer, human captain.;
+;Thank you. Can I follow you?;6
+;The Essence of the Devourer? What is it?;4
+4;The Essence of the Devourer is what lords over everything, everywhere. It is indestructible, that which gives life again and again. *The Rogues cross their arms in the same way and bow as well.*;
+;Oh. I get it. It's your religion.;5
+5;You could say that.;
+;I think you were sent to take me there. Shall we move out?;6
+6;*The Rogue turns around silently and gestures for you to follow. It's not a long walk: you reach some kind of a limo without a roof. You note with interest that the Rogue's party stays in the dock, not intending to come with you.*;
+;What, aren't they coming with us?;7
+;…;8
+7;Oh, no. I don't need them anymore. They were just for… *Foornoot waves his hand and reclines in his chair.*;
+;…;8
+8;*It's a long drive. You swerve around here and there, sometimes using giant transport lifts. Despite its size, the Rogues' mothership doesn't look as big on the inside. It's very old, and living there doesn't seem very comfortable.*;alien_city_dialog
+;Listen, how do you even live here?;9
+;*keep silent*;18
+9;What? We just do. Some people live on planets, some don't. We live on our mothership.;
+;I meant, how does it feel, constantly being on the move?;10
+;Why don't you live on some planet? It can't be your original home.;14
+;Interesting ship… It's so big. How did you build it?;17
+;*continue the ride in silence*;18
+10;*Foornoot is surprised.* On the move? You're mistaken. *He makes a sweeping gesture with his hand, pointing at the people walking along the sidewalk.* We aren't as keen on traveling as people tend to think we are.;
+;It's strange to hear that from someone literally named Rogue.;11
+;Why don't you live on some planet? It can't be your original home.;14
+;Interesting ship… It's so big. How did you build it?;17
+;*continue the ride in silence*;18
+11;Oh, that… That was before, human captain. Before we understood the Essence of the Devourer.;
+;So what is it?;12
+;Why don't you live on some planet? It can't be your original home.;14
+;Interesting ship… It's so big. How did you build it?;7
+;*continue the ride in silence*;18
+12;*Foornoot smiles and makes a weird face.* The Essence of the Devourer is the Essence of the Devourer. It's too early for you to try to understand it, human captain.;
+;Why do you think that?;13
+;Why don't you live on some planet? It can't be your original home.;14
+;Interesting ship… It's so big. How did you build it?;17
+;*continue the ride in silence*;18
+13;*Foornoot makes the weird face again.*;
+;Why don't you live on some planet? It can't be your original home.;14
+;Interesting ship… It's so big. How did you build it?;17
+;*continue the ride in silence*;18
+14;We already had a planet. Now, it's the Essence of the Devourer. That was what motivated our ancestors to explore space and live like this. Then we found our mothership. Now, we live here.;
+;So you were just flying around and you stumbled upon this ship?;15
+;How does it feel, constantly being on the move?;10
+;Interesting ship… It's so big. How did you build it?;17
+;*continue the ride in silence*;18
+15;Exactly. *You can't read the look in the Rogue's eyes, but you can tell that he believes in what he's saying.*;
+;You were very lucky, then.;16
+;How does it feel, constantly being on the move?;10
+;Interesting ship… It's so big. How did you build it?;17
+;*continue the ride in silence*;18
+16;The Devourer deprived us of our home, but we found our solace in the Essence of the Devourer. And a new home.;
+;How does it feel, constantly being on the move?;10
+;Interesting ship… It's so big. How did you build it?;17
+;*continue the ride in silence*;18
+17;We didn't build this ship. It was gifted to us by the Essence of the Devourer.;
+;Why don't you live on some planet? It can't be your original home.;14
+;How does it feel, constantly being on the move?;10
+;*continue the ride in silence*;18
+18;"*The doors of yet another elevator close behind you. You go up. When the next door opens, you are stunned by blinding light and loud noises. The Rogues fill up the street. You can see smiling faces everywhere. The children are chasing each other, everyone is having fun. Foornoot seems to be having fun, too. He puts a hand in his pocket and takes out some... apparently, they're coins. He tosses them towards the playing children and shouts.* Ahoy! Exodus! Exodus! *The children catch the coins in the air, scraming ""Exodus! Exodus!"" as well, and run away into the crowd. Your limo advances at a very low speed.*";alien_city_dialog
+;What is this, Foornoot?;19
+;*try not to pay attention to it*;21
+19;Today is Exodus Day. A long time ago on this day, our ancestors left their dead planet and became space dwellers. *Foornoot smiles blissfully.* We have fun and celebrate Exodus Day in this part of the ship. Anyone can come and have some fun.;
+;In that case, happy Exodus Day, Foornoot.;20
+;I see. Interesting tradition.;21
+20;Thank you, Captain. You too… even though you're not a Rogue, you're here.;
+;…;21
+21;*The limousine goes very slowly before coming to a complete stop. This happens because in front of you are some Rogues that don't look like they're leaving any time soon. Man and women (yes, Rogue women have mammaries, too, although much less attractive ones than those of female homo sapiens) are holding hands, singing, and having fun. When they see the limo, they surround it, laughing, and invite you to come out and join them. Foornoot looks at you and says.* You know, Elder Hoor will understand if you want to stay here for a bit, Captain. But if you don't want to, we can drive on.;
+;Will your compatriots be offended?;22
+22;I don't know how they'll take it. I wouldn't be offended, you're very busy… Do you want to stay?;
+;I do. Why not have a bit of fun? Come on, turn off the engine, let's get out.;23
+;I do, but I think about my people first. My people who need us to be doing our work and not entertaining ourselves. Come on, let's drive on.;42
+23;*You come out of the car, and you and your soldiers make a circle. You hold hands and do something like a circle dance. The Rogues sing religious songs beautifully. A lot of eyes look your way since you're foreigners, but none of them are evil. Foornoot is somewhere close by, flirting with one of the cuter female Rogues.*;
+;…;24
+24;*The crowd seems to stay in place, but it isn't so. Children and adults alike, and you with your circle dance, are slowly approaching a building that looks a lot like a church. It is exactly that. Unlike the other structures, it's wooden. There are two main floors and a tall flat-top tower. There is a Rogue waving a red flag on the roof.*;
+;Foornoot! Why is he waving a flag?;25
+;…;26
+25;Red! The color of Sun and of the Devourer!;
+;…;26
+26;*The church doors open, and the Rogues start coming in. Not everyone can fit inside, so they let the elderly and the children go in first. You see a path being cleared for you and your people next.* You're a foreigner here, Captain. It'll be interesting for you to see and hear this up close. *Foornoot says that, who has somehow gotten behind you.* Although we can leave, if you want.;
+;No, of course not, I'm intrigued.;27
+;We've had our share of fun. It's time to go.;43
+27;*You come inside. There are no pews or rich ornaments in the church, unless you count the small pulpit on the stage. An old Rogue is standing behind it. Or rather, not behind it. He is connected to the pulpit with thick wires, and you can feel soft humming and vibration from the pulpit itself despite the noises of the crowd. The Rogue's eyes are watery and his skin is very gray. He waits until the crowd calms down, looking over the congregation. When everything is quiet, he starts talking. The sound comes from the pulpit instead of from him.* Ahem... Greetings, my dear compatriots. *Giant speakers transmit the old man's voice outside of the doors so that everyone on the street hears them.* I am very pleased to see all of you here.;
+;…;28
+28;But I am even more surprised and pleased to find out that people of another civilization have to come learn about our teachings and share our happiness. *The old man's hand points you out.* It's good... good... *The old man coughs.* What is the Exodus? The Exodus was a day a long time ago, when our ancestors left their planet. The planet devoid of nurturing sunlight and warmth. Many stayed, that is understandable. Many died and became the Essence of the Devourer. And those who lived were your grandfathers and great-grandfathers. Those who gave life to you so that you give life to those who will give life to those who come next.;
+;…;29
+29;But what is the Exodus? What is it? The Exodus? *The old man stops. A red liquid flows down the transparent tube connected to his throat. The old man swallows mightily a couple of times and continues.* We lived on the planet with a live, still uneaten sun. We were alone, and our world was in our solitude. *The old man's speech now resembles fanatical chanting.* For we were developed. We were perfect. We were better than ourselves in our solitude. And then the aliens came. They came in peace. But they made us different. Better, perhaps, but not ourselves anymore. And a war started. War! There was a war!! *The old man is ecstatic, his voice is booming and his facial features now resemble stone.* We fought among ourselves, for we were united no more! The Devourer! He saved us!! The Devourer!!;
+;*you better keep quiet and wait for the end*;31
+31;Those who were against Him could not handle it and even fought each other. When they saw their demise, they despaired, and were bound and thrown into the dying hills, and let the eternity judge them. *The old man has been speaking more and more quietly, but his voice got especially low when saying that.* Their leader will be judged by the Darkness. For his feet and his hands are bound, and he is left there, in the desert, with a stone on his chest, for him to feel the Darkness, and a stone over his eyes, for him to only see the Darkness. And the Devourer devoured our sun. And with it, all those who ruined us, all our sins, and their sins, and themselves.;
+;…;32
+32;And now, there is no violence among us. All evil deeds are done for. In our humility, we are righteous. Although we do not have land anymore, we are above it, and Space is just to us. We have become righteous and cleansed ourselves of lies, there is no degeneracy nor sin among us, for we hail the Devourer. He still exists, devouring sins. A bright light to save us, and others, in the past and in the future. And when He is no more, He will open his treasury of bliss, and let the days of peace unite all peoples of space and all planets.;
+;…;33
+33;*The old man raises both hands.* Remember, my children and my brothers, who we are and who the Devourer is. And now... *Several Rogues come onto the stage with small buckets.* Rejoice! For there was an Exodus! An Exodus! There was one! *The Rogues start throwing the contents of the buckets into the crown. It is coins and sweets. You can tell from the people around you that they're delicious, but you gently refuse to taste them. It must be a wise decision. Foornoot, who is now nearby, leads you towards the exist.* I think it's time for us to go. Now there's going to be a celebration, I can't say it's going to be very interesting. What did you think of it?;
+;Of what?;34
+34;The sermon. What do you think?;
+;What do I think? Hm… Is a god needed on a space ship? I don't think so. No offense, of course.;35
+;I listened intently, since it will help me understand you better. My thoughts are… neutral.;37
+;I understand and respect your religion. We believe in different gods, but I like you.;39
+35;Yes... This is the default point of view, human captain. *Foornoot is still gently leading you towards the limo, helping you to get through the crowd.* Klisks, the Zorsan, Borks, they all tend to have that opinion. You think that we consider the Devourer a god, but it's absolutely not true.;
+;What is he, then? From your words, it's some kind of an absolute. I just don't understand what exactly he is absolute in.;36
+36;*You get into the limo. It takes off. Foornoot reclines in his seat, thinks about something, and then says.* We have different concepts of absolutes, Captain... *He sighs.* I'm tired. I think you will excuse me if I don't speak for a while and rest. We're close.;
+;Of course. I'll try to get some sleep.;-1
+37;*You are next to the limo.* What can I say? It's a strange approach, Captain. Pragmatic, but a bit strange. Don't you need to have some respect for something in order to understand it?;
+;Don't think that my thoughts about it can only be binary. I like your… religion, as well as your way of life, but I can't say they've won me over.;38
+38;Your honesty is admirable. It's not something you see often. *You get into the limo and it takes off.* Right, Captain. I'll keep silent for a while, unless you need me.;
+;I'm not going to bother you. I wanted to get some sleep, too.;-1
+39;I'm glad, but why won't you understand that the Devourer isn't a god to us! The Devourer is… I don't have the words to describe it. *You are next to the limo.* ;
+;I don't understand. What is He, then? Is it a higher intelligence? A higher creature?;41
+41;*Foornoot smiles.* No... He was sent to us. And to all of you. For everybody to live forever. But He isn't a god, or a higher creature. The Devourer is the Devourer. *You get into the limo. It takes off. Foornoot turns towards the window and says.* I'm tired, and I don't want to talk for a while. We're close, human captain.;
+;Of course. I need to get some rest, too.;-1
+42;As you wish. Drive on, just don't run anybody over. *The limo takes off.* We're pretty close, Captain.;
+;Finally. I think I'll get some rest.;-1
+43;Of course. We'll get there quick, the main streets are free, and we're already close. *You get into the limo and drive off. Foornoot is silent for a suspiciously long time. When you look at him, you see that he is looking out of the window and smiling to himself. You don't think you should bother him. You better not.*;alien_city_dialog
+;*sleep until you get to the destination*;-1

@@ -1,0 +1,15 @@
+0;*The evacuation was successful, despite the ship reactor detonating anyway. The Rogues are aboard, and their captain is in your quarters. He's sitting across from you, looking satisfied, but slightly nervous.*;
+;I'm glad to help.;1
+1;R-r-right. Of course. It's just… It was risky, human captain. My name is Hoorkata Famrana. I am in your debt.;
+;Don't, Hoorkata. You don't say thanks for such things. Where do I take you?;3
+;Speaking of debts. Do you think my efforts deserve to be rewarded somehow?;2
+2;Human captain, I'm sorry, but my ship has been destroyed. I'm bankrupt. But if you take me to the closest Rogue station, they'll pay you for sure.;
+;My scientists want to talk to you a bit. Would you mind?;4
+;A Rogue station? Sure. Make yourself at home.;-1
+3;Human captain, I don't want to be a liability any more than I have to. Take me to the closest Rogue station. That will be enough. You've done so much already.;
+;My scientists want to talk to you a bit. Would you mind?;4
+;A Rogue station? Sure. Make yourself at home.;-1
+4;I'll be honored. It's the least I can do to thank you for saving our lives.;
+;Great. Henry, let your boys take our guests to Science.;5
+5;I'll take them there myself. Just in case.;marine_dialog
+;As you wish.;-1

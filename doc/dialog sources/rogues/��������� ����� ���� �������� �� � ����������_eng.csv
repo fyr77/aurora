@@ -1,0 +1,12 @@
+0;Unknown unmarked ship, who are you? What do you want?;;
+;A weird blue sphere. It's glowing, too. It's set up shop on my ship, and I have no idea what to do with it. Do you know what it is?;101;energy_sphere.started
+;Aurora 2, homeport Earth. We're looking for your main mothership.;1;
+;Nothing, just testing the line.;-1;
+1;You must have some weird method of finding it… It's the biggest ship. Over and out.;;
+;Yeah, that was stupid of me. Over and out.;-1;
+101;*The Rogue frowns.* I know what it is… Has it latched onto some kind of equipment?;;
+;That's right. What can you say?;102;
+102;I had a case like that… It chose my navigation computer. I threw it into outer space.;;
+;Is there no other choice?;103;
+103;If there is, you'll have to look for it. I couldn't find one.;;
+;Okay. Thank you for the advice. Over and out.;-1;

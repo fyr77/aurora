@@ -1,0 +1,14 @@
+0;*The analytics department of the Aurora calls you. Weird. Usually they contact you through Gordon. They must have something important this time.* Captain, we've studied the information you've gotten from Zorsan ships.;;;
+;And what can you say? Are the Zorsan going to attack anyone else if they succeed with us?;1;;
+1;No, Captain, they aren't. It would have been stupid from their point of view. According to this intel, when they occupy Earth, they're going to transfer their ruling class to it and clean up the planet. A new war would have been detrimental to them in that case.;;;
+;Are you positive? Did you double-check?;2;;
+2;Affirmative, Captain.;;;
+;Damn it… Okay. Ready the drive. I think Hoor will provide us with some help despite there being no threat for him.;-1;;
+;Right. In that case, we don't have a choice. Make some edits to the source files.;3;;
+3;Edits? Do you want our department to doctor information?;;;
+;Yes, that's exactly what I want. Don't make it look like a major threat, just… what am I talking about? I'm not going to tell you how to do your jobs.;4;;
+4;Of course, Captain. But I want you to know from the start that if our ruse is found out, the aliens definitely won't be happy. It could lead to even worse consequences.;;;
+;I gave you an order. Your job is to carry it out, not discuss it.;5;;
+;I think you're right. Leave it as it is. Hoor will probably help us anyway.;-1;;
+5;Aye, aye, Captain.;;;
+;Great. Over and out.;-1;;1

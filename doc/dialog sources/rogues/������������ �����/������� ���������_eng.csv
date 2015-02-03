@@ -1,0 +1,4 @@
+0;The Rogue ship has blown unexpetedly.;
+;And what about the shuttle?;1
+1;It's gone. They didn't manage to undock before the explosion.;
+;Damn it…;-1
