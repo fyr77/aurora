@@ -5,8 +5,10 @@
  */
 package ru.game.aurora.gui;
 
+import de.lessvoid.nifty.EndNotify;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.screen.EndOfScreenAction;
 import de.lessvoid.nifty.slick2d.render.font.AbstractSlickRenderFont;
 import de.lessvoid.nifty.slick2d.render.font.UnicodeSlickRenderFont;
 import org.newdawn.slick.GameContainer;
@@ -33,6 +35,8 @@ public class GUI {
     private GameContainer containerInstance;
 
     private final Stack<String> screens = new Stack<>();
+
+    private String nextScreen = null;
 
     public static void init(GameContainer con, Nifty n) {
         instance = new GUI(con, n);
@@ -66,8 +70,34 @@ public class GUI {
 
     }
 
+    public void goToScreen(String id)
+    {
+        if (nifty.gotoScreen(id)) {
+            nextScreen = null;
+            return;
+        } else {
+            nextScreen = id;
+        }
+
+        nifty.scheduleEndOfFrameElementAction(nifty.getCurrentScreen(), null, new EndOfScreenAction(), new EndNotify() {
+            @Override
+            public void perform() {
+                nifty.gotoScreen(nextScreen);
+                nextScreen = null;
+            }
+        });
+    }
+
+    public String peekScreen() {
+        return screens.isEmpty() ? "" : screens.peek();
+    }
+
     public void pushCurrentScreen() {
-        pushScreen(nifty.getCurrentScreen().getScreenId());
+        if (nextScreen == null) {
+            pushScreen(nifty.getCurrentScreen().getScreenId());
+        } else {
+            pushScreen(nextScreen);
+        }
     }
 
     public void pushScreen(String id) {

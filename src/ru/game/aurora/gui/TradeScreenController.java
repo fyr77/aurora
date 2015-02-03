@@ -146,12 +146,14 @@ public class TradeScreenController implements ScreenController
 
 
     public static void openTrade(String merchantImage, Multiset<InventoryItem> merchantInventory, Faction merchantFaction) {
-        GUI.getInstance().pushCurrentScreen();
+        GUI.getInstance().pushScreen("star_system_gui");
         final TradeScreenController tradeScreenController = (TradeScreenController) GUI.getInstance().getNifty().findScreenController(TradeScreenController.class.getCanonicalName());
         tradeScreenController.setMerchantImage(new Drawable(merchantImage));
         tradeScreenController.merchantInventory = merchantInventory;
         tradeScreenController.merchantFaction = merchantFaction;
-        GUI.getInstance().getNifty().gotoScreen("trade_screen");
+
+        //hack: stoopid nifty-gui can ignore call to goToScreen(), as dialog screen has not yet closed
+        GUI.getInstance().goToScreen("trade_screen");
     }
 
     public static void openTrade(String merchantImage, Multiset<InventoryItem> merchantInventory) {

@@ -1,0 +1,14 @@
+{
+    "id": "energy_concentration",
+    "icon" : "technology_research",
+    "report": {
+        "icon" : "technology_research",
+        "text" : "energy_concentration.report"
+    },
+    "makesAvailable" : [],
+    "makesAvailableEngineering" : ["advanced_lasers"],
+    "earthProgress" : ["solar_energy"],
+    "score" : 50,
+    "progress" : 140,
+    "initialProgress" : 140
+}

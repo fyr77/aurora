@@ -194,27 +194,33 @@ public class World implements Serializable, ResolutionChangeListener {
     }
 
     public void addOverlayWindow(Dialog d, Map<String, String> flags) {
-        GUI.getInstance().pushCurrentScreen();
+        if (!GUI.getInstance().peekScreen().equals("dialog_screen")) {
+            // do not push dialog if it is already on top
+            GUI.getInstance().pushCurrentScreen();
+        }
         d.enter(this);
         d.setFlags(flags);
         Nifty nifty = GUI.getInstance().getNifty();
         ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).pushDialog(d);
-        nifty.gotoScreen("dialog_screen");
+        GUI.getInstance().goToScreen("dialog_screen");
     }
 
     public void addOverlayWindow(Dialog d) {
-        GUI.getInstance().pushCurrentScreen();
+        if (!GUI.getInstance().peekScreen().equals("dialog_screen")) {
+            // do not push dialog if it is already on top
+            GUI.getInstance().pushCurrentScreen();
+        }
         d.enter(this);
         Nifty nifty = GUI.getInstance().getNifty();
         ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).pushDialog(d);
-        nifty.gotoScreen("dialog_screen");
+        GUI.getInstance().goToScreen("dialog_screen");
     }
 
     public void addOverlayWindow(StoryScreen s) {
         GUI.getInstance().pushCurrentScreen();
         Nifty nifty = GUI.getInstance().getNifty();
         ((StoryScreenController) nifty.getScreen("story_screen").getScreenController()).setStory(s);
-        nifty.gotoScreen("story_screen");
+        GUI.getInstance().goToScreen("story_screen");
     }
 
     public void addOverlayWindow(ResearchProjectDesc s) {
@@ -223,7 +229,7 @@ public class World implements Serializable, ResolutionChangeListener {
 
         if (!nifty.getCurrentScreen().getScreenId().equals("research_report_screen")) {
             GUI.getInstance().pushCurrentScreen();
-            nifty.gotoScreen("research_report_screen");
+            GUI.getInstance().goToScreen("research_report_screen");
         }
     }
 

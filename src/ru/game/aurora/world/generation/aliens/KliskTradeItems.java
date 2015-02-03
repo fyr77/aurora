@@ -88,7 +88,7 @@ public class KliskTradeItems
 
         public ScienceTheorySellItem(String name)
         {
-            super("research", "alien_" + name, "technology_research", Configuration.getDoubleProperty("trade.theory_price"), true);
+            super("research", "alien_" + name, name + "_theory", Configuration.getDoubleProperty("trade.theory_price"), true);
             this.name = name;
         }
 

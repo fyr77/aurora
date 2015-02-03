@@ -104,7 +104,8 @@
                         </panel>
 
                     </panel>
-                    <panel childLayout="horizontal" height="80px">
+                    <panel height="10px"/>
+                    <panel childLayout="horizontal" height="60px" padding="5px">
                         <panel width="85%"/>
                         <control id="close_button" name="button" label="Close" width="150px" height="45px">
                             <interact onClick="closeScreen()"/>

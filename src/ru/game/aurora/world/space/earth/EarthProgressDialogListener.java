@@ -25,6 +25,8 @@ public class EarthProgressDialogListener implements DialogListener {
 
     @Override
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+        // remove 'dialog_screen' from top
+        GUI.getInstance().popScreen();
         if (returnCode == -1) {
             // pop previouse screen and replace it with retirement gameover
             GUI.getInstance().popScreen();

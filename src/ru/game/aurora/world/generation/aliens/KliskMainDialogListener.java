@@ -16,6 +16,7 @@ import ru.game.aurora.gui.TradeScreenController;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.SellOnlyInventoryItem;
+import ru.game.aurora.player.research.ResearchSellItem;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
@@ -47,6 +48,7 @@ public class KliskMainDialogListener implements DialogListener {
             defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("physics"));
             defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("biology"));
             defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("chemistry"));
+            defaultTradeInventory.add(new ResearchSellItem("energy_concentration", "technology_research", 12, true));
         }
         return defaultTradeInventory;
     }
