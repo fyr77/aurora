@@ -86,7 +86,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 // replace station sprite
                 humanity.getHomeworld().getShips().remove(construction);
                 construction = new NPCShip(0, 1, "icarus_station", humanity, null, "Icarus #1", 25);
-                construction.getWeapons().add(new WeaponInstance(ResourceManager.getInstance().getWeapons().getEntity("humanity_missiles")));
+                construction.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("humanity_missiles"));
                 construction.setAi(null);
                 humanity.getHomeworld().getShips().add(construction);
 

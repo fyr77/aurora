@@ -102,6 +102,9 @@ public class CombatAI implements NPCShipAI {
     }
 
     private void fireAtTarget(NPCShip ship, World world, StarSystem currentSystem, double distance) {
+        if (ship.getWeapons() == null) {
+            return;
+        }
         for (int i = 0; i < ship.getWeapons().size(); ++i) {
             final WeaponInstance weapon = ship.getWeapons().get(i);
             if (weapon.getReloadTimeLeft() <= 0 && weapon.getWeaponDesc().getRange() >= distance) {
