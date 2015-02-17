@@ -27,6 +27,7 @@ colony_search.coords - coordinates of an explored planet that will be used as qu
 colony_search.found - if suitable planet has been found
 colony_search.explored - suitable planet explored
 colony_search.explored_fully
+colony_news - number of dialog with colony leader
 last_beacon.coords - coordinates of a last-known aurora location
 
 diplomacy.flag - true if quest is active
