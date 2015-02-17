@@ -2,3 +2,4 @@ not_enough_space.csv;colony_planet_not_enough_space;scientist_dialog;quest/colon
 1Земля-Отправка колонистов.csv;colony_first_party_departure;earth_dialog;quest/colony_search
 4После сдачи инфы Мартану, высадка колонистов.csv;colony_first_party_arrival;colonist_dialog;quest/colony_search
 Диалог на планете.csv;colony_default;colonist_dialog;quest/colony_search
+Лидер колонистов.csv;colony_default_2;colonist_dialog;quest/colony_search
