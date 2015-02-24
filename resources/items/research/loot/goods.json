@@ -1,0 +1,14 @@
+{
+    "id": "loot.goods",
+    "icon" : "artifact_research",
+    "report": {
+        "icon" : "artifact_research",
+        "text" :  "loot.goods.report"
+    },
+    "makesAvailable" : [],
+    "makesAvailableEngineering" : [],
+    "earthProgress" : [],
+    "score" : 80,
+    "progress" : 140,
+    "initialProgress" : 140
+}

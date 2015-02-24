@@ -1,0 +1,14 @@
+{
+    "id": "loot.energy",
+    "icon" : "artifact_research",
+    "report": {
+        "icon" : "artifact_research",
+        "text" :  "loot.energy.report"
+    },
+    "makesAvailable" : ["energy_concentration"],
+    "makesAvailableEngineering" : [],
+    "earthProgress" : [],
+    "score" : 80,
+    "progress" : 140,
+    "initialProgress" : 140
+}

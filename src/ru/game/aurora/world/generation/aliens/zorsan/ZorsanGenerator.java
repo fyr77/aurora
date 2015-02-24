@@ -176,6 +176,12 @@ public class ZorsanGenerator implements WorldGeneratorPart {
     public void updateWorld(World world) {
         final AlienRace race = new AlienRace(NAME, "zorsan_scout", Dialog.loadFromFile("dialogs/zorsan_main.json"));
 
+        race.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.COMPUTERS, race)), 0.1);
+        race.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.ENERGY, race)), 0.05);
+        race.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.GOODS, race)), 0.03);
+        race.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.MATERIALS, race)), 0.1);
+        race.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.WEAPONS, race)), 0.2);
+
         race.setDefaultFactory(new NPCShipFactory() {
             private static final long serialVersionUID = -2842750240901357677L;
 

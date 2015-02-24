@@ -18,6 +18,7 @@ import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.NPCShipFactory;
 import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
@@ -150,7 +151,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                     world.getGlobalVariables().put("klisk_trade.started", 1);
                     beginTradeQuest(world, kliskPlanet, targetSystemForQuest);
                 }
-
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("klisk.ambassador_visit", "news"));
                 kliskPlanet.setDialog(createDefaultKliskPlanetDialog(world));
             }
         });
@@ -188,6 +189,13 @@ public class KliskGenerator implements WorldGeneratorPart {
     public void updateWorld(World world) {
         Dialog mainDialog = Dialog.loadFromFile("dialogs/klisk_1.json");
         final AlienRace kliskRace = new AlienRace(NAME, "klisk_ship", mainDialog);
+
+        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.COMPUTERS, kliskRace)), 0.2);
+        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.ENERGY, kliskRace)), 0.1);
+        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.GOODS, kliskRace)), 0.1);
+        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.MATERIALS, kliskRace)), 0.2);
+        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.WEAPONS, kliskRace)), 0.05);
+
         kliskRace.setMusic(ResourceManager.getInstance().getPlaylist("Klisk"));
         mainDialog.addListener(new DialogListener() {
 

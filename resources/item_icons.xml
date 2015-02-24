@@ -39,4 +39,6 @@
     <resource type="image" id="credits_icon">sprites/gui/credit.png</resource>
     <resource type="image" id="ru_icon">sprites/gui/resources.png</resource>
 
+    <resource type="spritesheet" id="alien_space_drop_items" tw="64" th="64">sprites/items/alien_items.png</resource>
+
 </resources>

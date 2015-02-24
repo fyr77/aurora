@@ -1,0 +1,14 @@
+{
+    "id": "loot.weaponry",
+    "icon" : "artifact_research",
+    "report": {
+        "icon" : "artifact_research",
+        "text" :  "loot.weaponry.report"
+    },
+    "makesAvailable" : [],
+    "makesAvailableEngineering" : [],
+    "earthProgress" : [],
+    "score" : 80,
+    "progress" : 140,
+    "initialProgress" : 140
+}

@@ -91,6 +91,11 @@ public class BorkGenerator implements WorldGeneratorPart {
         // TODO: generate agressive bork ships
         final AlienRace borkRace = new AlienRace(NAME, "bork_ship", mainDialog);
 
+        borkRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.COMPUTERS, borkRace)), 0.1);
+        borkRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.ENERGY, borkRace)), 0.05);
+        borkRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.GOODS, borkRace)), 0.03);
+        borkRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.MATERIALS, borkRace)), 0.1);
+        borkRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.WEAPONS, borkRace)), 0.2);
 
         BasePlanet[] planets = new BasePlanet[5];
         StarSystem ss = new StarSystem("Bork homeworld", new Star(1, Color.white), 13, 2);

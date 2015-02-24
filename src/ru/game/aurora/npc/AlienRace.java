@@ -54,7 +54,6 @@ public class AlienRace implements Faction {
         defaultLootTable.put(new SpaceDebris.ResourceDebris(5), 1.0);
         defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
     }
-
     public Dialog getDefaultDialog() {
         return defaultDialog;
     }
