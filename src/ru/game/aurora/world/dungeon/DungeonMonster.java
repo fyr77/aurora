@@ -79,6 +79,7 @@ public class DungeonMonster extends DungeonObject implements IMonster {
     @Override
     public void onAttack(World world, GameObject attacker, int damage) {
         hp -= damage;
+        super.onAttack(world, attacker, damage);
         if (hp <= 0) {
             // clean obstacle flag
             if (!nowMoving()) {

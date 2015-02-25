@@ -123,6 +123,7 @@ public class Animal extends BaseGameObject implements IMonster {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.armor_consumed_damage"), desc.getArmor()));
         }
         hp -= damage;
+        super.onAttack(world, attacker, damage);
         if (!wasAttacked && desc.getBehaviour() == MonsterBehaviour.SELF_DEFENSIVE) {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_enraged"), getName()));
             wasAttacked = true;

@@ -132,6 +132,7 @@ public class BaseParallelWorldObject extends BaseGameObject {
                 world.getCurrentStarSystem().getObjects().add(new SpaceDebris(x, y, "bio_remains", new InsideEncounterGenerator.BioCellsItem()));
             }
         }
+        super.onAttack(world, attacker, damaged);
     }
 
     @Override

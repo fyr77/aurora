@@ -47,6 +47,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
         @Override
         public void onAttack(World world, GameObject attacker, int damage) {
+            super.onAttack(world, attacker, damage);
             if (getBehaviour() == MonsterBehaviour.AGGRESSIVE) {
                 return;
             }

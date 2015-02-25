@@ -75,6 +75,7 @@ public class BaseGameObject extends MovableSprite implements GameObject {
 
     @Override
     public void onAttack(World world, GameObject attacker, int damaged) {
+        world.onGameObjectAttacked(attacker, this, damaged);
     }
 
     @Override

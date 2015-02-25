@@ -237,7 +237,7 @@ public class NPCShip extends BaseGameObject implements IMonster {
         if (hp <= 0) {
             explode(currentStarSystem);
         }
-
+        super.onAttack(world, attacker, dmg);
 
         if (attacker != null) {
             changeThreat(world, attacker, dmg * 2);   //todo: balance
