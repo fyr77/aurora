@@ -1,0 +1,7 @@
+0;The first wave of the enemy is destroyed. But it's probably not all they've got, so be on your guard.;
+;Henry, Sarah, what is the status on the ship?;1
+;Good.;-1
+1;We're holding out. Don't forget about giving orders to repair the damage and it'll all be great, Cap.;engineer_dialog
+;What about the weapons?;2
+2;What about them? We'll cool them and reload them now that we have time, and we'll be ready again. Don't worry, it's all under control.;marine_dialog
+;Great. I don't think the enemy will keep us waiting long.;-1

@@ -1,0 +1,20 @@
+0;Hello, this is watch guard first class. Who are you? Your ship isn't registered in any database.;zorsan_dialog;
+;Aurora 2, homeport Earth. I represent the humans. I've come on a diplomatic mission.;1;
+1;Oh. *He sounds surprised.* I'm not authorized for such negotiations. I have to go. You have to wait.;zorsan_dialog;
+;How long?;2;
+2;"*There is no answer, but the line is still open. You have to listen to silence for almost ten minutes, and only then someone connects to the line.* This is the head watch guard of planet *you can't make out the name of the planet he says. The only word you manage to make out is ""Zorsan""*, but foreigners like you usually call it Zorsan. Who are you?";;
+;Watch guard?;3;
+;Aurora 2, a ship from Earth. I represent my people, we are newcomers to space. We have a diplomatic mission.;4;
+3;I watch the watch guards I outrank. They watch the ships that are allowed to land.;;
+;My ship is Aurora 2, it's from Earth. I represent my people, we are newcomers to space. We have a diplomatic mission.;4;
+4;Yeah, I know about it. I was instructed about this. You will be allowed to land if you agree to certain conditions.;;
+;Such as?;5;
+5;One, you have to be respectful towards the Zorsan people. This is the main rule, everyone has to abide by it.;;
+;Seems logical, but why would you bring it up? I think it's obvious.;6;
+6;It's a good thing that you think that. Two. No more than five representatives. Three, no combat weapons are allowed.;;
+;Hm. Okay. What else?;7;
+7;Four. The captain will have to negotiate personally. And that is all. Do you think you can agree to those conditions?;;
+;Of course.;8;
+;You know what? I'll wait a bit. I have to consult my officers. Over and out.;-1;
+8;In that case, you may proceed to land. You will have to provide an access code once you enter the outer atmosphere. It has already been sent to you. Over and out.;;
+;Okay. Over and out.;-1;1

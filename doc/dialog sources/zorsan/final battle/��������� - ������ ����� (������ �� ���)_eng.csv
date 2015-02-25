@@ -1,0 +1,6 @@
+0;Aurora 2, come in! It's urgent! Aurora 2!;
+;I copy, loud and clear!;1
+1;ICS-34 sent out a distress signal! Enemy landing party. If they capture the station, Earth will lose a significant part of its defense systems.;
+;Any special orders or advice?;2
+2;Hurry. Also, it's very hot in there.;
+;Roger. Over and out.;-1

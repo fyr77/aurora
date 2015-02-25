@@ -1,0 +1,7 @@
+0;Captain, another wave of attackers has reached our system.;
+;They still won't give it a rest?;1
+;Are you ready for another drop?;1
+1;There are no dropships among them this time. But there is a very large ship of an unknown type.;
+;They must have decided to bring their Big Boss along. Any ideas about what it is?;2
+2;It would be logical to assume that it's either a really big dropship or their own Death Star. In any case, we better not let it get to Earth.;
+;Roger, we'll try to do that.;-1

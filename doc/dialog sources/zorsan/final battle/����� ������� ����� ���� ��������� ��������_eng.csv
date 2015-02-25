@@ -1,0 +1,23 @@
+0;*Instead of Martan, it's the leader of the American Alliance who is on your screen behind a wall of static.*;;;;
+;Where's Martan? What's going on there?;1;;;
+1;Martan stayed at the Project Aurora Command Center in Brussels. Zorsan forces entered it six hours ago. We don't have any communications with them, and according to the latest report from a reconnaissance plane, there is fighting going on there. Most of the center is destroyed, I don't know if Martan is alive. The command has been transferred here, to America.;;;;
+;What is the situation on Earth?;2;;;
+2;It's bad. After the last landing party landed, the resistance in Europe is broken. They tried to use WMD's, there are reports of several tactical nuclear strikes, but it's unknown how effective they were.;;;;
+;What about America?;3;;;am
+;How is it in Asia?;4;;;as
+;What's happening in other regions?;5;;;other
+;Is there still hope that we'll win?;6;;;
+3;We're doing relatively okay. We have the most advanced military in the world, after all. At first we were pretty good at shooting down their flying tanks, but then they got reinforcements and breached our perimeter. Right now we're readying several nuclear strikes on the main drop sites, after which our forces will make an attack, we have a chance of suppressing them. The aliens don't show any mercy, all the major cities they've reached are in ruins, so we don't plan on showing them any mercy either.;;;;
+;How is it in Asia?;4;!as;;as
+;What's happening in other regions?;5;!other;;other
+;Is there still hope that we'll win?;6;;;
+4;They were pretty cruel in Asia. They blew up several powerful bombs underwater, and then they did precision strikes on infrastructure objects. As a result, Japan, Pacific Islands and China are submerged. After that, a small Zorsan force crushed what was left of their military and captured the main cities while the people were busy fighting the natural disasters.;;;;
+;What about America?;3;!am;;am
+;What's happening in other regions?;5;!other;;other
+;Is there still hope that we'll win?;6;;;
+5;They didn't really go to the other regions. Australia is calm, for example, but they can't offer much help either. Russia is fighting on two fronts, trying to help Europe and Asia. In Aftica, the Zorsan were content with destroying the ports and the airfields, so it's impossible to get help from there so far. They're probably planning to deal with those regions later.;;;;
+;What about America?;3;;;am
+;How is it in Asia?;4;;;as
+;Is there still hope that we'll win?;6;;;
+6;If we manage to crush their forces in America, we can get our troops together along with the Africans and send them to Europe in a few days. If we're very lucky, we can clean it up. There are also reports that say that the aliens are experiencing a shortage of supplies, their aviation isn't flying around as much anymore, they must be conserving fuel. So if we hold out for some time, we could take them unarmed. But that's only if they don't get any more reinforcements. Do you hear me? One more dropship gets to Earth and we're done for.;;;;
+;I'll do everything I can.;-1;;;

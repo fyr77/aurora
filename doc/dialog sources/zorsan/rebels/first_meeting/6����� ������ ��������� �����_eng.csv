@@ -1,0 +1,20 @@
+0;*Henry calls you. His clothes are pressed, and he is well-groomed as always.* Captain. Do you have a minute?;;
+;What did you want?;1;
+1;We were scanning the station while you were there. Their defenses aren't the best, so I managed to eavesdrop on some parts of your conversation. Sorry.;;
+;That's not what an officer is supposed to do, Henry. We were having a private conversation.;2;
+;I understand. It's better to be safe than sorry..;3;
+2;Sorry. I won't appeal a fine or even time in the brig. However, let me ask something.;;
+;I'm listening.;4;
+3;I'm glad you understand. And I hope you'll answer a question I'm going to ask you.;;
+;I'm listening.;4;
+4;Did you say yes or no?;;
+;Yes. We're going to work for these rebels.;7;rebels_continue
+;No. It's not worth the trouble.;5;rebels_reject
+5;Oh. I thought you'd say yes. Their proposition really does look lucrative, Captain.;;
+;Doesn't matter. Blood isn't cheap. We aren't Wild Geese. And I'm not Bob Denard. The mission of our ship is completely different.;6;
+6;*Henry smiles. It's the first time you see him do it, and it's very bright. It's kind.* I'm proud to serve under you, Captain. *He's silent for a bit, then he adds.* I really am. *He salutes you and signs off.*;;
+;Hm…;-1;
+7;Do you think you did the right thing?;;
+;I don't know. But his offer was lucrative, wasn't it? It's hard to say no.;8;
+8;That's true. It's hard to say no. And war, it's just controlled violence. *Henry looks at you weirdly, but since you're having a video conversation, it's hard to say what exactly he's feeling.* Don't forget, Captain, you're the boss. Be responsible. *He salutes you and signs off.*;;
+;I'll try. Yeah. I'll try.;-1;

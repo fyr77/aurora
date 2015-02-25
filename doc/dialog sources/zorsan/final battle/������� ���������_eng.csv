@@ -1,0 +1,8 @@
+0;*The Head of Asian Alliance looks tired and depressed. You can see several Zorsan in battle gear in the background.*;
+;Where is the Head of the American Alliance?;1
+1;KIA in the battle of the American Defense Force HQ. The last Zorsan drop was right on their roof.;
+;So there was no victory at the last moment…;2
+2;Captain, our forces are completely obliterated. The planet is getting captured by the Zorsan, they've taken all the major cities already. If you don't stop resisting at once, they'll start killing civilians, as the Zorsan representative said. About a thousand people every hour.;
+;Damn it.;3
+3;I know that you've done all you could, but the war is over. Turn off your weapon systems and allow the Zorsan boarding party to come aboard. We can't afford any more losses.;
+;*Game Over*;-1

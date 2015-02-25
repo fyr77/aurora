@@ -20,7 +20,7 @@
 Мазершип Брау -- Mothership Brau
 Эролоа -- Eroloa
 Суть Пожирателя -- The Essence of the Devourer
-Мартан -- Martan
+Мартан Килмови -- Martan Kilmovee
 Хаказар -- Hakazar
 Американский Альянс -- American Alliance
 Азиатский Союз -- Asian Union
@@ -34,4 +34,6 @@ Vortangu. Hakazar. Falronek. Porakef. Trokanfe.(Klisk corps)
 Ка -- Ka
 Хумбата -- Hoombata
 Хоршак -- Horshak
-хурката Фамрана -- Hoorkata Famrana
+Хурката Фамрана -- Hoorkata Famrana
+Жэурдэ -- Zheurde
+Нтанда -- Ntanda
