@@ -57,4 +57,8 @@ public interface ITileMap extends Serializable, ILosBoard, TileBasedMap {
     public Collection<IVictoryCondition> getVictoryConditions();
 
     public AStarPathFinder getPathFinder();
+
+    public Object getUserData();
+
+    public void setUserData(Object o);
 }

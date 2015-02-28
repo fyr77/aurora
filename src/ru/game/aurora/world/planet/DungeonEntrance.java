@@ -60,6 +60,9 @@ public class DungeonEntrance extends BaseGameObject {
     @Override
     public void interact(World world) {
         if (canBeEntered) {
+            if (world.getCurrentRoom() instanceof Planet) {
+                dungeon.getMap().setUserData(world.getCurrentRoom());
+            }
             dungeon.enter(world);
         } else {
             GameLogger.getInstance().logMessage(Localization.getText("gui", messageIdIfCanNotEnter));

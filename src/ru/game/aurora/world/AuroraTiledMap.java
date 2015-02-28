@@ -43,6 +43,8 @@ public class AuroraTiledMap implements ITileMap {
 
     private BasePositionable entryPoint;
 
+    private Object userData;
+
     private transient IFovAlgorithm fovAlgorithm;
 
     private transient ILosAlgorithm losAlgorithm;
@@ -89,7 +91,7 @@ public class AuroraTiledMap implements ITileMap {
 
                     Constructor ctor = clazz.getConstructor(AuroraTiledMap.class, int.class, int.class);
                     Object obj = ctor.newInstance(this, groupId, objectId);
-                    if (DungeonObject.class.isAssignableFrom(clazz)) {
+                    if (GameObject.class.isAssignableFrom(clazz)) {
                         objects.add((GameObject) obj);
                     } else if (IVictoryCondition.class.isAssignableFrom(clazz)) {
                         victoryConditions.add((IVictoryCondition) obj);
@@ -278,5 +280,13 @@ public class AuroraTiledMap implements ITileMap {
             pathfinder = new SoftReference<AStarPathFinder>(pf);
         }
         return pf;
+    }
+
+    public Object getUserData() {
+        return userData;
+    }
+
+    public void setUserData(Object userData) {
+        this.userData = userData;
     }
 }

@@ -327,4 +327,14 @@ public class SurfaceTileMap implements ITileMap, Serializable {
         }
         return pf;
     }
+
+    @Override
+    public Object getUserData() {
+        return null;
+    }
+
+    @Override
+    public void setUserData(Object o) {
+
+    }
 }

@@ -3,6 +3,7 @@ package ru.game.aurora.world.planet;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.BaseGameObject;
+import ru.game.aurora.world.ScanGroup;
 import ru.game.aurora.world.World;
 
 /**
@@ -40,5 +41,10 @@ public class PlanetNPC extends BaseGameObject {
     @Override
     public boolean canBeInteracted() {
         return true;
+    }
+
+    @Override
+    public ScanGroup getScanGroup() {
+        return ScanGroup.OTHER;
     }
 }

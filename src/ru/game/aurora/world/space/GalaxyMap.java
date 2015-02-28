@@ -238,6 +238,16 @@ public class GalaxyMap extends BaseSpaceRoom {
         return Collections.emptyList();
     }
 
+    @Override
+    public Object getUserData() {
+        return null;
+    }
+
+    @Override
+    public void setUserData(Object o) {
+
+    }
+
     public List<GalaxyMapObject> getGalaxyMapObjects() {
         return objects;
     }

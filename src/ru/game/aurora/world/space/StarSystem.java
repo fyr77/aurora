@@ -852,6 +852,16 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     }
 
     @Override
+    public Object getUserData() {
+        return null;
+    }
+
+    @Override
+    public void setUserData(Object o) {
+
+    }
+
+    @Override
     public int getWidthInTiles() {
         return radius * 2;
     }
