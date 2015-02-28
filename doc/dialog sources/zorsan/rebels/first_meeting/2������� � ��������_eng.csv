@@ -1,0 +1,8 @@
+0;*They respond to your hail almost instantly.* Humans? Human captain? *The Zorsan looks very scared.*;
+;Yes, humans. Now tell me why I shouldn't blast your ship to smithereens.;1
+1;*The Zorsan jumps. He actually jumps, he's so startled.* Don't! Captain, I'm just a peaceful messenger, I have a message for you! Don't attack!!!;
+;What is the message?;2
+2;Look at it yourself, I don't know, I'm just the messenger! *There is a request to accept data transfer. Preliminary analysis concludes it's just text and there is no malware.*;
+;Who sent it?;3
+3;*It's no use. Having transferred the data, the courier hangs up and flies away, gaining speed quickly.*;
+;Should we go after him? What's this message say… I should check my journal.;-1

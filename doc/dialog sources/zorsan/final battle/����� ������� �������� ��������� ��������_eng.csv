@@ -1,0 +1,19 @@
+0;Damn it, it's not looking good!;;;;
+;What is it? You can't handle a handful of aliens on your own planet?;1;;;
+1;Their goddamn machines, they're so much better than ours. Our atmospheric fighters and armor can't do serious damage to them, our hand-carried weapons aren't effective either, our troops are suffering great losses. We've already lost half of the European Alliance military, the other half is retreating on all fronts! The Zorsan have complete air superiority, they're kicking our asses. And they also landed in America and Asia, we can't even give them some reinforcements.;;;;
+;What kind of machines do they have?;2;!f1;;f1
+;Weird. When we fought them at the embassy, their soldiers didn't seem too tough to us.;3;!f2;;f2
+;Then how can it be that we're more or less okay in space?;4;!f3;;f3
+;What is the prediction? Can you handle it?;5;;;
+2;Mostly some kind of a cross between battle helicopters and tanks. They can fly and go on land, their armor can take a hit from any of our AA guns, and our anti-tank weapons aren't designed to hit aerial targets like those. Whereas they are capable of destroying even the heaviest tanks and fortifications we have with one shot. The only things we have that are capable of putting up a fight against them are the latest generation interceptors, but we only had a couple dozen and they're all destroyed already.;;;;
+;Weird. When we fought them at the embassy, their soldiers didn't seem too tough to us.;3;;;f2
+3;Probably because you were dealing with regular lightly armed security. We're fighting the regular military here.;;;;
+;What kind of machines do they have?;2;!f1;;f1
+;Then how can it be that we're more or less okay in space?;4;!f3;;f3
+4;Space technology has been the forefront of our R&D for a long time now. Our spaceships are the best technology Man can create, and it is capable of taking on the Zorsan in a fight. But most of our ground war technology is absolutely obsolete crap, as it turns out.;;;;
+;What kind of machines do they have?;2;!f1;;f1
+;Weird. When we fought them at the embassy, their soldiers didn't seem too tough to us.;3;!f2;;f2
+;Then how can it be that we're more or less okay in space?;4;!f3;;f3
+;What is the prediction? Can you handle it?;5;;;
+5;Hard to say. We still have the numerical superiority, but it's disappearing fast. The Zorsan have already captured several world capitals, there is fighting going on in many important places of the planet. But our armies are already beginning a counter-offensive. If no more Zorsan show up in our backyourd, we could stop their advance, and they won't last long without supplies. Basically, we'll hold if you guys up there don't let any other dropships come close to the planet.;;;;
+;We'll do everything we can.;-1;;;

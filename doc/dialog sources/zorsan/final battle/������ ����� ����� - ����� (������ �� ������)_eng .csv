@@ -1,0 +1,25 @@
+0;Human captain? Glad to see you're all right. *Foorko looks pretty shaken up. You can see rhythmic lashes of red lighting up the interior of the ship behind him.*;
+;Thanks for the help. Did anything happen?;1
+1;Nothing serious. We got hit a couple times. The breaches are already fixed.;
+;Need any help?;2
+2;*Foorko shakes his head no.*;
+;How did you know I needed your help?;3
+;How many enemies did you kill?;4
+;Where to now?;6
+;Right. I can see you're okay. I have a new mission, I have to go. Over and out.;-1
+3;Elder Hoor told me about it. He said it'd be nice to thank the human captain who had helped me… *Foorko smiles.**;
+;How many enemies did you kill?;4
+;Where to now?;6
+;Right. I can see you're okay. I have a new mission, I have to go. Over and out.;-1
+4;Not too many. You and your super flagship got most of it. It's a dangerous thing, that flagship... *Foorko frowns pensively.* You do know I'll have to report about it to the Elder?;
+;Why?;5
+5;It's a dangerous weapon, human captain…;
+;How did you know I needed your help?;3
+;How many enemies did you kill?;4
+;Where to now?;6
+;Dangerous weapon? Hm… I can understand that, although it's unpleasant to hear such things from you. Right. I have my orders, I don't have time to get distracted. Over and out.;-1
+6;To my home system, the mothership. And then… I'm still getting ready to become an Elder, human captain. There are always things for me to do.;
+;How did you know I needed your help?;3
+;How many enemies did you kill?;4
+;Where to now?;6
+;In that case, I wish you luck. And I have to go, so I'm flying off. Over and out.;-1

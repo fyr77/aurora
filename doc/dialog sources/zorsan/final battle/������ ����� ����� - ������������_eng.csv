@@ -1,0 +1,14 @@
+0;*Command hails you.* Aurora 2, report! Aurora 2!;;
+;What is there to report? We did it… I'm tired.;1;
+1;*Silence. There are cries of joy in the background, someone is crying. You'd better go on with the report.*;;
+;We kicked Zorsan asses. They never even got close to Earth.;2;earth_damage=0
+;It wasn't easy, but we did it with small casualties.;3;earth_damage>0 && earth_damage < 4
+;Well… I think it was hard. The enemy was strong. But we did it.;4;earth_damage>3
+2;My God, it's beautiful! Captain!! *You can hear happy hysteria in the speaker's voice.* We did it, Captain, we did it!;;
+;Yeah. But it's still too early to celebrate. What are my orders?;5;
+3;Some people died, but we're alive! Captain, do you get it?! We're alive! Alive!! *The speaker starts screaming.*;;
+;It's still too early to celebrate. I'm waiting for your orders.;5;
+4;Yeah. We're getting reports of casualties and destruction all over the place, but… Captain, you did it! You saved us!! God bless you, it's great!;;
+;I'm waiting for your orders. And I'm ready to get some revenge.;5;
+5;Yeah... yeah... Of course. *The speaker calms down, but you can still hear cries of joy, stomping of feet and other noises.* We've managed to triangulate the source of the invasion forces: it's system ${closest_coords}. The closest one to us, as you can see. You're ordered to go there and sound out the situation. In case of coming across any enemy forces, get back, do not engage.;;
+;Roger. Over and out.;-1;
