@@ -1,4 +1,4 @@
-0;*The room is very dark. It looks depressing, but the Zorsan like this style, apparently. Speaking of the Zorsan: there is one standing behind a high desk. Judging from his robe with patterns of the color of noble honey, his rank is pretty high.* So, it's you. I expected to see someone who looked... less like us. I'm the Imperial Diplomatic Representative. You don't need my name yet.;;
+0;*The room is very dark. It looks depressing, but the Zorsan like this style, apparently. Speaking of the Zorsan: there is one standing behind a high desk. Judging from his robe with patterns of the color of red gold, his rank is pretty high.* So, it's you. I expected to see someone who looked... less like us. I'm the Imperial Diplomatic Representative. You don't need my name yet.;;
 ;In that case, you don't need mine either. I represent my people. We are humans, homo sapiens. We're from planet Earth.;1;
 1;Never heard of it. And I'd probably prefer not to hear about it, given the choice. I received a report saying that you got here with a diplomatic mission.;;
 ;That's right. And we're ready to send over some introductory information about us. Our planet, our technology, ourselves... It's a short description to provide you with first impressions.;2;
@@ -30,49 +30,49 @@
 11;Now you do. The information you've provided is pretty interesting. The information you've provided is very interesting. But there is one more thing I'd like to know.;;
 ;…;13;
 12;You've done your homework. Maybe you aren't a dumb savage after all. *The Zorsan smiles.* Sorry for being so blunt. I'll ask one more question, and then we'll be done, I promise.;;
-;…;13;
-13;*The Zorsan gets back behind the desk and presses the top again. The door opens with a crack. Several Zorsan wearing blue robes and holding weapons run inside. They quickly train their sights on you.* And the question is, I want to know the coordinates of your planet.;;
-;Obviously, there isn't going to be any cooperation between us.;14;
-14;Of course not. Even in the best case scenario, we'd just kick you out of our system disgraced. The Zorsan don't like foreigners, human captain. Especially ones like you. A bad, tasteless parody of us. A sign of what we could have become had we not been us.;;
-;Okay. Now!;15;
-15;*That was an obvious signal. Punching the Zorsan diplomat in the face was another one. When you turn around, you see that your troops have already dealt with the enemy guards and gotten their weapons. You'll definitely have to give Liszkiewicz a bonus now.* What now, Captain?;;
-;…;16;
-16;*You can hear yelling and noise. Loud footsteps. An alarm is sounded in a few seconds.*;;
-;And now, we have to run. To the hangar, then the shuttle, and get the hell out of here before they realize what's happening. Damn it, that's not how I imagined it would happen.;-1;
-17;Yes. Every side has something to say. Maybe they're just less developed than us? Or maybe we're just better? Who knows?;;
-;"I definitely don't. And categories like ""better"" or ""worse"" aren't fit for this type of comparison.";18;
-18;Why not? Let's be honest, there are always ones that are better. Simply better. And it's obvious that in an uneven alliance, the worse one will benefit, not the better one. Tell me, how would we benefit from a relationship with you?;;
-;Right. Am I hearing things or did you just outright say that my people is worse than yours? That's pretty bold. There's a lot more similarities between us than things that are different. And we will both benefit from it, be the alliance peaceful or military.;6;
-;Peace is always profitable. A relationship between unequal partners only stimulates the less productive one to work harder.;19;
-;Cooperating with someone who is better than you makes you better. But you are too strict. You put technological development higher than cultural development, or any other kind.;22;
-19;Trust me, human captain... It's not like that. The worse one will never catch up with the better one. *He is interrupted by a call from something that acts as a teleophone. Having finished his conversation, the Zorsan looks at you again.* Something has changed. Look. *He walks up to the window and opens it. The noise from the street fills the room, along with a stuffy stench that smells like something that burned.*;;
-;…;7;
-20;Well, there is some truth to what you're saying. The rate of our technological advancement really is higher than that of the Klisks, Borks, or Rogues. And definitely higher than yours.;;
-;A living being isn't alive due to technology. Don't you think you should look at the profitability of our cooperation from this side as well?;21;
-21;Oh, you're speaking about culture. When I hear that word, I reach for my gun. How would that be profitable, pray tell? That's a good question. What is the benefit of a cooperation between someone weak and someone strong? Between your people and mine?;;
-;I'd choose my words more carefully if I were you. Strong and weak, that's a very harsh comparison. Humans are a pretty developed people. And you would benefit from an alliance with us, be it peaceful or military.;6;
-;I'll let your insult slide. Only the cooperation between two unequal parties is truly productive. It's great motivation for both of them.;19;
-;Your gun? Funny. You completely dismiss the value of cooperation between two different cultures, even though it affects every aspect of life. Technology included.;22;
-22;Oh, come on now! You're trying to work with high concepts, but that's just empty words! *A phone rings, or something that acts like one here. The Zorsan listens intently, then hangs up. After that, he walks up to the window and opens it. The inside becomes very noisy, just like the street. A rank stench of something burning fills the room.*;;
-;…;7;
-23;Oh! You've done your homework. *The Zorsan laughs.* Yes, you could call that a reason... the Borks. Fools and imbeciles. And about Klisks and Rogues... What? Do their looks not offend the eye? Are their customs and way of life not strange? ;;
-;What are you hinting at?;24;
-24;What do you think? There is an obvious reason. And it is simple: we are better. Better than the Borks, 40% of whom are idiots and fools. Better than the Klisks, the gut-legged creatures following some stupid... Code! Better than the Rogues, whose central object of worship is - just think about this! - The Obliterator!;;
-;The Borks are fools and imbeciles?;25;
-;The Klisk Code?;26;
-;The Obliterator? What is it?;27;
-;All right, enough! I'm tired of listening to this. This is the definition of chauvinism!;28;
-25;Forty percent. It's something genetic. I call it the brand of their fate, you know.;;
-;The Klisk Code?;26;
-;The Obliterator? What is it?;27;
-;All right, enough! I'm tired of listening to this. This is the definition of chauvinism!;28;
-26;The Code of Commerce. A thing that couldn't have been created naturally. A people stupid enough to allow external influence is worthy only of contempt.;;
-;The Borks are fools and imbeciles?;25;
-;The Obliterator? What is it?;27;
-;All right, enough! I'm tired of listening to this. This is the definition of chauvinism!;28;
-27;Oh, you don't know? You're so… You'll find out. Some day. Or maybe you won't, that won't surprise me.;;
-;The Borks are fools and imbeciles?;25;
-;The Klisk Code?;26;
-;All right, enough! I'm tired of listening to this. This is the definition of chauvinism!;28;
-28;Oh. Just like I suspected. You've already categorized yourself as the worst, despite my never having said th- *He is interrupted with a call from a device that is essentially a phone. The Zorsan picks up the receiver and says something into it. Having hung up, he says.* Well, now it's all sorted out. *He walks up to the window and opens it. The room is immediately filled with noise from the street and the stench of something burning.*;;
-;…;7;
+;…;13
+13;*The Zorsan gets back behind the desk and presses the top again. The door opens with a crack. Several Zorsan wearing blue robes and holding weapons run inside. They quickly train their sights on you.* And the question is, I want to know the coordinates of your planet.;
+;Obviously, there isn't going to be any cooperation between us.;14
+14;Of course not. Even in the best case scenario, we'd just kick you out of our system disgraced. The Zorsan don't like foreigners, human captain. Especially ones like you. A bad, tasteless parody of us. A sign of what we could have become had we not been us.;
+;Okay. Now!;15
+15;*That was an obvious signal. Punching the Zorsan diplomat in the face was another one. When you turn around, you see that your troops have already dealt with the enemy guards and gotten their weapons. You'll definitely have to give Liszkiewicz a bonus now.* What now, Captain?;
+;…;16
+16;*You can hear yelling and noise. Loud footsteps. An alarm is sounded in a few seconds.*;
+;And now, we have to run. To the hangar, then the shuttle, and get the hell out of here before they realize what's happening. Damn it, that's not how I imagined it would happen.;-1
+17;Yes. Every side has something to say. Maybe they're just less developed than us? Or maybe we're just better? Who knows?;
+;"I definitely don't. And categories like ""better"" or ""worse"" aren't fit for this type of comparison.";18
+18;Why not? Let's be honest, there are always ones that are better. Simply better. And it's obvious that in an uneven alliance, the worse one will benefit, not the better one. Tell me, how would we benefit from a relationship with you?;
+;Right. Am I hearing things or did you just outright say that my people is worse than yours? That's pretty bold. There's a lot more similarities between us than things that are different. And we will both benefit from it, be the alliance peaceful or military.;6
+;Peace is always profitable. A relationship between unequal partners only stimulates the less productive one to work harder.;19
+;Cooperating with someone who is better than you makes you better. But you are too strict. You put technological development higher than cultural development, or any other kind.;22
+19;Trust me, human captain... It's not like that. The worse one will never catch up with the better one. *He is interrupted by a call from something that acts as a teleophone. Having finished his conversation, the Zorsan looks at you again.* Something has changed. Look. *He walks up to the window and opens it. The noise from the street fills the room, along with a stuffy stench that smells like something that burned.*;
+;…;7
+20;Well, there is some truth to what you're saying. The rate of our technological advancement really is higher than that of the Klisks, Borks, or Rogues. And definitely higher than yours.;
+;A living being isn't alive due to technology. Don't you think you should look at the profitability of our cooperation from this side as well?;21
+21;Oh, you're speaking about culture. When I hear that word, I reach for my gun. How would that be profitable, pray tell? That's a good question. What is the benefit of a cooperation between someone weak and someone strong? Between your people and mine?;
+;I'd choose my words more carefully if I were you. Strong and weak, that's a very harsh comparison. Humans are a pretty developed people. And you would benefit from an alliance with us, be it peaceful or military.;6
+;I'll let your insult slide. Only the cooperation between two unequal parties is truly productive. It's great motivation for both of them.;19
+;Your gun? Funny. You completely dismiss the value of cooperation between two different cultures, even though it affects every aspect of life. Technology included.;22
+22;Oh, come on now! You're trying to work with high concepts, but that's just empty words! *A phone rings, or something that acts like one here. The Zorsan listens intently, then hangs up. After that, he walks up to the window and opens it. The inside becomes very noisy, just like the street. A rank stench of something burning fills the room.*;
+;…;7
+23;Oh! You've done your homework. *The Zorsan laughs.* Yes, you could call that a reason... the Borks. Fools and imbeciles. And about Klisks and Rogues... What? Do their looks not offend the eye? Are their customs and way of life not strange? ;
+;What are you hinting at?;24
+24;What do you think? There is an obvious reason. And it is simple: we are better. Better than the Borks, 40% of whom are idiots and fools. Better than the Klisks, the gut-legged creatures following some stupid... Code! Better than the Rogues, whose central object of worship is - just think about this! - The Obliterator!;
+;The Borks are fools and imbeciles?;25
+;The Klisk Code?;26
+;The Obliterator? What is it?;27
+;All right, enough! I'm tired of listening to this. This is the definition of chauvinism!;28
+25;Forty percent. It's something genetic. I call it the brand of their fate, you know.;
+;The Klisk Code?;26
+;The Obliterator? What is it?;27
+;All right, enough! I'm tired of listening to this. This is the definition of chauvinism!;28
+26;The Code of Commerce. A thing that couldn't have been created naturally. A people stupid enough to allow external influence is worthy only of contempt.;
+;The Borks are fools and imbeciles?;25
+;The Obliterator? What is it?;27
+;All right, enough! I'm tired of listening to this. This is the definition of chauvinism!;28
+27;Oh, you don't know? You're so… You'll find out. Some day. Or maybe you won't, that won't surprise me.;
+;The Borks are fools and imbeciles?;25
+;The Klisk Code?;26
+;All right, enough! I'm tired of listening to this. This is the definition of chauvinism!;28
+28;Oh. Just like I suspected. You've already categorized yourself as the worst, despite my never having said th- *He is interrupted with a call from a device that is essentially a phone. The Zorsan picks up the receiver and says something into it. Having hung up, he says.* Well, now it's all sorted out. *He walks up to the window and opens it. The room is immediately filled with noise from the street and the stench of something burning.*;
+;…;7

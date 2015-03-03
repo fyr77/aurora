@@ -1,19 +1,19 @@
-0;*When the door opens, you see a small delegation of creatures that look a lot like humans. Judging from their posture and facial expressions, they're military.* Good day. We are here to provide your safety.;;;;
-;I think that's a good thing. Where do we go?;1;;;
-1;You follow us. *They surround you and your men in a box formation. Can you imagine being comfortable while walking surrounded by people in gray uniforms? At least it doesn't last long, just until you're out of the spaceport. You are led to something that looks like a bus. There are some symbols on its sides, obviously of their government.* Please take a seat.;;;;
-;Thanks, I guess.;2;;;
-2;*The door closes right after the last man is in. The bus moves out. The driver doesn't pay you any attention whenever you try to strike up a conversation.*;;;;
-;*try to get some sleep*;-1;;;
-;*look around the bus*;3;;;
-;*look out the window*;9;;;
-3;*There are five people on your team. Henry picked the best soldiers, the masters of their craft. They're relaxed, but you can see that they are ready to act. One of them, sitting on the seat coupled with yours, talks to you.* Captain, are you nervous? Are you okay?;;;;
-;It's all right.;4;;;
-;I'm a bit worried.;5;;;
-;I don't like this.;6;;;
-4;I don't know, I don't think so. I wouldn't come down without weapons. Too bad they didn't leave us a choice.;;;;
-;Do you really think the Zorsan are up to something?;7;;;
-5;A bit? You have nerves of steel, Captain. I'm jealous. I'm worried sick.;;;;
-;Do you really think the Zorsan are up to something?;7;;;
+0;*When the door opens, you see a small delegation of creatures that look a lot like humans. Judging from their posture and facial expressions, they're military.* Good day. We are here to provide your safety.;
+;I think that's a good thing. Where do we go?;1
+1;You follow us. *They surround you and your men in a box formation. Can you imagine being comfortable while walking surrounded by people in gray uniforms? At least it doesn't last long, just until you're out of the spaceport. You are led to something that looks like a bus. There are some symbols on its sides, obviously of their government.* Please take a seat.;
+;Thanks, I guess.;2
+2;*The door closes right after the last man is in. The bus moves out. The driver doesn't pay you any attention whenever you try to strike up a conversation.*;
+;*try to get some sleep*;-1
+;*look around the bus*;3
+;*look out the window*;9
+3;*There are four people on your team. Henry picked the best soldiers, the masters of their craft. They're relaxed, but you can see that they are ready to act. One of them, sitting on the seat coupled with yours, talks to you.* Captain, are you nervous? Are you okay?;
+;It's all right.;4
+;I'm a bit worried.;5
+;I don't like this.;6
+4;I don't know, I don't think so. I wouldn't come down without weapons. Too bad they didn't leave us a choice.;
+;Do you really think the Zorsan are up to something?;7
+5;A bit? You have nerves of steel, Captain. I'm jealous. I'm worried sick.;
+;Do you really think the Zorsan are up to something?;7
 6;I concur, Cap. I think this is all pretty goddamn suspicious. The boys are on edge, too.;;;;
 ;Do you really think the Zorsan are up to something?;7;;;
 7;I don't know. But I'm on my guard. Liszkiewicz told us to keep an eye out.;;;;
@@ -24,11 +24,11 @@
 9;*The bus leaves the spaceport. You don't see any people around. Seems like this is an industrial zone. Wherever you look, there are factories stretching over many kilometers. You can't see any smoke or other obvious pollution, but a more in-depth inspection shows that the environment here is very polluted.*;;;;
 ;*try to get some sleep*;-1;;;
 ;*look out the window*;10;;;window
-;What instructions did Liszkiewicz give you?;11;;;
+;*talk to your people*;11;;;
 10;*It is a big and wide road that looks a lot like a typical highway on Earth. There is a lot of cars, but they all let the bus pass. The spaceport and the industrial zone are behind you, but the scenery still looks pretty desolate. There isn't a single tree, the grass is a dirty yellow mess, and there are signs of external meddling and serious pollution everywhere.*;;;;
 ;*try to get some sleep*;-1;;;
 ;*talk to your people*;11;;;
-11;*The one sitting on the seat coupled with yours answers.* He sent his best, sir. Those who are capable of acting in unknown, constantly changing environments. This is the best thing for this situation.;;;;
+11;*The one sitting on the seat coupled with yours answers.* Liszkiewicz sent his best, sir. Those who are capable of acting in unknown, constantly changing environments. This is the best thing for this situation.;;;;
 ;*try to get some sleep*;-1;;;
 ;*look out the window*;12;;;window
 12;*You enter the city. It's big. No, it's really big. You won't go as far as to call these buildings skyscrapers, but they're tall. There is a lot of cars on the highway, and a lot of people. They're dressed well, although their style looks strange to someone from Earth. Their clothes look rather Eastern: wide pants, long dresses with sleeves. One of your soldiers is looking out the window fixedly, looking agitated.*;;;;
@@ -36,7 +36,7 @@
 13;*The muscular Japanese man sitting two seats away to your left.* They're looking at us. I think they're angry.;;;;
 ;Can you see anything in that crowd?;14;;;
 14;Captain, we aren't welcome here.;;;;
-;Right. Well, be on your guard, if that'll calm you down.;15;;;
+;Right. Well, be on your guard.;15;;;
 15;*The bus pulls up at a big high-rise. There are Zorsan standing next to it. They are several, and their clothes don't look anything like what the city dwellers you saw outside your window wore. They remind  you of the Eastern style on Earth, too. Something cape-like with a hood. The bus doors open.*;;;;
 ;We're getting out.;16;;;
 16;*One of the Zorsan approaches you outside. Looking at him up close, you can see that the white cloth of his cape is thick, beautiful, and a bit opalescent.* Good day. Glad to meet you. Please follow me. *It is worth nothing that there isn't anything reminiscent of the press around.*;;;;
