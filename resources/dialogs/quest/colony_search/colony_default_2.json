@@ -12,7 +12,8 @@
           "replyConditions": [
             {
               "name": "colony.dungeon_quest.completed",
-              "type": "SET"
+              "value": "0",
+              "type": "EQUAL"
             }
           ]
         },
@@ -23,7 +24,8 @@
           "replyConditions": [
             {
               "name": "colony.lost_group_quest.completed",
-              "type": "SET"
+              "value": "0",
+              "type": "EQUAL"
             }
           ]
         },
@@ -34,7 +36,8 @@
           "replyConditions": [
             {
               "name": "colony.hunt_quest.completed",
-              "type": "SET"
+              "value": "0",
+              "type": "EQUAL"
             }
           ]
         },
@@ -112,7 +115,14 @@
         {
           "returnValue": 0,
           "targetStatementId": 7,
-          "replyText": "9"
+          "replyText": "9",
+          "replyConditions": [
+            {
+              "name": "colony_news",
+              "value": "5",
+              "type": "GREATER"
+            }
+          ]
         },
         {
           "returnValue": 0,

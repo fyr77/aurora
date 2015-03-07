@@ -1,5 +1,5 @@
 0;"*The station's interior isn't too tidy. It's pretty old, there are signs of being in battle a lot and being repaired afterwards. At least it seems reliable. ""Seems"" is the operating word. It even has an elevator! Now that's a miracle. This place suits the rebels well: their faces are tense, they look pretty tough. You're led to ""our boss"" in a small convoy down narrow station corridors. Both the rebels and your people are alert. The atmosphere is rather tense.*";interior_dialog
-;…;
+;…;1
 1;"*In front of the door that says ""Navigator's Quarters"" (you've gotten good at alien languages, haven't you?) they stop you.* Alone, human captain. You don't have to surrender your weapon.";interior_dialog
 ;Okay. *go inside*;2
 2;"*What is there to say? It really is the navigator's quarters. At least, the first thing you see is a big dynamic map of the system. Almost like the one at your ship (you plot your course on it; the execution is pretty basic, but what can you do?), except it looks slightly different. There's also a lot of equipment, devices you don't recognize at all. You can't see the owner of the room right away, but if you listen closely, you can hear grunts from the open dashboard panel mounted on the wall. As you can see, he's almost completely inside of it, tinkering with the electronics oliviously.* Human captain! Sorry! One moment. *Wow... he noticed you.*";
@@ -8,7 +8,7 @@
 3;Yeah, yeah! *Instead of the grunts, you can now hear crackles, then a clang, and then a small pop. The Zorsan jumps up in a funny way, banging with his heavy boots, and jumps away from the panel.* I think... I think... *He looks at it attentively.* Yeah... Yeah. That's all. *He walks up to the panel and shuts it. You can see that the owner of the room is naked down to his waist. He's weirdly wide, like all Zorsan, but not because he's fat: apparently, that's just how he's built. You wouldn't say he's muscular. More like wiry. And also bald. He is about two heads shorter than you.* Sorry again, human captain. I'm pretty good at electronics, and I tend to my room myself.;
 ;You were... Okay. You were good in there. You got hit with electricity, too. Was it bad?;4
 4;No. *He shows you his thick hands with distinctive burn marks.* Wasn't the first time. *He walks up to his desk and gets dressed.* You've found this place. That's great, human captain. I'm glad that we'll be working together!;
-;Don't speak too soon. Let's put it like this: you've piqued my interest me, but I still don't understand who you are. And what is all this, anyway? The message was pretty strange.;
+;Don't speak too soon. Let's put it like this: you've piqued my interest me, but I still don't understand who you are. And what is all this, anyway? The message was pretty strange.;5
 5;Wait! *The Zorsan smiles.* Let's do it one question at a time. Not all at once.;
 ;Let's start with the basics. Who are you?;10
 ;All right. Your message.;6
