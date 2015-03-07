@@ -80,7 +80,7 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
 
             if (world.getCurrentStarSystem() != null && ship.getX() == 0 && ship.getY() == 0) {
                 turnsInSun++;
-                GameLogger.getInstance().logMessage(Localization.getText("journal", "burns." + turnsInSun));
+                GameLogger.getInstance().logMessage(Localization.getText("journal", "red_meat.burns." + turnsInSun));
             } else {
                 turnsInSun = 0;
             }

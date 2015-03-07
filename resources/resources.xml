@@ -107,7 +107,7 @@
     <resource type="image" id="press_conference">sprites/portraits/press_conference.png</resource>
     <resource type="image" id="colonist_dialog">sprites/portraits/colonist.png</resource>
     <resource type="image" id="colonist_marine_dialog">sprites/portraits/colonial_marine.png</resource>
-    <resource type="spritesheet" id="humanity_tileset" tx="64" ty="64">sprites/maps/humanity_tileset.png</resource>
+    <resource type="spritesheet" id="humanity_tileset" tw="64" th="64">maps/humanity_tileset.png</resource>
 
     <resource type="image" id="colony_boxes">sprites/planet_objects/boxes.png</resource>
     <resource type="image" id="colony_colonist">sprites/planet_objects/colonist_sprite.png</resource>
