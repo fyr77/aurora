@@ -105,7 +105,7 @@ public class ResearchState implements Serializable {
                             continue;
                         }
                         toAdd.add(new ResearchProjectState(projectDesc));
-                        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "added_new_research"), projectDesc.getName()));
+                        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.added_new_research"), projectDesc.getName()));
                     }
                 }
                 if (state.desc.getMakesAvailableEngineering() != null) {

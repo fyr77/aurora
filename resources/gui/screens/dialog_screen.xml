@@ -16,7 +16,7 @@
                     </panel>
                     <panel height="10px"/>
                     <panel childLayout="center" padding="10px" width="100%">
-                        <control id="replyList" name="listBox" vertical="optional" horizontal="optional" displayItems="10"
+                        <control id="replyList" name="listBox" vertical="optional" horizontal="off" displayItems="10"
                              height="256" selection="Single" width="100%"/>
                     </panel>
                 </panel>
