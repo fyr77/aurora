@@ -1,5 +1,6 @@
 package ru.game.aurora.player.engineering;
 
+import com.google.common.collect.Multiset;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
@@ -11,22 +12,31 @@ import ru.game.aurora.util.EngineUtils;
  * Date: 01.05.14
  * Time: 14:41
  */
-public class ShipUpgradeViewConverter implements ListBox.ListBoxViewConverter<ShipUpgrade> {
-    @Override
-    public void display(Element element, ShipUpgrade upgrade) {
-        Element text = element.findElementByName("#item");
-        EngineUtils.setTextForGUIElement(text, upgrade.getLocalizedName(upgrade.getLocalizationGroup()));
+public class ShipUpgradeViewConverter implements ListBox.ListBoxViewConverter<Multiset.Entry<ShipUpgrade>> {
+
+    private String getText(Multiset.Entry<ShipUpgrade> upgrade)
+    {
+        return (upgrade.getCount() > 1 ? "x" + upgrade.getCount() : "") + " " +
+                upgrade.getElement().getLocalizedName(upgrade.getElement().getLocalizationGroup());
     }
 
     @Override
-    public int getWidth(Element element, ShipUpgrade upgrade) {
+    public void display(Element element, Multiset.Entry<ShipUpgrade> upgrade) {
+        Element text = element.findElementByName("#item");
+        element.setUserData(upgrade);
+        EngineUtils.setTextForGUIElement(text, getText(upgrade));
+    }
+
+    @Override
+    public int getWidth(Element element, Multiset.Entry<ShipUpgrade> upgrade) {
         Element text = element.findElementByName("#item");
         final TextRenderer textRenderer = text.getRenderer(TextRenderer.class);
-        return ((textRenderer.getFont() == null) ? 0 : textRenderer.getFont().getWidth(upgrade.getLocalizedName(upgrade.getLocalizationGroup())) + 32);
+        return ((textRenderer.getFont() == null) ? 0 : textRenderer.getFont().getWidth(getText(upgrade)) + 32);
     }
 
     @Override
-    public int getHeight(Element element, ShipUpgrade shipUpgrade) {
-        return 138;
+    public int getHeight(Element element, Multiset.Entry<ShipUpgrade> shipUpgrade) {
+        display(element, shipUpgrade);
+        return element.getHeight();
     }
 }

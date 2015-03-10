@@ -7,6 +7,9 @@
 package ru.game.aurora.gui;
 
 
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
+import com.sun.org.apache.xpath.internal.operations.Mult;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
@@ -37,9 +40,14 @@ public class EarthScreenController implements ScreenController {
 
     private Element messagesList;
 
-    private ListBox<ShipUpgrade> storageList;
+    //todop: [save] move these multisets into player object when save compatibility is no longer required
+    private Multiset<ShipUpgrade> storageMultiset;
 
-    private ListBox<ShipUpgrade> inventoryList;
+    private Multiset<ShipUpgrade> inventoryMultiset;
+
+    private ListBox<Multiset.Entry<ShipUpgrade>> storageList;
+
+    private ListBox<Multiset.Entry<ShipUpgrade>> inventoryList;
 
     private Element shipYardTab;
 
@@ -52,6 +60,8 @@ public class EarthScreenController implements ScreenController {
 
     public EarthScreenController(World world) {
         this.world = world;
+        storageMultiset = HashMultiset.create();
+        inventoryMultiset = HashMultiset.create();
     }
 
     @Override
@@ -78,8 +88,13 @@ public class EarthScreenController implements ScreenController {
         EngineUtils.resetScrollbarX(inventoryList);
         storageList.clear();
         inventoryList.clear();
-        storageList.addAllItems(new ArrayList<>(world.getPlayer().getEarthState().getAvailableUpgrades()));
-        inventoryList.addAllItems(world.getPlayer().getShip().getUpgrades());
+        storageMultiset.clear();
+        inventoryMultiset.clear();
+        storageMultiset.addAll(world.getPlayer().getEarthState().getAvailableUpgrades());
+        inventoryMultiset.addAll(world.getPlayer().getShip().getUpgrades());
+
+        storageList.addAllItems(storageMultiset.entrySet());
+        inventoryList.addAllItems(inventoryMultiset.entrySet());
     }
 
     private void fillMessages() {
@@ -111,14 +126,14 @@ public class EarthScreenController implements ScreenController {
         EngineUtils.setTextForGUIElement(engiCountElement, String.valueOf(world.getPlayer().getShip().getMaxEngineers()));
         EngineUtils.setTextForGUIElement(milCountElement, String.valueOf(world.getPlayer().getShip().getMaxMilitary()));
 
-        List<ShipUpgrade> selected = new ArrayList<>();
+        List<Multiset.Entry<ShipUpgrade>> selected = new ArrayList<>();
         selected.addAll(inventoryList.getSelection());
         selected.addAll(storageList.getSelection());
         if (!selected.isEmpty()) {
-            ShipUpgrade su = selected.get(0);
-            EngineUtils.setTextForGUIElement(upgradeText, su.getLocalizedDescription());
-            EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), su.getLocalizedName(su.getLocalizationGroup()));
-            EngineUtils.setImageForGUIElement(upgradeImage, su.getDrawable().getImage());
+            Multiset.Entry<ShipUpgrade> su = selected.get(0);
+            EngineUtils.setTextForGUIElement(upgradeText, su.getElement().getLocalizedDescription());
+            EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), su.getElement().getLocalizedName(su.getElement().getLocalizationGroup()));
+            EngineUtils.setImageForGUIElement(upgradeImage, su.getElement().getDrawable().getImage());
         } else {
             EngineUtils.setTextForGUIElement(upgradeText, "");
             EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), "");
@@ -128,51 +143,49 @@ public class EarthScreenController implements ScreenController {
         final int freeSpace1 = world.getPlayer().getShip().getFreeSpace();
         freeSpace.setProgress((100 - (float) freeSpace1) / 100.0f);
         freeSpace.setText(Localization.getText("gui", "shipyard.remaining_space") + " " + freeSpace1);
+        fillUpgrades();
+        GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
 
     public void onShipToShipyardClicked() {
-        ShipUpgrade su = inventoryList.getFocusItem();
-        inventoryList.removeItemByIndex(inventoryList.getFocusItemIndex());
-        world.getPlayer().getShip().removeUpgrade(world, su);
+        Multiset.Entry<ShipUpgrade> su = inventoryList.getFocusItem();
+        if (su.getCount() == 1) {
+            inventoryList.removeItemByIndex(inventoryList.getFocusItemIndex());
+        }
+        inventoryMultiset.remove(su.getElement());
+        world.getPlayer().getShip().removeUpgrade(world, su.getElement());
         updateShipyardLabels();
     }
 
     public void onShipyardToShipClicked() {
-        ShipUpgrade su = storageList.getFocusItem();
-        if (su.getSpace() > world.getPlayer().getShip().getFreeSpace()) {
+        Multiset.Entry<ShipUpgrade> su = storageList.getFocusItem();
+        if (su.getElement().getSpace() > world.getPlayer().getShip().getFreeSpace()) {
             return;
         }
-        inventoryList.addItem(su);
-        world.getPlayer().getShip().addUpgrade(world, su);
+        if (!inventoryMultiset.contains(su.getElement())) {
+            inventoryList.addItem(su);
+        }
+        inventoryMultiset.add(su.getElement());
+        world.getPlayer().getShip().addUpgrade(world, su.getElement());
         updateShipyardLabels();
     }
 
-    private void deselectAll(ListBox<ShipUpgrade> l) {
+    private void deselectAll(ListBox<Multiset.Entry<ShipUpgrade>> l) {
         for (Integer i : l.getSelectedIndices()) {
             l.deselectItemByIndex(i);
         }
     }
 
 
-    //это - очень сильное колдунство. onClicked занят ниже. Поэтому тут - onReleased. Костыль
     @NiftyEventSubscriber(pattern = ".*storage_to_inventory")
     public void onReleased(String id, ButtonClickedEvent event) {
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        ListBox itemsList = storageList;
-        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        itemsList.setFocusItemByIndex(numericId);
-        itemsList.selectItemByIndex(numericId);
+        storageList.selectItem((Multiset.Entry<ShipUpgrade>) event.getButton().getElement().getParent().getUserData());
         deselectAll(inventoryList);
     }
 
-    //костыль к костылю. YO DAWG
     @NiftyEventSubscriber(pattern = ".*inventory_to_storage")
     public void onPrimaryReleased(String id, ButtonClickedEvent event) {
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        ListBox itemsList = inventoryList;
-        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        itemsList.setFocusItemByIndex(numericId);
-        itemsList.selectItemByIndex(numericId);
+        inventoryList.selectItem((Multiset.Entry<ShipUpgrade>) event.getButton().getElement().getParent().getUserData());
         deselectAll(storageList);
     }
 
@@ -183,7 +196,7 @@ public class EarthScreenController implements ScreenController {
         }
 
         if (id.equals(inventoryList.getId()) || id.equals(storageList.getId())) {
-            ShipUpgrade su = (ShipUpgrade) event.getSelection().get(0);
+            ShipUpgrade su = ((Multiset.Entry<ShipUpgrade>) event.getSelection().get(0)).getElement();
             EngineUtils.setTextForGUIElement(upgradeText, su.getLocalizedDescription());
             EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), su.getLocalizedName(su.getLocalizationGroup()));
             EngineUtils.setImageForGUIElement(upgradeImage, su.getDrawable().getImage());

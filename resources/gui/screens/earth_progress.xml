@@ -107,14 +107,15 @@
                             <!-- inventory and upgrades -->
                             <panel height="10px"/>
 
-                            <panel childLayout="horizontal" height="60%">
-                                <panel childLayout="vertical" width="45%">
+                            <panel childLayout="horizontal" height="45%">
+                                <panel childLayout="vertical" width="45%" height="100%">
                                     <text id="inventoryText" style="button-font" align="center" text="${gui.shipyard}"
                                           height="32px"/>
-                                    <control id="storageList" name="listBox" vertical="optional" horizontal="optional"
-                                             displayItems="10" selection="Single"
+                                    <control id="storageList" name="listBox" vertical="optional" horizontal="off"
+                                             selection="Single"
                                              viewConverterClass="ru.game.aurora.player.engineering.ShipUpgradeViewConverter"
                                              visibleToMouse="true"
+                                             height="90%"
                                             >
                                         <control name="shipyard_line"
                                                  controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
@@ -133,11 +134,12 @@
 
                                 <panel height="10px"/>
 
-                                <panel childLayout="vertical" width="45%">
+                                <panel childLayout="vertical" width="45%" height="100%">
                                     <text id="storageText" style="button-font" align="center" text="${gui.ship}"
                                           height="32px"/>
-                                    <control id="inventoryList" name="listBox" vertical="optional" horizontal="optional"
-                                             displayItems="10" selection="Single"
+                                    <control id="inventoryList" name="listBox" vertical="on" horizontal="off"
+                                             selection="Single"
+                                             height="90%"
                                              visibleToMouse="true"
                                              viewConverterClass="ru.game.aurora.player.engineering.ShipUpgradeViewConverter">
                                         <control name="ship_line"
@@ -160,8 +162,8 @@
 
                         </control>
                     </control>
-                    <panel height="10px"/>
-                    <panel childLayout="horizontal">
+                    <panel height="*"/>
+                    <panel childLayout="horizontal" height="50px">
                         <panel width="75%"/>
                         <control id="close_button" name="button" label="Close" width="150px" height="45px">
                             <interact onClick="closeScreen()"/>
