@@ -1,0 +1,7 @@
+1Мазершип связь.csv;rogues_mothership_first_time;rogues_dialog;rogues
+3Разговор с аналитическим отделом корабля после добычи инфы.csv;rogues_zorsan_data_decoded;scientist_dialog;rogues
+Дефолтный ответ если связался не с мазершипом.csv;rogues_default;rogues_dialog;rogues
+Дефолтный разговор с диппредом бродяг.csv;rogues_admiral_default;rogues_admiral_dialog;rogues
+Диалог перед высадкой на маяк.csv;rogues_beacon_landing;scientist_dialog;rogues
+Маяк - Диалог после захвата.csv;rogues_beacon_explored;scientist_dialog;rogues
+Первый разговор с диппредом Бродяг.csv;rogues_admiral_first;rogues_admiral_dialog;rogues

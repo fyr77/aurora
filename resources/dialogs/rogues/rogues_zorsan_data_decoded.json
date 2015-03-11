@@ -1,6 +1,6 @@
 {
   "id": "rogues_zorsan_data_decoded",
-  "iconName": "scietist_dialog",
+  "iconName": "scientist_dialog",
   "statements": {
     "0": {
       "id": 0,
@@ -72,5 +72,7 @@
         }
       ]
     }
-  }
+  },
+  "flags": {},
+  "returnValue": 0
 }
