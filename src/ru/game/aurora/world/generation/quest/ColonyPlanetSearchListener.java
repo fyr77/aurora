@@ -115,6 +115,10 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
 
     @Override
     public boolean onPlayerLandedPlanet(World world, Planet planet) {
+        if (world.getGlobalVariables().containsKey("colony_search.found")) {
+            isAlive = false;
+            return false;
+        }
         currentPlanet = checkCurrentPlanet(world, planet);
         if (currentPlanet != null) {
             PlanetData data = planetDataMap.get(currentPlanet);
