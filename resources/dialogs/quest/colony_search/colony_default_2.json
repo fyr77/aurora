@@ -499,7 +499,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 999,
           "replyText": "0",
           "flags": {
             "colony.dungeon_quest": "true"
@@ -535,7 +535,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 999,
           "replyText": "0",
           "flags": {
             "colony.lost_group_quest": "true"
@@ -629,6 +629,16 @@
           "flags": {
             "colony.dungeon_quest.reported": "true"
           }
+        }
+      ]
+    },
+    "999": {
+      "id": 999,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
         }
       ]
     },

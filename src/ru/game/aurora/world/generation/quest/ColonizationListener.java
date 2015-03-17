@@ -133,7 +133,8 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         @Override
         public void update(GameContainer container, World world) {
             super.update(container, world);
-            if (world.getTurnCount() > dieTime) {
+            if (world.isUpdatedThisFrame() && world.getTurnCount() > dieTime) {
+                isAlive = false;
                 remainingScientists--;
                 checkAllDone(world);
                 GameLogger.getInstance().logMessage(Localization.getText("journal", "colony_search.lost_group.scientist_killed_message"));
@@ -192,19 +193,25 @@ public class ColonizationListener extends GameEventListener implements DialogLis
             }
 
             // lost group quest - find and save 5 scientists from monsters
-            if (flags.containsKey("colony.lost_group")) {
+            if (flags.containsKey("colony.lost_group_quest")) {
                 logger.info("Lost group quest started");
                 world.getGlobalVariables().put("colony.lost_group", true);
                 world.getPlayer().getJournal().addQuestEntries("colony_search", "lost_group");
                 remainingScientists = 5;
 
                 for (int i = 0; i < remainingScientists; ++i) {
-                    LostScientist ls = new LostScientist(world, 0, 0, "humanity_tileset", 6, 2);
+                    LostScientist ls = new LostScientist(world, 0, 0, "humanity_tileset", 2, 6);
                     ls.setDialog(Dialog.loadFromFile("dialogs/quest/colony_search/lost_group_" + (i + 1) + ".json"));
                     planet.setNearestFreePoint(ls, colonyCenter.getX() + 50 + CommonRandom.getRandom().nextInt(100), colonyCenter.getY() + 50 + CommonRandom.getRandom().nextInt(100));
                     createMonsters(world, ls, 20, CommonRandom.getRandom().nextInt(4));
+                    planet.getPlanetObjects().add(ls);
                 }
 
+            }
+
+            if (flags.containsKey("colony.lost_group_quest.reported")) {
+                logger.info("Colony lost group quest completed");
+                world.getGlobalVariables().put("colony.lost_group_quest.completed", "1");
             }
         }
     }
@@ -299,7 +306,8 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         if (world.getGlobalVariables().containsKey("colony.hunt_quest")
                 && !world.getGlobalVariables().containsKey("colony.hunt_quest.completed")
                 && world.getCurrentRoom() == world.getGlobalVariables().get("colony_search.coords")) {
-            if (!target.isAlive()) {
+            //todo: fix hack, make animals and animal corpses separate items
+            if (!target.isAlive() || (target instanceof Animal && ((Animal) target).getHp() <= 0)) {
                 monstersKilled++;
                 if (monstersKilled >= 5) {
                     logger.info("Player has killed 5 monsters for colony quest");

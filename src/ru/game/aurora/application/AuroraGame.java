@@ -15,6 +15,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.openal.SoundStore;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.ExitConfirmationScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpPopupControl;
@@ -258,6 +259,7 @@ public class AuroraGame extends NiftyOverlayGame {
     @Override
     protected void renderGame(GameContainer gameContainer, Graphics graphics) throws SlickException {
         try {
+
             if (mainMenu != null) {
                 mainMenu.draw(graphics);
             } else {
@@ -339,6 +341,7 @@ public class AuroraGame extends NiftyOverlayGame {
             Configuration.getSystemProperties().put("locale", Localization.getCurrentLocaleTag());
             app = new AppGameContainer(new AuroraGame());
             app.setUpdateOnlyWhenVisible(false);
+            app.setClearEachFrame(true);
             Resolution res;
             String resolutionString = Configuration.getSystemProperties().getProperty("screen.resolution");
             if (resolutionString != null) {
