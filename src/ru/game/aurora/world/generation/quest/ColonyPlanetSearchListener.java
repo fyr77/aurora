@@ -180,11 +180,11 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
         );
         desc.setArmor(1);
 
-        Animal animal1 = new Animal(currentPlanet, 0, 0, desc);
+        Animal animal1 = new Animal(currentPlanet.getMap(), 0, 0, desc);
         currentPlanet.setNearestFreePoint(animal1, world.getPlayer().getLandingParty().getX() + 3, world.getPlayer().getLandingParty().getY());
-        Animal animal2 = new Animal(currentPlanet, 0, 0, desc);
+        Animal animal2 = new Animal(currentPlanet.getMap(), 0, 0, desc);
         currentPlanet.setNearestFreePoint(animal2, world.getPlayer().getLandingParty().getX() + 1, world.getPlayer().getLandingParty().getY() + 3);
-        Animal animal3 = new Animal(currentPlanet, 0, 0, desc);
+        Animal animal3 = new Animal(currentPlanet.getMap(), 0, 0, desc);
         currentPlanet.setNearestFreePoint(animal3, currentPlanet.getShuttle().getX(), currentPlanet.getShuttle().getY());
         currentPlanet.getPlanetObjects().add(animal1);
         currentPlanet.getPlanetObjects().add(animal2);

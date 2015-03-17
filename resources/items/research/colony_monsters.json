@@ -1,0 +1,10 @@
+{
+    "id": "colony_monsters",
+    "icon" : "bio_research",
+    "makesAvailable" : [],
+    "makesAvailableEngineering" : [],
+    "earthProgress" : [],
+    "score" : 30,
+    "progress" : 90,
+    "initialProgress" : 90
+}

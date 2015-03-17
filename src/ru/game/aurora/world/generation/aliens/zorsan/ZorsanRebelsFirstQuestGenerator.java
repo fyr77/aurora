@@ -206,7 +206,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
             desc.setImages(ResourceManager.getInstance().getImage("zorsan_warrior"), null);
             desc.setCanBePickedUp(false);
             for (int i = 0; i < enemies; ++i) {
-                Animal animal = new Animal(targetPlanet, 0, 0, desc);
+                Animal animal = new Animal(targetPlanet.getMap(), 0, 0, desc);
                 targetPlanet.setNearestFreePoint(animal, artifact.getX() + CommonRandom.getRandom().nextInt(4), artifact.getY() + CommonRandom.getRandom().nextInt(4));
                 targetPlanet.getPlanetObjects().add(animal);
             }

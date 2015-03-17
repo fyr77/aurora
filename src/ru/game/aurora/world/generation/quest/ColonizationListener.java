@@ -7,6 +7,7 @@ import ru.game.aurora.application.*;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.planet.*;
@@ -85,7 +86,8 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         Random r = CommonRandom.getRandom();
         for (int i = 0; i < amount; ++i) {
             AnimalSpeciesDesc desc = CollectionUtils.selectRandomElement(p.getFloraAndFauna().getAnimalSpecies());
-            Animal animal = new Animal(p, 0, 0, desc);
+            Animal animal = new Animal(p.getMap(), 0, 0, desc);
+            animal.setWasAttacked(true); // make animals more aggressive towards player
             p.setNearestFreePoint(
                     animal
                     , center.getX() + r.nextInt(radius) - r.nextInt(radius / 2)
@@ -213,6 +215,36 @@ public class ColonizationListener extends GameEventListener implements DialogLis
                 logger.info("Colony lost group quest completed");
                 world.getGlobalVariables().put("colony.lost_group_quest.completed", "1");
             }
+
+            if (flags.containsKey("colony.dungeon_quest")) {
+                logger.info("Dungeon quest started");
+                world.getGlobalVariables().put("colony.dungeon_quest", true);
+                world.getPlayer().getJournal().addQuestEntries("colony_search", "dungeon");
+
+                final AuroraTiledMap auroraTiledMap = new AuroraTiledMap("maps/planetary_dungeon_1.tmx");
+                auroraTiledMap.setUserData(planet);
+                Dungeon cavern = new Dungeon(world, auroraTiledMap, planet);
+                final DungeonEntrance entrance = new DungeonEntrance(planet, 0, 0, "cavern", cavern);
+                cavern.getController().addListener(new IStateChangeListener<World>() {
+                    @Override
+                    public void stateChanged(World param) {
+                        entrance.setLocked("dungeon.locked");
+                        param.getPlayer().getJournal().addQuestEntries("colony_search", "dungeon_end");
+                        param.getGlobalVariables().put("colony.dungeon_quest.completed", "0");
+                        param.getPlayer().getLandingParty().setPos(entrance.getX(), entrance.getY());
+                    }
+                });
+
+                cavern.setPlaylistName("dark_corners");
+                planet.setNearestFreePoint(entrance, planet.getWidth() / 2, planet.getHeight() / 2);
+                planet.getPlanetObjects().add(entrance);
+            }
+
+            if (flags.containsKey("colony.dungeon_quest.reported")) {
+                world.getPlayer().changeResource(world, Resources.RU, 20);
+                logger.info("Colony dungeon quest completed");
+                world.getGlobalVariables().put("colony.dungeon_quest.completed", "1");
+            }
         }
     }
 
@@ -256,10 +288,10 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         AnimalSpeciesDesc guard = new AnimalSpeciesDesc(planet, "Marine", false, false, 10, ResourceManager.getInstance().getWeapons().getEntity("assault"), 1, MonsterBehaviour.FRIENDLY, Collections.<AnimalModifier>emptySet());
         guard.setCanBePickedUp(false);
         guard.setImages(ResourceManager.getInstance().getSpriteSheet("humanity_tileset").getSprite(1, 9), ResourceManager.getInstance().getImage("no_image"));
-        planet.getPlanetObjects().add(new Animal(planet, colonyCenter.getX() + 9, colonyCenter.getY() + 7, guard));
+        planet.getPlanetObjects().add(new Animal(planet.getMap(), colonyCenter.getX() + 9, colonyCenter.getY() + 7, guard));
         if (world.getGlobalVariables().containsKey("colony_search.explored_fully")) {
-            planet.getPlanetObjects().add(new Animal(planet, colonyCenter.getX() + 2, colonyCenter.getY() + 6, guard));
-            planet.getPlanetObjects().add(new Animal(planet, colonyCenter.getX() + 7, colonyCenter.getY() + 3, guard));
+            planet.getPlanetObjects().add(new Animal(planet.getMap(), colonyCenter.getX() + 2, colonyCenter.getY() + 6, guard));
+            planet.getPlanetObjects().add(new Animal(planet.getMap(), colonyCenter.getX() + 7, colonyCenter.getY() + 3, guard));
         }
 
         chief = new PlanetNPC(colonyCenter.getX() + 8, colonyCenter.getY() + 9, "colony_colonist");

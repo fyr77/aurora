@@ -407,6 +407,10 @@
             {
               "name": "colony.dungeon_quest",
               "type": "NOT_SET"
+            },
+            {
+              "name": "colony.dungeon_quest.completed",
+              "type": "NOT_SET"
             }
           ]
         },
@@ -418,6 +422,10 @@
             {
               "name": "colony.lost_group_quest",
               "type": "NOT_SET"
+            },
+            {
+              "name": "colony.lost_group_quest.completed",
+              "type": "NOT_SET"
             }
           ]
         },
@@ -428,6 +436,10 @@
           "replyConditions": [
             {
               "name": "colony.hunt_quest",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "colony.hunt_quest.completed",
               "type": "NOT_SET"
             }
           ]
@@ -599,7 +611,7 @@
               "type": "GREATER"
             },
             {
-              "name": "colony_lost_group_quest.saved",
+              "name": "colony.lost_group_quest.saved",
               "value": "5",
               "type": "LESS"
             }

@@ -410,12 +410,19 @@ public class DungeonController extends Listenable implements Serializable {
         }
         // should always be done after player update, so that world.isUpdatedThisFrame() flag is set
         boolean isAtObject = false;
+        List<GameObject> toRemove = new ArrayList<>();
         for (GameObject a : new ArrayList<>(map.getObjects())) {
             a.update(container, world);
+            if (!a.isAlive()) {
+                toRemove.add(a);
+                continue;
+            }
             if (getDistance(landingParty, a) == 0 && a.canBeInteracted()) {
                 isAtObject = true;
             }
         }
+
+        map.getObjects().removeAll(toRemove);
 
         final Element interactPanel = GUI.getInstance().getNifty().getScreen("surface_gui").findElementByName("interactPanel");
         if (interactPanel != null) {

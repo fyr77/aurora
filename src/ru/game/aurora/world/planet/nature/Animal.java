@@ -13,6 +13,8 @@ import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.Planet;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,7 +32,10 @@ public class Animal extends BaseGameObject implements IMonster {
 
     private final AnimalSpeciesDesc desc;
 
-    private final Planet myPlanet;
+    // todo: remove
+    private Planet myPlanet;
+
+    private ITileMap myMap;
 
     private boolean pickedUp = false;
 
@@ -40,17 +45,17 @@ public class Animal extends BaseGameObject implements IMonster {
 
     private List<WeaponInstance> weapons;
 
-    public Animal(Planet p, int x, int y, AnimalSpeciesDesc desc) {
+    public Animal(ITileMap map, int x, int y, AnimalSpeciesDesc desc) {
         super(x, y);
         this.desc = desc;
-        this.myPlanet = p;
+        this.myMap = map;
         this.hp = desc.getHp();
         if (desc.getWeapon() != null) {
             this.weapons = Lists.newArrayList(new WeaponInstance(desc.getWeapon()));
         } else {
             this.weapons = Collections.emptyList();
         }
-        controller = new MonsterController(p.getMap(), this);
+        controller = new MonsterController(myMap, this);
     }
 
     @Override
@@ -59,13 +64,29 @@ public class Animal extends BaseGameObject implements IMonster {
         controller.update(container, world);
     }
 
+    // todo: [save] remove planet
+    private void readObject(
+            ObjectInputStream aInputStream
+    ) throws ClassNotFoundException, IOException {
+        //always perform the default de-serialization first
+        aInputStream.defaultReadObject();
+
+        if (myPlanet != null && myMap == null) {
+            myMap = myPlanet.getMap();
+            myPlanet = null;
+        }
+    }
+
+
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
         if (desc.getImage() == null || (desc.isCanBePickedUp() && desc.getDeadImage() == null)) {
             AnimalGenerator.getInstance().getImageForAnimal(desc);
         }
         final Image image = hp > 0 ? desc.getImage() : desc.getDeadImage();
-        graphics.drawImage(image, camera.getXCoordWrapped(x, myPlanet.getWidth()), camera.getYCoordWrapped(y, myPlanet.getHeight()));
+        graphics.drawImage(image
+                , myMap.isWrapped() ? camera.getXCoordWrapped(x, myMap.getWidthInTiles()) : camera.getXCoord(x)
+                , myMap.isWrapped() ? camera.getYCoordWrapped(y, myMap.getHeightInTiles()) : camera.getYCoord(y));
 
         String hpText;
         if (hp < 100) {
@@ -131,9 +152,9 @@ public class Animal extends BaseGameObject implements IMonster {
         if (hp <= 0) {
             // clean obstacle flag
             if (nowMoving()) {
-                myPlanet.getSurface().setTilePassable(getTargetX(), getTargetY(), true);
+                myMap.setTilePassable(getTargetX(), getTargetY(), true);
             } else {
-                myPlanet.getSurface().setTilePassable(x, y, true);
+                myMap.setTilePassable(x, y, true);
             }
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), getName()));
             if (!desc.isCanBePickedUp()) {
@@ -170,5 +191,7 @@ public class Animal extends BaseGameObject implements IMonster {
         return (desc.getBehaviour() == MonsterBehaviour.SELF_DEFENSIVE && wasAttacked) ? MonsterBehaviour.AGGRESSIVE : desc.getBehaviour();
     }
 
-
+    public void setWasAttacked(boolean wasAttacked) {
+        this.wasAttacked = wasAttacked;
+    }
 }

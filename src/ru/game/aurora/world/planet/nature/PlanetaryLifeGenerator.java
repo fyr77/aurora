@@ -109,7 +109,7 @@ public class PlanetaryLifeGenerator {
         final int animalCount = r.nextInt(100 / planet.getSize()) + 5;
         AnimalSpeciesDesc[] animalSpeciesDescs = planet.getFloraAndFauna().getAnimalSpecies();
         for (int i = 0; i < animalCount; ++i) {
-            Animal a = new Animal(planet, 0, 0, animalSpeciesDescs[r.nextInt(animalSpeciesDescs.length)]);
+            Animal a = new Animal(planet.getMap(), 0, 0, animalSpeciesDescs[r.nextInt(animalSpeciesDescs.length)]);
             int animalX;
             int animalY;
             do {
