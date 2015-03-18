@@ -1,0 +1,8 @@
+0;*Gordon comes in all of a sudden. He is excited.*;
+;Gordon? You didn't put in a request to come in. No big deal, but it's kind of unexpected..;1
+1;Captain! The Moon! We've recorded an anomalous change in the gravitational potential of Luna!;
+;Uh… I got most of it, but I don't know what it means. Is that a bad thing?;2
+2;It's unusual!! We have to go there and do primary reconnaissance!;
+;Hm… So there's no apparent harm?;3
+3;No, but this… this is the Moon! We have to check it out!;
+;I'll think about your suggestion, Gordon. We have to go to Earth, but if it really is as unusual as you say, we could go see what it is. Go back to your station.;-1

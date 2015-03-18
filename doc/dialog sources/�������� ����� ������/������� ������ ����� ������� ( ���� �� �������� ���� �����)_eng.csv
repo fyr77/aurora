@@ -1,0 +1,24 @@
+0;"*A strangely dressed alien is looking at you; they call his kind the Rogues. Behind his back, you can see about a dozen of his compatriots setting up something like a small obelisk, a pole about five meters tall. However, this thing is vibrating and blinking its lights.* I know you. You're humans. By the Essence of the Devourer, I greet you.";;
+;I greet you, too. Tell me, what is this structure? And what are you doing on my planet's moon?;1;
+1;We're praying to the Essence of the Devourer and to the Essence of your star. And this is our Altar. The prayer is useless without it.;;
+;Okay. Explain, then, please, why did your manipulations change the way the Moon affects our planet? Our coastal cities are in danger.;2;
+2;We know. Our Altar is broken.;;
+;Does that mean that you'll leave Luna and take your equipment with you?;3;
+3;That means that we can't leave Luna. It's a beautiful name. Until the prayer is done, we can't go back. Until the Altar is working, the prayer can't be done.;;
+;Look, I don't think you understood me. I'll repeat. Your actions put our cities in danger. That is bad. And it will go on until you fix your broken Altar..;4;
+4;We're sorry. We really are. But we can't.;;
+;Last chance. Do you refuse?;5;
+5;*His answer is silence and a steadfast stare.*;;
+;I'm sorry it's come to this, but if you won't go for a peaceful solution, we'll have to use force.;6;
+;That's not going to work. Whose orders did you start all this on, anyway?;7;
+;Right. The Altar is broken. So if it gets fixed, the cataclysms on our planets will stop and you will be able to leave?;8;
+;Okay, I need to call an urgent officer's meeting. I have to go.;-1;
+6;A fight? You will become the Essence of the Devourer. *The Rogue is angry.*;;
+;And you will become research material.;-1;1
+7;Our own. Praying to the Essence of the Devourer is happiness. But we were sent here by Elder Hoor, from Mothership Brau. Is that what you meant?;;
+;Elder Hoor, Mothership Brau… Good. If you guys are so dense, I'll have to go pay him a visit.;-1;
+8;Yes. Do you want to help us?;;
+;What choice do I have?;9;
+;I don't think so. This solution is too unpleasant for me.;5;
+9;Okay. Your ship. Give us clear comms. We'll send you a list of what we need.;;
+;Deal. I'm going back there. Don't take too long.;-1;

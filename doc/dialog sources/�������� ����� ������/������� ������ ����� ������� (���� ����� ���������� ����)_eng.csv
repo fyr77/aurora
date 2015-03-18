@@ -1,0 +1,22 @@
+0;Oh. Humans. It's you again.;
+;That's right. Did you know that your Altar causes natural catastrophes on my planet? Our coastal cities are in danger.;2
+2;We know. Our Altar is broken.;
+;Does that mean that you'll leave Luna and take your equipment with you?;3
+3;That means that we can't leave Luna. It's a beautiful name. But, until the prayer is done, we can't go back. Until the Altar is working, the prayer can't be done.;
+;Look, I don't think you understood me. I'll repeat. Your actions put our cities in danger. That is bad. And it will go on until you fix your broken Altar.;4
+4;We're sorry. We really are. But we can't.;
+;Last chance. Do you refuse?;5
+5;*His answer is silence and a steadfast stare.*;
+;I'm sorry it's come to this, but if you won't go for a peaceful solution, we'll have to use force.;6
+;That's not going to work. Whose orders did you start all this on, anyway?;7
+;Right. The Altar is broken. So if it gets fixed, the cataclysms on our planets will stop and you will be able to leave?;8
+6;Okay, I need to call an urgent officer's meeting. I have to go.;
+;A fight? You will become the Essence of the Devourer. *The Rogue is angry.*;-1
+7;And you will become research material.;
+;Our own. Praying to the Essence of the Devourer is happiness. But we were sent here by Elder Hoor, from Mothership Brau. Is that what you meant?;-1
+8;Elder Hoor, Mothership Brau… Good. If you're so dense, I'll have to go pay him a visit.;
+;Yes. Do you want to help us?;9
+;What choice do I have?;5
+9;I don't think so. This solution is too unpleasant for me.;
+;Okay. Your ship. Give us clear comms. We'll send you a list of what we need.;-1
+;Deal. I'm going back there. Don't take too long.;
