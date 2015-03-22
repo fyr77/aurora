@@ -71,7 +71,7 @@
           "replyText": "2"
         },
         {
-          "returnValue": -1,
+          "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "3"
         }
@@ -83,7 +83,13 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "0"
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "1",
+              "type": "SET"
+            }
+          ]
         }
       ]
     },
@@ -122,5 +128,7 @@
         }
       ]
     }
-  }
+  },
+  "flags": {},
+  "returnValue": 0
 }

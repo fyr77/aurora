@@ -1,0 +1,5 @@
+Бродяги диалог до разговора с Мартаном.csv;rogues_altar_1;rogues_dialog;encounters
+Бродяги диалог после Мартана ( если не проверял Луну ранее).csv;rogues_altar_2;rogues_dialog;encounters
+Мартан диалог уничтожение Бродяг.csv;rogues_altar_destroyed;earth_dialog;encounters
+Сообщение ученого при виде проблем с луной.csv;rogues_altar_scientist;scientist_dialog;encounters
+Экаунтер МЕССА.csv;rogues_altar_earth;earth_dialog;encounters
