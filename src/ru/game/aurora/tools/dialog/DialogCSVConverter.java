@@ -2,6 +2,7 @@ package ru.game.aurora.tools.dialog;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import ru.game.aurora.dialog.Condition;
 import ru.game.aurora.dialog.Dialog;
@@ -162,12 +163,13 @@ public class DialogCSVConverter {
         File inputFile = new File(input);
         Context<Statement> context = parseFile(inputFile, dialogId);
         Context<Statement> englishContext = null;
-        String[] nameSplit = input.split("\\.");
-        File englishFile = new File(nameSplit[0] + "_en." + nameSplit[1]);
+        String baseName = FilenameUtils.getBaseName(input);
+        String extension = FilenameUtils.getExtension(input);
+        File englishFile = new File(inputFile.getParentFile(), baseName + "_en." + extension);
         if (englishFile.exists()) {
             englishContext = parseFile(englishFile, dialogId);
         }
-        englishFile = new File(nameSplit[0] + "_eng." + nameSplit[1]);
+        englishFile = new File(inputFile.getParentFile(), baseName + "_eng." + extension);
         if (englishFile.exists()) {
             englishContext = parseFile(englishFile, dialogId);
         }

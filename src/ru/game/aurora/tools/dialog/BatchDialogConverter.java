@@ -33,7 +33,6 @@ public class BatchDialogConverter {
 
     private void readAndProcessConfig(File currentFolder, File config) throws IOException {
         logger.info("Processing config" + config.getAbsolutePath());
-        boolean hasErrors = false;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(config), EngineUtils.detectEncoding(config)))) {
 
             String line;
@@ -47,7 +46,7 @@ public class BatchDialogConverter {
                 if (parts.length != 4) {
                     logger.info("Malformed line " + idx);
                     ++idx;
-                    hasErrors = true;
+                    ++errorCount;
                     continue;
                 }
 
@@ -58,20 +57,19 @@ public class BatchDialogConverter {
 
                 if (portrait.isEmpty() || id.isEmpty()) {
                     logger.error("Malformed line " + idx);
-                    hasErrors = true;
+                    ++errorCount;
                     ++idx;
                     continue;
                 }
 
-                hasErrors &= DialogCSVConverter.process(inputFile.getAbsolutePath(), outputDir.getAbsolutePath(), outputLocalizationRoot, id, portrait);
+                if (!DialogCSVConverter.process(inputFile.getAbsolutePath(), outputDir.getAbsolutePath(), outputLocalizationRoot, id, portrait)) {
+                    errorCount++;
+                }
 
             } while (true);
 
         }
 
-        if (hasErrors) {
-            errorCount++;
-        }
     }
 
     public void processDialogsInFolder(File folder) throws IOException {

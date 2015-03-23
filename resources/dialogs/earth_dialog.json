@@ -916,8 +916,19 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 78,
+          "targetStatementId": 77,
           "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "klisk.war_help",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 78,
+          "replyText": "1",
           "flags": {
             "rogues_flag": "true"
           }
@@ -925,7 +936,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 70,
-          "replyText": "1",
+          "replyText": "2",
           "replyConditions": [
             {
               "name": "bork_flag",
@@ -939,7 +950,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "2"
+          "replyText": "3"
         }
       ]
     },
@@ -991,6 +1002,20 @@
           "replyConditions": [
             {
               "name": "rogues.zorsan_data",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "rogues_flag": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 69,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "rogues.zorsan_data",
               "value": "forged",
               "type": "EQUAL"
             }
@@ -999,7 +1024,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 69,
-          "replyText": "1",
+          "replyText": "2",
           "replyConditions": [
             {
               "name": "rogues.zorsan_data",
@@ -1026,7 +1051,24 @@
         {
           "returnValue": 0,
           "targetStatementId": 69,
-          "replyText": "0"
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "bork.war_help",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 69,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "bork.war_help",
+              "type": "NOT_SET"
+            }
+          ]
         }
       ]
     },
@@ -1035,7 +1077,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 77,
+          "targetStatementId": 76,
           "replyText": "0",
           "replyConditions": [
             {
