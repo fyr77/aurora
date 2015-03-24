@@ -1,16 +1,18 @@
 {
-    "id": "klisk_trade_quest_ship_default",
-    "iconName": "klisk_vip_dialog",
-    "statements": {
-        "0": {
-            "id": 0,
-            "replies": [
-                {
-                    "returnValue": 0,
-                    "targetStatementId": -1,
-                    "replyText": "0"
-                }
-            ]
+  "id": "klisk_trade_quest_ship_default",
+  "iconName": "klisk_vip_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
         }
+      ]
     }
+  },
+  "flags": {},
+  "returnValue": 0
 }

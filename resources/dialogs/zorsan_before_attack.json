@@ -1,0 +1,416 @@
+{
+  "id": "zorsan_before_attack",
+  "iconName": "zorsan_leader_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "klisk.zorsan_info",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "2"
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0"
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "window",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "0"
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "0"
+        }
+      ]
+    },
+    "10": {
+      "id": 10,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "klisk.zorsan_info",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "11": {
+      "id": 11,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        }
+      ]
+    },
+    "12": {
+      "id": 12,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        }
+      ]
+    },
+    "13": {
+      "id": 13,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "0"
+        }
+      ]
+    },
+    "14": {
+      "id": 14,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "0"
+        }
+      ]
+    },
+    "15": {
+      "id": 15,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "0"
+        }
+      ]
+    },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "0"
+        }
+      ]
+    },
+    "16": {
+      "id": 16,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "19": {
+      "id": 19,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0"
+        }
+      ]
+    },
+    "18": {
+      "id": 18,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "2"
+        }
+      ]
+    },
+    "21": {
+      "id": 21,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "2"
+        }
+      ]
+    },
+    "20": {
+      "id": 20,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "0"
+        }
+      ]
+    },
+    "23": {
+      "id": 23,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
+        }
+      ]
+    },
+    "22": {
+      "id": 22,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0"
+        }
+      ]
+    },
+    "25": {
+      "id": 25,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 27,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 28,
+          "replyText": "2"
+        }
+      ]
+    },
+    "24": {
+      "id": 24,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 27,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 28,
+          "replyText": "3"
+        }
+      ]
+    },
+    "27": {
+      "id": 27,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 28,
+          "replyText": "2"
+        }
+      ]
+    },
+    "26": {
+      "id": 26,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 27,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 28,
+          "replyText": "2"
+        }
+      ]
+    },
+    "28": {
+      "id": 28,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

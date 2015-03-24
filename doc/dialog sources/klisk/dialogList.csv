@@ -6,3 +6,5 @@
 6ПРибытие на станцию, внезапная торговля.csv;klisk_trade_quest_arrival;rogues_dialog;klisk
 7Процесс торговли.csv;klisk_trade_quest_trade;rogues_dialog;klisk
 Дефолтный диалог с диппредом (+конец квеста).csv;klisk_planet_default;klisk_vip_dialog;klisk
+ship_default.csv;klisk_trade_quest_ship_default;klisk_vip_dialog;klisk
+station_default.csv;klisk_trade_quest_station_default;rogues_dialog;klisk
