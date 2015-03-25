@@ -20,6 +20,7 @@ sourceSets {
         resources {
             srcDir 'resources'
         }
+        output.resourcesDir = 'build/classes/main'
     }
 
 }

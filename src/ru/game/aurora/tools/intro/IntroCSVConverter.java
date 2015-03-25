@@ -37,7 +37,7 @@ public class IntroCSVConverter {
         final String textId = context.id + "." + context.lineNumber + ".text";
 
 
-        context.text.put(textId, tokens[2]);
+        context.text.put(textId, StringEscapeUtils.unescapeCsv(tokens[2]));
 
         return new IntroDialog.Statement(tokens.length > 3 ? tokens[3] : null, captionId, tokens[1].isEmpty() ? null : tokens[1], textId);
     }
@@ -79,7 +79,7 @@ public class IntroCSVConverter {
         try {
             // check for english localization
             String[] split = args[0].split("\\.");
-            File englishFile = new File(split[0] + "_en." + split[1]);
+            File englishFile = new File(split[0] + "_eng." + split[1]);
             if (englishFile.exists()) {
                 englishContext = readFile(englishFile, args[1]);
             } else {

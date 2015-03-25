@@ -1,21 +1,12 @@
 {
   "id": "intro_am",
-  "mainImageId": "intro",
+  "mainImageId": "usa_leader",
   "statements": [
     {
+      "mainImageId": "intro",
       "iconName": "usa_leader",
       "captionId": "intro_am.1.caption",
       "textId": "intro_am.1.text"
-    },
-    {
-      "iconName": "asia_leader",
-      "captionId": "intro_am.2.caption",
-      "textId": "intro_am.2.text"
-    },
-    {
-      "iconName": "europe_leader",
-      "captionId": "intro_am.3.caption",
-      "textId": "intro_am.3.text"
     }
   ]
 }
