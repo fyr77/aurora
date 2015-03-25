@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+
+    <controlDefinition name="dialog-line">
+        <panel childLayout="center" width="100%" align="center" padding="5px">
+            <text id="#line-text" style="base-font" align="left" textHAlign="left" height="100%" width="90%" wrap="true"/>
+        </panel>
+
+    </controlDefinition>
+
     <screen id="dialog_screen" controller="ru.game.aurora.gui.DialogController">
         <layer childLayout="absolute">
             <control id="dialog_window" name="window" title="${gui.dialog.caption}" closeable="false" width="80%" height="576px"
@@ -16,8 +24,19 @@
                     </panel>
                     <panel height="10px"/>
                     <panel childLayout="center" padding="10px" width="100%">
-                        <control id="replyList" name="listBox" vertical="optional" horizontal="off" displayItems="10"
-                             height="256" selection="Single" width="100%"/>
+                        <control id="replyList" name="listBox" vertical="optional" horizontal="off"
+                                 height="256" selection="Single" width="100%" viewConverterClass="ru.game.aurora.gui.ListBoxSimpleTextWithWrapViewConverter">
+                            <control name="dialog-line" controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
+                                <effect>
+                                    <onCustom customKey="select" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
+                                    <onCustom customKey="select" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
+                                    <onCustom customKey="select" name="textColor" post="false" color="#fc0f" neverStopRendering="true" timeType="infinite" />
+                                    <onHover name="colorBar" color="#444736" post="false" neverStopRendering="true" timeType="infinite"
+                                             inset="1px"/>
+                                </effect>
+                                <interact onClick="listBoxItemClicked()"/>
+                            </control>
+                        </control>
                     </panel>
                 </panel>
             </control>

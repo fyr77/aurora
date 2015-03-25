@@ -14,9 +14,7 @@ public class ListBoxSimpleTextWithWrapViewConverter implements ListBox.ListBoxVi
 
     @Override
     public int getWidth(Element element, Object item) {
-        /*TextRenderer renderer = element.getRenderer(TextRenderer.class);
-        renderer.setText(item.toString());
-        return renderer.getTextWidth();*/
+        display(element, item);
         return element.getWidth();
     }
 
