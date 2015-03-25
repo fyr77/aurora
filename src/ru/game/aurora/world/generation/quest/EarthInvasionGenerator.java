@@ -22,6 +22,7 @@ import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.space.ShipLootItem;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Map;
@@ -207,6 +208,9 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                         setAi(new LeaveSystemAI());
                         klisk_trade_drone.addMessage("buyAll");
                         world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("klisk_trader_drone_withdraw", "news"));
+
+                        ShipLootItem goods = new ShipLootItem(ShipLootItem.Type.GOODS, getFaction());
+                        goods.onReceived(world, 1);
                     }
 
                 }

@@ -6,6 +6,8 @@
  */
 package ru.game.aurora.world.generation.aliens;
 
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
@@ -13,6 +15,7 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.NextDialogListener;
+import ru.game.aurora.gui.TradeScreenController;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.NPCShipFactory;
@@ -116,7 +119,7 @@ public class KliskGenerator implements WorldGeneratorPart {
         world.addListener(new KliskTradequestDialogListener(targetSystem));
     }
 
-    private StarSystem generateTargetStarsystemForTradeQuest(World world, AlienRace race) {
+    private StarSystem generateTargetStarsystemForTradeQuest(World world, final AlienRace race) {
         StarSystem ss = WorldGenerator.generateRandomStarSystem(world, 12, 15);
         world.getGalaxyMap().addObjectAtDistance(ss, (Positionable) world.getGlobalVariables().get("solar_system"), 20);
         world.getGlobalVariables().put("klisk_trade.coords", ss.getCoordsString());
@@ -124,7 +127,22 @@ public class KliskGenerator implements WorldGeneratorPart {
         NPCShip spaceStation = race.getDefaultFactory().createShip(world, STATION);
         ss.setRandomEmptyPosition(spaceStation);
         ss.getShips().add(spaceStation);
-        spaceStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json")));
+        final Dialog stationDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json");
+        stationDialog.addListener(new DialogListener() {
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                if (returnCode == 1) {
+                    Multiset<InventoryItem> defaultTradeInventory = HashMultiset.create();
+                    defaultTradeInventory.add(new KliskTradeItems.AdvancedRadarsSellItem());
+                    defaultTradeInventory.add(new KliskTradeItems.AlienAlloysSellItem());
+                    defaultTradeInventory.add(new KliskTradeItems.ResourceSellItem());
+                    defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("math"));
+                    defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("physics"));
+                    TradeScreenController.openTrade("rogues_dialog", defaultTradeInventory, race);
+                }
+            }
+        });
+        spaceStation.setCaptain(new NPC(stationDialog));
         ss.setQuestLocation(true);
         return ss;
     }

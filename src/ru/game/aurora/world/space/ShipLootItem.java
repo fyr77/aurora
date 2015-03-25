@@ -2,7 +2,7 @@ package ru.game.aurora.world.space;
 
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.common.Drawable;
-import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.ResearchProjectDesc;
@@ -18,7 +18,7 @@ import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 public class ShipLootItem extends SellOnlyInventoryItem
 {
 
-    public static enum Type
+    public enum Type
     {
         COMPUTERS ("loot.computers"),
         WEAPONS ("loot.weaponry"),
@@ -53,7 +53,7 @@ public class ShipLootItem extends SellOnlyInventoryItem
         super("research", type.id, new Drawable("alien_space_drop_items", getRaceIdx(race), type.ordinal()), Configuration.getIntProperty("trade.loot_price"), false);
     }
 
-    public ShipLootItem(Type type, AlienRace race) {
+    public ShipLootItem(Type type, Faction race) {
         this(type, race.getName());
     }
 

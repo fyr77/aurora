@@ -8,9 +8,9 @@
 
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </layout>
+        </encoder>
         <File>aurora.log</File>
     </appender>
 
