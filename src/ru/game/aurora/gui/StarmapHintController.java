@@ -31,9 +31,12 @@ public class StarmapHintController implements EffectImpl {
 
     private StarMapController starMapController;
 
+    private GalaxyMapController galaxyMapController;
+
     @Override
     public void activate(Nifty nifty, Element element, EffectProperties effectProperties) {
         starMapController = (StarMapController) GUI.getInstance().getNifty().findScreenController(StarMapController.class.getCanonicalName());
+        galaxyMapController = (GalaxyMapController) GUI.getInstance().getNifty().findScreenController(GalaxyMapController.class.getCanonicalName());
         panel = nifty.getCurrentScreen().findElementByName("starmap-hint-panel");
 
         nameText = panel.findElementByName("star_name");
@@ -43,7 +46,10 @@ public class StarmapHintController implements EffectImpl {
 
     @Override
     public void execute(Element element, float v, Falloff falloff, NiftyRenderEngine niftyRenderEngine) {
-        GalaxyMapObject objectAtMouseCoords = starMapController.getGalaxyMapObjectAtMouseCoords();
+        GalaxyMapObject objectAtMouseCoords = GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("star_map_screen")
+                ? starMapController.getGalaxyMapObjectAtMouseCoords()
+                : galaxyMapController.getGalaxyMapObjectAtMouseCoords()
+                ;
         if (objectAtMouseCoords == null) {
             panel.hide();
             return;

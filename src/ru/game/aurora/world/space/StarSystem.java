@@ -172,6 +172,13 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
             EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, (int) (camera.getTileWidth() / star.size), star.color, true);
         } else {
             g.drawImage(star.getImage(), camera.getXCoord(tileX) + (camera.getTileWidth() - star.getImage().getWidth()) / 2, camera.getYCoord(tileY) + (camera.getTileHeight() - star.getImage().getHeight()) / 2);
+            g.setColor(Color.white);
+
+            g.drawString(name,   camera.getXCoord(tileX) + (camera.getTileWidth() - g.getFont().getWidth(name)) / 2, camera.getYCoord(tileY) + star.getImage().getHeight() / 2 + AuroraGame.tileSize / 2);
+            if (messageForStarMap != null) {
+                //g.drawString(messageForStarMap,   camera.getXCoord(tileX) + (camera.getTileWidth() - g.getFont().getWidth(messageForStarMap)) / 2, camera.getYCoord(tileY) + star.getImage().getHeight() / 2 + AuroraGame.tileSize);
+                EngineUtils.drawDashedCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, (int) (star.getImage().getHeight() * 0.8), Color.green, 10);
+            }
         }
     }
 
@@ -839,6 +846,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     }
 
     public void setMessageForStarMap(String messageForStarMap) {
+        if (messageForStarMap != null && messageForStarMap.isEmpty()) {
+            this.messageForStarMap = null;
+            return;
+        }
         this.messageForStarMap = messageForStarMap;
     }
 

@@ -299,4 +299,22 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         }
     }
 
+    public GalaxyMapObject getGalaxyMapObjectAtMouseCoords() {
+        int x = GUI.getInstance().getNifty().getNiftyMouse().getX();
+        int y = GUI.getInstance().getNifty().getNiftyMouse().getY();
+
+        x = world.getCamera().getPointTileX(x) + world.getCamera().getTarget().getX() - world.getCamera().getNumTilesX() / 2;
+        y = world.getCamera().getPointTileY(y) + world.getCamera().getTarget().getY() - world.getCamera().getNumTilesY() / 2;
+        double minDist = Double.POSITIVE_INFINITY;
+        GalaxyMapObject result = null;
+        for (GalaxyMapObject gmo : world.getGalaxyMap().getGalaxyMapObjects()) {
+            double newDist = BasePositionable.getDistance(gmo.getX(), gmo.getY(), x, y);
+            if (newDist < minDist) {
+                result = gmo;
+                minDist = newDist;
+            }
+        }
+        return minDist <= 1.5 ? result : null;
+    }
+
 }

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
     <registerEffect name="custom-hint" class="ru.game.aurora.gui.niffy.CustomHint"/>
+    <registerEffect name="galaxymap-hint" class="ru.game.aurora.gui.StarmapHintController"/>
+
     <controlDefinition name="button_and_count">
         <panel childLayout="horizontal">
             <panel childLayout="vertical" padding="5px">
@@ -15,6 +17,9 @@
 
     <screen id="galaxy_map_gui" controller="ru.game.aurora.gui.GalaxyMapController">
         <layer id="starmap_layer" childLayout="vertical">
+            <effect>
+                <onHover name="galaxymap-hint" targetElement="starmap-hint-panel"/>
+            </effect>
             <control name="top_panel" id="top_panel"/>
 
             <panel height="50px"/>
@@ -105,6 +110,19 @@
                 <control id="help_window" name="window" hideOnClose="true" closeable="true" title="${gui.help.title}"   width="45%" height="35%" x="10%" y="10%" visible="false">
                     <control id="help_popup" name="help_popup"/>
                 </control>
+            </panel>
+        </layer>
+        <!--star map hint layer -->
+        <layer childLayout="absolute">
+            <panel id="starmap-hint-panel" width="200" visible="false" childLayout="vertical"
+                   padding="5px,25px,5px,25px"
+                   backgroundColor="#aa7f4dff">
+                <text id="star_name" style="button-font" width="90%" wrap="true" text="empty" align="center"
+                      valign="center"/>
+                <text id="explored_progress" style="button-font" width="90%" wrap="true" text="empty" align="center"
+                      valign="center"/>
+                <text id="comment" style="button-font" width="90%" wrap="true" text="empty" align="center"
+                      valign="center"/>
             </panel>
         </layer>
     </screen>
@@ -264,7 +282,7 @@
                 </control>
             </panel>
         </layer>
-        <!--hint layer -->
+        <!--GUI hint layer -->
         <layer childLayout="absolute">
             <panel id="hint-panel" width="200" visible="false" childLayout="vertical" padding="5px,25px,5px,25px"
                    backgroundColor="#aa7f4dff">
@@ -273,6 +291,8 @@
             </panel>
         </layer>
     </screen>
+
+
     <popup id="landing_party_lost" childLayout="absolute">
         <control id="landing_party_lost_window" name="window" hideOnClose="true" width="60%" height="350px" x="20%"
                  y="30%">

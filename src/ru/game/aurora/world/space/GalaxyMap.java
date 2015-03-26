@@ -7,6 +7,8 @@ package ru.game.aurora.world.space;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.tools.*;
+import de.lessvoid.nifty.tools.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -15,8 +17,10 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.StarMapController;
 import ru.game.aurora.world.*;
 
+import java.awt.*;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -99,6 +103,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         final Nifty nifty = GUI.getInstance().getNifty();
         nifty.gotoScreen("galaxy_map_gui");
         nifty.setIgnoreKeyboardEvents(true);
+        StarMapController.updateStarmapLabels(world);
     }
 
     @Override
@@ -169,6 +174,9 @@ public class GalaxyMap extends BaseSpaceRoom {
             } else if (hasEnterableObject && !landPanelVisible) {
                 scanLandPanel.setVisible(true);
             }
+        }
+        if (world.isUpdatedThisFrame()) {
+            StarMapController.updateStarmapLabels(world);
         }
     }
 

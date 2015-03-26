@@ -65,10 +65,42 @@ public class StarMapController implements ScreenController {
         EngineUtils.drawDashedCircleCentered(g, myCamera.getXCoord(obj.getX()) + myCamera.getTileWidth() / 2, myCamera.getYCoord(obj.getY()) + myCamera.getTileHeight() / 2, (int) (myCamera.getTileHeight() * 4), Color.green, 10);
     }
 
+    public static void updateStarmapLabels(World world)
+    {
+        GalaxyMap galaxyMap = world.getGalaxyMap();
+        for (int i = 0; i < galaxyMap.getTilesY(); ++i) {
+            for (int j = 0; j < galaxyMap.getTilesX(); ++j) {
+                GalaxyMapObject obj = galaxyMap.getObjectAt(j, i);
+                if (obj == null) {
+                    continue;
+                }
+
+                StringBuilder messageBuilder = new StringBuilder();
+                for (GameEventListener listener : world.getListeners()) {
+                    final String localizedMessageForStarSystem = listener.getLocalizedMessageForStarSystem(world, obj);
+                    if (localizedMessageForStarSystem != null) {
+                        messageBuilder.append(localizedMessageForStarSystem).append('\n');
+                    }
+                }
+
+                if (obj instanceof StarSystem) {
+                    ((StarSystem) obj).setMessageForStarMap(messageBuilder.toString());
+                }
+            }
+        }
+
+        for (ResearchProjectState activeResearch : world.getPlayer().getResearchState().getCurrentProjects()) {
+            for (StarSystem ss : activeResearch.desc.getTargetStarSystems()) {
+                ss.setMessageForStarMap((ss.getMessageForStarMap() != null ? ss.getMessageForStarMap() + activeResearch.desc.getName() : activeResearch.desc.getName()));
+            }
+        }
+    }
+
     private void draw(GameContainer container, Graphics g) {
         g.setBackground(Color.black);
         g.clear();
         StarSystem solarSystem = (StarSystem) world.getGlobalVariables().get("solar_system");
+        updateStarmapLabels(world);
         for (int i = 0; i < galaxyMap.getTilesY(); ++i) {
             for (int j = 0; j < galaxyMap.getTilesX(); ++j) {
                 GalaxyMapObject obj = galaxyMap.getObjectAt(j, i);
@@ -76,33 +108,14 @@ public class StarMapController implements ScreenController {
                     continue;
                 }
                 obj.drawOnGlobalMap(container, g, myCamera, j, i);
-
-                StringBuilder messageBuilder = new StringBuilder();
-                for (GameEventListener listener : world.getListeners()) {
-                    final String localizedMessageForStarSystem = listener.getLocalizedMessageForStarSystem(world, obj);
-                    if (localizedMessageForStarSystem != null) {
-                        messageBuilder.append(localizedMessageForStarSystem).append('\n');
-                        mark(g, obj);
-                    }
+                if (obj instanceof StarSystem && ((StarSystem) obj).getMessageForStarMap() != null) {
+                    mark(g, obj);
                 }
 
-                if (obj instanceof StarSystem) {
-                    ((StarSystem) obj).setMessageForStarMap(messageBuilder.toString());
-                }
                 if (solarSystem == obj) {
                     g.setColor(Color.yellow);
                     g.drawString("Solar system", myCamera.getXCoord(j), myCamera.getYCoord(i));
                 }
-            }
-        }
-
-        for (ResearchProjectState activeResearch : world.getPlayer().getResearchState().getCurrentProjects()) {
-            for (StarSystem ss : activeResearch.desc.getTargetStarSystems()) {
-                if (ss.getMessageForStarMap() == null || ss.getMessageForStarMap().isEmpty()) {
-                    mark(g, ss);
-                }
-
-                ss.setMessageForStarMap((ss.getMessageForStarMap() != null ? ss.getMessageForStarMap() + activeResearch.desc.getName() : activeResearch.desc.getName()));
             }
         }
 
