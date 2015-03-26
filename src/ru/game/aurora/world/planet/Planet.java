@@ -212,7 +212,6 @@ public class Planet extends BasePlanet implements IDungeon {
         Element popup = nifty.createPopup("landing");
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
 
-        world.onPlayerLandedPlanet(this);
         surfaceGenerationFuture = GlobalThreadPool.getExecutor().submit(new Runnable() {
             @Override
             public void run() {
@@ -243,11 +242,11 @@ public class Planet extends BasePlanet implements IDungeon {
 
     public void leavePlanet(World world) {
         GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.launch_shuttle"));
+        landingParty.onReturnToShip(world);
         world.setCurrentRoom(owner);
-        owner.enter(world);
+        owner.returnTo(world);
         world.getPlayer().getShip().setPos(x, y);
         world.onPlayerLeftPlanet(this);
-        landingParty.onReturnToShip(world);
     }
 
 
@@ -308,6 +307,8 @@ public class Planet extends BasePlanet implements IDungeon {
                 exploredTiles += openedTiles;
                 landingParty.addCollectedGeodata(openedTiles);
                 surfaceGenerationFuture = null;
+
+                world.onPlayerLandedPlanet(this);
             }
             return;
         }

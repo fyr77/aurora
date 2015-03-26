@@ -19,6 +19,7 @@ public class CrewMemberViewConverter
             b.getElement().show();
             b.setText(item.getActionButtonCaption());
         }
+        element.setUserData(item);
     }
 
     @Override

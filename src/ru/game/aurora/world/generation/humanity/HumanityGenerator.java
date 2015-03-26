@@ -48,7 +48,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
         defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
     }
 
-    private class TradeShip extends NPCShip
+    /*private class TradeShip extends NPCShip
     {
 
         public TradeShip(Faction race) {
@@ -65,7 +65,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
                     ));
             TradeScreenController.openTrade("klisk_dialog", inventoryItems);
         }
-    }
+    }*/
 
     @Override
     public void updateWorld(final World world) {
@@ -83,9 +83,6 @@ public class HumanityGenerator implements WorldGeneratorPart {
         solarSystem.setAstronomyData(0); // everything is explored
         solarSystem.setQuestLocation(true);
         humans.setHomeworld(solarSystem);
-        NPCShip trader = new TradeShip(humans);
-        solarSystem.setRandomEmptyPosition(trader);
-        solarSystem.getShips().add(trader);
 
         // generate solar system somewhere in lower third of a galaxy
         world.getGalaxyMap().addObjectAndSetTile(

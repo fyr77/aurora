@@ -102,9 +102,7 @@ public class ShipScreenController implements ScreenController {
 
     @NiftyEventSubscriber(pattern = ".*callButton")
     public void onCallButtonClicked(String id, ButtonClickedEvent event) {
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        numericId -= Integer.parseInt(crewMemberListBox.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        crewMemberListBox.setFocusItemByIndex(numericId);
+        crewMemberListBox.setFocusItem((CrewMember) event.getButton().getElement().getParent().getUserData());
     }
 
     @NiftyEventSubscriber(id = "ship_window")
