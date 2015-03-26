@@ -1,6 +1,7 @@
 package ru.game.aurora.world.space;
 
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.SellOnlyInventoryItem;
@@ -66,7 +67,7 @@ public class ShipLootItem extends SellOnlyInventoryItem
         }
 
         if (id.contains("goods")) {
-            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("loot.goods", "news"));
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "loot.goods", "news"));
         }
     }
 

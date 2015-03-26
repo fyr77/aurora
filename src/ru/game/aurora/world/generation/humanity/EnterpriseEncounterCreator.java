@@ -68,11 +68,12 @@ public class EnterpriseEncounterCreator extends GameEventListener {
 
         // spawn private messages.
         world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                world,
                 "enterprise_1",
                 "message"
         ));
 
-        world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("enterprise_launch", "news"));
+        world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "enterprise_launch", "news"));
 
 
         Dialog captainDialog = Dialog.loadFromFile("dialogs/encounters/enterprise.json");

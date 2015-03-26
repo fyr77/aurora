@@ -118,7 +118,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
                 dropShipsLanded++;
                 if (dropShipsLanded == 1) {
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_first_dropship.json"));
-                    world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_attack_invasion", "news"));
+                    world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "zorsan_attack_invasion", "news"));
                     attackSpaceStation(world);
                 }
 
@@ -411,7 +411,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
             world.getPlayer().getEarthState().getEarthSpecialDialogs().clear();
 
-            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_attack_victory", "news"));
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "zorsan_attack_victory", "news"));
 
 
             state = State.OVER;
@@ -616,7 +616,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
         world.addListener(this);
 
-        world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_attack_2", "news"));
+        world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "zorsan_attack_2", "news"));
 
 
 

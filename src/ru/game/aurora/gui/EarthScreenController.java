@@ -21,6 +21,7 @@ import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.niffy.ProgressBarControl;
@@ -207,14 +208,20 @@ public class EarthScreenController implements ScreenController {
             Element imagePanel = messagesList.findElementByName("selectedItemImg");
 
             TextRenderer tr = messagesList.findElementByName("selectedItemText").getRenderer(TextRenderer.class);
+            Element detailsText = messagesList.findElementByName("messageDetailsText");
             if (event.getSelection().isEmpty()) {
                 tr.setText("<No item selected>");
-                imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage("no_image"))));
+                EngineUtils.setImageForGUIElement(imagePanel, "no_image");
+                EngineUtils.setTextForGUIElement(detailsText, String.format(Localization.getText("private_messages", "message_details_template"), "", ""));
                 return;
             }
             PrivateMessage pm = (PrivateMessage) event.getSelection().get(0);
+            pm.setRead(true);
             tr.setText(pm.getLocalizedText("private_messages"));
-            imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(pm.getDrawable().getImage())));
+            final Image image = pm.getDrawable().getImage();
+            image.setFilter(Image.FILTER_LINEAR);
+            EngineUtils.setImageForGUIElement(imagePanel, image);
+            EngineUtils.setTextForGUIElement(detailsText, String.format(Localization.getText("private_messages", "message_details_template"), pm.getSender(), pm.getReceivedAt()));
             messagesList.layoutElements();
         }
 

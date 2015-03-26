@@ -233,7 +233,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
             protected void onCompleted(World world) {
                 world.getPlayer().getEarthState().getAvailableUpgrades().add(new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon")));
                 world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/zorsan_cannon_unlocked.json"));
-                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_weapons_reserch", "news"));
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "zorsan_weapons_reserch", "news"));
                 world.getPlayer().getEarthState().updateTechnologyLevel(100);
             }
         });

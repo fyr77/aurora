@@ -44,6 +44,8 @@ public class BiologyResearch extends EarthResearch {
         if (materialCount >= TARGET_COUNT) {
             world.getPlayer().getEarthState().getMessages().add(
                     new PrivateMessage(
+                            world,
+                            "news_sender",
                             "cancer_cure"
                             , "news"
                     )

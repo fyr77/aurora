@@ -2,6 +2,7 @@ package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.player.earth.EvacuationState;
 import ru.game.aurora.player.earth.PrivateMessage;
@@ -103,7 +104,9 @@ public class MainQuestGenerator implements WorldGeneratorPart {
                             isAlive = false;
                             world.getPlayer().getEarthState().getMessages().add(
                                     new PrivateMessage(
-                                            "obliterator_discovered"
+                                            world
+                                            , "news_sender"
+                                            , "obliterator_discovered"
                                             , "news"
                                     )
                             );

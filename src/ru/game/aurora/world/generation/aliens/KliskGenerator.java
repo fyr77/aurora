@@ -11,6 +11,7 @@ import com.google.common.collect.Multiset;
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
@@ -169,7 +170,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                     world.getGlobalVariables().put("klisk_trade.started", 1);
                     beginTradeQuest(world, kliskPlanet, targetSystemForQuest);
                 }
-                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("klisk.ambassador_visit", "news"));
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "klisk.ambassador_visit", "news"));
                 kliskPlanet.setDialog(createDefaultKliskPlanetDialog(world));
             }
         });

@@ -8,6 +8,7 @@ package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
@@ -62,11 +63,15 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
             final EarthState earthState = world.getPlayer().getEarthState();
             if (state == 0) {
                 earthState.getMessages().add(new PrivateMessage(
+                        world,
+                        "news_sender",
                         "icarus_1",
                         "message"
                 )
                 );
                 earthState.getMessages().add(new PrivateMessage(
+                        world,
+                        "news_sender",
                         "icarus_2"
                         , "news"
                 ));
@@ -93,6 +98,8 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 // add messages
 
                 earthState.getMessages().add(new PrivateMessage(
+                        world
+                        , "news_sender",
                         "icarus_3"
                         , "news"
                 ));
@@ -101,6 +108,8 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 state = 2;
             } else if (state == 2) {
                 earthState.getMessages().add(new PrivateMessage(
+                        world
+                        , "news_sender",
                         "icarus_4"
                         , "news"
                 ));
@@ -113,6 +122,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         public void onStarted(World world) {
             super.onStarted(world);
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                    world, "news_sender",
                     "icarus_0"
                     , "news"
             ));

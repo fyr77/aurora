@@ -263,7 +263,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
 
 
     @Override
-    public void updateWorld(World world) {
+    public void updateWorld(final World world) {
         final Dialog starsystemEnterDialog = Dialog.loadFromFile("dialogs/encounters/inside_entrance_detected.json");
         starsystemEnterDialog.addListener(new DialogListener() {
             private static final long serialVersionUID = -4264540383261831865L;
@@ -288,7 +288,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
 
             @Override
             public void stateChanged(World param) {
-                param.getPlayer().getEarthState().getMessages().add(new PrivateMessage("inside", "news"));
+                param.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "inside", "news"));
             }
         });
     }

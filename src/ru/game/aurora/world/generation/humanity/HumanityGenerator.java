@@ -48,7 +48,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
         defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
     }
 
-    /*private class TradeShip extends NPCShip
+    private class TradeShip extends NPCShip
     {
 
         public TradeShip(Faction race) {
@@ -65,7 +65,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
                     ));
             TradeScreenController.openTrade("klisk_dialog", inventoryItems);
         }
-    }*/
+    }
 
     @Override
     public void updateWorld(final World world) {
@@ -118,8 +118,8 @@ public class HumanityGenerator implements WorldGeneratorPart {
         // add welcoming messages
         List<PrivateMessage> pm = world.getPlayer().getEarthState().getMessages();
 
-        pm.add(new PrivateMessage("game_start", "message"));
-        pm.add(new PrivateMessage("game_start_2", "message"));
+        pm.add(new PrivateMessage(world, "game_start", "message"));
+        pm.add(new PrivateMessage(world, "game_start_2", "message"));
 
         // add Enterprise ship event
         //world.addListener(new EnterpriseEncounterCreator()); //TODO: re-add later

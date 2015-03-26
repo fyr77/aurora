@@ -147,11 +147,14 @@ public class Earth extends BasePlanet {
             protected void onCompleted(World world) {
                 world.getPlayer().getEarthState().getEvacuationState().changeEvacuationSpeed(100);
                 world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                        world,
+                        "news_sender",
                         "evac_start",
                         "news"
                 ));
 
                 world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                        world,
                         "evac_start_2",
                         "message"
                 ));

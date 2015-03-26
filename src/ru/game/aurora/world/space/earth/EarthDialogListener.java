@@ -167,7 +167,7 @@ public class EarthDialogListener implements DialogListener {
             flags.remove("zorsan_war_info_update");
             world.getGlobalVariables().put("zorsan.war_preparations", 1);
             world.getGlobalVariables().put("zorsan.escape", 1);
-            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("zorsan_attack_1", "news"));
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "zorsan_attack_1", "news"));
             world.addListener(new GameEventListener() {
                 private static final long serialVersionUID = -3584085663658592781L;
                 int days;

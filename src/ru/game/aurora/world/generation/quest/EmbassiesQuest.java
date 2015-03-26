@@ -1,5 +1,6 @@
 package ru.game.aurora.world.generation.quest;
 
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.player.earth.PrivateMessage;
@@ -68,8 +69,8 @@ public class EmbassiesQuest implements WorldGeneratorPart {
                             @Override
                             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                                 // based on player replies in this dialog, different private messages are sent
-                                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("press_conference_" + flags.get("message"), "news"));
-                                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("press_conference_common", "news"));
+                                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "press_conference_" + flags.get("message"), "news"));
+                                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "press_conference_common", "news"));
                             }
                         });
                         world.addOverlayWindow(pressConference);

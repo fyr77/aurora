@@ -3,11 +3,23 @@
 
     <controlDefinition name="list_screen">
         <panel childLayout="horizontal" width="100%" height="100%">
-            <control id="itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="23" selection="Single" width="45%"/>
+            <control id="itemsList" name="listBox" vertical="optional" horizontal="off" height="100%" selection="Single" width="30%"
+                     viewConverterClass="ru.game.aurora.gui.ListBoxSimpleTextWithWrapViewConverter">
+                <control name="dialog-line" controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
+                    <effect>
+                        <onCustom customKey="select" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
+                        <onCustom customKey="select" name="colorBar" post="false" color="#444f" neverStopRendering="true" timeType="infinite" />
+                        <onCustom customKey="select" name="textColor" post="false" color="#fc0f" neverStopRendering="true" timeType="infinite" />
+                        <onHover name="colorBar" color="#444736" post="false" neverStopRendering="true" timeType="infinite"
+                                 inset="1px"/>
+                    </effect>
+                    <interact onClick="listBoxItemClicked()"/>
+                </control>
+            </control>
 
-            <panel width="10%"/>
+            <panel width="10px"/>
             <panel childLayout="vertical">
-                <panel childLayout="center">
+                <panel childLayout="center" style="nifty-panel-no-shadow">
                     <panel width="*"/>
                     <panel id="selectedItemImg" height="256" width="256"/>
                 </panel>

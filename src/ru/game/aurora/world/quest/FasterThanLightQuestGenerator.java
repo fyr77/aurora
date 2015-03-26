@@ -208,7 +208,7 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
             isAlive = false;
             world.getPlayer().getJournal().addQuestEntries("ftl", "escape");
             world.getPlayer().getJournal().questCompleted("ftl");
-            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage("ftl", "news"));
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "ftl", "news"));
             world.getPlayer().getShip().setPos(world.getPlayer().getShip().getX() - 10, world.getPlayer().getShip().getY() - 5);
             world.getPlayer().getShip().setMovementSpeed(1);
 

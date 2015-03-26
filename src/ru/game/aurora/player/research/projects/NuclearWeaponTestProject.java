@@ -54,6 +54,7 @@ public class NuclearWeaponTestProject extends ResearchProjectDesc {
         world.getGlobalVariables().put("quest.main.weapon_test_done", null);
         world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/quest/main/weapon_test_report.json"));
         world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(
+                world, "news_sender",
                 "nuclear_tests_leaked"
                 , "news"
         ));
