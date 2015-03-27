@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GameLogger {
 
@@ -19,7 +21,7 @@ public class GameLogger {
 
     private final List<String> logItems = new ArrayList<>(MAX_LOG_ENTRIES);
 
-    private final List<LoggerAppender> appenders = new ArrayList<>();
+    private final Set<LoggerAppender> appenders = new HashSet<>();
 
     private static final GameLogger instance = new GameLogger();
 
@@ -31,8 +33,9 @@ public class GameLogger {
         appenders.add(new ConsoleAppender());
     }
 
-    public static interface LoggerAppender {
-        public void logMessage(String message);
+    public interface LoggerAppender
+    {
+        void logMessage(String message);
     }
 
     public static final class ConsoleAppender implements LoggerAppender {

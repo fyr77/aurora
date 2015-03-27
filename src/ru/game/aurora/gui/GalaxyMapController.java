@@ -7,7 +7,6 @@ package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.effects.Effect;
@@ -31,6 +30,7 @@ import ru.game.aurora.world.space.StarSystem;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class GalaxyMapController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender {
 
     private static final long serialVersionUID = 6443855197594505098L;
