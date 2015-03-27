@@ -47,17 +47,11 @@ public class EarthProgressScreenController implements ScreenController {
      * Given 2 strings returns a combined string like 'text1.........text2', filling dots to a fixed width in pixels
      */
     private String getLine(String text1, String text2) {
-
-        int text1Width = listFont.getWidth(text1);
         int text2Width = listFont.getWidth(text2);
-        int dotWidth = listFont.getWidth(".");
 
-        int totalTextWidth = 600;
-
-        int dotCount = (totalTextWidth - text1Width - text2Width) / dotWidth;
-
-        StringBuilder sb = new StringBuilder(text1);
-        for (int i = 0; i < dotCount; ++i) {
+        StringBuilder sb = new StringBuilder(" ");
+        sb.append(text1);
+        while (listFont.getWidth(sb.toString()) + text2Width + 20 < results.getElement().getWidth()) {
             sb.append('.');
         }
         sb.append(text2);

@@ -88,7 +88,7 @@
                     <panel height="10px"/>
                     <control name="scrollPanel" horizontal="false" height="*" childLayout="vertical">
                         <panel padding="10px" childLayout="center" width="100%">
-                            <text id="report_text" style="base-font" width="100%" wrap="true" text="" textHAlign="left" x="10px" y="10px"/>
+                            <text id="report_text" style="base-font" width="90%" wrap="true" text="" textHAlign="left" x="10px" y="10px"/>
                         </panel>
                     </control>
                     <panel height="10px"/>

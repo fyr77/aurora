@@ -26,7 +26,7 @@
                     <text id="messageDetailsText" style="base-font" width="*" height="100%" textHAlign="left" textVAlign="center"/>
                 </panel>
                 <panel height="10px" />
-                <control id="scrollbarPanelId" name="scrollPanel" horizontal="false">
+                <control id="scrollbarPanelId" name="scrollPanel" horizontal="false" vertical="optional">
                     <text id="selectedItemText" style="base-font" wrap="true" text="${gui.no_item_selected}" width="85%" textHAlign="left" />
                 </control>
             </panel>
@@ -40,14 +40,13 @@
                      y="25%"
                      childLayout="vertical">
                 <panel childLayout="vertical" height="100%" width="100%">
-                    <control id="itemsList" name="listBox" vertical="optional" horizontal="optional" displayItems="20"
+                    <control id="itemsList" name="listBox" vertical="optional" horizontal="off" height="*"
                              selection="Disabled"/>
                     <panel height="20px"/>
                     <panel childLayout="horizontal" height="50px">
                         <panel width="75%"/>
                         <text id="totalText" style="button-font" text="Total:"/>
                     </panel>
-                    <panel height="*"/>
                     <panel childLayout="horizontal" height="50px">
                         <panel width="70%"/>
                         <control id="close_button" name="button" label="Close" width="150px" height="45px">

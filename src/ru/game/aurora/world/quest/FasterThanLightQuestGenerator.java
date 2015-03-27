@@ -183,7 +183,12 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
             Dialog startDialog = Dialog.loadFromFile("dialogs/quest/faster_than_light/ftl_start.json");
             startDialog.addListener(this);
             world.getPlayer().getEarthState().getEarthSpecialDialogs().add(startDialog);
-            world.getPlayer().getJournal().addQuestEntries("ftl", "start");
+            startDialog.addListener(new DialogListener() {
+                @Override
+                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                    world.getPlayer().getJournal().addQuestEntries("ftl", "start");
+                }
+            });
             return false;
         }
         return false;
