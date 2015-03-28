@@ -180,7 +180,6 @@ public class ColonizationListener extends GameEventListener implements DialogLis
                 world.getGlobalVariables().put("colony_news", val);
             }
             Planet planet = (Planet)world.getGlobalVariables().get("colony_search.coords");
-            // todo quests
             // monster hunt quest - kill any 5 monsters on this planet
             if (flags.containsKey("colony.hunt_quest")) {
                 logger.info("Colony monster hunt quest started");

@@ -278,7 +278,6 @@ public class Ship extends BaseGameObject {
 
     public void setDefaultCrewDialogs(World world)
     {
-        //todo: implement
         setHenryDefaultDialog();
         setGordonDefaultDialog();
         setSarahDefaultDialog();

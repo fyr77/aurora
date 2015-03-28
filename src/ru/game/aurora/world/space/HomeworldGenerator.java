@@ -24,8 +24,6 @@ public class HomeworldGenerator {
     }
 
     public static StarSystem createSolarSystem(World world, AlienRace humanRace) {
-        // todo: gas giants and other planets
-
         BasePlanet[] planets = new BasePlanet[8];
         StarSystem ss = new StarSystem("Solar system", new Star(2, Color.yellow), 9, 9);
 
