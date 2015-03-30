@@ -1,0 +1,10 @@
+0;*Someone - apparently, one of the scientists - is sittng on the ground and trying to do something with his radio.*;
+;Boo!;1
+1;Aaaaah!;
+;Calm down! Quiet! We've come to save you. Yeah… Come on, calm down. What were you doing here?;2
+2;Can't you see? Trying to fix my radio!;
+;And how's it going?;3
+3;*The respectable-looking scientist with a gray beard lets out a dirty curse.*;
+;Right. I see. Well, we've found everyone. Come on, grab a sidearm, we're moving out to the colony.;4
+4;*He curses again.*;
+;Tell me about it.;-1

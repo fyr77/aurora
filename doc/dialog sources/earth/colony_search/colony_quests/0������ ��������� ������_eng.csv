@@ -1,0 +1,6 @@
+0;Don't shoot! Help me! Help!;
+;Calm down! We were actually looking for you. Where are the rest?;1
+1;I don't know how I got here myself! We were attacked… There were so many of them, of those beasts… I panicked, and I… I don't know!;
+;So that's what happened… Okay. You'll have to come with us to find the rest of your group.;2
+2;What?! Deeper into the forest?!;
+;We can't walk you to the colony and abandon the rest. You'll just have to do it. Just keep close and, if something happens, shoot at them with your pistol. We'll give you one now. Move out!;-1

@@ -1,0 +1,10 @@
+0;Hey! I'm over here! Help!;
+;Another one. How are you? Are you okay?;1
+1;I'm alive, but barely. The predators attacked us…;
+;And you all ran away, I know.;2
+2;We should have stayed together…;
+;Skill comes with experience. You'll have to come with us, and then we'll all get back to the colony. Are you ready to go?;3
+3;Of course I am! Thank you for saving me!;
+;Thank me when we're out of here.;-1
+4;Yeah, but… there should be an ore deposit not far from here. We'd better find it and remember where it is.;
+;I'm not promising anything, but I'll try to help. It'd help the lab on the Aurora 2, as well…;-1
