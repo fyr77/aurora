@@ -48,7 +48,7 @@ public class KliskMainDialogListener implements DialogListener {
             defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("physics"));
             defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("biology"));
             defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("chemistry"));
-            defaultTradeInventory.add(new ResearchSellItem("energy_concentration", "technology_research", 12, true));
+            defaultTradeInventory.add(new ResearchSellItem("energy_concentration", "technology_research", 25, true));
         }
         return defaultTradeInventory;
     }
