@@ -129,7 +129,8 @@
           "targetStatementId": -1,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "alien_city_dialog"
     },
     "9": {
       "id": 9,
@@ -149,7 +150,8 @@
           "targetStatementId": 11,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "alien_city_dialog"
     },
     "11": {
       "id": 11,
@@ -169,7 +171,8 @@
           "targetStatementId": 13,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "alien_city_dialog"
     },
     "13": {
       "id": 13,
