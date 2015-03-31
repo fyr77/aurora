@@ -1,7 +1,7 @@
 Диалог после битвы - Боевые дроны (помощь от клисков).csv;zorsan_battle_after_klisk;klisk_dialog;zorsan/final_battle
 Диалог после битвы - Вояджер.csv;zorsan_battle_after_voyager;enterprise_dialog;zorsan/final_battle
 Диалог после битвы - командование.csv;zorsan_battle_after_earth;earth_dialog;zorsan/final_battle
-Диалог после битвы - Фурко (помощь от бродяг) .csv;zorsan_battle_after_rogues;rogues_scar_dialog;zorsan/final_battle
+Диалог после битвы - Фурко (помощь от бродяг).csv;zorsan_battle_after_rogues;rogues_scar_dialog;zorsan/final_battle
 Диалог после битвы - Хрррака (помощь от борков).csv;zorsan_battle_after_hrraka;bork_dialog;zorsan/final_battle
 МКС - перед высадкой.csv;zorsan_battle_before_station_boarding;earth_ship_dialog;zorsan/final_battle
 МКС захвачена.csv;zorsan_battle_station_captured;earth_dialog;zorsan/final_battle
@@ -24,3 +24,4 @@
 После первого выстрела по Земле.csv;zorsan_battle_deathstar_attack;earth_dialog;zorsan/final_battle
 После первой волны.csv;zorsan_battle_first_wave_ended;earth_dialog;zorsan/final_battle
 Третья волна.csv;zorsan_battle_third_wave;earth_dialog;zorsan/final_battle
+humanity_default.csv;zorsan_battle_humanity_default;earth_ship_dialog;zorsan/final_battle

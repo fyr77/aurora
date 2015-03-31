@@ -229,7 +229,7 @@
       "id": 16,
       "replies": [
         {
-          "returnValue": 1,
+          "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "0"
         }
@@ -410,5 +410,7 @@
         }
       ]
     }
-  }
+  },
+  "flags": {},
+  "returnValue": 0
 }

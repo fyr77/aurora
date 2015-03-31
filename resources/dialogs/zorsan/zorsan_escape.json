@@ -52,5 +52,7 @@
         }
       ]
     }
-  }
+  },
+  "flags": {},
+  "returnValue": 0
 }

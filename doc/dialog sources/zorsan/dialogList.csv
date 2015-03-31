@@ -1,5 +1,7 @@
-1.1Диалог с планетой (если брал перерыв).csv;zorsan_homeworld_2;zorsan_leader_dialog;.
-1Диалог с планетой Зорсанов.csv;zorsan_homeworld_1;zorsan_leader_dialog;.
-2ПОездка из космодрома в публичный холл.csv;zorsan_city_transfer;alien_city_dialog;.
-3Диалог в публичном холле.csv;zorsan_before_attack;zorsan_leader_dialog;.
-4Диалог при возвращении на корабль.csv;zorsan_escape;marine_dialog;.
+1.1Диалог с планетой (если брал перерыв).csv;zorsan_homeworld_2;zorsan_leader_dialog;zorsan
+1Диалог с планетой Зорсанов.csv;zorsan_homeworld_1;zorsan_leader_dialog;zorsan
+2ПОездка из космодрома в публичный холл.csv;zorsan_city_transfer;alien_city_dialog;zorsan
+3Диалог в публичном холле.csv;zorsan_before_attack;zorsan_leader_dialog;zorsan
+4Диалог при возвращении на корабль.csv;zorsan_escape;marine_dialog;zorsan
+ship_default.csv;zorsan_main;zorsan_dialog;.
+war_data_collected.csv;zorsan_war_data_collected;scientist_dialog;zorsan
