@@ -25,6 +25,11 @@ public class AnimalCorpseItem implements InventoryItem {
     }
 
     @Override
+    public String getId() {
+        return getName();
+    }
+
+    @Override
     public String getName() {
         return desc.getName();
     }

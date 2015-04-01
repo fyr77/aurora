@@ -26,6 +26,11 @@ public class OreDeposit extends BaseGameObject {
         }
 
         @Override
+        public String getId() {
+            return type.name();
+        }
+
+        @Override
         public String getName() {
             return type.name();
         }

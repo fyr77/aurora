@@ -16,6 +16,10 @@ public class MedPack extends UsableItem {
 
     private static final int healAmount = Configuration.getIntProperty("medpack.heal");
 
+    public MedPack() {
+        super("medpack");
+    }
+
     @Override
     public void useIt(World world, int amount) {
         world.getPlayer().getLandingParty().addHP(world, healAmount);

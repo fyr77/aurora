@@ -13,6 +13,10 @@ import ru.game.aurora.world.World;
 public class Cylinders extends UsableItem {
     private static final long serialVersionUID = -8290168486132537828L;
 
+    public Cylinders() {
+        super("oxygen");
+    }
+
     @Override
     public void useIt(World world, int amount) {
         world.getPlayer().getLandingParty().refillOxygen();

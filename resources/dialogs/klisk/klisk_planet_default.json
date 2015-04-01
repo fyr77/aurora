@@ -30,9 +30,14 @@
           ]
         },
         {
+          "returnValue": 100,
+          "targetStatementId": -1,
+          "replyText": "2"
+        },
+        {
           "returnValue": 0,
           "targetStatementId": 1,
-          "replyText": "2",
+          "replyText": "3",
           "replyConditions": [
             {
               "name": "klisk_trade.result",
@@ -43,7 +48,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "3"
+          "replyText": "4"
         }
       ]
     },

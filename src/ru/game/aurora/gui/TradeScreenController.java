@@ -77,7 +77,7 @@ public class TradeScreenController implements ScreenController
                 continue;
             }
 
-            if (e.getElement().isUnique() && world.getPlayer().getUniqueItemsPurchased().contains(e.getElement().getName())) {
+            if (e.getElement().isUnique() && world.getPlayer().getUniqueItemsPurchased().contains(e.getElement().getId())) {
                 continue;
             }
             listBox.addItem(e);
@@ -140,7 +140,7 @@ public class TradeScreenController implements ScreenController
 
         entry.getElement().onReceived(world, amountToBuy);
         world.getPlayer().changeResource(world, Resources.CREDITS, -(int) (amountToBuy * entry.getElement().getPrice()));
-        world.getPlayer().getUniqueItemsPurchased().add(entry.getElement().getName());
+        world.getPlayer().getUniqueItemsPurchased().add(entry.getElement().getId());
         updateLists();
     }
 

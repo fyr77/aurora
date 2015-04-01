@@ -13,6 +13,8 @@ import java.io.Serializable;
 // todo: make an abstract base class
 public interface InventoryItem extends Serializable
 {
+    public String getId();
+
     public String getName();
 
     public String getDescription();

@@ -1,6 +1,7 @@
 0;Oh… Human captain. What brings you here?;;;;
 ;We have to talk about something.;27;reputation > 6;;
 ;We have to talk about something.;16;reputation < 7;;
+;We wish to trade;-1;;100;
 ;I'm back. The trade fleet is safe and sound.;1;klisk_trade.result;;
 ;A courtesy visit. I see you're busy. I'm leaving already.;-1;;;
 1;*Eroloa coughs loudly.* Kahha! I'm waiting for details.;;;;

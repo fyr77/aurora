@@ -36,9 +36,9 @@ public class KliskMainDialogListener implements DialogListener {
     public KliskMainDialogListener() {
     }
 
-    private Multiset<InventoryItem> defaultTradeInventory;
+    private static Multiset<InventoryItem> defaultTradeInventory;
 
-    public Multiset<InventoryItem> getDefaultTradeInventory() {
+    public static Multiset<InventoryItem> getDefaultTradeInventory() {
         if (defaultTradeInventory == null) {
             defaultTradeInventory = HashMultiset.create();
             defaultTradeInventory.add(new KliskTradeItems.AdvancedRadarsSellItem());

@@ -35,6 +35,11 @@ public class AlienArtifact extends BaseGameObject {
         private static final long serialVersionUID = 4883589185683400708L;
 
         @Override
+        public String getId() {
+            return "artifact";
+        }
+
+        @Override
         public String getName() {
             return Localization.getText("gui", "surface.artifact_samples");
         }

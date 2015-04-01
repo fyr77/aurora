@@ -64,6 +64,11 @@ public class KliskGenerator implements WorldGeneratorPart {
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                if (returnCode == 100) {
+                    //trade
+                    TradeScreenController.openTrade("klisk_vip_dialog", KliskMainDialogListener.getDefaultTradeInventory());
+                    return;
+                }
                 if (flags.containsKey("klisk.war_help")) {
                     world.getGlobalVariables().put("klisk.war_help", true);
                 }

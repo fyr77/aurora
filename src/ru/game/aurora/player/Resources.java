@@ -13,6 +13,11 @@ import ru.game.aurora.world.planet.InventoryItem;
 public enum Resources implements InventoryItem {
     RU("RU") {
         @Override
+        public String getId() {
+            return getName();
+        }
+
+        @Override
         public String getDescription() {
             return null;
         }
@@ -62,6 +67,11 @@ public enum Resources implements InventoryItem {
         }
     },
     CREDITS(Localization.getText("gui", "credits")) {
+
+        @Override
+        public String getId() {
+            return getName();
+        }
         @Override
         public String getDescription() {
             return null;
@@ -115,6 +125,11 @@ public enum Resources implements InventoryItem {
         }
     },
     CELLS_FROM_PARALLEL_WORLD(Localization.getText("journal", "inside.bio_remains_name")) {
+
+        @Override
+        public String getId() {
+            return getName();
+        }
         @Override
         public String getDescription() {
             return Localization.getText("items", "parallel_world_cells.desc");

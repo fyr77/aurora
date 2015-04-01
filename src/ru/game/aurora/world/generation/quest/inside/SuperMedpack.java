@@ -15,7 +15,13 @@ import java.util.Map;
  * Super medpack crafted from biodata from parallel world
  */
 public class SuperMedpack extends UsableItem {
+
+
     private static final long serialVersionUID = 7731141908856823318L;
+
+    public SuperMedpack() {
+        super("supermedpack");
+    }
 
     @Override
     public String getName() {

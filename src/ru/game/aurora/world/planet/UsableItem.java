@@ -12,6 +12,12 @@ import ru.game.aurora.world.World;
 public abstract class UsableItem implements InventoryItem {
     private static final long serialVersionUID = 6868775045575998500L;
 
+    private final String id;
+
+    public UsableItem(String id) {
+        this.id = id;
+    }
+
     public void useIt(World world, int amount) {
         world.getPlayer().getLandingParty().getInventory().setCount(this, amount - 1);
         world.getPlayer().getLandingParty().overWeightTest();
@@ -56,5 +62,10 @@ public abstract class UsableItem implements InventoryItem {
     @Override
     public boolean isUnique() {
         return false;
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 }
