@@ -35,10 +35,10 @@
 ;Obviously, there isn't going to be any cooperation between us.;14;
 14;Of course not. Even in the best case scenario, we'd just kick you out of our system disgraced. The Zorsan don't like foreigners, human captain. Especially ones like you. A bad, tasteless parody of us. A sign of what we could have become had we not been us.;;
 ;Okay. Now!;15;
-15;*That was an obvious signal. Punching the Zorsan diplomat in the face was another one. When you turn around, you see that your troops have already dealt with the enemy guards and gotten their weapons. You'll definitely have to give Liszkiewicz a bonus now.* What now, Captain?;;
+15;*That was an obvious signal. Punching the Zorsan diplomat in the face was another one. When you turn around, you see that your troops have already dealt with the enemy guards and gotten their weapons. You'll definitely have to give Liszkiewicz a bonus now.* What now, Captain?;colonist_marine_dialog;
 ;…;16;
-16;*You can hear yelling and noise. Loud footsteps. An alarm is sounded in a few seconds.*;;
-;And now, we have to run. To the hangar, then the shuttle, and get the hell out of here before they realize what's happening. Damn it, that's not how I imagined it would happen.;-1;
+16;*You can hear yelling and noise. Loud footsteps. An alarm is sounded in a few seconds.*;alien_city_dialog;
+;And now, we have to run. To the hangar, then the shuttle, and get the hell out of here before they realize what's happening. Damn it, that's not how I imagined it would happen.;-1;;1
 17;Yes. Every side has something to say. Maybe they're just less developed than us? Or maybe we're just better? Who knows?;;
 ;"I definitely don't. And categories like ""better"" or ""worse"" aren't fit for this type of comparison.";18;
 18;Why not? Let's be honest, there are always ones that are better. Simply better. And it's obvious that in an uneven alliance, the worse one will benefit, not the better one. Tell me, how would we benefit from a relationship with you?;;

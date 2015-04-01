@@ -6,7 +6,7 @@
             <panel width="10px"/>
 
             <control name="scrollPanel" horizontal="false" height="100%">
-                <text id="#message_text" style="base-font" width="95%" wrap="true" textHAlign="left" textVAlign="top"/>
+                <text id="#message_text" style="base-font" width="90%" wrap="true" textHAlign="left" textVAlign="top"/>
             </control>
 
         </panel>
