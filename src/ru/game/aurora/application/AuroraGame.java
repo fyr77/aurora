@@ -202,6 +202,9 @@ public class AuroraGame extends NiftyOverlayGame {
     @Override
     protected void updateGame(GameContainer gameContainer, int i) throws SlickException {
         try {
+            if (gameContainer.getInput().isKeyPressed(Input.KEY_F11)) {
+                flipVisbility();
+            }
             if (mainMenu != null) {
                 World loadedWorld = mainMenu.update(camera, gameContainer);
                 if (loadedWorld != null) {

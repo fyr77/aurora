@@ -3,9 +3,14 @@ VERSION 0.4.1
 IN PROGRESS...
 
 + Trade system
++ Alien ships now drop loot
 * Patched nifty-gui to allow lists have elements with different height
 * Some new music
-
++ 3 new colony quests
++ English translation completed
++ Hints on a galaxy map
+* Improved private messages gui
+* Dumping resources to the shuttle
 
 =============================================
 
