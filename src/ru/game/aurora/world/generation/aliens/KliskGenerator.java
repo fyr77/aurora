@@ -214,11 +214,11 @@ public class KliskGenerator implements WorldGeneratorPart {
         Dialog mainDialog = Dialog.loadFromFile("dialogs/klisk_1.json");
         final AlienRace kliskRace = new AlienRace(NAME, "klisk_ship", mainDialog);
 
-        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.COMPUTERS, kliskRace)), 0.2);
-        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.ENERGY, kliskRace)), 0.1);
-        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.GOODS, kliskRace)), 0.1);
-        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.MATERIALS, kliskRace)), 0.2);
-        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.WEAPONS, kliskRace)), 0.05);
+        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.COMPUTERS, kliskRace)), 0.5);
+        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.ENERGY, kliskRace)), 0.3);
+        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.GOODS, kliskRace)), 0.3);
+        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.MATERIALS, kliskRace)), 0.6);
+        kliskRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.WEAPONS, kliskRace)), 0.15);
 
         kliskRace.setMusic(ResourceManager.getInstance().getPlaylist("Klisk"));
         mainDialog.addListener(new DialogListener() {

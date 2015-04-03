@@ -25,11 +25,13 @@ public class AlienAlloysResearch extends BaseResearchWithFixedProgress
             @Override
             public void onInstalled(World world, Ship ship) {
                 ship.changeMaxHull(5);
+                ship.setHull(ship.getMaxHull());
             }
 
             @Override
             public void onRemoved(World world, Ship ship) {
                 ship.changeMaxHull(-5);
+                ship.setHull(ship.getMaxHull());
             }
 
             @Override

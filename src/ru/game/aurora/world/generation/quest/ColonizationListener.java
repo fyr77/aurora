@@ -14,9 +14,11 @@ import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.Animal;
 import ru.game.aurora.world.planet.nature.AnimalModifier;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
+import ru.game.aurora.world.planet.nature.Plant;
 import ru.game.aurora.world.space.GalaxyMapObject;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
@@ -247,6 +249,16 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         }
     }
 
+    private void cleanPlants(Planet planet, int size)
+    {
+        for (Iterator<GameObject> iterator = planet.getPlanetObjects().iterator(); iterator.hasNext(); ) {
+            GameObject go = iterator.next();
+            if ((go instanceof Plant) && ((Plant) go).getDistance(colonyCenter) < size / 2) {
+                iterator.remove();
+            }
+        }
+    }
+
     public void modifyPlanet(World world, Planet planet) {
         final int initialSize = Configuration.getIntProperty("quest.colony_search.colony_initial_size");
         colonyCenter = planet.findPassableRegion(initialSize, initialSize);
@@ -268,6 +280,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
                 }
             }
         }
+        cleanPlants(planet, initialSize);
 
         planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 2, colonyCenter.getY() + 2, new Drawable("colony_boxes"), null, ScanGroup.OTHER));
         planet.getPlanetObjects().add(new BaseGameObject(colonyCenter.getX() + 2, colonyCenter.getY() + 3, new Drawable("colony_boxes"), null, ScanGroup.OTHER));

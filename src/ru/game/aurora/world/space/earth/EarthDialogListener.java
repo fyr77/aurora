@@ -140,6 +140,7 @@ public class EarthDialogListener implements DialogListener {
                 }
             });
             world.addOverlayWindow(d, flagsForNextDialog);
+            world.getPlayer().getJournal().questCompleted("embassies");
         }
 
         // quest stuff

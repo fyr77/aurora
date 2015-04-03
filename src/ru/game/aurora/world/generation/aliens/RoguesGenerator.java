@@ -108,11 +108,11 @@ public class RoguesGenerator implements WorldGeneratorPart {
         Dialog defaultDialog = Dialog.loadFromFile("dialogs/rogues/rogues_default.json");
         final AlienRace rogueRace = new AlienRace(NAME, "rogues_scout", defaultDialog);
 
-        rogueRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.COMPUTERS, rogueRace)), 0.2);
-        rogueRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.ENERGY, rogueRace)), 0.2);
-        rogueRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.GOODS, rogueRace)), 0.2);
-        rogueRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.MATERIALS, rogueRace)), 0.1);
-        rogueRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.WEAPONS, rogueRace)), 0.05);
+        rogueRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.COMPUTERS, rogueRace)), 0.4);
+        rogueRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.ENERGY, rogueRace)), 0.4);
+        rogueRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.GOODS, rogueRace)), 0.4);
+        rogueRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.MATERIALS, rogueRace)), 0.3);
+        rogueRace.getDefaultLootTable().put(new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.WEAPONS, rogueRace)), 0.2);
 
         rogueRace.setDefaultFactory(new NPCShipFactory() {
             private static final long serialVersionUID = 1334986755758313061L;

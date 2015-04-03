@@ -288,7 +288,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
 
             @Override
             public void stateChanged(World param) {
-                param.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "inside", "news"));
+                param.getPlayer().getEarthState().getMessages().add(new PrivateMessage(param, "news_sender", "inside", "news"));
             }
         });
     }
