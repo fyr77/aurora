@@ -288,7 +288,7 @@ public class NPCShip extends BaseGameObject implements IMonster {
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.attack")
                 , getName()
                 , target.getName()
-                , Localization.getText("weapons", weaponDesc.getName())
+                , weaponDesc.getName()
                 , weaponDesc.getDamage()
         ));
 

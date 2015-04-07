@@ -181,6 +181,7 @@ public class AuroraGame extends NiftyOverlayGame {
         }
         world = loaded;
         resolutionChangeListeners.add(world);
+        world.onResolutionChanged(tilesX, tilesY, isFullScreen());
         mainMenu = null;
         if (debugWorldVariables != null) {
             logger.warn("Adding debug variables");

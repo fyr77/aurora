@@ -14,7 +14,6 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
-import ru.game.aurora.gui.GalaxyMapController;
 import ru.game.aurora.gui.niffy.FriendlyAttackConfirmationController;
 import ru.game.aurora.gui.niffy.InteractionTargetSelectorController;
 import ru.game.aurora.player.Player;
@@ -673,11 +672,15 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         if (asteroidBelt != null) {
             for (int x = -radius; x < radius; x++) {
                 for (int y = -radius; y < radius; y++) {
-                    if (camera.isInViewport(x, y)) {
+
+                    float screenX = camera.getXCoord(x);
+                    float screenY = camera.getYCoord(y);
+                    if (screenX >= - camera.getTileWidth() && screenX <= (camera.getNumTilesX() + 1) * camera.getTileWidth()
+                            && screenY >= - camera.getTileHeight() && screenY <= (camera.getNumTilesY() + 1) * camera.getTileHeight()) {
                         long dist = Math.round(Math.sqrt(Math.pow(0 - x, 2) + Math.pow(0 - y, 2)));
                         if (dist >= asteroidBelt.innerRadius && dist < asteroidBelt.innerRadius + asteroidBelt.width) {
                             Image asteroidSprite = ResourceManager.getInstance().getImage("asteroids");
-                            g.drawImage(asteroidSprite, camera.getXCoord(x), camera.getYCoord(y));
+                            g.drawImage(asteroidSprite, screenX, screenY);
                         }
                     }
                 }
