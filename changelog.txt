@@ -11,6 +11,7 @@ IN PROGRESS...
 + Hints on a galaxy map
 * Improved private messages gui
 * Dumping resources to the shuttle
++ Confirmation before attacking a friendly ship
 
 =============================================
 

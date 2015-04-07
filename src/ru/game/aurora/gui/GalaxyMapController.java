@@ -317,4 +317,12 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         return minDist <= 1.5 ? result : null;
     }
 
+
+    public void doAttack()
+    {
+        closeCurrentPopup();
+        world.getCurrentStarSystem().updateShoot(world, false, false, true);
+    }
+
+
 }

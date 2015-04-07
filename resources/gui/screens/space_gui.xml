@@ -330,6 +330,25 @@
     </popup>
 
 
+    <popup id="attack_friendly_popup" childLayout="absolute">
+        <control id="attack_friendly_confirm_window" name="window" title="${gui.attack_friendly.title}" hideOnClose="true" width="40%" x="30%"
+                 y="30%" height="20%" controller="ru.game.aurora.gui.niffy.FriendlyAttackConfirmationController">
+            <panel childLayout="vertical" padding="5px">
+                <text style="button-font" width="100%" text="${gui.attack_friendly.text}" height="*" textHAlign="center" textVAlign="center"/>
+                <panel childLayout="horizontal" height="30%">
+                    <panel width="*"/>
+                    <control name="button" label="${gui.ok}" height="100%">
+                        <interact onClick="doAttack()"/>
+                    </control>
+                    <panel width="10px"/>
+                    <control name="button" label="${gui.cancel}" height="100%">
+                        <interact onClick="close()"/>
+                    </control>
+                </panel>
+            </panel>
+        </control>
+    </popup>
+
     <popup id="object_scan" childLayout="absolute">
         <control id="object_scan_window" name="window" title="${gui.scan.title}" hideOnClose="true" width="60%" x="20%"
                  y="30%">
