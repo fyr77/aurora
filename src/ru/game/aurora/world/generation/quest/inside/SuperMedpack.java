@@ -35,6 +35,7 @@ public class SuperMedpack extends UsableItem {
 
     @Override
     public void useIt(World world, int amount) {
+        super.useIt(world, amount);
         world.getPlayer().getLandingParty().resetHp(world);
     }
 
