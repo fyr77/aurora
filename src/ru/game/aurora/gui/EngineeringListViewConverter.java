@@ -22,19 +22,18 @@ public class EngineeringListViewConverter implements ListBox.ListBoxViewConverte
     public void display(Element listBoxItem, Object obj) {
         Label l = listBoxItem.findNiftyControl("#name_text", Label.class);
         l.setText(getText(obj));
+        listBoxItem.setUserData(obj);
     }
 
     @Override
     public int getWidth(Element element, Object item) {
-        final Element text = element.findElementByName("#name_text");
-        final TextRenderer textRenderer = text.getRenderer(TextRenderer.class);
-        return 64 + ((textRenderer.getFont() == null) ? 0 : textRenderer.getFont().getWidth(getText(item)));
+        display(element, item);
+        return element.getWidth();
     }
 
     @Override
     public int getHeight(Element element, Object o) {
-        final Element text = element.findElementByName("#name_text");
-        final TextRenderer textRenderer = text.getRenderer(TextRenderer.class);
-        return textRenderer.getFont().getHeight();
+        display(element, o);
+        return element.getHeight();
     }
 }

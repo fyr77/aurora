@@ -6,6 +6,7 @@
  */
 package ru.game.aurora.gui;
 
+import com.sun.xml.internal.ws.api.pipe.Engine;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.*;
@@ -39,11 +40,13 @@ public class EngineeringScreenController implements ScreenController {
 
     private Element ruText;
 
-    private TabGroup tg;
-
     private ListBox projectsList;
 
     private Element window;
+
+    private Element imagePanel;
+
+    private Element textElement;
 
 
     public EngineeringScreenController(World world) {
@@ -53,11 +56,12 @@ public class EngineeringScreenController implements ScreenController {
     @Override
     public void bind(Nifty nifty, Screen screen) {
         window = screen.findElementByName("engineering_window");
-        tg = screen.findNiftyControl("engineering_tabs", TabGroup.class);
         pointsText = screen.findElementByName("hullPointsToRepair");
         engiText = screen.findElementByName("assignedEngineers");
         ruText = screen.findElementByName("requiredRuText");
         projectsList = screen.findNiftyControl("itemsList", ListBox.class);
+        imagePanel = screen.findElementByName("selectedItemImg");
+        textElement = screen.findElementByName("selectedItemText");
     }
 
     @Override
@@ -137,16 +141,10 @@ public class EngineeringScreenController implements ScreenController {
 
     @NiftyEventSubscriber(id = "itemsList")
     public void onListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent event) {
-        if (tg.getTabCount() == 0) {
-            return;
-        }
-        if (tg.getSelectedTabIndex() != 1) {
-            return;
-        }
-        Element imagePanel = tg.getSelectedTab().getElement().findElementByName("selectedItemImg");
-        TextRenderer tr = tg.getSelectedTab().getElement().findElementByName("selectedItemText").getRenderer(TextRenderer.class);
+
+
         if (event.getSelection().isEmpty()) {
-            tr.setText(Localization.getText("gui", "no_item_selected"));
+            EngineUtils.setTextForGUIElement(textElement, Localization.getText("gui", "no_item_selected"));
             imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage("no_image"))));
             return;
         }
@@ -167,41 +165,39 @@ public class EngineeringScreenController implements ScreenController {
                 }
             }
         }
-        tr.setText(info);
+        EngineUtils.setTextForGUIElement(textElement, info);
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ep.getDrawable().getImage())));
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
 
     public void onIncreaseEngineersButtonClicked() {
-        ListBox avail = tg.getSelectedTab().getElement().findNiftyControl("itemsList", ListBox.class);
-        if (avail.getSelection().isEmpty()) {
+        if (projectsList.getSelection().isEmpty()) {
             return;
         }
         final int idleEngineers = world.getPlayer().getEngineeringState().getIdleEngineers();
         if (idleEngineers == 0) {
             return;
         }
-        EngineeringProject rp = (EngineeringProject) avail.getSelection().get(0);
+        EngineeringProject rp = (EngineeringProject) projectsList.getSelection().get(0);
         if (!rp.isProjectStarted() && !rp.checkEnoughResources(world)) {
             return;
         }
         rp.changeEngineers(1, world);
         world.getPlayer().getEngineeringState().setIdleEngineers(idleEngineers - 1);
-        avail.refresh();
+        projectsList.refresh();
     }
 
     public void onDecreaseEngineersButtonClicked() {
-        ListBox avail = tg.getSelectedTab().getElement().findNiftyControl("itemsList", ListBox.class);
-        if (avail.getSelection().isEmpty()) {
+        if (projectsList.getSelection().isEmpty()) {
             return;
         }
-        EngineeringProject ep = (EngineeringProject) avail.getSelection().get(0);
+        EngineeringProject ep = (EngineeringProject) projectsList.getSelection().get(0);
         if (ep.getEngineersAssigned() == 0) {
             return;
         }
         ep.changeEngineers(-1, world);
         world.getPlayer().getEngineeringState().setIdleEngineers(world.getPlayer().getEngineeringState().getIdleEngineers() + 1);
-        avail.refresh();
+        projectsList.refresh();
     }
 
 
@@ -209,11 +205,6 @@ public class EngineeringScreenController implements ScreenController {
     @NiftyEventSubscriber(pattern = ".*crease_engineers")
     public void onClicked(String id, ButtonClickedEvent event) {
 
-        int numericId = Integer.parseInt(id.split("#")[0]);
-        ListBox itemsList = tg.getSelectedTab().getElement().findNiftyControl("itemsList", ListBox.class);
-        // hack. No idea how ids are distributed between list elements, they seem to start from arbitrary number and be sorted in ascending order
-        // so in order to get index of clicked element, must subtract from its id id of the first one
-        numericId -= Integer.parseInt(itemsList.getElement().findElementByName("#child-root").getElements().get(0).getId());
-        itemsList.selectItemByIndex(numericId);
+        projectsList.selectItem(event.getButton().getElement().getParent().getUserData());
     }
 }

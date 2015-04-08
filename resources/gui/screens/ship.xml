@@ -17,12 +17,12 @@
     </controlDefinition>
 
     <controlDefinition name="line-with-text-and-image">
-        <panel childLayout="horizontal" width="100%" align="center" padding="5px">
-            <panel width="$sizeWithMargin" height="$sizeWithMargin" childLayout="center" style="nifty-panel-noshadow">
+        <panel childLayout="horizontal" width="100%" align="center" padding="5px" height="$sizeWithMargin">
+            <panel width="$size" height="$size" childLayout="center" style="nifty-panel-noshadow">
                 <image id="#line-icon" width="$size" height="$size"/>
             </panel>
-            <panel width="*" height="$sizeWithMargin" childLayout="center" padding="5px">
-            <text id="#line-text" style="base-font" textVAlign="center" textHAlign="left" height="80%" width="90%"
+            <panel width="*" height="$size" childLayout="center" padding="5px">
+                <text id="#line-text" style="base-font" textVAlign="center" textHAlign="left" height="80%" width="90%"
                       wrap="true"/>
             </panel>
         </panel>
