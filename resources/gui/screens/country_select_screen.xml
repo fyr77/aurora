@@ -2,37 +2,40 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
     <screen id="country_select_screen" controller="ru.game.aurora.gui.CountrySelectScreenController">
         <layer childLayout="absolute">
-            <control id="country_select_window" name="window" closeable="false" width="80%" height="80%" x="10%" y="10%"
+            <control id="country_select_window" name="window" closeable="false" width="55%" height="45%" x="20%" y="15%"
                      childLayout="vertical">
                 <control id="RadioGroup-1" name="radioButtonGroup"/>
                 <panel childLayout="vertical" height="100%" width="100%">
                     <text style="button-font" text="${gui.country_select.title}"/>
                     <panel height="10px"/>
-                    <panel childLayout="vertical" backgroundColor="#8001" paddingLeft="7px" paddingRight="7px"
-                           paddingTop="4px" paddingBottom="4px" width="90%">
+                    <panel childLayout="vertical" backgroundColor="#8001" padding="5px" width="100%">
                         <effect>
                             <onActive name="border" color="#0008"/>
                         </effect>
                         <panel childLayout="horizontal">
                             <control name="radioButton" id="america" group="RadioGroup-1"/>
+                            <panel width="5px"/>
                             <control name="label" style="button-font" text="${gui.country_select.america.label}"/>
                         </panel>
                         <panel childLayout="horizontal">
                             <control name="radioButton" id="europe" group="RadioGroup-1"/>
+                            <panel width="5px"/>
                             <control name="label" style="button-font" text="${gui.country_select.europe.label}"/>
                         </panel>
                         <panel childLayout="horizontal">
                             <control name="radioButton" id="asia" group="RadioGroup-1"/>
+                            <panel width="5px"/>
                             <control name="label" style="button-font" text="${gui.country_select.asia.label}"/>
                         </panel>
                     </panel>
 
                     <panel height="10px"/>
 
-                    <control name="scrollPanel" horizontal="false" height="*" childLayout="vertical">
-                        <panel childLayout="center" padding="10px" width="100%">
+                    <control name="scrollPanel" horizontal="false" height="*" vertical="optional"
+                             childLayout="vertical">
+                        <panel childLayout="center" padding="5px" width="100%">
                             <text id="description" style="base-font" wrap="true"
-                                  text="${gui.country_select.america.text}" textHAlign="left" width="90%" height="90%"
+                                  text="${gui.country_select.america.text}" textHAlign="left" width="100%" height="100%"
                                   textVAlign="top"/>
                         </panel>
                     </control>
@@ -41,7 +44,7 @@
 
                     <panel childLayout="horizontal" height="50px">
                         <panel width="80%"/>
-                        <control id="close_button" name="button" label="${gui.ok}" width="150px" height="45px">
+                        <control id="close_button" name="button" label="${gui.ok}" width="15%" height="45px">
                             <interact onClick="closeScreen()"/>
                         </control>
                     </panel>

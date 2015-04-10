@@ -48,10 +48,20 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
         planets[1] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.PASSIVE_ATMOSPHERE, 3, 0, 0);
         HomeworldGenerator.setCoord(planets[1], 3);
 
-        planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.BREATHABLE_ATMOSPHERE, 3, 0, 0);
-        final Planet planet = (Planet) planets[2];
         final int colonySize = Configuration.getIntProperty("quest.colony_search.colony_max_size");
-        planet.ensureFreeSpace(colonySize, colonySize);
+        while (true) {
+            planets[2] = new Planet(world, ss, PlanetCategory.PLANET_ROCK, PlanetAtmosphere.BREATHABLE_ATMOSPHERE, 3, 0, 0);
+            try {
+                ((Planet) planets[2]).ensureFreeSpace(colonySize, colonySize);
+            } catch (IllegalArgumentException ex) {
+                continue;
+            }
+
+            break;
+        }
+        final Planet planet = (Planet) planets[2];
+
+
         PlanetaryLifeGenerator.setPlanetHasLife(planet);
         PlanetaryLifeGenerator.addAnimals(planet);
         PlanetaryLifeGenerator.addPlants(planet);

@@ -8,6 +8,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Faction;
@@ -94,12 +95,21 @@ public class StarMapController implements ScreenController {
                 ss.setMessageForStarMap((ss.getMessageForStarMap() != null ? ss.getMessageForStarMap() + activeResearch.desc.getName() : activeResearch.desc.getName()));
             }
         }
+
+        for (Faction f : world.getFactions().values()) {
+            if (f instanceof AlienRace && ((AlienRace) f).getHomeworld() != null && ((AlienRace) f).isKnown()) {
+                String message = Localization.getText("gui", "starmap." + f.getName().toLowerCase() + "_homeworld");
+                if (message != null) {
+                    String oldMessage = ((AlienRace) f).getHomeworld().getMessageForStarMap();
+                    ((AlienRace) f).getHomeworld().setMessageForStarMap(message + (oldMessage != null ? "\n" + oldMessage : ""));
+                }
+            }
+        }
     }
 
     private void draw(GameContainer container, Graphics g) {
         g.setBackground(Color.black);
         g.clear();
-        StarSystem solarSystem = (StarSystem) world.getGlobalVariables().get("solar_system");
         updateStarmapLabels(world);
         for (int i = 0; i < galaxyMap.getTilesY(); ++i) {
             for (int j = 0; j < galaxyMap.getTilesX(); ++j) {
@@ -112,10 +122,6 @@ public class StarMapController implements ScreenController {
                     mark(g, obj);
                 }
 
-                if (solarSystem == obj) {
-                    g.setColor(Color.yellow);
-                    g.drawString("Solar system", myCamera.getXCoord(j), myCamera.getYCoord(i));
-                }
             }
         }
 

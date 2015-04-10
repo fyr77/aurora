@@ -69,7 +69,15 @@ public class StarmapHintController implements EffectImpl {
 
     private void updatePanel(StarSystem objectAtMouseCoords) {
         EngineUtils.setTextForGUIElement(nameText, objectAtMouseCoords.getName());
-        EngineUtils.setTextForGUIElement(exploreText, objectAtMouseCoords.isVisited() ? Localization.getText("gui", "starmap.visited") : Localization.getText("gui", "starmap.not_visited"));
+        StringBuilder exploreTextBuilder = new StringBuilder();
+        if (objectAtMouseCoords.isVisited()) {
+            exploreTextBuilder.append(Localization.getText("gui", "starmap.visited")).append('\n');
+            exploreTextBuilder.append(String.format(Localization.getText("gui", "starmap.planet_count"), objectAtMouseCoords.getPlanets().length)).append('\n');
+            exploreTextBuilder.append(String.format(Localization.getText("gui", "starmap.astro_data"), objectAtMouseCoords.getAstronomyData())).append('\n');
+        } else {
+            exploreTextBuilder.append(Localization.getText("gui", "starmap.not_visited"));
+        }
+        EngineUtils.setTextForGUIElement(exploreText, exploreTextBuilder.toString());
         final String questText = objectAtMouseCoords.getMessageForStarMap();
         if (questText != null && !questText.isEmpty()) {
             EngineUtils.setTextForGUIElement(commentsText, Localization.getText("gui", "starmap.marks") + "\n" + questText);

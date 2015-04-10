@@ -15,7 +15,10 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.TradeScreenController;
-import ru.game.aurora.npc.*;
+import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Faction;
+import ru.game.aurora.npc.NPCShipFactory;
+import ru.game.aurora.npc.StandardAlienShipEvent;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.SellOnlyInventoryItem;
@@ -71,6 +74,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
     public void updateWorld(final World world) {
         final AlienRace humans = new AlienRace(NAME, "earth_transport", Dialog.loadFromFile("dialogs/human_ship_default_dialog.json"));
         humans.setTravelDistance(1);
+        humans.setKnown(true);
         world.getFactions().put(humans.getName(), humans);
 
         //todo: restore
@@ -82,6 +86,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
         final StarSystem solarSystem = HomeworldGenerator.createSolarSystem(world, humans);
         solarSystem.setAstronomyData(0); // everything is explored
         solarSystem.setQuestLocation(true);
+        solarSystem.setVisited(true);
         humans.setHomeworld(solarSystem);
 
         // generate solar system somewhere in lower third of a galaxy
