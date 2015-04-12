@@ -1,0 +1,6 @@
+0;I can see. I sense that you were unable to reach a peaceful solution.;
+;You're right. How did you know?;1
+1;In the end, that thing put on a scary show, the same way it did before. I can't say I'll forget it anytime soon.;
+;Martan, I was in a hurry. Besides, are people really panicking that much?;2
+2;Not that much. But still, you could have tried to come up with something more subtle.;
+;Maybe I could have, maybe not, what does it matter now? Okay. I have to go.;-1
