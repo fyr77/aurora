@@ -1,6 +1,6 @@
-0;Orbital trade station XH-201. How can I help you?;;;
+0;Orbital trade station XH-201. What do you need?;;;
 ;What do you have for sale?;-1;;1
 ;We're escorting a Klisk ship.;1;klisk_trade.started;
 ;Nevermind, we were just flying by and decided to find out what's here.;-1;;
 1;They haven't docked yet, please wait.;;;
-;Those snails are taking their damn time…;-1;;
+;Those snails really are taking their time.;-1;;
