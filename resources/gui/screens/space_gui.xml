@@ -94,7 +94,7 @@
                    childLayout="horizontal"
                    backgroundImage="sprites/gui/bottom_panel_galaxy.png" padding="20px,40px,20px,20px">
                 <panel width="324px"/>
-                <control id="log_list" name="listBox" vertical="on" horizontal="on" displayItems="3"
+                <control id="log_list" name="listBox" vertical="on" horizontal="off" height="95%"
                          selectionMode="Disabled" width="*"/>
                 <panel width="70px"/>
                 <panel childLayout="vertical" width="83px">
@@ -257,7 +257,7 @@
 
                 <panel width="*" childLayout="vertical">
                     <panel height="8px"/>
-                    <control id="log_list" name="listBox" vertical="on" horizontal="on" displayItems="3"
+                    <control id="log_list" name="listBox" vertical="on" horizontal="off" height="95%"
                              selectionMode="Disabled"/>
                 </panel>
 

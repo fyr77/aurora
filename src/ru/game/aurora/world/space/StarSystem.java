@@ -401,7 +401,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     }
 
     private void checkIsFriendlyAndFire(World world, final GameObject targetObject, final Ship playerShip, WeaponInstance weapon, final int damage) {
-        if (targetObject.getFaction() == null || targetObject.getFaction().isHostileTo(world, world.getPlayer().getShip())) {
+        if ((targetObject instanceof NPCShip && ((NPCShip) targetObject).isHostile) || (targetObject.getFaction() == null || targetObject.getFaction().isHostileTo(world, world.getPlayer().getShip()))) {
             doFire(world, targetObject, playerShip, weapon, damage);
             return;
         }

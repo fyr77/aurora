@@ -7,7 +7,6 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.common.Drawable;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.MonsterBehaviour;
@@ -134,5 +133,11 @@ public class DungeonMonster extends DungeonObject implements IMonster {
             graphics.setColor(Color.white);
         }
         graphics.drawString(hpText, camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
+    }
+
+    @Override
+    public String getName() {
+        String rz = Localization.getText("monsters", desc.getId() + ".name");
+        return rz != null ? rz : "";
     }
 }

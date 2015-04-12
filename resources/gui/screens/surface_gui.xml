@@ -66,7 +66,7 @@
 
                 <panel width="*" childLayout="vertical">
                     <panel height="8px"/>
-                    <control id="log_list" name="listBox" vertical="on" horizontal="on" displayItems="3"
+                    <control id="log_list" name="listBox" vertical="on" horizontal="off" height="95%"
                              selectionMode="Disabled" />
                 </panel>
                 <panel width="160px"/>
