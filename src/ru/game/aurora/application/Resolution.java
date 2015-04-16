@@ -37,11 +37,11 @@ public final class Resolution implements Comparable<Resolution>
     }
 
     public int getTilesX() {
-        return width / AuroraGame.tileSize;
+        return (int) Math.ceil(width / (float) AuroraGame.tileSize);
     }
 
     public int getTilesY() {
-        return height / AuroraGame.tileSize;
+        return (int) Math.ceil((float) height / AuroraGame.tileSize);
     }
 
     public int getWidth() {

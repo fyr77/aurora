@@ -1,19 +1,23 @@
 {
     "id": "colony_search_surface_explored",
-    "iconName":"scientist_dialog",
-    "statements":{
-        "0":{
-            "id":0,
-            "replies":[
+    "iconName": "scientist_dialog",
+    "statements": {
+        "0": {
+            "id": 0,
+            "replies": [
                 {
-                    "targetStatementId":-1,
-                    "replyText":"stay"
+                    "returnValue": 0,
+                    "targetStatementId": -1,
+                    "replyText": "0"
                 },
                 {
-                    "targetStatementId":-1,
-                    "replyText":"leave"
+                    "returnValue": 0,
+                    "targetStatementId": -1,
+                    "replyText": "1"
                 }
             ]
         }
-    }
+    },
+    "flags": {},
+    "returnValue": 0
 }

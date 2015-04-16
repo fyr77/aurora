@@ -19,7 +19,7 @@
                 <panel childLayout="vertical">
 
                     <!-- tabs -->
-                    <control id="journal_tabs" name="tabGroup" buttonWidth="300px" buttonHeight="30px" height="650px">
+                    <control id="journal_tabs" name="tabGroup" buttonWidth="300px" buttonHeight="30px" height="*">
                         <control id="active_quests" name="tab" caption="${gui.journal.active_quest.title}"
                                  childLayout="center">
                             <control name="journal_control" id="active_quest_tab"/>

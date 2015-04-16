@@ -15,7 +15,6 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.openal.SoundStore;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
-import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.ExitConfirmationScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpPopupControl;
@@ -39,9 +38,9 @@ public class AuroraGame extends NiftyOverlayGame {
 
     public static final int tileSize = 64;
 
-    public static int tilesX = 20;
+    public static int tilesX;
 
-    public static int tilesY = 15;
+    public static int tilesY;
 
     private static Camera camera;
 
@@ -73,7 +72,7 @@ public class AuroraGame extends NiftyOverlayGame {
                 if (!mode.isFullscreenCapable() || mode.getBitsPerPixel() < 24) {
                     continue;
                 }
-                if (mode.getWidth() < 1024 || mode.getHeight() < 768) {
+                if (mode.getWidth() < 1024) {
                     continue;
                 }
                 if (resolutionset.contains((long) mode.getWidth() * mode.getHeight())) {
@@ -340,7 +339,7 @@ public class AuroraGame extends NiftyOverlayGame {
             if (locale != null) {
                 Localization.init(Locale.forLanguageTag(locale));
             } else {
-                Localization.init(Locale.forLanguageTag("ru"));
+                Localization.init(Locale.getDefault());
             }
             Configuration.getSystemProperties().put("locale", Localization.getCurrentLocaleTag());
             app = new AppGameContainer(new AuroraGame());

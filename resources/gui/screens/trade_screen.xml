@@ -32,36 +32,37 @@
                      x="1%" y="1%"
                      padding="8px,8px,8px,8px">
                 <panel childLayout="vertical">
-                    <panel height="10px"/>
-                    <panel childLayout="horizontal" height="266px" padding="5px">
-                        <panel childLayout="center" width="266px" height="266px" style="nifty-panel-no-shadow">
-                            <image id="itemImage" width="256px" height="256px"/>
+                    <panel childLayout="horizontal" height="138px" padding="5px">
+                        <panel childLayout="center" width="138px" height="138px" style="nifty-panel-no-shadow">
+                            <image id="itemImage" width="128px" height="128px"/>
                         </panel>
                         <panel width="10px"/>
-                        <panel width="*" height="266px" childLayout="vertical" padding="10px" style="nifty-panel-no-shadow">
+                        <panel width="*" height="138px" childLayout="vertical" padding="10px"
+                               style="nifty-panel-no-shadow">
                             <text id="itemName" style="bold-font" textHAlign="left" width="90%" height="50px"/>
-                            <panel height="10px"/>
+                            <panel height="5px"/>
                             <text width="90%" wrap="true" style="base-font" textHAlign="left" height="*"
                                   id="itemDescription"/>
+                            <panel height="5px"/>
                         </panel>
                         <panel width="10px"/>
-                        <panel childLayout="center" width="266px" height="266px" style="nifty-panel-no-shadow">
-                            <image id="trader_image" width="256px" height="256px"/>
+                        <panel childLayout="center" width="138px" height="138px" style="nifty-panel-no-shadow">
+                            <image id="trader_image" width="128px" height="128px"/>
                         </panel>
                     </panel>
-                    <panel height="10px"/>
+                    <panel height="5px"/>
                     <control name="icon_and_count_with_shadow" id="credits_count"
                              icon="resources/sprites/gui/credit.png" width="128px" height="64px">
                     </control>
                     <!-- inventory and upgrades -->
-                    <panel height="10px"/>
+
                     <panel childLayout="horizontal" height="*">
 
                         <panel childLayout="vertical" width="49%">
                             <text id="storageText" style="button-font" align="center" text="${gui.ship}"
                                   height="32px"/>
                             <control id="inventoryList" name="listBox" vertical="optional" horizontal="optional"
-                                     height="95%" selection="Single"
+                                     height="80%" selection="Single"
                                      visibleToMouse="true"
                                      viewConverterClass="ru.game.aurora.gui.InventoryViewConverter">
                                 <control name="trade_ship_line"
@@ -84,7 +85,7 @@
                             <text id="inventoryText" style="button-font" align="center" text="${gui.trade.merchant}"
                                   height="32px"/>
                             <control id="merchantList" name="listBox" vertical="optional" horizontal="optional"
-                                     height="95%" selection="Single"
+                                     height="80%" selection="Single"
                                      viewConverterClass="ru.game.aurora.gui.InventoryViewConverter"
                                      visibleToMouse="true"
                                     >
@@ -104,10 +105,10 @@
                         </panel>
 
                     </panel>
-                    <panel height="10px"/>
-                    <panel childLayout="horizontal" height="60px" padding="5px">
+                    <panel height="5px"/>
+                    <panel childLayout="horizontal" height="50px" padding="5px">
                         <panel width="85%"/>
-                        <control id="close_button" name="button" label="Close" width="150px" height="45px">
+                        <control id="close_button" name="button" label="Close" width="130px" height="40px">
                             <interact onClick="closeScreen()"/>
                         </control>
                     </panel>
