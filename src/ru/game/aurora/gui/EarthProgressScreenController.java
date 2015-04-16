@@ -15,6 +15,7 @@ import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.spi.render.RenderFont;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.util.Pair;
@@ -89,10 +90,10 @@ public class EarthProgressScreenController implements ScreenController {
         }
 
         final int lostCrewMembers = world.getPlayer().getShip().getLostCrewMembers();
-
+        final int lostCrewMemberScore = Configuration.getIntProperty("game.progress.lostCrewScore");
         if (lostCrewMembers > 0) {
-            data.add(new Pair<>("Crew members lost", String.valueOf(lostCrewMembers) + " (" + String.valueOf(-10 * lostCrewMembers) + ")"));
-            totalScore -= 10 * lostCrewMembers;
+            data.add(new Pair<>("Crew members lost", String.valueOf(lostCrewMembers) + " (" + String.valueOf(lostCrewMemberScore * lostCrewMembers) + ")"));
+            totalScore -= lostCrewMemberScore * lostCrewMembers;
         }
 
     }

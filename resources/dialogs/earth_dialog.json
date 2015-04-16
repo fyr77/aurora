@@ -1081,7 +1081,7 @@
           "replyText": "0",
           "replyConditions": [
             {
-              "name": "klisk_trade.result",
+              "name": "klisk_trade.quest_result",
               "value": "perfect",
               "type": "EQUAL"
             }
@@ -1093,7 +1093,7 @@
           "replyText": "1",
           "replyConditions": [
             {
-              "name": "klisk_trade.result",
+              "name": "klisk_trade.quest_result",
               "value": "good",
               "type": "EQUAL"
             }
@@ -1105,7 +1105,7 @@
           "replyText": "2",
           "replyConditions": [
             {
-              "name": "klisk_trade.result",
+              "name": "klisk_trade.quest_result",
               "type": "NOT_SET"
             }
           ]
@@ -1116,7 +1116,7 @@
           "replyText": "3",
           "replyConditions": [
             {
-              "name": "klisk_trade.result",
+              "name": "klisk_trade.quest_result",
               "value": "bad",
               "type": "EQUAL"
             }
