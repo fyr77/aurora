@@ -41,7 +41,7 @@
 
 
     <!--TODO: this should be generated dynamically-->
-    <File classpath='yes'>jwrapper/aurora-0.4.0.jar</File>
+    <File classpath='yes'>jwrapper/aurora-0.4.1.jar</File>
 
     <File classpath='yes'>jwrapper/eventbus-1.4.jar</File>
 
@@ -67,11 +67,11 @@
 
     <File classpath='yes'>jwrapper/lwjgl.jar</File>
 
-    <File classpath='yes'>jwrapper/nifty-1.3.2.jar</File>
+    <File classpath='yes'>jwrapper/nifty-1.3.4-SNAPSHOT.jar</File>
 
-    <File classpath='yes'>jwrapper/nifty-default-controls-1.3.2.jar</File>
+    <File classpath='yes'>jwrapper/nifty-default-controls-1.3.4-SNAPSHOT.jar</File>
 
-    <File classpath='yes'>jwrapper/nifty-slick-renderer-1.3.2.jar</File>
+    <File classpath='yes'>jwrapper/nifty-slick-renderer-1.3.4-SNAPSHOT.jar</File>
 
     <File classpath='yes'>jwrapper/rlforj.0.3.jar</File>
 

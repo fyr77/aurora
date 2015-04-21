@@ -23,6 +23,17 @@ sourceSets {
         output.resourcesDir = 'build/classes/main'
     }
 
+    distJar {
+        java {
+            srcDir 'src'
+        }
+    }
+
+}
+
+configurations {
+    distJarCompile.extendsFrom compile
+    distJarRuntime.extendsFrom runtime
 }
 
 applicationDistribution.from('resources') {
@@ -33,10 +44,17 @@ applicationDistribution.from('native') {
     into 'bin\\native'
 }
 
-jar {
+
+task strippedJar(type: Jar) {
+    dependsOn compileJava
     manifest {
         from 'src\\META-INF\\MANIFEST.MF'
     }
+    from sourceSets.distJar.output
+}
+
+applicationDistribution.from(strippedJar) {
+    into 'lib'
 }
 
 mainClassName = 'ru.game.aurora.application.AuroraGame'
@@ -126,4 +144,4 @@ task winExe {
     }
 }
 
-winExe.dependsOn jar
+winExe.dependsOn strippedJar
