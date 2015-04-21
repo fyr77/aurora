@@ -1,6 +1,12 @@
+VERSION 0.4.2
+
+IN PROGRESS
+
+=============================================
+
 VERSION 0.4.1
 
-IN PROGRESS...
+21.04.2015
 
 + Trade system
 + Alien ships now drop loot
