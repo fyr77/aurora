@@ -50,7 +50,8 @@
           "targetStatementId": 97,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog"
     },
     "4": {
       "id": 4,
@@ -70,7 +71,8 @@
           "targetStatementId": 98,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog"
     },
     "5": {
       "id": 5,
