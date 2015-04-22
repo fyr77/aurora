@@ -1,47 +1,47 @@
-0;*You see a creature on a display. It matches the description in the report of the Aurora-1 commander. Indeed, the creature looks way too... human-like. The hat covers its sparkling eyes, whilst its cloak covers the rest of the body. It's easy to mistake it for a human. It waits for you to speak.*;
-;Do... do you understand me?;1
-1;*Its answers are brief and its voice sounds really unusual to a human ear.* Yes.;
-;Then on behalf of Earth and the entire humankind, the first human spaceship greets...;2
-2;*It harrumphs and interrupts you.* You're not the first. Three hundred seventy four earth days ago we met another spaceship that was similar to yours.;
-;What? The Aurora? Did you see the Aurora?;3
-3;Yes, the Aurora it was called. It is a beautiful name. The Aurora. It is really enjoyable to pronounce it.;
-;Where is it? Where is the Aurora now? Do you know? Do you know the answer to this question?;4
-4;*his speech sounds really weird even despite the fact that his grammar and stresses are alright* I knew you would ask. But I can not tell you.;
-;But why?;5
-5;Because the Aurora has its own path and you have your own path.;
-;Please, tell me the location of the Aurora. Where is it? Our entire planet depends on the Aurora.;6
-6;We can't tell you. If you follow your path, you might meet the Aurora.;
-;Hell no! I don't know, what you mean, but I swear I'll shred you into small pieces, if you don't give me the information.;7
-;Okay, my path. If you use this phrase, apparently, it means something. What does it mean?;8
-;Ok. Anyway I do not have time for this. Do you know why did we have to send these deep space research ships?;9
-7;*the creature shows no aggression* Humans… You must all be the same. *The gardeners eyes flash. Suddenly the alarm sounds and the computer voice informs about all weapon system critical malfunction. You receive an incoming call from Sarah*;
+0;*Before you is a creature. It looks surprisingly human-like, and reminds you more of a fairy tale character than an alien. You can see it yourself, can't you? A pair of eyes glows in the darkness under its hat. Human eyes don't glow like that. It's time to turn on the device from the Aurora 1 and start talking.*;
+;Can you understand me?;1
+1;It is so. *The creature's voice is unusual, you can hear wooden sounds in it, strange rattling, clangs.* I… We… Gardener. Gardeners. Call us that.;
+;We greet you. On behalf of Earth and all of humanity. We are humans. Our ship is the Aurora 2.;2
+2;*Something that sounds like mocking.* I know who you are. A long time ago... one year ago. More. We saw a ship like yours. The Aurora 1. We gave them the ability to talk to everyone, and it was not in vain. You talk to me, and we understand each other.;
+;Aurora 1? You came in contact with the Aurora 1?;3
+3;It is so. Aurora… Aurora. Aurora. *laughter* I like saying this word. Aurora. Au-rora. Au. Ro. Ra.;
+;In that case, I'll ask you a question. A very important one. Can you tell me where the Aurora 1 is right now?;4
+4;I knew you would ask that. No. That is not in my power.;
+;Why not?;5
+5;The Aurora 1 has its own path, and you have yours.;
+;I repeat, it is very important for all of my people.;6
+6;We cannot. Different ships have different paths. But you can trust me... *The creature's eyes flash. No, it really does, it looks as if two flashlights got turned on in the dark gap below the hat.* You will definitely meet.;
+;I am asking politely, but I could use force.;7
+;Paths. Why are you talking about roads? What do you mean?;8
+;Okay. I don't have time for this, anyway. If you contacted the Aurora 1, you probably know why humans have gone out to outer space.;9
+7;Oh. Humans. Maybe you are all like that. *The Gardener's eyes flash, but it doesn't stop there. Suddenly, the ship's alarm goes off. Synthesized voice informs you that external defense systems have been deactivated.* See? *After that the alarm quiets down. Sarah instantly hails you on the second line.*;
 ;Sarah?;99
-8;Paths. There are plenty of them. And we all get changed by the ones we choose. You do not want to change by stepping on a wrong road, don't you?;
+8;Paths. Lots of them. We are all changed by the paths we choose... You don't want to accidentally change after setting out down someone else's road, do you? It is what makes us different. We are perfectly aware of the borders between our paths and the others'.;
 ;Who are you?;12
-;I do not understand. What do you mean? How can I find Aurora?;13
-12;*Short laughter*I have already told you… We are the Gardeners. Look around, isn't it beautiful here? This is the garden. It does not belong to us. It... *he suddenly stumples* we just look after it. And we see what will happen with the plants.;
-;Its hard to understand you. Just tell me what should I do to find Aurora;13
-;You see what happens… Do you see the future?;14
-13;The smart can find the way, the strong can make its own.;
+;I don't understand. What do you want to tell me? What do I do to find the Aurora?!;13
+12;*laughter* I told you… We are Gardeners. Look around. Is it not beautiful? It is the Garden. It is not ours. Nor is it yours. It... *He stutters. It looks weird.* We just tend to it. And we can see what will happen to the plants.;
+;Hard to understand. Just tell me what to do to find the Aurora 1.;13
+;You can see what will happen to them? Are you trying to say that you can see the future?;14
+13;He who is strong and intelligent will find the path. Or he will lay it.;
 ;Who are you?;12
-;The way? Do you mean the future?;14
-14;There is no future. Everything moves in circles. You will understand it but not right now. But you will.;
-;So you want us to follow our own path but you will not show it to us. Right?;6
+;Path? Is it me or do you mean… the future?;14
+14;There is no future. Everything moves back and forth, in circles. You will understand this, but not now. But you will.;
+;Okay. Right. You want us to follow our own path. But you can't point us to it.;6
 ;Who are you?;12
-;I do not understand. What do you mean? How can I find Aurora?;6
-9;You live on a dying planet. You need a contact. Help. Resources.;
+;I don't understand. What do you want to tell me? What do I do to find the Aurora?!;13
+9;Yes. You are the people of a dying planet. You need contact. You need help. You need resources.;
 ;Can you help us with that?;18
-18;Resources? *he laughs* Look around… and take whatever you want. This garden is endless. You do not need the help, but you may need the Klisk.;
-;What?;19
-19;The Klisk. Their station is located in this system. Check it. Everything begins here.;
-;"I do not understand. What ""begins""?";20
-20;There and back again in circles. You will understand. Farewell, human captain. We will meet again.;
+18;Resources? *laughs* Look around… and take them from wherever you want. This Garden is endless, and it is getting bigger every second. You do not need our help. You need the Klisks.;
+;Who?;19
+19;Klisks. Their station is here. Look for it. That will be what starts it all.;
+;I don't understand. What will it start?;20
+20;*The Gardener's eyes flash.* Back and forth, and then in circles… You will understand. Until next time, human captain. It will not be soon.;
 ;Wait!;21
-21;*Link terminated*;
-;Damn it was strange. But what else should you expect from an alien?;-1
-99;Captain… *she is confused* There.. There is some kind of malfunction here. All defences went down for a couple of seconds! Now everything is working again. I will try to find the cause.;engineer_dialog
-;I see *Henry is also calling*;98
-98;Captain. The weapon systems are offline. We are rebooting and reloading now but it will take some time.;marine_dialog
-;I see. Go on. Report immediately if it happens again.;97
-97;Henry nods and disconnects. You switch back to the alien.;
-;…;6
+21;*It's no use. He disconnected.*;
+;Damn. That was… weird. First contact is first contact.;-1
+99;Captain… *She's embarrassed.* Some… Some kind of bug in the system! All the shields went down in a second! Even radar defense! It's back up, but... I'll sort it out, Cap. I'll find out what caused it.;
+;Of course. *Henry is trying to contact you.*;98
+98;Captain. *His voice is dry, but you can see that Henry is nervous.* Weapon systems are down. It's like the energy just disappeared. We're feeding them again, but it's not going very fast.;
+;I see. Go on. Report if this happens again..;97
+97;*Henry nods and disappears from the screen. You go back to the Gardener.*;
+;;6
