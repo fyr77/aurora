@@ -72,9 +72,9 @@ public class PlanetMapRenderer {
                 g.drawImage(overlay, 0, 0);
             }
             if (showLandingParty) {
-                Image shuttle = ResourceManager.getInstance().getImage("shuttle");
+                Image shuttle = ResourceManager.getInstance().getImage("shuttle").getScaledCopy(0.5f);
                 g.drawImage(shuttle, myCamera.getXCoord(planet.getShuttle().getX()), myCamera.getYCoordWrapped((int) (planet.getShuttle().getY() - shuttle.getHeight() / newTileHeight), planet.getHeight()));
-                Image landing_party = ResourceManager.getInstance().getImage("awayteam");
+                Image landing_party = ResourceManager.getInstance().getImage("awayteam").getScaledCopy(0.5f);
                 g.drawImage(landing_party
                         , myCamera.getXCoord(world.getPlayer().getLandingParty().getX())
                         , myCamera.getYCoordWrapped((int) (world.getPlayer().getLandingParty().getY() - landing_party.getHeight() / newTileHeight), planet.getHeight())); // -1 so that legs of sprite showed point on map. not its head

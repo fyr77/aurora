@@ -203,7 +203,7 @@ public class StarMapController implements ScreenController {
         Image result = new Image(mapPanel.getWidth(), mapPanel.getHeight());
         Graphics g = result.getGraphics();
         draw(null, g);
-        final Image aurora = ResourceManager.getInstance().getImage("aurora");
+        final Image aurora = ResourceManager.getInstance().getImage("aurora").getScaledCopy(0.5f);
         g.drawImage(aurora, myCamera.getXCoord(ship.getX()) - aurora.getWidth() / 2, myCamera.getYCoord(ship.getY()) - aurora.getHeight() / 2);
         g.flush();
         return result;
