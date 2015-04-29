@@ -18,7 +18,7 @@ public class PlanetNPC extends BaseGameObject {
     private Dialog dialog;
 
     public PlanetNPC(int x, int y, String tileset, int tileX, int tileY) {
-        super(x, y, new Drawable(tileset, tileX, tileY));
+        super(x, y, new Drawable(tileset, tileX, tileY, false));
     }
 
     public PlanetNPC(int x, int y, String image) {

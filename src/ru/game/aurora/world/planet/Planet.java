@@ -63,6 +63,9 @@ public class Planet extends BasePlanet implements IDungeon {
     // total amount of all tiles explored on this planet
     private int exploredTiles = 0;
 
+    // flags that show if planet has some natural dangers like acid rains, see Environment class
+    private int environment = 0;
+
 
     public Planet(World world, StarSystem owner, Planet other) {
         super(other.getX(), other.getY(), other.size, owner, other.atmosphere, other.category);
@@ -473,5 +476,13 @@ public class Planet extends BasePlanet implements IDungeon {
     @Override
     public String getInteractMessage() {
         return Localization.getText("gui", "space.land");
+    }
+
+    public int getEnvironment() {
+        return environment;
+    }
+
+    public void addEnvironmentFlag(byte val) {
+        environment |= val;
     }
 }

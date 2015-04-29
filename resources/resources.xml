@@ -151,6 +151,15 @@
     <resource type="image" id="ring_front_3">sprites/planets/rings_front3.png</resource>
     <resource type="image" id="asteroids">sprites/space_objects/asteroids.png</resource>
 
+    <resource type="animation" id="tornado" tw="64" th="64" duration="300">
+        sprites/planet_objects/environment/tornado.png
+    </resource>
+    <resource type="animation" id="rain" tw="64" th="64" duration="300">sprites/planet_objects/environment/rain.png
+    </resource>
+    <resource type="animation" id="acid_rain" tw="64" th="64" duration="300">
+        sprites/planet_objects/environment/acid_rain.png
+    </resource>
+
     <!-- stars -->
     <resource type="image" id="star_4">sprites/space_objects/sun_64.png</resource>
     <resource type="image" id="star_3">sprites/space_objects/sun_96.png</resource>

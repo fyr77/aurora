@@ -205,6 +205,16 @@ public class WorldGenerator implements Runnable {
             );
             if (atmosphere != PlanetAtmosphere.NO_ATMOSPHERE) {
                 PlanetaryLifeGenerator.setPlanetHasLife(e);
+                if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.tornado.chance")) {
+                    e.addEnvironmentFlag(Environment.WIND);
+                }
+
+                if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.rain.chance")) {
+                    e.addEnvironmentFlag(Environment.RAIN);
+                }
+                if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.acid_rain.chance")) {
+                    e.addEnvironmentFlag(Environment.ACID_RAIN);
+                }
             }
             planetList.add(e);
 
@@ -284,6 +294,7 @@ public class WorldGenerator implements Runnable {
 
         world.addListener(new SaveGameManager.Autosaver());
         world.addListener(new StarSystemMusicChangeListener());
+        world.addListener(new Environment.PlanetProcessor());
     }
 
     // perform some fast initialization in gui thread

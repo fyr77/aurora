@@ -8,6 +8,8 @@
 
 package ru.game.aurora.common;
 
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.ResourceManager;
 
@@ -22,40 +24,74 @@ public class Drawable implements Serializable {
 
     private int ty = -1;
 
+    private boolean isAnimation = false;
+
     private transient Image flippedCopy;
 
     private transient Image image = null;
+
+    private transient Animation anim = null;
 
     public Drawable(Image img) {
         image = img;
     }
 
     public Drawable(String id) {
-        this(id, -1, -1);
+        this(id, -1, -1, false);
+    }
+
+    public Drawable(String id, boolean isAnimation) {
+        this(id, -1, -1, isAnimation);
     }
 
     public Drawable(String id, int tx, int ty) {
+        this(id, tx, ty, false);
+    }
+
+    public Drawable(String id, int tx, int ty, boolean isAnimation) {
         this.id = id;
         this.tx = tx;
         this.ty = ty;
+        this.isAnimation = isAnimation;
     }
 
     private void loadImage() {
-        if (tx == -1) {
-            image = ResourceManager.getInstance().getImage(id);
+        if (!isAnimation) {
+            if (tx == -1) {
+                image = ResourceManager.getInstance().getImage(id);
+            } else {
+                image = ResourceManager.getInstance().getSpriteSheet(id).getSprite(tx, ty);
+            }
         } else {
-            image = ResourceManager.getInstance().getSpriteSheet(id).getSprite(tx, ty);
+            anim = ResourceManager.getInstance().getAnimation(id);
+            anim.setLooping(true);
+            anim.setAutoUpdate(true);
         }
     }
 
     public Image getImage() {
-        if (image == null) {
+        if ((!isAnimation && image == null) || (isAnimation && anim == null)) {
             loadImage();
         }
-        return image;
+        return isAnimation ? anim.getCurrentFrame() : image;
+    }
+
+    public void draw(Graphics g, float x, float y) {
+        if ((!isAnimation && image == null) || (isAnimation && anim == null)) {
+            loadImage();
+        }
+
+        if (isAnimation) {
+            g.drawAnimation(anim, x, y);
+        } else {
+            g.drawImage(image, x, y);
+        }
     }
 
     public Image getFlippedCopy() {
+        if (isAnimation) {
+            throw new UnsupportedOperationException("Flipping not supported for animations");
+        }
         if (flippedCopy != null) {
             return flippedCopy;
         }
