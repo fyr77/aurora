@@ -151,8 +151,12 @@
     <resource type="image" id="ring_front_3">sprites/planets/rings_front3.png</resource>
     <resource type="image" id="asteroids">sprites/space_objects/asteroids.png</resource>
 
+    <resource type="image" id="lava">sprites/planet_objects/environment/lava.png</resource>
     <resource type="animation" id="tornado" tw="64" th="64" duration="300">
         sprites/planet_objects/environment/tornado.png
+    </resource>
+    <resource type="animation" id="meteor" tw="64" th="64" duration="3000">
+        sprites/planet_objects/environment/meteor.png
     </resource>
     <resource type="animation" id="rain" tw="64" th="64" duration="300">sprites/planet_objects/environment/rain.png
     </resource>

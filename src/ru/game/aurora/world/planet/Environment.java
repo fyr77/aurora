@@ -1,7 +1,10 @@
 package ru.game.aurora.world.planet;
 
+import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.Localization;
+import ru.game.aurora.effects.FallingMeteor;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
@@ -17,9 +20,11 @@ public class Environment {
     public static final byte ACID_RAIN = 0x02;
     public static final byte LAVA = 0x04;
     public static final byte WIND = 0x08;
+    public static final byte METEORS = 0x10;
 
     // adds effects on planets
     public static class PlanetProcessor extends GameEventListener {
+
         @Override
         public boolean onPlayerLandedPlanet(World world, Planet planet) {
             if ((planet.getEnvironment() & WIND) != 0) {
@@ -32,6 +37,22 @@ public class Environment {
 
             if ((planet.getEnvironment() & ACID_RAIN) != 0) {
                 addRain(planet, true);
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onTurnEnded(World world) {
+            if (!(world.getCurrentRoom() instanceof Planet) || (((Planet) world.getCurrentRoom()).getEnvironment() & Environment.METEORS) == 0) {
+                return false;
+            }
+
+            if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.meteor.chance")) {
+                ((Planet) world.getCurrentRoom()).getController().addEffect(new FallingMeteor(
+                        CommonRandom.getRandom().nextInt(AuroraGame.tilesX * AuroraGame.tileSize / 2) + AuroraGame.tilesX * AuroraGame.tileSize / 4
+                        , CommonRandom.getRandom().nextInt(AuroraGame.tilesY * AuroraGame.tileSize / 2) + AuroraGame.tilesY * AuroraGame.tileSize / 4
+                ));
+                return true;
             }
             return false;
         }
@@ -66,5 +87,24 @@ public class Environment {
                 p.getPlanetObjects().add(rc);
             }
         }
+    }
+
+    public static void appendScanText(StringBuilder sb, int env) {
+        if ((env & WIND) != 0) {
+            sb.append(Localization.getText("gui", "scan.tornado")).append('\n');
+        }
+
+        if ((env & ACID_RAIN) != 0) {
+            sb.append(Localization.getText("gui", "scan.acid_rain")).append('\n');
+        }
+
+        if ((env & METEORS) != 0) {
+            sb.append(Localization.getText("gui", "scan.meteor")).append('\n');
+        }
+
+        if ((env & LAVA) != 0) {
+            sb.append(Localization.getText("gui", "scan.lava")).append('\n');
+        }
+        sb.append('\n');
     }
 }

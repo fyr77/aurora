@@ -465,6 +465,7 @@ public class Planet extends BasePlanet implements IDungeon {
         sb.append(Localization.getText("gui", "scan.size")).append(' ').append(sizeText).append('\n');
         sb.append(Localization.getText("gui", "scan.bio_activity")).append(' ').append(hasLife() ? Localization.getText("gui", "scan.detected") : Localization.getText("gui", "scan.not_detected")).append('\n');
         sb.append(Localization.getText("gui", "scan.surface_type")).append(' ').append(getCategory()).append('\n');
+        Environment.appendScanText(sb, environment);
 
         return sb.toString();
     }
