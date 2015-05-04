@@ -324,8 +324,11 @@ public class Planet extends BasePlanet implements IDungeon {
 
         if (landingParty.getDistanceFromTargetPointWrapped(shuttle, getWidth(), getHeight()) == 0) {
             if (world.isUpdatedThisFrame()) {
-                GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.refill_oxygen"));
-                world.getPlayer().getLandingParty().refillOxygen();
+                if (atmosphere != PlanetAtmosphere.BREATHABLE_ATMOSPHERE) {
+                    GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.refill_oxygen"));
+                    world.getPlayer().getLandingParty().refillOxygen();
+                }
+
                 // dump dumpable cargo
                 for (Iterator<Multiset.Entry<InventoryItem>> iter = landingParty.getInventory().entrySet().iterator(); iter.hasNext(); ) {
                     Multiset.Entry<InventoryItem> o = iter.next();
