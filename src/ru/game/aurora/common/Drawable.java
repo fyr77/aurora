@@ -90,7 +90,7 @@ public class Drawable implements Serializable {
 
     public Image getFlippedCopy() {
         if (isAnimation) {
-            throw new UnsupportedOperationException("Flipping not supported for animations");
+            return getImage();
         }
         if (flippedCopy != null) {
             return flippedCopy;

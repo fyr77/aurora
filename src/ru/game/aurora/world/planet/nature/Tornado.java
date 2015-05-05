@@ -39,16 +39,18 @@ public class Tornado extends BaseGameObject implements IMonster {
         if (world.isUpdatedThisFrame()) {
             --ttl;
             myController.update(container, world);
+            // tornado does not block path
+            map.setTilePassable(getTargetX(), getTargetY(), true);
             if (ttl <= 0) {
                 // spawn new tornado somewhere else
-                if (distanceWrapped < world.getCamera().getNumTilesX()) {
+                if (distanceWrapped < world.getCamera().getNumTilesX() / 2) {
                     GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.tornado.dissipate"));
                 }
                 ttl = CommonRandom.getRandom().nextInt(Configuration.getIntProperty("environment.tornado.max_ttl") + 10);
 
-                ((Planet) map).setNearestFreePoint(this, CommonRandom.getRandom().nextInt(map.getWidthInTiles()), CommonRandom.getRandom().nextInt(map.getHeightInTiles()));
+                ((Planet) world.getCurrentRoom()).setNearestFreePoint(this, CommonRandom.getRandom().nextInt(map.getWidthInTiles()), CommonRandom.getRandom().nextInt(map.getHeightInTiles()));
                 distanceWrapped = getDistanceWrapped(landingParty, map.getWidthInTiles(), map.getHeightInTiles());
-                if (distanceWrapped < world.getCamera().getNumTilesX()) {
+                if (distanceWrapped < world.getCamera().getNumTilesX() / 2) {
                     GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.tornado.appear"));
                 }
             }
@@ -83,7 +85,7 @@ public class Tornado extends BaseGameObject implements IMonster {
 
     @Override
     public int getSpeed() {
-        return 1;
+        return CommonRandom.getRandom().nextInt(2) + 1;
     }
 
     @Override

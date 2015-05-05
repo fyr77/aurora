@@ -1,9 +1,6 @@
 package ru.game.aurora.world.planet;
 
-import ru.game.aurora.application.AuroraGame;
-import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.*;
 import ru.game.aurora.effects.FallingMeteor;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.GameObject;
@@ -47,7 +44,8 @@ public class Environment {
                 return false;
             }
 
-            if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.meteor.chance")) {
+            if (CommonRandom.getRandom().nextDouble() < 1/*Configuration.getDoubleProperty("environment.meteor.fall_chance")*/) {
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.meteor_fall"));
                 ((Planet) world.getCurrentRoom()).getController().addEffect(new FallingMeteor(
                         CommonRandom.getRandom().nextInt(AuroraGame.tilesX * AuroraGame.tileSize / 2) + AuroraGame.tilesX * AuroraGame.tileSize / 4
                         , CommonRandom.getRandom().nextInt(AuroraGame.tilesY * AuroraGame.tileSize / 2) + AuroraGame.tilesY * AuroraGame.tileSize / 4

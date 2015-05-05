@@ -10,10 +10,9 @@ import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import ru.game.aurora.application.AuroraGame;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.ResolutionChangeListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.*;
 import ru.game.aurora.npc.Faction;
@@ -22,8 +21,12 @@ import ru.game.aurora.player.earth.EvacuationState;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.RnDSet;
 import ru.game.aurora.world.generation.StarSystemNamesCollection;
+import ru.game.aurora.world.generation.WorldGenerator;
+import ru.game.aurora.world.planet.BasePlanet;
+import ru.game.aurora.world.planet.Environment;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
+import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
@@ -77,6 +80,11 @@ public class World implements Serializable, ResolutionChangeListener {
 
     // to distinguish save games made by different players
     private final UUID uuid;
+
+    private static final Logger logger = LoggerFactory.getLogger(World.class);
+
+    // Version of a game that created this world. Can be used on save loading to detect if save conversion is required
+    private String gameVersion = Version.VERSION;
 
     private boolean cheatsUsed = false;
 
@@ -194,6 +202,7 @@ public class World implements Serializable, ResolutionChangeListener {
     }
 
     public void addOverlayWindow(Dialog d, Map<String, String> flags) {
+        logger.info("Opening dialog " + d.getId());
         if (!GUI.getInstance().peekScreen().equals("dialog_screen")) {
             // do not push dialog if it is already on top
             GUI.getInstance().pushCurrentScreen();
@@ -206,6 +215,7 @@ public class World implements Serializable, ResolutionChangeListener {
     }
 
     public void addOverlayWindow(Dialog d) {
+        logger.info("Opening dialog " + d.getId());
         if (!GUI.getInstance().peekScreen().equals("dialog_screen")) {
             // do not push dialog if it is already on top
             GUI.getInstance().pushCurrentScreen();
@@ -472,9 +482,33 @@ public class World implements Serializable, ResolutionChangeListener {
     }
 
     public void gameLoaded() {
+        logger.info("Game loaded");
         GUI.getInstance().resetIngameMenu();
         if (player.getUniqueItemsPurchased() == null) {
             player.setUniqueItemsPurchased(new HashSet<String>());
+        }
+
+        if (gameVersion == null || gameVersion.equals("0.4.0") || gameVersion.equals("0.4.1")) {
+            logger.info("Detected game version 0.4.0-0.4.1, applying fixes");
+            gameVersion = Version.VERSION;
+            listeners.add(new Environment.PlanetProcessor());
+            listeners.add(new LoggingListener());
+            for (GalaxyMapObject gmo : galaxyMap.getGalaxyMapObjects()) {
+                if (gmo instanceof StarSystem) {
+                    for (BasePlanet p : ((StarSystem) gmo).getPlanets()) {
+                        if (p instanceof Planet) {
+                            WorldGenerator.addEnvironmentDangers((Planet) p);
+                            if (p.getSatellites() != null) {
+                                for (BasePlanet pp : p.getSatellites()) {
+                                    if (pp instanceof Planet) {
+                                        WorldGenerator.addEnvironmentDangers((Planet) pp);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -484,6 +518,7 @@ public class World implements Serializable, ResolutionChangeListener {
 
     @Override
     public void onResolutionChanged(int tilesX, int tilesY, boolean fullscreen) {
+        logger.info("Changing resolution to {}x{} tiles, fullscreen is {}", tilesX, tilesY, fullscreen);
         Camera oldCamera = camera;
         camera = new Camera(0, 0, tilesX, tilesY, AuroraGame.tileSize, AuroraGame.tileSize);
         camera.setTarget(oldCamera.getTarget());
@@ -495,6 +530,7 @@ public class World implements Serializable, ResolutionChangeListener {
 
     public void checkCheats() {
         if (Configuration.getBooleanProperty("cheat.invulnerability") || Configuration.getBooleanProperty("cheat.skipDungeons")) {
+            logger.info("Detected cheats");
             cheatsUsed = true;
         }
     }

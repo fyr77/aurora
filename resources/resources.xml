@@ -155,10 +155,12 @@
     <resource type="animation" id="tornado" tw="64" th="64" duration="300">
         sprites/planet_objects/environment/tornado.png
     </resource>
-    <resource type="animation" id="meteor" tw="64" th="64" duration="3000">
+    <resource type="animation" id="meteor" tw="64" th="64" duration="120">
         sprites/planet_objects/environment/meteor.png
     </resource>
     <resource type="animation" id="rain" tw="64" th="64" duration="300">sprites/planet_objects/environment/rain.png
+    </resource>
+    <resource type="animation" id="snow" tw="64" th="64" duration="300">sprites/planet_objects/environment/snow.png
     </resource>
     <resource type="animation" id="acid_rain" tw="64" th="64" duration="300">
         sprites/planet_objects/environment/acid_rain.png
@@ -177,6 +179,12 @@
     <resource type="image" id="plasma_shot">sprites/effects/plasma_shot.png</resource>
     <resource type="image" id="bullet_shot">sprites/effects/bullet_shot.png</resource>
     <resource type="animation" id="ship_explosion" tw="64" th="64" duration="100">sprites/effects/explosion.png
+    </resource>
+    <resource type="animation" id="surface_explosion" tw="64" th="64" duration="100">
+        sprites/effects/surface_explosion.png
+    </resource>
+    <resource type="animation" id="surface_explosion_large" tw="128" th="128" duration="100">
+        sprites/effects/surface_explosion_2x.png
     </resource>
     <resource type="animation" id="solar_wind" tw="64" th="64" duration="100">sprites/effects/solar_wind.png</resource>
     <resource type="animation" id="black_hole" tw="64" th="64" duration="100">sprites/effects/black_hole.png</resource>

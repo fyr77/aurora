@@ -23,7 +23,7 @@ import java.util.Set;
  */
 public abstract class GameEventListener implements Serializable {
 
-    public static enum EventGroup {
+    public enum EventGroup {
         ENCOUNTER_SPAWN,
     }
 

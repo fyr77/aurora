@@ -13,26 +13,26 @@ import java.io.Serializable;
 public interface GameObject extends Serializable, Updatable, IMovable, IDrawable {
 
 
-    public Image getImage();
+    Image getImage();
 
-    public String getName();
+    String getName();
 
-    public boolean canBeInteracted();
+    boolean canBeInteracted();
 
-    public void interact(World world);
+    void interact(World world);
 
-    public String getInteractMessage();
+    String getInteractMessage();
 
-    public boolean canBeAttacked();
+    boolean canBeAttacked();
 
-    public void onAttack(World world, GameObject attacker, int damaged);
+    void onAttack(World world, GameObject attacker, int damaged);
 
-    public boolean isAlive();
+    boolean isAlive();
 
-    public String getScanDescription(World world);
+    String getScanDescription(World world);
 
-    public ScanGroup getScanGroup();
+    ScanGroup getScanGroup();
 
-    public Faction getFaction();
+    Faction getFaction();
 
 }

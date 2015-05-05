@@ -203,19 +203,10 @@ public class WorldGenerator implements Runnable {
                     , planetX
                     , planetY
             );
-            if (atmosphere != PlanetAtmosphere.NO_ATMOSPHERE) {
+            if (atmosphere != PlanetAtmosphere.NO_ATMOSPHERE && CommonRandom.getRandom().nextBoolean()) {
                 PlanetaryLifeGenerator.setPlanetHasLife(e);
-                if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.tornado.chance")) {
-                    e.addEnvironmentFlag(Environment.WIND);
-                }
-
-                if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.rain.chance")) {
-                    e.addEnvironmentFlag(Environment.RAIN);
-                }
-                if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.acid_rain.chance")) {
-                    e.addEnvironmentFlag(Environment.ACID_RAIN);
-                }
             }
+            addEnvironmentDangers(e);
             planetList.add(e);
 
 
@@ -261,6 +252,29 @@ public class WorldGenerator implements Runnable {
         return ss;
     }
 
+    public static void addEnvironmentDangers(Planet e) {
+        if (e.getAtmosphere() != PlanetAtmosphere.NO_ATMOSPHERE) {
+            if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.tornado.chance")) {
+                e.addEnvironmentFlag(Environment.WIND);
+            }
+
+            if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.rain.chance")) {
+                e.addEnvironmentFlag(Environment.RAIN);
+            }
+            if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.acid_rain.chance")) {
+                e.addEnvironmentFlag(Environment.ACID_RAIN);
+            }
+        } else {
+            if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.meteor.chance")) {
+                e.addEnvironmentFlag(Environment.METEORS);
+            }
+        }
+
+        if (e.getEnvironment() == 0) {
+            throw new IllegalStateException();
+        }
+    }
+
     public static StarSystem generateRandomStarSystem(World world, int x, int y) {
         final int planetCount = CommonRandom.getRandom().nextInt(Configuration.getIntProperty("world.starsystem.maxPlanets"));
         return generateRandomStarSystem(world, x, y, planetCount);
@@ -295,6 +309,7 @@ public class WorldGenerator implements Runnable {
         world.addListener(new SaveGameManager.Autosaver());
         world.addListener(new StarSystemMusicChangeListener());
         world.addListener(new Environment.PlanetProcessor());
+        world.addListener(new LoggingListener());
     }
 
     // perform some fast initialization in gui thread

@@ -9,6 +9,7 @@ import ru.game.aurora.common.Drawable;
 import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetCategory;
 
 /**
  * Area of a planet that is filled with rain.
@@ -22,16 +23,16 @@ public class RainCloud extends BaseGameObject {
     protected Planet myPlanet;
 
     public RainCloud(Planet planet) {
-        this(planet, "rain");
+        this(planet, planet.getCategory() == PlanetCategory.PLANET_ICE ? "snow" : "rain");
     }
 
     public RainCloud(Planet planet, String sprite) {
         super(
-                CommonRandom.getRandom().nextInt(planet.getWidth())
-                , CommonRandom.getRandom().nextInt(planet.getHeight())
+                0
+                , 0
                 , new Drawable(sprite, true));
         this.myPlanet = planet;
-
+        respawn();
     }
 
     private void respawn() {

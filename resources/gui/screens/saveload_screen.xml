@@ -80,7 +80,7 @@
                 <panel height="10px"/>
                 <panel height="256px" childLayout="horizontal">
                     <image width="256px" filename="sprites/research_icons/star_research.png"/>
-                    <text width="*" height="256px" text="${gui.saveload.load_confirm}" style="button-font"/>
+                    <text width="*" height="256px" wrap="true" text="${gui.saveload.load_confirm}" style="button-font"/>
                 </panel>
                 <panel height="10px"/>
                 <panel childLayout="horizontal" height="45px">

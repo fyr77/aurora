@@ -23,6 +23,7 @@ import ru.game.aurora.gui.niffy.InteractionTargetSelectorController;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
+import ru.game.aurora.world.planet.nature.RainCloud;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -469,8 +470,9 @@ public class DungeonController extends Listenable implements Serializable {
 
             graphics.setColor(Color.red);
             for (GameObject a : map.getObjects()) {
-                // draw only if tile under this animal is visible
-                if (map.isTileVisible(a.getX(), a.getY())) {
+                // draw only if tile under this object is visible
+                // rain clouds have a separate drawing logic
+                if (map.isTileVisible(a.getX(), a.getY()) || RainCloud.class.isAssignableFrom(a.getClass())) {
                     a.draw(container, graphics, camera, world);
 
                     // in shoot mode, all available targets are surrounded with red square
