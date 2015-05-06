@@ -24,7 +24,7 @@ public class PlanetMapRenderer {
     private static final Color ANIMAL_COLOR = new Color(0, 255, 0, 200);
     private static final Color RESOURCE_COLOR = new Color(255, 255, 0, 200);
     private static final Color ANOMALY_COLOR = new Color(255, 0, 0, 200);
-    private static final Color BACKGROUND_COLOR = new Color(0, 0, 0, 200);
+    private static final Color BACKGROUND_COLOR = new Color(0, 0, 0, 230);
 
     private static final Logger logger = LoggerFactory.getLogger(PlanetMapRenderer.class);
 
@@ -40,12 +40,30 @@ public class PlanetMapRenderer {
             myCamera.setTarget(new Movable(planet.getWidth() / 2, planet.getHeight() / 2));
             planet.getSurface().drawLandscapeMap(g, myCamera);
             g.flush();
+
+            // darken the unvisited tiles
+            Image overlay = new Image((int) container.getWidth(), (int) container.getHeight());
+            Graphics overlayGraphics = overlay.getGraphics();
+            overlayGraphics.setColor(BACKGROUND_COLOR);
+            for (int i = 0; i < container.getWidth(); ++i) {
+                for (int j = 0; j < container.getHeight(); ++j) {
+                    if (!planet.getMap().isTileVisible(i, j)) {
+                        overlayGraphics.fillRect(i * newTileWidth, j * newTileHeight, newTileWidth, newTileHeight);
+                    }
+                }
+            }
+            //overlayGraphics.fillRect(0, 0, container.getWidth(), container.getHeight());
+            overlayGraphics.flush();
+            g.drawImage(overlay, 0, 0);
+            overlay.destroy();
+
+
             if (showOverlay) {
                 // create overlay with info about life and anomalies
-                Image overlay = new Image((int) container.getWidth(), (int) container.getHeight());
-                Graphics overlayGraphics = overlay.getGraphics();
-                overlayGraphics.setColor(BACKGROUND_COLOR);
-                overlayGraphics.fillRect(0, 0, container.getWidth(), container.getHeight());
+                overlay = new Image((int) container.getWidth(), (int) container.getHeight());
+                overlayGraphics = overlay.getGraphics();
+                //overlayGraphics.setColor(BACKGROUND_COLOR);
+                //overlayGraphics.fillRect(0, 0, container.getWidth(), container.getHeight());
                 int maxRadius = (int) (container.getHeight() / 10);
                 Random r = new Random(planet.hashCode()); // fixed-seed, so that runs on same planet produce same results
                 for (GameObject po : planet.getPlanetObjects()) {
