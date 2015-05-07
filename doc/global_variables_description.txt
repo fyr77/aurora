@@ -119,6 +119,7 @@ rogues altar on the moon quest
 rogues_altar.moon_checked - if set, player had a conversation with rogues on the moon
 rogues_altar.earth_communicated - after player has talked for a first time with earth
 rogues_altar.result - outcome of this quest. Can be "destroy" "help" "withdraw"
+rogues_altar.has_items - set if player has the required items
 
 ==============================
 
@@ -140,7 +141,10 @@ bork.hrrraka_alive - if Katar Hrrraka survived in final battle
 bork blockade quest
 
 bork_blockade.communicated
+bork_blockade.withdraw - if katar hrraka agreed to withdraw his son
 bork_blockade.result - outcome "destroy" "withdraw" "pay"
+bork_blockade.has_items - if player has the required items, this flag is set only for the duration of a dialog
+
 
 =============================
 

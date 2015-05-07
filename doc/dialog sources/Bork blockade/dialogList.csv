@@ -2,3 +2,4 @@
 Борки блокада диалог.csv;bork_blockade_contact;bork_vip_dialog;encounters
 4Earth_dialog.csv;bork_blockade_earth;earth_dialog;encounters
 blockade_destroyed.csv;bork_blockade_destroyed;earth_dialog;encounters
+5Борки финальный диалог (две линейки).csv;bork_blockade_default;bork_vip_dialog;encounters

@@ -1,7 +1,5 @@
 package ru.game.aurora.world.space;
 
-import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.SellOnlyInventoryItem;
@@ -21,16 +19,19 @@ public class ShipLootItem extends SellOnlyInventoryItem
 
     public enum Type
     {
-        COMPUTERS ("loot.computers"),
-        WEAPONS ("loot.weaponry"),
-        ENERGY ("loot.energy"),
-        MATERIALS ("loot.materials"),
-        GOODS ("loot.goods");
+        COMPUTERS("loot.computers", 4),
+        WEAPONS("loot.weaponry", 6),
+        ENERGY("loot.energy", 5),
+        MATERIALS("loot.materials", 4),
+        GOODS("loot.goods", 3);
 
         public final String id;
 
-        Type(String id) {
+        public final int price;
+
+        Type(String id, int price) {
             this.id = id;
+            this.price = price;
         }
     }
 
@@ -51,7 +52,7 @@ public class ShipLootItem extends SellOnlyInventoryItem
     }
 
     public ShipLootItem(Type type, String race) {
-        super("research", type.id, new Drawable("alien_space_drop_items", getRaceIdx(race), type.ordinal()), Configuration.getIntProperty("trade.loot_price"), false);
+        super("research", type.id, new Drawable("alien_space_drop_items", getRaceIdx(race), type.ordinal()), type.price, false);
     }
 
     public ShipLootItem(Type type, Faction race) {

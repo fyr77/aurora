@@ -3,3 +3,4 @@
 Мартан диалог уничтожение Бродяг.csv;rogues_altar_destroyed;earth_dialog;encounters
 Сообщение ученого при виде проблем с луной.csv;rogues_altar_scientist;scientist_dialog;encounters
 Экаунтер МЕССА.csv;rogues_altar_earth;earth_dialog;encounters
+8default_dialog.csv;rogues_altar_default;rogues_dialog;encounters

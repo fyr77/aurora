@@ -2,6 +2,9 @@ VERSION 0.4.2
 
 IN PROGRESS
 
+* Surface map now shows visited regions
++ Weather effects: rain, acid rain, tornado, meteors
+
 =============================================
 
 VERSION 0.4.1

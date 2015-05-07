@@ -2,13 +2,13 @@ package ru.game.aurora.world.generation.quest;
 
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.npc.NPC;
+import ru.game.aurora.npc.factions.PirateFaction;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.*;
@@ -16,6 +16,7 @@ import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.dungeon.KillAllMonstersCondition;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.DungeonEntrance;
@@ -26,6 +27,8 @@ import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.ShipLootItem;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -83,27 +86,66 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
         @Override
         public void interact(World world) {
-            if (!world.getGlobalVariables().containsKey("rogues_altar.earth_communicated")) {
-                world.getGlobalVariables().put("rogues_altar.moon_checked", true);
-                world.getPlayer().getJournal().addQuestEntries("rogues_altar", "desc", "comm");
-                // player has not yet received task to settle things down
-                world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/rogues_altar_1.json"));
-                return;
-            }
+            if (!world.getGlobalVariables().containsKey("rogues_altar.moon_checked")) {
+                if (!world.getGlobalVariables().containsKey("rogues_altar.earth_communicated")) {
+                    world.getGlobalVariables().put("rogues_altar.moon_checked", true);
+                    world.getPlayer().getJournal().addQuestEntries("rogues_altar", "desc", "comm");
+                    // player has not yet received task to settle things down
+                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/rogues_altar_1.json"));
+                } else {
 
-            final Dialog d = Dialog.loadFromFile("dialogs/encounters/rogues_altar_2.json");
-            d.addListener(new DialogListener() {
-                private static final long serialVersionUID = 7809964677347861595L;
+                    final Dialog d = Dialog.loadFromFile("dialogs/encounters/rogues_altar_2.json");
+                    d.addListener(new DialogListener() {
+                        private static final long serialVersionUID = 7809964677347861595L;
 
-                @Override
-                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                    if (returnCode == 1) {
-                        // player decided to fight rogues, make them aggressive
-                        onAttack(world, RogueAltarWorker.this, 0);
-                    }
+                        @Override
+                        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                            if (returnCode == 1) {
+                                // player decided to fight rogues, make them aggressive
+                                onAttack(world, RogueAltarWorker.this, 0);
+                            }
+                        }
+                    });
+                    world.addOverlayWindow(d);
                 }
-            });
-            world.addOverlayWindow(d);
+                world.getGlobalVariables().put("rogues_altar.moon_checked", true);
+            } else {
+                Dialog d = Dialog.loadFromFile("dialogs/encounters/rogues_altar_default.json");
+                d.addListener(new DialogListener() {
+                    @Override
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                        if (returnCode == 0) {
+                            world.getPlayer().getJournal().addQuestEntries("rogues_altar", "repair");
+                            world.getPlayer().getJournal().questCompleted("rogues_altar");
+                            world.getGlobalVariables().put("rogues_altar.result", "help");
+                            world.getReputation().updateReputation(RoguesGenerator.NAME, HumanityGenerator.NAME, 2);
+                            world.getCurrentDungeon().getController().returnToPrevRoom(true);
+                            Planet moon = (Planet) world.getCurrentRoom();
+                            for (GameObject po : moon.getPlanetObjects()) {
+                                if (po instanceof DungeonEntrance) {
+                                    ((DungeonEntrance) po).setLocked("rogues_altar_abandoned");
+                                }
+                            }
+                        }
+                    }
+                });
+
+
+                final ShipLootItem computers = new ShipLootItem(ShipLootItem.Type.COMPUTERS, BorkGenerator.NAME);
+                int computersCount = world.getPlayer().getInventory().count(computers);
+                final ShipLootItem materials = new ShipLootItem(ShipLootItem.Type.MATERIALS, BorkGenerator.NAME);
+                int materialsCount = world.getPlayer().getInventory().count(materials);
+                final ShipLootItem energy = new ShipLootItem(ShipLootItem.Type.ENERGY, BorkGenerator.NAME);
+                int energyCount = world.getPlayer().getInventory().count(energy);
+
+                if (computersCount >= 2 && materialsCount >= 1 && energyCount >= 1) {
+                    Map<String, String> flags = new HashMap<>();
+                    flags.put("rogues_altar.has_items", "");
+                    world.addOverlayWindow(d, flags);
+                } else {
+                    world.addOverlayWindow(d);
+                }
+            }
 
         }
     }
@@ -212,6 +254,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
                         ShipLootItem goods = new ShipLootItem(ShipLootItem.Type.GOODS, getFaction());
                         goods.onReceived(world, 1);
+                        world.getReputation().updateReputation(KliskGenerator.NAME, HumanityGenerator.NAME, 1);
                     }
 
                 }
@@ -291,13 +334,69 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
             }
         }
 
+
+        private void removeBlockade(World world) {
+
+            world.getPlayer().getJournal().questCompleted("bork_blockade");
+            StarSystem ss = ((AlienRace) world.getFactions().get(HumanityGenerator.NAME)).getHomeworld();
+            for (Iterator<GameObject> iter = ss.getShips().iterator(); iter.hasNext(); ) {
+                GameObject so = iter.next();
+                if (so instanceof EarthInvasionGenerator.BorkBlockadeShip) {
+                    iter.remove();
+                }
+            }
+        }
+
         @Override
         public void interact(World world) {
+            final ShipLootItem weaponInstance = new ShipLootItem(ShipLootItem.Type.WEAPONS, BorkGenerator.NAME);
+            int weaponCount = world.getPlayer().getInventory().count(weaponInstance);
+            final ShipLootItem goodsInstance = new ShipLootItem(ShipLootItem.Type.GOODS, BorkGenerator.NAME);
+
+            int goodsCount = world.getPlayer().getInventory().count(goodsInstance);
+            if (weaponCount >= 2 && goodsCount >= 2) {
+                world.getGlobalVariables().put("bork_blockade.has_items", true);
+            } else {
+                world.getGlobalVariables().remove("bork_blockade.has_items");
+            }
+
             super.interact(world);
             if (!communicated) {
                 world.getPlayer().getJournal().addQuestEntries("bork_blockade", "comm");
                 world.getGlobalVariables().put("bork_blockade.communicated", true);
                 communicated = true;
+
+                Dialog newDialog = Dialog.loadFromFile("dialogs/encounters/bork_blockade_default.json");
+                newDialog.addListener(new DialogListener() {
+                    @Override
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                        if (returnCode == 3) {
+                            world.getPlayer().getJournal().addQuestEntries("bork_blockade", "withdraw");
+                            world.getGlobalVariables().put("bork_blockade.result", "withdraw");
+                            world.getReputation().updateReputation(BorkGenerator.NAME, HumanityGenerator.NAME, 1);
+                            removeBlockade(world);
+                        } else if (returnCode == 2) {
+                            world.getPlayer().getJournal().addQuestEntries("bork_blockade", "goods_delivered");
+                            world.getGlobalVariables().put("bork_blockade.result", "pay");
+                            weaponInstance.onLost(world, 2);
+                            goodsInstance.onLost(world, 2);
+                            world.getReputation().updateReputation(BorkGenerator.NAME, HumanityGenerator.NAME, 2);
+                            removeBlockade(world);
+                        } else if (returnCode == 1) {
+                            for (GameObject go : world.getCurrentStarSystem().getObjects()) {
+                                if (go instanceof BorkBlockadeShip) {
+                                    ((BorkBlockadeShip) go).setFaction(world.getFactions().get(PirateFaction.NAME));
+                                }
+                            }
+                        }
+                    }
+                });
+
+                for (GameObject go : world.getCurrentStarSystem().getObjects()) {
+                    if (go instanceof BorkBlockadeShip) {
+                        ((BorkBlockadeShip) go).setCaptain(new NPC(newDialog));
+                    }
+                }
             }
         }
     }

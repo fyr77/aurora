@@ -270,9 +270,6 @@ public class WorldGenerator implements Runnable {
             }
         }
 
-        if (e.getEnvironment() == 0) {
-            throw new IllegalStateException();
-        }
     }
 
     public static StarSystem generateRandomStarSystem(World world, int x, int y) {

@@ -8,14 +8,11 @@ package ru.game.aurora.world.generation.aliens;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.TradeScreenController;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Resources;
-import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.research.ResearchSellItem;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
 import ru.game.aurora.world.World;
@@ -24,6 +21,7 @@ import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.quest.EarthInvasionGenerator;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.quest.JournalEntry;
+import ru.game.aurora.world.space.ShipLootItem;
 
 import java.util.Map;
 
@@ -38,7 +36,7 @@ public class KliskMainDialogListener implements DialogListener {
 
     private static Multiset<InventoryItem> defaultTradeInventory;
 
-    public static Multiset<InventoryItem> getDefaultTradeInventory() {
+    public static Multiset<InventoryItem> getDefaultTradeInventory(World world) {
         if (defaultTradeInventory == null) {
             defaultTradeInventory = HashMultiset.create();
             defaultTradeInventory.add(new KliskTradeItems.AdvancedRadarsSellItem());
@@ -49,6 +47,11 @@ public class KliskMainDialogListener implements DialogListener {
             defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("biology"));
             defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("chemistry"));
             defaultTradeInventory.add(new ResearchSellItem("energy_concentration", "technology_research", 25, true));
+            defaultTradeInventory.add(new ShipLootItem(ShipLootItem.Type.GOODS, world.getFactions().get(KliskGenerator.NAME)));
+            defaultTradeInventory.add(new ShipLootItem(ShipLootItem.Type.COMPUTERS, world.getFactions().get(KliskGenerator.NAME)));
+            defaultTradeInventory.add(new ShipLootItem(ShipLootItem.Type.ENERGY, world.getFactions().get(KliskGenerator.NAME)));
+            defaultTradeInventory.add(new ShipLootItem(ShipLootItem.Type.MATERIALS, world.getFactions().get(KliskGenerator.NAME)));
+            defaultTradeInventory.add(new ShipLootItem(ShipLootItem.Type.WEAPONS, world.getFactions().get(KliskGenerator.NAME)));
         }
         return defaultTradeInventory;
     }
@@ -59,7 +62,7 @@ public class KliskMainDialogListener implements DialogListener {
         switch (returnCode) {
             case 1:
             case 2:
-                TradeScreenController.openTrade("klisk_dialog", getDefaultTradeInventory(), world.getFactions().get(KliskGenerator.NAME));
+                TradeScreenController.openTrade("klisk_dialog", getDefaultTradeInventory(world), world.getFactions().get(KliskGenerator.NAME));
                 break;
 
 // initial quest - trading of race information

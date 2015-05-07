@@ -11,7 +11,6 @@ import com.google.common.collect.Multiset;
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
@@ -27,12 +26,12 @@ import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
-import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.EmbassiesQuest;
 import ru.game.aurora.world.planet.*;
@@ -66,7 +65,7 @@ public class KliskGenerator implements WorldGeneratorPart {
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 if (returnCode == 100) {
                     //trade
-                    TradeScreenController.openTrade("klisk_vip_dialog", KliskMainDialogListener.getDefaultTradeInventory());
+                    TradeScreenController.openTrade("klisk_vip_dialog", KliskMainDialogListener.getDefaultTradeInventory(world));
                     return;
                 }
                 if (flags.containsKey("klisk.war_help")) {
@@ -144,6 +143,11 @@ public class KliskGenerator implements WorldGeneratorPart {
                     defaultTradeInventory.add(new KliskTradeItems.ResourceSellItem());
                     defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("math"));
                     defaultTradeInventory.add(new KliskTradeItems.ScienceTheorySellItem("physics"));
+                    defaultTradeInventory.add(new ShipLootItem(ShipLootItem.Type.GOODS, world.getFactions().get(KliskGenerator.NAME)));
+                    defaultTradeInventory.add(new ShipLootItem(ShipLootItem.Type.COMPUTERS, world.getFactions().get(RoguesGenerator.NAME)));
+                    defaultTradeInventory.add(new ShipLootItem(ShipLootItem.Type.ENERGY, world.getFactions().get(RoguesGenerator.NAME)));
+                    defaultTradeInventory.add(new ShipLootItem(ShipLootItem.Type.MATERIALS, world.getFactions().get(KliskGenerator.NAME)));
+                    defaultTradeInventory.add(new ShipLootItem(ShipLootItem.Type.WEAPONS, world.getFactions().get(BorkGenerator.NAME)));
                     TradeScreenController.openTrade("rogues_dialog", defaultTradeInventory, race);
                 }
             }
