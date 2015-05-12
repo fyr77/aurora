@@ -58,7 +58,7 @@ public class RainCloud extends BaseGameObject {
         for (int xx = x - radius; xx <= x + radius; ++xx) {
             for (int yy = y - radius; yy <= y + radius; ++yy) {
                 if (getDistanceWrapped(x, y, xx, yy, myPlanet.getWidth(), myPlanet.getHeight()) < radius && camera.isInViewport(xx, yy) && myPlanet.getMap().isTileVisible(xx, yy)) {
-                    drawable.draw(g, camera.getXCoordWrapped(xx, myPlanet.getWidth()), camera.getYCoordWrapped(yy, myPlanet.getHeight()));
+                    drawable.draw(g, camera.getXCoordWrapped(xx, myPlanet.getWidth()), camera.getYCoordWrapped(yy, myPlanet.getHeight()), false);
                 }
             }
         }

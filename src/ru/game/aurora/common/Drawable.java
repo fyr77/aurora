@@ -76,7 +76,7 @@ public class Drawable implements Serializable {
         return isAnimation ? anim.getCurrentFrame() : image;
     }
 
-    public void draw(Graphics g, float x, float y) {
+    public void draw(Graphics g, float x, float y, boolean flipped) {
         if ((!isAnimation && image == null) || (isAnimation && anim == null)) {
             loadImage();
         }
@@ -84,7 +84,11 @@ public class Drawable implements Serializable {
         if (isAnimation) {
             g.drawAnimation(anim, x, y);
         } else {
-            g.drawImage(image, x, y);
+            if (flipped) {
+                g.drawImage(getFlippedCopy(), x, y);
+            } else {
+                g.drawImage(image, x, y);
+            }
         }
     }
 

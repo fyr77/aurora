@@ -42,9 +42,9 @@ public class MovableSprite extends Movable implements IDrawable {
     public void draw(GameContainer container, Graphics g, Camera camera, World world) {
         final ITileMap map = world.getCurrentRoom().getMap();
         if (map != null && map.isWrapped()) {
-            drawable.draw(g, camera.getXCoordWrapped(x, map.getWidthInTiles()) + getOffsetX(), camera.getYCoordWrapped(y, map.getHeightInTiles()) + getOffsetY());
+            drawable.draw(g, camera.getXCoordWrapped(x, map.getWidthInTiles()) + getOffsetX(), camera.getYCoordWrapped(y, map.getHeightInTiles()) + getOffsetY(), isFlipped);
         } else {
-            drawable.draw(g, camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
+            drawable.draw(g, camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY(), isFlipped);
         }
     }
 

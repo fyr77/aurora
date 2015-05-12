@@ -45,7 +45,7 @@ public class FallingMeteor extends Effect {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera, World world) {
-        drawable.draw(g, currentPos.getX(), currentPos.getY());
+        drawable.draw(g, currentPos.getX(), currentPos.getY(), false);
     }
 
     @Override
