@@ -194,4 +194,9 @@ public class Animal extends BaseGameObject implements IMonster {
     public void setWasAttacked(boolean wasAttacked) {
         this.wasAttacked = wasAttacked;
     }
+
+    @Override
+    public Image getImage() {
+        return hp > 0 ? desc.getImage() : desc.getDeadImage();
+    }
 }
