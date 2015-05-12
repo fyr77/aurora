@@ -8,7 +8,6 @@ package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
@@ -25,7 +24,6 @@ import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.StarResearchProject;
 import ru.game.aurora.world.*;
-import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
@@ -235,6 +233,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                     case 200:
                         // player refused to surrender and is now hostile with rogues
                         world.getReputation().setHostile(RoguesGenerator.NAME, HumanityGenerator.NAME);
+                        world.getCurrentStarSystem().getReputation().setHostile(RoguesGenerator.NAME, HumanityGenerator.NAME);
                         world.getGlobalVariables().put("rogues.beacon_hostile", true);
                         break;
                     case 100:

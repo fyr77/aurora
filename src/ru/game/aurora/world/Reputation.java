@@ -120,6 +120,7 @@ public class Reputation implements Serializable
     public void setHostile(String name, String name2)
     {
         setReputation(name, name2, HOSTILE_REPUTATION);
+        setReputation(name2, name, HOSTILE_REPUTATION);
     }
 
     public Reputation copy()
