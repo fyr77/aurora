@@ -197,8 +197,8 @@ public class LandingParty extends BaseGameObject {
 
         for (Iterator<Multiset.Entry<InventoryItem>> iter = inventory.entrySet().iterator(); iter.hasNext(); ) {
             Multiset.Entry<InventoryItem> o = iter.next();
-            o.getElement().onReceived(world, o.getCount());
             if (o.getElement().isDumpable()) {
+                o.getElement().onReceived(world, o.getCount());
                 iter.remove();
             }
         }

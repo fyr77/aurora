@@ -20,7 +20,7 @@ public class Localization {
 
     private static Locale currentLocale;
 
-    private static final String[] supportedLocales = {"ru", "en"};
+    public static final String[] supportedLocales = {"ru", "en"};
 
     private static final UTF8Control utf8Control = new UTF8Control();
 
@@ -38,8 +38,8 @@ public class Localization {
             }
         }
 
-        logger.warn("Locale " + locale.getLanguage() + " is not supported, defaulting to ru");
-        currentLocale = Locale.forLanguageTag("ru");
+        logger.warn("Locale " + locale.getLanguage() + " is not supported, defaulting to en");
+        currentLocale = Locale.forLanguageTag("en");
     }
 
     private static String getBundleName(String key) {

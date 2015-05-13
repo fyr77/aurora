@@ -1,21 +1,18 @@
 package ru.game.aurora.gui;
 
+import com.google.common.collect.Lists;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.controls.CheckBox;
-import de.lessvoid.nifty.controls.DropDown;
-import de.lessvoid.nifty.controls.Scrollbar;
-import de.lessvoid.nifty.controls.ScrollbarChangedEvent;
+import de.lessvoid.nifty.controls.*;
+import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.openal.SoundStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.game.aurora.application.AuroraGame;
-import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.Resolution;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -27,17 +24,22 @@ import java.util.List;
 public class SettingsScreenController implements ScreenController {
     private DropDown<Resolution> resolutionDropDown;
 
+    private DropDown<String> localeDropDown;
+
     private CheckBox fullScreen;
 
     private Scrollbar musicVolume;
 
     private Scrollbar soundVolume;
 
+    private boolean rebootRequested;
+
     private static final Logger logger = LoggerFactory.getLogger(SettingsScreenController.class);
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
         resolutionDropDown = screen.findNiftyControl("resolution_select", DropDown.class);
+        localeDropDown = screen.findNiftyControl("locale_select", DropDown.class);
 
         List<Resolution> resolutions = AuroraGame.getAvailableResolutions();
 
@@ -55,12 +57,16 @@ public class SettingsScreenController implements ScreenController {
                 break;
             }
         }
+
+        localeDropDown.addAllItems(Lists.newArrayList(Localization.supportedLocales));
     }
 
     @Override
     public void onStartScreen() {
         musicVolume.setValue(SoundStore.get().getMusicVolume());
         soundVolume.setValue(SoundStore.get().getSoundVolume());
+        localeDropDown.selectItem(Localization.getCurrentLocaleTag());
+        rebootRequested = false;
     }
 
     @Override
@@ -74,18 +80,45 @@ public class SettingsScreenController implements ScreenController {
         } else {
             AuroraGame.setFullScreen(fullScreen.isChecked());
         }
-        GUI.getInstance().popAndSetScreen();
         Configuration.getSystemProperties().put("screen.resolution", res.toString());
         Configuration.getSystemProperties().put("music.volume", String.valueOf(musicVolume.getValue()));
         Configuration.getSystemProperties().put("sound.volume", String.valueOf(soundVolume.getValue()));
         Configuration.getSystemProperties().put("screen.full_screen", String.valueOf(fullScreen.isChecked()));
+        Configuration.getSystemProperties().put("locale", localeDropDown.getSelection());
         Configuration.saveSystemProperties();
 
+        if (rebootRequested) {
+            Nifty nifty = GUI.getInstance().getNifty();
+            Element popup = nifty.createPopup("restart_confirm");
+            nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
+        } else {
+            GUI.getInstance().popAndSetScreen();
+        }
+    }
+
+    public void rebootApp() {
+        try {
+            AuroraGame.restartApplication(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void closePopup() {
+        GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+        GUI.getInstance().popAndSetScreen();
     }
 
     @NiftyEventSubscriber(id = "music_volume")
     public void onMusicVolumeChanged(final String id, final ScrollbarChangedEvent event) {
         SoundStore.get().setMusicVolume(event.getValue());
+    }
+
+    @NiftyEventSubscriber(id = "locale_select")
+    public void onMusicVolumeChanged(final String id, final DropDownSelectionChangedEvent event) {
+        if (!event.getSelection().equals(Localization.getCurrentLocaleTag())) {
+            rebootRequested = true;
+        }
     }
 
     @NiftyEventSubscriber(id = "sound_volume")

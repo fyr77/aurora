@@ -4,6 +4,9 @@ IN PROGRESS
 
 * Surface map now shows visited regions
 + Weather effects: rain, acid rain, tornado, meteors
+* Fixed rogue convoy not attacking
+* Fixed landing party item adding each time shuttle returns to the ship
+* Switching locale ingame
 
 =============================================
 

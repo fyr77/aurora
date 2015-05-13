@@ -16,6 +16,12 @@
                     </panel>
 
                     <panel height="10px"/>
+                    <!-- locale -->
+                    <text style="button-font" text="${gui.settings.locale}" width="60%"
+                          textHAlign="left"/>
+                    <panel height="10px"/>
+                    <control id="locale_select" name="dropDown"/>
+                    <panel height="10px"/>
 
                     <!-- music -->
                     <text style="button-font" wrap="true" text="${gui.settings.music_volume}" width="60%"
@@ -31,7 +37,7 @@
                     <panel height="*"/>
                     <panel childLayout="horizontal" height="50px">
                         <panel width="*"/>
-                        <control id="close_button" name="button" label="${gui.ok}" width="150px" height="45px">
+                        <control id="ok_button" name="button" label="${gui.ok}" width="150px" height="45px">
                             <interact onClick="applySettings()"/>
                         </control>
                         <panel width="10px"/>
@@ -43,5 +49,37 @@
                 </panel>
             </control>
         </layer>
+
+
     </screen>
+
+    <popup id="restart_confirm" childLayout="absolute">
+        <control id="restart_confirm_window" name="window" closable="false" hideOnClose="true" width="60%"
+                 height="350px"
+                 x="20%"
+                 y="30%">
+            <panel childLayout="vertical">
+                <panel height="10px"/>
+                <panel height="256px" childLayout="horizontal">
+                    <image width="256px" filename="sprites/research_icons/artifact.png"/>
+                    <panel width="*" childLayout="horizontal" height="256px" padding="10px">
+                        <text width="90%" height="100%" text="${gui.settings.restart_confirm}" textVAlign="center"
+                              style="button-font" wrap="true"/>
+                    </panel>
+                </panel>
+                <panel height="10px"/>
+                <panel childLayout="horizontal" height="45px">
+                    <panel width="*"/>
+                    <control id="close_button" name="button" label="${gui.settings.restart}" width="150px"
+                             height="45px">
+                        <interact onClick="rebootApp()"/>
+                    </control>
+                    <panel width="5px"/>
+                    <control id="close_button" name="button" label="${gui.cancel}" height="45px" width="150px">
+                        <interact onClick="closePopup()"/>
+                    </control>
+                </panel>
+            </panel>
+        </control>
+    </popup>
 </nifty>
