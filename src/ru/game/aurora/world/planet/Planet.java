@@ -164,7 +164,8 @@ public class Planet extends BasePlanet implements IDungeon {
             }
         }
 
-        throw new IllegalArgumentException("Given planet does not have a passable terrain of " + regionWidth + "x" + regionHeight + " size ");
+        logger.warn("Given planet does not have a passable terrain of " + regionWidth + "x" + regionHeight + " size ");
+        return null;
     }
 
     public void setNearestFreePoint(Positionable p, int x, int y) {
