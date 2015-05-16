@@ -37,11 +37,11 @@
     <!-- The files that the app wants to bundle, here we have just one which is a JAR file and we specify that it should be on the launch classpath -->
     <File>jwrapper/native</File>
 
-    <File>jwrapper/resources</File>
+    <File classpath='yes'>jwrapper/resources</File>
 
 
     <!--TODO: this should be generated dynamically-->
-    <File classpath='yes'>jwrapper/aurora-0.4.1.jar</File>
+    <File classpath='yes'>jwrapper/aurora-0.4.2.jar</File>
 
     <File classpath='yes'>jwrapper/eventbus-1.4.jar</File>
 

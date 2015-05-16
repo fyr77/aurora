@@ -23,13 +23,8 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
           "targetStatementId": 16,
-          "replyText": "3",
+          "replyText": "2",
           "replyConditions": [
             {
               "name": "klisk.planet_info",
@@ -45,7 +40,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 2,
-          "replyText": "4",
+          "replyText": "3",
           "replyConditions": [
             {
               "name": "klisk.coordinates_traded",
@@ -59,12 +54,12 @@
         {
           "returnValue": 0,
           "targetStatementId": 3,
-          "replyText": "5"
+          "replyText": "4"
         },
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "6"
+          "replyText": "5"
         }
       ]
     },

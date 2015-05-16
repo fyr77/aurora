@@ -238,12 +238,6 @@ public class DungeonController extends Listenable implements Serializable {
 
     }
 
-    private int getRange(LandingParty party, Positionable target) {
-        int xDist = getDist(party.getX(), target.getX(), map.getWidthInTiles());
-        int yDist = getDist(party.getY(), target.getY(), map.getHeightInTiles());
-        return xDist + yDist;
-    }
-
     /**
      * This update method is used in FIRE mode. Selecting targets and shooting.
      */
@@ -343,6 +337,11 @@ public class DungeonController extends Listenable implements Serializable {
             world.setUpdatedThisFrame(true);
         }
 
+    }
+
+    private double getRange(LandingParty landingParty, GameObject target) {
+        return map.isWrapped() ? landingParty.getDistanceWrapped(target, map.getWidthInTiles(), map.getHeightInTiles())
+                : landingParty.getDistance(target);
     }
 
     public void changeMode() {
@@ -449,7 +448,7 @@ public class DungeonController extends Listenable implements Serializable {
             }
             if (allConditionsSatisfied) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.objectives_completed"));
-                returnToPrevRoom(allConditionsSatisfied);
+                returnToPrevRoom(true);
             }
         }
         // check that no crew member left, AND landing party window is not opened, because if it is - then landing party can have 0 members in process of configuration
