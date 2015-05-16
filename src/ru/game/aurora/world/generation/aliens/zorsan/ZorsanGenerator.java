@@ -16,7 +16,6 @@ import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.util.GameTimer;
-import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
@@ -111,9 +110,8 @@ public class ZorsanGenerator implements WorldGeneratorPart {
 
                     Ship ship = world.getPlayer().getShip();
                     if (party.getTotalMembers() < 10) {
-                        final int marineCount = Math.min(ship.getMilitary(), 10 - party.getTotalMembers());
+                        final int marineCount = Math.min(ship.getMilitary() - party.getMilitary(), 10 - party.getTotalMembers());
                         party.setMilitary(party.getMilitary() + marineCount);
-                        ship.setMilitary(ship.getMilitary() - marineCount);
                     }
 
                     party.setWeapon(ResourceManager.getInstance().getWeapons().getEntity("zorsan_laser_rifles"));
