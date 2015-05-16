@@ -206,7 +206,7 @@ public class NPCShip extends BaseGameObject implements IMonster {
 
     @Override
     public void interact(World world) {
-        if (!isCanBeHailed() || isHostile) {
+        if (!isCanBeHailed() || isHostile(world, world.getPlayer().getShip())) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.hail_not_responded"));
             return;
         }

@@ -88,6 +88,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
 
 
         NPCShip frame = new NPCShip(2, 2, "rogues_frame", roguesRace, null, "Rogues Frame", Integer.MAX_VALUE);
+        frame.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), ResourceManager.getInstance().getWeapons().getEntity("long_range_plasma_cannon"));
         frame.setCaptain(new NPC(createFrameDialog(frame)));
         frame.setScanDescription("races", "Rogues.mothership.description");
         frame.setAi(null);
