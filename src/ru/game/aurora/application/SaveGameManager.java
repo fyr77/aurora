@@ -79,7 +79,7 @@ public class SaveGameManager {
                     try {
                         BufferedImage read = ImageIO.read(new ByteArrayInputStream(screenshot));
                         screenshotImage = EngineUtils.createImage(read);
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         logger.error("Failed to read image", e);
                         screenshotImage = ResourceManager.getInstance().getImage("no_image");
                     }
@@ -164,8 +164,8 @@ public class SaveGameManager {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(resizedImage, "JPG", bos);
             slot.screenshot = bos.toByteArray();
-            screen.destroy();
-            slot.screenshotImage = EngineUtils.createImage(resizedImage);
+            slot.screenshotImage = null;
+            // do not set slot.screenshotImage as it leads to strange bugs
 
             bos.reset();
             ObjectOutputStream oos = new ObjectOutputStream(bos);
