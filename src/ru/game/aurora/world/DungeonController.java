@@ -108,28 +108,30 @@ public class DungeonController extends Listenable implements Serializable {
         if (container.getInput().isKeyPressed(Input.KEY_UP)) {
             y--;
             dy = -1;
-            partyMove(world);
             actuallyMoved = true;
         } else if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
             y++;
             dy = 1;
-            partyMove(world);
             actuallyMoved = true;
         } else if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
             x--;
             dx = -1;
-            partyMove(world);
             actuallyMoved = true;
         } else if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
             x++;
             dx = 1;
-            partyMove(world);
             actuallyMoved = true;
         }
 
         if (!actuallyMoved) {
             return;
         }
+
+        if (landingParty.overWeightTest()) {
+            return;
+        }
+        world.getCamera().resetViewPort();
+        world.setUpdatedThisFrame(true);
 
         if (isWrap) {
             x = EngineUtils.wrap(x, map.getWidthInTiles());
@@ -177,8 +179,7 @@ public class DungeonController extends Listenable implements Serializable {
     }
 
     private void partyMove(World world) {
-        world.getCamera().resetViewPort();
-        world.setUpdatedThisFrame(true);
+
     }
 
     public void interactWithObject(final World world) {
@@ -248,7 +249,7 @@ public class DungeonController extends Listenable implements Serializable {
         int targetIdx = 0;
         List<GameObject> availableTargets = new ArrayList<>();
 
-        if (target != null && (!target.isAlive() || getRange(landingParty, target) > landingParty.getWeapon().getRange())) {
+        if (target != null && (!target.isAlive() || !target.canBeAttacked() || getRange(landingParty, target) > landingParty.getWeapon().getRange())) {
             // target moved out of range
             target = null;
         }

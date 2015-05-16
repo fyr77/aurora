@@ -8,7 +8,6 @@ package ru.game.aurora.gui;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
@@ -135,7 +134,6 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
 
     public void firePressed() {
         ((IDungeon) world.getCurrentRoom()).getController().updateShoot(world, false, false, true);
-        world.setUpdatedNextFrame(true);
     }
 
     public void cancelPressed() {

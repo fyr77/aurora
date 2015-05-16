@@ -6,6 +6,9 @@ IN PROGRESS
 + Weather effects: rain, acid rain, tornado, meteors
 * Fixed rogue convoy not attacking
 * Fixed landing party item adding each time shuttle returns to the ship
+* Fixed some buggy dialogs
+* Fixed oxygen spending when no action happens (move attempt with overweight, shooting with no targets)
+* Fixed targeting dead animals
 * Switching locale ingame
 
 =============================================

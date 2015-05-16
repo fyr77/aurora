@@ -91,13 +91,14 @@ public class LandingParty extends BaseGameObject {
         return totalWeight;
     }
 
-    public void overWeightTest() {
+    public boolean overWeightTest() {
         boolean overWeight;
         overWeight = getMaxWeight() < getInventoryWeight();
         if (overWeight) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.overweight"));
         }
         setMoveability(!overWeight);
+        return overWeight;
     }
 
     public void consumeOxygen() {

@@ -17,7 +17,7 @@ public class InteractionTargetSelectionViewConverter implements ListBox.ListBoxV
     @Override
     public void display(Element element, GameObject o) {
 
-        EngineUtils.setTextForGUIElement(element.findElementByName("#line-text"), o.getName());
+        EngineUtils.setTextForGUIElement(element.findElementByName("#line-text"), o.getName() != null ? o.getName() : "");
         EngineUtils.setImageForGUIElement(element.findElementByName("#line-icon"), o.getImage());
     }
 
@@ -25,7 +25,7 @@ public class InteractionTargetSelectionViewConverter implements ListBox.ListBoxV
     public int getWidth(Element element, GameObject o) {
         final Element text = element.findElementByName("#line-text");
         final TextRenderer textRenderer = text.getRenderer(TextRenderer.class);
-        return ((textRenderer.getFont() == null) ? 0 : textRenderer.getFont().getWidth(o.getName())
+        return ((textRenderer.getFont() == null || o.getName() == null) ? 0 : textRenderer.getFont().getWidth(o.getName())
                 + ((o.getImage() == null) ? 0 : o.getImage().getWidth()));
     }
 
