@@ -34,7 +34,7 @@ public enum Resources implements InventoryItem {
 
         @Override
         public void onReceived(World world, int amount) {
-
+            world.getPlayer().getInventory().add(this, amount);
         }
         @Override
         public boolean isUnique() {
@@ -91,7 +91,7 @@ public enum Resources implements InventoryItem {
 
         @Override
         public void onReceived(World world, int amount) {
-
+            world.getPlayer().getInventory().add(this, amount);
         }
 
         @Override
@@ -152,7 +152,7 @@ public enum Resources implements InventoryItem {
 
         @Override
         public void onReceived(World world, int amount) {
-
+            world.getPlayer().getInventory().add(this, amount);
         }
 
         @Override
