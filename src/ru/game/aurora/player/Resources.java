@@ -43,7 +43,7 @@ public enum Resources implements InventoryItem {
 
         @Override
         public void onLost(World world, int amount) {
-
+            world.getPlayer().getInventory().remove(this, amount);
         }
 
         @Override
@@ -96,7 +96,7 @@ public enum Resources implements InventoryItem {
 
         @Override
         public void onLost(World world, int amount) {
-
+            world.getPlayer().getInventory().remove(this, amount);
         }
 
         @Override
@@ -157,7 +157,7 @@ public enum Resources implements InventoryItem {
 
         @Override
         public void onLost(World world, int amount) {
-
+            world.getPlayer().getInventory().remove(this, amount);
         }
 
         @Override
