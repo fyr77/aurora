@@ -21,4 +21,5 @@ There are no specific code conventions here, however code should be clean and co
 
 ### Special thanks to ###
 
-[JProfiler java profiler](http://www.ej-technologies.com/products/jprofiler/overview.html) for providing a free open-source license for our project.
+[JProfiler java profiler](http://www.ej-technologies.com/products/jprofiler/overview.html) and
+[Install4j, a multi-platform installer builder](http://www.ej-technologies.com/products/install4j/overview.html) for providing a free open-source licenses for our project.
