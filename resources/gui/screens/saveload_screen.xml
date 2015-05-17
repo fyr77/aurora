@@ -8,11 +8,11 @@
             <text id="#line-text" style="base-font" align="left" textHAlign="center" textVAlign="center" height="138px"
                   width="400px" wrap="true"/>
             <control id="#loadButton" name="button" label="${gui.saveload.load}" width="150px" height="100px">
-                <interact onClick="loadPressed()"/>
+                <interact onRelease="loadPressed()"/>
             </control>
             <text width="10px" style="base-font" text="   "/>
             <control id="#saveButton" name="button" label="${gui.saveload.save}" width="150px" height="100px">
-                <interact onClick="savePressed()"/>
+                <interact onRelease="savePressed()"/>
             </control>
         </panel>
 
@@ -40,7 +40,7 @@
                     <panel childLayout="horizontal" height="50px">
                         <panel width="80%"/>
                         <control id="close_button" name="button" label="${gui.close}" width="150px" height="45px">
-                            <interact onClick="closeScreen()"/>
+                            <interact onRelease="closeScreen()"/>
                         </control>
                     </panel>
                 </panel>
@@ -62,10 +62,10 @@
                 <panel childLayout="horizontal" height="45px">
                     <panel width="65%"/>
                     <control id="close_button" name="button" label="${gui.ok}" height="45px">
-                        <interact onClick="doSave()"/>
+                        <interact onRelease="doSave()"/>
                     </control>
                     <control id="close_button" name="button" label="${gui.cancel}" height="45px">
-                        <interact onClick="closePopup()"/>
+                        <interact onRelease="closePopup()"/>
                     </control>
                 </panel>
             </panel>
@@ -86,10 +86,10 @@
                 <panel childLayout="horizontal" height="45px">
                     <panel width="65%"/>
                     <control id="close_button" name="button" label="${gui.ok}" height="45px">
-                        <interact onClick="doLoad()"/>
+                        <interact onRelease="doLoad()"/>
                     </control>
                     <control id="close_button" name="button" label="${gui.cancel}" height="45px">
-                        <interact onClick="closePopup()"/>
+                        <interact onRelease="closePopup()"/>
                     </control>
                 </panel>
             </panel>
