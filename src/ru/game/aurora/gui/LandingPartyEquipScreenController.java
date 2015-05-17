@@ -18,6 +18,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.Color;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.util.EngineUtils;
@@ -26,6 +27,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.LandingParty;
+import ru.game.aurora.world.planet.Planet;
 
 
 public class LandingPartyEquipScreenController implements ScreenController {
@@ -73,15 +75,22 @@ public class LandingPartyEquipScreenController implements ScreenController {
         final LandingParty worldLandingParty = world.getPlayer().getLandingParty();
         if (worldLandingParty == null) {
             localLandingParty = new LandingParty(0, 0, ResourceManager.getInstance().getWeapons().getEntity("assault"), 1, 1, 1, Configuration.getIntProperty("player.landing_party.defaultHP"));
-            myScreen.findNiftyControl("cancel_button", Button.class).disable();
         } else {
             localLandingParty = new LandingParty(worldLandingParty);
-            if (localLandingParty.canBeLaunched(world)) {
-                myScreen.findNiftyControl("cancel_button", Button.class).enable();
-            } else {
-                myScreen.findNiftyControl("cancel_button", Button.class).disable();
-            }
         }
+        
+        //automatically set engineers and scientist count equal to free of them, if it's less
+        int idleScientists = world.getPlayer().getResearchState().getIdleScientists();
+        int idleEngineers = world.getPlayer().getEngineeringState().getIdleEngineers();
+        
+        if(idleScientists < localLandingParty.getScience()) {
+            localLandingParty.setScience(idleScientists);
+        }
+        if(idleEngineers < localLandingParty.getEngineers()) {
+            localLandingParty.setEngineers(idleEngineers);
+        }
+        
+        checkLaunchAvailability();
 
         shipStorage = HashMultiset.create(world.getPlayer().getInventory());
 
@@ -176,16 +185,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
                 break;
         }
 
-        if (!localLandingParty.canBeLaunched(world)) {
-            // disable close buttons, because current party configuration is invalid
-            myScreen.findElementByName("ok_button").disable();
-            statusText.getRenderer(TextRenderer.class).setColor(redColor);
-            EngineUtils.setTextForGUIElement(statusText, Localization.getText("gui", "landing_party.can_not_launch"));
-        } else {
-            myScreen.findElementByName("ok_button").enable();
-            statusText.getRenderer(TextRenderer.class).setColor(new Color("#3C2C41"));
-            EngineUtils.setTextForGUIElement(statusText, Localization.getText("gui", "landing_party.can_launch"));
-        }
+        checkLaunchAvailability();
         updateLabels();
     }
 
@@ -198,6 +198,20 @@ public class LandingPartyEquipScreenController implements ScreenController {
 
     public void cancel() {
         GUI.getInstance().popAndSetScreen();
+        
+        if(world.getCurrentRoom() instanceof Planet) {  //if we are at planet, fly away
+            Planet planet = (Planet) world.getCurrentRoom();
+            
+            //the Planet.leavePlanet() method calls landingParty.onReturnToShip(), that duplicates crew
+                //and does some useless things in this case, so we have to reimplement it's functionality
+            
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.launch_shuttle"));
+            world.setCurrentRoom(planet.getOwner());
+            planet.getOwner().returnTo(world);
+            world.getPlayer().getShip().setPos(planet.getX(), planet.getY());
+            world.onPlayerLeftPlanet(planet);
+        }
+        
         localLandingParty = null;
     }
 
@@ -210,6 +224,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
             storageList.removeItem(inventoryItemEntry);
         }
         refreshLists();
+        checkLaunchAvailability();
     }
 
     public void onInventoryToStorageClicked() {
@@ -221,6 +236,7 @@ public class LandingPartyEquipScreenController implements ScreenController {
             inventoryList.removeItem(inventoryItemEntry);
         }
         refreshLists();
+        checkLaunchAvailability();
     }
 
     private void refreshLists() {
@@ -245,4 +261,20 @@ public class LandingPartyEquipScreenController implements ScreenController {
     public void onPrimaryReleased(String id, ButtonClickedEvent event) {
         inventoryList.selectItem((Multiset.Entry<InventoryItem>) event.getButton().getElement().getParent().getUserData());
     }
+    
+    private void checkLaunchAvailability() {  
+        //it's the LandingParty.canBeLaunched()'s wrapper. checks availability of launching
+          //and sets GUI elements to needed state
+          
+          if (!localLandingParty.canBeLaunched(world)) {
+              // disable close buttons, because current party configuration is invalid
+              myScreen.findElementByName("ok_button").disable();
+              statusText.getRenderer(TextRenderer.class).setColor(redColor);
+              EngineUtils.setTextForGUIElement(statusText, Localization.getText("gui", "landing_party.can_not_launch"));
+          } else {
+              myScreen.findElementByName("ok_button").enable();
+              statusText.getRenderer(TextRenderer.class).setColor(new Color("#3C2C41"));
+              EngineUtils.setTextForGUIElement(statusText, Localization.getText("gui", "landing_party.can_launch"));
+          }
+      }
 }
