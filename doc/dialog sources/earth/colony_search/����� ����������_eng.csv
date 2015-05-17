@@ -71,7 +71,6 @@
 ;Missing people? What's with that cave?;22;!colony.dungeon_quest && !colony.dungeon_quest.completed;;
 ;People have gone missing in the forest?;24;!colony.lost_group_quest && !colony.lost_group_quest.completed;;
 ;Tell me more about hunting animals.;25;!colony.hunt_quest && !colony.hunt_quest.completed;;
-;Who's going to attack you, then?;26;;;
 ;We can't help you with anything today, our orders won't let us. We have to go.;-1;;;
 22;A group of researchers, speleologists, has gone missing in one of the local caves. Again, we can find them ourselves, but help is always welcome, right? I don't want to risk my men. And if you save the scientists, you'll get valuable scientific data.;;;;
 ;It's better to risk someone else's men, right? Okay. We'll help you.;999;;;colony.dungeon_quest
@@ -80,7 +79,6 @@
 ;Missing people? What's with that cave?;22;;;
 ;People have gone missing in the forest?;24;;;
 ;Tell me more about hunting animals.;25;;;
-;Who's going to attack you, then?;26;;;
 ;We can't help you with anything today, our orders won't let us. We have to go.;-1;;;
 24;Yeah. Our field guys were supposed to report in about seven hours ago. We can find them ourselves, we have the experience, but I'd be glad to accept your help. The animals are pretty fierce in these woods, and look at the armor and weapons you've got! If you save the scientists, you'll get the scientific data you need. I know exactly what they want from you back on Earth, huh?;;;;
 ;You're right. We do need the data, and we do have decent weapons. Show us the way.;999;;;colony.lost_group_quest
@@ -98,6 +96,7 @@
 29;How are they?;;;;
 ;They were attacked by the local monsters. But we showed up on time and saved them all.;30;colony.lost_group_quest.saved=5;;
 ;They were attacked by the local monsters. We managed to save some people, the rest died.;31;colony.lost_group_quest.saved>0 && colony.lost_group_quest.saved<5;;
+;They were attacked by the local monsters. We couldn't save them. We barely got away ourselves.;32;!colony.lost_group_quest.saved;;
 ;They were attacked by the local monsters. We couldn't save them. We barely got away ourselves.;32;colony.lost_group_quest.saved=0;;
 30;Those are some great news. Too bad we have nothing to pay you with.;;;;
 ;It's okay. But next time, send more guards.;-1;;;colony.lost_group_quest.reported

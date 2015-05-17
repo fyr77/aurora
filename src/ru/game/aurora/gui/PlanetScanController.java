@@ -116,6 +116,9 @@ public class PlanetScanController implements ScreenController {
 
     @NiftyEventSubscriber(id = "bioscan_checkbox")
     public void scanFilterDisabled(final String id, final CheckBoxStateChangedEvent event) {
+        if (!(planetToScan instanceof Planet)) {
+            return;
+        }
         Image planetMap = PlanetMapRenderer.createMap(world
                 , (Planet) planetToScan
                 , new Rectangle(0, 0, surfaceMapPanel.getWidth(), surfaceMapPanel.getHeight())

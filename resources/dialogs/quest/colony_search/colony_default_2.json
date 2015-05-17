@@ -446,13 +446,8 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 26,
-          "replyText": "3"
-        },
-        {
-          "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "4"
+          "replyText": "3"
         }
       ]
     },
@@ -496,13 +491,8 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 26,
-          "replyText": "3"
-        },
-        {
-          "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "4"
+          "replyText": "3"
         }
       ]
     },
@@ -621,6 +611,17 @@
           "returnValue": 0,
           "targetStatementId": 32,
           "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "colony.lost_group_quest.saved",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 32,
+          "replyText": "3",
           "replyConditions": [
             {
               "name": "colony.lost_group_quest.saved",
