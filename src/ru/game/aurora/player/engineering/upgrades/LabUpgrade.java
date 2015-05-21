@@ -2,8 +2,6 @@ package ru.game.aurora.player.engineering.upgrades;
 
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.player.engineering.ShipUpgrade;
-import ru.game.aurora.player.research.ResearchProjectState;
-import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 
@@ -33,24 +31,7 @@ public class LabUpgrade extends ShipUpgrade {
     @Override
     public void onRemoved(World world, Ship ship) {
         ship.setMaxScientists(ship.getMaxScientists() - size);
-
-        int scientistsToRemove = size;
-
-        final ResearchState researchState = world.getPlayer().getResearchState();
-        if (researchState.getIdleScientists() > 0) {
-            int idleToRemove = Math.min(scientistsToRemove, researchState.getIdleScientists());
-            researchState.setIdleScientists(researchState.getIdleScientists() - idleToRemove);
-            scientistsToRemove -= idleToRemove;
-        }
-
-        for (ResearchProjectState rps : researchState.getCurrentProjects()) {
-            if (scientistsToRemove <= 0) {
-                break;
-            }
-            int projectScientistsToRemove = Math.min(scientistsToRemove, rps.scientists);
-            rps.scientists -= projectScientistsToRemove;
-            scientistsToRemove -= projectScientistsToRemove;
-        }
+        world.getPlayer().getResearchState().removeScientists(size);
         world.onCrewChanged();
     }
 

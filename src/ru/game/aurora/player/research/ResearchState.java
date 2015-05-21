@@ -156,4 +156,38 @@ public class ResearchState implements Serializable {
     public int getProcessedAstroData() {
         return processedAstroData;
     }
+    
+    public void addIdleScientists(int amount) {
+        idleScientists += amount;
+    }
+    
+    public void removeScientists(int amount) {
+        if (idleScientists > 0) {
+            int idleToRemove = Math.min(amount, idleScientists);
+            idleScientists = (idleScientists - idleToRemove);
+            amount -= idleToRemove;
+        }
+
+        for (ResearchProjectState rps : currentProjects) {
+            if (amount <= 0) {
+                break;
+            }
+            int projectScientistsToRemove = Math.min(amount, rps.scientists);
+            rps.scientists -= projectScientistsToRemove;
+            amount -= projectScientistsToRemove;
+        }
+    }
+    
+    public int getBusyScientists(boolean recalc) {
+        if(!recalc) {
+            return World.getWorld().getPlayer().getShip().getScientists() - idleScientists;
+        }
+        
+        int busyScientists = 0;
+        for(ResearchProjectState project : currentProjects) {
+            busyScientists += project.scientists;
+        }
+        
+        return busyScientists;
+    }
 }

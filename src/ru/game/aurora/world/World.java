@@ -37,6 +37,8 @@ import java.util.*;
 public class World implements Serializable, ResolutionChangeListener {
 
     private static final long serialVersionUID = 3L;
+    
+    private static World world;
 
     private Camera camera;
 
@@ -96,6 +98,8 @@ public class World implements Serializable, ResolutionChangeListener {
         reputation = new Reputation();
         currentDate = new GregorianCalendar(Configuration.getIntProperty("world.startYear"), 1, 1);
         uuid = UUID.randomUUID();
+        
+        world = this;
     }
 
     public Map<String, Serializable> getGlobalVariables() {
@@ -510,6 +514,8 @@ public class World implements Serializable, ResolutionChangeListener {
                 }
             }
         }
+        
+        world = this;
     }
 
     public String getCurrentDateString() {
@@ -533,5 +539,9 @@ public class World implements Serializable, ResolutionChangeListener {
             logger.info("Detected cheats");
             cheatsUsed = true;
         }
+    }
+    
+    public static World getWorld() {
+        return world;
     }
 }

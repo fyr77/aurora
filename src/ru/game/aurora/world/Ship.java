@@ -12,13 +12,12 @@ import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.ExplosionEffect;
-import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.npc.crew.GordonMainDialogListener;
 import ru.game.aurora.npc.crew.HenryMainDialogListener;
 import ru.game.aurora.npc.crew.SarahMainDialogListener;
+import ru.game.aurora.player.Player;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
 import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
@@ -238,6 +237,10 @@ public class Ship extends BaseGameObject {
     }
 
     public void refillCrew(World world) {
+        Player player = world.getPlayer();
+        
+        player.getResearchState().setIdleScientists(maxScientists - player.getResearchState().getBusyScientists(true));
+        player.getEngineeringState().setIdleEngineers(maxEngineers - player.getEngineeringState().getBusyEngineers(true));
 
         scientists = maxScientists;
         engineers = maxEngineers;

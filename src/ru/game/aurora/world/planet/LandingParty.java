@@ -181,6 +181,9 @@ public class LandingParty extends BaseGameObject {
         ship.setMilitary(ship.getMilitary() - military);
         ship.setScientists(ship.getScientists() - science);
         ship.setEngineers(ship.getEngineers() - engineers);
+        
+        world.getPlayer().getEngineeringState().removeEngineers(engineers);
+        world.getPlayer().getResearchState().removeScientists(science);
     }
 
     public void onReturnToShip(World world) {
@@ -208,6 +211,9 @@ public class LandingParty extends BaseGameObject {
         ship.setMilitary(ship.getMilitary() + military);
         ship.setScientists(ship.getScientists() + science);
         ship.setEngineers(ship.getEngineers() + engineers);
+        
+        world.getPlayer().getEngineeringState().addIdleEngineers(engineers);
+        world.getPlayer().getResearchState().addIdleScientists(science);
 
         resetHp(world);
         refillOxygen();

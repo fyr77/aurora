@@ -144,6 +144,13 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     }
 
     @Override
+    public boolean onCrewChanged(World world) {
+        Ship ship = world.getPlayer().getShip();
+        topPanelController.setCrewStats(ship.getScientists(), ship.getEngineers(), ship.getMilitary());
+        return false;
+    }
+
+    @Override
     public boolean onTurnEnded(World world) {
         if (GUI.getInstance().getNifty().getCurrentScreen().getScreenController().equals(this)) {
             updateStats();
