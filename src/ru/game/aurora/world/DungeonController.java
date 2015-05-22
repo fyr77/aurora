@@ -8,6 +8,7 @@
 package ru.game.aurora.world;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -320,6 +321,7 @@ public class DungeonController extends Listenable implements Serializable {
 
             ResourceManager.getInstance().getSound(landingParty.getWeapon().getShotSound()).play();
 
+            GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("fire", Button.class).disable();
             blasterShotEffect.setEndListener(new IStateChangeListener<World>() {
                 private static final long serialVersionUID = -7742240385490245306L;
 
@@ -332,6 +334,8 @@ public class DungeonController extends Listenable implements Serializable {
                         map.getObjects().remove(target);
                         target = null;
                     }
+                    
+                    GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("fire", Button.class).enable();
                 }
             });
 

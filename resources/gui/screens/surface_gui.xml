@@ -51,7 +51,7 @@
                 <panel style="nifty-panel" x="40%" width="200px" childLayout="center" height="100%">
                     <control id="left_button" name="button" label="${gui.surface.interact}" width="90%"
                              height="90%">
-                        <interact onClick="interactClicked()"/>
+                        <interact onRelease="interactClicked()"/>
                     </control>
                     <panel width="*"/>
                 </panel>
