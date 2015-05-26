@@ -58,7 +58,7 @@ public class DungeonEntrance extends BaseGameObject {
     }
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         if (canBeEntered) {
             if (world.getCurrentRoom() instanceof Planet) {
                 dungeon.getMap().setUserData(world.getCurrentRoom());
@@ -67,6 +67,8 @@ public class DungeonEntrance extends BaseGameObject {
         } else {
             GameLogger.getInstance().logMessage(Localization.getText("gui", messageIdIfCanNotEnter));
         }
+        
+        return true;
     }
 
     @Override

@@ -34,8 +34,9 @@ public class PlanetNPC extends BaseGameObject {
     }
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         world.addOverlayWindow(dialog);
+        return true;
     }
 
     @Override

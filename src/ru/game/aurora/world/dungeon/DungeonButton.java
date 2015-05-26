@@ -37,7 +37,7 @@ public class DungeonButton extends DungeonObject {
     private final String door;
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         if (isPressed()) {
             setState(false);
         } else {
@@ -55,6 +55,8 @@ public class DungeonButton extends DungeonObject {
                 }
             }
         }
+        
+        return true;
     }
 
     public DungeonButton(AuroraTiledMap map, int groupId, int objectId) {

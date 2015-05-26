@@ -31,8 +31,9 @@ public class ExitPoint extends BaseGameObject
     }
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         world.getCurrentDungeon().getController().returnToPrevRoom(world.getCurrentRoom().getMap().getVictoryConditions().isEmpty());
+        return true;
     }
 
     @Override

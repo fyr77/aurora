@@ -128,7 +128,7 @@
 74;Giant snails. Yuck! What's wrong with them?;;;;
 ;They are okay. Their representative will be here... I don't know when, that's a complicated question. ;76;klisk_trade.quest_result=perfect;;
 ; We discussed with them terms of the cooperation. I wasted a lot of time, trying to do it. ;76;klisk_trade.quest_result=good;;
-;We had a conversation, yet we didn't come to an agreement about anything really useful.;76;!klisk_trade.quest_result;;
+;We had a conversation, yet we didn't come to an agreement about anything really useful.;76;klisk_trade.quest_result=refused;;
 ;I'm so sorry, but we failed to come to an agreement.;75;klisk_trade.quest_result=bad;;
 75;So bad. Okay, we didn't lose everything. Continue.;;;;
 ;As for the rogues. ;78;!rogues_flag;;rogues_flag

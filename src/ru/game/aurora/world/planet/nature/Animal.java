@@ -10,6 +10,7 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.WeaponInstance;
+import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.Planet;
 
@@ -24,7 +25,7 @@ import java.util.List;
  * Date: 04.12.12
  * Time: 17:00
  */
-public class Animal extends BaseGameObject implements IMonster {
+public class Animal extends SurfaceLootObject implements IMonster {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,8 +37,6 @@ public class Animal extends BaseGameObject implements IMonster {
     private Planet myPlanet;
 
     private ITileMap myMap;
-
-    private boolean pickedUp = false;
 
     private boolean wasAttacked = false;
 
@@ -165,19 +164,6 @@ public class Animal extends BaseGameObject implements IMonster {
     }
 
     @Override
-    public void interact(World world) {
-        pickedUp = true;
-        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.picked_up"), getName()));
-        world.getPlayer().getLandingParty().pickUp(new AnimalCorpseItem(desc), 1);
-    }
-
-    @Override
-    public boolean isAlive() {
-        // object is alive until picked up, even if animal is actually dead
-        return !pickedUp;
-    }
-
-    @Override
     public String getName() {
         if (hp > 0) {
             return desc.getName();
@@ -198,5 +184,10 @@ public class Animal extends BaseGameObject implements IMonster {
     @Override
     public Image getImage() {
         return hp > 0 ? desc.getImage() : desc.getDeadImage();
+    }
+    
+    @Override
+    protected InventoryItem getLootItem() {
+        return new AnimalCorpseItem(desc);
     }
 }

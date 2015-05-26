@@ -210,12 +210,14 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         private static final long serialVersionUID = 8752939890229707029L;
 
         @Override
-        public void interact(World world) {
+        public boolean interact(World world) {
             world.getPlayer().changeResource(world, Resources.CELLS_FROM_PARALLEL_WORLD, CommonRandom.getRandom().nextInt(3));
             ResearchProjectDesc research = world.getResearchAndDevelopmentProjects().getResearchProjects().remove("parallel_world_bio_data");
             if (research != null) {
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
+            
+            return true;
         }
     }
 
@@ -244,7 +246,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public void interact(World world) {
+        public boolean interact(World world) {
             ParallelWorld pw = new ParallelWorld(world, world.getCurrentStarSystem());
             pw.enter(world);
             world.getPlayer().getShip().setPos(0, 0);
@@ -253,6 +255,8 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
             world.getPlayer().getJournal().addQuestEntries("inside", "enter");
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/inside_entered.json"));
             world.getGlobalVariables().put("inside.in_parallel_universe", true);
+            
+            return true;
         }
 
         @Override

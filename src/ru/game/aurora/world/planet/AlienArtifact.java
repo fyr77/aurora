@@ -117,16 +117,16 @@ public class AlienArtifact extends BaseGameObject {
     }
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         if (firstUseDialog != null) {
             world.addOverlayWindow(firstUseDialog);
             firstUseDialog = null;
-            return;
+            return false;
         }
 
         if (remainingData <= 0) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.artifact.already_explored"));
-            return;
+            return false;
         }
 
         final int researchSpeed = world.getPlayer().getLandingParty().calcResearchPower();
@@ -139,6 +139,8 @@ public class AlienArtifact extends BaseGameObject {
         } else {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.artifact.progress"), researchSpeed, remainingData));
         }
+        
+        return true;
     }
 
     @Override

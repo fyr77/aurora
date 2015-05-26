@@ -26,9 +26,11 @@ public class SpaceDebris extends BaseGameObject {
         }
 
         @Override
-        public void interact(World world) {
+        public boolean interact(World world) {
             world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() + amount);
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.debris.message"), amount));
+            
+            return true;
         }
     }
 
@@ -54,9 +56,11 @@ public class SpaceDebris extends BaseGameObject {
         }
 
         @Override
-        public void interact(World world) {
+        public boolean interact(World world) {
             isAlive = false;
             item.onReceived(world, 1);
+            
+            return true;
         }
     }
 
@@ -79,9 +83,11 @@ public class SpaceDebris extends BaseGameObject {
     }
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         isAlive = false;
         dropItem.interact(world);
+        
+        return true;
     }
 
     @Override

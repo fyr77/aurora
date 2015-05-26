@@ -10,11 +10,11 @@ import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.Faction;
-import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.ScanGroup;
+import ru.game.aurora.world.SurfaceLootObject;
 import ru.game.aurora.world.World;
 
-public class OreDeposit extends BaseGameObject {
+public class OreDeposit extends SurfaceLootObject {
     private static final long serialVersionUID = 2L;
 
     public static class OreUnit implements InventoryItem {
@@ -159,7 +159,12 @@ public class OreDeposit extends BaseGameObject {
 
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
+        if(!checkInteractOverweight()) {
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.overweight")));
+            return false;
+        }
+        
         final int miningPower = world.getPlayer().getLandingParty().calcMiningPower();
         currentMiningProgress -= miningPower;
         if (currentMiningProgress <= 0) {
@@ -173,6 +178,8 @@ public class OreDeposit extends BaseGameObject {
         } else {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.ore.mining"), getName(), miningPower, currentMiningProgress));
         }
+        
+        return true;
     }
 
     @Override

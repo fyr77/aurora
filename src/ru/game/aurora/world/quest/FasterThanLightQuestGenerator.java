@@ -81,10 +81,12 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
         }
 
         @Override
-        public void interact(World world) {
+        public boolean interact(World world) {
             world.getPlayer().getShip().setMovementSpeed(world.getPlayer().getShip().getMovementSpeed() + 1);
             GameLogger.getInstance().logMessage(Localization.getText("journal", "ftl.solar_wind_used"));
             alive = false;
+            
+            return true;
         }
 
         @Override

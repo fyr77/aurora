@@ -1106,7 +1106,8 @@
           "replyConditions": [
             {
               "name": "klisk_trade.quest_result",
-              "type": "NOT_SET"
+              "value": "refused",
+              "type": "EQUAL"
             }
           ]
         },

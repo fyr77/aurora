@@ -207,7 +207,10 @@ public class DungeonController extends Listenable implements Serializable {
 
         if (gameObjectsAtPlayerPosition.size() == 1) {
             final GameObject p = gameObjectsAtPlayerPosition.get(0);
-            p.interact(world);
+            
+            if(!p.interact(world))
+                return;
+            
             world.setUpdatedThisFrame(true);
             // some items (like ore deposits) can be picked up more than once, do not remove them in this case
             if (!p.isAlive()) {
@@ -221,7 +224,9 @@ public class DungeonController extends Listenable implements Serializable {
 
             @Override
             public void stateChanged(GameObject param) {
-                param.interact(world);
+                if(!param.interact(world))
+                    return;
+                
                 world.setUpdatedThisFrame(true);
                 // some items (like ore deposits) can be picked up more than once, do not remove them in this case
                 if (!param.isAlive()) {

@@ -85,7 +85,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public void interact(World world) {
+        public boolean interact(World world) {
             if (!world.getGlobalVariables().containsKey("rogues_altar.moon_checked")) {
                 if (!world.getGlobalVariables().containsKey("rogues_altar.earth_communicated")) {
                     world.getGlobalVariables().put("rogues_altar.moon_checked", true);
@@ -147,6 +147,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                 }
             }
 
+            return true;
         }
     }
 
@@ -348,7 +349,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public void interact(World world) {
+        public boolean interact(World world) {
             final ShipLootItem weaponInstance = new ShipLootItem(ShipLootItem.Type.WEAPONS, BorkGenerator.NAME);
             int weaponCount = world.getPlayer().getInventory().count(weaponInstance);
             final ShipLootItem goodsInstance = new ShipLootItem(ShipLootItem.Type.GOODS, BorkGenerator.NAME);
@@ -398,6 +399,8 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                     }
                 }
             }
+            
+            return true;
         }
     }
 
