@@ -120,7 +120,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         }
 
         @Override
-        public void interact(World world) {
+        public boolean interact(World world) {
             super.interact(world);
             remainingScientists--;
             Object savedVal = world.getGlobalVariables().get("colony.lost_group_quest.saved");
@@ -132,6 +132,8 @@ public class ColonizationListener extends GameEventListener implements DialogLis
             world.getGlobalVariables().put("colony.lost_group_quest.saved", saved);
             checkAllDone(world);
             isAlive = false;
+            
+            return true;
         }
 
         @Override

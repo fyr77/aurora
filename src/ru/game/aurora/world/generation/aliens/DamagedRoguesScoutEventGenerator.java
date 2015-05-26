@@ -193,8 +193,17 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
                     world.getGlobalVariables().put("rogues.damage_scout_crew_saved", null);
                     world.getReputation().updateReputation(rogueRace.getName(), HumanityGenerator.NAME, 1);
                 } else {
-                    world.getPlayer().getShip().setEngineers(world.getPlayer().getShip().getEngineers() - 1);
-                    world.getPlayer().getShip().setMilitary(world.getPlayer().getShip().getMilitary() - 1);
+                    int engineers = world.getPlayer().getShip().getEngineers();
+                    if(engineers > 0) {
+                        world.getPlayer().getShip().setEngineers(engineers - 1);
+                        world.getPlayer().getEngineeringState().removeEngineers(1);
+                    }
+                    
+                    int military = world.getPlayer().getShip().getMilitary();
+                    if(military > 0) {
+                        world.getPlayer().getShip().setMilitary(military - 1);
+                    }
+                    
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/rogues/rogues_damaged_scout_exploded.json"));
                 }
 

@@ -32,8 +32,9 @@ public class LandingShuttle extends BaseGameObject {
     }
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         myPlanet.leavePlanet(world);
+        return true;
     }
 
     @Override

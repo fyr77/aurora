@@ -64,7 +64,7 @@ public class BaseGameObject extends MovableSprite implements GameObject {
     }
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         throw new UnsupportedOperationException();
     }
 

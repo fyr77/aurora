@@ -72,4 +72,40 @@ public class EngineeringState implements Serializable {
             completedProjectNames.add(project.getId());
         }
     }
+    
+    public void removeEngineers(int amount) {
+        if (idleEngineers > 0) {
+            int idleToRemove = Math.min(amount, idleEngineers);
+            idleEngineers = idleEngineers - idleToRemove;
+            amount -= idleToRemove;
+        }
+
+        for (EngineeringProject epr : projects) {
+            if (amount <= 0) {
+                break;
+            }
+            int projectScientistsToRemove = Math.min(amount, epr.getEngineersAssigned());
+            epr.changeEngineers(-projectScientistsToRemove, World.getWorld());
+            amount -= projectScientistsToRemove;
+        }
+        
+        if(amount > 0 && hullRepairs.engineersAssigned > 0) {
+            int toRemove = Math.min(amount, hullRepairs.engineersAssigned);
+            hullRepairs.engineersAssigned -= Math.min(amount, toRemove);
+            amount -= toRemove;
+        }
+    }
+    
+    public int getBusyEngineers(boolean recalc) {
+        if(!recalc) {
+            return World.getWorld().getPlayer().getShip().getEngineers() - idleEngineers;
+        }
+        
+        int busyEngineers = 0;
+        for(EngineeringProject project : projects) {
+            busyEngineers += project.getEngineersAssigned();
+        }
+        
+        return busyEngineers + hullRepairs.engineersAssigned;
+    }
 }

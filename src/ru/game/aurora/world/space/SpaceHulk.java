@@ -64,9 +64,9 @@ public class SpaceHulk extends BaseGameObject {
     }
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         if (explored) {
-            return;
+            return true;
         }
 
         if (onInteractDialog != null) {
@@ -77,6 +77,7 @@ public class SpaceHulk extends BaseGameObject {
             dungeon.enter(world);
         }
 
+        return true;
     }
 
     @Override

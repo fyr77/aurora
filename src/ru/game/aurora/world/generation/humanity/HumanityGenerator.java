@@ -60,13 +60,15 @@ public class HumanityGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public void interact(World world) {
+        public boolean interact(World world) {
             Multiset<InventoryItem> inventoryItems = HashMultiset.<InventoryItem>create();
             inventoryItems.add(Resources.CELLS_FROM_PARALLEL_WORLD, 5);
             inventoryItems.add(new SellOnlyInventoryItem(
                             "items", "rogue_beacon_data", new Drawable("technology_research"), Configuration.getIntProperty("quest.rogues_beacon.price"), true, RoguesGenerator.NAME
                     ));
             TradeScreenController.openTrade("klisk_dialog", inventoryItems);
+            
+            return true;
         }
     }
 

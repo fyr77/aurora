@@ -19,7 +19,7 @@ public interface GameObject extends Serializable, Updatable, IMovable, IDrawable
 
     boolean canBeInteracted();
 
-    void interact(World world);
+    boolean interact(World world);
 
     String getInteractMessage();
 

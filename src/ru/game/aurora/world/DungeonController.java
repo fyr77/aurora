@@ -8,6 +8,7 @@
 package ru.game.aurora.world;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.controls.Button;
 import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -206,7 +207,10 @@ public class DungeonController extends Listenable implements Serializable {
 
         if (gameObjectsAtPlayerPosition.size() == 1) {
             final GameObject p = gameObjectsAtPlayerPosition.get(0);
-            p.interact(world);
+            
+            if(!p.interact(world))
+                return;
+            
             world.setUpdatedThisFrame(true);
             // some items (like ore deposits) can be picked up more than once, do not remove them in this case
             if (!p.isAlive()) {
@@ -220,7 +224,9 @@ public class DungeonController extends Listenable implements Serializable {
 
             @Override
             public void stateChanged(GameObject param) {
-                param.interact(world);
+                if(!param.interact(world))
+                    return;
+                
                 world.setUpdatedThisFrame(true);
                 // some items (like ore deposits) can be picked up more than once, do not remove them in this case
                 if (!param.isAlive()) {
@@ -320,6 +326,7 @@ public class DungeonController extends Listenable implements Serializable {
 
             ResourceManager.getInstance().getSound(landingParty.getWeapon().getShotSound()).play();
 
+            GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("fire", Button.class).disable();
             blasterShotEffect.setEndListener(new IStateChangeListener<World>() {
                 private static final long serialVersionUID = -7742240385490245306L;
 
@@ -332,6 +339,8 @@ public class DungeonController extends Listenable implements Serializable {
                         map.getObjects().remove(target);
                         target = null;
                     }
+                    
+                    GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("fire", Button.class).enable();
                 }
             });
 

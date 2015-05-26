@@ -207,16 +207,16 @@ public class NPCShip extends BaseGameObject implements IMonster {
     }
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         if (!isCanBeHailed() || isHostile(world, world.getPlayer().getShip())) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.hail_not_responded"));
-            return;
+            return false;
         }
 
         world.onPlayerContactedAlienShip(this);
         if (captain != null) {
             world.addOverlayWindow(captain.getCustomDialog());
-            return;
+            return true;
         }
 
         if (faction != null && (faction instanceof AlienRace)) {
@@ -229,6 +229,7 @@ public class NPCShip extends BaseGameObject implements IMonster {
             world.addOverlayWindow(d);
         }
 
+        return true;
     }
 
 

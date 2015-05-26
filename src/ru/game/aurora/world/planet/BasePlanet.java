@@ -144,14 +144,16 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
     }
 
     @Override
-    public void interact(World world) {
-        if (category == PlanetCategory.GAS_GIANT) {
+    public boolean interact(World world) {
+        if (!canBeInteracted()) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.can_not_land"));
-            return;
+            return false;
         }
         GameLogger.getInstance().logMessage(Localization.getText("gui", "landing"));
         world.setCurrentRoom(this);
         enter(world);
+        
+        return true;
     }
 
     @Override
@@ -162,5 +164,14 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
     @Override
     public boolean turnIsADay() {
         return true;
+    }
+    
+    @Override
+    public boolean canBeInteracted() {
+        return canBeCommunicated() || canBeLanded();
+    }
+    
+    public boolean canBeCommunicated() {
+        return false;
     }
 }

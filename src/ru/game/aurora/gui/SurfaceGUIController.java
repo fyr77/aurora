@@ -115,7 +115,6 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     public void interactClicked() {
         IDungeon dungeon = (IDungeon) world.getCurrentRoom();
         dungeon.getController().interactWithObject(world);
-        world.setUpdatedNextFrame(true);
         updateStats();
     }
 

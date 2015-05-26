@@ -42,7 +42,7 @@ public class EnergySphereEncounterGenerator extends GameEventListener implements
         }
 
         @Override
-        public void interact(World world) {
+        public boolean interact(World world) {
             // has contacted with player
             world.getGlobalVariables().put("energy_sphere.started", "0");
             // reset all research progress
@@ -54,6 +54,8 @@ public class EnergySphereEncounterGenerator extends GameEventListener implements
 
             world.getPlayer().getJournal().addQuestEntries("energy_sphere", "start");
             world.getPlayer().getShip().addCrewMember(world, new CrewMember("energy_sphere", "energy_sphere_dialog"));
+            
+            return true;
         }
 
         @Override

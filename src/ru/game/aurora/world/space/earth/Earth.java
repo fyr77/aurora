@@ -224,4 +224,9 @@ public class Earth extends BasePlanet {
     public Image getImage() {
         return earthImage;
     }
+    
+    @Override
+    public boolean canBeCommunicated() {
+        return true;
+    } 
 }

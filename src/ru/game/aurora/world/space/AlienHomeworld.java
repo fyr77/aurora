@@ -126,4 +126,9 @@ public class AlienHomeworld extends BasePlanet {
     public String getName() {
         return getFaction().getName() + " homeworld";
     }
+    
+    @Override
+    public boolean canBeCommunicated() {
+        return canBeCommunicated;
+    }
 }

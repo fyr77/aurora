@@ -208,11 +208,11 @@
                 <panel width="*"/>
                 <panel style="nifty-panel" width="334px" childLayout="horizontal" height="100%">
                     <control id="left_button" name="button" label="${gui.space.land}" width="150px" height="100%">
-                        <interact onClick="leftButtonPressed()"/>
+                        <interact onRelease="leftButtonPressed()"/>
                     </control>
                     <panel width="10px"/>
                     <control id="right_button" name="button" label="${gui.space.scan}" width="150px" height="100%">
-                        <interact onClick="rightButtonPressed()"/>
+                        <interact onRelease="rightButtonPressed()"/>
                     </control>
                 </panel>
                 <panel width="*"/>

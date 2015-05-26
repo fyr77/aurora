@@ -36,7 +36,7 @@ public class AuroraProbe extends NPCShip {
     }
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         world.addOverlayWindow(dialog);
         isAlive = false;
 
@@ -47,6 +47,8 @@ public class AuroraProbe extends NPCShip {
         GameLogger.getInstance().logMessage(String.format(Localization.getText("research", "probe.astro_data_retrieved"), curSystem.getAstronomyData()));
         curSystem.setAstronomyData(0);
         world.getPlayer().getResearchState().addProcessedAstroData(remainingAstroData);
+        
+        return true;
     }
 
     @Override

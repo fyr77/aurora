@@ -92,6 +92,7 @@ public class PlanetScanController implements ScreenController {
         }
 
         EngineUtils.setTextForGUIElement(myWindow.findElementByName("scan_text"), planetToScan.getScanText());
+        updateButtonsState();
 
         if ((planetToScan instanceof Earth) || (planetToScan instanceof AlienHomeworld)) {
             //todo: load custom map
@@ -106,6 +107,30 @@ public class PlanetScanController implements ScreenController {
                     , false
             );
             EngineUtils.setImageForGUIElement(surfaceMapPanel, planetMap);
+        }
+    }
+    
+    private void updateButtonsState() {
+        if(planetToScan.canBeLanded()) {
+            myWindow.findElementByName("land_button").enable();
+            myWindow.findElementByName("lp_button").enable();
+            
+            myWindow.findElementByName("land_button").getNiftyControl(Button.class).setText(Localization.getText("gui", "space.land"));
+        } 
+        else if (planetToScan.canBeCommunicated()) {
+            //if we cannot land, but can communicate with the planet, enable and rename 
+                //land button and disable LP button
+            
+            myWindow.findElementByName("land_button").enable();
+            myWindow.findElementByName("lp_button").disable();
+            
+            myWindow.findElementByName("land_button").getNiftyControl(Button.class).setText(Localization.getText("gui", "space.hail"));
+        } 
+        else {
+            myWindow.findElementByName("land_button").disable();
+            myWindow.findElementByName("lp_button").disable();
+            
+            myWindow.findElementByName("land_button").getNiftyControl(Button.class).setText(Localization.getText("gui", "space.land"));
         }
     }
 
