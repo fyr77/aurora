@@ -13,7 +13,11 @@ import java.io.Serializable;
 
 public interface NPCShipAI extends Serializable {
 
-    public void update(NPCShip ship, World world, StarSystem currentSystem);
+    void update(NPCShip ship, World world, StarSystem currentSystem);
 
-    public boolean isAlive();
+    boolean isAlive();
+
+    // if set to false this ship will not change this ai to any other
+    // otherwise it will e.g. change to combat ai if attacked
+    boolean isOverridable();
 }

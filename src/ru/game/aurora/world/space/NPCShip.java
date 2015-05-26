@@ -134,20 +134,22 @@ public class NPCShip extends BaseGameObject implements IMonster {
 
         updateThreatMap(world);
 
-        while (!threatMap.isEmpty()) {
-            GameObject mostThreatTarget = getMostThreatTarget();
-            if (mostThreatTarget != null) {
-                if (!mostThreatTarget.isAlive()) {
-                    threatMap.remove(mostThreatTarget);
-                    continue;
+        if (ai.isOverridable()) {
+            while (!threatMap.isEmpty()) {
+                GameObject mostThreatTarget = getMostThreatTarget();
+                if (mostThreatTarget != null) {
+                    if (!mostThreatTarget.isAlive()) {
+                        threatMap.remove(mostThreatTarget);
+                        continue;
+                    }
+                    ai = new CombatAI(mostThreatTarget);
+                    break;
                 }
-                ai = new CombatAI(mostThreatTarget);
-                break;
             }
-        }
 
-        if (threatMap.isEmpty() && ai instanceof CombatAI && !isStationary) {
-            ai = new LeaveSystemAI();
+            if (threatMap.isEmpty() && ai instanceof CombatAI && !isStationary) {
+                ai = new LeaveSystemAI();
+            }
         }
 
         if (ai != null) {
