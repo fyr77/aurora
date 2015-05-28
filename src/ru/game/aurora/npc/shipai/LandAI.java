@@ -48,4 +48,9 @@ public class LandAI implements NPCShipAI
     public boolean isAlive() {
         return !hasLanded;
     }
+
+    @Override
+    public boolean isOverridable() {
+        return true;
+    }
 }

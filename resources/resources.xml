@@ -31,6 +31,7 @@
     <resource type="image" id="awayteam">sprites/ships/away_team.png</resource>
     <resource type="image" id="shuttle">sprites/ships/player_shuttle.png</resource>
     <resource type="image" id="probe">sprites/ships/probe.png</resource>
+    <resource type="image" id="drone">sprites/ships/drone.png</resource>
     <resource type="image" id="scientist_dialog">sprites/portraits/scientist.png</resource>
     <resource type="image" id="engineer_dialog">sprites/portraits/engineer.png</resource>
     <resource type="image" id="marine_dialog">sprites/portraits/marine.png</resource>

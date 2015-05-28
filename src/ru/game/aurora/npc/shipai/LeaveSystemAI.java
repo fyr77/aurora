@@ -54,4 +54,9 @@ public class LeaveSystemAI implements NPCShipAI {
     public boolean isAlive() {
         return !isAway;
     }
+
+    @Override
+    public boolean isOverridable() {
+        return true;
+    }
 }

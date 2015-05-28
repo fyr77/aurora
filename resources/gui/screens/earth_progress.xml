@@ -128,7 +128,7 @@
                                     <panel width="*" childLayout="vertical" padding="10px">
                                         <text id="upgrade_name" style="bold-font" textHAlign="left"/>
                                         <panel height="10px"/>
-                                        <text width="100%" wrap="true" style="base-font" textHAlign="left"
+                                        <text width="90%" wrap="true" style="base-font" textHAlign="left"
                                               id="upgrade_text"/>
                                     </panel>
                                     <panel width="5px"/>

@@ -31,6 +31,18 @@ public abstract class ShipUpgrade extends ItemWithTextAndImage {
 
     public abstract void onRemoved(World world, Ship ship);
 
+    public boolean isUsable() {
+        return false;
+    }
+
+    public boolean canBeUsedNow(World world) {
+        return false;
+    }
+
+    public void onUse(World world) {
+        // nothing in the base class
+    }
+
     public abstract int getSpace();
 
     public String getLocalizationGroup() {

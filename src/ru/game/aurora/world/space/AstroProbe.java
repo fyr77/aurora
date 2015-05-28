@@ -5,6 +5,7 @@ import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.npc.shipai.KeepOrbitAI;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 
@@ -21,7 +22,7 @@ public class AstroProbe extends NPCShip {
     private double cache = 0;
 
     public AstroProbe(World world) {
-        super(0, 0, "probe", world.getFactions().get(HumanityGenerator.NAME), null, "Astroprobe", 4);
+        super(0, 0, "drone", world.getFactions().get(HumanityGenerator.NAME), null, "Astroprobe", 4);
         setAi(new KeepOrbitAI(false));
         lastCheckTurn = world.getTurnCount();
     }
@@ -30,12 +31,17 @@ public class AstroProbe extends NPCShip {
     public void update(GameContainer container, World world) {
         super.update(container, world);
 
+        if (!world.isUpdatedThisFrame()) {
+            return;
+        }
+
         StarSystem ss = world.getCurrentStarSystem();
         if (ss == null || ss.getAstronomyData() == 0) {
             return;
         }
 
         final int daysSinceLastCheck = world.getTurnCount() - lastCheckTurn;
+        lastCheckTurn = world.getTurnCount();
         final double shouldHaveCollected = (daysSinceLastCheck * Configuration.getDoubleProperty("upgrades.astroprobe.collect_speed"));
         cache += Math.min(ss.getAstronomyData(), shouldHaveCollected);
 
@@ -47,10 +53,12 @@ public class AstroProbe extends NPCShip {
     }
 
     @Override
-    public void interact(World world) {
+    public boolean interact(World world) {
         isAlive = false;
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.astroprobe.collected"), collectedAstroData));
         world.getPlayer().getResearchState().addProcessedAstroData(collectedAstroData);
+        world.getPlayer().changeResource(world, Resources.RU, Configuration.getIntProperty("upgrades.astroprobe.price") / 2);
+        return true;
     }
 
     @Override

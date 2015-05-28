@@ -105,6 +105,14 @@ public class ShipScreenController implements ScreenController {
         crewMemberListBox.setFocusItem((CrewMember) event.getButton().getElement().getParent().getUserData());
     }
 
+    @NiftyEventSubscriber(pattern = ".*use_button")
+    public void onUseModuleButtonClicked(String id, ButtonClickedEvent event) {
+        final ShipUpgrade usedModule = (ShipUpgrade) event.getButton().getElement().getParent().getUserData();
+        modulesListBox.selectItem(usedModule);
+        usedModule.onUse(world);
+        closeScreen();
+    }
+
     @NiftyEventSubscriber(id = "ship_window")
     public void onClose(final String id, final WindowClosedEvent event) {
         closeScreen();

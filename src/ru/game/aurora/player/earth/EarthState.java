@@ -9,10 +9,7 @@ package ru.game.aurora.player.earth;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.player.engineering.ShipUpgrade;
-import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
-import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
-import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
-import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
+import ru.game.aurora.player.engineering.upgrades.*;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
@@ -40,6 +37,7 @@ public class EarthState implements Serializable
         availableUpgrades.add(new LabUpgrade());
         availableUpgrades.add(new WorkshopUpgrade());
         availableUpgrades.add(new BarracksUpgrade());
+        availableUpgrades.add(new AstroDroneUpgrade());
     }
 
     public void updateTechnologyLevel(int value) {

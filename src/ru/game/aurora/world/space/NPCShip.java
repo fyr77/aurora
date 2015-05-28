@@ -134,7 +134,7 @@ public class NPCShip extends BaseGameObject implements IMonster {
 
         updateThreatMap(world);
 
-        if (ai.isOverridable()) {
+        if (ai == null || ai.isOverridable()) {
             while (!threatMap.isEmpty()) {
                 GameObject mostThreatTarget = getMostThreatTarget();
                 if (mostThreatTarget != null) {

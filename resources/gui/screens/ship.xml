@@ -29,6 +29,22 @@
 
     </controlDefinition>
 
+    <controlDefinition name="line-with-text-and-image-and-button">
+        <panel childLayout="horizontal" width="100%" align="center" padding="5px" height="$sizeWithMargin">
+            <panel width="$size" height="$size" childLayout="center" style="nifty-panel-noshadow">
+                <image id="#line-icon" width="$size" height="$size"/>
+            </panel>
+            <panel width="*" height="$size" childLayout="center" padding="5px">
+                <text id="#line-text" style="base-font" textVAlign="center" textHAlign="left" height="80%" width="90%"
+                      wrap="true"/>
+            </panel>
+
+            <control id="#use_button" name="button" label="${gui.use}" width="150px" height="45px" visible="false"/>
+            <panel width="25px"/>
+        </panel>
+
+    </controlDefinition>
+
     <screen id="ship_screen" controller="ru.game.aurora.gui.ShipScreenController">
         <layer childLayout="absolute">
             <control id="ship_window" name="window" hideOnClose="true" title="${gui.ship.title}" width="80%"
@@ -84,7 +100,7 @@
                                          viewConverterClass="ru.game.aurora.player.engineering.ShipUpgradeViewConverter2"
                                          visibleToMouse="true"
                                         >
-                                    <control name="line-with-text-and-image"
+                                    <control name="line-with-text-and-image-and-button"
                                              controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"
                                              size="128" sizeWithMargin="138">
                                     </control>

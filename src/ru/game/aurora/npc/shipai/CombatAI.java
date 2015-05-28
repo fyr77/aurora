@@ -118,4 +118,9 @@ public class CombatAI implements NPCShipAI {
     public boolean isAlive() {
         return true;
     }
+
+    @Override
+    public boolean isOverridable() {
+        return true;
+    }
 }
