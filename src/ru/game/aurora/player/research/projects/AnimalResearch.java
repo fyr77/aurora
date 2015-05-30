@@ -5,6 +5,8 @@
  */
 package ru.game.aurora.player.research.projects;
 
+import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
@@ -65,5 +67,24 @@ public class AnimalResearch extends ResearchProjectDesc {
 
     public AnimalSpeciesDesc getDesc() {
         return desc;
+    }
+    
+    @Override
+    public void onCompleted(World world) {
+        super.onCompleted(world);
+        desc.setOutopsyMade(true);
+    }
+
+    @Override
+    public String getDescription() {
+        String description = Localization.getText("research", "animal.desc");
+        if(desc.isOutopsyMade()) {
+            description += "\n\n" + String.format(
+                    Localization.getText("research", "animal.desc_completed"), 
+                    desc.getHp(), 
+                    Configuration.getProperty("animal.autopsy_damage_bonus"));
+        }
+        
+        return description;
     }
 }

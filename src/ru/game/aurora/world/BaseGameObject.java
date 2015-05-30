@@ -7,6 +7,7 @@
 package ru.game.aurora.world;
 
 
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.npc.Faction;
@@ -76,6 +77,7 @@ public class BaseGameObject extends MovableSprite implements GameObject {
     @Override
     public void onAttack(World world, GameObject attacker, int damaged) {
         world.onGameObjectAttacked(attacker, this, damaged);
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.damage_message"), damaged, getName()));
     }
 
     @Override

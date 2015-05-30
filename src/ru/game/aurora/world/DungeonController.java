@@ -333,7 +333,6 @@ public class DungeonController extends Listenable implements Serializable {
                 @Override
                 public void stateChanged(World world) {
                     target.onAttack(world, landingParty, damage);
-                    GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.damage_message"), damage, target.getName()));
                     if (!target.isAlive()) {
                         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), target.getName()));
                         map.getObjects().remove(target);

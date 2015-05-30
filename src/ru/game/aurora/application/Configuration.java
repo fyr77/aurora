@@ -24,19 +24,29 @@ public class Configuration {
      * System properties like screen resolution
      */
     private static Properties systemProperties;
-
-    public static void init() throws IOException {
-        worldProperties = new Properties();
-        try (InputStream is = new FileInputStream("resources/game.properties")) {
+    
+    static {
+        try {
+            worldProperties = new Properties();
+            InputStream is = new FileInputStream("resources/game.properties");
             worldProperties.load(is);
+        } catch (IOException e) {
+            logger.error("Failed to load game properties:", e);
+            System.exit(0);
         }
-
+        
+        //the game can run without system.properties, 
+            //so we won't terminate it if smth went wrong, but log an error
+        
         systemProperties = new Properties();
-        File systemPropsFile = new File("system.properties");
-        if (systemPropsFile.exists()) {
-            try (InputStream is = new FileInputStream(systemPropsFile)) {
+        try {
+            File systemPropsFile = new File("system.properties");
+            if (systemPropsFile.exists()) {
+                InputStream is = new FileInputStream(systemPropsFile);
                 systemProperties.load(is);
             }
+        } catch (IOException e) {
+            logger.error("Failed to load game properties:", e);
         }
     }
 
@@ -50,6 +60,10 @@ public class Configuration {
 
     public static double getDoubleProperty(String key) {
         return Double.parseDouble(worldProperties.getProperty(key));
+    }
+    
+    public static String getProperty(String key) {
+        return worldProperties.getProperty(key);
     }
 
     public static Properties getSystemProperties() {
