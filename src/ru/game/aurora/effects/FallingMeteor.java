@@ -94,6 +94,8 @@ public class FallingMeteor extends Effect {
                 }
 
                 planet.setNearestFreePoint(landingParty, landingParty.getX(), landingParty.getY());
+                final BasePositionable shuttle = planet.getShuttle();
+                planet.setNearestFreePoint(shuttle, shuttle.getX(), shuttle.getY());
             }
         }
     }
