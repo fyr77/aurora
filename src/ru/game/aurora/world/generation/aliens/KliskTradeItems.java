@@ -70,12 +70,12 @@ public class KliskTradeItems
 
         @Override
         public void onReceived(World world, int amount) {
-            world.getPlayer().getResearchState().addNewAvailableProject(world.getResearchAndDevelopmentProjects().getResearchProjects().remove("alien_alloys"));
+            world.getPlayer().getResearchState().addNewAvailableProject(world.getResearchAndDevelopmentProjects().getResearchProjects().remove("loot.materials"));
         }
 
         @Override
         public boolean canBeSoldTo(World world, Faction faction) {
-            return world.getResearchAndDevelopmentProjects().getResearchProjects().containsKey("alien_alloys");
+            return world.getResearchAndDevelopmentProjects().getResearchProjects().containsKey("loot.materials");
         }
     }
 

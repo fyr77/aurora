@@ -10,6 +10,6 @@ public class ResearchProjectsGenerator implements WorldGeneratorPart
 {
     @Override
     public void updateWorld(World world) {
-        world.getResearchAndDevelopmentProjects().getResearchProjects().put("alien_alloys", new AlienAlloysResearch());
+        world.getResearchAndDevelopmentProjects().getResearchProjects().put("loot.materials", new AlienAlloysResearch());
     }
 }

@@ -9,11 +9,11 @@ import ru.game.aurora.world.World;
 public class AlienAlloysResearch extends BaseResearchWithFixedProgress
 {
     public AlienAlloysResearch() {
-        super( "alien_alloys"
+        super("loot.materials"
                 , "hull_module"
                 , new ResearchReport(
                         "hull_module"
-                        , "alien_alloys.report"
+                        , "loot.materials.report"
                 ),
                 150,
                 100);
