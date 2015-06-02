@@ -80,7 +80,7 @@ public class LandingParty extends BaseGameObject {
     }
 
     public int getMaxWeight() {
-        return engineers * 2 + science; //Инженеры - крепкие ребята, учёные - не очень, солдаты таскают своё оружие
+        return engineers * 2 + science;
     }
 
     public int getInventoryWeight() {
@@ -307,7 +307,7 @@ public class LandingParty extends BaseGameObject {
                 } else {
                     break;
                 }
-                overWeightTest();   //возможен перегруз в результате потери члена команды
+                overWeightTest();   //overload test in case of loosing a crew member
             }
             amount -= amountToSubtract;
         }
