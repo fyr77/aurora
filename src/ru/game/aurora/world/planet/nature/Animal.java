@@ -6,6 +6,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.*;
@@ -28,6 +29,10 @@ import java.util.List;
 public class Animal extends SurfaceLootObject implements IMonster {
 
     private static final long serialVersionUID = 1L;
+    
+    private static final int autopsyDamageBonus;
+    
+    private static final boolean autopsyDamageBonusPercent;
 
     private int hp;
 
@@ -43,6 +48,18 @@ public class Animal extends SurfaceLootObject implements IMonster {
     private final MonsterController controller;
 
     private List<WeaponInstance> weapons;
+    
+    static {
+        String str = Configuration.getProperty("animal.autopsy_damage_bonus");
+        if(str.contains("%")) {
+            autopsyDamageBonus = Integer.parseInt(str.replace("%", ""));
+            autopsyDamageBonusPercent = true;
+        }
+        else {
+            autopsyDamageBonus = Integer.parseInt(str);
+            autopsyDamageBonusPercent = false;
+        }
+    }
 
     public Animal(ITileMap map, int x, int y, AnimalSpeciesDesc desc) {
         super(x, y);
@@ -88,7 +105,10 @@ public class Animal extends SurfaceLootObject implements IMonster {
                 , myMap.isWrapped() ? camera.getYCoordWrapped(y, myMap.getHeightInTiles()) : camera.getYCoord(y));
 
         String hpText;
-        if (hp < 100) {
+        
+        if(!desc.isOutopsyMade()) {
+            hpText = "???";
+        } else if (hp < 100) {
             hpText = Integer.toString(Math.max(0, hp));
         } else {
             hpText = "N/A";
@@ -138,6 +158,9 @@ public class Animal extends SurfaceLootObject implements IMonster {
 
     @Override
     public void onAttack(World world, GameObject attacker, int damage) {
+        if (desc.isOutopsyMade()) {
+            damage += getAutopsyDamageBonus(damage);
+        }
         if (desc.getModifiers().contains(AnimalModifier.ARMOR)) {
             damage = Math.max(0, damage - desc.getArmor());
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.armor_consumed_damage"), desc.getArmor()));
@@ -161,6 +184,14 @@ public class Animal extends SurfaceLootObject implements IMonster {
                 pickedUp = true;
             }
         }
+    }
+    
+    private static int getAutopsyDamageBonus(int damage) {
+        if(autopsyDamageBonusPercent) {
+            return Math.max((int) (damage * 0.01f * autopsyDamageBonus), 1);
+        }
+        
+        return autopsyDamageBonus;
     }
 
     @Override

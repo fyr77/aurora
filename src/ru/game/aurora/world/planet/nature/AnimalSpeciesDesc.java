@@ -59,7 +59,7 @@ public class AnimalSpeciesDesc implements Serializable {
     /**
      * True if dead animal was brought to ship and examined
      */
-    private final boolean outopsyMade = false;
+    private boolean outopsyMade = false;
 
     private int armor;
 
@@ -96,6 +96,10 @@ public class AnimalSpeciesDesc implements Serializable {
 
     public boolean isOutopsyMade() {
         return outopsyMade;
+    }
+    
+    public void setOutopsyMade(boolean value) {
+        outopsyMade = value;
     }
 
     public Set<AnimalModifier> getModifiers() {

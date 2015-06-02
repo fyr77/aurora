@@ -330,11 +330,6 @@ public class AuroraGame extends NiftyOverlayGame {
 
             logger.info("Application class path is: " + System.getProperty("java.class.path"));
 
-            try {
-                Configuration.init();
-            } catch (IOException e) {
-                throw new SlickException("Failed to load game properties", e);
-            }
             SoundStore.get().init();
             final String locale = Configuration.getSystemProperties().getProperty("locale");
             if (locale != null) {
