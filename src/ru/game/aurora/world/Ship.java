@@ -8,7 +8,10 @@ package ru.game.aurora.world;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
@@ -206,6 +209,44 @@ public class Ship extends BaseGameObject {
         if (Configuration.getBooleanProperty("cheat.invulnerability")) {
             return;
         }
+        
+        int loseCrewChance = Configuration.getIntProperty("game.crew.lose_chance");
+        int loseChanceReduce = 0;     //TODO: implement med center
+        loseCrewChance -= loseCrewChance * 0.01f * loseChanceReduce;
+        
+        Random rnd = CommonRandom.getRandom();
+        if(rnd.nextInt(100) < loseCrewChance && getTotalCrew() > 0) {
+            int[] crewSize = {engineers, military, scientists};
+            int[] availableCrew = new int[crewSize.length];
+            
+            int i = 0;  //counter of available crew
+            for(int j = 0; j < crewSize.length; ++j) {
+                if(crewSize[j] > 0)
+                    availableCrew[i++] = j;
+            }
+            
+            String lostMember;
+            int toDelete = i > 1 ? rnd.nextInt(i) : 0;
+            switch(availableCrew[toDelete]) {
+                case 0:
+                    engineers--;
+                    world.getPlayer().getEngineeringState().removeEngineers(1);
+                    lostMember = Localization.getText("crew", "engineer.name");
+                    break;
+                case 1:
+                    military--;
+                    lostMember = Localization.getText("crew", "military.name");
+                    break;
+                default:
+                    scientists--;
+                    world.getPlayer().getResearchState().removeScientists(1);
+                    lostMember = Localization.getText("crew", "scientist.name");
+            }
+            
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.crew.lost"), lostMember));
+            world.onCrewChanged();
+        }
+        
         hull -= dmg;
         world.onPlayerShipDamaged();
         if (hull <= 0) {
