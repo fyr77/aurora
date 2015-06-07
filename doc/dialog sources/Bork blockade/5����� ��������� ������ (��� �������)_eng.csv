@@ -1,0 +1,17 @@
+0;Oh, you. Hi. What do you want?! Don't distract me!!;;;
+;Hey, Hrrraka. I've talked to the smart Bork who's your dad. He's calling you back.;1;bork_blockade.withdraw;
+;Look, I found the necessary goods. Get ready to take them aboard.;4;bork_blockade.has_items;
+;I've chosen the easy way, you ugly bastard. Get ready to fight.;-1;;1
+;I just wanted to check if you were still there. Turns out you are. Over and out.;-1;;
+1;Hrrrum. *Hrraka, unselfconscious as Borks are, puts his paw into his mouth and starts picking around inside. The sight really calls your attention. Thirty seconds pass, then forty... It ends with a bone with pieces of meat on that Hrrraka takes out. He takes a good look at it and puts the delicacy back into his mouth.* Hfurrfurr. I know. They came here already. Got to go.;;;
+;Great. You'll be better off then, trust me.;2;;
+2;*Hrrraka shakes his head side to side. He speaks more quietly than usual.* Nah. It won't. Dad don't love me, he loves Lornur and Tornur, and he don't love me. They're smart, I'm not, and he doesn't love me. Arrr!;;;
+;That's sad. Sorry, but you really are a nuisance to my planet.;3;;
+3;*Apparently, his ennui went as fast as it came.* Arrrr! I'll rob some Klisks yet!!! Arrr! *Before signing off, he says...* And if I come across you, I'll rob you too, you old wreck!!!;;;
+;…;-1;;3
+4;"Hrrrrum?! Grrreeeeee! Goods?! Arrrr!! *Approximate translation: ""Wonderful! Come on, I have already opened the airlock!""*";;;
+;So what, you'll leave now?;5;;
+5;"Arrrr! Who're you? Manbeing? Nah. Ah. Man!! Man, good! Arr! Man almost like Bork! Arrrr! *Behind Hrrraka, his entire crew joins in a hearty ""Arrrr!""* You're my friend, man!!!";;;
+;Well, I don't even know what to say, I'm so happy.;6;;
+6;We're going, Hrrraka's friend! If we find a rich Klisk, or a rich Rogue, or a rich Zorsan, or a rich Bor- *He cuts himself short. Finally, he manages to go on.* Arrr! No, not Bork! A very very rich Klisk, yeah! If we find one, we'll call you, we rob him together!!;;;
+;I don't insist… Right. He's signed off already.;-1;;2
