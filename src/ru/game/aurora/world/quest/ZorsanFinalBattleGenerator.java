@@ -179,6 +179,10 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             spaceStationDungeon.enter(world);
         } else if (dialog.getId().equals("zorsan_battle_before_start")) {
             updateWorld(world);
+            if (returnCode == 1) {
+                world.setCurrentRoom(earth.getOwner());
+                GUI.getInstance().getNifty().gotoScreen("earth_screen");
+            }
         }
     }
 

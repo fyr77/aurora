@@ -8,6 +8,7 @@ IN PROGRESS...
 * HP is now not shown on animals untill their corpse research is done
 * Chance of loosing a crewmember when ship is taking damage
 * Switched to LWJGL 2.9.3
+* Chance to reconfigure ship for final battle
 
 
 ===========================================

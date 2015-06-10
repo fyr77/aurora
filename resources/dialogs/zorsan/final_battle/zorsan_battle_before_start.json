@@ -369,6 +369,11 @@
           "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "1"
         }
       ]
     },
@@ -377,13 +382,28 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 23,
+          "targetStatementId": 24,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 23,
           "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
+    },
+    "24": {
+      "id": 24,
+      "replies": [
+        {
+          "returnValue": 1,
+          "targetStatementId": -1,
+          "replyText": "0"
         }
       ]
     }
