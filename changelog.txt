@@ -1,6 +1,14 @@
+
 VERSION 0.4.3
 
 IN PROGRESS...
+
++ Astro drones
+* Animal respawn on planets
+* HP is now not shown on animals untill their corpse research is done
+* Chance of loosing a crewmember when ship is taking damage
+* Switched to LWJGL 2.9.3
+
 
 ===========================================
 
