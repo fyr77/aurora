@@ -13,6 +13,7 @@ import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.Planet;
 
 import java.io.Serializable;
+import java.lang.ref.SoftReference;
 import java.util.Set;
 
 /**
@@ -37,9 +38,9 @@ public class AnimalSpeciesDesc implements Serializable {
 
     private final WeaponDesc weapon;
 
-    private transient Image image;
+    private transient SoftReference<Image> image;
 
-    private transient Image deadImage;
+    private transient SoftReference<Image> deadImage;
 
     private boolean canBePickedUp = true;
 
@@ -115,16 +116,16 @@ public class AnimalSpeciesDesc implements Serializable {
     }
 
     public Image getImage() {
-        return image;
+        return image.get();
     }
 
     public Image getDeadImage() {
-        return deadImage;
+        return deadImage.get();
     }
 
     public void setImages(Image img, Image deadImg) {
-        image = img;
-        deadImage = deadImg;
+        image = new SoftReference<>(img);
+        deadImage = new SoftReference<>(deadImg);
     }
 
     public Planet getHomePlanet() {

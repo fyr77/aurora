@@ -11,12 +11,13 @@ import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.SurfaceTypes;
 
 import java.io.Serializable;
+import java.lang.ref.SoftReference;
 
 
 public class PlantSpeciesDesc implements Serializable {
     private static final long serialVersionUID = 1l;
 
-    private transient Image image;
+    private transient SoftReference<Image> image;
 
     /**
      * This plant will grow only on this type of tiles
@@ -53,14 +54,14 @@ public class PlantSpeciesDesc implements Serializable {
     }
 
     public void setImage(Image image) {
-        this.image = image;
+        this.image = new SoftReference<>(image);
     }
 
     public Image getImage() {
         if (image == null) {
             AnimalGenerator.getInstance().getImageForPlant(this);
         }
-        return image;
+        return image.get();
     }
 
     public byte getPreferredSurfaceType() {

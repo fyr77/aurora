@@ -47,6 +47,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
      * 0 - reserved
      * tttt - tile type
      */
+    // todo: make a weak reference, generate using seed
     private final byte[][] surface;
 
     public SurfaceTileMap(int width, int height, byte[][] surface) {
