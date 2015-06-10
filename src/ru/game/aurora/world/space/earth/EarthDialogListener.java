@@ -150,6 +150,8 @@ public class EarthDialogListener implements DialogListener {
             flags.remove("diplomacy_report");
             flags.remove("diplomacy.all_done");
             earth.getDialogFlags().remove("diplomacy.all_done");
+
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.boy.sender", "letters.boy_2", "message"));
         }
 
         if (flags.containsKey("zorsan_war_info_quest")) {
@@ -169,6 +171,7 @@ public class EarthDialogListener implements DialogListener {
             world.getGlobalVariables().put("zorsan.war_preparations", 1);
             world.getGlobalVariables().put("zorsan.escape", 1);
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "zorsan_attack_1", "news"));
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.boy.sender", "letters.boy_3", "message"));
             world.addListener(new GameEventListener() {
                 private static final long serialVersionUID = -3584085663658592781L;
                 int days;

@@ -3,6 +3,7 @@ package ru.game.aurora.world.space.earth;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
@@ -23,6 +24,10 @@ public class EarthUpgradeUnlocker extends GameEventListener {
     @Override
     public boolean onReturnToEarth(World world) {
         final int technologyLevel = world.getPlayer().getEarthState().getTechnologyLevel();
+
+        if (technologyLevel > 50 && prevTechValue <= 50) {
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.boy.sender", "letters.boy", "message"));
+        }
 
         if (technologyLevel > 450 && prevTechValue <= 450) {
 
