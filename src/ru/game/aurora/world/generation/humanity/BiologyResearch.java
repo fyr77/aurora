@@ -52,6 +52,8 @@ public class BiologyResearch extends EarthResearch {
             );
 
             world.getPlayer().getEarthState().updateTechnologyLevel(100);
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.scientist.sender", "letters.scientist", "message"));
+            world.getGlobalVariables().put("messages.scientist.received", 1);
             return true;
         }
         return false;

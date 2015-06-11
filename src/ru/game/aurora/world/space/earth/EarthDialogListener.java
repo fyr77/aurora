@@ -172,6 +172,10 @@ public class EarthDialogListener implements DialogListener {
             world.getGlobalVariables().put("zorsan.escape", 1);
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "zorsan_attack_1", "news"));
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.boy.sender", "letters.boy_3", "message"));
+            if (world.getGlobalVariables().containsKey("messages.scientist.received") && ((Integer) world.getGlobalVariables().get("messages.scientist.received")) == 2) {
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.scientist.sender", "letters.scientist_3", "message"));
+                world.getGlobalVariables().put("messages.scientist.received", 3);
+            }
             world.addListener(new GameEventListener() {
                 private static final long serialVersionUID = -3584085663658592781L;
                 int days;

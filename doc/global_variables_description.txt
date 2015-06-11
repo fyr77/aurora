@@ -180,3 +180,5 @@ red_meat.attached
 Humanity
 
 earth.advanced_lasers - set by some research, humanity weapons are more powerful
+
+messages.scientist.received - if received a private messages from the scientist chain
