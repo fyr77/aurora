@@ -307,6 +307,7 @@ public class WorldGenerator implements Runnable {
         world.addListener(new StarSystemMusicChangeListener());
         world.addListener(new Environment.PlanetProcessor());
         world.addListener(new LoggingListener());
+        world.addListener(new PlanetLifeUpdater());
     }
 
     // perform some fast initialization in gui thread

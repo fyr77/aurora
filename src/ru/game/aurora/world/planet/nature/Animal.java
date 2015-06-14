@@ -38,7 +38,6 @@ public class Animal extends SurfaceLootObject implements IMonster {
 
     private final AnimalSpeciesDesc desc;
 
-    // todo: remove
     private Planet myPlanet;
 
     private ITileMap myMap;
@@ -73,6 +72,11 @@ public class Animal extends SurfaceLootObject implements IMonster {
         }
         controller = new MonsterController(myMap, this);
     }
+    
+    public Animal(Planet planet, int x, int y, AnimalSpeciesDesc desc) {
+        this(planet.getMap(), x, y, desc);
+        this.myPlanet = planet;
+    }
 
     @Override
     public void update(GameContainer container, World world) {
@@ -89,7 +93,7 @@ public class Animal extends SurfaceLootObject implements IMonster {
 
         if (myPlanet != null && myMap == null) {
             myMap = myPlanet.getMap();
-            myPlanet = null;
+            //myPlanet = null;
         }
     }
 
@@ -182,6 +186,10 @@ public class Animal extends SurfaceLootObject implements IMonster {
             if (!desc.isCanBePickedUp()) {
                 // this alien leaves no corpse
                 pickedUp = true;
+            }
+            
+            if(myPlanet != null) {
+                myPlanet.getFloraAndFauna().addAnimalCount(-1);
             }
         }
     }

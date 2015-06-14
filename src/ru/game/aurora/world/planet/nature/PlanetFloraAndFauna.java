@@ -36,6 +36,12 @@ public class PlanetFloraAndFauna implements Serializable
     private AnimalSpeciesDesc[] animalSpecies;
 
     private PlantSpeciesDesc[] plantSpecies;
+    
+    private int animalCount = 0;
+    
+    private int maxAnimals = 0;
+    
+    private int lastLifeUpdate = 0;
 
     public PlanetFloraAndFauna(String plantsStyleTag, String animalsStyleTag) {
         this.plantsStyleTag = plantsStyleTag;
@@ -69,5 +75,33 @@ public class PlanetFloraAndFauna implements Serializable
 
     public void setColorMap(Map<Integer, Slick2DColor> colorMap) {
         this.colorMap = colorMap;
+    }
+    
+    public int getAnimalCount() {
+        return this.animalCount;
+    }
+    
+    public int getMaxAnimals() {
+        return this.maxAnimals;
+    }
+    
+    public void setAnimalCount(int amount) {
+        this.animalCount = amount;
+    }
+    
+    public void addAnimalCount(int amount) {
+        this.animalCount += amount;
+    }
+    
+    public void setMaxAnimals(int amount) {
+        this.maxAnimals = amount;
+    }
+    
+    public int getLastLifeUpdate() {
+        return this.lastLifeUpdate;
+    }
+    
+    public void setLastLifeUpdate(int turn) {
+        this.lastLifeUpdate = turn;
     }
 }

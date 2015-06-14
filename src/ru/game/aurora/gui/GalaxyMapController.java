@@ -25,6 +25,8 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.BasePlanet;
+import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.PlanetLifeUpdater;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -288,6 +290,9 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     public void scanPlanet(BasePlanet planet) {
         if (planet == null) {
             return;
+        }
+        if(planet instanceof Planet) {
+            PlanetLifeUpdater.updateLife((Planet)planet);
         }
         GUI.getInstance().pushCurrentScreen();
         PlanetScanController psc = (PlanetScanController) GUI.getInstance().getNifty().findScreenController(PlanetScanController.class.getCanonicalName());

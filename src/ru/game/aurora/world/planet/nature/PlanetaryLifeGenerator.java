@@ -107,9 +107,17 @@ public class PlanetaryLifeGenerator {
         // generate random species descs. Currently only one
         final Random r = CommonRandom.getRandom();
         final int animalCount = r.nextInt(100 / planet.getSize()) + 5;
+        
+        addAnimals(planet, animalCount);
+        planet.getFloraAndFauna().setMaxAnimals(animalCount);
+    }
+    
+    public static void addAnimals(Planet planet, int amount) {
+        Random r = CommonRandom.getRandom();
         AnimalSpeciesDesc[] animalSpeciesDescs = planet.getFloraAndFauna().getAnimalSpecies();
-        for (int i = 0; i < animalCount; ++i) {
-            Animal a = new Animal(planet.getMap(), 0, 0, animalSpeciesDescs[r.nextInt(animalSpeciesDescs.length)]);
+        
+        for (int i = 0; i < amount; ++i) {
+            Animal a = new Animal(planet, 0, 0, animalSpeciesDescs[r.nextInt(animalSpeciesDescs.length)]);
             int animalX;
             int animalY;
             do {
@@ -119,5 +127,7 @@ public class PlanetaryLifeGenerator {
             a.setPos(animalX, animalY);
             planet.getPlanetObjects().add(a);
         }
+        
+        planet.getFloraAndFauna().addAnimalCount(amount);
     }
 }
