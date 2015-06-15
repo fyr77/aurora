@@ -29,6 +29,11 @@ public class EarthUpgradeUnlocker extends GameEventListener {
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.boy.sender", "letters.boy", "message"));
         }
 
+        if (technologyLevel > 1500 && world.getGlobalVariables().containsKey("messages.scientist.received") && ((Integer) world.getGlobalVariables().get("messages.scientist.received") == 1)) {
+            world.getGlobalVariables().put("messages.scientist.received", 2);
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "messages.scientist.sender", "messages.scientist_2", "message"));
+        }
+
         if (technologyLevel > 450 && prevTechValue <= 450) {
 
             // unlock missiles
