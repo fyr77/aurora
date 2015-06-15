@@ -4,6 +4,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.World;
 
 import java.util.Map;
@@ -40,6 +41,10 @@ public class EarthProgressDialogListener implements DialogListener {
         world.setCurrentRoom(earth.getOwner());
         GUI.getInstance().getNifty().gotoScreen("earth_screen");
 
+        if (world.getPlayer().getShip().getLostCrewMembers() > 0 && !world.getGlobalVariables().containsKey("messages.mother.received")) {
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.mother.sender", "letters.mother", "message"));
+            world.getGlobalVariables().put("messages.mother.received", 1);
+        }
         // refilling crew
         world.getPlayer().getShip().refillCrew(world);
 

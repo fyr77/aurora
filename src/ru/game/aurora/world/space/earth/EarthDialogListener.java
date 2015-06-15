@@ -164,6 +164,11 @@ public class EarthDialogListener implements DialogListener {
             world.getGlobalVariables().remove("colony_search.explored");
             world.addListener(new ColonizationListener(world));
             flags.remove("colony_info_dumped");
+
+            if (world.getGlobalVariables().containsKey("messages.mother.received") && world.getGlobalVariables().get("messages.mother.received") == 1) {
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.mother.sender", "letters.mother_2", "message"));
+                world.getGlobalVariables().put("messages.mother.received", 2);
+            }
         }
 
         if (flags.containsKey("zorsan_war_info_update")) {
@@ -172,6 +177,10 @@ public class EarthDialogListener implements DialogListener {
             world.getGlobalVariables().put("zorsan.escape", 1);
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "zorsan_attack_1", "news"));
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.boy.sender", "letters.boy_3", "message"));
+            if (world.getGlobalVariables().containsKey("messages.mother.received")) {
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.mother.sender", "letters.mother_3", "message"));
+                world.getGlobalVariables().put("messages.mother.received", 3);
+            }
             if (world.getGlobalVariables().containsKey("messages.scientist.received") && ((Integer) world.getGlobalVariables().get("messages.scientist.received")) == 2) {
                 world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.scientist.sender", "letters.scientist_3", "message"));
                 world.getGlobalVariables().put("messages.scientist.received", 3);

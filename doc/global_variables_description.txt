@@ -182,3 +182,4 @@ Humanity
 earth.advanced_lasers - set by some research, humanity weapons are more powerful
 
 messages.scientist.received - if received a private messages from the scientist chain
+messages.mother.received - if received a private messages from mother of a killed crew member

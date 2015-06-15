@@ -9,7 +9,8 @@ IN PROGRESS...
 * Chance of loosing a crewmember when ship is taking damage
 * Switched to LWJGL 2.9.3
 * Chance to reconfigure ship for final battle
-
+* Animals respawn on planets
++ New private messages
 
 ===========================================
 
