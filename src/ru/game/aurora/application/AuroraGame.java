@@ -61,6 +61,13 @@ public class AuroraGame extends NiftyOverlayGame {
     public AuroraGame() {
     }
 
+    // returns a name of the directory where the game can store its data like saves
+    // writing to installation directory is a bad idea if game is installed on UAC-protected disk
+    public static File getOutDir() {
+        File homeDir = new File(System.getProperty("user.home"));
+        return new File(homeDir, "AuroraRL");
+    }
+
     public static List<Resolution> getAvailableResolutions() {
         Set<Long> resolutionset = new HashSet<>();
         List<Resolution> result = new ArrayList<>();

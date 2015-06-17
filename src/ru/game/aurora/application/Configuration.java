@@ -71,7 +71,7 @@ public class Configuration {
     }
 
     public static void saveSystemProperties() {
-        try (FileOutputStream fos = new FileOutputStream("system.properties")) {
+        try (FileOutputStream fos = new FileOutputStream(new File(AuroraGame.getOutDir(), "system.properties"))) {
             systemProperties.store(fos, null);
         } catch (IOException e) {
             logger.error("Failed to save system.properties", e);

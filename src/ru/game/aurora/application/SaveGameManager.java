@@ -104,14 +104,15 @@ public class SaveGameManager {
     }
 
     public static void init() throws IOException {
-        File saveDir = new File("saves");
+        final File outDir = AuroraGame.getOutDir();
+        File saveDir = new File(outDir, "saves");
         if (!saveDir.exists()) {
             saveDir.mkdir();
         }
 
         for (int i = 0, slotsLength = slots.length; i < slotsLength; i++) {
             String fileName = "saves/save_" + i + ".bin";
-            File f = new File(fileName);
+            File f = new File(outDir, fileName);
             if (f.exists()) {
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
                 try {
@@ -126,7 +127,7 @@ public class SaveGameManager {
         }
 
         final String autosaveFileName = "saves/autosave.bin";
-        File autosave = new File(autosaveFileName);
+        File autosave = new File(outDir, autosaveFileName);
         if (autosave.exists()) {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(autosave));
             try {
@@ -141,6 +142,7 @@ public class SaveGameManager {
         }
 
     }
+
 
     public static void saveGame(SaveGameSlot slot, World world) {
         try {
@@ -174,7 +176,7 @@ public class SaveGameManager {
 
             slot.saveData = bos.toByteArray();
             slot.date = new Date();
-            oos = new ObjectOutputStream(new FileOutputStream(slot.fileName));
+            oos = new ObjectOutputStream(new FileOutputStream(new File(AuroraGame.getOutDir(), slot.fileName)));
             oos.writeObject(slot);
             oos.close();
         } catch (Exception ex) {
