@@ -165,7 +165,7 @@ public class EarthDialogListener implements DialogListener {
             world.addListener(new ColonizationListener(world));
             flags.remove("colony_info_dumped");
 
-            if (world.getGlobalVariables().containsKey("messages.mother.received") && world.getGlobalVariables().get("messages.mother.received") == 1) {
+            if (world.getGlobalVariables().containsKey("messages.mother.received") && ((Integer)world.getGlobalVariables().get("messages.mother.received") == 1)) {
                 world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.mother.sender", "letters.mother_2", "message"));
                 world.getGlobalVariables().put("messages.mother.received", 2);
             }

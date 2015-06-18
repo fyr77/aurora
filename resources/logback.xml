@@ -11,7 +11,7 @@
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
-        <File>aurora.log</File>
+        <File>${user.home}/AuroraRL/aurora.log</File>
     </appender>
 
     <logger name="de.lessvoid.nifty" level="WARN"/>
