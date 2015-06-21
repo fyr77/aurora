@@ -40,7 +40,7 @@ public class Configuration {
 
         systemProperties = new Properties();
         try {
-            File systemPropsFile = new File("system.properties");
+            File systemPropsFile = new File(AuroraGame.getOutDir(), "system.properties");
             if (systemPropsFile.exists()) {
                 InputStream is = new FileInputStream(systemPropsFile);
                 systemProperties.load(is);

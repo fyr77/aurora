@@ -15,7 +15,7 @@ import ru.game.aurora.player.engineering.EngineeringProject;
 public class EngineeringListViewConverter implements ListBox.ListBoxViewConverter {
     private String getText(Object obj) {
         EngineeringProject ep = (EngineeringProject) obj;
-        return ep.getLocalizedName("engineering") + ", engineers: " + ep.getEngineersAssigned();
+        return ep.getLocalizedName("engineering") + "\nEngineers: " + ep.getEngineersAssigned();
     }
 
     @Override

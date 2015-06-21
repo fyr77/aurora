@@ -185,7 +185,7 @@ public class SaveGameManager {
     }
 
     public static World loadGame(SaveGameSlot slot) {
-        File f = new File(slot.fileName);
+        File f = new File(AuroraGame.getOutDir(), slot.fileName);
         if (!f.exists()) {
             return null;
         }

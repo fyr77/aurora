@@ -3,7 +3,9 @@
 
     <controlDefinition name="engineering_line">
         <panel childLayout="horizontal" width="100%" align="right" padding="2px,5px">
-            <control id="#name_text" name="label" align="left" textHAlign="left" width="*"/>
+            <panel width="*" childLayout="horizontal">
+                <control id="#name_text" name="label" align="left" textHAlign="left" width="90%" wrap="true"/>
+            </panel>
             <control id="#decrease_engineers" name="button" width="32px" label="-">
                 <interact onClick="onDecreaseEngineersButtonClicked()"/>
             </control>
