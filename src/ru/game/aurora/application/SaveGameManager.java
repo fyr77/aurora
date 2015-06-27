@@ -113,17 +113,23 @@ public class SaveGameManager {
         for (int i = 0, slotsLength = slots.length; i < slotsLength; i++) {
             String fileName = "saves/save_" + i + ".bin";
             File f = new File(outDir, fileName);
-            if (f.exists()) {
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-                try {
-                    slots[i] = (SaveGameSlot) ois.readObject();
-                } catch (Exception e) {
-                    logger.error("Failed to load save", e);
+            try {
+                if (f.exists()) {
+                    ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+                    try {
+                        slots[i] = (SaveGameSlot) ois.readObject();
+                    } catch (Exception e) {
+                        logger.error("Failed to load save", e);
+                    }
+                    ois.close();
+                } else {
+                    slots[i] = new SaveGameSlot(fileName);
                 }
-                ois.close();
-            } else {
+            } catch (Exception e) {
+                logger.error("Save game file in slot " + i + " is corrupted and can not be loaded", e);
                 slots[i] = new SaveGameSlot(fileName);
             }
+
         }
 
         final String autosaveFileName = "saves/autosave.bin";
