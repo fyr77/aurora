@@ -45,8 +45,8 @@ public class PlanetMapRenderer {
             Image overlay = new Image((int) container.getWidth(), (int) container.getHeight());
             Graphics overlayGraphics = overlay.getGraphics();
             overlayGraphics.setColor(BACKGROUND_COLOR);
-            for (int i = 0; i < container.getWidth(); ++i) {
-                for (int j = 0; j < container.getHeight(); ++j) {
+            for (int i = 0; i < planet.getMap().getWidthInTiles(); ++i) {
+                for (int j = 0; j < planet.getMap().getHeightInTiles(); ++j) {
                     if (!planet.getMap().isTileVisible(i, j)) {
                         overlayGraphics.fillRect(i * newTileWidth, j * newTileHeight, newTileWidth, newTileHeight);
                     }

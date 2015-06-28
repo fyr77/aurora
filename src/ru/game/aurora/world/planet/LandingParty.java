@@ -188,7 +188,7 @@ public class LandingParty extends BaseGameObject {
 
     public void onReturnToShip(World world) {
         if (collectedGeodata > 0) {
-            final int collectedGeodata1 = getCollectedGeodata();
+            final int collectedGeodata1 = (int) Math.round(Configuration.getDoubleProperty("research.geodata.multiplier") * getCollectedGeodata());
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.collect_geodata"), collectedGeodata1));
             final ResearchState researchState = world.getPlayer().getResearchState();
             if (researchState.getGeodata().getRaw() == 0) {
