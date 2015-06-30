@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="6.0.2" transformSequenceNumber="5">
-  <directoryPresets config="D:/Prog/Aurora/build" />
+  <directoryPresets config="D:/Prog/Aurora/resources/sprites/icons" />
   <application name="Aurora RL" distributionSourceDir="" applicationId="1414-4994-3501-4573" mediaDir="D:/Prog/Aurora/build" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="AuroraRL" publisher="Sun Dogs" publisherWeb="http://auroraroguelike.com" version="0.4.3" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="8c4d07cd4716c5c5" javaMinVersion="1.7" javaMaxVersion="" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="true" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
@@ -63,7 +63,7 @@
         <content />
       </infoPlist>
       <iconImageFiles>
-        <file path="D:/Prog/Aurora/build/distributions/Aurora-0.4.2/bin/resources/sprites/icons/icon_32.png" />
+        <file path="D:/Prog/Aurora/resources/sprites/icons/icon_32.png" />
       </iconImageFiles>
     </launcher>
   </launchers>
