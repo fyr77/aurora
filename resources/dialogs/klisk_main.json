@@ -82,7 +82,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 6,
-          "replyText": "2"
+          "replyText": "2",
+          "flags": {
+            "full_info": "true"
+          }
         }
       ]
     },

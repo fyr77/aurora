@@ -8,7 +8,7 @@
 2;Sure. Everything we've talked about is already sent to you. Will you give me some information about your civilization?;;;;
 ;No, I'd rather talk about it later. I'm sorry.;4;;;
 ;Well, I guess so. But I can give you only superficial information.;5;;;base_info
-;Sure. You'll find all the information you need in this folder.;6;;;
+;Sure. You'll find all the information you need in this folder.;6;;;full_info
 4;What a shame. But it's all up to you, the human commander. The Trading Codex gives the right to do what you think is necessary. Do you need something else on our space station?;;;;
 ;Thank you. Yes, I need one more thing.;0;;;
 ;Unfortunately, I have no time. Thank you and good luck. Open the airlock door!;-1;;;

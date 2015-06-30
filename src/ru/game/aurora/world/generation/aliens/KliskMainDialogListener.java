@@ -84,7 +84,7 @@ public class KliskMainDialogListener implements DialogListener {
             flags.remove("planet_info");
         }
 
-        if (returnCode >= 100 && returnCode <= 500) {
+        if (flags.containsKey("base_info") || flags.containsKey("full_info")) {
             if (flags.containsKey("klisk.discount")) {
                 world.getGlobalVariables().put("klisk.discount", 10);
             }
@@ -104,6 +104,13 @@ public class KliskMainDialogListener implements DialogListener {
                 research = new AlienRaceResearch("zorsan", (AlienRace) world.getFactions().get(ZorsanGenerator.NAME), new JournalEntry("zorsan", "main"));
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
             }
+            world.getPlayer().getJournal().questCompleted("last_beacon", "klisk_homeworlds", "end");
+            world.getGlobalVariables().put("klisk.coordinates_traded", true);
+
+            ((AlienRace) world.getFactions().get(ZorsanGenerator.NAME)).setKnown(true);
+            ((AlienRace) world.getFactions().get(BorkGenerator.NAME)).setKnown(true);
+            ((AlienRace) world.getFactions().get(RoguesGenerator.NAME)).setKnown(true);
+            ((AlienRace) world.getFactions().get(KliskGenerator.NAME)).setKnown(true);
 
 
             if (flags.containsKey("planet_info") || world.getGlobalVariables().containsKey("klisk.planet_info")) {
@@ -121,13 +128,7 @@ public class KliskMainDialogListener implements DialogListener {
                     new EarthInvasionGenerator().updateWorld(world);
                 }
             }
-            world.getPlayer().getJournal().questCompleted("last_beacon", "klisk_homeworlds", "end");
-            world.getGlobalVariables().put("klisk.coordinates_traded", true);
 
-            ((AlienRace) world.getFactions().get(ZorsanGenerator.NAME)).setKnown(true);
-            ((AlienRace) world.getFactions().get(BorkGenerator.NAME)).setKnown(true);
-            ((AlienRace) world.getFactions().get(RoguesGenerator.NAME)).setKnown(true);
-            ((AlienRace) world.getFactions().get(KliskGenerator.NAME)).setKnown(true);
         }
 
         if (returnCode == 101) {
