@@ -11,7 +11,7 @@
     <screen id="dialog_screen" controller="ru.game.aurora.gui.DialogController">
         <layer childLayout="absolute">
             <control id="dialog_window" name="window" title="${gui.dialog.caption}" closeable="false" width="80%" height="576px"
-                     x="10%" y="20%">
+                     x="10%" y="10%">
                 <panel childLayout="vertical">
                     <panel childLayout="horizontal">
                         <panel id="dialogIcon" width="256px" height="256px"/>
