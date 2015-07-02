@@ -65,17 +65,13 @@ public class KliskMainDialogListener implements DialogListener {
                 TradeScreenController.openTrade("klisk_dialog", getDefaultTradeInventory(world), world.getFactions().get(KliskGenerator.NAME));
                 break;
 
-// initial quest - trading of race information
 
-            case 500:
-                if (flags.containsKey("base_info")) {
-                    world.getPlayer().changeResource(world, Resources.CREDITS, 5);
-                } else {
-                    world.getPlayer().changeResource(world, Resources.CREDITS, 10);
-                }
-                break;
+        }
 
-///////
+        if (flags.containsKey("small_reward")) {
+            world.getPlayer().changeResource(world, Resources.CREDITS, 5);
+        } else if (flags.containsKey("large_reward")) {
+            world.getPlayer().changeResource(world, Resources.CREDITS, 10);
         }
 
         if (flags.containsKey("planet_info")) {

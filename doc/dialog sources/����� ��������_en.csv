@@ -17,7 +17,7 @@
 ;I'd like to know more about your people.;7;!klisk.klisk_info;200;klisk.klisk_info
 ;What can you say about the rogues?;7;!klisk.rogues_info;300;klisk.rogues_info
 ;Tell me about the zorsans. It's an empire! Sounds interesting.;7;!klisk.zorsan_info;400;klisk.zorsan_info
-;Neither. I'd like to get credits.;10;;500;
+;Neither. I'd like to get credits.;10;;500;small_reward
 ;Can you say anything about the gardeners?;8;;;
 8;*refusing cracking* Unfortunately, I can't do that. The first reason is that we know nothing about the gardeners. The second reason is that they don't have any diplomatic relationships with the other races. You'll have to choose something else.;;;;
 ;Well, I guess I have no other choice, but to choose something else.;5;;;
@@ -42,11 +42,11 @@
 ;I'd go with the rogues.;14;!klisk.rogues_info;300;klisk.rogues_info
 ;Tell me more about the zorsans.;14;!klisk.zorsan_info;400;klisk.zorsan_info
 ;What's up with the gardeners?;13;;;
-;Nothing. I'd prefer to get the money.;10;;500;
+;Nothing. I'd prefer to get the money.;10;;500;large_reward
 13;They don't have any diplomatic relationships with the other races, so there is almost no information about them. You have to choose something else.;;;;
 ;What a shame. I was really looking forward to receiving that information. But that's okay. Could you please repeat the whole list?;6;;;
 14;That's a good decision. I'll send the information on your computer. What should we do with your bonus?;;;;
-;Cash it out.;15;;500;
+;Cash it out.;15;;500;small_reward
 ;Give me one more information package.;5;;;
 15;As you say, commander. Do you want to look on what you can spend your money on?;;;;
 ;Why not? What services does your station provide?;0;;;

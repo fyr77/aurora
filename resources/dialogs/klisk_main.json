@@ -188,7 +188,10 @@
         {
           "returnValue": 500,
           "targetStatementId": 10,
-          "replyText": "4"
+          "replyText": "4",
+          "flags": {
+            "small_reward": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -264,7 +267,10 @@
         {
           "returnValue": 500,
           "targetStatementId": 10,
-          "replyText": "5"
+          "replyText": "5",
+          "flags": {
+            "large_reward": "true"
+          }
         }
       ]
     },
@@ -354,7 +360,10 @@
         {
           "returnValue": 500,
           "targetStatementId": 15,
-          "replyText": "0"
+          "replyText": "0",
+          "flags": {
+            "small_reward": "true"
+          }
         },
         {
           "returnValue": 0,

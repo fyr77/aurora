@@ -8,10 +8,7 @@ package ru.game.aurora.world.space;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.*;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.BlasterShotEffect;
@@ -257,7 +254,7 @@ public class NPCShip extends BaseGameObject implements IMonster {
         currentStarSystem.addEffect(new ExplosionEffect(x, y, "ship_explosion", false, true));
 
         if (loot != null) {
-            if (CommonRandom.getRandom().nextBoolean()) {
+            if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("ship.drop_chance")) {
                 currentStarSystem.getShips().add(new SpaceDebris(x, y, loot));
             }
         }

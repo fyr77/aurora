@@ -116,6 +116,9 @@ public class AnimalSpeciesDesc implements Serializable {
     }
 
     public Image getImage() {
+        if (image == null) {
+            return null;
+        }
         return image.get();
     }
 
