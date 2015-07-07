@@ -104,9 +104,10 @@ public class Animal extends SurfaceLootObject implements IMonster {
             AnimalGenerator.getInstance().getImageForAnimal(desc);
         }
         final Image image = hp > 0 ? desc.getImage() : desc.getDeadImage();
-        graphics.drawImage(image
-                , myMap.isWrapped() ? camera.getXCoordWrapped(x, myMap.getWidthInTiles()) : camera.getXCoord(x)
-                , myMap.isWrapped() ? camera.getYCoordWrapped(y, myMap.getHeightInTiles()) : camera.getYCoord(y));
+        
+        float coordX = myMap.isWrapped() ? camera.getXCoordWrapped(x, myMap.getWidthInTiles()) : camera.getXCoord(x);
+        float coordY = myMap.isWrapped() ? camera.getYCoordWrapped(y, myMap.getHeightInTiles()) : camera.getYCoord(y);
+        graphics.drawImage(image, coordX, coordY);
 
         String hpText;
         
@@ -122,7 +123,7 @@ public class Animal extends SurfaceLootObject implements IMonster {
         } else {
             graphics.setColor(Color.white);
         }
-        graphics.drawString(hpText, camera.getXCoord(x) + getOffsetX(), camera.getYCoord(y) + getOffsetY());
+        graphics.drawString(hpText, coordX + getOffsetX(), coordY + getOffsetY());
     }
 
     public AnimalSpeciesDesc getDesc() {
