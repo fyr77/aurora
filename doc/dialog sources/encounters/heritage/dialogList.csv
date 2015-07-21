@@ -1,0 +1,9 @@
+1Первый монстр.csv;heritage_first_monster;colonist_marine_dialog;encounters/heritage
+2Гордон вызывает.csv;heritage_gordon;scientist_dialog;encounters/heritage
+5Диалог с клиском 3.csv;heritage_klisk;klisk_dialog;encounters/heritage
+6Второй монстр.csv;heritage_second_monster;colonist_marine_dialog;encounters/heritage
+7Третий монстр.csv;heritage_third_monster;colonist_marine_dialog;encounters/heritage
+8Четвёртый монстр.csv;heritage_third_monster;colonist_marine_dialog;encounters/heritage
+9Пятый монстр.csv;heritage_third_monster;colonist_marine_dialog;encounters/heritage
+10Диалог с монстром.csv;heritage_monster_dialog;klisk_mutant_dialog;encounters/heritage
+11Диалог с клиском 4 - финал.csv;heritage_klisk_final;klisk_dialog;encounters/heritage
