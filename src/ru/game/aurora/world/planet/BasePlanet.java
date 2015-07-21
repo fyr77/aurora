@@ -19,6 +19,7 @@ import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -109,6 +110,9 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
     }
 
     public List<BasePlanet> getSatellites() {
+        if (satellites == null) {
+            return Collections.emptyList();
+        }
         return satellites;
     }
 

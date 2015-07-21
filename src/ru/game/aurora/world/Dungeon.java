@@ -32,6 +32,11 @@ public class Dungeon implements Room, IDungeon {
     private String playlistName;
 
     /**
+     * Just a custom tag that can be used to store dungeon id or anything else
+     */
+    private String tag;
+
+    /**
      * If dungeon has an enter dialog - first show that dialog, and only if it ends with return code 1 - actually
      * enter dungeon
      */
@@ -163,5 +168,13 @@ public class Dungeon implements Room, IDungeon {
 
     public void setCommanderInParty(boolean commanderInParty) {
         isCommanderInParty = commanderInParty;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

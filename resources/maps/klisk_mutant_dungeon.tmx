@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="30" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="sand_and_rock" tilewidth="64" tileheight="64">
+  <image source="sand_and_rock.png" width="256" height="1024"/>
+ </tileset>
+ <tileset firstgid="65" name="editor_tileset" tilewidth="64" tileheight="64">
+  <image source="editor_tileset.png" width="256" height="192"/>
+ </tileset>
+ <layer name="пол" width="20" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RMQ4AIAhDUS5mvP+tnEgcqqXIJj9h0xeMZn82DlNp+cxCy72oqXhoMm+t8pileOjezUEe24HttpuRs1EPnWeW6mX+4sWLVmkxu+u6TmkBLSC/sWAJAAA=
+  </data>
+ </layer>
+ <objectgroup name="Слой объектов 1" width="20" height="30">
+  <object type="entryPoint" gid="65" x="896" y="513" width="64" height="64"/>
+  <object type="exitPoint" gid="66" x="896" y="512" width="64" height="64"/>
+  <object type="ru.game.aurora.world.dungeon.KillAllMonstersCondition" gid="67" x="822" y="816"/>
+ </objectgroup>
+ <layer name="углы" width="20" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAW0BsYjyDwTIDaiklm2QGwBxDZUMguGyfUvyG+GQGyOZh65ZtETWCJhSsLTjAHV77A4oqZ55IYpCJgyYMbRKBgFo2AUDAQAAELk0KhgCQAA
+  </data>
+ </layer>
+ <layer name="стены" width="20" height="30">
+  <properties>
+   <property name="isObstacle" value="true"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2SQQ6AIAwEUVERvfj/z4qHJuumIpSjTNIDpAyl1Ln/4lMMEGujZ6T92eD1ioc5K5xTYZ7U+tWPUp/GYvTFFFuKg9a7wRfhnORqdQkB7uV6uAbx3b3M/U9wz/e83Y9vydXI+Vouz1WNT5sNdGFPc2i9ZEpd6JS/QHduRizuFk+n0/knF0skNmFgCQAA
+  </data>
+ </layer>
+</map>
