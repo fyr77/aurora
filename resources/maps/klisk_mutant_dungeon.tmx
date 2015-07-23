@@ -14,7 +14,7 @@
  <objectgroup name="Слой объектов 1" width="20" height="30">
   <object type="entryPoint" gid="65" x="896" y="513" width="64" height="64"/>
   <object type="exitPoint" gid="66" x="896" y="512" width="64" height="64"/>
-  <object type="ru.game.aurora.world.dungeon.KillAllMonstersCondition" gid="67" x="822" y="816"/>
+  <object type="ru.game.aurora.world.dungeon.DungeonPlaceholder" gid="68" x="192" y="512" width="64" height="64"/>
  </objectgroup>
  <layer name="углы" width="20" height="30">
   <data encoding="base64" compression="gzip">

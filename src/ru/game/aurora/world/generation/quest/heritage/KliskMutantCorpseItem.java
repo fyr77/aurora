@@ -1,0 +1,74 @@
+package ru.game.aurora.world.generation.quest.heritage;
+
+import org.newdawn.slick.Image;
+import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.npc.Faction;
+import ru.game.aurora.world.BaseGameObject;
+import ru.game.aurora.world.World;
+import ru.game.aurora.world.planet.InventoryItem;
+
+/**
+ * Collectable body of a dead klisk mutant
+ */
+public class KliskMutantCorpseItem extends BaseGameObject implements InventoryItem {
+    @Override
+    public String getId() {
+        return "klisk_mutant_corpse";
+    }
+
+    @Override
+    public String getName() {
+        return Localization.getText("journal", "heritage.corpse_name");
+    }
+
+    @Override
+    public String getDescription() {
+        return Localization.getText("journal", "heritage.corpse_desc");
+    }
+
+    @Override
+    public Image getImage() {
+        return ResourceManager.getInstance().getImage("klisk_mutant_dead");
+    }
+
+    @Override
+    public double getPrice() {
+        return 0;
+    }
+
+    @Override
+    public void onReceived(World world, int amount) {
+        world.getGlobalVariables().put("heritage.monster_collected", true);
+    }
+
+    @Override
+    public void onLost(World world, int amount) {
+
+    }
+
+    @Override
+    public boolean isDumpable() {
+        return true;
+    }
+
+    @Override
+    public boolean isUsable() {
+        return false;
+    }
+
+    @Override
+    public boolean isUnique() {
+        return false;
+    }
+
+    @Override
+    public int getWeight() {
+        return 1;
+    }
+
+    @Override
+    public boolean canBeSoldTo(World world, Faction faction) {
+        return false;
+    }
+}

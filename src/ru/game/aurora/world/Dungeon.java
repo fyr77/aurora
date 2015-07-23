@@ -9,6 +9,7 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.planet.LandingParty;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,9 +33,9 @@ public class Dungeon implements Room, IDungeon {
     private String playlistName;
 
     /**
-     * Just a custom tag that can be used to store dungeon id or anything else
+     * Just a custom userData that can be used to store dungeon id or anything else
      */
-    private String tag;
+    private Map<String, String> userData;
 
     /**
      * If dungeon has an enter dialog - first show that dialog, and only if it ends with return code 1 - actually
@@ -170,11 +171,11 @@ public class Dungeon implements Room, IDungeon {
         isCommanderInParty = commanderInParty;
     }
 
-    public String getTag() {
-        return tag;
+    public Map<String, String> getUserData() {
+        if (userData == null) {
+            userData = new HashMap<>();
+        }
+        return userData;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
 }

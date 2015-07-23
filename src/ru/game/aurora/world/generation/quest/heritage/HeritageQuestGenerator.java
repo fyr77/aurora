@@ -1,8 +1,12 @@
 package ru.game.aurora.world.generation.quest.heritage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.*;
+import ru.game.aurora.world.dungeon.DungeonPlaceholder;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.planet.DungeonEntrance;
@@ -20,6 +24,10 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
 
     private static final String dungeonTag = "heritage";
 
+    private static final String dungeonNumberTag = "number";
+
+    private static final Logger logger = LoggerFactory.getLogger(HeritageQuestGenerator.class);
+
     @Override
     public void updateWorld(World world) {
 
@@ -29,6 +37,7 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
         for (int i = 0; i < monstersCount; ++i) {
             StarSystem nextSS = world.getGalaxyMap().getRandomNonQuestStarsystemInRange(kliskHomeworld.getX(), kliskHomeworld.getY(), range, new HasPlanetWithLifeFilter());
             if (nextSS == null) {
+                logger.warn("No suitable planets found withing {} range from klisk homeworld, increasing range", range);
                 range += klisk.getTravelDistance();
                 --i;
                 continue;
@@ -36,7 +45,7 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
 
             Planet p = HasPlanetWithLifeFilter.getPlanetWithLife(nextSS);
             Dungeon dungeon = new Dungeon(world, new AuroraTiledMap("maps/klisk_mutant_dungeon.tmx"), p);
-            dungeon.setTag(dungeonTag);
+            dungeon.getUserData().put(dungeonTag, "");
             dungeon.getController().addListener(this);
             DungeonEntrance entrance = new DungeonEntrance(p, 0, 0, "cavern", dungeon);
             p.setNearestFreePoint(entrance, CommonRandom.getRandom().nextInt(p.getWidth()), CommonRandom.getRandom().nextInt(p.getHeight()));
@@ -50,8 +59,65 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
 
     }
 
+    private GameObject createMonster(ITileMap map) {
+
+        return null;
+    }
+
     @Override
     public boolean onPlayerEnteredDungeon(World world, Dungeon dungeon) {
-        return super.onPlayerEnteredDungeon(world, dungeon);
+        if (dungeon.getUserData().containsKey(dungeonTag)) {
+            return false;
+        }
+        logger.info("Player has entered dungeon of a Heritage quest");
+        // check what dungeon is it
+
+        if (dungeon.getUserData().containsKey(dungeonNumberTag)) {
+            // player already entered this dungeon before, no need to show new dialogs
+            return false;
+        }
+
+        Dialog enterDialog;
+        Integer monstersKilled = (Integer) world.getGlobalVariables().get("heritage.monsters_killed");
+        if (monstersKilled == null) {
+            monstersKilled = 0;
+        }
+
+        GameObject monster;
+
+        DungeonPlaceholder placeholder;
+
+        for (GameObject go : dungeon.getMap().getObjects()) {
+            if (go instanceof DungeonPlaceholder) {
+                placeholder = (DungeonPlaceholder) go;
+                break;
+            }
+        }
+
+        switch (monstersKilled) {
+            case 0:
+                enterDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_first_monster.json");
+                monster = createMonster(dungeon.getMap());
+                break;
+            case 1:
+                enterDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_second_monster.json");
+                monster = createMonster(dungeon.getMap());
+                break;
+            case 2:
+                enterDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_third_monster.json");
+                monster = createMonster(dungeon.getMap());
+                break;
+            case 3:
+                enterDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_fourth_monster.json");
+                monster = new KliskMutantCorpseItem();
+                break;
+            case 4:
+                enterDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_fourth_monster.json");
+                monster = createMonster(dungeon.getMap());
+                break;
+
+        }
+
+        return true;
     }
 }
