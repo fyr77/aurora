@@ -13,22 +13,46 @@
         {
           "returnValue": 0,
           "targetStatementId": 2,
-          "replyText": "1"
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "heritage.second_monster_killed",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
           "targetStatementId": 3,
-          "replyText": "2"
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "heritage.third_monster_killed",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
           "targetStatementId": 4,
-          "replyText": "3"
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "heritage.fourth_monster_killed",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
           "targetStatementId": 6,
-          "replyText": "4"
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "Heritage.fifth_monster_killed",
+              "type": "SET"
+            }
+          ]
         }
       ]
     },

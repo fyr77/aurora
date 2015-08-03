@@ -18,6 +18,7 @@ import ru.game.aurora.player.research.projects.AlienRaceResearch;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.EarthInvasionGenerator;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.quest.JournalEntry;
@@ -64,8 +65,36 @@ public class KliskMainDialogListener implements DialogListener {
             case 2:
                 TradeScreenController.openTrade("klisk_dialog", getDefaultTradeInventory(world), world.getFactions().get(KliskGenerator.NAME));
                 break;
+            case 128:
+                // this is the heritage quest
+                world.getGlobalVariables().put("heritage.quest_started", true);
+                world.getPlayer().changeResource(world, Resources.CREDITS, 10);
+                Dialog heritageStartDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_klisk.json");
+                heritageStartDialog.addListener(new DialogListener() {
+                    @Override
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                        if (returnCode == 1) {
+                            // player has accepted the quest to hunt klisk mutants
+                            world.getReputation().updateReputation(KliskGenerator.NAME, HumanityGenerator.NAME, 1);
+                            world.getGlobalVariables().put("heritage.quest_started", true);
+                            world.getPlayer().getJournal().addQuestEntries("heritage", "klisk_accept");
+                        } else {
+                            world.getPlayer().getJournal().questCompleted("heritage", "klisk_refuse");
+                            world.getGlobalVariables().put("heritage.quest_started", false);
+                        }
+                    }
+                });
+                world.addOverlayWindow(heritageStartDialog);
+                break;
+            case 129:
+                world.getPlayer().changeResource(world, Resources.CREDITS, 30);
+                Dialog heritageEndDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_klisk_final.json");
+                heritageEndDialog.addListener(new DialogListener() {
+                    @Override
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
 
-
+                    }
+                });
         }
 
         if (flags.containsKey("small_reward")) {

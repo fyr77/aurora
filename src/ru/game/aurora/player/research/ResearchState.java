@@ -83,7 +83,7 @@ public class ResearchState implements Serializable {
             int realScientists = state.scientists;
             if (world.getPlayer().getMainCountry() == EarthCountry.ASIA) {
                 // asia has a research bonus
-                realScientists = (int) Math.ceil(realScientists * Configuration.getDoubleProperty("player.asia.researchMultiplier"));
+                realScientists = (int) Math.ceil(world.getPlayer().getResearchMultiplier() * realScientists * Configuration.getDoubleProperty("player.asia.researchMultiplier"));
             }
             state.desc.update(world, realScientists);
             if (state.desc.isCompleted()) {

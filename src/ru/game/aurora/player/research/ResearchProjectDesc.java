@@ -56,6 +56,8 @@ public abstract class ResearchProjectDesc extends Listenable {
      */
     protected List<StarSystem> targetStarSystems;
 
+    protected String customClass;
+
     protected ResearchProjectDesc(String id, String icon) {
         this.id = id;
         this.icon = icon;
@@ -172,5 +174,9 @@ public abstract class ResearchProjectDesc extends Listenable {
             targetStarSystems = new ArrayList<>();
         }
         return targetStarSystems;
+    }
+
+    public String getCustomClass() {
+        return customClass;
     }
 }

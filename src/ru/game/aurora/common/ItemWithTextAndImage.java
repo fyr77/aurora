@@ -19,6 +19,8 @@ public class ItemWithTextAndImage implements Serializable, JsonConfigManager.Ent
 
     protected final Drawable drawable;
 
+    protected String customClass;
+
     public ItemWithTextAndImage(String id, Drawable drawable) {
         this.id = id;
         this.drawable = drawable;
@@ -56,5 +58,10 @@ public class ItemWithTextAndImage implements Serializable, JsonConfigManager.Ent
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (drawable != null ? drawable.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String getCustomClass() {
+        return customClass;
     }
 }

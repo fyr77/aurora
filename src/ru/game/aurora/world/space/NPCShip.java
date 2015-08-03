@@ -293,7 +293,7 @@ public class NPCShip extends BaseGameObject implements IMonster {
         ));
 
 
-        Effect e = new BlasterShotEffect(this, target, world.getCamera(), 800, weaponInstance);
+        Effect e = weaponDesc.createShotEffect(this, target, world.getCamera(), 800);
         e.setEndListener(new IStateChangeListener<World>() {
             private static final long serialVersionUID = -3379281638297845046L;
 

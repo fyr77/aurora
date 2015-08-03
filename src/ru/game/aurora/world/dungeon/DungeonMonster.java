@@ -3,6 +3,8 @@ package ru.game.aurora.world.dungeon;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
@@ -27,7 +29,7 @@ public class DungeonMonster extends DungeonObject implements IMonster {
 
     private int hp;
 
-    private final MonsterController controller;
+    protected MonsterController controller;
 
     private final ITileMap owner;
 
@@ -36,6 +38,8 @@ public class DungeonMonster extends DungeonObject implements IMonster {
     private MonsterBehaviour behaviour;
 
     private List<WeaponInstance> weapons = new ArrayList<>();
+
+    protected static final Logger logger = LoggerFactory.getLogger(DungeonMonster.class);
 
     public DungeonMonster(AuroraTiledMap map, int groupId, int objectId) {
         super(map, groupId, objectId);
@@ -55,6 +59,17 @@ public class DungeonMonster extends DungeonObject implements IMonster {
         }
 
         controller = new MonsterController(map, this);
+    }
+
+    public DungeonMonster(String name, int x, int y, Set<String> tags, int hp, MonsterController controller, ITileMap owner, MonsterDesc desc, MonsterBehaviour behaviour, List<WeaponInstance> weapons) {
+        super(name, x, y);
+        this.tags = tags;
+        this.hp = hp;
+        this.controller = controller;
+        this.owner = owner;
+        this.desc = desc;
+        this.behaviour = behaviour;
+        this.weapons = weapons;
     }
 
     @Override

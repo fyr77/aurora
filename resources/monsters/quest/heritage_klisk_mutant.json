@@ -1,0 +1,14 @@
+{
+  "id": "klisk_mutant",
+  "hp": 25,
+  "drawable": {
+    "id": "klisk_mutant"
+  },
+  "turnsBetweenMoves": 1,
+  "weaponId": "acid",
+  "behaviour": "AGGRESSIVE",
+  "modifiers": [
+    "ARMOR"
+
+  ]
+}

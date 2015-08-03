@@ -29,7 +29,7 @@ public class BlasterShotEffect extends Effect {
 
     private final Vector2f movementDir;
 
-    private final Vector2f target;
+    protected final Vector2f target;
 
     private final int moveSpeed;
 

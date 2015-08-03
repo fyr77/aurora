@@ -540,6 +540,14 @@ public class World implements Serializable, ResolutionChangeListener {
             cheatsUsed = true;
         }
     }
+
+    public Object getGlobalVariable(String key, Object defaultValue) {
+        Object rz = globalVariables.get(key);
+        if (rz == null) {
+            rz = defaultValue;
+        }
+        return rz;
+    }
     
     public static World getWorld() {
         return world;

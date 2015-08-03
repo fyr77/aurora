@@ -187,3 +187,10 @@ messages.mother.received - if received a private messages from mother of a kille
 ===========================
 heritage.monsters_killed
 heritage.monster_collected
+heritage.quest_started
+heritage.quest_completed
+heritage.first_monster_killed - set when killed but not yet reported
+heritage.second_monster_killed
+heritage.third_monster_killed
+heritage.fourth_monster_killed
+heritage.fifth_monster_killed

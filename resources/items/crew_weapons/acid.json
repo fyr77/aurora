@@ -1,0 +1,7 @@
+{
+"id": "acid",
+"name": "acid.name",
+"range": 10,
+"damage": 5,
+"customClass": "ru.game.aurora.world.generation.quest.heritage.AcidWeapon"
+}

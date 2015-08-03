@@ -8,10 +8,16 @@
 package ru.game.aurora.world.equip;
 
 import org.newdawn.slick.Image;
+import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.JsonConfigManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
+import ru.game.aurora.effects.BlasterShotEffect;
+import ru.game.aurora.effects.Effect;
 import ru.game.aurora.npc.Faction;
+import ru.game.aurora.world.IMovable;
+import ru.game.aurora.world.ITileMap;
+import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
@@ -45,6 +51,9 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
 
     public final int size;
 
+    // for json loading
+    private String customClass;
+
     public WeaponDesc(String id, Drawable drawable, int damage, int range, int price, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
         super(id, drawable);
         this.damage = damage;
@@ -69,6 +78,15 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
     @Override
     public void onReceived(World world, int amount) {
 
+    }
+
+    public Effect createShotEffect(IMovable source, IMovable target, Camera camera, int moveSpeed)
+    {
+        return new BlasterShotEffect(source, target, camera, moveSpeed, this);
+    }
+
+    public Effect createShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, ITileMap map) {
+        return new BlasterShotEffect(source, targetScreenX, targetScreenY, camera, moveSpeed, this, map);
     }
 
     @Override
@@ -136,5 +154,10 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
 
     public int getReloadTurns() {
         return reloadTurns;
+    }
+
+    @Override
+    public String getCustomClass() {
+        return customClass;
     }
 }

@@ -310,13 +310,12 @@ public class DungeonController extends Listenable implements Serializable {
             // firing
             final int damage = landingParty.calcDamage(world);
 
-            BlasterShotEffect blasterShotEffect = new BlasterShotEffect(
+            Effect blasterShotEffect = landingParty.getWeapon().createShotEffect(
                     landingParty
                     , world.getCamera().getXCoordWrapped(target.getX(), map.getWidthInTiles()) + world.getCamera().getTileWidth() / 2
                     , world.getCamera().getYCoordWrapped(target.getY(), map.getHeightInTiles()) + world.getCamera().getTileHeight() / 2
                     , world.getCamera()
                     , 800
-                    , landingParty.getWeapon()
                     , map
             );
             if (landingParty.getWeapon().getShotSound() != null) {

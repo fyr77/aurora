@@ -178,6 +178,8 @@
 
     <!-- effects -->
     <resource type="image" id="blaster_shot">sprites/effects/blaster_shot.png</resource>
+    <resource type="image" id="acid_shot">sprites/effects/acid_shot.png</resource>
+    <resource type="image" id="acid_pool">sprites/effects/acid_spot.png</resource>
     <resource type="image" id="blaster_shot_red">sprites/effects/blaster_shot_red.png</resource>
     <resource type="image" id="missile_shot">sprites/effects/missile_shot.png</resource>
     <resource type="image" id="plasma_shot">sprites/effects/plasma_shot.png</resource>

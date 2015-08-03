@@ -49,6 +49,8 @@ public class Player implements Serializable {
     // main country in Aurora project, defines some bonuses
     private EarthCountry mainCountry = EarthCountry.AMERICA;
 
+    private double researchMultiplier = 1;
+
     // set of unique items player has purchased, such items will not be shown in shops
     private Set<String> uniqueItemsPurchased = new HashSet<>();
 
@@ -155,5 +157,13 @@ public class Player implements Serializable {
 
     public void setUniqueItemsPurchased(Set<String> uniqueItemsPurchased) {
         this.uniqueItemsPurchased = uniqueItemsPurchased;
+    }
+
+    public double getResearchMultiplier() {
+        return researchMultiplier;
+    }
+
+    public void updateResearchMultiplier(double val) {
+        researchMultiplier *= val;
     }
 }

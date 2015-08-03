@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.dungeon.DungeonPlaceholder;
@@ -13,6 +14,8 @@ import ru.game.aurora.world.planet.DungeonEntrance;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.filters.HasPlanetWithLifeFilter;
+
+import java.util.Map;
 
 /**
  * Player can meet a klisk-like mutants on some planets. If he kills them and brings them to klisk homeworld he can get credits
@@ -59,9 +62,8 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
 
     }
 
-    private GameObject createMonster(ITileMap map) {
-
-        return null;
+    private GameObject createMonster(ITileMap map, Dialog d) {
+        return new KliskMutant(0, 0, map, d);
     }
 
     @Override
@@ -85,7 +87,7 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
 
         GameObject monster;
 
-        DungeonPlaceholder placeholder;
+        DungeonPlaceholder placeholder = null;
 
         for (GameObject go : dungeon.getMap().getObjects()) {
             if (go instanceof DungeonPlaceholder) {
@@ -94,29 +96,55 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
             }
         }
 
+        if (placeholder == null) {
+            throw new IllegalStateException("Placeholder object not found in Heritage quest map");
+        }
+
         switch (monstersKilled) {
             case 0:
                 enterDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_first_monster.json");
-                monster = createMonster(dungeon.getMap());
+                monster = createMonster(dungeon.getMap(), enterDialog);
+                world.getPlayer().getJournal().addQuestEntries("heritage", "start");
                 break;
             case 1:
                 enterDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_second_monster.json");
-                monster = createMonster(dungeon.getMap());
+                monster = createMonster(dungeon.getMap(), enterDialog);
+                world.getPlayer().getJournal().addQuestEntries("heritage", "second_monster");
                 break;
             case 2:
                 enterDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_third_monster.json");
-                monster = createMonster(dungeon.getMap());
+                monster = createMonster(dungeon.getMap(), enterDialog);
+                world.getPlayer().getJournal().addQuestEntries("heritage", "third_monster");
                 break;
             case 3:
-                enterDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_fourth_monster.json");
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/heritage/heritage_fourth_monster.json"));
                 monster = new KliskMutantCorpseItem();
+                world.getGlobalVariables().put("heritage.monsters_killed", 4);
+                world.getPlayer().getJournal().addQuestEntries("heritage", "fourth_monster");
                 break;
             case 4:
-                enterDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_fourth_monster.json");
-                monster = createMonster(dungeon.getMap());
+
+                final Dialog d = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_fifth_monster.json");
+                world.getPlayer().getJournal().addQuestEntries("heritage", "fifth_monster");
+                d.addListener(new DialogListener() {
+                    @Override
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                        world.getCurrentDungeon().getController().returnToPrevRoom(false);
+                        ((Planet)world.getCurrentRoom()).leavePlanet(world);
+                        world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/heritage/heritage_monster_dialog.json"));
+                    }
+                });
+                world.addOverlayWindow(d);
+                monster = createMonster(dungeon.getMap(), null);
+                world.getGlobalVariables().put("heritage.fifth_monster_killed", true);
+                world.getGlobalVariables().put("heritage.monsters_killed", 5);
                 break;
+            default:
+                throw new IllegalStateException("Strange number of killed monsters for heritage quest: " + monstersKilled);
 
         }
+        dungeon.getUserData().put(dungeonNumberTag, String.valueOf(monstersKilled));
+        monster.setPos(placeholder.getX(), placeholder.getY());
 
         return true;
     }

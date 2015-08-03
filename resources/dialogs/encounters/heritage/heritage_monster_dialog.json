@@ -347,6 +347,16 @@
         }
       ]
     },
+    "16": {
+      "id": 16,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "0"
+        }
+      ]
+    },
     "17": {
       "id": 17,
       "replies": [
@@ -359,26 +369,6 @@
           "returnValue": 0,
           "targetStatementId": 18,
           "replyText": "1"
-        }
-      ]
-    },
-    "16": {
-      "id": 16,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 17,
-          "replyText": "0"
-        }
-      ]
-    },
-    "19": {
-      "id": 19,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 20,
-          "replyText": "0"
         }
       ]
     },
@@ -397,12 +387,12 @@
         }
       ]
     },
-    "21": {
-      "id": 21,
+    "19": {
+      "id": 19,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 22,
+          "targetStatementId": 20,
           "replyText": "0"
         }
       ]
@@ -419,6 +409,16 @@
           "returnValue": 0,
           "targetStatementId": 18,
           "replyText": "1"
+        }
+      ]
+    },
+    "21": {
+      "id": 21,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "0"
         }
       ]
     },

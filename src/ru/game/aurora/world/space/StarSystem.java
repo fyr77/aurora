@@ -11,7 +11,6 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Point;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.niffy.FriendlyAttackConfirmationController;
@@ -413,7 +412,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     public void doFire(World world, final GameObject targetObject, final Ship playerShip, WeaponInstance weapon, final int damage) {
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, targetObject.getName()));
 
-        BlasterShotEffect e = new BlasterShotEffect(playerShip, targetObject, world.getCamera(), 800, weapon);
+        Effect e = weapon.getWeaponDesc().createShotEffect(playerShip, targetObject, world.getCamera(), 800);
         e.setEndListener(new IStateChangeListener<World>() {
             private static final long serialVersionUID = 8150717419595750398L;
 

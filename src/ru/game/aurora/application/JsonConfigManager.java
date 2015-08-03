@@ -7,6 +7,7 @@
 package ru.game.aurora.application;
 
 import com.google.gson.Gson;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,8 +23,9 @@ public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
 
     private static final Logger logger = LoggerFactory.getLogger(JsonConfigManager.class);
 
-    public static interface EntityWithId {
-        public String getId();
+    public interface EntityWithId {
+        String getId();
+        String getCustomClass();
     }
 
     private final Class<T> entityClass;
@@ -57,7 +59,18 @@ public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
     private void loadEntity(File f) {
         try {
             FileReader reader = new FileReader(f);
-            T entity = gson.fromJson(reader, entityClass);
+            String json = IOUtils.toString(reader);
+            reader.close();
+
+            T entity = gson.fromJson(json, entityClass);
+            String customClassName = entity.getCustomClass();
+            Class customClass = Class.forName(customClassName);
+            if (!EntityWithId.class.isAssignableFrom(customClass)) {
+                logger.error("Custom class for entity in file {} does not implement the EntityWithId interface", f.getName());
+                return;
+            }
+            reader.reset();
+            entity = (T) gson.fromJson(json, (Class<? extends EntityWithId>)customClass);
             if (entities.containsKey(entity.getId())) {
                 logger.warn("Duplicated entry with id " + entity.getId());
             }

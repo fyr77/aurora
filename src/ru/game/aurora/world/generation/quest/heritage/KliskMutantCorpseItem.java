@@ -3,6 +3,7 @@ package ru.game.aurora.world.generation.quest.heritage;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.BaseGameObject;
 import ru.game.aurora.world.World;
@@ -39,7 +40,26 @@ public class KliskMutantCorpseItem extends BaseGameObject implements InventoryIt
 
     @Override
     public void onReceived(World world, int amount) {
-        world.getGlobalVariables().put("heritage.monster_collected", true);
+        if (!world.getGlobalVariables().containsKey("heritage.monster_collected")) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/heritage/heritage_gordon.json"));
+            world.getGlobalVariables().put("heritage.monster_collected", true);
+        }
+
+        int count = (int) world.getGlobalVariable("heritage.monsters_killed", 0);
+        switch (count) {
+            case 1:
+                world.getGlobalVariables().put("heritage.first_monster_killed", true);
+                break;
+            case 2:
+                world.getGlobalVariables().put("heritage.second_monster_killed", true);
+                break;
+            case 3:
+                world.getGlobalVariables().put("heritage.third_monster_killed", true);
+                break;
+            case 4:
+                world.getGlobalVariables().put("heritage.fourth_monster_killed", true);
+                break;
+        }
     }
 
     @Override

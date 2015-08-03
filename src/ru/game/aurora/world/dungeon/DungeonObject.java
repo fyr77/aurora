@@ -27,6 +27,11 @@ public class DungeonObject extends BaseGameObject {
         this.name = map.getMap().getObjectName(groupId, objectId);
     }
 
+    public DungeonObject(String name, int x, int y) {
+        super(x, y);
+        this.name = name;
+    }
+
     @Override
     public String getName() {
         return name;

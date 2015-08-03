@@ -67,7 +67,7 @@ public class MonsterController implements Serializable {
             }
             targetScreenX += other.getOffsetX() + camera.getTileWidth() / 2;
             targetScreenY += other.getOffsetY() + camera.getTileHeight() / 2;
-            rz = new BlasterShotEffect(myMonster, targetScreenX, targetScreenY, camera, 800, weapon, map);
+            rz = weapon.createShotEffect(myMonster, targetScreenX, targetScreenY, camera, 800, map);
             if (weapon.getShotSound() != null) {
                 rz.setStartSound(weapon.getShotSound());
             }
