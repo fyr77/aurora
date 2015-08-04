@@ -51,9 +51,6 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
 
     public final int size;
 
-    // for json loading
-    private String customClass;
-
     public WeaponDesc(String id, Drawable drawable, int damage, int range, int price, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
         super(id, drawable);
         this.damage = damage;
@@ -156,8 +153,4 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
         return reloadTurns;
     }
 
-    @Override
-    public String getCustomClass() {
-        return customClass;
-    }
 }

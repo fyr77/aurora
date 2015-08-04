@@ -155,10 +155,13 @@ public class Camera implements Serializable {
      * Check that center of given tile is now on screen
      */
     public boolean isInViewport(int tileX, int tileY) {
+        return isInViewport(tileX, tileY, 0);
+    }
+    public boolean isInViewport(int tileX, int tileY, int size) {
         float screenX = getXCoord(tileX);
         float screenY = getYCoord(tileY);
-        return (screenX >= 0 && screenX < viewportTilesX + getTileWidth() * getNumTilesX())
-                && (screenY >= 0 && screenY < viewportTilesY + getTileHeight() * getNumTilesY());
+        return (screenX >= -size * getTileWidth() && screenX < viewportTilesX + getTileWidth() * (getNumTilesX() + size))
+                && (screenY >= -size * getTileHeight() && screenY < viewportTilesY + getTileHeight() * (getNumTilesY() + size));
 
     }
 

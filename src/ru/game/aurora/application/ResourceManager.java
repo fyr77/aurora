@@ -292,7 +292,8 @@ public class ResourceManager {
         Image image;
         try {
             image = new Image(path, false, Image.FILTER_NEAREST);
-        } catch (SlickException e) {
+        } catch (Exception e) {
+            logger.error("Failed to load image " + path, e);
             throw new SlickException("Could not load image", e);
         }
 

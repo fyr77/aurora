@@ -11,8 +11,10 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,19 +60,23 @@ public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
 
     private void loadEntity(File f) {
         try {
-            FileReader reader = new FileReader(f);
+            Reader reader = new BufferedReader(new FileReader(f));
+            reader.mark(4096);
             String json = IOUtils.toString(reader);
-            reader.close();
 
             T entity = gson.fromJson(json, entityClass);
             String customClassName = entity.getCustomClass();
-            Class customClass = Class.forName(customClassName);
-            if (!EntityWithId.class.isAssignableFrom(customClass)) {
-                logger.error("Custom class for entity in file {} does not implement the EntityWithId interface", f.getName());
-                return;
+            if (customClassName != null) {
+                Class customClass = Class.forName(customClassName);
+                if (!EntityWithId.class.isAssignableFrom(customClass)) {
+                    logger.error("Custom class for entity in file {} does not implement the EntityWithId interface", f.getName());
+                    return;
+                }
+                reader.reset();
+                entity = (T) gson.fromJson(json, (Class<? extends EntityWithId>) customClass);
             }
-            reader.reset();
-            entity = (T) gson.fromJson(json, (Class<? extends EntityWithId>)customClass);
+            reader.close();
+
             if (entities.containsKey(entity.getId())) {
                 logger.warn("Duplicated entry with id " + entity.getId());
             }

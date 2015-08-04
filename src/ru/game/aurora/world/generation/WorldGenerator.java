@@ -25,6 +25,7 @@ import ru.game.aurora.world.generation.aliens.zorsan.ZorsanRebelsFirstQuestGener
 import ru.game.aurora.world.generation.artifacts.BuildersRuinGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.*;
+import ru.game.aurora.world.generation.quest.heritage.HeritageQuestGenerator;
 import ru.game.aurora.world.generation.quest.inside.InsideEncounterGenerator;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
@@ -68,6 +69,7 @@ public class WorldGenerator implements Runnable {
             , new FamilyProblemsEventGenerator()
             , new InsideEncounterGenerator()
             , new RedMeatEncounterGenerator()
+            , new HeritageQuestGenerator()
     };
 
     private static final WorldGeneratorPart[] alienGenerators = {

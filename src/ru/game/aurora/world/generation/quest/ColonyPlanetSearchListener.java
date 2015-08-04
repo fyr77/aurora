@@ -224,10 +224,8 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
             return false;
         }
         firstPlanetFound = true;
-
-        if (currentPlanet.hasLife()) {
-            addMonsters(world);
-        }
+        PlanetaryLifeGenerator.setPlanetHasLife(currentPlanet);
+        addMonsters(world);
 
         world.getGlobalVariables().put("colony_search.explored", true);
         if (!world.getGlobalVariables().containsKey("colony_search.coords")) {

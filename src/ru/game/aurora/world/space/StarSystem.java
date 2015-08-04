@@ -159,9 +159,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
 
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics g, Camera camera, int tileX, int tileY) {
-        if (!camera.isInViewport(tileX, tileY)) {
+       if (!camera.isInViewport(tileX, tileY, 4)) {
             return;
-        }
+       }
         if (camera.getTileWidth() != 64) {
             //hack: this is galaxy map screen, where all stars are drawn within single screen
             // draw only dots, not images themselves, as they won't fit on screen and will overlap ugly
