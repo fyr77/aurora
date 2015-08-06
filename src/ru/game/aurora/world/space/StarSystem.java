@@ -165,8 +165,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         if (camera.getTileWidth() != 64) {
             //hack: this is galaxy map screen, where all stars are drawn within single screen
             // draw only dots, not images themselves, as they won't fit on screen and will overlap ugly
-            g.setColor(star.color);
-            EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, (int) (camera.getTileWidth() / star.size), star.color, true);
+            //g.setColor(star.color);
+            //EngineUtils.drawCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, (int) (camera.getTileWidth() / star.size), star.color, true);
+            Image starImage = ParallaxBackground.getImage(star.size, star.color);
+            g.drawImage(starImage, camera.getXCoord(tileX) - camera.getTileWidth() / 2, camera.getYCoord(tileY) - camera.getTileHeight());
         } else {
             g.drawImage(star.getImage(), camera.getXCoord(tileX) + (camera.getTileWidth() - star.getImage().getWidth()) / 2, camera.getYCoord(tileY) + (camera.getTileHeight() - star.getImage().getHeight()) / 2);
             g.setColor(Color.white);

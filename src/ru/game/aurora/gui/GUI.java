@@ -11,6 +11,7 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.EndOfScreenAction;
 import de.lessvoid.nifty.slick2d.render.font.AbstractSlickRenderFont;
 import de.lessvoid.nifty.slick2d.render.font.UnicodeSlickRenderFont;
+import org.apache.commons.io.IOUtils;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
@@ -19,6 +20,7 @@ import ru.game.aurora.application.MainMenuController;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.Stack;

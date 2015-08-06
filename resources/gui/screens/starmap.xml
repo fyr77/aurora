@@ -28,15 +28,14 @@
 
         <!--hint layer -->
         <layer childLayout="absolute">
-            <panel id="starmap-hint-panel" width="200" visible="false" childLayout="vertical"
-                   padding="5px,25px,5px,25px"
-                   backgroundColor="#aa7f4dff">
-                <text id="star_name" style="button-font" width="90%" wrap="true" text="empty" align="center"
-                      valign="center"/>
-                <text id="explored_progress" style="button-font" width="90%" wrap="true" text="empty" align="center"
-                      valign="center"/>
-                <text id="comment" style="button-font" width="90%" wrap="true" text="empty" align="center"
-                      valign="center"/>
+            <panel id="starmap-hint-panel" childLayout="horizontal"  visible="false" padding="5px,25px,5px,25px" backgroundColor="#aa7f4dff">
+                <panel childLayout="center" height="150px" width="96px" backgroundColor="#aa7f4dff">
+                    <image id="star_image" width="96px" height="96px"/>
+                </panel>
+                <panel width="200px" childLayout="center" backgroundColor="#aa7f4dff">
+                        <text id="star_text" style="button-font" width="90%" height="90%" wrap="true" text="empty" align="center"
+                              textVAlign="center"/>
+                </panel>
             </panel>
         </layer>
     </screen>

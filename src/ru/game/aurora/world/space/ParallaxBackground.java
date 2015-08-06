@@ -89,7 +89,7 @@ public class ParallaxBackground {
 
     private static Map<StarCacheKey, Image> sprites = new HashMap<>();
 
-    private Image getImage(int spriteIdx, Color baseColor)
+    public static Image getImage(int spriteIdx, Color baseColor)
     {
         StarCacheKey key = new StarCacheKey(spriteIdx, baseColor);
         Image star_image = sprites.get(key);

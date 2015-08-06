@@ -8,6 +8,7 @@ import de.lessvoid.nifty.effects.Falloff;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.render.NiftyRenderEngine;
 import de.lessvoid.nifty.tools.SizeValue;
+import org.newdawn.slick.Image;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.space.GalaxyMapObject;
@@ -23,11 +24,9 @@ import ru.game.aurora.world.space.StarSystem;
 public class StarmapHintController implements EffectImpl {
     private Element panel;
 
-    private Element nameText;
+    private Element starText;
 
-    private Element exploreText;
-
-    private Element commentsText;
+    private Element starImage;
 
     private StarMapController starMapController;
 
@@ -39,9 +38,8 @@ public class StarmapHintController implements EffectImpl {
         galaxyMapController = (GalaxyMapController) GUI.getInstance().getNifty().findScreenController(GalaxyMapController.class.getCanonicalName());
         panel = nifty.getCurrentScreen().findElementByName("starmap-hint-panel");
 
-        nameText = panel.findElementByName("star_name");
-        exploreText = panel.findElementByName("explored_progress");
-        commentsText = panel.findElementByName("comment");
+        starText = panel.findElementByName("star_text");
+        starImage = panel.findElementByName("star_image");
     }
 
     @Override
@@ -68,22 +66,28 @@ public class StarmapHintController implements EffectImpl {
     }
 
     private void updatePanel(StarSystem objectAtMouseCoords) {
-        EngineUtils.setTextForGUIElement(nameText, objectAtMouseCoords.getName());
-        StringBuilder exploreTextBuilder = new StringBuilder();
-        if (objectAtMouseCoords.isVisited()) {
-            exploreTextBuilder.append(Localization.getText("gui", "starmap.visited")).append('\n');
-            exploreTextBuilder.append(String.format(Localization.getText("gui", "starmap.planet_count"), objectAtMouseCoords.getPlanets().length)).append('\n');
-            exploreTextBuilder.append(String.format(Localization.getText("gui", "starmap.astro_data"), objectAtMouseCoords.getAstronomyData())).append('\n');
-        } else {
-            exploreTextBuilder.append(Localization.getText("gui", "starmap.not_visited"));
+        final Image image = objectAtMouseCoords.getStar().getImage();
+        if (image != null) {
+            EngineUtils.setImageForGUIElement(starImage, image);
+            starImage.getLayoutPart().getBoxConstraints().setWidth(SizeValue.px(image.getWidth() / 2));
+            starImage.getLayoutPart().getBoxConstraints().setHeight(SizeValue.px(image.getHeight() / 2));
+            panel.layoutElements();
         }
-        EngineUtils.setTextForGUIElement(exploreText, exploreTextBuilder.toString());
+        StringBuilder textBuilder = new StringBuilder(objectAtMouseCoords.getName());
+        textBuilder.append('\n');
+        if (objectAtMouseCoords.isVisited()) {
+            textBuilder.append(Localization.getText("gui", "starmap.visited")).append('\n');
+            textBuilder.append(String.format(Localization.getText("gui", "starmap.planet_count"), objectAtMouseCoords.getPlanets().length)).append('\n');
+            textBuilder.append(String.format(Localization.getText("gui", "starmap.astro_data"), objectAtMouseCoords.getAstronomyData())).append('\n');
+        } else {
+            textBuilder.append(Localization.getText("gui", "starmap.not_visited"));
+        }
+        textBuilder.append('\n');
         final String questText = objectAtMouseCoords.getMessageForStarMap();
         if (questText != null && !questText.isEmpty()) {
-            EngineUtils.setTextForGUIElement(commentsText, Localization.getText("gui", "starmap.marks") + "\n" + questText);
-        } else {
-            EngineUtils.setTextForGUIElement(commentsText, "");
+            textBuilder.append(Localization.getText("gui", "starmap.marks")).append("\n").append(questText);
         }
+        EngineUtils.setTextForGUIElement(starText, textBuilder.toString());
     }
 
     @Override
