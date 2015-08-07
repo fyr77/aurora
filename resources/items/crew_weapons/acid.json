@@ -1,7 +1,8 @@
 {
 "id": "acid",
+"shotSound": "melee_1",
 "name": "acid.name",
-"range": 10,
-"damage": 5,
+"range": 5,
+"damage": 3,
 "customClass": "ru.game.aurora.world.generation.quest.heritage.AcidWeapon"
 }

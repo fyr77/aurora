@@ -45,7 +45,7 @@ public class LoggingListener extends GameEventListener {
 
     @Override
     public boolean onPlayerEnteredDungeon(World world, Dungeon dungeon) {
-        logger.info("Player entered a dungeon {}");
+        logger.info("Player entered a dungeon {}", dungeon.getUserData());
         return false;
     }
 

@@ -24,6 +24,8 @@ public class Dungeon implements Room, IDungeon {
 
     private Dialog enterDialog;
 
+    private BasePositionable landingPartyPrevCoords;
+
     /**
      * If set to true, and landing party is lost, this leads to a game over
      */
@@ -117,6 +119,7 @@ public class Dungeon implements Room, IDungeon {
         world.setCurrentRoom(this);
         GUI.getInstance().getNifty().gotoScreen("surface_gui");
         LandingParty landingParty = world.getPlayer().getLandingParty();
+        landingPartyPrevCoords = new BasePositionable(landingParty.x, landingParty.y);
         landingParty.setPos(map.getEntryPoint().getX(), map.getEntryPoint().getY());
         landingParty.onLaunch(world);
         world.getCamera().setTarget(landingParty);
@@ -178,4 +181,22 @@ public class Dungeon implements Room, IDungeon {
         return userData;
     }
 
+    public BasePositionable getLandingPartyPrevCoords() {
+        return landingPartyPrevCoords;
+    }
+
+    @Override
+    public int getX() {
+        return landingPartyPrevCoords.getX();
+    }
+
+    @Override
+    public int getY() {
+        return landingPartyPrevCoords.getY();
+    }
+
+    @Override
+    public void setPos(int newX, int newY) {
+
+    }
 }

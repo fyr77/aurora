@@ -63,8 +63,8 @@ public class AcidWeapon extends WeaponDesc
             if (isOver()) {
                 // add acid pool
                 world.getCurrentRoom().getMap().getObjects().add(
-                        new AcidPool(world.getCamera().getPointTileX((int) target.getX())
-                                , world.getCamera().getPointTileY((int) target.getY()))
+                        new AcidPool(world.getCamera().getPointTileX((int) Math.ceil(target.getX()) - 1)
+                                , world.getCamera().getPointTileY((int) Math.ceil(target.getY())) - 1)
                 );
             }
         }
@@ -91,7 +91,7 @@ public class AcidWeapon extends WeaponDesc
                     landingParty.subtractHp(world, CommonRandom.getRandom().nextInt(3) + 1);
                 }
 
-                if (ttl --> 0) {
+                if (ttl-- <= 0) {
                     isAlive = false;
                 }
             }

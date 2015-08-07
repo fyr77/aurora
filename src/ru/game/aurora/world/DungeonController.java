@@ -25,6 +25,7 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.nature.RainCloud;
+import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -537,7 +538,11 @@ public class DungeonController extends Listenable implements Serializable {
         }
         world.setCurrentRoom(prevRoom);
         prevRoom.returnTo(world);
-        landingParty.onReturnToShip(world);
+        if (prevRoom instanceof StarSystem) {
+            landingParty.onReturnToShip(world);
+        } else {
+            landingParty.setPos(myDungeon.getX(), myDungeon.getY());
+        }
 
         if (conditionsSatisfied && successDialog != null) {
             world.addOverlayWindow(successDialog);

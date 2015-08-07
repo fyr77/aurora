@@ -115,7 +115,15 @@
         <!--star map hint layer -->
         <layer childLayout="absolute">
 
-            <panel id="starmap-hint-panel" childLayout="horizontal"  padding="5px,25px,5px,25px" backgroundColor="#aa7f4dff">
+            <panel id="starmap-hint-panel" childLayout="horizontal" visible="falseAdding heritage quest to star system at [75, 197]
+13:27:32.760 [Thread-8] INFO  ru.game.aurora.world.planet.Planet - Generated landscape in 224
+13:27:32.762 [Thread-8] INFO  r.g.a.w.g.q.h.HeritageQuestGenerator - Adding heritage quest to star system at [151, 191]
+13:27:33.276 [Thread-8] INFO  ru.game.aurora.world.planet.Planet - Generated landscape in 514
+13:27:33.291 [Thread-8] INFO  r.g.a.w.g.q.h.HeritageQuestGenerator - Adding heritage quest to star system at [74, 156]
+13:27:33.805 [Thread-8] INFO  ru.game.aurora.world.planet.Planet - Generated landscape in 514
+13:27:33.810 [Thread-8] INFO  r.g.a.w.g.q.h.HeritageQuestGenerator - Adding heritage quest to star system at [85, 85]
+13:27:35.209 [Thread-8] INFO  ru.game.aurora.world.planet.Planet - Generated landscape in 1399
+13:27:35.221 [Thread-8] INFO  r.g.a.w.g.q.h.HeritageQuestGenerator - Adding heritage quest to star system at [115, 171]" padding="5px,25px,5px,25px" backgroundColor="#aa7f4dff">
                 <panel childLayout="center" height="150px" width="96px" backgroundColor="#aa7f4dff">
                     <image id="star_image" width="96px" height="96px"/>
                 </panel>

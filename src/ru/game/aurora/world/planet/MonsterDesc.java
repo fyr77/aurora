@@ -36,4 +36,14 @@ public class MonsterDesc extends ItemWithTextAndImage {
     public MonsterDesc(String id, Drawable drawable) {
         super(id, drawable);
     }
+
+    public MonsterDesc(String id, Set<AnimalModifier> modifiers, int hp, int turnsBetweenMoves, String weaponId, String image, boolean canBePickedUp, MonsterBehaviour behaviour) {
+        super(id, new Drawable(image));
+        this.modifiers = modifiers;
+        this.hp = hp;
+        this.turnsBetweenMoves = turnsBetweenMoves;
+        this.weaponId = weaponId;
+        this.canBePickedUp = canBePickedUp;
+        this.behaviour = behaviour;
+    }
 }

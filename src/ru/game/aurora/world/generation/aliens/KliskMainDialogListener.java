@@ -20,6 +20,7 @@ import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.EarthInvasionGenerator;
+import ru.game.aurora.world.generation.quest.heritage.HeritageKliskDialogListener;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.ShipLootItem;
@@ -87,14 +88,9 @@ public class KliskMainDialogListener implements DialogListener {
                 world.addOverlayWindow(heritageStartDialog);
                 break;
             case 129:
-                world.getPlayer().changeResource(world, Resources.CREDITS, 30);
                 Dialog heritageEndDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_klisk_final.json");
-                heritageEndDialog.addListener(new DialogListener() {
-                    @Override
-                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-
-                    }
-                });
+                heritageEndDialog.addListener(new HeritageKliskDialogListener());
+                break;
         }
 
         if (flags.containsKey("small_reward")) {

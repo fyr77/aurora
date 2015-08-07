@@ -45,6 +45,7 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
                 --i;
                 continue;
             }
+            logger.info("Adding heritage quest to star system at " + nextSS.getCoordsString());
 
             Planet p = HasPlanetWithLifeFilter.getPlanetWithLife(nextSS);
             Dungeon dungeon = new Dungeon(world, new AuroraTiledMap("maps/klisk_mutant_dungeon.tmx"), p);
@@ -55,6 +56,8 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
             p.getPlanetObjects().add(entrance);
 
         }
+
+        world.addListener(this);
     }
 
     @Override
@@ -68,7 +71,7 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
 
     @Override
     public boolean onPlayerEnteredDungeon(World world, Dungeon dungeon) {
-        if (dungeon.getUserData().containsKey(dungeonTag)) {
+        if (!dungeon.getUserData().containsKey(dungeonTag)) {
             return false;
         }
         logger.info("Player has entered dungeon of a Heritage quest");
@@ -118,7 +121,7 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
                 break;
             case 3:
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/heritage/heritage_fourth_monster.json"));
-                monster = new KliskMutantCorpseItem();
+                monster = new KliskMutantCorpseItem(0, 0);
                 world.getGlobalVariables().put("heritage.monsters_killed", 4);
                 world.getPlayer().getJournal().addQuestEntries("heritage", "fourth_monster");
                 break;
@@ -138,6 +141,7 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
                 monster = createMonster(dungeon.getMap(), null);
                 world.getGlobalVariables().put("heritage.fifth_monster_killed", true);
                 world.getGlobalVariables().put("heritage.monsters_killed", 5);
+                isAlive = false;
                 break;
             default:
                 throw new IllegalStateException("Strange number of killed monsters for heritage quest: " + monstersKilled);
@@ -145,7 +149,9 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
         }
         dungeon.getUserData().put(dungeonNumberTag, String.valueOf(monstersKilled));
         monster.setPos(placeholder.getX(), placeholder.getY());
-
+        dungeon.getMap().getObjects().add(monster);
         return true;
     }
+
+
 }

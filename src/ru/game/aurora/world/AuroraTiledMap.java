@@ -154,7 +154,7 @@ public class AuroraTiledMap implements ITileMap {
         }
         for (int i = camera.getTarget().getY() - camera.getNumTilesY() / 2 - 1; i <= camera.getTarget().getY() + camera.getNumTilesY() / 2 + 1; ++i) {
             for (int j = camera.getTarget().getX() - camera.getNumTilesX() / 2 - 1; j <= camera.getTarget().getX() + camera.getNumTilesX() / 2 + 1; ++j) {
-                if (i < 0 || j < 0 || i >= map.getHeight() || j >= map.getHeight()) {
+                if (i < 0 || j < 0 || i >= map.getHeight() || j >= map.getWidth()) {
                     continue;
                 }
 

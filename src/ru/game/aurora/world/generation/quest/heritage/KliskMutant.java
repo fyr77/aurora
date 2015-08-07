@@ -5,10 +5,7 @@ import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.world.AuroraTiledMap;
-import ru.game.aurora.world.ITileMap;
-import ru.game.aurora.world.MonsterController;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.MonsterBehaviour;
@@ -38,7 +35,15 @@ public class KliskMutant extends DungeonMonster
                 , 30
                 , null
                 , owner
-                , new MonsterDesc("klisk_mutant", new Drawable("klisk_mutant"))
+                , new MonsterDesc("klisk_mutant"
+                    , null
+                    , 30
+                    , 1
+                    , "acid"
+                    , "klisk_mutant"
+                    , true
+                    , MonsterBehaviour.AGGRESSIVE
+                )
                 , MonsterBehaviour.AGGRESSIVE
                 , Lists.newArrayList(new WeaponInstance(ResourceManager.getInstance().getWeapons().getEntity("acid"))));
         controller = new MonsterController(owner, this);
@@ -46,18 +51,19 @@ public class KliskMutant extends DungeonMonster
     }
 
     @Override
-    public void update(GameContainer container, World world) {
-        super.update(container, world);
+    public void onAttack(World world, GameObject attacker, int damage) {
+        super.onAttack(world, attacker, damage);
         if (!isAlive()) {
             Integer killCount = (Integer) world.getGlobalVariable("heritage.monsters_killed", 0);
             logger.info("Killed {}th quest monster for heritage quest", killCount);
             world.getGlobalVariables().put("heritage.monsters_killed", killCount + 1);
 
-            KliskMutantCorpseItem corpse = new KliskMutantCorpseItem();
+            KliskMutantCorpseItem corpse = new KliskMutantCorpseItem(x, y);
             corpse.setPos(x, y);
             world.getCurrentDungeon().getMap().getObjects().add(corpse);
 
             world.addOverlayWindow(dialog);
         }
     }
+
 }

@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="20" height="30" tilewidth="64" tileheight="64">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="30" tilewidth="64" tileheight="64" nextobjectid="7">
  <tileset firstgid="1" name="sand_and_rock" tilewidth="64" tileheight="64">
   <image source="sand_and_rock.png" width="256" height="1024"/>
  </tileset>
  <tileset firstgid="65" name="editor_tileset" tilewidth="64" tileheight="64">
   <image source="editor_tileset.png" width="256" height="192"/>
  </tileset>
+ <tileset firstgid="77" name="cave" tilewidth="64" tileheight="64">
+  <image source="../sprites/planet_objects/cave.png" width="64" height="64"/>
+ </tileset>
  <layer name="пол" width="20" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3RMQ4AIAhDUS5mvP+tnEgcqqXIJj9h0xeMZn82DlNp+cxCy72oqXhoMm+t8pileOjezUEe24HttpuRs1EPnWeW6mX+4sWLVmkxu+u6TmkBLSC/sWAJAAA=
+   H4sIAAAAAAAAC+3RMQoAIAxDUS8m3v9WTgWHaNqaMR+66aPiGG5eRmnFLKEVXtaseGg6b1V5zKp46N7LQR7bge12mpmzWQ+dZ1bV6/zFj5dNaTHbOedYG3pvKOJgCQAA
   </data>
  </layer>
  <objectgroup name="Слой объектов 1" width="20" height="30">
-  <object type="entryPoint" gid="65" x="896" y="513" width="64" height="64"/>
-  <object type="exitPoint" gid="66" x="896" y="512" width="64" height="64"/>
-  <object type="ru.game.aurora.world.dungeon.DungeonPlaceholder" gid="68" x="192" y="512" width="64" height="64"/>
+  <object id="4" type="entryPoint" gid="65" x="1088" y="513" width="64" height="64"/>
+  <object id="5" type="exitPoint" gid="66" x="1088" y="512" width="64" height="64"/>
+  <object id="6" type="ru.game.aurora.world.dungeon.DungeonPlaceholder" gid="68" x="384" y="512" width="64" height="64"/>
  </objectgroup>
  <layer name="углы" width="20" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAW0BsYjyDwTIDaiklm2QGwBxDZUMguGyfUvyG+GQGyOZh65ZtETWCJhSsLTjAHV77A4oqZ55IYpCJgyYMbRKBgFo2AUDAQAAELk0KhgCQAA
+   H4sIAAAAAAAAC2NgGAX0BMYjyDwTIDbCIu5Lhlm2QGwBxDYUuQhhFgyT61+Q3wyB2BzNPHLNoiewRMKUhKcZA6rfYXFETfPIDVMQMGXAjKNRMApGwSigFwAA74MjA2AJAAA=
   </data>
  </layer>
  <layer name="стены" width="20" height="30">
   <properties>
+   <property name="isObstacle" value="false"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2SQQ6AIAwEUVERvfgh//8s4dBk3RQEPMokPUDKUEqN6URsiAFi/egZaX9u8FrFw5wVzqkwT2p960epT2Np9PkQW4iD1jvlXQU+D+ckV6tLcHAv18M1iC/2Mvc/zjzfk7of35KrkfO1XJ6rGp82G+jCnubQesmUutApf4Hu1IzUgO4vnk6n8x9uTauHVGAJAAA=
+  </data>
+ </layer>
+ <layer name="true стены" width="20" height="30">
+  <properties>
    <property name="isObstacle" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2SQQ6AIAwEUVERvfj/z4qHJuumIpSjTNIDpAyl1Ln/4lMMEGujZ6T92eD1ioc5K5xTYZ7U+tWPUp/GYvTFFFuKg9a7wRfhnORqdQkB7uV6uAbx3b3M/U9wz/e83Y9vydXI+Vouz1WNT5sNdGFPc2i9ZEpd6JS/QHduRizuFk+n0/knF0skNmFgCQAA
+   H4sIAAAAAAAAC2NgGHrADg8m1xxy5LGpJcVeQmpIAYTCg1TzCLlpOJmHrpaS8MMVt7jswGcGvvSHSwybemLyCCnmEQMI+Y1Us6iRR4m1n9jwJ8deapVdo2AUjILBDwDSW88vYAkAAA==
   </data>
  </layer>
 </map>

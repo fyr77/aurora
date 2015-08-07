@@ -70,6 +70,8 @@ public class DungeonMonster extends DungeonObject implements IMonster {
         this.desc = desc;
         this.behaviour = behaviour;
         this.weapons = weapons;
+
+        drawable = desc.getDrawable();
     }
 
     @Override

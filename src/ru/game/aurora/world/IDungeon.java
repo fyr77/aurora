@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Base interface for rooms that can be explored by landing party
  */
-public interface IDungeon extends Serializable
+public interface IDungeon extends Serializable, Positionable
 {
     DungeonController getController();
 
@@ -20,4 +20,5 @@ public interface IDungeon extends Serializable
      * @return true if this dungeon has its own playlist, so that default playlist must be restored when leaving it
      */
     boolean hasCustomMusic();
+
 }

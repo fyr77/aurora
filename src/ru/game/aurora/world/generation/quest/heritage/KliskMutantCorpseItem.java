@@ -6,16 +6,24 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.BaseGameObject;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
+import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.space.StarSystem;
 
 /**
  * Collectable body of a dead klisk mutant
  */
 public class KliskMutantCorpseItem extends BaseGameObject implements InventoryItem {
+
+    public KliskMutantCorpseItem(int x, int y) {
+        super(x, y, "klisk_mutant_dead");
+    }
+
     @Override
     public String getId() {
-        return "klisk_mutant_corpse";
+        return "klisk_mutant_dead";
     }
 
     @Override
@@ -41,7 +49,15 @@ public class KliskMutantCorpseItem extends BaseGameObject implements InventoryIt
     @Override
     public void onReceived(World world, int amount) {
         if (!world.getGlobalVariables().containsKey("heritage.monster_collected")) {
-            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/heritage/heritage_gordon.json"));
+            world.addListener(new GameEventListener() {
+                @Override
+                public boolean onPlayerLeftPlanet(World world, Planet planet) {
+                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/heritage/heritage_gordon.json"));
+                    isAlive = false;
+                    return true;
+                }
+            });
+
             world.getGlobalVariables().put("heritage.monster_collected", true);
         }
 
@@ -90,5 +106,17 @@ public class KliskMutantCorpseItem extends BaseGameObject implements InventoryIt
     @Override
     public boolean canBeSoldTo(World world, Faction faction) {
         return false;
+    }
+
+    @Override
+    public boolean canBeInteracted() {
+        return true;
+    }
+
+    @Override
+    public boolean interact(World world) {
+        world.getPlayer().getLandingParty().getInventory().add(this);
+        isAlive = false;
+        return true;
     }
 }
