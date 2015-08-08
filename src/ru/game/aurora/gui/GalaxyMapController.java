@@ -319,8 +319,8 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         int x = GUI.getInstance().getNifty().getNiftyMouse().getX();
         int y = GUI.getInstance().getNifty().getNiftyMouse().getY();
 
-        x = world.getCamera().getPointTileX(x) + world.getCamera().getTarget().getX() - world.getCamera().getNumTilesX() / 2;
-        y = world.getCamera().getPointTileY(y) + world.getCamera().getTarget().getY() - world.getCamera().getNumTilesY() / 2;
+        x = world.getCamera().getPointTileX(x);
+        y = world.getCamera().getPointTileY(y);
         double minDist = Double.POSITIVE_INFINITY;
         GalaxyMapObject result = null;
         for (GalaxyMapObject gmo : world.getGalaxyMap().getGalaxyMapObjects()) {

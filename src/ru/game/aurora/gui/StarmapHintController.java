@@ -8,6 +8,7 @@ import de.lessvoid.nifty.effects.Falloff;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.render.NiftyRenderEngine;
 import de.lessvoid.nifty.tools.SizeValue;
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.util.EngineUtils;
@@ -57,10 +58,12 @@ public class StarmapHintController implements EffectImpl {
             panel.hide();
             return;
         }
-        final NiftyMouse niftyMouse = GUI.getInstance().getNifty().getNiftyMouse();
-        panel.setConstraintX(new SizeValue(niftyMouse.getX() + "px"));
-        panel.setConstraintY(new SizeValue(niftyMouse.getY() + "px"));
         updatePanel((StarSystem) objectAtMouseCoords);
+
+        final NiftyMouse niftyMouse = GUI.getInstance().getNifty().getNiftyMouse();
+        panel.setConstraintX(new SizeValue(Math.min(niftyMouse.getX(), Display.getWidth() - panel.getWidth()) + "px"));
+        panel.setConstraintY(new SizeValue(Math.min(niftyMouse.getY(), Display.getHeight() - panel.getHeight()) + "px"));
+
         panel.show();
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }
