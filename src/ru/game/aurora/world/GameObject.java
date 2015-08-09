@@ -35,4 +35,6 @@ public interface GameObject extends Serializable, Updatable, IMovable, IDrawable
 
     Faction getFaction();
 
+    // objects with higher value are drawn on top of objects with lower one
+    int getDrawOrder();
 }

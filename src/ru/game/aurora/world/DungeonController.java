@@ -29,6 +29,8 @@ import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -463,6 +465,21 @@ public class DungeonController extends Listenable implements Serializable {
         // check that no crew member left, AND landing party window is not opened, because if it is - then landing party can have 0 members in process of configuration
         if (landingParty.getTotalMembers() <= 0 && !GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("landing_party_equip_screen")) {
             onLandingPartyDestroyed(world);
+        }
+
+        if (world.isUpdatedThisFrame()) {
+            // sort objects by their y coordinate so that they overlap correctly
+            Collections.sort(map.getObjects(), new Comparator<GameObject>() {
+                @Override
+                public int compare(GameObject o1, GameObject o2) {
+                    int coordsCompare = Integer.compare(o1.getY(), o2.getY());
+                    if (coordsCompare == 0) {
+                        return Integer.compare(o1.getDrawOrder(), o2.getDrawOrder());
+                    } else {
+                        return coordsCompare;
+                    }
+                }
+            });
         }
     }
 

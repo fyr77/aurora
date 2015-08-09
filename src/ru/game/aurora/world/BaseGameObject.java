@@ -27,6 +27,8 @@ public class BaseGameObject extends MovableSprite implements GameObject {
 
     protected Faction faction;
 
+    protected int drawOrder = 0;
+
     public BaseGameObject() {
         super(0, 0, null);
     }
@@ -111,5 +113,10 @@ public class BaseGameObject extends MovableSprite implements GameObject {
 
     public void setFaction(Faction faction) {
         this.faction = faction;
+    }
+
+    @Override
+    public int getDrawOrder() {
+        return drawOrder;
     }
 }

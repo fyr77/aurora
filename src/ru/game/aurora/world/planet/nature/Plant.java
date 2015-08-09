@@ -45,4 +45,8 @@ public class Plant extends BaseGameObject {
         return desc.getName();
     }
 
+    @Override
+    public int getDrawOrder() {
+        return 100; // plants are always on top
+    }
 }
