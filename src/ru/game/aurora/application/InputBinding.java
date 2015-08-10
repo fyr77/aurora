@@ -26,7 +26,12 @@ public class InputBinding {
         WEAPON_1,
         WEAPON_2,
         WEAPON_3,
-        WEAPON_4
+        WEAPON_4;
+
+        @Override
+        public String toString() {
+            return Localization.getText("gui", "input_binding." + name().toLowerCase());
+        }
     }
 
     public static Action[] weapons = new Action[] {Action.WEAPON_1, Action.WEAPON_2, Action.WEAPON_3, Action.WEAPON_4};

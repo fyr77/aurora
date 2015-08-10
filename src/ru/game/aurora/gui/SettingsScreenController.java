@@ -109,6 +109,10 @@ public class SettingsScreenController implements ScreenController {
         GUI.getInstance().popAndSetScreen();
     }
 
+    public void redefineControls() {
+        GUI.getInstance().getNifty().gotoScreen("input_binding_screen");
+    }
+
     @NiftyEventSubscriber(id = "music_volume")
     public void onMusicVolumeChanged(final String id, final ScrollbarChangedEvent event) {
         SoundStore.get().setMusicVolume(event.getValue());

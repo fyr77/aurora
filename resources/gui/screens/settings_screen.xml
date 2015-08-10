@@ -34,6 +34,10 @@
                     <control name="horizontalScrollbar" id="sound_volume" worldMax="1.0" worldPageSize="0.1"
                              initial="0.5" buttonStepSize="0.1" pageStepSize="0.3"/>
 
+                    <panel height="10px"/>
+                    <control id="redefine_controls_button" name="button" label="${gui.input_binding.button}" height="45px">
+                        <interact onClick="redefineControls()"/>
+                    </control>
                     <panel height="*"/>
                     <panel childLayout="horizontal" height="50px">
                         <panel width="*"/>

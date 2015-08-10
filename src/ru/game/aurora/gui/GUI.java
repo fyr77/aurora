@@ -125,11 +125,13 @@ public class GUI {
         nifty.registerScreenController(new MainMenuController(con));
         nifty.registerScreenController(new LoadingScreenController());
         nifty.registerScreenController(new ExitConfirmationScreenController());
+        nifty.registerScreenController(new InputBindingScreenController(con.getInput()));
         nifty.addXml("gui/screens/main_menu.xml");
         nifty.addXml("gui/screens/saveload_screen.xml");
         nifty.addXml("gui/screens/misc_screens.xml");
         nifty.addXml("gui/screens/loading_screen.xml");
         nifty.addXml("gui/screens/settings_screen.xml");
+        nifty.addXml("gui/screens/input_binding_screen.xml");
     }
 
     public static GUI getInstance() {

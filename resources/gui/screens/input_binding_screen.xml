@@ -1,0 +1,41 @@
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+    <controlDefinition name="input_binding_line">
+        <panel childLayout="horizontal" width="100%" align="center" padding="5px">
+
+            <text id="#action-text" style="base-font" align="left" textHAlign="left" height="64px" width="200px" wrap="true"/>
+            <text id="#value-text" style="base-font" align="left" textHAlign="left" height="64px" width="200px" wrap="true"/>
+            <control id="#redefineButton" name="button" label="${gui.input_binding.change}" width="120px" height="64px">
+            </control>
+        </panel>
+
+    </controlDefinition>
+
+    <screen id="input_binding_screen" controller="ru.game.aurora.gui.InputBindingScreenController">
+        <layer childLayout="absolute">
+            <control id="input_binding_window" name="window" closeable="false" title="${gui.input_binding.title}"
+                     width="70%" height="80%" x="15%" y="10%">
+                <panel childLayout="vertical">
+
+                    <control id="items" name="listBox" vertical="optional" horizontal="off" selection="Single"
+                             displayItems="8"
+                             viewConverterClass="ru.game.aurora.gui.InputBindingViewConverter">
+                        <control name="input_binding_line"
+                                 controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
+                    </control>
+
+                    <panel childLayout="horizontal" height="50px">
+                        <panel width="*"/>
+                        <control id="ok_button" name="button" label="${gui.ok}" width="150px" height="45px">
+                            <interact onClick="applySettings()"/>
+                        </control>
+                        <panel width="10px"/>
+                        <control id="close_button" name="button" label="${gui.cancel}" width="150px" height="45px">
+                            <interact onClick="cancelSettings()"/>
+                        </control>
+                        <panel width="10px"/>
+                    </panel>
+                </panel>
+            </control>
+        </layer>
+    </screen>
+</nifty>
