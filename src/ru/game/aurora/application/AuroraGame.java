@@ -345,6 +345,16 @@ public class AuroraGame extends NiftyOverlayGame {
                 Localization.init(Locale.getDefault());
             }
             Configuration.getSystemProperties().put("locale", Localization.getCurrentLocaleTag());
+
+            // read input binding
+            String savedInputBinding = Configuration.getSystemProperties().getProperty(InputBinding.key);
+            if (savedInputBinding == null) {
+                logger.info("No saved keyboard layout found, using default");
+                InputBinding.setDefault();
+            } else {
+                logger.info("Loading keyboard layout");
+                InputBinding.loadFromString(savedInputBinding);
+            }
             app = new AppGameContainer(new AuroraGame());
             app.setUpdateOnlyWhenVisible(false);
             app.setClearEachFrame(true);

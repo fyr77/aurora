@@ -11,6 +11,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.world.BasePositionable;
@@ -57,19 +58,19 @@ public abstract class BaseSpaceRoom implements Room, ITileMap {
         }
 
         if (!player.getShip().nowMoving()) {
-            if (container.getInput().isKeyPressed(Input.KEY_UP)) {
+            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))) {
                 player.getShip().moveUp();
                 shipMove(world);
             }
-            if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
+            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))) {
                 player.getShip().moveDown();
                 shipMove(world);
             }
-            if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
+            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))) {
                 player.getShip().moveLeft();
                 shipMove(world);
             }
-            if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
+            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))) {
                 player.getShip().moveRight();
                 shipMove(world);
             }

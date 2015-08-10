@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.StarMapController;
 import ru.game.aurora.util.ProbabilitySet;
@@ -157,7 +158,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
             if (objects.get(idx).canBeEntered()) {
                 hasEnterableObject = true;
-                if (container.getInput().isKeyPressed(Input.KEY_ENTER)) {
+                if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))) {
                     enterRoom(objects.get(idx));
                 }
             }

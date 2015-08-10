@@ -13,6 +13,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.GUI;
@@ -63,7 +64,7 @@ public class GalaxyMapScreen implements Room {
 
     @Override
     public void update(GameContainer container, World world) {
-        if (container.getInput().isKeyPressed(Input.KEY_ENTER) || container.getInput().isKeyPressed(Input.KEY_ESCAPE) || container.getInput().isKeyPressed(Input.KEY_M)) {
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT)) || container.getInput().isKeyPressed(Input.KEY_ESCAPE) || container.getInput().isKeyPressed(Input.KEY_M)) {
             world.setCurrentRoom(world.getGalaxyMap());
             GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("starmap_button", Button.class).setText(Localization.getText("gui", "space.galaxy_map"));
         }

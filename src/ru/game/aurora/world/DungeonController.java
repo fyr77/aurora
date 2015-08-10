@@ -109,19 +109,19 @@ public class DungeonController extends Listenable implements Serializable {
         int dx = 0;
         int dy = 0;
 
-        if (container.getInput().isKeyPressed(Input.KEY_UP)) {
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))) {
             y--;
             dy = -1;
             actuallyMoved = true;
-        } else if (container.getInput().isKeyPressed(Input.KEY_DOWN)) {
+        } else if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))) {
             y++;
             dy = 1;
             actuallyMoved = true;
-        } else if (container.getInput().isKeyPressed(Input.KEY_LEFT)) {
+        } else if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))) {
             x--;
             dx = -1;
             actuallyMoved = true;
-        } else if (container.getInput().isKeyPressed(Input.KEY_RIGHT)) {
+        } else if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))) {
             x++;
             dx = 1;
             actuallyMoved = true;
@@ -153,7 +153,7 @@ public class DungeonController extends Listenable implements Serializable {
             actuallyMoved = false;
         }
 
-        final boolean enterPressed = container.getInput().isKeyPressed(Input.KEY_ENTER);
+        final boolean enterPressed = container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT));
         if (enterPressed) {
             interactWithObject(world);
         }
@@ -397,7 +397,7 @@ public class DungeonController extends Listenable implements Serializable {
         tilesExploredThisTurn = 0;
         switch (mode) {
             case MODE_MOVE:
-                if (container.getInput().isKeyPressed(Input.KEY_F)) {
+                if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SHOOT))) {
                     changeMode();
                     return;
                 }
@@ -410,9 +410,12 @@ public class DungeonController extends Listenable implements Serializable {
                 }
                 updateShoot(
                         world
-                        , container.getInput().isKeyPressed(Input.KEY_UP) || container.getInput().isKeyPressed(Input.KEY_RIGHT)
-                        , container.getInput().isKeyPressed(Input.KEY_DOWN) || container.getInput().isKeyPressed(Input.KEY_LEFT)
-                        , container.getInput().isKeyPressed(Input.KEY_F) || container.getInput().isKeyPressed(Input.KEY_ENTER)
+                        , container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))
+                                || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))
+                        , container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))
+                                || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))
+                        , container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SHOOT))
+                                || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
                 );
                 break;
             default:
