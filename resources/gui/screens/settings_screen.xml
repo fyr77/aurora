@@ -35,7 +35,7 @@
                              initial="0.5" buttonStepSize="0.1" pageStepSize="0.3"/>
 
                     <panel height="10px"/>
-                    <control id="redefine_controls_button" name="button" label="${gui.input_binding.button}" height="45px">
+                    <control id="redefine_controls_button" width="250px" name="button" label="${gui.input_binding.button}" height="45px">
                         <interact onClick="redefineControls()"/>
                     </control>
                     <panel height="*"/>
