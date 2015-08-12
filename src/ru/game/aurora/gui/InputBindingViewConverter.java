@@ -18,6 +18,7 @@ public class InputBindingViewConverter implements ListBox.ListBoxViewConverter<M
         EngineUtils.setTextForGUIElement(element.findElementByName("#action-text"), actionIntegerEntry.getKey().toString());
         EngineUtils.setTextForGUIElement(element.findElementByName("#value-text"), Input.getKeyName(actionIntegerEntry.getValue()));
         element.setUserData(actionIntegerEntry.getKey());
+        element.layoutElements();
     }
 
     @Override

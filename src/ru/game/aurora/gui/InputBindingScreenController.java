@@ -4,7 +4,6 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
-import de.lessvoid.nifty.controls.listbox.ListBoxView;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -66,6 +65,8 @@ public class InputBindingScreenController implements ScreenController {
                 }
             }
             EngineUtils.setTextForGUIElement(textElement, Input.getKeyName(i));
+            action = null;
+            textElement = null;
         }
 
         @Override
@@ -132,9 +133,13 @@ public class InputBindingScreenController implements ScreenController {
 
     @NiftyEventSubscriber(pattern = ".*redefine.+")
     public void redefine(String id, ButtonClickedEvent event) {
-        input.removeKeyListener(listener);
         final Element parent = event.getButton().getElement().getParent();
         final InputBinding.Action action = (InputBinding.Action) parent.getUserData();
+        if (listener.action == action) {
+            return; // already pressed same button
+        }
+        input.removeKeyListener(listener);
+
         final Element textElement = parent.findElementByName("#value-text");
         EngineUtils.setTextForGUIElement(textElement, "???");
         listener.set(action, textElement);
