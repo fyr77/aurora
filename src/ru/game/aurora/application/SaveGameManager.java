@@ -175,6 +175,7 @@ public class SaveGameManager {
             slot.screenshotImage = null;
             // do not set slot.screenshotImage as it leads to strange bugs
 
+            screen.destroy();
             bos.reset();
             ObjectOutputStream oos = new ObjectOutputStream(bos);
             oos.writeObject(world);
