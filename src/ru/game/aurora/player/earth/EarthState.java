@@ -38,6 +38,7 @@ public class EarthState implements Serializable
         availableUpgrades.add(new WorkshopUpgrade());
         availableUpgrades.add(new BarracksUpgrade());
         availableUpgrades.add(new AstroDroneUpgrade());
+        availableUpgrades.add(new MedBayUpgrade());
     }
 
     public void updateTechnologyLevel(int value) {

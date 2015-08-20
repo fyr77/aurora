@@ -30,6 +30,9 @@
     <resource type="image" id="antenna_module">sprites/modules/antenna.png</resource>
     <resource type="image" id="hull_module">sprites/modules/hull.png</resource>
     <resource type="image" id="astrodrone_hangar_module">sprites/modules/hangar.png</resource>
+    
+    <resource type="image" id="medbay_module">sprites/modules/med_module.png</resource>
+    <resource type="image" id="medbay_module_enhanced">sprites/modules/med_module_up.png</resource>
 
     <!-- item icons -->
 
