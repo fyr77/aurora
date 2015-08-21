@@ -38,6 +38,22 @@ import java.util.Map;
 public class EarthInvasionGenerator implements WorldGeneratorPart {
     private static final long serialVersionUID = 1113857719613332116L;
 
+    @Override
+    public void updateWorld(World world) {
+        int val = CommonRandom.getRandom().nextInt(3);
+        switch (val) {
+            case 0:
+                world.addListener(new RogueInvasionAdder());
+                break;
+            case 1:
+                world.addListener(new KliskTraderAdder());
+                break;
+            case 2:
+                world.addListener(new BorkBlockadeAdder());
+                break;
+        }
+    }
+
     /**
      * Rogue altar event. Rogues start building an altar on the moon, to pray the Obliterator, that disturbs its gravity field.
      * User can enter this altar as a dungeon, and either kill all rogues and destroy it, or help them fix it.
@@ -74,7 +90,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                     world.getGlobalVariables().put("rogues_altar.result", "destroy");
                     world.getPlayer().getJournal().addQuestEntries("rogues_altar", "destroy");
                     world.getPlayer().getJournal().questCompleted("rogues_altar");
-                    world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/rogues_altar_destroyed.json"));
+                    world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/encounters/rogues_altar_destroyed.json"));
                 }
             });
         }
@@ -399,7 +415,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                     }
                 }
             }
-            
+
             return true;
         }
     }
@@ -439,22 +455,6 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "bork_blockade", "news"));
 
             return true;
-        }
-    }
-
-    @Override
-    public void updateWorld(World world) {
-        int val = CommonRandom.getRandom().nextInt(3);
-        switch (val) {
-            case 0:
-                world.addListener(new RogueInvasionAdder());
-                break;
-            case 1:
-                world.addListener(new KliskTraderAdder());
-                break;
-            case 2:
-                world.addListener(new BorkBlockadeAdder());
-                break;
         }
     }
 }
