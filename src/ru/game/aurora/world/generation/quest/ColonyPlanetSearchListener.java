@@ -111,6 +111,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
 
         if (p.getAtmosphere() != PlanetAtmosphere.BREATHABLE_ATMOSPHERE
                 || p.getSize() != 3
+                || p.getFloraAndFauna() == null
                 ) {
             return null;
         }
