@@ -1,0 +1,10 @@
+{
+  "id": "space_1",
+  "drawable": {
+    "id": "hull_module"
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.ShipSpaceUpgrade",
+  "amount": 20,
+  "valye": 1500,
+  "type": "SHIP"
+}

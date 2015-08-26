@@ -140,6 +140,10 @@ public class Ship extends BaseGameObject {
         }
     }
 
+    public void addFreeSpace(int amount) {
+        freeSpace += amount;
+    }
+
     @Override
     public void update(GameContainer container, World world) {
         super.update(container, world);

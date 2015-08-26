@@ -17,13 +17,17 @@ import java.util.*;
 
 public class EarthState implements Serializable
 {
-    private static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = 4L;
 
     private final List<PrivateMessage> messages = new LinkedList<>();
 
     private final Set<ShipUpgrade> availableUpgrades = new HashSet<>();
 
     private int technologyLevel = 0;
+
+    private int undistributedProgress = 0;
+
+    private Map<EarthUpgrade.Type, Integer> progress;
 
     private EvacuationState evacuationState;
 
@@ -39,6 +43,10 @@ public class EarthState implements Serializable
         availableUpgrades.add(new BarracksUpgrade());
         availableUpgrades.add(new AstroDroneUpgrade());
         availableUpgrades.add(new MedBayUpgrade());
+        progress = new HashMap<>();
+        progress.put(EarthUpgrade.Type.EARTH, 0);
+        progress.put(EarthUpgrade.Type.SHIP, 0);
+        progress.put(EarthUpgrade.Type.SPACE, 0);
     }
 
     public void updateTechnologyLevel(int value) {
@@ -73,5 +81,31 @@ public class EarthState implements Serializable
 
     public int getTechnologyLevel() {
         return technologyLevel;
+    }
+
+    public int getProgress(EarthUpgrade.Type type) {
+        return progress.get(type);
+    }
+
+    public int getUndistributedProgress() {
+        return undistributedProgress;
+    }
+
+    public void addProgress(World world, EarthUpgrade.Type type, int amount)
+    {
+        int oldValue = getProgress(type);
+        int newValue = oldValue + amount;
+        for (EarthUpgrade upgrade : EarthUpgrade.getUpgrades(type)) {
+            if (upgrade.getValue() < oldValue) {
+                continue;
+            }
+
+            if (upgrade.getValue() > newValue) {
+                break;
+            }
+            upgrade.unlock(world);
+        }
+        progress.put(type, newValue);
+        undistributedProgress -= amount;
     }
 }
