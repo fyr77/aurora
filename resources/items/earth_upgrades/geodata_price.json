@@ -1,0 +1,12 @@
+{
+  "id": "geodata_price",
+  "drawable": {
+    "id": "cartography_research",
+    "tx": -1
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.UpdateGlobalMultiplierUpgrade",
+  "value": 3000,
+  "variableName": "geodataPriceMultiplier",
+  "variableValue": "1.1",
+  "type": "SPACE"
+}

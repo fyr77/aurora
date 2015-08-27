@@ -18,6 +18,7 @@ public class ShipSpaceUpgrade extends EarthUpgrade
 
     @Override
     public void unlock(World world) {
+        super.unlock(world);
         world.getPlayer().getShip().addFreeSpace(amount);
     }
 }

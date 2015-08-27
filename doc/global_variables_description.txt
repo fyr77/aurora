@@ -11,6 +11,8 @@ voyager - Voyager ship object
 solar_system - points to StarSystem object
 skipHelp - if set, no help popups will be show
 
+geodataResearchMultiplier - research points obtained from geodata are multiplied by this value
+geodataPriceMultiplier - geodata price in credits is increased by this multiplier
 ==============================
 Main quest:
 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+
+
+    <controlDefinition name="earth-upgrade-line">
+        <panel childLayout="horizontal" width="100%" align="center" padding="5px">
+            <image id="#line-icon" width="64px" height="64px"/>
+            <text id="#line-text" style="base-font" align="left" textHAlign="left" height="64px" width="500px"
+                  wrap="true"/>
+            <panel childLayout="center" width="64px" height="64px">
+                <text id="#unlock-text" style="base-font"/>
+                <image id="#unlock-icon" filename="sprites/no_image.png" visible="false"/>
+            </panel>
+            <control id="#use-button" name="button" label="${gui.use}" width="120px" height="64px">
+                <interact onClick="usePressed()"/>
+            </control>
+
+        </panel>
+
+    </controlDefinition>
+
+
+    <controlDefinition name="humanity_screen_tab">
+        <panel childLayout="vertical">
+            <control id="#progressbar" name="progressbar" width="90%" height="40px"/>
+            <panel height="10px"/>
+            <control id="#items" name="listBox" vertical="optional" horizontal="off" selection="None"
+                     height="*"
+                     viewConverterClass="ru.game.aurora.gui.EarthUpgradeViewConverter">
+                <control name="earth-upgrade-line"
+                         controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
+            </control>
+            <panel height="10px"/>
+            <panel width="100%" height="45px" childLayout="horizontal">
+                <text id="#remaining-points-text"/>
+                <panel width="*"/>
+                <control id="#add-1000-button" name="button" label="${gui.progress.add1k}" width="150px" height="45px">
+                    <interact onClick="add1k()"/>
+                </control>
+                <panel width="5px"/>
+                <control id="#add-all-button" name="button" label="${gui.progress.addAll}" width="150px" height="45px">
+                    <interact onClick="addAll()"/>
+                </control>
+            </panel>
+        </panel>
+    </controlDefinition>
+
+
+    <controlDefinition name="humanity_screen">
+        <panel childLayout="vertical">
+            <control id="progress_tabs" name="tabGroup" buttonWidth="30%" buttonHeight="30px" height="92%">
+                <control id="ship_tab" name="tab" caption="${gui.progress.ship_tab_caption}" childLayout="center">
+                    <control name="humanity_screen_tab" id="ship_upgrades_tab"/>
+                </control>
+                <control id="space_tab" name="tab" caption="${gui.progress.space_tab_caption}" childLayout="center">
+                    <control name="humanity_screen_tab" id="space_upgrades_tab"/>
+                </control>
+            </control>
+        </panel>
+
+    </controlDefinition>
+</nifty>

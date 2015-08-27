@@ -10,7 +10,6 @@ import com.google.common.collect.Multiset;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.common.Drawable;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.SurfaceGUIController;
 import ru.game.aurora.player.EarthCountry;
@@ -28,30 +27,16 @@ public class LandingParty extends BaseGameObject {
     public static final int MAX_OXYGEN = 100;
 
     private static final long serialVersionUID = 2;
-
-    private int military;
-
-    private int science;
-
-    private int engineers;
-
-    private int oxygen;
-
-    private WeaponDesc weapon;
-
-    private int collectedGeodata = 0;
-
-    private Multiset<InventoryItem> inventory = HashMultiset.create();
-
+    private static final SellOnlyInventoryItem geodataKey = new GeodataInventoryItem();
     private final int MAX_HP;
-
+    private int military;
+    private int science;
+    private int engineers;
+    private int oxygen;
+    private WeaponDesc weapon;
+    private int collectedGeodata = 0;
+    private Multiset<InventoryItem> inventory = HashMultiset.create();
     private int hp;
-
-    private static final SellOnlyInventoryItem geodataKey = new SellOnlyInventoryItem(
-            "research"
-            , "cartography.geodata_item"
-            , new Drawable("cartography_research")
-            , Configuration.getDoubleProperty("trade.geodata_price"), false);
 
     public LandingParty(int maxHp) {
         super(0, 0, "awayteam");
@@ -122,6 +107,10 @@ public class LandingParty extends BaseGameObject {
         return weapon;
     }
 
+    public void setWeapon(WeaponDesc weapon) {
+        this.weapon = weapon;
+    }
+
     public int calcDamage(World world) {
         double baseValue = (weapon.getDamage() * (1.0 / 3 * (science + engineers) + military));
         if (world.getPlayer().getMainCountry() == EarthCountry.AMERICA) {
@@ -181,7 +170,7 @@ public class LandingParty extends BaseGameObject {
         ship.setMilitary(ship.getMilitary() - military);
         ship.setScientists(ship.getScientists() - science);
         ship.setEngineers(ship.getEngineers() - engineers);
-        
+
         world.getPlayer().getEngineeringState().removeEngineers(engineers);
         world.getPlayer().getResearchState().removeScientists(science);
     }
@@ -211,7 +200,7 @@ public class LandingParty extends BaseGameObject {
         ship.setMilitary(ship.getMilitary() + military);
         ship.setScientists(ship.getScientists() + science);
         ship.setEngineers(ship.getEngineers() + engineers);
-        
+
         world.getPlayer().getEngineeringState().addIdleEngineers(engineers);
         world.getPlayer().getResearchState().addIdleScientists(science);
 
@@ -316,10 +305,6 @@ public class LandingParty extends BaseGameObject {
 
     public int getHp() {
         return hp;
-    }
-
-    public void setWeapon(WeaponDesc weapon) {
-        this.weapon = weapon;
     }
 
     @Override

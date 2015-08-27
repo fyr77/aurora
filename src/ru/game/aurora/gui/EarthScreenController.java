@@ -15,16 +15,13 @@ import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.elements.Element;
-import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.elements.render.TextRenderer;
-import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.niffy.ProgressBarControl;
+import ru.game.aurora.player.earth.EarthUpgrade;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.util.EngineUtils;
@@ -55,6 +52,8 @@ public class EarthScreenController implements ScreenController {
 
     private Element upgradeText;
 
+    private Element humanityProgressTab;
+
     private ProgressBarControl freeSpace;
 
 
@@ -68,6 +67,7 @@ public class EarthScreenController implements ScreenController {
     public void bind(Nifty nifty, Screen screen) {
         messagesList = screen.findElementByName("messages_list");
         shipYardTab = screen.findElementByName("shipyard");
+        humanityProgressTab = screen.findElementByName("upgrades");
         storageList = shipYardTab.findNiftyControl("storageList", ListBox.class);
         inventoryList = shipYardTab.findNiftyControl("inventoryList", ListBox.class);
         upgradeText = shipYardTab.findElementByName("upgrade_text");
@@ -81,6 +81,22 @@ public class EarthScreenController implements ScreenController {
         fillUpgrades();
         world.setPaused(true);
         updateShipyardLabels();
+
+
+        fillHumanityUpgrades(humanityProgressTab.findElementByName("ship_upgrades_tab"), EarthUpgrade.Type.SHIP);
+        fillHumanityUpgrades(humanityProgressTab.findElementByName("space_upgrades_tab"), EarthUpgrade.Type.SPACE);
+    }
+
+    private void fillHumanityUpgrades(Element tab, EarthUpgrade.Type type) {
+        ProgressBarControl progressBarControl = tab.findControl("#progressbar", ProgressBarControl.class);
+        int max = EarthUpgrade.getMax(type);
+        int current = world.getPlayer().getEarthState().getProgress(type);
+        progressBarControl.setText(String.valueOf(current) + "/" + String.valueOf(max));
+        progressBarControl.setProgress((float) current / (float) max);
+
+        ListBox<EarthUpgrade> listBox = tab.findNiftyControl("#items", ListBox.class);
+        listBox.clear();
+        listBox.addAllItems(EarthUpgrade.getUpgrades(type));
     }
 
     private void fillUpgrades() {

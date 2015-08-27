@@ -6,6 +6,8 @@
  */
 package ru.game.aurora.player.research;
 
+import ru.game.aurora.world.World;
+
 import java.io.Serializable;
 
 /**
@@ -25,6 +27,14 @@ public class Geodata implements Serializable {
 
     private int processed = 0;
 
+    public static double getAmountMultiplier(World world) {
+        return Double.parseDouble((String) world.getGlobalVariable("geodataResearchMultiplier", "1.0"));
+    }
+
+    public static double getPriceMultiplier(World world) {
+        return Double.parseDouble((String) world.getGlobalVariable("geodataPriceMultiplier", "1.0"));
+    }
+
     public void addRawData(int amount) {
         raw += amount;
     }
@@ -35,8 +45,8 @@ public class Geodata implements Serializable {
         processed += realAmount;
     }
 
-    public int dumpAndGetVictoryPoints() {
-        int result = raw + 2 * processed;
+    public int dumpAndGetVictoryPoints(World world) {
+        int result = (int) ((raw + 2 * processed) * getAmountMultiplier(world));
         raw = 0;
         processed = 0;
         return result;

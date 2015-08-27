@@ -1,7 +1,8 @@
 {
   "id": "hull_1",
   "drawable": {
-      "id": "hull_module"
+    "id": "hull_module",
+    "tx": -1
   },
   "customClass": "ru.game.aurora.player.earth.upgrades.ShipHullUpgrade",
   "amount": 2,

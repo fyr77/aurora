@@ -16,6 +16,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.spi.render.RenderFont;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.player.research.Geodata;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.util.Pair;
@@ -27,15 +28,10 @@ import java.util.List;
 
 public class EarthProgressScreenController implements ScreenController {
     private final World world;
-
-    private ListBox results;
-
-    private Element total;
-
-    private RenderFont listFont;
-
     private final List<Pair<String, String>> data = new LinkedList<>();
-
+    private ListBox results;
+    private Element total;
+    private RenderFont listFont;
     private int totalScore;
 
     private Element myWindow;
@@ -72,14 +68,14 @@ public class EarthProgressScreenController implements ScreenController {
         data.clear();
         totalScore = 0;
         final ResearchState researchState = world.getPlayer().getResearchState();
-
-        int i = researchState.getGeodata().getRaw();
+        double geodataMultiplier = Geodata.getAmountMultiplier(world);
+        int i = (int) (researchState.getGeodata().getRaw() * geodataMultiplier);
         totalScore += i;
-        data.add(new Pair<>("Raw geodata", String.valueOf(i)));
+        data.add(new Pair<>("Raw geodata" + (geodataMultiplier > 0 ? " x" + geodataMultiplier : ""), String.valueOf(i)));
 
-        i = researchState.getGeodata().getProcessed() * 2;
+        i = (int) (researchState.getGeodata().getProcessed() * 2 * geodataMultiplier);
         totalScore += i;
-        data.add(new Pair<>("Processed geodata", String.valueOf(i)));
+        data.add(new Pair<>("Processed geodata" + (geodataMultiplier > 0 ? " x" + geodataMultiplier : ""), String.valueOf(i)));
 
         data.add(new Pair<>("Astro data", String.valueOf(researchState.getProcessedAstroData())));
         totalScore += researchState.getProcessedAstroData();

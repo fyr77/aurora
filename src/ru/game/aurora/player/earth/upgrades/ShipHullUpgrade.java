@@ -17,6 +17,7 @@ public class ShipHullUpgrade extends EarthUpgrade
 
     @Override
     public void unlock(World world) {
+        super.unlock(world);
         world.getPlayer().getShip().changeMaxHull(amount);
     }
 }

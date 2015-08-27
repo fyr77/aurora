@@ -1,34 +1,24 @@
 package ru.game.aurora.player.earth;
 
-import com.sun.istack.internal.NotNull;
 import ru.game.aurora.application.JsonConfigManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
-import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.world.World;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Base class for humanity upgrades
  */
-public abstract class EarthUpgrade extends ItemWithTextAndImage implements Comparable<EarthUpgrade>
+public class EarthUpgrade extends ItemWithTextAndImage implements Comparable<EarthUpgrade>
 {
 
-    public enum Type
-    {
-        SHIP,
-        EARTH,
-        SPACE
-    }
-
+    public static final long serialVersionUID = 1L;
     private static Map<Type, List<EarthUpgrade>> upgrades;
 
     static {
-        JsonConfigManager<EarthUpgrade> m = new JsonConfigManager<>(EarthUpgrade.class, "items/earth_upgrades");
+        JsonConfigManager<EarthUpgrade> m = new JsonConfigManager<>(EarthUpgrade.class, "resources/items/earth_upgrades");
+        upgrades = new HashMap<>();
         upgrades.put(Type.EARTH, new ArrayList<EarthUpgrade>());
         upgrades.put(Type.SHIP, new ArrayList<EarthUpgrade>());
         upgrades.put(Type.SPACE, new ArrayList<EarthUpgrade>());
@@ -41,22 +31,36 @@ public abstract class EarthUpgrade extends ItemWithTextAndImage implements Compa
         Collections.sort(upgrades.get(Type.SPACE));
     }
 
-    public static final long serialVersionUID = 1L;
-
     protected int value;
-
     protected Type type;
+    protected boolean used = false;
+    protected boolean unlocked = false;
+
+    public EarthUpgrade() {
+        super(null, null);
+    }
 
     public EarthUpgrade(String id, Drawable drawable, int value) {
         super(id, drawable);
         this.value = value;
     }
 
+    public static List<EarthUpgrade> getUpgrades(Type t) {
+        return upgrades.get(t);
+    }
+
+    public static int getMax(Type t) {
+        final List<EarthUpgrade> earthUpgrades = upgrades.get(t);
+        return earthUpgrades.get(earthUpgrades.size() - 1).getValue();
+    }
+
     public int getValue() {
         return value;
     }
 
-    public abstract void unlock(World world);
+    public void unlock(World world) {
+        unlocked = true;
+    }
 
     public boolean canBeUsed()
     {
@@ -70,7 +74,7 @@ public abstract class EarthUpgrade extends ItemWithTextAndImage implements Compa
      */
     public void use(World world, int variant)
     {
-        // nothing
+        used = true;
     }
 
     public Type getType() {
@@ -82,10 +86,6 @@ public abstract class EarthUpgrade extends ItemWithTextAndImage implements Compa
         return Integer.compare(value, o.value);
     }
 
-    public static List<EarthUpgrade> getUpgrades(Type t) {
-        return upgrades.get(t);
-    }
-
     /**
      * Upgrade can has more than one variant where player needs to change one
      */
@@ -94,5 +94,17 @@ public abstract class EarthUpgrade extends ItemWithTextAndImage implements Compa
         return null;
     }
 
+    public boolean isUsed() {
+        return used;
+    }
 
+    public boolean isUnlocked() {
+        return unlocked;
+    }
+
+    public enum Type {
+        SHIP,
+        EARTH,
+        SPACE
+    }
 }

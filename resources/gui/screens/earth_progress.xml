@@ -89,6 +89,9 @@
                         <control id="messages" name="tab" caption="Messages" childLayout="center">
                             <control name="messages_screen" id="messages_list"/>
                         </control>
+                        <control id="upgrades" name="tab" caption="Humanity" childLayout="center">
+                            <control name="humanity_screen" id="humanity_tab"/>
+                        </control>
                         <control id="shipyard" name="tab" caption="Shipyard" childLayout="vertical">
                             <panel height="10px"/>
                             <panel childLayout="horizontal" width="100%" height="276px">
