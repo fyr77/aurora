@@ -5,8 +5,10 @@
     <controlDefinition name="earth-upgrade-line">
         <panel childLayout="horizontal" width="100%" align="center" padding="5px">
             <image id="#line-icon" width="64px" height="64px"/>
-            <text id="#line-text" style="base-font" align="left" textHAlign="left" height="64px" width="500px"
+            <panel childLayout="center" paddingLeft="10px" paddingRight="10px" width="500px">
+                <text id="#line-text" style="base-font" align="left" textHAlign="left" height="64px" width="90%"
                   wrap="true"/>
+            </panel>
             <panel childLayout="center" width="64px" height="64px">
                 <text id="#unlock-text" style="base-font"/>
                 <image id="#unlock-icon" filename="sprites/no_image.png" visible="false"/>
@@ -22,7 +24,7 @@
 
     <controlDefinition name="humanity_screen_tab">
         <panel childLayout="vertical">
-            <control id="#progressbar" name="progressbar" width="90%" height="40px"/>
+            <control id="#progressbar" name="progressbar" width="100%" height="40px"/>
             <panel height="10px"/>
             <control id="#items" name="listBox" vertical="optional" horizontal="off" selection="None"
                      height="*"
@@ -32,8 +34,8 @@
             </control>
             <panel height="10px"/>
             <panel width="100%" height="45px" childLayout="horizontal">
-                <text id="#remaining-points-text"/>
-                <panel width="*"/>
+                <text id="#remaining-points-text" style="button-font" height="45px" textHAlign="center" width="*"/>
+
                 <control id="#add-1000-button" name="button" label="${gui.progress.add1k}" width="150px" height="45px">
                     <interact onClick="add1k()"/>
                 </control>
@@ -54,6 +56,9 @@
                 </control>
                 <control id="space_tab" name="tab" caption="${gui.progress.space_tab_caption}" childLayout="center">
                     <control name="humanity_screen_tab" id="space_upgrades_tab"/>
+                </control>
+                <control id="earth_tab" name="tab" caption="${gui.progress.earth_tab_caption}" childLayout="center">
+                    <control name="humanity_screen_tab" id="earth_upgrades_tab"/>
                 </control>
             </control>
         </panel>

@@ -5,8 +5,8 @@
     "tx": -1
   },
   "customClass": "ru.game.aurora.player.earth.upgrades.UpdateGlobalMultiplierUpgrade",
-  "value": 1500,
+  "value": 900,
   "variableName": "geodataResearchMultiplier",
   "variableValue": "1.1",
-  "type": "SPACE"
+  "type": "EARTH"
 }

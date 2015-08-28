@@ -22,18 +22,13 @@ public class EarthState implements Serializable
     private final List<PrivateMessage> messages = new LinkedList<>();
 
     private final Set<ShipUpgrade> availableUpgrades = new HashSet<>();
-
-    private int technologyLevel = 0;
-
-    private int undistributedProgress = 0;
-
-    private Map<EarthUpgrade.Type, Integer> progress;
-
-    private EvacuationState evacuationState;
-
     // quest dialogs that override default earth dialog
     // ordered in a queue, as there may be more than one at a time
     private final Queue<Dialog> earthSpecialDialogs = new LinkedList<>();
+    private int technologyLevel = 0;
+    private int undistributedProgress = 0;
+    private Map<EarthUpgrade.Type, Integer> progress;
+    private EvacuationState evacuationState;
 
     public EarthState()
     {
@@ -50,6 +45,7 @@ public class EarthState implements Serializable
     }
 
     public void updateTechnologyLevel(int value) {
+        undistributedProgress += value;
         technologyLevel += value;
     }
 

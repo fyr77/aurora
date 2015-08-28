@@ -5,6 +5,7 @@
  */
 package ru.game.aurora.world;
 
+import ru.game.aurora.player.earth.EarthUpgrade;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
@@ -23,14 +24,8 @@ import java.util.Set;
  */
 public abstract class GameEventListener implements Serializable {
 
-    public enum EventGroup {
-        ENCOUNTER_SPAWN,
-    }
-
     private static final long serialVersionUID = -4189717114829655272L;
-
     protected boolean isAlive = true;
-
     protected Set<EventGroup> groups;
 
     /**
@@ -79,6 +74,10 @@ public abstract class GameEventListener implements Serializable {
     // should be called after hp is reduced, so in case target was killed its isAlive() should return false here
     public boolean onGameObjectAttacked(World world, GameObject attacker, GameObject target, int damage) {return false;}
 
+    public boolean onEarthUpgradeUnlocked(World world, EarthUpgrade upgrade) {
+        return false;
+    }
+
     /**
      * Returns false if this event will never happen again and should be disposed
      */
@@ -108,5 +107,9 @@ public abstract class GameEventListener implements Serializable {
     public void setGroups(EventGroup... g) {
         this.groups = new HashSet<>();
         Collections.addAll(this.groups, g);
+    }
+
+    public enum EventGroup {
+        ENCOUNTER_SPAWN,
     }
 }

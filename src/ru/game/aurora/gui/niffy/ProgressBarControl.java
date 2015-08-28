@@ -51,7 +51,7 @@ public class ProgressBarControl implements Controller {
         } else if (progress > 1.0f) {
             progress = 1.0f;
         }
-        final int MIN_WIDTH = 32;
+        final int MIN_WIDTH = 0;
         int pixelWidth = (int) (MIN_WIDTH + (progressBarElement.getParent().getWidth() - MIN_WIDTH) * progress);
         progressBarElement.setConstraintWidth(new SizeValue(pixelWidth + "px"));
         progressBarElement.getParent().layoutElements();
@@ -64,15 +64,15 @@ public class ProgressBarControl implements Controller {
         progressTextElement.getRenderer(TextRenderer.class).setText(text);
     }
 
+    public boolean isEnabled() {
+        return progressBarElement.isEnabled();
+    }
+
     public void setEnabled(boolean enabled) {
         if (enabled) {
             progressBarElement.enable();
         } else {
             progressBarElement.disable();
         }
-    }
-
-    public boolean isEnabled() {
-        return progressBarElement.isEnabled();
     }
 }

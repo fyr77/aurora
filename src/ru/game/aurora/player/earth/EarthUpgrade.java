@@ -1,6 +1,8 @@
 package ru.game.aurora.player.earth;
 
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.JsonConfigManager;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.world.World;
@@ -60,6 +62,7 @@ public class EarthUpgrade extends ItemWithTextAndImage implements Comparable<Ear
 
     public void unlock(World world) {
         unlocked = true;
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "progress.upgrade_unlocked"), getLocalizedName("upgrades")));
     }
 
     public boolean canBeUsed()
