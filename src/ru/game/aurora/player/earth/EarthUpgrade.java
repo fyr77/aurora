@@ -5,6 +5,7 @@ import ru.game.aurora.application.JsonConfigManager;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.World;
 
 import java.util.*;
@@ -37,6 +38,7 @@ public class EarthUpgrade extends ItemWithTextAndImage implements Comparable<Ear
     protected Type type;
     protected boolean used = false;
     protected boolean unlocked = false;
+    private String dialogId = null;
 
     public EarthUpgrade() {
         super(null, null);
@@ -63,6 +65,9 @@ public class EarthUpgrade extends ItemWithTextAndImage implements Comparable<Ear
     public void unlock(World world) {
         unlocked = true;
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "progress.upgrade_unlocked"), getLocalizedName("upgrades")));
+        if (dialogId != null) {
+            world.addOverlayWindow(Dialog.loadFromFile(dialogId));
+        }
     }
 
     public boolean canBeUsed()
