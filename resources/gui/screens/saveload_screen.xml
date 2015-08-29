@@ -6,14 +6,16 @@
                 <image id="#line-icon" width="128px" height="128px"/>
             </panel>
             <text id="#line-text" style="base-font" align="left" textHAlign="center" textVAlign="center" height="138px"
-                  width="400px" wrap="true"/>
+                  width="*" wrap="true"/>
+
             <control id="#loadButton" name="button" label="${gui.saveload.load}" width="150px" height="100px">
                 <interact onRelease="loadPressed()"/>
             </control>
-            <text width="10px" style="base-font" text="   "/>
+            <panel width="15px" height="138px"/>
             <control id="#saveButton" name="button" label="${gui.saveload.save}" width="150px" height="100px">
                 <interact onRelease="savePressed()"/>
             </control>
+            <panel width="50px" height="138px"/>
         </panel>
 
     </controlDefinition>
@@ -21,12 +23,12 @@
     <screen id="saveload_screen" controller="ru.game.aurora.gui.SaveLoadScreenController">
         <layer childLayout="absolute">
             <control id="saveload_window" name="window" hideOnClose="true" title="${gui.saveload.title}"
-                     height="80%" x="100px" y="10px" width="900px">
-                <panel childLayout="vertical">
+                     height="80%" x="15%" y="10%" width="70%">
+                <panel childLayout="vertical" width="100%">
 
                     <control id="items" name="listBox" vertical="optional" horizontal="off" selection="Single"
                              displayItems="5"
-                             viewConverterClass="ru.game.aurora.gui.SaveViewConverter">
+                             viewConverterClass="ru.game.aurora.gui.SaveViewConverter" width="100%">
                         <control name="save-line-with-image"
                                  controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
                     </control>

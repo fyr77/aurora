@@ -3,11 +3,11 @@
 
     <screen id="exit_confirmation_screen" controller="ru.game.aurora.gui.ExitConfirmationScreenController">
         <layer id="layer" childLayout="absolute">
-            <control id="confirmation_window" name="window" closeable="false" hideOnClose="true" width="60%"
-                     height="350px"
-                     x="20%" y="30%">
+            <control id="confirmation_window" name="window" closeable="false" hideOnClose="true" width="50%"
+                     height="200px"
+                     x="25%" y="30%">
                 <panel childLayout="vertical" margin="10px">
-                    <panel height="30%"/>
+                    <panel height="15%"/>
                     <text style="button-font" text="${gui.confirm_exit}" width="100%" textHAlign="center"/>
                     <panel height="*"/>
                     <panel childLayout="horizontal" height="50px">
