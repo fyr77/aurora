@@ -11,7 +11,7 @@
             </panel>
             <panel childLayout="center" width="64px" height="64px">
                 <text id="#unlock-text" style="base-font"/>
-                <image id="#unlock-icon" filename="sprites/no_image.png" visible="false"/>
+                <image id="#unlock-icon" filename="sprites/gui/rexona.png" visible="false"/>
             </panel>
             <control id="#use-button" name="button" label="${gui.use}" width="120px" height="64px">
                 <interact onClick="usePressed()"/>
