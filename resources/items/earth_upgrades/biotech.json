@@ -1,0 +1,13 @@
+{
+  "id": "biotech_1",
+  "drawable": {
+    "id": "medbay_module",
+    "tx": -1
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.UpdateGlobalMultiplierUpgrade",
+  "value": 1500,
+  "variableName": "landingPartyHPBonus",
+  "variableValue": "1",
+  "type": "EARTH",
+  "multiply": false
+}

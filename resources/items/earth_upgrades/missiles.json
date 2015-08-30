@@ -1,0 +1,11 @@
+{
+  "id": "missiles",
+  "drawable": {
+    "id": "ship_rocket",
+    "tx": -1
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.WeaponModuleUnlockUpgrade",
+  "value": 750,
+  "weaponId": "humanity_missiles",
+  "type": "SHIP"
+}

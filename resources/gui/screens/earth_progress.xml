@@ -84,10 +84,13 @@
             <control id="earth_window" name="window" title="Earth Relay" closeable="false" width="60%" height="85%"
                      x="20%" y="8%"
                      padding="8px,8px,8px,8px">
-                <panel childLayout="vertical">
-                    <control id="earth_tabs" name="tabGroup" buttonWidth="30%" buttonHeight="30px" height="92%">
+                <panel childLayout="vertical" height="100%">
+                    <control id="earth_tabs" name="tabGroup" buttonWidth="30%" buttonHeight="30px" height="*">
                         <control id="messages" name="tab" caption="Messages" childLayout="center">
                             <control name="messages_screen" id="messages_list"/>
+                        </control>
+                        <control id="upgrades" name="tab" caption="Humanity" childLayout="center">
+                            <control name="humanity_screen" id="humanity_tab"/>
                         </control>
                         <control id="shipyard" name="tab" caption="Shipyard" childLayout="vertical">
                             <panel height="10px"/>
@@ -196,8 +199,8 @@
 
                         </control>
                     </control>
-                    <panel height="*"/>
-                    <panel childLayout="horizontal" height="50px">
+                    <panel height="10px"/>
+                    <panel childLayout="horizontal" height="55px">
                         <panel width="75%"/>
                         <control id="close_button" name="button" label="Close" width="150px" height="45px">
                             <interact onClick="closeScreen()"/>

@@ -17,6 +17,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.*;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.Player;
+import ru.game.aurora.player.earth.EarthUpgrade;
 import ru.game.aurora.player.earth.EvacuationState;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.RnDSet;
@@ -37,54 +38,32 @@ import java.util.*;
 public class World implements Serializable, ResolutionChangeListener {
 
     private static final long serialVersionUID = 3L;
-    
+    private static final DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+    private static final Logger logger = LoggerFactory.getLogger(World.class);
     private static World world;
-
+    private final GalaxyMap galaxyMap;
+    private final Player player;
+    private final Calendar currentDate;
+    private final Reputation reputation;
+    private final transient StarSystemNamesCollection starSystemNamesCollection = new StarSystemNamesCollection();
+    private final List<GameEventListener> listeners = new LinkedList<>();
+    private final Map<String, Faction> factions = new HashMap<>();
+    private final Map<String, Serializable> globalVariables = new HashMap<>();
+    private final RnDSet researchAndDevelopmentProjects;
+    // to distinguish save games made by different players
+    private final UUID uuid;
     private Camera camera;
-
     /**
      * Set by game logic, shows that game is over and on next update this world will be deallocated and main menu will be shown
      */
     private boolean isGameOver;
-
     private Room currentRoom;
-
     // if true, current room is not updated
     private boolean isPaused;
-
-    private final GalaxyMap galaxyMap;
-
-    private final Player player;
-
-    private final Calendar currentDate;
-
-    private final Reputation reputation;
-
     private transient boolean updatedThisFrame;
-
     private transient boolean updatedNextFrame;
-
-    private final transient StarSystemNamesCollection starSystemNamesCollection = new StarSystemNamesCollection();
-
-    private static final DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
-
     private StarSystem currentStarSystem = null;
-
     private int turnCount = 0;
-
-    private final List<GameEventListener> listeners = new LinkedList<>();
-
-    private final Map<String, Faction> factions = new HashMap<>();
-
-    private final Map<String, Serializable> globalVariables = new HashMap<>();
-
-    private final RnDSet researchAndDevelopmentProjects;
-
-    // to distinguish save games made by different players
-    private final UUID uuid;
-
-    private static final Logger logger = LoggerFactory.getLogger(World.class);
-
     // Version of a game that created this world. Can be used on save loading to detect if save conversion is required
     private String gameVersion = Version.VERSION;
 
@@ -100,6 +79,10 @@ public class World implements Serializable, ResolutionChangeListener {
         uuid = UUID.randomUUID();
         
         world = this;
+    }
+
+    public static World getWorld() {
+        return world;
     }
 
     public Map<String, Serializable> getGlobalVariables() {
@@ -177,6 +160,10 @@ public class World implements Serializable, ResolutionChangeListener {
         return camera;
     }
 
+    public void setCamera(Camera camera) {
+        this.camera = camera;
+    }
+
     public boolean isUpdatedThisFrame() {
         return updatedThisFrame;
     }
@@ -189,6 +176,10 @@ public class World implements Serializable, ResolutionChangeListener {
         return currentRoom;
     }
 
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
     public IDungeon getCurrentDungeon() {
         return (currentRoom instanceof IDungeon) ? (IDungeon) currentRoom : null;
     }
@@ -199,10 +190,6 @@ public class World implements Serializable, ResolutionChangeListener {
 
     public Player getPlayer() {
         return player;
-    }
-
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
     }
 
     public void addOverlayWindow(Dialog d, Map<String, String> flags) {
@@ -403,6 +390,13 @@ public class World implements Serializable, ResolutionChangeListener {
         }
     }
 
+    public void onEarthUpgradeUnlocked(EarthUpgrade upgrade) {
+        List<GameEventListener> newList = new LinkedList<>(listeners);
+        for (GameEventListener l : newList) {
+            l.onEarthUpgradeUnlocked(this, upgrade);
+        }
+    }
+
     public void onGameObjectAttacked(GameObject attacker, GameObject target, int damage) {
         List<GameEventListener> newList = new LinkedList<>(listeners);
         for (GameEventListener l : newList) {
@@ -441,10 +435,6 @@ public class World implements Serializable, ResolutionChangeListener {
         return listeners;
     }
 
-    public void setCamera(Camera camera) {
-        this.camera = camera;
-    }
-
     public boolean isGameOver() {
         return isGameOver;
     }
@@ -477,12 +467,12 @@ public class World implements Serializable, ResolutionChangeListener {
         this.updatedNextFrame = updatedNextFrame;
     }
 
-    public void setPaused(boolean paused) {
-        isPaused = paused;
-    }
-
     public boolean isPaused() {
         return isPaused;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
     }
 
     public void gameLoaded() {
@@ -514,7 +504,7 @@ public class World implements Serializable, ResolutionChangeListener {
                 }
             }
         }
-        
+
         world = this;
     }
 
@@ -547,9 +537,5 @@ public class World implements Serializable, ResolutionChangeListener {
             rz = defaultValue;
         }
         return rz;
-    }
-    
-    public static World getWorld() {
-        return world;
     }
 }

@@ -7,6 +7,7 @@ package ru.game.aurora.world;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
@@ -24,6 +25,7 @@ import ru.game.aurora.player.Player;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
 import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
+import ru.game.aurora.player.engineering.upgrades.MedBayUpgrade;
 import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
 import ru.game.aurora.world.equip.WeaponInstance;
@@ -138,6 +140,10 @@ public class Ship extends BaseGameObject {
         }
     }
 
+    public void addFreeSpace(int amount) {
+        freeSpace += amount;
+    }
+
     @Override
     public void update(GameContainer container, World world) {
         super.update(container, world);
@@ -211,7 +217,7 @@ public class Ship extends BaseGameObject {
         }
         
         int loseCrewChance = Configuration.getIntProperty("game.crew.lose_chance");
-        int loseChanceReduce = 0;     //TODO: implement med center
+        int loseChanceReduce = MedBayUpgrade.getCrewDeathReduceValue();
         loseCrewChance -= loseCrewChance * 0.01f * loseChanceReduce;
         
         Random rnd = CommonRandom.getRandom();

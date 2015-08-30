@@ -38,13 +38,10 @@ public class Earth extends BasePlanet {
     private final Dialog earthDialog;
 
     private final Dialog progressDialog;
-
-    private int lastVisitTurn = 0;
-
-    private transient Image earthImage = null;
-
     // flags used to control default earth dialog
     private final Map<String, String> dialogFlags = new HashMap<>();
+    private int lastVisitTurn = 0;
+    private transient Image earthImage = null;
 
     public Earth(StarSystem owner, PlanetCategory cat, PlanetAtmosphere atmosphere, int size, int x, int y) {
         super(x, y, size, owner, atmosphere, cat);
@@ -186,7 +183,7 @@ public class Earth extends BasePlanet {
         world.onPlayerReturnToEarth();
         int result = 0;
         final ResearchState researchState = world.getPlayer().getResearchState();
-        result += researchState.getGeodata().dumpAndGetVictoryPoints();
+        result += researchState.getGeodata().dumpAndGetVictoryPoints(world);
         for (ResearchProjectDesc desc : researchState.getCompletedProjects()) {
             result += desc.getScore();
             if (desc.getEarthProgress() != null) {
