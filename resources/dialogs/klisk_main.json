@@ -106,8 +106,27 @@
         },
         {
           "returnValue": 0,
+          "targetStatementId": 120,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "heritage.monster_collected",
+              "type": "SET"
+            },
+            {
+              "name": "heritage.quest_started",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "heritage.quest_completed",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 0,
-          "replyText": "1"
+          "replyText": "2"
         }
       ]
     },
@@ -387,6 +406,16 @@
         }
       ]
     },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
     "16": {
       "id": 16,
       "replies": [
@@ -397,16 +426,6 @@
           "flags": {
             "planet_info": "true"
           }
-        }
-      ]
-    },
-    "17": {
-      "id": 17,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
         }
       ]
     },
@@ -425,8 +444,18 @@
         }
       ]
     },
-    "105": {
-      "id": 105,
+    "110": {
+      "id": 110,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 111,
+          "replyText": "0"
+        }
+      ]
+    },
+    "111": {
+      "id": 111,
       "replies": [
         {
           "returnValue": 0,
@@ -462,76 +491,6 @@
           "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "6"
-        }
-      ]
-    },
-    "106": {
-      "id": 106,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 107,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 108,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 109,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 110,
-          "replyText": "3"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 112,
-          "replyText": "4"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "5"
-        }
-      ]
-    },
-    "107": {
-      "id": 107,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 106,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 108,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 109,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 110,
-          "replyText": "3"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 112,
-          "replyText": "4"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "5"
         }
       ]
     },
@@ -605,18 +564,78 @@
         }
       ]
     },
-    "110": {
-      "id": 110,
+    "106": {
+      "id": 106,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 111,
+          "targetStatementId": 107,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 108,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 109,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 110,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 112,
+          "replyText": "4"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "5"
         }
       ]
     },
-    "111": {
-      "id": 111,
+    "107": {
+      "id": 107,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 106,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 108,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 109,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 110,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 112,
+          "replyText": "4"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "5"
+        }
+      ]
+    },
+    "105": {
+      "id": 105,
       "replies": [
         {
           "returnValue": 0,
@@ -652,68 +671,6 @@
           "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "6"
-        }
-      ]
-    },
-    "112": {
-      "id": 112,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 116,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 113,
-          "replyText": "1",
-          "replyConditions": [
-            {
-              "name": "credits",
-              "value": "6",
-              "type": "GREATER"
-            }
-          ]
-        }
-      ]
-    },
-    "113": {
-      "id": 113,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 115,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 114,
-          "replyText": "1"
-        }
-      ]
-    },
-    "114": {
-      "id": 114,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 116,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "1"
-        }
-      ]
-    },
-    "115": {
-      "id": 115,
-      "replies": [
-        {
-          "returnValue": 101,
-          "targetStatementId": -1,
-          "replyText": "0"
         }
       ]
     },
@@ -754,6 +711,118 @@
           "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "6"
+        }
+      ]
+    },
+    "115": {
+      "id": 115,
+      "replies": [
+        {
+          "returnValue": 101,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "114": {
+      "id": 114,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 116,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "113": {
+      "id": 113,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 115,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 114,
+          "replyText": "1"
+        }
+      ]
+    },
+    "112": {
+      "id": 112,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 116,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 113,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "credits",
+              "value": "6",
+              "type": "GREATER"
+            }
+          ]
+        }
+      ]
+    },
+    "123": {
+      "id": 123,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 0,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "122": {
+      "id": 122,
+      "replies": [
+        {
+          "returnValue": 128,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "121": {
+      "id": 121,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 122,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 123,
+          "replyText": "1"
+        }
+      ]
+    },
+    "120": {
+      "id": 120,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 121,
+          "replyText": "0"
         }
       ]
     }
