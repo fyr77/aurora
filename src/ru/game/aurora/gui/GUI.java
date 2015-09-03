@@ -16,6 +16,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.MainMenuController;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 
@@ -163,32 +164,44 @@ public class GUI {
         nifty.registerScreenController(new StarMapController(world));
 
         // load xmls
-        nifty.addXml("gui/screens/interaction_target_selection_control.xml");
-        nifty.addXml("gui/screens/help_popup.xml");
-        nifty.addXml("gui/screens/image_button.xml");
-        nifty.addXml("gui/screens/shoot_panel.xml");
-        nifty.addXml("gui/screens/progress_bar.xml");
-        nifty.addXml("gui/screens/top_panel.xml");
-        nifty.addXml("gui/screens/space_gui.xml");
-        nifty.addXml("gui/screens/country_select_screen.xml");
-        nifty.addXml("gui/screens/fail_screen.xml");
-        nifty.addXml("gui/screens/list_screen.xml");
-        nifty.addXml("gui/screens/research_screen.xml");
-        nifty.addXml("gui/screens/ingame_menu.xml");
-        nifty.addXml("gui/screens/trade_screen.xml");
-        nifty.addXml("gui/screens/dialog_screen.xml");
-        nifty.addXml("gui/screens/story_screen.xml");
-        nifty.addXml("gui/screens/earth_progress.xml");
-        nifty.addXml("gui/screens/engineering_screen.xml");
-        nifty.addXml("gui/screens/surface_gui.xml");
-        nifty.addXml("gui/screens/landing_party_equip_screen.xml");
-        nifty.addXml("gui/screens/ship.xml");
-        nifty.addXml("gui/screens/intro_dialog.xml");
-        nifty.addXml("gui/screens/inventory_screen.xml");
-        nifty.addXml("gui/screens/journal_screen.xml");
-        nifty.addXml("gui/screens/planet_scan_screen.xml");
-        nifty.addXml("gui/screens/surface_map.xml");
-        nifty.addXml("gui/screens/starmap.xml");
+        String[] screens = {
+                "gui/screens/interaction_target_selection_control.xml", 
+                "gui/screens/help_popup.xml",
+                "gui/screens/image_button.xml",
+                "gui/screens/shoot_panel.xml",
+                "gui/screens/progress_bar.xml",
+                "gui/screens/top_panel.xml",
+                "gui/screens/space_gui.xml",
+                "gui/screens/country_select_screen.xml",
+                "gui/screens/fail_screen.xml",
+                "gui/screens/list_screen.xml",
+                "gui/screens/research_screen.xml",
+                "gui/screens/ingame_menu.xml",
+                "gui/screens/trade_screen.xml",
+                "gui/screens/dialog_screen.xml",
+                "gui/screens/story_screen.xml",
+                "gui/screens/earth_progress.xml",
+                "gui/screens/engineering_screen.xml",
+                "gui/screens/surface_gui.xml",
+                "gui/screens/landing_party_equip_screen.xml",
+                "gui/screens/ship.xml",
+                "gui/screens/intro_dialog.xml",
+                "gui/screens/inventory_screen.xml",
+                "gui/screens/journal_screen.xml",
+                "gui/screens/planet_scan_screen.xml",
+                "gui/screens/surface_map.xml",
+                "gui/screens/starmap.xml"
+        };
+        
+        for(String screen : screens) {
+            String override = ResourceManager.getOverridedResources().get(screen);
+            if(override != null) {
+                nifty.addXml(override);
+            }
+            else {
+                nifty.addXml(screen);
+            }
+        }
 
         // remove old map controller listener, if it already exists (this is a loaded game). it should actually not be saved at all
         for (Iterator<GameEventListener> iter = world.getListeners().iterator(); iter.hasNext(); ) {

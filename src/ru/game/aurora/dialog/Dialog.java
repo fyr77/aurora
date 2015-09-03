@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.PlaceholderResolver;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.world.ITileMap;
 import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
@@ -274,7 +275,14 @@ public class Dialog implements OverlayWindow {
 
     public static Dialog loadFromFile(String path) {
         Dialog d = new Dialog();
-        d.load(path);
+        
+        String overrided = ResourceManager.getOverridedResources().get(path);
+        if(overrided != null) {
+            d.load(overrided);
+        } else {
+            d.load(path);
+        }
+        
         return d;
     }
 
