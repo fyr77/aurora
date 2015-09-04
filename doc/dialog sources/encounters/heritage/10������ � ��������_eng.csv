@@ -1,0 +1,86 @@
+0;*They brought the monster to one of the cargo holds and set up a direct connection to the bridge.*;
+;Great. Ahem. Can you hear me?;1
+1;I can. *The creature looks up at the camera. It's talking loudly, obviously thinking that you can hear it better that way.* What do you want from me? *It really does look more like a Klisk alive than its comrades when they were dead. If you took a normal Klisk, made it four times as big, grew its muscles until they looked grotesque, and threw a hide of a different color over all that, you would get this monster. Although, can you really call it that?*;
+;Who are you?;2
+;Why did you want my people to kill you?;4
+;Are you confused by where you are?;6
+;What was that writing on the walls of your lair?;8
+;Do you know there are others like you?;10
+;This might surprise you, but we were looking for you.;12
+;What do I do with you now?;14
+2;*The creature hugs itself and rocks side to side.* I don't know. I don't remember anything.;
+;What do you mean?;3
+3;As far as I can remember, I spent all my life on that planet. A very long time. And then you came. That's it.;
+;Why did you want my people to kill you?;4
+;Are you confused by where you are?;6
+;What was that writing on the walls of your lair?;8
+;Do you know there are others like you?;10
+;This might surprise you, but we were looking for you.;12
+;What do I do with you now?;14
+4;So tired. Always alone, always alone. *The creature points at its head.* And there... very bad. *Now it points at its chest.* Here, too. Better all the time, it's unbearable. I wanted to kill myself, but I can't. I thought you would.;
+;This is very strange. I expected a lot of things, but definitely not this.;5
+5;*No response.*;
+;Who are you?;2
+;Are you confused by where you are?;6
+;What was that writing on the walls of your lair?;8
+;Do you know there are others like you?;10
+;This might surprise you, but we were looking for you.;12
+;What do I do with you now?;14
+6;It's a space ship. What's wrong with it?;
+;And how do you know that?;7
+7;*The creature opens its mouth. Then the creature closes it. It falls silent and retreats into itself.*;
+;Who are you?;2
+;Why did you want my people to kill you?;4
+;What was that writing on the walls of your lair?;8
+;Do you know there are others like you?;10
+;This might surprise you, but we were looking for you.;12
+;What do I do with you now?;14
+8;Poetry. Sometimes it appears in my head. And I write it down. And then I forget it again. That's why I write it down.;
+;What was that poem?;9
+9;I... *It frowns.* I forgot it. I remember what it was about. About how tired I was. That I only have what I have in my head, what I think about. I'd like to throw everything I have at someone's feet, someone I can talk to. But all I have is what's inside my head.;
+;Who are you?;2
+;Why did you want my people to kill you?;4
+;Are you confused by where you are?;6
+;Do you know there are others like you?;10
+;This might surprise you, but we were looking for you.;12
+;What do I do with you now?;14
+10;I knew that. But I forgot. Now I remember. They weren't like me, you're wrong. They couldn't… do what I did. *It frowns and rubs its forehead.*;
+;You're right. We couldn't talk to them, they attacked my people and we had to defend ourselves. But how could you know that?;11
+11;It's just inside my head. That's that.;
+;Who are you?;2
+;Why did you want my people to kill you?;4
+;Are you confused by where you are?;6
+;What was that writing on the walls of your lair?;8
+;This might surprise you, but we were looking for you.;12
+;What do I do with you now?;14
+12;Really? Why?;
+;You were created by a scientist who wasn't a very good person. He sent those like you to different planets. And we were sent after them. To solve the problem.;13
+13;Yes. I see. I must be a problem. I remember a long time ago, where I lived, small and big things lived. *Tries to depict something with its hands.* I ate them. Then I ran out.;
+;Who are you?;2
+;Why did you want my people to kill you?;4
+;Are you confused by where you are?;6
+;What was that writing on the walls of your lair?;8
+;Do you know there are others like you?;10
+;What do I do with you now?;14
+14;What do you do with me?;
+;They sent us to kill you. But you're sentient. That would have been very unethical.;15
+15;Oh. Ethical… unethical… I think I… Understand. *It hugs itself again and starts rocking back and forth.*;
+;I could hand you over to those who sent us. They're practical, but not evil. They could find a way to help you. Do you want that?;16
+;I could leave you here, aboard my ship. Do you want that?;19
+16;Oh… What are they like?;
+;Klisks? They're like you, just smaller. You're very much alike.;17
+17;Strange. Something is itching in my head… *It rubs its forehead.* There, inside. But I wouldn't mind that.;
+;Then it's decided.;-1
+;There is another way.;18
+18;Oh?;
+;I could hand you over to those who sent us. They're practical, but not evil. They could find a way to help you. Do you want that?;16
+;I could leave you here, aboard my ship. Do you want that?;19
+19;Oh. Stay here? And… who are you? And why?;
+;We're humans from planet Earth. We explore space to save our planet. Sometimes we help other peoples. I don't know how you could help us, but you definitely could do it somehow.;20
+20;Humans. Very interesting. *Rubs its nose.* I think I could help. I… I know…;
+;Of course you could. Stay. We'll find a place for you.;21
+;There is another way.;18
+21;Yes... No... You don't understand. *It rubs its nose again.* I didn't mean I knew that... it's different... *The monster shudders, and suddenly says in one breath...* Hexatomic structures allow synthesis of nucleotides that are alternative to ribo- and deoxyribonucleotides. Ribo- and deoxynucleotides, nucleotides containing hexose residue, can be bound to each other forming various polynucleotide chains. That... that...;
+;Is that something from chemistry? What is it?;22
+22;*The monster doesn't respond. Rocking side to side more and more, in the end it relaxes fully and drops to the floor.*;
+;Damn it. Gordon, send a science team to the cargo hold with our new friend! And medics, I guess…;-1

@@ -1,0 +1,6 @@
+0;Aurora 2, how copy?;
+;I copy. Captain speaking. Did you find the monster?;1
+1;We did. Didn't even have to fight it. The corpse is dry as a… uhhh… nevermind, Captain. Anyway, looks like the creature slit its own throat.;
+;I didn't expect that.;2
+2;Exactly. And we checked out the walls of its lair. There are words, they make up lines. The lines make no sense, but they rhyme. Was it trying to write poetry?;
+;Very unusual. Okay. Bag the corpse and get it to the ship. We'll sort it out there.;-1
