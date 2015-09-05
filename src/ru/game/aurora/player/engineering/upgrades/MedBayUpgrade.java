@@ -78,4 +78,8 @@ public class MedBayUpgrade extends ShipUpgrade {
         result = 31 * result + (enhanced ? 1 : 0);
         return result;
     }
+
+    public boolean isEnhanced() {
+        return enhanced;
+    }
 }

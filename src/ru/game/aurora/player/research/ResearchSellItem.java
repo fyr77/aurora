@@ -25,7 +25,7 @@ public class ResearchSellItem extends SellOnlyInventoryItem
 
     @Override
     public void onReceived(World world, int amount) {
-        ResearchProjectDesc desc = world.getResearchAndDevelopmentProjects().getResearchProjects().get(id);
+        ResearchProjectDesc desc = world.getResearchAndDevelopmentProjects().getResearchProjects().remove(id);
         if (desc == null) {
             logger.warn("No research with id {}, can not add it after purchasing a sell item", id);
             return;
