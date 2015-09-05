@@ -43,7 +43,14 @@ public class Localization {
     }
 
     private static String getBundleName(String key) {
-        return "localization/" + currentLocale.getLanguage() + "/" + key;
+        String bundleName = "localization/" + currentLocale.getLanguage() + "/" + key;
+        
+        String overrided = ResourceManager.getOverridedResources().get(bundleName + "_" + currentLocale.getLanguage() + ".properties");
+        if(overrided != null) {
+            return overrided.replaceAll("_" + currentLocale.getLanguage() + ".properties", "");
+        } else {
+            return bundleName;
+        }
     }
 
     public static Boolean bundleExists(String bundleId) {

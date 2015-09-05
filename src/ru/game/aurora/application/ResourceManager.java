@@ -34,6 +34,8 @@ public class ResourceManager {
     private static final String SPRITE_SHEET_REF = "__SPRITE_SHEET_";
 
     private static final ResourceManager _instance = new ResourceManager();
+    
+    private static final Map<String, String> overridedResources = new HashMap<String, String>();
 
     private final Map<String, Sound> soundMap;
     private final Map<String, Playlist> playlistMap;
@@ -307,6 +309,11 @@ public class ResourceManager {
         Image rz = imageMap.get(ID);
         if (rz == null) {
             String imagePath = imageFileMap.get(ID);
+            String override = getOverridedResources().get(imagePath);
+            if(override != null) {
+                imagePath = override;
+            }
+            
             if (imagePath != null) {
                 try {
                     rz = new Image(imagePath, false, Image.FILTER_NEAREST);
@@ -389,5 +396,9 @@ public class ResourceManager {
 
     public JsonConfigManager<MonsterDesc> getMonsterDescs() {
         return monsterDescs;
+    }
+    
+    public static Map<String, String> getOverridedResources() {
+        return overridedResources;
     }
 }
