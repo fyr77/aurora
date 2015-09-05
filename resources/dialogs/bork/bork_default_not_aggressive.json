@@ -23,21 +23,6 @@
         }
       ]
     },
-    "103": {
-      "id": 103,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 103,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 105,
-          "replyText": "1"
-        }
-      ]
-    },
     "1": {
       "id": 1,
       "replies": [
@@ -63,8 +48,33 @@
         }
       ]
     },
-    "110": {
-      "id": 110,
+    "103": {
+      "id": 103,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 103,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 105,
+          "replyText": "1"
+        }
+      ]
+    },
+    "105": {
+      "id": 105,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 106,
+          "replyText": "0"
+        }
+      ]
+    },
+    "106": {
+      "id": 106,
       "replies": [
         {
           "returnValue": 0,
@@ -72,7 +82,7 @@
           "replyText": "0",
           "replyConditions": [
             {
-              "name": "0",
+              "name": "105",
               "type": "SET"
             }
           ]
@@ -80,7 +90,23 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "1"
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "110",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 108,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 108,
+          "replyText": "3"
         }
       ]
     },
@@ -143,8 +169,8 @@
         }
       ]
     },
-    "106": {
-      "id": 106,
+    "110": {
+      "id": 110,
       "replies": [
         {
           "returnValue": 0,
@@ -152,7 +178,7 @@
           "replyText": "0",
           "replyConditions": [
             {
-              "name": "105",
+              "name": "0",
               "type": "SET"
             }
           ]
@@ -160,33 +186,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "1",
-          "replyConditions": [
-            {
-              "name": "110",
-              "type": "SET"
-            }
-          ]
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 108,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 108,
-          "replyText": "3"
-        }
-      ]
-    },
-    "105": {
-      "id": 105,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 106,
-          "replyText": "0"
+          "replyText": "1"
         }
       ]
     }

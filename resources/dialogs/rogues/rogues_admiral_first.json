@@ -237,6 +237,16 @@
         }
       ]
     },
+    "16": {
+      "id": 16,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "0"
+        }
+      ]
+    },
     "17": {
       "id": 17,
       "replies": [
@@ -262,13 +272,23 @@
         }
       ]
     },
-    "16": {
-      "id": 16,
+    "18": {
+      "id": 18,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 17,
+          "targetStatementId": 19,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "2"
         }
       ]
     },
@@ -292,36 +312,6 @@
         }
       ]
     },
-    "18": {
-      "id": 18,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 19,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 20,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 21,
-          "replyText": "2"
-        }
-      ]
-    },
-    "21": {
-      "id": 21,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 22,
-          "replyText": "0"
-        }
-      ]
-    },
     "20": {
       "id": 20,
       "replies": [
@@ -342,12 +332,12 @@
         }
       ]
     },
-    "23": {
-      "id": 23,
+    "21": {
+      "id": 21,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 22,
           "replyText": "0"
         }
       ]
@@ -358,6 +348,16 @@
         {
           "returnValue": 0,
           "targetStatementId": 23,
+          "replyText": "0"
+        }
+      ]
+    },
+    "23": {
+      "id": 23,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
           "replyText": "0"
         }
       ]

@@ -42,17 +42,6 @@
         }
       ]
     },
-    "98": {
-      "id": 98,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 97,
-          "replyText": "0"
-        }
-      ],
-      "customIcon": "marine_dialog"
-    },
     "4": {
       "id": 4,
       "replies": [
@@ -62,17 +51,6 @@
           "replyText": "0"
         }
       ]
-    },
-    "99": {
-      "id": 99,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 98,
-          "replyText": "0"
-        }
-      ],
-      "customIcon": "engineer_dialog"
     },
     "5": {
       "id": 5,
@@ -101,16 +79,6 @@
           "returnValue": 0,
           "targetStatementId": 9,
           "replyText": "2"
-        }
-      ]
-    },
-    "97": {
-      "id": 97,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 6,
-          "replyText": "0"
         }
       ]
     },
@@ -199,6 +167,16 @@
         }
       ]
     },
+    "18": {
+      "id": 18,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "0"
+        }
+      ]
+    },
     "19": {
       "id": 19,
       "replies": [
@@ -209,12 +187,12 @@
         }
       ]
     },
-    "18": {
-      "id": 18,
+    "20": {
+      "id": 20,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 19,
+          "targetStatementId": 21,
           "replyText": "0"
         }
       ]
@@ -229,15 +207,37 @@
         }
       ]
     },
-    "20": {
-      "id": 20,
+    "97": {
+      "id": 97,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 21,
+          "targetStatementId": 6,
           "replyText": "0"
         }
       ]
+    },
+    "98": {
+      "id": 98,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 97,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "marine_dialog"
+    },
+    "99": {
+      "id": 99,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "engineer_dialog"
     }
   },
   "flags": {},

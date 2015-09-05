@@ -71,10 +71,23 @@ public class Dialog implements OverlayWindow {
     public Dialog(String id, String iconName, Collection<Statement> statements) {
         this.id = id;
         this.iconName = iconName;
-        this.statements = new HashMap<>();
+        this.statements = new TreeMap<>(); // use a sorted map so that statements are in a fixed order after saving to json
         for (Statement st : statements) {
             this.statements.put(st.id, st);
         }
+    }
+
+    public static Dialog loadFromFile(String path) {
+        Dialog d = new Dialog();
+
+        String overrided = ResourceManager.getOverridedResources().get(path);
+        if (overrided != null) {
+            d.load(overrided);
+        } else {
+            d.load(path);
+        }
+
+        return d;
     }
 
     public String getId() {
@@ -118,6 +131,10 @@ public class Dialog implements OverlayWindow {
         return outList;
     }
 
+    public Map<String, String> getFlags() {
+        return flags;
+    }
+
     public void setFlags(Map<String, String> flags) {
         if (this.flags == null) {
             this.flags = new HashMap<>(flags);
@@ -125,10 +142,6 @@ public class Dialog implements OverlayWindow {
             this.flags.clear();
             this.flags.putAll(flags);
         }
-    }
-
-    public Map<String, String> getFlags() {
-        return flags;
     }
 
     @Override
@@ -271,19 +284,6 @@ public class Dialog implements OverlayWindow {
 
         currentStatement = statements.get(0);
         fileName = path;
-    }
-
-    public static Dialog loadFromFile(String path) {
-        Dialog d = new Dialog();
-        
-        String overrided = ResourceManager.getOverridedResources().get(path);
-        if(overrided != null) {
-            d.load(overrided);
-        } else {
-            d.load(path);
-        }
-        
-        return d;
     }
 
     public int getReturnValue() {

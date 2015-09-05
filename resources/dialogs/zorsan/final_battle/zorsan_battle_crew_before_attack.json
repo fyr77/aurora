@@ -345,17 +345,6 @@
       ],
       "customIcon": "engineer_dialog"
     },
-    "17": {
-      "id": 17,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 18,
-          "replyText": "0"
-        }
-      ],
-      "customIcon": "engineer_dialog"
-    },
     "16": {
       "id": 16,
       "replies": [
@@ -372,37 +361,13 @@
       ],
       "customIcon": "engineer_dialog"
     },
-    "19": {
-      "id": 19,
+    "17": {
+      "id": 17,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 20,
+          "targetStatementId": 18,
           "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 99,
-          "replyText": "1",
-          "replyConditions": [
-            {
-              "name": "crew.engineer",
-              "value": "5",
-              "type": "LESS"
-            }
-          ]
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 98,
-          "replyText": "2",
-          "replyConditions": [
-            {
-              "name": "crew.engineer",
-              "value": "4",
-              "type": "GREATER"
-            }
-          ]
         }
       ],
       "customIcon": "engineer_dialog"
@@ -447,18 +412,37 @@
       ],
       "customIcon": "engineer_dialog"
     },
-    "21": {
-      "id": 21,
+    "19": {
+      "id": 19,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 23,
+          "targetStatementId": 20,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 22,
-          "replyText": "1"
+          "targetStatementId": 99,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "5",
+              "type": "LESS"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "crew.engineer",
+              "value": "4",
+              "type": "GREATER"
+            }
+          ]
         }
       ],
       "customIcon": "engineer_dialog"
@@ -484,23 +468,18 @@
       ],
       "customIcon": "engineer_dialog"
     },
-    "23": {
-      "id": 23,
+    "21": {
+      "id": 21,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 24,
+          "targetStatementId": 23,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 26,
+          "targetStatementId": 22,
           "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 27,
-          "replyText": "2"
         }
       ],
       "customIcon": "engineer_dialog"
@@ -531,6 +510,38 @@
               "type": "GREATER"
             }
           ]
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "23": {
+      "id": 23,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 27,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "engineer_dialog"
+    },
+    "24": {
+      "id": 24,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "0"
         }
       ],
       "customIcon": "engineer_dialog"
@@ -575,8 +586,8 @@
       ],
       "customIcon": "engineer_dialog"
     },
-    "24": {
-      "id": 24,
+    "26": {
+      "id": 26,
       "replies": [
         {
           "returnValue": 0,
@@ -607,13 +618,23 @@
       ],
       "customIcon": "engineer_dialog"
     },
-    "26": {
-      "id": 26,
+    "28": {
+      "id": 28,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 25,
+          "targetStatementId": 12,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
+          "replyText": "2"
         }
       ],
       "customIcon": "engineer_dialog"
@@ -658,53 +679,6 @@
       ],
       "customIcon": "engineer_dialog"
     },
-    "28": {
-      "id": 28,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 12,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 17,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 98,
-          "replyText": "2"
-        }
-      ],
-      "customIcon": "engineer_dialog"
-    },
-    "31": {
-      "id": 31,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 32,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 38,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 39,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 99,
-          "replyText": "3"
-        }
-      ],
-      "customIcon": "scientist_dialog"
-    },
     "30": {
       "id": 30,
       "replies": [
@@ -744,6 +718,54 @@
         }
       ],
       "customIcon": "engineer_dialog"
+    },
+    "31": {
+      "id": 31,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 32,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 38,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 39,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "3"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "32": {
+      "id": 32,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 33,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "33": {
+      "id": 33,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 34,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "scientist_dialog"
     },
     "34": {
       "id": 34,
@@ -787,38 +809,47 @@
       ],
       "customIcon": "scientist_dialog"
     },
-    "32": {
-      "id": 32,
+    "36": {
+      "id": 36,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 33,
+          "targetStatementId": 38,
           "replyText": "0"
-        }
-      ],
-      "customIcon": "scientist_dialog"
-    },
-    "33": {
-      "id": 33,
-      "replies": [
+        },
         {
           "returnValue": 0,
-          "targetStatementId": 34,
-          "replyText": "0"
-        }
-      ],
-      "customIcon": "scientist_dialog"
-    },
-    "101": {
-      "id": 101,
-      "replies": [
+          "targetStatementId": 39,
+          "replyText": "1"
+        },
         {
           "returnValue": 0,
           "targetStatementId": 99,
-          "replyText": "0"
+          "replyText": "2"
         }
       ],
-      "customIcon": "engineer_dialog"
+      "customIcon": "scientist_dialog"
+    },
+    "37": {
+      "id": 37,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 38,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 39,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "scientist_dialog"
     },
     "38": {
       "id": 38,
@@ -841,17 +872,6 @@
       ],
       "customIcon": "scientist_dialog"
     },
-    "98": {
-      "id": 98,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 101,
-          "replyText": "0"
-        }
-      ],
-      "customIcon": "engineer_dialog"
-    },
     "39": {
       "id": 39,
       "replies": [
@@ -862,6 +882,159 @@
         }
       ],
       "customIcon": "scientist_dialog"
+    },
+    "40": {
+      "id": 40,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 41,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "41": {
+      "id": 41,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 32,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 38,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "42": {
+      "id": 42,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 43,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 44,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 45,
+          "replyText": "2"
+        }
+      ]
+    },
+    "43": {
+      "id": 43,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 46,
+          "replyText": "0"
+        }
+      ]
+    },
+    "44": {
+      "id": 44,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 46,
+          "replyText": "0"
+        }
+      ]
+    },
+    "45": {
+      "id": 45,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 46,
+          "replyText": "0"
+        }
+      ]
+    },
+    "46": {
+      "id": 46,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 47,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 48,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 49,
+          "replyText": "2"
+        }
+      ]
+    },
+    "47": {
+      "id": 47,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 50,
+          "replyText": "0"
+        }
+      ]
+    },
+    "48": {
+      "id": 48,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 50,
+          "replyText": "0"
+        }
+      ]
+    },
+    "49": {
+      "id": 49,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 50,
+          "replyText": "0"
+        }
+      ]
+    },
+    "50": {
+      "id": 50,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "0"
+        }
+      ]
+    },
+    "98": {
+      "id": 98,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 101,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "engineer_dialog"
     },
     "99": {
       "id": 99,
@@ -929,189 +1102,16 @@
         }
       ]
     },
-    "36": {
-      "id": 36,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 38,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 39,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 99,
-          "replyText": "2"
-        }
-      ],
-      "customIcon": "scientist_dialog"
-    },
-    "37": {
-      "id": 37,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 38,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 39,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 99,
-          "replyText": "2"
-        }
-      ],
-      "customIcon": "scientist_dialog"
-    },
-    "42": {
-      "id": 42,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 43,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 44,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 45,
-          "replyText": "2"
-        }
-      ]
-    },
-    "43": {
-      "id": 43,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 46,
-          "replyText": "0"
-        }
-      ]
-    },
-    "40": {
-      "id": 40,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 41,
-          "replyText": "0"
-        }
-      ],
-      "customIcon": "scientist_dialog"
-    },
-    "41": {
-      "id": 41,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 32,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 38,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 99,
-          "replyText": "2"
-        }
-      ],
-      "customIcon": "scientist_dialog"
-    },
-    "46": {
-      "id": 46,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 47,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 48,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 49,
-          "replyText": "2"
-        }
-      ]
-    },
-    "47": {
-      "id": 47,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 50,
-          "replyText": "0"
-        }
-      ]
-    },
-    "44": {
-      "id": 44,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 46,
-          "replyText": "0"
-        }
-      ]
-    },
-    "45": {
-      "id": 45,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 46,
-          "replyText": "0"
-        }
-      ]
-    },
-    "50": {
-      "id": 50,
+    "101": {
+      "id": 101,
       "replies": [
         {
           "returnValue": 0,
           "targetStatementId": 99,
           "replyText": "0"
         }
-      ]
-    },
-    "49": {
-      "id": 49,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 50,
-          "replyText": "0"
-        }
-      ]
-    },
-    "48": {
-      "id": 48,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 50,
-          "replyText": "0"
-        }
-      ]
+      ],
+      "customIcon": "engineer_dialog"
     }
   },
   "flags": {},

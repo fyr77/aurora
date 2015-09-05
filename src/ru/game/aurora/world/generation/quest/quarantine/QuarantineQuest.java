@@ -10,7 +10,6 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.nature.AnimalCorpseItem;
-import ru.game.aurora.world.space.StarSystem;
 
 /**
  * Created by Егор on 04.09.2015.
@@ -31,6 +30,8 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
     // 2 - first marine dead
     private int state;
 
+    private int daysSinceStart = 0;
+
     private void killCrewMember()
     {
         resetCountdown();
@@ -42,6 +43,8 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
             // quest not yet started
             return false;
         }
+
+        ++daysSinceStart;
 
         if (countdown -- == 0) {
             final Ship ship = world.getPlayer().getShip();

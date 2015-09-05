@@ -162,16 +162,6 @@
         }
       ]
     },
-    "17": {
-      "id": 17,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 18,
-          "replyText": "0"
-        }
-      ]
-    },
     "16": {
       "id": 16,
       "replies": [
@@ -204,6 +194,26 @@
         }
       ]
     },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "0"
+        }
+      ]
+    },
+    "18": {
+      "id": 18,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "0"
+        }
+      ]
+    },
     "19": {
       "id": 19,
       "replies": [
@@ -225,26 +235,6 @@
         }
       ]
     },
-    "18": {
-      "id": 18,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 19,
-          "replyText": "0"
-        }
-      ]
-    },
-    "21": {
-      "id": 21,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 22,
-          "replyText": "0"
-        }
-      ]
-    },
     "20": {
       "id": 20,
       "replies": [
@@ -255,12 +245,12 @@
         }
       ]
     },
-    "23": {
-      "id": 23,
+    "21": {
+      "id": 21,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 22,
           "replyText": "0"
         }
       ]
@@ -280,12 +270,12 @@
         }
       ]
     },
-    "25": {
-      "id": 25,
+    "23": {
+      "id": 23,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 26,
+          "targetStatementId": -1,
           "replyText": "0"
         }
       ]
@@ -296,6 +286,26 @@
         {
           "returnValue": 0,
           "targetStatementId": 3,
+          "replyText": "0"
+        }
+      ]
+    },
+    "25": {
+      "id": 25,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "0"
+        }
+      ]
+    },
+    "26": {
+      "id": 26,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 27,
           "replyText": "0"
         }
       ]
@@ -336,12 +346,12 @@
         }
       ]
     },
-    "26": {
-      "id": 26,
+    "28": {
+      "id": 28,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 27,
+          "targetStatementId": 29,
           "replyText": "0"
         }
       ]
@@ -356,12 +366,12 @@
         }
       ]
     },
-    "28": {
-      "id": 28,
+    "30": {
+      "id": 30,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 29,
+          "targetStatementId": 31,
           "replyText": "0"
         }
       ]
@@ -381,44 +391,6 @@
           "flags": {
             "klisk.war_help": "true"
           }
-        }
-      ]
-    },
-    "30": {
-      "id": 30,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 31,
-          "replyText": "0"
-        }
-      ]
-    },
-    "34": {
-      "id": 34,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 36,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 35,
-          "replyText": "1",
-          "flags": {
-            "klisk_trader_drone.withdraw": "true"
-          }
-        }
-      ]
-    },
-    "35": {
-      "id": 35,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
         }
       ]
     },
@@ -461,6 +433,34 @@
               "type": "SET"
             }
           ]
+        }
+      ]
+    },
+    "34": {
+      "id": 34,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 36,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 35,
+          "replyText": "1",
+          "flags": {
+            "klisk_trader_drone.withdraw": "true"
+          }
+        }
+      ]
+    },
+    "35": {
+      "id": 35,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
         }
       ]
     },

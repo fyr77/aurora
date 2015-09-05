@@ -346,6 +346,16 @@
         }
       ]
     },
+    "16": {
+      "id": 16,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "0"
+        }
+      ]
+    },
     "17": {
       "id": 17,
       "replies": [
@@ -356,13 +366,23 @@
         }
       ]
     },
-    "16": {
-      "id": 16,
+    "18": {
+      "id": 18,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 17,
+          "targetStatementId": 9,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
         }
       ]
     },
@@ -376,8 +396,8 @@
         }
       ]
     },
-    "18": {
-      "id": 18,
+    "20": {
+      "id": 20,
       "replies": [
         {
           "returnValue": 0,
@@ -451,23 +471,21 @@
         }
       ]
     },
-    "20": {
-      "id": 20,
+    "22": {
+      "id": 22,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 9,
-          "replyText": "0"
+          "targetStatementId": 999,
+          "replyText": "0",
+          "flags": {
+            "colony.dungeon_quest": "true"
+          }
         },
         {
           "returnValue": 0,
-          "targetStatementId": 21,
+          "targetStatementId": 23,
           "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "2"
         }
       ]
     },
@@ -496,15 +514,15 @@
         }
       ]
     },
-    "22": {
-      "id": 22,
+    "24": {
+      "id": 24,
       "replies": [
         {
           "returnValue": 0,
           "targetStatementId": 999,
           "replyText": "0",
           "flags": {
-            "colony.dungeon_quest": "true"
+            "colony.lost_group_quest": "true"
           }
         },
         {
@@ -532,16 +550,13 @@
         }
       ]
     },
-    "24": {
-      "id": 24,
+    "26": {
+      "id": 26,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 999,
-          "replyText": "0",
-          "flags": {
-            "colony.lost_group_quest": "true"
-          }
+          "targetStatementId": -1,
+          "replyText": "0"
         },
         {
           "returnValue": 0,
@@ -560,18 +575,16 @@
         }
       ]
     },
-    "26": {
-      "id": 26,
+    "28": {
+      "id": 28,
       "replies": [
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 23,
-          "replyText": "1"
+          "replyText": "0",
+          "flags": {
+            "colony.dungeon_quest.reported": "true"
+          }
         }
       ]
     },
@@ -632,31 +645,8 @@
         }
       ]
     },
-    "28": {
-      "id": 28,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0",
-          "flags": {
-            "colony.dungeon_quest.reported": "true"
-          }
-        }
-      ]
-    },
-    "999": {
-      "id": 999,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
-    "31": {
-      "id": 31,
+    "30": {
+      "id": 30,
       "replies": [
         {
           "returnValue": 0,
@@ -668,8 +658,8 @@
         }
       ]
     },
-    "30": {
-      "id": 30,
+    "31": {
+      "id": 31,
       "replies": [
         {
           "returnValue": 0,
@@ -704,6 +694,16 @@
           "flags": {
             "colony.hunt_quest.reported": "true"
           }
+        }
+      ]
+    },
+    "999": {
+      "id": 999,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
         }
       ]
     }

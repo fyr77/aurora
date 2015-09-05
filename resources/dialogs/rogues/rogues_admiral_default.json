@@ -2,34 +2,6 @@
   "id": "rogues_admiral_default",
   "iconName": "rogues_admiral_dialog",
   "statements": {
-    "205": {
-      "id": 205,
-      "replies": [
-        {
-          "returnValue": 201,
-          "targetStatementId": -1,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 206,
-          "replyText": "1"
-        }
-      ]
-    },
-    "34": {
-      "id": 34,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0",
-          "flags": {
-            "zorsan.quest": "true"
-          }
-        }
-      ]
-    },
     "0": {
       "id": 0,
       "replies": [
@@ -106,16 +78,6 @@
         }
       ]
     },
-    "204": {
-      "id": 204,
-      "replies": [
-        {
-          "returnValue": 200,
-          "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
     "1": {
       "id": 1,
       "replies": [
@@ -145,42 +107,6 @@
         }
       ]
     },
-    "100": {
-      "id": 100,
-      "replies": [
-        {
-          "returnValue": 100,
-          "targetStatementId": -1,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "1"
-        }
-      ]
-    },
-    "32": {
-      "id": 32,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 1,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "rogues.zorsan_data",
-              "type": "SET"
-            }
-          ]
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 33,
-          "replyText": "1"
-        }
-      ]
-    },
     "2": {
       "id": 2,
       "replies": [
@@ -196,26 +122,6 @@
         }
       ]
     },
-    "206": {
-      "id": 206,
-      "replies": [
-        {
-          "returnValue": 202,
-          "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
-    "33": {
-      "id": 33,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 34,
-          "replyText": "0"
-        }
-      ]
-    },
     "3": {
       "id": 3,
       "replies": [
@@ -226,21 +132,6 @@
         }
       ]
     },
-    "201": {
-      "id": 201,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 203,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 202,
-          "replyText": "1"
-        }
-      ]
-    },
     "4": {
       "id": 4,
       "replies": [
@@ -248,21 +139,6 @@
           "returnValue": 0,
           "targetStatementId": 5,
           "replyText": "0"
-        }
-      ]
-    },
-    "200": {
-      "id": 200,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 203,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 201,
-          "replyText": "1"
         }
       ]
     },
@@ -279,28 +155,8 @@
         }
       ]
     },
-    "203": {
-      "id": 203,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 204,
-          "replyText": "0"
-        }
-      ]
-    },
     "6": {
       "id": 6,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
-    "202": {
-      "id": 202,
       "replies": [
         {
           "returnValue": 0,
@@ -327,27 +183,6 @@
         }
       ]
     },
-    "27": {
-      "id": 27,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 28,
-          "replyText": "1",
-          "replyConditions": [
-            {
-              "name": "zorsan.war_preparations",
-              "type": "SET"
-            }
-          ]
-        }
-      ]
-    },
     "26": {
       "id": 26,
       "replies": [
@@ -369,13 +204,24 @@
         }
       ]
     },
-    "29": {
-      "id": 29,
+    "27": {
+      "id": 27,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 31,
+          "targetStatementId": -1,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 28,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "zorsan.war_preparations",
+              "type": "SET"
+            }
+          ]
         }
       ]
     },
@@ -389,12 +235,166 @@
         }
       ]
     },
+    "29": {
+      "id": 29,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 31,
+          "replyText": "0"
+        }
+      ]
+    },
     "31": {
       "id": 31,
       "replies": [
         {
           "returnValue": 0,
           "targetStatementId": 32,
+          "replyText": "0"
+        }
+      ]
+    },
+    "32": {
+      "id": 32,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "rogues.zorsan_data",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 33,
+          "replyText": "1"
+        }
+      ]
+    },
+    "33": {
+      "id": 33,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 34,
+          "replyText": "0"
+        }
+      ]
+    },
+    "34": {
+      "id": 34,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0",
+          "flags": {
+            "zorsan.quest": "true"
+          }
+        }
+      ]
+    },
+    "100": {
+      "id": 100,
+      "replies": [
+        {
+          "returnValue": 100,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "200": {
+      "id": 200,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 203,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 201,
+          "replyText": "1"
+        }
+      ]
+    },
+    "201": {
+      "id": 201,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 203,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 202,
+          "replyText": "1"
+        }
+      ]
+    },
+    "202": {
+      "id": 202,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "203": {
+      "id": 203,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 204,
+          "replyText": "0"
+        }
+      ]
+    },
+    "204": {
+      "id": 204,
+      "replies": [
+        {
+          "returnValue": 200,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "205": {
+      "id": 205,
+      "replies": [
+        {
+          "returnValue": 201,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 206,
+          "replyText": "1"
+        }
+      ]
+    },
+    "206": {
+      "id": 206,
+      "replies": [
+        {
+          "returnValue": 202,
+          "targetStatementId": -1,
           "replyText": "0"
         }
       ]

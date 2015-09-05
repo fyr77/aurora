@@ -72,16 +72,6 @@
         }
       ]
     },
-    "99": {
-      "id": 99,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 8,
-          "replyText": "0"
-        }
-      ]
-    },
     "5": {
       "id": 5,
       "replies": [
@@ -192,6 +182,16 @@
           "flags": {
             "parallel_worlds": "true"
           }
+        }
+      ]
+    },
+    "99": {
+      "id": 99,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
         }
       ]
     }
