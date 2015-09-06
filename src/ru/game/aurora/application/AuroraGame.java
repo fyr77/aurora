@@ -18,6 +18,7 @@ import org.slf4j.bridge.SLF4JBridgeHandler;
 import ru.game.aurora.gui.ExitConfirmationScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpPopupControl;
+import ru.game.aurora.modding.ModManager;
 import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
@@ -31,32 +32,26 @@ import java.util.logging.LogManager;
 
 public class AuroraGame extends NiftyOverlayGame {
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AuroraGame.class);
-
-    private static World world;
-
-    private static MainMenuController mainMenu;
-
     public static final int tileSize = 64;
-
-    public static int tilesX;
-
-    public static int tilesY;
-
-    private static Camera camera;
-
-    private static long lastFrameTime;
-
-    private static AppGameContainer app;
-
+    /**
+     * Sun property pointing the main class and its arguments.
+     * Might not be defined on non Hotspot VM implementations.
+     */
+    public static final String SUN_JAVA_COMMAND = "sun.java.command";
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AuroraGame.class);
     private static final Set<Updatable> updatables = new HashSet<>();
-
     private static final List<ResolutionChangeListener> resolutionChangeListeners = new ArrayList<>();
-
+    public static int tilesX;
+    public static int tilesY;
     /*
     Used for debugging purposes, this set of global variables is added to world state when it is loaded/created
      */
     public static Properties debugWorldVariables = null;
+    private static World world;
+    private static MainMenuController mainMenu;
+    private static Camera camera;
+    private static long lastFrameTime;
+    private static AppGameContainer app;
 
     public AuroraGame() {
     }
@@ -120,6 +115,10 @@ public class AuroraGame extends NiftyOverlayGame {
         }
     }
 
+    public static boolean isFullScreen() {
+        return app.isFullscreen();
+    }
+
     public static void setFullScreen(boolean fullScreen) {
         if (fullScreen == app.isFullscreen()) {
             return;
@@ -132,54 +131,8 @@ public class AuroraGame extends NiftyOverlayGame {
         }
     }
 
-    public static boolean isFullScreen() {
-        return app.isFullscreen();
-    }
-
     public static Set<Updatable> getUpdatables() {
         return updatables;
-    }
-
-    @Override
-    protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
-
-        LogManager.getLogManager().reset();
-        SLF4JBridgeHandler.removeHandlersForRootLogger();
-        SLF4JBridgeHandler.install();
-
-        ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
-        gameContainer.getInput().enableKeyRepeat();
-        gameContainer.setTargetFrameRate(60);
-
-        initNifty(gameContainer);
-        GUI.init(gameContainer, getNifty());
-        GUI.getInstance().getNifty().gotoScreen("main_menu");
-        mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
-        resolutionChangeListeners.add(mainMenu);
-        try {
-            AnimalGenerator.init();
-        } catch (FileNotFoundException e) {
-            throw new SlickException("Failed to initialize Monster Generator", e);
-        }
-        lastFrameTime = gameContainer.getTime();
-        String musicVolumeString = Configuration.getSystemProperties().getProperty("music.volume");
-        if (musicVolumeString != null) {
-            float volume = Float.parseFloat(musicVolumeString);
-            SoundStore.get().setMusicVolume(volume);
-            SoundStore.get().setCurrentMusicVolume(volume);
-        }
-        String soundVolumeString = Configuration.getSystemProperties().getProperty("sound.volume");
-        if (soundVolumeString != null) {
-            SoundStore.get().setSoundVolume(Float.parseFloat(soundVolumeString));
-        }
-        ResourceManager.getInstance().getPlaylist("background").play();
-
-    }
-
-    @Override
-    protected void prepareNifty(Nifty nifty) {
-        nifty.loadStyleFile("gui/style/aurora-style.xml");
-        nifty.loadControlFile("nifty-default-controls.xml");
     }
 
     public static void onGameLoaded(World loaded) {
@@ -207,36 +160,6 @@ public class AuroraGame extends NiftyOverlayGame {
         return world != null;
     }
 
-    @Override
-    protected void updateGame(GameContainer gameContainer, int i) throws SlickException {
-        try {
-            if (gameContainer.getInput().isKeyPressed(Input.KEY_F11)) {
-                flipVisbility();
-            }
-            if (mainMenu != null) {
-                World loadedWorld = mainMenu.update(camera, gameContainer);
-                if (loadedWorld != null) {
-                    onGameLoaded(loadedWorld);
-                    // hack: show initial help on new game start
-                    HelpPopupControl.showHelp();
-                }
-            } else {
-                world.update(gameContainer);
-                if (world.isGameOver()) {
-                    goToMainMenu();
-                }
-            }
-            final List<Updatable> updatables1 = new ArrayList<>(updatables);
-            for (Updatable up : updatables1) {
-                up.update(gameContainer, world);
-            }
-            gameContainer.getInput().clearKeyPressedRecord();
-        } catch (Exception ex) {
-            logger.error("Exception in updateGame()", ex);
-            throw ex;
-        }
-    }
-
     public static void goToMainMenu() {
         mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
         mainMenu.reset();
@@ -254,34 +177,6 @@ public class AuroraGame extends NiftyOverlayGame {
     public static void exitGame() {
         Configuration.saveSystemProperties();
         app.exit();
-    }
-
-    @Override
-    public boolean closeRequested() {
-        showExitConfirmation(false);
-        return false;
-    }
-
-    @Override
-    public String getTitle() {
-        return "Aurora " + Version.VERSION;
-    }
-
-    @Override
-    protected void renderGame(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        try {
-
-            if (mainMenu != null) {
-                mainMenu.draw(graphics);
-            } else {
-                world.draw(gameContainer, graphics);
-            }
-
-            lastFrameTime = gameContainer.getTime();
-        } catch (Exception ex) {
-            logger.error("Exception in renderGame()", ex);
-            throw ex;
-        }
     }
 
     private static void addDir(String s) throws IOException {
@@ -378,7 +273,7 @@ public class AuroraGame extends NiftyOverlayGame {
             tilesY = res.getTilesY();
 
             SaveGameManager.init();
-
+            ModManager.init();
             // make sure that system.properties appears even if game later crashes on startup
             Configuration.saveSystemProperties();
 
@@ -398,12 +293,6 @@ public class AuroraGame extends NiftyOverlayGame {
         world.draw(app, img.getGraphics());
         return img;
     }
-
-    /**
-     * Sun property pointing the main class and its arguments.
-     * Might not be defined on non Hotspot VM implementations.
-     */
-    public static final String SUN_JAVA_COMMAND = "sun.java.command";
 
     /**
      * Restart the current Java application
@@ -465,6 +354,106 @@ public class AuroraGame extends NiftyOverlayGame {
         } catch (Exception e) {
             // something went wrong
             throw new IOException("Error while trying to restart the application", e);
+        }
+    }
+
+    @Override
+    protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
+
+        LogManager.getLogManager().reset();
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
+
+        ResourceManager.getInstance().loadResources(AuroraGame.class.getClassLoader().getResourceAsStream("resources.xml"));
+        gameContainer.getInput().enableKeyRepeat();
+        gameContainer.setTargetFrameRate(60);
+
+        initNifty(gameContainer);
+        GUI.init(gameContainer, getNifty());
+        GUI.getInstance().getNifty().gotoScreen("main_menu");
+        mainMenu = (MainMenuController) GUI.getInstance().getNifty().findScreenController(MainMenuController.class.getCanonicalName());
+        resolutionChangeListeners.add(mainMenu);
+        try {
+            AnimalGenerator.init();
+        } catch (FileNotFoundException e) {
+            throw new SlickException("Failed to initialize Monster Generator", e);
+        }
+        lastFrameTime = gameContainer.getTime();
+        String musicVolumeString = Configuration.getSystemProperties().getProperty("music.volume");
+        if (musicVolumeString != null) {
+            float volume = Float.parseFloat(musicVolumeString);
+            SoundStore.get().setMusicVolume(volume);
+            SoundStore.get().setCurrentMusicVolume(volume);
+        }
+        String soundVolumeString = Configuration.getSystemProperties().getProperty("sound.volume");
+        if (soundVolumeString != null) {
+            SoundStore.get().setSoundVolume(Float.parseFloat(soundVolumeString));
+        }
+        ResourceManager.getInstance().getPlaylist("background").play();
+
+    }
+
+    @Override
+    protected void prepareNifty(Nifty nifty) {
+        nifty.loadStyleFile("gui/style/aurora-style.xml");
+        nifty.loadControlFile("nifty-default-controls.xml");
+    }
+
+    @Override
+    protected void updateGame(GameContainer gameContainer, int i) throws SlickException {
+        try {
+            if (gameContainer.getInput().isKeyPressed(Input.KEY_F11)) {
+                flipVisbility();
+            }
+            if (mainMenu != null) {
+                World loadedWorld = mainMenu.update(camera, gameContainer);
+                if (loadedWorld != null) {
+                    onGameLoaded(loadedWorld);
+                    // hack: show initial help on new game start
+                    HelpPopupControl.showHelp();
+                }
+            } else {
+                world.update(gameContainer);
+                if (world.isGameOver()) {
+                    goToMainMenu();
+                }
+            }
+            final List<Updatable> updatables1 = new ArrayList<>(updatables);
+            for (Updatable up : updatables1) {
+                up.update(gameContainer, world);
+            }
+            gameContainer.getInput().clearKeyPressedRecord();
+        } catch (Exception ex) {
+            logger.error("Exception in updateGame()", ex);
+            throw ex;
+        }
+    }
+
+    @Override
+    public boolean closeRequested() {
+        showExitConfirmation(false);
+        return false;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Aurora " + Version.VERSION;
+    }
+
+    @Override
+    protected void renderGame(GameContainer gameContainer, Graphics graphics) throws SlickException {
+        try {
+
+            if (mainMenu != null) {
+                mainMenu.draw(graphics);
+            } else {
+                world.draw(gameContainer, graphics);
+            }
+
+            lastFrameTime = gameContainer.getTime();
+        } catch (Exception ex) {
+            logger.error("Exception in renderGame()", ex);
+            throw ex;
         }
     }
 }

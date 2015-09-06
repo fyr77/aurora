@@ -17,6 +17,7 @@ import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpPopupControl;
 import ru.game.aurora.gui.IntroDialogController;
 import ru.game.aurora.gui.LoadingScreenController;
+import ru.game.aurora.modding.ModManager;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
@@ -35,17 +36,14 @@ import java.util.Map;
  */
 public class MainMenuController implements ScreenController, ResolutionChangeListener {
 
-    private WorldGenerator generator;
-
+    private static final Logger logger = LoggerFactory.getLogger(MainMenuController.class);
     private final GameContainer container;
 
     private final Animation upperEngine;
 
     private final Animation lowerEngine;
-
+    private WorldGenerator generator;
     private MainMenuBackground background;
-
-    private static final Logger logger = LoggerFactory.getLogger(MainMenuController.class);
 
     public MainMenuController(GameContainer container) {
         this.container = container;
@@ -69,7 +67,6 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
         generator = new WorldGenerator();
         World world = generator.initWorld();
         world.checkCheats();
-
         GUI.getInstance().onWorldLoaded(container, world);
         new Thread(generator).start();
         ((LoadingScreenController) GUI.getInstance().getNifty().findScreenController(LoadingScreenController.class.getCanonicalName())).setGenerator(generator);
@@ -162,6 +159,9 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
         if (generator != null) {
             if (generator.isGenerated() && GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("loading_screen")) {
                 final World world = generator.getWorld();
+
+                ModManager.getInstance().onNewGameStarted(world);
+
                 world.setCamera(camera);
                 world.getCurrentRoom().enter(world);
                 // add them here and not in world generator, as gui must be created first

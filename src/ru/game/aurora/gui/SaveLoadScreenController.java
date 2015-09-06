@@ -16,6 +16,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.SaveGameManager;
+import ru.game.aurora.modding.ModManager;
 import ru.game.aurora.world.World;
 
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class SaveLoadScreenController implements ScreenController {
             nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
             return;
         }
+        ModManager.getInstance().onGameLoaded(world);
         world.gameLoaded();
         AuroraGame.onGameLoaded(world);
     }
