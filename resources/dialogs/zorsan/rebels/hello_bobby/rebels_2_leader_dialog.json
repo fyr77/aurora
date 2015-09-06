@@ -62,26 +62,6 @@
         }
       ]
     },
-    "99": {
-      "id": 99,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 20,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 10,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 21,
-          "replyText": "2"
-        }
-      ]
-    },
     "6": {
       "id": 6,
       "replies": [
@@ -292,41 +272,6 @@
         }
       ]
     },
-    "17": {
-      "id": 17,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 11,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 12,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 13,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 18,
-          "replyText": "3"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 19,
-          "replyText": "4"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 99,
-          "replyText": "5"
-        }
-      ]
-    },
     "16": {
       "id": 16,
       "replies": [
@@ -362,8 +307,8 @@
         }
       ]
     },
-    "19": {
-      "id": 19,
+    "17": {
+      "id": 17,
       "replies": [
         {
           "returnValue": 0,
@@ -387,8 +332,13 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 99,
+          "targetStatementId": 19,
           "replyText": "4"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "5"
         }
       ]
     },
@@ -422,6 +372,46 @@
         }
       ]
     },
+    "19": {
+      "id": 19,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 99,
+          "replyText": "4"
+        }
+      ]
+    },
+    "20": {
+      "id": 20,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
     "21": {
       "id": 21,
       "replies": [
@@ -437,8 +427,8 @@
         }
       ]
     },
-    "20": {
-      "id": 20,
+    "22": {
+      "id": 22,
       "replies": [
         {
           "returnValue": 0,
@@ -447,13 +437,23 @@
         }
       ]
     },
-    "22": {
-      "id": 22,
+    "99": {
+      "id": 99,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 20,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "2"
         }
       ]
     }

@@ -1,0 +1,252 @@
+package ru.game.aurora.world.generation.quest.quarantine;
+
+import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
+import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.player.engineering.ShipUpgrade;
+import ru.game.aurora.player.engineering.upgrades.MedBayUpgrade;
+import ru.game.aurora.player.research.ResearchProjectState;
+import ru.game.aurora.world.*;
+import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.planet.InventoryItem;
+import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.nature.AnimalCorpseItem;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+/**
+ * Created by Егор on 04.09.2015.
+ * Quarantine quest. One of crewmember becomes infected with unknown disease and crew starts dying untill
+ * player finds a solution.
+ */
+public class QuarantineQuest extends GameEventListener implements WorldGeneratorPart {
+
+    private static final long serialVersionUID = 1L;
+
+    private Planet targetPlanet = null;
+
+    // countdown before death of next crew member
+    private int countdown = 0;
+
+    // 0 - quest started
+    // 1 - first scientist dead
+    // 2 - first marine dead
+    private int state;
+
+    private int daysSinceStart = 0;
+
+    private boolean hasMedbay = false;
+
+    private double researchBoost = 1;
+
+    private int animalsCollected = 0;
+
+    public static void endQuest(World world) {
+        for (Iterator<GameEventListener> iterator = world.getListeners().iterator(); iterator.hasNext(); ) {
+            GameEventListener listener = iterator.next();
+            if (listener instanceof QuarantineQuest) {
+                iterator.remove();
+            }
+        }
+
+        world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_end.json"));
+
+        // if player has bought medicine from klisk - remove its research
+        for (Iterator<ResearchProjectState> iterator = world.getPlayer().getResearchState().getCurrentProjects().iterator(); iterator.hasNext(); ) {
+            ResearchProjectState pr = iterator.next();
+            if (pr.desc instanceof QuarantineResearch) {
+                iterator.remove();
+                world.getPlayer().getResearchState().addIdleScientists(pr.scientists);
+                break;
+            }
+        }
+
+        world.getGlobalVariables().remove("quarantine.started");
+    }
+
+    private void killCrewMember()
+    {
+        resetCountdown();
+    }
+
+    @Override
+    public boolean onTurnEnded(World world) {
+        if (targetPlanet == null) {
+            // quest not yet started
+            return false;
+        }
+
+        ++daysSinceStart;
+
+        if (daysSinceStart == Configuration.getIntProperty("quest.quarantine.turnsBetweenDeaths") + 20) {
+            Dialog d = Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_first_death.json");
+            Map<String, String> flags = new HashMap<>();
+            // this dialog has options for improvements that may help in disease research, like presense of medbay
+            for (ShipUpgrade su : world.getPlayer().getShip().getUpgrades()) {
+                if (su instanceof MedBayUpgrade) {
+                    if (!((MedBayUpgrade) su).isEnhanced()) {
+                        flags.put("has_medbay", "");
+                    } else {
+                        flags.put("has_advanced_medbay", "");
+                        researchBoost *= 1.2;
+                    }
+                    hasMedbay = true;
+                }
+
+                if (world.getResearchAndDevelopmentProjects().getResearchProjects().containsKey("alien_biology")) {
+                    flags.put("has_biology", "");
+                    researchBoost *= 1.5;
+                }
+            }
+            world.addOverlayWindow(d, flags);
+            return true;
+        }
+
+        if (daysSinceStart == 100) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_gordon_1.json"));
+        } else if (daysSinceStart == 800) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_gordon_2.json"));
+        } else if (daysSinceStart == 1500) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_gordon_3.json"));
+        }
+
+        if (daysSinceStart == 210) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_henry_1.json"));
+        } else if (daysSinceStart == 910) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_henry_2.json"));
+        } else if (daysSinceStart == 1300) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_henry_3.json"));
+        }
+
+        if (daysSinceStart == 90) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_sarah_1.json"));
+        } else if (daysSinceStart == 1400) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_sarah_2.json"));
+        }
+
+
+        if (countdown -- == 0) {
+            final Ship ship = world.getPlayer().getShip();
+
+            GameLogger.getInstance().logMessage(Localization.getText("journal", "quarantine.crewmember_dies"));
+            if (state == 0) {
+                // this is quest start
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_start.json"));
+                world.getGlobalVariables().put("quarantine.started", true);
+                if (ship.getScientists() > 0) {
+                    ship.setScientists(ship.getScientists() - 1);
+                    world.getPlayer().getResearchState().removeScientists(1);
+                    resetCountdown();
+                } else {
+                    killCrewMember();
+                }
+                state++;
+            } else if (state == 1){
+                // add henry dialog
+                if (ship.getMilitary() > 0) {
+                    ship.setMilitary(ship.getMilitary() - 1);
+                    resetCountdown();
+                } else {
+                    killCrewMember();
+                }
+            } else {
+                killCrewMember();
+            }
+        }
+
+        return true;
+    }
+
+    private void resetCountdown()
+    {
+        this.countdown = Configuration.getIntProperty("quest.quarantine.turnsBetweenDeaths") + CommonRandom.getRandom().nextInt(10);
+        if (hasMedbay) {
+            this.countdown *= 1.5;
+        }
+    }
+
+    private boolean checkAndStartQuest(World world, Planet planet) {
+        if (world.getTurnCount() < Configuration.getIntProperty("quest.quarantine.minDist")) {
+            // too early, lets start this quest after at least a year of travel
+            return false;
+        }
+
+        if (BasePositionable.getDistance(planet.getOwner(), (Positionable) world.getGlobalVariables().get("solar_system"))
+                > Configuration.getIntProperty("quest.quarantine.minTurn")) {
+            // this planet is too near
+            return false;
+        }
+
+        boolean found = false;
+        // check that landing party inventory contains at least one animal corpse
+        for (InventoryItem item : world.getPlayer().getLandingParty().getInventory()) {
+            if (item instanceof AnimalCorpseItem) {
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            return false;
+        }
+
+        if (CommonRandom.getRandom().nextDouble() >= Configuration.getDoubleProperty("quest.quarantine.chance")) {
+            return false;
+        }
+
+        this.targetPlanet = planet;
+        resetCountdown();
+
+        return true;
+    }
+
+    @Override
+    public boolean onPlayerLeftPlanet(World world, Planet planet) {
+        if (targetPlanet == null) {
+            return checkAndStartQuest(world, planet);
+        }
+        if (planet != targetPlanet) {
+            return false;
+        }
+
+        if (world.getGlobalVariables().containsKey("quarantine.research_started")) {
+            return false;
+        }
+
+        for (InventoryItem i : world.getPlayer().getLandingParty().getInventory()) {
+            if (i instanceof AnimalCorpseItem) {
+                animalsCollected++;
+            }
+        }
+
+        if (planet.getExploredTiles() >= 100 && animalsCollected >= 3) {
+            world.getGlobalVariables().put("quarantine.research_started", "");
+            world.getPlayer().getResearchState().addNewAvailableProject(new QuarantineResearch(researchBoost));
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_materials_collected.json"));
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onPlayerLandedPlanet(World world, Planet planet) {
+        if (planet != targetPlanet) {
+            return false;
+        }
+
+        if (world.getGlobalVariables().containsKey("quarantine.started") &&
+                !world.getGlobalVariables().containsKey("quarantine.first_return")) {
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_landing_party.json"));
+            world.getGlobalVariables().put("quarantine.first_return", "");
+        }
+        return false;
+    }
+
+    @Override
+    public void updateWorld(World world) {
+        world.addListener(this);
+    }
+}

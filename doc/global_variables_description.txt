@@ -197,3 +197,8 @@ heritage.second_monster_killed
 heritage.third_monster_killed
 heritage.fourth_monster_killed
 heritage.fifth_monster_killed
+
+============================
+quarantine.started
+quarantine.first_return - set when player returns to target planet after quest is started
+quarantine.research_started - set after disease research becomes available

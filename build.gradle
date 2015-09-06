@@ -70,8 +70,8 @@ startScripts {
     doLast {
         def windowsScriptFile = file getWindowsScript()
         def unixScriptFile = file getUnixScript()
-        windowsScriptFile.text = windowsScriptFile.text.replace('%APP_HOME%\\lib\\placeholder', '%APP_HOME%\\bin\\resources')
-        unixScriptFile.text = unixScriptFile.text.replace('$APP_HOME/lib/placeholder', '$APP_HOME/bin/resources')
+        windowsScriptFile.text = windowsScriptFile.text.replace('%APP_HOME%\\lib\\placeholder', '%APP_HOME%\\bin\\resources;%APP_HOME%\\bin\\mods')
+        unixScriptFile.text = unixScriptFile.text.replace('$APP_HOME/lib/placeholder', '$APP_HOME/bin/resources:$APP_HOME/bin/mods')
         unixScriptFile.text = unixScriptFile.text.replace('exec "$JAVACMD"', 'cd "$( dirname "${BASH_SOURCE[0]}" )" \nexec "$JAVACMD"')
     }
 }

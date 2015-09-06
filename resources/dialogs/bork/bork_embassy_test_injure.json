@@ -301,6 +301,16 @@
         }
       ]
     },
+    "16": {
+      "id": 16,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "0"
+        }
+      ]
+    },
     "17": {
       "id": 17,
       "replies": [
@@ -311,12 +321,12 @@
         }
       ]
     },
-    "16": {
-      "id": 16,
+    "18": {
+      "id": 18,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 17,
+          "targetStatementId": 19,
           "replyText": "0"
         }
       ]
@@ -336,44 +346,6 @@
           "flags": {
             "": "true"
           }
-        }
-      ]
-    },
-    "18": {
-      "id": 18,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 19,
-          "replyText": "0"
-        }
-      ]
-    },
-    "21": {
-      "id": 21,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 22,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "zorsan.war_preparations",
-              "type": "SET"
-            },
-            {
-              "name": "zorsan_flag",
-              "type": "NOT_SET"
-            }
-          ],
-          "flags": {
-            "zorsan_flag": "true"
-          }
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "1"
         }
       ]
     },
@@ -405,6 +377,44 @@
         }
       ]
     },
+    "21": {
+      "id": 21,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "zorsan.war_preparations",
+              "type": "SET"
+            },
+            {
+              "name": "zorsan_flag",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "zorsan_flag": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "22": {
+      "id": 22,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "0"
+        }
+      ]
+    },
     "23": {
       "id": 23,
       "replies": [
@@ -430,16 +440,6 @@
           "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "1"
-        }
-      ]
-    },
-    "22": {
-      "id": 22,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 23,
-          "replyText": "0"
         }
       ]
     }

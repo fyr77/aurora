@@ -352,22 +352,6 @@
       ],
       "customIcon": "energy_sphere_dialog"
     },
-    "17": {
-      "id": 17,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 21,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 22,
-          "replyText": "1"
-        }
-      ],
-      "customIcon": "energy_sphere_dialog"
-    },
     "16": {
       "id": 16,
       "replies": [
@@ -397,6 +381,33 @@
           "replyText": "4"
         }
       ]
+    },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "1"
+        }
+      ],
+      "customIcon": "energy_sphere_dialog"
+    },
+    "18": {
+      "id": 18,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "energy_sphere_dialog"
     },
     "19": {
       "id": 19,
@@ -434,32 +445,6 @@
       ],
       "customIcon": "energy_sphere_dialog"
     },
-    "18": {
-      "id": 18,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 19,
-          "replyText": "0"
-        }
-      ],
-      "customIcon": "energy_sphere_dialog"
-    },
-    "21": {
-      "id": 21,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 23,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 26,
-          "replyText": "1"
-        }
-      ]
-    },
     "20": {
       "id": 20,
       "replies": [
@@ -491,12 +476,12 @@
       ],
       "customIcon": "energy_sphere_dialog"
     },
-    "23": {
-      "id": 23,
+    "21": {
+      "id": 21,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 24,
+          "targetStatementId": 23,
           "replyText": "0"
         },
         {
@@ -521,13 +506,18 @@
         }
       ]
     },
-    "25": {
-      "id": 25,
+    "23": {
+      "id": 23,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 26,
+          "targetStatementId": 24,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "1"
         }
       ]
     },
@@ -543,6 +533,16 @@
           "returnValue": 0,
           "targetStatementId": 26,
           "replyText": "1"
+        }
+      ]
+    },
+    "25": {
+      "id": 25,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "0"
         }
       ]
     },

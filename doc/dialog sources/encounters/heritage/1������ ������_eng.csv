@@ -1,0 +1,8 @@
+0;Landing party calling Aurora 2! Do you read us?;
+;We read you. What is it?;1
+1;We've found some creature's lair. It attacked us, we had to fight it and kill it. The creature looks a lot like a Klisk, sir.;
+;What, were you attacked by a Klisk?;2
+2;Negative, sir. It just looks a lot like a Klisk. But about four times bigger. *The soldier thinks for a bit and adds.* And also it spit acid at us.;
+;Understood. I think our eggheads will be glad to root around in that thing's insides. Prep it for loading, soldier. Dismissed.;3
+3;Sir, yes, sir, understood.;
+;…;-1

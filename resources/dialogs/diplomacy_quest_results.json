@@ -2,16 +2,6 @@
   "id": "diplomacy_quest_results",
   "iconName": "earth_dialog",
   "statements": {
-    "85": {
-      "id": 85,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
     "0": {
       "id": 0,
       "replies": [
@@ -50,32 +40,12 @@
         }
       ]
     },
-    "84": {
-      "id": 84,
+    "80": {
+      "id": 80,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 85,
-          "replyText": "0"
-        }
-      ]
-    },
-    "87": {
-      "id": 87,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 88,
-          "replyText": "0"
-        }
-      ]
-    },
-    "86": {
-      "id": 86,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 87,
+          "targetStatementId": 81,
           "replyText": "0"
         }
       ]
@@ -90,12 +60,12 @@
         }
       ]
     },
-    "80": {
-      "id": 80,
+    "82": {
+      "id": 82,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 81,
+          "targetStatementId": 83,
           "replyText": "0"
         }
       ]
@@ -110,22 +80,42 @@
         }
       ]
     },
-    "82": {
-      "id": 82,
+    "84": {
+      "id": 84,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 83,
+          "targetStatementId": 85,
           "replyText": "0"
         }
       ]
     },
-    "280": {
-      "id": 280,
+    "85": {
+      "id": 85,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 86,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "86": {
+      "id": 86,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 87,
+          "replyText": "0"
+        }
+      ]
+    },
+    "87": {
+      "id": 87,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 88,
           "replyText": "0"
         }
       ]
@@ -146,6 +136,16 @@
         {
           "returnValue": 0,
           "targetStatementId": 81,
+          "replyText": "0"
+        }
+      ]
+    },
+    "280": {
+      "id": 280,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 86,
           "replyText": "0"
         }
       ]

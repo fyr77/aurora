@@ -2,16 +2,6 @@
   "id": "rogues_default",
   "iconName": "rogues_dialog",
   "statements": {
-    "102": {
-      "id": 102,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 103,
-          "replyText": "0"
-        }
-      ]
-    },
     "0": {
       "id": 0,
       "replies": [
@@ -38,16 +28,6 @@
         }
       ]
     },
-    "103": {
-      "id": 103,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
     "1": {
       "id": 1,
       "replies": [
@@ -64,6 +44,26 @@
         {
           "returnValue": 0,
           "targetStatementId": 102,
+          "replyText": "0"
+        }
+      ]
+    },
+    "102": {
+      "id": 102,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 103,
+          "replyText": "0"
+        }
+      ]
+    },
+    "103": {
+      "id": 103,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
           "replyText": "0"
         }
       ]

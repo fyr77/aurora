@@ -1,0 +1,10 @@
+{
+  "id": "medicine",
+  "drawable": {
+    "id": "medbay_module_enhanced",
+    "tx": -1
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.AdvancedMedbayUnlocker",
+  "value": 2100,
+  "type": "EARTH"
+}

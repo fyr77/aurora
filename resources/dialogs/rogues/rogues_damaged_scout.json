@@ -195,17 +195,6 @@
       ],
       "customIcon": "engineer_dialog"
     },
-    "23": {
-      "id": 23,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 24,
-          "replyText": "0"
-        }
-      ],
-      "customIcon": "scientist_dialog"
-    },
     "22": {
       "id": 22,
       "replies": [
@@ -218,6 +207,17 @@
           "returnValue": 0,
           "targetStatementId": 24,
           "replyText": "1"
+        }
+      ],
+      "customIcon": "scientist_dialog"
+    },
+    "23": {
+      "id": 23,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
         }
       ],
       "customIcon": "scientist_dialog"

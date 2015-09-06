@@ -68,16 +68,6 @@
         }
       ]
     },
-    "98": {
-      "id": 98,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 20,
-          "replyText": "0"
-        }
-      ]
-    },
     "4": {
       "id": 4,
       "replies": [
@@ -90,16 +80,6 @@
           "returnValue": 0,
           "targetStatementId": 5,
           "replyText": "1"
-        }
-      ]
-    },
-    "99": {
-      "id": 99,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 98,
-          "replyText": "0"
         }
       ]
     },
@@ -233,16 +213,6 @@
         }
       ]
     },
-    "17": {
-      "id": 17,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 20,
-          "replyText": "0"
-        }
-      ]
-    },
     "16": {
       "id": 16,
       "replies": [
@@ -258,12 +228,12 @@
         }
       ]
     },
-    "19": {
-      "id": 19,
+    "17": {
+      "id": 17,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 99,
+          "targetStatementId": 20,
           "replyText": "0"
         }
       ]
@@ -283,12 +253,12 @@
         }
       ]
     },
-    "21": {
-      "id": 21,
+    "19": {
+      "id": 19,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 24,
+          "targetStatementId": 99,
           "replyText": "0"
         }
       ]
@@ -313,8 +283,8 @@
         }
       ]
     },
-    "23": {
-      "id": 23,
+    "21": {
+      "id": 21,
       "replies": [
         {
           "returnValue": 0,
@@ -333,12 +303,12 @@
         }
       ]
     },
-    "25": {
-      "id": 25,
+    "23": {
+      "id": 23,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 24,
           "replyText": "0"
         }
       ]
@@ -358,12 +328,42 @@
         }
       ]
     },
+    "25": {
+      "id": 25,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
     "26": {
       "id": 26,
       "replies": [
         {
           "returnValue": 0,
           "targetStatementId": 25,
+          "replyText": "0"
+        }
+      ]
+    },
+    "98": {
+      "id": 98,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "0"
+        }
+      ]
+    },
+    "99": {
+      "id": 99,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 98,
           "replyText": "0"
         }
       ]

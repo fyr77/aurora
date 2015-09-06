@@ -277,16 +277,6 @@
         }
       ]
     },
-    "17": {
-      "id": 17,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 18,
-          "replyText": "0"
-        }
-      ]
-    },
     "16": {
       "id": 16,
       "replies": [
@@ -307,6 +297,26 @@
         }
       ]
     },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "0"
+        }
+      ]
+    },
+    "18": {
+      "id": 18,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "0"
+        }
+      ]
+    },
     "19": {
       "id": 19,
       "replies": [
@@ -322,12 +332,12 @@
         }
       ]
     },
-    "18": {
-      "id": 18,
+    "20": {
+      "id": 20,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 19,
+          "targetStatementId": 21,
           "replyText": "0"
         }
       ]
@@ -342,16 +352,6 @@
           "flags": {
             "engineer_dinner": "true"
           }
-        }
-      ]
-    },
-    "20": {
-      "id": 20,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 21,
-          "replyText": "0"
         }
       ]
     }

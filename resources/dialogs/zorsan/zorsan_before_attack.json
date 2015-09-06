@@ -216,16 +216,6 @@
       ],
       "customIcon": "colonist_marine_dialog"
     },
-    "17": {
-      "id": 17,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 18,
-          "replyText": "0"
-        }
-      ]
-    },
     "16": {
       "id": 16,
       "replies": [
@@ -237,12 +227,12 @@
       ],
       "customIcon": "alien_city_dialog"
     },
-    "19": {
-      "id": 19,
+    "17": {
+      "id": 17,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 7,
+          "targetStatementId": 18,
           "replyText": "0"
         }
       ]
@@ -267,6 +257,26 @@
         }
       ]
     },
+    "19": {
+      "id": 19,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0"
+        }
+      ]
+    },
+    "20": {
+      "id": 20,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "0"
+        }
+      ]
+    },
     "21": {
       "id": 21,
       "replies": [
@@ -287,12 +297,12 @@
         }
       ]
     },
-    "20": {
-      "id": 20,
+    "22": {
+      "id": 22,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 21,
+          "targetStatementId": 7,
           "replyText": "0"
         }
       ]
@@ -304,36 +314,6 @@
           "returnValue": 0,
           "targetStatementId": 24,
           "replyText": "0"
-        }
-      ]
-    },
-    "22": {
-      "id": 22,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 7,
-          "replyText": "0"
-        }
-      ]
-    },
-    "25": {
-      "id": 25,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 26,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 27,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 28,
-          "replyText": "2"
         }
       ]
     },
@@ -362,17 +342,17 @@
         }
       ]
     },
-    "27": {
-      "id": 27,
+    "25": {
+      "id": 25,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 25,
+          "targetStatementId": 26,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 26,
+          "targetStatementId": 27,
           "replyText": "1"
         },
         {
@@ -393,6 +373,26 @@
         {
           "returnValue": 0,
           "targetStatementId": 27,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 28,
+          "replyText": "2"
+        }
+      ]
+    },
+    "27": {
+      "id": 27,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
           "replyText": "1"
         },
         {

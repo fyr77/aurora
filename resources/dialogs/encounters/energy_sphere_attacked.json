@@ -381,41 +381,6 @@
       ],
       "customIcon": "engergy_sphere_dialog"
     },
-    "17": {
-      "id": 17,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 18,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 19,
-          "replyText": "1",
-          "replyConditions": [
-            {
-              "name": "sphere_touch",
-              "type": "NOT_SET"
-            }
-          ],
-          "flags": {
-            "sphere_touch": "true"
-          }
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 23,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "3"
-        }
-      ],
-      "customIcon": "engergy_sphere_dialog"
-    },
     "16": {
       "id": 16,
       "replies": [
@@ -451,27 +416,27 @@
       ],
       "customIcon": "engergy_sphere_dialog"
     },
-    "19": {
-      "id": 19,
+    "17": {
+      "id": 17,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 10,
-          "replyText": "0",
+          "targetStatementId": 18,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "1",
           "replyConditions": [
             {
-              "name": "sphere_shoot",
+              "name": "sphere_touch",
               "type": "NOT_SET"
             }
           ],
           "flags": {
-            "sphere_shoot": "true"
+            "sphere_touch": "true"
           }
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 20,
-          "replyText": "1"
         },
         {
           "returnValue": 0,
@@ -515,8 +480,8 @@
         }
       ]
     },
-    "21": {
-      "id": 21,
+    "19": {
+      "id": 19,
       "replies": [
         {
           "returnValue": 0,
@@ -534,7 +499,7 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 22,
+          "targetStatementId": 20,
           "replyText": "1"
         },
         {
@@ -547,7 +512,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "engergy_sphere_dialog"
     },
     "20": {
       "id": 20,
@@ -583,6 +549,69 @@
         }
       ],
       "customIcon": "engergy_sphere_dialog"
+    },
+    "21": {
+      "id": 21,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "sphere_shoot",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "sphere_shoot": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3"
+        }
+      ]
+    },
+    "22": {
+      "id": 22,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "sphere_shoot",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "sphere_shoot": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
     },
     "23": {
       "id": 23,
@@ -624,45 +653,6 @@
           "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "3"
-        }
-      ]
-    },
-    "22": {
-      "id": 22,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 10,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "sphere_shoot",
-              "type": "NOT_SET"
-            }
-          ],
-          "flags": {
-            "sphere_shoot": "true"
-          }
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 23,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "2"
-        }
-      ]
-    },
-    "25": {
-      "id": 25,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 26,
-          "replyText": "0"
         }
       ]
     },
@@ -709,41 +699,13 @@
         }
       ]
     },
-    "27": {
-      "id": 27,
+    "25": {
+      "id": 25,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 10,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "sphere_shoot",
-              "type": "NOT_SET"
-            }
-          ],
-          "flags": {
-            "sphere_shoot": "true"
-          }
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 19,
-          "replyText": "1",
-          "replyConditions": [
-            {
-              "name": "sphere_touch",
-              "type": "NOT_SET"
-            }
-          ],
-          "flags": {
-            "sphere_touch": "true"
-          }
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "2"
+          "targetStatementId": 26,
+          "replyText": "0"
         }
       ]
     },
@@ -790,6 +752,44 @@
         }
       ],
       "customIcon": "engergy_sphere_dialog"
+    },
+    "27": {
+      "id": 27,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "sphere_shoot",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "sphere_shoot": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "sphere_touch",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "sphere_touch": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
     }
   },
   "flags": {},

@@ -239,17 +239,6 @@
         }
       ]
     },
-    "17": {
-      "id": 17,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 18,
-          "replyText": "0"
-        }
-      ],
-      "customIcon": "interior_dialog"
-    },
     "16": {
       "id": 16,
       "replies": [
@@ -265,15 +254,16 @@
         }
       ]
     },
-    "19": {
-      "id": 19,
+    "17": {
+      "id": 17,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 20,
+          "targetStatementId": 18,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "18": {
       "id": 18,
@@ -291,16 +281,15 @@
       ],
       "customIcon": "interior_dialog"
     },
-    "21": {
-      "id": 21,
+    "19": {
+      "id": 19,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 22,
+          "targetStatementId": 20,
           "replyText": "0"
         }
-      ],
-      "customIcon": "interior_dialog"
+      ]
     },
     "20": {
       "id": 20,
@@ -313,15 +302,16 @@
       ],
       "customIcon": "interior_dialog"
     },
-    "23": {
-      "id": 23,
+    "21": {
+      "id": 21,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 24,
+          "targetStatementId": 22,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "22": {
       "id": 22,
@@ -332,6 +322,27 @@
           "replyText": "0"
         }
       ]
+    },
+    "23": {
+      "id": 23,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
+        }
+      ]
+    },
+    "24": {
+      "id": 24,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "0"
+        }
+      ],
+      "customIcon": "interior_dialog"
     },
     "25": {
       "id": 25,
@@ -363,16 +374,30 @@
         }
       ]
     },
-    "24": {
-      "id": 24,
+    "26": {
+      "id": 26,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 25,
+          "targetStatementId": 27,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 28,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 29,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 31,
+          "replyText": "3"
         }
-      ],
-      "customIcon": "interior_dialog"
+      ]
     },
     "27": {
       "id": 27,
@@ -399,47 +424,6 @@
         }
       ]
     },
-    "26": {
-      "id": 26,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 27,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 28,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 29,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 31,
-          "replyText": "3"
-        }
-      ]
-    },
-    "29": {
-      "id": 29,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 31,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 30,
-          "replyText": "1"
-        }
-      ],
-      "customIcon": "alien_city_dialog"
-    },
     "28": {
       "id": 28,
       "replies": [
@@ -465,13 +449,18 @@
         }
       ]
     },
-    "31": {
-      "id": 31,
+    "29": {
+      "id": 29,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 32,
+          "targetStatementId": 31,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 30,
+          "replyText": "1"
         }
       ],
       "customIcon": "alien_city_dialog"
@@ -487,30 +476,16 @@
       ],
       "customIcon": "alien_city_dialog"
     },
-    "34": {
-      "id": 34,
+    "31": {
+      "id": 31,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 36,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 35,
-          "replyText": "1"
-        }
-      ]
-    },
-    "35": {
-      "id": 35,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 36,
+          "targetStatementId": 32,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "alien_city_dialog"
     },
     "32": {
       "id": 32,
@@ -543,22 +518,27 @@
         }
       ]
     },
-    "38": {
-      "id": 38,
+    "34": {
+      "id": 34,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 39,
+          "targetStatementId": 36,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 35,
+          "replyText": "1"
         }
       ]
     },
-    "39": {
-      "id": 39,
+    "35": {
+      "id": 35,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 36,
           "replyText": "0"
         }
       ]
@@ -585,6 +565,26 @@
           "returnValue": 0,
           "targetStatementId": 38,
           "replyText": "1"
+        }
+      ]
+    },
+    "38": {
+      "id": 38,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 39,
+          "replyText": "0"
+        }
+      ]
+    },
+    "39": {
+      "id": 39,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
         }
       ]
     }

@@ -1,0 +1,14 @@
+0Генри1.csv;quarantine_henry_1;marine_dialog;encounters/quarantine;
+0Гордон обращается к капитану.csv;quarantine_start;scientist_dialog;encounters/quarantine;
+1Генри2.csv;quarantine_henry_2;marine_dialog;encounters/quarantine;
+1Первая смерть.csv;quarantine_first_death;scientist_dialog;encounters/quarantine;
+2Генри3.csv;quarantine_henry_3;marine_dialog;encounters/quarantine;
+2Клиски.csv;quarantine_klisk;klisk_dialog;encounters/quarantine;
+3Наземный отряд на нужной планете.csv;quarantine_landing_party;colonist_marine_dialog;encounters/quarantine;
+4Гордон, при наличии всего нужного.csv;quarantine_materials_collected;scientist_dialog;encounters/quarantine;
+4Сара2.csv;quarantine_sarah_1;engineer_dialog;encounters/quarantine;
+5Гордон, в конце квеста, итог.csv;quarantine_end;scientist_dialog;encounters/quarantine;
+5Сара3.csv;quarantine_sarah_2;engineer_dialog;encounters/quarantine;
+6Гордон1.csv;quarantine_gordon_1;scientist_dialog;encounters/quarantine;
+7Гордон2.csv;quarantine_gordon_2;scientist_dialog;encounters/quarantine;
+8Гордон3.csv;quarantine_gordon_3;scientist_dialog;encounters/quarantine;
