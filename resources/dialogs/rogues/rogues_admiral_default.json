@@ -29,8 +29,19 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 200,
+          "targetStatementId": 207,
           "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "quarantine.started",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 200,
+          "replyText": "3",
           "replyConditions": [
             {
               "name": "rogues.damaged_scout_found",
@@ -41,7 +52,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 205,
-          "replyText": "3",
+          "replyText": "4",
           "replyConditions": [
             {
               "name": "rogues.damage_scout_crew_saved",
@@ -52,7 +63,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 100,
-          "replyText": "4",
+          "replyText": "5",
           "replyConditions": [
             {
               "name": "rogues.fine",
@@ -63,7 +74,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 28,
-          "replyText": "5",
+          "replyText": "6",
           "replyConditions": [
             {
               "name": "zorsan.war_preparations",
@@ -74,7 +85,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "6"
+          "replyText": "7"
         }
       ]
     },
@@ -394,6 +405,16 @@
       "replies": [
         {
           "returnValue": 202,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "207": {
+      "id": 207,
+      "replies": [
+        {
+          "returnValue": 0,
           "targetStatementId": -1,
           "replyText": "0"
         }

@@ -22,8 +22,19 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 9,
+          "targetStatementId": 13,
           "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "quarantine.started",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "2",
           "replyConditions": [
             {
               "name": "zorsan.escape",
@@ -45,7 +56,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 5,
-          "replyText": "2",
+          "replyText": "3",
           "replyConditions": [
             {
               "name": "zorsan.war_preparations",
@@ -60,7 +71,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "3"
+          "replyText": "4"
         }
       ]
     },
@@ -230,6 +241,16 @@
     },
     "12": {
       "id": 12,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "13": {
+      "id": 13,
       "replies": [
         {
           "returnValue": 0,

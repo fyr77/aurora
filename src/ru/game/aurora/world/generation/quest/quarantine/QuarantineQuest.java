@@ -13,6 +13,7 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.nature.AnimalCorpseItem;
+import ru.game.aurora.world.space.StarSystem;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -66,6 +67,7 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
         }
 
         world.getGlobalVariables().remove("quarantine.started");
+        world.getPlayer().getJournal().questCompleted("quarantine", "end");
     }
 
     private void killCrewMember()
@@ -84,6 +86,7 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
 
         if (daysSinceStart == Configuration.getIntProperty("quest.quarantine.turnsBetweenDeaths") + 20) {
             Dialog d = Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_first_death.json");
+            world.getPlayer().getJournal().addQuestEntries("quarantine", "confirmed");
             Map<String, String> flags = new HashMap<>();
             // this dialog has options for improvements that may help in disease research, like presense of medbay
             for (ShipUpgrade su : world.getPlayer().getShip().getUpgrades()) {
@@ -96,12 +99,17 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
                     }
                     hasMedbay = true;
                 }
-
-                if (world.getResearchAndDevelopmentProjects().getResearchProjects().containsKey("alien_biology")) {
-                    flags.put("has_biology", "");
-                    researchBoost *= 1.5;
-                }
             }
+            if (hasMedbay) {
+                world.getPlayer().getJournal().addQuestEntries("quarantine", "medbay");
+            }
+
+            if (world.getResearchAndDevelopmentProjects().getResearchProjects().containsKey("alien_biology")) {
+                flags.put("has_biology", "");
+                researchBoost *= 1.5;
+                world.getPlayer().getJournal().addQuestEntries("quarantine", "biodata");
+            }
+
             world.addOverlayWindow(d, flags);
             return true;
         }
@@ -136,6 +144,7 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
             if (state == 0) {
                 // this is quest start
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_start.json"));
+                world.getPlayer().getJournal().addQuestEntries("quarantine", "start");
                 world.getGlobalVariables().put("quarantine.started", true);
                 if (ship.getScientists() > 0) {
                     ship.setScientists(ship.getScientists() - 1);
@@ -225,6 +234,7 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
 
         if (planet.getExploredTiles() >= 100 && animalsCollected >= 3) {
             world.getGlobalVariables().put("quarantine.research_started", "");
+            world.getPlayer().getJournal().addQuestEntries("quarantine", "medicine");
             world.getPlayer().getResearchState().addNewAvailableProject(new QuarantineResearch(researchBoost));
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_materials_collected.json"));
         }
@@ -241,6 +251,22 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
                 !world.getGlobalVariables().containsKey("quarantine.first_return")) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_landing_party.json"));
             world.getGlobalVariables().put("quarantine.first_return", "");
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
+        if (targetPlanet == null) {
+            return false;
+        }
+
+        if (world.getGlobalVariables().get("solar_system").equals(ss)) {
+            world.getGalaxyMap().returnTo(world);
+            world.setCurrentRoom(world.getGalaxyMap());
+            world.onPlayerLeftSystem(ss);
+            GameLogger.getInstance().logMessage(Localization.getText("journal", "quarantine.solar_system"));
+            return true;
         }
         return false;
     }

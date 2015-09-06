@@ -1,5 +1,6 @@
 0;*The Bork Diplomatic Representative's office is very lavish and a bit scary. You get this impression because of the numerous carved elements that are literally everywhere, from top to bottom. The owner himself, apparently, feels right at home in this ambiance, and he looks pretty lively.* I'm listening.;;;;
 ;"There is something. A Bork fleet led by someone named Hrrraka has blockaded my planet. That Hrrraka told me to talk to some, and I quote, ""smart Bork."" ";1;bork_blockade.communicated && !bork_blockade.withdraw;;
+;Our crew is infected by an unknown disease. Can you help us?;13;quarantine.started;;
 ;When we got to the Zorsan planet, they lured us in and attacked us. Why did they do it? We never did anything bad to them. ;9;zorsan.escape && !zorsan.war_preparations && !zorsan_escape_discussed;;zorsan_escape_discussed
 ;The Zorsan are going to attack my planet. Can you help us somehow? ;5;zorsan.war_preparations && !bork.war_help;;
 ;I just came to say hello, I'm already leaving.;-1;;;
@@ -31,3 +32,5 @@
 ;So it would be stupid of us to expect you to support us? ;12;;;
 12;As long as the Zorsan aren't a serious threat to you, we don't have a reason to intervene. But if it comes to total war between your species, it will all depend on our cooperation. If it goes well in the future, we can aid you. ;;;;
 ;All right. I'll keep that in mind.;-1;;;
+13;There is nothing we can do for you. We, the Borks, are tough creatures and rarely suffer from diseases. Our medicine is more into healing wounds then treating ilnesses. Besides that our species are quite different. So you should probably ask the Klisk about that. Those slimes know much about other species.;;;;
+;Will do that.;-1;;;

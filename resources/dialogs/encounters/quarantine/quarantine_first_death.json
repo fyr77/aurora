@@ -122,13 +122,24 @@
         },
         {
           "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "has_biology",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 13,
-          "replyText": "1"
+          "replyText": "2"
         },
         {
           "returnValue": 0,
           "targetStatementId": 14,
-          "replyText": "2",
+          "replyText": "3",
           "replyConditions": [
             {
               "name": "has_medbay",
@@ -139,7 +150,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 15,
-          "replyText": "3",
+          "replyText": "4",
           "replyConditions": [
             {
               "name": "has_advanced_medbay",
@@ -150,7 +161,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "4"
+          "replyText": "5"
         }
       ]
     },
@@ -196,6 +207,16 @@
     },
     "15": {
       "id": 15,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "0"
+        }
+      ]
+    },
+    "16": {
+      "id": 16,
       "replies": [
         {
           "returnValue": 0,

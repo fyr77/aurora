@@ -21,10 +21,12 @@ import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.EarthInvasionGenerator;
 import ru.game.aurora.world.generation.quest.heritage.HeritageKliskDialogListener;
+import ru.game.aurora.world.generation.quest.quarantine.QuarantineKliskDialogListener;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.ShipLootItem;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,11 +34,10 @@ import java.util.Map;
  */
 public class KliskMainDialogListener implements DialogListener {
     private static final long serialVersionUID = 1L;
+    private static Multiset<InventoryItem> defaultTradeInventory;
 
     public KliskMainDialogListener() {
     }
-
-    private static Multiset<InventoryItem> defaultTradeInventory;
 
     public static Multiset<InventoryItem> getDefaultTradeInventory(World world) {
         if (defaultTradeInventory == null) {
@@ -90,6 +91,18 @@ public class KliskMainDialogListener implements DialogListener {
             case 129:
                 Dialog heritageEndDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_klisk_final.json");
                 heritageEndDialog.addListener(new HeritageKliskDialogListener());
+                world.addOverlayWindow(heritageEndDialog);
+                break;
+            case 130:
+                Dialog quarantineDialog = Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_klisk.json");
+                quarantineDialog.addListener(new QuarantineKliskDialogListener());
+                if (world.getReputation().isFriendly(KliskGenerator.NAME, HumanityGenerator.NAME)) {
+                    Map<String, String> qf = new HashMap<>();
+                    qf.put("high_reputation", "");
+                    world.addOverlayWindow(quarantineDialog, qf);
+                } else {
+                    world.addOverlayWindow(quarantineDialog);
+                }
                 break;
         }
 

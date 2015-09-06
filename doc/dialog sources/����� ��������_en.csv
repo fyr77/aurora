@@ -35,6 +35,7 @@
 ;No, I'd rather fly away. Thank you. It was a decent trade.;-1;;;
 3;I'm all yours, what do you want?;;;;
 ;We have met a strange creature. It looked like a Klisk but it was not a Kilsk. It even did not seem to be sapient.;120;heritage.monster_collected && !heritage.quest_started && !heritage.quest_completed;;
+;My crew is infected by a deadly disease.;-1;quarantine.started;130;
 ;I found a strange blue sphere on the spaceship. Apparently, it is alive , but we don't know how to communicate with it. Can you help us out?;105;energy_sphere.started=0;;
 ;No-no, nothing. I was mistaken. Let's talk about something else.;0;;;
 6;What information package do you want to receive for this?;;;;

@@ -1,6 +1,7 @@
 0;*Hoor looks at you, his eyes cloudy. The machine hums and blinks.* Oh… you. What do you want?;;;;
 ;I managed to obtain the necessary data. I didn't risk transferring it, I took it here on the source drive.;1;rogues.zorsan_data;;
 ;Yes, there is something. A small group of Rogues is going to pray on my planet's satellite. It causes natural catastrophes on our planet. Your compatriots won't leave. The leader said I could provide them with everything necessary and speed up the process, but your order would convince them, too.;25;rogues_altar.moon_checked;;
+;Our crew is infected by a deadly disease! Can you help us?;207;quarantine.started;;
 ;One of your ships is going to crash. The situation is dire.;200;rogues.damaged_scout_found;;
 ;I have some Rogues with me. They were in a crash, I saved them.;205;rogues.damage_scout_crew_saved;;
 ;We are ready to pay the fine.;100;rogues.fine;;
@@ -62,3 +63,5 @@
 ;I like the way you think! I wouldn't say no to money.;206;;;
 206;*Hoor's face softens. But he is still frowning.* Five credits. No… more.;;;;
 ;Well, that's better than nothing. Happy to be working with you. Good luck.;-1;;202;
+207;Unlikely. Our species are too different, our medicine will not help you. You should pobably ask Klisk, as they know much about other lifeforms.;;;;
+;I see.;-1;;;
