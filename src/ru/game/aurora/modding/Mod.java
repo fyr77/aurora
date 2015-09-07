@@ -7,9 +7,13 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * Performs mod loading
@@ -33,6 +37,9 @@ public class Mod {
      * Directory with custom mod resources
      */
     private static final String RESOURCES_DIR = "resources/";
+
+    private static final String CONFIGURATION_NAME = "mod.properties";
+
     private static final Logger logger = LoggerFactory.getLogger(Mod.class);
     /**
      * Mod information loaded from json
@@ -50,13 +57,15 @@ public class Mod {
      * Mod root directory
      */
     private File myRoot;
+
+    private Properties modConfiguration;
     /**
      * Mod status
      */
     private boolean isLoaded = false;
 
-    public Mod(File directory) {
-        load(directory);
+    public Mod(File directory, ClassLoader rootModClassLoader) {
+        load(directory, rootModClassLoader);
     }
 
     public ModManifest getManifest() {
@@ -74,7 +83,7 @@ public class Mod {
     /**
      * Loads a directory with a mod.
      */
-    private void load(File directory) {
+    private void load(File directory, ClassLoader rootModClassLoader) {
         myRoot = directory;
         if (!myRoot.exists() || !myRoot.isDirectory()) {
             logger.error("Failed to load mod from {}, dir does not exist", directory);
@@ -94,16 +103,42 @@ public class Mod {
             return;
         }
 
+        List<URL> modClassPath = new ArrayList<>();
         try {
-            classLoader = new URLClassLoader(new URL[]{
-                    new File(myRoot, LIB_DIR).toURL(),
-                    new File(myRoot, OVERRIDES_DIR).toURL(),
-                    new File(myRoot, RESOURCES_DIR).toURL()
+            // build a list of jars
+            final File libDir = new File(myRoot, LIB_DIR);
+            if (libDir.exists() && libDir.isDirectory()) {
+                for (File f : libDir.listFiles()) {
+                    if (f.isFile() && f.getName().endsWith(".jar")) {
+                        modClassPath.add(f.toURI().toURL());
+                    }
+                }
+            }
+            modClassPath.add(new File(myRoot, OVERRIDES_DIR).toURL());
+            modClassPath.add(new File(myRoot, RESOURCES_DIR).toURL());
 
-            });
+
+            classLoader = new URLClassLoader(
+                    modClassPath.toArray(new URL[modClassPath.size()])
+                    , rootModClassLoader
+            );
         } catch (MalformedURLException e) {
             logger.error("Failed to create classloader ", e);
             return;
+        }
+
+        // load mod.properties if it exists
+        InputStream confStream = classLoader.getResourceAsStream(CONFIGURATION_NAME);
+        if (confStream != null) {
+            try {
+                modConfiguration = new Properties();
+                modConfiguration.load(confStream);
+                confStream.close();
+            } catch (IOException ex) {
+                logger.error("Failed to load mod.properties file for mod at " + myRoot, ex);
+                isLoaded = false;
+                return;
+            }
         }
 
         // load resource overrides
@@ -151,5 +186,20 @@ public class Mod {
     public void unload() {
         isLoaded = false;
         classLoader = null;
+    }
+
+    /**
+     * Checks if given object belongs to this mod (was loaded from this mod classpath)
+     */
+    public boolean loadedByThisMod(Object object) {
+        return object.getClass().getClassLoader().equals(classLoader);
+    }
+
+    public Properties getModConfiguration() {
+        return modConfiguration;
+    }
+
+    public ClassLoader getClassLoader() {
+        return classLoader;
     }
 }

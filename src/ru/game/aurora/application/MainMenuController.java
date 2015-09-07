@@ -17,7 +17,6 @@ import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpPopupControl;
 import ru.game.aurora.gui.IntroDialogController;
 import ru.game.aurora.gui.LoadingScreenController;
-import ru.game.aurora.modding.ModManager;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
@@ -159,8 +158,6 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
         if (generator != null) {
             if (generator.isGenerated() && GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("loading_screen")) {
                 final World world = generator.getWorld();
-
-                ModManager.getInstance().onNewGameStarted(world);
 
                 world.setCamera(camera);
                 world.getCurrentRoom().enter(world);

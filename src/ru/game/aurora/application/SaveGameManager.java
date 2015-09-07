@@ -8,6 +8,7 @@ package ru.game.aurora.application;
 import org.newdawn.slick.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.game.aurora.modding.SaveGameObjectInputStream;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
@@ -21,73 +22,12 @@ import java.io.*;
 import java.util.Date;
 
 public class SaveGameManager {
-    private static final Logger logger = LoggerFactory.getLogger(SaveGameManager.class);
-
-    private static final int SLOTS = 4;
-
     public static final int SCREEN_SIZE = 128;
-
+    private static final Logger logger = LoggerFactory.getLogger(SaveGameManager.class);
+    private static final int SLOTS = 4;
     private static SaveGameSlot[] slots = new SaveGameSlot[SLOTS];
 
     private static SaveGameSlot autosaveSlot;
-
-    public static class Autosaver extends GameEventListener {
-        private static final long serialVersionUID = -5194873367259385934L;
-
-        @Override
-        public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
-            SaveGameManager.saveGame(SaveGameManager.autosaveSlot, world);
-            return false;
-        }
-    }
-
-    public static final class SaveGameSlot implements Serializable
-    {
-        private static final long serialVersionUID = -136702861620738655L;
-
-        public String fileName;
-
-        public Date date;
-
-        public String gameDate;
-
-        public String gameLocation;
-
-        public byte[] screenshot;
-
-        public byte[] saveData;
-
-        public boolean isAutosave = false;
-
-        private transient Image screenshotImage;
-
-        public SaveGameSlot(String fileName) {
-            this.fileName = fileName;
-        }
-
-        public boolean isLoaded()
-        {
-            return saveData != null;
-        }
-
-        public Image getScreenshot() {
-            if (screenshotImage == null) {
-                if (screenshot == null) {
-                    screenshotImage = ResourceManager.getInstance().getImage("no_image");
-                } else {
-
-                    try {
-                        BufferedImage read = ImageIO.read(new ByteArrayInputStream(screenshot));
-                        screenshotImage = EngineUtils.createImage(read);
-                    } catch (Exception e) {
-                        logger.error("Failed to read image", e);
-                        screenshotImage = ResourceManager.getInstance().getImage("no_image");
-                    }
-                }
-            }
-            return screenshotImage;
-        }
-    }
 
     public static boolean hasSaves() {
         if (autosaveSlot.isLoaded()) {
@@ -149,7 +89,6 @@ public class SaveGameManager {
 
     }
 
-
     public static void saveGame(SaveGameSlot slot, World world) {
         try {
 
@@ -197,7 +136,8 @@ public class SaveGameManager {
             return null;
         }
         try {
-            ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(slot.saveData));
+            // world can has classes that belong to a mod and can not be found in game classpath, so we should use custom classloader
+            ObjectInputStream ois = new SaveGameObjectInputStream(new ByteArrayInputStream(slot.saveData));
             World rz = (World) ois.readObject();
             ois.close();
             rz.checkCheats();
@@ -214,5 +154,61 @@ public class SaveGameManager {
 
     public static SaveGameSlot getAutosaveSlot() {
         return autosaveSlot;
+    }
+
+    public static class Autosaver extends GameEventListener {
+        private static final long serialVersionUID = -5194873367259385934L;
+
+        @Override
+        public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
+            SaveGameManager.saveGame(SaveGameManager.autosaveSlot, world);
+            return false;
+        }
+    }
+
+    public static final class SaveGameSlot implements Serializable {
+        private static final long serialVersionUID = -136702861620738655L;
+
+        public String fileName;
+
+        public Date date;
+
+        public String gameDate;
+
+        public String gameLocation;
+
+        public byte[] screenshot;
+
+        public byte[] saveData;
+
+        public boolean isAutosave = false;
+
+        private transient Image screenshotImage;
+
+        public SaveGameSlot(String fileName) {
+            this.fileName = fileName;
+        }
+
+        public boolean isLoaded() {
+            return saveData != null;
+        }
+
+        public Image getScreenshot() {
+            if (screenshotImage == null) {
+                if (screenshot == null) {
+                    screenshotImage = ResourceManager.getInstance().getImage("no_image");
+                } else {
+
+                    try {
+                        BufferedImage read = ImageIO.read(new ByteArrayInputStream(screenshot));
+                        screenshotImage = EngineUtils.createImage(read);
+                    } catch (Exception e) {
+                        logger.error("Failed to read image", e);
+                        screenshotImage = ResourceManager.getInstance().getImage("no_image");
+                    }
+                }
+            }
+            return screenshotImage;
+        }
     }
 }

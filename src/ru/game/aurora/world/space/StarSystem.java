@@ -32,97 +32,68 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     public static final Color[] possibleColors = {Color.red, Color.white, Color.yellow, new Color(122, 155, 243)};
 
     public static final int[] possibleSizes = {1, 2, 3, 4};
-
-    private static final long serialVersionUID = 2L;
-
-    /**
-     * Mode for moving. Arrows control ship movement
-     */
-    private static final int MODE_MOVE = 0;
-
-    /**
-     * Mode for shooting. Arrows control target selection
-     */
-    private static final int MODE_SHOOT = 1;
-
-    private int selectedWeapon = 0;
-
-    /**
-     * Quest star system, like solar system and others.
-     * Blocks spawning of random encounters in them.
-     */
-    private boolean isQuestLocation = false;
-
-    private GameObject target;
-
-    private boolean visited = false;
-
-    /**
-     * Dialog that will be shown when player enters this system for first time.
-     */
-    private Dialog firstEnterDialog;
-
-    /**
-     * Special background sprite that will be drawn between parallax background and planets pane
-     */
-    private String backgroundSprite;
-
-    private String backgroundNebula1;
-    private Point nebula1Offset;
-    private String backgroundNebula2;
-    private Point nebula2Offset;
-
-    /**
-     * Current mode
-     */
-    private int mode = MODE_MOVE;
-
-    private Star star;
-
-    private BasePlanet[] planets;
-
-    private AsteroidBelt asteroidBelt = null;
-
-    private int globalMapX;
-
-    private int globalMapY;
-
-    private Reputation reputation;
-
-    // if set to false, player can not leave this star system
-    private boolean canBeLeft = true;
-
-    private transient ParallaxBackground background;
-
-    private transient PriorityQueue<Effect> effects = new PriorityQueue<>();
-
-    private transient Effect currentEffect = null;
-
     /**
      * Relation between tile size and max planet size
      * 3 means max planet will have radius of 3 tiles
      */
     public final static int PLANET_SCALE_FACTOR = 3;
-
     public final static int STAR_SCALE_FACTOR = 4;
-
-    // size of star system. moving out of radius from the star initiates return to global map
-    private int radius;
-
+    private static final long serialVersionUID = 2L;
+    /**
+     * Mode for moving. Arrows control ship movement
+     */
+    private static final int MODE_MOVE = 0;
+    /**
+     * Mode for shooting. Arrows control target selection
+     */
+    private static final int MODE_SHOOT = 1;
     private final List<GameObject> ships = new ArrayList<>();
-
     /**
      * Variables available for quest logic
      */
     private final Map<String, Serializable> variables = new HashMap<>();
-
+    private final String name;
+    private int selectedWeapon = 0;
+    /**
+     * Quest star system, like solar system and others.
+     * Blocks spawning of random encounters in them.
+     */
+    private boolean isQuestLocation = false;
+    private GameObject target;
+    private boolean visited = false;
+    /**
+     * Dialog that will be shown when player enters this system for first time.
+     */
+    private Dialog firstEnterDialog;
+    /**
+     * Special background sprite that will be drawn between parallax background and planets pane
+     */
+    private String backgroundSprite;
+    private String backgroundNebula1;
+    private Point nebula1Offset;
+    private String backgroundNebula2;
+    private Point nebula2Offset;
+    /**
+     * Current mode
+     */
+    private int mode = MODE_MOVE;
+    private Star star;
+    private BasePlanet[] planets;
+    private AsteroidBelt asteroidBelt = null;
+    private int globalMapX;
+    private int globalMapY;
+    private Reputation reputation;
+    // if set to false, player can not leave this star system
+    private boolean canBeLeft = true;
+    private transient ParallaxBackground background;
+    private transient PriorityQueue<Effect> effects = new PriorityQueue<>();
+    private transient Effect currentEffect = null;
+    // size of star system. moving out of radius from the star initiates return to global map
+    private int radius;
     /**
      * How many unexplored data for Astronomy research this star system contains
      */
     private int astronomyData;
-
-    private final String name;
-
     // information about quests and events in this star system, used in starmap view
     private transient String messageForStarMap;
 
@@ -133,10 +104,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         this.globalMapY = globalMapY;
     }
 
-    public void setPlanets(BasePlanet[] planets) {
-        this.planets = planets;
-    }
-
     public void setAsteroidBelt(int innerRadius, int width) {
         asteroidBelt = new AsteroidBelt(innerRadius, width);
     }
@@ -145,16 +112,16 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         return variables;
     }
 
-    public void setRadius(int radius) {
-        this.radius = radius;
-    }
-
     public boolean isInside(Positionable p) {
         return (p.getX() >= -radius && p.getX() <= radius && p.getY() >= -radius && p.getY() <= radius);
     }
 
     public int getRadius() {
         return radius;
+    }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
     }
 
     @Override
@@ -283,7 +250,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         }, spaceObjectAtPlayerShipPosition);
     }
 
-
     public List<GameObject> getGameObjectsAtPosition(Positionable pos) {
         List<GameObject> rz = new ArrayList<>();
         int x = pos.getX();
@@ -410,7 +376,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         FriendlyAttackConfirmationController.open(world, targetObject, weapon, damage);
     }
 
-
     public void doFire(World world, final GameObject targetObject, final Ship playerShip, WeaponInstance weapon, final int damage) {
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, targetObject.getName()));
 
@@ -464,7 +429,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
             GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(false);
         }
     }
-
 
     @Override
     public void update(GameContainer container, World world) {
@@ -547,6 +511,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
 
     public boolean isVisited() {
         return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 
     @Override
@@ -735,6 +703,14 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         }
     }
 
+    /**
+     * Assigns a random empty tile to this object.
+     *
+     * @param object    Object to be put into the star system
+     * @param minRadius Minimum distance from the sun (from 0 to 1 relative to star system size)
+     *                  where the object can be located
+     * @param maxRadius Maximum distance from the sun.
+     */
     public void setRandomEmptyPosition(Positionable object, double minRadius, double maxRadius) {
         int orbit;
 
@@ -810,16 +786,16 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         effects.add(effect);
     }
 
-    public void setStar(Star star) {
-        this.star = star;
-    }
-
     public void setFirstEnterDialog(Dialog firstEnterDialog) {
         this.firstEnterDialog = firstEnterDialog;
     }
 
     public BasePlanet[] getPlanets() {
         return planets;
+    }
+
+    public void setPlanets(BasePlanet[] planets) {
+        this.planets = planets;
     }
 
     public boolean isQuestLocation() {
@@ -874,6 +850,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         return star;
     }
 
+    public void setStar(Star star) {
+        this.star = star;
+    }
+
     @Override
     public List<GameObject> getObjects() {
         return ships;
@@ -899,19 +879,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         return radius * 2;
     }
 
-    private static class AsteroidBelt implements Serializable {
-        private static final long serialVersionUID = 652085640285216434L;
-
-        private final int innerRadius;
-
-        private final int width;
-
-        public AsteroidBelt(int innerRadius, int width) {
-            this.innerRadius = innerRadius;
-            this.width = width;
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -934,7 +901,16 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         return result;
     }
 
-    public void setVisited(boolean visited) {
-        this.visited = visited;
+    private static class AsteroidBelt implements Serializable {
+        private static final long serialVersionUID = 652085640285216434L;
+
+        private final int innerRadius;
+
+        private final int width;
+
+        public AsteroidBelt(int innerRadius, int width) {
+            this.innerRadius = innerRadius;
+            this.width = width;
+        }
     }
 }

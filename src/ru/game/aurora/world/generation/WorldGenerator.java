@@ -10,6 +10,7 @@ import org.newdawn.slick.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.*;
+import ru.game.aurora.modding.ModManager;
 import ru.game.aurora.music.StarSystemMusicChangeListener;
 import ru.game.aurora.npc.AlienRaceFirstCommunicationListener;
 import ru.game.aurora.npc.factions.FreeForAllFaction;
@@ -46,16 +47,8 @@ import java.util.concurrent.Future;
  * Generates world in separate thread
  */
 public class WorldGenerator implements Runnable {
-    private static final Logger logger = LoggerFactory.getLogger(WorldGenerator.class);
-
-    private String currentStatus = "Initializing";
-
     public static final PlanetCategory[] satelliteCategories = {PlanetCategory.PLANET_ROCK, PlanetCategory.PLANET_ICE};
-
-    private World world;
-
-    private boolean completed = false;
-
+    private static final Logger logger = LoggerFactory.getLogger(WorldGenerator.class);
     private static final WorldGeneratorPart[] questGenerators = {
             new InitialRadioEmissionQuestGenerator()
             , new MainQuestGenerator()
@@ -71,7 +64,6 @@ public class WorldGenerator implements Runnable {
             , new RedMeatEncounterGenerator()
             , new HeritageQuestGenerator()
     };
-
     private static final WorldGeneratorPart[] alienGenerators = {
             new HumanityGenerator()
             , new KliskGenerator()
@@ -80,76 +72,14 @@ public class WorldGenerator implements Runnable {
             , new BorkGenerator()
             , new ZorsanGenerator()
     };
-
     private static final WorldGeneratorPart[] otherGenerators = {
             new BuildersRuinGenerator()
             , new TutorialGenerator()
             , new ResearchProjectsGenerator()
     };
-
-    private void createAliens(World world) {
-        currentStatus = Localization.getText("gui", "generation.aliens");
-        for (WorldGeneratorPart part : alienGenerators) {
-            part.updateWorld(world);
-        }
-
-        world.getFactions().put("freeforall", new FreeForAllFaction());
-        world.getFactions().put("neutral", new NeutralFaction());
-        world.addListener(new AlienRaceFirstCommunicationListener());
-    }
-
-    private void createArtifactsAndAnomalies(World world) {
-        currentStatus = Localization.getText("gui", "generation.artifacts");
-        for (WorldGeneratorPart part : otherGenerators) {
-            part.updateWorld(world);
-        }
-    }
-
-    private void generateMap(final World world) {
-        currentStatus = Localization.getText("gui", "generation.stars");
-        final int maxStars = Configuration.getIntProperty("world.galaxy.maxStars");
-        List<Future> futures = new ArrayList<>(maxStars);
-        // now generate random star systems
-        for (int i = 0; i < maxStars; ++i) {
-            futures.add(GlobalThreadPool.getExecutor().submit(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        int x;
-                        int y;
-                        do {
-                            x = CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesX());
-                            y = CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesY());
-                        } while (world.getGalaxyMap().getObjectAt(x, y) != null);
-                        StarSystem ss = generateRandomStarSystem(world, x, y);
-
-                        synchronized (world) {
-                            final int idx = world.getGalaxyMap().getGalaxyMapObjects().size();
-                            world.getGalaxyMap().getGalaxyMapObjects().add(ss);
-                            world.getGalaxyMap().setTileAt(x, y, idx);
-                        }
-                    } catch (Throwable t) {
-                        logger.error("Failed to generate world", t);
-                    }
-                }
-            }));
-        }
-
-
-        while (!futures.isEmpty()) {
-            try {
-                for (Iterator<Future> iter = futures.iterator(); iter.hasNext(); ) {
-                    Future f = iter.next();
-                    if (f.isDone()) {
-                        iter.remove();
-                    }
-                }
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                // nothing
-            }
-        }
-    }
+    private String currentStatus = "Initializing";
+    private World world;
+    private boolean completed = false;
 
     public static StarSystem generateRandomStarSystem(Star star, World world, int x, int y, int planetCount) {
         final Random r = CommonRandom.getRandom();
@@ -285,6 +215,70 @@ public class WorldGenerator implements Runnable {
         return generateRandomStarSystem(new Star(starSize, starColor), world, x, y, planets);
     }
 
+    private void createAliens(World world) {
+        currentStatus = Localization.getText("gui", "generation.aliens");
+        for (WorldGeneratorPart part : alienGenerators) {
+            part.updateWorld(world);
+        }
+
+        world.getFactions().put("freeforall", new FreeForAllFaction());
+        world.getFactions().put("neutral", new NeutralFaction());
+        world.addListener(new AlienRaceFirstCommunicationListener());
+    }
+
+    private void createArtifactsAndAnomalies(World world) {
+        currentStatus = Localization.getText("gui", "generation.artifacts");
+        for (WorldGeneratorPart part : otherGenerators) {
+            part.updateWorld(world);
+        }
+    }
+
+    private void generateMap(final World world) {
+        currentStatus = Localization.getText("gui", "generation.stars");
+        final int maxStars = Configuration.getIntProperty("world.galaxy.maxStars");
+        List<Future> futures = new ArrayList<>(maxStars);
+        // now generate random star systems
+        for (int i = 0; i < maxStars; ++i) {
+            futures.add(GlobalThreadPool.getExecutor().submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        int x;
+                        int y;
+                        do {
+                            x = CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesX());
+                            y = CommonRandom.getRandom().nextInt(world.getGalaxyMap().getTilesY());
+                        } while (world.getGalaxyMap().getObjectAt(x, y) != null);
+                        StarSystem ss = generateRandomStarSystem(world, x, y);
+
+                        synchronized (world) {
+                            final int idx = world.getGalaxyMap().getGalaxyMapObjects().size();
+                            world.getGalaxyMap().getGalaxyMapObjects().add(ss);
+                            world.getGalaxyMap().setTileAt(x, y, idx);
+                        }
+                    } catch (Throwable t) {
+                        logger.error("Failed to generate world", t);
+                    }
+                }
+            }));
+        }
+
+
+        while (!futures.isEmpty()) {
+            try {
+                for (Iterator<Future> iter = futures.iterator(); iter.hasNext(); ) {
+                    Future f = iter.next();
+                    if (f.isDone()) {
+                        iter.remove();
+                    }
+                }
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // nothing
+            }
+        }
+    }
+
     private void createQuestWorlds(World world) {
         currentStatus = Localization.getText("gui", "generation.quests");
         for (WorldGeneratorPart part : questGenerators) {
@@ -328,13 +322,18 @@ public class WorldGenerator implements Runnable {
             createArtifactsAndAnomalies(world);
             createQuestWorlds(world);
             createMisc(world);
-
+            applyMods(world);
             currentStatus = Localization.getText("gui", "generation.done");
             completed = true;
         } catch (Exception ex) {
             logger.error("Failed to generate world", ex);
             System.exit(-1);
         }
+    }
+
+    private void applyMods(World world) {
+        currentStatus = Localization.getText("gui", "generation.mods");
+        ModManager.getInstance().onNewGameStarted(world);
     }
 
     public String getCurrentStatus() {

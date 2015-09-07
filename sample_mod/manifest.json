@@ -1,0 +1,5 @@
+{
+  "modName": "Sample Mod",
+  "modVersion": "0.1",
+  "mainClassName": "ru.game.aurora.modding.sample.SampleMod"
+}
