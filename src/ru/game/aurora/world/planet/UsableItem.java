@@ -52,11 +52,13 @@ public abstract class UsableItem implements InventoryItem {
     @Override
     public void onReceived(World world, int amount) {
         world.getPlayer().getInventory().add(this, amount);
+        world.onItemAmountChanged(this, amount);
     }
 
     @Override
     public void onLost(World world, int amount) {
         world.getPlayer().getInventory().remove(this, amount);
+        world.onItemAmountChanged(this, amount);
     }
 
     @Override

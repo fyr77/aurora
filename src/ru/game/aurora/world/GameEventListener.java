@@ -6,6 +6,7 @@
 package ru.game.aurora.world;
 
 import ru.game.aurora.player.earth.EarthUpgrade;
+import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
@@ -75,6 +76,15 @@ public abstract class GameEventListener implements Serializable {
     public boolean onGameObjectAttacked(World world, GameObject attacker, GameObject target, int damage) {return false;}
 
     public boolean onEarthUpgradeUnlocked(World world, EarthUpgrade upgrade) {
+        return false;
+    }
+
+    /**
+     * Changed amount of item in ships inventory.
+     * For items collected by landing party this method is called either when dumping items on shuttle
+     * or when party returns to ship
+     */
+    public boolean onItemAmountChanged(World world, InventoryItem item, int amount) {
         return false;
     }
 

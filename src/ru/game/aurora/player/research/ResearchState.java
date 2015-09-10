@@ -18,7 +18,6 @@ import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,15 +26,10 @@ import java.util.List;
  */
 public class ResearchState implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    private int idleScientists;
-
     private final List<ResearchProjectDesc> completedProjects = new ArrayList<>();
-
     private final List<ResearchProjectState> currentProjects = new ArrayList<>();
-
     private final Geodata geodata = new Geodata();
-
+    private int idleScientists;
     private int processedAstroData;
 
     public ResearchState(int idleScientists) {
@@ -68,7 +62,7 @@ public class ResearchState implements Serializable {
             return;
         }
         this.currentProjects.add(new ResearchProjectState(desc));
-        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.added_new_research"), desc.getName()));
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.added_new_research"), " " + desc.getName()));
     }
 
     /**
@@ -77,9 +71,9 @@ public class ResearchState implements Serializable {
      */
     public void update(World world) {
         List<ResearchProjectState> toAdd = new LinkedList<>();
-        for (Iterator<ResearchProjectState> iter = currentProjects.iterator(); iter.hasNext(); ) {
-            ResearchProjectState state = iter.next();
-
+        List<ResearchProjectState> toRemove = new LinkedList<>();
+        List<ResearchProjectState> list = new ArrayList<>(currentProjects);
+        for (ResearchProjectState state : list) {
             int realScientists = state.scientists;
             if (world.getPlayer().getMainCountry() == EarthCountry.ASIA) {
                 // asia has a research bonus
@@ -87,7 +81,7 @@ public class ResearchState implements Serializable {
             }
             state.desc.update(world, realScientists);
             if (state.desc.isCompleted()) {
-                iter.remove();
+                toRemove.add(state);
                 if (!state.desc.isRepeatable()) {
                     completedProjects.add(state.desc);
                 } else {
@@ -126,6 +120,7 @@ public class ResearchState implements Serializable {
         }
         // to prevent CME
         currentProjects.addAll(toAdd);
+        currentProjects.removeAll(toRemove);
     }
 
     public boolean containsResearchFor(AnimalSpeciesDesc animalSpeciesDesc) {

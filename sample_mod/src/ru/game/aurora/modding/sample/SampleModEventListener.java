@@ -71,7 +71,7 @@ public class SampleModEventListener extends GameEventListener {
          *
          * We could also use ResourceDebris that contain just some Resource Units
          */
-        SpaceDebris.ItemDebris debris = new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.ENERGY, BorkGenerator.NAME));
+        SpaceDebris debris = new SpaceDebris(0, 0, "debris", new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.ENERGY, BorkGenerator.NAME)));
 
         /*
          * This helper method sets the coordinates of an object so that it is located on an empty tile - not on a planet, star or any

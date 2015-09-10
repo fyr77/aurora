@@ -25,6 +25,7 @@ import ru.game.aurora.world.generation.StarSystemNamesCollection;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Environment;
+import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.GalaxyMapObject;
@@ -401,6 +402,13 @@ public class World implements Serializable, ResolutionChangeListener {
         List<GameEventListener> newList = new LinkedList<>(listeners);
         for (GameEventListener l : newList) {
             l.onGameObjectAttacked(this, attacker, target, damage);
+        }
+    }
+
+    public void onItemAmountChanged(InventoryItem item, int amount) {
+        List<GameEventListener> newList = new LinkedList<>(listeners);
+        for (GameEventListener l : newList) {
+            l.onItemAmountChanged(this, item, amount);
         }
     }
 

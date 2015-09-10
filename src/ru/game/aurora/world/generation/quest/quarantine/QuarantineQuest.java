@@ -8,7 +8,10 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.MedBayUpgrade;
 import ru.game.aurora.player.research.ResearchProjectState;
-import ru.game.aurora.world.*;
+import ru.game.aurora.util.ProbabilitySet;
+import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.Ship;
+import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
@@ -29,6 +32,10 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
     private static final long serialVersionUID = 1L;
 
     private Planet targetPlanet = null;
+
+    private Planet lastLandedPlanet = null;
+
+    private boolean researchAvailable = false;
 
     // countdown before death of next crew member
     private int countdown = 0;
@@ -70,9 +77,36 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
         world.getPlayer().getJournal().questCompleted("quarantine", "end");
     }
 
-    private void killCrewMember()
+    private void killCrewMember(World world)
     {
         resetCountdown();
+        ProbabilitySet<Integer> pbs = new ProbabilitySet<>(CommonRandom.getRandom());
+        final Ship ship = world.getPlayer().getShip();
+        pbs.put(0, (double) ship.getMilitary());
+        pbs.put(1, (double) ship.getEngineers());
+        pbs.put(2, (double) ship.getScientists());
+
+        int i = pbs.getRandom();
+        switch (i) {
+            case 0:
+                ship.setMilitary(ship.getMilitary() - 1);
+                break;
+            case 1:
+                ship.setEngineers(ship.getEngineers() - 1);
+                world.getPlayer().getEngineeringState().removeEngineers(1);
+                break;
+            case 2:
+                ship.setScientists(ship.getScientists() - 1);
+                world.getPlayer().getResearchState().removeScientists(1);
+                break;
+        }
+        world.onCrewChanged();
+    }
+
+    @Override
+    public boolean onPlayerLeftPlanet(World world, Planet planet) {
+        lastLandedPlanet = planet;
+        return false;
     }
 
     @Override
@@ -109,7 +143,7 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
                 researchBoost *= 1.5;
                 world.getPlayer().getJournal().addQuestEntries("quarantine", "biodata");
             }
-
+            researchAvailable = true;
             world.addOverlayWindow(d, flags);
             return true;
         }
@@ -151,7 +185,7 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
                     world.getPlayer().getResearchState().removeScientists(1);
                     resetCountdown();
                 } else {
-                    killCrewMember();
+                    killCrewMember(world);
                 }
                 state++;
             } else if (state == 1){
@@ -160,10 +194,10 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
                     ship.setMilitary(ship.getMilitary() - 1);
                     resetCountdown();
                 } else {
-                    killCrewMember();
+                    killCrewMember(world);
                 }
             } else {
-                killCrewMember();
+                killCrewMember(world);
             }
         }
 
@@ -178,8 +212,8 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
         }
     }
 
-    private boolean checkAndStartQuest(World world, Planet planet) {
-        if (world.getTurnCount() < Configuration.getIntProperty("quest.quarantine.minDist")) {
+    private boolean checkAndStartQuest(World world) {
+      /*  if (world.getTurnCount() < Configuration.getIntProperty("quest.quarantine.minDist")) {
             // too early, lets start this quest after at least a year of travel
             return false;
         }
@@ -188,51 +222,39 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
                 > Configuration.getIntProperty("quest.quarantine.minTurn")) {
             // this planet is too near
             return false;
-        }
+        }*/
 
-        boolean found = false;
-        // check that landing party inventory contains at least one animal corpse
-        for (InventoryItem item : world.getPlayer().getLandingParty().getInventory()) {
-            if (item instanceof AnimalCorpseItem) {
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            return false;
-        }
 
         if (CommonRandom.getRandom().nextDouble() >= Configuration.getDoubleProperty("quest.quarantine.chance")) {
-            return false;
+            //  return false;
         }
 
-        this.targetPlanet = planet;
+        this.targetPlanet = lastLandedPlanet;
         resetCountdown();
 
         return true;
     }
 
     @Override
-    public boolean onPlayerLeftPlanet(World world, Planet planet) {
-        if (targetPlanet == null) {
-            return checkAndStartQuest(world, planet);
-        }
-        if (planet != targetPlanet) {
+    public boolean onItemAmountChanged(World world, InventoryItem item, int amount) {
+        if (amount < 0 || !AnimalCorpseItem.class.isAssignableFrom(item.getClass())) {
             return false;
         }
+        if (targetPlanet == null) {
+            return checkAndStartQuest(world);
+        }
+
+        if (world.getCurrentRoom() != targetPlanet) {
+            return false;
+        }
+
+        animalsCollected += amount;
 
         if (world.getGlobalVariables().containsKey("quarantine.research_started")) {
             return false;
         }
 
-        for (InventoryItem i : world.getPlayer().getLandingParty().getInventory()) {
-            if (i instanceof AnimalCorpseItem) {
-                animalsCollected++;
-            }
-        }
-
-        if (planet.getExploredTiles() >= 100 && animalsCollected >= 3) {
+        if (lastLandedPlanet.getExploredTiles() >= 100 && animalsCollected >= 3) {
             world.getGlobalVariables().put("quarantine.research_started", "");
             world.getPlayer().getJournal().addQuestEntries("quarantine", "medicine");
             world.getPlayer().getResearchState().addNewAvailableProject(new QuarantineResearch(researchBoost));
@@ -241,9 +263,14 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
         return false;
     }
 
+
     @Override
     public boolean onPlayerLandedPlanet(World world, Planet planet) {
         if (planet != targetPlanet) {
+            return false;
+        }
+
+        if (!researchAvailable) {
             return false;
         }
 

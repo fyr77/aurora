@@ -13,30 +13,49 @@ import java.io.Serializable;
 // todo: make an abstract base class
 public interface InventoryItem extends Serializable
 {
-    public String getId();
+    String getId();
 
-    public String getName();
+    String getName();
 
-    public String getDescription();
+    String getDescription();
 
-    public Image getImage();
+    Image getImage();
 
-    public double getPrice();
+    /**
+     * Price for selling or buying this item from a merchant
+     */
+    double getPrice();
 
-    public void onReceived(World world, int amount);
+    /**
+     * Called when player receives this item (buys, picks up etc)
+     */
+    void onReceived(World world, int amount);
 
-    public void onLost(World world, int amount);
+    /**
+     * Called when player looses this item (sells it, drops it etc)
+     */
+    void onLost(World world, int amount);
 
     /**
      * If this item is automatically transfered from landing party to a ship
      */
-    public boolean isDumpable();
+    boolean isDumpable();
 
-    public boolean isUsable();
+    /**
+     * If returns true then a 'use' button will be showed in inventory screen near this item
+     */
+    boolean isUsable();
 
-    public boolean isUnique();
+    /**
+     * If true, player will not be able to buy second one
+     */
+    boolean isUnique();
 
-    public int getWeight();
+    int getWeight();
 
-    public boolean canBeSoldTo(World world, Faction faction);
+    /**
+     * Checks that this item can be sold to a merchant of this faction. Will appear in the trade screen only if returned
+     * true
+     */
+    boolean canBeSoldTo(World world, Faction faction);
 }

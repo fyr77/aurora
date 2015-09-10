@@ -7,7 +7,9 @@ import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Special items that can only be sold to aliens
@@ -62,12 +64,13 @@ public class SellOnlyInventoryItem extends ItemWithTextAndImage implements Inven
 
     @Override
     public void onReceived(World world, int amount) {
-        // do nothing, such items are not reflected in your inventory
+        world.onItemAmountChanged(this, amount);
     }
 
     @Override
     public void onLost(World world, int amount) {
         world.getPlayer().getInventory().remove(this, amount);
+        world.onItemAmountChanged(this, amount);
     }
 
     @Override

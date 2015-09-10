@@ -56,11 +56,12 @@ public class AnimalCorpseItem implements InventoryItem {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.new_animal_research") + " " + desc.getName());
             world.getPlayer().getResearchState().addNewAvailableProject(new AnimalResearch(desc));
         }
+        world.onItemAmountChanged(this, amount);
     }
 
     @Override
     public void onLost(World world, int amount) {
-
+        world.onItemAmountChanged(this, -amount);
     }
 
     @Override

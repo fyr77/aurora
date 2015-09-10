@@ -28,6 +28,7 @@ import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.*;
 import ru.game.aurora.world.generation.quest.heritage.HeritageQuestGenerator;
 import ru.game.aurora.world.generation.quest.inside.InsideEncounterGenerator;
+import ru.game.aurora.world.generation.quest.quarantine.QuarantineQuest;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.quest.FasterThanLightQuestGenerator;
@@ -63,6 +64,7 @@ public class WorldGenerator implements Runnable {
             , new InsideEncounterGenerator()
             , new RedMeatEncounterGenerator()
             , new HeritageQuestGenerator()
+            , new QuarantineQuest()
     };
     private static final WorldGeneratorPart[] alienGenerators = {
             new HumanityGenerator()

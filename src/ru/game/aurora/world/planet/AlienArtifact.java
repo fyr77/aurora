@@ -21,80 +21,11 @@ import ru.game.aurora.world.World;
 public class AlienArtifact extends BaseGameObject {
 
     private static final long serialVersionUID = 1533202973059805452L;
-
-    private int remainingData = 10;
-
     private final ArtifactResearch resultResearch;
-
+    private final ArtifactSamples samples = new ArtifactSamples();
+    private int remainingData = 10;
     // optional dialog is shown when this artifact is used for first time
     private Dialog firstUseDialog = null;
-
-    private final ArtifactSamples samples = new ArtifactSamples();
-
-    public final class ArtifactSamples implements InventoryItem {
-        private static final long serialVersionUID = 4883589185683400708L;
-
-        @Override
-        public String getId() {
-            return "artifact";
-        }
-
-        @Override
-        public String getName() {
-            return Localization.getText("gui", "surface.artifact_samples");
-        }
-
-        @Override
-        public String getDescription() {
-            return null;
-        }
-
-        @Override
-        public Image getImage() {
-            return ResourceManager.getInstance().getImage("artifact_boxes");
-        }
-
-        @Override
-        public double getPrice() {
-            return 1;
-        }
-
-        @Override
-        public void onReceived(World world, int amount) {
-            resultResearch.setSpeedModifier(amount / 10.0); // research speed depends on how many data had been collected
-            world.getPlayer().getResearchState().addNewAvailableProject(resultResearch);
-        }
-
-        @Override
-        public void onLost(World world, int amount) {
-
-        }
-
-        @Override
-        public boolean isDumpable() {
-            return true;
-        }
-
-        @Override
-        public boolean isUsable() {
-            return false;
-        }
-
-        @Override
-        public boolean isUnique() {
-            return false;
-        }
-
-        @Override
-        public int getWeight() {
-            return 0;
-        }
-
-        @Override
-        public boolean canBeSoldTo(World world, Faction faction) {
-            return false;
-        }
-    }
 
     public AlienArtifact(int x, int y, String spriteName, ArtifactResearch resultResearch) {
         super(x, y, spriteName);
@@ -139,7 +70,7 @@ public class AlienArtifact extends BaseGameObject {
         } else {
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.artifact.progress"), researchSpeed, remainingData));
         }
-        
+
         return true;
     }
 
@@ -150,5 +81,71 @@ public class AlienArtifact extends BaseGameObject {
 
     public void setFirstUseDialog(Dialog firstUseDialog) {
         this.firstUseDialog = firstUseDialog;
+    }
+
+    public final class ArtifactSamples implements InventoryItem {
+        private static final long serialVersionUID = 4883589185683400708L;
+
+        @Override
+        public String getId() {
+            return "artifact";
+        }
+
+        @Override
+        public String getName() {
+            return Localization.getText("gui", "surface.artifact_samples");
+        }
+
+        @Override
+        public String getDescription() {
+            return null;
+        }
+
+        @Override
+        public Image getImage() {
+            return ResourceManager.getInstance().getImage("artifact_boxes");
+        }
+
+        @Override
+        public double getPrice() {
+            return 1;
+        }
+
+        @Override
+        public void onReceived(World world, int amount) {
+            world.onItemAmountChanged(this, amount);
+            resultResearch.setSpeedModifier(amount / 10.0); // research speed depends on how many data had been collected
+            world.getPlayer().getResearchState().addNewAvailableProject(resultResearch);
+        }
+
+        @Override
+        public void onLost(World world, int amount) {
+            world.onItemAmountChanged(this, -amount);
+        }
+
+        @Override
+        public boolean isDumpable() {
+            return true;
+        }
+
+        @Override
+        public boolean isUsable() {
+            return false;
+        }
+
+        @Override
+        public boolean isUnique() {
+            return false;
+        }
+
+        @Override
+        public int getWeight() {
+            return 0;
+        }
+
+        @Override
+        public boolean canBeSoldTo(World world, Faction faction) {
+            return false;
+        }
     }
 }
