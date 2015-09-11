@@ -150,23 +150,23 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
 
         if (daysSinceStart == 100) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_gordon_1.json"));
-        } else if (daysSinceStart == 800) {
+        } else if (daysSinceStart == 400) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_gordon_2.json"));
-        } else if (daysSinceStart == 1500) {
+        } else if (daysSinceStart == 800) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_gordon_3.json"));
         }
 
         if (daysSinceStart == 210) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_henry_1.json"));
-        } else if (daysSinceStart == 910) {
+        } else if (daysSinceStart == 350) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_henry_2.json"));
-        } else if (daysSinceStart == 1300) {
+        } else if (daysSinceStart == 700) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_henry_3.json"));
         }
 
-        if (daysSinceStart == 90) {
+        if (daysSinceStart == 190) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_sarah_1.json"));
-        } else if (daysSinceStart == 1400) {
+        } else if (daysSinceStart == 530) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_sarah_2.json"));
         }
 
