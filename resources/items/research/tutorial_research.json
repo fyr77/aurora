@@ -1,0 +1,10 @@
+{
+  "id": "tutorial_research",
+  "icon": "probe_research",
+  "makesAvailable": [],
+  "makesAvailableEngineering": [],
+  "earthProgress": [],
+  "score": 10,
+  "progress": 100,
+  "initialProgress": 100
+}
