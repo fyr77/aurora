@@ -1,0 +1,4 @@
+0Диалог с Мартаном.csv;game_start;earth_dialog;.
+tutorial_code_received.csv;tutorial_code_received;scientist_dialog;tutorials
+tutorial_end.csv;tutorial_end;earth_dialog;tutorials
+tutorial_start.csv;tutorial_start;earth_dialog;tutorials

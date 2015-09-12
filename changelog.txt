@@ -2,6 +2,9 @@ VERSION 0.5.0
 
 IN PROGRESS...
 + Heritage quest
++ Quarantine quest
++ Modding support v0.1
++ Tutorial quest
 * Improved galaxy map view (star sprites, hints do not draw outside of window)
 
 
