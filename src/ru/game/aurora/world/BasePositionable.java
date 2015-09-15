@@ -5,6 +5,8 @@
  */
 package ru.game.aurora.world;
 
+import ru.game.aurora.util.EngineUtils;
+
 public class BasePositionable implements Positionable {
 
     private static final long serialVersionUID = -6804845897857713862L;
@@ -33,6 +35,12 @@ public class BasePositionable implements Positionable {
 
     @Override
     public void setPos(int newX, int newY) {
+        ITileMap map = World.getWorld().getCurrentRoom().getMap();
+        if(map.isWrapped()) {
+            newX = EngineUtils.wrap(newX, map.getWidthInTiles());
+            newY = EngineUtils.wrap(newY, map.getHeightInTiles());
+        }
+        
         oldX = x;
         oldY = y;
         x = newX;
