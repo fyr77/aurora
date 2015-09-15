@@ -114,7 +114,9 @@ gardeners.first_contact - set after first contact with gardener race
 Tutorials
 
 tutorial.landing - if set, on next planetary landing tutorial dialog will be shown
-
+tutorial.planet_scan - same for planet scan screen
+tutorial.research
+tutorial.starmap
 ==============================
 
 rogues altar on the moon quest

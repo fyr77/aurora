@@ -398,6 +398,13 @@ public class World implements Serializable, ResolutionChangeListener {
         }
     }
 
+    public void onNewGameStarted() {
+        List<GameEventListener> newList = new LinkedList<>(listeners);
+        for (GameEventListener l : newList) {
+            l.onNewGameStarted(this);
+        }
+    }
+
     public void onGameObjectAttacked(GameObject attacker, GameObject target, int damage) {
         List<GameEventListener> newList = new LinkedList<>(listeners);
         for (GameEventListener l : newList) {

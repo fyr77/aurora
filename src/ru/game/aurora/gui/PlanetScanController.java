@@ -107,6 +107,11 @@ public class PlanetScanController implements ScreenController {
                     , false
             );
             EngineUtils.setImageForGUIElement(surfaceMapPanel, planetMap);
+
+            if (world.getGlobalVariables().containsKey("tutorial.planet_scan")) {
+                world.getGlobalVariables().remove("tutorial.planet_scan");
+                HelpPopupControl.showHelp("planet_scan", "planet_scan_2", "planet_scan_3");
+            }
         }
     }
     

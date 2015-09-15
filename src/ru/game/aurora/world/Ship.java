@@ -7,13 +7,7 @@ package ru.game.aurora.world;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.CommonRandom;
-import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.ExplosionEffect;
@@ -23,11 +17,7 @@ import ru.game.aurora.npc.crew.HenryMainDialogListener;
 import ru.game.aurora.npc.crew.SarahMainDialogListener;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.engineering.ShipUpgrade;
-import ru.game.aurora.player.engineering.upgrades.BarracksUpgrade;
-import ru.game.aurora.player.engineering.upgrades.LabUpgrade;
-import ru.game.aurora.player.engineering.upgrades.MedBayUpgrade;
-import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
-import ru.game.aurora.player.engineering.upgrades.WorkshopUpgrade;
+import ru.game.aurora.player.engineering.upgrades.*;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.StarSystem;
@@ -41,30 +31,18 @@ public class Ship extends BaseGameObject {
     public static final int BASE_MILITARY = 5;
 
     private static final long serialVersionUID = 3;
-
+    private final List<WeaponInstance> weapons = new ArrayList<>();
+    private final List<ShipUpgrade> upgrades = new ArrayList<>();
     private int hull;
-
     private int maxHull;
-
     private int scientists;
-
     private int engineers;
-
     private int military;
-
     private int maxMilitary;
-
     // is added to all weapons ranges
     private int rangeBuff;
-
     private int maxScientists;
-
     private int maxEngineers;
-
-    private final List<WeaponInstance> weapons = new ArrayList<>();
-
-    private final List<ShipUpgrade> upgrades = new ArrayList<>();
-
     private Map<String, CrewMember> crewMembers = new HashMap<>();
 
     private int freeSpace;
@@ -154,12 +132,12 @@ public class Ship extends BaseGameObject {
         }
     }
 
-    public void setHull(int hull) {
-        this.hull = hull;
-    }
-
     public int getHull() {
         return hull;
+    }
+
+    public void setHull(int hull) {
+        this.hull = hull;
     }
 
     public int getMaxHull() {
@@ -215,10 +193,16 @@ public class Ship extends BaseGameObject {
         if (Configuration.getBooleanProperty("cheat.invulnerability")) {
             return;
         }
-        
+
+
         int loseCrewChance = Configuration.getIntProperty("game.crew.lose_chance");
         int loseChanceReduce = MedBayUpgrade.getCrewDeathReduceValue();
         loseCrewChance -= loseCrewChance * 0.01f * loseChanceReduce;
+
+        if (world.getGlobalVariables().containsKey("tutorial.started")) {
+            // crew memebers can not die during a tutorial
+            loseCrewChance = 0;
+        }
         
         Random rnd = CommonRandom.getRandom();
         if(rnd.nextInt(100) < loseCrewChance && getTotalCrew() > 0) {

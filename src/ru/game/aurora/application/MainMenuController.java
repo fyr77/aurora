@@ -21,6 +21,7 @@ import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
+import ru.game.aurora.world.generation.quest.TutorialQuestGenerator;
 
 import java.awt.*;
 import java.io.IOException;
@@ -134,15 +135,15 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
     }
 
     private Dialog createInitialDialog() {
-        final Dialog gameStartDialog = Dialog.loadFromFile("dialogs/game_start_tutorial.json");
+        final Dialog gameStartDialog = Dialog.loadFromFile("dialogs/game_start.json");
         gameStartDialog.addListener(new DialogListener() {
             private static final long serialVersionUID = 3479062521122587288L;
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 if (returnCode != 0) {
-                    GUI.getInstance().pushScreen("loading_screen");
-                    GUI.getInstance().getNifty().gotoScreen("ship_screen");
+                    logger.info("Starting tutorial quest");
+                    new TutorialQuestGenerator().updateWorld(world);
                 }
             }
         });
@@ -162,7 +163,10 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
                 world.setCamera(camera);
                 world.getCurrentRoom().enter(world);
                 // add them here and not in world generator, as gui must be created first
-                HelpPopupControl.setHelpIds("start", "galaxy_map", "galaxy_map_2", "galaxy_map_3");
+                world.onNewGameStarted();
+                if (!world.getGlobalVariables().containsKey("tutorial.started")) {
+                    HelpPopupControl.setHelpIds("start", "galaxy_map", "galaxy_map_2", "galaxy_map_3");
+                }
                 HelpPopupControl.showHelp();
                 return world;
             }

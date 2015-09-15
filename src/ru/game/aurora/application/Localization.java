@@ -16,13 +16,10 @@ import java.util.ResourceBundle;
 
 public class Localization {
 
-    private static final Logger logger = LoggerFactory.getLogger(Localization.class);
-
-    private static Locale currentLocale;
-
     public static final String[] supportedLocales = {"ru", "en"};
-
+    private static final Logger logger = LoggerFactory.getLogger(Localization.class);
     private static final UTF8Control utf8Control = new UTF8Control();
+    private static Locale currentLocale;
 
     public static String getCurrentLocaleTag() {
         return currentLocale.toLanguageTag();
@@ -62,6 +59,10 @@ public class Localization {
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    public static String getText(String bundleId, String textId, Object... params) {
+        return String.format(getText(bundleId, textId), params);
     }
 
     public static String getText(String bundleId, String textId) {

@@ -69,6 +69,11 @@ public class ResearchScreenController implements ScreenController {
         window.layoutElements();
         world.setPaused(true);
 
+        if (world.getGlobalVariables().containsKey("tutorial.research")) {
+            world.getGlobalVariables().remove("tutorial.research");
+            HelpPopupControl.showHelp("research", "research_2", "research_3");
+        }
+
     }
 
     @Override

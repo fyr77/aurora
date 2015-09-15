@@ -23,42 +23,9 @@ public class BasePositionable implements Positionable {
         this.y = y;
     }
 
-    @Override
-    public int getX() {
-        return x;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public void setPos(int newX, int newY) {
-        ITileMap map = World.getWorld().getCurrentRoom().getMap();
-        if(map.isWrapped()) {
-            newX = EngineUtils.wrap(newX, map.getWidthInTiles());
-            newY = EngineUtils.wrap(newY, map.getHeightInTiles());
-        }
-        
-        oldX = x;
-        oldY = y;
-        x = newX;
-        y = newY;
-    }
-
-    public double getDistance(Positionable other) {
-        return Math.sqrt(Math.pow(x - other.getX(), 2) + Math.pow(y - other.getY(), 2));
-    }
-
-    public double getDistanceWrapped(Positionable other, int width, int height) {
-        return getDistanceWrapped(x, y, other.getX(), other.getY(), width, height);
-    }
-
     public static double getDistance(Positionable first, Positionable second) {
         return getDistance(first.getX(), first.getY(), second.getX(), second.getY());
     }
-
 
     public static double getDistance(int x, int y, int otherX, int otherY) {
         return Math.sqrt(Math.pow(x - otherX, 2) + Math.pow(y - otherY, 2));
@@ -72,6 +39,38 @@ public class BasePositionable implements Positionable {
         int wrapYDist = Math.abs(height - directYDist);
 
         return Math.sqrt(Math.pow(Math.min(directXDist, wrapXDist), 2) + Math.pow(Math.min(directYDist, wrapYDist), 2));
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public void setPos(int newX, int newY) {
+        ITileMap map = World.getWorld().getCurrentRoom().getMap();
+        if (map != null && map.isWrapped()) {
+            newX = EngineUtils.wrap(newX, map.getWidthInTiles());
+            newY = EngineUtils.wrap(newY, map.getHeightInTiles());
+        }
+
+        oldX = x;
+        oldY = y;
+        x = newX;
+        y = newY;
+    }
+
+    public double getDistance(Positionable other) {
+        return Math.sqrt(Math.pow(x - other.getX(), 2) + Math.pow(y - other.getY(), 2));
+    }
+
+    public double getDistanceWrapped(Positionable other, int width, int height) {
+        return getDistanceWrapped(x, y, other.getX(), other.getY(), width, height);
     }
 
     @Override

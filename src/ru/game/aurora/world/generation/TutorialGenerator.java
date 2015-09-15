@@ -27,6 +27,8 @@ public class TutorialGenerator implements WorldGeneratorPart {
     public void updateWorld(World world) {
 
         world.getGlobalVariables().put("tutorial.landing", null);
+        world.getGlobalVariables().put("tutorial.planet_scan", null);
+        world.getGlobalVariables().put("tutorial.research", null);
 
         // Repair tutorial dialog - activated after taking damage for the first time
         world.addListener(new GameEventListener() {

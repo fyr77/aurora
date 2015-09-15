@@ -29,6 +29,9 @@ public abstract class GameEventListener implements Serializable {
     protected boolean isAlive = true;
     protected Set<EventGroup> groups;
 
+    public boolean onNewGameStarted(World world) {
+        return false;
+    }
     /**
      * Called when player enters star system, before it is shown
      */

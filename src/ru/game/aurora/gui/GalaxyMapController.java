@@ -72,6 +72,10 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
             logList.addAllItems(GameLogger.getInstance().getLogItems());
             logList.setFocusItemByIndex(logList.getItems().size() - 1);
         }
+        if (world.getGlobalVariables().containsKey("tutorial.starmap")) {
+            world.getGlobalVariables().remove("tutorial.starmap");
+            HelpPopupControl.showHelp("galaxy_map", "galaxy_map_2", "galaxy_map_3");
+        }
     }
 
     @Override

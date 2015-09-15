@@ -23,10 +23,15 @@ public class SurfaceLootObject extends BaseGameObject {
     public boolean interact(World world) {
         return interact(world, null, getLootItem());
     }
+
+    @Override
+    public String getInteractMessage() {
+        return Localization.getText("gui", "surface.pick_up");
+    }
     
     protected boolean interact(World world, String pickUpMessage, InventoryItem lootItem) {
         if(!checkInteractOverweight()) {
-            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.overweight")));
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.overweight"));
             return false;
         }
         
