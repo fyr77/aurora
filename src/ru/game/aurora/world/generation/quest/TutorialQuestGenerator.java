@@ -1,6 +1,7 @@
 package ru.game.aurora.world.generation.quest;
 
 import org.newdawn.slick.GameContainer;
+import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
@@ -11,20 +12,15 @@ import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.GameObject;
+import ru.game.aurora.world.ScanGroup;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
-import ru.game.aurora.world.planet.BasePlanet;
-import ru.game.aurora.world.planet.MonsterBehaviour;
-import ru.game.aurora.world.planet.PickableInventoryItem;
-import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.planet.nature.Animal;
-import ru.game.aurora.world.planet.nature.AnimalModifier;
-import ru.game.aurora.world.planet.nature.AnimalSpeciesDesc;
+import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.earth.Earth;
 
-import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -62,8 +58,11 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
         // move player into solar system
         StarSystem solarSystem = (StarSystem) world.getGlobalVariables().get("solar_system");
         solarSystem.setCanBeLeft(false);
+        world.getGlobalVariables().put("autosave_disabled", true);
+        // we do not need the game to be saved at this moment
         solarSystem.enter(world);
         world.setCurrentRoom(solarSystem);
+        world.getGlobalVariables().remove("autosave_disabled");
 
         earth = (Earth) solarSystem.getPlanets()[2];
         world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/tutorials/tutorial_end.json"));
@@ -90,7 +89,7 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
         world.addListener(this);
     }
 
-    private static class TutorialResearch extends BaseResearchWithFixedProgress {
+    public static class TutorialResearch extends BaseResearchWithFixedProgress {
 
         public TutorialResearch(String id, String icon, int initialProgress, int score) {
             super(id, icon, initialProgress, score);
@@ -121,6 +120,47 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
                     world.getResearchAndDevelopmentProjects().getResearchProjects().remove("tutorial_research")
             );
             world.getPlayer().getInventory().remove(this);
+        }
+
+        @Override
+        public boolean isDumpable() {
+            return true;
+        }
+    }
+
+    private static final class TestDrone extends DungeonMonster {
+        public TestDrone(Planet mars) {
+            super("Drone"
+                    , 0
+                    , 0
+                    , null
+                    , null
+                    , mars.getMap()
+                    , new MonsterDesc(
+                    "test_drone"
+                    , null
+                    , 5
+                    , 2
+                    , null
+                    , "rhino"
+                    , false
+                    , MonsterBehaviour.PASSIVE)
+
+                    , null);
+        }
+
+        @Override
+        public ScanGroup getScanGroup() {
+            return ScanGroup.OTHER;
+        }
+
+        @Override
+        public void onAttack(World world, GameObject attacker, int damage) {
+            super.onAttack(world, attacker, damage);
+            if (hp <= 0) {
+                world.getCurrentRoom().getMap().getObjects().add(
+                        new PickableInventoryItem(getTargetX(), getTargetY(), new TestDroneDataItem()));
+            }
         }
     }
 
@@ -158,38 +198,17 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
                 world.getPlayer().getJournal().addQuestEntries("tutorial", "ship_destroyed");
                 HelpPopupControl.showHelp("tutorial.4.1");
 
-                // add a drone to the surface which player must kill
-                AnimalSpeciesDesc desc = new AnimalSpeciesDesc(
-                        mars
-                        , "Drone"
-                        , false
-                        , false
-                        , 5
-                        , null
-                        , 2
-                        , MonsterBehaviour.PASSIVE
-                        , Collections.<AnimalModifier>emptySet()
-                );
-                desc.setImages(ResourceManager.getInstance().getImage("rhino"), null);
-                desc.setCanBePickedUp(false);
-                Animal drone = new Animal(mars.getMap(), 0, 0, desc) {
-                    @Override
-                    public void onAttack(World world, GameObject attacker, int damage) {
-                        super.onAttack(world, attacker, damage);
-                        if (hp <= 0) {
-                            world.getCurrentRoom().getMap().getObjects().add(new PickableInventoryItem(x, y, new TestDroneDataItem()));
-                        }
-                    }
-                };
+                DungeonMonster drone = new TestDrone(mars);
                 mars.setNearestFreePoint(drone, 20, 20);
                 mars.getPlanetObjects().add(drone);
+                GameLogger.getInstance().logMessage(Localization.getText("journal", "tutorial.drone_landed"));
             }
         }
 
         @Override
         public void update(GameContainer container, World world) {
             super.update(container, world);
-            if (!scanTutorialShown && getDistance(world.getPlayer().getLandingParty()) < 5) {
+            if (world.isUpdatedThisFrame() && !scanTutorialShown && getDistance(world.getPlayer().getShip()) < 3) {
                 HelpPopupControl.showHelp("tutorial.2.1", "tutorial.2.2");
                 scanTutorialShown = true;
             }

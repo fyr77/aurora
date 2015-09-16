@@ -10,7 +10,7 @@ credits - amount of credits player has
 voyager - Voyager ship object
 solar_system - points to StarSystem object
 skipHelp - if set, no help popups will be show
-
+autosave_disabled - no autosave will happen on onPlayerEnteredStarsystem event
 geodataResearchMultiplier - research points obtained from geodata are multiplied by this value
 geodataPriceMultiplier - geodata price in credits is increased by this multiplier
 landingPartyHPBonus - additional hp for landing party

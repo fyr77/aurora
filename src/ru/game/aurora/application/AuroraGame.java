@@ -409,8 +409,11 @@ public class AuroraGame extends NiftyOverlayGame {
                 World loadedWorld = mainMenu.update(camera, gameContainer);
                 if (loadedWorld != null) {
                     onGameLoaded(loadedWorld);
+                    world.onNewGameStarted();
                     // hack: show initial help on new game start
-                    HelpPopupControl.showHelp();
+                    if (!world.getGlobalVariables().containsKey("tutorial.started")) {
+                        HelpPopupControl.showHelp();
+                    }
                 }
             } else {
                 world.update(gameContainer);

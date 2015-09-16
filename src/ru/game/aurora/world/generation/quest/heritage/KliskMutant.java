@@ -1,18 +1,13 @@
 package ru.game.aurora.world.generation.quest.heritage;
 
 import com.google.common.collect.Lists;
-import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.MonsterBehaviour;
 import ru.game.aurora.world.planet.MonsterDesc;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * Klisk mutant, increases counter when killed
@@ -32,7 +27,6 @@ public class KliskMutant extends DungeonMonster
                 , x
                 , y
                 , null
-                , 30
                 , null
                 , owner
                 , new MonsterDesc("klisk_mutant"
@@ -44,7 +38,6 @@ public class KliskMutant extends DungeonMonster
                     , true
                     , MonsterBehaviour.AGGRESSIVE
                 )
-                , MonsterBehaviour.AGGRESSIVE
                 , Lists.newArrayList(new WeaponInstance(ResourceManager.getInstance().getWeapons().getEntity("acid"))));
         controller = new MonsterController(owner, this);
         dialog = killDialog;

@@ -23,23 +23,15 @@ import java.util.*;
  * Time: 12:40
  */
 public class DungeonMonster extends DungeonObject implements IMonster {
-    private static final long serialVersionUID = 3L;
-
-    private Set<String> tags = null;
-
-    private int hp;
-
-    protected MonsterController controller;
-
-    private final ITileMap owner;
-
-    private final MonsterDesc desc;
-
-    private MonsterBehaviour behaviour;
-
-    private List<WeaponInstance> weapons = new ArrayList<>();
-
     protected static final Logger logger = LoggerFactory.getLogger(DungeonMonster.class);
+    private static final long serialVersionUID = 3L;
+    private final ITileMap owner;
+    private final MonsterDesc desc;
+    protected int hp;
+    protected MonsterController controller;
+    private Set<String> tags = null;
+    private MonsterBehaviour behaviour;
+    private List<WeaponInstance> weapons = new ArrayList<>();
 
     public DungeonMonster(AuroraTiledMap map, int groupId, int objectId) {
         super(map, groupId, objectId);
@@ -61,14 +53,14 @@ public class DungeonMonster extends DungeonObject implements IMonster {
         controller = new MonsterController(map, this);
     }
 
-    public DungeonMonster(String name, int x, int y, Set<String> tags, int hp, MonsterController controller, ITileMap owner, MonsterDesc desc, MonsterBehaviour behaviour, List<WeaponInstance> weapons) {
+    public DungeonMonster(String name, int x, int y, Set<String> tags, MonsterController controller, ITileMap owner, MonsterDesc desc, List<WeaponInstance> weapons) {
         super(name, x, y);
         this.tags = tags;
-        this.hp = hp;
+        this.hp = desc.hp;
         this.controller = controller;
         this.owner = owner;
         this.desc = desc;
-        this.behaviour = behaviour;
+        this.behaviour = desc.behaviour;
         this.weapons = weapons;
 
         drawable = desc.getDrawable();

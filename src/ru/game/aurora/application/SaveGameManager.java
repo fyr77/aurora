@@ -161,7 +161,9 @@ public class SaveGameManager {
 
         @Override
         public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
-            SaveGameManager.saveGame(SaveGameManager.autosaveSlot, world);
+            if (!world.getGlobalVariables().containsKey("autosave_disabled")) {
+                SaveGameManager.saveGame(SaveGameManager.autosaveSlot, world);
+            }
             return false;
         }
     }

@@ -1,6 +1,7 @@
 {
   "id": "tutorial_research",
   "icon": "probe_research",
+  "customClass": "ru.game.aurora.world.generation.quest.TutorialQuestGenerator$TutorialResearch",
   "makesAvailable": [],
   "makesAvailableEngineering": [],
   "earthProgress": [],

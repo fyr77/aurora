@@ -163,11 +163,10 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
                 world.setCamera(camera);
                 world.getCurrentRoom().enter(world);
                 // add them here and not in world generator, as gui must be created first
-                world.onNewGameStarted();
+
                 if (!world.getGlobalVariables().containsKey("tutorial.started")) {
                     HelpPopupControl.setHelpIds("start", "galaxy_map", "galaxy_map_2", "galaxy_map_3");
                 }
-                HelpPopupControl.showHelp();
                 return world;
             }
 
