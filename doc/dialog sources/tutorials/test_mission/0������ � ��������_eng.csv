@@ -1,0 +1,9 @@
+0;Right. *Martan Kilmovee, your direct superior, nods, greeting you in his office.* So you're finally here. Look at the uniform they gave you. You look just like a Christmas tree.;;;
+;It's the dress uniform. And it's a bit too tight.;1;;
+1;*Martan laughs.* And some were allowed to wear their civilian clothes... well, then. *He jerks his head and becomes serious.* All the papers are signed, everything is ready. What's it going to be, are you going on a real mission right now or do you want to complete a set of test assignments first? Don't look at me like that. There's nothing wrong with getting used to your ship first. And it won't hurt to check all the systems once more.;;;
+;I don't need any training, I have enough experience. Otherwise, you wouldn't have put me in command, right?;2;;
+;I think you're right. Getting to know the ship and her crew better wouldn't hurt.;3;;
+2;As you wish. *Martan shrugs.* In that case, go to the take-off site. The shuttle is waiting for you.;;;
+;…;-1;;
+3;Great. Go on, the shuttle is waiting for you. You will receive the instructions about the test assignment when you get to the ship.;;;
+;…;-1;;1

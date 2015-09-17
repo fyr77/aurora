@@ -1,0 +1,8 @@
+0;I want to report on our progress, C-captain.;
+;I'm listening, Gordon.;1
+1;It's going slower than we would like it to. *He shakes his head and grabs his temples.* It's hard to work. I have migraines and I'm queasy…;
+;I hope you're doing okay. How are the rest?;2
+2;Some are doing better, some worse. We're doing our best, Captain. We're doing our best.;
+;I value your work, Gordon. Tell your people that.;3
+3;I will. You hold on, too.;
+;Heh. Like I have a choice.;-1

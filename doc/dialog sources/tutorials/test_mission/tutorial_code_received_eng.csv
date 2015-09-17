@@ -1,0 +1,8 @@
+0;*Gordon appears on your screen. He looks a bit surprised.* C-captain, my colleagues have finally broken the test drone's code. It wasn't hard, it's a simple 256 bit key, a walk in the park for our servers.;
+;So you got the code phrase?;1
+1;Y-yes. Honestly, I was expecting some random combination of numbers or letters.;
+;And what was it? Out with it.;2
+2;How about a beer after work?;
+;What? Gordon, what are you talking about? We don't have any alcohol onboard.;3
+3;"*Gordon rolls his eyes.* Captain, you didn't understand. That's the key phrase from the drone's memory block: ""How about a beer after work?""";
+;Oh, that's what it is. Martan is a comedian.;-1

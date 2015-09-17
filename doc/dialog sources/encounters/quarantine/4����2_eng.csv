@@ -1,0 +1,13 @@
+0;*This is Sarah calling, but she's hard to recognize. Apart from the usual symptoms, gray skin and swollen eyes, she's losing hair. Badly.*;
+;I'm listening, Frontz.;1
+1;*Sarah is silent.*;
+;Sarah?;2
+2;Cap, I… I… The medicine doesn't help, I… *She cuts herself off.* One of my men fell into the charger. He got thrashed. We used to work together. *She shakes her head, bites her lip.* And then he started coughing, fell unconscious. That was it.;
+;I'm very sorry it happened. Are you okay, Frontz?;3
+3;Me? Oh… Oh, yeah. I've just been losing hair, can you see? *Sarah points at it absolutely indiffirently.* Gordon gave me a few tranquilizer pills personally. It helps. Yeah. Captain, we're going to make it, right? It's all going to be over soon, right?;
+;Definitely.;5
+;I don't know, Sarah.;4
+4;Well… at least you're honest. *She signs off.*;
+;…;-1
+5;You're the captain, you know better, right? *She signs off.*;
+;…;-1

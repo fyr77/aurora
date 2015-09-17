@@ -1,0 +1,45 @@
+0;*Gordon hails you once more, and again over the urgent channel.*;;
+;Gordon? But the inspection isn't over yet.;1;
+1;*Gordon nods silently. His expression doesn't look too good, and he himself looks extremely tired: swollen bags under his eyes, gray skin... It's obvious.*;;
+;It's bad.;2;
+2;Yes. This… is some kind of illness. Another man died. There can be no doubt about it.;;
+;Okay. What do we have to do? Separate the infected from the uninfected, then go to Earth, set up a quarantine?;3;
+3;Captain… *Gordon sighs.* There's no one to separate. We're all sick. They have just finished the blood work, and... it's everybody. Even you. *You can see from his eyes that Gordon is barely holding back his panic.*;;
+;Calm down. We're alive so far. And taht means… we have to do something.;4;
+4;Yes… We do… *Gordon nods. He looks doomed.*;;
+;What is this illness like, anyway? Symptoms, causes?;5;
+;Will there be more fatalities?;7;
+;What do you suggest we do?;9;
+5;Something resembling plague, C-captain. Lung kind. *Gordon brings a fist up to the camera and flicks a finger.* It develops. *He flicks another one.* Reaches its acute state. *He flicks the third one.* The person can't breathe and dies. It's hard.;;
+;How much time do we have left?;6;
+6;Hard to say, Captain. It all depends on the stage of the infection, the wave from which you got infected… some will last more, some less.;;
+;Hm…;999;
+999;*Gordon is waiting silently.*;;
+;What is this illness like, anyway? Symptoms, causes?;5;
+;Will there be more fatalities?;7;
+;What do you suggest we do?;9;
+7;Yes. The probability of death is 100%. If we don't cure ourselves… *The scientist shakes his head meaningfully.*;;
+;An empty ship in outer space…;8;
+8;Can Earth build a third Aurora?;;
+;I don't want to find out.;999;
+9;First of all, no docking with Earth. You understand.;;
+;Of course.;10;
+10;We have to act, Captain.;;
+;Gordon, you're head of a cutting edge science department. Can't you figure out how to cure this crap?;11;
+;Remember buying data on extraterrestrial biology from the aliens? Can it help us?;16;has_biology
+;Can we buy the medicine?;13;
+;We have the experimental module for the medical bay installed, Gordon… Could it help?;14;has_medbay
+;We have the advanced medical bay, Gordon… Can it help?;15;has_advanced_medbay
+;Okay. We've got no time to waste. Get back to your duties and wait for my orders. Over and out, Gordon.;-1;
+11;Not enough data, Captain. The fauna sample we had was destroyed while we were preparing for the quarantine.;;
+;Got it. Do we need new ones?;12;
+12;Yes. And it would be great if we explored the planet where we caught it, Captain. That would help for sure.;;
+;I see, Gordon.;10;
+13;*Gordon shrugs. He's right: how is he supposed to know that?*;;
+;…;10;
+14;Yes, I know, C-captain. The equipment there really is great! We can arrest the acute stage of the disease… but only for some time.;;
+;That's something.;10;
+15;Yes, Captain, that is a great module. Our sick will hold out longer with it, and data from the samples will be processed faster.;;
+;Great!;10;
+16;Yes, we'll definitely find something there. For example, there was a description of many diseases that are dangerous for species from multiple planets. It's great that you decided to buy the data back then!;;
+;Wow, and I thought I was just wasting money.;10;

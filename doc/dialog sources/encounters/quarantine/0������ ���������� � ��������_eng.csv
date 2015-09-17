@@ -1,0 +1,11 @@
+0;*Gordon hails you, and this time it's not via the normal channel. It's something urgent.*;
+;I'm listening.;1
+1;C-captain… we have a… situation. My subordinate died. *Gordon cuts himself off, his voice is shaking.* While performing an autopsy on one of the recent faun samples, he was working without proper equipment and…;
+;*continue listening*;2
+;Gordon, this is important! Did he get infected with something?!;3
+2;…and then he had contact with all of us, some soldiers and engineers, visited public spaces... C-captain, I demand urgent measures. We have to fully inspect the crew and establish a quarantine.;
+;You needed my approval? You got it.;4
+3;C-could be. If it's true, then he infected a lot of people. We have to fully inspect the crew and establish a quarantine.;
+;Yeah, yeah, I got that. Do whatever you have to, I'll order them to make all the necessary announcements.;4
+4;*Gordon nods and signs off.*;
+;I hope we make it.;-1

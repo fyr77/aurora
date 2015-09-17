@@ -1,0 +1,6 @@
+0;Captain, we've landed. What do we do? Copy?;
+;Listen to my orders. Number one: shoot at least three specimens of the local fauna.;1
+1;Roger.;
+;Number two. Explore at least one hundred standard geographical sectors while analyzing the atmosphere and water.;2
+2;Roger. Anything else, Captain?;
+;Yeah. Try getting back alive. Trust me, we have enough problems as it is.;-1

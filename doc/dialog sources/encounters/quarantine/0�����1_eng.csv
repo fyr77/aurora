@@ -1,0 +1,8 @@
+0;*Henry hails you.*;
+;Liszkiewicz?;1
+1;Captain. *Henry nods.* One of my soldiers vomited a glass of blood today, right while falling in. And then he died.;
+;I'm sorry.;2
+2;I know. Captain, we need to do something. *Henry looks straight at the camera.* My people are dying.;
+;We're working here, Henry. Could you please not sow panic?;3
+3;I'm not. It's just that you had to find out. Captain. *He nods again and disconnects.*;
+;…;-1

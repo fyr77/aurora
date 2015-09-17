@@ -1,0 +1,8 @@
+0;*A call from Engineering. It's strange, but there is no feed from the camera.*;
+;Frontz? What is it?;1
+1;Uhm… *It's a male voice you don't recognize.* Captain, sir… Ms Sarah lost consciousness at work, she was brought here. We called the doctors.;
+;How bad is it?;2
+2;They said Ms Frontz is strong and she'll get through it, but still… There was blood coming out of her mouth. They hooked her up to an IV drip and walked away. We thought we had to tell you…;
+;You did the right thing. Stay with her until she wakes up. That's an order.;3
+3;Yeah… of course, Captain, sir. The doctors told us to stay with her until she comes to. She should be awake in about 40 minutes. We're staying. What if something happens?;
+;That's right. It'll all be all right.;-1

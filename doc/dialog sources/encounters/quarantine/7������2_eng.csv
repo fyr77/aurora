@@ -1,0 +1,8 @@
+0;Captain?;
+;I'm listening, Gordon.;1
+1;My assistent passed away today. It was a sad scene. Now I'm working for two... *Gordon's voice is steady and serene, but you wouldn't guess it from the way he looks: he's lost a lot of weight.*;
+;Are you okay?;2
+2;Apart from a fatal disease, nothing you should worry about, Captain... Yeah. I'd like you to enhance my people's rations. Especially sweets. Chocolate. We need that. *He taps his temple with his finger and says it like some sort of children's rhyme.* For-our-brains.;
+;I'll pass it on… Gordon, you look a bit… too calm…;3
+3;Really? *He has an expression of exaggerated surprise.* Well… that's one of my responsibilities, right? *Gordon smiles, adjusts his robe and disconnects.*;
+;He was a bit strange…;-1

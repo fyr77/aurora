@@ -1,0 +1,18 @@
+0;Yeah… I can see something's wrong with you. *The Klisk clicks in a cute way. He's probably lying.*;;;
+;I'll transfer all the data we have to you. We need medicine.;1;;
+1;Well, then... *The Klisk reads the research data carefully. It takes a lot of time, he consults his science team several times.* Well, then! *The cute clicking again.* In some sense, you are lucky, human captain. You need to try really hard to get sick on a different planet. Turns out, you and the creatures you contracted it from aren't that different after all!;;;
+;How ironic…;2;;
+2;I hope you forgive me. And about the medicine… yes. We have it. And we can share the data that will help you adapt it for yourselves. 10 credits.;;;
+;I'm not even going to haggle. There you go, sign here.;5;;
+;I don't have that kind of money.;3;;
+;How about a special proposition for a friend of the Klisks?;7;high_reputation;
+3;I'm very sorry.;;;
+;…;-1;;
+5;Sign? What does that mean?;;;
+;It's an expression. I accept your proposition and I'm ready to transfer the money.;6;;
+6;Oh. Well, then… great, human captain. Always a pleasure doing business with you.;;;
+;Likewise. Over and out.;-1;;1
+7;That's true, human captain... *The Klisk clicks pensively and types something on his keyboard.* You really are a friend of our people. This isn't really following the Code to the letter, but... Heal your people. *Incoming data transfer request. It's the formula for the medicina you need.*;;;
+;Thanks. You saved my crew.;8;;
+8;Just don't think it'll work some other time, too. *Clicks of laughter.* Klisks value their friends, but money and friendly relations are incompatible, aren't they?;;;
+;At least sometimes. Over and out.;-1;;2
