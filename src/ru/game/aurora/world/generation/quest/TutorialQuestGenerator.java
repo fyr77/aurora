@@ -6,6 +6,7 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpPopupControl;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.SellOnlyInventoryItem;
@@ -35,6 +36,7 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
     @Override
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
         if (returnCode == 0) {
+            setEarthTutorialDialog(world);
             return;
         }
 
@@ -42,15 +44,24 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
         world.getGlobalVariables().remove("tutorial.started");
         earth.getOwner().setCanBeLeft(true);
         earth.setLastVisitTurn(world.getTurnCount());
+
+        final Dialog journeyStartDialog = Dialog.loadFromFile("dialogs/game_start.json");
+        journeyStartDialog.addListener(new DialogListener() {
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                if (returnCode == 1) {
+                    GUI.getInstance().goToScreen("ship_screen");
+                }
+            }
+        });
+        world.addOverlayWindow(journeyStartDialog);
     }
 
-    @Override
-    public boolean onReturnToEarth(World world) {
+    private void setEarthTutorialDialog(World world) {
         // refresh the special tutorial dialog on earth
         final Dialog e = Dialog.loadFromFile("dialogs/tutorials/tutorial_end.json");
         e.addListener(this);
         world.getPlayer().getEarthState().getEarthSpecialDialogs().add(e);
-        return true;
     }
 
     @Override
@@ -65,7 +76,7 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
         world.getGlobalVariables().remove("autosave_disabled");
 
         earth = (Earth) solarSystem.getPlanets()[2];
-        world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/tutorials/tutorial_end.json"));
+        setEarthTutorialDialog(world);
         world.getPlayer().getShip().setPos(earth.getX() + 1, earth.getY() + 2);
 
         world.getGlobalVariables().put("tutorial.started", true);

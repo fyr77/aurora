@@ -71,6 +71,15 @@
                 </panel>
             </control>
         </layer>
+
+        <layer id="help_layer" childLayout="absolute">
+            <panel width="100%" height="100%" childLayout="absolute">
+                <control id="help_window" name="window" hideOnClose="true" closeable="true" title="${gui.help.title}"
+                         width="45%" height="35%" x="10%" y="10%" visible="false">
+                    <control id="help_popup" name="help_popup"/>
+                </control>
+            </panel>
+        </layer>
     </screen>
 
     <screen id="research_report_screen" controller="ru.game.aurora.gui.ResearchReportScreenController">
@@ -102,13 +111,5 @@
             </control>
         </layer>
 
-        <layer id="help_layer" childLayout="absolute">
-            <panel width="100%" height="100%" childLayout="absolute">
-                <control id="help_window" name="window" hideOnClose="true" closeable="true" title="${gui.help.title}"
-                         width="45%" height="35%" x="10%" y="10%" visible="false">
-                    <control id="help_popup" name="help_popup"/>
-                </control>
-            </panel>
-        </layer>
     </screen>
 </nifty>

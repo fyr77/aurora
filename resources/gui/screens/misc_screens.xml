@@ -27,4 +27,17 @@
         </layer>
     </screen>
 
+    <screen id="fade_out_screen" controller="ru.game.aurora.gui.FadeOutScreenController">
+        <layer childLayout="center">
+            <panel id="fadePanel" backgroundColor="#000000ff" width="100%" height="100%" childLayout="center">
+                <effect>
+                    <onCustom customKey="fadeIn" name="fade" start="#ff" end="#00" neverStopRendering="true"
+                              length="500"/>
+                    <onCustom customKey="fadeOut" name="fade" start="#00" end="#ff" length="500"
+                              neverStopRendering="true"/>
+                </effect>
+            </panel>
+        </layer>
+    </screen>
+
 </nifty>
