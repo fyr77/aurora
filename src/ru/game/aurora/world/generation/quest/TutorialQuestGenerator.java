@@ -6,15 +6,13 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.gui.FadeOutScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpPopupControl;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
-import ru.game.aurora.world.GameEventListener;
-import ru.game.aurora.world.GameObject;
-import ru.game.aurora.world.ScanGroup;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.*;
@@ -34,7 +32,7 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
     private Earth earth;
 
     @Override
-    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+    public void onDialogEnded(final World world, Dialog dialog, int returnCode, Map<String, String> flags) {
         if (returnCode == 0) {
             setEarthTutorialDialog(world);
             return;
@@ -45,16 +43,22 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
         earth.getOwner().setCanBeLeft(true);
         earth.setLastVisitTurn(world.getTurnCount());
 
-        final Dialog journeyStartDialog = Dialog.loadFromFile("dialogs/game_start.json");
-        journeyStartDialog.addListener(new DialogListener() {
+        FadeOutScreenController.makeFade(new IStateChangeListener() {
             @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                if (returnCode == 1) {
-                    GUI.getInstance().goToScreen("ship_screen");
-                }
+            public void stateChanged(Object param) {
+                final Dialog journeyStartDialog = Dialog.loadFromFile("dialogs/game_start_tutorial.json");
+                journeyStartDialog.addListener(new DialogListener() {
+                    @Override
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                        if (returnCode == 1) {
+                            GUI.getInstance().goToScreen("ship_screen");
+                        }
+                    }
+                });
+                world.addOverlayWindow(journeyStartDialog);
             }
         });
-        world.addOverlayWindow(journeyStartDialog);
+
     }
 
     private void setEarthTutorialDialog(World world) {
@@ -117,7 +121,7 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
 
     private static class TestDroneDataItem extends SellOnlyInventoryItem {
         public TestDroneDataItem() {
-            super("journal", "tutorial.drone_data", "artifact_boxes", 0, true);
+            super("journal", "tutorial.drone_data", "recorder", 0, true);
         }
 
         @Override
@@ -153,7 +157,7 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
                     , 5
                     , 2
                     , null
-                    , "rhino"
+                    , "spider_robot"
                     , false
                     , MonsterBehaviour.PASSIVE)
 
