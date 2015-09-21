@@ -78,13 +78,8 @@ public class PlanetScanController implements ScreenController {
         shuttleDraggableElement.getElement().setVisible(planetToScan instanceof Planet); // only on these planets player can see shuttle and change its position
         if (planetToScan instanceof Planet) {
             Planet p = (Planet) planetToScan;
-            LandingParty lp = world.getPlayer().getLandingParty();
-            final int x = (int) (landscapePanel.getWidth() * (EngineUtils.wrap(lp.getX(), p.getWidth()) / (float) p.getWidth()));
-            final int y = (int) (landscapePanel.getHeight() * (EngineUtils.wrap(lp.getY(), p.getHeight()) / (float) p.getHeight()));
-
-            shuttlePosition = new BasePositionable(landscapePanel.getX() + x, landscapePanel.getY() + y);
-            shuttleDraggableElement.getElement().setConstraintX(SizeValue.px(shuttlePosition.getX()));
-            shuttleDraggableElement.getElement().setConstraintY(SizeValue.px(shuttlePosition.getY()));
+            updateShuttleIconPosition();
+            shuttlePosition = new BasePositionable(shuttleDraggableElement.getElement().getX(), shuttleDraggableElement.getElement().getY());
             GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
 
             atmosphereHint.getEffects(EffectEventId.onHover, CustomHint.class).get(0).getParameters().setProperty("hintText",
@@ -113,6 +108,18 @@ public class PlanetScanController implements ScreenController {
                 HelpPopupControl.showHelp("planet_scan", "planet_scan_2", "planet_scan_3");
             }
         }
+    }
+
+    private void updateShuttleIconPosition() {
+        Planet planetToScan1 = (Planet) planetToScan;
+        final Element element = shuttleDraggableElement.getElement();
+        LandingParty lp = world.getPlayer().getLandingParty();
+        element.setConstraintX(SizeValue.px(
+                (int) (landscapePanel.getX() + EngineUtils.wrap(lp.getX(), planetToScan1.getWidth()) * landscapePanel.getWidth() / (float) planetToScan1.getWidth()) - shuttleDraggableElement.getWidth() / 2
+        ));
+        element.setConstraintY(SizeValue.px(
+                (int) (landscapePanel.getY() + EngineUtils.wrap(lp.getY(), planetToScan1.getHeight()) * landscapePanel.getHeight() / (float) planetToScan1.getHeight()) - shuttleDraggableElement.getHeight() / 2
+        ));
     }
     
     private void updateButtonsState() {
@@ -184,14 +191,15 @@ public class PlanetScanController implements ScreenController {
         final int x = (int) (planetToScan1.getWidth() * ((spriteCenterX - landscapePanel.getX()) / (float) landscapePanel.getWidth()));
         final int y = (int) (planetToScan1.getHeight() * ((spriteCenterY - landscapePanel.getY()) / (float) landscapePanel.getHeight()));
 
+        LandingParty lp = world.getPlayer().getLandingParty();
+
         if (!planetToScan1.getMap().isTilePassable(x, y)) {
-            //can not place shuttle on an obstacle, revert position
-            shuttleDraggableElement.setConstraintX(SizeValue.px(shuttlePosition.getX()));
-            shuttleDraggableElement.setConstraintY(SizeValue.px(shuttlePosition.getY()));
+            //can not place shuttle on an obstacle, set on a closest free point
+            planetToScan1.setNearestFreePoint(lp, x, y);
+            updateShuttleIconPosition();
             return;
         }
 
-        LandingParty lp = world.getPlayer().getLandingParty();
 
         lp.setPos(x, y);
     }
