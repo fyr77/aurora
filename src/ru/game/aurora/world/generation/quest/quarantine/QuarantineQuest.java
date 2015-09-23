@@ -9,9 +9,7 @@ import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.MedBayUpgrade;
 import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.util.ProbabilitySet;
-import ru.game.aurora.world.GameEventListener;
-import ru.game.aurora.world.Ship;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
@@ -213,16 +211,16 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
     }
 
     private boolean checkAndStartQuest(World world) {
-      /*  if (world.getTurnCount() < Configuration.getIntProperty("quest.quarantine.minDist")) {
+        if (world.getDayCount() < Configuration.getIntProperty("quest.quarantine.minDist")) {
             // too early, lets start this quest after at least a year of travel
             return false;
         }
 
-        if (BasePositionable.getDistance(planet.getOwner(), (Positionable) world.getGlobalVariables().get("solar_system"))
+        if (BasePositionable.getDistance(lastLandedPlanet.getOwner(), (Positionable) world.getGlobalVariables().get("solar_system"))
                 > Configuration.getIntProperty("quest.quarantine.minTurn")) {
             // this planet is too near
             return false;
-        }*/
+        }
 
 
         if (CommonRandom.getRandom().nextDouble() >= Configuration.getDoubleProperty("quest.quarantine.chance")) {

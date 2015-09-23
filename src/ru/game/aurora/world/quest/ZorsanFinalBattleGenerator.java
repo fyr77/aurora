@@ -39,114 +39,24 @@ import java.util.*;
  * Time: 23:06
  */
 public class ZorsanFinalBattleGenerator extends GameEventListener implements DialogListener {
-    private enum State {
-        CREATED,
-        REINFORCEMENTS_ARRIVED,
-        FIRST_WAVE_COMBAT,
-        FIRST_WAVE_REINFORCEMENTS,
-        FIRST_WAVE_INTERMISSION,
-        ALL_REINFORCEMENTS_ARRIVED,
-        SECOND_WAVE_COMBAT,
-        THIRD_WAVE_COMBAT,
-        OVER,
-        RECON_DONE
-    }
-
     private static final Logger logger = LoggerFactory.getLogger(ZorsanFinalBattleGenerator.class);
-
-    private State state = State.CREATED;
-
-    private int turnNumber;
-
     private static final long serialVersionUID = 2198763272604170716L;
-
-    private StarSystem solarSystem;
-
-    private AlienRace humanity;
-
-    private AlienRace zorsan;
-
-    private Earth earth;
-
     private final List<NPCShip> currentWave = new LinkedList<>();
-
-    private int dropShipsLanded = 0;
-
     private final List<NPCShip> allyShips = new LinkedList<>();
-
-    private StarSystem closestStarSystem = null;
-
     private final int shotsDone = 0;
-
+    private State state = State.CREATED;
+    private int turnNumber;
+    private StarSystem solarSystem;
+    private AlienRace humanity;
+    private AlienRace zorsan;
+    private Earth earth;
+    private int dropShipsLanded = 0;
+    private StarSystem closestStarSystem = null;
     // if it is not null - space station is being boarded
     // if it becomes signalled - station is captured and destroyed
     private GameTimer spaceStationBoardingTimer = null;
-
     private NPCShip spaceStation = null;
-
     private Dungeon spaceStationDungeon = null;
-
-    class ZorsanTroopTransport extends NPCShip {
-
-        private static final long serialVersionUID = 4933360150674508485L;
-
-
-        public ZorsanTroopTransport(int x, int y, Positionable target) {
-            super(x, y, "zorsan_transport", zorsan, null, "Zorsan transport", 25);
-            setSpeed(1);
-            setAi(new LandAI(target));
-            setLoot(zorsan.getDefaultLootTable());
-        }
-
-        @Override
-        public void update(GameContainer container, World world) {
-            if (!isAlive()) {
-                return;
-            }
-
-            doMove(container);
-
-            if (world.isUpdatedThisFrame()) {
-                curSpeed--;
-            }
-            if (curSpeed > 0) {
-                return;
-            }
-            curSpeed = speed;
-            ai.update(this, world, solarSystem);
-            if (!ai.isAlive()) {
-                dropShipsLanded++;
-                if (dropShipsLanded == 1) {
-                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_first_dropship.json"));
-                    world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "zorsan_attack_invasion", "news"));
-                    attackSpaceStation(world);
-                }
-
-                if (dropShipsLanded == 3) {
-                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_half_dropships.json"));
-                }
-
-                if (dropShipsLanded == 5) {
-                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_almost_all_dropships.json"));
-                }
-
-                if (dropShipsLanded == 6) {
-                    Dialog endDialog = Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_earth_captured.json");
-                    endDialog.addListener(new DialogListener() {
-                        private static final long serialVersionUID = -426755352470714542L;
-
-                        @Override
-                        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                            GUI.getInstance().getNifty().gotoScreen("fail_screen");
-                            FailScreenController controller = (FailScreenController) GUI.getInstance().getNifty().findScreenController(FailScreenController.class.getCanonicalName());
-                            controller.set("crew_lost_gameover", "zorsan_captured_earth");
-                        }
-                    });
-                    world.addOverlayWindow(endDialog);
-                }
-            }
-        }
-    }
 
     // when first troop transport reaches earth, it also starts an attack on a space station
     private void attackSpaceStation(World world) {
@@ -171,7 +81,6 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             }
         });
     }
-
 
     @Override
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
@@ -284,23 +193,22 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         return dialog;
     }
 
-
     @Override
     public boolean onTurnEnded(World world) {
-        if (state == State.CREATED && world.getTurnCount() - turnNumber > 5) {
+        if (state == State.CREATED && world.getDayCount() - turnNumber > 5) {
             summonFirstWaveOfReinforcements(world);
             state = State.REINFORCEMENTS_ARRIVED;
             return true;
         }
 
-        if (state == State.REINFORCEMENTS_ARRIVED && world.getTurnCount() - turnNumber > 5) {
+        if (state == State.REINFORCEMENTS_ARRIVED && world.getDayCount() - turnNumber > 5) {
             summonFirstAttackWave(world);
-            turnNumber = world.getTurnCount();
+            turnNumber = world.getDayCount();
             state = State.FIRST_WAVE_COMBAT;
             return true;
         }
 
-        if (state == State.FIRST_WAVE_COMBAT && world.getTurnCount() - turnNumber > 30) {
+        if (state == State.FIRST_WAVE_COMBAT && world.getDayCount() - turnNumber > 30) {
             // suddenly some ships appear from another side
             summonFirstAttackWaveReinforcements(world);
             state = State.FIRST_WAVE_REINFORCEMENTS;
@@ -326,20 +234,20 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
         if (state == State.FIRST_WAVE_REINFORCEMENTS && currentWave.isEmpty()) {
             state = State.FIRST_WAVE_INTERMISSION;
-            turnNumber = world.getTurnCount();
+            turnNumber = world.getDayCount();
             repairAllies();
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_first_wave_ended.json"));
             return true;
         }
 
-        if (state == State.FIRST_WAVE_INTERMISSION && world.getTurnCount() - turnNumber > 5) {
+        if (state == State.FIRST_WAVE_INTERMISSION && world.getDayCount() - turnNumber > 5) {
             state = State.ALL_REINFORCEMENTS_ARRIVED;
-            turnNumber = world.getTurnCount();
+            turnNumber = world.getDayCount();
             summonSecondWaveOfReinforcements(world);
             return true;
         }
 
-        if (state == State.ALL_REINFORCEMENTS_ARRIVED && world.getTurnCount() - turnNumber > 5) {
+        if (state == State.ALL_REINFORCEMENTS_ARRIVED && world.getDayCount() - turnNumber > 5) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_second_wave.json"));
             summonSecondAttackWave(world);
             state = State.SECOND_WAVE_COMBAT;
@@ -422,7 +330,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             world.getPlayer().getShip().setDefaultCrewDialogs(world);
         }
 
-        if (state == State.RECON_DONE && world.getTurnCount() - turnNumber > 5) {
+        if (state == State.RECON_DONE && world.getDayCount() - turnNumber > 5) {
 
             final StoryScreen storyScreen = new StoryScreen("story/obliterator.json");
             world.addOverlayWindow(storyScreen);
@@ -465,7 +373,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             if (oldLocation != null) {
                 ((StarSystem) oldLocation).setBackgroundSprite(null);
             }
-            turnNumber = world.getTurnCount();
+            turnNumber = world.getDayCount();
         }
 
         return false;
@@ -615,7 +523,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
         });
         world.getPlayer().getEarthState().getEarthSpecialDialogs().add(earthDialog);
 
-        turnNumber = world.getTurnCount();
+        turnNumber = world.getDayCount();
         ZorsanGenerator.removeWarDataDrop(world);
 
         world.addListener(this);
@@ -625,5 +533,80 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
 
         repairAllies();
+    }
+
+    private enum State {
+        CREATED,
+        REINFORCEMENTS_ARRIVED,
+        FIRST_WAVE_COMBAT,
+        FIRST_WAVE_REINFORCEMENTS,
+        FIRST_WAVE_INTERMISSION,
+        ALL_REINFORCEMENTS_ARRIVED,
+        SECOND_WAVE_COMBAT,
+        THIRD_WAVE_COMBAT,
+        OVER,
+        RECON_DONE
+    }
+
+    class ZorsanTroopTransport extends NPCShip {
+
+        private static final long serialVersionUID = 4933360150674508485L;
+
+
+        public ZorsanTroopTransport(int x, int y, Positionable target) {
+            super(x, y, "zorsan_transport", zorsan, null, "Zorsan transport", 25);
+            setSpeed(1);
+            setAi(new LandAI(target));
+            setLoot(zorsan.getDefaultLootTable());
+        }
+
+        @Override
+        public void update(GameContainer container, World world) {
+            if (!isAlive()) {
+                return;
+            }
+
+            doMove(container);
+
+            if (world.isUpdatedThisFrame()) {
+                curSpeed--;
+            }
+            if (curSpeed > 0) {
+                return;
+            }
+            curSpeed = speed;
+            ai.update(this, world, solarSystem);
+            if (!ai.isAlive()) {
+                dropShipsLanded++;
+                if (dropShipsLanded == 1) {
+                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_first_dropship.json"));
+                    world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "zorsan_attack_invasion", "news"));
+                    attackSpaceStation(world);
+                }
+
+                if (dropShipsLanded == 3) {
+                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_half_dropships.json"));
+                }
+
+                if (dropShipsLanded == 5) {
+                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_almost_all_dropships.json"));
+                }
+
+                if (dropShipsLanded == 6) {
+                    Dialog endDialog = Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_earth_captured.json");
+                    endDialog.addListener(new DialogListener() {
+                        private static final long serialVersionUID = -426755352470714542L;
+
+                        @Override
+                        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                            GUI.getInstance().getNifty().gotoScreen("fail_screen");
+                            FailScreenController controller = (FailScreenController) GUI.getInstance().getNifty().findScreenController(FailScreenController.class.getCanonicalName());
+                            controller.set("crew_lost_gameover", "zorsan_captured_earth");
+                        }
+                    });
+                    world.addOverlayWindow(endDialog);
+                }
+            }
+        }
     }
 }

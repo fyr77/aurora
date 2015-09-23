@@ -35,11 +35,8 @@ public class GalaxyMap extends BaseSpaceRoom {
     private static final Logger logger = LoggerFactory.getLogger(GalaxyMap.class);
 
     private static final long serialVersionUID = -2138368991952958011L;
-
-    private transient ParallaxBackground background;
-
     private final List<GalaxyMapObject> objects = new ArrayList<>();
-
+    private transient ParallaxBackground background;
     private transient GalaxyMapScreen fullMapScreen = new GalaxyMapScreen();
 
     private int[][] map;
@@ -66,6 +63,10 @@ public class GalaxyMap extends BaseSpaceRoom {
         }
     }
 
+    public static double getDistance(StarSystem first, StarSystem second) {
+        return Math.sqrt(Math.pow(first.getX() - second.getX(), 2) + Math.pow(first.getY() - second.getY(), 2));
+    }
+
     private void createBackground(Camera cam, int tilesX, int tilesY) {
         background = new ParallaxBackground(tilesX * cam.getTileWidth(), tilesY * cam.getTileHeight(), cam.getTileWidth() * tilesX / 2, cam.getTileHeight() * tilesY / 2, 15);
     }
@@ -75,8 +76,8 @@ public class GalaxyMap extends BaseSpaceRoom {
     }
 
     @Override
-    public boolean turnIsADay() {
-        return true;
+    public double getTurnToDayRelation() {
+        return 1;
     }
 
     public int[][] getInternalMap() {
@@ -110,7 +111,6 @@ public class GalaxyMap extends BaseSpaceRoom {
         enter(world);
     }
 
-
     public GalaxyMapObject getObjectAt(int x, int y) {
         if (x < 0 || x >= tilesX || y < 0 || y >= tilesY) {
             return null;
@@ -130,7 +130,6 @@ public class GalaxyMap extends BaseSpaceRoom {
             logger.error("Error on GalaxyMap deserialization", e);
         }
     }
-
 
     @Override
     public void update(GameContainer container, World world) {
@@ -261,10 +260,6 @@ public class GalaxyMap extends BaseSpaceRoom {
             }
         }
         super.draw(container, graphics, camera, world);
-    }
-
-    public static double getDistance(StarSystem first, StarSystem second) {
-        return Math.sqrt(Math.pow(first.getX() - second.getX(), 2) + Math.pow(first.getY() - second.getY(), 2));
     }
 
     @Override

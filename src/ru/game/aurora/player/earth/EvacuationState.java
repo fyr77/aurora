@@ -47,7 +47,7 @@ public class EvacuationState implements Serializable {
     private StarSystem targetSystem;
 
     public EvacuationState(World world) {
-        this.turnObliteratorArrives = world.getTurnCount() + OBLITERATOR_TURNS;
+        this.turnObliteratorArrives = world.getDayCount() + OBLITERATOR_TURNS;
         findSuitableStarSystem(world.getGalaxyMap(), ((AlienRace) world.getFactions().get("Humanity")).getHomeworld());
     }
 
@@ -77,7 +77,7 @@ public class EvacuationState implements Serializable {
 
     public boolean isGameOver(World world) {
         //todo: this is for Alpha, obliterator never arrives
-        return false;//world.getTurnCount() >= turnObliteratorArrives;
+        return false;//world.getDayCount() >= turnObliteratorArrives;
     }
 
     public void showEndGameScreen(World world) {

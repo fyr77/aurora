@@ -27,26 +27,88 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
 
     private static final long serialVersionUID = -6641862933214448810L;
 
+    @Override
+    public void updateWorld(final World world) {
+        final Dialog starsystemEnterDialog = Dialog.loadFromFile("dialogs/encounters/inside_entrance_detected.json");
+        starsystemEnterDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = -4264540383261831865L;
+
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                world.getPlayer().getJournal().addQuestEntries("inside", "start");
+            }
+        });
+        world.addListener(new SingleShipEvent(
+                Configuration.getDoubleProperty("quest.inside.chance")
+                , new Entrance()
+                , starsystemEnterDialog
+        ));
+
+        world.getResearchAndDevelopmentProjects().getEngineeringProjects().put(
+                "super_medpack"
+                , new SuperMedpack.SuperMedpackCraftProject("super_medpack_craft", "super_medpack", 10));
+
+        world.getResearchAndDevelopmentProjects().getResearchProjects().get("parallel_world_bio_data").addListener(new IStateChangeListener<World>() {
+            private static final long serialVersionUID = -3766979340652869635L;
+
+            @Override
+            public void stateChanged(World param) {
+                param.getPlayer().getEarthState().getMessages().add(new PrivateMessage(param, "news_sender", "inside", "news"));
+            }
+        });
+    }
+
+    public static class BioCellsItem extends BaseGameObject {
+        private static final long serialVersionUID = 8752939890229707029L;
+
+        @Override
+        public boolean interact(World world) {
+            world.getPlayer().changeResource(world, Resources.CELLS_FROM_PARALLEL_WORLD, CommonRandom.getRandom().nextInt(3));
+            ResearchProjectDesc research = world.getResearchAndDevelopmentProjects().getResearchProjects().remove("parallel_world_bio_data");
+            if (research != null) {
+                world.getPlayer().getResearchState().addNewAvailableProject(research);
+            }
+            
+            return true;
+        }
+    }
+
     private class ParallelWorld extends StarSystem {
 
         private static final long serialVersionUID = 1946685308754087835L;
-
+        private final Color backgroundColor = new Color(125, 32, 34);
         private int planetsDestroyed = 0;
-
         private StarSystem entranceLocation;
-
         private boolean firstAttackMessageShown = false;
-
         private boolean firstDestroyMessageShown = false;
 
-        private final Color backgroundColor = new Color(125, 32, 34);
+        public ParallelWorld(World world, StarSystem entranceLocation) {
+            super(null, null, 0, 0);
+            setPlanets(new BasePlanet[0]);
+            setRadius(50);
+            this.entranceLocation = entranceLocation;
+            setQuestLocation(true);
+
+            final int planetCount = Configuration.getIntProperty("quest.inside.planets");
+            for (int i = 0; i < planetCount; ++i) {
+                final ParallelWorldPlanet pp = new ParallelWorldPlanet(world);
+                setRandomEmptyPosition(pp, 0.2, 1.5);
+                getObjects().add(pp);
+            }
+            setCanBeLeft(false);
+        }
+
+        @Override
+        public void draw(GameContainer container, Graphics g, Camera camera, World world) {
+            g.setColor(backgroundColor);
+            g.fillRect(0, 0, container.getWidth(), container.getHeight());
+            super.draw(container, g, camera, world);
+        }
 
         private class ParallelWorldPlanet extends BaseParallelWorldObject {
-            private int cells;
-
-            private List<ParallelWorldCell> myCells;
-
             private static final long serialVersionUID = 5859875096919217802L;
+            private int cells;
+            private List<ParallelWorldCell> myCells;
 
             private ParallelWorldPlanet(World world) {
                 super(Color.red, 3);
@@ -175,50 +237,6 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
                 agressive = true;
             }
         }
-
-
-        public ParallelWorld(World world, StarSystem entranceLocation) {
-            super(null, null, 0, 0);
-            setPlanets(new BasePlanet[0]);
-            setRadius(50);
-            this.entranceLocation = entranceLocation;
-            setQuestLocation(true);
-
-            final int planetCount = Configuration.getIntProperty("quest.inside.planets");
-            for (int i = 0; i < planetCount; ++i) {
-                final ParallelWorldPlanet pp = new ParallelWorldPlanet(world);
-                setRandomEmptyPosition(pp, 0.2, 1.5);
-                getObjects().add(pp);
-            }
-            setCanBeLeft(false);
-        }
-
-        @Override
-        public boolean turnIsADay() {
-            return false;
-        }
-
-        @Override
-        public void draw(GameContainer container, Graphics g, Camera camera, World world) {
-            g.setColor(backgroundColor);
-            g.fillRect(0, 0, container.getWidth(), container.getHeight());
-            super.draw(container, g, camera, world);
-        }
-    }
-
-    public static class BioCellsItem extends BaseGameObject {
-        private static final long serialVersionUID = 8752939890229707029L;
-
-        @Override
-        public boolean interact(World world) {
-            world.getPlayer().changeResource(world, Resources.CELLS_FROM_PARALLEL_WORLD, CommonRandom.getRandom().nextInt(3));
-            ResearchProjectDesc research = world.getResearchAndDevelopmentProjects().getResearchProjects().remove("parallel_world_bio_data");
-            if (research != null) {
-                world.getPlayer().getResearchState().addNewAvailableProject(research);
-            }
-            
-            return true;
-        }
     }
 
     private class Entrance extends BaseGameObject {
@@ -255,7 +273,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
             world.getPlayer().getJournal().addQuestEntries("inside", "enter");
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/inside_entered.json"));
             world.getGlobalVariables().put("inside.in_parallel_universe", true);
-            
+
             return true;
         }
 
@@ -263,37 +281,5 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         public boolean canBeInteracted() {
             return true;
         }
-    }
-
-
-    @Override
-    public void updateWorld(final World world) {
-        final Dialog starsystemEnterDialog = Dialog.loadFromFile("dialogs/encounters/inside_entrance_detected.json");
-        starsystemEnterDialog.addListener(new DialogListener() {
-            private static final long serialVersionUID = -4264540383261831865L;
-
-            @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                world.getPlayer().getJournal().addQuestEntries("inside", "start");
-            }
-        });
-        world.addListener(new SingleShipEvent(
-                Configuration.getDoubleProperty("quest.inside.chance")
-                , new Entrance()
-                , starsystemEnterDialog
-        ));
-
-        world.getResearchAndDevelopmentProjects().getEngineeringProjects().put(
-                "super_medpack"
-                , new SuperMedpack.SuperMedpackCraftProject("super_medpack_craft", "super_medpack", 10));
-
-        world.getResearchAndDevelopmentProjects().getResearchProjects().get("parallel_world_bio_data").addListener(new IStateChangeListener<World>() {
-            private static final long serialVersionUID = -3766979340652869635L;
-
-            @Override
-            public void stateChanged(World param) {
-                param.getPlayer().getEarthState().getMessages().add(new PrivateMessage(param, "news_sender", "inside", "news"));
-            }
-        });
     }
 }

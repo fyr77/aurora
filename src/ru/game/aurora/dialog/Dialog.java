@@ -181,8 +181,8 @@ public class Dialog implements OverlayWindow {
     }
 
     @Override
-    public boolean turnIsADay() {
-        return false;
+    public double getTurnToDayRelation() {
+        return 0;
     }
 
     @Override

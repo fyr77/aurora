@@ -41,7 +41,7 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
         // end quest
         world.getGlobalVariables().remove("tutorial.started");
         earth.getOwner().setCanBeLeft(true);
-        earth.setLastVisitTurn(world.getTurnCount());
+        earth.setLastVisitTurn(world.getDayCount());
 
         FadeOutScreenController.makeFade(new IStateChangeListener() {
             @Override

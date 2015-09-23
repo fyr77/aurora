@@ -41,22 +41,14 @@ public class CrewMember extends ItemWithTextAndImage {
         return Localization.getText("gui", "crew.call");
     }
 
-    public void setDialog(Dialog dialog) {
-        this.dialog = dialog;
-        // reload crew member list, so that buttons are refreshed
-        ((ShipScreenController) GUI.getInstance().getNifty().findScreenController(ShipScreenController.class.getCanonicalName())).refresh();
-    }
-
     public void changeReputation(int amount) {
         reputation += amount;
     }
 
-    // these can be overriden by subclasses
-
     public void interact(World world) {
         Map<String, String> additionalFlags = new HashMap<>();
         additionalFlags.put("reputation", String.valueOf(reputation));
-        additionalFlags.put("turn", String.valueOf(world.getTurnCount()));
+        additionalFlags.put("turn", String.valueOf(world.getDayCount()));
         additionalFlags.putAll(dialogFlags);
         // this is a ship condition, that can be used in tutorials and some dialogs
         String condition;
@@ -72,6 +64,8 @@ public class CrewMember extends ItemWithTextAndImage {
         world.addOverlayWindow(dialog, additionalFlags);
     }
 
+    // these can be overriden by subclasses
+
     public Map<String, String> getDialogFlags() {
         return dialogFlags;
     }
@@ -86,6 +80,12 @@ public class CrewMember extends ItemWithTextAndImage {
 
     public Dialog getDialog() {
         return dialog;
+    }
+
+    public void setDialog(Dialog dialog) {
+        this.dialog = dialog;
+        // reload crew member list, so that buttons are refreshed
+        ((ShipScreenController) GUI.getInstance().getNifty().findScreenController(ShipScreenController.class.getCanonicalName())).refresh();
     }
 
     public int getReputation() {

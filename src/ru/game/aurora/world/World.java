@@ -64,7 +64,10 @@ public class World implements Serializable, ResolutionChangeListener {
     private transient boolean updatedThisFrame;
     private transient boolean updatedNextFrame;
     private StarSystem currentStarSystem = null;
-    private int turnCount = 0;
+    private int dayCount = 0;
+    // each turn a value defined by currentRoom.getTurnToDayRelation() is added to this value
+    // if it becomes greater than 1 then a day has passed and listeners are called
+    private double dayFraction = 0.0;
     // Version of a game that created this world. Can be used on save loading to detect if save conversion is required
     private String gameVersion = Version.VERSION;
 
@@ -100,9 +103,11 @@ public class World implements Serializable, ResolutionChangeListener {
             // update game world
             currentRoom.update(container, this);
             if (isUpdatedThisFrame()) {
-                if (currentRoom.turnIsADay()) {
+                dayFraction += currentRoom.getTurnToDayRelation();
+                while (dayFraction >= 1) {
+                    dayFraction -= 1;
                     currentDate.add(Calendar.DAY_OF_MONTH, 1);
-                    turnCount++;
+                    dayCount++;
                     player.getResearchState().update(this);
                     player.getEngineeringState().update(this);
                     player.getEarthState().update(this);
@@ -235,8 +240,8 @@ public class World implements Serializable, ResolutionChangeListener {
         }
     }
 
-    public int getTurnCount() {
-        return turnCount;
+    public int getDayCount() {
+        return dayCount;
     }
 
     public void onPlayerEnteredSystem(StarSystem ss) {

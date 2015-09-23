@@ -39,23 +39,6 @@ public class Dungeon implements Room, IDungeon {
      */
     private Map<String, String> userData;
 
-    /**
-     * If dungeon has an enter dialog - first show that dialog, and only if it ends with return code 1 - actually
-     * enter dungeon
-     */
-    private final class EnterDialogListener implements DialogListener {
-        private static final long serialVersionUID = -8962566365128471357L;
-
-        @Override
-        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-            if (returnCode == 1) {
-                // pop prev screen, so that after dialog we will not return there
-                GUI.getInstance().popScreen();
-                enterImpl(world);
-            }
-        }
-    }
-
     public Dungeon(World world, ITileMap map, Room prevRoom) {
         this.map = map;
         this.controller = new DungeonController(world, prevRoom, this);
@@ -156,8 +139,8 @@ public class Dungeon implements Room, IDungeon {
     }
 
     @Override
-    public boolean turnIsADay() {
-        return false;
+    public double getTurnToDayRelation() {
+        return 0;
     }
 
     @Override
@@ -165,13 +148,13 @@ public class Dungeon implements Room, IDungeon {
         return isCommanderInParty;
     }
 
+    public void setCommanderInParty(boolean commanderInParty) {
+        isCommanderInParty = commanderInParty;
+    }
+
     @Override
     public boolean hasCustomMusic() {
         return playlistName != null;
-    }
-
-    public void setCommanderInParty(boolean commanderInParty) {
-        isCommanderInParty = commanderInParty;
     }
 
     public Map<String, String> getUserData() {
@@ -198,5 +181,22 @@ public class Dungeon implements Room, IDungeon {
     @Override
     public void setPos(int newX, int newY) {
 
+    }
+
+    /**
+     * If dungeon has an enter dialog - first show that dialog, and only if it ends with return code 1 - actually
+     * enter dungeon
+     */
+    private final class EnterDialogListener implements DialogListener {
+        private static final long serialVersionUID = -8962566365128471357L;
+
+        @Override
+        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+            if (returnCode == 1) {
+                // pop prev screen, so that after dialog we will not return there
+                GUI.getInstance().popScreen();
+                enterImpl(world);
+            }
+        }
     }
 }

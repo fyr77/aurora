@@ -29,15 +29,14 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
     protected final PlanetCategory category;
     protected final PlanetAtmosphere atmosphere;
     /**
-     * If planet has rings, this value is non-zero index of rings sprite
-     */
-    protected int rings;
-    /**
      * Planet size type. 1 is largest, 4 is smallest.
      * Planet image size on global map and dimensions of planet surface depends on it.
      */
     protected final int size;
-
+    /**
+     * If planet has rings, this value is non-zero index of rings sprite
+     */
+    protected int rings;
     protected List<BasePlanet> satellites;
 
     private transient Image sprite;
@@ -165,9 +164,10 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
         return null;
     }
 
+
     @Override
-    public boolean turnIsADay() {
-        return true;
+    public double getTurnToDayRelation() {
+        return 0.25;
     }
     
     @Override

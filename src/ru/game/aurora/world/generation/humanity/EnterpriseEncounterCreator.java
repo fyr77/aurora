@@ -38,31 +38,12 @@ public class EnterpriseEncounterCreator extends GameEventListener {
         setGroups(EventGroup.ENCOUNTER_SPAWN);
     }
 
-    private static class EnterpriseDialogListener implements DialogListener {
-
-        private static final long serialVersionUID = 8961118747394070541L;
-
-        @Override
-        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-            if (returnCode == 1) {
-                // repair
-                final int maxHull = world.getPlayer().getShip().getMaxHull();
-                if (world.getPlayer().getShip().getHull() == maxHull) {
-                    GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.enterprise.hull_not_damaged"));
-                } else {
-                    GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.enterprise.help"));
-                    world.getPlayer().getShip().setHull(maxHull);
-                }
-            }
-        }
-    }
-
     @Override
     public boolean onTurnEnded(World world) {
         if (!isAlive) {
             return false;
         }
-        if (world.getTurnCount() < turnCount) {
+        if (world.getDayCount() < turnCount) {
             return false;
         }
 
@@ -91,5 +72,24 @@ public class EnterpriseEncounterCreator extends GameEventListener {
     @Override
     public boolean isAlive() {
         return isAlive;
+    }
+
+    private static class EnterpriseDialogListener implements DialogListener {
+
+        private static final long serialVersionUID = 8961118747394070541L;
+
+        @Override
+        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+            if (returnCode == 1) {
+                // repair
+                final int maxHull = world.getPlayer().getShip().getMaxHull();
+                if (world.getPlayer().getShip().getHull() == maxHull) {
+                    GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.enterprise.hull_not_damaged"));
+                } else {
+                    GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.enterprise.help"));
+                    world.getPlayer().getShip().setHull(maxHull);
+                }
+            }
+        }
     }
 }

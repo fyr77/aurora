@@ -4,11 +4,12 @@ import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
-import ru.game.aurora.music.Playlist;
-import ru.game.aurora.npc.*;
+import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.CrewMember;
+import ru.game.aurora.npc.Faction;
+import ru.game.aurora.npc.SingleShipEvent;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.Ship;
@@ -31,6 +32,38 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
     private int turnsInSun = 0;
 
     private int turnsSinceInfection = -1;
+
+    @Override
+    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+        if (dialog.getId().equals("red_meat_started")) {
+            final CrewMember henry = world.getPlayer().getShip().getCrewMembers().get("henry");
+            if (flags.containsKey("henry_plus")) {
+                henry.changeReputation(1);
+            }
+
+            if (flags.containsKey("prison")) {
+                final CrewMember sarah = world.getPlayer().getShip().getCrewMembers().get("sarah");
+                henry.changeReputation(1);
+                sarah.changeReputation(-1);
+                henry.getDialogFlags().put("red_meat_prison", "");
+                sarah.getDialogFlags().put("red_meat_prison", "");
+
+                Dialog dialogWhileInPrison = Dialog.loadFromFile("dialogs/encounters/red_meat/red_meat_officer_call.json");
+                henry.setDialog(dialogWhileInPrison);
+                sarah.setDialog(dialogWhileInPrison);
+
+                prisonStartTurn = world.getDayCount();
+                world.getPlayer().getJournal().addQuestEntries("red_meat", "discipline");
+            }
+        }
+    }
+
+    @Override
+    public void updateWorld(World world) {
+        final SingleShipEvent listener = new SingleShipEvent(Configuration.getDoubleProperty("quest.red_meat.chance"), new Spore(world));
+        world.addListener(listener);
+        listener.setMinRange(Configuration.getIntProperty("quest.red_meat.minDist"));
+    }
 
     // player can not enter alien homeworlds, solar system and colony system
     private class MainListener extends GameEventListener
@@ -73,7 +106,7 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
         @Override
         public boolean onTurnEnded(World world) {
             final Ship ship = world.getPlayer().getShip();
-            if (prisonStartTurn > 0 && world.getTurnCount() - prisonStartTurn > 1) {
+            if (prisonStartTurn > 0 && world.getDayCount() - prisonStartTurn > 1) {
                 // crew members return from prison
                 ship.setDefaultCrewDialogs(world);
             }
@@ -112,31 +145,6 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
         }
     }
 
-    @Override
-    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-        if (dialog.getId().equals("red_meat_started")) {
-            final CrewMember henry = world.getPlayer().getShip().getCrewMembers().get("henry");
-            if (flags.containsKey("henry_plus")) {
-                henry.changeReputation(1);
-            }
-
-            if (flags.containsKey("prison")) {
-                final CrewMember sarah = world.getPlayer().getShip().getCrewMembers().get("sarah");
-                henry.changeReputation(1);
-                sarah.changeReputation(-1);
-                henry.getDialogFlags().put("red_meat_prison", "");
-                sarah.getDialogFlags().put("red_meat_prison", "");
-
-                Dialog dialogWhileInPrison = Dialog.loadFromFile("dialogs/encounters/red_meat/red_meat_officer_call.json");
-                henry.setDialog(dialogWhileInPrison);
-                sarah.setDialog(dialogWhileInPrison);
-
-                prisonStartTurn = world.getTurnCount();
-                world.getPlayer().getJournal().addQuestEntries("red_meat", "discipline");
-            }
-        }
-    }
-
     private class Spore extends NPCShip
     {
 
@@ -171,12 +179,5 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
                 turnsSinceInfection = 0;
             }
         }
-    }
-
-    @Override
-    public void updateWorld(World world) {
-        final SingleShipEvent listener = new SingleShipEvent(Configuration.getDoubleProperty("quest.red_meat.chance"), new Spore(world));
-        world.addListener(listener);
-        listener.setMinRange(Configuration.getIntProperty("quest.red_meat.minDist"));
     }
 }

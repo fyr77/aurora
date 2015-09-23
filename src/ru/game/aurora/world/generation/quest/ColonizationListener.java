@@ -64,13 +64,13 @@ public class ColonizationListener extends GameEventListener implements DialogLis
     private long time;
 
     public ColonizationListener(World world) {
-        time = world.getTurnCount();
+        time = world.getDayCount();
         logger.info("Created colonization listener on turn " + time);
     }
 
     @Override
     public boolean onReturnToEarth(World world) {
-        if (state == State.INITED && world.getTurnCount() - time >= 30) {
+        if (state == State.INITED && world.getDayCount() - time >= 30) {
             Dialog d = Dialog.loadFromFile("dialogs/quest/colony_search/colony_first_party_departure.json");
             d.addListener(this);
             world.getPlayer().getEarthState().getEarthSpecialDialogs().add(d);
@@ -106,7 +106,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
 
         public LostScientist(World world, int x, int y, String tileset, int tileX, int tileY) {
             super(x, y, tileset, tileX, tileY);
-            dieTime = world.getTurnCount() + 70 + CommonRandom.getRandom().nextInt(50);
+            dieTime = world.getDayCount() + 70 + CommonRandom.getRandom().nextInt(50);
         }
 
         @Override
@@ -139,7 +139,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         @Override
         public void update(GameContainer container, World world) {
             super.update(container, world);
-            if (world.isUpdatedThisFrame() && world.getTurnCount() > dieTime) {
+            if (world.isUpdatedThisFrame() && world.getDayCount() > dieTime) {
                 isAlive = false;
                 remainingScientists--;
                 checkAllDone(world);
@@ -320,11 +320,11 @@ public class ColonizationListener extends GameEventListener implements DialogLis
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/colony_search/colony_first_party_arrival.json"));
             modifyPlanet(world, planet);
             state = State.COLONISTS_DELIVERED;
-            time = world.getTurnCount();
+            time = world.getDayCount();
             world.getPlayer().getJournal().addQuestEntries("colony_search", "colonists_arrival");
         }
 
-        if (state == State.COLONISTS_DELIVERED && world.getTurnCount() - time > 100) {
+        if (state == State.COLONISTS_DELIVERED && world.getDayCount() - time > 100) {
             logger.info("Initializing colony quests as 100 turns have passed");
             state = State.QUESTS_AVAILABLE;
             Dialog d = Dialog.loadFromFile("dialogs/quest/colony_search/colony_default_2.json");
@@ -345,6 +345,74 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         }
 
         return null;
+    }
+
+    private class LostScientist extends PlanetNPC {
+        private static final long serialVersionUID = 1L;
+
+        private int dieTime;
+
+        public LostScientist(World world, int x, int y, String tileset, int tileX, int tileY) {
+            super(x, y, tileset, tileX, tileY);
+            dieTime = world.getDayCount() + 70 + CommonRandom.getRandom().nextInt(50);
+        }
+
+        @Override
+        public void onAttack(World world, GameObject attacker, int damaged) {
+            super.onAttack(world, attacker, damaged);
+            if (!isAlive()) {
+                remainingScientists--;
+                GameLogger.getInstance().logMessage(Localization.getText("journal", "colony_search.lost_group.scientist_killed_message"));
+                checkAllDone(world);
+            }
+        }
+
+        @Override
+        public boolean interact(World world) {
+            super.interact(world);
+            remainingScientists--;
+            Object savedVal = world.getGlobalVariables().get("colony.lost_group_quest.saved");
+            int saved = 0;
+            if (savedVal != null) {
+                saved = (Integer) savedVal;
+            }
+            ++saved;
+            world.getGlobalVariables().put("colony.lost_group_quest.saved", saved);
+            checkAllDone(world);
+            isAlive = false;
+
+            return true;
+        }
+
+        @Override
+        public void update(GameContainer container, World world) {
+            super.update(container, world);
+            if (world.isUpdatedThisFrame() && world.getDayCount() > dieTime) {
+                isAlive = false;
+                remainingScientists--;
+                checkAllDone(world);
+                GameLogger.getInstance().logMessage(Localization.getText("journal", "colony_search.lost_group.scientist_killed_message"));
+            }
+        }
+
+        private void checkAllDone(World world) {
+            if (remainingScientists == 0) {
+                world.getGlobalVariables().put("colony.lost_group_quest.completed", 0);
+                GameLogger.getInstance().logMessage(Localization.getText("journal", "colony_search.lost_group.all_done_message"));
+                Object savedVal = world.getGlobalVariables().get("colony.lost_group_quest.saved");
+                int saved = 0;
+                if (savedVal != null) {
+                    saved = (Integer) savedVal;
+                }
+                if (saved == 0) {
+                    world.getPlayer().getJournal().addQuestEntries("colony_search", "lost_group.bad");
+                } else if (saved == 5) {
+                    world.getPlayer().getJournal().addQuestEntries("colony_search", "lost_group.good");
+                } else {
+                    world.getPlayer().getJournal().addQuestEntries("colony_search", "lost_group.ok");
+                }
+            }
+        }
     }
 
     @Override

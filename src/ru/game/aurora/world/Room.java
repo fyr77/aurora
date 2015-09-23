@@ -11,19 +11,21 @@ public interface Room extends Updatable, Serializable, IDrawable {
     /**
      * Called when player enters this room from some other room. Should reset room state (e.g. put player on a starting position) and open gui.
      */
-    public void enter(World world);
+    void enter(World world);
 
     /**
      * Called when player returns to this room from internal room. Should not reset room state, only open gui; Also called when game is loaded
      */
-    public void returnTo(World world);
+    void returnTo(World world);
 
-    public ITileMap getMap();
+    ITileMap getMap();
 
     /**
-     * If true, each turn in this room will increase current game date.
-     * Is false for small encounters like dungeons.
+     * Different rooms may have different duration of a turn. E.g. one turn in space takes one day while one turn in a dungeon
+     * takes only a small fraction of a day. It is important for some time-related events like researches (which take days, not turns)
+     * This method returns relation between turn duration and a day. If it returns 0 then actions in current room do not advance time at all.
+     * If it returns 1 then each turn in this room is a day.
      */
-    public boolean turnIsADay();
+    double getTurnToDayRelation();
 
 }

@@ -11,11 +11,34 @@ public class PlanetLifeUpdater extends GameEventListener {
 
     private static final long serialVersionUID = 1L;
 
+    public static void updateLife(Planet planet) {
+        PlanetFloraAndFauna ff = planet.getFloraAndFauna();
+        if(ff == null) {
+            return;
+        }
+
+        World world = World.getWorld();
+
+        int respawnDelay = Configuration.getIntProperty("animal.respawn.delay");
+        int turns = world.getDayCount() - ff.getLastLifeUpdate();
+        int toAdd = Math.min(turns / respawnDelay, ff.getMaxAnimals() - ff.getAnimalCount());
+
+        if(toAdd > 0) {
+            PlanetaryLifeGenerator.addAnimals(planet, toAdd);
+            ff.setLastLifeUpdate(world.getDayCount() - (turns % respawnDelay));
+        }
+        else {
+            if(ff.getMaxAnimals() - ff.getAnimalCount() < 1) {
+                ff.setLastLifeUpdate(world.getDayCount());
+            }
+        }
+    }
+
     @Override
     public boolean onTurnEnded(World world) {
         Room room = world.getCurrentRoom();
-        if(room instanceof Planet) {
-            updateLife((Planet)room);
+        if (room instanceof Planet) {
+            updateLife((Planet) room);
         }
         return false;
     }
@@ -24,29 +47,6 @@ public class PlanetLifeUpdater extends GameEventListener {
     public boolean onPlayerLandedPlanet(World world, Planet planet) {
         updateLife(planet);
         return false;
-    }
-    
-    public static void updateLife(Planet planet) {
-        PlanetFloraAndFauna ff = planet.getFloraAndFauna();
-        if(ff == null) {
-            return;
-        }
-        
-        World world = World.getWorld();
-        
-        int respawnDelay = Configuration.getIntProperty("animal.respawn.delay");
-        int turns = world.getTurnCount() - ff.getLastLifeUpdate();
-        int toAdd = Math.min(turns / respawnDelay, ff.getMaxAnimals() - ff.getAnimalCount());
-        
-        if(toAdd > 0) {
-            PlanetaryLifeGenerator.addAnimals(planet, toAdd);
-            ff.setLastLifeUpdate(world.getTurnCount() - (turns % respawnDelay));
-        }
-        else {
-            if(ff.getMaxAnimals() - ff.getAnimalCount() < 1) {
-                ff.setLastLifeUpdate(world.getTurnCount());
-            }
-        }
     }
 
 }

@@ -43,7 +43,7 @@ public class EarthDialogListener implements DialogListener {
         if (returnCode == 1) {
             // player has chosen to dump research info
 
-            int daysPassed = world.getTurnCount() - earth.getLastVisitTurn();
+            int daysPassed = world.getDayCount() - earth.getLastVisitTurn();
             Statement stmt;
 
 
@@ -67,7 +67,7 @@ public class EarthDialogListener implements DialogListener {
                     // ok
                     stmt.replies[0] = new Reply(0, 1, "continue");
                 }
-                earth.setLastVisitTurn(world.getTurnCount());
+                earth.setLastVisitTurn(world.getDayCount());
             } else {
                 stmt = new Statement(0, Localization.getText("dialogs", "earth.trip_too_short"), new Reply(0, -1, "ok"));
             }

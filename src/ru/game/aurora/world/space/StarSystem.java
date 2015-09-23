@@ -554,8 +554,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     }
 
     @Override
-    public boolean turnIsADay() {
-        return true;
+    public double getTurnToDayRelation() {
+        return 1.0;
     }
 
     private void createBackground(World world) {

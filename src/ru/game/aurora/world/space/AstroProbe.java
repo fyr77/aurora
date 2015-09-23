@@ -24,7 +24,7 @@ public class AstroProbe extends NPCShip {
     public AstroProbe(World world) {
         super(0, 0, "drone", world.getFactions().get(HumanityGenerator.NAME), null, "Astroprobe", 4);
         setAi(new KeepOrbitAI(false));
-        lastCheckTurn = world.getTurnCount();
+        lastCheckTurn = world.getDayCount();
     }
 
     @Override
@@ -40,8 +40,8 @@ public class AstroProbe extends NPCShip {
             return;
         }
 
-        final int daysSinceLastCheck = world.getTurnCount() - lastCheckTurn;
-        lastCheckTurn = world.getTurnCount();
+        final int daysSinceLastCheck = world.getDayCount() - lastCheckTurn;
+        lastCheckTurn = world.getDayCount();
         final double shouldHaveCollected = (daysSinceLastCheck * Configuration.getDoubleProperty("upgrades.astroprobe.collect_speed"));
         cache += Math.min(ss.getAstronomyData(), shouldHaveCollected);
 

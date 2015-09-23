@@ -58,8 +58,8 @@ public class GalaxyMapScreen implements Room {
     }
 
     @Override
-    public boolean turnIsADay() {
-        return true;
+    public double getTurnToDayRelation() {
+        return 1;
     }
 
     @Override

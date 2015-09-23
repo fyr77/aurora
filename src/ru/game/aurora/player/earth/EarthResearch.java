@@ -11,14 +11,10 @@ import ru.game.aurora.world.World;
 
 public abstract class EarthResearch extends GameEventListener {
     private static final long serialVersionUID = -5430246310704423995L;
-
-    protected int targetTurn;
-
     protected final int length;
-
-    protected boolean completed = false;
-
     protected final String id;
+    protected int targetTurn;
+    protected boolean completed = false;
 
     public EarthResearch(String id, int length) {
         this.id = id;
@@ -26,12 +22,12 @@ public abstract class EarthResearch extends GameEventListener {
     }
 
     public void onStarted(World world) {
-        targetTurn = world.getTurnCount() + length;
+        targetTurn = world.getDayCount() + length;
     }
 
     @Override
     public boolean onTurnEnded(World world) {
-        if (targetTurn <= world.getTurnCount()) {
+        if (targetTurn <= world.getDayCount()) {
             completed = true;
             onCompleted(world);
             return true;

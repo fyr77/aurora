@@ -11,7 +11,6 @@ import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.*;
@@ -39,27 +38,17 @@ public class Planet extends BasePlanet implements IDungeon {
     private static final Logger logger = LoggerFactory.getLogger(Planet.class);
 
     private static final long serialVersionUID = 3L;
-
+    private final World world;
     private SurfaceTileMap surface = null;
-
-
     private LandingParty landingParty;
-
     /**
      * Where landing shuttle is located. Launching to orbit and refilling oxygen is available at shuttle
      */
     private LandingShuttle shuttle;
-
     private PlanetFloraAndFauna floraAndFauna = null;
-
     private transient Future surfaceGenerationFuture = null;
-
     private transient Animation shuttle_landing;
-
     private DungeonController controller;
-
-    private final World world;
-
     // total amount of all tiles explored on this planet
     private int exploredTiles = 0;
 
