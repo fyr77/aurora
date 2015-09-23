@@ -31,21 +31,13 @@ import java.util.Set;
 public class Player implements Serializable {
 
     private static final long serialVersionUID = 3L;
-
-    private Ship ship;
-
-    private LandingParty landingParty;
-
-    private ResearchState researchState;
-
-    private EngineeringState engineeringState;
-
     private final EarthState earthState;
-
     private final Journal journal = new Journal();
-
     private final Multiset<InventoryItem> inventory = HashMultiset.create();
-
+    private Ship ship;
+    private LandingParty landingParty;
+    private ResearchState researchState;
+    private EngineeringState engineeringState;
     // main country in Aurora project, defines some bonuses
     private EarthCountry mainCountry = EarthCountry.AMERICA;
 
@@ -133,6 +125,10 @@ public class Player implements Serializable {
 
     public int getFailCount() {
         return failsCount;
+    }
+
+    public void resetFailCount() {
+        failsCount = 0;
     }
 
     public Multiset<InventoryItem> getInventory() {

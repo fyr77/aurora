@@ -328,6 +328,10 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
             state = State.OVER;
             world.getPlayer().getShip().setDefaultCrewDialogs(world);
+
+            // reset earth counters so that player does not get fired after saving Earth, lol
+            earth.setLastVisitTurn(world.getDayCount());
+            world.getPlayer().resetFailCount();
         }
 
         if (state == State.RECON_DONE && world.getDayCount() - turnNumber > 5) {
