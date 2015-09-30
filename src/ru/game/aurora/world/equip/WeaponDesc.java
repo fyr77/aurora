@@ -15,7 +15,7 @@ import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.npc.Faction;
-import ru.game.aurora.world.IMovable;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.ITileMap;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
@@ -32,24 +32,15 @@ import java.io.Serializable;
 public class WeaponDesc extends ItemWithTextAndImage implements Serializable, JsonConfigManager.EntityWithId, InventoryItem {
 
     private static final long serialVersionUID = 3L;
-
-    private final int damage;
-
-    private final int range;
-
-    private final int price;
-
-    private final String shotImage;
-
-    private final int reloadTurns;
-
     public final String shotSound;
-
     public final String explosionAnimation;
-
     public final String particlesAnimation;
-
     public final int size;
+    private final int damage;
+    private final int range;
+    private final int price;
+    private final String shotImage;
+    private final int reloadTurns;
 
     public WeaponDesc(String id, Drawable drawable, int damage, int range, int price, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
         super(id, drawable);
@@ -77,12 +68,12 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
 
     }
 
-    public Effect createShotEffect(IMovable source, IMovable target, Camera camera, int moveSpeed)
+    public Effect createShotEffect(World world, GameObject shooter, GameObject target, Camera camera, int moveSpeed)
     {
-        return new BlasterShotEffect(source, target, camera, moveSpeed, this);
+        return new BlasterShotEffect(shooter, target, camera, moveSpeed, this);
     }
 
-    public Effect createShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, ITileMap map) {
+    public Effect createShotEffect(World world, GameObject shooter, Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, ITileMap map) {
         return new BlasterShotEffect(source, targetScreenX, targetScreenY, camera, moveSpeed, this, map);
     }
 

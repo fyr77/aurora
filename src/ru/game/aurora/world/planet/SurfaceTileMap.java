@@ -6,6 +6,7 @@ import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.effects.Effect;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.GameObject;
@@ -23,18 +24,25 @@ import java.util.*;
 public class SurfaceTileMap implements ITileMap, Serializable {
 
     private static final long serialVersionUID = 1L;
+    private static final TileDrawer mountainDrawer = new TileDrawer("mountains", (byte) 0);
+    private static final Map<Byte, TileDrawer> drawers = new HashMap<>();
+
+    static {
+        drawers.put(SurfaceTypes.ROCKS, new TileDrawer("rock", SurfaceTypes.ROCKS));
+        drawers.put(SurfaceTypes.STONES, new TileDrawer("stones", SurfaceTypes.STONES));
+        drawers.put(SurfaceTypes.DIRT, new TileDrawer("sand", SurfaceTypes.DIRT));
+        drawers.put(SurfaceTypes.ICE, new TileDrawer("ice", SurfaceTypes.ICE));
+        drawers.put(SurfaceTypes.SNOW, new TileDrawer("snow", SurfaceTypes.SNOW));
+        drawers.put(SurfaceTypes.ASPHALT, new TileDrawer("asph", SurfaceTypes.ASPHALT));
+
+    }
 
     private final int width;
-
     private final int height;
-
     /**
      * Animals that are located on planet surface.
      */
     private final List<GameObject> planetObjects = new ArrayList<>();
-
-    protected transient SoftReference<AStarPathFinder> pathfinder;
-
     /**
      * Tiles with planet surface.
      * Actual contents are encoded by bits
@@ -49,6 +57,7 @@ public class SurfaceTileMap implements ITileMap, Serializable {
      */
     // todo: make a weak reference, generate using seed
     private final byte[][] surface;
+    protected transient SoftReference<AStarPathFinder> pathfinder;
 
     public SurfaceTileMap(int width, int height, byte[][] surface) {
         this.height = height;
@@ -65,23 +74,14 @@ public class SurfaceTileMap implements ITileMap, Serializable {
         }
     }
 
-    private static final TileDrawer mountainDrawer = new TileDrawer("mountains", (byte) 0);
-
-    private static final Map<Byte, TileDrawer> drawers = new HashMap<>();
-
-    static {
-        drawers.put(SurfaceTypes.ROCKS, new TileDrawer("rock", SurfaceTypes.ROCKS));
-        drawers.put(SurfaceTypes.STONES, new TileDrawer("stones", SurfaceTypes.STONES));
-        drawers.put(SurfaceTypes.DIRT, new TileDrawer("sand", SurfaceTypes.DIRT));
-        drawers.put(SurfaceTypes.ICE, new TileDrawer("ice", SurfaceTypes.ICE));
-        drawers.put(SurfaceTypes.SNOW, new TileDrawer("snow", SurfaceTypes.SNOW));
-        drawers.put(SurfaceTypes.ASPHALT, new TileDrawer("asph", SurfaceTypes.ASPHALT));
-
-    }
-
     @Override
     public List<GameObject> getObjects() {
         return planetObjects;
+    }
+
+    @Override
+    public Collection<Effect> getEffects() {
+        return Collections.emptyList();
     }
 
     @Override

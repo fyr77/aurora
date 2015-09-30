@@ -379,7 +379,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     public void doFire(World world, final GameObject targetObject, final Ship playerShip, WeaponInstance weapon, final int damage) {
         GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, targetObject.getName()));
 
-        Effect e = weapon.getWeaponDesc().createShotEffect(playerShip, targetObject, world.getCamera(), 800);
+        Effect e = weapon.getWeaponDesc().createShotEffect(world, playerShip, targetObject, world.getCamera(), 800);
         e.setEndListener(new IStateChangeListener<World>() {
             private static final long serialVersionUID = 8150717419595750398L;
 
@@ -877,6 +877,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     @Override
     public int getHeightInTiles() {
         return radius * 2;
+    }
+
+    @Override
+    public Collection<Effect> getEffects() {
+        return effects;
     }
 
     @Override

@@ -33,22 +33,6 @@ public class ColonizationListener extends GameEventListener implements DialogLis
     private static final Logger logger = LoggerFactory.getLogger(ColonizationListener.class);
 
     private static final long serialVersionUID = 410651695811568220L;
-
-    private BasePositionable colonyCenter;
-
-    private PlanetNPC chief;
-
-    private int monstersKilled = 0;
-
-    private int remainingScientists = 0;
-
-    private static enum State {
-        INITED,
-        COLONISTS_BOARDED,
-        COLONISTS_DELIVERED,
-        QUESTS_AVAILABLE
-    }
-
     private static final boolean[][] colonyMap = new boolean[][]{
             {false, false, false, false, false, false},
             {false, true, true, false, false, false},
@@ -58,9 +42,11 @@ public class ColonizationListener extends GameEventListener implements DialogLis
             {false, true, true, true, true, false},
             {false, false, false, false, false, false}
     };
-
+    private BasePositionable colonyCenter;
+    private PlanetNPC chief;
+    private int monstersKilled = 0;
+    private int remainingScientists = 0;
     private State state = State.INITED;
-
     private long time;
 
     public ColonizationListener(World world) {
@@ -95,76 +81,6 @@ public class ColonizationListener extends GameEventListener implements DialogLis
                     , center.getX() + r.nextInt(radius) - r.nextInt(radius / 2)
                     , center.getY() + r.nextInt(radius) - r.nextInt(radius / 2));
             p.getPlanetObjects().add(animal);
-        }
-    }
-
-    private class LostScientist extends PlanetNPC
-    {
-        private static final long serialVersionUID = 1L;
-
-        private int dieTime;
-
-        public LostScientist(World world, int x, int y, String tileset, int tileX, int tileY) {
-            super(x, y, tileset, tileX, tileY);
-            dieTime = world.getDayCount() + 70 + CommonRandom.getRandom().nextInt(50);
-        }
-
-        @Override
-        public void onAttack(World world, GameObject attacker, int damaged) {
-            super.onAttack(world, attacker, damaged);
-            if (!isAlive()) {
-                remainingScientists--;
-                GameLogger.getInstance().logMessage(Localization.getText("journal", "colony_search.lost_group.scientist_killed_message"));
-                checkAllDone(world);
-            }
-        }
-
-        @Override
-        public boolean interact(World world) {
-            super.interact(world);
-            remainingScientists--;
-            Object savedVal = world.getGlobalVariables().get("colony.lost_group_quest.saved");
-            int saved = 0;
-            if (savedVal != null) {
-                saved = (Integer)savedVal;
-            }
-            ++saved;
-            world.getGlobalVariables().put("colony.lost_group_quest.saved", saved);
-            checkAllDone(world);
-            isAlive = false;
-            
-            return true;
-        }
-
-        @Override
-        public void update(GameContainer container, World world) {
-            super.update(container, world);
-            if (world.isUpdatedThisFrame() && world.getDayCount() > dieTime) {
-                isAlive = false;
-                remainingScientists--;
-                checkAllDone(world);
-                GameLogger.getInstance().logMessage(Localization.getText("journal", "colony_search.lost_group.scientist_killed_message"));
-            }
-        }
-
-        private void checkAllDone(World world)
-        {
-            if (remainingScientists == 0) {
-                world.getGlobalVariables().put("colony.lost_group_quest.completed", 0);
-                GameLogger.getInstance().logMessage(Localization.getText("journal", "colony_search.lost_group.all_done_message"));
-                Object savedVal = world.getGlobalVariables().get("colony.lost_group_quest.saved");
-                int saved = 0;
-                if (savedVal != null) {
-                    saved = (Integer)savedVal;
-                }
-                if (saved == 0) {
-                    world.getPlayer().getJournal().addQuestEntries("colony_search", "lost_group.bad");
-                } else if (saved == 5) {
-                    world.getPlayer().getJournal().addQuestEntries("colony_search", "lost_group.good");
-                } else {
-                    world.getPlayer().getJournal().addQuestEntries("colony_search", "lost_group.ok");
-                }
-            }
         }
     }
 
@@ -347,6 +263,32 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         return null;
     }
 
+    @Override
+    public boolean onGameObjectAttacked(World world, GameObject attacker, GameObject target, int damage) {
+        if (world.getGlobalVariables().containsKey("colony.hunt_quest")
+                && !world.getGlobalVariables().containsKey("colony.hunt_quest.completed")
+                && world.getCurrentRoom() == world.getGlobalVariables().get("colony_search.coords")) {
+            //todo: fix hack, make animals and animal corpses separate items
+            if (!target.isAlive() || (target instanceof Animal && ((Animal) target).getHp() <= 0)) {
+                monstersKilled++;
+                if (monstersKilled >= 5) {
+                    logger.info("Player has killed 5 monsters for colony quest");
+                    world.getGlobalVariables().put("colony.hunt_quest.completed", "0");
+                }
+            }
+
+        }
+
+        return false;
+    }
+
+    private static enum State {
+        INITED,
+        COLONISTS_BOARDED,
+        COLONISTS_DELIVERED,
+        QUESTS_AVAILABLE
+    }
+
     private class LostScientist extends PlanetNPC {
         private static final long serialVersionUID = 1L;
 
@@ -413,24 +355,5 @@ public class ColonizationListener extends GameEventListener implements DialogLis
                 }
             }
         }
-    }
-
-    @Override
-    public boolean onGameObjectAttacked(World world, GameObject attacker, GameObject target, int damage) {
-        if (world.getGlobalVariables().containsKey("colony.hunt_quest")
-                && !world.getGlobalVariables().containsKey("colony.hunt_quest.completed")
-                && world.getCurrentRoom() == world.getGlobalVariables().get("colony_search.coords")) {
-            //todo: fix hack, make animals and animal corpses separate items
-            if (!target.isAlive() || (target instanceof Animal && ((Animal) target).getHp() <= 0)) {
-                monstersKilled++;
-                if (monstersKilled >= 5) {
-                    logger.info("Player has killed 5 monsters for colony quest");
-                    world.getGlobalVariables().put("colony.hunt_quest.completed", "0");
-                }
-            }
-
-        }
-
-        return false;
     }
 }

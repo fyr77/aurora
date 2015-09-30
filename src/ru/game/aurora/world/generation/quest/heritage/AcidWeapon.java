@@ -32,8 +32,8 @@ public class AcidWeapon extends WeaponDesc
     }
 
     @Override
-    public Effect createShotEffect(IMovable source, IMovable target, Camera camera, int moveSpeed) {
-        return new AcidShot(source
+    public Effect createShotEffect(World world, GameObject shooter, GameObject target, Camera camera, int moveSpeed) {
+        return new AcidShot(shooter
                 , target
                 , camera
                 , moveSpeed
@@ -42,7 +42,7 @@ public class AcidWeapon extends WeaponDesc
     }
 
     @Override
-    public Effect createShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, ITileMap map) {
+    public Effect createShotEffect(World world, GameObject shooter, Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, ITileMap map) {
         return new AcidShot(source, targetScreenX, targetScreenY, camera, moveSpeed, "acid_shot", map);
     }
 
@@ -72,9 +72,8 @@ public class AcidWeapon extends WeaponDesc
 
     private static class AcidPool extends BaseGameObject
     {
-        private int ttl;
-
         private static final long serialVersionUID = 1L;
+        private int ttl;
 
         public AcidPool(int x, int y) {
             super(x, y, "acid_pool");

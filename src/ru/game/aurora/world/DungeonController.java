@@ -16,7 +16,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
@@ -51,21 +50,15 @@ public class DungeonController extends Listenable implements Serializable {
     private static final int MODE_SHOOT = 1;
 
     private final Room prevRoom;
+    private final ITileMap map;
+    private final boolean isWrap;
+    private final World world;
+    private final IDungeon myDungeon;
     /**
      * Current mode
      */
     private int mode = MODE_MOVE;
-
-    private final ITileMap map;
-
-    private final boolean isWrap;
-
-    private final World world;
-
     private LandingParty landingParty;
-
-    private final IDungeon myDungeon;
-
     private Dialog successDialog;
 
     private int tilesExploredThisTurn = 0;
@@ -314,7 +307,9 @@ public class DungeonController extends Listenable implements Serializable {
             final int damage = landingParty.calcDamage(world);
 
             Effect blasterShotEffect = landingParty.getWeapon().createShotEffect(
-                    landingParty
+                    world
+                    , landingParty
+                    , landingParty
                     , world.getCamera().getXCoordWrapped(target.getX(), map.getWidthInTiles()) + world.getCamera().getTileWidth() / 2
                     , world.getCamera().getYCoordWrapped(target.getY(), map.getHeightInTiles()) + world.getCamera().getTileHeight() / 2
                     , world.getCamera()

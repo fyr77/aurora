@@ -1,0 +1,18 @@
+{
+  "id": "humanity_torpedoes",
+  "damage": 8,
+  "name": "humanity_torpedoes.name",
+  "desc": "humanity_torpedoes.desc",
+  "shotImage": "torpedo",
+  "shotSound": "missile_1",
+  "range": 12,
+  "drawable": {
+    "id": "ship_torpedo",
+    "tx": -1,
+    "ty": -1
+  },
+  "reloadTurns": 5,
+  "explosionAnimation": "rocket_explosion",
+  "particlesAnimation": "rocket_particles",
+  "size": 40
+}

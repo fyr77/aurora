@@ -1,0 +1,11 @@
+{
+  "id": "edf_1",
+  "drawable": {
+    "id": "colonist_marine_dialog",
+    "tx": -1
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.EDFUpgrade",
+  "value": 3000,
+  "reputationChange": 1,
+  "type": "EARTH"
+}

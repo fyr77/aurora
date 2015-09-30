@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.InputBinding;
+import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.StarMapController;
 import ru.game.aurora.util.ProbabilitySet;
@@ -22,6 +23,7 @@ import ru.game.aurora.world.*;
 
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -264,6 +266,11 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     @Override
     public List<GameObject> getObjects() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public Collection<Effect> getEffects() {
         return Collections.emptyList();
     }
 

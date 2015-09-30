@@ -3,7 +3,6 @@ package ru.game.aurora.world;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.util.pathfinding.Path;
 import ru.game.aurora.application.*;
-import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.util.EngineUtils;
@@ -27,13 +26,9 @@ public class MonsterController implements Serializable {
     private static final long serialVersionUID = -8278864000200488198L;
 
     private final IMonster myMonster;
-
-    private int turnsBeforeMove;
-
     private final WeaponInstance weapon;
-
     private final ITileMap map;
-
+    private int turnsBeforeMove;
     private Path path;
     private int lastX;
     private int lastY;
@@ -67,7 +62,7 @@ public class MonsterController implements Serializable {
             }
             targetScreenX += other.getOffsetX() + camera.getTileWidth() / 2;
             targetScreenY += other.getOffsetY() + camera.getTileHeight() / 2;
-            rz = weapon.createShotEffect(myMonster, targetScreenX, targetScreenY, camera, 800, map);
+            rz = weapon.createShotEffect(world, myMonster, myMonster, targetScreenX, targetScreenY, camera, 800, map);
             if (weapon.getShotSound() != null) {
                 rz.setStartSound(weapon.getShotSound());
             }

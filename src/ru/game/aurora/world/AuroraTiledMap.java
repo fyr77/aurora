@@ -12,7 +12,7 @@ import rlforj.los.ILosAlgorithm;
 import rlforj.los.PrecisePermissive;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
-import ru.game.aurora.world.dungeon.DungeonObject;
+import ru.game.aurora.effects.Effect;
 import ru.game.aurora.world.dungeon.ExitPoint;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
@@ -21,9 +21,7 @@ import ru.game.aurora.world.planet.TileDrawer;
 
 import java.lang.ref.SoftReference;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Map in a format of a TILed EDitor
@@ -36,20 +34,13 @@ public class AuroraTiledMap implements ITileMap {
     private final List<IVictoryCondition> victoryConditions = new ArrayList<>();
 
     private final String mapRef;
-
-    private byte[][] flags;
-
-    private transient TiledMap map;
-
-    private BasePositionable entryPoint;
-
-    private Object userData;
-
-    private transient IFovAlgorithm fovAlgorithm;
-
-    private transient ILosAlgorithm losAlgorithm;
-
     protected transient SoftReference<AStarPathFinder> pathfinder;
+    private byte[][] flags;
+    private transient TiledMap map;
+    private BasePositionable entryPoint;
+    private Object userData;
+    private transient IFovAlgorithm fovAlgorithm;
+    private transient ILosAlgorithm losAlgorithm;
 
     public AuroraTiledMap(String mapRef) {
         this.mapRef = mapRef;
@@ -64,6 +55,11 @@ public class AuroraTiledMap implements ITileMap {
     @Override
     public List<GameObject> getObjects() {
         return objects;
+    }
+
+    @Override
+    public Collection<Effect> getEffects() {
+        return Collections.emptyList();
     }
 
     private int getXCoord(int x) {

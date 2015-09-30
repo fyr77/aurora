@@ -11,7 +11,6 @@ import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.*;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.effects.BlasterShotEffect;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.music.MusicDialogListener;
@@ -25,6 +24,7 @@ import ru.game.aurora.npc.shipai.NPCShipAI;
 import ru.game.aurora.util.GameTimer;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.*;
+import ru.game.aurora.world.equip.TorpedoLauncher;
 import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.MonsterBehaviour;
@@ -34,15 +34,10 @@ import java.util.*;
 public class NPCShip extends BaseGameObject implements IMonster {
 
     private static final long serialVersionUID = 2L;
-
-    protected NPC captain;
-
-    protected int hp;
-
     protected final int maxHP;
-
     protected final String name;
-
+    protected NPC captain;
+    protected int hp;
     protected int speed = 3;
 
     protected int curSpeed = 3;
@@ -71,10 +66,6 @@ public class NPCShip extends BaseGameObject implements IMonster {
         this.captain = captain;
         this.name = name;
         this.maxHP = this.hp = hp;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
     }
 
     public void setLoot(ProbabilitySet<GameObject> loot) {
@@ -193,6 +184,10 @@ public class NPCShip extends BaseGameObject implements IMonster {
         return rz;
     }
 
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
     @Override
     public String getName() {
         //todo: localize
@@ -264,6 +259,13 @@ public class NPCShip extends BaseGameObject implements IMonster {
         return weapons;
     }
 
+    public void setWeapons(WeaponDesc... weaponDescs) {
+        this.weapons = new ArrayList<>(weaponDescs.length);
+        for (WeaponDesc weaponDesc : weaponDescs) {
+            this.weapons.add(new WeaponInstance(weaponDesc));
+        }
+    }
+
     @Override
     public MonsterBehaviour getBehaviour() {
         return null;
@@ -272,13 +274,6 @@ public class NPCShip extends BaseGameObject implements IMonster {
     public void setWeapons(WeaponInstance... weapons) {
         this.weapons = new ArrayList<>(weapons.length);
         Collections.addAll(this.weapons, weapons);
-    }
-
-    public void setWeapons(WeaponDesc... weaponDescs) {
-        this.weapons = new ArrayList<>(weaponDescs.length);
-        for (WeaponDesc weaponDesc : weaponDescs) {
-            this.weapons.add(new WeaponInstance(weaponDesc));
-        }
     }
 
     public void fire(World world, StarSystem ss, int weaponIdx, final GameObject target) {
@@ -293,20 +288,22 @@ public class NPCShip extends BaseGameObject implements IMonster {
         ));
 
 
-        Effect e = weaponDesc.createShotEffect(this, target, world.getCamera(), 800);
-        e.setEndListener(new IStateChangeListener<World>() {
-            private static final long serialVersionUID = -3379281638297845046L;
+        Effect e = weaponDesc.createShotEffect(world, this, target, world.getCamera(), 800);
+        if (e != null) {
+            e.setEndListener(new IStateChangeListener<World>() {
+                private static final long serialVersionUID = -3379281638297845046L;
 
-            @Override
-            public void stateChanged(World world) {
-                target.onAttack(world, NPCShip.this, weaponDesc.getDamage());
-                if (!target.isAlive()) {
-                    GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
+                @Override
+                public void stateChanged(World world) {
+                    target.onAttack(world, NPCShip.this, weaponDesc.getDamage());
+                    if (!target.isAlive()) {
+                        GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
+                    }
                 }
-            }
-        });
-        e.setStartSound(weaponDesc.shotSound);
-        ss.addEffect(e);
+            });
+            e.setStartSound(weaponDesc.shotSound);
+            ss.addEffect(e);
+        }
     }
 
     @Deprecated
@@ -350,10 +347,6 @@ public class NPCShip extends BaseGameObject implements IMonster {
         super.moveUp();
     }
 
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
     public void setHostile(boolean hostile) {
         isHostile = hostile;
     }
@@ -366,12 +359,12 @@ public class NPCShip extends BaseGameObject implements IMonster {
         isStationary = stationary;
     }
 
-    public void setCaptain(NPC captain) {
-        this.captain = captain;
-    }
-
     public NPC getCaptain() {
         return captain;
+    }
+
+    public void setCaptain(NPC captain) {
+        this.captain = captain;
     }
 
     public boolean isCanBeHailed() {
@@ -404,7 +397,6 @@ public class NPCShip extends BaseGameObject implements IMonster {
             threatMap.put(target, Math.max(1, amount));    //агро не может быть меньше 1
         }
     }
-
 
     //цель для атаки
     public GameObject getMostThreatTarget() {
@@ -441,6 +433,11 @@ public class NPCShip extends BaseGameObject implements IMonster {
                 if (getDistance(ship) < (speed * 2)) {
                     changeThreat(world, ship, 2);   //todo: balance
                 }
+
+                if (ship instanceof TorpedoLauncher.Torpedo) {
+                    // torpedoes have a higher priority
+                    changeThreat(world, ship, 1);
+                }
             }
         }
     }
@@ -449,9 +446,17 @@ public class NPCShip extends BaseGameObject implements IMonster {
         return hp;
     }
 
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
     @Override
     public int getSpeed() {
         return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     public int getMaxHP() {
@@ -465,10 +470,6 @@ public class NPCShip extends BaseGameObject implements IMonster {
     @Override
     public boolean canBeAttacked() {
         return true;
-    }
-
-    public void setAlive(boolean alive) {
-        isAlive = alive;
     }
 
 

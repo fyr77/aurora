@@ -1,0 +1,11 @@
+{
+  "id": "torpedoes",
+  "drawable": {
+    "id": "ship_torpedo",
+    "tx": -1
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.WeaponModuleUnlockUpgrade",
+  "value": 750,
+  "weaponId": "humanity_torpedoes",
+  "type": "SHIP"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "etf_1",
+  "drawable": {
+    "id": "earth_freighter",
+    "tx": -1
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.ETFUpgrade",
+  "value": 4100,
+  "reputationChange": 1,
+  "type": "SPACE"
+}

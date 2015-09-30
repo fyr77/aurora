@@ -1,0 +1,10 @@
+{
+  "id": "diplomacy_1",
+  "drawable": {
+    "id": "klisk_dialog",
+    "tx": -1
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.DiplomacyUpgrade",
+  "value": 3000,
+  "type": "SPACE"
+}
