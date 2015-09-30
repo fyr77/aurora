@@ -9,6 +9,7 @@ package ru.game.aurora.tools.dialog;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import ru.game.aurora.util.EngineUtils;
 
 import java.io.*;
@@ -24,7 +25,7 @@ public class BatchDialogConverter {
 
     private static final String CONFIG_NAME = "dialogList.csv";
 
-    private int errorCount = 0;
+    int errorCount = 0;
 
     public BatchDialogConverter(File outputLocalizationRoot, File outputRoot) {
         this.outputLocalizationRoot = outputLocalizationRoot;
@@ -33,7 +34,9 @@ public class BatchDialogConverter {
 
     private void readAndProcessConfig(File currentFolder, File config) throws IOException {
         logger.info("Processing config" + config.getAbsolutePath());
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(config), EngineUtils.detectEncoding(config)))) {
+        String charsetName = EngineUtils.detectEncoding(config);
+        try (BufferedReader reader =
+                (charsetName != null ? new BufferedReader(new InputStreamReader(new FileInputStream(config), charsetName)) : new BufferedReader(new InputStreamReader(new FileInputStream(config))))) {
 
             String line;
             int idx = 0;
