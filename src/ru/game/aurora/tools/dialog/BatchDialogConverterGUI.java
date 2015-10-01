@@ -50,7 +50,7 @@ public class BatchDialogConverterGUI {
         inputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser dialog = new JFileChooser();
+                JFileChooser dialog = new JFileChooser(new File(inputTextField.getText()));
                 dialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 dialog.showOpenDialog(panel);
 
@@ -77,7 +77,7 @@ public class BatchDialogConverterGUI {
         outputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser dialog = new JFileChooser();
+                JFileChooser dialog = new JFileChooser(new File(outputTextField.getText()));
                 dialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 dialog.showOpenDialog(panel);
 
@@ -131,11 +131,11 @@ public class BatchDialogConverterGUI {
                                 new File(outputTextField.getText() + "/dialogs"));
                         try {
                             converter.processDialogsInFolder(new File(inputTextField.getText()));
-                            convertButton.setEnabled(true);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
-
+                        
+                        convertButton.setEnabled(true);
                         logger.info("Errors: " + converter.errorCount);
                     }
                 });
@@ -145,6 +145,7 @@ public class BatchDialogConverterGUI {
         });
         panel.add(convertButton);
 
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 
