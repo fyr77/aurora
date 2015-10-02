@@ -12,10 +12,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.PlaceholderResolver;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
 import ru.game.aurora.world.ITileMap;
 import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
@@ -263,7 +260,7 @@ public class Dialog implements OverlayWindow {
     }
 
     private void load(String path) {
-        InputStream is = Dialog.class.getClassLoader().getResourceAsStream(path);
+        InputStream is = AuroraGame.getResourceAsStream(path);
         if (is == null) {
             logger.error("Failed to load dialog from " + path + ", maybe it does not exist");
             throw new IllegalArgumentException();

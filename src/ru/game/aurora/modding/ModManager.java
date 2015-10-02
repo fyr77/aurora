@@ -2,14 +2,14 @@ package ru.game.aurora.modding;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.game.aurora.application.UTF8Control;
 import ru.game.aurora.world.World;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Mod collection
@@ -78,6 +78,19 @@ public class ModManager {
         return m != null ? m.getModConfiguration() : null;
     }
 
+    public InputStream getResourceAsStream(String resource) {
+        for (Mod m : mods) {
+            if (m.isLoaded()) {
+                InputStream rz = m.getClassLoader().getResourceAsStream(resource);
+                if (rz != null) {
+                    return rz;
+                }
+            }
+        }
+        return null;
+    }
+
+
     public void onNewGameStarted(World world) {
         for (Mod m : mods) {
             if (m.isLoaded()) {
@@ -119,5 +132,24 @@ public class ModManager {
 
     public ClassLoader getRootModClassLoader() {
         return rootModClassLoader;
+    }
+
+    public List<ResourceBundle> getResourceBundles(String bundleName, Locale currentLocale, UTF8Control utf8Control) {
+        List<ResourceBundle> bundleList = new ArrayList<>(mods.size());
+        for (Mod m : mods) {
+            if (!m.isLoaded()) {
+                continue;
+            }
+            ResourceBundle b = null;
+            try {
+                b = ResourceBundle.getBundle(bundleName, currentLocale, m.getClassLoader(), utf8Control);
+            } catch (MissingResourceException ignore) {
+
+            }
+            if (b != null) {
+                bundleList.add(b);
+            }
+        }
+        return bundleList;
     }
 }

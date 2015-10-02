@@ -357,6 +357,18 @@ public class AuroraGame extends NiftyOverlayGame {
         }
     }
 
+    public static InputStream getResourceAsStream(String resource) {
+        InputStream rz = AuroraGame.class.getClassLoader().getResourceAsStream(resource);
+        if (rz == null) {
+            logger.info("Resource {} not found in main game, searching in mods", resource);
+            rz = ModManager.getInstance().getResourceAsStream(resource);
+            if (rz == null) {
+                logger.warn("Resource {} not found in mods", resource);
+            }
+        }
+        return rz;
+    }
+
     @Override
     protected void initGameAndGUI(GameContainer gameContainer) throws SlickException {
 

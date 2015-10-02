@@ -1,6 +1,7 @@
 package ru.game.aurora.modding.sample;
 
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.modding.ModManager;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
@@ -86,9 +87,6 @@ public class SampleModEventListener extends GameEventListener {
          */
         ss.getObjects().add(debris);
 
-        /*
-         * Now lets show a simple dialog
-         */
 
         /*
          * This object has completed its task and should be disposed. Listeners that have isAlive set to false are removed
@@ -97,6 +95,11 @@ public class SampleModEventListener extends GameEventListener {
          * when player visits them
          */
         isAlive = false;
+
+        /*
+         * Add a dialog with Gordon
+         */
+        world.addOverlayWindow(Dialog.loadFromFile("dialogs/sample_mod_gordon_dialog.json"));
 
         /*
          * As we modified the world state we should return true from this method

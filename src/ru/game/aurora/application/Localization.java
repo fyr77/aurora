@@ -9,8 +9,11 @@ package ru.game.aurora.application;
 import de.lessvoid.nifty.Nifty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.game.aurora.modding.ModManager;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 
@@ -53,11 +56,14 @@ public class Localization {
     public static Boolean bundleExists(String bundleId) {
         // this method is total shit, but no other easy way to check that bundle exists
         // needed by dialogs, after all dialogs are moved to separate files i hope this will be no longer needed
+        final String bundleName = getBundleName(bundleId);
+
         try {
-            ResourceBundle.getBundle(getBundleName(bundleId), currentLocale, utf8Control);
+            ResourceBundle.getBundle(bundleName, currentLocale, utf8Control);
             return true;
         } catch (Exception ex) {
-            return false;
+            List<ResourceBundle> modBundles = ModManager.getInstance().getResourceBundles(bundleName, currentLocale, utf8Control);
+            return !modBundles.isEmpty();
         }
     }
 
@@ -69,8 +75,20 @@ public class Localization {
         if (bundleId == null || textId == null) {
             return "";
         }
-        ResourceBundle bundle = ResourceBundle.getBundle(getBundleName(bundleId), currentLocale, utf8Control);
-        if (!bundle.containsKey(textId)) {
+        final String bundleName = getBundleName(bundleId);
+        ResourceBundle bundle = null;
+        try {
+            bundle = ResourceBundle.getBundle(bundleName, currentLocale, utf8Control);
+        } catch (MissingResourceException ex) {
+            // ignore, probably this bundle is in a mod
+        }
+        if (bundle == null || !bundle.containsKey(textId)) {
+            List<ResourceBundle> modBundles = ModManager.getInstance().getResourceBundles(bundleName, currentLocale, utf8Control);
+            for (ResourceBundle b : modBundles) {
+                if (b.containsKey(textId)) {
+                    return b.getString(textId);
+                }
+            }
             logger.warn("Localization key {}:{} not found", bundleId, textId);
             return "<" + bundleId + "/" + textId + ">";
         }
