@@ -7,10 +7,7 @@
 package ru.game.aurora.frankenstein;
 
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.ImageBuffer;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.frankenstein.FrankensteinColor;
@@ -25,9 +22,8 @@ import java.awt.image.BufferedImage;
 import java.util.Map;
 
 public class Slick2DFrankensteinImage implements FrankensteinImage {
-    private final Image myImage;
-
     private static final Logger logger = LoggerFactory.getLogger(Slick2DFrankensteinImage.class);
+    private final Image myImage;
 
     public Slick2DFrankensteinImage(Image myImage) {
         this.myImage = myImage;
@@ -71,7 +67,10 @@ public class Slick2DFrankensteinImage implements FrankensteinImage {
         }
 
         try {
-            myImage.getGraphics().drawImage(slick2DFrankensteinImage.myImage, i, i1);
+            //ImageIO.write(EngineUtils.convertToBufferedImage(slick2DFrankensteinImage.myImage), "jpg", new File("out/part" + UUID.randomUUID() + ".jpeg"));
+            Graphics g = myImage.getGraphics();
+            g.drawImage(slick2DFrankensteinImage.myImage, i, i1);
+            g.flush();
         } catch (SlickException e) {
             throw new RuntimeException("Failed to draw image", e);
         } finally {

@@ -10,6 +10,7 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.frankenstein.Slick2DColor;
 import ru.game.aurora.frankenstein.Slick2DFrankensteinImage;
 import ru.game.aurora.frankenstein.Slick2DImageFactory;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.Planet;
@@ -18,43 +19,28 @@ import ru.game.frankenstein.impl.MonsterPartsLoader;
 import ru.game.frankenstein.util.CollectionUtils;
 import ru.game.frankenstein.util.Size;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 /**
  * Generates random alien animals
  */
 public class AnimalGenerator {
-    private static final Logger logger = LoggerFactory.getLogger(AnimalGenerator.class);
-
-    private MonsterGenerator monsterGenerator;
-
-    private MonsterGenerator plantGenerator;
-
-    private MonsterGenerationParams monsterGenerationParams;
-
-    private MonsterGenerationParams plantGenerationParams;
-
-    private static AnimalGenerator instance;
-
     public static final Color[] supportedColors = {new Color(0x00697436), new Color(0x00a12e00), new Color(0x00ad5400), new Color(0x005f4d96), new Color(0x00966e00)};
-
-    private int baseHp;
-
-    private int baseDmg;
-
-    private double rangeAttackChance;
-
+    private static final Logger logger = LoggerFactory.getLogger(AnimalGenerator.class);
+    private static AnimalGenerator instance;
     private final ProbabilitySet<AnimalModifier> modifierProbabilitySet = new ProbabilitySet<>();
-
-    public static void init() throws FileNotFoundException {
-        instance = new AnimalGenerator();
-    }
-
-    public static AnimalGenerator getInstance() {
-        return instance;
-    }
+    private MonsterGenerator monsterGenerator;
+    private MonsterGenerator plantGenerator;
+    private MonsterGenerationParams monsterGenerationParams;
+    private MonsterGenerationParams plantGenerationParams;
+    private int baseHp;
+    private int baseDmg;
+    private double rangeAttackChance;
 
     public AnimalGenerator() throws FileNotFoundException {
         try {
@@ -83,6 +69,34 @@ public class AnimalGenerator {
         } catch (FrankensteinException ex) {
             logger.error("Failed to initialize monster generator");
             throw new RuntimeException(ex);
+        }
+    }
+
+    public static void init() throws FileNotFoundException {
+        instance = new AnimalGenerator();
+    }
+
+    public static AnimalGenerator getInstance() {
+        return instance;
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        instance.monsterGenerationParams.tags.clear(); //todo: thread-safe?
+        instance.monsterGenerationParams.tags.add("style1");
+        instance.monsterGenerationParams.colorMap = null;//instance.createDefault4TintMap(CollectionUtils.selectRandomElement(supportedColors));
+        for (int i = 0; i < 5; ++i) {
+            try {
+                Monster monster = instance.monsterGenerator.generateMonster(instance.monsterGenerationParams);
+                BufferedImage img = EngineUtils.convertToBufferedImage(((Slick2DFrankensteinImage) monster.monsterImage).getImpl());
+                try {
+                    ImageIO.write(img, "jpg", new File("out/monster" + i + ".jpg"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } catch (FrankensteinException e) {
+                logger.error("Failed to generate monster image", e);
+            }
         }
     }
 
