@@ -36,15 +36,9 @@
       "id": 2,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 1,
           "targetStatementId": -1,
-          "replyText": "0",
-          "replyConditions": [
-            {
-              "name": "1",
-              "type": "SET"
-            }
-          ]
+          "replyText": "0"
         }
       ]
     },
