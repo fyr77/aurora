@@ -51,6 +51,7 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
                     @Override
                     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                         if (returnCode == 1) {
+                            GUI.getInstance().pushCurrentScreen();
                             GUI.getInstance().goToScreen("ship_screen");
                         }
                     }
