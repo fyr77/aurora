@@ -35,6 +35,11 @@ public class PickableInventoryItem extends SurfaceLootObject {
     }
 
     @Override
+    public String getName() {
+        return item.getName();
+    }
+
+    @Override
     public void draw(GameContainer container, Graphics g, Camera camera, World world) {
         if (drawable == null || drawable.getImage() == null) {
             drawable = new Drawable(item.getImage());

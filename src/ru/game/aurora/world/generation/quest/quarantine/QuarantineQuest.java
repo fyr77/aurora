@@ -14,6 +14,7 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.nature.AnimalCorpseItem;
+import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.HashMap;
@@ -202,6 +203,7 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
         return true;
     }
 
+
     private void resetCountdown()
     {
         this.countdown = Configuration.getIntProperty("quest.quarantine.turnsBetweenDeaths") + CommonRandom.getRandom().nextInt(10);
@@ -210,21 +212,29 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
         }
     }
 
+    @Override
+    public String getLocalizedMessageForStarSystem(World world, GalaxyMapObject galaxyMapObject) {
+        if (targetPlanet != null && targetPlanet.getOwner().equals(galaxyMapObject)) {
+            return Localization.getText("journal", "quarantine.star_system_mark");
+        }
+        return null;
+    }
+
     private boolean checkAndStartQuest(World world) {
-        if (world.getDayCount() < Configuration.getIntProperty("quest.quarantine.minDist")) {
+        if (world.getDayCount() < Configuration.getIntProperty("quest.quarantine.minTurn")) {
             // too early, lets start this quest after at least a year of travel
             return false;
         }
 
         if (BasePositionable.getDistance(lastLandedPlanet.getOwner(), (Positionable) world.getGlobalVariables().get("solar_system"))
-                > Configuration.getIntProperty("quest.quarantine.minTurn")) {
+                < Configuration.getIntProperty("quest.quarantine.minDist")) {
             // this planet is too near
             return false;
         }
 
 
         if (CommonRandom.getRandom().nextDouble() >= Configuration.getDoubleProperty("quest.quarantine.chance")) {
-            //  return false;
+            return false;
         }
 
         this.targetPlanet = lastLandedPlanet;
