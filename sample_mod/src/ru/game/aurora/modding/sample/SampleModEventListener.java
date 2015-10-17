@@ -67,12 +67,12 @@ public class SampleModEventListener extends GameEventListener {
 
         /*
          * Ok so starsystem is suitable and probability check passed. Create and add debris object.
-         * We will use an ItemDebris object that can contain item inside it. We will put there a piece of energy equipment
+         * We will use an ItemDebris object that can contain item inside it. We will put there a piece of civilian goods
          * created by the Bork race. Lets imagine that some Bork pirate has found his end here trying to rob someone too tough for him.
          *
          * We could also use ResourceDebris that contain just some Resource Units
          */
-        SpaceDebris debris = new SpaceDebris(0, 0, "debris", new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.ENERGY, BorkGenerator.NAME)));
+        SpaceDebris debris = new SpaceDebris(0, 0, "debris", new SpaceDebris.ItemDebris(new ShipLootItem(ShipLootItem.Type.GOODS, BorkGenerator.NAME)));
 
         /*
          * This helper method sets the coordinates of an object so that it is located on an empty tile - not on a planet, star or any

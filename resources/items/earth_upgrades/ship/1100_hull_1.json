@@ -6,6 +6,6 @@
   },
   "customClass": "ru.game.aurora.player.earth.upgrades.ShipHullUpgrade",
   "amount": 2,
-  "value": 500,
+  "value": 1100,
   "type": "SHIP"
 }

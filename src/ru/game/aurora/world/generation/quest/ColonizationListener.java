@@ -237,6 +237,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
             modifyPlanet(world, planet);
             state = State.COLONISTS_DELIVERED;
             time = world.getDayCount();
+            planet.getOwner().setQuestLocation(true);
             world.getPlayer().getJournal().addQuestEntries("colony_search", "colonists_arrival");
         }
 
