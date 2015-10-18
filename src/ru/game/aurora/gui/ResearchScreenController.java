@@ -139,7 +139,7 @@ public class ResearchScreenController implements ScreenController {
         rp.scientists++;
         world.getPlayer().getResearchState().setIdleScientists(idleScientists - 1);
         avail.refresh();
-
+        updateCurrentResearchStatus(rp);
     }
 
     public void onDecreaseScientistsButtonClicked() {
@@ -154,6 +154,15 @@ public class ResearchScreenController implements ScreenController {
         rp.scientists--;
         world.getPlayer().getResearchState().setIdleScientists(world.getPlayer().getResearchState().getIdleScientists() + 1);
         avail.refresh();
+        updateCurrentResearchStatus(rp);
+    }
+
+    private void updateCurrentResearchStatus(ResearchProjectState state) {
+        Element statusLines = tg.getSelectedTab().getElement().findElementByName("statusStrings");
+        if (statusLines != null) {
+            statusLines.getRenderer(TextRenderer.class).setText(Localization.getText("gui", "research.active.status")
+                    + "\n" + state.desc.getStatusString(world, state.scientists));
+        }
     }
 
     // works for increase/decrease scientists buttons, makes item in list selected (by default clicking on button does not select item in list)
