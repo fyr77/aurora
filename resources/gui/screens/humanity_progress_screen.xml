@@ -36,8 +36,8 @@
             <panel width="100%" height="45px" childLayout="horizontal">
                 <text id="#remaining-points-text" style="button-font" height="45px" textHAlign="center" width="*"/>
 
-                <control id="#add-1000-button" name="button" label="${gui.progress.add1k}" width="150px" height="45px">
-                    <interact onClick="add1k()"/>
+                <control id="#add-500-button" name="button" label="${gui.progress.add1k}" width="150px" height="45px">
+                    <interact onClick="add500()"/>
                 </control>
                 <panel width="5px"/>
                 <control id="#add-all-button" name="button" label="${gui.progress.addAll}" width="150px" height="45px">

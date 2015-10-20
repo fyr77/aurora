@@ -11,10 +11,7 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.controls.ButtonClickedEvent;
-import de.lessvoid.nifty.controls.ListBox;
-import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
-import de.lessvoid.nifty.controls.TabGroup;
+import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
@@ -93,9 +90,9 @@ public class EarthScreenController implements ScreenController {
         fillHumanityUpgrades(humanityProgressTab.findElementByName("earth_upgrades_tab"), EarthUpgrade.Type.EARTH);
     }
 
-    public void add1k() {
+    public void add500() {
         world.getPlayer().getEarthState().addProgress(world, getCurrentHumanityProgressTab()
-                , Math.min(1000, world.getPlayer().getEarthState().getUndistributedProgress()));
+                , Math.min(500, world.getPlayer().getEarthState().getUndistributedProgress()));
         updateHumanityTab();
     }
 
@@ -268,6 +265,9 @@ public class EarthScreenController implements ScreenController {
             image.setFilter(Image.FILTER_LINEAR);
             EngineUtils.setImageForGUIElement(imagePanel, image);
             EngineUtils.setTextForGUIElement(detailsText, String.format(Localization.getText("private_messages", "message_details_template"), pm.getSender(), pm.getReceivedAt()));
+
+            ScrollPanel scrollPanel = messagesList.findNiftyControl("scrollbarPanelId", ScrollPanel.class);
+            scrollPanel.setVerticalPos(0);
             messagesList.layoutElements();
         }
 
