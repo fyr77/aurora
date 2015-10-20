@@ -9,5 +9,5 @@
   "variableName": "landingPartyHPBonus",
   "variableValue": "1",
   "type": "EARTH",
-  "multiply": false
+  "add": true
 }

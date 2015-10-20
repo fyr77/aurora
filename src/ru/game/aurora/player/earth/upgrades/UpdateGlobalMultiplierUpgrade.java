@@ -14,7 +14,7 @@ public class UpdateGlobalMultiplierUpgrade extends EarthUpgrade {
 
     private double variableValue;
 
-    private boolean multiply = true;
+    private boolean add = false;
 
     public UpdateGlobalMultiplierUpgrade(String id, Drawable drawable, int value) {
         super(id, drawable, value);
@@ -23,7 +23,7 @@ public class UpdateGlobalMultiplierUpgrade extends EarthUpgrade {
     @Override
     public void unlock(World world) {
         super.unlock(world);
-        if (multiply) {
+        if (!add) {
             double val = Double.parseDouble((String) world.getGlobalVariable(variableName, "1.0"));
             world.getGlobalVariables().put(variableName, String.valueOf(val * variableValue));
         } else {
