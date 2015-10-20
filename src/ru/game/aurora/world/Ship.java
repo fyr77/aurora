@@ -240,12 +240,16 @@ public class Ship extends BaseGameObject {
         hull -= dmg;
         world.onPlayerShipDamaged();
         if (hull <= 0) {
-            ExplosionEffect ship_explosion = new ExplosionEffect(x, y, "ship_explosion", false, true);
-            ship_explosion.getAnim().setSpeed(0.5f);
-            ((StarSystem) world.getCurrentRoom()).addEffect(ship_explosion);
-            ship_explosion.setEndListener(new GameOverEffectListener());
+            explode(world);
 
         }
+    }
+
+    private void explode(World world) {
+        ExplosionEffect ship_explosion = new ExplosionEffect(x, y, "ship_explosion", false, true);
+        ship_explosion.getAnim().setSpeed(0.5f);
+        ((StarSystem) world.getCurrentRoom()).addEffect(ship_explosion);
+        ship_explosion.setEndListener(new GameOverEffectListener());
     }
 
     @Override
@@ -351,8 +355,12 @@ public class Ship extends BaseGameObject {
 
     public void changeMaxHull(int amount)
     {
+        int damage = maxHull - hull;
         maxHull += amount;
-        hull = Math.min(hull, maxHull);
+        hull = maxHull - damage;
+        if (hull <= 0) {
+            explode(World.getWorld());
+        }
     }
 
     public void changeRangeBuff(int delta) {

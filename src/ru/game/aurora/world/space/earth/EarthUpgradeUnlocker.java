@@ -25,7 +25,7 @@ public class EarthUpgradeUnlocker extends GameEventListener {
 
         if (technologyLevel > 1500 && world.getGlobalVariables().containsKey("messages.scientist.received") && ((Integer) world.getGlobalVariables().get("messages.scientist.received") == 1)) {
             world.getGlobalVariables().put("messages.scientist.received", 2);
-            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "messages.scientist.sender", "messages.scientist_2", "message"));
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.scientist.sender", "letters.scientist_2", "message"));
         }
 
         prevTechValue = technologyLevel;
