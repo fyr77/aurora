@@ -7,11 +7,14 @@ import de.lessvoid.nifty.elements.render.TextRenderer;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.planet.InventoryItem;
 
+import java.text.DecimalFormat;
+
 /**
  * Used in inventory screens
  */
 public class InventoryViewConverter implements ListBox.ListBoxViewConverter<Multiset.Entry<InventoryItem>>
 {
+    private static final DecimalFormat priceFormat = new DecimalFormat("#.#####");
     private boolean showPrice = false;
 
     public void setShowPrice(boolean showPrice) {
@@ -42,9 +45,9 @@ public class InventoryViewConverter implements ListBox.ListBoxViewConverter<Mult
         rz += item.getElement().getName();
         if (showPrice) {
             if (item.getCount() > 1) {
-                rz += " x" + item.getElement().getPrice() + "CR = " + (item.getCount() * item.getElement().getPrice() + " CR");
+                rz += " x" + priceFormat.format(item.getElement().getPrice()) + "CR = " + priceFormat.format(item.getCount() * item.getElement().getPrice()) + " CR";
             } else {
-                rz += " " + item.getElement().getPrice() + " CR";
+                rz += " " + priceFormat.format(item.getElement().getPrice()) + " CR";
             }
         }
         return rz;
