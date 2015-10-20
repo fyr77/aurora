@@ -26,10 +26,15 @@
                     <text id="messageDetailsText" style="base-font" width="*" height="100%" textHAlign="left" textVAlign="center"/>
                 </panel>
                 <panel height="10px" />
-                <control id="scrollbarPanelId" name="scrollPanel" horizontal="false" vertical="optional">
-                    <text id="selectedItemText" style="base-font" wrap="true" text="${gui.no_item_selected}" width="95%"
-                          height="95%" textHAlign="left"/>
+
+                <control id="scrollbarPanelId" name="scrollPanel" horizontal="false" childLayout="center">
+                    <panel childLayout="center" padding="15px" width="100%">
+                        <text id="selectedItemText" style="base-font" wrap="true" text="${gui.no_item_selected}"
+                              width="95%"
+                              textHAlign="left"/>
+                    </panel>
                 </control>
+
             </panel>
         </panel>
     </controlDefinition>

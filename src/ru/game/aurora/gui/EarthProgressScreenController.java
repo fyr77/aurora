@@ -48,7 +48,7 @@ public class EarthProgressScreenController implements ScreenController {
 
         StringBuilder sb = new StringBuilder(" ");
         sb.append(text1);
-        while (listFont.getWidth(sb.toString()) + text2Width + 20 < results.getElement().getWidth()) {
+        while (listFont.getWidth(sb.toString()) + text2Width + 20 < results.getElement().getWidth() - 30) { //-30 for vertical scrollbar
             sb.append('.');
         }
         sb.append(text2);
@@ -81,6 +81,9 @@ public class EarthProgressScreenController implements ScreenController {
         totalScore += researchState.getProcessedAstroData();
 
         for (ResearchProjectDesc desc : researchState.getCompletedProjects()) {
+            if (desc.getScore() == 0) {
+                continue;
+            }
             totalScore += desc.getScore();
             data.add(new Pair<>(desc.getName(), String.valueOf(desc.getScore())));
         }
