@@ -232,6 +232,10 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
             return false;
         }
 
+        if (lastLandedPlanet.equals(world.getGlobalVariable("colony_search.coords", null))) {
+            // we do not want to start this quest on a planet selected for colonization
+            return false;
+        }
 
         if (CommonRandom.getRandom().nextDouble() >= Configuration.getDoubleProperty("quest.quarantine.chance")) {
             return false;
