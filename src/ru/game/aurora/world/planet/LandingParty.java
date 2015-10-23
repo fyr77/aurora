@@ -245,7 +245,7 @@ public class LandingParty extends BaseGameObject {
         if (world.getPlayer().getMainCountry() == EarthCountry.AMERICA) {
             rz += Configuration.getIntProperty("player.america.hpBonus");
         }
-        rz += (Integer) world.getGlobalVariable("landingPartyHPBonus", 0);
+        rz += ((Number) world.getGlobalVariable("landingPartyHPBonus", 0)).intValue();
         return rz;
     }
 

@@ -94,11 +94,14 @@ public class EarthScreenController implements ScreenController {
         world.getPlayer().getEarthState().addProgress(world, getCurrentHumanityProgressTab()
                 , Math.min(500, world.getPlayer().getEarthState().getUndistributedProgress()));
         updateHumanityTab();
+        // maybe some new modules became available, update the shipyard tab contents
+        fillUpgrades();
     }
 
     public void addAll() {
         world.getPlayer().getEarthState().addProgress(world, getCurrentHumanityProgressTab(), world.getPlayer().getEarthState().getUndistributedProgress());
         updateHumanityTab();
+        fillUpgrades();
     }
 
     private EarthUpgrade.Type getCurrentHumanityProgressTab() {
