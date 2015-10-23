@@ -11,8 +11,9 @@
     "tx": -1,
     "ty": -1
   },
-  "reloadTurns": 5,
+  "reloadTurns": 8,
   "explosionAnimation": "rocket_explosion",
   "particlesAnimation": "rocket_particles",
-  "size": 40
+  "size": 40,
+  "customClass": "ru.game.aurora.world.equip.TorpedoLauncher"
 }

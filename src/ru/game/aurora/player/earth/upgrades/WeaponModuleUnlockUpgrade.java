@@ -13,9 +13,8 @@ public class WeaponModuleUnlockUpgrade extends EarthUpgrade {
     private String weaponId;
 
     @Override
-    public void use(World world, int variant) {
-        super.use(world, variant);
-
+    public void unlock(World world) {
+        super.unlock(world);
         WeaponUpgrade upgrade = new WeaponUpgrade(ResourceManager.getInstance().getWeapons().getEntity(weaponId));
         world.getPlayer().getEarthState().getAvailableUpgrades().add(upgrade);
 

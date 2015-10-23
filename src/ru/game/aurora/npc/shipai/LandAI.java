@@ -6,6 +6,7 @@
  */
 package ru.game.aurora.npc.shipai;
 
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.world.Positionable;
@@ -22,22 +23,45 @@ public class LandAI implements NPCShipAI
 
     private final Positionable target;
 
+    private boolean isOverridable = true;
+
     private boolean hasLanded = false;
 
     public LandAI(Positionable target) {
         this.target = target;
     }
 
-    @Override
-    public void update(NPCShip ship, World world, StarSystem currentSystem) {
+    private void moveToTargetHorizontal(NPCShip ship) {
         if (target.getX() < ship.getX()) {
             ship.moveLeft();
         } else if (target.getX() > ship.getX()) {
             ship.moveRight();
-        } else if (target.getY() < ship.getY()) {
+        }
+    }
+
+    private void moveToTargetVertical(NPCShip ship) {
+        if (target.getY() < ship.getY()) {
             ship.moveUp();
         } else if (target.getY() > ship.getY()) {
             ship.moveDown();
+        }
+    }
+
+    @Override
+    public void update(NPCShip ship, World world, StarSystem currentSystem) {
+        boolean canMoveX = ship.getX() != target.getX();
+        boolean canMoveY = ship.getY() != target.getY();
+        if (canMoveX && canMoveY) {
+            // select randomly either x or y direction to move
+            if (CommonRandom.getRandom().nextBoolean()) {
+                moveToTargetHorizontal(ship);
+            } else {
+                moveToTargetVertical(ship);
+            }
+        } else if (canMoveX) {
+            moveToTargetHorizontal(ship);
+        } else if (canMoveY) {
+            moveToTargetVertical(ship);
         } else {
             hasLanded = true;
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "logging.ship_landed"), ship.getName()));
@@ -51,6 +75,10 @@ public class LandAI implements NPCShipAI
 
     @Override
     public boolean isOverridable() {
-        return true;
+        return isOverridable;
+    }
+
+    public void setIsOverridable(boolean isOverridable) {
+        this.isOverridable = isOverridable;
     }
 }

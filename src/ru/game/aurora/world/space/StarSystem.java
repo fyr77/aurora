@@ -377,22 +377,23 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     }
 
     public void doFire(World world, final GameObject targetObject, final Ship playerShip, WeaponInstance weapon, final int damage) {
-        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, targetObject.getName()));
-
         Effect e = weapon.getWeaponDesc().createShotEffect(world, playerShip, targetObject, world.getCamera(), 800);
-        e.setEndListener(new IStateChangeListener<World>() {
-            private static final long serialVersionUID = 8150717419595750398L;
+        if (e != null) {
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, targetObject.getName()));
+            e.setEndListener(new IStateChangeListener<World>() {
+                private static final long serialVersionUID = 8150717419595750398L;
 
-            @Override
-            public void stateChanged(World world) {
-                targetObject.onAttack(world, playerShip, damage);
-                if (!target.isAlive()) {
-                    GameLogger.getInstance().logMessage(targetObject.getName() + " " + Localization.getText("gui", "space.destroyed"));
-                    target = null;
+                @Override
+                public void stateChanged(World world) {
+                    targetObject.onAttack(world, playerShip, damage);
+                    if (!target.isAlive()) {
+                        GameLogger.getInstance().logMessage(targetObject.getName() + " " + Localization.getText("gui", "space.destroyed"));
+                        target = null;
+                    }
                 }
-            }
-        });
-        effects.add(e);
+            });
+            effects.add(e);
+        }
 
         ResourceManager.getInstance().getSound(weapon.getWeaponDesc().shotSound).play();
 

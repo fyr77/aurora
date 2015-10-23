@@ -259,6 +259,11 @@ public class NPCShip extends BaseGameObject implements IMonster {
         return weapons;
     }
 
+    public void setWeapons(WeaponInstance... weapons) {
+        this.weapons = new ArrayList<>(weapons.length);
+        Collections.addAll(this.weapons, weapons);
+    }
+
     public void setWeapons(WeaponDesc... weaponDescs) {
         this.weapons = new ArrayList<>(weaponDescs.length);
         for (WeaponDesc weaponDesc : weaponDescs) {
@@ -269,11 +274,6 @@ public class NPCShip extends BaseGameObject implements IMonster {
     @Override
     public MonsterBehaviour getBehaviour() {
         return null;
-    }
-
-    public void setWeapons(WeaponInstance... weapons) {
-        this.weapons = new ArrayList<>(weapons.length);
-        Collections.addAll(this.weapons, weapons);
     }
 
     public void fire(World world, StarSystem ss, int weaponIdx, final GameObject target) {
@@ -435,8 +435,8 @@ public class NPCShip extends BaseGameObject implements IMonster {
                 }
 
                 if (ship instanceof TorpedoLauncher.Torpedo) {
-                    // torpedoes have a higher priority
-                    changeThreat(world, ship, 1);
+                    // torpedoes have a highest priority
+                    changeThreat(world, ship, 10);
                 }
             }
         }
