@@ -6,6 +6,6 @@
   },
   "customClass": "ru.game.aurora.player.earth.upgrades.ShipSpaceUpgrade",
   "amount": 20,
-  "value": 3200,
+  "value": 2200,
   "type": "SHIP"
 }

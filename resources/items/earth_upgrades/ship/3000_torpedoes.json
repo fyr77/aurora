@@ -5,7 +5,7 @@
     "tx": -1
   },
   "customClass": "ru.game.aurora.player.earth.upgrades.WeaponModuleUnlockUpgrade",
-  "value": 5000,
+  "value": 3000,
   "weaponId": "humanity_torpedoes",
   "type": "SHIP"
 }
