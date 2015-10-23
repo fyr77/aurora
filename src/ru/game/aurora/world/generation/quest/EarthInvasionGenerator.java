@@ -332,6 +332,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
         public BorkBlockadeShip(int x, int y, World world) {
             super(x, y, "bork_ship", world.getFactions().get(BorkGenerator.NAME), new NPC(Dialog.loadFromFile("dialogs/encounters/bork_blockade_contact.json")), "Bork ship", 5);
+            setWeapons(ResourceManager.getInstance().getWeapons().getEntity("bork_cannon"));
         }
 
         @Override
