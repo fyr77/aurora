@@ -104,6 +104,8 @@
     <resource type="image" id="earth_dialog">sprites/portraits/earth-1.png</resource>
     <resource type="image" id="enterprise_dialog">sprites/portraits/enterprise.png</resource>
     <resource type="image" id="earth_ship_dialog">sprites/portraits/earth-2.png</resource>
+    <resource type="image" id="etf_cap_1_dialog">sprites/portraits/cap_1.png</resource>
+    <resource type="image" id="etf_cap_2_dialog">sprites/portraits/cap_2.png</resource>
     <resource type="image" id="earth_transport">sprites/ships/human_transport.png</resource>
     <resource type="image" id="earth_destroyer">sprites/ships/earth_destroyer.png</resource>
     <resource type="image" id="earth_freighter">sprites/ships/earth_freighter.png</resource>

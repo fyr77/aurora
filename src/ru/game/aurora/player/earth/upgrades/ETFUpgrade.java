@@ -9,6 +9,7 @@ import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.earth.EarthUpgrade;
+import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
@@ -24,6 +25,11 @@ import java.util.Map;
  * They can help with resources.
  */
 public class ETFUpgrade extends EarthUpgrade {
+
+    private static final String[] captains = {
+            "etf_cap_1_dialog",
+            "etf_cap_2_dialog"
+    };
 
     @Override
     public void unlock(World world) {
@@ -81,6 +87,7 @@ public class ETFUpgrade extends EarthUpgrade {
                 }
             });
 
+            etfDialog.setIconName(CollectionUtils.selectRandomElement(captains));
 
             generatedShip = new NPCShip(
                     0
