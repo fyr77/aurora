@@ -24,6 +24,7 @@ import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.PrivateMessage;
+import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.GameObject;
@@ -39,37 +40,14 @@ import ru.game.aurora.world.space.StarSystem;
 import java.util.List;
 
 public class HumanityGenerator implements WorldGeneratorPart {
-    private static final long serialVersionUID = -1289210420627927980L;
-
     public static final String NAME = "Humanity";
-
+    private static final long serialVersionUID = -1289210420627927980L;
     private static final ProbabilitySet<GameObject> defaultLootTable;
 
     static {
         defaultLootTable = new ProbabilitySet<>();
         defaultLootTable.put(new SpaceDebris.ResourceDebris(5), 1.0);
         defaultLootTable.put(new SpaceDebris.ResourceDebris(10), 0.2);
-    }
-
-    private class TradeShip extends NPCShip
-    {
-
-        public TradeShip(Faction race) {
-            super(0, 0, "earth_transport", race, null, "", 5);
-            setStationary(true);
-        }
-
-        @Override
-        public boolean interact(World world) {
-            Multiset<InventoryItem> inventoryItems = HashMultiset.<InventoryItem>create();
-            inventoryItems.add(Resources.CELLS_FROM_PARALLEL_WORLD, 5);
-            inventoryItems.add(new SellOnlyInventoryItem(
-                            "items", "rogue_beacon_data", new Drawable("technology_research"), Configuration.getIntProperty("quest.rogues_beacon.price"), true, RoguesGenerator.NAME
-                    ));
-            TradeScreenController.openTrade("klisk_dialog", inventoryItems);
-            
-            return true;
-        }
     }
 
     @Override
@@ -120,7 +98,23 @@ public class HumanityGenerator implements WorldGeneratorPart {
         });
 
         // set custom ship AIs, only land on planets, do not leave star system
-        world.addListener(new StandardAlienShipEvent(humans, humans.getDefaultFactory(), true));
+        world.addListener(new StandardAlienShipEvent(humans, humans.getDefaultFactory(), true) {
+            @Override
+            public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
+                if (!ss.equals(world.getGlobalVariable("solar_system", null))) {
+                    return false;
+                }
+
+                if (CommonRandom.getRandom().nextDouble() < 0.7) {
+                    NPCShip ship = shipFactory.createShip(world, 0);
+                    ss.setRandomEmptyPosition(ship);
+                    ss.getShips().add(ship);
+                    ship.setAi(new LandAI(CollectionUtils.selectRandomElement(world.getCurrentStarSystem().getPlanets())));
+                    return true;
+                }
+                return false;
+            }
+        });
 
         // add welcoming messages
         List<PrivateMessage> pm = world.getPlayer().getEarthState().getMessages();
@@ -158,5 +152,26 @@ public class HumanityGenerator implements WorldGeneratorPart {
                 return false;
             }
         });
+    }
+
+    private class TradeShip extends NPCShip
+    {
+
+        public TradeShip(Faction race) {
+            super(0, 0, "earth_transport", race, null, "", 5);
+            setStationary(true);
+        }
+
+        @Override
+        public boolean interact(World world) {
+            Multiset<InventoryItem> inventoryItems = HashMultiset.<InventoryItem>create();
+            inventoryItems.add(Resources.CELLS_FROM_PARALLEL_WORLD, 5);
+            inventoryItems.add(new SellOnlyInventoryItem(
+                            "items", "rogue_beacon_data", new Drawable("technology_research"), Configuration.getIntProperty("quest.rogues_beacon.price"), true, RoguesGenerator.NAME
+                    ));
+            TradeScreenController.openTrade("klisk_dialog", inventoryItems);
+
+            return true;
+        }
     }
 }

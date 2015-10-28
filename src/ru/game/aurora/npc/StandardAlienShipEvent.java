@@ -21,11 +21,8 @@ import ru.game.aurora.world.space.StarSystem;
  */
 public class StandardAlienShipEvent extends GameEventListener {
     private static final long serialVersionUID = -3413422560284690414L;
-
+    protected final NPCShipFactory shipFactory;
     private final AlienRace race;
-
-    private final NPCShipFactory shipFactory;
-
     /**
      * If true, will ignore questLocation flag on star systems and will still spawn ships in them.
      */
