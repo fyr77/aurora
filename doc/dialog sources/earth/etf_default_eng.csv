@@ -1,0 +1,23 @@
+0;Greetings from the crew of the Earth Trade Fleet vessel! It's pleasant to meet a compatriot so far from home.;;;
+;We need resources for repairs and production. Do you have anything?;1;;
+;Trade Fleet? I'd like to find out more about it.;2;;
+;Yes, glad to meet you, to. But we have to go.;-1;;
+1;Of course, helping you is one of our main priorities. We're sending you everything we have.;;;
+;Great, we're waiting for it.;1;;1
+2;I'll be glad to answer all your questions.;;;
+;What are the Trade Fleet's objectives?;3;;
+;How is it connected with Project Aurora?;4;;
+;Will you help us when you meet us?;5;;
+;I don't have any more questions.;0;;
+3;The Trade Fleet was created to carry out interstellar trade and diplomacy and to supply human settlements outside of the Solar System.;;;
+;I want to ask something else.;2;;
+;I see, I don't have any more questions.;0;;
+4;"Our fleet was created thanks to you, to maintain the diplomatic and trading links you've established by using the technologies you've procured. But we aren't connected to Project Aurora directly and we don't answer to it, we have different objectives. You're explorers, you chart new worlds for us; we are traders and diplomats, we settle them.";;;
+;I want to ask something else.;2;;
+;I see, I don't have any more questions.;0;;
+5;We'll help you wherever we can. We're always ready to share resources for repairs with you, although don't expect much, we don't have anything we don't need. And we'll try to support you in battle if we have to, although we're traders, not soldiers.;;;
+;What about supplying us with manpower?;6;;
+;I want to ask something else.;2;;
+;I see, I don't have any more questions.;0;;
+6;Unfortunately, no. You're the ones with a giant crew onboard, we only have the people we need to run the ship. We can't give you any men.;;;
+;Too bad. I wanted to ask something else…;2;;
