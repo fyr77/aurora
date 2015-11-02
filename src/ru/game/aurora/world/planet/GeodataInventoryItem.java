@@ -7,7 +7,6 @@ import ru.game.aurora.player.research.Geodata;
 import ru.game.aurora.world.World;
 
 /**
- * Created by Егор on 27.08.2015.
  * Item used for selling geodata to traders
  */
 public class GeodataInventoryItem extends SellOnlyInventoryItem {

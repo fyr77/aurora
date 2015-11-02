@@ -6,7 +6,7 @@ import ru.game.aurora.player.earth.EarthUpgrade;
 import ru.game.aurora.util.EngineUtils;
 
 /**
- * Created by Егор on 27.08.2015.
+ * Created by on 27.08.2015.
  * Shows earth upgrades
  */
 public class EarthUpgradeViewConverter implements ListBox.ListBoxViewConverter<EarthUpgrade> {

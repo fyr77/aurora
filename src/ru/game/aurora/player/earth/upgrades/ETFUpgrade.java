@@ -20,7 +20,7 @@ import ru.game.aurora.world.space.StarSystem;
 import java.util.Map;
 
 /**
- * Created by Егор on 29.09.2015.
+ * Created by on 29.09.2015.
  * Adds Earth Trade Fleet - civilian ships that can be encountered in friendly star systems.
  * They can help with resources.
  */

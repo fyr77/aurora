@@ -8,7 +8,6 @@ import ru.game.aurora.world.SurfaceLootObject;
 import ru.game.aurora.world.World;
 
 /**
- * Created by Егор on 15.09.2015.
  * Inventory item that can be picked up
  */
 public class PickableInventoryItem extends SurfaceLootObject {

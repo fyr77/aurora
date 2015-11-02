@@ -5,7 +5,7 @@ import ru.game.aurora.player.earth.EarthUpgrade;
 import ru.game.aurora.world.World;
 
 /**
- * Created by Егор on 27.08.2015.
+ * Created by on 27.08.2015.
  * Upgrade that sets global variable multiplier. If such variable already exists it is treated as double and multiplied
  * by this value
  */

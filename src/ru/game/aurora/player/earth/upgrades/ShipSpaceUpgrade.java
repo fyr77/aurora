@@ -5,7 +5,7 @@ import ru.game.aurora.player.earth.EarthUpgrade;
 import ru.game.aurora.world.World;
 
 /**
- * Created by Егор on 27.08.2015.
+ * Created by on 27.08.2015.
  * Increases max ship free space
  */
 public class ShipSpaceUpgrade extends EarthUpgrade

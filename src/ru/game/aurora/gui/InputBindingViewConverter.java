@@ -9,7 +9,7 @@ import ru.game.aurora.util.EngineUtils;
 import java.util.Map;
 
 /**
- * Created by Егор on 10.08.2015.
+ * Created by on 10.08.2015.
  */
 public class InputBindingViewConverter implements ListBox.ListBoxViewConverter<Map.Entry<InputBinding.Action, Integer>> {
 

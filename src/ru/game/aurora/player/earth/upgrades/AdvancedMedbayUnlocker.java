@@ -6,7 +6,7 @@ import ru.game.aurora.player.engineering.upgrades.MedBayUpgrade;
 import ru.game.aurora.world.World;
 
 /**
- * Created by Егор on 31.08.2015.
+ * Created by on 31.08.2015.
  * Unlocks super medbay upgrade, removes the previous one
  */
 public class AdvancedMedbayUnlocker extends EarthUpgrade {

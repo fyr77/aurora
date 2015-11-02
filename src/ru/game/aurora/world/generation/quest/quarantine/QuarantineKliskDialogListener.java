@@ -10,7 +10,6 @@ import ru.game.aurora.world.World;
 import java.util.Map;
 
 /**
- * Created by Егор on 06.09.2015.
  * Klisk can sell (or give for free in case of good rep) a cure
  */
 public class QuarantineKliskDialogListener implements DialogListener {

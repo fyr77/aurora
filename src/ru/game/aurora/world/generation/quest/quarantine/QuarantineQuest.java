@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Created by Егор on 04.09.2015.
  * Quarantine quest. One of crewmember becomes infected with unknown disease and crew starts dying untill
  * player finds a solution.
  */

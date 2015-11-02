@@ -6,7 +6,6 @@ import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.world.World;
 
 /**
- * Created by Егор on 29.08.2015.
  * Makes new weapon module available at shipyard
  */
 public class WeaponModuleUnlockUpgrade extends EarthUpgrade {

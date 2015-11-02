@@ -15,7 +15,6 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.NPCShip;
 
 /**
- * Created by Егор on 29.09.2015.
  * Fires a huge torpedo. Torpedo is like a ship, has a movement speed and can be shot. Deals a lot of damage.
  */
 public class TorpedoLauncher extends WeaponDesc {
