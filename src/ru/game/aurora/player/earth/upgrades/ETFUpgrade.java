@@ -28,7 +28,8 @@ public class ETFUpgrade extends EarthUpgrade {
 
     private static final String[] captains = {
             "etf_cap_1_dialog",
-            "etf_cap_2_dialog"
+            "etf_cap_2_dialog",
+            "etf_cap_3_dialog"
     };
 
     @Override
