@@ -44,6 +44,9 @@ applicationDistribution.from('native') {
     into 'bin\\native'
 }
 
+applicationDistribution.from('mods') {
+    into 'bin\\mods'
+}
 
 task strippedJar(type: Jar) {
     dependsOn compileJava
