@@ -39,7 +39,8 @@ public class MonsterController implements Serializable {
         this.map = map;
         this.myMonster = myMonster;
         this.turnsBeforeMove = myMonster.getSpeed();
-        weapon = !myMonster.getWeapons().isEmpty() ? myMonster.getWeapons().get(0) : null;
+        final List<WeaponInstance> weapons = myMonster.getWeapons();
+        weapon = (weapons != null && !weapons.isEmpty()) ? weapons.get(0) : null;
     }
 
     private Effect playAttackEffects(World world, IMovable other, WeaponDesc weapon) {

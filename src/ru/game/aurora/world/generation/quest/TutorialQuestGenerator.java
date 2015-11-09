@@ -135,6 +135,7 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
             world.getPlayer().getResearchState().addNewAvailableProject(
                     world.getResearchAndDevelopmentProjects().getResearchProjects().remove("tutorial_research")
             );
+            HelpPopupControl.showHelp("tutorial.5.1", "tutorial.5.2");
             world.getPlayer().getInventory().remove(this);
         }
 
@@ -156,13 +157,14 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
                     "test_drone"
                     , null
                     , 5
-                    , 2
+                    , 1
                     , null
                     , "spider_robot"
                     , false
-                    , MonsterBehaviour.PASSIVE)
+                    , MonsterBehaviour.AGGRESSIVE)
 
                     , null);
+            controller = new MonsterController(mars.getMap(), this);
         }
 
         @Override
