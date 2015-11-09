@@ -8,7 +8,9 @@ package ru.game.aurora.world.space;
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPC;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.space.earth.Earth;
@@ -72,6 +74,10 @@ public class HomeworldGenerator {
         if (spaceStation.getDistance(Moon) == 0) { // check that it does not intersect with moon
             spaceStation.setPos(spaceStation.getX(), spaceStation.getY() + 1);
         }
+
+        Dialog d = Dialog.loadFromFile("dialogs/human_ship_default_dialog.json");
+        d.setIconName("etf_cap_1_dialog");
+        spaceStation.setCaptain(new NPC(d));
         spaceStation.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon2"), ResourceManager.getInstance().getWeapons().getEntity("humanity_missiles"));
         spaceStation.setStationary(true);
         spaceStation.setAi(null);
