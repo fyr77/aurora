@@ -103,6 +103,7 @@ public class ETFUpgrade extends EarthUpgrade {
             ss.setRandomEmptyPosition(generatedShip);
             generatedShip.setAi(new LeaveSystemAI());
             ss.getObjects().add(generatedShip);
+            resources = CommonRandom.getRandom().nextInt(10) + 5;
             return true;
         }
 
