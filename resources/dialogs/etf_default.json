@@ -27,7 +27,7 @@
       "replies": [
         {
           "returnValue": 1,
-          "targetStatementId": 1,
+          "targetStatementId": -1,
           "replyText": "0"
         }
       ]

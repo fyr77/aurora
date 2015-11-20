@@ -3,7 +3,7 @@
 ;Trade Fleet? I'd like to find out more about it.;2;;
 ;Yes, glad to meet you, to. But we have to go.;-1;;
 1;Of course, helping you is one of our main priorities. We're sending you everything we have.;;;
-;Great, we're waiting for it.;1;;1
+;Great, we're waiting for it.;-1;;1
 2;I'll be glad to answer all your questions.;;;
 ;What are the Trade Fleet's objectives?;3;;
 ;How is it connected with Project Aurora?;4;;
