@@ -207,6 +207,9 @@ public class AuroraGame extends NiftyOverlayGame {
     public static void main(String[] args) throws SlickException, IOException {
         try {
             logger.info("Aurora game version " + Version.VERSION + " started");
+            // allow software rendering for support of older generation cards
+            System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true");
+
             final String osName = System.getProperty("os.name");
 
             if (args.length > 0) {
