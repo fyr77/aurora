@@ -49,7 +49,7 @@
           "replyText": "4",
           "replyConditions": [
             {
-              "name": "Heritage.fifth_monster_killed",
+              "name": "heritage.fifth_monster_killed",
               "type": "SET"
             }
           ]
@@ -72,7 +72,10 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "0"
+          "replyText": "0",
+          "flags": {
+            "second_paid": "true"
+          }
         }
       ]
     },
@@ -82,7 +85,10 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "0"
+          "replyText": "0",
+          "flags": {
+            "third_paid": "true"
+          }
         }
       ]
     },
@@ -102,7 +108,10 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "0"
+          "replyText": "0",
+          "flags": {
+            "fourth_paid": "true"
+          }
         }
       ]
     },
@@ -140,7 +149,7 @@
       "id": 8,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 20,
           "targetStatementId": -1,
           "replyText": "0"
         }
@@ -160,7 +169,7 @@
       "id": 10,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 10,
           "targetStatementId": -1,
           "replyText": "0"
         }
@@ -195,7 +204,7 @@
       "id": 13,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 30,
           "targetStatementId": -1,
           "replyText": "0"
         }
@@ -220,7 +229,7 @@
       "id": 15,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 20,
           "targetStatementId": -1,
           "replyText": "0"
         }
@@ -230,7 +239,7 @@
       "id": 16,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 30,
           "targetStatementId": -1,
           "replyText": "0"
         }

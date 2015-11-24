@@ -91,4 +91,9 @@ public class DungeonEntrance extends BaseGameObject {
     public void update(GameContainer container, World world) {
 
     }
+
+    @Override
+    public Image getImage() {
+        return ResourceManager.getInstance().getImage(sprite);
+    }
 }

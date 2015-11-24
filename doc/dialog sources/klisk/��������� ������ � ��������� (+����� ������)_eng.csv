@@ -1,5 +1,6 @@
 0;Oh… Human captain. What brings you here?;;;;
 ;We have to talk about something.;27;reputation > 6;;
+;About those klisk mutants…;-1;heritage.quest_started && !heritage.quest_completed;129;
 ;We have to talk about something.;16;reputation < 7;;
 ;We wish to trade;-1;;100;
 ;I'm back. The trade fleet is safe and sound.;1;klisk_trade.result;;

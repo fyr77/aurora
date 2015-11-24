@@ -8,6 +8,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.planet.LandingParty;
+import ru.game.aurora.world.space.StarSystem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -99,12 +100,15 @@ public class Dungeon implements Room, IDungeon {
     }
 
     private void enterImpl(World world) {
+        boolean launchedFromSpace = world.getCurrentRoom() instanceof StarSystem;
         world.setCurrentRoom(this);
         GUI.getInstance().getNifty().gotoScreen("surface_gui");
         LandingParty landingParty = world.getPlayer().getLandingParty();
         landingPartyPrevCoords = new BasePositionable(landingParty.x, landingParty.y);
         landingParty.setPos(map.getEntryPoint().getX(), map.getEntryPoint().getY());
-        landingParty.onLaunch(world);
+        if (launchedFromSpace) {
+            landingParty.onLaunch(world);
+        }
         world.getCamera().setTarget(landingParty);
 
         int tilesExplored = map.updateVisibility(landingParty.getX(), landingParty.getY(), 2);

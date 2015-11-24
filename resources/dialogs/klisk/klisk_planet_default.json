@@ -30,14 +30,29 @@
           ]
         },
         {
+          "returnValue": 129,
+          "targetStatementId": -1,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "heritage.quest_started",
+              "type": "SET"
+            },
+            {
+              "name": "heritage.quest_completed",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
           "returnValue": 100,
           "targetStatementId": -1,
-          "replyText": "2"
+          "replyText": "3"
         },
         {
           "returnValue": 0,
           "targetStatementId": 1,
-          "replyText": "3",
+          "replyText": "4",
           "replyConditions": [
             {
               "name": "klisk_trade.result",
@@ -48,7 +63,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "4"
+          "replyText": "5"
         }
       ]
     },

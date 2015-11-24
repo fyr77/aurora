@@ -34,6 +34,7 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.EmbassiesQuest;
+import ru.game.aurora.world.generation.quest.heritage.HeritageKliskDialogListener;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.quest.JournalEntry;
 import ru.game.aurora.world.space.*;
@@ -66,6 +67,13 @@ public class KliskGenerator implements WorldGeneratorPart {
                 if (returnCode == 100) {
                     //trade
                     TradeScreenController.openTrade("klisk_vip_dialog", KliskMainDialogListener.getDefaultTradeInventory(world));
+                    return;
+                }
+                if (returnCode == 129) {
+                    // heritage quest
+                    Dialog heritageEndDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_klisk_final.json");
+                    heritageEndDialog.addListener(new HeritageKliskDialogListener());
+                    world.addOverlayWindow(heritageEndDialog);
                     return;
                 }
                 if (flags.containsKey("klisk.war_help")) {

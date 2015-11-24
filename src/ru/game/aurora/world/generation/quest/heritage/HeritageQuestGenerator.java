@@ -15,6 +15,8 @@ import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.filters.HasPlanetWithLifeFilter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,6 +39,7 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
         final AlienRace klisk = (AlienRace) world.getFactions().get(KliskGenerator.NAME);
         StarSystem kliskHomeworld = klisk.getHomeworld();
         int range = klisk.getTravelDistance() * 2;
+        List<StarSystem> starSystems = new ArrayList<>(monstersCount);
         for (int i = 0; i < monstersCount; ++i) {
             StarSystem nextSS = world.getGalaxyMap().getRandomNonQuestStarsystemInRange(kliskHomeworld.getX(), kliskHomeworld.getY(), range, new HasPlanetWithLifeFilter());
             if (nextSS == null) {
@@ -46,7 +49,9 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
                 continue;
             }
             logger.info("Adding heritage quest to star system at " + nextSS.getCoordsString());
-
+            // to make sure that getRandomNonQuestStarSystemInRange() will not return same system twice
+            nextSS.setQuestLocation(true);
+            starSystems.add(nextSS);
             Planet p = HasPlanetWithLifeFilter.getPlanetWithLife(nextSS);
             Dungeon dungeon = new Dungeon(world, new AuroraTiledMap("maps/klisk_mutant_dungeon.tmx"), p);
             dungeon.getUserData().put(dungeonTag, "");
@@ -55,6 +60,10 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
             p.setNearestFreePoint(entrance, CommonRandom.getRandom().nextInt(p.getWidth()), CommonRandom.getRandom().nextInt(p.getHeight()));
             p.getPlanetObjects().add(entrance);
 
+        }
+        for (StarSystem ss : starSystems) {
+            // clear quest location flag as other events may also happen in these systems
+            ss.setQuestLocation(false);
         }
 
         world.addListener(this);

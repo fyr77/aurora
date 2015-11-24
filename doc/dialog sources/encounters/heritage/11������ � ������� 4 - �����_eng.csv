@@ -1,42 +1,42 @@
-0;You're back, Captain! *Lonroe looks at you extremely satisfied.* You've completed your assignment, yes?;;
-;Not yet, I have no bodies.;1;
-;First monster is done.;2;heritage.second_monster_killed
-;My men shot the second monster. Did you know it burned some words in the walls of his lair with acid?;3;heritage.third_monster_killed
-;The third one… It's going to be funny, but it killed itself.;4;heritage.fourth_monster_killed
-;About the fourth creature…;6;Heritage.fifth_monster_killed
-1;Then come back when you have some! Don't waste my time and your own, Captain.;;
-;Of course. Over and out.;-1;
-2;Great, simply wonderful! Send the corpse over, and I'll transfer you the money.;;
-;Pleasure to work with you.;-1;
-3;But still, it attacked your people, Captain. That means it wasn't intelligent. Don't let your conscience eat you from the inside, my friend. You're doing a good thing. Send the corpse to me and I'll transfer you the money.;;
-;Doing a good thing? I really hope I am. Over and out.;-1;
-4;Really? Are you serious?;;
-;And a long time before we came, too. It slit its own throat. And it was trying to write poetry.;5;
-5;*Lonroe clicks a sad, somber rhythm.* Too bad. Maybe it really was intelligent. I hope we can find that out soon through studying its corpse. Here's your money.;;
-;Of course. Over and out.;-1;
-6;Yes?;;
-;I brought it alive. It's intelligent.;7;
-;My people couldn't find it.;9;
-;I decided to keep it.;11;
-7;What? Are you sure about that? *Lonroe leans forward, he's shocked.*;;
-;Absolutely. I had a long conversation with it. There's definitely something wrong with its head, but I wouldn't call it stupid.;8;
-8;So that's how it is... So, after all... Ahem. *Lonroe leans back and smiles.* This is just wonderful news, human captain. You deserve a bonus. You're one of the best investments ever made by the Vortangu Corp.;;
-;Glad to hear that. Always a pleasure to work with people like you.;-1;
-9;*Lonroe frowns.*;;
-;We searched the whole planet, combed it with scanners. Nothing. Looks like it managed to climb into some deep hole and die there.;10;
-10;Let it rest in peace, then. *Lonroe is annoyed, he draws his speech slowly and petulantly.* I think you understand that I cannot pay for such a voyage. There is nothing to pay you for. There is nothing to discuss there. It was a pleasure to work with you, human captain. Not as good as I expected, but pleasant. *The connection breaks. Lonroe simply signed off.*;;
-;So that's how it is. He really got mad.;-1;
-11;So what are you going to do with it, human captain? *Lonroe laughs.* Sic it on your enemies like a pet animal?;;
-;Could be. But probably not. It's intelligent.;14;
-;That's none of your business.;12;
-12;You're right, it is. I guess it's no use telling you that you're holding corporate assets... Let it be like that, human captain. You aren't getting paid for your voyage, I think that much is obvious.;;
-;I didn't expect anything different.;13;
-13;*Lonroe nods. His voice is quiet and silky.* Looks like the rumors about you were greatly exaggerated, Captain… *He shakes his head and signs off.*;;
-;They say a lot of things about me. Although… He can't hear me anyway.;-1;
-14;In that case, you must hand it over to us. It is our corporate asset. We can study it, help it... Human captain, you're making a mistake!;;
-;You're right. You know what… take it, after all.;15;
-;It wanted to stay. I can't force it to go.;16;
-15;*Lonroe leans back and smiles.* It's a good thing you changed your mind. Trust me, we won't harm that creature. As for you... You deserve a bonus. You're one of the best investments ever made by the Vortangu Corp.;;
-;Glad to hear that. Over and out, Lonroe.;-1;
-16;*Lonroe is annoyed. His skin is covered in big drops of slime.* Yes. You're right. *His answers sound like hissing.* This is unethical. Let it be like that. Keep that creature. You won't get any money for it, of course. And you don't look like you need it, anyway. *The connection drops. Looks like someone disconnected too quickly.*;;
-;If he doesn't calm down, he'll explode all over his office. His office is cool. I'd like one like that... hm... Maybe I could ask Sarah to renovate my quarters…;-1;
+0;You're back, Captain! *Lonroe looks at you extremely satisfied.* You've completed your assignment, yes?;;;;
+;Not yet, I have no bodies.;1;;;
+;First monster is done.;2;heritage.second_monster_killed;;
+;My men shot the second monster. Did you know it burned some words in the walls of his lair with acid?;3;heritage.third_monster_killed;;
+;The third one… It's going to be funny, but it killed itself.;4;heritage.fourth_monster_killed;;
+;About the fourth creature…;6;heritage.fifth_monster_killed;;
+1;Then come back when you have some! Don't waste my time and your own, Captain.;;;;
+;Of course. Over and out.;-1;;;
+2;Great, simply wonderful! Send the corpse over, and I'll transfer you the money.;;;;
+;Pleasure to work with you.;-1;;;second_paid
+3;But still, it attacked your people, Captain. That means it wasn't intelligent. Don't let your conscience eat you from the inside, my friend. You're doing a good thing. Send the corpse to me and I'll transfer you the money.;;;;
+;Doing a good thing? I really hope I am. Over and out.;-1;;;third_paid
+4;Really? Are you serious?;;;;
+;And a long time before we came, too. It slit its own throat. And it was trying to write poetry.;5;;;fourth_paid
+5;*Lonroe clicks a sad, somber rhythm.* Too bad. Maybe it really was intelligent. I hope we can find that out soon through studying its corpse. Here's your money.;;;;
+;Of course. Over and out.;-1;;;
+6;Yes?;;;;
+;I brought it alive. It's intelligent.;7;;;
+;My people couldn't find it.;9;;;
+;I decided to keep it.;11;;;
+7;What? Are you sure about that? *Lonroe leans forward, he's shocked.*;;;;
+;Absolutely. I had a long conversation with it. There's definitely something wrong with its head, but I wouldn't call it stupid.;8;;;
+8;So that's how it is... So, after all... Ahem. *Lonroe leans back and smiles.* This is just wonderful news, human captain. You deserve a bonus. You're one of the best investments ever made by the Vortangu Corp.;;;;
+;Glad to hear that. Always a pleasure to work with people like you.;-1;;20;
+9;*Lonroe frowns.*;;;;
+;We searched the whole planet, combed it with scanners. Nothing. Looks like it managed to climb into some deep hole and die there.;10;;;
+10;Let it rest in peace, then. *Lonroe is annoyed, he draws his speech slowly and petulantly.* I think you understand that I cannot pay for such a voyage. There is nothing to pay you for. There is nothing to discuss there. It was a pleasure to work with you, human captain. Not as good as I expected, but pleasant. *The connection breaks. Lonroe simply signed off.*;;;;
+;So that's how it is. He really got mad.;-1;;10;
+11;So what are you going to do with it, human captain? *Lonroe laughs.* Sic it on your enemies like a pet animal?;;;;
+;Could be. But probably not. It's intelligent.;14;;;
+;That's none of your business.;12;;;
+12;You're right, it is. I guess it's no use telling you that you're holding corporate assets... Let it be like that, human captain. You aren't getting paid for your voyage, I think that much is obvious.;;;;
+;I didn't expect anything different.;13;;;
+13;*Lonroe nods. His voice is quiet and silky.* Looks like the rumors about you were greatly exaggerated, Captain… *He shakes his head and signs off.*;;;;
+;They say a lot of things about me. Although… He can't hear me anyway.;-1;;30;
+14;In that case, you must hand it over to us. It is our corporate asset. We can study it, help it... Human captain, you're making a mistake!;;;;
+;You're right. You know what… take it, after all.;15;;;
+;It wanted to stay. I can't force it to go.;16;;;
+15;*Lonroe leans back and smiles.* It's a good thing you changed your mind. Trust me, we won't harm that creature. As for you... You deserve a bonus. You're one of the best investments ever made by the Vortangu Corp.;;;;
+;Glad to hear that. Over and out, Lonroe.;-1;;20;
+16;*Lonroe is annoyed. His skin is covered in big drops of slime.* Yes. You're right. *His answers sound like hissing.* This is unethical. Let it be like that. Keep that creature. You won't get any money for it, of course. And you don't look like you need it, anyway. *The connection drops. Looks like someone disconnected too quickly.*;;;;
+;If he doesn't calm down, he'll explode all over his office. His office is cool. I'd like one like that... hm... Maybe I could ask Sarah to renovate my quarters…;-1;;30;
