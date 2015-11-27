@@ -34,7 +34,7 @@ public class ResourceManager {
     private static final String SPRITE_SHEET_REF = "__SPRITE_SHEET_";
 
     private static final ResourceManager _instance = new ResourceManager();
-    
+
     private static final Map<String, String> overridedResources = new HashMap<String, String>();
 
     private final Map<String, Sound> soundMap;
@@ -287,7 +287,7 @@ public class ResourceManager {
     }
 
     public Image loadImage(String id, String path) throws SlickException {
-       if (path == null || path.length() == 0)
+        if (path == null || path.length() == 0)
             throw new SlickException("Image resource [" + id + "] has invalid path");
 
         this.imageFileMap.put(id, path);
@@ -295,8 +295,15 @@ public class ResourceManager {
         try {
             image = new Image(path, false, Image.FILTER_NEAREST);
         } catch (Exception e) {
-            logger.error("Failed to load image " + path, e);
-            throw new SlickException("Could not load image", e);
+            // old hardware or bad opengl drivers may have a quite limiting maximum texture size of 1024 pixels in one dimension
+            // reallocate it as a bigimage instead
+            if (e.getCause() != null && e.getCause() instanceof IOException && e.getCause().getMessage().contains("big for the current hardware")) {
+                logger.warn("Image file " + path + " is too big for current hardware, re-allocating it as BigImage");
+                image = new BigImage(path, Image.FILTER_NEAREST);
+            } else {
+                logger.error("Failed to load image " + path, e);
+                throw new SlickException("Could not load image", e);
+            }
         }
 
         return image;
@@ -313,7 +320,7 @@ public class ResourceManager {
             if(override != null) {
                 imagePath = override;
             }
-            
+
             if (imagePath != null) {
                 try {
                     rz = new Image(imagePath, false, Image.FILTER_NEAREST);
@@ -397,7 +404,7 @@ public class ResourceManager {
     public JsonConfigManager<MonsterDesc> getMonsterDescs() {
         return monsterDescs;
     }
-    
+
     public static Map<String, String> getOverridedResources() {
         return overridedResources;
     }
