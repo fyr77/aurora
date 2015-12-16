@@ -88,8 +88,8 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'org.bushe:eventbus:1.4'
     compile fileTree(dir: 'third-party', include: ['frankenstein-core.jar'])
-    compile 'com.google.code.gson:gson:2.2.2'
-    compile 'com.google.guava:guava:15.0'
+    compile 'com.google.code.gson:gson:2.5'
+    compile 'com.google.guava:guava:18.0'
     compile fileTree(dir: 'third-party', include: ['jinput.jar'])
     compile fileTree(dir: 'third-party', include: ['jogg-0.0.7.jar']) // look for newer version?
     compile fileTree(dir: 'third-party', include: ['jorbis-0.0.15.jar']) // this one is exists in maven from 15 version
