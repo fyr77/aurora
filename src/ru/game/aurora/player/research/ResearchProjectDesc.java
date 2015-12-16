@@ -8,6 +8,7 @@ package ru.game.aurora.player.research;
 
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.engineering.EngineeringProject;
+import ru.game.aurora.util.GsonTransient;
 import ru.game.aurora.world.Listenable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.space.StarSystem;
@@ -54,6 +55,7 @@ public abstract class ResearchProjectDesc extends Listenable {
      * If this project requires visiting of specific star systems, this is list of them.
      * It is used to mark them on a global map.
      */
+    @GsonTransient
     protected List<StarSystem> targetStarSystems;
 
     protected String customClass;

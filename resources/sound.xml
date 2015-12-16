@@ -12,6 +12,10 @@
     <resource type="playlist" id="Gardeners">resources/music/gardeners</resource>
     <resource type="playlist" id="Humanity">resources/music/humanity</resource>
 
+    <resource type="playlist" id="henry_dialog">resources/music/crew/henry</resource>
+    <resource type="playlist" id="gordon_dialog">resources/music/crew/gordon</resource>
+    <resource type="playlist" id="sarah_dialog">resources/music/crew/sarah</resource>
+
     <resource type="sound" id="laser_1">resources/sounds/shots/laser_1.wav</resource>
     <resource type="sound" id="plasma_1">resources/sounds/shots/plasma_1.wav</resource>
     <resource type="sound" id="bullet_1">resources/sounds/shots/bullet_1.wav</resource>
