@@ -77,7 +77,7 @@
 ;Find them yourselves, then. Maybe we could help you with something else?;23;;;
 23;Of course. It's your call.;;;;
 ;Missing people? What's with that cave?;22;;;
-;People have gone missing in the forest?;24;;;
+;People have gone missing in the forest?;24;!colony.lost_group_quest && !colony.lost_group_quest.completed;;
 ;Tell me more about hunting animals.;25;;;
 ;We can't help you with anything today, our orders won't let us. We have to go.;-1;;;
 24;Yeah. Our field guys were supposed to report in about seven hours ago. We can find them ourselves, we have the experience, but I'd be glad to accept your help. The animals are pretty fierce in these woods, and look at the armor and weapons you've got! If you save the scientists, you'll get the scientific data you need. I know exactly what they want from you back on Earth, huh?;;;;
@@ -94,7 +94,7 @@
 28;*The colonist leader grabs his face and sighs.* God damn this planet. It's okay, we'll teach it a lesson later. Thanks for the help. We'll give you some resources for your trouble.;;;;
 ;You're welcome. Too bad we couldn't get there sooner.;-1;;;colony.dungeon_quest.reported
 29;How are they?;;;;
-;They were attacked by the local monsters. But we showed up on time and saved them all.;30;colony.lost_group_quest.saved=5;;
+;They were attacked by the local monsters. But we showed up on time and saved them all.;30;colony.lost_group_quest.saved>4;;
 ;They were attacked by the local monsters. We managed to save some people, the rest died.;31;colony.lost_group_quest.saved>0 && colony.lost_group_quest.saved<5;;
 ;They were attacked by the local monsters. We couldn't save them. We barely got away ourselves.;32;!colony.lost_group_quest.saved;;
 ;They were attacked by the local monsters. We couldn't save them. We barely got away ourselves.;32;colony.lost_group_quest.saved=0;;

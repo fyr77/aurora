@@ -500,7 +500,17 @@
         {
           "returnValue": 0,
           "targetStatementId": 24,
-          "replyText": "1"
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "colony.lost_group_quest",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "colony.lost_group_quest.completed",
+              "type": "NOT_SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
@@ -598,8 +608,8 @@
           "replyConditions": [
             {
               "name": "colony.lost_group_quest.saved",
-              "value": "5",
-              "type": "EQUAL"
+              "value": "4",
+              "type": "GREATER"
             }
           ]
         },
