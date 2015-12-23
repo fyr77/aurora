@@ -285,4 +285,10 @@ public class AuroraTiledMap implements ITileMap {
     public void setUserData(Object userData) {
         this.userData = userData;
     }
+
+    @Override
+    public String getStepSound(int x, int y) {
+        // todo: somehow read it from map
+        return "step_stone";
+    }
 }

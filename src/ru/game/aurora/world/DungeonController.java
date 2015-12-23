@@ -172,6 +172,11 @@ public class DungeonController extends Listenable implements Serializable {
             landingParty.moveRight();
         }
 
+        String soundId = map.getStepSound(landingParty.getTargetX(), landingParty.getTargetY());
+        if (soundId != null) {
+            ResourceManager.getInstance().getSound(soundId).play();
+        }
+
         // world.getPlayer().getLandingParty().setPos(x, y);
     }
 

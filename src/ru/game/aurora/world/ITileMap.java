@@ -64,4 +64,12 @@ public interface ITileMap extends Serializable, ILosBoard, TileBasedMap {
     Object getUserData();
 
     void setUserData(Object o);
+
+    /**
+     * Returns the id of the sound that should be played when stepping onto
+     * tile at x,y
+     *
+     * @return Sound id defined in sound.xml
+     */
+    String getStepSound(int x, int y);
 }

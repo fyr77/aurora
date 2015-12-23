@@ -871,6 +871,11 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     }
 
     @Override
+    public String getStepSound(int x, int y) {
+        return null;
+    }
+
+    @Override
     public int getWidthInTiles() {
         return radius * 2;
     }

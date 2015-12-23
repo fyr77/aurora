@@ -338,4 +338,13 @@ public class SurfaceTileMap implements ITileMap, Serializable {
     public void setUserData(Object o) {
 
     }
+
+    @Override
+    public String getStepSound(int x, int y) {
+        byte b = getTileAt(x, y);
+        if ((b & SurfaceTypes.SNOW) != 0 || (b & SurfaceTypes.DIRT) != 0) {
+            return "step_sand";
+        }
+        return "step_stone";
+    }
 }

@@ -284,6 +284,11 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     }
 
+    @Override
+    public String getStepSound(int x, int y) {
+        return null;
+    }
+
     public List<GalaxyMapObject> getGalaxyMapObjects() {
         return objects;
     }
