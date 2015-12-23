@@ -386,7 +386,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
                 @Override
                 public void stateChanged(World world) {
                     targetObject.onAttack(world, playerShip, damage);
-                    if (!target.isAlive()) {
+                    if (!targetObject.isAlive()) {
                         GameLogger.getInstance().logMessage(targetObject.getName() + " " + Localization.getText("gui", "space.destroyed"));
                         target = null;
                     }
