@@ -190,7 +190,7 @@ public class DungeonController extends Listenable implements Serializable {
         // check if can pick up smth
         List<GameObject> gameObjectsAtPlayerPosition = new ArrayList<>();
         for (GameObject p : map.getObjects()) {
-            if (!p.canBeInteracted()) {
+            if (!p.canBeInteracted(world)) {
                 continue;
             }
 
@@ -431,7 +431,7 @@ public class DungeonController extends Listenable implements Serializable {
                 toRemove.add(a);
                 continue;
             }
-            if (getDistance(landingParty, a) == 0 && a.canBeInteracted()) {
+            if (getDistance(landingParty, a) == 0 && a.canBeInteracted(world)) {
                 isAtObject = true;
             }
         }

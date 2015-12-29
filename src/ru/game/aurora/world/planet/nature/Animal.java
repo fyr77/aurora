@@ -146,7 +146,7 @@ public class Animal extends SurfaceLootObject implements IMonster {
     }
 
     @Override
-    public boolean canBeInteracted() {
+    public boolean canBeInteracted(World world) {
         return hp <= 0;
     }
 

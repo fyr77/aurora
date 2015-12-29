@@ -62,7 +62,7 @@ public class BaseGameObject extends MovableSprite implements GameObject {
     }
 
     @Override
-    public boolean canBeInteracted() {
+    public boolean canBeInteracted(World world) {
         return false;
     }
 

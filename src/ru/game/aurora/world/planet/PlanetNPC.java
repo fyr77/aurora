@@ -35,13 +35,16 @@ public class PlanetNPC extends BaseGameObject {
 
     @Override
     public boolean interact(World world) {
-        world.addOverlayWindow(dialog);
-        return true;
+        if (dialog != null) {
+            world.addOverlayWindow(dialog);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean canBeInteracted() {
-        return true;
+    public boolean canBeInteracted(World world) {
+        return dialog != null;
     }
 
     @Override

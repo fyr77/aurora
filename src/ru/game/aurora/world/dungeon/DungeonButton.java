@@ -8,7 +8,6 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
-import ru.game.aurora.common.Drawable;
 import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
@@ -76,7 +75,7 @@ public class DungeonButton extends DungeonObject {
     }
 
     @Override
-    public boolean canBeInteracted() {
+    public boolean canBeInteracted(World world) {
         return true;
     }
 

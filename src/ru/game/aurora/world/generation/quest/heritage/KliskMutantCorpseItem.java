@@ -10,7 +10,6 @@ import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
-import ru.game.aurora.world.space.StarSystem;
 
 /**
  * Collectable body of a dead klisk mutant
@@ -109,7 +108,7 @@ public class KliskMutantCorpseItem extends BaseGameObject implements InventoryIt
     }
 
     @Override
-    public boolean canBeInteracted() {
+    public boolean canBeInteracted(World world) {
         return true;
     }
 

@@ -30,8 +30,9 @@ public interface GameObject extends Serializable, Updatable, IMovable, IDrawable
      * Return true if this object can be interacted with. Like hailing an alien ship or pressing a button.
      * If it is true then when player stands on same tile with this object,
      * an 'interact' button will appear.
+     * @param world
      */
-    boolean canBeInteracted();
+    boolean canBeInteracted(World world);
 
     /**
      * Player is standing on the same tile and has pressed an 'interact' button
