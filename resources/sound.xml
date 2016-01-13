@@ -25,4 +25,8 @@
 
     <resource type="sound" id="explosion_1">resources/sounds/explosions/explosion_1.wav</resource>
     <resource type="sound" id="explosion_2">resources/sounds/explosions/explosion_2.wav</resource>
+
+    <!-- footsteps -->
+    <resource type="sound" id="step_sand">resources/sounds/steps/sand.wav</resource>
+    <resource type="sound" id="step_stone">resources/sounds/steps/stone.wav</resource>
 </resources>

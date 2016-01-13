@@ -116,7 +116,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
             // lost group quest - find and save 5 scientists from monsters
             if (flags.containsKey("colony.lost_group_quest")) {
                 logger.info("Lost group quest started");
-                world.getGlobalVariables().put("colony.lost_group", true);
+                world.getGlobalVariables().put("colony.lost_group_quest", true);
                 world.getPlayer().getJournal().addQuestEntries("colony_search", "lost_group");
                 remainingScientists = 5;
 
