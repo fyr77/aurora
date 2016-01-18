@@ -32,6 +32,8 @@ public interface IMovable extends Positionable {
      */
     void moveLeft();
 
+    void moveTo(int newX, int newY);
+
     /**
      * Get distance in pixels between starting point (start tile X coordinate) and current position
      */

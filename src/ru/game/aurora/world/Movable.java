@@ -37,7 +37,7 @@ public class Movable extends BasePositionable implements IMovable, Updatable {
         movementSpeed = 1;
     }
 
-    private void startMoving(int destinationX, int destinationY) {
+    public void moveTo(int destinationX, int destinationY) {
         if (canMove) {
             isMoving = true;
             this.destinationX = destinationX;
@@ -51,22 +51,22 @@ public class Movable extends BasePositionable implements IMovable, Updatable {
 
     @Override
     public void moveUp() {
-        startMoving(x, y - movementSpeed);
+        moveTo(x, y - movementSpeed);
     }
 
     @Override
     public void moveDown() {
-        startMoving(x, y + movementSpeed);
+        moveTo(x, y + movementSpeed);
     }
 
     @Override
     public void moveRight() {
-        startMoving(x + movementSpeed, y);
+        moveTo(x + movementSpeed, y);
     }
 
     @Override
     public void moveLeft() {
-        startMoving(x - movementSpeed, y);
+        moveTo(x - movementSpeed, y);
     }
 
     @Override
