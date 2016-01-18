@@ -6,6 +6,8 @@ import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.ShipScreenController;
+import ru.game.aurora.music.MusicDialogListener;
+import ru.game.aurora.music.Playlist;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 
@@ -21,6 +23,8 @@ public class CrewMember extends ItemWithTextAndImage {
     private int reputation;
 
     private Dialog dialog;
+
+    private Playlist customMusic;
 
     private Map<String, String> dialogFlags = new HashMap<>();
 
@@ -45,6 +49,10 @@ public class CrewMember extends ItemWithTextAndImage {
         reputation += amount;
     }
 
+    public void setCustomMusic(Playlist customMusic) {
+        this.customMusic = customMusic;
+    }
+
     public void interact(World world) {
         Map<String, String> additionalFlags = new HashMap<>();
         additionalFlags.put("reputation", String.valueOf(reputation));
@@ -62,6 +70,10 @@ public class CrewMember extends ItemWithTextAndImage {
         }
         additionalFlags.put("condition", condition);
         world.addOverlayWindow(dialog, additionalFlags);
+        if (customMusic != null && !customMusic.isPlaying()) {
+            dialog.addListener(new MusicDialogListener(Playlist.getCurrentPlaylist().getId()));
+            customMusic.play();
+        }
     }
 
     // these can be overriden by subclasses

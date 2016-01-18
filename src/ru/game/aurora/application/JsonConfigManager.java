@@ -6,10 +6,14 @@
  */
 package ru.game.aurora.application;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.game.aurora.util.GsonTransient;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,7 +36,18 @@ public class JsonConfigManager<T extends JsonConfigManager.EntityWithId> {
 
     private final Class<T> entityClass;
 
-    private final Gson gson = new Gson();
+    // we will ignore all fields marked with GsonTransient annotation
+    private final Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+        @Override
+        public boolean shouldSkipField(FieldAttributes f) {
+            return f.getAnnotation(GsonTransient.class) != null;
+        }
+
+        @Override
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return false;
+        }
+    }).create();
 
     private final Map<String, T> entities = new HashMap<>();
 

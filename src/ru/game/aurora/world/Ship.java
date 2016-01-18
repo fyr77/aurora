@@ -84,14 +84,17 @@ public class Ship extends BaseGameObject {
 
         final CrewMember henry = new CrewMember("henry", "marine_dialog", Dialog.loadFromFile("dialogs/tutorials/marine_intro.json"));
         henry.getDialog().addListener(new HenryMainDialogListener(henry));
+        henry.setCustomMusic(ResourceManager.getInstance().getPlaylist("henry_dialog"));
         addCrewMember(world, henry);
 
         final CrewMember gordon = new CrewMember("gordon", "scientist_dialog", Dialog.loadFromFile("dialogs/tutorials/scientist_intro.json"));
         gordon.getDialog().addListener(new GordonMainDialogListener(gordon));
+        gordon.setCustomMusic(ResourceManager.getInstance().getPlaylist("gordon_dialog"));
         addCrewMember(world, gordon);
 
         final CrewMember sarah = new CrewMember("sarah", "engineer_dialog", Dialog.loadFromFile("dialogs/tutorials/engineer_intro.json"));
         sarah.getDialog().addListener(new SarahMainDialogListener(sarah));
+        sarah.setCustomMusic(ResourceManager.getInstance().getPlaylist("sarah_dialog"));
         addCrewMember(world, sarah);
 
         refillCrew(world);
