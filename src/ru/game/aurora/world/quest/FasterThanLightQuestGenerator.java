@@ -8,6 +8,7 @@
 package ru.game.aurora.world.quest;
 
 import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Vector2f;
 import ru.game.aurora.application.*;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
@@ -122,6 +123,10 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
             }
         }
 
+        private boolean shipCloseEnoughToBorder(World world) {
+            return world.getPlayer().getShip().getDistance(explodingStar) > targetSystem.getRadius() - 2;
+        }
+
         @Override
         public void update(GameContainer container, World world) {
             if (growing && world.isUpdatedThisFrame()) {
@@ -133,16 +138,18 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
                 }
                 final Ship ship = world.getPlayer().getShip();
 
-                if (Math.abs(radius - 3.0f) < 0.001) {
+                if (state == 3 && (Math.abs(radius - 3.0f) < 0.001 || shipCloseEnoughToBorder(world))) {
                     targetSystem.setRadius(targetSystem.getRadius() + 4);
                     radiusIncrement = 1;
+                    state = 4;
                 }
 
-                if (Math.abs(radius - 6f) < 0.001) {
+                if (state == 4 && (Math.abs(radius - 6f) < 0.001 || shipCloseEnoughToBorder(world))) {
                     targetSystem.setRadius(targetSystem.getRadius() + 4);
+                    state = 5;
                 }
 
-                if (Math.abs(radius - 7f) < 0.001) {
+                if (state == 5 && (Math.abs(radius - 7f) < 0.001 || shipCloseEnoughToBorder(world))) {
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/faster_than_light/ftl_hyperspace_border_expand.json"));
                     world.getPlayer().getJournal().addQuestEntries("ftl", "run");
                     targetSystem.setRadius(targetSystem.getRadius() + 1);
@@ -152,15 +159,27 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
                     for (int i = 0; i < solarWindCount; ++i) {
                         SolarWind sw = new SolarWind(0, 0);
                         do {
-                            targetSystem.setRandomEmptyPosition(sw);
+                            targetSystem.setRandomEmptyPosition(sw, 0.9, 1.5);
                         } while (sw.getDistance(explodingStar) < explodingStar.radius);
 
                         targetSystem.getShips().add(sw);
                     }
+                    // spawn some solar winds in the direction the player should run, so that
+                    // he is guaranteed to have at least some wind
+                    Vector2f direction = new Vector2f(world.getPlayer().getShip().getX(), world.getPlayer().getShip().getY());
+                    Vector2f player = direction.copy();
+                    direction.normalise();
+
+                    for (int i = 1; i < 4; ++i) {
+                        player.add(direction.copy().scale(i * (CommonRandom.getRandom().nextInt(3) + 1)));
+                        SolarWind sw = new SolarWind(Math.round(player.getX()), Math.round(player.getY()));
+                        targetSystem.getShips().add(sw);
+                    }
+                    state = 6;
 
                 }
 
-                if (radius > 8f) {
+                if (state == 6 && radius > 8f) {
                     targetSystem.setRadius(targetSystem.getRadius() + 1);
                 }
 
