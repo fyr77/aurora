@@ -29,4 +29,7 @@
     <!-- footsteps -->
     <resource type="sound" id="step_sand">resources/sounds/steps/sand.wav</resource>
     <resource type="sound" id="step_stone">resources/sounds/steps/stone.wav</resource>
+
+    <!-- notifications and gui -->
+    <resource type="sound" id="alarm1">resources/sounds/alarm1.wav</resource>
 </resources>

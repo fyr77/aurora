@@ -18,21 +18,27 @@
 
     <controlDefinition name="list_screen_engineering">
         <panel childLayout="horizontal" width="100%" height="100%">
-            <control id="itemsList" name="listBox" vertical="optional" horizontal="off" height="100%"
-                     selection="Single" width="50%"
-                     viewConverterClass="ru.game.aurora.gui.EngineeringListViewConverter">
-                <control name="engineering_line" controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
-                    <effect>
-                        <onCustom customKey="focus" name="colorBar" post="false" color="#444f" neverStopRendering="true"
-                                  timeType="infinite"/>
-                        <onCustom customKey="select" name="colorBar" post="false" color="#444f"
-                                  neverStopRendering="true" timeType="infinite"/>
-                        <onCustom customKey="select" name="textColor" post="false" color="#fc0f"
-                                  neverStopRendering="true" timeType="infinite"/>
-                    </effect>
-                    <interact onClick="listBoxItemClicked()"/>
+            <panel childLayout="vertical" width="50%">
+                <control id="itemsList" name="listBox" vertical="optional" horizontal="off" height="100%"
+                         selection="Single"
+                         viewConverterClass="ru.game.aurora.gui.EngineeringListViewConverter">
+                    <control name="engineering_line"
+                             controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController">
+                        <effect>
+                            <onCustom customKey="focus" name="colorBar" post="false" color="#444f"
+                                      neverStopRendering="true"
+                                      timeType="infinite"/>
+                            <onCustom customKey="select" name="colorBar" post="false" color="#444f"
+                                      neverStopRendering="true" timeType="infinite"/>
+                            <onCustom customKey="select" name="textColor" post="false" color="#fc0f"
+                                      neverStopRendering="true" timeType="infinite"/>
+                        </effect>
+                        <interact onClick="listBoxItemClicked()"/>
+                    </control>
                 </control>
-            </control>
+                <text textHAlign="left" style="base-font" text="${gui.list.increase_decrease_hint}" wrap="true"
+                      width="90%"/>
+            </panel>
             <panel width="10px"/>
             <panel childLayout="vertical" width="*">
                 <panel childLayout="center" style="nifty-panel-no-shadow">

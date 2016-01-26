@@ -19,6 +19,8 @@ import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.engineering.EngineeringProject;
@@ -33,6 +35,8 @@ import java.util.Map;
 
 public class EngineeringScreenController implements ScreenController {
     private final World world;
+
+    private final GameContainer container;
 
     EngineeringState engineeringState;
 
@@ -51,8 +55,9 @@ public class EngineeringScreenController implements ScreenController {
     private Element textElement;
 
 
-    public EngineeringScreenController(World world) {
+    public EngineeringScreenController(World world, GameContainer container) {
         this.world = world;
+        this.container = container;
     }
 
     @Override
@@ -116,7 +121,17 @@ public class EngineeringScreenController implements ScreenController {
     }
 
     public void onEngineersDecreased() {
-        if (engineeringState.getHullRepairs().engineersAssigned > 0) {
+        int engineersAssigned = engineeringState.getHullRepairs().engineersAssigned;
+        if (engineersAssigned > 0) {
+            int amountToChange = 1;
+            if (container.getInput().isKeyDown(Input.KEY_LSHIFT) || container.getInput().isKeyDown(Input.KEY_RSHIFT)) {
+                amountToChange = Math.min(5, engineersAssigned);
+            }
+
+            if (container.getInput().isKeyDown(Input.KEY_LCONTROL) || container.getInput().isKeyDown(Input.KEY_RCONTROL)) {
+                amountToChange = engineersAssigned;
+            }
+
             engineeringState.getHullRepairs().engineersAssigned--;
             engineeringState.addIdleEngineers(1);
             updateLabels();
@@ -124,9 +139,19 @@ public class EngineeringScreenController implements ScreenController {
     }
 
     public void onEngineersIncreased() {
-        if (engineeringState.getIdleEngineers() > 0 && engineeringState.getHullRepairs().remainingPoints > 0) {
-            engineeringState.getHullRepairs().engineersAssigned++;
-            engineeringState.setIdleEngineers(engineeringState.getIdleEngineers() - 1);
+        int idleEngineers = engineeringState.getIdleEngineers();
+        if (idleEngineers > 0 && engineeringState.getHullRepairs().remainingPoints > 0) {
+            int amountToChange = 1;
+            if (container.getInput().isKeyDown(Input.KEY_LSHIFT) || container.getInput().isKeyDown(Input.KEY_RSHIFT)) {
+                amountToChange = Math.min(5, idleEngineers);
+            }
+
+            if (container.getInput().isKeyDown(Input.KEY_LCONTROL) || container.getInput().isKeyDown(Input.KEY_RCONTROL)) {
+                amountToChange = idleEngineers;
+            }
+
+            engineeringState.getHullRepairs().engineersAssigned += amountToChange;
+            engineeringState.setIdleEngineers(idleEngineers - amountToChange);
             updateLabels();
         }
     }
@@ -180,12 +205,21 @@ public class EngineeringScreenController implements ScreenController {
         if (idleEngineers == 0) {
             return;
         }
+        int amountToChange = 1;
+        if (container.getInput().isKeyDown(Input.KEY_LSHIFT) || container.getInput().isKeyDown(Input.KEY_RSHIFT)) {
+            amountToChange = Math.min(5, idleEngineers);
+        }
+
+        if (container.getInput().isKeyDown(Input.KEY_LCONTROL) || container.getInput().isKeyDown(Input.KEY_RCONTROL)) {
+            amountToChange = idleEngineers;
+        }
+
         EngineeringProject rp = (EngineeringProject) projectsList.getSelection().get(0);
         if (!rp.isProjectStarted() && !rp.checkEnoughResources(world)) {
             return;
         }
-        rp.changeEngineers(1, world);
-        world.getPlayer().getEngineeringState().setIdleEngineers(idleEngineers - 1);
+        rp.changeEngineers(amountToChange, world);
+        world.getPlayer().getEngineeringState().setIdleEngineers(idleEngineers - amountToChange);
         projectsList.refresh();
     }
 
@@ -197,8 +231,19 @@ public class EngineeringScreenController implements ScreenController {
         if (ep.getEngineersAssigned() == 0) {
             return;
         }
-        ep.changeEngineers(-1, world);
-        world.getPlayer().getEngineeringState().setIdleEngineers(world.getPlayer().getEngineeringState().getIdleEngineers() + 1);
+
+        int amountToChange = 1;
+
+        if (container.getInput().isKeyDown(Input.KEY_LSHIFT) || container.getInput().isKeyDown(Input.KEY_RSHIFT)) {
+            amountToChange = Math.min(5, ep.getEngineersAssigned());
+        }
+
+        if (container.getInput().isKeyDown(Input.KEY_LCONTROL) || container.getInput().isKeyDown(Input.KEY_RCONTROL)) {
+            amountToChange = ep.getEngineersAssigned();
+        }
+
+        ep.changeEngineers(-amountToChange, world);
+        world.getPlayer().getEngineeringState().setIdleEngineers(world.getPlayer().getEngineeringState().getIdleEngineers() + amountToChange);
         projectsList.refresh();
     }
 

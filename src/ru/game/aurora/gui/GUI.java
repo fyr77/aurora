@@ -138,7 +138,7 @@ public class GUI {
         GalaxyMapController galaxyMapController = new GalaxyMapController(world);
         // first register controllers
         nifty.registerScreenController(galaxyMapController);
-        nifty.registerScreenController(new ResearchScreenController(world));
+        nifty.registerScreenController(new ResearchScreenController(world, con));
         nifty.registerScreenController(new TradeScreenController(world));
         nifty.registerScreenController(new DialogController(world));
         nifty.registerScreenController(new StoryScreenController(world));
@@ -146,7 +146,7 @@ public class GUI {
         nifty.registerScreenController(new EarthProgressScreenController(world));
         nifty.registerScreenController(new LandingPartyEquipScreenController(world));
         nifty.registerScreenController(new EarthScreenController(world));
-        nifty.registerScreenController(new EngineeringScreenController(world));
+        nifty.registerScreenController(new EngineeringScreenController(world, con));
         nifty.registerScreenController(new FailScreenController(world));
         final SurfaceGUIController surfaceGUIController = new SurfaceGUIController(world);
         nifty.registerScreenController(surfaceGUIController);

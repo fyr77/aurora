@@ -17,6 +17,8 @@ import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.ResearchProjectDesc;
@@ -27,6 +29,8 @@ import ru.game.aurora.world.World;
 public class ResearchScreenController implements ScreenController {
     private final World world;
 
+    private final GameContainer container;
+
     private Element availableResearch;
 
     private Element completedResearch;
@@ -35,8 +39,9 @@ public class ResearchScreenController implements ScreenController {
 
     private Element window;
 
-    public ResearchScreenController(World world) {
+    public ResearchScreenController(World world, GameContainer container) {
         this.world = world;
+        this.container = container;
     }
 
     @Override
@@ -132,12 +137,22 @@ public class ResearchScreenController implements ScreenController {
             return;
         }
         final int idleScientists = world.getPlayer().getResearchState().getIdleScientists();
-        if (idleScientists == 0) {
+
+        int amountToChange = Math.min(idleScientists, 1);
+        if (container.getInput().isKeyDown(Input.KEY_LSHIFT) || container.getInput().isKeyDown(Input.KEY_RSHIFT)) {
+            amountToChange = Math.min(5, idleScientists);
+        }
+
+        if (container.getInput().isKeyDown(Input.KEY_LCONTROL) || container.getInput().isKeyDown(Input.KEY_RCONTROL)) {
+            amountToChange = idleScientists;
+        }
+
+        if (amountToChange == 0) {
             return;
         }
         ResearchProjectState rp = (ResearchProjectState) avail.getSelection().get(0);
-        rp.scientists++;
-        world.getPlayer().getResearchState().setIdleScientists(idleScientists - 1);
+        rp.scientists += amountToChange;
+        world.getPlayer().getResearchState().setIdleScientists(idleScientists - amountToChange);
         avail.refresh();
         updateCurrentResearchStatus(rp);
     }
@@ -151,8 +166,18 @@ public class ResearchScreenController implements ScreenController {
         if (rp.scientists == 0) {
             return;
         }
-        rp.scientists--;
-        world.getPlayer().getResearchState().setIdleScientists(world.getPlayer().getResearchState().getIdleScientists() + 1);
+        int amountToChange = 1;
+
+        if (container.getInput().isKeyDown(Input.KEY_LSHIFT) || container.getInput().isKeyDown(Input.KEY_RSHIFT)) {
+            amountToChange = Math.min(5, rp.scientists);
+        }
+
+        if (container.getInput().isKeyDown(Input.KEY_LCONTROL) || container.getInput().isKeyDown(Input.KEY_RCONTROL)) {
+            amountToChange = rp.scientists;
+        }
+
+        rp.scientists -= amountToChange;
+        world.getPlayer().getResearchState().setIdleScientists(world.getPlayer().getResearchState().getIdleScientists() + amountToChange);
         avail.refresh();
         updateCurrentResearchStatus(rp);
     }

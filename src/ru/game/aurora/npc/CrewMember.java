@@ -1,6 +1,7 @@
 package ru.game.aurora.npc;
 
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.dialog.Dialog;
@@ -11,6 +12,8 @@ import ru.game.aurora.music.Playlist;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +27,9 @@ public class CrewMember extends ItemWithTextAndImage {
 
     private Dialog dialog;
 
-    private Playlist customMusic;
+    private transient Playlist customMusic;
+
+    private String customMusicId;
 
     private Map<String, String> dialogFlags = new HashMap<>();
 
@@ -49,8 +54,9 @@ public class CrewMember extends ItemWithTextAndImage {
         reputation += amount;
     }
 
-    public void setCustomMusic(Playlist customMusic) {
-        this.customMusic = customMusic;
+    public void setCustomMusic(String customMusicId) {
+        this.customMusicId = customMusicId;
+        this.customMusic = ResourceManager.getInstance().getPlaylist(customMusicId);
     }
 
     public void interact(World world) {
@@ -102,5 +108,12 @@ public class CrewMember extends ItemWithTextAndImage {
 
     public int getReputation() {
         return reputation;
+    }
+
+    private void readObject(ObjectInputStream ois) throws IOException,
+            ClassNotFoundException {
+        ois.defaultReadObject();
+        customMusic = ResourceManager.getInstance().getPlaylist(customMusicId);
+
     }
 }

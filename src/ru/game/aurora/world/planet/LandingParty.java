@@ -10,6 +10,7 @@ import com.google.common.collect.Multiset;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.SurfaceGUIController;
 import ru.game.aurora.player.EarthCountry;
@@ -89,8 +90,10 @@ public class LandingParty extends BaseGameObject {
     public void consumeOxygen() {
         oxygen--;
         if (oxygen == 50) {
+            ResourceManager.getInstance().getSound("alarm1").play();
             GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.oxygen.half_empty"));
         } else if (oxygen == 20) {
+            ResourceManager.getInstance().getSound("alarm1").play();
             GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.oxygen.almost_empty"));
         }
     }
