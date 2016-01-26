@@ -24,7 +24,7 @@ public class PickableInventoryItem extends SurfaceLootObject {
     }
 
     @Override
-    public boolean canBeInteracted() {
+    public boolean canBeInteracted(World world) {
         return true;
     }
 

@@ -278,7 +278,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
         }
 
         @Override
-        public boolean canBeInteracted() {
+        public boolean canBeInteracted(World world) {
             return true;
         }
     }

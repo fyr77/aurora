@@ -148,7 +148,7 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
 
     @Override
     public boolean interact(World world) {
-        if (!canBeInteracted()) {
+        if (!canBeInteracted(world)) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.can_not_land"));
             return false;
         }
@@ -171,7 +171,7 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
     }
     
     @Override
-    public boolean canBeInteracted() {
+    public boolean canBeInteracted(World world) {
         return canBeCommunicated() || canBeLanded();
     }
     

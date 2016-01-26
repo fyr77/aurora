@@ -25,9 +25,9 @@ import java.util.List;
 public class MonsterController implements Serializable {
     private static final long serialVersionUID = -8278864000200488198L;
 
-    private final IMonster myMonster;
+    protected final IMonster myMonster;
     private final WeaponInstance weapon;
-    private final ITileMap map;
+    protected final ITileMap map;
     private int turnsBeforeMove;
     private Path path;
     private int lastX;
@@ -88,124 +88,128 @@ public class MonsterController implements Serializable {
         }
 
         if (--turnsBeforeMove == 0) {
-            turnsBeforeMove = myMonster.getSpeed();
-            final int x = map.isWrapped() ? EngineUtils.wrap(myMonster.getX(), map.getWidthInTiles()) : myMonster.getX();
-            final int y = map.isWrapped() ? EngineUtils.wrap(myMonster.getY(), map.getHeightInTiles()) : myMonster.getY();
+            makeTurn(world);
 
-            int newX = x + CommonRandom.getRandom().nextInt(2) - 1;
-            int newY = y + CommonRandom.getRandom().nextInt(2) - 1;
-            // if we want to attack landing party and it is close enough, move closer
-            final LandingParty party = world.getPlayer().getLandingParty();
-            int partyX = party.getX();
-            int partyY = party.getY();
+        }
+    }
 
-            if (myMonster.getBehaviour() == MonsterBehaviour.AGGRESSIVE) {
-                ////////////////////////// attack landing party //////////////////////////////////
+    protected void makeTurn(World world) {
+        turnsBeforeMove = myMonster.getSpeed();
+        final int x = map.isWrapped() ? EngineUtils.wrap(myMonster.getX(), map.getWidthInTiles()) : myMonster.getX();
+        final int y = map.isWrapped() ? EngineUtils.wrap(myMonster.getY(), map.getHeightInTiles()) : myMonster.getY();
 
-                final double distance = map.isWrapped() ? party.getDistanceWrapped(myMonster, map.getWidthInTiles(), map.getHeightInTiles()) : party.getDistance(myMonster);
-                if (weapon != null && distance < 1.5 * weapon.getWeaponDesc().getRange()) { //1.5 because of diagonal cells, 10 because melee monsters have attack range 1
-                    if (!map.lineOfSightExists(x, y, partyX, partyY)) {
-                        // can't shoot because no line of sight
-                        return;
+        int newX = x + CommonRandom.getRandom().nextInt(2) - 1;
+        int newY = y + CommonRandom.getRandom().nextInt(2) - 1;
+        // if we want to attack landing party and it is close enough, move closer
+        final LandingParty party = world.getPlayer().getLandingParty();
+        int partyX = party.getX();
+        int partyY = party.getY();
+
+        if (myMonster.getBehaviour() == MonsterBehaviour.AGGRESSIVE) {
+            ////////////////////////// attack landing party //////////////////////////////////
+
+            final double distance = map.isWrapped() ? party.getDistanceWrapped(myMonster, map.getWidthInTiles(), map.getHeightInTiles()) : party.getDistance(myMonster);
+            if (weapon != null && distance < 1.5 * weapon.getWeaponDesc().getRange()) { //1.5 because of diagonal cells, 10 because melee monsters have attack range 1
+                if (!map.lineOfSightExists(x, y, partyX, partyY)) {
+                    // can't shoot because no line of sight
+                    return;
+                }
+                if (!weapon.isReady()) {
+                    return;
+                }
+                Effect eff = playAttackEffects(world, party, weapon.getWeaponDesc());
+                eff.setEndListener(new IStateChangeListener<World>() {
+                    private static final long serialVersionUID = -7177344379777105885L;
+
+                    @Override
+                    public void stateChanged(World world) {
+                        party.subtractHp(world, weapon.getWeaponDesc().getDamage());
+                        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), myMonster.getName(), weapon.getWeaponDesc().getDamage(), party.getHp()));
                     }
-                    if (!weapon.isReady()) {
-                        return;
-                    }
-                    Effect eff = playAttackEffects(world, party, weapon.getWeaponDesc());
+                });
+
+                newX = x;
+                newY = y;
+            } else if (map.lineOfSightExists(x, y, partyX, partyY)
+                    && (weapon == null
+                    || distance < 5 * weapon.getWeaponDesc().getRange()
+                    || (weapon.getWeaponDesc().getId().equals("melee") && distance < 15))) {
+                lastX = partyX;
+                lastY = partyY;
+                playerShown = true;
+            }
+
+            if (playerShown) {
+                // rebuild path only if player moved
+                if (path == null || lastX != partyX || lastY != partyY) {
+                    lastX = partyX;
+                    lastY = partyY;
+                    map.setTilePassable(x, y, true);    //hack (pathfinder cannot find path if starting point is blocked)
+                    path = map.getPathFinder().findPath(null, x, y, lastX, lastY);
+                    map.setTilePassable(x, y, false);   //hack
+                    pathIndex = 1;
+                }
+
+                playerShown = false;
+            }
+
+            if (path != null && path.getLength() > 1) {
+                newX = path.getX(pathIndex);
+                newY = path.getY(pathIndex);
+                pathIndex++;
+                if (pathIndex >= (path.getLength() - 1)) {
+                    path = null;
+                }
+            }
+
+            /////////////////////////////////////////////////////////////////////////
+        } else if (myMonster.getBehaviour() == MonsterBehaviour.FRIENDLY && weapon != null) {
+            // find some AGGRESSIVE target nearby
+            List<GameObject> tmpList = new ArrayList<>(map.getObjects());
+            for (GameObject po : tmpList) {
+
+                if (!po.canBeAttacked() || !DungeonMonster.class.isAssignableFrom(po.getClass())) {
+                    continue;
+                }
+                final DungeonMonster po1 = (DungeonMonster) po;
+
+                if (po1.getBehaviour() != MonsterBehaviour.AGGRESSIVE) {
+                    continue;
+                }
+
+                if (po1.getDistance(myMonster) < weapon.getWeaponDesc().getRange() && map.lineOfSightExists(x, y, po.getX(), po.getY())) {
+
+                    Effect eff = playAttackEffects(world, po1, weapon.getWeaponDesc());
                     eff.setEndListener(new IStateChangeListener<World>() {
-                        private static final long serialVersionUID = -7177344379777105885L;
+                        private static final long serialVersionUID = 995534841614292836L;
 
                         @Override
                         public void stateChanged(World world) {
-                            party.subtractHp(world, weapon.getWeaponDesc().getDamage());
-                            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), myMonster.getName(), weapon.getWeaponDesc().getDamage(), party.getHp()));
+                            po1.onAttack(world, myMonster, weapon.getWeaponDesc().getDamage());
                         }
                     });
-
-                    newX = x;
-                    newY = y;
-                } else if (map.lineOfSightExists(x, y, partyX, partyY)
-                        && (weapon == null
-                        || distance < 5 * weapon.getWeaponDesc().getRange()
-                        || (weapon.getWeaponDesc().getId().equals("melee") && distance < 15))) {
-                    lastX = partyX;
-                    lastY = partyY;
-                    playerShown = true;
-                }
-
-                if (playerShown) {
-                    // rebuild path only if player moved
-                    if (path == null || lastX != partyX || lastY != partyY) {
-                        lastX = partyX;
-                        lastY = partyY;
-                        map.setTilePassable(x, y, true);    //hack (pathfinder cannot find path if starting point is blocked)
-                        path = map.getPathFinder().findPath(null, x, y, lastX, lastY);
-                        map.setTilePassable(x, y, false);   //hack
-                        pathIndex = 1;
-                    }
-
-                    playerShown = false;
-                }
-
-                if (path != null && path.getLength() > 1) {
-                    newX = path.getX(pathIndex);
-                    newY = path.getY(pathIndex);
-                    pathIndex++;
-                    if (pathIndex >= (path.getLength() - 1)) {
-                        path = null;
-                    }
-                }
-
-                /////////////////////////////////////////////////////////////////////////
-            } else if (myMonster.getBehaviour() == MonsterBehaviour.FRIENDLY && weapon != null) {
-                // find some AGGRESSIVE target nearby
-                List<GameObject> tmpList = new ArrayList<>(map.getObjects());
-                for (GameObject po : tmpList) {
-
-                    if (!po.canBeAttacked() || !DungeonMonster.class.isAssignableFrom(po.getClass())) {
-                        continue;
-                    }
-                    final DungeonMonster po1 = (DungeonMonster) po;
-
-                    if (po1.getBehaviour() != MonsterBehaviour.AGGRESSIVE) {
-                        continue;
-                    }
-
-                    if (po1.getDistance(myMonster) < weapon.getWeaponDesc().getRange() && map.lineOfSightExists(x, y, po.getX(), po.getY())) {
-
-                        Effect eff = playAttackEffects(world, po1, weapon.getWeaponDesc());
-                        eff.setEndListener(new IStateChangeListener<World>() {
-                            private static final long serialVersionUID = 995534841614292836L;
-
-                            @Override
-                            public void stateChanged(World world) {
-                                po1.onAttack(world, myMonster, weapon.getWeaponDesc().getDamage());
-                            }
-                        });
-                        break;
-                    }
-                }
-                // do not move
-                return;
-            }
-
-            if (map.isTilePassable(newX, newY)) {
-                map.setTilePassable(x, y, true);
-                if (newX > x) {
-                    myMonster.moveRight();
-                } else if (newX < x) {
-                    myMonster.moveLeft();
-                } else if (newY < y) {
-                    myMonster.moveUp();
-                } else if (newY > y) {
-                    myMonster.moveDown();
-                }
-                if (myMonster.getBehaviour() != MonsterBehaviour.FRIENDLY) {
-                    // hack: friendly monsters do not block path
-                    map.setTilePassable(myMonster.getTargetX(), myMonster.getTargetY(), false);
+                    break;
                 }
             }
+            // do not move
+            return;
+        }
 
+        if (map.isTilePassable(newX, newY)) {
+            map.setTilePassable(x, y, true);
+            if (newX > x) {
+                myMonster.moveRight();
+            } else if (newX < x) {
+                myMonster.moveLeft();
+            } else if (newY < y) {
+                myMonster.moveUp();
+            } else if (newY > y) {
+                myMonster.moveDown();
+            }
+            if (myMonster.getBehaviour() != MonsterBehaviour.FRIENDLY) {
+                // hack: friendly monsters do not block path
+                map.setTilePassable(myMonster.getTargetX(), myMonster.getTargetY(), false);
+            }
         }
     }
 }

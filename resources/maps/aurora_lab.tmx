@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" nextobjectid="8">
+ <tileset firstgid="1" name="humanity_tileset" tilewidth="64" tileheight="64">
+  <image source="humanity_tileset.png" width="256" height="640"/>
+ </tileset>
+ <tileset firstgid="41" name="rogues_tileset" tilewidth="64" tileheight="64">
+  <image source="rogues_tileset.png" width="256" height="640"/>
+ </tileset>
+ <tileset firstgid="81" name="zorsan_tileset" tilewidth="64" tileheight="64">
+  <image source="zorsan_tileset.png" width="256" height="640"/>
+ </tileset>
+ <tileset firstgid="121" name="editor_tileset" tilewidth="64" tileheight="64">
+  <image source="editor_tileset.png" width="256" height="192"/>
+ </tileset>
+ <layer name="Слой тайлов 1" width="30" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjAAGYcIghY3LNpSamp72MUExNe5HNxCZHib2MDMSZT4twRrablQR7qBW/IHs56WwvLDwHyl5eIu1gxMKmxF5S8s9QtjcfCdMzfkH25UFpdL8j5zNOLGL08C+17SUVDzd7QeUlGxCzD4B/uUgMg1EwCkbB8AMAesp/KxAOAAA=
+  </data>
+ </layer>
+ <layer name="walls" width="30" height="30">
+  <properties>
+   <property name="isObstacle" value="true"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2VYQrCMAyFC52bVVR0iv+8gYqKeibvfwETaCGErkvcnKh98LEty/LKlnTGZP2TJi1Icni+REtg3sDG52z99TiRi6wUvlNFbpvcD/mOgBKogF3D/XUPviUDa2Lf1CRWkXxndH0V6lQsLulduuaZ0b3nWA2JL87Bgj2j8Q1zxGuk5sX5dVqSXyh9X+nn4BuLv9M37CGWxfvy3QMH4Cis1cX3Qc5PwBm4sBycVd7/XX2prsANuEfqf+r78v4fwpfLerS+oS/xWAzkS/dbyZ6cQvNfyMrK+h49AfK4SHgQDgAA
+  </data>
+ </layer>
+ <layer name="misc" width="30" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OQREAAAgDoAWwf15vJfQDCUiAmu8AAAAcWz8omJwQDgAA
+  </data>
+ </layer>
+ <objectgroup name="Слой объектов 1">
+  <object id="2" name="exitDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="22" x="768" y="384" width="64" height="64">
+   <properties>
+    <property name="imageClose" value="humanity_tileset"/>
+    <property name="imageCloseTileX" value="1"/>
+    <property name="imageCloseTileY" value="5"/>
+    <property name="imageOpen" value="humanity_tileset"/>
+    <property name="imageOpenTileX" value="3"/>
+    <property name="imageOpenTileY" value="6"/>
+    <property name="initialState" value="closed"/>
+   </properties>
+  </object>
+  <object id="3" type="entryPoint" gid="121" x="1096" y="512" width="64" height="64"/>
+  <object id="5" name="escapeTrigger" type="ru.game.aurora.world.dungeon.DungeonTrigger" gid="122" x="640" y="574.667" width="128" height="196"/>
+  <object id="6" type="ru.game.aurora.world.dungeon.DungeonPlaceholder" gid="124" x="768" y="512" width="64" height="64"/>
+  <object id="7" type="ru.game.aurora.world.dungeon.DungeonMonster" gid="38" x="769.333" y="320" width="64" height="64">
+   <properties>
+    <property name="id" value="marine"/>
+    <property name="tags" value="ally"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

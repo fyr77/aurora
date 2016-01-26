@@ -26,7 +26,7 @@ public class ExitPoint extends BaseGameObject
     }
 
     @Override
-    public boolean canBeInteracted() {
+    public boolean canBeInteracted(World world) {
         return true;
     }
 

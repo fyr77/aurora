@@ -205,3 +205,7 @@ heritage.fifth_monster_killed
 quarantine.started
 quarantine.first_return - set when player returns to target planet after quest is started
 quarantine.research_started - set after disease research becomes available
+
+===========================
+
+sentient_stones.started
