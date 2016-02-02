@@ -98,6 +98,7 @@ dependencies {
     compile fileTree(dir: 'third-party', include: ['Libnoiseforjava-master.jar']) // create fork and publish it
     compile 'ch.qos.logback:logback-classic:1.0.13'
     compile 'ch.qos.logback:logback-core:1.0.13'
+    compile 'com.code-disaster.steamworks4j:steamworks4j:1.2.3'
     compile 'org.lwjgl.lwjgl:lwjgl:2.9.3'
     compile fileTree(dir: 'third-party', include: ['nifty-1.3.4-SNAPSHOT.jar']) // look for version
     compile fileTree(dir: 'third-party', include: ['nifty-default-controls-1.3.4-SNAPSHOT.jar']) // look for version

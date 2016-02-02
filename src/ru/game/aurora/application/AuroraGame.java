@@ -6,6 +6,7 @@
  */
 package ru.game.aurora.application;
 
+import com.codedisaster.steamworks.SteamAPI;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.slick2d.NiftyOverlayGame;
 import org.lwjgl.LWJGLException;
@@ -219,6 +220,15 @@ public class AuroraGame extends NiftyOverlayGame {
                 }
             }
 
+            if (args.length == 0 || !args[0].equals("-noSteam")) {
+                if (!SteamAPI.init()) {
+                    logger.error("Failed to initialize steam api");
+                    return;
+                }
+            } else {
+                logger.warn("This is a non-Steam build");
+            }
+
             String nativePath;
             if (osName.contains("Windows")) {
                 nativePath = "native/windows";
@@ -352,6 +362,9 @@ public class AuroraGame extends NiftyOverlayGame {
             if (runBeforeRestart != null) {
                 runBeforeRestart.run();
             }
+            if (SteamAPI.isSteamRunning()) {
+                SteamAPI.shutdown();
+            }
             // exit
             System.exit(0);
         } catch (Exception e) {
@@ -441,6 +454,10 @@ public class AuroraGame extends NiftyOverlayGame {
                 up.update(gameContainer, world);
             }
             gameContainer.getInput().clearKeyPressedRecord();
+
+            if (SteamAPI.isSteamRunning()) {
+                SteamAPI.runCallbacks();
+            }
         } catch (Exception ex) {
             logger.error("Exception in updateGame()", ex);
             throw ex;
