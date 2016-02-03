@@ -1,6 +1,16 @@
-VERSION 0.5.0
+VERSION 0.5.1
 
 IN PROGRESS...
+
++ Steam API support via steamworks4j
+* Torpedoes should now hit target on same turn they reach their location
+
+==========================================
+
+VERSION 0.5.0
+
+28.11.2015
+
 + Heritage quest
 + Quarantine quest
 + Modding support v0.1

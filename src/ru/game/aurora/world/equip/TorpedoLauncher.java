@@ -52,7 +52,19 @@ public class TorpedoLauncher extends WeaponDesc {
         }
 
         @Override
+        protected void movementCompleted() {
+            if (BasePositionable.getDistance(this, target) == 0) {
+                target.onAttack(World.getWorld(), this, damage);
+                World.getWorld().getCurrentRoom().getMap().getEffects().add(new ExplosionEffect(x, y, "ship_explosion", false, true));
+                isAlive = false;
+            }
+        }
+
+        @Override
         public void update(GameContainer container, World world) {
+            if (!isAlive()) {
+                return;
+            }
             if (BasePositionable.getDistance(this, target) < 2) {
                 setMovementSpeed(1);
             }

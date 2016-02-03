@@ -113,10 +113,16 @@ public class Movable extends BasePositionable implements IMovable, Updatable {
                         offsetY = 0;
                         setPos(destinationX, destinationY);
                         lastCall = 0;
+                        movementCompleted();
                     }
                 }
             }
         }
+    }
+
+    protected void movementCompleted() {
+        // override in a subclass if you want to do something after movement animation is done
+        // at this moment x and y will be set to destination position
     }
 
     @Override
