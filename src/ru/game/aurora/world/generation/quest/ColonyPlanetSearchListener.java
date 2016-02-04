@@ -163,7 +163,6 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
         if (data.animalCaptured && data.resourcesCollected && planet.getExploredTiles() > targetTiles) {
             world.getGlobalVariables().put("colony_search.explored_fully", true);
             world.getGlobalVariables().put("colony_search.coords", currentPlanet);
-            world.getPlayer().getJournal().getQuests().get("colony_search").addMessage("explored");
             isAlive = false;
         }
 
@@ -225,6 +224,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
             return false;
         }
         firstPlanetFound = true;
+        world.getPlayer().getJournal().getQuests().get("colony_search").addMessage("explored");
         PlanetaryLifeGenerator.setPlanetHasLife(currentPlanet);
         addMonsters(world);
 
