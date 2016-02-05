@@ -34,6 +34,7 @@ import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.quest.FasterThanLightQuestGenerator;
 import ru.game.aurora.world.quest.Journal;
 import ru.game.aurora.world.quest.JournalEntry;
+import ru.game.aurora.world.quest.SentientStonesQuestGenerator;
 import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.earth.EarthUpgradeUnlocker;
@@ -65,6 +66,7 @@ public class WorldGenerator implements Runnable {
             , new RedMeatEncounterGenerator()
             , new HeritageQuestGenerator()
             , new QuarantineQuest()
+            , new SentientStonesQuestGenerator()
     };
     private static final WorldGeneratorPart[] alienGenerators = {
             new HumanityGenerator()

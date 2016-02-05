@@ -101,6 +101,11 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
             world.getGlobalVariables().put("sentient_stones.started", true);
             turnsBeforeIncident = Configuration.getIntProperty("sentient_stones.turnsBeforeIncident");
         }
+
+        @Override
+        public boolean isDumpable() {
+            return true;
+        }
     }
 
     private class SentientStone extends PickableInventoryItem {
@@ -122,15 +127,15 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
 
     @Override
     public boolean onPlayerLandedPlanet(World world, Planet planet) {
-        if (planet != null) {
+        if (this.planet != null) {
             return false;
         }
 
         if (planet.getOwner().isQuestLocation()) {
             return false;
         }
-        if (planet.getExploredTiles() > 0) {
-            // already landed here before
+        if (planet.getExploredTiles() > 121) {
+            // already landed here before, 121 is the spot around the landing location that is explored when player landed now
             return false;
         }
 
@@ -161,7 +166,7 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
     /**
      * Stone monster works as follows:
      * 1) If there is a direct line between monster and player monster remembers player position and starts charging
-     * 2) After 1-2 turns of charging monster in a single turn rolls untill it hits a wall. If landing party is still on its
+     * 2) After 1-2 turns of charging monster in a single turn rolls until it hits a wall. If landing party is still on its
      * way then it gets hit and thrown to a random nearby spot
      * 3) If there is no direct line, monster moves as usual
      * <p/>
@@ -327,7 +332,7 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
     @Override
     public boolean onTurnEnded(World world) {
         if (planet != null) {
-            if (!initialDialogShown && world.getCurrentRoom().equals(planet) && ++stepsCount > 5) {
+            if (!initialDialogShown && world.getCurrentRoom().equals(planet) && ++stepsCount > 2) {
                 Dialog dialog = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_landing_party_report.json");
                 world.addOverlayWindow(dialog);
                 initialDialogShown = true;
