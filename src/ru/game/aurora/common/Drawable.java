@@ -36,6 +36,11 @@ public class Drawable implements Serializable {
         image = img;
     }
 
+    public Drawable(Image img, Image flippedCopy) {
+        this.image = img;
+        this.flippedCopy = flippedCopy;
+    }
+
     public Drawable(String id) {
         this(id, -1, -1, false);
     }

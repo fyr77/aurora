@@ -13,6 +13,7 @@ import rlforj.los.PrecisePermissive;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.effects.Effect;
+import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.dungeon.ExitPoint;
 import ru.game.aurora.world.dungeon.IVictoryCondition;
 import ru.game.aurora.world.planet.LandingParty;
@@ -171,7 +172,7 @@ public class AuroraTiledMap implements ITileMap {
 
     @Override
     public boolean isTilePassable(int x, int y) {
-        return SurfaceTypes.isPassible(flags[y][x]);
+        return contains(x, y) && SurfaceTypes.isPassible(flags[y][x]);
     }
 
     @Override
@@ -181,7 +182,7 @@ public class AuroraTiledMap implements ITileMap {
 
     @Override
     public boolean isTileVisible(int x, int y) {
-        return (flags[y][x] & SurfaceTypes.VISIBILITY_MASK) != 0;
+        return contains(x, y) && ((flags[y][x] & SurfaceTypes.VISIBILITY_MASK) != 0);
     }
 
     @Override
@@ -232,6 +233,9 @@ public class AuroraTiledMap implements ITileMap {
 
     @Override
     public void setTilePassable(int x, int y, boolean isPassable) {
+        if (!contains(x, y)) {
+            return;
+        }
         if (!isPassable) {
             flags[y][x] |= SurfaceTypes.OBSTACLE_MASK;
         } else {
@@ -290,5 +294,31 @@ public class AuroraTiledMap implements ITileMap {
     public String getStepSound(int x, int y) {
         // todo: somehow read it from map
         return "step_stone";
+    }
+
+    public static void setNearestFreePoint(ITileMap map, Positionable p, int x, int y) {
+        int radius = 0;
+        outer:
+        while (true) {
+            for (int dy = -radius; dy <= radius; ++dy) {
+                for (int dx = -radius; dx <= radius; ++dx) {
+
+                    final int xCandidate = EngineUtils.wrap(x + dx, map.getWidthInTiles());
+                    final int yCandidate = EngineUtils.wrap(y + dy, map.getHeightInTiles());
+                    if (map.isTilePassable(xCandidate, yCandidate)) {
+                        x = xCandidate;
+                        y = yCandidate;
+                        break outer;
+                    }
+                }
+            }
+            ++radius;
+
+            if (radius >= Math.min(map.getWidthInTiles(), map.getHeightInTiles())) {
+                throw new IllegalStateException("Whole map is not passable, can not place object");
+            }
+        }
+
+        p.setPos(x, y);
     }
 }

@@ -161,29 +161,7 @@ public class Planet extends BasePlanet implements IDungeon {
         if (surface == null) {
             createSurface();
         }
-        int radius = 0;
-        outer:
-        while (true) {
-            for (int dy = -radius; dy <= radius; ++dy) {
-                for (int dx = -radius; dx <= radius; ++dx) {
-
-                    final int xCandidate = EngineUtils.wrap(x + dx, surface.getWidthInTiles());
-                    final int yCandidate = EngineUtils.wrap(y + dy, surface.getHeightInTiles());
-                    if (surface.isTilePassable(xCandidate, yCandidate)) {
-                        x = xCandidate;
-                        y = yCandidate;
-                        break outer;
-                    }
-                }
-            }
-            ++radius;
-
-            if (radius >= Math.min(surface.getWidthInTiles(), surface.getHeightInTiles())) {
-                throw new IllegalStateException("Whole planet surface is not passable, can not place object");
-            }
-        }
-
-        p.setPos(x, y);
+        AuroraTiledMap.setNearestFreePoint(surface, p, x, y);
     }
 
 

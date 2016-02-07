@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" nextobjectid="8">
+<map version="1.0" orientation="orthogonal" width="30" height="30" tilewidth="64" tileheight="64">
  <tileset firstgid="1" name="humanity_tileset" tilewidth="64" tileheight="64">
   <image source="humanity_tileset.png" width="256" height="640"/>
  </tileset>
@@ -22,7 +22,7 @@
    <property name="isObstacle" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VYQrCMAyFC52bVVR0iv+8gYqKeibvfwETaCGErkvcnKh98LEty/LKlnTGZP2TJi1Icni+REtg3sDG52z99TiRi6wUvlNFbpvcD/mOgBKogF3D/XUPviUDa2Lf1CRWkXxndH0V6lQsLulduuaZ0b3nWA2JL87Bgj2j8Q1zxGuk5sX5dVqSXyh9X+nn4BuLv9M37CGWxfvy3QMH4Cis1cX3Qc5PwBm4sBycVd7/XX2prsANuEfqf+r78v4fwpfLerS+oS/xWAzkS/dbyZ6cQvNfyMrK+h49AfK4SHgQDgAA
+   H4sIAAAAAAAAC+2VbQrCMAyGC52bVVT8wn/eQEVFPZP3v4AJtBBC1yWuOsS+8LAty/KWLemMKfonTTqQ5PB8iZbAvIWtz9n563EiF1kpfKeK3C65zL7VQL6oEVADDbBvub/J4FszsCb2zZrEGpLvjK6vQp2GxSW9S9c8M7r3HKsh8cU5WLBnNL5hjniN1Lw4v05L8iul7ztzFHxj8U/6hj3Esngu3wNwBE7CWn18n+T8DFyAK8vBWeX939eX6gbcgUek/lDfl/f/N3y5rEfrG/oSj9J/QF9fut9K9uQUmv9CUVHR7+gFHoNaFxAOAAA=
   </data>
  </layer>
  <layer name="misc" width="30" height="30">
@@ -30,8 +30,8 @@
    H4sIAAAAAAAAC+3OQREAAAgDoAWwf15vJfQDCUiAmu8AAAAcWz8omJwQDgAA
   </data>
  </layer>
- <objectgroup name="Слой объектов 1">
-  <object id="2" name="exitDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="22" x="768" y="384" width="64" height="64">
+ <objectgroup name="Слой объектов 1" width="0" height="0">
+  <object name="exitDoor" type="ru.game.aurora.world.dungeon.DungeonDoor" gid="22" x="768" y="384" width="64" height="64">
    <properties>
     <property name="imageClose" value="humanity_tileset"/>
     <property name="imageCloseTileX" value="1"/>
@@ -42,14 +42,14 @@
     <property name="initialState" value="closed"/>
    </properties>
   </object>
-  <object id="3" type="entryPoint" gid="121" x="1096" y="512" width="64" height="64"/>
-  <object id="5" name="escapeTrigger" type="ru.game.aurora.world.dungeon.DungeonTrigger" gid="122" x="640" y="574.667" width="128" height="196"/>
-  <object id="6" type="ru.game.aurora.world.dungeon.DungeonPlaceholder" gid="124" x="768" y="512" width="64" height="64"/>
-  <object id="7" type="ru.game.aurora.world.dungeon.DungeonMonster" gid="38" x="769.333" y="320" width="64" height="64">
+  <object type="entryPoint" gid="121" x="1096" y="512" width="64" height="64"/>
+  <object type="ru.game.aurora.world.dungeon.DungeonPlaceholder" gid="124" x="960" y="512" width="64" height="64"/>
+  <object type="ru.game.aurora.world.dungeon.DungeonMonster" gid="38" x="768" y="320" width="64" height="64">
    <properties>
     <property name="id" value="marine"/>
     <property name="tags" value="ally"/>
    </properties>
   </object>
+  <object name="exitTrigger" type="ru.game.aurora.world.dungeon.DungeonTrigger" x="512" y="384" width="256" height="192"/>
  </objectgroup>
 </map>

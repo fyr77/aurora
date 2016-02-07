@@ -11,6 +11,7 @@ import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.common.Drawable;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.SurfaceGUIController;
 import ru.game.aurora.player.EarthCountry;
@@ -333,5 +334,9 @@ public class LandingParty extends BaseGameObject {
     public void moveLeft() {
         overWeightTest();
         super.moveLeft();
+    }
+
+    public void setImage(String customImage) {
+        drawable = new Drawable(customImage);
     }
 }

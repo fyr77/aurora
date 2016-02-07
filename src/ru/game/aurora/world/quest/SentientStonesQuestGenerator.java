@@ -2,6 +2,7 @@ package ru.game.aurora.world.quest;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
@@ -45,8 +46,8 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
     public void stateChanged(World param) {
         // open the door, add marines, show dialog
         exitDoor.setState(true);
-
-        Dialog d = Dialog.loadFromFile("dialogs/sentient_stones/after_incident.csv");
+        param.getPlayer().getLandingParty().setImage("awayteam");
+        Dialog d = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_after_incident.json");
         Map<String, String> flags = new HashMap<>();
         final int scientists = Configuration.getIntProperty("sentient_stones.scientists");
         if (param.getPlayer().getLandingParty().getScience() == scientists) {
@@ -74,16 +75,18 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
                 if (returnCode == 1) {
                     //throw to space
                     world.getPlayer().getJournal().questCompleted("sentient_stones", "throw_to_space");
-                    world.getGlobalVariables().remove("sentient_stones.started");
+                    world.getGlobalVariables().remove("sentient_stone.started");
                     isAlive = false;
                 }
                 world.getCurrentDungeon().getController().returnToPrevRoom(true);
             }
         });
-        param.addOverlayWindow(d);
+        param.addOverlayWindow(d, flags);
     }
 
     private class SentientStoneItem extends SellOnlyInventoryItem {
+
+        private static final long serialVersionUID = 1L;
 
         public SentientStoneItem() {
             super("journal"
@@ -97,7 +100,7 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
         @Override
         public void onReceived(World world, int amount) {
             // start quest here
-            world.getPlayer().getJournal().addQuestEntries("sentient_stones", "start");
+            world.getPlayer().getJournal().addQuestEntries("sentient_stone", "start");
             world.getGlobalVariables().put("sentient_stones.started", true);
             turnsBeforeIncident = Configuration.getIntProperty("sentient_stones.turnsBeforeIncident");
         }
@@ -109,6 +112,8 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
     }
 
     private class SentientStone extends PickableInventoryItem {
+
+        private static final long serialVersionUID = 1L;
 
         public SentientStone(int x, int y) {
             super(x, y, new SentientStoneItem());
@@ -170,11 +175,14 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
      * way then it gets hit and thrown to a random nearby spot
      * 3) If there is no direct line, monster moves as usual
      * <p/>
-     * Monster is 2x2, x,y shows left bottom
+     * Monster is drawn as 2x2 tile size image, but is shifted half of tile, so that it is centered around its x,y
+     * When attacking monster hists a 3 tile wide corridor
      */
     private static class StoneMonster extends DungeonMonster {
 
-        private boolean hidden = false;
+        private static final long serialVersionUID = 1L;
+
+        private transient Image img = null;
 
         public StoneMonster(ITileMap map) {
             super(
@@ -197,23 +205,21 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
             );
 
             controller = new StoneMonsterController(map, this);
-
-        }
-
-        public void setHidden(boolean hidden) {
-            this.hidden = hidden;
+            setMovementSpeed(2);
         }
 
         @Override
         public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
-            if (hidden) {
-                return;
+            if (img == null) {
+                img = ResourceManager.getInstance().getImage("stone_1").getScaledCopy(2);
             }
-            super.draw(container, graphics, camera, world);
+            img.draw(camera.getXCoord(getX()) + getOffsetX() - AuroraGame.tileSize / 2, camera.getYCoord(getY()) + getOffsetY() - AuroraGame.tileSize / 2);
         }
     }
 
     private static class StoneMonsterController extends MonsterController {
+
+        private static final long serialVersionUID = 1;
 
         private enum State {
             ROLLING,
@@ -223,8 +229,6 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
 
         private State state;
 
-        private BasePositionable stopPosition;
-
         private Vector2f rollDirection;
 
         private int countdown;
@@ -232,7 +236,6 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
         public StoneMonsterController(ITileMap map, IMonster myMonster) {
             super(map, myMonster);
             this.state = State.MOVING_TO_POSITION;
-            this.stopPosition = null;
             this.countdown = 0;
         }
 
@@ -241,16 +244,37 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
             LandingParty lp = world.getPlayer().getLandingParty();
             if (state == State.MOVING_TO_POSITION) {
                 // check if there is a line of sight and we can charge
-                if (myMonster.getX() == lp.getX() || myMonster.getX() + 1 == lp.getX()
-                        || myMonster.getY() == lp.getY() || myMonster.getY() + 1 == lp.getY()) {
+                boolean canMoveY = Math.abs(myMonster.getX() - lp.getX()) <= 1;
+                boolean canMoveX = Math.abs(myMonster.getY() - lp.getY()) <= 1;
+                if (canMoveX || canMoveY) {
 
-                    if (map.lineOfSightExists(myMonster.getX(), myMonster.getY(), lp.getX(), lp.getY()) &&
-                            map.lineOfSightExists(myMonster.getX() + 1, myMonster.getY() + 1, lp.getX(), lp.getY())) {
+                    if (map.lineOfSightExists(myMonster.getX(), myMonster.getY(), lp.getX(), lp.getY())) {
                         state = State.CHARGING;
                         countdown = Configuration.getIntProperty("sentient_stones.charge_turns");
-                        rollDirection = new Vector2f(Math.signum(lp.getX() - myMonster.getX())
-                                , Math.signum(lp.getY() - myMonster.getY()));
+
+                        float dx = canMoveX ? Math.signum(lp.getX() - myMonster.getX()) : 0;
+                        float dy = canMoveY ? Math.signum(lp.getY() - myMonster.getY()) : 0;
+                        if (canMoveX ^ canMoveY) {
+                            rollDirection = new Vector2f(dx, dy);
+                        } else {
+                            // can charge both x and y, select one of it
+                            if (CommonRandom.getRandom().nextBoolean()) {
+                                rollDirection = new Vector2f(dx, 0);
+                            } else {
+                                rollDirection = new Vector2f(0, dy);
+                            }
+                        }
+
+                        // check that there are at least a couple of cells to roll and we are not stuck to a wall
+                        if (!map.isTilePassable((int) (myMonster.getX() + dx), (int) (myMonster.getY() + dy))) {
+                            state = State.MOVING_TO_POSITION;
+                            super.makeTurn(world);
+                            return;
+                        }
                         GameLogger.getInstance().logMessage(Localization.getText("journal", "sentient_stone.charging"));
+                        return;
+                    } else {
+                        super.makeTurn(world);
                     }
                 } else {
                     // just move towards player
@@ -259,49 +283,53 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
                 return;
             }
             if (state == State.CHARGING) {
-                if (--countdown == 0) {
+                if (--countdown <= 0) {
                     GameLogger.getInstance().logMessage(Localization.getText("journal", "sentient_stone.attack"));
                     // calculate target position
-                    BasePositionable[] targetPos = new BasePositionable[]{
-                            new BasePositionable(myMonster.getX(), myMonster.getY())
-                            , new BasePositionable(myMonster.getX() + 1, myMonster.getY())
-                            , new BasePositionable(myMonster.getX(), myMonster.getY() + 1)
-                            , new BasePositionable(myMonster.getX() + 1, myMonster.getY() + 1)
-                    };
-                    boolean lpHit = false;
-                    boolean wallHit = false;
-                    int movesDone = 0;
 
-                    // check all 2x2 squares in the direction of movement untill we find a wall
+                    boolean lpHit = false;
+                    int movesDone = 1;
+
+                    // check all 3x3 squares in the direction of movement untill we find a wall
                     // check if we hit a landing party
                     while (true) {
-                        for (int i = 0; i < 4; ++i) {
-                            targetPos[i].setPos(targetPos[i].getX() + (int) rollDirection.getX(), targetPos[i].getY() + (int) rollDirection.getY());
-                            if (lp.getDistance(targetPos[i]) == 0) {
-                                lpHit = true;
-                            } else {
-                                if (!map.isTilePassable(targetPos[i].getX(), targetPos[i].getY())) {
-                                    wallHit = true;
-                                    break;
-                                }
+                        int newMonsterX = (int) (myMonster.getX() + movesDone * rollDirection.getX());
+                        int newMonsterY = (int) (myMonster.getY() + (movesDone * rollDirection.getY()));
+                        if (lp.getDistance(newMonsterX, newMonsterY) <= 1) {
+                            lpHit = true;
+                        } else {
+
+                            if (!map.isTilePassable(newMonsterX
+                                    , newMonsterY)) {
+                                --movesDone;
+                                break;
                             }
                         }
-                        if (!wallHit) {
-                            ++movesDone;
-                        } else {
-                            break;
-                        }
+                        ++movesDone;
                     }
 
+                    int destinationX = (int) (myMonster.getX() + movesDone * rollDirection.getX());
+                    int destinationY = (int) (myMonster.getY() + movesDone * rollDirection.getY());
                     if (lpHit) {
                         GameLogger.getInstance().logMessage(Localization.getText("journal", "sentient_stone.party_damaged"));
                         lp.onAttack(world, myMonster, Configuration.getIntProperty("sentient_stones.damage"));
+                        // move to random empty position
+
+                        double v = 0.7 + 0.3 * CommonRandom.getRandom().nextDouble();
+                        BasePositionable bp = new BasePositionable((int) (myMonster.getX() + movesDone * v * rollDirection.getX())
+                                , (int) (myMonster.getY() + movesDone * v * rollDirection.getY()));
+
+                        AuroraTiledMap.setNearestFreePoint(map, bp, bp.getX(), bp.getY());
+
+                        lp.moveTo(bp.getX()
+                                , bp.getY());
                     }
                     map.setTilePassable(myMonster.getX(), myMonster.getY(), true);
-                    myMonster.moveTo((int) (myMonster.getX() + movesDone * rollDirection.getX())
-                            , (int) (myMonster.getY() + movesDone * rollDirection.getY()));
+                    myMonster.moveTo(destinationX
+                            , destinationY);
 
                     map.setTilePassable(myMonster.getTargetX(), myMonster.getTargetY(), false);
+                    state = State.MOVING_TO_POSITION;
                 }
                 return;
             }
@@ -313,9 +341,12 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
 
     private void beginIncident(World world) {
         Dungeon dungeon = new Dungeon(world, new AuroraTiledMap("maps/aurora_lab.tmx"), world.getCurrentRoom());
+        StoneMonster m = new StoneMonster(dungeon.getMap());
+        dungeon.getMap().getObjects().add(m);
+        world.setCurrentRoom(dungeon);
+        dungeon.enter(world);
         for (GameObject object : dungeon.getMap().getObjects()) {
             if (object instanceof DungeonPlaceholder) {
-                StoneMonster m = new StoneMonster(dungeon.getMap());
                 m.setPos(object.getX(), object.getY());
             } else if (object instanceof DungeonTrigger) {
                 ((DungeonTrigger) object).setListener(this);
@@ -323,10 +354,9 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
                 exitDoor = (DungeonDoor) object;
             }
         }
-        world.setCurrentRoom(dungeon);
-        dungeon.enter(world);
         world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_incident.json"));
-        world.getPlayer().getJournal().addQuestEntries("sentient_stones", "incident");
+        world.getPlayer().getJournal().addQuestEntries("sentient_stone", "incident");
+        world.getPlayer().getLandingParty().setImage("sci_team");
     }
 
     @Override

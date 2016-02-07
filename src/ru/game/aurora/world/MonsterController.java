@@ -87,7 +87,7 @@ public class MonsterController implements Serializable {
             weapon.reload();
         }
 
-        if (--turnsBeforeMove == 0) {
+        if (--turnsBeforeMove <= 0) {
             makeTurn(world);
 
         }
