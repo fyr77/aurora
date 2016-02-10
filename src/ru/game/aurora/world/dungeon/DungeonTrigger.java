@@ -25,6 +25,8 @@ public class DungeonTrigger extends DungeonObject {
 
     private boolean reusable = false;
 
+    private boolean enabled = true;
+
     public DungeonTrigger(String name, int x, int y, IStateChangeListener<World> listener) {
         super(name, x, y);
         this.listener = listener;
@@ -49,7 +51,7 @@ public class DungeonTrigger extends DungeonObject {
 
     @Override
     public void update(GameContainer container, World world) {
-        if (!world.isUpdatedThisFrame()) {
+        if (!enabled || !world.isUpdatedThisFrame()) {
             return;
         }
 
@@ -58,5 +60,13 @@ public class DungeonTrigger extends DungeonObject {
             listener.stateChanged(world);
             isAlive = reusable;
         }
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 }

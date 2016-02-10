@@ -14,7 +14,7 @@
  </tileset>
  <layer name="Слой тайлов 1" width="30" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjAAGYcIghY3LNpSamp72MUExNe5HNxCZHib2MDMSZT4twRrablQR7qBW/IHs56WwvLDwHyl5eIu1gxMKmxF5S8s9QtjcfCdMzfkH25UFpdL8j5zNOLGL08C+17SUVDzd7QeUlGxCzD4B/uUgMg1EwCkbB8AMAesp/KxAOAAA=
+   H4sIAAAAAAAAC+2T0QqAMAhFNaioj63/f2vBIBmOtqaOhhcuEwceVARwuR5NmRz117qStuRitCSX1uT+WrgIZfU15ozwztfcL2bymly6ox7c0jkjE7dwa+7nz9yT2HK/N++Ib9o7vbGNyVn0K82t9WjcOXgJXjv0u1fOwOVyjacLiRVSQhAOAAA=
   </data>
  </layer>
  <layer name="walls" width="30" height="30">
@@ -22,7 +22,7 @@
    <property name="isObstacle" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VbQrCMAyGC52bVVT8wn/eQEVFPZP3v4AJtBBC1yWuOsS+8LAty/KWLemMKfonTTqQ5PB8iZbAvIWtz9n563EiF1kpfKeK3C65zL7VQL6oEVADDbBvub/J4FszsCb2zZrEGpLvjK6vQp2GxSW9S9c8M7r3HKsh8cU5WLBnNL5hjniN1Lw4v05L8iul7ztzFHxj8U/6hj3Esngu3wNwBE7CWn18n+T8DFyAK8vBWeX939eX6gbcgUek/lDfl/f/N3y5rEfrG/oSj9J/QF9fut9K9uQUmv9CUVHR7+gFHoNaFxAOAAA=
+   H4sIAAAAAAAAC+2V/QrCIBTFBVdmsaJW9F9vUFFRPVPv/wLdCwoXc+pNa0Qe+LHN3Z2zD68TouqfNI2QUuPWp2gJzHvYmJqtOZ4EapEVI3fGqI1JF85tBspFjYAxoIBdz/l1Zq7NoKAnzpuOjClyjRa8eWV9fB4x6D23gveefR4pudgHC8eLk2v7iHq0Itwv2tynJNc0zNx3+sjm+sY/mWvXEOmMl8rdAwfgmOiVk/sg+yfgDFycGuwzJV5V6nmvwA24e/yH+r5uD30j15U0cHPtvMRt6j8gN5eutylrcgjOf6Gqqup39AR4i1pMEA4AAA==
   </data>
  </layer>
  <layer name="misc" width="30" height="30">
@@ -50,6 +50,6 @@
     <property name="tags" value="ally"/>
    </properties>
   </object>
-  <object name="exitTrigger" type="ru.game.aurora.world.dungeon.DungeonTrigger" x="512" y="384" width="256" height="192"/>
+  <object name="exitTrigger" type="ru.game.aurora.world.dungeon.DungeonTrigger" x="640" y="384" width="320" height="192"/>
  </objectgroup>
 </map>

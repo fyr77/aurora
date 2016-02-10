@@ -29,7 +29,7 @@ public class MonsterController implements Serializable {
     private final WeaponInstance weapon;
     protected final ITileMap map;
     private int turnsBeforeMove;
-    private Path path;
+    protected Path path;
     private int lastX;
     private int lastY;
     private boolean playerShown = false;

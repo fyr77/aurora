@@ -55,6 +55,9 @@ public class AuroraTiledMap implements ITileMap {
 
     @Override
     public List<GameObject> getObjects() {
+        if (map == null) {
+            loadMap();
+        }
         return objects;
     }
 

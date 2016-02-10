@@ -29,7 +29,7 @@ import java.util.*;
  */
 public class SentientStonesQuestGenerator extends GameEventListener implements WorldGeneratorPart, IStateChangeListener<World> {
 
-    private static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 268386696160525596L;
 
     private Planet planet = null;
 
@@ -41,11 +41,15 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
 
     private DungeonDoor exitDoor;
 
+    private DungeonMonster marine;
+
+    private DungeonTrigger trigger;
+
     // called when player reaches exit point
     @Override
     public void stateChanged(World param) {
         // open the door, add marines, show dialog
-        exitDoor.setState(true);
+
         param.getPlayer().getLandingParty().setImage("awayteam");
         Dialog d = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_after_incident.json");
         Map<String, String> flags = new HashMap<>();
@@ -194,8 +198,8 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
                     , map
                     , new MonsterDesc("sentient_stone"
                             , null
-                            , 30
                             , 1
+                            , 2
                             , "melee"
                             , "stone_1"
                             , true
@@ -205,7 +209,6 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
             );
 
             controller = new StoneMonsterController(map, this);
-            setMovementSpeed(2);
         }
 
         @Override
@@ -214,6 +217,22 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
                 img = ResourceManager.getInstance().getImage("stone_1").getScaledCopy(2);
             }
             img.draw(camera.getXCoord(getX()) + getOffsetX() - AuroraGame.tileSize / 2, camera.getYCoord(getY()) + getOffsetY() - AuroraGame.tileSize / 2);
+        }
+
+        @Override
+        public boolean isAlive() {
+            // monster can not be killed
+            return true;
+        }
+
+        @Override
+        public void onAttack(World world, GameObject attacker, int damage) {
+            world.onGameObjectAttacked(attacker, this, damage);
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.damage_message"), damage, getName()));
+            hp -= damage;
+            if (hp <= 0) {
+                GameLogger.getInstance().logMessage(Localization.getText("journal", "sentient_stone.stunned"));
+            }
         }
     }
 
@@ -241,12 +260,16 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
 
         @Override
         protected void makeTurn(World world) {
+            if (myMonster.getHp() <= 0) {
+                // monsters stays stunned
+                return;
+            }
             LandingParty lp = world.getPlayer().getLandingParty();
             if (state == State.MOVING_TO_POSITION) {
                 // check if there is a line of sight and we can charge
                 boolean canMoveY = Math.abs(myMonster.getX() - lp.getX()) <= 1;
                 boolean canMoveX = Math.abs(myMonster.getY() - lp.getY()) <= 1;
-                if (canMoveX || canMoveY) {
+                if (--countdown <= 0 && (canMoveX || canMoveY)) {
 
                     if (map.lineOfSightExists(myMonster.getX(), myMonster.getY(), lp.getX(), lp.getY())) {
                         state = State.CHARGING;
@@ -290,7 +313,7 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
                     boolean lpHit = false;
                     int movesDone = 1;
 
-                    // check all 3x3 squares in the direction of movement untill we find a wall
+                    // check all 3x3 squares in the direction of movement until we find a wall
                     // check if we hit a landing party
                     while (true) {
                         int newMonsterX = (int) (myMonster.getX() + movesDone * rollDirection.getX());
@@ -327,9 +350,12 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
                     map.setTilePassable(myMonster.getX(), myMonster.getY(), true);
                     myMonster.moveTo(destinationX
                             , destinationY);
+                    // force rebuild pathfinding
+                    path = null;
 
                     map.setTilePassable(myMonster.getTargetX(), myMonster.getTargetY(), false);
                     state = State.MOVING_TO_POSITION;
+                    countdown = Configuration.getIntProperty("sentient_stones.charge_turns");
                 }
                 return;
             }
@@ -338,25 +364,40 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
-
+    // This is where the incident in the laboratory begins
     private void beginIncident(World world) {
-        Dungeon dungeon = new Dungeon(world, new AuroraTiledMap("maps/aurora_lab.tmx"), world.getCurrentRoom());
-        StoneMonster m = new StoneMonster(dungeon.getMap());
-        dungeon.getMap().getObjects().add(m);
-        world.setCurrentRoom(dungeon);
-        dungeon.enter(world);
-        for (GameObject object : dungeon.getMap().getObjects()) {
-            if (object instanceof DungeonPlaceholder) {
-                m.setPos(object.getX(), object.getY());
-            } else if (object instanceof DungeonTrigger) {
-                ((DungeonTrigger) object).setListener(this);
-            } else if (object instanceof DungeonDoor && object.getName().equals("exitDoor")) {
-                exitDoor = (DungeonDoor) object;
+
+        Dialog d = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_incident.json");
+        d.addListener(new DialogListener() {
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                Dungeon dungeon = new Dungeon(world, new AuroraTiledMap("maps/aurora_lab.tmx"), world.getCurrentRoom());
+                dungeon.getMap().setUserData("sstones");
+                dungeon.setEnterDialog(Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_run.json"));
+                StoneMonster m = new StoneMonster(dungeon.getMap());
+                for (GameObject object : dungeon.getMap().getObjects()) {
+                    if (object instanceof DungeonPlaceholder) {
+                        m.setPos(object.getX(), object.getY());
+                        dungeon.getMap().setTilePassable(m.getX(), m.getY(), false);
+                    } else if (object instanceof DungeonTrigger) {
+                        trigger = (DungeonTrigger) object;
+                        trigger.setListener(SentientStonesQuestGenerator.this);
+                        trigger.setEnabled(false);
+                    } else if (object instanceof DungeonDoor && object.getName().equals("exitDoor")) {
+                        exitDoor = (DungeonDoor) object;
+                    } else if (object instanceof DungeonMonster) {
+                        marine = (DungeonMonster) object;
+                    }
+                }
+                dungeon.getMap().getObjects().add(m);
+                world.setCurrentRoom(dungeon);
+                dungeon.enter(world);
             }
-        }
-        world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_incident.json"));
+        });
+        world.addOverlayWindow(d);
         world.getPlayer().getJournal().addQuestEntries("sentient_stone", "incident");
         world.getPlayer().getLandingParty().setImage("sci_team");
+        stepsCount = Configuration.getIntProperty("sentient_stones.turnsToSurvive");
     }
 
     @Override
@@ -375,6 +416,15 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
                     turnsBeforeIncident = -1;
                     beginIncident(world);
                 }
+            }
+        }
+        if (world.getCurrentDungeon() != null && "sstones".equals(world.getCurrentDungeon().getMap().getUserData())) {
+            if (--stepsCount <= 0 && !trigger.isEnabled()) {
+                // time is out, open the door, move marine inside and enable exit trigger
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_door_broken.json"));
+                exitDoor.setState(true);
+                trigger.setEnabled(true);
+                marine.moveTo(marine.getX(), marine.getY() + 2);
             }
         }
         return false;
