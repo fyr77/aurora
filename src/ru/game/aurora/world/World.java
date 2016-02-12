@@ -424,6 +424,13 @@ public class World implements Serializable, ResolutionChangeListener {
         }
     }
 
+    public void onLandingPartyDestroyed() {
+        List<GameEventListener> newList = new LinkedList<>(listeners);
+        for (GameEventListener l : newList) {
+            l.onLandingPartyDestroyed(this);
+        }
+    }
+
     public void onPlayerContactedAlienShip(GameObject ship) {
         Set<GameEventListener.EventGroup> calledGroups = new HashSet<>();
         List<GameEventListener> newList = new LinkedList<>(listeners);

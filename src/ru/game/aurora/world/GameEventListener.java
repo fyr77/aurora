@@ -78,6 +78,10 @@ public abstract class GameEventListener implements Serializable {
     // should be called after hp is reduced, so in case target was killed its isAlive() should return false here
     public boolean onGameObjectAttacked(World world, GameObject attacker, GameObject target, int damage) {return false;}
 
+    public boolean onLandingPartyDestroyed(World world) {
+        return false;
+    }
+
     public boolean onEarthUpgradeUnlocked(World world, EarthUpgrade upgrade) {
         return false;
     }

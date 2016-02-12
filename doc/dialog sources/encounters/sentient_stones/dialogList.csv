@@ -2,4 +2,5 @@ landing_party_report.csv;sstones_landing_party_report;colonist_marine_dialog;enc
 incident.csv;sstones_incident;scientist_dialog;encounters/sentient_stones
 after_incident.csv;sstones_after_incident;scientist_dialog;encounters/sentient_stones
 door_broken.csv;sstones_door_broken;marine_dialog;encounters/sentient_stones
+scientists_dead.csv;sstones_incident_fail;marine_dialog;encounters/sentient_stones
 how_to_run.csv;sstones_run;scientist_dialog;encounters/sentient_stones

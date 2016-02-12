@@ -57,6 +57,13 @@ public abstract class Effect extends BaseGameObject implements Comparable<Effect
 
     public abstract boolean isOver();
 
+    /**
+     * While blocking effect is playing no other updates may happen
+     */
+    public boolean isBlocking() {
+        return true;
+    }
+
     public void onOver(World world) {
         if (endListener != null) {
             endListener.stateChanged(world);

@@ -356,7 +356,11 @@ public class DungeonController extends Listenable implements Serializable {
     }
 
     public void changeMode() {
-        mode = (mode == MODE_MOVE) ? MODE_SHOOT : MODE_MOVE;
+        if (landingParty.getWeapon() == null) {
+            mode = MODE_MOVE;
+        } else {
+            mode = (mode == MODE_MOVE) ? MODE_SHOOT : MODE_MOVE;
+        }
         GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(mode == MODE_SHOOT);
     }
 
@@ -390,7 +394,7 @@ public class DungeonController extends Listenable implements Serializable {
                 currentEffect.onOver(world);
                 currentEffect = null;
             }
-            if (!world.isUpdatedThisFrame()) {
+            if ((currentEffect != null && currentEffect.isBlocking()) && !world.isUpdatedThisFrame()) {
                 return;
             }
         }
@@ -550,6 +554,8 @@ public class DungeonController extends Listenable implements Serializable {
         if (myDungeon.hasCustomMusic()) {
             ResourceManager.getInstance().getPlaylist("background").play();
         }
+
+        world.onLandingPartyDestroyed();
     }
 
     public void returnToPrevRoom(boolean conditionsSatisfied) {

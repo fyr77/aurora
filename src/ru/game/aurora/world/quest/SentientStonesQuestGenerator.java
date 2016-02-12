@@ -7,6 +7,7 @@ import org.newdawn.slick.geom.Vector2f;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.effects.ScreenShakeEffect;
 import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.MedBayUpgrade;
@@ -15,6 +16,7 @@ import ru.game.aurora.world.dungeon.DungeonDoor;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.dungeon.DungeonPlaceholder;
 import ru.game.aurora.world.dungeon.DungeonTrigger;
+import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.planet.nature.Animal;
@@ -45,6 +47,30 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
 
     private DungeonTrigger trigger;
 
+    private WeaponDesc landingPartyWeapon;
+
+    private final class IncidentResultDialogListener implements DialogListener {
+        @Override
+        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+            if (returnCode == 1) {
+                //throw to space
+                world.getPlayer().getJournal().questCompleted("sentient_stones", "throw_to_space");
+                world.getGlobalVariables().remove("sentient_stone.started");
+                isAlive = false;
+            }
+            world.getCurrentDungeon().getController().returnToPrevRoom(true);
+            world.getPlayer().getLandingParty().setWeapon(landingPartyWeapon);
+        }
+    }
+
+    @Override
+    public boolean onLandingPartyDestroyed(World world) {
+        Dialog d = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_after_incident.json");
+        d.addListener(new IncidentResultDialogListener());
+        world.addOverlayWindow(d);
+        return true;
+    }
+
     // called when player reaches exit point
     @Override
     public void stateChanged(World param) {
@@ -73,18 +99,7 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
                 flags.put("casualties", "");
             }
         }
-        d.addListener(new DialogListener() {
-            @Override
-            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                if (returnCode == 1) {
-                    //throw to space
-                    world.getPlayer().getJournal().questCompleted("sentient_stones", "throw_to_space");
-                    world.getGlobalVariables().remove("sentient_stone.started");
-                    isAlive = false;
-                }
-                world.getCurrentDungeon().getController().returnToPrevRoom(true);
-            }
-        });
+        d.addListener(new IncidentResultDialogListener());
         param.addOverlayWindow(d, flags);
     }
 
@@ -356,6 +371,7 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
                     map.setTilePassable(myMonster.getTargetX(), myMonster.getTargetY(), false);
                     state = State.MOVING_TO_POSITION;
                     countdown = Configuration.getIntProperty("sentient_stones.charge_turns");
+                    world.getCurrentDungeon().getController().addEffect(new ScreenShakeEffect());
                 }
                 return;
             }
@@ -398,6 +414,9 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
         world.getPlayer().getJournal().addQuestEntries("sentient_stone", "incident");
         world.getPlayer().getLandingParty().setImage("sci_team");
         stepsCount = Configuration.getIntProperty("sentient_stones.turnsToSurvive");
+        // science team is not able to shoot
+        landingPartyWeapon = world.getPlayer().getLandingParty().getWeapon();
+        world.getPlayer().getLandingParty().setWeapon(null);
     }
 
     @Override
