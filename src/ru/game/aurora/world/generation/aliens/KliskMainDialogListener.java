@@ -12,6 +12,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.TradeScreenController;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.research.ResearchSellItem;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
@@ -67,6 +68,12 @@ public class KliskMainDialogListener implements DialogListener {
             case 2:
                 TradeScreenController.openTrade("klisk_dialog", getDefaultTradeInventory(world), world.getFactions().get(KliskGenerator.NAME));
                 break;
+            case 101:
+                world.getPlayer().changeResource(world, Resources.CREDITS, -6);
+                world.getGlobalVariables().put("energy_sphere.started", 1);
+                world.getPlayer().getJournal().addQuestEntries("energy_sphere", "klisk");
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/energy_sphere_communication.json"));
+                break;
             case 128:
                 // this is the heritage quest
                 world.getGlobalVariables().put("heritage.quest_started", true);
@@ -103,6 +110,30 @@ public class KliskMainDialogListener implements DialogListener {
                 } else {
                     world.addOverlayWindow(quarantineDialog);
                 }
+                break;
+            case 131:
+                Dialog sstonesDialog = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_klisk.json");
+                Map<String, String> map = new HashMap<>();
+                map.put("credits", String.valueOf(world.getPlayer().getCredits()));
+                sstonesDialog.addListener(new DialogListener() {
+                    @Override
+                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                        if (returnCode == 0) {
+                            return;
+                        }
+                        world.getPlayer().changeResource(world, Resources.CREDITS, -5);
+                        if (returnCode == 2) {
+                            world.getPlayer().getJournal().questCompleted("sentient_stone", "throw_to_space");
+                            world.getGlobalVariables().remove("sentient_stone.started");
+                            return;
+                        }
+                        world.getPlayer().getJournal().addQuestEntries("sentient_stone", "after_klisk");
+
+                        CrewMember stone = new CrewMember("stone", "");
+
+                    }
+                });
+                world.addOverlayWindow(sstonesDialog, map);
                 break;
         }
 
@@ -165,11 +196,5 @@ public class KliskMainDialogListener implements DialogListener {
 
         }
 
-        if (returnCode == 101) {
-            world.getPlayer().changeResource(world, Resources.CREDITS, -6);
-            world.getGlobalVariables().put("energy_sphere.started", 1);
-            world.getPlayer().getJournal().addQuestEntries("energy_sphere", "klisk");
-            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/energy_sphere_communication.json"));
-        }
     }
 }

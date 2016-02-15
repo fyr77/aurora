@@ -4,3 +4,4 @@ after_incident.csv;sstones_after_incident;scientist_dialog;encounters/sentient_s
 door_broken.csv;sstones_door_broken;marine_dialog;encounters/sentient_stones
 scientists_dead.csv;sstones_incident_fail;marine_dialog;encounters/sentient_stones
 how_to_run.csv;sstones_run;scientist_dialog;encounters/sentient_stones
+klisk_communications.csv;sstones_klisk;klisk_dialog;encounters/sentient_stones

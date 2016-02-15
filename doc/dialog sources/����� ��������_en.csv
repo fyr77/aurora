@@ -36,6 +36,7 @@
 3;I'm all yours, what do you want?;;;;
 ;We have met a strange creature. It looked like a Klisk but it was not a Kilsk. It even did not seem to be sapient.;120;heritage.monster_collected && !heritage.quest_started && !heritage.quest_completed;;
 ;About those klisk mutants…;-1;heritage.quest_started && !heritage.quest_completed;129;
+;We found an unusual alien…;-1;sentient_stone.started;131;
 ;My crew is infected by a deadly disease.;-1;quarantine.started;130;
 ;I found a strange blue sphere on the spaceship. Apparently, it is alive , but we don't know how to communicate with it. Can you help us out?;105;energy_sphere.started=0;;
 ;No-no, nothing. I was mistaken. Let's talk about something else.;0;;;

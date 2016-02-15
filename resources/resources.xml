@@ -98,6 +98,9 @@
     <resource type="image" id="bork_dialog">sprites/portraits/swarm.png</resource>
     <resource type="image" id="bork_vip_dialog">sprites/portraits/bork_vip_dialog.png</resource>
 
+    <!-- other -->
+    <resource type="image" id="stone_dialog">sprites/portraits/stone_portrait.png</resource>
+
     <!-- earth -->
     <resource type="image" id="usa_leader">sprites/portraits/am_leader.png</resource>
     <resource type="image" id="asia_leader">sprites/portraits/as_leader.png</resource>

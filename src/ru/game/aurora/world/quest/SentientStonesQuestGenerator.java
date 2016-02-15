@@ -54,12 +54,20 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
         public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
             if (returnCode == 1) {
                 //throw to space
-                world.getPlayer().getJournal().questCompleted("sentient_stones", "throw_to_space");
+                world.getPlayer().getJournal().questCompleted("sentient_stone", "throw_to_space");
                 world.getGlobalVariables().remove("sentient_stone.started");
-                isAlive = false;
             }
             world.getCurrentDungeon().getController().returnToPrevRoom(true);
             world.getPlayer().getLandingParty().setWeapon(landingPartyWeapon);
+            isAlive = false;
+        }
+    }
+
+    public class StoneDialogListener implements DialogListener {
+
+        @Override
+        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+            //todo
         }
     }
 
@@ -120,7 +128,7 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
         public void onReceived(World world, int amount) {
             // start quest here
             world.getPlayer().getJournal().addQuestEntries("sentient_stone", "start");
-            world.getGlobalVariables().put("sentient_stones.started", true);
+            world.getGlobalVariables().put("sentient_stone.started", true);
             turnsBeforeIncident = Configuration.getIntProperty("sentient_stones.turnsBeforeIncident");
         }
 
@@ -140,7 +148,7 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
 
         @Override
         public boolean canBeInteracted(World world) {
-            return !world.getGlobalVariables().containsKey("sentient_stones.started");
+            return !world.getGlobalVariables().containsKey("sentient_stone.started");
         }
 
         @Override
