@@ -13,7 +13,9 @@ import ru.game.aurora.world.*;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
+import ru.game.aurora.world.planet.nature.Animal;
 import ru.game.aurora.world.planet.nature.AnimalCorpseItem;
+import ru.game.aurora.world.planet.nature.PlanetaryLifeGenerator;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -102,16 +104,20 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
     }
 
     @Override
-    public boolean onPlayerLeftPlanet(World world, Planet planet) {
-        lastLandedPlanet = planet;
-        return false;
-    }
-
-    @Override
     public boolean onTurnEnded(World world) {
         if (targetPlanet == null) {
             // quest not yet started
             return false;
+        }
+
+        if (!world.getGlobalVariables().containsKey("quarantine.research_started")
+                && targetPlanet == world.getCurrentRoom()
+                && targetPlanet.getExploredTiles() >= 100
+                && animalsCollected >= 3) {
+            world.getGlobalVariables().put("quarantine.research_started", "");
+            world.getPlayer().getJournal().addQuestEntries("quarantine", "medicine");
+            world.getPlayer().getResearchState().addNewAvailableProject(new QuarantineResearch(researchBoost));
+            world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_materials_collected.json"));
         }
 
         ++daysSinceStart;
@@ -236,6 +242,11 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
             return false;
         }
 
+        if (lastLandedPlanet.getFloraAndFauna() == null) {
+            // strange situation
+            return false;
+        }
+
         if (CommonRandom.getRandom().nextDouble() >= Configuration.getDoubleProperty("quest.quarantine.chance")) {
             return false;
         }
@@ -277,6 +288,8 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
 
     @Override
     public boolean onPlayerLandedPlanet(World world, Planet planet) {
+        lastLandedPlanet = planet;
+
         if (planet != targetPlanet) {
             return false;
         }
@@ -289,6 +302,21 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
                 !world.getGlobalVariables().containsKey("quarantine.first_return")) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_landing_party.json"));
             world.getGlobalVariables().put("quarantine.first_return", "");
+            // ensure that there are at least 3 monsters alive there
+            if (targetPlanet.getFloraAndFauna() != null) {
+                int count = 0;
+                for (GameObject go : targetPlanet.getPlanetObjects()) {
+                    if (Animal.class.isAssignableFrom(go.getClass())) {
+                        ++count;
+                        if (count > 3) {
+                            break;
+                        }
+                    }
+                }
+                if (count < 3) {
+                    PlanetaryLifeGenerator.addAnimals(targetPlanet, 3);
+                }
+            }
         }
         return false;
     }

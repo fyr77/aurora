@@ -33,6 +33,9 @@ public class TorpedoLauncher extends WeaponDesc {
     }
 
     public static class Torpedo extends NPCShip {
+
+        private static final long serialVersionUID = -5197035695990846257L;
+
         private GameObject target;
 
         private int ttl;
