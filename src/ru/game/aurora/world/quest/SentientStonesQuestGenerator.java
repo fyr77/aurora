@@ -8,6 +8,7 @@ import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.effects.ScreenShakeEffect;
+import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.MedBayUpgrade;
@@ -63,11 +64,53 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
         }
     }
 
-    public class StoneDialogListener implements DialogListener {
+    public static class StoneDialogListener implements DialogListener {
+
+        private static final long serialVersionUID = 1L;
+
+        private CrewMember stone;
+
+        public StoneDialogListener(CrewMember stone) {
+            this.stone = stone;
+        }
 
         @Override
         public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-            //todo
+            if (dialog.getId().equals("sstones_stone_1")) {
+                if (returnCode == 0) {
+                    return;
+                }
+
+                Dialog second = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_stone_2.json");
+                second.addListener(this);
+                stone.setDialog(second);
+                return;
+            } else if (dialog.getId().equals("sstones_stone_2")) {
+                if (returnCode == 0) {
+                    return;
+                }
+
+                Dialog second = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_stone_3.json");
+                second.addListener(this);
+                stone.setDialog(second);
+                return;
+            } else if (dialog.getId().equals("sstones_stone_3")) {
+                Dialog second = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_stone_4.json");
+                second.addListener(this);
+                stone.setDialog(second);
+                return;
+            } else if (dialog.getId().equals("sstones_stone_4")) {
+                Dialog second = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_stone_5.json");
+                second.addListener(this);
+                stone.setDialog(second);
+                return;
+            } else {
+                if (returnCode == 1) {
+                    // throw away
+                    world.getPlayer().getShip().removeCrewMember(world, stone.getId());
+                    world.getPlayer().getJournal().questCompleted("sentient_stone", "");
+                }
+            }
         }
     }
 

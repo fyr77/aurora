@@ -116,9 +116,20 @@
           ]
         },
         {
-          "returnValue": 129,
+          "returnValue": 131,
           "targetStatementId": -1,
           "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "sentient_stone.started",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 129,
+          "targetStatementId": -1,
+          "replyText": "3",
           "replyConditions": [
             {
               "name": "heritage.quest_started",
@@ -133,7 +144,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 120,
-          "replyText": "3",
+          "replyText": "4",
           "replyConditions": [
             {
               "name": "heritage.monster_collected",
@@ -152,7 +163,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 0,
-          "replyText": "4"
+          "replyText": "5"
         }
       ]
     },

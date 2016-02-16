@@ -25,6 +25,7 @@ import ru.game.aurora.world.generation.quest.heritage.HeritageKliskDialogListene
 import ru.game.aurora.world.generation.quest.quarantine.QuarantineKliskDialogListener;
 import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.quest.JournalEntry;
+import ru.game.aurora.world.quest.SentientStonesQuestGenerator;
 import ru.game.aurora.world.space.ShipLootItem;
 
 import java.util.HashMap;
@@ -129,7 +130,11 @@ public class KliskMainDialogListener implements DialogListener {
                         }
                         world.getPlayer().getJournal().addQuestEntries("sentient_stone", "after_klisk");
 
-                        CrewMember stone = new CrewMember("stone", "");
+                        Dialog d = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_stone_1.json");
+                        CrewMember stone = new CrewMember("stone", "stone_dialog", d);
+                        d.addListener(new SentientStonesQuestGenerator.StoneDialogListener(stone));
+                        world.getPlayer().getShip().addCrewMember(world, stone);
+                        world.getPlayer().getResearchState().getCompletedProjects().add(world.getResearchAndDevelopmentProjects().getResearchProjects().remove("sentient_stone"));
 
                     }
                 });

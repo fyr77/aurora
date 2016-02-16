@@ -5,3 +5,8 @@ door_broken.csv;sstones_door_broken;marine_dialog;encounters/sentient_stones
 scientists_dead.csv;sstones_incident_fail;marine_dialog;encounters/sentient_stones
 how_to_run.csv;sstones_run;scientist_dialog;encounters/sentient_stones
 klisk_communications.csv;sstones_klisk;klisk_dialog;encounters/sentient_stones
+stone_1.csv;sstones_stone_1;stone_dialog;encounters/sentient_stones
+stone_2.csv;sstones_stone_2;stone_dialog;encounters/sentient_stones
+stone_3.csv;sstones_stone_3;stone_dialog;encounters/sentient_stones
+stone_4.csv;sstones_stone_4;stone_dialog;encounters/sentient_stones
+stone_5.csv;sstones_stone_5;stone_dialog;encounters/sentient_stones

@@ -1,0 +1,10 @@
+{
+  "id": "sentient_stone",
+  "icon": "stone_dialog",
+  "makesAvailable": [],
+  "makesAvailableEngineering": [],
+  "earthProgress": [],
+  "score": 50,
+  "progress": 40,
+  "initialProgress": 40
+}
