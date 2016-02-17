@@ -186,9 +186,20 @@
           "replyText": "0"
         },
         {
+          "returnValue": 131,
+          "targetStatementId": -1,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "sentient_stone.started",
+              "type": "SET"
+            }
+          ]
+        },
+        {
           "returnValue": 0,
           "targetStatementId": 17,
-          "replyText": "1",
+          "replyText": "2",
           "replyConditions": [
             {
               "name": "klisk_trader_drone.communicated",
@@ -199,7 +210,7 @@
         {
           "returnValue": 0,
           "targetStatementId": 20,
-          "replyText": "2",
+          "replyText": "3",
           "replyConditions": [
             {
               "name": "zorsan.war_preparations",
@@ -344,9 +355,20 @@
           ]
         },
         {
+          "returnValue": 131,
+          "targetStatementId": -1,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "sentient_stone.started",
+              "type": "SET"
+            }
+          ]
+        },
+        {
           "returnValue": 0,
           "targetStatementId": 34,
-          "replyText": "1",
+          "replyText": "2",
           "replyConditions": [
             {
               "name": "klisk_trader_drone.communicated",
@@ -357,7 +379,7 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "2"
+          "replyText": "3"
         }
       ]
     },

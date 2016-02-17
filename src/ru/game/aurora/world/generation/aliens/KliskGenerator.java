@@ -37,6 +37,7 @@ import ru.game.aurora.world.generation.quest.EmbassiesQuest;
 import ru.game.aurora.world.generation.quest.heritage.HeritageKliskDialogListener;
 import ru.game.aurora.world.planet.*;
 import ru.game.aurora.world.quest.JournalEntry;
+import ru.game.aurora.world.quest.SentientStonesQuestGenerator;
 import ru.game.aurora.world.space.*;
 
 import java.util.Iterator;
@@ -68,8 +69,9 @@ public class KliskGenerator implements WorldGeneratorPart {
                     //trade
                     TradeScreenController.openTrade("klisk_vip_dialog", KliskMainDialogListener.getDefaultTradeInventory(world));
                     return;
-                }
-                if (returnCode == 129) {
+                } else if (returnCode == 131) {
+                    SentientStonesQuestGenerator.processKliskDialogResult(world);
+                } else if (returnCode == 129) {
                     // heritage quest
                     Dialog heritageEndDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_klisk_final.json");
                     heritageEndDialog.addListener(new HeritageKliskDialogListener());

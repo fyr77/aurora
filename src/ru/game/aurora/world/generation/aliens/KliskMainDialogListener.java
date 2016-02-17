@@ -12,7 +12,6 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.TradeScreenController;
 import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.research.ResearchSellItem;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
@@ -113,32 +112,7 @@ public class KliskMainDialogListener implements DialogListener {
                 }
                 break;
             case 131:
-                Dialog sstonesDialog = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_klisk.json");
-                Map<String, String> map = new HashMap<>();
-                map.put("credits", String.valueOf(world.getPlayer().getCredits()));
-                sstonesDialog.addListener(new DialogListener() {
-                    @Override
-                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                        if (returnCode == 0) {
-                            return;
-                        }
-                        world.getPlayer().changeResource(world, Resources.CREDITS, -5);
-                        if (returnCode == 2) {
-                            world.getPlayer().getJournal().questCompleted("sentient_stone", "throw_to_space");
-                            world.getGlobalVariables().remove("sentient_stone.started");
-                            return;
-                        }
-                        world.getPlayer().getJournal().addQuestEntries("sentient_stone", "after_klisk");
-
-                        Dialog d = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_stone_1.json");
-                        CrewMember stone = new CrewMember("stone", "stone_dialog", d);
-                        d.addListener(new SentientStonesQuestGenerator.StoneDialogListener(stone));
-                        world.getPlayer().getShip().addCrewMember(world, stone);
-                        world.getPlayer().getResearchState().getCompletedProjects().add(world.getResearchAndDevelopmentProjects().getResearchProjects().remove("sentient_stone"));
-
-                    }
-                });
-                world.addOverlayWindow(sstonesDialog, map);
+                SentientStonesQuestGenerator.processKliskDialogResult(world);
                 break;
         }
 

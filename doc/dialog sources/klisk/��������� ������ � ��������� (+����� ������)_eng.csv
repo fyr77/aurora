@@ -22,6 +22,7 @@
 ;I'm very sorry.;16;;;
 16;What do you want?;;;;
 ;No, I've already discussed everything I wanted to discuss. It's time for me to go.;-1;;;
+;We have an unusual alien on board…;-1;sentient_stone.started;131;
 ;Yeah, there is something. Recently, a trade bot has come to my planet's orbit, and it's ruining all of our communications. I found out that it was owned by the Hakazar Company. I don't know who else I can talk to. Can you help me?;17;klisk_trader_drone.communicated ;;
 ;There is something very important. The Zorsan are going to attack my planet. It won't happen today or tomorrow, we have almost two years... but still. We are at completely different stages of development. My planet needs help, or we will lose.;20;zorsan.war_preparations;;
 17;Oh. Too bad… Kahha! Too bad… I cannot help you. *You can see great pain in Eroloa's face.* I am an official employee of the Vortangu Company. I am not allowed to meddle with Hakazar's affairs.;;;;
@@ -48,6 +49,7 @@
 ;I'm happy, too. You know, I have a few things I want to discuss with you.;27;;;
 27;*Eroloa listens attentively.*;;;;
 ;The Zorsan are going to attack my planet. We have almost two years, which gives us a chance… but we won't be able to repel their attack alone. We could use some help.;28;zorsan.war_preparations && !klisk.war_help;;
+;We have an unusual alien on board…;-1;sentient_stone.started;131;
 ;A Hakazar Company merchant bot has set up camp on the orbit of my planet. It's giving us trouble. Could you help us make them recall it?  ;34;klisk_trader_drone.communicated ;;
 ;No, nothing, no business. It has been good working with you, even though a bit tiring. I have to go.;-1;;;
 28;The Zorsan? *Eroloa clicks nervously.* I'm not surprised, but how did you let that happen? You know what… don't tell me. It's a bad situation.;;;;
