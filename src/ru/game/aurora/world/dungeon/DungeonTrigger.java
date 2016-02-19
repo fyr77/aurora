@@ -10,7 +10,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.LandingParty;
 
 /**
- * Created by Егор on 10.01.2016.
+ * Created by Egor on 10.01.2016.
  * Triggers a callback when player steps over it
  */
 public class DungeonTrigger extends DungeonObject {

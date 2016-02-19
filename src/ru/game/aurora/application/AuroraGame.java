@@ -224,6 +224,8 @@ public class AuroraGame extends NiftyOverlayGame {
                 if (!SteamAPI.init()) {
                     logger.error("Failed to initialize steam api");
                     return;
+                } else {
+                    logger.info("SteamAPI successfully initialized");
                 }
             } else {
                 logger.warn("This is a non-Steam build");
@@ -240,7 +242,8 @@ public class AuroraGame extends NiftyOverlayGame {
                 logger.error("Unsupported os " + osName + ", lwjgl has no native libraries for it");
                 throw new RuntimeException("Unsupported os " + osName + ", lwjgl has no native libraries for it");
             }
-            logger.info("Setting native lib dir to " + nativePath);
+            File f = new File(nativePath);
+            logger.info("Setting native lib dir to " + f.getAbsolutePath());
             addDir(nativePath);
 
             logger.info("Application class path is: " + System.getProperty("java.class.path"));

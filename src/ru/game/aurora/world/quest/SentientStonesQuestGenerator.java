@@ -26,7 +26,7 @@ import ru.game.aurora.world.planet.nature.Plant;
 import java.util.*;
 
 /**
- * Created by Егор on 26.12.2015.
+ * Created by Egor on 26.12.2015.
  * Quest about sentinent stones.
  * Player can take one on their home planet.
  */
