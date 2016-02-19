@@ -19,6 +19,7 @@ import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.gui.niffy.ProgressBarControl;
+import ru.game.aurora.player.earth.EarthState;
 import ru.game.aurora.player.earth.EarthUpgrade;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.engineering.ShipUpgrade;
@@ -99,7 +100,14 @@ public class EarthScreenController implements ScreenController {
     }
 
     public void addAll() {
-        world.getPlayer().getEarthState().addProgress(world, getCurrentHumanityProgressTab(), world.getPlayer().getEarthState().getUndistributedProgress());
+        // Add min of all available progress and max possible upgrade cost
+        EarthUpgrade.Type currentHumanityProgressTab = getCurrentHumanityProgressTab();
+        EarthState earthState = world.getPlayer().getEarthState();
+        final int currentProgress = earthState.getProgress(currentHumanityProgressTab);
+        List<EarthUpgrade> upgrades = EarthUpgrade.getUpgrades(currentHumanityProgressTab);
+        final int topUpgradeCost = upgrades.get(upgrades.size() - 1).getValue();
+        final int amount = Math.min(topUpgradeCost - currentProgress, earthState.getUndistributedProgress());
+        earthState.addProgress(world, currentHumanityProgressTab, amount);
         updateHumanityTab();
         fillUpgrades();
     }
