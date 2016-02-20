@@ -356,8 +356,9 @@
                 <panel childLayout="horizontal" padding="10px" height="276px">
                     <image filename="resources/sprites/portraits/scientist.png" width="256px" height="256px"/>
                     <panel width="10px"/>
-                    <panel style="nifty-listbox#scrollpanel" width="*" height="256px" childLayout="horizontal">
-                        <text width="100%" height="256px" id="scan_text" style="base-font" textHAlign="left"
+                    <panel style="nifty-listbox#scrollpanel" padding="10px" width="*" height="256px"
+                           childLayout="horizontal">
+                        <text width="95%" height="256px" id="scan_text" style="base-font" textHAlign="left"
                               padding="5px" wrap="true"/>
                     </panel>
                 </panel>

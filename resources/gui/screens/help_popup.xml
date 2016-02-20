@@ -4,7 +4,7 @@
             <panel childLayout="vertical">
                 <panel height="10px"/>
                 <control id="scrollbarPanelId" name="scrollPanel" horizontal="false" vertical="auto" childLayout="center" height="*">
-                    <panel childLayout="center" padding="15px" width="100%" height="100%">
+                    <panel childLayout="center" padding="15px" width="95%" height="95%">
                         <text id="helpText" style="base-font" wrap="true" width="100%" height="100%" textHAlign="left" textVAlign="center" />
                     </panel>
                 </control>
