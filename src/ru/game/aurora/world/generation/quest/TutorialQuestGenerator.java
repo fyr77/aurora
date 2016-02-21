@@ -12,6 +12,8 @@ import ru.game.aurora.gui.HelpPopupControl;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.dungeon.DungeonMonster;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -41,6 +43,7 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
         // end quest
         world.getGlobalVariables().remove("tutorial.started");
         earth.getOwner().setCanBeLeft(true);
+        AchievementManager.getInstance().achievementUnlocked(AchievementNames.scholar);
         earth.setLastVisitTurn(world.getDayCount());
 
         FadeOutScreenController.makeFade(new IStateChangeListener() {

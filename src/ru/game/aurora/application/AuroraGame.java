@@ -9,6 +9,7 @@ package ru.game.aurora.application;
 import com.codedisaster.steamworks.SteamAPI;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.slick2d.NiftyOverlayGame;
+import org.apache.commons.io.IOUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -20,6 +21,7 @@ import ru.game.aurora.gui.ExitConfirmationScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.HelpPopupControl;
 import ru.game.aurora.modding.ModManager;
+import ru.game.aurora.steam.AchievementManager;
 import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
@@ -177,6 +179,10 @@ public class AuroraGame extends NiftyOverlayGame {
 
     public static void exitGame() {
         Configuration.saveSystemProperties();
+        if (SteamAPI.isSteamRunning()) {
+            AchievementManager.term();
+            SteamAPI.shutdown();
+        }
         app.exit();
     }
 
@@ -227,6 +233,17 @@ public class AuroraGame extends NiftyOverlayGame {
                 } else {
                     logger.info("SteamAPI successfully initialized");
                 }
+
+                // read the steam id file
+                InputStream is = AuroraGame.class.getClassLoader().getResourceAsStream("steam_appid.txt");
+                if (is == null) {
+                    logger.error("Failed to find steam_appid.txt file");
+                    return;
+                }
+                String appId = IOUtils.toString(is);
+                is.close();
+                logger.info("Loaded steam appid " + app);
+                AchievementManager.init(Integer.parseInt(appId.trim()));
             } else {
                 logger.warn("This is a non-Steam build");
             }
