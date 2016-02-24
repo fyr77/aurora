@@ -8,6 +8,8 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.MedBayUpgrade;
 import ru.game.aurora.player.research.ResearchProjectState;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -75,6 +77,9 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
 
         world.getGlobalVariables().remove("quarantine.started");
         world.getPlayer().getJournal().questCompleted("quarantine", "end");
+        if (world.getPlayer().getShip().getTotalCrew() == 1) {
+            AchievementManager.getInstance().achievementUnlocked(AchievementNames.drDeath);
+        }
     }
 
     private void killCrewMember(World world)

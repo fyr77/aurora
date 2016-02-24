@@ -11,7 +11,10 @@ import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.npc.SingleShipEvent;
 import ru.game.aurora.npc.shipai.LandAI;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -20,7 +23,9 @@ import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Player ship gets wrapped by some zerg-style bio-stuff
@@ -68,6 +73,10 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
     // player can not enter alien homeworlds, solar system and colony system
     private class MainListener extends GameEventListener
     {
+        private static final long serialVersionUID = 1L;
+
+        private Set<StarSystem> visitedStarSystems = new HashSet<>();
+
         @Override
         public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
             if (!world.getGlobalVariables().containsKey("red_meat.attached")) {
@@ -75,6 +84,12 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
                 return false;
             }
 
+            if (visitedStarSystems.size() < 10) {
+                visitedStarSystems.add(ss);
+                if (visitedStarSystems.size() == 10) {
+                    AchievementManager.getInstance().achievementUnlocked(AchievementNames.leaveIt);
+                }
+            }
             for (Faction f : world.getFactions().values()) {
                 if (f instanceof AlienRace && ((AlienRace) f).getHomeworld() == ss) {
                     world.getGalaxyMap().returnTo(world);
@@ -148,6 +163,8 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
     private class Spore extends NPCShip
     {
 
+        private static final long serialVersionUID = 1L;
+
         public Spore(World world) {
             super(0, 0, "spore", null, null, "Spore", 20);
             setStationary(true);
@@ -177,6 +194,15 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
                 world.getPlayer().getShip().setHull(world.getPlayer().getShip().getHull() + 1);
                 world.getPlayer().getResearchState().addNewAvailableProject(world.getResearchAndDevelopmentProjects().getResearchProjects().remove("red_meat"));
                 turnsSinceInfection = 0;
+            }
+        }
+
+        @Override
+        public void onAttack(World world, GameObject attacker, int dmg) {
+            super.onAttack(world, attacker, dmg);
+            if (hp <= 0) {
+                // well, i thought that this is impossible, but some players managed to achieve it
+                AchievementManager.getInstance().achievementUnlocked(AchievementNames.quickOrDead);
             }
         }
     }

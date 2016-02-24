@@ -233,20 +233,20 @@ public class AuroraGame extends NiftyOverlayGame {
                 } else {
                     logger.info("SteamAPI successfully initialized");
                 }
-
-                // read the steam id file
-                InputStream is = AuroraGame.class.getClassLoader().getResourceAsStream("steam_appid.txt");
-                if (is == null) {
-                    logger.error("Failed to find steam_appid.txt file");
-                    return;
-                }
-                String appId = IOUtils.toString(is);
-                is.close();
-                logger.info("Loaded steam appid " + app);
-                AchievementManager.init(Integer.parseInt(appId.trim()));
             } else {
                 logger.warn("This is a non-Steam build");
             }
+
+            // read the steam id file
+            InputStream is = AuroraGame.class.getClassLoader().getResourceAsStream("steam_appid.txt");
+            if (is == null) {
+                logger.error("Failed to find steam_appid.txt file");
+                return;
+            }
+            String appId = IOUtils.toString(is);
+            is.close();
+            logger.info("Loaded steam appid " + app);
+            AchievementManager.init(Integer.parseInt(appId.trim()));
 
             String nativePath;
             if (osName.contains("Windows")) {

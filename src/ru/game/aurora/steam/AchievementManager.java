@@ -62,11 +62,11 @@ public class AchievementManager implements SteamUserStatsCallback {
     }
 
     public void achievementUnlocked(String name) {
+        logger.info("Unlocking achievement " + name);
         if (!isInitialized) {
             logger.warn("Steam API not initialized, can not record unlock of achievement " + name);
             return;
         }
-        logger.info("Unlocking achievement " + name);
         statsAPI.setAchievement(name);
 
         logger.info("Sending stats to server");

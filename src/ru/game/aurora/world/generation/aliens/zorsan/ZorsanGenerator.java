@@ -15,6 +15,8 @@ import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.engineering.upgrades.WeaponUpgrade;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchProjectState;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.util.GameTimer;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -63,6 +65,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                 }
                 world.getReputation().setHostile(HumanityGenerator.NAME, ZorsanGenerator.NAME);
                 isAlive = false;
+                world.addListener(new SlamDoorAchievementListener());
                 return true;
             }
             return false;
@@ -71,6 +74,37 @@ public class ZorsanGenerator implements WorldGeneratorPart {
         @Override
         public void stateChanged(World world) {
             world.addListener(this);
+        }
+    }
+
+    /**
+     * Checks prerequisites for SlamDoor achievement - destroy all zorsan ships before leaving star system
+     */
+    private static class SlamDoorAchievementListener extends GameEventListener {
+        @Override
+        public boolean onPlayerLeftStarSystem(World world, StarSystem ss) {
+            isAlive = false;
+            return false;
+        }
+
+        @Override
+        public boolean onTurnEnded(World world) {
+            if (!(world.getCurrentRoom() instanceof StarSystem)) {
+                return false;
+            }
+            for (GameObject go : world.getCurrentRoom().getMap().getObjects()) {
+                if (go.getFaction() == null) {
+                    continue;
+                }
+                if (ZorsanGenerator.NAME.equals(go.getFaction().getName())) {
+                    return false;
+                }
+            }
+
+            // no zorsan ships found in current star system
+            AchievementManager.getInstance().achievementUnlocked(AchievementNames.slamDoor);
+            isAlive = false;
+            return true;
         }
     }
 

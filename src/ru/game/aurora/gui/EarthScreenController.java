@@ -23,6 +23,8 @@ import ru.game.aurora.player.earth.EarthState;
 import ru.game.aurora.player.earth.EarthUpgrade;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.engineering.ShipUpgrade;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 
@@ -91,25 +93,52 @@ public class EarthScreenController implements ScreenController {
         fillHumanityUpgrades(humanityProgressTab.findElementByName("earth_upgrades_tab"), EarthUpgrade.Type.EARTH);
     }
 
+    private int getAmountToAdd(EarthUpgrade.Type currentHumanityProgressTab, int initalAmount) {
+        EarthState earthState = world.getPlayer().getEarthState();
+        final int currentProgress = earthState.getProgress(currentHumanityProgressTab);
+        List<EarthUpgrade> upgrades = EarthUpgrade.getUpgrades(currentHumanityProgressTab);
+        final int topUpgradeCost = upgrades.get(upgrades.size() - 1).getValue();
+        return Math.min(topUpgradeCost - currentProgress, earthState.getUndistributedProgress());
+    }
+
+    /**
+     * Checks if player has discovered all upgrades
+     */
+    private void checkSingularityAchievement() {
+        for (EarthUpgrade.Type t : EarthUpgrade.Type.values()) {
+            if (world.getPlayer().getEarthState().getProgress(t) < EarthUpgrade.getMax(t)) {
+                return;
+            }
+        }
+        AchievementManager.getInstance().achievementUnlocked(AchievementNames.singularity);
+    }
+
     public void add500() {
-        world.getPlayer().getEarthState().addProgress(world, getCurrentHumanityProgressTab()
-                , Math.min(500, world.getPlayer().getEarthState().getUndistributedProgress()));
+        EarthUpgrade.Type currentHumanityProgressTab = getCurrentHumanityProgressTab();
+        final EarthState earthState = world.getPlayer().getEarthState();
+        int amount = getAmountToAdd(currentHumanityProgressTab, Math.min(500, world.getPlayer().getEarthState().getUndistributedProgress()));
+        if (amount <= 0) {
+            return;
+        }
+        earthState.addProgress(world, currentHumanityProgressTab, amount);
         updateHumanityTab();
         // maybe some new modules became available, update the shipyard tab contents
         fillUpgrades();
+        checkSingularityAchievement();
     }
 
     public void addAll() {
         // Add min of all available progress and max possible upgrade cost
         EarthUpgrade.Type currentHumanityProgressTab = getCurrentHumanityProgressTab();
-        EarthState earthState = world.getPlayer().getEarthState();
-        final int currentProgress = earthState.getProgress(currentHumanityProgressTab);
-        List<EarthUpgrade> upgrades = EarthUpgrade.getUpgrades(currentHumanityProgressTab);
-        final int topUpgradeCost = upgrades.get(upgrades.size() - 1).getValue();
-        final int amount = Math.min(topUpgradeCost - currentProgress, earthState.getUndistributedProgress());
+        final EarthState earthState = world.getPlayer().getEarthState();
+        int amount = getAmountToAdd(currentHumanityProgressTab, earthState.getUndistributedProgress());
+        if (amount <= 0) {
+            return;
+        }
         earthState.addProgress(world, currentHumanityProgressTab, amount);
         updateHumanityTab();
         fillUpgrades();
+        checkSingularityAchievement();
     }
 
     private EarthUpgrade.Type getCurrentHumanityProgressTab() {
