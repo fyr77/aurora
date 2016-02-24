@@ -1,6 +1,6 @@
 {
   "id": "humanity_torpedoes",
-  "damage": 8,
+  "damage": 6,
   "name": "humanity_torpedoes.name",
   "desc": "humanity_torpedoes.desc",
   "shotImage": "torpedo",
@@ -11,7 +11,7 @@
     "tx": -1,
     "ty": -1
   },
-  "reloadTurns": 8,
+  "reloadTurns": 3,
   "explosionAnimation": "rocket_explosion",
   "particlesAnimation": "rocket_particles",
   "size": 40,

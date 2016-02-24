@@ -2,6 +2,7 @@ package ru.game.aurora.world.equip;
 
 import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.common.Drawable;
@@ -43,7 +44,7 @@ public class TorpedoLauncher extends WeaponDesc {
         private int damage;
 
         public Torpedo(int x, int y, GameObject target, Faction faction, int damage) {
-            super(x, y, "torpedo", faction, null, "torpedo", 3);
+            super(x, y, "torpedo", faction, null, "torpedo", 4);
             setSpeed(1);
             this.target = target;
             final LandAI ai = new LandAI(target);
@@ -60,6 +61,15 @@ public class TorpedoLauncher extends WeaponDesc {
                 target.onAttack(World.getWorld(), this, damage);
                 World.getWorld().getCurrentRoom().getMap().getEffects().add(new ExplosionEffect(x, y, "ship_explosion", false, true));
                 isAlive = false;
+            }
+        }
+
+        @Override
+        public void onAttack(World world, GameObject attacker, int dmg) {
+            if (CommonRandom.getRandom().nextDouble() > 0.5) {
+                super.onAttack(world, attacker, dmg);
+            } else {
+                GameLogger.getInstance().logMessage(Localization.getText("gui", "space.torpedo_missed"));
             }
         }
 
