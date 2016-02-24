@@ -1,0 +1,39 @@
+"lang"
+{
+	"english"
+	{
+		"Tokens"
+		{
+			"SCHOLAR_NAME"	"Scholar"
+			"SCHOLAR_DESC"	"Complete training mission."
+			"DR_DEATH_NAME"	"DR_DEATH_NAME"
+			"DR_DEATH_DESC"	"DR_DEATH_DESC"
+			"SLAM_DOOR_NAME"	"SLAM_DOOR_NAME"
+			"SLAM_DOOR_DESC"	"SLAM_DOOR_DESC"
+			"QUICK_OR_DEAD_NAME"	"QUICK_OR_DEAD_NAME"
+			"QUICK_OR_DEAD_DESC"	"QUICK_OR_DEAD_DESC"
+			"TECH_SINGULARITY_NAME"	"TECH_SINGULARITY_NAME"
+			"TECH_SINGULARITY_DESC"	"TECH_SINGULARITY_DESC"
+			"LEAVE_IT_NAME"	"LEAVE_IT_NAME"
+			"LEAVE_IT_DESC"	"LEAVE_IT_DESC"
+		}
+	}
+	"russian"
+	{
+		"Tokens"
+		{
+			"SCHOLAR_NAME"	"Прилежный ученик"
+			"SCHOLAR_DESC"	"Завершите обучающую миссию."
+			"DR_DEATH_NAME"	"Доктор Смерть"
+			"DR_DEATH_DESC"	"Изобрести вакцину от инопланетной чумы когда на борту останется последний член экипажа."
+			"SLAM_DOOR_NAME"	"Хлопнув дверью"
+			"SLAM_DOOR_DESC"	"Уничтожить все корабли зорсан в системе после побега из посольства."
+			"QUICK_OR_DEAD_NAME"	"Быстрый или мертвый"
+			"QUICK_OR_DEAD_DESC"	"Уничтожить инопланетную плесень до того, как она прицепится к кораблю."
+			"TECH_SINGULARITY_NAME"	"Техническая сингулярность"
+			"TECH_SINGULARITY_DESC"	"Открыть все улучшения человечества."
+			"LEAVE_IT_NAME"	"Давайте его оставим"
+			"LEAVE_IT_DESC"	"Посетить 10 систем с космической плесенью на борту."
+		}
+	}
+}
