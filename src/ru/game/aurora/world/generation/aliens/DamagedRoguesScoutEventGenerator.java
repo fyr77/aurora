@@ -13,6 +13,8 @@ import ru.game.aurora.npc.SingleShipEvent;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.research.ResearchProjectDesc;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.IStateChangeListener;
@@ -177,6 +179,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
             private void saveByShuttle(World world) {
                 double boomChance = Configuration.getDoubleProperty("quest.damaged_rogue_scout.boom_chance");
                 if (CommonRandom.getRandom().nextDouble() > boomChance) {
+                    AchievementManager.getInstance().achievementUnlocked(AchievementNames.noPainNoGain);
                     // successfully saved
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/rogues/rogues_damaged_scout_shuttle.json"));
                     final ResearchProjectDesc captured_rogues = world.getResearchAndDevelopmentProjects().getResearchProjects().get("captured_rogues");

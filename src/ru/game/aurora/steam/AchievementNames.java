@@ -34,4 +34,34 @@ public interface AchievementNames {
      * Purchase all humanity upgrades
      */
     String singularity = "TECH_SINGULARITY";
+
+    /**
+     * Collect all help for final battle
+     */
+    String unitedGalaxy = "UNITED_GALAXY";
+
+    /**
+     * Rob rogues cemetry
+     */
+    String tombRaider = "TOMB RAIDER";
+
+    /**
+     * Collect 3 additional crew members (stone, power ball and klisk)
+     */
+    String catchEmAll = "CATCH_EM_ALL";
+
+    /**
+     * Save rogues on a shuttle
+     */
+    String noPainNoGain = "NO_PAIN_NO_GAIN";
+
+    /**
+     * Collect 10 biocells from parallel world
+     */
+    String innerWorld = "INNER_WORLD";
+
+    /**
+     * Establish a colony
+     */
+    String cradle = "CRADLE";
 }

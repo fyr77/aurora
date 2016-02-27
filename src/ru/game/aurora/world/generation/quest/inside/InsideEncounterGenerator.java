@@ -11,6 +11,8 @@ import ru.game.aurora.npc.SingleShipEvent;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.ResearchProjectDesc;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.BasePlanet;
@@ -67,6 +69,10 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
             ResearchProjectDesc research = world.getResearchAndDevelopmentProjects().getResearchProjects().remove("parallel_world_bio_data");
             if (research != null) {
                 world.getPlayer().getResearchState().addNewAvailableProject(research);
+            }
+
+            if (world.getPlayer().getInventory().count(Resources.CELLS_FROM_PARALLEL_WORLD) >= 10) {
+                AchievementManager.getInstance().achievementUnlocked(AchievementNames.innerWorld);
             }
             
             return true;

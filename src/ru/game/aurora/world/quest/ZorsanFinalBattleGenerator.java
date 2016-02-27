@@ -17,6 +17,8 @@ import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.player.earth.PrivateMessage;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.util.GameTimer;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.WeaponDesc;
@@ -537,6 +539,20 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
 
         repairAllies();
+
+        boolean kliskHelp1 = "withdraw".equals(world.getGlobalVariables().get("klisk_trader_drone.result"));
+        boolean borkHelp1 = world.getGlobalVariables().containsKey("bork.war_help");
+
+        // playe may have missed these quests as they are random. So treat them as passed by default
+        boolean roguesHelp = "help".equals(world.getGlobalVariable("rogues_altar.result", "help"));
+        boolean borkHelp2 = "pay".equals(world.getGlobalVariable("bork_blockade.result", "pay"));
+
+        boolean kliskHelp2 = world.getGlobalVariables().containsKey("klisk.war_help");
+        boolean roguesHelp2 = world.getGlobalVariables().containsKey("rogues.war_help");
+
+        if (kliskHelp1 && borkHelp1 && roguesHelp && borkHelp2 && kliskHelp2 && roguesHelp2) {
+            AchievementManager.getInstance().achievementUnlocked(AchievementNames.unitedGalaxy);
+        }
     }
 
     private enum State {

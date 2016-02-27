@@ -18,6 +18,8 @@ import ru.game.aurora.npc.crew.SarahMainDialogListener;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.*;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.StarSystem;
@@ -63,6 +65,9 @@ public class Ship extends BaseGameObject {
     public void addCrewMember(World world, CrewMember member) {
         crewMembers.put(member.getId(), member);
         member.onAdded(world);
+        if (crewMembers.size() == 6) {
+            AchievementManager.getInstance().achievementUnlocked(AchievementNames.catchEmAll);
+        }
     }
 
     public void removeCrewMember(World world, String id) {

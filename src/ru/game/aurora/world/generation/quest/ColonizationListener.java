@@ -8,6 +8,8 @@ import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.player.Resources;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.planet.*;
@@ -236,6 +238,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/colony_search/colony_first_party_arrival.json"));
             modifyPlanet(world, planet);
             state = State.COLONISTS_DELIVERED;
+            AchievementManager.getInstance().achievementUnlocked(AchievementNames.cradle);
             time = world.getDayCount();
             planet.getOwner().setQuestLocation(true);
             world.getPlayer().getJournal().addQuestEntries("colony_search", "colonists_arrival");

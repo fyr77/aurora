@@ -23,6 +23,8 @@ import ru.game.aurora.player.engineering.projects.AdvancedLasers;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.StarResearchProject;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -309,6 +311,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 world.getPlayer().getInventory().add(new SellOnlyInventoryItem(
                         "items", "rogue_beacon_data", new Drawable("technology_research"), Configuration.getIntProperty("quest.rogues_beacon.price"), true, RoguesGenerator.NAME
                 ), 1);
+                AchievementManager.getInstance().achievementUnlocked(AchievementNames.tombRaider);
             }
         });
         beacon.setResearchProjectDescs(world.getResearchAndDevelopmentProjects().getResearchProjects().get("beacon"));
