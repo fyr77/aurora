@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.GUI;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.StatNames;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
@@ -274,6 +276,10 @@ public class Planet extends BasePlanet implements IDungeon {
                     shuttle.setPos(landingParty.getX(), landingParty.getY());
                 }
 
+                if (exploredTiles == 0) {
+                    // this is first time we landed on a planet
+                    AchievementManager.getInstance().updateStat(StatNames.worldsVisited, 1);
+                }
                 int openedTiles = surface.updateVisibility(landingParty.getX(), landingParty.getY(), 5);
                 exploredTiles += openedTiles;
                 landingParty.addCollectedGeodata(openedTiles);

@@ -73,6 +73,17 @@ public class AchievementManager implements SteamUserStatsCallback {
         statsAPI.storeStats();
     }
 
+    public void updateStat(String name, int delta) {
+        logger.info("Updating stat " + name + " by " + delta);
+        if (!isInitialized) {
+            logger.warn("Steam API not initialized, can not update stat" + name);
+            return;
+        }
+        int value = statsAPI.getStatI(name, 0);
+        statsAPI.setStatI(name, value + delta);
+        statsAPI.storeStats();
+    }
+
     /////////////// callbacks for steam api ///////////////////
 
     @Override
