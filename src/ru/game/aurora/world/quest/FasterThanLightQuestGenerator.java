@@ -226,7 +226,7 @@ public class FasterThanLightQuestGenerator extends GameEventListener implements 
 
     @Override
     public boolean onPlayerLeftStarSystem(World world, StarSystem ss) {
-        if (state == 3 && ss == targetSystem) {
+        if (state >= 3 && ss == targetSystem) {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/faster_than_light/ftl_escaped.json"));
             int idx = world.getGalaxyMap().getInternalMap()[targetSystem.getY()][targetSystem.getX()];
             world.getGalaxyMap().getGalaxyMapObjects().remove(idx);
