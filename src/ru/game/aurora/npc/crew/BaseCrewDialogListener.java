@@ -3,6 +3,8 @@ package ru.game.aurora.npc.crew;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.CrewMember;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.World;
 
 import java.util.Map;
@@ -36,5 +38,19 @@ public abstract class BaseCrewDialogListener implements DialogListener
             return true;
         }
         return false;
+    }
+
+    /**
+     * Called when player has listened to the end of a character story
+     */
+    protected void allDone(World world) {
+        world.getGlobalVariables().put(crewMember.getId() + ".all_done", true);
+
+        if (world.getGlobalVariables().containsKey("sarah.all_done")
+                && world.getGlobalVariables().containsKey("gordon.all_done")
+                && world.getGlobalVariables().containsKey("henry.all_done")
+                ) {
+            AchievementManager.getInstance().achievementUnlocked(AchievementNames.whatsUp);
+        }
     }
 }

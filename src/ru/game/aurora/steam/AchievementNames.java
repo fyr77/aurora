@@ -64,4 +64,44 @@ public interface AchievementNames {
      * Establish a colony
      */
     String cradle = "CRADLE";
+
+    /**
+     * For bork family problems quest
+     */
+    String hubbard = "HUBBARD";
+
+    /**
+     * For trading exactly according to klisk codex
+     */
+    String kliskCodex = "KLISK_CODEX";
+
+    /**
+     * Buy all 4 science theories for Gordon
+     */
+    String gordonGift = "GORDON_GIFT";
+
+    /**
+     * Complete main story line
+     */
+    String alphaCompleted = "JUST_BEGINNING";
+
+    /**
+     * Pay fines to the rogues
+     */
+    String lawAbiding = "LAW_ABIDING";
+
+    /**
+     * Collect many alien animal researches and cure cancer
+     */
+    String cancerCure = "CURE_FROM_SPACE";
+
+    /**
+     * Encounter zorsan rebels base
+     */
+    String zorsanRebels = "ZORSAN_REBELS";
+
+    /**
+     * Communicate with all 3 officers and listen their story
+     */
+    String whatsUp = "WHATS_UP";
 }

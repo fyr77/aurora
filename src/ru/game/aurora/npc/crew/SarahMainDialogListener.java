@@ -96,6 +96,7 @@ public class SarahMainDialogListener extends BaseCrewDialogListener
         if (checkFlagAndShowDialog(world, flags, "sarah_past", "dialogs/crew/sarah/sarah_past_1.json")) {
             crewMember.getDialogFlags().put("sarah_past", "1");
             crewMember.changeReputation(1);
+            allDone(world);
             return;
         }
 

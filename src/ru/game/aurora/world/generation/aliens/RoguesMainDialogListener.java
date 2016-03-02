@@ -8,6 +8,8 @@ import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.earth.PrivateMessage;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
@@ -39,6 +41,7 @@ public class RoguesMainDialogListener implements DialogListener {
 
             world.getPlayer().changeResource(world, Resources.CREDITS, -fine);
             world.getGlobalVariables().remove("rogues.fine");
+            AchievementManager.getInstance().achievementUnlocked(AchievementNames.lawAbiding);
         }
 
         if (flags.containsKey("rogues_altar.withdraw")) {

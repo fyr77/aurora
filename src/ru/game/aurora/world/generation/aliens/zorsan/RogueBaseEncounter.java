@@ -7,6 +7,8 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.NPC;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.World;
@@ -72,6 +74,7 @@ public class RogueBaseEncounter extends GameEventListener
         ss.setRandomEmptyPosition(station);
         ss.getShips().add(station);
         isInSystemWithStation = true;
+        AchievementManager.getInstance().achievementUnlocked(AchievementNames.zorsanRebels);
         return true;
     }
 

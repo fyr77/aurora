@@ -8,6 +8,8 @@ import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.SellOnlyInventoryItem;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.research.BaseResearchWithFixedProgress;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 
@@ -93,10 +95,21 @@ public class KliskTradeItems
         }
 
         @Override
+        public boolean isUnique() {
+            return true;
+        }
+
+        @Override
         public void onReceived(World world, int amount) {
             world.getPlayer().getResearchState().getCompletedProjects().add(new BaseResearchWithFixedProgress(name, "technology_research", 0, 150));
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/crew/gordon/science_theories/gordon_science_theories_" + name + ".json"));
             world.getPlayer().getShip().getCrewMembers().get("gordon").changeReputation(1);
+
+            int totalCount = (int) world.getGlobalVariable("gordon.gifts", 0);
+            world.getGlobalVariables().put("gordon.gifts", ++totalCount);
+            if (totalCount == 4) {
+                AchievementManager.getInstance().achievementUnlocked(AchievementNames.gordonGift);
+            }
         }
     }
 }

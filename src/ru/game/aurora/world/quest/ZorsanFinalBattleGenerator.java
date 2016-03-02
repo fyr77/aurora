@@ -347,6 +347,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
                 @Override
                 public void stateChanged(World world) {
                     world.addOverlayWindow(new StoryScreen("story/alpha_completed.json"));
+                    AchievementManager.getInstance().achievementUnlocked(AchievementNames.alphaCompleted);
                 }
             });
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/obliterator_arrival.json"));

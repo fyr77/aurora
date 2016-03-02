@@ -26,6 +26,8 @@ import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchReport;
 import ru.game.aurora.player.research.projects.AlienRaceResearch;
 import ru.game.aurora.player.research.projects.ArtifactResearch;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Positionable;
 import ru.game.aurora.world.World;
@@ -102,6 +104,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                     switch (tradeResult) {
                         case "perfect":
                             repDelta = 2;
+                            AchievementManager.getInstance().achievementUnlocked(AchievementNames.kliskCodex);
                             break;
                         case "good":
                             repDelta = 1;

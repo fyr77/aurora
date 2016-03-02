@@ -91,6 +91,7 @@ public class HenryMainDialogListener extends BaseCrewDialogListener
 
         if (checkFlagAndShowDialog(world, flags, "henry_secrets_1", "dialogs/crew/henry/henry_secrets_1.json")) {
             crewMember.changeReputation(1);
+            allDone(world);
             return;
         }
 

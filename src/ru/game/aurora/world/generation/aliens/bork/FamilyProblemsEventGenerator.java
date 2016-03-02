@@ -16,6 +16,8 @@ import ru.game.aurora.npc.NPC;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.Resources;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -158,6 +160,7 @@ public class FamilyProblemsEventGenerator extends GameEventListener implements W
                 stupidBrotherShip.setAi(new LeaveSystemAI());
                 world.getPlayer().changeResource(world, Resources.CREDITS, 5);
                 world.getReputation().updateReputation(BorkGenerator.NAME, HumanityGenerator.NAME, 1);
+                AchievementManager.getInstance().achievementUnlocked(AchievementNames.hubbard);
                 break;
 
         }

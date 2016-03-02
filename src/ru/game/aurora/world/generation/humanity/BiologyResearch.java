@@ -10,6 +10,8 @@ import ru.game.aurora.player.earth.EarthResearch;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.projects.AnimalResearch;
+import ru.game.aurora.steam.AchievementManager;
+import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.World;
 
 
@@ -18,7 +20,7 @@ public class BiologyResearch extends EarthResearch {
 
     private int materialCount = 0;
 
-    private static final int TARGET_COUNT = 5;
+    private static final int TARGET_COUNT = 10;
 
     public BiologyResearch() {
         super("cancer_cure", Integer.MAX_VALUE);
@@ -54,6 +56,7 @@ public class BiologyResearch extends EarthResearch {
             world.getPlayer().getEarthState().updateTechnologyLevel(100);
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "letters.scientist.sender", "letters.scientist", "message"));
             world.getGlobalVariables().put("messages.scientist.received", 1);
+            AchievementManager.getInstance().achievementUnlocked(AchievementNames.cancerCure);
             return true;
         }
         return false;

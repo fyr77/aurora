@@ -39,14 +39,16 @@ Crew relationship
 
 Gordon:
 parallel_worlds = state of dialogs with parallel worlds, 1 after tutorial, 2 after gordon_parallel_worlds_1
+all_done - if heard all story
 
 Sarah:
 engineer_dinner - if asked her for a dinner
 red_meat_prison - if sent to prison for making experiments
+all_done - if heard all story
 
 Henry:
 red_meat_prison - if sent to prison for making experiments
-
+all_done - if heard all story
 ==============================
 
 Relations with rogues:

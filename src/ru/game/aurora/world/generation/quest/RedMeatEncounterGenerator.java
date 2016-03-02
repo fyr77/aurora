@@ -163,7 +163,7 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
     private class Spore extends NPCShip
     {
 
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = -4429790645902806562L;
 
         public Spore(World world) {
             super(0, 0, "spore", null, null, "Spore", 20);

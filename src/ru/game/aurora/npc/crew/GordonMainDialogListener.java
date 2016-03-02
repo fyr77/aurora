@@ -1,7 +1,6 @@
 package ru.game.aurora.npc.crew;
 
 import ru.game.aurora.dialog.Dialog;
-import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.world.World;
 
@@ -86,6 +85,7 @@ public class GordonMainDialogListener extends BaseCrewDialogListener
         if (checkFlagAndShowDialog(world, flags, "parallel_worlds_2", "dialogs/crew/gordon/gordon_parallel_worlds_1.json")) {
             crewMember.getDialogFlags().put("parallel_worlds", "2");
             crewMember.changeReputation(1);
+            allDone(world);
             return;
         }
 
