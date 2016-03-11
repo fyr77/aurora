@@ -1,0 +1,37 @@
+0;"*Something unusual happened today. You got a report that the rock wants to talk, it's never contacted you first until now. Has something happened? You can't tell from the way it looks. It's still in the cargo hold, connected to the terminal and... reading? It looks like it's going through some library archives.* ""Captain. Hello. We waited for you. We want to talk.""";
+;"""What did you want?""";2
+;"""'We'? What do you mean, we?""";1
+1;"""You know that we aren't really many rocks. But it's easier for us to talk about ourselves in plural.""";
+;"""What did you want?""";2
+2;"""We have lived here a long time. And we have studied a lot. You can see it yourself. Captain, we… We wanted to ask you. What is it all for?""";
+;"""I don't understand you.""";3
+3;"""What are you for? What are we for? We never thought about this, and now… We want to know.  We never thought about it,  and now we do, and we are brought down by it. What is it all for? How does it all end?""";
+;"""What a strange question. We haven't talked about that.""";4
+;"""The purpose of life… You could say that only you can decide what you live for and why. The world of your inner turmoil is your own, only you can make sense of it. In the end, it all comes down to death.""";5
+;"""It's not the process of life itself that is important, it's what you do while it goes on. Your actions, decisions. For whom, what for, for whose sake. But it only matters to you, in the context of your life. It doesn't matter outside of it. And in the end it'll come down to death.""";6
+;"""There are people who think that the purpose of life is following certain rules. To live like a good person, to abstain from evil, basically. All of it will provide a good life after death... in the end it all comes down to death.""";7
+4;"""Professor Gordon and his friends, Captain… They talked, but we understood little… you tell us. When you talk, we understand everything.""";
+;"""The purpose of life… You could say that only you can decide what you live for and why. The world of your inner turmoil is your own, only you can make sense of it. In the end, it all comes down to death.""";5
+;"""It's not the process of life itself that is important, it's what you do while it goes on. Your actions, decisions. For whom, what for, for whose sake. But it only matters to you, in the context of your life. It doesn't matter outside of it. And in the end it'll come down to death.""";6
+;"""There are people who think that the purpose of life is following certain rules. To live like a good person, to abstain from evil, basically. All of it will provide a good life after death... in the end it all comes down to death.""";7
+5;"""It's all so complicated. And hard. All of it is up to us, and us alone. So many decisions that we do not understand the point and the meaning of. And death. What is death?""";
+;"""The end of everything, I guess.""";8
+6;"""I understand. But still. Yes, we do something, but what do we do it all for? Where is the final result, where is our goal? Death... maybe that's it? What is death?""";
+;"""A great motivator, in some sense.""";8
+7;"""Religion. We know, human captain. This concept is alien to us. We don't know if we even have a soul, to start with... and what do we need one for? We bet you haven't even figured it out yourselves. And death... what is death?""";
+;"""A passage after which something unknown awaits.""";8
+8;"""We don't understand you.""";
+;"""Death. Full cessation of vital functions. You've probably read about it.""";9
+9;"""Yes. And we do not understand. None of our people have died, we can say that for sure. Everyone we have known, they were all with us. Always. Until you came. A rock could roll into the sea, spend a year there and roll back out, unharmed.""";
+;"""A human with no special equipment would be killed by that.""";10
+10;"""A rock could get crack into several pieces, but they would still be alive. One of them would stay the original, uncracked rock. Others would become different rocks.""";
+;"""I see your point. You can't understand death. But if so, why are you so bothered by it?""";11
+11;"""Because we're trying to understand you."" *A slide show is brought up on the screen. Pictures of people, buildings, books, nature... the rock isn't trying to shows you something, it's doing it for itself.* ""All this. How can you live knowing that you are fleeting, fragile? How can you live without constant fear, constant dread? Even now, if we are thrown into outer space, you'll die. And we'll still live.""";
+;"""Who told you it wasn't done out of fear?""";12
+;"""You get used to it. In the end, death is no obstacle to life.""";12
+;"""Some think that death isn't the end of it.""";12
+12;"*The rock is silent for some time, about a minute, going through the pictures on the screen. Then...* ""We want to be alone, Captain. Please, leave us be. It's very personal.""";
+;"""Can I ask what it's about?""";13
+;"""Okay. Good luck, then.""";-1
+13;"""Not now. Personal.""";
+;"""Okay. Good luck, then.""";-1

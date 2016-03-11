@@ -1,0 +1,81 @@
+0;"*The rock is still connected to the Klisk terminal. The terminal is still showing a lot of colored spots on the main monitor and the text input window on the auxiliary one. As soon as you get closer, a line appears.* ""I remember you and many not you. Many. Bugs.""";;;;
+;"""Hello.""";1;!flag1;;flag1
+;"""Who are you?""";6;!flag2;;flag2
+;"""Tell me about your people.""";12;!flag3;;flag3
+;"""Tell me about your planet.""";18;!flag4;;flag4
+;"""We've been talking a long time now.""";21;flag1 && flag2 && flag3 && flag4;;
+;*walk away*;-1;;;
+1;"""That word. That one. Then. Now. Why?""";;;;
+;"""We greet other creatures with that word.""";2;;;
+;"""You see me. I see you. Hello.""";3;;;
+;"""Hello. I see you, glad. Hello. You see me, glad. One time. No more.""";4;;;
+2;"*The rock is silent.""";;;;
+;"""You see me. I see you. Hello.""";3;;;
+;"""Hello. I see you, glad. Hello. You see me, glad. One time. No more.""";4;;;
+3;"*Symbols.* ""See and hello? Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. I see Hello. Hello. Hello. Hello. Why don't you hello? Hello. Hello."" *The colors on the screen blink and become a bit blurred.*";;;;
+;"""Wait! Not like that. Hello. I see you, glad. Hello. You see me, glad. One time. No more.""";4;;;
+4;"*The rock scratches the floor.* ""Realice. You and I see you and I. Hello. Hello. I am glad to see. You are glad to see.""";;;;
+;"""Exactly.""";5;;;
+5;"""I hello too. You. You here. I here.""";;;;
+;"""Who are you?""";6;;;
+;"""Tell me about your people.""";12;;;
+;"""Tell me about your planet.""";18;;;
+;*walk away*;-1;;;
+6;"""Me."" *After that, an untranslated mass of words follows.*";;;;
+;"""I didn't understand you.""";7;;;
+7;"""Me is me. You is you, bug. Me is me."" *Untranslated set of symbols.*";;;;
+;"""What is *repeat the untranslated set of symbols*?""";8;;;
+;"""You think I am a bug. I think you are a rock. I think I am a human. You think you are?""";9;;;
+;"""Bug. Why bug?""";10;;;
+;"""Let's talk some more.""";11;;;
+8;"""*Untranslated set of symbols* is *untranslated set of symbols*!""";;;;
+;"""You think I am a bug. I think you are a rock. I think I am a human. You think you are?""";9;;;
+;"""Bug. Why bug?""";10;;;
+;"""Let's talk some more.""";11;;;
+9;"""*Untranslated set of symbols.* I am I. I want and cannot. You don't understand.""";;;;
+;"""What is *repeat the untranslated set of symbols*?""";8;;;
+;"""Bug. Why bug?""";10;;;
+;"""Let's talk some more.""";11;;;
+10;"""Warm and crunchy. Unusual. Dull. You take what I sense with.""";;;;
+;"""What is *repeat the untranslated set of symbols*?""";8;;;
+;"""You think I am a bug. I think you are a rock. I think I am a human. You think you are?""";9;;;
+;"""Let's talk some more.""";11;;;
+11;*The rock is silent.*;;;;
+;"""Hello.""";1;!flag1;;flag1
+;"""Who are you?""";6;!flag2;;flag2
+;"""Tell me about your people.""";12;!flag3;;flag3
+;"""Tell me about your planet.""";18;!flag4;;flag4
+;"""We've been talking a long time now.""";21;flag1 && flag2 && flag3 && flag4;;
+;*walk away*;-1;;;
+12;"""People? What? What is people?""";;;;
+;"""People. A historical community of individuals.""";13;;;
+;"""People is many, many of those like you.""";14;;;
+13;"*No answer. The rock didn't understand you.""";;;;
+;"""People is many, many of those like you.""";14;;;
+14;"""Many, many like me, are us. Us live. Us roll. Us divide.""";;;;
+;"""Live?""";15;;;
+;"""Roll?""";16;;;
+;"""Divide?""";17;;;
+;"""Let's talk about something else.""";11;;;
+15;"""Live. Right now, live. Live at all. Live.""";;;;
+;"""Roll?""";16;;;
+;"""Divide?""";17;;;
+;"""Let's talk about something else.""";11;;;
+16;"""Roll, good. Room to roll, good. Roll is new, always new. We roll there and back."" *There is an impressive amount of untranslated text.*";;;;
+;"""Live?""";15;;;
+;"""Divide?""";17;;;
+;"""Let's talk about something else.""";11;;;
+17;"""Was you. Divide, now you and him. Him divide, now him and more him. More him divide, now more him, more more him.""";;;;
+;"""Live?""";15;;;
+;"""Roll?""";16;;;
+;"""Let's talk about something else.""";11;;;
+18;"""Planet?""";;;;
+;"""Place where you live.""";19;;;
+19;"""Here?""";;;;
+;"""Where we took you from.""";20;;;
+20;"*Some lines of untranslated text.* ""Took? Yes. Live there. Live here. There good. Here good."" *More lines of untranslated text.*";;;;
+;"""Okay."" *Looks like it's too early to talk about that.""";11;;;
+21;"*The rock shakes from side to side.* ""So many… yours.. I…"" *It shakes again.* ""Later. I want… not roll. Not feel. Peace.""";;;;
+;"""Òhen I wish you a good rest.""";22;;;
+22;*The colors on the monitor are duller, but you can still make them out. The text window is empty. Looks like the rock fell asleep instantly, if you could say that about a rock.*;;;;
+;I hope our next conversation is more useful.;-1;;1;

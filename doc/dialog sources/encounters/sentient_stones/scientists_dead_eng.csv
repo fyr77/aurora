@@ -1,0 +1,14 @@
+0;*Henry is in the ruined lab. Soldiers and medics scurry about behind him.* Captain, we broke down the door. But it seems like we were too late: the rock broke everything, almost all the scientists are dead.;;;
+;Damn it. Any survivors?;1;;
+1;Gordon is alive, although he's severely wounded. That scientist is definitely tougher than he looks. The medics say he'll probably make it. A couple more people are alive, too, but the outlook isn't as optimistic.;;;
+;What about the rock?;2;;
+2;It's a tough bastard, our handguns weren't too effective against it, but it seems like the shots knocked it out. While it was out we dragged it to the empty cargo hold, let it roll around in there as much as it wants when it comes to.;;;
+;Good idea. Let's leave it in there until we know what to do with it.;3;;
+;It's too dangerous, we can't afford another tragedy like this. Open the airlock and dump it into space.;5;;
+3;What are you going to do? I don't think our scientists are going to want to study it again. And we can't guarantee their safety if that boulder decides to attack again.;;;
+;The Klisks could help. They know a lot about other life forms.;4;;
+4;Yeah, that's a good idea, sir. I have to go, there's a lot to be cleaned up here.;;;
+;…;-1;;
+5;Are you sure?;;;
+;Yes, I'm sure. Open the airlock. I'm not going to risk the lives of my crew.;-1;;1
+;No, I changed my mind. Let's keep it.;3;;

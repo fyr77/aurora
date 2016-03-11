@@ -1,0 +1,15 @@
+0;*The cargo hold camera. There is only the rock with its terminal there, nothing else. The output goes straight to the captain's computer. It's simple. All you have left to do is press the button and open the outside airlock.*;;;
+;Gordon, are you sure there is no way to contact it?;1;;
+;*open the airlock*;2;;
+;*not now*;-1;;
+1;N-n-no, Captain. We tried, but the connection to its terminal will only be established when it floats outside. Not unt-t-til then. N-n-no way. *Gordon nods.*;;;
+;*open the airlock*;2;;
+2;"*Well, there it goes. The airlock is open. Along with the current of air rushing outside, the rock goes out, dragging the terminal after it on the sturdy cable. It's a normal sight. A simple cargo dump. But...* ""There's a connection, Captain. We're floating.""";;;
+;"""Are you sure? We can still catch you!""";3;;
+;"""Take care of yourself.""";4;;
+;*sign off*;-1;;1
+3;"""It's our time, human captain. Our life, and we are doing the right thing.""";;;
+;"""Take care of yourself.""";4;;
+;*sign off*;-1;;1
+4;"*There is no answer. Although… what is that? As its last message, it decided to send this.* ""In the gardens where the irises blossom, To talk to an old friend. What a reward for the traveler!""";;;
+;I hope so, too.;-1;;1
