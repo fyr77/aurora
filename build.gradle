@@ -73,7 +73,9 @@ startScripts {
     doLast {
         def windowsScriptFile = file getWindowsScript()
         def unixScriptFile = file getUnixScript()
+        windowsScriptFile.text = windowsScriptFile.text.replace('@rem Find java.exe', 'set JAVA_HOME=../jre')
         windowsScriptFile.text = windowsScriptFile.text.replace('%APP_HOME%\\lib\\placeholder', '%APP_HOME%\\bin\\resources;%APP_HOME%\\bin\\mods')
+        unixScriptFile.text = unixScriptFile.text.replace('APP_NAME="Aurora"', 'APP_NAME="Aurora"\nJAVA_HOME=../jre')
         unixScriptFile.text = unixScriptFile.text.replace('$APP_HOME/lib/placeholder', '$APP_HOME/bin/resources:$APP_HOME/bin/mods')
         unixScriptFile.text = unixScriptFile.text.replace('exec "$JAVACMD"', 'cd "$( dirname "${BASH_SOURCE[0]}" )" \nexec "$JAVACMD"')
     }

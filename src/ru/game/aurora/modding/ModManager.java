@@ -38,10 +38,14 @@ public class ModManager {
         for (File f : modsRoot.listFiles()) {
             if (f.isDirectory()) {
                 logger.info("Loading mod from " + f);
-                final Mod e = new Mod(f, instance.rootModClassLoader);
-                instance.mods.add(e);
-                if (!e.isLoaded()) {
-                    logger.warn("Mod at {} failed to load", f);
+                try {
+                    final Mod e = new Mod(f, instance.rootModClassLoader);
+                    instance.mods.add(e);
+                    if (!e.isLoaded()) {
+                        logger.warn("Mod at {} failed to load", f);
+                    }
+                } catch (Throwable t) {
+                    logger.warn("Mod at " + f + " failed to load", t);
                 }
             }
         }
