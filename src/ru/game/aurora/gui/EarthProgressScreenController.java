@@ -92,7 +92,7 @@ public class EarthProgressScreenController implements ScreenController {
         final int lostCrewMemberScore = Configuration.getIntProperty("game.progress.lostCrewScore");
         if (lostCrewMembers > 0) {
             data.add(new Pair<>("Crew members lost", String.valueOf(lostCrewMembers) + " (" + String.valueOf(lostCrewMemberScore * lostCrewMembers) + ")"));
-            totalScore -= lostCrewMemberScore * lostCrewMembers;
+            totalScore += lostCrewMemberScore * lostCrewMembers;
         }
 
     }
