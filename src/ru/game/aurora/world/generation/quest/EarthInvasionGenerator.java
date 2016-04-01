@@ -90,6 +90,7 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                     world.getGlobalVariables().put("rogues_altar.result", "destroy");
                     world.getPlayer().getJournal().addQuestEntries("rogues_altar", "destroy");
                     world.getPlayer().getJournal().questCompleted("rogues_altar");
+                    world.getGlobalVariables().remove("rogues_altar.moon_checked");
                     world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/encounters/rogues_altar_destroyed.json"));
                 }
             });
@@ -102,14 +103,15 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
 
         @Override
         public boolean interact(World world) {
-            if (!world.getGlobalVariables().containsKey("rogues_altar.moon_checked")) {
-                if (!world.getGlobalVariables().containsKey("rogues_altar.earth_communicated")) {
-                    world.getGlobalVariables().put("rogues_altar.moon_checked", true);
-                    world.getPlayer().getJournal().addQuestEntries("rogues_altar", "desc", "comm");
-                    // player has not yet received task to settle things down
-                    world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/rogues_altar_1.json"));
-                } else {
 
+            if (!world.getGlobalVariables().containsKey("rogues_altar.earth_communicated")) {
+                world.getPlayer().getJournal().addQuestEntries("rogues_altar", "desc");
+                // player has not yet received task to settle things down
+                world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/rogues_altar_1.json"));
+                world.getGlobalVariables().put("rogues_altar.moon_checked", true);
+            } else {
+
+                if (!world.getGlobalVariables().containsKey("rogues_altar.moon_checked") || !world.getGlobalVariables().containsKey("rogues_altar.item_list_received")) {
                     final Dialog d = Dialog.loadFromFile("dialogs/encounters/rogues_altar_2.json");
                     d.addListener(new DialogListener() {
                         private static final long serialVersionUID = 7809964677347861595L;
@@ -122,44 +124,46 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                             }
                         }
                     });
+                    world.getPlayer().getJournal().addQuestEntries("rogues_altar", "desc", "comm");
                     world.addOverlayWindow(d);
-                }
-                world.getGlobalVariables().put("rogues_altar.moon_checked", true);
-            } else {
-                Dialog d = Dialog.loadFromFile("dialogs/encounters/rogues_altar_default.json");
-                d.addListener(new DialogListener() {
-                    @Override
-                    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                        if (returnCode == 0) {
-                            world.getPlayer().getJournal().addQuestEntries("rogues_altar", "repair");
-                            world.getPlayer().getJournal().questCompleted("rogues_altar");
-                            world.getGlobalVariables().put("rogues_altar.result", "help");
-                            world.getReputation().updateReputation(RoguesGenerator.NAME, HumanityGenerator.NAME, 2);
-                            world.getCurrentDungeon().getController().returnToPrevRoom(true);
-                            Planet moon = (Planet) world.getCurrentRoom();
-                            for (GameObject po : moon.getPlanetObjects()) {
-                                if (po instanceof DungeonEntrance) {
-                                    ((DungeonEntrance) po).setLocked("rogues_altar_abandoned");
+                    world.getGlobalVariables().put("rogues_altar.moon_checked", true);
+                    world.getGlobalVariables().put("rogues_altar.item_list_received", true);
+                } else {
+                    Dialog d = Dialog.loadFromFile("dialogs/encounters/rogues_altar_default.json");
+                    d.addListener(new DialogListener() {
+                        @Override
+                        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                            if (returnCode == 0) {
+                                world.getPlayer().getJournal().addQuestEntries("rogues_altar", "repair");
+                                world.getPlayer().getJournal().questCompleted("rogues_altar");
+                                world.getGlobalVariables().put("rogues_altar.result", "help");
+                                world.getReputation().updateReputation(RoguesGenerator.NAME, HumanityGenerator.NAME, 2);
+                                world.getCurrentDungeon().getController().returnToPrevRoom(true);
+                                Planet moon = (Planet) world.getCurrentRoom();
+                                for (GameObject po : moon.getPlanetObjects()) {
+                                    if (po instanceof DungeonEntrance) {
+                                        ((DungeonEntrance) po).setLocked("rogues_altar_abandoned");
+                                    }
                                 }
                             }
                         }
+                    });
+
+
+                    final ShipLootItem computers = new ShipLootItem(ShipLootItem.Type.COMPUTERS, BorkGenerator.NAME);
+                    int computersCount = world.getPlayer().getInventory().count(computers);
+                    final ShipLootItem materials = new ShipLootItem(ShipLootItem.Type.MATERIALS, BorkGenerator.NAME);
+                    int materialsCount = world.getPlayer().getInventory().count(materials);
+                    final ShipLootItem energy = new ShipLootItem(ShipLootItem.Type.ENERGY, BorkGenerator.NAME);
+                    int energyCount = world.getPlayer().getInventory().count(energy);
+
+                    if (computersCount >= 2 && materialsCount >= 1 && energyCount >= 1) {
+                        Map<String, String> flags = new HashMap<>();
+                        flags.put("rogues_altar.has_items", "");
+                        world.addOverlayWindow(d, flags);
+                    } else {
+                        world.addOverlayWindow(d);
                     }
-                });
-
-
-                final ShipLootItem computers = new ShipLootItem(ShipLootItem.Type.COMPUTERS, BorkGenerator.NAME);
-                int computersCount = world.getPlayer().getInventory().count(computers);
-                final ShipLootItem materials = new ShipLootItem(ShipLootItem.Type.MATERIALS, BorkGenerator.NAME);
-                int materialsCount = world.getPlayer().getInventory().count(materials);
-                final ShipLootItem energy = new ShipLootItem(ShipLootItem.Type.ENERGY, BorkGenerator.NAME);
-                int energyCount = world.getPlayer().getInventory().count(energy);
-
-                if (computersCount >= 2 && materialsCount >= 1 && energyCount >= 1) {
-                    Map<String, String> flags = new HashMap<>();
-                    flags.put("rogues_altar.has_items", "");
-                    world.addOverlayWindow(d, flags);
-                } else {
-                    world.addOverlayWindow(d);
                 }
             }
 
