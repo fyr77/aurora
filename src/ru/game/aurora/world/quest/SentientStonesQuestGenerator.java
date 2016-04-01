@@ -50,6 +50,8 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
 
     private LandingParty originalLandingParty;
 
+    private boolean incidentStarted = false;
+
     public static void processKliskDialogResult(World world) {
         Dialog sstonesDialog = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_klisk.json");
         Map<String, String> map = new HashMap<>();
@@ -97,6 +99,7 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
             world.getPlayer().getResearchState().removeScientists(scientistsLost);
             world.onCrewChanged();
             isAlive = false;
+            incidentStarted = false;
         }
     }
 
@@ -152,6 +155,9 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
 
     @Override
     public boolean onLandingPartyDestroyed(World world) {
+        if (!incidentStarted) {
+            return false;
+        }
         Dialog d = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_incident_fail.json");
         d.addListener(new IncidentResultDialogListener());
         world.addOverlayWindow(d);
@@ -472,7 +478,7 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
     ////////////////////////////////////////////////////////////////////////////////////
     // This is where the incident in the laboratory begins
     private void beginIncident(World world) {
-
+        incidentStarted = true;
         Dialog d = Dialog.loadFromFile("dialogs/encounters/sentient_stones/sstones_incident.json");
         d.addListener(new DialogListener() {
             @Override
