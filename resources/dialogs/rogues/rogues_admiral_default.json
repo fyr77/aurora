@@ -24,6 +24,10 @@
             {
               "name": "rogues_altar.moon_checked",
               "type": "SET"
+            },
+            {
+              "name": "rogues_altar.result",
+              "type": "NOT_SET"
             }
           ]
         },
