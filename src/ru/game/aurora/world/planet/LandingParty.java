@@ -120,7 +120,7 @@ public class LandingParty extends BaseGameObject {
         if (world.getPlayer().getMainCountry() == EarthCountry.AMERICA) {
             baseValue *= Configuration.getDoubleProperty("player.america.damageMultiplier");
         }
-        return (int) Math.round(baseValue);
+        return Math.max(1, (int) Math.round(baseValue)); // damage should never drop to zero
     }
 
     public int calcMiningPower() {
