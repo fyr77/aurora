@@ -91,6 +91,12 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
                     world.getPlayer().getJournal().addQuestEntries("rogues_altar", "destroy");
                     world.getPlayer().getJournal().questCompleted("rogues_altar");
                     world.getGlobalVariables().remove("rogues_altar.moon_checked");
+                    Planet moon = (Planet) ((Dungeon) world.getCurrentRoom()).getPrevRoom();
+                    for (GameObject po : moon.getPlanetObjects()) {
+                        if (po instanceof DungeonEntrance) {
+                            ((DungeonEntrance) po).setLocked("rogues_altar_abandoned");
+                        }
+                    }
                     world.getPlayer().getEarthState().getEarthSpecialDialogs().add(Dialog.loadFromFile("dialogs/encounters/rogues_altar_destroyed.json"));
                 }
             });

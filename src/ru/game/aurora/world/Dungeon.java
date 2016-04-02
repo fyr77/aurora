@@ -203,4 +203,8 @@ public class Dungeon implements Room, IDungeon {
             }
         }
     }
+
+    public Room getPrevRoom() {
+        return controller.getPrevRoom();
+    }
 }

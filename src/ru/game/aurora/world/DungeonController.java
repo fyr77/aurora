@@ -596,4 +596,8 @@ public class DungeonController extends Listenable implements Serializable {
     public int getTilesExploredThisTurn() {
         return tilesExploredThisTurn;
     }
+
+    public Room getPrevRoom() {
+        return prevRoom;
+    }
 }
