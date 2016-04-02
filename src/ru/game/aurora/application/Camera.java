@@ -7,6 +7,7 @@
 package ru.game.aurora.application;
 
 import ru.game.aurora.world.IMovable;
+import ru.game.aurora.world.ITileMap;
 
 import java.io.Serializable;
 
@@ -88,6 +89,14 @@ public class Camera implements Serializable {
 
     public float getRelativeY(float tileY) {
         return viewportTilesY + tileHeight * tileY;
+    }
+
+    public float getXCoord(int tileX, ITileMap map) {
+        return map.isWrapped() ? getXCoordWrapped(tileX, map.getWidthInTiles()) : getXCoord(tileX);
+    }
+
+    public float getYCoord(int tileY, ITileMap map) {
+        return map.isWrapped() ? getYCoordWrapped(tileY, map.getHeightInTiles()) : getYCoord(tileY);
     }
 
     public float getXCoordWrapped(int tileX, int totalTilesX) {

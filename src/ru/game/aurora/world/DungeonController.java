@@ -315,8 +315,8 @@ public class DungeonController extends Listenable implements Serializable {
                     world
                     , landingParty
                     , landingParty
-                    , world.getCamera().getXCoordWrapped(target.getX(), map.getWidthInTiles()) + world.getCamera().getTileWidth() / 2
-                    , world.getCamera().getYCoordWrapped(target.getY(), map.getHeightInTiles()) + world.getCamera().getTileHeight() / 2
+                    , world.getCamera().getXCoord(target.getX(), map) + world.getCamera().getTileWidth() / 2
+                    , world.getCamera().getYCoord(target.getY(), map) + world.getCamera().getTileHeight() / 2
                     , world.getCamera()
                     , 800
                     , map
@@ -509,7 +509,7 @@ public class DungeonController extends Listenable implements Serializable {
 
                     // in shoot mode, all available targets are surrounded with red square
                     if (mode == MODE_SHOOT && a.canBeAttacked() && getDistance(landingParty, a) < landingParty.getWeapon().getRange()) {
-                        graphics.drawRect(camera.getXCoordWrapped(a.getX(), map.getWidthInTiles()), camera.getYCoordWrapped(a.getY(), map.getHeightInTiles()), camera.getTileWidth(), camera.getTileHeight());
+                        graphics.drawRect(camera.getXCoord(a.getX(), map), camera.getYCoord(a.getY(), map), camera.getTileWidth(), camera.getTileHeight());
                     }
                 }
 
@@ -523,7 +523,10 @@ public class DungeonController extends Listenable implements Serializable {
 
                 if (target != null) {
                     // draw target mark
-                    graphics.drawImage(ResourceManager.getInstance().getImage("target"), camera.getXCoordWrapped(target.getX(), map.getWidthInTiles()), camera.getYCoordWrapped(target.getY(), map.getHeightInTiles()));
+                    graphics.drawImage(
+                            ResourceManager.getInstance().getImage("target")
+                            , camera.getXCoord(target.getX(), map)
+                            , camera.getYCoord(target.getY(), map));
                 }
             }
         }
