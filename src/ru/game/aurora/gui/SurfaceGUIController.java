@@ -154,4 +154,10 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
             GUI.getInstance().getWorldInstance().getGlobalVariables().put("skipHelp", true);
         }
     }
+
+    public void closeCurrentPopup() {
+        GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
+        GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+        world.setPaused(false);
+    }
 }
