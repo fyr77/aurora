@@ -98,7 +98,7 @@ public class EarthScreenController implements ScreenController {
         final int currentProgress = earthState.getProgress(currentHumanityProgressTab);
         List<EarthUpgrade> upgrades = EarthUpgrade.getUpgrades(currentHumanityProgressTab);
         final int topUpgradeCost = upgrades.get(upgrades.size() - 1).getValue();
-        return Math.min(topUpgradeCost - currentProgress, earthState.getUndistributedProgress());
+        return Math.min(topUpgradeCost - currentProgress, initalAmount);
     }
 
     /**

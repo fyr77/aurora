@@ -31,7 +31,7 @@
 
                     <panel height="10px"/>
 
-                    <control name="scrollPanel" horizontal="false" height="*" vertical="optional"
+                    <control name="scrollPanel" horizontal="false" height="*" vertical="true"
                              childLayout="vertical">
                         <panel childLayout="center" padding="5px" width="100%">
                             <text id="description" style="base-font" wrap="true"

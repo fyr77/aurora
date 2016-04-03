@@ -8,6 +8,7 @@ package ru.game.aurora.player.earth;
 
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.player.earth.EarthUpgrade.Type;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.*;
 import ru.game.aurora.world.World;
@@ -29,6 +30,7 @@ public class EarthState implements Serializable
     private int undistributedProgress = 0;
     private Map<EarthUpgrade.Type, Integer> progress;
     private EvacuationState evacuationState;
+    private Map<Type, List<EarthUpgrade>> earthUpgrades;
 
     public EarthState()
     {
@@ -103,5 +105,13 @@ public class EarthState implements Serializable
         }
         progress.put(type, newValue);
         undistributedProgress -= amount;
+    }
+    
+    public Map<Type, List<EarthUpgrade>> getEarthUpgrades() {
+        return earthUpgrades;
+    }
+    
+    public void setEarthUpgrades(Map<Type, List<EarthUpgrade>> upgrades) {
+        earthUpgrades = upgrades;
     }
 }
