@@ -90,16 +90,15 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
                 world.getPlayer().getJournal().questCompleted("sentient_stone", "throw_to_space");
                 world.getGlobalVariables().remove("sentient_stone.started");
             }
-            int scientistsLost = Configuration.getIntProperty("sentient_stones.scientists") - world.getPlayer().getLandingParty().getScience();
-            world.getPlayer().setLandingParty(originalLandingParty);
 
-            Ship ship = world.getPlayer().getShip();
-            scientistsLost = Math.min(scientistsLost, ship.getScientists());
-            ship.setScientists(ship.getScientists() - scientistsLost);
-            world.getPlayer().getResearchState().removeScientists(scientistsLost);
-            world.onCrewChanged();
             isAlive = false;
             incidentStarted = false;
+            
+            if(world.getCurrentDungeon() != null) {
+                world.getCurrentDungeon().getController().returnToPrevRoom(true);
+                world.getPlayer().setLandingParty(originalLandingParty);
+                world.onCrewChanged();
+            }
         }
     }
 
@@ -517,6 +516,7 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
         landingParty.setMilitary(0);
         landingParty.setScience(Configuration.getIntProperty("sentient_stones.scientists"));
         world.getPlayer().setLandingParty(landingParty);
+        landingParty.onLaunch(world);
     }
 
     @Override
