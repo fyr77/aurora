@@ -39,7 +39,9 @@ import java.util.*;
 public class World implements Serializable, ResolutionChangeListener {
 
     private static final long serialVersionUID = 3L;
-    private static final DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+    private static final DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", 
+    		Locale.forLanguageTag(Configuration.getSystemProperties().getProperty("locale")));
+    
     private static final Logger logger = LoggerFactory.getLogger(World.class);
     private static World world;
     private final GalaxyMap galaxyMap;
