@@ -16,9 +16,11 @@
 6;A fight? You will become the Essence of the Devourer. *The Rogue is angry.*;;
 ;And you will become research material.;-1;1
 7;Our own. Praying to the Essence of the Devourer is happiness. But we were sent here by Elder Hoor, from Mothership Brau. Is that what you meant?;;
+;Yes. Should discuss this issue with him. But I have more questions for you.;5;
 ;Elder Hoor, Mothership Brau… Good. If you guys are so dense, I'll have to go pay him a visit.;-1;
 8;Yes. Do you want to help us?;;
 ;What choice do I have?;9;
 ;I don't think so. This solution is too unpleasant for me.;5;
 9;Okay. Your ship. Give us clear comms. We'll send you a list of what we need.;;
+;I have more questions;5;
 ;Deal. I'm going back there. Don't take too long.;-1;

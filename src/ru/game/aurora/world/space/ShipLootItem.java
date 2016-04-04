@@ -17,6 +17,8 @@ import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 public class ShipLootItem extends SellOnlyInventoryItem
 {
 
+    public static final long serialVersionUID = 1982507403913686060L;
+
     public enum Type
     {
         COMPUTERS("loot.computers", 4),
@@ -75,5 +77,23 @@ public class ShipLootItem extends SellOnlyInventoryItem
     @Override
     public void onLost(World world, int amount) {
         world.getPlayer().getInventory().remove(this, amount);
+    }
+
+    boolean b;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ShipLootItem that = (ShipLootItem) o;
+
+        return id.equals(that.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }
