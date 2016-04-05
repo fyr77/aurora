@@ -17,21 +17,27 @@ public class EarthUpgrade extends ItemWithTextAndImage implements Comparable<Ear
 {
 
     public static final long serialVersionUID = 1L;
-    private static Map<Type, List<EarthUpgrade>> upgrades;
+    
+    private static Map<Type, List<EarthUpgrade>> getUpgrades() {
+    	Map<Type, List<EarthUpgrade>> upgrades = World.getWorld().getPlayer().getEarthState().getEarthUpgrades();
+    	if(upgrades == null) {
+    		JsonConfigManager<EarthUpgrade> m = new JsonConfigManager<>(EarthUpgrade.class, "resources/items/earth_upgrades");
+            upgrades = new HashMap<>();
+            upgrades.put(Type.EARTH, new ArrayList<EarthUpgrade>());
+            upgrades.put(Type.SHIP, new ArrayList<EarthUpgrade>());
+            upgrades.put(Type.SPACE, new ArrayList<EarthUpgrade>());
+            for (EarthUpgrade e : m.getEntities().values()) {
+                upgrades.get(e.type).add(e);
+            }
 
-    static {
-        JsonConfigManager<EarthUpgrade> m = new JsonConfigManager<>(EarthUpgrade.class, "resources/items/earth_upgrades");
-        upgrades = new HashMap<>();
-        upgrades.put(Type.EARTH, new ArrayList<EarthUpgrade>());
-        upgrades.put(Type.SHIP, new ArrayList<EarthUpgrade>());
-        upgrades.put(Type.SPACE, new ArrayList<EarthUpgrade>());
-        for (EarthUpgrade e : m.getEntities().values()) {
-            upgrades.get(e.type).add(e);
-        }
-
-        Collections.sort(upgrades.get(Type.EARTH));
-        Collections.sort(upgrades.get(Type.SHIP));
-        Collections.sort(upgrades.get(Type.SPACE));
+            Collections.sort(upgrades.get(Type.EARTH));
+            Collections.sort(upgrades.get(Type.SHIP));
+            Collections.sort(upgrades.get(Type.SPACE));
+            
+            World.getWorld().getPlayer().getEarthState().setEarthUpgrades(upgrades);
+    	}
+    	
+    	return upgrades;
     }
 
     protected int value;
@@ -50,11 +56,11 @@ public class EarthUpgrade extends ItemWithTextAndImage implements Comparable<Ear
     }
 
     public static List<EarthUpgrade> getUpgrades(Type t) {
-        return upgrades.get(t);
+        return getUpgrades().get(t);
     }
 
     public static int getMax(Type t) {
-        final List<EarthUpgrade> earthUpgrades = upgrades.get(t);
+        final List<EarthUpgrade> earthUpgrades = getUpgrades().get(t);
         return earthUpgrades.get(earthUpgrades.size() - 1).getValue();
     }
 
