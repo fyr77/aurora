@@ -67,11 +67,11 @@ public class ShipLootItem extends SellOnlyInventoryItem
         ResearchProjectDesc r = world.getResearchAndDevelopmentProjects().getResearchProjects().remove(id);
         if (r != null) {
             world.getPlayer().getResearchState().addNewAvailableProject(r);
+            if (id.contains("goods")) {
+                world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "loot.goods", "news"));
+            }
         }
 
-        if (id.contains("goods")) {
-            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "news_sender", "loot.goods", "news"));
-        }
     }
 
     @Override

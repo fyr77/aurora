@@ -16,10 +16,7 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.NextDialogListener;
 import ru.game.aurora.gui.TradeScreenController;
-import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.npc.NPC;
-import ru.game.aurora.npc.NPCShipFactory;
-import ru.game.aurora.npc.StandardAlienShipEvent;
+import ru.game.aurora.npc.*;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.player.research.ResearchProjectDesc;
@@ -137,14 +134,7 @@ public class KliskGenerator implements WorldGeneratorPart {
         world.addListener(new KliskTradequestDialogListener(targetSystem));
     }
 
-    private StarSystem generateTargetStarsystemForTradeQuest(World world, final AlienRace race) {
-        StarSystem ss = WorldGenerator.generateRandomStarSystem(world, 12, 15);
-        world.getGalaxyMap().addObjectAtDistance(ss, (Positionable) world.getGlobalVariables().get("solar_system"), 20);
-        world.getGlobalVariables().put("klisk_trade.coords", ss.getCoordsString());
-
-        NPCShip spaceStation = race.getDefaultFactory().createShip(world, STATION);
-        ss.setRandomEmptyPosition(spaceStation);
-        ss.getShips().add(spaceStation);
+    static Dialog loadTradeStationDefaultDialog(final Faction race) {
         final Dialog stationDialog = Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json");
         stationDialog.addListener(new DialogListener() {
             @Override
@@ -165,7 +155,19 @@ public class KliskGenerator implements WorldGeneratorPart {
                 }
             }
         });
-        spaceStation.setCaptain(new NPC(stationDialog));
+        return stationDialog;
+    }
+
+    private StarSystem generateTargetStarsystemForTradeQuest(World world, final AlienRace race) {
+        StarSystem ss = WorldGenerator.generateRandomStarSystem(world, 12, 15);
+        world.getGalaxyMap().addObjectAtDistance(ss, (Positionable) world.getGlobalVariables().get("solar_system"), 20);
+        world.getGlobalVariables().put("klisk_trade.coords", ss.getCoordsString());
+
+        NPCShip spaceStation = race.getDefaultFactory().createShip(world, STATION);
+        ss.setRandomEmptyPosition(spaceStation);
+        ss.getShips().add(spaceStation);
+
+        spaceStation.setCaptain(new NPC(loadTradeStationDefaultDialog(race)));
         ss.setQuestLocation(true);
         return ss;
     }

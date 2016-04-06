@@ -43,7 +43,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
             world.getGlobalVariables().put("klisk_trade.result", "refused");
             world.getPlayer().getJournal().addQuestEntries("klisk_trade", "refused");
             world.getGlobalVariables().remove("klisk_trade.started");
-            npcStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json")));
+            npcStation.setCaptain(new NPC(KliskGenerator.loadTradeStationDefaultDialog(world.getFactions().get(KliskGenerator.NAME))));
             return;
         }
 
@@ -127,7 +127,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
             // player refused to perform trading
             world.getGlobalVariables().put("klisk_trade.result", "refused");
             world.getPlayer().getJournal().addQuestEntries("klisk_trade", "refused");
-            npcStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json")));
+            npcStation.setCaptain(new NPC(KliskGenerator.loadTradeStationDefaultDialog(world.getFactions().get(KliskGenerator.NAME))));
             return;
         }
         world.getPlayer().getJournal().addQuestEntries("klisk_trade", "traded");
@@ -147,7 +147,7 @@ public class KliskTradequestDialogListener extends GameEventListener implements 
         world.getGlobalVariables().put("klisk_trade.result", result);
 
         // reset to default dialog
-        npcStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_station_default.json")));
+        npcStation.setCaptain(new NPC(KliskGenerator.loadTradeStationDefaultDialog(world.getFactions().get(KliskGenerator.NAME))));
 
     }
 
