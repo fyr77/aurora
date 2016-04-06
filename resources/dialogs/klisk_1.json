@@ -17,8 +17,25 @@
       "replies": [
         {
           "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "gardeners.first_contact",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 2,
-          "replyText": "0"
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "gardeners.first_contact",
+              "type": "SET"
+            }
+          ]
         }
       ]
     },
