@@ -66,13 +66,17 @@ public class QuarantineQuest extends GameEventListener implements WorldGenerator
         world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/quarantine/quarantine_end.json"));
 
         // if player has bought medicine from klisk - remove its research
-        for (Iterator<ResearchProjectState> iterator = world.getPlayer().getResearchState().getCurrentProjects().iterator(); iterator.hasNext(); ) {
-            ResearchProjectState pr = iterator.next();
-            if (pr.desc instanceof QuarantineResearch) {
-                iterator.remove();
-                world.getPlayer().getResearchState().addIdleScientists(pr.scientists);
-                break;
+        if(world.getGlobalVariables().containsKey("quarantine.med_from_klisk")) {
+            for (Iterator<ResearchProjectState> iterator = world.getPlayer().getResearchState().getCurrentProjects().iterator(); iterator.hasNext(); ) {
+                ResearchProjectState pr = iterator.next();
+                if (pr.desc instanceof QuarantineResearch) {
+                    iterator.remove();
+                    world.getPlayer().getResearchState().addIdleScientists(pr.scientists);
+                    break;
+                }
             }
+            
+            world.getGlobalVariables().remove("quarantine.med_from_klisk");
         }
 
         world.getGlobalVariables().remove("quarantine.started");
