@@ -16,7 +16,11 @@ import ru.game.aurora.world.planet.PlanetCategory;
  * Has no effect, just a visual.
  */
 public class RainCloud extends BaseGameObject {
+    public static final long serialVersionUID = -6720745635254295035L;
+
     protected int radius;
+
+    protected int maxRadius;
 
     private int ttl;
 
@@ -39,7 +43,8 @@ public class RainCloud extends BaseGameObject {
         setPos(CommonRandom.getRandom().nextInt(myPlanet.getWidth())
                 , CommonRandom.getRandom().nextInt(myPlanet.getHeight()));
         ttl = CommonRandom.getRandom().nextInt(Configuration.getIntProperty("environment.rain.max_ttl")) + 10;
-        radius = CommonRandom.getRandom().nextInt(Configuration.getIntProperty("environment.rain.max_size")) + 10;
+        maxRadius = CommonRandom.getRandom().nextInt(Configuration.getIntProperty("environment.rain.max_size")) + 10;
+        radius = 2;
     }
 
     @Override
@@ -49,6 +54,8 @@ public class RainCloud extends BaseGameObject {
             --ttl;
             if (ttl == 0) {
                 respawn();
+            } else if (radius < maxRadius) {
+                radius++;
             }
         }
     }
