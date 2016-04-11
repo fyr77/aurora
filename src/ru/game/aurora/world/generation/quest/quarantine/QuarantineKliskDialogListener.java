@@ -18,12 +18,14 @@ public class QuarantineKliskDialogListener implements DialogListener {
         if (returnCode == 2) {
             // klisk give medicine for free
             world.getPlayer().getJournal().addQuestEntries("quarantine", "klisk_get");
+            world.getGlobalVariables().put("quarantine.med_from_klisk", "Y");
             QuarantineQuest.endQuest(world);
         } else if (returnCode == 1) {
             // attempt to buy
             if (world.getPlayer().getCredits() >= 10) {
                 world.getPlayer().changeResource(world, Resources.CREDITS, -10);
                 world.getPlayer().getJournal().addQuestEntries("quarantine", "klisk_buy");
+                world.getGlobalVariables().put("quarantine.med_from_klisk", "Y");
                 QuarantineQuest.endQuest(world);
             } else {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "logging.not_enough_credits"));
