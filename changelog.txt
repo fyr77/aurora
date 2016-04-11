@@ -1,9 +1,17 @@
+VERSION 0.5.2
+
+* Acid rains now spawn slowly, party can hide from them under plants.
+* Fixed bugs with typos in dialogs
+
+=========================================
+
 VERSION 0.5.1
 
-IN PROGRESS...
+6.04.2016
 
 + Steam API support via steamworks4j
 * Torpedoes should now hit target on same turn they reach their location
++ Sentient stones quest
 
 ==========================================
 
