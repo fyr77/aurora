@@ -7,6 +7,7 @@ import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.frankenstein.Slick2DColor;
 import ru.game.aurora.frankenstein.Slick2DFrankensteinImage;
 import ru.game.aurora.frankenstein.Slick2DImageFactory;
@@ -163,6 +164,11 @@ public class AnimalGenerator {
     }
 
     public void getImageForAnimal(AnimalSpeciesDesc desc) {
+        if("Marine".equals(desc.getName())) { //TODO: ?
+            desc.setImages(ResourceManager.getInstance().getSpriteSheet("humanity_tileset").getSprite(1, 9), ResourceManager.getInstance().getImage("no_image"));
+            return;
+        }
+        
         try {
             monsterGenerationParams.tags.clear(); //todo: thread-safe?
             monsterGenerationParams.tags.add(desc.getHomePlanet().getFloraAndFauna().getAnimalsStyleTag());
