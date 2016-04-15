@@ -289,6 +289,11 @@ public class GalaxyMap extends BaseSpaceRoom {
         return null;
     }
 
+    /**
+     * Never remove anything from this collection!
+     * If you need to remove object from map just set its map[x][y] = -1
+     * Removing object from list will lead to all indices becoming shifted by one
+     */
     public List<GalaxyMapObject> getGalaxyMapObjects() {
         return objects;
     }
@@ -299,7 +304,6 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     public void addObjectAndSetTile(GalaxyMapObject object, int x, int y) {
         objects.add(object);
-        object.setPos(x, y);
         while (map[y][x] != -1) {
             if (y < tilesY - 1) {
                 ++y;
@@ -307,6 +311,7 @@ public class GalaxyMap extends BaseSpaceRoom {
                 ++x;
             }
         }
+        object.setPos(x, y);
         map[y][x] = objects.size() - 1;
     }
 
