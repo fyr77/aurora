@@ -365,6 +365,17 @@ public class DungeonController extends Listenable implements Serializable {
     }
 
     public void update(GameContainer container, World world) {
+
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INVENTORY))) {
+            GUI.getInstance().pushCurrentScreen();
+            GUI.getInstance().getNifty().gotoScreen("inventory_screen");
+            return;
+        }
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))) {
+            GUI.getInstance().pushCurrentScreen();
+            GUI.getInstance().getNifty().gotoScreen("surface_map_screen");
+            return;
+        }
         Camera myCamera = world.getCamera();
         this.landingParty = world.getPlayer().getLandingParty();
         if (container.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {

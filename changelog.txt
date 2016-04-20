@@ -2,6 +2,7 @@ VERSION 0.5.2
 
 * Acid rains now spawn slowly, party can hide from them under plants.
 * Fixed bugs with typos in dialogs
+* Added key bindings for map and inventory
 
 =========================================
 

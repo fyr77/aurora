@@ -279,7 +279,7 @@ public class AuroraGame extends NiftyOverlayGame {
             String savedInputBinding = Configuration.getSystemProperties().getProperty(InputBinding.key);
             if (savedInputBinding == null) {
                 logger.info("No saved keyboard layout found, using default");
-                InputBinding.setDefault();
+                InputBinding.useDefaultBinding();
             } else {
                 logger.info("Loading keyboard layout");
                 InputBinding.loadFromString(savedInputBinding);

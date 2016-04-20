@@ -178,10 +178,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         int y = world.getPlayer().getShip().getY();
         int x = world.getPlayer().getShip().getX();
 
-        if (container.getInput().isKeyPressed(Input.KEY_L)) {
-            /*LandingPartyEquipScreen screen = new LandingPartyEquipScreen(false);
-            screen.enter(world);
-            world.setCurrentRoom(screen);*/
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LANDING_PARTY))) {
             GUI.getInstance().pushCurrentScreen();
             GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
             return;

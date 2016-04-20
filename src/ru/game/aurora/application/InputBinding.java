@@ -1,6 +1,7 @@
 package ru.game.aurora.application;
 
 import org.newdawn.slick.Input;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
@@ -26,7 +27,12 @@ public class InputBinding {
         WEAPON_1,
         WEAPON_2,
         WEAPON_3,
-        WEAPON_4;
+        WEAPON_4,
+        ENGINEERING,
+        RESEARCH,
+        LANDING_PARTY,
+        MAP,
+        INVENTORY;
 
         @Override
         public String toString() {
@@ -36,18 +42,29 @@ public class InputBinding {
 
     public static Action[] weapons = new Action[] {Action.WEAPON_1, Action.WEAPON_2, Action.WEAPON_3, Action.WEAPON_4};
 
-    public static void setDefault()
+    public static void useDefaultBinding() {
+        keyBinding = createDefaultBinding();
+    }
+
+    public static Map<Action, Integer> createDefaultBinding()
     {
-        keyBinding.put(Action.LEFT, Input.KEY_LEFT);
-        keyBinding.put(Action.RIGHT, Input.KEY_RIGHT);
-        keyBinding.put(Action.UP, Input.KEY_UP);
-        keyBinding.put(Action.DOWN, Input.KEY_DOWN);
-        keyBinding.put(Action.INTERACT, Input.KEY_SPACE);
-        keyBinding.put(Action.SHOOT, Input.KEY_F);
-        keyBinding.put(Action.WEAPON_1, Input.KEY_1);
-        keyBinding.put(Action.WEAPON_2, Input.KEY_2);
-        keyBinding.put(Action.WEAPON_3, Input.KEY_3);
-        keyBinding.put(Action.WEAPON_4, Input.KEY_4);
+        Map<Action, Integer> defaultBinding = new HashMap<>();
+        defaultBinding.put(Action.LEFT, Input.KEY_LEFT);
+        defaultBinding.put(Action.RIGHT, Input.KEY_RIGHT);
+        defaultBinding.put(Action.UP, Input.KEY_UP);
+        defaultBinding.put(Action.DOWN, Input.KEY_DOWN);
+        defaultBinding.put(Action.INTERACT, Input.KEY_SPACE);
+        defaultBinding.put(Action.SHOOT, Input.KEY_F);
+        defaultBinding.put(Action.WEAPON_1, Input.KEY_1);
+        defaultBinding.put(Action.WEAPON_2, Input.KEY_2);
+        defaultBinding.put(Action.WEAPON_3, Input.KEY_3);
+        defaultBinding.put(Action.WEAPON_4, Input.KEY_4);
+        defaultBinding.put(Action.ENGINEERING, Input.KEY_E);
+        defaultBinding.put(Action.RESEARCH, Input.KEY_R);
+        defaultBinding.put(Action.LANDING_PARTY, Input.KEY_L);
+        defaultBinding.put(Action.MAP, Input.KEY_M);
+        defaultBinding.put(Action.INVENTORY, Input.KEY_I);
+        return defaultBinding;
     }
 
     public static String saveToString()
@@ -60,6 +77,7 @@ public class InputBinding {
     }
 
     public static void loadFromString(String s) {
+        final Logger logger = LoggerFactory.getLogger(InputBinding.class);
         try {
             String[] parts = s.split(";");
             for (String part : parts) {
@@ -68,13 +86,25 @@ public class InputBinding {
             }
 
             if (keyBinding.size() != Action.values().length) {
-                LoggerFactory.getLogger(InputBinding.class).error("Input binding string does not contain values for all inputs," +
-                        " reverting to a default one");
-                setDefault();
+                logger.error("Input binding string does not contain values for all inputs," +
+                        " updating new inputs");
+                Map<Action, Integer> defaultBinding = createDefaultBinding();
+                int count = 0;
+                for (Map.Entry<Action, Integer> entry : defaultBinding.entrySet()) {
+                    if (!keyBinding.containsKey(entry.getKey())) {
+                        keyBinding.put(entry.getKey(), entry.getValue());
+                        ++count;
+                    }
+                }
+                logger.info("Added {} new key bindings", count);
+
+                s = InputBinding.saveToString();
+                Configuration.getSystemProperties().put(InputBinding.key, s);
+                Configuration.saveSystemProperties();
             }
         } catch (Exception ex) {
-            LoggerFactory.getLogger(InputBinding.class).error("Failed to read input binding, will use a default one", ex);
-            setDefault();
+            logger.error("Failed to read input binding, will use a default one", ex);
+            createDefaultBinding();
         }
     }
 }

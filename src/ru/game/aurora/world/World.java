@@ -135,13 +135,13 @@ public class World implements Serializable, ResolutionChangeListener {
             updatedThisFrame = updatedNextFrame;
             updatedNextFrame = false;
 
-            if (container.getInput().isKeyPressed(Input.KEY_R)) {
+            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RESEARCH))) {
                 GUI.getInstance().pushCurrentScreen();
                 nifty.gotoScreen("research_screen");
                 return;
             }
 
-            if (container.getInput().isKeyPressed(Input.KEY_E)) {
+            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.ENGINEERING))) {
                 GUI.getInstance().pushCurrentScreen();
                 nifty.gotoScreen("engineering_screen");
                 return;
