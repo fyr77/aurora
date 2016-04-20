@@ -148,6 +148,10 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         GUI.getInstance().getNifty().gotoScreen("inventory_screen");
     }
 
+    public void nextTurn() {
+        world.setUpdatedNextFrame(true);
+    }
+
     @NiftyEventSubscriber(id = "help_window")
     public void onHelpClose(final String id, final WindowClosedEvent event) {
         if (GUI.getInstance().getNifty().getCurrentScreen().findControl("help_popup", HelpPopupControl.class).isHelpSkipChecked()) {

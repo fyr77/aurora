@@ -59,9 +59,12 @@
             <!-- bottom panel containing weapon buttons and log text -->
             <panel height="113px" childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
                    imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69" padding="12px,20px,5px,15px">
-                <control id="weapon_button" name="button" label="${gui.surface.fire}" width="64px" height="64px">
-                    <interact onClick="weaponClicked()"/>
-                </control>
+                <panel width="64px" height="100%" childLayout="vertical">
+                    <panel height="10px"/>
+                    <control id="weapon_button" name="button" label="${gui.surface.fire}" width="100%" height="64px">
+                        <interact onClick="weaponClicked()"/>
+                    </control>
+                </panel>
                 <panel width="267px"/>
 
                 <panel width="*" childLayout="vertical">
@@ -69,7 +72,13 @@
                     <control id="log_list" name="listBox" vertical="on" horizontal="off" height="95%"
                              selectionMode="Disabled" />
                 </panel>
-                <panel width="160px"/>
+                <panel width="30px"/>
+                <panel width="115px" childLayout="vertical">
+                    <panel height="20px"/>
+                    <control id="next_turn_button" name="button" label="${gui.end_turn}" height="50px" width="100%">
+                        <interact onRelease="nextTurn()"/>
+                    </control>
+                </panel>
             </panel>
         </layer>
         <layer id="help_layer" childLayout="absolute">
