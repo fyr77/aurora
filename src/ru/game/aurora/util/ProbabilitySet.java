@@ -36,6 +36,14 @@ public class ProbabilitySet<T> extends AbstractMap<T, Double> implements Seriali
         this(proto, new Random(System.currentTimeMillis()));
     }
 
+    @SafeVarargs
+    public ProbabilitySet(Map.Entry<T, Double>... entries) {
+        this.random = new Random(System.currentTimeMillis());
+        for (Map.Entry<T, Double> e : entries) {
+            this.entries.put(e.getKey(), e.getValue());
+        }
+    }
+
     public ProbabilitySet(ProbabilitySet<? extends T> proto, Random random) {
         this.entries.putAll(proto);
         this.random = random;

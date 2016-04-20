@@ -30,6 +30,10 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
     protected final PlanetAtmosphere atmosphere;
     /**
      * Planet size type. 1 is largest, 4 is smallest.
+     * 1 = HUGE
+     * 2 = LARGE
+     * 3 = MEDIUM
+     * 4 = SMALL
      * Planet image size on global map and dimensions of planet surface depends on it.
      */
     protected final int size;

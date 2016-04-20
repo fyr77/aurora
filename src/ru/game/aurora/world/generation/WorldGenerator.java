@@ -16,6 +16,7 @@ import ru.game.aurora.npc.AlienRaceFirstCommunicationListener;
 import ru.game.aurora.npc.factions.FreeForAllFaction;
 import ru.game.aurora.npc.factions.NeutralFaction;
 import ru.game.aurora.util.CollectionUtils;
+import ru.game.aurora.util.ProbabilitySet;
 import ru.game.aurora.world.CrewChangeListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.*;
@@ -39,10 +40,7 @@ import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.earth.EarthUpgradeUnlocker;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.Future;
 
 /**
@@ -51,6 +49,14 @@ import java.util.concurrent.Future;
 public class WorldGenerator implements Runnable {
     public static final PlanetCategory[] satelliteCategories = {PlanetCategory.PLANET_ROCK, PlanetCategory.PLANET_ICE};
     private static final Logger logger = LoggerFactory.getLogger(WorldGenerator.class);
+
+    private static ProbabilitySet<Integer> planetSizesDistribution = new ProbabilitySet<>(
+            new AbstractMap.SimpleEntry<>(1, 1.0),
+            new AbstractMap.SimpleEntry<>(2, 2.0),
+            new AbstractMap.SimpleEntry<>(3, 3.0), // medium size planets are about 1/2 of all planets
+            new AbstractMap.SimpleEntry<>(4, 1.0)
+    );
+
     private static final WorldGeneratorPart[] questGenerators = {
             new InitialRadioEmissionQuestGenerator()
             , new MainQuestGenerator()
@@ -109,7 +115,7 @@ public class WorldGenerator implements Runnable {
 
             int planetY = (int) (Math.sqrt(radius * radius - planetX * planetX) * (r.nextBoolean() ? -1 : 1));
             PlanetAtmosphere atmosphere = CollectionUtils.selectRandomElement(PlanetAtmosphere.values());
-            final int planetSize = r.nextInt(3) + 1;
+            final int planetSize = planetSizesDistribution.getRandom();
             astroData += 10 * planetSize;
             PlanetCategory cat = CollectionUtils.selectRandomElement(PlanetCategory.values());
             if (cat == PlanetCategory.GAS_GIANT) {
