@@ -176,23 +176,23 @@ public class EngineeringScreenController implements ScreenController {
             return;
         }
         EngineeringProject ep = (EngineeringProject) event.getSelection().get(0);
-        String info = ep.getLocalizedText("engineering");
+        StringBuilder info = new StringBuilder(ep.getLocalizedText("engineering"));
         final Map<InventoryItem, Integer> cost = ep.getCost();
         if (!cost.isEmpty()) {
-            info = info + "\n\n";
+            info.append("\n\n");
             for (Map.Entry<InventoryItem, Integer> entry : cost.entrySet()) {
-                info += entry.getKey().getName() + ": " + entry.getValue() + "\n";
+                info.append(entry.getKey().getName()).append(": ").append(entry.getValue()).append("\n");
             }
 
             if (ep.isProjectStarted()) {
-                info = info + String.format(Localization.getText("gui", "engineering.upgrade_in_progress"), ep.getRemainingDays(world));
+                info.append(String.format(Localization.getText("gui", "engineering.upgrade_in_progress"), ep.getRemainingDays(world)));
             } else {
                 if (!ep.checkEnoughResources(world)) {
-                    info = info + Localization.getText("gui", "logging.not_enough_resources");
+                    info.append(Localization.getText("gui", "logging.not_enough_resources"));
                 }
             }
         }
-        EngineUtils.setTextForGUIElement(textElement, info);
+        EngineUtils.setTextForGUIElement(textElement, info.toString());
         imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ep.getDrawable().getImage())));
         GUI.getInstance().getNifty().getCurrentScreen().layoutLayers();
     }

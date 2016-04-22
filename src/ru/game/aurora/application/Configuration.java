@@ -42,8 +42,9 @@ public class Configuration {
         try {
             File systemPropsFile = new File(AuroraGame.getOutDir(), "system.properties");
             if (systemPropsFile.exists()) {
-                InputStream is = new FileInputStream(systemPropsFile);
-                systemProperties.load(is);
+                try (InputStream is = new FileInputStream(systemPropsFile)) {
+                    systemProperties.load(is);
+                }
             }
         } catch (IOException e) {
             logger.error("Failed to load game properties:", e);
