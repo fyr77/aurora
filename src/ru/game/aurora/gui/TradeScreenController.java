@@ -68,6 +68,9 @@ public class TradeScreenController implements ScreenController
     private void addWithFilter(ListBox<Multiset.Entry<InventoryItem>> listBox, Multiset<InventoryItem> items)
     {
         for (Multiset.Entry<InventoryItem> e : items.entrySet()) {
+            if (!e.getElement().isVisibleInInventory()) {
+                continue;
+            }
             // skip items with price of 0
             if (e.getElement().getPrice() < 0.00001) {
                 continue;

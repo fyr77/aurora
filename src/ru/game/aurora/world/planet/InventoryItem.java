@@ -51,6 +51,12 @@ public interface InventoryItem extends Serializable
      */
     boolean isUnique();
 
+    /**
+     * If returns false - this item will not be shown on inventory screen
+     * Needed for some special types of items like landing party weapons
+     */
+    boolean isVisibleInInventory();
+
     int getWeight();
 
     /**

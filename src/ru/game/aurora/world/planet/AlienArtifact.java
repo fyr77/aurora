@@ -139,6 +139,11 @@ public class AlienArtifact extends BaseGameObject {
         }
 
         @Override
+        public boolean isVisibleInInventory() {
+            return true;
+        }
+
+        @Override
         public int getWeight() {
             return 0;
         }

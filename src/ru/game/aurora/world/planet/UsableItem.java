@@ -70,4 +70,10 @@ public abstract class UsableItem implements InventoryItem {
     public String getId() {
         return id;
     }
+
+    @Override
+    public boolean isVisibleInInventory() {
+        return true;
+    }
+
 }

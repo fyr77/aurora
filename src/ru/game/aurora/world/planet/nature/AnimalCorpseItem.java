@@ -80,6 +80,11 @@ public class AnimalCorpseItem implements InventoryItem {
     }
 
     @Override
+    public boolean isVisibleInInventory() {
+        return true;
+    }
+
+    @Override
     public int getWeight() {
         return 1;
     }

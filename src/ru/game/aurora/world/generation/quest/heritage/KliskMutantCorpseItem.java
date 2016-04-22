@@ -46,6 +46,12 @@ public class KliskMutantCorpseItem extends BaseGameObject implements InventoryIt
     }
 
     @Override
+    public boolean isVisibleInInventory() {
+        return true;
+    }
+
+
+    @Override
     public void onReceived(World world, int amount) {
         if (!world.getGlobalVariables().containsKey("heritage.monster_collected")) {
             world.addListener(new GameEventListener() {

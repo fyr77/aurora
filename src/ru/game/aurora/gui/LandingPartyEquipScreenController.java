@@ -110,6 +110,13 @@ public class LandingPartyEquipScreenController implements ScreenController {
                 weaponSelect.addItem(item);
             }
         }
+        if (world.getPlayer().getLandingParty() != null) {
+            for (InventoryItem item : world.getPlayer().getLandingParty().getInventory()) {
+                if (item instanceof WeaponDesc) {
+                    weaponSelect.addItem(item);
+                }
+            }
+        }
 
         updateLabels();
         refreshLists();
@@ -242,11 +249,15 @@ public class LandingPartyEquipScreenController implements ScreenController {
     private void refreshLists() {
         storageList.clear();
         for (Multiset.Entry<InventoryItem> entry : shipStorage.entrySet()) {
-            storageList.addItem(entry);
+            if (entry.getElement().isVisibleInInventory()) {
+                storageList.addItem(entry);
+            }
         }
         inventoryList.clear();
         for (Multiset.Entry<InventoryItem> entry : localLandingParty.getInventory().entrySet()) {
-            inventoryList.addItem(entry);
+            if (entry.getElement().isVisibleInInventory()) {
+                inventoryList.addItem(entry);
+            }
         }
         updateLabels();
     }

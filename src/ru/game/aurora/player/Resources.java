@@ -42,6 +42,11 @@ public enum Resources implements InventoryItem {
         }
 
         @Override
+        public boolean isVisibleInInventory() {
+            return true;
+        }
+
+        @Override
         public void onLost(World world, int amount) {
             world.getPlayer().getInventory().remove(this, amount);
         }
@@ -82,6 +87,10 @@ public enum Resources implements InventoryItem {
             return ResourceManager.getInstance().getImage("credits_icon");
         }
 
+        @Override
+        public boolean isVisibleInInventory() {
+            return true;
+        }
 
 
         @Override
@@ -149,6 +158,12 @@ public enum Resources implements InventoryItem {
         public double getPrice() {
             return 0.5;
         }
+
+        @Override
+        public boolean isVisibleInInventory() {
+            return true;
+        }
+
 
         @Override
         public void onReceived(World world, int amount) {

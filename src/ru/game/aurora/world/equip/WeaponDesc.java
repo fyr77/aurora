@@ -98,6 +98,11 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
     }
 
     @Override
+    public boolean isVisibleInInventory() {
+        return false;
+    }
+
+    @Override
     public int getWeight() {
         return size;
     }

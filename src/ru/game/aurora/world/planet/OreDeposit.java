@@ -51,6 +51,12 @@ public class OreDeposit extends SurfaceLootObject {
         }
 
         @Override
+        public boolean isVisibleInInventory() {
+            return true;
+        }
+
+
+        @Override
         public void onReceived(World world, int amount) {
             final int resAmount = amount * type.getResCountForUnit();
             GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.resources_transfer"), amount, type.name(), resAmount));

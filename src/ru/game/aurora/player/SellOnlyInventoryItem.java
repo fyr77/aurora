@@ -89,6 +89,11 @@ public class SellOnlyInventoryItem extends ItemWithTextAndImage implements Inven
     }
 
     @Override
+    public boolean isVisibleInInventory() {
+        return true;
+    }
+
+    @Override
     public int getWeight() {
         return 0;
     }

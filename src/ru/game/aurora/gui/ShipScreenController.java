@@ -69,7 +69,12 @@ public class ShipScreenController implements ScreenController {
 
         inventory.clear();
         List<Multiset.Entry<InventoryItem>> ll = new ArrayList<>();
-        ll.addAll(world.getPlayer().getInventory().entrySet());
+        for (Multiset.Entry<InventoryItem> e : world.getPlayer().getInventory().entrySet()) {
+            if (e.getElement().isVisibleInInventory()) {
+                ll.add(e);
+            }
+        }
+
         inventory.addAllItems(ll);
 
     }
