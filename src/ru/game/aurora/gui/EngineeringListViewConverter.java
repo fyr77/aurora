@@ -9,7 +9,6 @@ package ru.game.aurora.gui;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.elements.Element;
-import de.lessvoid.nifty.elements.render.TextRenderer;
 import ru.game.aurora.player.engineering.EngineeringProject;
 
 public class EngineeringListViewConverter implements ListBox.ListBoxViewConverter {
@@ -34,6 +33,6 @@ public class EngineeringListViewConverter implements ListBox.ListBoxViewConverte
     @Override
     public int getHeight(Element element, Object o) {
         display(element, o);
-        return element.getHeight();
+        return element.getConstraintHeight().getValueAsInt(1);
     }
 }

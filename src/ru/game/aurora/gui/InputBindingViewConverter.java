@@ -30,6 +30,6 @@ public class InputBindingViewConverter implements ListBox.ListBoxViewConverter<M
     @Override
     public int getHeight(Element element, Map.Entry<InputBinding.Action, Integer> actionIntegerEntry) {
         display(element, actionIntegerEntry);
-        return element.getHeight();
+        return element.getConstraintHeight().getValueAsInt(1);
     }
 }

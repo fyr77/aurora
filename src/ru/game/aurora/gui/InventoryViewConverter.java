@@ -63,6 +63,7 @@ public class InventoryViewConverter implements ListBox.ListBoxViewConverter<Mult
 
     @Override
     public int getHeight(Element element, Multiset.Entry<InventoryItem> inventoryItemEntry) {
-        return 64;
+        display(element, inventoryItemEntry);
+        return element.getConstraintHeight().getValueAsInt(1);
     }
 }

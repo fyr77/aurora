@@ -10,13 +10,9 @@ package ru.game.aurora.gui;
 import de.lessvoid.nifty.controls.Label;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.elements.Element;
-import de.lessvoid.nifty.elements.render.TextRenderer;
-import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchProjectState;
-import ru.game.aurora.player.research.projects.AstronomyResearch;
-import ru.game.aurora.player.research.projects.StarResearchProject;
 
 public class ResearchListViewConverter implements ListBox.ListBoxViewConverter
 {
@@ -54,6 +50,6 @@ public class ResearchListViewConverter implements ListBox.ListBoxViewConverter
     @Override
     public int getHeight(Element element, Object o) {
         display(element, o);
-        return element.findElementByName("#name_text").getHeight();
+        return element.findElementByName("#name_text").getConstraintHeight().getValueAsInt(1);
     }
 }

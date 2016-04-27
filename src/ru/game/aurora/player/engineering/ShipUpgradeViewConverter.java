@@ -37,6 +37,6 @@ public class ShipUpgradeViewConverter implements ListBox.ListBoxViewConverter<Mu
     @Override
     public int getHeight(Element element, Multiset.Entry<ShipUpgrade> shipUpgrade) {
         display(element, shipUpgrade);
-        return element.getHeight();
+        return element.getConstraintHeight().getValueAsInt(1);
     }
 }

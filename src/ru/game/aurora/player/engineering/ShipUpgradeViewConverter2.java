@@ -32,6 +32,6 @@ public class ShipUpgradeViewConverter2 implements ListBox.ListBoxViewConverter<S
     @Override
     public int getHeight(Element element, ShipUpgrade shipUpgrade) {
         display(element, shipUpgrade);
-        return element.getHeight();
+        return element.getConstraintHeight().getValueAsInt(1);
     }
 }
