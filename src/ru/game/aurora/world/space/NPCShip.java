@@ -464,6 +464,9 @@ public class NPCShip extends BaseGameObject implements IMonster {
     }
 
     public Map<GameObject, Integer> getThreatMap() {
+        if (threatMap == null) {
+            threatMap = new HashMap<>();
+        }
         return threatMap;
     }
 

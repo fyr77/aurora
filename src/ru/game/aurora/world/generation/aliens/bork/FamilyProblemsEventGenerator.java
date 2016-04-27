@@ -9,10 +9,14 @@ package ru.game.aurora.world.generation.aliens.bork;
 
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
+import ru.game.aurora.npc.factions.FreeForAllFaction;
+import ru.game.aurora.npc.factions.PirateFaction;
 import ru.game.aurora.npc.shipai.CombatAI;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.player.Resources;
@@ -23,6 +27,7 @@ import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.NPCShip;
+import ru.game.aurora.world.space.ShipLootItem;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.Map;
@@ -110,6 +115,9 @@ public class FamilyProblemsEventGenerator extends GameEventListener implements W
         @Override
         public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
             world.getPlayer().setResourceUnits(world.getPlayer().getResourceUnits() + 10);
+            world.getPlayer().getInventory().add(new ShipLootItem(ShipLootItem.Type.MATERIALS, world.getFactions().get(BorkGenerator.NAME)));
+            world.getPlayer().getInventory().add(new ShipLootItem(ShipLootItem.Type.GOODS, world.getFactions().get(BorkGenerator.NAME)));
+            GameLogger.getInstance().logMessage(Localization.getText("journal", "family_problems.ship_looted"));
             communicated = true;
         }
     }
@@ -129,12 +137,16 @@ public class FamilyProblemsEventGenerator extends GameEventListener implements W
                 smartBrotherShip.getThreatMap().put(stupidBrotherShip, 100);
                 stupidBrotherShip.getThreatMap().put(smartBrotherShip, 100);
                 stupidBrotherShip.setAi(new CombatAI(smartBrotherShip));
+                stupidBrotherShip.setFaction(world.getFactions().get(FreeForAllFaction.NAME));
+                smartBrotherShip.setFaction(world.getFactions().get(FreeForAllFaction.NAME));
                 break;
             case 0:
                 smartBrotherShip.setAi(new CombatAI(world.getPlayer().getShip()));
                 stupidBrotherShip.setAi(new CombatAI(world.getPlayer().getShip()));
                 smartBrotherShip.getThreatMap().put(world.getPlayer().getShip(), 100);
                 stupidBrotherShip.getThreatMap().put(world.getPlayer().getShip(), 100);
+                stupidBrotherShip.setFaction(world.getFactions().get(PirateFaction.NAME));
+                smartBrotherShip.setFaction(world.getFactions().get(PirateFaction.NAME));
                 break;
             case 2:
                 fatherShip.explode(world.getCurrentStarSystem());
