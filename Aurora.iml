@@ -87,7 +87,23 @@
           <root url="jar://$MODULE_DIR$/third-party/nifty-default-controls-1.3.4-SNAPSHOT.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-controls/src/main/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-controls/src/test/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-core/src/main/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-core/src/test/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-examples-jogl/src/main/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-examples-slick2d/src/main/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-examples/src/main/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-html/src/main/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-html/src/test/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-renderer-java2d/src/main/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-renderer-jogl2/src/main/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-renderer-lwjgl/src/main/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-renderer-slick/src/main/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-soundsystem-openal/src/main/java" />
+          <root url="file://$MODULE_DIR$/../nifty-gui/nifty-soundsystem-pauls-sound/src/main/java" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library" exported="">

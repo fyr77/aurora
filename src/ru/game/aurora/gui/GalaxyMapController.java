@@ -70,7 +70,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         if (logList != null) {
             logList.clear();
             logList.addAllItems(GameLogger.getInstance().getLogItems());
-            logList.setFocusItemByIndex(logList.getItems().size() - 1);
+            logList.setFocusItemByIndex(0);
         }
         if (world.getGlobalVariables().containsKey("tutorial.starmap")) {
             world.getGlobalVariables().remove("tutorial.starmap");
@@ -232,10 +232,10 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     @Override
     public void logMessage(String message) {
         if (logList.getItems().size() > GameLogger.MAX_LOG_ENTRIES) {
-            logList.removeItemByIndex(0);
+            logList.removeItemByIndex(logList.getItems().size() - 1);
         }
-        logList.addItem(message);
-        logList.setFocusItemByIndex(logList.getItems().size() - 1);
+        logList.insertItem(message, 0);
+        logList.setFocusItemByIndex(0);
         myScreen.layoutLayers();
     }
 

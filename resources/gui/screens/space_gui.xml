@@ -92,16 +92,18 @@
             <!-- bottom panel containing log text -->
             <panel height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69"
                    childLayout="horizontal"
-                   backgroundImage="sprites/gui/bottom_panel_galaxy.png" padding="20px,40px,20px,20px">
-                <panel width="324px"/>
-                <control id="log_list" name="listBox" vertical="on" horizontal="off" height="95%"
+                   backgroundImage="sprites/gui/bottom_panel_galaxy.png" padding="20px,0px,20px">
+                <panel width="324px" childLayout="center">
+                    <text id="ship_coordinates" style="button-font" text="${gui.space.ship_coords}" width="100%"
+                          height="100%" textHAlign="center" textVAlign="center"/>
+                </panel>
+                <panel width="10px"/>
+                <control id="log_list" name="listBox" vertical="on" horizontal="off" height="*"
                          selectionMode="Disabled" width="*"/>
-                <panel width="70px"/>
-                <panel childLayout="vertical" width="83px">
-                    <panel height="20px"/>
-                    <text id="stardate_text" style="button-font" width="83px"/>
-                    <panel height="15px"/>
-                    <text id="ship_coordinates" style="button-font" text="${gui.space.ship_coords}"/>
+                <panel width="40px"/>
+                <panel childLayout="vertical" width="120px">
+                    <text id="stardate_text" style="button-font" width="83px" height="100%" textHAlign="center"
+                          textVAlign="center"/>
                 </panel>
             </panel>
         </layer>
@@ -120,8 +122,9 @@
                     <image id="star_image" width="96px" height="96px"/>
                 </panel>
                 <panel width="200px" childLayout="center" backgroundColor="#aa7f4dff">
-                        <text id="star_text" style="button-font" width="90%" height="90%" wrap="true" text="empty" align="center"
-                              textVAlign="center"/>
+                    <text id="star_text" style="button-font" width="90%" height="90%" wrap="true" text="empty"
+                          align="center"
+                          textVAlign="center"/>
                 </panel>
             </panel>
         </layer>
@@ -221,7 +224,8 @@
             <!-- bottom panel containing weapon buttons and log text -->
             <panel height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69"
                    childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
-                   padding="12px,20px,5px,15px">
+                   padding="20px,20px,20px,20px"
+                    >
                 <control id="weapon_0_button" name="image_button" label="" width="64px" height="64px">
                     <interact onClick="weaponClicked(0)"/>
                     <effect>
@@ -254,25 +258,16 @@
                 </control>
 
                 <panel width="50px"/>
-
-                <panel width="*" childLayout="vertical">
-                    <panel height="8px"/>
-                    <control id="log_list" name="listBox" vertical="on" horizontal="off" height="95%"
-                             selectionMode="Disabled"/>
-                </panel>
-
-                <panel width="53px"/>
-
-                <panel width="50px" childLayout="vertical">
-                    <panel height="20px"/>
-                    <text id="stardate_text" style="button-font" textHAlign="center" width="83px"/>
+                <control id="log_list" name="listBox" vertical="on" horizontal="off" height="*"
+                         selectionMode="Disabled" width="*"/>
+                <panel width="50px"/>
+                <panel childLayout="vertical" height="100%" width="100px">
+                    <text id="stardate_text" style="button-font" textHAlign="center" width="100%"/>
                     <panel height="10px"/>
                     <control id="next_turn_button" name="button" label="${gui.end_turn}" height="50px">
                         <interact onRelease="nextTurn()"/>
                     </control>
                 </panel>
-
-                <panel width="50px"/>
             </panel>
         </layer>
         <layer id="help_layer" childLayout="absolute">

@@ -59,7 +59,7 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
 
         logList.clear();
         logList.addAllItems(GameLogger.getInstance().getLogItems());
-        logList.setFocusItemByIndex(logList.getItems().size() - 1);
+        logList.setFocusItemByIndex(0);
 
 
         if (world.getCurrentRoom() instanceof Planet) {
@@ -101,10 +101,10 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     @Override
     public void logMessage(String message) {
         if (logList.getItems().size() > GameLogger.MAX_LOG_ENTRIES) {
-            logList.removeItemByIndex(0);
+            logList.removeItemByIndex(logList.getItems().size() - 1);
         }
-        logList.addItem(message);
-        logList.setFocusItemByIndex(logList.getItems().size() - 1);
+        logList.insertItem(message, 0);
+        logList.setFocusItemByIndex(0);
         myScreen.layoutLayers();
     }
 

@@ -8,8 +8,8 @@ package ru.game.aurora.application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +19,7 @@ public class GameLogger {
 
     public static final int MAX_LOG_ENTRIES = 50;
 
-    private final List<String> logItems = new ArrayList<>(MAX_LOG_ENTRIES);
+    private final List<String> logItems = new LinkedList<>();
 
     private final Set<LoggerAppender> appenders = new HashSet<>();
 
@@ -52,12 +52,12 @@ public class GameLogger {
 
     public void logMessage(String message) {
         if (logItems.size() > MAX_LOG_ENTRIES) {
-            logItems.remove(0);
+            logItems.remove(logItems.size() - 1);
         }
         for (LoggerAppender appender : appenders) {
             appender.logMessage(message);
         }
-        logItems.add(message);
+        logItems.add(0, message);
     }
 
     public List<String> getLogItems() {
