@@ -4,6 +4,8 @@ VERSION 0.5.2
 * Fixed bugs with typos in dialogs
 * Added key bindings for map and inventory
 * Skip turn button in surface gui
+* Further reduced cost of geodata
+* Increased chance of spawning earth-like planets
 
 =========================================
 
