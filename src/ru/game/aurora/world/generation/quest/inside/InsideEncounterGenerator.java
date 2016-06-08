@@ -48,7 +48,7 @@ public class InsideEncounterGenerator implements WorldGeneratorPart {
 
         world.getResearchAndDevelopmentProjects().getEngineeringProjects().put(
                 "super_medpack"
-                , new SuperMedpack.SuperMedpackCraftProject("super_medpack_craft", "super_medpack", 10));
+                , new SuperMedpack.SuperMedpackCraftProject("super_medpack_craft", "super_medpack"));
 
         world.getResearchAndDevelopmentProjects().getResearchProjects().get("parallel_world_bio_data").addListener(new IStateChangeListener<World>() {
             private static final long serialVersionUID = -3766979340652869635L;

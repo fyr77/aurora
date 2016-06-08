@@ -63,8 +63,15 @@ public class SuperMedpack extends UsableItem {
 
         private static final long serialVersionUID = 7590398157274520538L;
 
-        public SuperMedpackCraftProject(String id, String icon, int length) {
-            super(id, icon, length);
+        private static final int progress = 30; //как долго будет идти создание аптечек
+
+        public SuperMedpackCraftProject(String id, String icon) {
+            super(id, icon, progress);
+        }
+
+        @Override
+        public boolean isRepeatable() {
+            return true;
         }
 
         @Override
@@ -76,7 +83,9 @@ public class SuperMedpack extends UsableItem {
 
         @Override
         public void onCompleted(World world) {
+            super.onCompleted(world);
             world.getPlayer().getInventory().add(new SuperMedpack(), 1);
+            remainingProgress = progress;
         }
     }
 }
