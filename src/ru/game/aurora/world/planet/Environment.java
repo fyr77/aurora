@@ -44,7 +44,7 @@ public class Environment {
                 return false;
             }
 
-            if (CommonRandom.getRandom().nextDouble() < 1/*Configuration.getDoubleProperty("environment.meteor.fall_chance")*/) {
+            if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("environment.meteor.fall_chance")) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.meteor_fall"));
                 ((Planet) world.getCurrentRoom()).getController().addEffect(new FallingMeteor(
                         CommonRandom.getRandom().nextInt(AuroraGame.tilesX * AuroraGame.tileSize / 2) + AuroraGame.tilesX * AuroraGame.tileSize / 4
