@@ -101,7 +101,6 @@ public class Ship extends BaseGameObject {
         sarah.getDialog().addListener(new SarahMainDialogListener(sarah));
         sarah.setCustomMusic("sarah_dialog");
         addCrewMember(world, sarah);
-
         refillCrew(world);
     }
 

@@ -63,6 +63,10 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
         return range;
     }
 
+    public boolean canTargetEmptySpace() {
+        return false;
+    }
+
     @Override
     public void onReceived(World world, int amount) {
 

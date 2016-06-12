@@ -1,0 +1,14 @@
+{
+  "id": "glauncher",
+  "name": "glauncher.name",
+  "range": 6,
+  "damage": 2,
+  "drawable": {
+    "id": "grenade_launcher",
+    "tx": -1,
+    "ty": -1
+  },
+  "shotImage": "bullet_shot",
+  "shotSound": "bullet_1",
+  "customClass": "ru.game.aurora.world.equip.GrenadeLauncher"
+}

@@ -314,12 +314,9 @@ public class DungeonController extends Listenable implements Serializable {
             Effect blasterShotEffect = landingParty.getWeapon().createShotEffect(
                     world
                     , landingParty
-                    , landingParty
-                    , world.getCamera().getXCoord(target.getX(), map) + world.getCamera().getTileWidth() / 2
-                    , world.getCamera().getYCoord(target.getY(), map) + world.getCamera().getTileHeight() / 2
+                    , target
                     , world.getCamera()
                     , 800
-                    , map
             );
             if (landingParty.getWeapon().getShotSound() != null) {
                 blasterShotEffect.setStartSound(landingParty.getWeapon().getShotSound());
