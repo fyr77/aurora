@@ -77,6 +77,14 @@ public class BasePositionable implements Positionable {
         return getDistanceWrapped(x, y, other.getX(), other.getY(), width, height);
     }
 
+    public double getDistanceFromMap(ITileMap map, Positionable other) {
+        if (map.isWrapped()) {
+            return getDistanceWrapped(x, y, other.getX(), other.getY(), map.getWidthInTiles(), map.getHeightInTiles());
+        } else {
+            return getDistance(other);
+        }
+    }
+
     @Override
     public String toString() {
         return "BasePositionable{" +

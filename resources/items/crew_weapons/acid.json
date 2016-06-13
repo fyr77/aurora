@@ -1,8 +1,14 @@
 {
 "id": "acid",
 "shotSound": "melee_1",
+    "shotImage": "acid_shot",
 "name": "acid.name",
 "range": 5,
 "damage": 3,
-"customClass": "ru.game.aurora.world.generation.quest.heritage.AcidWeapon"
+    "customClass": "ru.game.aurora.world.generation.quest.heritage.AcidWeapon",
+    "drawable": {
+        "id": "acid_launcher",
+        "tx": -1,
+        "ty": -1
+    }
 }

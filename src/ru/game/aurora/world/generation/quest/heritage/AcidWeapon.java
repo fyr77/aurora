@@ -83,11 +83,27 @@ public class AcidWeapon extends WeaponDesc
         @Override
         public void update(GameContainer container, World world) {
             final LandingParty landingParty = world.getPlayer().getLandingParty();
+            final int damage = CommonRandom.getRandom().nextInt(3) + 1;
+            final ITileMap map = world.getCurrentRoom().getMap();
             if (world.isUpdatedThisFrame()) {
                 if (landingParty.getTargetX() == x
                         && landingParty.getTargetY() == y) {
-                    GameLogger.getInstance().logMessage(Localization.getText("weapons", "acid.damage_text"));
-                    landingParty.subtractHp(world, CommonRandom.getRandom().nextInt(3) + 1);
+                    GameLogger.getInstance().logMessage(Localization.getText("weapons", "acid.damage_text", Localization.getText("gui", "landing_party.title")));
+                    landingParty.subtractHp(world, damage);
+                }
+
+                for (GameObject go : world.getCurrentRoom().getMap().getObjects()) {
+                    if (!go.canBeAttacked()) {
+                        continue;
+                    }
+                    if (go instanceof KliskMutant) {
+                        // mutant is not hurt by own weapon
+                        continue;
+                    }
+                    if (getDistanceFromMap(map, go) == 0) {
+                        GameLogger.getInstance().logMessage(Localization.getText("weapons", "acid.damage_text", go.getName()));
+                        go.onAttack(world, this, damage);
+                    }
                 }
 
                 if (ttl-- <= 0) {
