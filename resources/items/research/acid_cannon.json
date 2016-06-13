@@ -1,0 +1,14 @@
+{
+  "id": "acid_cannon",
+  "icon": "klisk_mutant_dead",
+  "report": {
+    "icon": "acid_launcher",
+    "text": "acid_cannon.report"
+  },
+  "makesAvailable": [],
+  "makesAvailableEngineering": [],
+  "earthProgress": [],
+  "score": 30,
+  "progress": 140,
+  "initialProgress": 140
+}

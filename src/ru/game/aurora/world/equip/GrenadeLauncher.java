@@ -11,6 +11,9 @@ import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.planet.LandingParty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by User on 12.06.2016.
  * Landing party grenade launcher.
@@ -50,9 +53,12 @@ public class GrenadeLauncher extends WeaponDesc {
 
         private GameObject shooter;
 
+        private IMovable target;
+
         public Grenade(GameObject shooter, IMovable target, Camera camera, int moveSpeed, WeaponDesc weapon) {
             super(shooter, target, camera, moveSpeed, weapon);
             this.shooter = shooter;
+            this.target = target;
         }
 
 
@@ -62,8 +68,8 @@ public class GrenadeLauncher extends WeaponDesc {
             if (isOver()) {
                 // explode
                 final ITileMap map = world.getCurrentRoom().getMap();
-                int x = world.getCamera().getPointTileX((int) Math.ceil(target.getX()) - 1);
-                int y = world.getCamera().getPointTileY((int) Math.ceil(target.getY())) - 1;
+                int x = target.getX();
+                int y = target.getY();
                 for (int xx = -1; xx <= 1; ++xx) {
                     for (int yy = -1; yy <= 1; ++yy) {
                         map.getObjects().add(new ExplosionEffect(x + xx, y + yy, "surface_explosion", false, xx == 0 && yy == 0));
@@ -74,13 +80,15 @@ public class GrenadeLauncher extends WeaponDesc {
                 if (shooter instanceof LandingParty) {
                     damage = ((LandingParty) shooter).calcDamage(world);
                 }
-                for (GameObject go : map.getObjects()) {
+                List<GameObject> goListCopy = new ArrayList<>(map.getObjects());
+                for (GameObject go : goListCopy) {
                     if (!go.canBeAttacked()) {
                         continue;
                     }
                     final double distance = !wrapped ? BasePositionable.getDistance(x, y, go.getX(), go.getY())
                             : BasePositionable.getDistanceWrapped(x, y, go.getX(), go.getY(), map.getWidthInTiles(), map.getHeightInTiles());
-                    if (distance == 0) {
+                    if (distance == 0 && target != go) {
+                        // do not subtract hp from target as it is already damaged by the bullet
                         go.onAttack(world, shooter, damage);
                         GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.splash_hit", go.getName(), damage));
                     } else if (distance == 1) {

@@ -3,9 +3,11 @@ package ru.game.aurora.world.generation.quest.heritage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.CommonRandom;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.world.*;
 import ru.game.aurora.world.dungeon.DungeonPlaceholder;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -127,6 +129,15 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
                 enterDialog = Dialog.loadFromFile("dialogs/encounters/heritage/heritage_third_monster.json");
                 monster = createMonster(dungeon.getMap(), enterDialog);
                 world.getPlayer().getJournal().addQuestEntries("heritage", "third_monster");
+                // after killing the third monster player will be able to research a new weapon
+                final ResearchProjectDesc acid_cannon = world.getResearchAndDevelopmentProjects().getResearchProjects().remove("acid_cannon");
+                acid_cannon.addListener(new IStateChangeListener<World>() {
+                    @Override
+                    public void stateChanged(World param) {
+                        param.getPlayer().getInventory().add(ResourceManager.getInstance().getWeapons().getEntity("acid"));
+                    }
+                });
+                world.getPlayer().getResearchState().addNewAvailableProject(acid_cannon);
                 break;
             case 3:
                 world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/heritage/heritage_fourth_monster.json"));

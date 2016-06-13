@@ -1,4 +1,8 @@
 0;Aurora 2, this is Battle Wolves, how copy?;
 ;Glad to hear you, Wolves, Captain speaking. Did you find the creature?;1
 1;Affirmative, Aurora 2. We had to turn the bastard into Swiss cheese, he was tough. And there was some nonsense written on the walls in his lair. In Klisk. The translator started beeping, so I turned it off.;
-;Got it, squad. Get back soon. Over and out.;-1
+;Got it, squad. Get back soon. Over and out.;02
+2;I am sorry for interrupting you, captain, but my colleagues have some suggestions about how we should use those mutant bodies.;scientist_dialog
+;What do you suggest?;3
+3;Biology team wants to research that acid. We now have enough material to study how this acid is generated inside klisk mutant body and check if we can reproduce it. I added a research project to your terminal.;scientist_dialog
+;Ok I will check it later.;-1
