@@ -111,7 +111,8 @@ public class Dungeon implements Room, IDungeon {
         }
         world.getCamera().setTarget(landingParty);
 
-        int tilesExplored = map.updateVisibility(landingParty.getX(), landingParty.getY(), 2);
+        int viewRangeBonus = ((Number) world.getGlobalVariable("landingPartyViewRangeBonus", 0)).intValue();
+        int tilesExplored = map.updateVisibility(landingParty.getX(), landingParty.getY(), 2 + viewRangeBonus);
         landingParty.addCollectedGeodata(tilesExplored);
 
         if (playlistName != null) {

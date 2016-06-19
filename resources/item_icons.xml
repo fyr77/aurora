@@ -47,6 +47,8 @@
     <resource type="image" id="artifact_boxes">sprites/items/boxes.png</resource>
     <resource type="image" id="medpack">sprites/items/medkit.png</resource>
     <resource type="image" id="super_medpack">sprites/items/medkit2.png</resource>
+    <resource type="image" id="scopes">sprites/items/binocular.png</resource>
+    <resource type="image" id="cyber_eye">sprites/items/scope_implant.png</resource>
 
     <resource type="image" id="bio_remains">sprites/items/bio_remains.png</resource>
     <resource type="image" id="credits_icon">sprites/gui/credit.png</resource>

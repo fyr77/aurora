@@ -37,6 +37,8 @@ public class EarthUpgradeViewConverter implements ListBox.ListBoxViewConverter<E
     @Override
     public int getHeight(Element element, EarthUpgrade earthUpgrade) {
         display(element, earthUpgrade);
-        return element.getConstraintHeight().getValueAsInt(1);
+        element.layoutElements();
+        return Math.max(element.findElementByName("#line-icon").getConstraintHeight().getValueAsInt(1)
+                , element.findElementByName("#line-text").getConstraintHeight().getValueAsInt(1));
     }
 }

@@ -5,7 +5,7 @@
     "tx": -1
   },
   "customClass": "ru.game.aurora.player.earth.upgrades.EDFUpgrade",
-  "value": 3000,
+  "value": 3500,
   "reputationChange": 1,
   "type": "EARTH"
 }

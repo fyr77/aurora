@@ -1,0 +1,13 @@
+{
+  "id": "scopes",
+  "drawable": {
+    "id": "scopes",
+    "tx": -1
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.UpdateGlobalMultiplierUpgrade",
+  "value": 2800,
+  "variableName": "landingPartyViewRangeBonus",
+  "variableValue": "1",
+  "type": "EARTH",
+  "add": true
+}

@@ -27,7 +27,7 @@ public class UpdateGlobalMultiplierUpgrade extends EarthUpgrade {
             double val = Double.parseDouble((String) world.getGlobalVariable(variableName, "1.0"));
             world.getGlobalVariables().put(variableName, String.valueOf(val * variableValue));
         } else {
-            double val = ((Number) world.getGlobalVariable(variableName, 1)).doubleValue();
+            double val = ((Number) world.getGlobalVariable(variableName, 0)).doubleValue();
             world.getGlobalVariables().put(variableName, val + variableValue);
         }
     }

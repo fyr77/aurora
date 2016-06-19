@@ -163,7 +163,8 @@ public class EarthScreenController implements ScreenController {
                 String.format(Localization.getText("gui", "progress.remaining_points"), world.getPlayer().getEarthState().getUndistributedProgress()));
         ListBox<EarthUpgrade> listBox = tab.findNiftyControl("#items", ListBox.class);
         listBox.clear();
-        listBox.addAllItems(EarthUpgrade.getUpgrades(type));
+        final List<EarthUpgrade> upgrades = EarthUpgrade.getUpgrades(type);
+        listBox.addAllItems(upgrades);
     }
 
     private void fillUpgrades() {

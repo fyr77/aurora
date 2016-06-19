@@ -1,0 +1,13 @@
+{
+  "id": "combat_implants_1",
+  "drawable": {
+    "id": "cyber_eye",
+    "tx": -1
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.UpdateGlobalMultiplierUpgrade",
+  "value": 4600,
+  "variableName": "landingPartyShootRangeBonus",
+  "variableValue": "1",
+  "type": "EARTH",
+  "add": true
+}

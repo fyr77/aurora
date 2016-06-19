@@ -155,7 +155,8 @@ public class DungeonController extends Listenable implements Serializable {
             return;
         }
 
-        tilesExploredThisTurn = map.updateVisibility(x, y, 3);
+        int viewRangeBonus = ((Number) world.getGlobalVariable("landingPartyViewRangeBonus", 0)).intValue();
+        tilesExploredThisTurn = map.updateVisibility(x, y, 3 + viewRangeBonus);
         landingParty.addCollectedGeodata(tilesExploredThisTurn);
 
         if (dy < 0) {
@@ -256,7 +257,8 @@ public class DungeonController extends Listenable implements Serializable {
         int targetIdx = 0;
         List<GameObject> availableTargets = new ArrayList<>();
 
-        if (target != null && (!target.isAlive() || !target.canBeAttacked() || getRange(landingParty, target) > landingParty.getWeapon().getRange())) {
+        int rangeBonus = (Integer) world.getGlobalVariable("landingPartyShootRangeBonus", 0);
+        if (target != null && (!target.isAlive() || !target.canBeAttacked() || getRange(landingParty, target) > (landingParty.getWeapon().getRange() + rangeBonus))) {
             // target moved out of range
             target = null;
         }
@@ -269,7 +271,7 @@ public class DungeonController extends Listenable implements Serializable {
                 // do not target animals on unexplored tiles
                 continue;
             }
-            if (landingParty.getWeapon().getRange() >= getRange(landingParty, planetObject)) {
+            if ((landingParty.getWeapon().getRange() + rangeBonus) >= getRange(landingParty, planetObject)) {
                 availableTargets.add(planetObject);
                 if (target == null) {
                     target = planetObject;
@@ -527,7 +529,7 @@ public class DungeonController extends Listenable implements Serializable {
 
             if (mode == MODE_SHOOT) {
                 graphics.setColor(Color.yellow);
-                EngineUtils.drawTileCircleCentered(graphics, camera, landingParty.getWeapon().getRange());
+                EngineUtils.drawTileCircleCentered(graphics, camera, landingParty.getWeapon().getRange() + ((Integer) world.getGlobalVariable("landingPartyShootRangeBonus", 0)));
 
                 if (target != null) {
                     // draw target mark

@@ -5,7 +5,7 @@
     <controlDefinition name="earth-upgrade-line">
         <panel childLayout="horizontal" width="100%" align="center" padding="5px">
             <image id="#line-icon" width="64px" height="64px"/>
-            <panel childLayout="center" paddingLeft="10px" paddingRight="10px" width="500px">
+            <panel childLayout="center" paddingLeft="10px" paddingRight="10px" width="*">
                 <text id="#line-text" style="base-font" align="left" textHAlign="left" height="64px" width="90%"
                   wrap="true"/>
             </panel>

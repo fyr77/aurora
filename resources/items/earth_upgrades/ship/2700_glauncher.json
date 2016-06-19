@@ -1,0 +1,11 @@
+{
+  "id": "glauncher",
+  "drawable": {
+    "id": "grenade_launcher",
+    "tx": -1
+  },
+  "customClass": "ru.game.aurora.player.earth.upgrades.CrewWeaponUnlockUpgrade",
+  "value": 2700,
+  "weaponId": "glauncher",
+  "type": "SHIP"
+}

@@ -280,7 +280,8 @@ public class Planet extends BasePlanet implements IDungeon {
                     // this is first time we landed on a planet
                     AchievementManager.getInstance().updateStat(StatNames.worldsVisited, 1);
                 }
-                int openedTiles = surface.updateVisibility(landingParty.getX(), landingParty.getY(), 5);
+                int viewRangeBonus = ((Number) world.getGlobalVariable("landingPartyViewRangeBonus", 0)).intValue();
+                int openedTiles = surface.updateVisibility(landingParty.getX(), landingParty.getY(), 5 + viewRangeBonus);
                 exploredTiles += openedTiles;
                 landingParty.addCollectedGeodata(openedTiles);
                 surfaceGenerationFuture = null;
