@@ -5,7 +5,9 @@ import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.NPC;
+import ru.game.aurora.npc.factions.NeutralFaction;
 import ru.game.aurora.npc.shipai.CombatAI;
+import ru.game.aurora.npc.shipai.FollowAI;
 import ru.game.aurora.npc.shipai.LandAI;
 import ru.game.aurora.npc.shipai.LeaveSystemAI;
 import ru.game.aurora.util.ProbabilitySet;
@@ -13,7 +15,6 @@ import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanWarData;
 import ru.game.aurora.world.planet.BasePlanet;
@@ -55,7 +56,7 @@ public class AmbushQuest extends GameEventListener implements DialogListener {
             state = 1;
         }
 
-        if (state == 2 && borkShip.getDistance(world.getPlayer().getShip()) <= 3) {
+        if (state == 2 && borkShip.isAlive() && borkShip.getDistance(world.getPlayer().getShip()) <= 3) {
             GameLogger.getInstance().logMessage(Localization.getText("journal", "ambush.communicate"));
         }
 
@@ -118,7 +119,11 @@ public class AmbushQuest extends GameEventListener implements DialogListener {
             Dialog borkDialog = Dialog.loadFromFile("dialogs/encounters/ambush_bork.json");
             borkDialog.addListener(this);
 
-            borkShip = new NPCShip(1, 1, "bork_ship_large", world.getFactions().get(BorkGenerator.NAME), new NPC(borkDialog), "Bork Ship", 15);
+            borkShip = new NPCShip(
+                    world.getPlayer().getShip().getX() + 4
+                    , world.getPlayer().getShip().getY() + 3
+                    , "bork_ship_large"
+                    , world.getFactions().get(NeutralFaction.NAME), new NPC(borkDialog), "Bork Ship", 15);
             borkShip.setSpeed(1);
             borkShip.setWeapons(
                     ResourceManager.getInstance().getWeapons().getEntity("bork_cannon")
@@ -126,8 +131,7 @@ public class AmbushQuest extends GameEventListener implements DialogListener {
                     , ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon")
             );
             borkShip.enableRepairs(4);
-            borkShip.setAi(new LandAI(world.getPlayer().getShip()));
-            borkShip.setCanBeHailed(false);
+            borkShip.setAi(new FollowAI(world.getPlayer().getShip()));
             borkShip.setForceLootDrop(true);
 
             // bork ship always drops zorsan weapon loot
@@ -137,12 +141,16 @@ public class AmbushQuest extends GameEventListener implements DialogListener {
 
                 @Override
                 public boolean interact(World world) {
-                    world.getPlayer().getJournal().questCompleted("ambush", "bork_ship_looted");
+                    // show this only if player killed bork ship instantly without following him
+                    if (world.getCurrentRoom() != ambushSystem) {
+                        world.getPlayer().getJournal().questCompleted("ambush", "bork_ship_looted");
+                    }
                     return super.interact(world);
                 }
             };
             borkLoot.put(zorsanWeaponLoot, 1.0);
             borkShip.setLoot(borkLoot);
+            ss.getObjects().add(borkShip);
 
             state = 2;
             return true;
@@ -155,6 +163,7 @@ public class AmbushQuest extends GameEventListener implements DialogListener {
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/ambush_bork2.json"));
             state = 3;
             borkShip.setAi(new LandAI(ss.getPlanets()[0]));
+            return true;
         }
 
         return false;
@@ -169,9 +178,17 @@ public class AmbushQuest extends GameEventListener implements DialogListener {
             borkShip.setAi(new CombatAI(world.getPlayer().getShip()));
             world.getPlayer().getJournal().addQuestEntries("ambush", "refuse");
         } else {
-            world.getPlayer().getJournal().questCompleted("ambush", "agree");
-            state = 3;
+            world.getPlayer().getJournal().addQuestEntries("ambush", "agree");
             borkShip.setAi(new LeaveSystemAI());
+            borkShip.setCanBeHailed(false);
         }
+    }
+
+    @Override
+    public String getLocalizedMessageForStarSystem(World world, GalaxyMapObject galaxyMapObject) {
+        if (ambushSystem != null && ambushSystem == galaxyMapObject) {
+            return Localization.getText("journal", "ambush.title");
+        }
+        return null;
     }
 }
