@@ -53,6 +53,9 @@ public class NPCShip extends BaseGameObject implements IMonster {
     // this ship can not move
     private boolean isStationary;
 
+    // if set to true, this ship will 100% drop some loot
+    private boolean forceLootDrop;
+
     private GameTimer repairTimer = null;
 
     // map of loot that can be dropped by this ship, with its chances
@@ -66,6 +69,11 @@ public class NPCShip extends BaseGameObject implements IMonster {
         this.captain = captain;
         this.name = name;
         this.maxHP = this.hp = hp;
+        this.forceLootDrop = false;
+    }
+
+    public void setForceLootDrop(boolean forceLootDrop) {
+        this.forceLootDrop = forceLootDrop;
     }
 
     public void setLoot(ProbabilitySet<GameObject> loot) {
@@ -249,7 +257,7 @@ public class NPCShip extends BaseGameObject implements IMonster {
         currentStarSystem.addEffect(new ExplosionEffect(x, y, "ship_explosion", false, true));
 
         if (loot != null) {
-            if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("ship.drop_chance")) {
+            if (forceLootDrop || CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("ship.drop_chance")) {
                 currentStarSystem.getShips().add(new SpaceDebris(x, y, loot));
             }
         }

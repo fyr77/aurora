@@ -16,6 +16,7 @@ import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.ColonizationListener;
+import ru.game.aurora.world.generation.quest.ambush.AmbushQuest;
 import ru.game.aurora.world.quest.ZorsanFinalBattleGenerator;
 
 import java.util.HashMap;
@@ -141,6 +142,9 @@ public class EarthDialogListener implements DialogListener {
             });
             world.addOverlayWindow(d, flagsForNextDialog);
             world.getPlayer().getJournal().questCompleted("embassies");
+
+            // start ambush quests = zorsans want revenge!
+            world.addListener(new AmbushQuest());
         }
 
         // quest stuff
