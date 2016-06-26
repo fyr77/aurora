@@ -135,7 +135,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     @Override
     public void update(GameContainer container, World world) {
-        if (container.getInput().isKeyPressed(Input.KEY_M)) {
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))) {
             world.setCurrentRoom(fullMapScreen);
             fullMapScreen.enter(world);
             return;

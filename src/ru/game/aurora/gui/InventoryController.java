@@ -53,11 +53,13 @@ public class InventoryController implements ScreenController {
             items.addItem(entry);
         }
         updateWeight();
+
+        world.setPaused(true);
     }
 
     @Override
     public void onEndScreen() {
-
+        world.setPaused(false);
     }
 
     public void closeScreen() {

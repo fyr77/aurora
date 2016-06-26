@@ -149,14 +149,35 @@ public class World implements Serializable, ResolutionChangeListener {
 
         }
 
+        updateInputKey(container);
+    }
+
+    private void updateInputKey(GameContainer container) {
         // should be the last so that ESC event is not consumed
         if (container.getInput().isKeyPressed(Input.KEY_ESCAPE) && (currentRoom instanceof GalaxyMap || currentRoom instanceof Planet || currentRoom instanceof StarSystem || currentRoom instanceof Dungeon)) {
-            Element popup = nifty.getTopMostPopup();
+            Element popup = GUI.getInstance().getNifty().getTopMostPopup();
             if (popup != null && popup.findElementByName("menu_window") != null) {
                 GUI.getInstance().closeIngameMenu();
             } else {
                 GUI.getInstance().showIngameMenu();
             }
+            return;
+        }
+
+        // Hide surface inventory
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INVENTORY))) {
+            if (GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("inventory_screen")) {
+                GUI.getInstance().popAndSetScreen();
+            }
+            return;
+        }
+
+        // Hide surface map
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))) {
+            if (GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("surface_map_screen")) {
+                GUI.getInstance().popAndSetScreen();
+            }
+            return;
         }
     }
 
