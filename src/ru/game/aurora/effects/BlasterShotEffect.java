@@ -61,7 +61,7 @@ public class BlasterShotEffect extends Effect {
         this(new Vector2f(
                     (map.isWrapped() ? camera.getXCoordWrapped(source.getX(), map.getWidthInTiles()) : camera.getXCoord(source.getX())) + camera.getTileWidth() / 2
                     , (map.isWrapped() ? camera.getYCoordWrapped(source.getY(), map.getHeightInTiles()) : camera.getYCoord(source.getY())) + camera.getTileHeight() / 2)
-                , new Vector2f(targetScreenX, targetScreenY)
+                , new Vector2f(camera.getXCoord((int)targetScreenX) + camera.getTileWidth()/2, camera.getYCoord((int)targetScreenY) + camera.getTileHeight()/2)
                 , moveSpeed
                 , weapon);
     }
