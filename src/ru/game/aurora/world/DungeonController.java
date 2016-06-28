@@ -456,7 +456,43 @@ public class DungeonController extends Listenable implements Serializable {
             return;
         }
 
-        // todo: empty space weapon logic
+        // check line of sight
+        if (!map.lineOfSightExists(landingParty.getX(), landingParty.getY(), targetGroundX, targetGroundY)) {
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.no_line_of_sight"));
+            return;
+        }
+
+        // firing
+        final int damage = landingParty.calcDamage(world);
+
+        Effect blasterShotEffect = landingParty.getWeapon().createShotEffect(
+                world
+                , landingParty
+                , landingParty
+                , targetGroundX
+                , targetGroundY
+                , world.getCamera()
+                , 800
+                , map
+        );
+        if (landingParty.getWeapon().getShotSound() != null) {
+            blasterShotEffect.setStartSound(landingParty.getWeapon().getShotSound());
+        }
+        effects.add(blasterShotEffect);
+
+        ResourceManager.getInstance().getSound(landingParty.getWeapon().getShotSound()).play();
+
+        GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("fire", Button.class).disable();
+        blasterShotEffect.setEndListener(new IStateChangeListener<World>() {
+            private static final long serialVersionUID = -7742240385490245306L;
+
+            @Override
+            public void stateChanged(World world) {
+                GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("fire", Button.class).enable();
+            }
+        });
+
+        world.setUpdatedThisFrame(true);
     }
 
     private double getRange(LandingParty landingParty, GameObject target) {
