@@ -71,8 +71,8 @@ public class DungeonController extends Listenable implements Serializable {
      * When in fire mode, this is currently selected target
      */
     private transient GameObject target = null;
-    private transient int targetGroundX = 0;
-    private transient int targetGroundY = 0;
+    private transient int targetTileX = 0;
+    private transient int targetTileY = 0;
 
     private int xClick;
     private int yClick;
@@ -356,10 +356,10 @@ public class DungeonController extends Listenable implements Serializable {
             aimNextTarget(world);
         }
         else{
-            if(landingParty.getWeaponRange(world) < getRange(landingParty, targetGroundX, targetGroundY)){
+            if(landingParty.getWeaponRange(world) < getRange(landingParty, targetTileX, targetTileY)){
                 // self aim
-                targetGroundX = landingParty.getX();
-                targetGroundY = landingParty.getY();
+                targetTileX = landingParty.getX();
+                targetTileY = landingParty.getY();
             }
         }
 
@@ -381,9 +381,9 @@ public class DungeonController extends Listenable implements Serializable {
         }
 
         // out of range check
-        if(landingParty.getWeaponRange(world) >= getRange(landingParty, targetGroundX + dx, targetGroundY + dy)) {
-            targetGroundX += dx;
-            targetGroundY += dy;
+        if(landingParty.getWeaponRange(world) >= getRange(landingParty, targetTileX + dx, targetTileY + dy)) {
+            targetTileX += dx;
+            targetTileY += dy;
         }
         else{
             return;
@@ -452,12 +452,12 @@ public class DungeonController extends Listenable implements Serializable {
 
     private void shootFireEmptySpace(World world){
         // check self aiming
-        if(targetGroundX == landingParty.getX() && targetGroundY == landingParty.getY()){
+        if(targetTileX == landingParty.getX() && targetTileY == landingParty.getY()){
             return;
         }
 
         // check line of sight
-        if (!map.lineOfSightExists(landingParty.getX(), landingParty.getY(), targetGroundX, targetGroundY)) {
+        if (!map.lineOfSightExists(landingParty.getX(), landingParty.getY(), targetTileX, targetTileY)) {
             GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.no_line_of_sight"));
             return;
         }
@@ -469,8 +469,8 @@ public class DungeonController extends Listenable implements Serializable {
                 world
                 , landingParty
                 , landingParty
-                , targetGroundX
-                , targetGroundY
+                , targetTileX
+                , targetTileY
                 , world.getCamera()
                 , 800
                 , map
@@ -518,12 +518,12 @@ public class DungeonController extends Listenable implements Serializable {
 
             if(landingParty.getWeapon().canTargetEmptySpace()) {
                 if (target == null) {
-                    targetGroundX = landingParty.getX();
-                    targetGroundY = landingParty.getY();
+                    targetTileX = landingParty.getX();
+                    targetTileY = landingParty.getY();
                 }
                 else{
-                    targetGroundX = target.getX();
-                    targetGroundY = target.getY();
+                    targetTileX = target.getX();
+                    targetTileY = target.getY();
                 }
             }
         }
@@ -693,8 +693,8 @@ public class DungeonController extends Listenable implements Serializable {
                 if(landingParty.getWeapon().canTargetEmptySpace()){
                         graphics.drawImage(
                                 ResourceManager.getInstance().getImage("target")
-                                , camera.getXCoord(targetGroundX, map)
-                                , camera.getYCoord(targetGroundY, map));
+                                , camera.getXCoord(targetTileX, map)
+                                , camera.getYCoord(targetTileY, map));
                 }
                 else{
                     if (target != null) {

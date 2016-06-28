@@ -33,11 +33,11 @@ public class GrenadeLauncher extends WeaponDesc {
     }
 
     @Override
-    public Effect createShotEffect(World world, GameObject shooter, Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, ITileMap map) {
+    public Effect createShotEffect(World world, GameObject shooter, Positionable source, int targetTileX, int targetTileY, Camera camera, int moveSpeed, ITileMap map){
         return new Grenade(
-                  shooter
-                , targetScreenX
-                , targetScreenY
+                shooter
+                , targetTileX
+                , targetTileY
                 , camera
                 , moveSpeed
                 , this
@@ -55,14 +55,14 @@ public class GrenadeLauncher extends WeaponDesc {
         private static final long serialVersionUID = 1L;
 
         private GameObject shooter;
-        private int targetGroundX;
-        private int targetGroundY;
+        private int targetTileX;
+        private int targetTileY;
 
-        public Grenade(GameObject shooter, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, WeaponDesc weapon, ITileMap map){
-            super(shooter, targetScreenX, targetScreenY, camera, moveSpeed, weapon, map);
+        public Grenade(GameObject shooter, int targetTileX, int targetTileY, Camera camera, int moveSpeed, WeaponDesc weapon, ITileMap map){
+            super(shooter, targetTileX, targetTileY, camera, moveSpeed, weapon, map);
             this.shooter = shooter;
-            this.targetGroundX = (int)targetScreenX;
-            this.targetGroundY = (int)targetScreenY;
+            this.targetTileX = targetTileX;
+            this.targetTileY = targetTileY;
         }
 
         @Override
@@ -71,8 +71,8 @@ public class GrenadeLauncher extends WeaponDesc {
             if (isOver()) {
                 // explode
                 final ITileMap map = world.getCurrentRoom().getMap();
-                int x = targetGroundX;
-                int y = targetGroundY;
+                int x = targetTileX;
+                int y = targetTileY;
 
                 for (int xx = -1; xx <= 1; ++xx) {
                     for (int yy = -1; yy <= 1; ++yy) {
