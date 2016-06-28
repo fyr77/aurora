@@ -71,6 +71,8 @@ public class DungeonController extends Listenable implements Serializable {
      * When in fire mode, this is currently selected target
      */
     private transient GameObject target = null;
+    private transient int targetGroundX = 0;
+    private transient int targetGroundY = 0;
 
     private int xClick;
     private int yClick;
@@ -209,10 +211,10 @@ public class DungeonController extends Listenable implements Serializable {
 
         if (gameObjectsAtPlayerPosition.size() == 1) {
             final GameObject p = gameObjectsAtPlayerPosition.get(0);
-            
+
             if(!p.interact(world))
                 return;
-            
+
             world.setUpdatedThisFrame(true);
             // some items (like ore deposits) can be picked up more than once, do not remove them in this case
             if (!p.isAlive()) {
@@ -228,7 +230,7 @@ public class DungeonController extends Listenable implements Serializable {
             public void stateChanged(GameObject param) {
                 if(!param.interact(world))
                     return;
-                
+
                 world.setUpdatedThisFrame(true);
                 // some items (like ore deposits) can be picked up more than once, do not remove them in this case
                 if (!param.isAlive()) {
@@ -244,21 +246,63 @@ public class DungeonController extends Listenable implements Serializable {
         int min = Math.min(first, second);
 
         return Math.min(max - min, total + min - max);
-
     }
 
     /**
      * This update method is used in FIRE mode. Selecting targets and shooting.
      */
-    public void updateShoot(World world, boolean nextTarget, boolean prevTarget, boolean shoot) {
+    private void updateShoot(World world, Input input){
+        // aiming
+        if(landingParty.getWeapon().canTargetEmptySpace()){
+            // target: empty space
+            aimEmptySpace(world, input);
+        }
+        else{
+            // target: enemy npc
+            boolean nextTarget = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))
+                    || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT));
+
+            boolean prevTarget = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))
+                    || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT));
+
+            if(nextTarget) {
+                aimNextTarget(world);
+                return;
+            }
+            else if(prevTarget) {
+                aimPrevTarget(world);
+                return;
+            }
+        }
+
+        // shooting
+        boolean shoot = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SHOOT))
+                || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT));
+
+        if(shoot){
+            updateShootFire(world);
+        }
+    }
+
+    // aim in to enemy npc
+    public void aimNextTarget(World world){
+        aimTarget(world, true, false);
+    }
+
+    public void aimPrevTarget(World world){
+        aimTarget(world, false, true);
+    }
+
+    private void aimTarget(World world, boolean nextTarget, boolean prevTarget){
         if (map.getObjects().isEmpty()) {
             return;
         }
+
         int targetIdx = 0;
+        int weaponRange = landingParty.getWeaponRange(world);
         List<GameObject> availableTargets = new ArrayList<>();
 
-        int rangeBonus = (Integer) world.getGlobalVariable("landingPartyShootRangeBonus", 0);
-        if (target != null && (!target.isAlive() || !target.canBeAttacked() || getRange(landingParty, target) > (landingParty.getWeapon().getRange() + rangeBonus))) {
+        if (target != null && (!target.isAlive() || !target.canBeAttacked() || getRange(landingParty, target) > weaponRange)) {
             // target moved out of range
             target = null;
         }
@@ -271,7 +315,7 @@ public class DungeonController extends Listenable implements Serializable {
                 // do not target animals on unexplored tiles
                 continue;
             }
-            if ((landingParty.getWeapon().getRange() + rangeBonus) >= getRange(landingParty, planetObject)) {
+            if (weaponRange >= getRange(landingParty, planetObject)) {
                 availableTargets.add(planetObject);
                 if (target == null) {
                     target = planetObject;
@@ -281,77 +325,148 @@ public class DungeonController extends Listenable implements Serializable {
                     targetIdx = availableTargets.size() - 1;
                 }
             }
-
         }
 
+        // check available targets in weapon range
         if (availableTargets.isEmpty()) {
-            // no target available in weapon range
+            return;
+        }
+        else {
+            // select target
+            if (nextTarget) {
+                targetIdx++;
+                if (targetIdx >= availableTargets.size()) {
+                    targetIdx = 0;
+                }
+            }
+            else if (prevTarget) {
+                targetIdx--;
+                if (targetIdx < 0) {
+                    targetIdx = availableTargets.size() - 1;
+                }
+            }
+
+            target = availableTargets.get(targetIdx);
+        }
+    }
+
+    // aim ground
+    private void aimEmptySpace(World world, Input input) {
+        if(target != null){
+            aimNextTarget(world);
+        }
+        else{
+            if(landingParty.getWeaponRange(world) < getRange(landingParty, targetGroundX, targetGroundY)){
+                // self aim
+                targetGroundX = landingParty.getX();
+                targetGroundY = landingParty.getY();
+            }
+        }
+
+        int dx = 0;
+        int dy = 0;
+
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))){
+            ++dx;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))){
+            --dx;
+        }
+
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))){
+            --dy;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))){
+            ++dy;
+        }
+
+        // out of range check
+        if(landingParty.getWeaponRange(world) >= getRange(landingParty, targetGroundX + dx, targetGroundY + dy)) {
+            targetGroundX += dx;
+            targetGroundY += dy;
+        }
+        else{
+            return;
+        }
+    }
+
+    public void updateShootFire(World world){
+        if(landingParty.getWeapon().canTargetEmptySpace()){
+            shootFireEmptySpace(world);
+        }
+        else{
+            shootFireTarget(world);
+        }
+    }
+
+    private void shootFireTarget(World world){
+        // check target existing and select next if current target not exist
+        if (target == null || !target.isAlive() || !target.canBeAttacked() || getRange(landingParty, target) > landingParty.getWeaponRange(world)) {
+            aimNextTarget(world);
             return;
         }
 
-        if (nextTarget) {
-            targetIdx++;
-            if (targetIdx >= availableTargets.size()) {
-                targetIdx = 0;
-            }
-        } else if (prevTarget) {
-            targetIdx--;
-            if (targetIdx < 0) {
-                targetIdx = availableTargets.size() - 1;
-            }
+        // check line of sight
+        if (!map.lineOfSightExists(landingParty.getX(), landingParty.getY(), target.getX(), target.getY())) {
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.no_line_of_sight"));
+            return;
         }
 
-        target = availableTargets.get(targetIdx);
+        // firing
+        final int damage = landingParty.calcDamage(world);
 
-        if (shoot) {
-            // check line of sight
-            if (!map.lineOfSightExists(landingParty.getX(), landingParty.getY(), target.getX(), target.getY())) {
-                GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.no_line_of_sight"));
-                return;
-            }
+        Effect blasterShotEffect = landingParty.getWeapon().createShotEffect(
+                world
+                , landingParty
+                , target
+                , world.getCamera()
+                , 800
+        );
+        if (landingParty.getWeapon().getShotSound() != null) {
+            blasterShotEffect.setStartSound(landingParty.getWeapon().getShotSound());
+        }
+        effects.add(blasterShotEffect);
 
-            // firing
-            final int damage = landingParty.calcDamage(world);
+        ResourceManager.getInstance().getSound(landingParty.getWeapon().getShotSound()).play();
 
-            Effect blasterShotEffect = landingParty.getWeapon().createShotEffect(
-                    world
-                    , landingParty
-                    , target
-                    , world.getCamera()
-                    , 800
-            );
-            if (landingParty.getWeapon().getShotSound() != null) {
-                blasterShotEffect.setStartSound(landingParty.getWeapon().getShotSound());
-            }
-            effects.add(blasterShotEffect);
+        GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("fire", Button.class).disable();
+        blasterShotEffect.setEndListener(new IStateChangeListener<World>() {
+            private static final long serialVersionUID = -7742240385490245306L;
 
-            ResourceManager.getInstance().getSound(landingParty.getWeapon().getShotSound()).play();
+            @Override
+            public void stateChanged(World world) {
+                target.onAttack(world, landingParty, damage);
 
-            GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("fire", Button.class).disable();
-            blasterShotEffect.setEndListener(new IStateChangeListener<World>() {
-                private static final long serialVersionUID = -7742240385490245306L;
-
-                @Override
-                public void stateChanged(World world) {
-                    target.onAttack(world, landingParty, damage);
-                    if (!target.isAlive()) {
-                        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), target.getName()));
-                        map.getObjects().remove(target);
-                        target = null;
-                    }
-                    
-                    GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("fire", Button.class).enable();
+                if (!target.isAlive()) {
+                    GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.killed_message"), target.getName()));
+                    map.getObjects().remove(target);
+                    target = null;
                 }
-            });
 
-            world.setUpdatedThisFrame(true);
+                GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("fire", Button.class).enable();
+            }
+        });
+
+        world.setUpdatedThisFrame(true);
+    }
+
+    private void shootFireEmptySpace(World world){
+        // check self aiming
+        if(targetGroundX == landingParty.getX() && targetGroundY == landingParty.getY()){
+            return;
         }
 
+        // todo: empty space weapon logic
     }
 
     private double getRange(LandingParty landingParty, GameObject target) {
         return map.isWrapped() ? landingParty.getDistanceWrapped(target, map.getWidthInTiles(), map.getHeightInTiles())
                 : landingParty.getDistance(target);
+    }
+
+    private double getRange(LandingParty landingParty, int targetX, int targetY){
+        return map.isWrapped() ? landingParty.getDistanceWrapped(targetX, targetY, map.getWidthInTiles(), map.getHeightInTiles())
+                : landingParty.getDistance(targetX, targetY);
     }
 
     public void changeMode() {
@@ -361,10 +476,24 @@ public class DungeonController extends Listenable implements Serializable {
             mode = (mode == MODE_MOVE) ? MODE_SHOOT : MODE_MOVE;
         }
         GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(mode == MODE_SHOOT);
+
+        if(mode == MODE_SHOOT && landingParty.getWeapon() != null){
+            aimNextTarget(world);
+
+            if(landingParty.getWeapon().canTargetEmptySpace()) {
+                if (target == null) {
+                    targetGroundX = landingParty.getX();
+                    targetGroundY = landingParty.getY();
+                }
+                else{
+                    targetGroundX = target.getX();
+                    targetGroundY = target.getY();
+                }
+            }
+        }
     }
 
     public void update(GameContainer container, World world) {
-
         if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INVENTORY))) {
             GUI.getInstance().pushCurrentScreen();
             GUI.getInstance().getNifty().gotoScreen("inventory_screen");
@@ -375,6 +504,7 @@ public class DungeonController extends Listenable implements Serializable {
             GUI.getInstance().getNifty().gotoScreen("surface_map_screen");
             return;
         }
+
         Camera myCamera = world.getCamera();
         this.landingParty = world.getPlayer().getLandingParty();
         if (container.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
@@ -422,15 +552,7 @@ public class DungeonController extends Listenable implements Serializable {
                     changeMode();
                     return;
                 }
-                updateShoot(
-                        world
-                        , container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))
-                                || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))
-                        , container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))
-                                || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))
-                        , container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SHOOT))
-                                || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-                );
+                updateShoot(world, container.getInput());
                 break;
             default:
                 throw new IllegalStateException("Unknown planet update type " + mode);
@@ -531,12 +653,20 @@ public class DungeonController extends Listenable implements Serializable {
                 graphics.setColor(Color.yellow);
                 EngineUtils.drawTileCircleCentered(graphics, camera, landingParty.getWeapon().getRange() + ((Integer) world.getGlobalVariable("landingPartyShootRangeBonus", 0)));
 
-                if (target != null) {
-                    // draw target mark
-                    graphics.drawImage(
-                            ResourceManager.getInstance().getImage("target")
-                            , camera.getXCoord(target.getX(), map)
-                            , camera.getYCoord(target.getY(), map));
+                // draw target mark
+                if(landingParty.getWeapon().canTargetEmptySpace()){
+                        graphics.drawImage(
+                                ResourceManager.getInstance().getImage("target")
+                                , camera.getXCoord(targetGroundX, map)
+                                , camera.getYCoord(targetGroundY, map));
+                }
+                else{
+                    if (target != null) {
+                        graphics.drawImage(
+                                ResourceManager.getInstance().getImage("target")
+                                , camera.getXCoord(target.getX(), map)
+                                , camera.getYCoord(target.getY(), map));
+                    }
                 }
             }
         }

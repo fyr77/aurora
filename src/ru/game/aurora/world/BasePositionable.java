@@ -31,6 +31,10 @@ public class BasePositionable implements Positionable {
         return Math.sqrt(Math.pow(x - otherX, 2) + Math.pow(y - otherY, 2));
     }
 
+    public static double getDistanceWrapped(Positionable obj, int x, int y, int width, int height){
+        return getDistanceWrapped(obj.getX(), obj.getY(), x, y, width, height);
+    }
+
     public static double getDistanceWrapped(int x, int y, int otherX, int otherY, int width, int height) {
         int directXDist = Math.abs(x - otherX);
         int wrapXDist = Math.abs(width - directXDist);
@@ -75,6 +79,10 @@ public class BasePositionable implements Positionable {
 
     public double getDistanceWrapped(Positionable other, int width, int height) {
         return getDistanceWrapped(x, y, other.getX(), other.getY(), width, height);
+    }
+
+    public double getDistanceWrapped(int targetX, int targetY, int width, int height){
+        return getDistanceWrapped(x, y, targetX, targetY, width, height);
     }
 
     public double getDistanceFromMap(ITileMap map, Positionable other) {

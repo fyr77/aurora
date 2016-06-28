@@ -124,16 +124,14 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
     }
 
     public void nextTargetPressed() {
-        ((IDungeon) world.getCurrentRoom()).getController().updateShoot(world, true, false, false);
+        ((IDungeon) world.getCurrentRoom()).getController().aimNextTarget(world);
     }
 
     public void prevTargetPressed() {
-        ((IDungeon) world.getCurrentRoom()).getController().updateShoot(world, false, true, false);
+        ((IDungeon) world.getCurrentRoom()).getController().aimPrevTarget(world);
     }
 
-    public void firePressed() {
-        ((IDungeon) world.getCurrentRoom()).getController().updateShoot(world, false, false, true);
-    }
+    public void firePressed() { ((IDungeon) world.getCurrentRoom()).getController().updateShootFire(world); }
 
     public void cancelPressed() {
         ((IDungeon) world.getCurrentRoom()).getController().changeMode();

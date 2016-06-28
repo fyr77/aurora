@@ -314,8 +314,6 @@ public class WorldGenerator implements Runnable {
         world.addListener(new Environment.PlanetProcessor());
         world.addListener(new LoggingListener());
         world.addListener(new PlanetLifeUpdater());
-
-        world.getPlayer().getInventory().add(ResourceManager.getInstance().getWeapons().getEntity("glauncher"));
     }
 
     // perform some fast initialization in gui thread
