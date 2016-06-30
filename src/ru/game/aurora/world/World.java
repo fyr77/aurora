@@ -100,7 +100,9 @@ public class World implements Serializable, ResolutionChangeListener {
     }
 
     public void update(GameContainer container) {
+        final Input input = container.getInput();
         final Nifty nifty = GUI.getInstance().getNifty();
+
         if (!isPaused) {
             // update game world
             currentRoom.update(container, this);
@@ -134,19 +136,6 @@ public class World implements Serializable, ResolutionChangeListener {
             }
             updatedThisFrame = updatedNextFrame;
             updatedNextFrame = false;
-
-            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RESEARCH))) {
-                GUI.getInstance().pushCurrentScreen();
-                nifty.gotoScreen("research_screen");
-                return;
-            }
-
-            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.ENGINEERING))) {
-                GUI.getInstance().pushCurrentScreen();
-                nifty.gotoScreen("engineering_screen");
-                return;
-            }
-
         }
 
         updateInputKey(container);
@@ -154,31 +143,72 @@ public class World implements Serializable, ResolutionChangeListener {
 
     private void updateInputKey(GameContainer container) {
         // should be the last so that ESC event is not consumed
-        if (container.getInput().isKeyPressed(Input.KEY_ESCAPE) && (currentRoom instanceof GalaxyMap || currentRoom instanceof Planet || currentRoom instanceof StarSystem || currentRoom instanceof Dungeon)) {
-            Element popup = GUI.getInstance().getNifty().getTopMostPopup();
-            if (popup != null && popup.findElementByName("menu_window") != null) {
-                GUI.getInstance().closeIngameMenu();
-            } else {
-                GUI.getInstance().showIngameMenu();
+        final Input input = container.getInput();
+        final GUI gui = GUI.getInstance();
+
+        if (input.isKeyPressed(Input.KEY_ESCAPE) && (currentRoom instanceof GalaxyMap || currentRoom instanceof Planet || currentRoom instanceof StarSystem || currentRoom instanceof Dungeon)) {
+            if(gui.isClosableGameplayScreen()){
+                gui.popAndSetScreen();
             }
-            return;
+            else{
+                Element popup = gui.getNifty().getTopMostPopup();
+                if (popup != null && popup.findElementByName("menu_window") != null) {
+                    gui.closeIngameMenu();
+                }
+                else {
+                    gui.showIngameMenu();
+                }
+                return;
+            }
         }
 
-        // Hide surface inventory
-        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INVENTORY))) {
-            if (GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("inventory_screen")) {
-                GUI.getInstance().popAndSetScreen();
+        // gameplay screens hotkey control
+        if(!isPaused){
+            if(currentRoom instanceof GalaxyMap || currentRoom instanceof StarSystem){
+                if(openScreenByInput(container, InputBinding.Action.ENGINEERING, "engineering_screen")) return;
+                if(openScreenByInput(container, InputBinding.Action.RESEARCH, "research_screen")) return;
+                if(openScreenByInput(container, InputBinding.Action.LANDING_PARTY, "landing_party_equip_screen")) return;
+                if(openScreenByInput(container, InputBinding.Action.MAP, "star_map_screen")) return;
+                if(openScreenByInput(container, InputBinding.Action.INVENTORY, "ship_screen")) return;
+                if(openScreenByInput(container, InputBinding.Action.JOURNAL, "journal_screen")) return;
             }
-            return;
+        }
+        else {
+            if(currentRoom instanceof GalaxyMap || currentRoom instanceof StarSystem) {
+                if(closeScreenByInput(container, InputBinding.Action.ENGINEERING, "engineering_screen")) return;
+                if(closeScreenByInput(container, InputBinding.Action.RESEARCH, "research_screen")) return;
+                if(closeScreenByInput(container, InputBinding.Action.LANDING_PARTY, "landing_party_equip_screen")) return;
+                if(closeScreenByInput(container, InputBinding.Action.MAP, "star_map_screen")) return;
+                if(closeScreenByInput(container, InputBinding.Action.INVENTORY, "ship_screen")) return;
+                if(closeScreenByInput(container, InputBinding.Action.JOURNAL, "journal_screen")) return;
+            }
+            else if(currentRoom instanceof Planet || currentRoom instanceof Dungeon){
+                if(closeScreenByInput(container, InputBinding.Action.INVENTORY, "inventory_screen")) return;
+                if(closeScreenByInput(container, InputBinding.Action.MAP, "surface_map_screen")) return;
+            }
+        }
+    }
+
+    private boolean openScreenByInput(GameContainer container, InputBinding.Action action, String screenId){
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(action))) {
+            GUI.getInstance().pushCurrentScreen();
+            GUI.getInstance().getNifty().gotoScreen(screenId);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    private boolean closeScreenByInput(GameContainer container, InputBinding.Action action, String screenId){
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(action))) {
+            if (GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals(screenId)) {
+                GUI.getInstance().popAndSetScreen();
+                return true;
+            }
         }
 
-        // Hide surface map
-        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))) {
-            if (GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("surface_map_screen")) {
-                GUI.getInstance().popAndSetScreen();
-            }
-            return;
-        }
+        return false;
     }
 
     public void draw(GameContainer container, Graphics graphics) {

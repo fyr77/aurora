@@ -214,7 +214,7 @@ public class PlanetScanController implements ScreenController {
     }
 
     public void closeScreen() {
-        GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
+        GUI.getInstance().popAndSetScreen();
     }
 
     public void landingParty() {

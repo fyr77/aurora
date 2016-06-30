@@ -42,35 +42,37 @@ public abstract class BaseSpaceRoom implements Room, ITileMap {
     @Override
     public void update(GameContainer container, World world) {
         Camera myCamera = world.getCamera();
+        Input input = container.getInput();
+
         if (!world.isPaused() && GUI.getInstance().getNifty().getTopMostPopup() == null) {
             // do not move camera by mouse if some other window is open
-            if (container.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 xClick = container.getInput().getMouseX() - myCamera.getViewportX();
                 yClick = container.getInput().getMouseY() - myCamera.getViewportY();
             }
-            if (container.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 myCamera.setViewportX(container.getInput().getMouseX() - xClick);
                 myCamera.setViewportY(container.getInput().getMouseY() - yClick);
             }
-            if (container.getInput().isKeyPressed(Input.KEY_HOME)) {
+            if (input.isKeyPressed(Input.KEY_HOME)) {
                 myCamera.resetViewPort();
             }
         }
 
         if (!player.getShip().nowMoving()) {
-            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))) {
+            if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP_SECONDARY))) {
                 player.getShip().moveUp();
                 shipMove(world);
             }
-            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))) {
+            if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN_SECONDARY))) {
                 player.getShip().moveDown();
                 shipMove(world);
             }
-            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))) {
+            if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT_SECONDARY))) {
                 player.getShip().moveLeft();
                 shipMove(world);
             }
-            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))) {
+            if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT_SECONDARY))) {
                 player.getShip().moveRight();
                 shipMove(world);
             }

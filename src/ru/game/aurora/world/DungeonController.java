@@ -97,6 +97,9 @@ public class DungeonController extends Listenable implements Serializable {
             }
             return;
         }
+
+        Input input = container.getInput();
+
         int x = landingParty.getX();
         int y = landingParty.getY();
         boolean actuallyMoved = false;
@@ -104,19 +107,19 @@ public class DungeonController extends Listenable implements Serializable {
         int dx = 0;
         int dy = 0;
 
-        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))) {
+        if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP_SECONDARY))) {
             y--;
             dy = -1;
             actuallyMoved = true;
-        } else if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))) {
+        } else if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN_SECONDARY))) {
             y++;
             dy = 1;
             actuallyMoved = true;
-        } else if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))) {
+        } else if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT_SECONDARY))) {
             x--;
             dx = -1;
             actuallyMoved = true;
-        } else if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))) {
+        } else if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT_SECONDARY))) {
             x++;
             dx = 1;
             actuallyMoved = true;
@@ -148,7 +151,7 @@ public class DungeonController extends Listenable implements Serializable {
             actuallyMoved = false;
         }
 
-        final boolean enterPressed = container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT));
+        final boolean enterPressed = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT));
         if (enterPressed) {
             interactWithObject(world);
         }
@@ -260,10 +263,14 @@ public class DungeonController extends Listenable implements Serializable {
         else{
             // target: enemy npc
             boolean nextTarget = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))
-                    || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT));
+                    || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP_SECONDARY))
+                    || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))
+                    || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT_SECONDARY));
 
             boolean prevTarget = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))
-                    || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT));
+                    || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN_SECONDARY))
+                    || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))
+                    || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT_SECONDARY));
 
             if(nextTarget) {
                 aimNextTarget(world);
@@ -366,17 +373,17 @@ public class DungeonController extends Listenable implements Serializable {
         int dx = 0;
         int dy = 0;
 
-        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))){
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT_SECONDARY))){
             ++dx;
         }
-        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))){
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT_SECONDARY))){
             --dx;
         }
 
-        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))){
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP_SECONDARY))){
             --dy;
         }
-        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))){
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN_SECONDARY))){
             ++dy;
         }
 

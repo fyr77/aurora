@@ -39,7 +39,6 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
     private World world;
 
-
     private transient Screen myScreen;
 
     private transient ListBox logList;
@@ -84,33 +83,32 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     }
 
     public void openStarMap() {
-        GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("star_map_screen");
+        openScreen("star_map_screen");
     }
 
     public void openResearchScreen() {
-        GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("research_screen");
+        openScreen("research_screen");
     }
 
     public void openEngineeringScreen() {
-        GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("engineering_screen");
+        openScreen("engineering_screen");
     }
 
     public void openShipScreen() {
-        GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("ship_screen");
+        openScreen("ship_screen");
     }
 
     public void openJournal() {
-        GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("journal_screen");
+        openScreen("journal_screen");
     }
 
     public void openLandingPartyScreen() {
+        openScreen("landing_party_equip_screen");
+    }
+
+    private void openScreen(String screenId){
         GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
+        GUI.getInstance().getNifty().gotoScreen(screenId);
     }
 
     public void setWorld(World world) {
@@ -337,12 +335,9 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         return minDist <= 1.5 ? result : null;
     }
 
-
     public void doAttack()
     {
         closeCurrentPopup();
         world.getCurrentStarSystem().updateShoot(world, false, false, true);
     }
-
-
 }

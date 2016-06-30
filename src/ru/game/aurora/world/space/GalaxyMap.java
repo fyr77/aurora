@@ -135,11 +135,21 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     @Override
     public void update(GameContainer container, World world) {
-        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))) {
-            world.setCurrentRoom(fullMapScreen);
-            fullMapScreen.enter(world);
+        final Input input = container.getInput();
+        final GUI gui = GUI.getInstance();
+
+        if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))) {
+            gui.pushCurrentScreen();
+            gui.getNifty().gotoScreen("star_map_screen");
             return;
         }
+
+        if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.JOURNAL))) {
+            gui.pushCurrentScreen();
+            gui.getNifty().gotoScreen("journal_screen");
+            return;
+        }
+
         super.update(container, world);
         final int y = player.getShip().getY();
         final int x = player.getShip().getX();
@@ -159,7 +169,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
             if (objects.get(idx).canBeEntered()) {
                 hasEnterableObject = true;
-                if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))) {
+                if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))) {
                     enterRoom(objects.get(idx));
                 }
             }
