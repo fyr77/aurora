@@ -2,6 +2,7 @@ package ru.game.aurora.npc.crew;
 
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.CrewMember;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 
 import java.util.Map;
@@ -97,6 +98,17 @@ public class SarahMainDialogListener extends BaseCrewDialogListener
             crewMember.getDialogFlags().put("sarah_past", "1");
             crewMember.changeReputation(1);
             allDone(world);
+            final long currentTurn = world.getDayCount();
+            world.addListener(new GameEventListener() {
+                @Override
+                public boolean onTurnEnded(World world) {
+                    if (world.getDayCount() > currentTurn + 300 && world.getCurrentStarSystem() != null) {
+                        Dialog.loadFromFile("dialogs/crew/sarah/sarah_pray.csv");
+                        isAlive = false;
+                    }
+                    return false;
+                }
+            });
             return;
         }
 

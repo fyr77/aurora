@@ -2,6 +2,7 @@ package ru.game.aurora.npc.crew;
 
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.CrewMember;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 
 import java.util.Map;
@@ -86,6 +87,17 @@ public class GordonMainDialogListener extends BaseCrewDialogListener
             crewMember.getDialogFlags().put("parallel_worlds", "2");
             crewMember.changeReputation(1);
             allDone(world);
+            final long currentTurn = world.getDayCount();
+            world.addListener(new GameEventListener() {
+                @Override
+                public boolean onTurnEnded(World world) {
+                    if (world.getDayCount() > currentTurn + 300 && world.getCurrentStarSystem() != null) {
+                        Dialog.loadFromFile("dialogs/crew/gordon/gordon_third_stage.csv");
+                        isAlive = false;
+                    }
+                    return false;
+                }
+            });
             return;
         }
 
