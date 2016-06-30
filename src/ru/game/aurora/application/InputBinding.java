@@ -4,7 +4,7 @@ import org.newdawn.slick.Input;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 /**
@@ -14,14 +14,13 @@ public class InputBinding {
 
     public static final String key = "inputBinding";
 
-    public static Map<Action, Integer> keyBinding = new HashMap<>();
+    public static Map<Action, Integer> keyBinding = new EnumMap<Action, Integer>(Action.class);
 
-    public enum Action
-    {
-        LEFT,
-        RIGHT,
-        UP,
-        DOWN,
+    public enum Action {
+        LEFT, LEFT_SECONDARY,
+        RIGHT, RIGHT_SECONDARY,
+        UP, UP_SECONDARY,
+        DOWN, DOWN_SECONDARY,
         INTERACT,
         SHOOT,
         WEAPON_1,
@@ -32,7 +31,9 @@ public class InputBinding {
         RESEARCH,
         LANDING_PARTY,
         MAP,
-        INVENTORY;
+        INVENTORY,
+        JOURNAL,
+        SCAN;
 
         @Override
         public String toString() {
@@ -46,13 +47,16 @@ public class InputBinding {
         keyBinding = createDefaultBinding();
     }
 
-    public static Map<Action, Integer> createDefaultBinding()
-    {
-        Map<Action, Integer> defaultBinding = new HashMap<>();
-        defaultBinding.put(Action.LEFT, Input.KEY_LEFT);
-        defaultBinding.put(Action.RIGHT, Input.KEY_RIGHT);
-        defaultBinding.put(Action.UP, Input.KEY_UP);
-        defaultBinding.put(Action.DOWN, Input.KEY_DOWN);
+    public static Map<Action, Integer> createDefaultBinding() {
+        Map<Action, Integer> defaultBinding = new EnumMap<Action, Integer>(Action.class);
+        defaultBinding.put(Action.LEFT, Input.KEY_A);
+        defaultBinding.put(Action.LEFT_SECONDARY, Input.KEY_LEFT);
+        defaultBinding.put(Action.RIGHT, Input.KEY_D);
+        defaultBinding.put(Action.RIGHT_SECONDARY, Input.KEY_RIGHT);
+        defaultBinding.put(Action.UP, Input.KEY_W);
+        defaultBinding.put(Action.UP_SECONDARY, Input.KEY_UP);
+        defaultBinding.put(Action.DOWN, Input.KEY_S);
+        defaultBinding.put(Action.DOWN_SECONDARY, Input.KEY_DOWN);
         defaultBinding.put(Action.INTERACT, Input.KEY_SPACE);
         defaultBinding.put(Action.SHOOT, Input.KEY_F);
         defaultBinding.put(Action.WEAPON_1, Input.KEY_1);
@@ -64,11 +68,12 @@ public class InputBinding {
         defaultBinding.put(Action.LANDING_PARTY, Input.KEY_L);
         defaultBinding.put(Action.MAP, Input.KEY_M);
         defaultBinding.put(Action.INVENTORY, Input.KEY_I);
+        defaultBinding.put(Action.JOURNAL, Input.KEY_J);
+        defaultBinding.put(Action.SCAN, Input.KEY_C);
         return defaultBinding;
     }
 
-    public static String saveToString()
-    {
+    public static String saveToString() {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<Action, Integer> entry : keyBinding.entrySet()) {
             sb.append(entry.getKey().name()).append("=").append(entry.getValue()).append(';');

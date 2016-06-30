@@ -77,6 +77,10 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
         return new BlasterShotEffect(shooter, target, camera, moveSpeed, this);
     }
 
+    public Effect createShotEffect(World world, GameObject shooter, Positionable source, int targetTileX, int targetTileY, Camera camera, int moveSpeed, ITileMap map){
+        return new BlasterShotEffect(source, targetTileX, targetTileY, camera, moveSpeed, this, map);
+    }
+
     public Effect createShotEffect(World world, GameObject shooter, Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, ITileMap map) {
         return new BlasterShotEffect(source, targetScreenX, targetScreenY, camera, moveSpeed, this, map);
     }

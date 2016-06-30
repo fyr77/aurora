@@ -44,8 +44,7 @@ public class BlasterShotEffect extends Effect {
     public BlasterShotEffect(IMovable source, IMovable target, Camera camera, int moveSpeed, WeaponInstance weapon) {
         this(new Vector2f(camera.getXCoord(source.getX()) + source.getOffsetX() + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2 + source.getOffsetY())
                 , new Vector2f(camera.getXCoord(target.getX()) + target.getOffsetX() + camera.getTileWidth() / 2, camera.getYCoord(target.getY()) + target.getOffsetY() + camera.getTileHeight() / 2)
-                ,
-                moveSpeed
+                , moveSpeed
                 , weapon);
 
     }
@@ -53,10 +52,18 @@ public class BlasterShotEffect extends Effect {
     public BlasterShotEffect(IMovable source, IMovable target, Camera camera, int moveSpeed, WeaponDesc weapon) {
         this(new Vector2f(camera.getXCoord(source.getX()) + source.getOffsetX() + camera.getTileWidth() / 2, camera.getYCoord(source.getY()) + camera.getTileHeight() / 2 + source.getOffsetY())
                 , new Vector2f(camera.getXCoord(target.getX()) + target.getOffsetX() + camera.getTileWidth() / 2, camera.getYCoord(target.getY()) + target.getOffsetY() + camera.getTileHeight() / 2)
-                ,
-                moveSpeed
+                , moveSpeed
                 , weapon);
 
+    }
+
+    public BlasterShotEffect(Positionable source, int targetTileX, int targetTileY, Camera camera, int moveSpeed, WeaponDesc weapon, ITileMap map) {
+        this(new Vector2f(
+                        (map.isWrapped() ? camera.getXCoordWrapped(source.getX(), map.getWidthInTiles()) : camera.getXCoord(source.getX())) + camera.getTileWidth() / 2
+                        , (map.isWrapped() ? camera.getYCoordWrapped(source.getY(), map.getHeightInTiles()) : camera.getYCoord(source.getY())) + camera.getTileHeight() / 2)
+                , new Vector2f(camera.getXCoord((int)targetTileX) + camera.getTileWidth()/2, camera.getYCoord((int)targetTileY) + camera.getTileHeight()/2)
+                , moveSpeed
+                , weapon);
     }
 
     public BlasterShotEffect(Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, WeaponDesc weapon, ITileMap map) {
@@ -64,8 +71,7 @@ public class BlasterShotEffect extends Effect {
                     (map.isWrapped() ? camera.getXCoordWrapped(source.getX(), map.getWidthInTiles()) : camera.getXCoord(source.getX())) + camera.getTileWidth() / 2
                     , (map.isWrapped() ? camera.getYCoordWrapped(source.getY(), map.getHeightInTiles()) : camera.getYCoord(source.getY())) + camera.getTileHeight() / 2)
                 , new Vector2f(targetScreenX, targetScreenY)
-                ,
-                moveSpeed
+                , moveSpeed
                 , weapon);
     }
 
@@ -75,8 +81,7 @@ public class BlasterShotEffect extends Effect {
                 , (map.isWrapped() ? camera.getYCoordWrapped(source.getY(), map.getHeightInTiles()) : camera.getYCoord(source.getY())) + camera.getTileHeight() / 2)
                 , new Vector2f(targetScreenX, targetScreenY)
                 , moveSpeed
-                ,
-                weaponSprite);
+                , weaponSprite);
     }
 
     public BlasterShotEffect(Vector2f source, Vector2f target, int moveSpeed, WeaponDesc weapon) {

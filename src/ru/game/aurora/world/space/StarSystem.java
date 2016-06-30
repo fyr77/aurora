@@ -207,7 +207,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
 
         final List<GameObject> spaceObjectAtPlayerShipPosition = getGameObjectsAtPosition(player.getShip());
 
-
         // if user ship is at planet, show additional gui panel
         final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("interactPanel");
         if (scanLandPanel != null) {
@@ -449,6 +448,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
             return;
         }
 
+        final Input input = container.getInput();
         final Ship playerShip = world.getPlayer().getShip();
 
         if (mode == MODE_MOVE) {
@@ -460,16 +460,21 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
                 }
             }
         } else {
-            updateShoot(
-                    world
-                    , container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))
-                            || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))
-                    , container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))
-                            || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))
-                    , container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SHOOT))
-                            || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-                            || container.getInput().isKeyPressed(selectedWeapon + Input.KEY_1)
-            );
+            final boolean next = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))
+                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP_SECONDARY))
+                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))
+                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT_SECONDARY));
+
+            final boolean prev = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))
+                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN_SECONDARY))
+                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))
+                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT_SECONDARY));
+
+            final boolean shoot = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SHOOT))
+                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+                        || input.isKeyPressed(selectedWeapon + Input.KEY_1);
+
+            updateShoot(world, next, prev, shoot);
             if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
                 onWeaponButtonPressed(world, -1);
             }

@@ -39,7 +39,6 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
     private World world;
 
-
     private transient Screen myScreen;
 
     private transient ListBox logList;
@@ -94,23 +93,24 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     }
 
     public void openEngineeringScreen() {
-        GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("engineering_screen");
+        openScreen("engineering_screen");
     }
 
     public void openShipScreen() {
-        GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("ship_screen");
+        openScreen("ship_screen");
     }
 
     public void openJournal() {
-        GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("journal_screen");
+        openScreen("journal_screen");
     }
 
     public void openLandingPartyScreen() {
+        openScreen("landing_party_equip_screen");
+    }
+
+    private void openScreen(String screenId){
         GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
+        GUI.getInstance().getNifty().gotoScreen(screenId);
     }
 
     public void setWorld(World world) {
@@ -253,6 +253,10 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     }
 
     public void rightButtonPressed() {
+        scanAction(world);
+    }
+
+    public void scanAction(World world){
         if (world.getCurrentStarSystem() != null) {
             List<GameObject> objects = world.getCurrentStarSystem().getGameObjectsAtPosition(world.getPlayer().getShip());
             if (objects.isEmpty()) {
@@ -262,7 +266,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
                 if (BasePlanet.class.isAssignableFrom(objects.get(0).getClass())) {
                     scanPlanet((BasePlanet) objects.get(0));
                 } else {
-                    scanObject(objects.get(0));
+                    scanObject(world, objects.get(0));
                 }
                 return;
             }
@@ -275,23 +279,23 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
                     if (BasePlanet.class.isAssignableFrom(param.getClass())) {
                         scanPlanet((BasePlanet) param);
                     } else {
-                        scanObject(param);
+                        scanObject(world, param);
                     }
                 }
             }, objects);
         }
     }
 
-    private void scanObject(GameObject object) {
+    private void scanObject(World world, GameObject object) {
         final Nifty nifty = GUI.getInstance().getNifty();
-        Element popup = nifty.createPopup("object_scan");
+        Element popup = nifty.createPopupWithId("object_scan", "object_scan");
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(false);
         world.setPaused(true);
         EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), object.getScanDescription(world));
     }
 
-    public void scanPlanet(BasePlanet planet) {
+    private void scanPlanet(BasePlanet planet) {
         if (planet == null) {
             return;
         }
@@ -337,12 +341,9 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         return minDist <= 1.5 ? result : null;
     }
 
-
     public void doAttack()
     {
         closeCurrentPopup();
         world.getCurrentStarSystem().updateShoot(world, false, false, true);
     }
-
-
 }

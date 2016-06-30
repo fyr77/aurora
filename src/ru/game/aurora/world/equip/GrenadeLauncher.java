@@ -29,17 +29,20 @@ public class GrenadeLauncher extends WeaponDesc {
 
     @Override
     public Effect createShotEffect(World world, GameObject shooter, GameObject target, Camera camera, int moveSpeed) {
-        return new Grenade(shooter
-                , target
-                , camera
-                , moveSpeed
-                , this
-        );
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public Effect createShotEffect(World world, GameObject shooter, Positionable source, float targetScreenX, float targetScreenY, Camera camera, int moveSpeed, ITileMap map) {
-        throw new UnsupportedOperationException();
+    public Effect createShotEffect(World world, GameObject shooter, Positionable source, int targetTileX, int targetTileY, Camera camera, int moveSpeed, ITileMap map){
+        return new Grenade(
+                shooter
+                , targetTileX
+                , targetTileY
+                , camera
+                , moveSpeed
+                , this
+                , map
+        );
     }
 
     @Override
@@ -52,15 +55,15 @@ public class GrenadeLauncher extends WeaponDesc {
         private static final long serialVersionUID = 1L;
 
         private GameObject shooter;
+        private int targetTileX;
+        private int targetTileY;
 
-        private IMovable target;
-
-        public Grenade(GameObject shooter, IMovable target, Camera camera, int moveSpeed, WeaponDesc weapon) {
-            super(shooter, target, camera, moveSpeed, weapon);
+        public Grenade(GameObject shooter, int targetTileX, int targetTileY, Camera camera, int moveSpeed, WeaponDesc weapon, ITileMap map){
+            super(shooter, targetTileX, targetTileY, camera, moveSpeed, weapon, map);
             this.shooter = shooter;
-            this.target = target;
+            this.targetTileX = targetTileX;
+            this.targetTileY = targetTileY;
         }
-
 
         @Override
         public void update(GameContainer container, World world) {
@@ -68,8 +71,9 @@ public class GrenadeLauncher extends WeaponDesc {
             if (isOver()) {
                 // explode
                 final ITileMap map = world.getCurrentRoom().getMap();
-                int x = target.getX();
-                int y = target.getY();
+                int x = targetTileX;
+                int y = targetTileY;
+
                 for (int xx = -1; xx <= 1; ++xx) {
                     for (int yy = -1; yy <= 1; ++yy) {
                         map.getObjects().add(new ExplosionEffect(x + xx, y + yy, "surface_explosion", false, xx == 0 && yy == 0));
@@ -80,19 +84,23 @@ public class GrenadeLauncher extends WeaponDesc {
                 if (shooter instanceof LandingParty) {
                     damage = ((LandingParty) shooter).calcDamage(world);
                 }
+
                 List<GameObject> goListCopy = new ArrayList<>(map.getObjects());
                 for (GameObject go : goListCopy) {
                     if (!go.canBeAttacked()) {
                         continue;
                     }
+
                     final double distance = !wrapped ? BasePositionable.getDistance(x, y, go.getX(), go.getY())
                             : BasePositionable.getDistanceWrapped(x, y, go.getX(), go.getY(), map.getWidthInTiles(), map.getHeightInTiles());
-                    if (distance == 0 && target != go) {
+
+                    if (distance == 0) {
                         // do not subtract hp from target as it is already damaged by the bullet
                         go.onAttack(world, shooter, damage);
                         GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.splash_hit", go.getName(), damage));
-                    } else if (distance == 1) {
-                        go.onAttack(world, shooter, damage);
+                    }
+                    else if (distance == 1 || (distance < 2 && Math.ceil(distance) == 2)) { // Math.ceil() used for diagonal damaging enemies
+                        go.onAttack(world, shooter, damage / 2);
                         GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.splash_hit", go.getName(), damage / 2));
                     }
                 }
@@ -103,7 +111,7 @@ public class GrenadeLauncher extends WeaponDesc {
                 if (lpDistance == 0) {
                     landingParty.subtractHp(world, damage);
                     GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.splash_hit", Localization.getText("gui", "landing_party.title"), damage));
-                } else if (lpDistance == 1) {
+                } else if (lpDistance == 1 || (lpDistance < 2 && Math.ceil(lpDistance) == 2)) { // Math.ceil() used for diagonal damaging landing party
                     landingParty.subtractHp(world, damage / 2);
                     GameLogger.getInstance().logMessage(Localization.getText("gui", "surface.splash_hit", Localization.getText("gui", "landing_party.title"), damage / 2));
                 }

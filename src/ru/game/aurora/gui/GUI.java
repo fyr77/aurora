@@ -21,13 +21,17 @@ import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 
 import java.lang.reflect.Field;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.Stack;
 
 public class GUI {
     private static GUI instance;
     private final Nifty nifty;
     private final Stack<String> screens = new Stack<>();
+    private final Set<String> closableGameplayScreens = new HashSet<String>();
+
     private Element ingameMenuInstance = null;
     private World worldInstance;
     private GameContainer containerInstance;
@@ -86,8 +90,7 @@ public class GUI {
 
     }
 
-    public void goToScreen(String id)
-    {
+    public void goToScreen(String id) {
         if (nifty.gotoScreen(id)) {
             nextScreen = null;
             return;
@@ -148,6 +151,7 @@ public class GUI {
         nifty.registerScreenController(new EarthScreenController(world));
         nifty.registerScreenController(new EngineeringScreenController(world, con));
         nifty.registerScreenController(new FailScreenController(world));
+
         final SurfaceGUIController surfaceGUIController = new SurfaceGUIController(world);
         nifty.registerScreenController(surfaceGUIController);
         nifty.registerScreenController(new IntroDialogController(world));
@@ -211,6 +215,16 @@ public class GUI {
         world.addListener(galaxyMapController);
         world.addListener(surfaceGUIController);
 
+        // this screens may be closed by "ESC" button
+        closableGameplayScreens.add("engineering_screen");
+        closableGameplayScreens.add("research_screen");
+        closableGameplayScreens.add("landing_party_equip_screen");
+        closableGameplayScreens.add("star_map_screen");
+        closableGameplayScreens.add("ship_screen");
+        closableGameplayScreens.add("journal_screen");
+        closableGameplayScreens.add("inventory_screen");
+        closableGameplayScreens.add("surface_map_screen");
+        closableGameplayScreens.add("planet_scan_screen");
     }
 
     public World getWorldInstance() {
@@ -252,5 +266,9 @@ public class GUI {
         nifty.closePopup(ingameMenuInstance.getId());
         ingameMenuInstance = null;
         worldInstance.setPaused(false);
+    }
+
+    public boolean isClosableGameplayScreen() {
+        return closableGameplayScreens.contains(nifty.getCurrentScreen().getScreenId());
     }
 }
