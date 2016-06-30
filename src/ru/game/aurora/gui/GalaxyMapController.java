@@ -83,11 +83,13 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     }
 
     public void openStarMap() {
-        openScreen("star_map_screen");
+        GUI.getInstance().pushCurrentScreen();
+        GUI.getInstance().getNifty().gotoScreen("star_map_screen");
     }
 
     public void openResearchScreen() {
-        openScreen("research_screen");
+        GUI.getInstance().pushCurrentScreen();
+        GUI.getInstance().getNifty().gotoScreen("research_screen");
     }
 
     public void openEngineeringScreen() {
@@ -251,6 +253,10 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     }
 
     public void rightButtonPressed() {
+        scanAction(world);
+    }
+
+    public void scanAction(World world){
         if (world.getCurrentStarSystem() != null) {
             List<GameObject> objects = world.getCurrentStarSystem().getGameObjectsAtPosition(world.getPlayer().getShip());
             if (objects.isEmpty()) {
@@ -260,7 +266,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
                 if (BasePlanet.class.isAssignableFrom(objects.get(0).getClass())) {
                     scanPlanet((BasePlanet) objects.get(0));
                 } else {
-                    scanObject(objects.get(0));
+                    scanObject(world, objects.get(0));
                 }
                 return;
             }
@@ -273,14 +279,14 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
                     if (BasePlanet.class.isAssignableFrom(param.getClass())) {
                         scanPlanet((BasePlanet) param);
                     } else {
-                        scanObject(param);
+                        scanObject(world, param);
                     }
                 }
             }, objects);
         }
     }
 
-    private void scanObject(GameObject object) {
+    private void scanObject(World world, GameObject object) {
         final Nifty nifty = GUI.getInstance().getNifty();
         Element popup = nifty.createPopup("object_scan");
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
@@ -289,7 +295,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         EngineUtils.setTextForGUIElement(popup.findElementByName("scan_text"), object.getScanDescription(world));
     }
 
-    public void scanPlanet(BasePlanet planet) {
+    private void scanPlanet(BasePlanet planet) {
         if (planet == null) {
             return;
         }

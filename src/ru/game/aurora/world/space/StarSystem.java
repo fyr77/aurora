@@ -207,7 +207,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
 
         final List<GameObject> spaceObjectAtPlayerShipPosition = getGameObjectsAtPosition(player.getShip());
 
-
         // if user ship is at planet, show additional gui panel
         final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("interactPanel");
         if (scanLandPanel != null) {

@@ -29,6 +29,7 @@ import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.GalaxyMapObject;
+import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
@@ -171,6 +172,11 @@ public class World implements Serializable, ResolutionChangeListener {
                 if(openScreenByInput(container, InputBinding.Action.MAP, "star_map_screen")) return;
                 if(openScreenByInput(container, InputBinding.Action.INVENTORY, "ship_screen")) return;
                 if(openScreenByInput(container, InputBinding.Action.JOURNAL, "journal_screen")) return;
+
+                if(currentRoom instanceof StarSystem){
+                    // scan object or planet by hotkey
+                    if(openScanScreen(container)) return;
+                }
             }
         }
         else {
@@ -181,6 +187,10 @@ public class World implements Serializable, ResolutionChangeListener {
                 if(closeScreenByInput(container, InputBinding.Action.MAP, "star_map_screen")) return;
                 if(closeScreenByInput(container, InputBinding.Action.INVENTORY, "ship_screen")) return;
                 if(closeScreenByInput(container, InputBinding.Action.JOURNAL, "journal_screen")) return;
+
+                if(currentRoom instanceof  StarSystem) {
+                    if (closeScanScreen(container)) return;
+                }
             }
             else if(currentRoom instanceof Planet || currentRoom instanceof Dungeon){
                 if(closeScreenByInput(container, InputBinding.Action.INVENTORY, "inventory_screen")) return;
@@ -204,6 +214,35 @@ public class World implements Serializable, ResolutionChangeListener {
         if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(action))) {
             if (GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals(screenId)) {
                 GUI.getInstance().popAndSetScreen();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean closeScanScreen(GameContainer container){
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SCAN))) {
+            String currentScreenId = GUI.getInstance().getNifty().getCurrentScreen().getScreenId();
+
+            if (currentScreenId.equals("planet_scan_screen")) {
+                GUI.getInstance().popAndSetScreen();
+                return true;
+            }
+            else if(currentScreenId.equals("star_system_gui")){
+                // todo: release object scan close screen logic
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean openScanScreen(GameContainer container) {
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SCAN))) {
+            GalaxyMapController galaxyMap = (GalaxyMapController)GUI.getInstance().getNifty().findScreenController(GalaxyMapController.class.getCanonicalName());
+            if (galaxyMap != null) {
+                galaxyMap.scanAction(this);
                 return true;
             }
         }

@@ -627,7 +627,6 @@ public class DungeonController extends Listenable implements Serializable {
             }
         }
 
-
         if (world.isUpdatedThisFrame() && !map.getVictoryConditions().isEmpty()) {
             boolean allConditionsSatisfied = true;
             for (IVictoryCondition cond : map.getVictoryConditions()) {

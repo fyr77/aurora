@@ -224,7 +224,7 @@ public class GUI {
         closableGameplayScreens.add("journal_screen");
         closableGameplayScreens.add("inventory_screen");
         closableGameplayScreens.add("surface_map_screen");
-        closableGameplayScreens.add("planet_scan_window");
+        closableGameplayScreens.add("planet_scan_screen");
     }
 
     public World getWorldInstance() {

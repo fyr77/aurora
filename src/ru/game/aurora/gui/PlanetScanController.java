@@ -72,7 +72,6 @@ public class PlanetScanController implements ScreenController {
     @Override
     public void onStartScreen() {
         myWindow.setVisible(true);
-
         world.setPaused(true);
 
         shuttleDraggableElement.getElement().setVisible(planetToScan instanceof Planet); // only on these planets player can see shuttle and change its position
