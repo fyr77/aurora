@@ -29,13 +29,13 @@ import ru.game.aurora.world.planet.InventoryItem;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.GalaxyMapObject;
-import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
 
 public class World implements Serializable, ResolutionChangeListener {
 
@@ -221,16 +221,11 @@ public class World implements Serializable, ResolutionChangeListener {
         return false;
     }
 
-    private boolean closeScanScreen(GameContainer container){
+    private boolean openScanScreen(GameContainer container) {
         if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SCAN))) {
-            String currentScreenId = GUI.getInstance().getNifty().getCurrentScreen().getScreenId();
-
-            if (currentScreenId.equals("planet_scan_screen")) {
-                GUI.getInstance().popAndSetScreen();
-                return true;
-            }
-            else if(currentScreenId.equals("star_system_gui")){
-                // todo: release object scan close screen logic
+            GalaxyMapController galaxyMap = (GalaxyMapController)GUI.getInstance().getNifty().findScreenController(GalaxyMapController.class.getCanonicalName());
+            if (galaxyMap != null) {
+                galaxyMap.scanAction(this);
                 return true;
             }
         }
@@ -238,12 +233,25 @@ public class World implements Serializable, ResolutionChangeListener {
         return false;
     }
 
-    private boolean openScanScreen(GameContainer container) {
+    private boolean closeScanScreen(GameContainer container){
         if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SCAN))) {
-            GalaxyMapController galaxyMap = (GalaxyMapController)GUI.getInstance().getNifty().findScreenController(GalaxyMapController.class.getCanonicalName());
-            if (galaxyMap != null) {
-                galaxyMap.scanAction(this);
+            String currentScreenId = GUI.getInstance().getNifty().getCurrentScreen().getScreenId();
+
+            if (currentScreenId.equals("planet_scan_screen")) {
+                // close planet scan screen
+                GUI.getInstance().popAndSetScreen();
                 return true;
+            }
+            else if(currentScreenId.equals("star_system_gui")){
+                // close object scan popup
+                Element popupElement = GUI.getInstance().getNifty().getCurrentScreen().getTopMostPopup();
+
+                if(popupElement != null && popupElement.getId().equals("object_scan")){
+                    GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
+                    GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
+                    setPaused(false);
+                    return true;
+                }
             }
         }
 

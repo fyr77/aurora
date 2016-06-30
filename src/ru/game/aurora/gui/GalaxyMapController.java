@@ -288,7 +288,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
     private void scanObject(World world, GameObject object) {
         final Nifty nifty = GUI.getInstance().getNifty();
-        Element popup = nifty.createPopup("object_scan");
+        Element popup = nifty.createPopupWithId("object_scan", "object_scan");
         nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(false);
         world.setPaused(true);
