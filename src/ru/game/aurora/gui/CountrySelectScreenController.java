@@ -6,10 +6,12 @@ import de.lessvoid.nifty.controls.RadioButtonGroupStateChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.player.EarthCountry;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
 /**
@@ -18,7 +20,7 @@ import ru.game.aurora.world.World;
  * Date: 10.12.13
  * Time: 23:19
  */
-public class CountrySelectScreenController implements ScreenController {
+public class CountrySelectScreenController implements ScreenController, Updatable {
 
     private final World world;
 
@@ -81,4 +83,8 @@ public class CountrySelectScreenController implements ScreenController {
         selectedId = event.getSelectedId();
     }
 
+    @Override
+    public void update(GameContainer container, World world) {
+
+    }
 }

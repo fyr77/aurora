@@ -19,14 +19,16 @@ import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
-public class ResearchScreenController implements ScreenController {
+public class ResearchScreenController implements ScreenController, Updatable {
     private final World world;
 
     private final GameContainer container;
@@ -195,5 +197,18 @@ public class ResearchScreenController implements ScreenController {
     public void onClicked(String id, ButtonClickedEvent event) {
         ListBox itemsList = availableResearch.findNiftyControl("itemsList", ListBox.class);
         itemsList.selectItem(event.getButton().getElement().getParent().getUserData());
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        final Input input = container.getInput();
+
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RESEARCH))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
+        || input.isKeyPressed(Input.KEY_ESCAPE)){
+            closeScreen();
+            return;
+        }
     }
 }

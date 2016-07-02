@@ -6,7 +6,7 @@
 package ru.game.aurora.world;
 
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -139,123 +139,13 @@ public class World implements Serializable, ResolutionChangeListener {
             updatedNextFrame = false;
         }
 
-        updateInputKey(container);
-    }
-
-    private void updateInputKey(GameContainer container) {
-        // should be the last so that ESC event is not consumed
-        final Input input = container.getInput();
-        final GUI gui = GUI.getInstance();
-
-        if (input.isKeyPressed(Input.KEY_ESCAPE) && (currentRoom instanceof GalaxyMap || currentRoom instanceof Planet || currentRoom instanceof StarSystem || currentRoom instanceof Dungeon)) {
-            if(gui.isClosableGameplayScreen()){
-                gui.popAndSetScreen();
-            }
-            else{
-                Element popup = gui.getNifty().getTopMostPopup();
-                if (popup != null && popup.findElementByName("menu_window") != null) {
-                    gui.closeIngameMenu();
-                }
-                else {
-                    gui.showIngameMenu();
-                }
-                return;
+        ScreenController controller = GUI.getInstance().getNifty().getCurrentScreen().getScreenController();
+        if(controller != null){
+            if(Updatable.class.isAssignableFrom(controller.getClass())) {
+                System.out.println("Controller: " + GUI.getInstance().getNifty().getCurrentScreen().getScreenController().getClass().getName());
+                ((Updatable)controller).update(container, this);
             }
         }
-
-        // gameplay screens hotkey control
-        if(!isPaused){
-            if(currentRoom instanceof GalaxyMap || currentRoom instanceof StarSystem){
-                if(openScreenByInput(container, InputBinding.Action.ENGINEERING, "engineering_screen")) return;
-                if(openScreenByInput(container, InputBinding.Action.RESEARCH, "research_screen")) return;
-                if(openScreenByInput(container, InputBinding.Action.LANDING_PARTY, "landing_party_equip_screen")) return;
-                if(openScreenByInput(container, InputBinding.Action.MAP, "star_map_screen")) return;
-                if(openScreenByInput(container, InputBinding.Action.INVENTORY, "ship_screen")) return;
-                if(openScreenByInput(container, InputBinding.Action.JOURNAL, "journal_screen")) return;
-
-                if(currentRoom instanceof StarSystem){
-                    // scan object or planet by hotkey
-                    if(openScanScreen(container)) return;
-                }
-            }
-        }
-        else {
-            if(currentRoom instanceof GalaxyMap || currentRoom instanceof StarSystem) {
-                if(closeScreenByInput(container, InputBinding.Action.ENGINEERING, "engineering_screen")) return;
-                if(closeScreenByInput(container, InputBinding.Action.RESEARCH, "research_screen")) return;
-                if(closeScreenByInput(container, InputBinding.Action.LANDING_PARTY, "landing_party_equip_screen")) return;
-                if(closeScreenByInput(container, InputBinding.Action.MAP, "star_map_screen")) return;
-                if(closeScreenByInput(container, InputBinding.Action.INVENTORY, "ship_screen")) return;
-                if(closeScreenByInput(container, InputBinding.Action.JOURNAL, "journal_screen")) return;
-
-                if(currentRoom instanceof  StarSystem) {
-                    if (closeScanScreen(container)) return;
-                }
-            }
-            else if(currentRoom instanceof Planet || currentRoom instanceof Dungeon){
-                if(closeScreenByInput(container, InputBinding.Action.INVENTORY, "inventory_screen")) return;
-                if(closeScreenByInput(container, InputBinding.Action.MAP, "surface_map_screen")) return;
-            }
-        }
-    }
-
-    private boolean openScreenByInput(GameContainer container, InputBinding.Action action, String screenId){
-        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(action))) {
-            GUI.getInstance().pushCurrentScreen();
-            GUI.getInstance().getNifty().gotoScreen(screenId);
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    private boolean closeScreenByInput(GameContainer container, InputBinding.Action action, String screenId){
-        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(action))) {
-            if (GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals(screenId)) {
-                GUI.getInstance().popAndSetScreen();
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private boolean openScanScreen(GameContainer container) {
-        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SCAN))) {
-            GalaxyMapController galaxyMap = (GalaxyMapController)GUI.getInstance().getNifty().findScreenController(GalaxyMapController.class.getCanonicalName());
-            if (galaxyMap != null) {
-                galaxyMap.scanAction(this);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private boolean closeScanScreen(GameContainer container){
-        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SCAN))) {
-            String currentScreenId = GUI.getInstance().getNifty().getCurrentScreen().getScreenId();
-
-            if (currentScreenId.equals("planet_scan_screen")) {
-                // close planet scan screen
-                GUI.getInstance().popAndSetScreen();
-                return true;
-            }
-            else if(currentScreenId.equals("star_system_gui")){
-                // close object scan popup
-                Element popupElement = GUI.getInstance().getNifty().getCurrentScreen().getTopMostPopup();
-
-                if(popupElement != null && popupElement.getId().equals("object_scan")){
-                    GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
-                    GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
-                    setPaused(false);
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     public void draw(GameContainer container, Graphics graphics) {

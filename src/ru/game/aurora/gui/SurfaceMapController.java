@@ -8,9 +8,13 @@ import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.PlanetMapRenderer;
@@ -21,7 +25,7 @@ import ru.game.aurora.world.space.PlanetMapRenderer;
  * Date: 26.03.14
  * Time: 14:36
  */
-public class SurfaceMapController implements ScreenController {
+public class SurfaceMapController implements ScreenController, Updatable {
     private final World world;
 
     private Element mapPanel;
@@ -78,5 +82,18 @@ public class SurfaceMapController implements ScreenController {
 
     public void closeScreen() {
         GUI.getInstance().popAndSetScreen();
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        final Input input = container.getInput();
+
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
+        || input.isKeyPressed(Input.KEY_ESCAPE)){
+            closeScreen();
+            return;
+        }
     }
 }

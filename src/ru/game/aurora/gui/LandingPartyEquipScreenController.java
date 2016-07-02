@@ -17,12 +17,12 @@ import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.Color;
-import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.GameLogger;
-import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
+import ru.game.aurora.application.*;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Ship;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.InventoryItem;
@@ -30,7 +30,7 @@ import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
 
 
-public class LandingPartyEquipScreenController implements ScreenController {
+public class LandingPartyEquipScreenController implements ScreenController, Updatable {
 
     // used in rendering warning text
     private final Color redColor = new Color(200, 0, 0, 255);
@@ -288,4 +288,20 @@ public class LandingPartyEquipScreenController implements ScreenController {
               EngineUtils.setTextForGUIElement(statusText, Localization.getText("gui", "landing_party.can_launch"));
           }
       }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        final Input input = container.getInput();
+
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LANDING_PARTY))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))){
+            this.ok();
+            return;
+        }
+        else if(input.isKeyPressed(Input.KEY_ESCAPE)){
+            this.cancel();
+            return;
+        }
+    }
 }

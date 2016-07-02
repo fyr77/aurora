@@ -16,7 +16,10 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.gui.niffy.ProgressBarControl;
 import ru.game.aurora.player.earth.EarthState;
@@ -26,13 +29,14 @@ import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.steam.AchievementManager;
 import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class EarthScreenController implements ScreenController {
+public class EarthScreenController implements ScreenController, Updatable {
 
     private final World world;
 
@@ -312,5 +316,17 @@ public class EarthScreenController implements ScreenController {
             messagesList.layoutElements();
         }
 
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        final Input input = container.getInput();
+
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
+        || input.isKeyPressed(Input.KEY_ESCAPE)) {
+            closeScreen();
+            return;
+        }
     }
 }

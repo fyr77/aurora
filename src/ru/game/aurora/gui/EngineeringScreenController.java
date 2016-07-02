@@ -21,19 +21,21 @@ import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.engineering.EngineeringState;
 import ru.game.aurora.player.engineering.HullRepairs;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
 import java.util.Map;
 
 
-public class EngineeringScreenController implements ScreenController {
+public class EngineeringScreenController implements ScreenController, Updatable {
     private final World world;
 
     private final GameContainer container;
@@ -253,5 +255,18 @@ public class EngineeringScreenController implements ScreenController {
     public void onClicked(String id, ButtonClickedEvent event) {
 
         projectsList.selectItem(event.getButton().getElement().getParent().getUserData());
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        final Input input = container.getInput();
+
+        if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.ENGINEERING))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
+        || input.isKeyPressed(Input.KEY_ESCAPE)) {
+            closeScreen();
+            return;
+        }
     }
 }

@@ -220,7 +220,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
             }
         }
 
-        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))) {
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+        || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))) {
             interactWithObjectAtShipPosition(world);
         }
     }
@@ -472,6 +473,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
 
             final boolean shoot = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SHOOT))
                         || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+                        || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
                         || input.isKeyPressed(selectedWeapon + Input.KEY_1);
 
             updateShoot(world, next, prev, shoot);

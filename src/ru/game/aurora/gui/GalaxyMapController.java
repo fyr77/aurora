@@ -15,7 +15,10 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.gui.niffy.CustomHint;
 import ru.game.aurora.gui.niffy.ImageButtonController;
@@ -27,13 +30,14 @@ import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetLifeUpdater;
+import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class GalaxyMapController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender {
+public class GalaxyMapController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender, Updatable {
 
     private static final long serialVersionUID = 6443855197594505098L;
 
@@ -54,7 +58,6 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     public void bind(Nifty nifty, Screen screen) {
         myScreen = screen;
         GameLogger.getInstance().addAppender(this);
-
     }
 
     @Override
@@ -82,15 +85,9 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
 
     }
 
-    public void openStarMap() {
-        GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("star_map_screen");
-    }
+    public void openStarMap()  { openScreen("star_map_screen"); }
 
-    public void openResearchScreen() {
-        GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("research_screen");
-    }
+    public void openResearchScreen() { openScreen("research_screen"); }
 
     public void openEngineeringScreen() {
         openScreen("engineering_screen");
@@ -341,9 +338,57 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         return minDist <= 1.5 ? result : null;
     }
 
-    public void doAttack()
-    {
+    public void doAttack() {
         closeCurrentPopup();
         world.getCurrentStarSystem().updateShoot(world, false, false, true);
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        final Input input = container.getInput();
+
+        if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.ENGINEERING))) {
+            openEngineeringScreen();
+            return;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RESEARCH))){
+            openResearchScreen();
+            return;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LANDING_PARTY))){
+            openLandingPartyScreen();
+            return;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))){
+            openStarMap();
+            return;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INVENTORY))){
+            openShipScreen();
+            return;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.JOURNAL))){
+            openJournal();
+            return;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SCAN))){
+            scanAction(world);
+            return;
+        }
+        else {
+            final Room currentRoom = world.getCurrentRoom();
+            final GUI gui = GUI.getInstance();
+
+            if (input.isKeyPressed(Input.KEY_ESCAPE) && (currentRoom instanceof GalaxyMap || currentRoom instanceof StarSystem)) {
+                Element popup = gui.getNifty().getTopMostPopup();
+                if (popup != null && popup.findElementByName("menu_window") != null) {
+                    gui.closeIngameMenu();
+                }
+                else {
+                    gui.showIngameMenu();
+                }
+                return;
+            }
+        }
     }
 }

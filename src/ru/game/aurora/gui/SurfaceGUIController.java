@@ -13,19 +13,22 @@ import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.GameLogger;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.gui.niffy.TopPanelController;
 import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.GameEventListener;
-import ru.game.aurora.world.IDungeon;
-import ru.game.aurora.world.World;
+import ru.game.aurora.world.*;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
+import ru.game.aurora.world.space.GalaxyMap;
+import ru.game.aurora.world.space.StarSystem;
 
 
-public class SurfaceGUIController extends GameEventListener implements ScreenController, GameLogger.LoggerAppender {
+public class SurfaceGUIController extends GameEventListener implements GameLogger.LoggerAppender, ScreenController, Updatable {
     private static final long serialVersionUID = -7781914700046409079L;
 
     private final World world;
@@ -118,11 +121,6 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         updateStats();
     }
 
-    public void openMap() {
-        GUI.getInstance().pushCurrentScreen();
-        GUI.getInstance().getNifty().gotoScreen("surface_map_screen");
-    }
-
     public void nextTargetPressed() {
         ((IDungeon) world.getCurrentRoom()).getController().aimNextTarget(world);
     }
@@ -146,6 +144,11 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         GUI.getInstance().getNifty().gotoScreen("inventory_screen");
     }
 
+    public void openMap() {
+        GUI.getInstance().pushCurrentScreen();
+        GUI.getInstance().getNifty().gotoScreen("surface_map_screen");
+    }
+
     public void nextTurn() {
         world.setUpdatedNextFrame(true);
     }
@@ -161,5 +164,34 @@ public class SurfaceGUIController extends GameEventListener implements ScreenCon
         GUI.getInstance().getNifty().setIgnoreKeyboardEvents(true);
         GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
         world.setPaused(false);
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        final Input input = container.getInput();
+
+        if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INVENTORY))) {
+            openInventory();
+            return;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))){
+            openMap();
+            return;
+        }
+        else {
+            final Room currentRoom = world.getCurrentRoom();
+            final GUI gui = GUI.getInstance();
+
+            if (input.isKeyPressed(Input.KEY_ESCAPE) && (currentRoom instanceof Planet || currentRoom instanceof Dungeon)) {
+                Element popup = gui.getNifty().getTopMostPopup();
+                if (popup != null && popup.findElementByName("menu_window") != null) {
+                    gui.closeIngameMenu();
+                }
+                else {
+                    gui.showIngameMenu();
+                }
+                return;
+            }
+        }
     }
 }

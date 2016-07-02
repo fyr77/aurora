@@ -8,6 +8,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
@@ -34,7 +35,7 @@ import java.util.Map;
  * Date: 31.03.14
  * Time: 17:24
  */
-public class StarMapController implements ScreenController {
+public class StarMapController implements ScreenController, Updatable {
     private final World world;
 
     private Element mapPanel;
@@ -250,5 +251,18 @@ public class StarMapController implements ScreenController {
 
     public void closeScreen() {
         GUI.getInstance().popAndSetScreen();
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        final Input input = container.getInput();
+
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
+        || input.isKeyPressed(Input.KEY_ESCAPE)){
+            closeScreen();
+            return;
+        }
     }
 }

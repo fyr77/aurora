@@ -10,17 +10,20 @@ import de.lessvoid.nifty.controls.listbox.ListBoxControl;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
 import java.util.List;
 
-public class TradeScreenController implements ScreenController
-{
+public class TradeScreenController implements ScreenController, Updatable {
 
     private World world;
 
@@ -199,5 +202,17 @@ public class TradeScreenController implements ScreenController
     @NiftyEventSubscriber(pattern = ".*inventory_to_storage")
     public void onPrimaryReleased(String id, ButtonClickedEvent event) {
         inventoryList.selectItem((Multiset.Entry<InventoryItem>) event.getButton().getElement().getParent().getUserData());
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        final Input input = container.getInput();
+
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
+        || input.isKeyPressed(Input.KEY_ESCAPE)) {
+            closeScreen();
+            return;
+        }
     }
 }

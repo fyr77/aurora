@@ -15,18 +15,22 @@ import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.spi.render.RenderFont;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.Configuration;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.player.research.Geodata;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.util.Pair;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
 import java.util.LinkedList;
 import java.util.List;
 
 
-public class EarthProgressScreenController implements ScreenController {
+public class EarthProgressScreenController implements ScreenController, Updatable {
     private final World world;
     private final List<Pair<String, String>> data = new LinkedList<>();
     private ListBox results;
@@ -119,5 +123,17 @@ public class EarthProgressScreenController implements ScreenController {
 
     public void closeScreen() {
         GUI.getInstance().popAndSetScreen();
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        final Input input = container.getInput();
+
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
+        || input.isKeyPressed(Input.KEY_ESCAPE)) {
+            closeScreen();
+            return;
+        }
     }
 }

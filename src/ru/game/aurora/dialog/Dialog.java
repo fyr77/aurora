@@ -13,6 +13,8 @@ import org.newdawn.slick.Input;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.*;
+import ru.game.aurora.gui.DialogController;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.ITileMap;
 import ru.game.aurora.world.OverlayWindow;
 import ru.game.aurora.world.World;
@@ -122,8 +124,11 @@ public class Dialog implements OverlayWindow {
         List<String> outList = new ArrayList<>(replies.size());
         final String s = "dialogs/" + id;
         boolean hasCustomBundle = Localization.bundleExists(s);
+
+        int index = 1;
         for (Reply reply : replies) {
-            outList.add(Localization.getText(hasCustomBundle ? s : "dialogs", id + "." + currentStatement.id + "." + reply.replyText));
+            outList.add(index + ") " + Localization.getText(hasCustomBundle ? s : "dialogs", id + "." + currentStatement.id + "." + reply.replyText));
+            ++index;
         }
         return outList;
     }
@@ -182,44 +187,29 @@ public class Dialog implements OverlayWindow {
         return 0;
     }
 
-    @Override
-    public void update(GameContainer container, World world) {
-        if (statements == null) {
-            enter(world);
-        }
-        if (currentStatement == null) {
-            return;
-        }
-
-        int idx = -1;
-        for (int i = Input.KEY_1; i < Input.KEY_9; ++i) {
-            if (container.getInput().isKeyPressed(i)) {
-                idx = i - Input.KEY_1;
-                break;
-            }
-        }
-
-        if (idx >= availableReplies.size() || idx < 0) {
-            return;
-        }
-        useReply(world, idx);
-    }
-
     public void useReply(World world, int idx) {
-        availableReplies = currentStatement.getAvailableReplies(world, flags);
-        Reply selectedReply = availableReplies.get(idx);
-        currentStatement = statements.get(selectedReply.targetStatementId);
-        if (selectedReply.returnValue != 0) {
-            returnValue = selectedReply.returnValue;
-        }
-        if (selectedReply.flags != null) {
-            flags.putAll(selectedReply.flags);
-        }
-
-        if (currentStatement != null) {
+        if(currentStatement != null){
             availableReplies = currentStatement.getAvailableReplies(world, flags);
-        } else {
-            availableReplies = null;
+
+            if(idx < 0 || idx > availableReplies.size()){
+                return;
+            }
+            else{
+                Reply selectedReply = availableReplies.get(idx);
+                currentStatement = statements.get(selectedReply.targetStatementId);
+                if (selectedReply.returnValue != 0) {
+                    returnValue = selectedReply.returnValue;
+                }
+                if (selectedReply.flags != null) {
+                    flags.putAll(selectedReply.flags);
+                }
+
+                if (currentStatement != null) {
+                    availableReplies = currentStatement.getAvailableReplies(world, flags);
+                } else {
+                    availableReplies = null;
+                }
+            }
         }
     }
 
@@ -247,6 +237,11 @@ public class Dialog implements OverlayWindow {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+
     }
 
     @Override

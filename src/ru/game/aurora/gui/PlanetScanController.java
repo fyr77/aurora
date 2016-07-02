@@ -8,12 +8,16 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.SizeValue;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.gui.niffy.CustomHint;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.BasePositionable;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.LandingParty;
@@ -28,7 +32,7 @@ import ru.game.aurora.world.space.earth.Earth;
  * Date: 18.03.14
  * Time: 17:32
  */
-public class PlanetScanController implements ScreenController {
+public class PlanetScanController implements ScreenController, Updatable {
     private final World world;
 
     private BasePositionable shuttlePosition;
@@ -225,5 +229,25 @@ public class PlanetScanController implements ScreenController {
         closeScreen();
         world.setCurrentRoom(planetToScan);
         planetToScan.enter(world);
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+        final Input input = container.getInput();
+
+        if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SCAN))
+        || input.isKeyPressed(Input.KEY_ESCAPE)) {
+            closeScreen();
+            return;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LANDING_PARTY))){
+            landingParty();
+            return;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+        || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))){
+            land();
+            return;
+        }
     }
 }
