@@ -141,19 +141,6 @@ public class World implements Serializable, ResolutionChangeListener {
 
         ScreenController controller = GUI.getInstance().getNifty().getCurrentScreen().getScreenController();
         if(controller != null){
-            // disable key repeating in dialog screens
-            if(controller.getClass().getName().equals(DialogController.class.getName())) {
-                if(container.getInput().isKeyRepeatEnabled()){
-                    container.getInput().disableKeyRepeat();
-                }
-            }
-            else{
-                if(!container.getInput().isKeyRepeatEnabled()){
-                    container.getInput().enableKeyRepeat();
-                }
-            }
-
-            // update
             if(Updatable.class.isAssignableFrom(controller.getClass())) {
                 ((Updatable)controller).update(container, this);
             }

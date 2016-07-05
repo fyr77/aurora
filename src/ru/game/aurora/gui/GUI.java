@@ -140,7 +140,7 @@ public class GUI {
         nifty.registerScreenController(galaxyMapController);
         nifty.registerScreenController(new ResearchScreenController(world, con));
         nifty.registerScreenController(new TradeScreenController(world));
-        nifty.registerScreenController(new DialogController(world));
+        nifty.registerScreenController(new DialogController(con, world));
         nifty.registerScreenController(new StoryScreenController(world));
         nifty.registerScreenController(new ResearchReportScreenController(world));
         nifty.registerScreenController(new EarthProgressScreenController(world));

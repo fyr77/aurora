@@ -30,7 +30,9 @@ import java.util.Stack;
 
 
 public class DialogController implements ScreenController, Updatable {
+
     private final World world;
+    private final GameContainer gameContainer;
 
     private final Stack<Dialog> dialogs = new Stack<>();
 
@@ -44,7 +46,8 @@ public class DialogController implements ScreenController, Updatable {
 
     private Screen screen;
 
-    public DialogController(World world) {
+    public DialogController(GameContainer con, World world) {
+        this.gameContainer = con;
         this.world = world;
     }
 
@@ -63,6 +66,7 @@ public class DialogController implements ScreenController, Updatable {
 
     @Override
     public void onStartScreen() {
+        gameContainer.getInput().disableKeyRepeat();
         world.setPaused(true);
         updateDialog();
     }
@@ -111,6 +115,7 @@ public class DialogController implements ScreenController, Updatable {
 
     @Override
     public void onEndScreen() {
+        gameContainer.getInput().enableKeyRepeat();
         world.setPaused(false);
     }
 
