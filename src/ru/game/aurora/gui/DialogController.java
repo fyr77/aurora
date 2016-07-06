@@ -36,8 +36,6 @@ public class DialogController implements ScreenController, Updatable {
 
     private final Stack<Dialog> dialogs = new Stack<>();
 
-    private Dialog currentDialog;
-
     private Element imagePanel;
 
     private Element npcText;
@@ -73,6 +71,8 @@ public class DialogController implements ScreenController, Updatable {
 
     @Override
     public void update(GameContainer container, World world){
+        final Dialog currentDialog = dialogs.peek();
+
         if (currentDialog.getStatements() == null) {
             currentDialog.enter(world);
         }
@@ -98,7 +98,6 @@ public class DialogController implements ScreenController, Updatable {
 
     private void updateDialog() {
         final Dialog dialog = this.dialogs.peek();
-        currentDialog = dialog;
 
         EngineUtils.setImageForGUIElement(imagePanel, dialog.getCurrentStatement().customIcon == null ? dialog.getIconName() : dialog.getCurrentStatement().customIcon);
         EngineUtils.setTextForGUIElement(npcText, dialog.getLocalizedNPCText(world));

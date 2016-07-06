@@ -8,22 +8,19 @@ import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.Ship;
-import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShipScreenController implements ScreenController, Updatable {
+public class ShipScreenController extends DefaultCloseableScreenController {
     private ListBox<CrewMember> crewMemberListBox;
 
     private ListBox<ShipUpgrade> modulesListBox;
@@ -99,10 +96,6 @@ public class ShipScreenController implements ScreenController, Updatable {
         world.setPaused(false);
     }
 
-    public void closeScreen() {
-        GUI.getInstance().popAndSetScreen();
-    }
-
     public void callOfficerPressed() {
         crewMemberListBox.getFocusItem().interact(world);
         myScreen.layoutLayers();
@@ -128,13 +121,10 @@ public class ShipScreenController implements ScreenController, Updatable {
     }
 
     @Override
-    public void update(GameContainer container, World world) {
-        final Input input = container.getInput();
+    public void inputUpdate(Input input) {
+        super.inputUpdate(input);
 
-        if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INVENTORY))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
-        || input.isKeyPressed(Input.KEY_ESCAPE)) {
+        if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INVENTORY))) {
             closeScreen();
             return;
         }

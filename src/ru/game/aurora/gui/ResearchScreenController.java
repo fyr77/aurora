@@ -15,7 +15,6 @@ import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
@@ -25,10 +24,9 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
-public class ResearchScreenController implements ScreenController, Updatable {
+public class ResearchScreenController extends DefaultCloseableScreenController {
     private final World world;
 
     private final GameContainer container;
@@ -87,12 +85,6 @@ public class ResearchScreenController implements ScreenController, Updatable {
     public void onEndScreen() {
         world.setPaused(false);
     }
-
-
-    public void closeScreen() {
-        GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
-    }
-
 
     @NiftyEventSubscriber(id = "research_window")
     public void onClose(final String id, final WindowClosedEvent event) {
@@ -200,13 +192,10 @@ public class ResearchScreenController implements ScreenController, Updatable {
     }
 
     @Override
-    public void update(GameContainer container, World world) {
-        final Input input = container.getInput();
+    public void inputUpdate(Input input) {
+        super.inputUpdate(input);
 
-        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RESEARCH))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
-        || input.isKeyPressed(Input.KEY_ESCAPE)){
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RESEARCH))){
             closeScreen();
             return;
         }

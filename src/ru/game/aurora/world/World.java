@@ -141,7 +141,10 @@ public class World implements Serializable, ResolutionChangeListener {
 
         ScreenController controller = GUI.getInstance().getNifty().getCurrentScreen().getScreenController();
         if(controller != null){
-            if(Updatable.class.isAssignableFrom(controller.getClass())) {
+            if(controller instanceof DefaultCloseableScreenController){
+                ((DefaultCloseableScreenController)controller).inputUpdate(container.getInput());
+            }
+            else if(Updatable.class.isAssignableFrom(controller.getClass())) {
                 ((Updatable)controller).update(container, this);
             }
         }

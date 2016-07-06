@@ -18,7 +18,7 @@ import ru.game.aurora.world.World;
  * Date: 08.10.13
  * Time: 13:35
  */
-public class FailScreenController implements ScreenController, Updatable {
+public class FailScreenController extends DefaultCloseableScreenController {
     private final World world;
 
     private Element text;
@@ -51,19 +51,12 @@ public class FailScreenController implements ScreenController, Updatable {
         world.setPaused(false);
     }
 
-    public void gameOver() {
-        world.setGameOver(true);
+    @Override
+    public void closeScreen() {
+       gameOver();
     }
 
-    @Override
-    public void update(GameContainer container, World world) {
-        final Input input = container.getInput();
-
-        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
-        || input.isKeyPressed(Input.KEY_ESCAPE)) {
-            gameOver();
-            return;
-        }
+    public void gameOver() {
+        world.setGameOver(true);
     }
 }

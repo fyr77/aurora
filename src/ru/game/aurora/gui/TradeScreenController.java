@@ -23,7 +23,7 @@ import ru.game.aurora.world.planet.InventoryItem;
 
 import java.util.List;
 
-public class TradeScreenController implements ScreenController, Updatable {
+public class TradeScreenController extends DefaultCloseableScreenController {
 
     private World world;
 
@@ -113,10 +113,6 @@ public class TradeScreenController implements ScreenController, Updatable {
         world.setPaused(false);
     }
 
-    public void closeScreen() {
-        GUI.getInstance().popAndSetScreen();
-    }
-
     public void onSellClicked() {
         Multiset.Entry<InventoryItem> entry = inventoryList.getSelection().get(0);
         int amountToSell = 1;
@@ -202,17 +198,5 @@ public class TradeScreenController implements ScreenController, Updatable {
     @NiftyEventSubscriber(pattern = ".*inventory_to_storage")
     public void onPrimaryReleased(String id, ButtonClickedEvent event) {
         inventoryList.selectItem((Multiset.Entry<InventoryItem>) event.getButton().getElement().getParent().getUserData());
-    }
-
-    @Override
-    public void update(GameContainer container, World world) {
-        final Input input = container.getInput();
-
-        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
-        || input.isKeyPressed(Input.KEY_ESCAPE)) {
-            closeScreen();
-            return;
-        }
     }
 }

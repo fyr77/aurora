@@ -32,7 +32,7 @@ import ru.game.aurora.world.space.earth.Earth;
  * Date: 18.03.14
  * Time: 17:32
  */
-public class PlanetScanController implements ScreenController, Updatable {
+public class PlanetScanController extends DefaultCloseableScreenController {
     private final World world;
 
     private BasePositionable shuttlePosition;
@@ -216,10 +216,6 @@ public class PlanetScanController implements ScreenController, Updatable {
         shuttleDraggableElement.setFocus();
     }
 
-    public void closeScreen() {
-        GUI.getInstance().popAndSetScreen();
-    }
-
     public void landingParty() {
         GUI.getInstance().pushCurrentScreen();
         GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
@@ -232,9 +228,7 @@ public class PlanetScanController implements ScreenController, Updatable {
     }
 
     @Override
-    public void update(GameContainer container, World world) {
-        final Input input = container.getInput();
-
+    public void inputUpdate(Input input) {
         if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SCAN))
         || input.isKeyPressed(Input.KEY_ESCAPE)) {
             closeScreen();
@@ -245,7 +239,7 @@ public class PlanetScanController implements ScreenController, Updatable {
             return;
         }
         else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-        || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))){
+        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))){
             land();
             return;
         }

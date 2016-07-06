@@ -17,7 +17,6 @@ import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
@@ -28,14 +27,13 @@ import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.engineering.EngineeringState;
 import ru.game.aurora.player.engineering.HullRepairs;
 import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
 import java.util.Map;
 
 
-public class EngineeringScreenController implements ScreenController, Updatable {
+public class EngineeringScreenController extends DefaultCloseableScreenController {
     private final World world;
 
     private final GameContainer container;
@@ -163,11 +161,6 @@ public class EngineeringScreenController implements ScreenController, Updatable 
         closeScreen();
     }
 
-    public void closeScreen() {
-        GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
-    }
-
-
     @NiftyEventSubscriber(id = "itemsList")
     public void onListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent event) {
 
@@ -258,13 +251,10 @@ public class EngineeringScreenController implements ScreenController, Updatable 
     }
 
     @Override
-    public void update(GameContainer container, World world) {
-        final Input input = container.getInput();
+    public void inputUpdate(Input input) {
+        super.inputUpdate(input);
 
-        if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.ENGINEERING))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
-        || input.isKeyPressed(Input.KEY_ESCAPE)) {
+        if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.ENGINEERING))) {
             closeScreen();
             return;
         }

@@ -20,7 +20,7 @@ import ru.game.aurora.world.World;
  * Date: 10.12.13
  * Time: 23:19
  */
-public class CountrySelectScreenController implements ScreenController, Updatable {
+public class CountrySelectScreenController implements ScreenController {
 
     private final World world;
 
@@ -81,10 +81,5 @@ public class CountrySelectScreenController implements ScreenController, Updatabl
     public void onRadioButtonStateChanged(final String id, final RadioButtonGroupStateChangedEvent event) {
         EngineUtils.setTextForGUIElement(textElement, Localization.getText("gui", "country_select." + event.getSelectedId() + ".text"));
         selectedId = event.getSelectedId();
-    }
-
-    @Override
-    public void update(GameContainer container, World world) {
-
     }
 }

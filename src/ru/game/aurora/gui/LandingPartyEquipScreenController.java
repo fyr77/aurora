@@ -30,7 +30,7 @@ import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
 
 
-public class LandingPartyEquipScreenController implements ScreenController, Updatable {
+public class LandingPartyEquipScreenController extends DefaultCloseableScreenController {
 
     // used in rendering warning text
     private final Color redColor = new Color(200, 0, 0, 255);
@@ -290,9 +290,7 @@ public class LandingPartyEquipScreenController implements ScreenController, Upda
       }
 
     @Override
-    public void update(GameContainer container, World world) {
-        final Input input = container.getInput();
-
+    public void inputUpdate(Input input) {
         if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LANDING_PARTY))
         || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
         || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))){

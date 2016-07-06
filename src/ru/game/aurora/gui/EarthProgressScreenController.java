@@ -30,7 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class EarthProgressScreenController implements ScreenController, Updatable {
+public class EarthProgressScreenController extends DefaultCloseableScreenController {
     private final World world;
     private final List<Pair<String, String>> data = new LinkedList<>();
     private ListBox results;
@@ -118,22 +118,6 @@ public class EarthProgressScreenController implements ScreenController, Updatabl
 
     @NiftyEventSubscriber(id = "earth_progress_window")
     public void onCloseWindow(String id, WindowClosedEvent event) {
-        GUI.getInstance().popAndSetScreen();
-    }
-
-    public void closeScreen() {
-        GUI.getInstance().popAndSetScreen();
-    }
-
-    @Override
-    public void update(GameContainer container, World world) {
-        final Input input = container.getInput();
-
-        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
-        || input.isKeyPressed(Input.KEY_ESCAPE)) {
-            closeScreen();
-            return;
-        }
+        closeScreen();
     }
 }

@@ -28,7 +28,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-public class ResearchReportScreenController implements ScreenController, Updatable {
+public class ResearchReportScreenController extends DefaultCloseableScreenController {
     private final World world;
 
     private Window window;
@@ -94,16 +94,12 @@ public class ResearchReportScreenController implements ScreenController, Updatab
         world.setPaused(false);
     }
 
+    @Override
     public void closeScreen() {
         if (reportsToShow.isEmpty()) {
             GUI.getInstance().popAndSetScreen();
         } else {
             showNextReport();
         }
-    }
-
-    @Override
-    public void update(GameContainer container, World world) {
-
     }
 }

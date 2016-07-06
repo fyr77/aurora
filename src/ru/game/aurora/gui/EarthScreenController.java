@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class EarthScreenController implements ScreenController, Updatable {
+public class EarthScreenController extends DefaultCloseableScreenController {
 
     private final World world;
 
@@ -200,6 +200,7 @@ public class EarthScreenController implements ScreenController, Updatable {
         world.setPaused(false);
     }
 
+    @Override
     public void closeScreen() {
         GUI.getInstance().getNifty().gotoScreen("star_system_gui");
         world.getPlayer().getShip().refillCrew(world);
@@ -314,19 +315,6 @@ public class EarthScreenController implements ScreenController, Updatable {
             ScrollPanel scrollPanel = messagesList.findNiftyControl("scrollbarPanelId", ScrollPanel.class);
             scrollPanel.setVerticalPos(0);
             messagesList.layoutElements();
-        }
-
-    }
-
-    @Override
-    public void update(GameContainer container, World world) {
-        final Input input = container.getInput();
-
-        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
-        || input.isKeyPressed(Input.KEY_ESCAPE)) {
-            closeScreen();
-            return;
         }
     }
 }

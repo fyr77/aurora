@@ -5,7 +5,6 @@ import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.*;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.InputBinding;
@@ -35,7 +34,7 @@ import java.util.Map;
  * Date: 31.03.14
  * Time: 17:24
  */
-public class StarMapController implements ScreenController, Updatable {
+public class StarMapController extends DefaultCloseableScreenController {
     private final World world;
 
     private Element mapPanel;
@@ -249,18 +248,11 @@ public class StarMapController implements ScreenController, Updatable {
         closeScreen();
     }
 
-    public void closeScreen() {
-        GUI.getInstance().popAndSetScreen();
-    }
-
     @Override
-    public void update(GameContainer container, World world) {
-        final Input input = container.getInput();
+    public void inputUpdate(Input input) {
+        super.inputUpdate(input);
 
-        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
-        || input.isKeyPressed(Input.KEY_ESCAPE)){
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))){
             closeScreen();
             return;
         }
