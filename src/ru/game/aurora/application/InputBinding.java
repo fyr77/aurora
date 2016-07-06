@@ -17,11 +17,16 @@ public class InputBinding {
     public static Map<Action, Integer> keyBinding = new EnumMap<Action, Integer>(Action.class);
 
     public enum Action {
-        LEFT, LEFT_SECONDARY,
-        RIGHT, RIGHT_SECONDARY,
-        UP, UP_SECONDARY,
-        DOWN, DOWN_SECONDARY,
+        LEFT,
+        LEFT_SECONDARY,
+        RIGHT,
+        RIGHT_SECONDARY,
+        UP,
+        UP_SECONDARY,
+        DOWN,
+        DOWN_SECONDARY,
         INTERACT,
+        INTERACT_SECONDARY,
         SHOOT,
         WEAPON_1,
         WEAPON_2,
@@ -58,6 +63,7 @@ public class InputBinding {
         defaultBinding.put(Action.DOWN, Input.KEY_S);
         defaultBinding.put(Action.DOWN_SECONDARY, Input.KEY_DOWN);
         defaultBinding.put(Action.INTERACT, Input.KEY_SPACE);
+        defaultBinding.put(Action.INTERACT_SECONDARY, Input.KEY_ENTER);
         defaultBinding.put(Action.SHOOT, Input.KEY_F);
         defaultBinding.put(Action.WEAPON_1, Input.KEY_1);
         defaultBinding.put(Action.WEAPON_2, Input.KEY_2);

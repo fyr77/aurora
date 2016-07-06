@@ -64,7 +64,10 @@ public class GalaxyMapScreen implements Room {
 
     @Override
     public void update(GameContainer container, World world) {
-        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT)) || container.getInput().isKeyPressed(Input.KEY_ESCAPE) || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))) {
+        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+                || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
+                || container.getInput().isKeyPressed(Input.KEY_ESCAPE)
+                || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))) {
             world.setCurrentRoom(world.getGalaxyMap());
             GUI.getInstance().getNifty().getCurrentScreen().findNiftyControl("starmap_button", Button.class).setText(Localization.getText("gui", "space.galaxy_map"));
         }

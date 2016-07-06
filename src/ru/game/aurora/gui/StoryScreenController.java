@@ -17,12 +17,14 @@ import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
+import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
 
-public class StoryScreenController implements ScreenController {
+public class StoryScreenController implements ScreenController, Updatable {
     private final World world;
 
     private StoryScreen story;
@@ -94,5 +96,10 @@ public class StoryScreenController implements ScreenController {
             story.next(world);
         }
         GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
+    }
+
+    @Override
+    public void update(GameContainer container, World world) {
+
     }
 }

@@ -5,7 +5,8 @@ import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.Input;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.quest.Journal;
@@ -17,7 +18,7 @@ import ru.game.aurora.world.quest.JournalEntry;
  * Date: 19.12.13
  */
 
-public class JournalScreenController implements ScreenController {
+public class JournalScreenController extends DefaultCloseableScreenController {
     private ListBox<JournalEntry> activeQuests;
 
     private ListBox<JournalEntry> completedQuests;
@@ -102,5 +103,15 @@ public class JournalScreenController implements ScreenController {
     @NiftyEventSubscriber(id = "journal_window")
     public void onClose(final String id, final WindowClosedEvent event) {
         closeScreen();
+    }
+
+    @Override
+    public void inputUpdate(Input input) {
+        super.inputUpdate(input);
+
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.JOURNAL))) {
+            closeScreen();
+            return;
+        }
     }
 }

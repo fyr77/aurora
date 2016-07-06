@@ -4,8 +4,12 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
 /**
@@ -14,7 +18,7 @@ import ru.game.aurora.world.World;
  * Date: 08.10.13
  * Time: 13:35
  */
-public class FailScreenController implements ScreenController {
+public class FailScreenController extends DefaultCloseableScreenController {
     private final World world;
 
     private Element text;
@@ -47,8 +51,12 @@ public class FailScreenController implements ScreenController {
         world.setPaused(false);
     }
 
+    @Override
+    public void closeScreen() {
+       gameOver();
+    }
+
     public void gameOver() {
         world.setGameOver(true);
     }
-
 }

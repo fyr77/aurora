@@ -15,10 +15,13 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.Reply;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
 import java.util.ArrayList;
@@ -26,8 +29,10 @@ import java.util.List;
 import java.util.Stack;
 
 
-public class DialogController implements ScreenController {
+public class DialogController implements ScreenController, Updatable {
+
     private final World world;
+    private final GameContainer gameContainer;
 
     private final Stack<Dialog> dialogs = new Stack<>();
 
@@ -39,7 +44,8 @@ public class DialogController implements ScreenController {
 
     private Screen screen;
 
-    public DialogController(World world) {
+    public DialogController(GameContainer con, World world) {
+        this.gameContainer = con;
         this.world = world;
     }
 
@@ -58,12 +64,41 @@ public class DialogController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        gameContainer.getInput().disableKeyRepeat();
         world.setPaused(true);
         updateDialog();
     }
 
-    public void updateDialog() {
+    @Override
+    public void update(GameContainer container, World world){
+        final Dialog currentDialog = dialogs.peek();
+
+        if (currentDialog.getStatements() == null) {
+            currentDialog.enter(world);
+        }
+        if (currentDialog.getCurrentStatement() == null) {
+            return;
+        }
+
+        int idx = -1;
+
+        for (int i = Input.KEY_1; i < Input.KEY_9; ++i) {
+            if (container.getInput().isKeyPressed(i)) {
+                idx = i - Input.KEY_1;
+                break;
+            }
+        }
+
+        if (idx < 0 || idx >= currentDialog.getCurrentStatement().getAvailableReplies(world, currentDialog.getFlags()).size()) {
+            return;
+        }
+
+        selectDialog(idx);
+    }
+
+    private void updateDialog() {
         final Dialog dialog = this.dialogs.peek();
+
         EngineUtils.setImageForGUIElement(imagePanel, dialog.getCurrentStatement().customIcon == null ? dialog.getIconName() : dialog.getCurrentStatement().customIcon);
         EngineUtils.setTextForGUIElement(npcText, dialog.getLocalizedNPCText(world));
         // reset horizontal scrollbar
@@ -74,13 +109,12 @@ public class DialogController implements ScreenController {
         replies.addAllItems(dialog.addAvailableRepliesLocalized(world));
         replies.refresh();
         replies.showItemByIndex(0);
-
-
         screen.layoutLayers();
     }
 
     @Override
     public void onEndScreen() {
+        gameContainer.getInput().enableKeyRepeat();
         world.setPaused(false);
     }
 
@@ -90,7 +124,12 @@ public class DialogController implements ScreenController {
             return;
         }
         int selectedIdx = event.getSelectionIndices().get(0);
+        selectDialog(selectedIdx);
+    }
+
+    private void selectDialog(final int selectedIdx) {
         this.dialogs.peek().useReply(world, selectedIdx);
+
         if (this.dialogs.peek().isOver()) {
             Dialog d = this.dialogs.pop();
             String prevScreen = GUI.getInstance().popScreen();
@@ -106,6 +145,5 @@ public class DialogController implements ScreenController {
             replies.deselectItemByIndex(selectedIdx);
             updateDialog();
         }
-
     }
 }

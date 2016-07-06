@@ -6,10 +6,12 @@ import de.lessvoid.nifty.controls.RadioButtonGroupStateChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.player.EarthCountry;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
 /**
@@ -80,5 +82,4 @@ public class CountrySelectScreenController implements ScreenController {
         EngineUtils.setTextForGUIElement(textElement, Localization.getText("gui", "country_select." + event.getSelectedId() + ".text"));
         selectedId = event.getSelectedId();
     }
-
 }

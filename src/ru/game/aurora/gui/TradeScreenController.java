@@ -10,17 +10,20 @@ import de.lessvoid.nifty.controls.listbox.ListBoxControl;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.util.EngineUtils;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
 import java.util.List;
 
-public class TradeScreenController implements ScreenController
-{
+public class TradeScreenController extends DefaultCloseableScreenController {
 
     private World world;
 
@@ -108,10 +111,6 @@ public class TradeScreenController implements ScreenController
     @Override
     public void onEndScreen() {
         world.setPaused(false);
-    }
-
-    public void closeScreen() {
-        GUI.getInstance().popAndSetScreen();
     }
 
     public void onSellClicked() {

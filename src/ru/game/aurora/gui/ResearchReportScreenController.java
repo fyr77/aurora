@@ -17,16 +17,18 @@ import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
+import org.newdawn.slick.GameContainer;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.engineering.EngineeringProject;
 import ru.game.aurora.player.research.ResearchProjectDesc;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 
-public class ResearchReportScreenController implements ScreenController {
+public class ResearchReportScreenController extends DefaultCloseableScreenController {
     private final World world;
 
     private Window window;
@@ -92,6 +94,7 @@ public class ResearchReportScreenController implements ScreenController {
         world.setPaused(false);
     }
 
+    @Override
     public void closeScreen() {
         if (reportsToShow.isEmpty()) {
             GUI.getInstance().popAndSetScreen();

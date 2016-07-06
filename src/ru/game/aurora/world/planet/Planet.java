@@ -314,7 +314,8 @@ public class Planet extends BasePlanet implements IDungeon {
                     }
                 }
             }
-            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))) {
+            if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+            || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))) {
                 leavePlanet(world);
             }
         }

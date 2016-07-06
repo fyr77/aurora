@@ -15,10 +15,10 @@ import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.slick2d.render.image.ImageSlickRenderImage;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
+import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.player.research.ResearchProjectDesc;
@@ -26,7 +26,7 @@ import ru.game.aurora.player.research.ResearchProjectState;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
 
-public class ResearchScreenController implements ScreenController {
+public class ResearchScreenController extends DefaultCloseableScreenController {
     private final World world;
 
     private final GameContainer container;
@@ -85,12 +85,6 @@ public class ResearchScreenController implements ScreenController {
     public void onEndScreen() {
         world.setPaused(false);
     }
-
-
-    public void closeScreen() {
-        GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
-    }
-
 
     @NiftyEventSubscriber(id = "research_window")
     public void onClose(final String id, final WindowClosedEvent event) {
@@ -195,5 +189,15 @@ public class ResearchScreenController implements ScreenController {
     public void onClicked(String id, ButtonClickedEvent event) {
         ListBox itemsList = availableResearch.findNiftyControl("itemsList", ListBox.class);
         itemsList.selectItem(event.getButton().getElement().getParent().getUserData());
+    }
+
+    @Override
+    public void inputUpdate(Input input) {
+        super.inputUpdate(input);
+
+        if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RESEARCH))){
+            closeScreen();
+            return;
+        }
     }
 }

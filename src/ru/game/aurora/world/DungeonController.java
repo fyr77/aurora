@@ -151,7 +151,9 @@ public class DungeonController extends Listenable implements Serializable {
             actuallyMoved = false;
         }
 
-        final boolean enterPressed = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT));
+        final boolean enterPressed = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+                || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY));
+
         if (enterPressed) {
             interactWithObject(world);
         }
@@ -284,7 +286,8 @@ public class DungeonController extends Listenable implements Serializable {
 
         // shooting
         boolean shoot = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SHOOT))
-                || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT));
+                || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+                || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY));
 
         if(shoot){
             updateShootFire(world);

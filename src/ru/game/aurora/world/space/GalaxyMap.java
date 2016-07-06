@@ -169,7 +169,7 @@ public class GalaxyMap extends BaseSpaceRoom {
 
             if (objects.get(idx).canBeEntered()) {
                 hasEnterableObject = true;
-                if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))) {
+                if (input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT)) || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))) {
                     enterRoom(objects.get(idx));
                 }
             }
