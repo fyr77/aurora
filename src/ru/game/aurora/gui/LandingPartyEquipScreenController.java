@@ -116,6 +116,9 @@ public class LandingPartyEquipScreenController extends DefaultCloseableScreenCon
                     weaponSelect.addItem(item);
                 }
             }
+
+            // select current weapon in dropdown menu
+            weaponSelect.selectItem(world.getPlayer().getLandingParty().getWeapon());
         }
 
         updateLabels();
