@@ -13,6 +13,7 @@ public class Movable extends BasePositionable implements IMovable, Updatable {
     private static final long serialVersionUID = 1L;
 
     protected boolean isMoving = false;
+    protected boolean isMovingEndAtPreviousUpdate = false;
 
     private boolean canMove = true;
 
@@ -86,6 +87,7 @@ public class Movable extends BasePositionable implements IMovable, Updatable {
 
     @Override
     public void update(GameContainer container, World world) {
+        isMovingEndAtPreviousUpdate = false;
         doMove(container);
     }
 
@@ -123,6 +125,15 @@ public class Movable extends BasePositionable implements IMovable, Updatable {
     protected void movementCompleted() {
         // override in a subclass if you want to do something after movement animation is done
         // at this moment x and y will be set to destination position
+        setMovementEnd();
+    }
+
+    private void setMovementEnd() {
+        isMovingEndAtPreviousUpdate = true;
+    }
+
+    public boolean isMovingEndAtPreviousUpdate(){
+        return isMovingEndAtPreviousUpdate;
     }
 
     @Override

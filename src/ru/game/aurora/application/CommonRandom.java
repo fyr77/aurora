@@ -17,4 +17,8 @@ public final class CommonRandom {
     public static Random getRandom() {
         return r;
     }
+
+    public static int nextInt(int min, int max){
+        return r.nextInt(max - min + 1) + min;
+    }
 }
