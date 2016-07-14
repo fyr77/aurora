@@ -366,6 +366,11 @@ public class Ship extends BaseGameObject {
         int damage = maxHull - hull;
         maxHull += amount;
         hull = maxHull - damage;
+
+        if(hull > maxHull){
+            hull = maxHull;
+        }
+
         if (hull <= 0) {
             explode(World.getWorld());
         }
