@@ -18,6 +18,7 @@ import ru.game.aurora.gui.niffy.InteractionTargetSelectorController;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
+import ru.game.aurora.world.encounter.asteroidbelt.AsteroidBeltEncounter;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.BasePlanet;
 
@@ -178,16 +179,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         int y = world.getPlayer().getShip().getY();
         int x = world.getPlayer().getShip().getX();
 
-        if (container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LANDING_PARTY))) {
-            GUI.getInstance().pushCurrentScreen();
-            GUI.getInstance().getNifty().gotoScreen("landing_party_equip_screen");
-            return;
-        }
-
-        if ((y < -radius)
-                || (y >= radius)
-                || (x < -radius)
-                || (x >= radius)) {
+        // leave star system check
+        if ((y < -radius) || (y >= radius) || (x < -radius) || (x >= radius)) {
             if (canBeLeft) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "space.leaving_star_system"));
                 checkAndSynchronizeReputation(world);
@@ -202,6 +195,14 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
                 if (world.isUpdatedThisFrame()) {
                     GameLogger.getInstance().logMessage(Localization.getText("gui", "space.can_not_leave_star_system"));
                 }
+            }
+        }
+
+        // asteroids encounter begin check
+        if(asteroidBelt != null) {
+            if(checkAsteroidEncounter(world.getPlayer().getShip())){
+                startAsteroidEncounter(world);
+                return;
             }
         }
 
@@ -224,6 +225,28 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))) {
             interactWithObjectAtShipPosition(world);
         }
+    }
+
+    private boolean checkAsteroidEncounter(Ship ship) {
+        if(ship.isMovingEndAtPreviousUpdate()) { // encounter can start only after Aurora stopped in asteroid belt
+            final int shipX = ship.getX();
+            final int shipY = ship.getY();
+            final long rangeFromCenter = Math.round(Math.sqrt(shipX * shipX + shipY * shipY));
+
+            if (rangeFromCenter >= asteroidBelt.innerRadius && rangeFromCenter < asteroidBelt.innerRadius + asteroidBelt.width) {
+                if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("encounter.asteroid_belt.chance")) {
+                    return true; // start asteroid encounter
+                }
+            }
+        }
+        return false;
+    }
+
+    private void startAsteroidEncounter(World world) {
+        // todo: add dialog before encounter started
+        Room encounterRoom = new AsteroidBeltEncounter(this);
+        world.setCurrentRoom(encounterRoom);
+        encounterRoom.enter(world);
     }
 
     public void interactWithObjectAtShipPosition(final World world) {
@@ -461,20 +484,9 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
                 }
             }
         } else {
-            final boolean next = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))
-                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP_SECONDARY))
-                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))
-                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT_SECONDARY));
-
-            final boolean prev = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))
-                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN_SECONDARY))
-                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))
-                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT_SECONDARY));
-
-            final boolean shoot = input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SHOOT))
-                        || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
-                        || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
-                        || input.isKeyPressed(selectedWeapon + Input.KEY_1);
+            final boolean next = inputCheckAimNext(input);
+            final boolean prev = inputCheckAimPrev(input);
+            final boolean shoot = inputCheckShoot(input);
 
             updateShoot(world, next, prev, shoot);
             if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
@@ -482,36 +494,57 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
             }
         }
 
-        boolean shipAtSameCoords = false;
-        List<GameObject> shipsCopy = new LinkedList<>(ships); //to prevent CMO
-        for (GameObject ship : shipsCopy) {
-            if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
-                shipAtSameCoords = true;
+        if(world.getCurrentRoom() == this) {
+            boolean shipAtSameCoords = false;
+            List<GameObject> shipsCopy = new LinkedList<>(ships); //to prevent CMO
+            for (GameObject ship : shipsCopy) {
+                if (ship.getX() == playerShip.getX() && ship.getY() == playerShip.getY()) {
+                    shipAtSameCoords = true;
+                }
+
+                ship.update(container, world);
             }
 
-            ship.update(container, world);
-        }
+            for (Iterator<GameObject> iter = ships.iterator(); iter.hasNext(); ) {
+                GameObject ship = iter.next();
+                if (!ship.isAlive()) {
+                    iter.remove();
+                }
+            }
 
-        for (Iterator<GameObject> iter = ships.iterator(); iter.hasNext(); ) {
-            GameObject ship = iter.next();
-            if (!ship.isAlive()) {
-                iter.remove();
+            final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("interactPanel");
+            if (scanLandPanel != null) {
+                boolean landPanelVisible = scanLandPanel.isVisible();
+                if (!shipAtSameCoords && landPanelVisible && getGameObjectsAtPosition(player.getShip()).isEmpty()) {
+                    scanLandPanel.setVisible(false);
+                } else if (shipAtSameCoords && !landPanelVisible) {
+                    Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
+                    leftButton.setText(Localization.getText("gui", "space.hail"));
+                    scanLandPanel.setVisible(true);
+                }
             }
         }
+    }
 
-        final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("interactPanel");
-        if (scanLandPanel != null) {
-            boolean landPanelVisible = scanLandPanel.isVisible();
-            if (!shipAtSameCoords && landPanelVisible && getGameObjectsAtPosition(player.getShip()).isEmpty()) {
-                scanLandPanel.setVisible(false);
-            } else if (shipAtSameCoords && !landPanelVisible) {
-                Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
-                leftButton.setText(Localization.getText("gui", "space.hail"));
-                scanLandPanel.setVisible(true);
-            }
-        }
+    private boolean inputCheckShoot(Input input) {
+        return input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.SHOOT))
+            || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT))
+            || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))
+            || input.isKeyPressed(selectedWeapon + Input.KEY_1);
+    }
 
-        playerShip.update(container, world);
+    private boolean inputCheckAimPrev(Input input) {
+        return input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN))
+            || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.DOWN_SECONDARY))
+            || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT))
+            || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.LEFT_SECONDARY));
+    }
+
+    private boolean inputCheckAimNext(Input input) {
+        return input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP))
+            || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.UP_SECONDARY))
+            || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT))
+            || input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.RIGHT_SECONDARY));
     }
 
     public boolean isVisited() {

@@ -100,6 +100,9 @@
 
     <!-- other -->
     <resource type="image" id="stone_dialog">sprites/portraits/stone_portrait.png</resource>
+    <resource type="image" id="asteroid_encounter_obj_1">sprites/space_objects/asteroid_encounter_obj_1.png</resource>
+    <resource type="image" id="asteroid_encounter_obj_2">sprites/space_objects/asteroid_encounter_obj_2.png</resource>
+    <resource type="image" id="asteroid_encounter_obj_3">sprites/space_objects/asteroid_encounter_obj_3.png</resource>
 
     <!-- earth -->
     <resource type="image" id="usa_leader">sprites/portraits/am_leader.png</resource>
@@ -196,6 +199,7 @@
     <resource type="image" id="torpedo">sprites/effects/torpedo.png</resource>
     <resource type="image" id="plasma_shot">sprites/effects/plasma_shot.png</resource>
     <resource type="image" id="bullet_shot">sprites/effects/bullet_shot.png</resource>
+    <resource type="image" id="laser_beam">sprites/effects/laser_beam.png</resource>
     <resource type="animation" id="ship_explosion" tw="64" th="64" duration="100">sprites/effects/explosion.png
     </resource>
     <resource type="animation" id="surface_explosion" tw="64" th="64" duration="100">

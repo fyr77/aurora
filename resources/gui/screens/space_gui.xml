@@ -136,7 +136,7 @@
 
             <panel height="50px"/>
 
-            <panel childLayout="horizontal" height="120px">
+            <panel id="resources_panel" childLayout="horizontal" height="120px">
                 <panel width="*"/>
                 <panel childLayout="vertical" width="160px" height="100px"
                        padding="18px,16px,26px,8px"
@@ -150,7 +150,7 @@
             <panel height="50px"/>
 
             <!-- midlle panel contains list of buttons to the right -->
-            <panel height="*" childLayout="horizontal">
+            <panel id="right_menu" height="*" childLayout="horizontal">
                 <panel width="*"/>
                 <panel width="216px" childLayout="vertical">
                     <panel height="*"/>
@@ -222,7 +222,7 @@
             </panel>
 
             <!-- bottom panel containing weapon buttons and log text -->
-            <panel height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69"
+            <panel id="bottom_menu" height="113px" imageMode="resize:324,802,153,40,324,802,153,4,324,802,153,69"
                    childLayout="horizontal" backgroundImage="sprites/gui/bottom_panel_starsystem.png"
                    padding="20px,20px,20px,20px"
                     >
