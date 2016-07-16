@@ -18,8 +18,8 @@ import ru.game.aurora.gui.niffy.InteractionTargetSelectorController;
 import ru.game.aurora.player.Player;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.*;
-import ru.game.aurora.world.encounter.asteroidbelt.AsteroidBeltEncounter;
 import ru.game.aurora.world.equip.WeaponInstance;
+import ru.game.aurora.world.generation.quest.asteroidbelt.AsteroidBeltQuestGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
 
 import java.io.IOException;
@@ -198,14 +198,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
             }
         }
 
-        // asteroids encounter begin check
-        if(asteroidBelt != null) {
-            if(checkAsteroidEncounter(world.getPlayer().getShip())){
-                startAsteroidEncounter(world);
-                return;
-            }
-        }
-
         final List<GameObject> spaceObjectAtPlayerShipPosition = getGameObjectsAtPosition(player.getShip());
 
         // if user ship is at planet, show additional gui panel
@@ -225,28 +217,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         || container.getInput().isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INTERACT_SECONDARY))) {
             interactWithObjectAtShipPosition(world);
         }
-    }
-
-    private boolean checkAsteroidEncounter(Ship ship) {
-        if(ship.isMovingEndAtPreviousUpdate()) { // encounter can start only after Aurora stopped in asteroid belt
-            final int shipX = ship.getX();
-            final int shipY = ship.getY();
-            final long rangeFromCenter = Math.round(Math.sqrt(shipX * shipX + shipY * shipY));
-
-            if (rangeFromCenter >= asteroidBelt.innerRadius && rangeFromCenter < asteroidBelt.innerRadius + asteroidBelt.width) {
-                if (CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("encounter.asteroid_belt.chance")) {
-                    return true; // start asteroid encounter
-                }
-            }
-        }
-        return false;
-    }
-
-    private void startAsteroidEncounter(World world) {
-        // todo: add dialog before encounter started
-        Room encounterRoom = new AsteroidBeltEncounter(this);
-        world.setCurrentRoom(encounterRoom);
-        encounterRoom.enter(world);
     }
 
     public void interactWithObjectAtShipPosition(final World world) {
@@ -574,6 +544,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         }
         world.getCamera().resetViewPort();
         visited = true;
+
+        if(asteroidBelt != null) {
+            world.addListener(new AsteroidBeltQuestGenerator(asteroidBelt));
+        }
     }
 
     @Override
@@ -949,12 +923,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         return result;
     }
 
-    private static class AsteroidBelt implements Serializable {
+    public static class AsteroidBelt implements Serializable {
         private static final long serialVersionUID = 652085640285216434L;
 
-        private final int innerRadius;
+        public final int innerRadius;
 
-        private final int width;
+        public final int width;
 
         public AsteroidBelt(int innerRadius, int width) {
             this.innerRadius = innerRadius;

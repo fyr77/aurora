@@ -1,4 +1,4 @@
-package ru.game.aurora.world.encounter.asteroidbelt;
+package ru.game.aurora.world.generation.quest.asteroidbelt;
 
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.tools.ObjectPool;
@@ -6,6 +6,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.*;
+import ru.game.aurora.effects.Effect;
+import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.ITileMap;
@@ -15,7 +17,7 @@ import ru.game.aurora.world.space.StarSystem;
 
 import java.util.*;
 
-public class AsteroidBeltEncounter implements Room {
+class AsteroidBeltEncounter implements Room {
 
     private static final long serialVersionUID = -8114836767522499104L;
 
@@ -24,6 +26,7 @@ public class AsteroidBeltEncounter implements Room {
     // encounter data
     private EncounterParallaxBackground background;
     private Camera camera;
+    private PriorityQueue<AsteroidExplosionEffect> effects;
 
     private int encounterLength;
     private int encounterSpeed;
@@ -70,6 +73,8 @@ public class AsteroidBeltEncounter implements Room {
 
         encounterShip = new EncounterShip();
         encounterShip.scaleCollider(0.5);
+
+        effects = new PriorityQueue<AsteroidExplosionEffect>();
 
         asteroidsPoolSize = Configuration.getIntProperty("encounter.asteroid_belt.asteroids_count");
         asteroidsActiveList = new ArrayList<Asteroid>(asteroidsPoolSize);
@@ -191,6 +196,7 @@ public class AsteroidBeltEncounter implements Room {
         updateMovement(container.getInput(), world);
         updateShoot(container);
         updateEnvironment(world);
+        updateEffects(container, world);
         reuseAsteroids();
     }
 
@@ -207,7 +213,7 @@ public class AsteroidBeltEncounter implements Room {
         }
 
         if(input.isKeyDown(InputBinding.keyBinding.get(InputBinding.Action.LEFT)) || input.isKeyDown(InputBinding.keyBinding.get(InputBinding.Action.LEFT_SECONDARY))){
-            dx -= shipShiftSpeed;
+            dx -= shipShiftSpeed * 2;
         }
         else if(input.isKeyDown(InputBinding.keyBinding.get(InputBinding.Action.RIGHT)) || input.isKeyDown(InputBinding.keyBinding.get(InputBinding.Action.RIGHT_SECONDARY))){
             dx += shipShiftSpeed;
@@ -263,7 +269,7 @@ public class AsteroidBeltEncounter implements Room {
 
     private void updateEnvironment(World world) {
         // update laser beams
-        if(shootsActiveList.size() > 0) {
+        if(!shootsActiveList.isEmpty()) {
             for (ShootEffect shoot : shootsActiveList) {
                 shoot.updateMovement();
 
@@ -294,6 +300,7 @@ public class AsteroidBeltEncounter implements Room {
                             shootsFreeSet.add(shoot);
                             asteroidsFreeSet.add(asteroid);
                             dropLoot(asteroid);
+                            effects.add(new AsteroidExplosionEffect(asteroid.getX(), asteroid.getY(), "rocket_explosion"));
                         }
                     }
                 }
@@ -301,7 +308,7 @@ public class AsteroidBeltEncounter implements Room {
         }
 
         // update loot objects
-        if(lootActiveList.size() > 0){
+        if(!lootActiveList.isEmpty()){
             for(int i = 0; i < lootActiveList.size(); ++i){
                 LootObject loot = lootActiveList.get(i);
 
@@ -318,11 +325,28 @@ public class AsteroidBeltEncounter implements Room {
         freeObjects();
     }
 
+    private void updateEffects(GameContainer container, World world) {
+        if(!effects.isEmpty()){
+            List<AsteroidExplosionEffect> freeList = new ArrayList<AsteroidExplosionEffect>(effects.size());
+
+            for(AsteroidExplosionEffect effect: effects){
+                if(effect.isOver()){
+                    freeList.add(effect);
+                }
+                else if(effect.isAlive()){
+                    effect.update(container, world);
+                }
+            }
+
+            if(!freeList.isEmpty()){
+                effects.removeAll(freeList);
+            }
+        }
+    }
+
     private void freeObjects() {
         if(!asteroidsFreeSet.isEmpty()){
-            Iterator<Asteroid> iterator = asteroidsFreeSet.iterator();
-            while (iterator.hasNext()) {
-                Asteroid asteroid = iterator.next();
+            for(Asteroid asteroid: asteroidsFreeSet){
                 asteroidsActiveList.remove(asteroid);
                 asteroidsPool.free(asteroid);
             }
@@ -330,9 +354,7 @@ public class AsteroidBeltEncounter implements Room {
         }
 
         if(!shootsFreeSet.isEmpty()){
-            Iterator<ShootEffect> iterator = shootsFreeSet.iterator();
-            while (iterator.hasNext()) {
-                ShootEffect shoot = iterator.next();
+            for(ShootEffect shoot: shootsFreeSet){
                 shootsActiveList.remove(shoot);
                 shootsPool.free(shoot);
             }
@@ -340,9 +362,7 @@ public class AsteroidBeltEncounter implements Room {
         }
 
         if(!lootFreeSet.isEmpty()){
-            Iterator<LootObject> iterator = lootFreeSet.iterator();
-            while (iterator.hasNext()) {
-                LootObject lootObj = iterator.next();
+            for(LootObject lootObj: lootFreeSet) {
                 lootActiveList.remove(lootObj);
                 lootPool.free(lootObj);
             }
@@ -385,13 +405,19 @@ public class AsteroidBeltEncounter implements Room {
             asteroid.draw(container, graphics, camera, world);
         }
 
-        if(lootActiveList.size() > 0) {
+        if(!lootActiveList.isEmpty()) {
             for (LootObject loot : lootActiveList) {
                 loot.draw(container, graphics, camera, world);
             }
         }
 
-        if(shootsActiveList.size() > 0) {
+        if(!effects.isEmpty()){
+            for(AsteroidExplosionEffect effect: effects){
+                effect.draw(container, graphics, camera, world);
+            }
+        }
+
+        if(!shootsActiveList.isEmpty()) {
             for (ShootEffect laser : shootsActiveList) {
                 laser.draw(container, graphics, camera, world);
             }

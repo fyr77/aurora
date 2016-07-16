@@ -15,11 +15,11 @@ import ru.game.aurora.world.World;
 public class ExplosionEffect extends Effect {
     private static final long serialVersionUID = -6865607525774879448L;
 
-    private final transient Animation anim;
+    protected final transient Animation anim;
 
-    private long lastCall;
+    protected long lastCall;
 
-    private final boolean screenCoords;
+    protected final boolean screenCoords;
 
     /**
      * @param screenCoords If true, these x and y are already coordinates on screen and should not be transformed

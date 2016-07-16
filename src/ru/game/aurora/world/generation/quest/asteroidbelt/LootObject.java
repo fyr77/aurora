@@ -1,4 +1,4 @@
-package ru.game.aurora.world.encounter.asteroidbelt;
+package ru.game.aurora.world.generation.quest.asteroidbelt;
 
 import ru.game.aurora.common.Drawable;
 

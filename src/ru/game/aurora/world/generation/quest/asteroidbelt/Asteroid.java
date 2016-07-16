@@ -1,4 +1,4 @@
-package ru.game.aurora.world.encounter.asteroidbelt;
+package ru.game.aurora.world.generation.quest.asteroidbelt;
 
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
