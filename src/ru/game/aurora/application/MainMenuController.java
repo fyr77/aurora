@@ -13,10 +13,7 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.IntroDialog;
-import ru.game.aurora.gui.GUI;
-import ru.game.aurora.gui.HelpPopupControl;
-import ru.game.aurora.gui.IntroDialogController;
-import ru.game.aurora.gui.LoadingScreenController;
+import ru.game.aurora.gui.*;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
@@ -168,6 +165,12 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
                     HelpPopupControl.setHelpIds("start", "galaxy_map", "galaxy_map_2", "galaxy_map_3");
                 }
                 return world;
+            }
+            else{
+                ScreenController controller = GUI.getInstance().getNifty().getCurrentScreen().getScreenController();
+                if(controller != null && controller instanceof DialogController){
+                    ((DialogController)controller).update(container, null);
+                }
             }
 
             return null;
