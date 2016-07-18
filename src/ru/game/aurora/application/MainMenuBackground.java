@@ -1,18 +1,8 @@
 package ru.game.aurora.application;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import ru.game.aurora.util.CollectionUtils;
-import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.space.ParallaxBackground;
-import ru.game.aurora.world.space.StarSystem;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
 /**
  * Created with IntelliJ IDEA.
  * User: User

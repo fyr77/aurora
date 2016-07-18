@@ -3,7 +3,6 @@ package ru.game.aurora.gui;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.InputBinding;
-import ru.game.aurora.world.Updatable;
 
 abstract public class DefaultCloseableScreenController implements ScreenController {
 

@@ -14,6 +14,7 @@ import de.lessvoid.nifty.slick2d.render.font.UnicodeSlickRenderFont;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.MainMenuController;
 import ru.game.aurora.application.ResourceManager;
@@ -122,12 +123,16 @@ public class GUI {
 
     public String popScreen() {
         if (screens.isEmpty()) {
+            LoggerFactory.getLogger(this.getClass()).error("Screens stack is empty");
             return null;
         }
         return screens.pop();
     }
 
     public void popAndSetScreen() {
+        if(screens.isEmpty()){
+            LoggerFactory.getLogger(this.getClass()).error("Screens stack is empty");
+        }
         nifty.gotoScreen(screens.pop());
     }
 

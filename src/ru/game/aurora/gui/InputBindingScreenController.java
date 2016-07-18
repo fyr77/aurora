@@ -6,7 +6,6 @@ import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 import ru.game.aurora.application.Configuration;
@@ -18,11 +17,13 @@ import java.util.*;
 /**
  * Screen with keyboard layout
  */
-public class InputBindingScreenController implements ScreenController {
+public class InputBindingScreenController extends DefaultCloseableScreenController {
 
     private Input input;
 
     private ListBox<Map.Entry<InputBinding.Action, Integer>> keyMap;
+
+    private Map<InputBinding.Action, Integer> backupKeys;
 
     private MyKeyListener listener = new MyKeyListener();
 
@@ -36,8 +37,7 @@ public class InputBindingScreenController implements ScreenController {
 
         private Element textElement;
 
-        public void set(InputBinding.Action a, Element e)
-        {
+        public void set(InputBinding.Action a, Element e) {
             if (textElement != null) {
                 for (Map.Entry<InputBinding.Action, Integer> entry : keyMap.getItems()) {
                     if (entry.getKey() == action) {
@@ -97,6 +97,40 @@ public class InputBindingScreenController implements ScreenController {
 
     @Override
     public void onStartScreen() {
+        keyMap.clear();
+        setupKeyMap();
+        backupKeys = new EnumMap<InputBinding.Action, Integer>(InputBinding.Action.class);
+        backupKeys.putAll(InputBinding.keyBinding);
+    }
+
+    @Override
+    public void onEndScreen() {
+
+    }
+
+    public void applySettings() {
+        for (Map.Entry<InputBinding.Action, Integer> entry : keyMap.getItems()) {
+            InputBinding.keyBinding.put(entry.getKey(), entry.getValue());
+        }
+        saveConfiguration();
+        GUI.getInstance().getNifty().gotoScreen("settings_screen");
+    }
+
+    public void cancelSettings() {
+        InputBinding.keyBinding.putAll(backupKeys);
+        saveConfiguration();
+        GUI.getInstance().getNifty().gotoScreen("settings_screen");
+    }
+
+    public void restoreDefault(){
+        InputBinding.useDefaultBinding();
+        saveConfiguration();
+        keyMap.clear();
+        setupKeyMap();
+    }
+
+    private void setupKeyMap() {
+        // show actual key binds
         List<Map.Entry<InputBinding.Action, Integer>> listToAdd = new ArrayList<>();
         listToAdd.addAll(InputBinding.keyBinding.entrySet());
         Collections.sort(listToAdd, new Comparator<Map.Entry<InputBinding.Action, Integer>>() {
@@ -109,26 +143,9 @@ public class InputBindingScreenController implements ScreenController {
         keyMap.addAllItems(listToAdd);
     }
 
-    @Override
-    public void onEndScreen() {
-
-    }
-
-    public void applySettings()
-    {
-        for (Map.Entry<InputBinding.Action, Integer> entry : keyMap.getItems()) {
-            InputBinding.keyBinding.put(entry.getKey(), entry.getValue());
-        }
-
-        String s = InputBinding.saveToString();
-        Configuration.getSystemProperties().put(InputBinding.key, s);
+    private void saveConfiguration(){
+        Configuration.getSystemProperties().put(InputBinding.key, InputBinding.saveToString());
         Configuration.saveSystemProperties();
-        GUI.getInstance().getNifty().gotoScreen("settings_screen");
-    }
-
-    public void cancelSettings()
-    {
-        GUI.getInstance().getNifty().gotoScreen("settings_screen");
     }
 
     @NiftyEventSubscriber(pattern = ".*redefine.+")
@@ -144,5 +161,17 @@ public class InputBindingScreenController implements ScreenController {
         EngineUtils.setTextForGUIElement(textElement, "???");
         listener.set(action, textElement);
         input.addKeyListener(listener);
+    }
+
+    @Override
+    public void inputUpdate(Input input) {
+        if(input.isKeyPressed(Input.KEY_ENTER)){
+            applySettings();
+            return;
+        }
+        else if(input.isKeyPressed(Input.KEY_ESCAPE)){
+            cancelSettings();
+            return;
+        }
     }
 }

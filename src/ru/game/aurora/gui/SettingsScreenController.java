@@ -6,7 +6,7 @@ import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.openal.SoundStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ import java.util.List;
  * Date: 31.10.13
  * Time: 14:31
  */
-public class SettingsScreenController implements ScreenController {
+public class SettingsScreenController extends DefaultCloseableScreenController {
     private DropDown<Resolution> resolutionDropDown;
 
     private DropDown<String> localeDropDown;
@@ -51,13 +51,6 @@ public class SettingsScreenController implements ScreenController {
         musicVolume = screen.findNiftyControl("music_volume", Scrollbar.class);
         soundVolume = screen.findNiftyControl("sound_volume", Scrollbar.class);
 
-        for (Resolution res : resolutionDropDown.getItems()) {
-            if (res.isActive()) {
-                resolutionDropDown.selectItem(res);
-                break;
-            }
-        }
-
         localeDropDown.addAllItems(Lists.newArrayList(Localization.supportedLocales));
     }
 
@@ -67,6 +60,14 @@ public class SettingsScreenController implements ScreenController {
         soundVolume.setValue(SoundStore.get().getSoundVolume());
         localeDropDown.selectItem(Localization.getCurrentLocaleTag());
         rebootRequested = false;
+
+        // select current resolution in dropdown
+        for (Resolution res : resolutionDropDown.getItems()) {
+            if (res.isActive()) {
+                resolutionDropDown.selectItem(res);
+                break;
+            }
+        }
     }
 
     @Override
@@ -89,11 +90,15 @@ public class SettingsScreenController implements ScreenController {
 
         if (rebootRequested) {
             Nifty nifty = GUI.getInstance().getNifty();
-            Element popup = nifty.createPopup("restart_confirm");
+            Element popup = nifty.createPopupWithId("restart_confirm", "restart_confirm");
             nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null);
         } else {
             GUI.getInstance().popAndSetScreen();
         }
+    }
+
+    public void cancelSettings() {
+        GUI.getInstance().popAndSetScreen();
     }
 
     public void rebootApp() {
@@ -106,23 +111,22 @@ public class SettingsScreenController implements ScreenController {
 
     public void closePopup() {
         GUI.getInstance().getNifty().closePopup(GUI.getInstance().getNifty().getTopMostPopup().getId());
-        GUI.getInstance().popAndSetScreen();
     }
 
     public void redefineControls() {
         GUI.getInstance().getNifty().gotoScreen("input_binding_screen");
     }
 
-    @NiftyEventSubscriber(id = "music_volume")
-    public void onMusicVolumeChanged(final String id, final ScrollbarChangedEvent event) {
-        SoundStore.get().setMusicVolume(event.getValue());
-    }
-
     @NiftyEventSubscriber(id = "locale_select")
-    public void onMusicVolumeChanged(final String id, final DropDownSelectionChangedEvent event) {
+    public void onLocaleChanged(final String id, final DropDownSelectionChangedEvent event) {
         if (!event.getSelection().equals(Localization.getCurrentLocaleTag())) {
             rebootRequested = true;
         }
+    }
+
+    @NiftyEventSubscriber(id = "music_volume")
+    public void onMusicVolumeChanged(final String id, final ScrollbarChangedEvent event) {
+        SoundStore.get().setMusicVolume(event.getValue());
     }
 
     @NiftyEventSubscriber(id = "sound_volume")
@@ -131,7 +135,40 @@ public class SettingsScreenController implements ScreenController {
         ResourceManager.getInstance().getSound("laser_1").play();
     }
 
-    public void cancelSettings() {
-        GUI.getInstance().popAndSetScreen();
+    @Override
+    public void inputUpdate(Input input) {
+        boolean restartPopup = GUI.getInstance().getNifty().getCurrentScreen().isActivePopup("restart_confirm");
+
+        if(input.isKeyPressed(Input.KEY_ENTER)){
+            if(restartPopup){
+                rebootApp();
+            }
+            else {
+                focusAndUserButton("ok_button");
+            }
+            return;
+        }
+        else if(input.isKeyPressed(Input.KEY_ESCAPE)){
+            if(restartPopup) {
+                closePopup();
+            }
+            else{
+                focusAndUserButton("close_button");
+            }
+            return;
+        }
+    }
+
+    private void focusAndUserButton(String elementId){
+        Screen screen = GUI.getInstance().getNifty().getCurrentScreen();
+        Element element = screen.findElementByName(elementId);
+
+        if(element != null) {
+            screen.getFocusHandler().setKeyFocus(element);
+            element.getElementInteraction().getPrimary().activate(GUI.getInstance().getNifty());
+        }
+        else{
+            logger.error("{} element not found", elementId);
+        }
     }
 }
