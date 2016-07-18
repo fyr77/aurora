@@ -13,7 +13,7 @@ import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
+import org.newdawn.slick.Input;
 import ru.game.aurora.application.AuroraGame;
 import ru.game.aurora.application.SaveGameManager;
 import ru.game.aurora.modding.ModManager;
@@ -24,7 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class SaveLoadScreenController implements ScreenController {
+public class SaveLoadScreenController extends DefaultCloseableScreenController {
     private ListBox<SaveGameManager.SaveGameSlot> slots;
 
     @Override
@@ -42,13 +42,7 @@ public class SaveLoadScreenController implements ScreenController {
     }
 
     @Override
-    public void onEndScreen() {
-
-    }
-
-    public void closeScreen() {
-        GUI.getInstance().popAndSetScreen();
-    }
+    public void onEndScreen() { }
 
     public void savePressed() {
         if (slots.getFocusItem().isLoaded()) {
@@ -106,5 +100,13 @@ public class SaveLoadScreenController implements ScreenController {
     @NiftyEventSubscriber(pattern = ".*Button")
     public void onClicked(String id, ButtonClickedEvent event) {
         slots.selectItem((SaveGameManager.SaveGameSlot) event.getButton().getElement().getParent().getUserData());
+    }
+
+    @Override
+    public void inputUpdate(Input input) {
+        if(input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)){
+            closeScreen();
+            return;
+        }
     }
 }

@@ -4,8 +4,7 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.slf4j.Logger;
@@ -13,12 +12,10 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.IntroDialog;
-import ru.game.aurora.gui.GUI;
-import ru.game.aurora.gui.HelpPopupControl;
-import ru.game.aurora.gui.IntroDialogController;
-import ru.game.aurora.gui.LoadingScreenController;
+import ru.game.aurora.gui.*;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.IStateChangeListener;
+import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.quest.TutorialQuestGenerator;
@@ -128,7 +125,6 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
         }
     }
 
-
     public void openSettings() {
         GUI.getInstance().pushCurrentScreen();
         GUI.getInstance().getNifty().gotoScreen("settings_screen");
@@ -169,13 +165,31 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
                 }
                 return world;
             }
+            else{
+                ScreenController controller = GUI.getInstance().getNifty().getCurrentScreen().getScreenController();
+                if(controller != null && Updatable.class.isAssignableFrom(controller.getClass())){
+                    ((Updatable)controller).update(container, null);
+                }
+            }
 
             return null;
+        }
+        else{
+            ScreenController controller = GUI.getInstance().getNifty().getCurrentScreen().getScreenController();
+            if(controller != null){
+                if(controller instanceof DefaultCloseableScreenController){
+                    ((DefaultCloseableScreenController)controller).inputUpdate(container.getInput());
+                }
+                else if(controller == this){
+                    if(container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+                        exitGame();
+                    }
+                }
+            }
         }
 
         return null;
     }
-
 
     public void draw(Graphics graphics) {
         if (background != null) {
@@ -189,7 +203,6 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
         }
 
     }
-
 
     @Override
     public void bind(Nifty nifty, Screen screen) {

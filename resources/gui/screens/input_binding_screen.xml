@@ -36,6 +36,10 @@
                             <interact onClick="cancelSettings()"/>
                         </control>
                         <panel width="10px"/>
+                        <control id="restore_default" name="button" label="${gui.restore_default}" width="150px" height="45px">
+                            <interact onClick="restoreDefault()"/>
+                        </control>
+                        <panel width="10px"/>
                     </panel>
                 </panel>
             </control>
