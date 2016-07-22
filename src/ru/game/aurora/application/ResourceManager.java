@@ -294,16 +294,10 @@ public class ResourceManager {
         Image image;
         try {
             image = new Image(path, false, Image.FILTER_NEAREST);
-        } catch (Exception e) {
+        } catch (SlickException e) {
             // old hardware or bad opengl drivers may have a quite limiting maximum texture size of 1024 pixels in one dimension
-            // reallocate it as a bigimage instead
-            if (e.getCause() != null && e.getCause() instanceof IOException && e.getCause().getMessage().contains("big for the current hardware")) {
-                logger.warn("Image file " + path + " is too big for current hardware, re-allocating it as BigImage");
-                image = new BigImage(path, Image.FILTER_NEAREST);
-            } else {
-                logger.error("Failed to load image " + path, e);
-                throw new SlickException("Could not load image", e);
-            }
+            // try to reallocate it as a bigimage instead
+            image = new BigImage(path, Image.FILTER_NEAREST);
         }
 
         return image;

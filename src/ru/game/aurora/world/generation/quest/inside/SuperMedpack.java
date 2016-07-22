@@ -63,7 +63,7 @@ public class SuperMedpack extends UsableItem {
 
         private static final long serialVersionUID = 7590398157274520538L;
 
-        private static final int progress = 30; //как долго будет идти создание аптечек
+        private static final int progress = 30;
 
         public SuperMedpackCraftProject(String id, String icon) {
             super(id, icon, progress);

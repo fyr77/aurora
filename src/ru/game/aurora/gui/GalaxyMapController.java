@@ -253,7 +253,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         scanAction(world);
     }
 
-    public void scanAction(World world){
+    public void scanAction(final World world) {
         if (world.getCurrentStarSystem() != null) {
             List<GameObject> objects = world.getCurrentStarSystem().getGameObjectsAtPosition(world.getPlayer().getShip());
             if (objects.isEmpty()) {
