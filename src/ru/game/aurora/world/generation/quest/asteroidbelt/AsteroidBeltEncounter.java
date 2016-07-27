@@ -6,6 +6,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.*;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.gui.FailScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.world.ITileMap;
@@ -155,7 +156,7 @@ class AsteroidBeltEncounter implements Room {
         world.setCurrentRoom(currentStarSystem);
         world.getCamera().resetViewPort();
         GameLogger.getInstance().logMessage(Localization.getText("journal", "asteroids.completed"));
-        // todo: add dialog after encounter end
+        world.addOverlayWindow(Dialog.loadFromFile("dialogs/encounters/asteroids_end.json"));
     }
 
     @Override
