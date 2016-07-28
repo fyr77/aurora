@@ -1,0 +1,24 @@
+0;*Some ship has been trying to contact you stubbornly. Wow, that's a Bork. His face is... Borkish, but if you know the mannerisms of this race, it's easy to understand he's nervous.* Captain! Human captain! Help! Help!;;;
+;Wait. Who are you? What do you want?;1;;
+1;"*The Bork roars as hard as the width of his throat permits and covers his camera lens in spittle. Ew.* Human captain! You! Help me! My... me! My! *At least there are no translation problems. Either the Bork is that dumb or that nervous. He speaks in pronouns.* Help! My family! Bad ones, took, said collect credits! Many many credits! I thought! Wanted loan, no one gave! Friend said, ""Arrrgh, you're stupid. Why don't you ask the human captain for help while you're at it?"" Good friend! Good advice! I fly here! Wait! You here! Help!";;;
+;Someone took your family hostage and is demanding ransom? Why don't you go to the government of your planet?;2;;
+2;"Say, ""You not ours, you pirate."" No help! Only you! You! Help! Family!";;;
+;Okay, I'll help.;6;;
+;I'll help. What do I get out of it?;7;;
+;No. Sorry.;8;;
+;*call Henry discreetly* Look through the logs. What do you think?;3;;
+3;*Henry quickly reads the text. When he's done, he screws his face up.* What do I think? What kind of idiot would go God knows where to get help from God knows who? Ahem. Well, not God knows who, of course, I'm sorry. But still.;marine_dialog;;
+;He doesn't look very smart.;4;;
+4;That's true. But still, I don't like his story.;marine_dialog;;
+;I'll keep that in mind.;5;;
+5;*The Bork waits for your answer*;;;
+;Okay, I'll help.;6;;
+;I'll help. What do I get out of it?;7;;
+;No. Sorry.;8;;
+6;*The Bork roars loudly, almost making you go deaf.* Coordinates! Send! There! *You receive the system coordinates: ${ambush.coordinates}* There! Fly together!;;;
+;Okay, okay…;-1;;1
+7;Credits! What you want! Ship! Anything! Anything, anything! Family! Help!;;;
+;I like your generosity. Agreed.;6;;
+;Your generosity is suspicious. Take care of it yourself. Sorry.;8;;
+8;*What happened to the idiot you just saw in front of you? The Bork shut his mouth and stopped covering his camera in spittle. His multiple eyes open wide, instead of a deafening roar you can only hear a low growl, which is much scarier.* So we're doing it the hard way... *The alert is sounded. Someone is training their sights on the Aurora 2.*;;;
+;So that's how it is? Henry! Battle ready!;-1;;

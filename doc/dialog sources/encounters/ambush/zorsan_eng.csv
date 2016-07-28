@@ -1,0 +1,7 @@
+0;*As soon as your ship and the Bork's approach the planet, the Aurora 2 is contacted by... strange, rare signatures. It's a Zorsan.* I see he pulled it off, human captain. We've been waiting for you for a few days.;
+;Something tells me this doesn't have anything at all to do with a family kidnapping.;1
+1;And that really is so! *The Zorsan smiles villainously.* We didn't think you'd fall for this ruse, but... you humans really are but a poor copy of the Zorsan. A bold-faced, perverse copy. What will you say before your death?;
+;Can we talk?;2
+;I'll say something. Henry, it's about to get exciting. To battle!;-1
+2;Talk? How naive… Or can you give us back our honor after you took it with your conduct on Zorsan? I have no desire to talk to you, human captain. Prepare to die.;
+;…;-1
