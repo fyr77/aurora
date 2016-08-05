@@ -1,0 +1,11 @@
+0;*The ship just had a particularly violent bump. You should call Sarah. There she is. She looks… embarrassed.*;;;
+;What the hell was that?;1;;
+1;Cap… It's nothing. No big deal. You know we have an automatic evasion system for dodging various space objects, right? Space trash, meteorites...      ;;;
+;I know. Why did you bring that up?;2;;
+2;Well, we don't have it anymore. *Sarah corrects herself, probably after seeing the look on your face.* Temporarily, Cap! Honest! We just... we hit a particularly dense asteroid stream and something happened to the system... *Sarah grimaces and clicks her tongue.* Something crashed, I don't know why. We have to change it. We need somebody to lead the ship through the asteroid stream.;;;
+;Wait, do you want me to turn on manual handling?;3;;
+3;That's right, uh-huh. *Sarah nods.* The main system and its backup are both out of commission. I can activate the third backup system, but it's not powerful enough for this stream. No one could have foreseen both main systems failing when there's so many of the damn rocks! The margin of error is 25%, Cap! One in four meteorites will hit us... ow-wow! And you've got direct access to command via the captain's control panel. Are you going to have a go?;;;
+;Of course. I'm taking the helm.;4;;0
+;I don't think human reflexes are enough to lead the ship better than a computer. Turn on the backup system.;-1;;
+4;*Use the control keys to move the ship. Press space to shoot.*;;;
+;<Start>;-1;;1

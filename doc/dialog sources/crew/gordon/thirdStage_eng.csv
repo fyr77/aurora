@@ -1,0 +1,49 @@
+0;Ca… C-c-c-captain! *Gordon is unexpected and emotional as always. You should probably turn the volume down a little.*;
+;Yeah, yeah! Just… keep it down a bit, ow. Hurt my ears a bit.;1
+1;I-I'm sorry. I just… It's… Am I interrupting something?;
+;No, it's okay. So what did you want?;4
+;Why?;2
+;A bit. I'm busy, Gordon.;3
+2;Just… to talk. Just to talk. No, I don't mean to intrude if you're… well… busy, right.;
+;No, it's okay. So what did you want?;4
+;I guess I am. Can we do this later?;3
+3;Of course, Captain. *Gordon nods and signs off.*;
+;He should report in more quietly.;-1
+4;I… Captain. It's all so good. I'm glad I work here, at the Aurora 2. I wanted to tell you this.;
+;Ahem. Thank you. I really am flattered. Why did you decide to make such a report?;5
+5;Well… I…. it's just that we see so many new things. Extraordinary things. I never knew that space could be... *he throws up his hands* LIKE THIS!;
+;Now you know it can, Gordon.;6
+6;R-r-r-right. S-sure. Just... you know... *Gordon is nervous, his lips are trembling. Finally, he blurts out:* I had wanted to leave after going back the first time! Back when we had a press conference!;
+;*keep silent, letting him continue*;7
+7;I wanted to go to that project! Phase 3! I… wanted to leave.;
+;Let me search my memory. You mentioned a Gabe…;8
+8;Yes. *Gordon nods and blushes a little* Gabe. Just Gabe. It's a pseudonym. He was project leader.;
+;So why didn't you?;9
+;I didn't understand it that time, what is that project? There were phases or something…;10
+;Who is that Gabe? Can you tell me more about him?;12
+;I see. I'm glad you are on my crew too… did you have anything else?;15
+9;There is no phase 3. I couldn't contact Gabe. And then I liked working here. No, honestly, I did!;
+;So why didn't you leave?;9
+;I didn't understand it that time, what is that project? There were phases or something…;10
+;Who is that Gabe? Can you tell me more about him?;12
+;I see. I'm glad you are on my crew too… did you have anything else?;15
+10;Phase one was studying the methods of getting into SAFPs. Spaces with Alternate Physical Parameters.;
+;So what is it?;11
+11;"You called it ""parallel worlds."" *Gordon grimaces.* Wrong, completely wrong! But, you could call it that.";
+;So why didn't you leave?;9
+;I didn't understand it that time, what is that project? There were phases or something…;10
+;Who is that Gabe? Can you tell me more about him?;12
+;I see. I'm glad you are on my crew too… did you have anything else?;15
+12;"He's, uhh... I don't know, Captain. *Gordon shrugs and fingers the end of his tie.* Everything just hinged on him. They said the project was still there, that work was being done, but Gabe made it so secret that... *The scientist's expression tells you what exactly he means by this ""that"".*";
+;What did he look like, at least?;13
+13;I don't know! None of us knew! *The scientist knocks some notebook off of his table without noticing.* He never talked to us directly. The only time I saw him, I only remembered the glasses. Old fashioned, round-rimmed with a metal frame.;
+;Mysterious.;14
+14;*His response is a confused shrug. After that, Gordon picks up the notebook that fell to the floor. You think you can see some formulas in it.*;
+;So why didn't you leave?;9
+;I didn't understand it that time, what is that project? There were phases or something…;10
+;Who is that Gabe? Can you tell me more about him?;12
+;I see. I'm glad you are on my crew too… did you have anything else?;15
+15;C-Cap-ptain! I was just feeling ashamed. Right. I hope that… umm… that….;
+;It's okay. Keep up your work on… whatever you're working on… keep it up, right?;16
+16;*Gordon nods, smiles embarrasedly and signs off.*;
+;Oh, thos eccentric geniuses…;-1
