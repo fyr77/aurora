@@ -1,3 +1,16 @@
+VERSION 0.5.3
+
+* Asteroids quest
+* Ambus quest
+* New crew dialogs
+* Alternative set of key bindings (wasd is now enabled by default)
+* Multiple gui and hotkey fixes and improvements (dialog option selection with keyboard, esc now closes all popups etc)
+* New landing party weapons. Grenade launcher has splash damage and can target empty space
+* New earth upgrades
+* Fixed meteors falling each turn, super medpack craft and other bugs
+
+========================================
+
 VERSION 0.5.2
 
 * Acid rains now spawn slowly, party can hide from them under plants.
