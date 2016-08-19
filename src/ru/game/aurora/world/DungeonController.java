@@ -696,7 +696,7 @@ public class DungeonController extends Listenable implements Serializable {
 
             if (mode == MODE_SHOOT) {
                 graphics.setColor(Color.yellow);
-                EngineUtils.drawTileCircleCentered(graphics, camera, landingParty.getWeapon().getRange() + ((Integer) world.getGlobalVariable("landingPartyShootRangeBonus", 0)));
+                EngineUtils.drawTileCircleCentered(graphics, camera, landingParty.getWeapon().getRange() + ((Number) world.getGlobalVariable("landingPartyShootRangeBonus", 0)).intValue());
 
                 // draw target mark
                 if(landingParty.getWeapon().canTargetEmptySpace()){

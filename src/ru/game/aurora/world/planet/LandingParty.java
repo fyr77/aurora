@@ -112,7 +112,7 @@ public class LandingParty extends BaseGameObject {
     }
 
     public int getWeaponRange(World world){
-        return weapon.getRange() + (Integer) world.getGlobalVariable("landingPartyShootRangeBonus", 0);
+        return weapon.getRange() + ((Number) world.getGlobalVariable("landingPartyShootRangeBonus", 0)).intValue();
     }
 
     public void setWeapon(WeaponDesc weapon) {
