@@ -41,11 +41,16 @@ public class ExplosionEffect extends Effect {
 
     @Override
     public boolean isOver() {
-        return anim.isStopped();
+        return anim == null || anim.isStopped();
     }
 
     @Override
     public void update(GameContainer container, World world) {
+        if (anim == null) {
+            // it is possible that game was saved and loaded before anim was finished, in this
+            // case it will be null
+            return;
+        }
         if (lastCall == 0) {
             lastCall = container.getTime();
         }
@@ -55,6 +60,11 @@ public class ExplosionEffect extends Effect {
 
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera, World world) {
+        if (anim == null) {
+            // it is possible that game was saved and loaded before anim was finished, in this
+            // case it will be null
+            return;
+        }
         float drawX = x;
         float drawY = y;
         if (!screenCoords) {
