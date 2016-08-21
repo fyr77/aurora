@@ -92,7 +92,7 @@ public class GordonMainDialogListener extends BaseCrewDialogListener
                 @Override
                 public boolean onTurnEnded(World world) {
                     if (world.getDayCount() > currentTurn + 300 && world.getCurrentStarSystem() != null) {
-                        Dialog.loadFromFile("dialogs/crew/gordon/gordon_third_stage.csv");
+                        Dialog.loadFromFile("dialogs/crew/gordon/gordon_third_stage.json");
                         isAlive = false;
                     }
                     return false;
