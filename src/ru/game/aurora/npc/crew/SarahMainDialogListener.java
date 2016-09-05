@@ -103,7 +103,7 @@ public class SarahMainDialogListener extends BaseCrewDialogListener
                 @Override
                 public boolean onTurnEnded(World world) {
                     if (world.getDayCount() > currentTurn + 300 && world.getCurrentStarSystem() != null) {
-                        Dialog.loadFromFile("dialogs/crew/sarah/sarah_pray.json");
+                        world.addOverlayWindow(Dialog.loadFromFile("dialogs/crew/sarah/sarah_pray.json"));
                         isAlive = false;
                     }
                     return false;

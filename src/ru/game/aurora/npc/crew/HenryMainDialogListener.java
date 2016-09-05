@@ -97,8 +97,8 @@ public class HenryMainDialogListener extends BaseCrewDialogListener
             world.addListener(new GameEventListener() {
                 @Override
                 public boolean onTurnEnded(World world) {
-                    if (world.getDayCount() > currentTurn + 300 && world.getCurrentStarSystem() != null) {
-                        Dialog.loadFromFile("dialogs/crew/henry/henry_the_line.json");
+                    if (world.getDayCount() > currentTurn + 350 && world.getCurrentStarSystem() != null) {
+                        world.addOverlayWindow(Dialog.loadFromFile("dialogs/crew/henry/henry_the_line.json"));
                         isAlive = false;
                     }
                     return false;
