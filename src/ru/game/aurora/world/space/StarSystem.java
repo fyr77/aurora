@@ -935,4 +935,18 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
             this.width = width;
         }
     }
+
+    public boolean isAstroProbePlased(){
+        boolean probed = false;
+
+        List<GameObject> objectsList = getObjects();
+        for(GameObject obj: objectsList){
+            if(obj instanceof AstroProbe){
+                probed = true;
+                break;
+            }
+        }
+
+        return probed;
+    }
 }

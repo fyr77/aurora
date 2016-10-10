@@ -23,6 +23,7 @@ import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.GalaxyMapObject;
+import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.HashMap;
@@ -66,8 +67,12 @@ public class StarMapController extends DefaultCloseableScreenController {
         EngineUtils.drawDashedCircleCentered(g, myCamera.getXCoord(obj.getX()) + myCamera.getTileWidth() / 2, myCamera.getYCoord(obj.getY()) + myCamera.getTileHeight() / 2, (int) (myCamera.getTileHeight() * 4), Color.green, 10);
     }
 
-    public static void updateStarmapLabels(World world)
-    {
+    private void markAstroProbe(Graphics g, GalaxyMapObject obj) {
+        EngineUtils.drawDashedCircleCentered(g, myCamera.getXCoord(obj.getX()) + myCamera.getTileWidth() / 2, myCamera.getYCoord(obj.getY()) + myCamera.getTileHeight() / 2, (int) (myCamera.getTileHeight() * 3), Color.yellow, 14);
+    }
+
+    public static void updateStarmapLabels(World world) {
+
         GalaxyMap galaxyMap = world.getGalaxyMap();
         for (int i = 0; i < galaxyMap.getTilesY(); ++i) {
             for (int j = 0; j < galaxyMap.getTilesX(); ++j) {
@@ -85,7 +90,13 @@ public class StarMapController extends DefaultCloseableScreenController {
                 }
 
                 if (obj instanceof StarSystem) {
-                    ((StarSystem) obj).setMessageForStarMap(messageBuilder.toString());
+                    StarSystem starSystem = (StarSystem)obj;
+
+                    if(starSystem.isAstroProbePlased()){
+                        messageBuilder.append(Localization.getText("gui", "space.astroprobe.launched")).append('\n');
+                    }
+
+                    starSystem.setMessageForStarMap(messageBuilder.toString());
                 }
             }
         }
@@ -110,7 +121,9 @@ public class StarMapController extends DefaultCloseableScreenController {
     private void draw(GameContainer container, Graphics g) {
         g.setBackground(Color.black);
         g.clear();
+
         updateStarmapLabels(world);
+
         for (int i = 0; i < galaxyMap.getTilesY(); ++i) {
             for (int j = 0; j < galaxyMap.getTilesX(); ++j) {
                 GalaxyMapObject obj = galaxyMap.getObjectAt(j, i);
@@ -118,10 +131,19 @@ public class StarMapController extends DefaultCloseableScreenController {
                     continue;
                 }
                 obj.drawOnGlobalMap(container, g, myCamera, j, i);
-                if (obj instanceof StarSystem && ((StarSystem) obj).getMessageForStarMap() != null) {
-                    mark(g, obj);
-                }
 
+
+                if(obj instanceof StarSystem){
+                    StarSystem starSystem = (StarSystem)obj;
+
+                    if(starSystem.getMessageForStarMap() != null){
+                        mark(g, starSystem);
+                    }
+
+                    if(starSystem.isAstroProbePlased()){
+                        markAstroProbe(g, starSystem);
+                    }
+                }
             }
         }
 
