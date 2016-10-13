@@ -936,7 +936,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         }
     }
 
-    public boolean isAstroProbePlased(){
+    public boolean isAstroProbeLaunched(){
         boolean probed = false;
 
         List<GameObject> objectsList = getObjects();

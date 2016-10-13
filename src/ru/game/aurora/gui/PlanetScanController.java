@@ -20,6 +20,7 @@ import ru.game.aurora.world.BasePositionable;
 import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
+import ru.game.aurora.world.planet.GasGiant;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.AlienHomeworld;
@@ -92,7 +93,7 @@ public class PlanetScanController extends DefaultCloseableScreenController {
         EngineUtils.setTextForGUIElement(myWindow.findElementByName("scan_text"), planetToScan.getScanText());
         updateButtonsState();
 
-        if ((planetToScan instanceof Earth) || (planetToScan instanceof AlienHomeworld)) {
+        if ((planetToScan instanceof Earth) || (planetToScan instanceof AlienHomeworld) || (planetToScan instanceof GasGiant)) {
             //todo: load custom map
             EngineUtils.setImageForGUIElement(surfaceMapPanel, (Image) null);
             return;

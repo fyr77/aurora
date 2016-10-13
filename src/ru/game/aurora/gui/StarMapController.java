@@ -23,7 +23,6 @@ import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.GalaxyMap;
 import ru.game.aurora.world.space.GalaxyMapObject;
-import ru.game.aurora.world.space.Star;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.util.HashMap;
@@ -92,7 +91,7 @@ public class StarMapController extends DefaultCloseableScreenController {
                 if (obj instanceof StarSystem) {
                     StarSystem starSystem = (StarSystem)obj;
 
-                    if(starSystem.isAstroProbePlased()){
+                    if(starSystem.isAstroProbeLaunched()){
                         messageBuilder.append(Localization.getText("gui", "space.astroprobe.launched")).append('\n');
                     }
 
@@ -140,7 +139,7 @@ public class StarMapController extends DefaultCloseableScreenController {
                         mark(g, starSystem);
                     }
 
-                    if(starSystem.isAstroProbePlased()){
+                    if(starSystem.isAstroProbeLaunched()){
                         markAstroProbe(g, starSystem);
                     }
                 }
