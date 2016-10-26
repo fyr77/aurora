@@ -33,9 +33,22 @@
     <resource type="image" id="shuttle">sprites/ships/player_shuttle.png</resource>
     <resource type="image" id="probe">sprites/ships/probe.png</resource>
     <resource type="image" id="drone">sprites/ships/drone.png</resource>
+
     <resource type="image" id="scientist_dialog">sprites/portraits/scientist.png</resource>
+    <resource type="image" id="scientist_dialog_puzzled">sprites/portraits/scientist_b.png</resource>
+    <resource type="image" id="scientist_dialog_scared">sprites/portraits/scientist_b2.png</resource>
+    <resource type="image" id="scientist_dialog_happy">sprites/portraits/scientist_g.png</resource>
+
     <resource type="image" id="engineer_dialog">sprites/portraits/engineer.png</resource>
+    <resource type="image" id="engineer_dialog_puzzled">sprites/portraits/engineer_b.png</resource>
+    <resource type="image" id="engineer_dialog_angry">sprites/portraits/engineer_b2.png</resource>
+    <resource type="image" id="engineer_dialog_happy">sprites/portraits/engineer_g.png</resource>
+
     <resource type="image" id="marine_dialog">sprites/portraits/marine.png</resource>
+    <resource type="image" id="marine_dialog_puzzled">sprites/portraits/marine_b.png</resource>
+    <resource type="image" id="marine_dialog_angry">sprites/portraits/marine_b2.png</resource>
+    <resource type="image" id="marine_dialog_happy">sprites/portraits/marine_g.png</resource>
+
     <resource type="image" id="interior_dialog">sprites/portraits/interior.png</resource>
     <resource type="image" id="alien_city_dialog">sprites/portraits/alien_landscape.png</resource>
 
