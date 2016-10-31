@@ -80,7 +80,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     private int mode = MODE_MOVE;
     private Star star;
     private BasePlanet[] planets;
+
     private AsteroidBelt asteroidBelt = null;
+    private AsteroidBeltQuestGenerator asteroidBeltQuestGenerator;
+
     private int globalMapX;
     private int globalMapY;
     private Reputation reputation;
@@ -546,12 +549,19 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         visited = true;
 
         if(asteroidBelt != null) {
-            world.addListener(new AsteroidBeltQuestGenerator(asteroidBelt));
+            asteroidBeltQuestGenerator = new AsteroidBeltQuestGenerator(asteroidBelt);
+            world.addListener(asteroidBeltQuestGenerator);
         }
     }
 
     @Override
     public void returnTo(World world) {
+        if(asteroidBeltQuestGenerator != null){
+            if(world.getListeners().contains(asteroidBeltQuestGenerator)){
+                world.getListeners().remove(asteroidBeltQuestGenerator);
+            }
+        }
+
         world.getCamera().setTarget(player.getShip());
         if (background == null) {
             createBackground(world);
@@ -921,6 +931,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         result = 31 * result + globalMapY;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    public boolean isAsteroidBeltExist() {
+        return asteroidBelt != null;
     }
 
     public static class AsteroidBelt implements Serializable {
