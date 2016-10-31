@@ -21,13 +21,16 @@ public class AsteroidBeltQuestGenerator extends GameEventListener {
 
     private final StarSystem.AsteroidBelt asteroidBelt;
 
-    public AsteroidBeltQuestGenerator(StarSystem.AsteroidBelt asteroidBelt){
+    public AsteroidBeltQuestGenerator(StarSystem.AsteroidBelt asteroidBelt)
+    {
         this.asteroidBelt = asteroidBelt;
     }
 
     @Override
     public boolean onTurnEnded(World world) {
-        if(asteroidBelt == null){ // it checked in StarSystem.enter(), but somebody can forget
+        StarSystem system = world.getCurrentStarSystem();
+        if(system == null || !system.isAsteroidBeltExist() || asteroidBelt == null){
+            isAlive = false;
             return false;
         }
 
