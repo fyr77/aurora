@@ -1,4 +1,4 @@
-0;*Gordon frowns thoughfully.* I work a lot. Well… sometimes I go to the gym. Or to the firing range. Sometimes people ask me to go the movies with them, but that doesn't happen often.;
+0;*Gordon frowns thoughfully.* I work a lot. Well… sometimes I go to the gym. Or to the firing range. Sometimes people ask me to go the movies with them, but that doesn't happen often.;scientist_dialog_puzzled
 ;Isn't it hard, working so much?;1
 ;The gym?;2
 ;You go to the firing range? Your dossier says you don't like violence. ;3
@@ -19,7 +19,7 @@
 ;The gym?;2
 ;You don't like the movies?;4
 ;I'm glad to know you aren't getting bored. Over and out.;-1
-4;No… they're just very stupid. Real space is much w-w-weirder than any science fiction. ;
+4;No… they're just very stupid. Real space is much w-w-weirder than any science fiction. ;scientist_dialog_happy
 ;Isn't it hard, working so much?;1
 ;The gym?;2
 ;You go to the firing range? Your dossier says you don't like violence. ;3
