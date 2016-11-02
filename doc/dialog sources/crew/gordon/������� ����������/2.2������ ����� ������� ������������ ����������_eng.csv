@@ -1,8 +1,8 @@
-0;Captain, we've already studied the data!;
+0;Captain, we've already studied the data!;scientist_dialog_happy
 ;That was quick. Is there anything interesting?;1
 1;Path integrals, Captain! Path integrals! Before, we could only calculate them for cases of Gauss squaring!;
 ;And now?;2
 2;And now we're on the brink of calculating path integrals for general cases!;
 ;And what does that mean?;3
-3;Uhhh... *Gordon is confused.* Well... You s-s-see, a path integral is the result of integrating by trajectories, the calculation of arbitrary composite functions by arbitrary function spaces or some subset... *A couple of minutes of puzzling explanations and terms later...* ...and if Gauss calculations were already pretty beneficial before, now... wow!;
+3;Uhhh... *Gordon is confused.* Well... You s-s-see, a path integral is the result of integrating by trajectories, the calculation of arbitrary composite functions by arbitrary function spaces or some subset... *A couple of minutes of puzzling explanations and terms later...* ...and if Gauss calculations were already pretty beneficial before, now... wow!;scientist_dialog_puzzled
 ;Okay. Keep working. I hope this data really is… useful. Although I didn't really understand anything.;-1
