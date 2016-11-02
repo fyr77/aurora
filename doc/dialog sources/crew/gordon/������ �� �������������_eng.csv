@@ -1,6 +1,6 @@
 0;I had i-imagined they would be different.;;
 ;Different?;1;
-1;Y-yes. M-more… unusual. *Gordon interlaces his fingers.* Completely dif-f-ferent from us, in terms of appearance and behavior. And these, they're s-s-straight up humanlike. ;;
+1;Y-yes. M-more… unusual. *Gordon interlaces his fingers.* Completely dif-f-ferent from us, in terms of appearance and behavior. And these, they're s-s-straight up humanlike. ;scientist_dialog_puzzled ;
 ;Is that a bad thing?;2;
 ;In terms of appearance and behavior? How, exactly?;3;
 ;Humanlike? What do you mean by that?;5;
@@ -20,7 +20,7 @@
 ;In terms of appearance and behavior? How, exactly?;3;
 ;So the blue sphere is humanlike, too?;6;energy_sphere.started
 ;Got it. Okay, over and out.;-1;
-6;*Gordon adjusts his glasses self-consciously.* The Blue Sphere is an exc-ception. Yeah, you're right. It… lives up to my expectations. ;;
+6;*Gordon adjusts his glasses self-consciously.* The Blue Sphere is an exc-ception. Yeah, you're right. It… lives up to my expectations. ;scientist_dialog_puzzled ;
 ;Is that a bad thing?;2;
 ;In terms of appearance and behavior? How, exactly?;3;
 ;Humanlike? What do you mean by that?;5;
