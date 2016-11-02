@@ -1,6 +1,6 @@
-0;*Gordon shuffles nervously.* I told you… it's classified.;;
+0;*Gordon shuffles nervously.* I told you… it's classified.;scientist_dialog_puzzled;
 ;But you did tell me something last time.;1;
-1;*He nods cautiously in response.*;;
+1;*He nods cautiously in response.*;scientist_dialog_scared;
 ;Which means you can tell me something, after all. I have to know what you did before, don't I? ;2;
 2;I said… Worlds with different physical conditions. You called them parallel worlds, but it's not true! They aren't like that! They aren't related to our dimension in any way, they're completely different! ;;
 ;Tell about the experiment itself in more detail.;5;
@@ -40,7 +40,7 @@
 ;Tell me about the third phase.;8;
 ;Hm. And that's all you can tell me right now?;10;
 ;I think I've gotten enough information.That's all for now.;-1;
-10;That is c-c-classified information. I… just can't tell you anymore. ;;
+10;That is c-c-classified information. I… just can't tell you anymore. ;scientist_dialog_scared;
 ;Tell me about the first phase.;6;
 ;Tell me about the second phase.;7;
 ;Tell me about the third phase.;8;
