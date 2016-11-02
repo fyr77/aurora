@@ -1,15 +1,15 @@
-0;*You get a call from Gordon. He's looking at the camera crazily and telling you about something while gesticulating a lot. There is no sound, though. Which makes him look pretty funny.*;;;
+0;*You get a call from Gordon. He's looking at the camera crazily and telling you about something while gesticulating a lot. There is no sound, though. Which makes him look pretty funny.*;scientist_dialog_happy;;
 ;*gesticulate in response*;1;;
 ;I can't hear you, Gordon.;2;;
-1;*Gordon suddenly stops talking and his face becomes round. He disconnects and calls you again in a couple of seconds.* You c-c-could have told me I didn't have sound, Captain. Did you have to make fun of me?;;;
+1;*Gordon suddenly stops talking and his face becomes round. He disconnects and calls you again in a couple of seconds.* You c-c-could have told me I didn't have sound, Captain. Did you have to make fun of me?;scientist_dialog_scared;;
 ;Don't be sour. What did you want?;3;;
 2;*He nods, disconnects and calls you again in a couple of seconds.* Uh… I h-h-have some communication p-p-problems. The sound g-g-goes away at times.;;;
 ;Talk to Tech about it. What did you want, Gordon?;3;;
-3;Oh! *Gordon looks crazy again.* The technologies we saw! The sh-sh-sh-sh… sh-sh…;;;
+3;Oh! *Gordon looks crazy again.* The technologies we saw! The sh-sh-sh-sh… sh-sh…;scientist_dialog_happy;;
 ;Shop. What exactly did you want to buy?;4;;
-4;Sh-sh-shop! They... it's... fantastic! The aliens' view on projective algebraic manifolds is stunning, and very precise! Their methods of approximation of objects to such high powers... too bad... *Gordon shakes his head.* We could have solved it... solve for special cases... *It looks like he's retreated into himself.*;;;
+4;Sh-sh-shop! They... it's... fantastic! The aliens' view on projective algebraic manifolds is stunning, and very precise! Their methods of approximation of objects to such high powers... too bad... *Gordon shakes his head.* We could have solved it... solve for special cases... *It looks like he's retreated into himself.*;scientist_dialog_happy;;
 ;Gordon… Gordon!;5;;
-5;*He doesn't pay you any mind.* ...or, for example, the problem of the symmetry of electroweak interaction! It looks like they figured the mechanism of calibrating symmetry of W and Z bosons a long time ago! Huh?... What? Oh... *He nods.* C-c-captain! You simply must buy the research data in the name of human science! Any data! Biological, chemical... any kind at all!;;;
+5;*He doesn't pay you any mind.* ...or, for example, the problem of the symmetry of electroweak interaction! It looks like they figured the mechanism of calibrating symmetry of W and Z bosons a long time ago! Huh?... What? Oh... *He nods.* C-c-captain! You simply must buy the research data in the name of human science! Any data! Biological, chemical... any kind at all!;scientist_dialog_happy;;
 ;"""In the name of human science,"" then. What is the pragmatic value of it?";6;;
 ;It's hard to argue with you. Okay, I'll get to it.;7;;
 6;*Gordon shakes his head and reaches for his neck with his hand. He looks a bit simple.* If you want to know if w-w-we can make a big blaster or something based on that technology... *He shakes his head again.* No. This is theoretical knowledge, they're much more valuable than any short-term practical benefit. This is science, Captain.;;;
@@ -22,5 +22,5 @@
 ;I'm glad you understand. Over and out.;-1;;
 9;That's not what I meant!;;;
 ;And I meant exactly what I said. Right now we need a good blaster more than potentially useful information. And if you don't understand that, Gordon, what the hell are you doing here?;10;;
-10;*Gordon's eyes glisten. He says this biting his lip.* Pardon me. It won't happen again. Permission to get back to my duties?;;;
+10;*Gordon's eyes glisten. He says this biting his lip.* Pardon me. It won't happen again. Permission to get back to my duties?;scientist_dialog_scared;;
 ;Granted. Over and out.;-1;;1
