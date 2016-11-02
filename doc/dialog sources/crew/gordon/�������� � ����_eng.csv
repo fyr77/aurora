@@ -1,4 +1,4 @@
-0;What do you want me to tell you? I… I… I don't know what to say! You have read the dossier, is that not enough?;
+0;What do you want me to tell you? I… I… I don't know what to say! You have read the dossier, is that not enough?;scientist_dialog_puzzled 
 ;Your dossier doesn't say anything about your family. ;1
 ;You were there at an excavation job for UAC? The same UAC that tried to colonize Mars? ;4
 ;Your dossier says you've been to ICS-34.;6
@@ -27,9 +27,9 @@
 ;You were there at an excavation job for UAC? The same UAC that tried to colonize Mars? ;4
 ;How about we forget about the dossier? Tell me about yourself in your own words. ;8
 ;Nevermind, I changed my mind. Over and out. ;-1
-8;I... Captain, I don't know w-what to tell you. *Gordon shrugs nervously, which looks like jerking his shoulders up and down.* I am not very good at... this. I mean, I'm a good scientist. I have a PhD in Theoretical Physics, and I'm a professor of microbiology. I d-don't know what else to tell you...;
+8;I... Captain, I don't know w-what to tell you. *Gordon shrugs nervously, which looks like jerking his shoulders up and down.* I am not very good at... this. I mean, I'm a good scientist. I have a PhD in Theoretical Physics, and I'm a professor of microbiology. I d-don't know what else to tell you...;scientist_dialog_puzzled 
 ;It looks like scientific work is your entire life. ;9
-9;*Gordon shrugs again.* I-I guess. ;
+9;*Gordon shrugs again.* I-I guess. ;scientist_dialog_puzzled 
 ;Your dossier doesn't say anything about your family. ;1
 ;You were there at an excavation job for UAC? The same UAC that tried to colonize Mars? ;4
 ;Your dossier says you've been to ICS-34.;6
