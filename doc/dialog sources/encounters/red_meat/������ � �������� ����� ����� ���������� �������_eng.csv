@@ -2,7 +2,7 @@
 ;Would you kindly explain the thing I see out of my window?;1;;;
 1;*Gordon falters.* Well… we… C-C-Captain, it's… *He gets nervous.* ;;;;
 ;All right, calm down.;2;;;
-2;We don't really know, Captain. Some biomass. Some kind of fungus. It bypassed our shields, stuck to the hull, and… ;;;;
+2;We don't really know, Captain. Some biomass. Some kind of fungus. It bypassed our shields, stuck to the hull, and… ;scientist_dialog_scared;;;
 ;And?;3;;;
 3;And that's it.;;;;
 ;What do you mean, and that's it?;4;;;
@@ -12,7 +12,7 @@
 ;Gordon, the Aurora 2 isn't capable of atmospheric flight anyway. It'll fall apart under its own weight. ;6;;;
 6;Exactly! *Nods.* No harm! We can just go on!;;;;
 ;Wait, wait, wait. So you suggest we fly around with THAT on our hull? ;7;;;
-7;Well... *Gordon feels that he's under fire and shrinks away from the camera.* We can't do anything about it, Captain! We tried to clean it off, but it grows back pretty much right away! It can survive in outer space, Captain, what can we do?!! We can't hit the entire surface of the biomass!!;;;;
+7;Well... *Gordon feels that he's under fire and shrinks away from the camera.* We can't do anything about it, Captain! We tried to clean it off, but it grows back pretty much right away! It can survive in outer space, Captain, what can we do?!! We can't hit the entire surface of the biomass!!;scientist_dialog_scared;;;
 ;We can probably do something. I'll try to come up with something. And meanwhile… meanwhile we can go on.;8;;;
 8;Cap, sorry for butting in. Henry and I have been studying the ship weapons' effect on that thing.;engineer_dialog;;;
 ;What, you shot your own ship? Without my authorization?;9;;;
@@ -34,10 +34,10 @@
 15;Roger that. Ready to assume responsibility and go there right away.;marine_dialog;;;
 ;Negative. You're more useful to me at work than in the brig. What did you find out? ;12;;;
 ;Yes, that's a good idea. Cool off for a day in there. And you too, Sarah.;16;;;
-16;Captain, are you serious? We gathered valuable data about that nasty thing and never put the ship in danger. And we get the brig for that?!;engineer_dialog;;;
+16;Captain, are you serious? We gathered valuable data about that nasty thing and never put the ship in danger. And we get the brig for that?!;engineer_dialog_angry;;;
 ;You're right, Sarah. Let's pretend it was a joke. Spill it, what did you find out? ;12;;;
 ;Yes, I'm serious. A breach of subordination and putting the ship in danger has to be punished. Here, hundreds of light years away from home, we can't afford losing discipline. I'm very sorry, but it's your own fault.;17;;;prison
-17;God damn it, I didn't expect this from you, Cap. Henry, will you keep the lady company? I'll get bored if I get stuck in there alone. ;engineer_dialog;;;
+17;God damn it, I didn't expect this from you, Cap. Henry, will you keep the lady company? I'll get bored if I get stuck in there alone. ;engineer_dialog_happy;;;
 ;Tell me what you found out first.;12;;;
 18;Of course, Captain. We would never have done it if we weren't sure about the consequences.;marine_dialog;;;
 ;So what did you find out?;12;;;
