@@ -1,8 +1,8 @@
 0;Cap? Captain? *Sarah knocks on the camera lens with her finger. The camera shakes.;engineer_dialog;;
 ;Frontz, quit it. The equipment is fragile, you'll break it.;1;;
-1;This thing, fragile? *laughs* You can kill a cow with that. I'm serious, you can.;engineer_dialog;;
+1;This thing, fragile? *laughs* You can kill a cow with that. I'm serious, you can.;engineer_dialog_happy;;
 ;I believe you. Is there anything else?;2;;
-2;There is. *She nods.* Let me show you. *Sarah presses some button, and the previously quiet radio is instantly filled with dense Bork cursing. You can see Frontz laughing heartily, though she has turned off her microphone. She returns the communication line back to normal in a few seconds.*;engineer_dialog;;
+2;There is. *She nods.* Let me show you. *Sarah presses some button, and the previously quiet radio is instantly filled with dense Bork cursing. You can see Frontz laughing heartily, though she has turned off her microphone. She returns the communication line back to normal in a few seconds.*;engineer_dialog_happy;;
 ;So, what was it?;3;;
 3;This is what's on all of our comm lines. Some Borks are negotiating. They don't think it's necessary to encode it, of course. You can hear it from whichever end of the system.;engineer_dialog;;
 ;Give them to me again. I want to know what they're talking about.;6;;
@@ -25,7 +25,7 @@
 ;So the aliens have inheritance problems, too.;11;;
 11;Did you say anything, Cap?;engineer_dialog;;
 ;Nothing. Thinking out loud. And Sarah, please stop listening in on my personal line.;12;;
-12;*Sarah smiles and signs off.*;engineer_dialog;;
+12;*Sarah smiles and signs off.*;engineer_dialog_happy;;
 ;*Sigh, pour a little wine in a glass, complain about how hard it is to be a Captain, and get to other business.*;-1;;1
 13;AHUH?! WHAT? Shut up. Hey. Who are you? How did you… oh. Did you turn off the encryption of our comms again, you retard? WHAT'S ENCRYPTION? Shut up. Okay. Who are you and what are you doing on our line?;;;
 ;Who am I? I'm… hmm… I'm God. Yeah.;14;;
@@ -85,7 +85,7 @@
 ;Right… Those things happen. Liszkiewicz, battle alert!.. Damn it. I feel like a total idiot.;-1;;
 34;THERE'S FEAR IN YOUR WORDS!! KILL!! KILL!! KILL!! *He signs off.* Tetragrammaton? What kind of name is that?! *According to the radar, they're both going to attack.*;;;
 ;Henry, battle alert. Hmmm… Sarah? Are you on my line again?;35;;
-35;Cap, that was something! Tetragrammaton?! *Sarah shows her pearly whites.*;engineer_dialog;;
+35;Cap, that was something! Tetragrammaton?! *Sarah shows her pearly whites.*;engineer_dialog_happy;;
 ;Well, I had to surprise them, didn't I? Also, stop eavesdropping. Someday I'll transfer you back to Earth for that. Over and out.;-1;;
 36;HA. YOU'RE NOT HIM. YOU'RE TOO SMALL. Yeah. Itty bitty, in fact. LIKE A SPECK OF DUST. A speck of sand. HAHAHAHAHA! Hahahaha! *The line goes dead, and suddenly, you hear Sarah's voice.* Small? Cap, what were they talking about? *She smiles mischievously.*;;;
 ;Nothing. Nothing at all. Damn it! They're attacking!! Liszkiewicz, battle alert! Frontz, uh… grab onto something!;-1;;
@@ -146,7 +146,7 @@
 ;It's not an easy decision, but… what can I do?;53;;
 53;ARRR! GOOOOD!! I feel stupid, but… arrrrr! *The smart brother signs off and flies towards the border of the system. The stupid brother signs off as well and quickly follows him.*;;;
 ;That was really weird. Um… Henry, did you hear that? REALLY weird.;54;;
-54;Borks, Captain. Just Borks. *Henry smiles cunningly looking at the camera.*;marine_dialog;;
+54;Borks, Captain. Just Borks. *Henry smiles cunningly looking at the camera.*;marine_dialog_happy;;
 ;That's true. Right… Okay. Over and out. We have to go on. Great things await us.;-1;;5
 55;IT'S TOO SMALL. Yeah. Dad's ship is too small to fit both of us. If that's your decision, it didn't help us. Stupid, get ready for battle. We don't have a choice. ARRRRRR! *They sign off and attack each other.*;;;
 ;Too bad I couldn't do it.;-1;;1
@@ -156,7 +156,7 @@
 ;But it doesn't make any sense! Damn it. I couldn't do it.;-1;;1
 58;THIS... THIS... DECISION. Are you... serious? I... No, I... *The smart one thinks.* Sounds good to me. Really good. I don't want to shoot you, Stupid. I DON'T WANT TO SHOOT YOU EITHER, DUMBASS. HEY. YOU. THANKS FOR YOUR HELP. Yeah, thanks. It's a strange decision, but it's better than... Arrrrr! *The line goes dead. A couple of seconds later, their father's ship flies off towards the star, and the Borks fly off towards the system border.*;;;
 ;I think I can be proud of myself.;59;;
-59;Yeah, Cap, you're so sweet! I'm proud of you!;engineer_dialog;;
+59;Yeah, Cap, you're so sweet! I'm proud of you!;engineer_dialog_happy;;
 ;Don't be a flirt, Sarah. And stop listening in on my personal line. Although… thanks for calling me sweet. But stop listening in on the captain's line regardless! Over and out.;-1;;2
 60;DAD SAID WE COULDN'T SELL THE SHIP. Yeah. He said it would be disrespectful. Is this your decision? It didn't help us... *The smart guy sighs, which sounds like a quiet roar.* Well, then. We have to do it, Stupid. *The line goes dead. The Borks start fighting.*;;;
 ;Damn it. I couldn't do it.;-1;;1
@@ -200,7 +200,7 @@
 ;I get the ship. Because it's mine. Stupid, give the dumbass a kick, let him get a move on.;76;;
 76;*It must be hard when your brother is not only dumber than you, but also stronger. Your radar tells you that the Bork ships are moving towards the edge of the system, and then jump. Only their father's ship is left, unmoved. Rightful booty.*;;;
 ;Well, I did it. I was good, right?;77;;
-77;Ooooh yeah, Cap! You sure were!;engineer_dialog;;
+77;Ooooh yeah, Cap! You sure were!;engineer_dialog_happy;;
 ;Sarah… Thanks, but if you listen in on my personal line again, I'll cut your pay. You know I'll do it. Go take care of your direct responsibilities. Over and out.;-1;;5
 78;TELL US OR FIGHT US. Ron? Hubbard? What kind of name is that?;;;
 ;It's a long story… ahem… Let's start off with saying that there once was a creature called Xenu. He was the overlord of the Galactic Empire. It existed seventy-five million years ago.;79;;
@@ -275,5 +275,5 @@
 ;Hey, think of the kittens. And in fact, I never even threatened them.;113;;
 113;What do the kittens have to do with it, Captain? *Liszkiewicz is surprised.*;marine_dialog;;
 ;I don't really know, to be honest. Do you want me to tell you about Xenu?;114;;
-114;*Suddenly, without even changing his expression, Henry stars laughing heartily. He barely manages to hit the button to go off the line, he's laughing so hard.*;marine_dialog;;
+114;*Suddenly, without even changing his expression, Henry stars laughing heartily. He barely manages to hit the button to go off the line, he's laughing so hard.*;marine_dialog_happy;;
 ;You really shouldn't do that. Don't joke about Scientology!;-1;;6
