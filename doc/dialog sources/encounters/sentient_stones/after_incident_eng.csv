@@ -24,7 +24,7 @@
 6;The soldiers shot it almost clean through. And it's still alive and hitting the walls down there in the cargo hold. I don't think finishing it off will be so easy... at least without endangering the ship. And... can we? I don't approve of its reaction, but it could have just been defending itself. From its point of view we're barbarians and kidnappers. I'm sorry, but it's true, Captain.;;;
 ;Did you try talking to him or something?;7;;
 ;So what do we do with it?;8;;
-7;First it wouldn't respond, then talking got pretty low on our list of priorities. *Gordon looks at the camera. He looks nervous, irritated, his eyes are red.*;;;
+7;First it wouldn't respond, then talking got pretty low on our list of priorities. *Gordon looks at the camera. He looks nervous, irritated, his eyes are red.*;scientist_dialog_scared;;
 ;Maybe we should finish it off and perform an autopsy?;6;;
 ;So what do we do with it?;8;;
 8;I refuse to carry out any experiments on this creature as long as there exists a possibility of danger for me and my people. I'm sorry, Captain. I don't want it to happen again.;;;
