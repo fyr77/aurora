@@ -1,8 +1,8 @@
 0;*Gordon places an urgent call to you. A very urgent one: this channel is reserved for extremely important messages. Apparently, something serious has happened.*;
 ;Report! What happened?;1
-1;Ca… C… *Gordon waves his hands around. He looks crazed.* It! Breach! Breach breach breach!! *Respected scientists standing behind him look pretty much the same way. All in all, the atmosphere in the lab is heated.* ;
+1;Ca… C… *Gordon waves his hands around. He looks crazed.* It! Breach! Breach breach breach!! *Respected scientists standing behind him look pretty much the same way. All in all, the atmosphere in the lab is heated.* ;scientist_dialog_happy
 ;What is it?;2
-2;C-C-Captain! We've encountered a Type 1 space breach! Minimal radiation, minimal possibility of harmful effect. We have to study it as soon as possible!! You only get such chances once in your life!!;
+2;C-C-Captain! We've encountered a Type 1 space breach! Minimal radiation, minimal possibility of harmful effect. We have to study it as soon as possible!! You only get such chances once in your life!!;scientist_dialog_happy
 ;Gordon, the emergency channel is for emergency goddamn messages.;3
 ;And what is it, exactly?;4
 ;Study it? Are you sure it's safe?;7
@@ -19,7 +19,7 @@
 ;Gordon, the emergency channel is for emergency goddamn messages.;3
 ;Study it? Are you sure it's safe?;7
 ;Right. You have my okay.;-1
-7;Yes! Absolutely nothing destructive will happen to us! ;
+7;Yes! Absolutely nothing destructive will happen to us! ;scientist_dialog_happy
 ;Gordon, the emergency channel is for emergency goddamn messages.;3
 ;Study it? Are you sure it's safe?;4
 ;Right. You have my okay.;-1
