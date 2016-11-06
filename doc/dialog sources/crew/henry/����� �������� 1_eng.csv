@@ -1,4 +1,4 @@
-0;I already explained it, Captain. *Liszkiewicz stretches his shoulders as if sitting like that was uncomfortable.* I really don't like thinking back to that. ;;;
+0;I already explained it, Captain. *Liszkiewicz stretches his shoulders as if sitting like that was uncomfortable.* I really don't like thinking back to that. ;marine_dialog_angry;;
 ;"I've read your dossier, and I've heard a lot about you, too. ""Exceptional heroism"", ""bravery selflessness."" What is there to be ashamed of? ";1;;
 ;All right, that's all for now.;-1;;
 1;"*sigh* Captain, have you been in a war? Actually, let me say that again. *Henry looks at the camera askance, which makes him look more predatory; he asks the next question a bit too deeply.* Have YOU. Been in a war?";;;
@@ -18,7 +18,7 @@
 ;Of course I have. Everyone has.;7;;
 6;So you haven't. I'm sorry, but how can you understand me, then? *Liszkiewicz shakes his head and taps his finger on the desk.* You know what, let's try to avoid forays into my past and my private life. At least not now. I'm sorry again. *Liszkiewicz's demeanor tells you the conversation is over.*;;;
 ;Uhm… I… okay. Maybe I really shouldn't have brought it up. Over and out.;-1;;
-7;Oh yeah? *Henry smiles very unpleasantly, his face suddenly becomes very nasty.* Have you sent friends to their certain deaths? Have you killed inoccents? Ruined the lives of millions of people? Trained artillery guns on peaceful settlements?;;;
+7;Oh yeah? *Henry smiles very unpleasantly, his face suddenly becomes very nasty.* Have you sent friends to their certain deaths? Have you killed inoccents? Ruined the lives of millions of people? Trained artillery guns on peaceful settlements?;marine_dialog_angry;;
 ;What…;8;;
 8;Nothing, Captain. Nothing at all. It's just that every mistake can be forgiven. But mine can't. *Henry sighs.* Not because someone told me that. Because I realize it myself. *Liszkiewicz's demeanor tells you the conversation is over.* ;;;
 ;Maybe you're right… Maybe some things really can't be forgiven…;9;;
@@ -34,7 +34,7 @@
 ;We've all made mistakes, Henry. You don't have to blame yourself.;5;;
 9;*Henry shrugs.*;;;
 ;That's all for now. Over and out.;-1;;-1
-10;*Henry smirks and doesn't say anything.*;;;
+10;*Henry smirks and doesn't say anything.*;marine_dialog_happy;;
 ;Well… if this is how it is, that's all for now. Over and out.;-1;;-1
 11;That's right! How could I forget?;;;
 ;Being a comedian now? All right. Sooner or later you'll understand it, too. I'll leave you to think about it when you have a free minute. Over and out, officer.;-1;;-1
