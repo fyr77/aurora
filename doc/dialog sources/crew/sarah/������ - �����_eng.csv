@@ -1,9 +1,9 @@
-0;*Sarah doesn't respond, looking around chaotically.* ;
+0;*Sarah doesn't respond, looking around chaotically.* ;engineer_dialog_puzzled
 ;Sarah.;1
-1;*She doesn't respond.*;
+1;*She doesn't respond.*;engineer_dialog_puzzled
 ;Sarah!!!;2
 ;*Leave her alone*;-1
-2;What? Huh?;
+2;What? Huh?;engineer_dialog_puzzled
 ;What are you doing?;3
 3;*Sarah pushes some button and only then responds.* The gravity here is very weird. Things don't fly, they flow. Really, really smooth and slick... *While saying this, Sarah gradually turns green, then red, then she blurts out:* Oh, Cap, everything's in a flurry in my stomach, I... am going to the doctor! *She runs away without even turning off the camera.* ;
 ;Huh. Looks like I'll have to ask Gordon. Or maybe ask Henry for advice.;-1
