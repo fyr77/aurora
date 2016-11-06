@@ -8,7 +8,7 @@
 ;You're being too negative. Humanity has gone through war more than once.;3;;
 ;That's grim, but being realistic is always good.;7;;
 ;Subversive talks, Liszkiewicz? Well, I'll be. ;9;;
-3;Humanity has gone through slaughtering itself more than once. You can call it a sort of military masturbation, doing it by our lonesome. *Henry smiles sarcastically, looking at you askance.* Now we're going to have our first space conflict. We've never battled in deep space before. And to add to that, we only have one long-range fighting ship, the Aurora 2. Well, you still think I'm being too grim?  ;;;
+3;Humanity has gone through slaughtering itself more than once. You can call it a sort of military masturbation, doing it by our lonesome. *Henry smiles sarcastically, looking at you askance.* Now we're going to have our first space conflict. We've never battled in deep space before. And to add to that, we only have one long-range fighting ship, the Aurora 2. Well, you still think I'm being too grim?  ;marine_dialog_angry;;
 ;We'll will anyway.;4;;
 ;I have to agree.;6;;
 4;Yeah. Sure we will. *Henry nods.* ;;;
@@ -19,13 +19,13 @@
 6;You do. Never say die, though. There's always a chance…Is there anything else, Captain? ;;;
 ;Yes, of course.;-1;;
 ;No, nothing. Over and out.;-1;;-1
-7;Don't worry, being realistic is a privilege of having a high rank, heh. *Henry smirks.* Being like that is our duty. You wanted to know if we're ready? Well. We'll have to do battle with an enemy who probably has already had experience in combat in space. Maybe even more than once. Whereas we don't have that experience, and even if we did, the only long-range fighting craft we have is... ;;;
+7;Don't worry, being realistic is a privilege of having a high rank, heh. *Henry smirks.* Being like that is our duty. You wanted to know if we're ready? Well. We'll have to do battle with an enemy who probably has already had experience in combat in space. Maybe even more than once. Whereas we don't have that experience, and even if we did, the only long-range fighting craft we have is... ;marine_dialog_happy ;;
 ;The Aurora 2.;8;;
 8;Exactly. You see? What do you think, are we ready? Is being realistic inappropriate here?;;;
 ;We'll will anyway.;4;;
 ;I have to agree.;6;;
-9;Are you going to put me in front of a shooting squad? ;;;
+9;Are you going to put me in front of a shooting squad? ;marine_dialog_happy ;;
 ;You're joking. The dossier didn't say you were a joker. ;10;;
-10;What else do I have left? We're facing a war with an enemy who's probably been in more than one space war, whereas we don't have that experience, and we only have one fighting craft: the Aurora 2... What do I have left apart from jokes? ;;;
+10;What else do I have left? We're facing a war with an enemy who's probably been in more than one space war, whereas we don't have that experience, and we only have one fighting craft: the Aurora 2... What do I have left apart from jokes? ;marine_dialog_happy ;;
 ;We'll will anyway.;4;;
 ;I have to agree.;6;;
