@@ -1,9 +1,9 @@
-0;*Someone is calling you from the science department. It's Gordon. The look on his face is a mixture of fear and childish happiness.* Captain! We... we need you.;;;;
+0;*Someone is calling you from the science department. It's Gordon. The look on his face is a mixture of fear and childish happiness.* Captain! We... we need you.;scientist_dialog_happy;;;
 ;Will you look at that. What happened there?;1;;;
 1;We… Uhhh… You have to see it. There. It's very important!;;;;
 ;All right, I'll be right over. I hope it's REALLY important.;5;;;
 ;What do you mean, I have to see it? Be more precise.;2;;;
-2;Well, here… Something… *Gordon waves his hands around, his glasses glisten.* Attached itself to the computer! Something foreign, an alien!;;;;
+2;Well, here… Something… *Gordon waves his hands around, his glasses glisten.* Attached itself to the computer! Something foreign, an alien!;scientist_dialog_happy;;;
 ;Wow, I really have to see it. I'm on my way.;5;;;
 ;Wait. And why are you calling me? It's not safe. Contact Liszkiewicz, isolate the computer… Well, follow the procedure.;3;;;
 3;It's… it's safe, Captain. It's not attacking anyone. The soldiers are there already, but nothing is happening. We need you to make a decision!;;;;
