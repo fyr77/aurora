@@ -4,7 +4,7 @@
 ;It's bad.;2;
 2;Yes. This… is some kind of illness. Another man died. There can be no doubt about it.;;
 ;Okay. What do we have to do? Separate the infected from the uninfected, then go to Earth, set up a quarantine?;3;
-3;Captain… *Gordon sighs.* There's no one to separate. We're all sick. They have just finished the blood work, and... it's everybody. Even you. *You can see from his eyes that Gordon is barely holding back his panic.*;;
+3;Captain… *Gordon sighs.* There's no one to separate. We're all sick. They have just finished the blood work, and... it's everybody. Even you. *You can see from his eyes that Gordon is barely holding back his panic.*;scientist_dialog_scared;
 ;Calm down. We're alive so far. And taht means… we have to do something.;4;
 4;Yes… We do… *Gordon nods. He looks doomed.*;;
 ;What is this illness like, anyway? Symptoms, causes?;5;
@@ -37,9 +37,9 @@
 ;I see, Gordon.;10;
 13;*Gordon shrugs. He's right: how is he supposed to know that?*;;
 ;…;10;
-14;Yes, I know, C-captain. The equipment there really is great! We can arrest the acute stage of the disease… but only for some time.;;
+14;Yes, I know, C-captain. The equipment there really is great! We can arrest the acute stage of the disease… but only for some time.;scientist_dialog_happy;
 ;That's something.;10;
-15;Yes, Captain, that is a great module. Our sick will hold out longer with it, and data from the samples will be processed faster.;;
+15;Yes, Captain, that is a great module. Our sick will hold out longer with it, and data from the samples will be processed faster.;scientist_dialog_happy;
 ;Great!;10;
-16;Yes, we'll definitely find something there. For example, there was a description of many diseases that are dangerous for species from multiple planets. It's great that you decided to buy the data back then!;;
+16;Yes, we'll definitely find something there. For example, there was a description of many diseases that are dangerous for species from multiple planets. It's great that you decided to buy the data back then!;scientist_dialog_happy;
 ;Wow, and I thought I was just wasting money.;10;
