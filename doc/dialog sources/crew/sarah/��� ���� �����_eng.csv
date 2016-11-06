@@ -4,15 +4,15 @@
 ;The chances of that are exceedingly low.;2
 ;I don't know, Sarah. In any case, with outside help we'll have less casualties.;3
 ;What is that nonsense? Of course we can!;4
-2;That's pretty glum thinking, Cap. But at least you're honest. *Sarah shivers.*;
+2;That's pretty glum thinking, Cap. But at least you're honest. *Sarah shivers.*;engineer_dialog_puzzled
 ;Are you afraid?;5
-3;Yeah. But still, many people will die…;
+3;Yeah. But still, many people will die…;engineer_dialog_puzzled
 ;Are you afraid?;5
-4;I think you're being a bit cock sure, Cap… *Sarah shivers.* I wish I could be like that.;
+4;I think you're being a bit cock sure, Cap… *Sarah shivers.* I wish I could be like that.;engineer_dialog_puzzled
 ;Are you afraid?;5
 5;I… I'm… unfomfortable. I imagined all that to me, and… Zorsan really know how to fight! What's going to happen to us?;
 ;I already told you what I was going to do. Don't panic prematurely, Sarah.;6
-6;Cap, are you really… *Sarah looks like she's about to go into hysterics.*;
+6;Cap, are you really… *Sarah looks like she's about to go into hysterics.*;engineer_dialog_puzzled
 ;Frontz! This is an order. Calm down.;7
 7;Yes… of course…;
 ;Calm down and don't panic. Nothing has happened yet, we don't know know anything. Get a grip. If this happens again, I'll have them prescribe you tranquilizers.;8
