@@ -1,4 +1,4 @@
-0;*Gordon is white as a sheet.*;
+0;*Gordon is white as a sheet.*;scientist_dialog_scared
 ;Gordon. Trust me, I'm calm and not angry. Do you believe me?;1
 1;Y-yes.;
 ;But if you don't explain where we are, I'll start getting angry. Explain it in layman's terms.;2
@@ -8,7 +8,7 @@
 ;Enough. I'm not going to blame you for it. In any case, I'm the Captain and the responsibility is on me. Gordon, I don't know how, but we have to get out of here. What do you know about this place?;5
 5;In essence... *Gordon rubs the bridge of his nose and turns to look at the data again.* Yes... In essence, we aren't in space. I mean, we're not in a vacuum. The Aurora 2 is inside an organic liquid of unknown composition. We cannot study its composition yet. But it does contain some simple proteins. That's all we've managed to find out. And... Yeah... Another thing...;
 ;What?;6
-6;Apparently, this liquid… It's… It's alive. *Gordon adds after a moment.* We're in a universe that is a living organism, Captain.;
+6;Apparently, this liquid… It's… It's alive. *Gordon adds after a moment.* We're in a universe that is a living organism, Captain.;scientist_dialog_scared
 ;It's… it's impossible. It's scientifically impossible!;7
 7;*You hear a mad scream from behind Gordon's back.* SHOVE YOUR SCIENCE WHERE THE SUN DON'T SHINE! *The one screaming this - a respectable-looking frail old man - drops to the floor and has a breakdown. Gordon is embarrassed.* Well... it's a different world... everything is different. Captain, we need time to study it. Try to investigate the terrain and the situation. ;
 ;Got it. Calm down your coworker. And when he comes to, tell him that we're taking a fine out of his next paycheck. Is that all? ;8
