@@ -1,10 +1,10 @@
 0;*Gordon calsl you. Emergency line.*;
 ;I'm listening.;1
-1;Captain! C-Captain! *The camera is tilted in a strange way, Gordon is looking at it bent over unnaturally. A group of scientists is running around behind him in the background. You can hear ruckus. The lab is in total disarray.* Heeeelp!;
+1;Captain! C-Captain! *The camera is tilted in a strange way, Gordon is looking at it bent over unnaturally. A group of scientists is running around behind him in the background. You can hear ruckus. The lab is in total disarray.* Heeeelp!;scientist_dialog_scared
 ;What is it?!;2
-2;The stone! It… it came to life!;
+2;The stone! It… it came to life!;scientist_dialog_scared
 ;What?!;3
-3;It came to life and attacked us! We... we can't call for backup! *Loud rumble. Gordon jumps somewhere, disappears from the camera's view, but you can still hear him.* It dented our door and it's stuck, we only have a line to you! Send some soldiers oveeeeer!;
+3;It came to life and attacked us! We... we can't call for backup! *Loud rumble. Gordon jumps somewhere, disappears from the camera's view, but you can still hear him.* It dented our door and it's stuck, we only have a line to you! Send some soldiers oveeeeer!;scientist_dialog_scared
 ;Sending some right now… Hold on out there.;4
 4;*Rumble and cracks. The connection dies.*;
 ;Gordon! Gordon! Damn it… Liszkiewicz, come in!;5
