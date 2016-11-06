@@ -5,7 +5,7 @@
 ;Wow, I'm talking to a doctor of sciences.;7
 ;And what happened after that?;10
 ;Okay, that's all for now. Over and out, Sarah.;-1
-1;Yeah, a Kibbutz. It's a sort of… uhhh… a village where everyone lives together and works together. And it had religious overtones in our case. Mom says we used to live in the city, but Dad took us there because of work…;
+1;Yeah, a Kibbutz. It's a sort of… uhhh… a village where everyone lives together and works together. And it had religious overtones in our case. Mom says we used to live in the city, but Dad took us there because of work…;engineer_dialog_puzzled
 ;What was your father's job?;2
 2;Cap, I don't even remember, to be honest. *Sarah shrugs and looks into the camera without blinking.* It was a long time ago.;
 ;Tell me about the army.;3
@@ -33,7 +33,7 @@
 ;Seriously, they're doing that?;8
 8;I don't know for sure, but probably. But that's not how you know you're famous. You know you're famous when they tell jokes about you. Or make pornos.;
 ;Pornos about me? Hm…;9
-9;Cap, don't get distracted, we're not done yet. *Sara smirks sarcastically.* ;
+9;Cap, don't get distracted, we're not done yet. *Sara smirks sarcastically.* ;engineer_dialog_happy
 ;Kibbutz?;1
 ;Tell me about the army.;3
 ;How were your student years?;5
