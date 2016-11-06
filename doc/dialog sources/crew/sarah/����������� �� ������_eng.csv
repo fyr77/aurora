@@ -1,15 +1,15 @@
-0;It's just wonderful here! I'd never guess that working on a space ship would be so interesting. You know, the other day we waited until Flint to have a shower and turned off the gravitation in there. Woooh, that sure was something!;
+0;It's just wonderful here! I'd never guess that working on a space ship would be so interesting. You know, the other day we waited until Flint to have a shower and turned off the gravitation in there. Woooh, that sure was something!;engineer_dialog_angry
 ;Cool. Is it always that fun over there?;1
 ;Who's Flint?;2
 ;Turn off the gravity? Isn't that dangerous?;3
 ;So you like to fool around during work hours?;5
 ;Yeah. I don't even know what to say. I guess I won't say anything. Over and out, Frontz.;-1
-1;The important thing is you have to know what to turn off and in what order. And the joke about the tennis ball inside the space suit's oxygen tube never gets old! *She adds hastily.* That's a joke! I mean, what, a tennis ball? It won't even fit into there.;
+1;The important thing is you have to know what to turn off and in what order. And the joke about the tennis ball inside the space suit's oxygen tube never gets old! *She adds hastily.* That's a joke! I mean, what, a tennis ball? It won't even fit into there.;engineer_dialog_angry
 ;Who's Flint?;2
 ;Turn off the gravity? Isn't that dangerous?;3
 ;So you like to fool around during work hours?;5
 ;Yeah. I don't even know what to say. I guess I won't say anything. Over and out, Frontz.;-1
-2;Chief mechanic in the third maintenance compartment. So he walks into the shower, and we go, whoosh! And he spins around for five minutes, while balls of water float around him. He was really angry, of course. But then he was okay.;
+2;Chief mechanic in the third maintenance compartment. So he walks into the shower, and we go, whoosh! And he spins around for five minutes, while balls of water float around him. He was really angry, of course. But then he was okay.;engineer_dialog_angry
 ;Cool. Is it always that fun over there?;1
 ;Turn off the gravity? Isn't that dangerous?;3
 ;So you like to fool around during work hours?;5
