@@ -1,13 +1,13 @@
 0;Really? Well, that's how it is, then! I don't know what the big fuss is, though.;
 ;Why do you think it's you?;1
-1;Haven't we talked about this? *Sarah frowns, trying to remember.* I don't remember. Anyway! Why me? It's simple, I'm a really good engineer. Maybe even a genius, Cap. Isn't it great that you have a genius working on your ship?;
+1;Haven't we talked about this? *Sarah frowns, trying to remember.* I don't remember. Anyway! Why me? It's simple, I'm a really good engineer. Maybe even a genius, Cap. Isn't it great that you have a genius working on your ship?;engineer_dialog_puzzled 
 ;Aren't you a bit too cocky?;2
 ;Are there a lot of you talented folk there?;4
 ;How exactly did you end up on the Aurora?;6
 ;I see. That's some self-esteem you have there, Frontz. Maybe it's not warranted, but I don't have time to talk now. Over and out.;-1
-2;*Sarah smiles and shakes her head no.* Nope. What, would you prefer some hunder-years-old geezer who hasn't seen a working engine in about five hundred years working in my place? Nope, Cap, that's not how it works. For an engineer, especially a good one, the most important thing is experience. I can fix absolutely anything. Even a tank with my bare hands. And then I'll build a new tank from whatever's left over. Have you ever changed tracks on a tank in forty-degree heat?;
+2;*Sarah smiles and shakes her head no.* Nope. What, would you prefer some hunder-years-old geezer who hasn't seen a working engine in about five hundred years working in my place? Nope, Cap, that's not how it works. For an engineer, especially a good one, the most important thing is experience. I can fix absolutely anything. Even a tank with my bare hands. And then I'll build a new tank from whatever's left over. Have you ever changed tracks on a tank in forty-degree heat?;engineer_dialog_happy
 ;Uhhh… I haven't.;3
-3;And I have! *Sarah says that with pride.* In some ways, it's more valuable than reading a thousand books.;
+3;And I have! *Sarah says that with pride.* In some ways, it's more valuable than reading a thousand books.;engineer_dialog_happy
 ;Are there a lot of you talented folk there?;4
 ;How exactly did you end up on the Aurora?;6
 ;I see. That's some self-esteem you have there, Frontz. Maybe it's not warranted, but I don't have time to talk now. Over and out.;-1
@@ -20,7 +20,7 @@
 ;I see. That's some self-esteem you have there, Frontz. Maybe it's not warranted, but I don't have time to talk now. Over and out.;-1
 6;Just like the rest of us. I filled out an application, dropped it into the little box, and then I got picked. It's weird, the time we live in, and those dumbasses still use paper applications... Going through a million of those pieces of paper, that's terrifying, right? And they picked me.;
 ;The best of the best?;7
-7;Remember, your words, not mine. *She smiles and looks at you, squinting.* ;
+7;Remember, your words, not mine. *She smiles and looks at you, squinting.* ;engineer_dialog_happy
 ;Aren't you a bit too cocky?;2
 ;Are there a lot of you talented folk there?;4
 ;How exactly did you end up on the Aurora?;6
