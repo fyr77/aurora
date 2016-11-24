@@ -324,8 +324,31 @@
         },
         {
           "returnValue": 0,
+          "targetStatementId": 29,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "colony_search.found",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 30,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "credits",
+              "value": "6",
+              "type": "GREATER"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
           "targetStatementId": 31,
-          "replyText": "4"
+          "replyText": "6"
         }
       ]
     },
@@ -390,6 +413,29 @@
         {
           "returnValue": 0,
           "targetStatementId": 32,
+          "replyText": "0"
+        }
+      ]
+    },
+    "29": {
+      "id": 29,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0",
+          "flags": {
+            "klisk.discount": "true"
+          }
+        }
+      ]
+    },
+    "30": {
+      "id": 30,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
           "replyText": "0"
         }
       ]

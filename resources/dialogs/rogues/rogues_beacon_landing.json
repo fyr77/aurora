@@ -47,7 +47,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 5,
+          "targetStatementId": 7,
           "replyText": "0"
         }
       ]
@@ -82,6 +82,16 @@
         }
       ],
       "customIcon": "marine_dialog"
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ]
     }
   },
   "flags": {},
