@@ -7,6 +7,7 @@
 package ru.game.aurora.application;
 
 import com.codedisaster.steamworks.SteamAPI;
+import com.codedisaster.steamworks.SteamException;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.slick2d.NiftyOverlayGame;
 import org.apache.commons.io.IOUtils;
@@ -211,7 +212,7 @@ public class AuroraGame extends NiftyOverlayGame {
         }
     }
 
-    public static void main(String[] args) throws SlickException, IOException {
+    public static void main(String[] args) throws SlickException, IOException, SteamException {
         try {
             logger.info("Using Java " + System.getProperty("java.version") + " at " + System.getProperty("java.home"));
             logger.info("Aurora game version " + Version.VERSION + " started");

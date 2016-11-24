@@ -130,4 +130,9 @@ public class AchievementManager implements SteamUserStatsCallback {
     public void onLeaderboardScoreUploaded(boolean success, SteamLeaderboardHandle leaderboard, int score, boolean scoreChanged, int globalRankNew, int globalRankPrevious) {
 
     }
+
+    @Override
+    public void onGlobalStatsReceived(long gameId, SteamResult result) {
+
+    }
 }
