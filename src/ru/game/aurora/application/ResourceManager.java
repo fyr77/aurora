@@ -307,6 +307,7 @@ public class ResourceManager {
         if (ID == null) {
             return null;
         }
+        ID = ID.trim();
         Image rz = imageMap.get(ID);
         if (rz == null) {
             String imagePath = imageFileMap.get(ID);
