@@ -30,7 +30,8 @@
           "targetStatementId": -1,
           "replyText": "4"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_angry"
     },
     "1": {
       "id": 1,
@@ -55,7 +56,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_angry"
     },
     "2": {
       "id": 2,
@@ -80,7 +82,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_angry"
     },
     "3": {
       "id": 3,

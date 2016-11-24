@@ -75,7 +75,8 @@
           "targetStatementId": -1,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_happy"
     },
     "4": {
       "id": 4,
@@ -95,7 +96,8 @@
           "targetStatementId": -1,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_puzzled "
     }
   },
   "flags": {},

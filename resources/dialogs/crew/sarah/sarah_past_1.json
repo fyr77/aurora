@@ -35,7 +35,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_puzzled "
     },
     "2": {
       "id": 2,
@@ -45,7 +46,8 @@
           "targetStatementId": 3,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_happy"
     },
     "3": {
       "id": 3,
@@ -65,7 +67,8 @@
           "targetStatementId": -1,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_happy"
     },
     "4": {
       "id": 4,
@@ -135,7 +138,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_happy"
     }
   },
   "flags": {},

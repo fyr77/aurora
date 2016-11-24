@@ -148,7 +148,8 @@
           "targetStatementId": 8,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_scared"
     },
     "8": {
       "id": 8,

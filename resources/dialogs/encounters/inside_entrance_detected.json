@@ -20,7 +20,8 @@
           "targetStatementId": 2,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_happy"
     },
     "2": {
       "id": 2,
@@ -45,7 +46,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_happy"
     },
     "3": {
       "id": 3,
@@ -125,7 +127,8 @@
           "targetStatementId": -1,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_happy"
     }
   },
   "flags": {},

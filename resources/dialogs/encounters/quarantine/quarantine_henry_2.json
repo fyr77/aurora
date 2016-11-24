@@ -20,7 +20,8 @@
           "targetStatementId": 2,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_angry"
     },
     "2": {
       "id": 2,
@@ -30,7 +31,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_angry"
     }
   },
   "flags": {},

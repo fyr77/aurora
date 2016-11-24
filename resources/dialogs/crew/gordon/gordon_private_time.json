@@ -30,7 +30,8 @@
           "targetStatementId": -1,
           "replyText": "4"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "1": {
       "id": 1,
@@ -130,7 +131,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_happy"
     }
   },
   "flags": {},

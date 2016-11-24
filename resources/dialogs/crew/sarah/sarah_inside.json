@@ -10,7 +10,8 @@
           "targetStatementId": 1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_puzzled"
     },
     "1": {
       "id": 1,
@@ -25,7 +26,8 @@
           "targetStatementId": -1,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_puzzled"
     },
     "2": {
       "id": 2,
@@ -35,7 +37,8 @@
           "targetStatementId": 3,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_puzzled"
     },
     "3": {
       "id": 3,

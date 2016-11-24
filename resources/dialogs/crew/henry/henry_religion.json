@@ -25,7 +25,8 @@
           "targetStatementId": 3,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_happy"
     },
     "2": {
       "id": 2,

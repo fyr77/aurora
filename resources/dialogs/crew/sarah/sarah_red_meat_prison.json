@@ -53,7 +53,8 @@
             "insult": "true"
           }
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_angry"
     }
   },
   "flags": {},

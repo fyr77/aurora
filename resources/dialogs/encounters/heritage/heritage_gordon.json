@@ -35,7 +35,8 @@
           "targetStatementId": 3,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_scared"
     },
     "3": {
       "id": 3,
@@ -65,7 +66,8 @@
           "targetStatementId": 6,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "6": {
       "id": 6,

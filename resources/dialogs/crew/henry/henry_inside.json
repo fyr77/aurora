@@ -25,7 +25,8 @@
           "targetStatementId": 2,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_puzzled"
     },
     "2": {
       "id": 2,
@@ -35,7 +36,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_puzzled"
     }
   },
   "flags": {},

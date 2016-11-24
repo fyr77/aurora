@@ -40,7 +40,8 @@
           "targetStatementId": 4,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_scared"
     },
     "4": {
       "id": 4,
@@ -203,7 +204,8 @@
           "targetStatementId": 10,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_happy"
     },
     "15": {
       "id": 15,
@@ -213,7 +215,8 @@
           "targetStatementId": 10,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_happy"
     },
     "16": {
       "id": 16,
@@ -223,7 +226,8 @@
           "targetStatementId": 10,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_happy"
     },
     "999": {
       "id": 999,

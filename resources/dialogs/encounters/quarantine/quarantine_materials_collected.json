@@ -20,7 +20,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_happy"
     }
   },
   "flags": {},

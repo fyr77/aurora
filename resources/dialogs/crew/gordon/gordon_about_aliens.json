@@ -46,7 +46,8 @@
           "targetStatementId": -1,
           "replyText": "4"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled "
     },
     "2": {
       "id": 2,
@@ -153,7 +154,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled "
     }
   },
   "flags": {},

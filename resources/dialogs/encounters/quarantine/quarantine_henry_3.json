@@ -10,7 +10,8 @@
           "targetStatementId": 1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_angry "
     },
     "1": {
       "id": 1,
@@ -31,7 +32,8 @@
           "targetStatementId": 3,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_angry "
     },
     "3": {
       "id": 3,
@@ -41,7 +43,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_angry "
     }
   },
   "flags": {},

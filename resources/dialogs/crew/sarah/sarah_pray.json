@@ -110,7 +110,8 @@
           "targetStatementId": 9,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_angry"
     },
     "9": {
       "id": 9,

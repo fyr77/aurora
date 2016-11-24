@@ -65,7 +65,8 @@
           "targetStatementId": 6,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_angry"
     },
     "4": {
       "id": 4,
@@ -115,7 +116,8 @@
           "targetStatementId": 8,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_happy "
     },
     "8": {
       "id": 8,
@@ -140,7 +142,8 @@
           "targetStatementId": 10,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_happy "
     },
     "10": {
       "id": 10,
@@ -155,7 +158,8 @@
           "targetStatementId": 6,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_happy "
     }
   },
   "flags": {},

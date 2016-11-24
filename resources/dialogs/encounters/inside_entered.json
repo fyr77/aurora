@@ -10,7 +10,8 @@
           "targetStatementId": 1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_scared"
     },
     "1": {
       "id": 1,
@@ -60,7 +61,8 @@
           "targetStatementId": 7,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_scared"
     },
     "7": {
       "id": 7,

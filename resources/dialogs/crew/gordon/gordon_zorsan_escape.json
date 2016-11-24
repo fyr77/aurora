@@ -10,25 +10,31 @@
           "targetStatementId": 1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_scared"
     },
     "1": {
       "id": 1,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 2,
+          "targetStatementId": 4,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 3,
+          "targetStatementId": 2,
           "replyText": "1"
         },
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 3,
           "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3"
         }
       ]
     },
@@ -37,7 +43,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 1,
+          "targetStatementId": 4,
           "replyText": "0"
         },
         {
@@ -57,7 +63,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 1,
+          "targetStatementId": 4,
           "replyText": "0"
         },
         {
@@ -76,6 +82,27 @@
           "replyText": "3"
         }
       ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     }
   },
   "flags": {},

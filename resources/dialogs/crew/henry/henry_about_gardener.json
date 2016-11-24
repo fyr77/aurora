@@ -130,7 +130,8 @@
           "targetStatementId": -1,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_happy"
     },
     "8": {
       "id": 8,

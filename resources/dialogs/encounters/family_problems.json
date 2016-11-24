@@ -22,7 +22,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "engineer_dialog"
+      "customIcon": "engineer_dialog_happy"
     },
     "2": {
       "id": 2,
@@ -33,7 +33,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "engineer_dialog"
+      "customIcon": "engineer_dialog_happy"
     },
     "3": {
       "id": 3,
@@ -155,7 +155,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "engineer_dialog"
+      "customIcon": "engineer_dialog_happy"
     },
     "13": {
       "id": 13,
@@ -458,7 +458,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "engineer_dialog"
+      "customIcon": "engineer_dialog_happy"
     },
     "36": {
       "id": 36,
@@ -764,7 +764,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "marine_dialog"
+      "customIcon": "marine_dialog_happy"
     },
     "55": {
       "id": 55,
@@ -815,7 +815,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "engineer_dialog"
+      "customIcon": "engineer_dialog_happy"
     },
     "60": {
       "id": 60,
@@ -1036,7 +1036,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "engineer_dialog"
+      "customIcon": "engineer_dialog_happy"
     },
     "78": {
       "id": 78,
@@ -1414,7 +1414,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "marine_dialog"
+      "customIcon": "marine_dialog_happy"
     }
   },
   "flags": {},

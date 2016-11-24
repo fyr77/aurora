@@ -25,7 +25,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "1": {
       "id": 1,
@@ -125,7 +126,8 @@
           "targetStatementId": -1,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_scared"
     },
     "6": {
       "id": 6,

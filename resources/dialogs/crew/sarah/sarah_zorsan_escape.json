@@ -15,7 +15,8 @@
           "targetStatementId": 2,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_angry"
     },
     "1": {
       "id": 1,
@@ -35,7 +36,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_angry"
     }
   },
   "flags": {},

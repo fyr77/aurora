@@ -10,7 +10,8 @@
           "targetStatementId": 1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "engineer_dialog_happy"
     },
     "1": {
       "id": 1,

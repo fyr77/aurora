@@ -65,7 +65,8 @@
           "targetStatementId": 5,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_puzzled"
     },
     "5": {
       "id": 5,
@@ -95,7 +96,8 @@
           "targetStatementId": 7,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_puzzled"
     },
     "7": {
       "id": 7,
@@ -125,7 +127,8 @@
           "targetStatementId": 10,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_puzzled"
     },
     "10": {
       "id": 10,
@@ -135,7 +138,8 @@
           "targetStatementId": 11,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_puzzled"
     },
     "11": {
       "id": 11,

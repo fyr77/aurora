@@ -65,7 +65,8 @@
           "targetStatementId": 5,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_happy"
     },
     "5": {
       "id": 5,
@@ -75,7 +76,8 @@
           "targetStatementId": 6,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_happy"
     },
     "6": {
       "id": 6,
@@ -95,7 +97,8 @@
           "targetStatementId": 8,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "8": {
       "id": 8,
@@ -120,7 +123,8 @@
           "targetStatementId": 15,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "9": {
       "id": 9,
@@ -180,7 +184,8 @@
           "targetStatementId": 15,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "12": {
       "id": 12,
@@ -190,7 +195,8 @@
           "targetStatementId": 13,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "13": {
       "id": 13,
@@ -200,7 +206,8 @@
           "targetStatementId": 14,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "14": {
       "id": 14,
