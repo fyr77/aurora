@@ -1,3 +1,12 @@
+VERSION 0.5.5
+
+* Added emotion portraits for crew members in dialogs
+* Switched to latest steamworks4j 1.5.0, hopefully will resolve some steam issues
+* Fixed asteroid belt encounter repeating again and again once completed
+* Added astroprobe mark on galaxy map
+
+======================================
+
 VERSION 0.5.4
 
 * Fixed crash with shooting on planets
