@@ -1,11 +1,11 @@
 0;*It is a ten minute walk to the military base. As you walk past the barracks, you can smell the heavy stench of sweat and unwashed feet, even though the air conditioning there is good. Weird. Anyway, you don't have to go to the barracks: Henry Liszkiewicz's office is a bit further away, closer to the weapon power supply systems. As you find out, the office isn't very spacious. Its owner is a tall man of that weird age some people get stuck in: he's definitely older than forty, but younger than one hundred. The soldier's face is covered in wrinkles. He gets up from his chair and gives you a short greeting.* Captain. Glad to meet you.;;;
 ;*extend your hand for a handshake in silence*;1;;
 ;Yes. Me too.;1;;
-1;So you're here already. *Henry smirks.* Is this an inspection, or were you just in the neighborhood.;;;
+1;So you're here already. *Henry smirks.* Is this an inspection, or were you just in the neighborhood.;marine_dialog_happy;;
 ;You can consider it a sort of inspection, Liszkiewicz. What are your responsibilities? What military capacity to we have? ;2;;
 ;"""Or."" I wanted to talk to you. It always helps to know the people you're serving with, especially your subordinates.";3;;
 ;Just in the neighborhood. And I'm already leaving.;-1;;
-2;*Henry smirks again, but in about a second his smile disappears.* I'm responsible for the entire military component of the Aurora 2, from the ship's guns to the soldiers. Only the best guns and the best people are under your command. The laser battery is state of the art, capable of burning a hole through the Moon. However, I am against such reckless waste of power.;;;
+2;*Henry smirks again, but in about a second his smile disappears.* I'm responsible for the entire military component of the Aurora 2, from the ship's guns to the soldiers. Only the best guns and the best people are under your command. The laser battery is state of the art, capable of burning a hole through the Moon. However, I am against such reckless waste of power.;marine_dialog_puzzled;;
 ;That takes care of the guns. What about the troops?;4;;
 4;I told you already. The best and exceptionally trained.;;;
 ;Be more precise.;5;;
@@ -13,14 +13,14 @@
 ;That's it for now. I have to go.;-1;;1
 5;Every one of our soldiers has been through some excellent training. They really are capable of anything, just give the order.;;;
 ;They were capable of anything on Earth. What about extra-terrestrial conditions? ;6;;
-6;As long as they have the right equipment. The better a soldier's equipment is, the better his fighting capabilities. By the way, there's no such thing as perfect equipment.;;;
+6;As long as they have the right equipment. The better a soldier's equipment is, the better his fighting capabilities. By the way, there's no such thing as perfect equipment.;marine_dialog_puzzled;;
 ;Good. What else can you say? ;7;;
 7;Like I said, your troops are capable of anything. Doing battle, obviously, and also fixing up some vehicles should the need arise. Well, and if they really have to, they can perform a preliminary analysis of gathered materials, but don't expect too much: a soldier is always a soldier.;;;
 ;So you vouch for your men?;8;;
 8;Sir, yes, sir. We're ready to fight whenever and wherever you want, and you can count on us.;;;
 ;Great. I can see I'm lucky to have you. I think that'll be all, I have to go.;-1;;1
 ;I can see you know your trade. Tell me about yourself.;3;;
-3;*Henry nods and becomes thoughtful. It seems he is a bit rattled: you can see longing and melancholy in his narrowed eyes.* I've had to be in a few wars. Nicaragua, Zimbabwe, New Rhodesia, Cuba, of course... *Henry smirks and jerks his head in a strange way.* ;;;
+3;*Henry nods and becomes thoughtful. It seems he is a bit rattled: you can see longing and melancholy in his narrowed eyes.* I've had to be in a few wars. Nicaragua, Zimbabwe, New Rhodesia, Cuba, of course... *Henry smirks and jerks his head in a strange way.* ;marine_dialog_puzzled;;
 ;The five day blockade of Nicaragua? ;9;;
 ;Zimbabwe. The Afrikaans Incident. ;10;;
 ;New Rhodesia? That's weird, that country doesn't exist. Neither does Cuba.;11;;
@@ -40,12 +40,12 @@
 12;I've forgotten about all the old ones. ;;;
 ;Come on now, I'm intrigued!;13;;
 ;Okay. I have some business I have to attend to, too. See you, Liszkiewicz.;-1;;1
-13;*Henry shakes his head.* War… Captain, I don't like thinking back to all that too much. War is a dirty business. ;;;
+13;*Henry shakes his head.* War… Captain, I don't like thinking back to all that too much. War is a dirty business. ;marine_dialog_puzzled;;
 ;Why? Maybe you'll stop liking carrying out your responsibilities in the future, too? ;16;;
 ;Why? You speak like a pacifist. ;17;;
-16;*Liszkiewicz responds with a smirk and a shrug.* I haven't gotten tired of it yet. You know… I have a routine check. I'm afraid I'm going to have to leave you. ;;;
+16;*Liszkiewicz responds with a smirk and a shrug.* I haven't gotten tired of it yet. You know… I have a routine check. I'm afraid I'm going to have to leave you. ;marine_dialog_happy;;
 ;Hm… Okay, then. I have to go, too. ;-1;;1
-17;That's right. I am a pacifist.;;;
+17;That's right. I am a pacifist.;marine_dialog_happy;;
 ;In that case, I don't understand you. You aren't like a regular soldier, Henry. ;15;;
 15;You're wrong. *Henry sighs.* I'm very much a regular soldier. Well... Almost. *Suddenly, his watch goes off. Henry looks at it and says:* I have a routine check. Chores. I will have to excuse myself. ;;;
 ;It's okay, Liszkiewicz, I have to go, too.;-1;;1
