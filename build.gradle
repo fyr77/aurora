@@ -1,7 +1,7 @@
 apply plugin: 'application'
 apply plugin: 'java'
 
-version = '0.5.4'
+version = '0.5.5'
 
 compileJava {
     options.encoding = 'utf-8'
@@ -11,6 +11,12 @@ repositories {
     mavenCentral()
 }
 
+allprojects {
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = '1.7'
+        targetCompatibility = '1.7'
+    }
+}
 
 sourceSets {
     main {
