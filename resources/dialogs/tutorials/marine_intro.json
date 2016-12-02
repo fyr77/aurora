@@ -35,7 +35,8 @@
           "targetStatementId": -1,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_happy"
     },
     "2": {
       "id": 2,
@@ -45,7 +46,8 @@
           "targetStatementId": 4,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_puzzled"
     },
     "3": {
       "id": 3,
@@ -70,7 +72,8 @@
           "targetStatementId": 12,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_puzzled"
     },
     "4": {
       "id": 4,
@@ -110,7 +113,8 @@
           "targetStatementId": 7,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_puzzled"
     },
     "7": {
       "id": 7,
@@ -225,7 +229,8 @@
           "targetStatementId": 17,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_puzzled"
     },
     "15": {
       "id": 15,
@@ -245,7 +250,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_happy"
     },
     "17": {
       "id": 17,
@@ -255,7 +261,8 @@
           "targetStatementId": 15,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "marine_dialog_happy"
     }
   },
   "flags": {},

@@ -40,7 +40,8 @@
           "targetStatementId": 3,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "3": {
       "id": 3,
@@ -60,7 +61,8 @@
           "targetStatementId": -1,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_happy"
     },
     "4": {
       "id": 4,
@@ -70,7 +72,8 @@
           "targetStatementId": 5,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "5": {
       "id": 5,
@@ -80,7 +83,8 @@
           "targetStatementId": 6,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "6": {
       "id": 6,
@@ -105,7 +109,8 @@
           "targetStatementId": 8,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "8": {
       "id": 8,
@@ -115,7 +120,8 @@
           "targetStatementId": 9,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "9": {
       "id": 9,
@@ -170,7 +176,8 @@
           "targetStatementId": 14,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_scared"
     },
     "14": {
       "id": 14,
@@ -183,7 +190,8 @@
             "parallel_worlds": "true"
           }
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_scared"
     },
     "99": {
       "id": 99,
