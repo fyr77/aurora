@@ -229,6 +229,7 @@ public class ColonizationListener extends GameEventListener implements DialogLis
         chief = new PlanetNPC(colonyCenter.getX() + 8, colonyCenter.getY() + 9, "colony_colonist");
         chief.setDialog(Dialog.loadFromFile("dialogs/quest/colony_search/colony_default.json"));
         planet.getPlanetObjects().add(chief);
+        world.getGlobalVariables().put("colony_established", true);
         logger.info("Colony established");
     }
 
