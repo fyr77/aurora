@@ -1,0 +1,22 @@
+{
+  "id": "intro_2_no_colony",
+  "mainImageId": "intro_2_1",
+  "statements": [
+    {
+      "mainImageId": "intro_2_1",
+      "textId": "intro_2_no_colony.1.text"
+    },
+    {
+      "mainImageId": "intro_2_2",
+      "textId": "intro_2_no_colony.2.text"
+    },
+    {
+      "mainImageId": "intro_2_2",
+      "textId": "intro_2_no_colony.3.text"
+    },
+    {
+      "mainImageId": "intro_2_3",
+      "textId": "intro_2_no_colony.4.text"
+    }
+  ]
+}

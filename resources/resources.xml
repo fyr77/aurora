@@ -260,6 +260,10 @@
     <resource type="image" id="captain_lost_gameover">sprites/story/captain_killed.png</resource>
     <resource type="image" id="obliterator_background">sprites/ships/obliterator.png</resource>
 
+    <resource type="image" id="intro_2_1">sprites/story/s1.png</resource>
+    <resource type="image" id="intro_2_2">sprites/story/s2-3.png</resource>
+    <resource type="image" id="intro_2_3">sprites/story/s3.png</resource>
+
     <resource type="image" id="story_obliterator_1">sprites/story/obliterator_1.png</resource>
     <resource type="image" id="story_obliterator_2">sprites/story/obliterator_2.png</resource>
     <resource type="image" id="story_obliterator_3">sprites/story/obliterator_3.png</resource>
