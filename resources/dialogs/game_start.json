@@ -10,7 +10,8 @@
           "targetStatementId": 1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "1": {
       "id": 1,
@@ -25,7 +26,8 @@
           "targetStatementId": 2,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_laughing_dialog"
     },
     "2": {
       "id": 2,

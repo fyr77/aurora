@@ -360,7 +360,8 @@
           "targetStatementId": -1,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_laughing_dialog"
     },
     "10": {
       "id": 10,
@@ -390,7 +391,8 @@
           "targetStatementId": 13,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "13": {
       "id": 13,
@@ -405,7 +407,8 @@
           "targetStatementId": -1,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "20": {
       "id": 20,
@@ -430,7 +433,8 @@
           "targetStatementId": 22,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "22": {
       "id": 22,
@@ -440,7 +444,8 @@
           "targetStatementId": 23,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "23": {
       "id": 23,
@@ -465,7 +470,8 @@
           "targetStatementId": 25,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "25": {
       "id": 25,
@@ -475,7 +481,8 @@
           "targetStatementId": 26,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_angry_dialog"
     },
     "26": {
       "id": 26,
@@ -490,7 +497,8 @@
           "targetStatementId": -1,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "36": {
       "id": 36,
@@ -505,7 +513,8 @@
           "targetStatementId": -1,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_laughing_dialog"
     },
     "37": {
       "id": 37,
@@ -515,7 +524,8 @@
           "targetStatementId": 38,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_laughing_dialog"
     },
     "38": {
       "id": 38,
@@ -530,7 +540,8 @@
           "targetStatementId": -1,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_laughing_dialog"
     },
     "39": {
       "id": 39,
@@ -540,7 +551,8 @@
           "targetStatementId": 41,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "41": {
       "id": 41,
@@ -555,7 +567,8 @@
           "targetStatementId": 0,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "51": {
       "id": 51,
@@ -615,7 +628,8 @@
           "targetStatementId": 56,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "56": {
       "id": 56,
@@ -625,7 +639,8 @@
           "targetStatementId": 57,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "57": {
       "id": 57,
@@ -640,7 +655,8 @@
           "targetStatementId": 0,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "58": {
       "id": 58,
@@ -650,7 +666,8 @@
           "targetStatementId": 59,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "59": {
       "id": 59,
@@ -677,7 +694,8 @@
             }
           ]
         }
-      ]
+      ],
+      "customIcon": "earth_angry_dialog"
     },
     "60": {
       "id": 60,
@@ -690,7 +708,8 @@
             "zorsan_war_info_quest": "true"
           }
         }
-      ]
+      ],
+      "customIcon": "earth_angry_dialog"
     },
     "61": {
       "id": 61,
@@ -703,7 +722,8 @@
             "zorsan_war_info_update": "true"
           }
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "62": {
       "id": 62,
@@ -713,7 +733,8 @@
           "targetStatementId": 63,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "63": {
       "id": 63,
@@ -723,7 +744,8 @@
           "targetStatementId": 64,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_angry_dialog"
     },
     "64": {
       "id": 64,
@@ -738,7 +760,8 @@
           "targetStatementId": 65,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "65": {
       "id": 65,
@@ -758,7 +781,8 @@
           "targetStatementId": 67,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "67": {
       "id": 67,
@@ -778,7 +802,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "69": {
       "id": 69,
@@ -830,7 +855,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "70": {
       "id": 70,
@@ -909,7 +935,8 @@
           "targetStatementId": -1,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "earth_angry_dialog"
     },
     "72": {
       "id": 72,
@@ -1027,7 +1054,8 @@
           "targetStatementId": -1,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "earth_angry_dialog"
     },
     "76": {
       "id": 76,
@@ -1070,7 +1098,8 @@
           "targetStatementId": -1,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "77": {
       "id": 77,
@@ -1108,7 +1137,8 @@
           "targetStatementId": -1,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "earth_laughing_dialog"
     },
     "78": {
       "id": 78,
@@ -1161,7 +1191,8 @@
           "targetStatementId": 80,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_angry_dialog"
     },
     "80": {
       "id": 80,
@@ -1171,7 +1202,8 @@
           "targetStatementId": 81,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_angry_dialog"
     },
     "81": {
       "id": 81,
@@ -1201,7 +1233,8 @@
           "targetStatementId": 84,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "84": {
       "id": 84,
@@ -1216,7 +1249,8 @@
           "targetStatementId": 85,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "85": {
       "id": 85,
@@ -1291,7 +1325,8 @@
           "targetStatementId": 91,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_laughing_dialog"
     },
     "91": {
       "id": 91,
@@ -1338,7 +1373,8 @@
           "targetStatementId": 94,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "94": {
       "id": 94,
@@ -1398,7 +1434,8 @@
           "targetStatementId": 0,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     }
   },
   "flags": {},

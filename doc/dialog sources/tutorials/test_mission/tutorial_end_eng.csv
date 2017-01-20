@@ -3,8 +3,8 @@
 ;Not yet.;-1;
 1;*Martan laughs, really content with his own joke.* Absolutely. How long before you have a chance to have a drink with your friends in a relaxing atmosphere? You still have time, our engineers will need a couple of days to dismantle your testers and process their data, anyway. Although they're saying that the ship's systems are functioning normally already.;earth_laughing_dialog;
 ;I guess you're right, having one last hurrah before leaving won't hurt.;2;
-;Thanks for the proposition, but I don't drink before flights.;earth_laughing_dialog;
-2;Great. I'm waiting for you at the exit at 5.;-1;
+;Thanks for the proposition, but I don't drink before flights.;3;
+2;Great. I'm waiting for you at the exit at 5.;earth_laughing_dialog;
 ;Okay.;-1;
-3;Of course, you're right, but I think you'll regret this many times when you realize that the closest bar is in a couple dozen light years from you. Okay, I'm giving you a day off, then, and the day after tomorrow the shuttle will take you aboard. They'll be done with the loading and other stuff by then.;;
+3;Of course, you're right, but I think you'll regret this many times when you realize that the closest bar is in a couple dozen light years from you. Okay, I'm giving you a day off, then, and the day after tomorrow the shuttle will take you aboard. They'll be done with the loading and other stuff by then.;earth_laughing_dialog;
 ;Okay.;-1;

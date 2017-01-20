@@ -20,7 +20,8 @@
           "targetStatementId": 2,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_angry_dialog"
     },
     "2": {
       "id": 2,
@@ -57,7 +58,8 @@
           "targetStatementId": 4,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "4": {
       "id": 4,
@@ -67,7 +69,8 @@
           "targetStatementId": 5,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "5": {
       "id": 5,

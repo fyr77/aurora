@@ -48,7 +48,8 @@
           "targetStatementId": 81,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_laughing_dialog"
     },
     "81": {
       "id": 81,
@@ -78,7 +79,8 @@
           "targetStatementId": 84,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_laughing_dialog"
     },
     "84": {
       "id": 84,
@@ -138,7 +140,8 @@
           "targetStatementId": 81,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "280": {
       "id": 280,
@@ -148,7 +151,8 @@
           "targetStatementId": 86,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_angry_dialog"
     }
   },
   "flags": {},

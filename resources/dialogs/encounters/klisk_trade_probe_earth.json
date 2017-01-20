@@ -41,7 +41,8 @@
           "targetStatementId": 3,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "3": {
       "id": 3,
@@ -51,7 +52,8 @@
           "targetStatementId": 4,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     },
     "4": {
       "id": 4,
@@ -81,7 +83,8 @@
           "targetStatementId": 7,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_angry_dialog"
     },
     "7": {
       "id": 7,
@@ -91,7 +94,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "earth_puzzled_dialog"
     }
   },
   "flags": {},
