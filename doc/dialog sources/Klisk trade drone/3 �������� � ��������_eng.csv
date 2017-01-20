@@ -3,15 +3,15 @@
 1;Of course you don't. *Martan turns off the devices.* It's been like that for a week. Every two hours. Everywhere on the planet, on everything that even remotely resembles a speaker. The source, as we've found out, is on the orbit, and it's something alien. Do you know anything about this?;;
 ;Yes. I had a feeling it wasn't going to end well.;2;klisk_trader_drone.communicated
 ;I don't, unfortunately.;5;
-2;And what is it?;;
+2;And what is it?;earth_puzzled_dialog;
 ;It's going to make you laugh, but it's a Klisk trading bot.;3;
-3;In that case, I'll go out on a limb and say it's jamming our comms with ads. It would have been funny if it wasn't so sad.;;
+3;In that case, I'll go out on a limb and say it's jamming our comms with ads. It would have been funny if it wasn't so sad.;earth_puzzled_dialog;
 ;What, nothing helps?;4;
 4;What do you think? We need to deal with this.;;
 ;"And I'll be the one ""dealing"" with it, I suppose.";6;
 5;In that case, I have great news: you need to find it out and do something about that thing.;;
 ;That's not news. Or great.;6;
-6;Of course. I'll say it right now: hurry up! I'm not going to tell you it's terribly important, but this ruckus really gets in the way.;;
+6;Of course. I'll say it right now: hurry up! I'm not going to tell you it's terribly important, but this ruckus really gets in the way.;earth_angry_dialog;
 ;My authorizations?;7;
-7;As usual, you have the carte blanche. If you have to, you can destroy the object, but I don't think its owners will like it too much. So try to deal with it peacefully.;;
+7;As usual, you have the carte blanche. If you have to, you can destroy the object, but I don't think its owners will like it too much. So try to deal with it peacefully.;earth_puzzled_dialog;
 ;Well, I'll try. Is that all? Then I have to go.;-1;
