@@ -16,6 +16,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.*;
 import org.newdawn.slick.openal.SoundStore;
+import org.newdawn.slick.openal.StreamSound;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import ru.game.aurora.gui.ExitConfirmationScreenController;
@@ -147,12 +148,16 @@ public class AuroraGame extends NiftyOverlayGame {
         resolutionChangeListeners.add(world);
         world.onResolutionChanged(tilesX, tilesY, isFullScreen());
         mainMenu = null;
+
         if (debugWorldVariables != null) {
             logger.warn("Adding debug variables");
             for (Map.Entry<Object, Object> e : debugWorldVariables.entrySet()) {
-                world.getGlobalVariables().put((String) e.getKey(), (Serializable) e.getValue());
-            }
+                String key = (String) e.getKey();
+                String value = (String) e.getValue();
 
+                logger.warn("Debug variable: " + key + "=" + value);
+                world.getGlobalVariables().put(key, value);
+            }
         }
 
         GUI.getInstance().onWorldLoaded(app, world);
@@ -216,27 +221,56 @@ public class AuroraGame extends NiftyOverlayGame {
         try {
             logger.info("Using Java " + System.getProperty("java.version") + " at " + System.getProperty("java.home"));
             logger.info("Aurora game version " + Version.VERSION + " started");
+
             // allow software rendering for support of older generation cards
             System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true");
 
-            final String osName = System.getProperty("os.name");
+            // args processing
+            boolean noSteam = false;
+            boolean debugVariables = false;
+            String debugVariablesFilePath = null;
 
             if (args.length > 0) {
-                if (args[0].equals("-debugVariables")) {
-                    debugWorldVariables = new Properties();
-                    debugWorldVariables.load(new FileInputStream(args[1]));
+                for (int i = 0; i < args.length; ++i) {
+                    if (args[i] != null) {
+                        switch (args[i]) {
+
+                            case "-noSteam":
+                                noSteam = true;
+                                break;
+
+                            case "-debugVariables":
+                                if(args.length > i+1){
+                                    debugVariables = true;
+                                    debugVariablesFilePath = args[i+1];
+                                    ++i;
+                                }
+                                else{
+                                    logger.error("Debug variables file path is empty. Do not use -debugVariables key or add filepath to arguments");
+                                }
+                                break;
+                        }
+                    }
                 }
             }
 
-            if (args.length == 0 || !args[0].equals("-noSteam")) {
-                if (!SteamAPI.init()) {
-                    logger.error("Failed to initialize steam api");
-                    return;
-                } else {
+            // args -debugVariables
+            if (debugVariables) {
+                loadDebugVariables(debugVariablesFilePath);
+            }
+
+            // args -noSteam
+            if (noSteam) {
+                logger.warn("This is a non-Steam build");
+            }
+            else {
+                if (SteamAPI.init()) {
                     logger.info("SteamAPI successfully initialized");
                 }
-            } else {
-                logger.warn("This is a non-Steam build");
+                else {
+                    logger.error("Failed to initialize steam api");
+                    return;
+                }
             }
 
             // read the steam id file
@@ -250,6 +284,7 @@ public class AuroraGame extends NiftyOverlayGame {
             logger.info("Loaded steam appid " + app);
             AchievementManager.init(Integer.parseInt(appId.trim()));
 
+            final String osName = System.getProperty("os.name");
             String nativePath;
             if (osName.contains("Windows")) {
                 nativePath = "native/windows";
@@ -316,6 +351,25 @@ public class AuroraGame extends NiftyOverlayGame {
         } catch (Exception ex) {
             logger.error("Failed to init game: ", ex);
             throw ex;
+        }
+    }
+
+    private static void loadDebugVariables(String debugVariablesFilePath) throws IOException {
+        if(debugVariablesFilePath != null && !debugVariablesFilePath.isEmpty()){
+            File debugFile = new File(debugVariablesFilePath);
+
+            if(debugFile.exists() && !debugFile.isDirectory()) {
+                debugWorldVariables = new Properties();
+                debugWorldVariables.load(new FileInputStream(debugVariablesFilePath));
+                logger.info("Debug variables loaded from \"" + debugVariablesFilePath + "\"");
+            }
+            else{
+                throw new FileNotFoundException("Debug variables file \"" + debugVariablesFilePath + "\" not exist");
+            }
+        }
+        else{
+            logger.error("Debug variables file path is empty. Do not use -debugVariables key or add filepath to arguments");
+            return;
         }
     }
 

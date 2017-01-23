@@ -109,11 +109,13 @@ public class Earth extends BasePlanet {
     private void addQuestFlags(World world, Map<String, String> flags) {
         // check for embassies quest
         if (!world.getGlobalVariables().containsKey("diplomacy.all_done")
-                && world.getGlobalVariables().containsKey("diplomacy.klisk_visited")
-                && world.getGlobalVariables().containsKey("diplomacy.bork_visited")
-                && world.getGlobalVariables().containsKey("diplomacy.zorsan_visited")
-                && world.getGlobalVariables().containsKey("diplomacy.rogues_visited")
-                ) {
+            && world.getGlobalVariables().containsKey("diplomacy.klisk_visited")
+            && world.getGlobalVariables().containsKey("diplomacy.bork_visited")
+            && world.getGlobalVariables().containsKey("diplomacy.zorsan_visited")
+            && world.getGlobalVariables().containsKey("diplomacy.rogues_visited")
+            && world.getGlobalVariables().containsKey("klisk_trade.quest_result")
+            && world.getGlobalVariables().containsKey("bork.diplomacy_test"))
+        {
             flags.put("diplomacy.all_done", "0");
         }
     }

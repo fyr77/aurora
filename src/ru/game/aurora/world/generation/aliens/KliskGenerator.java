@@ -8,6 +8,7 @@ package ru.game.aurora.world.generation.aliens;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import org.lwjgl.Sys;
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
@@ -116,7 +117,6 @@ public class KliskGenerator implements WorldGeneratorPart {
                     world.getGlobalVariables().remove("klisk_trade.result");
                     world.getGlobalVariables().put("klisk_trade.quest_result", tradeResult);
                 }
-
             }
         });
 
@@ -187,7 +187,7 @@ public class KliskGenerator implements WorldGeneratorPart {
                     // no quest
                     world.getReputation().updateReputation(KliskGenerator.NAME, HumanityGenerator.NAME, -1);
                     world.getPlayer().getJournal().addQuestEntries("embassies", "klisk_quest_refused");
-
+                    world.getGlobalVariables().put("klisk_trade.quest_result", "refused");
                 } else {
                     // accepts a quest
                     world.addOverlayWindow(Dialog.loadFromFile("dialogs/klisk/klisk_trade_quest_start.json"));

@@ -26,9 +26,10 @@ public class EmbassiesQuest implements WorldGeneratorPart {
     public static void updateJournal(World world, String key) {
         world.getPlayer().getJournal().addQuestEntries("embassies", key);
         if (world.getGlobalVariables().containsKey("diplomacy.klisk_visited")
-                && world.getGlobalVariables().containsKey("diplomacy.bork_visited")
-                && world.getGlobalVariables().containsKey("diplomacy.zorsan_visited")
-                && world.getGlobalVariables().containsKey("diplomacy.rogues_visited")) {
+            && world.getGlobalVariables().containsKey("diplomacy.bork_visited")
+            && world.getGlobalVariables().containsKey("diplomacy.zorsan_visited")
+            && world.getGlobalVariables().containsKey("diplomacy.rogues_visited"))
+        {
             world.getPlayer().getJournal().addQuestEntries("embassies", "end");
             world.getPlayer().getJournal().questCompleted("embassies");
         }
