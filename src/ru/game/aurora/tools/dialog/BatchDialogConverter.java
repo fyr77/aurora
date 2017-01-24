@@ -9,7 +9,6 @@ package ru.game.aurora.tools.dialog;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import ru.game.aurora.util.EngineUtils;
 
 import java.io.*;

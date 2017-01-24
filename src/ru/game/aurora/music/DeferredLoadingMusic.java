@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.GlobalThreadPool;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.lang.ref.SoftReference;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;

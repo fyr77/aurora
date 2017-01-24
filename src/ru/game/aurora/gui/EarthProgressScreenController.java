@@ -13,17 +13,12 @@ import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.spi.render.RenderFont;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
 import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.player.research.Geodata;
 import ru.game.aurora.player.research.ResearchProjectDesc;
 import ru.game.aurora.player.research.ResearchState;
 import ru.game.aurora.util.Pair;
-import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
 import java.util.LinkedList;

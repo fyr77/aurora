@@ -16,7 +16,6 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.*;
 import org.newdawn.slick.openal.SoundStore;
-import org.newdawn.slick.openal.StreamSound;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import ru.game.aurora.gui.ExitConfirmationScreenController;

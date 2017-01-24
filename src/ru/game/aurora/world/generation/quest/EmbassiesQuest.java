@@ -1,6 +1,5 @@
 package ru.game.aurora.world.generation.quest;
 
-import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.player.earth.PrivateMessage;

@@ -3,13 +3,8 @@ package ru.game.aurora.gui;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
-import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 
 /**

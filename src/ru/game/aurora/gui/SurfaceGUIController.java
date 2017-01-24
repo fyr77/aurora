@@ -24,8 +24,6 @@ import ru.game.aurora.world.*;
 import ru.game.aurora.world.planet.LandingParty;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
-import ru.game.aurora.world.space.GalaxyMap;
-import ru.game.aurora.world.space.StarSystem;
 
 
 public class SurfaceGUIController extends GameEventListener implements GameLogger.LoggerAppender, ScreenController, Updatable {

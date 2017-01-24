@@ -12,8 +12,6 @@ import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.world.World;
 
-import java.util.Date;
-
 public class PrivateMessage extends ItemWithTextAndImage {
     private static final long serialVersionUID = 1L;
 

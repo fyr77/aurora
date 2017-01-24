@@ -7,7 +7,6 @@
 package ru.game.aurora.world.dungeon;
 
 import ru.game.aurora.application.AuroraGame;
-import ru.game.aurora.common.Drawable;
 import ru.game.aurora.world.AuroraTiledMap;
 import ru.game.aurora.world.BaseGameObject;
 

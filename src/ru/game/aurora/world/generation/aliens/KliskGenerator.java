@@ -8,7 +8,6 @@ package ru.game.aurora.world.generation.aliens;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
-import org.lwjgl.Sys;
 import org.newdawn.slick.Color;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Configuration;
