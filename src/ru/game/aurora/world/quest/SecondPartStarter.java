@@ -1,6 +1,7 @@
 package ru.game.aurora.world.quest;
 
 import org.slf4j.LoggerFactory;
+import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.gui.FadeOutScreenController;
 import ru.game.aurora.gui.GUI;
@@ -14,8 +15,10 @@ import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.AlienHomeworld;
 import ru.game.aurora.world.space.StarSystem;
-import ru.game.aurora.world.space.StarSystemListFilter;
 import ru.game.aurora.world.space.earth.Earth;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by User on 07.01.2017.
@@ -25,8 +28,6 @@ public class SecondPartStarter {
 
     private static final long serialVersionUID = 3401155966034871085L;
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SecondPartStarter.class);
-
-    private static final int COLONY_FOUND_RADIUS_FROM_EARTH = 50;
 
     public void start(final World world) {
         world.getGlobalVariables().put("2nd_part", true);
@@ -80,7 +81,7 @@ public class SecondPartStarter {
     }
 
     private void removeObliteratorBackground(final World world) {
-        // Remove Obliterator background from cloned star system (MainQuestGenerator)
+        // todo: remove Obliterator background from cloned star system (MainQuestGenerator)
     }
 
     private void updateColony(final World world) {
@@ -128,56 +129,64 @@ public class SecondPartStarter {
     }
 
     private void colonyFound(World world) {
-        StarSystem solarSystem = (StarSystem)world.getGlobalVariables().get("solar_system");
-        if(solarSystem == null){
-            logger.error("Solar system not found - colony creating failed");
-            return;
+        int x = 0;
+        int y = 0;
+
+        Matcher m = Pattern.compile("\\d+").matcher((String)world.getGlobalVariables().get("colony_search.klisk_coords"));
+        try {
+            if (m.find()) {
+                x = Integer.parseInt(m.group());
+
+                if(m.find()) {
+                    y = Integer.parseInt(m.group());
+                }
+            }
+            else {
+                logger.error("Cant parse 'colony_search.klisk_coords' - no coordinates data");
+            }
+        }
+        catch (NumberFormatException e){
+            logger.error("Cant parse 'colony_search.klisk_coords' coordinates.");
         }
 
-        StarSystem colonyStarSystem = world.getGalaxyMap().getRandomNonQuestStarsystemInRange(solarSystem.getX(), solarSystem.getY(), COLONY_FOUND_RADIUS_FROM_EARTH,
-            new StarSystemListFilter() {
-            @Override
-            public boolean filter(StarSystem ss) {
-                BasePlanet[] planets = ss.getPlanets();
-                if(planets.length == 0){
-                    return false;
-                }
+        Object obj = world.getGalaxyMap().getObjectAt(x, y);
+        if(obj != null && obj instanceof StarSystem){
+            StarSystem colonyStarSystem = (StarSystem)obj;
 
-                for (int i = 0; i < planets.length; ++i){
-                    if(planets[i] != null && planets[i].getSize() == 3){
-                        // atmosphere is not important(?)
-                        return true;
-                    }
+            BasePlanet[] planets = colonyStarSystem.getPlanets();
+            for(int i = 0; i < planets.length; ++i){
+                if(planets[i] != null && planets[i].getSize() == 3 && planets[i].getAtmosphere() == PlanetAtmosphere.BREATHABLE_ATMOSPHERE){
+                    // create colony here
+                    AlienHomeworld newColonyPlanet = buildColonyPlanet(world, planets[i]);
+                    planets[i] = buildColonyPlanet(world, planets[i]);
+                    world.getGlobalVariables().put("colony_established", true);
+                    world.getGlobalVariables().put("colony_search.coords", newColonyPlanet);
+                    logger.info("Colony found in star system " + colonyStarSystem.getCoordsString());
+                    break;
                 }
-                return false;
             }
-        });
-
-        BasePlanet[] planets = colonyStarSystem.getPlanets();
-        for(int i = 0; i < planets.length; ++i){
-            if(planets[i] != null && planets[i].getSize() == 3){
-                // create colony here
-                AlienHomeworld newColonyPlanet = buildColonyPlanet(world, planets[i]);
-                planets[i] = buildColonyPlanet(world, planets[i]);
-                world.getGlobalVariables().put("colony_established", true);
-                world.getGlobalVariables().put("colony_search.coords", newColonyPlanet);
-                logger.info("Colony found in star system " + colonyStarSystem.getCoordsString());
-                break;
-            }
+        }
+        else{
+            logger.error("Colony founding fail. Object [" + x + "," + y + "] is not star system.");
         }
     }
 
     private AlienHomeworld buildColonyPlanet(World world, BasePlanet sourcePlanet){
         return new AlienHomeworld(
-                "earth", // todo: change colony sprite
+                null,
                 ((AlienRace) world.getFactions().get("Humanity")),
-                null, // todo: add dialog
+                loadDialog(),
                 sourcePlanet.getSize(),
                 sourcePlanet.getY(),
                 sourcePlanet.getOwner(),
                 PlanetAtmosphere.BREATHABLE_ATMOSPHERE,
                 sourcePlanet.getX(),
                 PlanetCategory.PLANET_ROCK);
+    }
+
+    private Dialog loadDialog() {
+        // todo: build full colony dialog
+        return Dialog.loadFromFile("dialogs/act2/colony_line/colony_dialog_before_landing.json");
     }
 
     private void startQuests(final World world) {

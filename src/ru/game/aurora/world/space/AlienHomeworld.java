@@ -55,7 +55,13 @@ public class AlienHomeworld extends BasePlanet {
     @Override
     public void drawOnGlobalMap(GameContainer container, Graphics graphics, Camera camera, int tileX, int tileY) {
         if ((planetImage == null) || x != oldX || y != oldY) {
-            planetImage = ResourceManager.getInstance().getImage(spriteName);
+            if(spriteName == null){
+                planetImage = PlanetSpriteGenerator.getInstance().createPlanetSprite(camera, this);
+            }
+            else{
+                planetImage = ResourceManager.getInstance().getImage(spriteName);
+            }
+
             double theta = Math.atan2(y, x);
             float shadowXFactor = (float) (0.5 - Math.cos(theta) * 0.25);
             float shadowYFactor = (float) (0.5 - Math.sin(theta) * 0.25);
