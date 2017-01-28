@@ -54,8 +54,7 @@ public class World implements Serializable, ResolutionChangeListener {
     private final Map<String, Faction> factions = new HashMap<>();
     private final Map<String, Serializable> globalVariables = new HashMap<>();
     private final RnDSet researchAndDevelopmentProjects;
-    // to distinguish save games made by different players
-    private final UUID uuid;
+
     private Camera camera;
     /**
      * Set by game logic, shows that game is over and on next update this world will be deallocated and main menu will be shown
@@ -83,7 +82,6 @@ public class World implements Serializable, ResolutionChangeListener {
         researchAndDevelopmentProjects = new RnDSet();
         reputation = new Reputation();
         currentDate = new GregorianCalendar(Configuration.getIntProperty("world.startYear"), 1, 1);
-        uuid = UUID.randomUUID();
         
         world = this;
     }
@@ -234,6 +232,11 @@ public class World implements Serializable, ResolutionChangeListener {
 
     public int getDayCount() {
         return dayCount;
+    }
+
+    public void addDays(int days){
+        currentDate.add(Calendar.DAY_OF_MONTH, days);
+        dayCount += days;
     }
 
     public void onPlayerEnteredSystem(StarSystem ss) {
@@ -537,10 +540,6 @@ public class World implements Serializable, ResolutionChangeListener {
         Camera oldCamera = camera;
         camera = new Camera(0, 0, tilesX, tilesY, AuroraGame.tileSize, AuroraGame.tileSize);
         camera.setTarget(oldCamera.getTarget());
-    }
-
-    public UUID getUuid() {
-        return uuid;
     }
 
     public void checkCheats() {
