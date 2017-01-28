@@ -54,6 +54,8 @@ public class World implements Serializable, ResolutionChangeListener {
     private final Map<String, Faction> factions = new HashMap<>();
     private final Map<String, Serializable> globalVariables = new HashMap<>();
     private final RnDSet researchAndDevelopmentProjects;
+    // to distinguish save games made by different players
+    private final UUID uuid;
 
     private Camera camera;
     /**
@@ -82,7 +84,8 @@ public class World implements Serializable, ResolutionChangeListener {
         researchAndDevelopmentProjects = new RnDSet();
         reputation = new Reputation();
         currentDate = new GregorianCalendar(Configuration.getIntProperty("world.startYear"), 1, 1);
-        
+        uuid = UUID.randomUUID();
+
         world = this;
     }
 
@@ -532,6 +535,10 @@ public class World implements Serializable, ResolutionChangeListener {
 
     public String getCurrentDateString() {
         return dateFormat.format(currentDate.getTimeInMillis());
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     @Override
