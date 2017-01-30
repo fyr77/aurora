@@ -1,0 +1,137 @@
+{
+  "id": "unity_station_embassy_choice",
+  "iconName": "interior_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "4"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "3"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0",
+          "flags": {
+            "unity_zorsan_ambassador_visited": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1",
+          "flags": {
+            "unity_zorsan_ambassador_visited": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "2",
+          "flags": {
+            "unity_zorsan_ambassador_visited": "true"
+          }
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

@@ -1,0 +1,599 @@
+{
+  "id": "unity_station_embassy_bork",
+  "iconName": "bork_vip_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1"
+        }
+      ],
+      "customIcon": "interior_dialog"
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "0"
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "4"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "5"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "6"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "7"
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "4"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "5"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "6"
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "4"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "5"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "6"
+        }
+      ],
+      "customIcon": " впрочем, политика… в ней нет морали, у вас на Земле наверняка об этом знают."
+    },
+    "10": {
+      "id": 10,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "4"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "5"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "6"
+        }
+      ]
+    },
+    "11": {
+      "id": 11,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "0"
+        }
+      ]
+    },
+    "12": {
+      "id": 12,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "3"
+        }
+      ]
+    },
+    "13": {
+      "id": 13,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "2"
+        }
+      ]
+    },
+    "14": {
+      "id": 14,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "2"
+        }
+      ],
+      "customIcon": " учтите - там живут не люди, или, если сказано излишне сильно, не такие люди, к каким вы привыкли."
+    },
+    "15": {
+      "id": 15,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "2"
+        }
+      ]
+    },
+    "16": {
+      "id": 16,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "4"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "5"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "6"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "7"
+        }
+      ]
+    },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "unity_klisk_ambassador_visited",
+              "type": "SET"
+            }
+          ]
+        }
+      ],
+      "customIcon": " вы же понимаете, что стоит вам или зорсанам нарушить хоть одно правило конвенции… *Борк постукивает сильными пальцами по окну.* многие хотят, чтобы их нарушили вы, не зорсаны, имейте в виду."
+    },
+    "18": {
+      "id": 18,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "0"
+        }
+      ]
+    },
+    "19": {
+      "id": 19,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "0"
+        }
+      ]
+    },
+    "20": {
+      "id": 20,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "0"
+        }
+      ]
+    },
+    "21": {
+      "id": 21,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "4"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "5"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "6"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "7"
+        }
+      ]
+    },
+    "22": {
+      "id": 22,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "0"
+        }
+      ]
+    },
+    "23": {
+      "id": 23,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "3"
+        }
+      ],
+      "customIcon": " С бродягами - участвуют в одном из их молебнов об Опустошителе-Пожирателе"
+    },
+    "24": {
+      "id": 24,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "2"
+        }
+      ]
+    },
+    "25": {
+      "id": 25,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "2"
+        }
+      ]
+    },
+    "26": {
+      "id": 26,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 27,
+          "replyText": "0"
+        }
+      ]
+    },
+    "27": {
+      "id": 27,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "2"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

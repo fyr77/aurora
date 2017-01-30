@@ -1,0 +1,10 @@
+1Разговор с Мартаном сразу после слайдов.csv;act_2_begin_martan;earth_dialog;act2\quest_union\
+2Связь со станцией Единства в космосе, перед стыковской.csv;unity_station_docking;rogues_dialog;act2\quest_union\
+3В Единстве.csv;unity_station_inside;bork_dialog;act2\quest_union\
+4Совещание.csv;unity_station_meeting;europe_leader;act2\quest_union\
+5После отдыха в столовой, момент выбора к кому из послов идти.csv;unity_station_intermission;interior_dialog;act2\quest_union\
+6Выбор, в какое посольство идти.csv;unity_station_embassy_choice;interior_dialog;act2\quest_union\
+7Посольство клисков.csv;unity_station_embassy_klisk;klisk_dialog;act2\quest_union\
+8Посольство борков.csv;unity_station_embassy_bork;bork_vip_dialog;act2\quest_union\
+9Посольство бродяг.csv;unity_station_embassy_rogues;rogues_dialog;act2\quest_union\
+10После разговоров с послами.csv;unity_station_after_dialogue_with_ambassadors;interior_dialog;act2\quest_union\
