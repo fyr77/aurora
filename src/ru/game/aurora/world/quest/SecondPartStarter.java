@@ -1,6 +1,7 @@
 package ru.game.aurora.world.quest;
 
 import org.slf4j.LoggerFactory;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.IntroDialog;
@@ -219,11 +220,14 @@ public class SecondPartStarter implements WorldGeneratorPart {
             logger.info("Unity station founded in " + unityStarSystem.getCoordsString());
 
             NPC capitan = new NPC(getUnityStationDialog());
-            NPCShip spaceStation = new NPCShip(5, 5, "rogues_beacon", world.getFactions().get(RoguesGenerator.NAME), capitan, "Unity station", 90);
+            NPCShip spaceStation = new NPCShip(0, 0, "rogues_beacon", world.getFactions().get(RoguesGenerator.NAME), capitan, "Unity station", 90);
+            setStationPosition(unityStarSystem.getPlanets(), spaceStation, unityStarSystem.getRadius()/2);
             spaceStation.setStationary(true);
             spaceStation.setAi(null);
 
             unityStarSystem.getShips().add(spaceStation);
+            unityStarSystem.setQuestLocation(true);
+
             world.getGlobalVariables().put("unity_station_system", unityStarSystem);
         }
         else{
@@ -231,8 +235,24 @@ public class SecondPartStarter implements WorldGeneratorPart {
         }
     }
 
+    private void setStationPosition(BasePlanet[] planets, NPCShip spaceStation, final int radius) {
+        int y = CommonRandom.getRandom().nextInt(2 * radius) - radius;
+        int x = (int) (Math.sqrt(radius * radius - y * y) * (CommonRandom.getRandom().nextBoolean() ? -1 : 1));
+
+        // Remove planet overlap
+        if(planets != null && planets.length > 0){
+            for(int i = 0; i < planets.length; ++i){
+                if(planets[i].getX() == x && planets[i].getY() == y){
+                    x += 2;
+                    y += 2;
+                }
+            }
+        }
+
+        spaceStation.setPos(y, x);
+    }
+
     private Dialog getUnityStationDialog() {
-        // TODO: 04.02.2017 add dialogs avatars
         final Dialog startDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_docking.json");
         final Dialog insideDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_inside.json");
         final Dialog meettingDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_meeting.json");
@@ -383,6 +403,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
                     world.getPlayer().getJournal().questCompleted("unity", "klisk_quest_reject");
                 }
 
+                // todo: add default 'Unity station dialog'
                 // todo: start quest "The burden of the metropolis"
                 // todo: after quest "The burden of the metropolis" start quest "On the trail of the Builders" and "Klisk pirate"
             }
@@ -439,7 +460,6 @@ public class SecondPartStarter implements WorldGeneratorPart {
 
     private void startUnityQuest(final World world) {
         Dialog startDialog = Dialog.loadFromFile("dialogs/act2/quest_union/act_2_begin_martan.json");
-
         startDialog.addListener(new DialogListener() {
             private static final long serialVersionUID = 4488508909100895730L;
 
@@ -450,7 +470,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
         });
 
         world.addOverlayWindow(startDialog);
-        world.addListener(new UnityQuest());
+        world.addListener(new UnityQuest(world));
         world.getPlayer().getJournal().addQuestEntries("unity", "start");
     }
 
