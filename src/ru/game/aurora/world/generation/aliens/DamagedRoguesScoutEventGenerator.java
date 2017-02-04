@@ -141,7 +141,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
                 damagedRogueScout.setAi(new LeaveSystemAI());
                 damagedRogueScout.setStationary(false);
                 damagedRogueScout.setCaptain(new NPC(
-                        Dialog.loadFromFile("dialogs/rogues/rogue_damaged_scout_after_help.json")
+                    Dialog.loadFromFile("dialogs/rogues/rogue_damaged_scout_after_help.json")
                 ));
             }
 

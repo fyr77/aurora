@@ -2,21 +2,28 @@ package ru.game.aurora.world.quest;
 
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.gui.FadeOutScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.IntroDialogController;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.NPC;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
 import ru.game.aurora.world.planet.PlanetCategory;
 import ru.game.aurora.world.space.AlienHomeworld;
+import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.space.StarSystemListFilter;
 import ru.game.aurora.world.space.earth.Earth;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +31,7 @@ import java.util.regex.Pattern;
  * Created by User on 07.01.2017.
  * This code starts second part of a global plot, after Obliterator visits Solar system
  */
-public class SecondPartStarter {
+public class SecondPartStarter implements WorldGeneratorPart {
 
     private static final long serialVersionUID = 3401155966034871085L;
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SecondPartStarter.class);
@@ -67,12 +74,25 @@ public class SecondPartStarter {
     }
 
     public void updateWorld(final World world) {
+        world.getGlobalVariables().put("autosave_disabled", true);
+
+        StarSystem solarSystem = (StarSystem)world.getGlobalVariables().get("solar_system");
+        if(solarSystem == null){
+            logger.error("Solar system not found");
+            return;
+        }
+
         // Apply Act II world changes
         updateYear(world);
         removeObliteratorBackground(world);
         updateColony(world);
-        startQuests(world);
-        movePlayerShipToEarth(world);
+        addUnityStation(world, solarSystem);
+        movePlayerShipToEarth(world, solarSystem);
+
+        //
+        world.getGlobalVariables().remove("autosave_disabled");
+
+        startUnityQuest(world);
     }
 
     private void updateYear(final World world) {
@@ -175,7 +195,7 @@ public class SecondPartStarter {
         return new AlienHomeworld(
                 null,
                 ((AlienRace) world.getFactions().get("Humanity")),
-                loadDialog(),
+                loadColonyDialog(),
                 sourcePlanet.getSize(),
                 sourcePlanet.getY(),
                 sourcePlanet.getOwner(),
@@ -184,25 +204,215 @@ public class SecondPartStarter {
                 PlanetCategory.PLANET_ROCK);
     }
 
-    private Dialog loadDialog() {
-        // todo: build full colony dialog
+    private Dialog loadColonyDialog() {
+        // todo: build full colony dialog (quest "The burden of the metropolis")
         return Dialog.loadFromFile("dialogs/act2/colony_line/colony_dialog_before_landing.json");
     }
 
-    private void startQuests(final World world) {
-        world.addListener(new UnityQuest());
-        world.getPlayer().getJournal().addQuestEntries("unity", "start");
-        world.getPlayer().getJournal().addQuestEntries("colony_negotiation", "start");
+    private void addUnityStation(World world, StarSystem solarSystem) {
+        int range = 50;
+        StarSystem unityStarSystem = world.getGalaxyMap().getRandomNonQuestStarsystemInRange(solarSystem.getX(), solarSystem.getY(), range, null);
+
+        if(unityStarSystem != null){
+            logger.info("Unity station founded in " + unityStarSystem.getCoordsString());
+
+            NPC capitan = new NPC(getUnityStationDialog());
+            NPCShip spaceStation = new NPCShip(5, 5, "rogues_beacon", world.getFactions().get(RoguesGenerator.NAME), capitan, "Unity station", 90);
+            spaceStation.setStationary(true);
+            spaceStation.setAi(null);
+
+            unityStarSystem.getShips().add(spaceStation);
+            world.getGlobalVariables().put("unity_station_system", unityStarSystem);
+        }
+        else{
+            logger.error("Unity station cant founded");
+        }
     }
 
-    private void movePlayerShipToEarth(final World world) {
-        // Replace Aurora to start position
-        StarSystem solarSystem = (StarSystem)world.getGlobalVariables().get("solar_system");
-        if(solarSystem == null){
-            logger.error("Solar system not found");
-            return;
-        }
+    private Dialog getUnityStationDialog() {
+        // TODO: 04.02.2017 add dialogs avatars
+        final Dialog startDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_docking.json");
+        final Dialog insideDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_inside.json");
+        final Dialog meettingDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_meeting.json");
+        final Dialog intermissionDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_intermission.json");
+        final Dialog embassyChoiceDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_embassy_choice.json");
+        final Dialog kliskEmbassyDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_embassy_klisk.json");
+        final Dialog borkEmbassyDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_embassy_bork.json");
+        final Dialog roguesEmbassyDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_embassy_rogues.json");
+        final Dialog endDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_after_dialogue_with_ambassadors.json");
 
+        // docking
+        startDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = -2371433038571672351L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                world.getPlayer().getJournal().addQuestEntries("unity", "inside");
+                world.addOverlayWindow(insideDialog, flags);
+            }
+        });
+
+        // inside
+        insideDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = 8780263868110509203L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                if(world.getGlobalVariables().containsKey("zorsan_escape_victims")){
+                    String victims = (String) world.getGlobalVariables().get("zorsan_escape_victims");
+                    flags.put("zorsan_escape_victims", victims);
+                    logger.info("flag 'zorsan_escape_victims'=" + victims);
+                }
+
+                world.addOverlayWindow(meettingDialog, flags);
+            }
+        });
+
+        // meeting
+        meettingDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = 8780263868110509203L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                world.addOverlayWindow(intermissionDialog, flags);
+            }
+        });
+
+        // intermission
+        intermissionDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = 2670006195502711335L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                createKliskPirateBase();
+                world.addOverlayWindow(embassyChoiceDialog, flags);
+            }
+        });
+
+        // embassy choise
+        embassyChoiceDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = 3854381839777885936L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                switch (returnCode){
+                    case 1:
+                        world.addOverlayWindow(kliskEmbassyDialog, flags);
+                        break;
+
+                    case 2:
+                        world.addOverlayWindow(borkEmbassyDialog, flags);
+                        break;
+
+                    case 3:
+                        world.addOverlayWindow(roguesEmbassyDialog, flags);
+                        break;
+
+                    default:
+                        throw new IllegalStateException("Unknown 'dialogs/act2/quest_union/unity_station_embassy_choice.json' dialog returnCode " + returnCode);
+                }
+            }
+        });
+
+        // klisk embassy
+        kliskEmbassyDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = 5531196549355238685L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                if(flags.containsKey("klisk_pirate_quest_accept")){
+                    // dialog flag: klisk_pirate_quest_accept
+                    logger.info("Quest Klisk Pirate accepted");
+                    world.getGlobalVariables().put("klisk_pirate.started", true);
+                }
+                else {
+                    // dialog flag: klisk_pirate_quest_reject
+                    logger.info("Quest Klisk Pirate rejected");
+                    world.getGlobalVariables().put("klisk_pirate.quest_result", "rejected");
+                }
+
+                if(flags.containsKey("unity_bork_ambassador_visited")
+                && flags.containsKey("unity_rogues_ambassador_visited")){
+                    world.addOverlayWindow(endDialog, flags);
+                }
+                else{
+                    world.addOverlayWindow(embassyChoiceDialog, flags);
+                }
+            }
+        });
+
+        // bork embassy
+        borkEmbassyDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = 8123031492187245360L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                if(flags.containsKey("unity_klisk_ambassador_visited")
+                && flags.containsKey("unity_rogues_ambassador_visited")){
+                    world.addOverlayWindow(endDialog, flags);
+                }
+                else{
+                    world.addOverlayWindow(embassyChoiceDialog, flags);
+                }
+            }
+        });
+
+        // rogues embassy
+        roguesEmbassyDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = -5792100234277240314L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                createBuildersArtifacts();
+
+                if(flags.containsKey("unity_bork_ambassador_visited")
+                && flags.containsKey("unity_klisk_ambassador_visited")){
+                    world.addOverlayWindow(endDialog, flags);
+                }
+                else{
+                    world.addOverlayWindow(embassyChoiceDialog, flags);
+                }
+            }
+        });
+
+        // end dialog
+        endDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = 5531196549355238685L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                if(world.getGlobalVariables().containsKey("klisk_pirate.started")){
+                    world.getPlayer().getJournal().questCompleted("unity", "klisk_quest_start");
+                }
+                else if(world.getGlobalVariables().containsKey("klisk_pirate.quest_result") && world.getGlobalVariables().get("klisk_pirate.quest_result").equals("rejected")){
+                    world.getPlayer().getJournal().questCompleted("unity", "klisk_quest_reject");
+                }
+
+                // todo: start quest "The burden of the metropolis"
+                // todo: after quest "The burden of the metropolis" start quest "On the trail of the Builders" and "Klisk pirate"
+            }
+        });
+
+        return startDialog;
+    }
+
+    private void createKliskPirateBase() {
+        World world = World.getWorld();
+
+        final int x = world.getCurrentStarSystem().getX();
+        final int y = world.getCurrentStarSystem().getY();
+        StarSystem questStarSystem = world.getGalaxyMap().getRandomNonQuestStarsystemInRange(x, y, 100, new StarSystemListFilter() {
+            @Override
+            public boolean filter(StarSystem system) {
+                return  system.getPlanets().length > 1;
+            }
+        });
+
+        BasePlanet questPlanet = questStarSystem.getPlanets()[0];
+        // todo: place pirate base on planet
+
+        world.getGlobalVariables().put("klisk_pirate.planet", questPlanet);
+        world.getGlobalVariables().put("klisk_pirate.coords", questStarSystem.getCoordsString());
+        logger.info("Klisk pirate base placed in " + questStarSystem.getCoordsString());
+    }
+
+    private void createBuildersArtifacts() {
+        // todo: add 4 quest star systems (quest "On the trail of the Builders")
+    }
+
+    private void movePlayerShipToEarth(final World world, StarSystem solarSystem) {
+        // Replace Aurora to Earth orbit
         BasePlanet earth = null;
         BasePlanet [] planets = solarSystem.getPlanets();
         for(int i = 0; i < planets.length; ++i){
@@ -221,5 +431,12 @@ public class SecondPartStarter {
         world.setCurrentRoom(solarSystem);
         solarSystem.enter(world);
         world.getPlayer().getShip().setPos(earth.getX(), earth.getY());
+    }
+
+    private void startUnityQuest(World world) {
+        world.addOverlayWindow(Dialog.loadFromFile("dialogs/act2/quest_union/act_2_begin_martan.json"));
+
+        world.addListener(new UnityQuest());
+        world.getPlayer().getJournal().addQuestEntries("unity", "start");
     }
 }

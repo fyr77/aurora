@@ -7,27 +7,54 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 3,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 6,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 5,
-          "replyText": "2"
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "unity_klisk_ambassador_visited",
+              "type": "NOT_SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
           "targetStatementId": 2,
-          "replyText": "3"
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "unity_rogues_ambassador_visited",
+              "type": "NOT_SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
-          "targetStatementId": 1,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "unity_bork_ambassador_visited",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "unity_zorsan_ambassador_visited",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "unity_zorsan_ambassador_visited": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
           "replyText": "4"
         }
       ]
@@ -37,23 +64,13 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 3,
+          "targetStatementId": 6,
           "replyText": "0"
         },
         {
-          "returnValue": 0,
-          "targetStatementId": 6,
+          "returnValue": 1,
+          "targetStatementId": -1,
           "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 5,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 2,
-          "replyText": "3"
         }
       ]
     },
@@ -61,28 +78,9 @@
       "id": 2,
       "replies": [
         {
-          "returnValue": 0,
-          "targetStatementId": 3,
-          "replyText": "0",
-          "flags": {
-            "unity_zorsan_ambassador_visited": "true"
-          }
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 6,
-          "replyText": "1",
-          "flags": {
-            "unity_zorsan_ambassador_visited": "true"
-          }
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 5,
-          "replyText": "2",
-          "flags": {
-            "unity_zorsan_ambassador_visited": "true"
-          }
+          "returnValue": 3,
+          "targetStatementId": -1,
+          "replyText": "0"
         }
       ]
     },
@@ -90,14 +88,9 @@
       "id": 3,
       "replies": [
         {
-          "returnValue": 0,
-          "targetStatementId": 4,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
+          "returnValue": 2,
           "targetStatementId": -1,
-          "replyText": "1"
+          "replyText": "0"
         }
       ]
     },
@@ -106,8 +99,45 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "unity_klisk_ambassador_visited",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "unity_zorsan_ambassador_visited": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "unity_rogues_ambassador_visited",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "unity_zorsan_ambassador_visited": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "unity_bork_ambassador_visited",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "unity_zorsan_ambassador_visited": "true"
+          }
         }
       ]
     },
@@ -116,8 +146,50 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "unity_klisk_ambassador_visited",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "unity_rogues_ambassador_visited",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "unity_bork_ambassador_visited",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "unity_zorsan_ambassador_visited",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "unity_zorsan_ambassador_visited": "true"
+          }
         }
       ]
     },
@@ -125,7 +197,7 @@
       "id": 6,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 1,
           "targetStatementId": -1,
           "replyText": "0"
         }

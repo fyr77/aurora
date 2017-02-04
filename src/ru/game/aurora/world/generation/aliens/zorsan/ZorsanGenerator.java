@@ -140,7 +140,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                 } else if (dialog.getId().equals(planetSightseeingDialog.getId())) {
 
                     // set as much marines as possible in a landing party
-                    LandingParty party = world.getPlayer().getLandingParty();
+                    final LandingParty party = world.getPlayer().getLandingParty();
 
                     Ship ship = world.getPlayer().getShip();
                     if (party.getTotalMembers() < 10) {
@@ -156,6 +156,21 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                     }
                     Dungeon dungeon = new Dungeon(world, new AuroraTiledMap("maps/zor_escape.tmx"), ss);
                     dungeon.setEnterDialog(zorsanFinalDialog);
+
+                    escapeDialog.addListener(new DialogListener() {
+                        private static final long serialVersionUID = -1708454732990868657L;
+                        @Override
+                        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                            // flag 'zorsan_escape_victims' used in some 'Unity' quest dialogs (v0.6 by 04.02.2017)
+                            // TODO: 04.02.2017 Need completely test of this encounter
+                            if(party.getMilitary() == 10){
+                                world.getGlobalVariables().put("zorsan_escape_victims", 0);
+                            }
+                            else{
+                                world.getGlobalVariables().put("zorsan_escape_victims", (10 - party.getMilitary()));
+                            }
+                        }
+                    });
                     dungeon.setSuccessDialog(escapeDialog);
                     dungeon.setCommanderInParty(true); // loosing this dungeon will lead to a gameover
                     dungeon.setPlaylistName("dungeon_invasion");

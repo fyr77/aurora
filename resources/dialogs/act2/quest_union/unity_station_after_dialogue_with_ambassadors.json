@@ -42,28 +42,18 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 5,
+          "targetStatementId": 4,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 4,
+          "targetStatementId": 5,
           "replyText": "1"
         }
       ]
     },
     "4": {
       "id": 4,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 5,
-          "replyText": "0"
-        }
-      ]
-    },
-    "5": {
-      "id": 5,
       "replies": [
         {
           "returnValue": 0,
@@ -74,6 +64,16 @@
           "returnValue": 0,
           "targetStatementId": 7,
           "replyText": "1"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
         }
       ]
     },
@@ -112,7 +112,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 11,
+          "targetStatementId": 10,
           "replyText": "0",
           "replyConditions": [
             {
@@ -123,17 +123,23 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 15,
+          "targetStatementId": 11,
           "replyText": "1"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 17,
-          "replyText": "2"
+          "targetStatementId": 12,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "unity_zorsan_ambassador_visited",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
-          "targetStatementId": 10,
+          "targetStatementId": 13,
           "replyText": "3",
           "replyConditions": [
             {
@@ -144,12 +150,12 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 21,
+          "targetStatementId": 14,
           "replyText": "4"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 23,
+          "targetStatementId": 15,
           "replyText": "5"
         }
       ]
@@ -159,28 +165,8 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 11,
+          "targetStatementId": 16,
           "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 15,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 17,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 21,
-          "replyText": "3"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 23,
-          "replyText": "4"
         }
       ]
     },
@@ -189,7 +175,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 12,
+          "targetStatementId": 17,
           "replyText": "0"
         }
       ]
@@ -199,8 +185,13 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 13,
+          "targetStatementId": 18,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "1"
         }
       ]
     },
@@ -209,27 +200,23 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 14,
-          "replyText": "0"
-        }
-      ]
-    },
-    "14": {
-      "id": 14,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 15,
-          "replyText": "0"
+          "targetStatementId": 10,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "klisk_pirate.started",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
-          "targetStatementId": 17,
+          "targetStatementId": 11,
           "replyText": "1"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 10,
+          "targetStatementId": 12,
           "replyText": "2",
           "replyConditions": [
             {
@@ -240,13 +227,23 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 21,
+          "targetStatementId": 14,
           "replyText": "3"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 23,
+          "targetStatementId": 15,
           "replyText": "4"
+        }
+      ]
+    },
+    "14": {
+      "id": 14,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "0"
         }
       ]
     },
@@ -255,7 +252,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 16,
+          "targetStatementId": 21,
           "replyText": "0"
         }
       ]
@@ -265,7 +262,17 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 11,
+          "targetStatementId": 22,
+          "replyText": "0"
+        }
+      ]
+    },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
           "replyText": "0",
           "replyConditions": [
             {
@@ -276,12 +283,18 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 17,
-          "replyText": "1"
+          "targetStatementId": 12,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "unity_zorsan_ambassador_visited",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
-          "targetStatementId": 10,
+          "targetStatementId": 13,
           "replyText": "2",
           "replyConditions": [
             {
@@ -292,28 +305,13 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 21,
+          "targetStatementId": 14,
           "replyText": "3"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 23,
+          "targetStatementId": 15,
           "replyText": "4"
-        }
-      ]
-    },
-    "17": {
-      "id": 17,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 18,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 20,
-          "replyText": "1"
         }
       ]
     },
@@ -322,7 +320,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 19,
+          "targetStatementId": 23,
           "replyText": "0"
         }
       ]
@@ -332,17 +330,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 20,
-          "replyText": "0"
-        }
-      ]
-    },
-    "20": {
-      "id": 20,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 11,
+          "targetStatementId": 10,
           "replyText": "0",
           "replyConditions": [
             {
@@ -353,12 +341,12 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 15,
+          "targetStatementId": 11,
           "replyText": "1"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 10,
+          "targetStatementId": 13,
           "replyText": "2",
           "replyConditions": [
             {
@@ -369,32 +357,22 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 21,
+          "targetStatementId": 14,
           "replyText": "3"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 23,
+          "targetStatementId": 15,
           "replyText": "4"
         }
       ]
     },
-    "21": {
-      "id": 21,
+    "20": {
+      "id": 20,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 22,
-          "replyText": "0"
-        }
-      ]
-    },
-    "22": {
-      "id": 22,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 11,
+          "targetStatementId": 10,
           "replyText": "0",
           "replyConditions": [
             {
@@ -405,17 +383,23 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 15,
+          "targetStatementId": 11,
           "replyText": "1"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 17,
-          "replyText": "2"
+          "targetStatementId": 12,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "unity_zorsan_ambassador_visited",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
-          "targetStatementId": 10,
+          "targetStatementId": 13,
           "replyText": "3",
           "replyConditions": [
             {
@@ -426,13 +410,33 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 21,
+          "targetStatementId": 14,
           "replyText": "4"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 23,
+          "targetStatementId": 15,
           "replyText": "5"
+        }
+      ]
+    },
+    "21": {
+      "id": 21,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "22": {
+      "id": 22,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
         }
       ]
     },
@@ -441,7 +445,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 24,
+          "targetStatementId": 19,
           "replyText": "0"
         }
       ]
@@ -451,8 +455,40 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 11,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "unity_zorsan_ambassador_visited",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "unity_zorsan_ambassador_visited",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "4"
         }
       ]
     }

@@ -19,7 +19,6 @@ import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.quest.TutorialQuestGenerator;
-import ru.game.aurora.world.quest.SecondPartStarter;
 
 import java.awt.*;
 import java.io.IOException;
@@ -162,16 +161,6 @@ public class MainMenuController implements ScreenController, ResolutionChangeLis
 
                 if (!world.getGlobalVariables().containsKey("tutorial.started")) {
                     HelpPopupControl.setHelpIds("start", "galaxy_map", "galaxy_map_2", "galaxy_map_3");
-                }
-
-                // TODO: Remove debug block after Act II development end
-                if(Configuration.getIntProperty("debug.startAct") == 2){
-                    // new game from second act
-                    logger.warn("[debug.startAct=2] Start new game from Act 2");
-
-                    world.getGlobalVariables().put("autosave_disabled", true);
-                    new SecondPartStarter().updateWorld(world);
-                    world.getGlobalVariables().remove("autosave_disabled");
                 }
 
                 return world;

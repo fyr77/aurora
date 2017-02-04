@@ -38,7 +38,7 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 8,
+          "targetStatementId": 4,
           "replyText": "1",
           "replyConditions": [
             {
@@ -54,22 +54,22 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 4,
+          "targetStatementId": 5,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 5,
+          "targetStatementId": 6,
           "replyText": "1"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 6,
+          "targetStatementId": 7,
           "replyText": "2"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 7,
+          "targetStatementId": 8,
           "replyText": "3"
         }
       ]
@@ -79,8 +79,23 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 9,
+          "targetStatementId": 5,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "3"
         }
       ]
     },
@@ -119,23 +134,8 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 4,
+          "targetStatementId": 9,
           "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 5,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 6,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 7,
-          "replyText": "3"
         }
       ]
     },
@@ -174,48 +174,26 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 15,
+          "targetStatementId": 13,
           "replyText": "0"
         },
         {
           "returnValue": 0,
           "targetStatementId": 14,
-          "replyText": "1"
+          "replyText": "1",
+          "flags": {
+            "klisk_pirate_quest_reject": "true"
+          }
         },
         {
           "returnValue": 0,
-          "targetStatementId": 13,
+          "targetStatementId": 15,
           "replyText": "2"
         }
       ]
     },
     "13": {
       "id": 13,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 15,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 14,
-          "replyText": "1"
-        }
-      ]
-    },
-    "14": {
-      "id": 14,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "0"
-        }
-      ]
-    },
-    "15": {
-      "id": 15,
       "replies": [
         {
           "returnValue": 0,
@@ -250,7 +228,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 22,
-          "replyText": "6"
+          "replyText": "6",
+          "flags": {
+            "klisk_pirate_quest_accept": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -260,7 +241,41 @@
         {
           "returnValue": 0,
           "targetStatementId": 14,
-          "replyText": "8"
+          "replyText": "8",
+          "flags": {
+            "klisk_pirate_quest_reject": "true"
+          }
+        }
+      ]
+    },
+    "14": {
+      "id": 14,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0",
+          "flags": {
+            "unity_klisk_ambassador_visited": "true"
+          }
+        }
+      ]
+    },
+    "15": {
+      "id": 15,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "1",
+          "flags": {
+            "klisk_pirate_quest_reject": "true"
+          }
         }
       ]
     },
@@ -295,7 +310,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 22,
-          "replyText": "5"
+          "replyText": "5",
+          "flags": {
+            "klisk_pirate_quest_accept": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -305,7 +323,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 14,
-          "replyText": "7"
+          "replyText": "7",
+          "flags": {
+            "klisk_pirate_quest_reject": "true"
+          }
         }
       ]
     },
@@ -340,7 +361,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 22,
-          "replyText": "5"
+          "replyText": "5",
+          "flags": {
+            "klisk_pirate_quest_accept": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -350,7 +374,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 14,
-          "replyText": "7"
+          "replyText": "7",
+          "flags": {
+            "klisk_pirate_quest_reject": "true"
+          }
         }
       ]
     },
@@ -385,7 +412,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 22,
-          "replyText": "5"
+          "replyText": "5",
+          "flags": {
+            "klisk_pirate_quest_accept": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -395,7 +425,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 14,
-          "replyText": "7"
+          "replyText": "7",
+          "flags": {
+            "klisk_pirate_quest_reject": "true"
+          }
         }
       ]
     },
@@ -430,7 +463,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 22,
-          "replyText": "5"
+          "replyText": "5",
+          "flags": {
+            "klisk_pirate_quest_accept": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -440,7 +476,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 14,
-          "replyText": "7"
+          "replyText": "7",
+          "flags": {
+            "klisk_pirate_quest_reject": "true"
+          }
         }
       ]
     },
@@ -475,7 +514,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 22,
-          "replyText": "5"
+          "replyText": "5",
+          "flags": {
+            "klisk_pirate_quest_accept": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -485,7 +527,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 14,
-          "replyText": "7"
+          "replyText": "7",
+          "flags": {
+            "klisk_pirate_quest_reject": "true"
+          }
         }
       ]
     },
@@ -525,7 +570,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 22,
-          "replyText": "6"
+          "replyText": "6",
+          "flags": {
+            "klisk_pirate_quest_accept": "true"
+          }
         },
         {
           "returnValue": 0,
@@ -535,7 +583,10 @@
         {
           "returnValue": 0,
           "targetStatementId": 14,
-          "replyText": "8"
+          "replyText": "8",
+          "flags": {
+            "klisk_pirate_quest_reject": "true"
+          }
         }
       ]
     },
@@ -545,7 +596,10 @@
         {
           "returnValue": 0,
           "targetStatementId": -1,
-          "replyText": "0"
+          "replyText": "0",
+          "flags": {
+            "unity_klisk_ambassador_visited": "true"
+          }
         }
       ]
     },
@@ -585,12 +639,18 @@
         {
           "returnValue": 0,
           "targetStatementId": 22,
-          "replyText": "6"
+          "replyText": "6",
+          "flags": {
+            "klisk_pirate_quest_accept": "true"
+          }
         },
         {
           "returnValue": 0,
           "targetStatementId": 14,
-          "replyText": "7"
+          "replyText": "7",
+          "flags": {
+            "klisk_pirate_quest_reject": "true"
+          }
         }
       ]
     }

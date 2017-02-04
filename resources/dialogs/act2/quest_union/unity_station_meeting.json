@@ -42,7 +42,7 @@
           "replyConditions": [
             {
               "name": "zorsan_escape_victims",
-              "value": "",
+              "value": "0",
               "type": "EQUAL"
             }
           ]

@@ -7,4 +7,6 @@ import ru.game.aurora.world.GameEventListener;
  * Unity quest
  */
 public class UnityQuest extends GameEventListener {
+
+    private static final long serialVersionUID = 8713537599537481751L;
 }

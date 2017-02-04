@@ -22,7 +22,7 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 7,
+          "targetStatementId": 3,
           "replyText": "1"
         }
       ]
@@ -32,12 +32,12 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 3,
+          "targetStatementId": 4,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 7,
+          "targetStatementId": 3,
           "replyText": "1"
         }
       ]
@@ -47,8 +47,18 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 4,
+          "targetStatementId": 5,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "2"
         }
       ]
     },
@@ -57,7 +67,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 5,
+          "targetStatementId": 8,
           "replyText": "0"
         }
       ]
@@ -67,13 +77,8 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 6,
+          "targetStatementId": 9,
           "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 7,
-          "replyText": "1"
         }
       ]
     },
@@ -82,7 +87,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 7,
+          "targetStatementId": 10,
           "replyText": "0"
         }
       ]
@@ -92,18 +97,8 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 8,
+          "targetStatementId": 11,
           "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 13,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 16,
-          "replyText": "2"
         }
       ]
     },
@@ -112,7 +107,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 9,
+          "targetStatementId": 12,
           "replyText": "0"
         }
       ]
@@ -122,7 +117,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 10,
+          "targetStatementId": 13,
           "replyText": "0"
         }
       ]
@@ -132,7 +127,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 11,
+          "targetStatementId": 14,
           "replyText": "0"
         }
       ]
@@ -142,7 +137,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 12,
+          "targetStatementId": 15,
           "replyText": "0"
         }
       ]
@@ -152,23 +147,13 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 8,
+          "targetStatementId": 16,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 13,
+          "targetStatementId": 3,
           "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 16,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 19,
-          "replyText": "3"
         }
       ]
     },
@@ -177,7 +162,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 14,
+          "targetStatementId": 17,
           "replyText": "0"
         }
       ]
@@ -187,7 +172,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 15,
+          "targetStatementId": 18,
           "replyText": "0"
         }
       ]
@@ -197,7 +182,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 12,
+          "targetStatementId": 18,
           "replyText": "0"
         }
       ]
@@ -207,7 +192,7 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 17,
+          "targetStatementId": 3,
           "replyText": "0"
         }
       ]
@@ -227,8 +212,23 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 12,
+          "targetStatementId": 5,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "3"
         }
       ]
     },
@@ -262,7 +262,7 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 25,
+          "targetStatementId": 24,
           "replyText": "3"
         }
       ]
@@ -282,7 +282,7 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 25,
+          "targetStatementId": 24,
           "replyText": "2"
         }
       ]
@@ -302,7 +302,7 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 25,
+          "targetStatementId": 24,
           "replyText": "2"
         }
       ]
@@ -312,13 +312,23 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 24,
+          "targetStatementId": 25,
           "replyText": "0"
         }
       ]
     },
     "24": {
       "id": 24,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "0"
+        }
+      ]
+    },
+    "25": {
+      "id": 25,
       "replies": [
         {
           "returnValue": 0,
@@ -332,18 +342,8 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 25,
+          "targetStatementId": 24,
           "replyText": "2"
-        }
-      ]
-    },
-    "25": {
-      "id": 25,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 26,
-          "replyText": "0"
         }
       ]
     },

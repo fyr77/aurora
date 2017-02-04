@@ -26,6 +26,7 @@ import ru.game.aurora.steam.AchievementManager;
 import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
+import ru.game.aurora.world.quest.SecondPartStarter;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
@@ -513,9 +514,19 @@ public class AuroraGame extends NiftyOverlayGame {
                 if (loadedWorld != null) {
                     onGameLoaded(loadedWorld);
                     world.onNewGameStarted();
-                    // hack: show initial help on new game start
-                    if (!world.getGlobalVariables().containsKey("tutorial.started")) {
-                        HelpPopupControl.showHelp();
+
+                    // TODO: Remove debug block after Act II development end
+                    if(Configuration.getIntProperty("debug.startAct") == 2){
+                        // new game from second act
+                        logger.warn("[debug.startAct=2] Start new game from Act 2");
+                        world.getGlobalVariables().put("tutorial.started", true);
+                        new SecondPartStarter().updateWorld(world);
+                    }
+                    else{
+                        // hack: show initial help on new game start
+                        if (!world.getGlobalVariables().containsKey("tutorial.started")) {
+                            HelpPopupControl.showHelp();
+                        }
                     }
                 }
             } else {
