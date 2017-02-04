@@ -1,0 +1,289 @@
+{
+  "id": "unity_human_ambassador_onboard_1",
+  "iconName": "europe_leader",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "3"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "2"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "4"
+        }
+      ],
+      "customIcon": " однако же всё равно можно заметить, как в нём оно борется с чувством долга. Похоже, чувство долга побеждает.* Это резонно. Я понимаю ваши мотивы и волнение. Только… минутку… *Джозеф делает пару каких-то пометок в планшете и откладывает его в сторону.* Я вас слушаю. Только, пожалуйста, покороче. Мне... тяжело даётся перелёт."
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "1"
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0"
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "3"
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "1"
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "0"
+        }
+      ]
+    },
+    "10": {
+      "id": 10,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "3"
+        }
+      ]
+    },
+    "11": {
+      "id": 11,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "0"
+        }
+      ]
+    },
+    "12": {
+      "id": 12,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "3"
+        }
+      ]
+    },
+    "13": {
+      "id": 13,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "4"
+        }
+      ]
+    },
+    "14": {
+      "id": 14,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

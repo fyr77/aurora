@@ -8,7 +8,9 @@ import ru.game.aurora.gui.FadeOutScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.IntroDialogController;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.npc.NPC;
+import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
@@ -35,6 +37,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
 
     private static final long serialVersionUID = 3401155966034871085L;
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SecondPartStarter.class);
+    private Dialog josephKomskyDialogs;
 
     public void start(final World world) {
         world.getGlobalVariables().put("2nd_part", true);
@@ -248,6 +251,8 @@ public class SecondPartStarter implements WorldGeneratorPart {
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 world.getPlayer().getJournal().addQuestEntries("unity", "inside");
                 world.addOverlayWindow(insideDialog, flags);
+                world.getPlayer().getShip().removeCrewMember(world, "komsky");
+                logger.info("Joseph Komsky removed from Aurora crew");
             }
         });
 
@@ -411,7 +416,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
         // todo: add 4 quest star systems (quest "On the trail of the Builders")
     }
 
-    private void movePlayerShipToEarth(final World world, StarSystem solarSystem) {
+    private void movePlayerShipToEarth(final World world, final StarSystem solarSystem) {
         // Replace Aurora to Earth orbit
         BasePlanet earth = null;
         BasePlanet [] planets = solarSystem.getPlanets();
@@ -433,10 +438,74 @@ public class SecondPartStarter implements WorldGeneratorPart {
         world.getPlayer().getShip().setPos(earth.getX(), earth.getY());
     }
 
-    private void startUnityQuest(World world) {
-        world.addOverlayWindow(Dialog.loadFromFile("dialogs/act2/quest_union/act_2_begin_martan.json"));
+    private void startUnityQuest(final World world) {
+        Dialog startDialog = Dialog.loadFromFile("dialogs/act2/quest_union/act_2_begin_martan.json");
 
+        startDialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = 4488508909100895730L;
+
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                addKomsky(world);
+            }
+        });
+
+        world.addOverlayWindow(startDialog);
         world.addListener(new UnityQuest());
         world.getPlayer().getJournal().addQuestEntries("unity", "start");
+    }
+
+    private void addKomsky(World world) {
+        final Dialog startDialog = Dialog.loadFromFile("dialogs/act2/unity_human_ambassador_onboard_1.json");
+        final Dialog secondDialog = Dialog.loadFromFile("dialogs/act2/unity_human_ambassador_onboard_2.json");
+        final Dialog busyDialog = Dialog.loadFromFile("dialogs/act2/unity_human_ambassador_onboard_3.json");
+
+        final CrewMember komsky = new CrewMember("komsky", "europe_leader", startDialog);
+        world.getPlayer().getShip().addCrewMember(world, komsky);
+
+        startDialog.addListener(new DialogListener() {
+            // Set komsky dialogue to  'unity_human_ambassador_onboard_3' and await 10 turns to switch to 'unity_human_ambassador_onboard_2'
+            private static final long serialVersionUID = 5578057943354971146L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                logger.info("flag 'unity_human_ambassador_onboard.talk_turn'=" + world.getDayCount());
+                world.getGlobalVariables().put("unity_human_ambassador_onboard.talk_turn", world.getDayCount());
+                komsky.setDialog(busyDialog);
+                addSecondDialogWorldListener(world, komsky, secondDialog);
+            }
+        });
+
+        secondDialog.addListener(new DialogListener() {
+            // Set Komsky dialogue to 'unity_human_ambassador_onboard_3' - this is end of Komksy talking on Aurora board
+
+            private static final long serialVersionUID = 4446555067154195647L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                logger.info("Joseph Komsky dialog line ended");
+                world.getGlobalVariables().put("unity_human_ambassador_onboard.talked", true);
+                komsky.setDialog(busyDialog);
+            }
+        });
+    }
+
+    private void addSecondDialogWorldListener(final World world, final CrewMember komsky, final Dialog secondDialog) {
+        // Set Komsky dialogue after 10 turns to 'unity_human_ambassador_onboard_2'
+        world.addListener(new GameEventListener() {
+            private static final long serialVersionUID = -2752824071525087767L;
+            @Override
+            public boolean onTurnEnded(World world) {
+                if(world.getGlobalVariables().containsKey("unity_human_ambassador_onboard.talk_turn")){
+                    int lastDay = (int)world.getGlobalVariables().get("unity_human_ambassador_onboard.talk_turn");
+
+                    if(world.getDayCount() > lastDay + 10){
+                        logger.info("Joseph Komsky second dialog added on turn " + world.getDayCount());
+                        komsky.setDialog(secondDialog);
+                        this.isAlive = false;
+                        world.getListeners().remove(this);
+                    }
+                }
+                return super.onTurnEnded(world);
+            }
+        });
     }
 }

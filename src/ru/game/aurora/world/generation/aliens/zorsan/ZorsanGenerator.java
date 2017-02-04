@@ -162,7 +162,7 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                         @Override
                         public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                             // flag 'zorsan_escape_victims' used in some 'Unity' quest dialogs (v0.6 by 04.02.2017)
-                            // TODO: 04.02.2017 Need completely test of this encounter
+                            // TODO: 04.02.2017 Need completely test of this encounter + Unity quest dialogs
                             if(party.getMilitary() == 10){
                                 world.getGlobalVariables().put("zorsan_escape_victims", 0);
                             }
