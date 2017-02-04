@@ -1,6 +1,6 @@
 {
   "id": "unity_station_meeting",
-  "iconName": "europe_leader",
+  "iconName": "gardener_dialog",
   "statements": {
     "0": {
       "id": 0,
@@ -30,7 +30,8 @@
           "targetStatementId": 3,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "zorsan_dialog"
     },
     "3": {
       "id": 3,
@@ -69,7 +70,8 @@
           "targetStatementId": 7,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "zorsan_dialog"
     },
     "4": {
       "id": 4,
@@ -79,7 +81,8 @@
           "targetStatementId": 8,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "zorsan_dialog"
     },
     "5": {
       "id": 5,
@@ -89,7 +92,8 @@
           "targetStatementId": 8,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "zorsan_dialog"
     },
     "6": {
       "id": 6,
@@ -99,7 +103,8 @@
           "targetStatementId": 8,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "zorsan_dialog"
     },
     "7": {
       "id": 7,
@@ -109,7 +114,8 @@
           "targetStatementId": 8,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "zorsan_dialog"
     },
     "8": {
       "id": 8,
@@ -119,7 +125,8 @@
           "targetStatementId": 9,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "zorsan_dialog"
     },
     "9": {
       "id": 9,
@@ -139,7 +146,8 @@
           "targetStatementId": 11,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "klisk_vip_dialog"
     },
     "11": {
       "id": 11,
@@ -159,7 +167,8 @@
           "targetStatementId": 14,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "europe_leader"
     },
     "12": {
       "id": 12,
@@ -169,7 +178,8 @@
           "targetStatementId": 15,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "europe_leader"
     },
     "13": {
       "id": 13,
@@ -179,7 +189,8 @@
           "targetStatementId": 15,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "europe_leader"
     },
     "14": {
       "id": 14,
@@ -189,7 +200,8 @@
           "targetStatementId": 15,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "europe_leader"
     },
     "15": {
       "id": 15,
@@ -199,7 +211,8 @@
           "targetStatementId": 16,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "gardener_dialog"
     },
     "16": {
       "id": 16,
@@ -209,7 +222,8 @@
           "targetStatementId": 17,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "europe_leader"
     },
     "17": {
       "id": 17,
@@ -219,7 +233,8 @@
           "targetStatementId": 18,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "europe_leader"
     },
     "18": {
       "id": 18,
@@ -229,7 +244,8 @@
           "targetStatementId": 19,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "europe_leader"
     },
     "19": {
       "id": 19,
@@ -239,7 +255,8 @@
           "targetStatementId": 20,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "bork_vip_dialog"
     },
     "20": {
       "id": 20,
@@ -249,7 +266,8 @@
           "targetStatementId": 21,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "bork_vip_dialog"
     },
     "21": {
       "id": 21,
@@ -259,7 +277,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     }
   },
   "flags": {},

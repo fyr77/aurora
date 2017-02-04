@@ -20,7 +20,8 @@
           "targetStatementId": 3,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "1": {
       "id": 1,
@@ -35,7 +36,8 @@
           "targetStatementId": 3,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "2": {
       "id": 2,
@@ -50,7 +52,8 @@
           "targetStatementId": 3,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "3": {
       "id": 3,

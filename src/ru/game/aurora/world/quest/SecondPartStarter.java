@@ -37,7 +37,6 @@ public class SecondPartStarter implements WorldGeneratorPart {
 
     private static final long serialVersionUID = 3401155966034871085L;
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SecondPartStarter.class);
-    private Dialog josephKomskyDialogs;
 
     public void start(final World world) {
         world.getGlobalVariables().put("2nd_part", true);

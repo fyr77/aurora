@@ -26,7 +26,8 @@
           "targetStatementId": 2,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "interior_dialog"
     },
     "2": {
       "id": 2,

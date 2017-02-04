@@ -72,7 +72,8 @@
           "targetStatementId": -1,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "bork_dialog"
     },
     "2": {
       "id": 2,
@@ -82,7 +83,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "rogues_dialog"
     },
     "3": {
       "id": 3,
@@ -92,7 +94,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "bork_dialog"
     },
     "4": {
       "id": 4,
@@ -139,7 +142,8 @@
             "unity_zorsan_ambassador_visited": "true"
           }
         }
-      ]
+      ],
+      "customIcon": "zorsan_dialog"
     },
     "5": {
       "id": 5,

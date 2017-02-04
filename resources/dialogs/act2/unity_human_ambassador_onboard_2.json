@@ -180,7 +180,8 @@
           "targetStatementId": 11,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog"
     },
     "11": {
       "id": 11,
@@ -190,7 +191,8 @@
           "targetStatementId": 12,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog"
     },
     "12": {
       "id": 12,
@@ -200,7 +202,8 @@
           "targetStatementId": 13,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog_puzzled"
     },
     "13": {
       "id": 13,
@@ -210,7 +213,8 @@
           "targetStatementId": 14,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog"
     },
     "14": {
       "id": 14,
@@ -220,7 +224,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "scientist_dialog"
     }
   },
   "flags": {},

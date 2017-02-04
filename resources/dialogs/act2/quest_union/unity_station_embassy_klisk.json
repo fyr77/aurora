@@ -1,6 +1,6 @@
 {
   "id": "unity_station_embassy_klisk",
-  "iconName": "klisk_dialog",
+  "iconName": "klisk_vip_dialog",
   "statements": {
     "0": {
       "id": 0,
@@ -10,7 +10,8 @@
           "targetStatementId": 1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "klisk_dialog"
     },
     "1": {
       "id": 1,
@@ -20,7 +21,8 @@
           "targetStatementId": 2,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "klisk_dialog"
     },
     "2": {
       "id": 2,
