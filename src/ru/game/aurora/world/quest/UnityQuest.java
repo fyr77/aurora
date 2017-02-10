@@ -278,7 +278,7 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
         final Dialog secondDialog = Dialog.loadFromFile("dialogs/act2/unity_human_ambassador_onboard_2.json");
         final Dialog busyDialog = Dialog.loadFromFile("dialogs/act2/unity_human_ambassador_onboard_3.json");
 
-        final CrewMember komsky = new CrewMember("komsky", "europe_leader", startDialog);
+        final CrewMember komsky = new CrewMember("komsky", "earth_diplomat_dialog", startDialog);
         world.getPlayer().getShip().addCrewMember(world, komsky);
 
         startDialog.addListener(new DialogListener() {

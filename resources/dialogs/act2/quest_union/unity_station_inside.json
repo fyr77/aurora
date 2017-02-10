@@ -411,7 +411,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "19": {
       "id": 19,
@@ -422,7 +422,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "20": {
       "id": 20,
@@ -516,7 +516,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "25": {
       "id": 25,

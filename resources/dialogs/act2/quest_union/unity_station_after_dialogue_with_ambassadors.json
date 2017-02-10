@@ -109,7 +109,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "9": {
       "id": 9,
@@ -163,7 +163,7 @@
           "replyText": "5"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "10": {
       "id": 10,
@@ -174,7 +174,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "11": {
       "id": 11,
@@ -185,7 +185,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "12": {
       "id": 12,
@@ -201,7 +201,7 @@
           "replyText": "1"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "13": {
       "id": 13,
@@ -244,7 +244,7 @@
           "replyText": "4"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "14": {
       "id": 14,
@@ -255,7 +255,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "15": {
       "id": 15,
@@ -266,7 +266,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "16": {
       "id": 16,
@@ -277,7 +277,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "17": {
       "id": 17,
@@ -326,7 +326,7 @@
           "replyText": "4"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "18": {
       "id": 18,
@@ -337,7 +337,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "19": {
       "id": 19,
@@ -380,7 +380,7 @@
           "replyText": "4"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "20": {
       "id": 20,
@@ -434,7 +434,7 @@
           "replyText": "5"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "21": {
       "id": 21,
@@ -445,7 +445,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "22": {
       "id": 22,
@@ -456,7 +456,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "23": {
       "id": 23,
@@ -467,7 +467,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     },
     "24": {
       "id": 24,
@@ -510,7 +510,7 @@
           "replyText": "4"
         }
       ],
-      "customIcon": "europe_leader"
+      "customIcon": "earth_diplomat_dialog"
     }
   },
   "flags": {},
