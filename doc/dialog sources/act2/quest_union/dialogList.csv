@@ -8,3 +8,4 @@
 8Посольство борков.csv;unity_station_embassy_bork;bork_vip_dialog;act2\quest_union\
 9Посольство бродяг.csv;unity_station_embassy_rogues;rogues_dialog;act2\quest_union\
 10После разговоров с послами.csv;unity_station_after_dialogue_with_ambassadors;interior_dialog;act2\quest_union\
+2-1 Unity station docking after visit.csv;unity_station_docking_visited;rogues_dialog;act2\quest_union\

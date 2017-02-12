@@ -215,6 +215,19 @@ public class NPCShip extends BaseGameObject implements IMonster {
 
         world.onPlayerContactedAlienShip(this);
         if (captain != null) {
+            // play NPC custom music
+            if(captain.getCustomMusicId() != null){
+                Playlist customPlaylist = ResourceManager.getInstance().getPlaylist(captain.getCustomMusicId());
+                if(!customPlaylist.isPlaying()){
+                    customPlaylist.play();
+                }
+            }
+
+            // fire this listener after NPC dialog end
+            if(captain.getMusicListener() != null){
+                captain.getCustomDialog().addListener(captain.getMusicListener());
+            }
+
             world.addOverlayWindow(captain.getCustomDialog());
             return true;
         }
