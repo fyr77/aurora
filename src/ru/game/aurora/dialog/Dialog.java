@@ -198,7 +198,7 @@ public class Dialog implements OverlayWindow {
                     returnValue = selectedReply.returnValue;
                 }
                 if (selectedReply.flags != null) {
-                    flags.putAll(selectedReply.flags);
+                    processFlags(selectedReply.flags, idx);
                 }
 
                 if (currentStatement != null) {
@@ -207,6 +207,61 @@ public class Dialog implements OverlayWindow {
                     availableReplies = null;
                 }
             }
+        }
+    }
+
+    private void processFlags(Map<String, String> selectedReplyFlag, int replyId) {
+        for(Map.Entry<String, String> entry: selectedReplyFlag.entrySet()){
+            // math operators check
+            if(entry.getValue().indexOf("+") != -1 || entry.getValue().indexOf("-") != -1){
+                String value = entry.getValue();
+
+                // represented entry value as {operand, operation, operand, operation, ..., operation, operand} string array
+                String [] expression = value.split("(?<=[-+])|(?=[-+])");
+
+                // math expression length is always odd number {val, +, val}[lenght=3] or {val, +, val, -, val}[length=5]
+                if(expression != null && expression.length >= 3  && expression.length % 2 == 1){ //
+                    try{
+                        // in cycle -> {...{{{value, operator, value}, operator, value}, operator, value}...}
+
+                        int result = getOperand(expression[0]);
+                        for(int i = 0; i < expression.length - 1; i += 2){
+                            switch (expression[i+1]) {
+                                case "+": result += getOperand(expression[i + 2]); break;
+                                case "-": result -= getOperand(expression[i + 2]); break;
+                                default: throw new NumberFormatException("Undefined arithmetic operation");
+                            }
+                        }
+
+                        // result of math expression
+                        String strResult = Integer.toString(result);
+                        logger.info("\"{}\" dialog arithmetic expression result={}, statementId={}, replyId={}", fileName, strResult, currentStatement.id, replyId);
+                        flags.put(entry.getKey(), strResult);
+                    }
+                    catch (NumberFormatException e) {
+                        // calculating failed cause invalid one operand or operator
+                        flags.put(entry.getKey(), entry.getValue());
+                    }
+                }
+                else{
+                    // this is not supported math expression (signs do not correspond to the mathematical expression)
+                    flags.put(entry.getKey(), entry.getValue());
+                }
+            }
+            else{
+                // this is not supported math expression (no operator '+' or '-' in expression)
+                flags.put(entry.getKey(), entry.getValue());
+            }
+        }
+    }
+
+    private int getOperand(String str) throws NumberFormatException {
+        str = str.trim();
+        if(flags.containsKey(str)){
+            return Integer.parseInt(flags.get(str).trim());
+        }
+        else{
+            return Integer.parseInt(str);
         }
     }
 
