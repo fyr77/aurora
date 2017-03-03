@@ -1,116 +1,116 @@
-0;;;
-;;1;;0;;
-1;;;
-;;2;;0;;
-2;;;
-;;3;!unity_look_around;0;;
-;;8;unity_look_around;0;;
-3;;;
-;;4;;0;;
-;;5;;0;;
-;;6;;0;;
-;;7;;0;;
-8;;;
-;;4;;0;;
-;;5;;0;;
-;;6;;0;;
-;;7;;0;;
-4;;;
-;;9;;0;;
-5;;;
-;;9;;0;;
-6;;;
-;;9;;0;;
-7;;;
-;;9;;0;;
-9;;;
-;;10;;0;;
-10;;;
-;;11;;0;;
-11;;;
-;;12;;0;;
-12;;;
-;;15;;0;;
-;;14;;0;;
-;;13;;0;;
-15;;;
-;;16;;0;;
-;;17;;0;;
-;;18;;0;;
-;;19;;0;;
-;;20;;0;;
-;;21;;0;;
-;;22;;0;;
-;;23;;0;;
-;;14;;0;;
-14;;;
-;;-1;;0;;
-13;;;
-;;15;;0;;
-;;14;;0;;
-16;;;
-;;17;;0;;
-;;18;;0;;
-;;19;;0;;
-;;20;;0;;
-;;21;;0;;
-;;22;;0;;
-;;23;;0;;
-;;14;;0;;
-17;;;
-;;16;;0;;
-;;18;;0;;
-;;19;;0;;
-;;20;;0;;
-;;21;;0;;
-;;22;;0;;
-;;23;;0;;
-;;14;;0;;
-18;;;
-;;16;;0;;
-;;17;;0;;
-;;19;;0;;
-;;20;;0;;
-;;21;;0;;
-;;22;;0;;
-;;23;;0;;
-;;14;;0;;
-19;;;
-;;16;;0;;
-;;17;;0;;
-;;18;;0;;
-;;20;;0;;
-;;21;;0;;
-;;22;;0;;
-;;23;;0;;
-;;14;;0;;
-20;;;
-;;16;;0;;
-;;17;;0;;
-;;18;;0;;
-;;19;;0;;
-;;21;;0;;
-;;22;;0;;
-;;23;;0;;
-;;14;;0;;
-21;;;
-;;16;;0;;
-;;17;;0;;
-;;18;;0;;
-;;19;;0;;
-;;20;;0;;
-;;21;;0;;
-;;22;;0;;
-;;23;;0;;
-;;14;;0;;
-22;;;
-;;-1;;0;;
-23;;;
-;;16;;0;;
-;;17;;0;;
-;;18;;0;;
-;;19;;0;;
-;;20;;0;;
-;;21;;0;;
-;;22;;0;;
-;;14;;0;;
+0;I'm listening. *The Klisk secretary is looking at you very politely. Quiet clicks are heard in the embassy.*;;;
+;I'm the captain of the Aurora 2. I have an appointment with the ambassador.;1;;0
+1;Of course. *The secretary clicks affirmatively.* The ambassador is waiting for you. Come in.;;;
+;*to the ambassador's office*;2;;0
+2;*It doesn't look very different from the embassy in terms of decoration. First, the layer of sand on the floor is thicker. Second, the fountain in the center of the room is much bigger. Otherwise, nothing is different. The owner of the office has his back turned to you looking out onto outer space, but as soon as you come in he turns around.* Human captain! *Click click click.*;;;
+;Hello. I was told you wanted to see me.;3;!unity_look_around;0
+;Hello. I was told you wanted to see me. I'm sorry for being late.; ;unity_look_around;0
+3;Of course. Some things you sort out with the ambassador, some things you sort out with someone else. *clicks of laughter* What is your job called these days?;;;
+;Captain of the Aurora 2 and nothing more.;4;;0
+;Hero of Earth. Who would have thought…;5;;0
+;Human. Just like that.;6;;0
+;Human. Who's getting old.;7;;0
+8;I understand, human captain. But as my people say, he who is late doesn't respect your time or his own. *The Klisk shrugs and clicks reconcilably.* Although you probably had an important reason. Otherwise... are you curious about why I wanted to see you? It's simple. Some things you sort out with the ambassador, others... *clicks of laughter* And what is your job called these days?;;;
+;Captain of the Aurora 2 and nothing more.;4;;0
+;Hero of Earth. Who would have thought…;5;;0
+;Human. Just like that.;6;;0
+;A human. Getting old.;7;;0
+4;You're humble. On one hand it's good, on the other… *clicks of laughter* How do you like my fountain?;;;
+;Is this why you wanted to see me?;9;;0
+5;No false modesty, right? Us Klisks, we respect creatures who know what they're worth. *measured, bassy clicks* How do you like my fountain?;;;
+;Is this why you wanted to see me?;9;;0
+6;*clicks of laughter*;;;
+;Is this why you wanted to see me?;9;;0
+7;We are all getting older. Does it really depress you so much? Maybe it's time to retire? *The Klisk clicks. He is laughing.* I'm joking, of course I'm joking! Old age gives you experience, and for everything else there are augmentations, as the Rogues say. How do you like my fountain?;;;
+;Is this why you wanted to see me?;9;;0
+9;*The Klisk doesn't pay attention.* A great work of art, isn't it? It's from Earth. I ordered one like that precisely so I could understand you better... *slow, deliberate clicks* So far I can't do it. *Is the Klisk telling the truth or is he lying? It's very hard to say for sure. After a bit of silence, the Klisk suddenly asks you.* What are you going to do with the Zorsan?;;;
+;We are going to fight them.;10;;0
+10;That's a good answer, Captain. Really, what more can you do? One on one with the most technologically advanced species in the inhabited Universe... You probably wouldn't say no to an offer of help.;;;
+;Are you going to offer it?;11;;0
+11;What would doing that make me? The horror. *Wounded clicks, but the Klisk speaks calmly and is friendly.* Let's put it like this... if you helped the Klisks out, friends of friends of Klisks could help you out. Nothing illegal, our dear Gardener didn't say anything about mercenaries. What do you say?;;;
+;So you want me to do a job for you. Not the easiest one, apparently. And not the cleanest. In return, you offer help in the war with the Zorsan.;12;;0
+12;*The Klisk is silent, waiting.*;;;
+;Give me the basics. I suppose I'll have to listen to you, there's no use for documentation here.;15;;0
+;I think you'll understand. *move towards the exit*;14;;0
+;What if someone… I don't know, found out about this conversation?;13;;0
+15;You're right. I know, human captain, that a certain Klisk interrupted your rest recently, and passed on some coordinates to you. The Klisk was sent by a dangerous criminal, a pirate leader we have been looking for since a long time ago. He wants to contact you. What you need to do is to go ahead. And when you gain his trust, either to arrest him yourself or to help with his arrest. It's that simple.;;;
+;A dangerous criminal, a pirate leader? Can I have some details?;16;;0
+;Hm. He managed to send somebody in here, even… You let him, I suppose?;17;;0
+;Why don't you handle it yourselves? I'll give you the coordinates.;18;;0
+;"""Go ahead?"" Be straight with me, what can I do and what can't I do?";19;;0
+;Arrest… You don't need him dead?;20;;0
+;What kind of reward are we talking about? Be more precise.;21;;0
+;I get it. I agree.;22;;0
+;Why me? What does he need from me?;23;;0
+;Seems too shady for me. I'd rather refuse. I think you'll understand. *move towards the exit*;14;;0
+14;Of course, human captain. It's been good talking to you and I'll enjoy working with you in the future. *The Klisk pushes the door opening button.* Principles. It's good when your business partner has them…;;;
+;…;-1;;0
+13;Surely they would consider whoever told them that a stupid, stupid... creature. *clicks of laughter* And even if they believed such slander that has no basis in reality, no one would believe them in turn. *The Klisk is damn convincing.*;;;
+;Give me the basics. I suppose I'll have to listen to you, there's no use for documentation here.;15;;0
+;I think you'll understand. *move towards the exit*;14;;0
+16;*The Klisk throws up his hands and hovers over to the fountain. His clicks are annoyed, even a little angry. His voice sounds the same, though.* A shame, a shame of our entire people. A Klisk, the son of a high-up executive of the Hakazar Corporation... he gave off great hope, but once he robbed his father and went into space. From then on, we only know what he's up to from the criminal reports. His father was forced to accept a demotion, can you imagine? *The Klisk clicks as if he was clucking his tongue.* And now his gang of pirates robs our caravans.;;;
+;Hm. He managed to send somebody in here, even… You let him, I suppose?;17;;0
+;Why don't you handle it yourselves? I'll give you the coordinates.;18;;0
+;"""Go ahead?"" Be straight with me, what can I do and what can't I do?";19;;0
+;Arrest… You don't need him dead?;20;;0
+;What kind of reward are we talking about? Be more precise.;21;;0
+;I get it. I agree.;22;;0
+;Why me? What does he need from me?;23;;0
+;Seems too shady for me. I'd rather refuse. I think you'll understand. *move towards the exit*;14;;0
+17;Naturally. If he thought a hero known for obeying the law is going to do his bidding, who are we to dissuade him?;;;
+;A dangerous criminal, a pirate leader? Can I have some details?;16;;0
+;Why don't you handle it yourselves? I'll give you the coordinates.;18;;0
+;"""Go ahead?"" Be straight with me, what can I do and what can't I do?";19;;0
+;Arrest… You don't need him dead?;20;;0
+;What kind of reward are we talking about? Be more precise.;21;;0
+;I get it. I agree.;22;;0
+;Why me? What does he need from me?;23;;0
+;Seems too shady for me. I'd rather refuse. I think you'll understand. *move towards the exit*;14;;0
+18;Those coordinates definitely don't lead to his hideout. It's probably some contact waiting for you. You and no one else. We have no choice.;;;
+;A dangerous criminal, a pirate leader? Can I have some details?;16;;0
+;Hm. He managed to send somebody in here, even… You let him, I suppose?;17;;0
+;"""Go ahead?"" Be straight with me, what can I do and what can't I do?";19;;0
+;Arrest… You don't need him dead?;20;;0
+;What kind of reward are we talking about? Be more precise.;21;;0
+;I get it. I agree.;22;;0
+;Why me? What does he need from me?;23;;0
+;Seems too shady for me. I'd rather refuse. I think you'll understand. *move towards the exit*;14;;0
+19;*The ambassador looks you straight in the eye.* Three words, human captain: don't get caught. You know what I mean.;;;
+;A dangerous criminal, a pirate leader? Can I have some details?;16;;0
+;Hm. He managed to send somebody in here, even… You let him, I suppose?;17;;0
+;Why don't you handle it yourselves? I'll give you the coordinates.;18;;0
+;Arrest… You don't need him dead?;20;;0
+;What kind of reward are we talking about? Be more precise.;21;;0
+;I get it. I agree.;22;;0
+;Why me? What does he need from me?;23;;0
+;Seems too shady for me. I'd rather refuse. I think you'll understand. *move towards the exit*;14;;0
+20;If it were that simple we would have come up with something by now, human captain. We need someone to gain his trust, to get as close to him as possible, and then... *The Klisk claps his hands.* We need him alive. Criminals of that scale are much more useful when they moan and groan in their cells.;;;
+;A dangerous criminal, a pirate leader? Can I have some details?;16;;0
+;Hm. He managed to send somebody in here, even… You let him, I suppose?;17;;0
+;Why don't you handle it yourselves? I'll give you the coordinates.;18;;0
+;"""Go ahead?"" Be straight with me, what can I do and what can't I do?";19;;0
+;What kind of reward are we talking about? Be more precise.;21;;0
+;I get it. I agree.;22;;0
+;Why me? What does he need from me?;23;;0
+;Seems too shady for me. I'd rather refuse. I think you'll understand. *move towards the exit*;14;;0
+21;Mercenaries. Squads of the best of the best, those who have worked for the corporate good for years. You could definitely use them, especially if someone else pays for them.;;;
+;A dangerous criminal, a pirate leader? Can I have some details?;16;;0
+;Hm. He managed to send somebody in here, even… You let him, I suppose?;17;;0
+;Why don't you handle it yourselves? I'll give you the coordinates.;18;;0
+;"""Go ahead?"" Be straight with me, what can I do and what can't I do?";19;;0
+;Arrest… You don't need him dead?;20;;0
+;What kind of reward are we talking about? Be more precise.;21;;0
+;I get it. I agree.;22;;0
+;Why me? What does he need from me?;23;;0
+;Seems too shady for me. I'd rather refuse. I think you'll understand. *move towards the exit*;14;;0
+22;Wonderful. *The Klisk clicks contentedly.* Then I suppose you know what to do. I can't wait for your tale of what happened at the place those coordinates lead to... *His clicks grow faster. It's laughter.* And if I like your tale, I'll definitely find something that you will like.;;;
+;No doubt. Pleasure doing business with you, Ambassador. *move towards the exit*;-1;;0
+23; Who knows? *The Klisk rocks on his platform pensively.* Maybe he thinks you're worthy of his cooperation. Or that you're simple enough to try to talk you into getting off your platform and crawling on your own…;;;
+;A dangerous criminal, a pirate leader? Can I have some details?;16;;0
+;Hm. He managed to send somebody in here, even… You let him, I suppose?;17;;0
+;Why don't you handle it yourselves? I'll give you the coordinates.;18;;0
+;"""Go ahead?"" Be straight with me, what can I do and what can't I do?";19;;0
+;Arrest… You don't need him dead?;20;;0
+;What kind of reward are we talking about? Be more precise.;21;;0
+;I get it. I agree.;22;;0
+;Seems too shady for me. I'd rather refuse. I think you'll understand. *move towards the exit*;14;;0
