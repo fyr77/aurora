@@ -23,7 +23,7 @@ public class Reply implements Serializable {
 
     public final String replyText;
 
-    public final Condition[] replyConditions;
+    private Condition[] replyConditions;
 
     public final Map<String, String> flags;
 
@@ -65,5 +65,13 @@ public class Reply implements Serializable {
     @Override
     public String toString() {
         return replyText;
+    }
+
+    public Condition [] getReplyConditions(){
+        return this.replyConditions;
+    }
+
+    public void setReplyConditions(Condition [] conditions){
+        this.replyConditions = conditions;
     }
 }

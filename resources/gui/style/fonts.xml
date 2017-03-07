@@ -16,6 +16,10 @@
         <attributes font="dpix_8pt.ttf" color="#AA7F4D"/>
     </style>
 
+    <style id="selected-font">
+        <attributes font="dpix_8pt.ttf" color="#40301D"/>
+    </style>
+
     <style id="bold-font">
         <attributes font="dpix_8pt.ttf"/>
     </style>

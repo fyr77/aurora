@@ -143,6 +143,15 @@ public class Dialog implements OverlayWindow {
         }
     }
 
+    public void setCurrentStatement(int startStatementId) {
+        if(statements.containsKey(startStatementId)){
+            this.currentStatement = statements.get(startStatementId);
+        }
+        else{
+            throw new IllegalStateException("\"" + fileName +"\" - Can not select any statement with id " + startStatementId);
+        }
+    }
+
     @Override
     public void enter(World world) {
         if (statements == null) {

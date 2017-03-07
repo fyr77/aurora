@@ -1,29 +1,28 @@
 {
-  "id": "unity_human_ambassador_onboard_1",
-  "iconName": "earth_diplomat_dialog",
+  "id": "metropole_burden_discussion_begin_normal",
+  "iconName": "colonist_dialog",
   "statements": {
     "0": {
       "id": 0,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 1,
+          "targetStatementId": 3,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 2,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 3,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": -1,
-          "replyText": "3"
+          "targetStatementId": 1,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.matthew_surname",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "metropole_burden.matthew_surname_reply": "true"
+          }
         }
       ]
     },
@@ -37,13 +36,23 @@
         },
         {
           "returnValue": 0,
-          "targetStatementId": 3,
+          "targetStatementId": 4,
           "replyText": "1"
         },
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 5,
           "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "3"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "4"
         }
       ]
     },
@@ -52,18 +61,23 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 1,
+          "targetStatementId": 4,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 3,
+          "targetStatementId": 5,
           "replyText": "1"
         },
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 6,
           "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "3"
         }
       ]
     },
@@ -89,11 +103,6 @@
           "returnValue": 0,
           "targetStatementId": 7,
           "replyText": "3"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 8,
-          "replyText": "4"
         }
       ]
     },
@@ -102,8 +111,18 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 9,
+          "targetStatementId": 5,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "2"
         }
       ]
     },
@@ -112,13 +131,18 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 10,
+          "targetStatementId": 4,
           "replyText": "0"
         },
         {
           "returnValue": 0,
-          "targetStatementId": 11,
+          "targetStatementId": 6,
           "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "2"
         }
       ]
     },
@@ -127,8 +151,18 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 12,
+          "targetStatementId": 4,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "2"
         }
       ]
     },
@@ -137,28 +171,8 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 4,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 5,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 6,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 7,
-          "replyText": "3"
-        },
-        {
-          "returnValue": 0,
           "targetStatementId": 8,
-          "replyText": "4"
+          "replyText": "0"
         }
       ]
     },
@@ -167,8 +181,13 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": -1,
+          "targetStatementId": 9,
           "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "1"
         }
       ]
     },
@@ -177,13 +196,8 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 13,
+          "targetStatementId": 10,
           "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 14,
-          "replyText": "1"
         }
       ]
     },
@@ -191,94 +205,37 @@
       "id": 10,
       "replies": [
         {
-          "returnValue": 0,
-          "targetStatementId": 11,
-          "replyText": "0"
-        }
-      ]
-    },
-    "11": {
-      "id": 11,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 4,
-          "replyText": "0"
+          "returnValue": 1,
+          "targetStatementId": -1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.documents_readed",
+              "type": "SET"
+            }
+          ]
         },
         {
-          "returnValue": 0,
-          "targetStatementId": 6,
-          "replyText": "1"
+          "returnValue": 2,
+          "targetStatementId": -1,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.documents_readed",
+              "type": "SET"
+            }
+          ]
         },
         {
-          "returnValue": 0,
-          "targetStatementId": 7,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 8,
-          "replyText": "3"
-        }
-      ]
-    },
-    "12": {
-      "id": 12,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 4,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 5,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 7,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 8,
-          "replyText": "3"
-        }
-      ]
-    },
-    "13": {
-      "id": 13,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 14,
-          "replyText": "0"
-        }
-      ]
-    },
-    "14": {
-      "id": 14,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 5,
-          "replyText": "0"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 6,
-          "replyText": "1"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 7,
-          "replyText": "2"
-        },
-        {
-          "returnValue": 0,
-          "targetStatementId": 8,
-          "replyText": "3"
+          "returnValue": 3,
+          "targetStatementId": -1,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.documents_readed",
+              "type": "NOT_SET"
+            }
+          ]
         }
       ]
     }

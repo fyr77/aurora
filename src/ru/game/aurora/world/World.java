@@ -204,6 +204,20 @@ public class World implements Serializable, ResolutionChangeListener {
         GUI.getInstance().goToScreen("dialog_screen");
     }
 
+    public void addOverlayWindow(Dialog d, Map<String, String> flags, int startStatementId) {
+        logger.info("Opening dialog " + d.getId());
+        if (!GUI.getInstance().peekScreen().equals("dialog_screen")) {
+            // do not push dialog if it is already on top
+            GUI.getInstance().pushCurrentScreen();
+        }
+        d.enter(this);
+        d.setCurrentStatement(startStatementId);
+        d.setFlags(flags);
+        Nifty nifty = GUI.getInstance().getNifty();
+        ((DialogController) nifty.getScreen("dialog_screen").getScreenController()).pushDialog(d);
+        GUI.getInstance().goToScreen("dialog_screen");
+    }
+
     public void addOverlayWindow(Dialog d) {
         logger.info("Opening dialog " + d.getId());
         if (!GUI.getInstance().peekScreen().equals("dialog_screen")) {

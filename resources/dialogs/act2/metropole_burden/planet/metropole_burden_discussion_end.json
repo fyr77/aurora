@@ -1,5 +1,5 @@
 {
-  "id": "colony_dialog_before_landing",
+  "id": "metropole_burden_discussion_end",
   "iconName": "colonist_dialog",
   "statements": {
     "0": {
@@ -7,23 +7,23 @@
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 1,
+          "targetStatementId": 3,
           "replyText": "0"
         }
       ]
     },
-    "1": {
-      "id": 1,
+    "3": {
+      "id": 3,
       "replies": [
         {
           "returnValue": 0,
-          "targetStatementId": 2,
+          "targetStatementId": 4,
           "replyText": "0"
         }
       ]
     },
-    "2": {
-      "id": 2,
+    "4": {
+      "id": 4,
       "replies": [
         {
           "returnValue": 0,

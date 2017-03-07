@@ -13,4 +13,5 @@
     <useStyles filename="gui/style/window/aurora-window.xml"/>
     <useStyles filename="gui/style/tabs/aurora-tabs.xml"/>
     <useStyles filename="gui/style/checkbox/aurora-checkbox.xml"/>
+    <useStyles filename="gui/style/textfield/aurora-textfield.xml"/>
 </nifty-styles>

@@ -1,0 +1,1278 @@
+{
+  "id": "metropole_burden_embargo_discussion",
+  "iconName": "colonist_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "colony_help_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "colony_help",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "colony_help_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "station_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "station_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "disagreement_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "disagreement_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "6",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "station_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "station_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "disagreement_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "disagreement_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "6",
+          "replyConditions": [
+            {
+              "name": "replace_condition",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "colony_help_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "colony_help",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "colony_help_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "disagreement_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "disagreement_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "6",
+          "replyConditions": [
+            {
+              "name": "replace_condition",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "0"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "colony_help_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "colony_help",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "colony_help_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "station_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "station_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "disagreement_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "disagreement_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "6",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "7",
+          "replyConditions": [
+            {
+              "name": "replace_condition",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "colony_help_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "colony_help",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "colony_help_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "station_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "station_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "disagreement_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "disagreement_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "6",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "7",
+          "replyConditions": [
+            {
+              "name": "replace_condition",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0",
+          "flags": {
+            "disagreement_minus": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "1",
+          "flags": {
+            "disagreement_minus": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "2",
+          "flags": {
+            "disagreement_minus": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "3",
+          "flags": {
+            "disagreement_plus": "true"
+          }
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "colony_help_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "colony_help",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "colony_help_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "station_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "station_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "disagreement_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "disagreement_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "6",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "7",
+          "replyConditions": [
+            {
+              "name": "replace_condition",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "colony_help_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "colony_help",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "colony_help_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "station_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "station_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "disagreement_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "disagreement_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "6",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "7",
+          "replyConditions": [
+            {
+              "name": "replace_condition",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "10": {
+      "id": 10,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "colony_help_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "colony_help",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "colony_help_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "station_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "station_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "disagreement_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "disagreement_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "6",
+          "replyConditions": [
+            {
+              "name": "replace_condition",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "11": {
+      "id": 11,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "station_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "station_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "terminal_used",
+              "type": "NOT_SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.matthew_surname_reply",
+              "type": "SET"
+            }
+          ],
+          "flags": {
+            "terminal_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "disagreement_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "disagreement_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "4",
+          "replyConditions": [
+            {
+              "name": "pressure_used",
+              "type": "NOT_SET"
+            }
+          ],
+          "flags": {
+            "pressure_used": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "5",
+          "replyConditions": [
+            {
+              "name": "replace_condition",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}
