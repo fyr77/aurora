@@ -11,11 +11,17 @@ import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.password_input.PasswordInputController;
 import ru.game.aurora.gui.password_input.PasswordInputEventsController;
 import ru.game.aurora.npc.CrewMember;
+import ru.game.aurora.npc.Faction;
+import ru.game.aurora.npc.NPC;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.KliskGenerator;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.space.AlienHomeworld;
 import ru.game.aurora.world.space.GalaxyMapObject;
+import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
 import java.io.Serializable;
@@ -53,23 +59,6 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
         world.addListener(this);
     }
 
-    private void addAliensStations(final World world) {
-        addKliskStation(world);
-        addBorkStation(world);
-        addRoguesStation(world);
-    }
-    private void addKliskStation(final World world) {
-        Dialog dialog = Dialog.loadFromFile("dialogs/act2/metropole_burden/stations/metropole_burden_klisk_station.json");
-    }
-
-    private void addBorkStation(final World world) {
-        Dialog dialog = Dialog.loadFromFile("dialogs/act2/metropole_burden/stations/metropole_burden_bork_station.json");
-    }
-
-    private void addRoguesStation(final World world) {
-        Dialog dialog = Dialog.loadFromFile("dialogs/act2/metropole_burden/stations/metropole_burden_rogues_station.json");
-    }
-
     private void getColonyData(final World world) {
         if(world.getGlobalVariables().containsKey("colony_search.coords")){
             Object obj = world.getGlobalVariables().get("colony_search.coords");
@@ -77,11 +66,76 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
             if(obj != null && obj instanceof AlienHomeworld){
                 colonyPlanet = (AlienHomeworld)obj;
                 colonySystem = colonyPlanet.getOwner();
+                colonySystem.setQuestLocation(true);
             }
             else{
                 logger.error("Colony star system not defined");
             }
         }
+    }
+
+    private void addAliensStations(final World world) {
+        addKliskStation(world);
+        addBorkStation(world);
+        addRoguesStation(world);
+    }
+    private void addKliskStation(final World world) {
+        Dialog dialog = Dialog.loadFromFile("dialogs/act2/metropole_burden/stations/metropole_burden_klisk_station.json");
+        dialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = 7356902391168484873L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                if(!world.getGlobalVariables().containsKey("metropole_burden.klisk_station_visited")){
+                    world.getGlobalVariables().put("metropole_burden.klisk_station_visited", true);
+                }
+
+                if(flags.containsKey("metropole_burden.trade_weapon")){
+                    world.getGlobalVariables().put("metropole_burden.trade_weapon", true);
+                }
+                if(flags.containsKey("metropole_burden.trade_augmentation")){
+                    world.getGlobalVariables().put("metropole_burden.trade_augmentation", true);
+                }
+            }
+        });
+
+        addStation(dialog, "klisk_station",  world.getFactions().get(KliskGenerator.NAME), "Klisk trade station", 1, -1);
+    }
+
+    private void addBorkStation(final World world) {
+        Dialog dialog = Dialog.loadFromFile("dialogs/act2/metropole_burden/stations/metropole_burden_bork_station.json");
+        dialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = -4050295078694394215L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                if(!world.getGlobalVariables().containsKey("metropole_burden.bork_station_visited")){
+                    world.getGlobalVariables().put("metropole_burden.bork_station_visited", true);
+                }
+            }
+        });
+        addStation(dialog, "bork_ship",  world.getFactions().get(BorkGenerator.NAME), "Bork trade station", -1, 1);
+    }
+
+    private void addRoguesStation(final World world) {
+        Dialog dialog = Dialog.loadFromFile("dialogs/act2/metropole_burden/stations/metropole_burden_rogues_station.json");
+        dialog.addListener(new DialogListener() {
+            private static final long serialVersionUID = 7331782200454824692L;
+            @Override
+            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                if(!world.getGlobalVariables().containsKey("metropole_burden.rogue_station_visited")){
+                    world.getGlobalVariables().put("metropole_burden.rogue_station_visited", true);
+                }
+            }
+        });
+
+        addStation(dialog, "rogues_beacon",  world.getFactions().get(RoguesGenerator.NAME), "Rogues trade station", 1, 1);
+    }
+
+    private void addStation(Dialog dialog, String sprite, Faction faction, String name, int dx, int dy){
+        NPCShip station = new NPCShip(0, 0, sprite, faction, new NPC(dialog), name, 25);
+        station.setStationary(true);
+        station.setAi(null);
+        station.setPos(colonyPlanet.getX() + dx, colonyPlanet.getY() + dy);
+        colonySystem.getShips().add(station);
     }
 
     private void addStartJornalEntries(final World world) {
@@ -387,7 +441,7 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 if(flags.containsKey("result")){
                     if(flags.get("result").equals("0")){
-                        logger.info("Press conference result is 0");
+                        logger.info("Press conference result is negative");
                         // negative result
                         if(flags.containsKey("metropole_burden.instant")){
                             world.getPlayer().getJournal().addQuestEntries("metropole_burden", "press_conference_instant_agressive");
@@ -397,7 +451,7 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
                         }
                     }
                     else{
-                        logger.info("Press conference result > 0");
+                        logger.info("Press conference result is positive");
                         // positive result
                         if(flags.containsKey("metropole_burden.instant")){
                             world.getPlayer().getJournal().addQuestEntries("metro pole_burden", "press_conference_instant");

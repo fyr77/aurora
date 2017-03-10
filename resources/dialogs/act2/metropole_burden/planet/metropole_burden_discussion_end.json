@@ -12,6 +12,26 @@
         }
       ]
     },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        }
+      ]
+    },
     "3": {
       "id": 3,
       "replies": [
