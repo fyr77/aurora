@@ -1,0 +1,227 @@
+0;;;;;
+;;1;;;
+1;;;;;
+;;2;!reply_unity_used;;reply_unity_used
+;;12;!reply_colony_used;;reply_colony_used
+;;29;reply_colony_used && reply_unity_used;;
+2;;;;;
+;;3;;;
+3;;;;;
+;;4;;;
+4;;;;;
+;;5;!reply_klisk_pirate_used && klisk_pirate.quest_result=rejected;;reply_klisk_pirate_used
+;;6;!reply_klisk_pirate_used && klisk_pirate.started;;reply_klisk_pirate_used
+;;7;!reply_bork_used;;reply_bork_used
+;;8;!reply_zorsan_used && unity_zorsan_ambassador_visited;;reply_zorsan_used
+;;10;!reply_rogues_used;;reply_rogues_used
+;;11;!reply_joseph_used;;reply_joseph_used
+5;;;;;
+;;6;!reply_klisk_pirate_used && klisk_pirate.started;;reply_klisk_pirate_used
+;;7;!reply_bork_used;;reply_bork_used
+;;8;!reply_zorsan_used && unity_zorsan_ambassador_visited;;reply_zorsan_used
+;;10;!reply_rogues_used;;reply_rogues_used
+;;11;!reply_joseph_used;;reply_joseph_used
+6;;;;;
+;;5;!reply_klisk_pirate_used && klisk_pirate.quest_result=rejected;;reply_klisk_pirate_used
+;;7;!reply_bork_used;;reply_bork_used
+;;8;!reply_zorsan_used && unity_zorsan_ambassador_visited;;reply_zorsan_used
+;;10;!reply_rogues_used;;reply_rogues_used
+;;11;!reply_joseph_used;;reply_joseph_used
+7;;;;;
+;;5;!reply_klisk_pirate_used && klisk_pirate.quest_result=rejected;;reply_klisk_pirate_used
+;;6;!reply_klisk_pirate_used && klisk_pirate.started;;reply_klisk_pirate_used
+;;8;!reply_zorsan_used && unity_zorsan_ambassador_visited;;reply_zorsan_used
+;;10;!reply_rogues_used;;reply_rogues_used
+;;11;!reply_joseph_used;;reply_joseph_used
+8;;;;;
+;;9;;;
+9;;;;;
+;;5;!reply_klisk_pirate_used && klisk_pirate.quest_result=rejected;;reply_klisk_pirate_used
+;;6;!reply_klisk_pirate_used && klisk_pirate.started;;reply_klisk_pirate_used
+;;7;!reply_bork_used;;reply_bork_used
+;;10;!reply_rogues_used;;reply_rogues_used
+;;11;!reply_joseph_used;;reply_joseph_used
+10;;;;;
+;;5;!reply_klisk_pirate_used && klisk_pirate.quest_result=rejected;;reply_klisk_pirate_used
+;;6;!reply_klisk_pirate_used && klisk_pirate.started;;reply_klisk_pirate_used
+;;7;!reply_bork_used;;reply_bork_used
+;;8;!reply_zorsan_used && unity_zorsan_ambassador_visited;;reply_zorsan_used
+;;10;!reply_rogues_used;;reply_rogues_used
+;;11;!reply_joseph_used;;reply_joseph_used
+11;;;;;
+;;12;!reply_colony_used;;reply_colony_used
+;;29;reply_colony_used && reply_unity_used;;
+12;;;;;
+;;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+13;;;;;
+;;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+14;;;;;
+;;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+15;;;;;
+;;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+16;;;;;
+;;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+17;;;;;
+;;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+18;;;;;
+;;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+19;;;;;
+;;20;;;
+20;;;;;
+;;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+21;;;;;
+;;22;;;
+22;;;;;
+;;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+23;;;;;
+;;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+24;;;;;
+;;25;;;
+25;;;;;
+;;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+26;;;;;
+;;27;;;
+27;;;;;
+;;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;;24;!reply_augmentation;;reply_augmentation
+;;26;!reply_opinion;;reply_opinion
+;;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+28;;;;;
+;;2;!reply_unity_used;;reply_unity_used
+;;12;!reply_colony_used;;reply_colony_used
+;;29;reply_colony_used && reply_unity_used;;
+29;;;;;
+;;30;;;
+30;;;;;
+;;31;;;
+31;;;;;
+;;32;;;
+32;;;;;
+;;-1;;;

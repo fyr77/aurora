@@ -253,6 +253,10 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
 
                 // set default station dialogues and music after visit
                 spaceStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_docking_visited.json")));
+
+                if(flags.containsKey("unity_zorsan_ambassador_visited")){
+                    world.getGlobalVariables().put("unity_zorsan_ambassador_visited", true);
+                }
             }
         });
 

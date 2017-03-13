@@ -441,6 +441,7 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 if(flags.containsKey("result")){
                     if(flags.get("result").equals("0")){
+                        world.getGlobalVariables().put("metropole_burden.agressive_end", true);
                         logger.info("Press conference result is negative");
                         // negative result
                         if(flags.containsKey("metropole_burden.instant")){
@@ -464,6 +465,11 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
                 else{
                     throw new NullPointerException("Flag 'result' not found");
                 }
+
+                if(flags.containsKey("metropole_burden.documents_found")){
+                    world.getGlobalVariables().put("metropole_burden.documents_found", true);
+                }
+
                 endQuest(world, "done");
             }
         });
