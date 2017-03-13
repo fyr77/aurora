@@ -7,3 +7,4 @@
 7.2Подписание эмбарго.csv;metropole_burden_embargo_signing;colonist_dialog;act2\metropole_burden\planet\
 8Конец переговоров.csv;metropole_burden_discussion_end;colonist_dialog;act2\metropole_burden\planet\
 9Пресс-конференция.csv;metropole_burden_press_conference;colonist_dialog;act2\metropole_burden\planet\
+metropole_burden_after_discussion.csv;metropole_burden_after_discussion;alien_city_dialog;act2\metropole_burden\planet\

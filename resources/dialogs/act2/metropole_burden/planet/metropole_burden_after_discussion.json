@@ -1,0 +1,18 @@
+{
+  "id": "metropole_burden_after_discussion",
+  "iconName": "alien_city_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}
