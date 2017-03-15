@@ -243,10 +243,10 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 if(world.getGlobalVariables().containsKey("klisk_pirate.started")){
-                    world.getPlayer().getJournal().questCompleted("unity", "klisk_quest_start");
+                    world.getPlayer().getJournal().addQuestEntries("unity", "klisk_quest_start");
                 }
                 else if(world.getGlobalVariables().containsKey("klisk_pirate.quest_result") && world.getGlobalVariables().get("klisk_pirate.quest_result").equals("rejected")){
-                    world.getPlayer().getJournal().questCompleted("unity", "klisk_quest_reject");
+                    world.getPlayer().getJournal().addQuestEntries("unity", "klisk_quest_reject");
                 }
 
                 world.getGlobalVariables().put("unity_done", true); // end the Unity quest branch
@@ -261,7 +261,6 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
         });
 
         endDialog.addListener(new MusicDialogListener(Playlist.getCurrentPlaylist().getId())); // end dialogs chain music
-
         return startDialog;
     }
 

@@ -481,7 +481,7 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
     private void endQuest(World world, Map<String, String> flags) {
         logger.info("Quest metropole_burden complete");
 
-        world.getGlobalVariables().put("metropole_burden_done", true);
+        world.getGlobalVariables().put("metropole_burden_done", true); // end the 'The burden of the metropolis' quest branch
         recordFlags(world, flags, "metropole_burden.taxes_signed");
         recordFlags(world, flags, "metropole_burden.dues_signed");
         recordFlags(world, flags, "metropole_burden.embargo_signed");

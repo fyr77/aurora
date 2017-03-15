@@ -47,7 +47,6 @@ public class EarthDialogListener implements DialogListener {
             int daysPassed = world.getDayCount() - earth.getLastVisitTurn();
             Statement stmt;
 
-
             if (daysPassed > Configuration.getIntProperty("game.minimumTripDays")) {
 
                 ((EarthProgressScreenController) GUI.getInstance().getNifty().getScreen("earth_progress_screen").getScreenController()).updateStats();
@@ -154,6 +153,10 @@ public class EarthDialogListener implements DialogListener {
             world.getGlobalVariables().remove("unity_done");
             world.getGlobalVariables().put("act2_unty_done", true);
             world.getGlobalVariables().put("act2_metropole_burden_done", true);
+
+            // todo: add journal entries
+            //world.getPlayer().getJournal().questCompleted("unity", "");
+            //world.getPlayer().getJournal().questCompleted("metropole_burden", "");
         }
 
         // quest stuff
