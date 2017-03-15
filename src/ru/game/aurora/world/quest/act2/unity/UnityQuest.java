@@ -1,10 +1,12 @@
-package ru.game.aurora.world.quest;
+package ru.game.aurora.world.quest.act2.unity;
 
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
+import ru.game.aurora.music.MusicDialogListener;
+import ru.game.aurora.music.Playlist;
 import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.npc.NPC;
 import ru.game.aurora.world.GameEventListener;
@@ -59,11 +61,15 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
         if(unityStarSystem != null){
             logger.info("Unity station founded in " + unityStarSystem.getCoordsString());
 
-            NPC capitan = new NPC(getUnityStationDialog());
-            NPCShip spaceStation = new NPCShip(0, 0, "rogues_beacon", world.getFactions().get(RoguesGenerator.NAME), capitan, "Unity station", 90);
+            NPCShip spaceStation = new NPCShip(0, 0, "rogues_beacon", world.getFactions().get(RoguesGenerator.NAME), null, "Unity station", 90);
             setStationPosition(unityStarSystem.getPlanets(), spaceStation, unityStarSystem.getRadius()/2);
             spaceStation.setStationary(true);
             spaceStation.setAi(null);
+
+            NPC capitan = new NPC(getUnityStationDialog(spaceStation));
+            capitan.setCustomPlaylist("unity_dialog");
+
+            spaceStation.setCaptain(capitan);
 
             unityStarSystem.getShips().add(spaceStation);
             unityStarSystem.setQuestLocation(true);
@@ -93,7 +99,7 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
         spaceStation.setPos(y, x);
     }
 
-    private Dialog getUnityStationDialog() {
+    private Dialog getUnityStationDialog(final NPCShip spaceStation) {
         final Dialog startDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_docking.json");
         final Dialog insideDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_inside.json");
         final Dialog meettingDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_meeting.json");
@@ -104,7 +110,6 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
         final Dialog roguesEmbassyDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_embassy_rogues.json");
         final Dialog endDialog = Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_after_dialogue_with_ambassadors.json");
 
-        // docking
         startDialog.addListener(new DialogListener() {
             private static final long serialVersionUID = -2371433038571672351L;
             @Override
@@ -238,18 +243,24 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 if(world.getGlobalVariables().containsKey("klisk_pirate.started")){
-                    world.getPlayer().getJournal().questCompleted("unity", "klisk_quest_start");
+                    world.getPlayer().getJournal().addQuestEntries("unity", "klisk_quest_start");
                 }
                 else if(world.getGlobalVariables().containsKey("klisk_pirate.quest_result") && world.getGlobalVariables().get("klisk_pirate.quest_result").equals("rejected")){
-                    world.getPlayer().getJournal().questCompleted("unity", "klisk_quest_reject");
+                    world.getPlayer().getJournal().addQuestEntries("unity", "klisk_quest_reject");
                 }
 
-                // todo: add default 'Unity station dialog'
-                // todo: start quest "The burden of the metropolis"
-                // todo: after quest "The burden of the metropolis" start quest "On the trail of the Builders" and "Klisk pirate"
+                world.getGlobalVariables().put("unity_done", true); // end the Unity quest branch
+
+                // set default station dialogues and music after visit
+                spaceStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_docking_visited.json")));
+
+                if(flags.containsKey("unity_zorsan_ambassador_visited")){
+                    world.getGlobalVariables().put("unity_zorsan_ambassador_visited", true);
+                }
             }
         });
 
+        endDialog.addListener(new MusicDialogListener(Playlist.getCurrentPlaylist().getId())); // end dialogs chain music
         return startDialog;
     }
 
@@ -278,11 +289,11 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
         final Dialog secondDialog = Dialog.loadFromFile("dialogs/act2/unity_human_ambassador_onboard_2.json");
         final Dialog busyDialog = Dialog.loadFromFile("dialogs/act2/unity_human_ambassador_onboard_3.json");
 
-        final CrewMember komsky = new CrewMember("komsky", "europe_leader", startDialog);
+        final CrewMember komsky = new CrewMember("komsky", "earth_diplomat_dialog", startDialog);
         world.getPlayer().getShip().addCrewMember(world, komsky);
 
         startDialog.addListener(new DialogListener() {
-            // Set komsky dialogue to  'unity_human_ambassador_onboard_3' and await 10 turns to switch to 'unity_human_ambassador_onboard_2'
+            // Set Komsky dialogue to  'unity_human_ambassador_onboard_3' and await 10 turns to switch to 'unity_human_ambassador_onboard_2'
             private static final long serialVersionUID = 5578057943354971146L;
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {

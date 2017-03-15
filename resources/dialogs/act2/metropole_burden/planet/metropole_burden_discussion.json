@@ -1,0 +1,550 @@
+{
+  "id": "metropole_burden_discussion",
+  "iconName": "colonist_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 1,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "2"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 1,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "2"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 1,
+          "targetStatementId": -1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "2"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 1,
+          "targetStatementId": -1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.embargo_signed",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.taxes_signed",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.dues_signed",
+              "type": "NOT_SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.taxes_signed",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.dues_signed",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.embargo_signed",
+              "type": "SET"
+            }
+          ]
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "3",
+          "flags": {
+            "metropole_burden.taxes_signed": "false"
+          }
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "flags": {
+            "metropole_burden.taxes_signed": "false"
+          }
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "flags": {
+            "metropole_burden.taxes_signed": "false"
+          }
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "0"
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "1"
+        }
+      ]
+    },
+    "10": {
+      "id": 10,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0",
+          "flags": {
+            "metropole_burden.taxes_signed": "true"
+          }
+        }
+      ]
+    },
+    "11": {
+      "id": 11,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0",
+          "flags": {
+            "metropole_burden.taxes_signed": "false"
+          }
+        }
+      ]
+    },
+    "12": {
+      "id": 12,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        }
+      ]
+    },
+    "13": {
+      "id": 13,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "3",
+          "flags": {
+            "metropole_burden.dues_signed": "false"
+          }
+        }
+      ]
+    },
+    "14": {
+      "id": 14,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "2"
+        }
+      ]
+    },
+    "15": {
+      "id": 15,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "1",
+          "flags": {
+            "metropole_burden.dues_signed": "false"
+          }
+        }
+      ]
+    },
+    "16": {
+      "id": 16,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "1"
+        }
+      ]
+    },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0",
+          "flags": {
+            "metropole_burden.dues_signed": "true"
+          }
+        }
+      ]
+    },
+    "18": {
+      "id": 18,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0",
+          "flags": {
+            "metropole_burden.dues_signed": "false"
+          }
+        }
+      ]
+    },
+    "19": {
+      "id": 19,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "1"
+        }
+      ]
+    },
+    "20": {
+      "id": 20,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "0"
+        }
+      ]
+    },
+    "21": {
+      "id": 21,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.klisk_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.rogue_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.bork_station_visited",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden.documents_found",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "1"
+        }
+      ]
+    },
+    "22": {
+      "id": 22,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
+        }
+      ]
+    },
+    "23": {
+      "id": 23,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "0"
+        }
+      ]
+    },
+    "24": {
+      "id": 24,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "0",
+          "flags": {
+            "metropole_burden.bring_colony_requests": "true"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "1",
+          "flags": {
+            "metropole_burden.bring_colony_requests": "false"
+          }
+        }
+      ]
+    },
+    "25": {
+      "id": 25,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "26": {
+      "id": 26,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

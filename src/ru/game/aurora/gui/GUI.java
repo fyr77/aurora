@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.MainMenuController;
 import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.gui.password_input.PasswordInputController;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 
@@ -153,6 +154,7 @@ public class GUI {
         nifty.registerScreenController(new EarthScreenController(world));
         nifty.registerScreenController(new EngineeringScreenController(world, con));
         nifty.registerScreenController(new FailScreenController(world));
+        nifty.registerScreenController(new PasswordInputController(world, con));
 
         final SurfaceGUIController surfaceGUIController = new SurfaceGUIController(world);
         nifty.registerScreenController(surfaceGUIController);
@@ -193,7 +195,8 @@ public class GUI {
                 "gui/screens/journal_screen.xml",
                 "gui/screens/planet_scan_screen.xml",
                 "gui/screens/surface_map.xml",
-                "gui/screens/starmap.xml"
+                "gui/screens/starmap.xml",
+                "gui/screens/password_input.xml",
         };
         
         for(String screen : screens) {

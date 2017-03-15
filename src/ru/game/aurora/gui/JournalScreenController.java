@@ -6,6 +6,7 @@ import de.lessvoid.nifty.controls.*;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.Input;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.util.EngineUtils;
 import ru.game.aurora.world.World;
@@ -92,8 +93,17 @@ public class JournalScreenController extends DefaultCloseableScreenController {
         if (event.getSelection().isEmpty()) {
             return;
         }
-        EngineUtils.setTextForGUIElement(tg.getSelectedTab().getElement().findElementByName("#message_text"), ((JournalEntry) event.getSelection().get(0)).getFullText(world));
+        JournalEntry entry = (JournalEntry)event.getSelection().get(0);
+        EngineUtils.setTextForGUIElement(tg.getSelectedTab().getElement().findElementByName("#message_text"), entry.getFullText(world));
         myWindow.getElement().layoutElements();
+
+        // Player must see the log entry to discover some answers in the dialogues of the quest "The burden of the metropolis"
+        if(entry.getId().equals("metropole_burden")){
+            if(entry.contains("document_introduction") && entry.contains("document_taxes") && entry.contains("document_dues") && entry.contains("document_embargo")){
+                world.getGlobalVariables().put("metropole_burden.documents_readed", true);
+                LoggerFactory.getLogger(JournalScreenController.class).info("'Metropole Burden' quest journal viewed");
+            }
+        }
     }
 
     public void closeScreen() {

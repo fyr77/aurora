@@ -1,0 +1,227 @@
+0;*К Мартану не пробиться, каким бы героем и знаменитостью ты ни был. Каково оно, постоять в очереди ожидающих первый раз за несколько лет? Ощущения своеобразные, признайся. В конце концов тебя пропускают. Мартан уже ждёт. Как обычно в своей рубашке и жилете, без пиджака. Как обычно пахнет тем же самым одеколоном. Если бы не морщины и прибавившаяся седина - он словно бы и не изменился нисколько, словно и не прошли эти годы.* А вот и ты. *Мартан протягивает руку.* Если бы летел кто-то другой - мы бы уже начали волноваться. Но Авророй управлял ты. Все знали, что ты вернёшься.;;;;
+;А куда же я денусь. *пожать руку*;1;;;
+1;*Мартан садится в кресло.* Вот именно. Бремя исследователя космоса, куда ты теперь от него денешься? Ммм? Ладно. Я так понимаю, с делами ты закончил. Отчитывайся.;;;;
+;"Я доставил Джозефа на ""Единство"" и поговорил со всеми послами.";2;!reply_unity_used;;reply_unity_used
+;По поводу колонии?;12;!reply_colony_used;;reply_colony_used
+;Это всё. ;29;reply_colony_used && reply_unity_used;;
+2;И что же?;;;;
+;Что же? Началось всё с совещания послов, куда позвали даже меня. А ещё там был Садовник. Не лично, конечно. Но и не на прямой связи. Он прислал запись.;3;;;
+3;*Мартан внимательно слушает твой рассказ. Получается очень долго - в паре слов тут ничего не опишешь. Изредка он перебивает.* То есть они разрешили нам подраться на кулачках и обещали не лезть? Какое благородство. Я уверен, что если мы будем побеждать - они начнуть помогать зорсанам. А если верх начнут одерживать зорсаны - будут оказывать помощь нам... прекрасно. Что дальше? *И он слушает дальше. Тебе остаётся лишь рассказывать. И ближе к концу ты очень удивлён - ведь на Мартана не производит совершенно никакого эффекта то, что сделал Садовник. Мартан кивает и откидывается на спинку кресла, разминая шею движениями из стороны в сторону.*;;;;
+;Ты не понял? Оказывается, он знал, что мы скажем! Он просто послал сделанную заранее запись!;4;;;
+4;И что? *Взгляд у твоего начальника ленивый и скептичный.* Во-первых - это вполне мог быть какой-нибудь монтаж, тебе это в голову не приходило? Во-вторых - даже если Садовник действительно? *Мартан недовольно щурится и шевелит пальцами в воздухе.* ВИДИТ БУДУЩЕЕ, то пока что он это не использовал ни для нашей, ни для чьей ещё либо пользы. Нам сейчас не об этом нужно думать. Что с послами? ;;;;
+;Я говорил с послом клисков. Он кое-что предложил одно скользкое дельце - я отказался.;5;!reply_klisk_pirate_used && klisk_pirate.quest_result=rejected;;reply_klisk_pirate_used
+;Я говорил с послом клисков. И согласился на кое-какую работу.;6;!reply_klisk_pirate_used && klisk_pirate.started;;reply_klisk_pirate_used
+;Разговор с послом борков был неплохим.;7;!reply_bork_used;;reply_bork_used
+;К зорсанам меня не  пустили.;8;!reply_zorsan_used && unity_zorsan_ambassador_visited;;reply_zorsan_used
+;Говорил с послом бродяг. Он переслал мне кое-какие данные - это поможет нам с Опустошителем. А ещё посла бродяг нет тела.;10;!reply_rogues_used;;reply_rogues_used
+;Говорил со всеми. А в самом конце - с Джозефом.;11;!reply_joseph_used;;reply_joseph_used
+5;Что за дело? *Мартан слушает и кивает, одобряя твой выбор.* Правильно. Лучше не рисковать, слишком многое на кону. ;;;;
+;Я говорил с послом клисков. И согласился на кое-какую работу.;6;!reply_klisk_pirate_used && klisk_pirate.started;;reply_klisk_pirate_used
+;Разговор с послом борков был неплохим.;7;!reply_bork_used;;reply_bork_used
+;К зорсанам меня не  пустили.;8;!reply_zorsan_used && unity_zorsan_ambassador_visited;;reply_zorsan_used
+;Говорил с послом бродяг. Он переслал мне кое-какие данные - это поможет нам с Опустошителем. А ещё посла бродяг нет тела.;10;!reply_rogues_used;;reply_rogues_used
+;Говорил со всеми. А в самом конце - с Джозефом.;11;!reply_joseph_used;;reply_joseph_used
+6;В чём суть дела? *Дослушав тебя, Мартан снова недовольно щурится.* И зачем ты согласился? От этой работы на милю несёт тухлятиной и аммиаком? Впрочем, именно для таких решений тебе и дали карт-бланш. Ты знаешь, что делашь. Может я не вижу чего-то, что видишь ты.;;;;
+;Я говорил с послом клисков. Он кое-что предложил одно скользкое дельце - я отказался.;5;!reply_klisk_pirate_used && klisk_pirate.quest_result=rejected;;reply_klisk_pirate_used
+;Разговор с послом борков был неплохим.;7;!reply_bork_used;;reply_bork_used
+;К зорсанам меня не  пустили.;8;!reply_zorsan_used && unity_zorsan_ambassador_visited;;reply_zorsan_used
+;Говорил с послом бродяг. Он переслал мне кое-какие данные - это поможет нам с Опустошителем. А ещё посла бродяг нет тела.;10;!reply_rogues_used;;reply_rogues_used
+;Говорил со всеми. А в самом конце - с Джозефом.;11;!reply_joseph_used;;reply_joseph_used
+7;*Рассказ о после борков занимается добрые минуты три.* Понятно. Это меня настораживает, знаешь ли. *Мартан облокачивается на стол и задумчиво смотрит в потолок.* Я бы ему не доверял. Не люблю такую откровенную многожелательность, пусть даже и обоснованную логически.;;;;
+;Я говорил с послом клисков. Он кое-что предложил одно скользкое дельце - я отказался.;5;!reply_klisk_pirate_used && klisk_pirate.quest_result=rejected;;reply_klisk_pirate_used
+;Я говорил с послом клисков. И согласился на кое-какую работу.;6;!reply_klisk_pirate_used && klisk_pirate.started;;reply_klisk_pirate_used
+;К зорсанам меня не  пустили.;8;!reply_zorsan_used && unity_zorsan_ambassador_visited;;reply_zorsan_used
+;Говорил с послом бродяг. Он переслал мне кое-какие данные - это поможет нам с Опустошителем. А ещё посла бродяг нет тела.;10;!reply_rogues_used;;reply_rogues_used
+;Говорил со всеми. А в самом конце - с Джозефом.;11;!reply_joseph_used;;reply_joseph_used
+8;Совершенно не удивлён! *Мартан довольно улыбается.* Как прекрасно, а?;;;;
+;Что прекра? стоп, я тебя понимаю. Зорсаны воюют с нами, мы воюем с зорсанами. Всё просто.;9;;;
+9;Именно. *Мартан кивает.* Это очевидный враг, в какой-то мере даже честный, отношения с ним очень просты. С остальными народами: клисками или бродягами, всё гораздо, гораздо сложнее. Что дальше?;;;;
+;Я говорил с послом клисков. Он кое-что предложил одно скользкое дельце - я отказался.;5;!reply_klisk_pirate_used && klisk_pirate.quest_result=rejected;;reply_klisk_pirate_used
+;Я говорил с послом клисков. И согласился на кое-какую работу.;6;!reply_klisk_pirate_used && klisk_pirate.started;;reply_klisk_pirate_used
+;Разговор с послом борков был неплохим.;7;!reply_bork_used;;reply_bork_used
+;Говорил с послом бродяг. Он переслал мне кое-какие данные - это поможет нам с Опустошителем. А ещё посла бродяг нет тела.;10;!reply_rogues_used;;reply_rogues_used
+;Говорил со всеми. А в самом конце - с Джозефом.;11;!reply_joseph_used;;reply_joseph_used
+10;Данные - это хорошо. Но? слишком легко они тебе достались, нет? Сомневаюсь, что тебя ждёт лёгкая прогулка. Лучше подготовься. *Мартан говорит твёрдо, но немного взволнованно.* Если не уверен, что готов ко всему - лучше отложи это путешествие.  Что ещё?;;;;
+;Я говорил с послом клисков. Он кое-что предложил одно скользкое дельце - я отказался.;5;!reply_klisk_pirate_used && klisk_pirate.quest_result=rejected;;reply_klisk_pirate_used
+;Я говорил с послом клисков. И согласился на кое-какую работу.;6;!reply_klisk_pirate_used && klisk_pirate.started;;reply_klisk_pirate_used
+;Разговор с послом борков был неплохим.;7;!reply_bork_used;;reply_bork_used
+;К зорсанам меня не  пустили.;8;!reply_zorsan_used && unity_zorsan_ambassador_visited;;reply_zorsan_used
+;Говорил с послом бродяг. Он переслал мне кое-какие данные - это поможет нам с Опустошителем. А ещё посла бродяг нет тела.;10;!reply_rogues_used;;reply_rogues_used
+;Говорил со всеми. А в самом конце - с Джозефом.;11;!reply_joseph_used;;reply_joseph_used
+11;Понятно. Молодец. *Улыбнувшись, Мартан дальше говорит своим обычным мягким голосом.* Это хорошо, что ты его навестил. Пусть он и профессионал, но оставаться за главного в таком месте - очень большая ответственность, гигантское напряжение. Не забывай регулярно прилетать к нему. Наверняка у него найдутся ценные данные, либо же ты сможешь ему чем-то помочь. Сам понимаешь - иногда без лёгкого серого физического воздействия не обойтись. Ладно! *Мартан сцепляет пальцы и с громким хрустом разминает их.* С послами мы закончили. Что ещё?;;;;
+;По поводу колонии?;12;!reply_colony_used;;reply_colony_used
+;Это всё. ;29;reply_colony_used && reply_unity_used;;
+12;Я тебя слушаю. Ты знаешь, что начальство хочет услышать. *Мартан смотрит прямо и не моргает.* Если они не услышат того, что им нужно - у тебя должно быть оправдание. ;;;;
+;Повышение налогов одобрено. Всё в порядке.;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;Донахью подписал указание о повышении пошлин.;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+13;Хорошо, я так и передам. Теперь в Аврору будет поступать ещё больше ресурсов. Они нам сейчас очень нужны.;;;;
+;Донахью подписал указание о повышении пошлин.;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+14;Я рад, что ты смог его уговорить. Никому до тебя не удавалось? До улёта в колонию Рич Донахью был лояльнее. *Мартан вздыхает.* Если всё продолжится в том же духе, придётся его менять.;;;;
+;Повышение налогов одобрено. Всё в порядке.;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+15;Хорошо. Меньше ресурсов будет утекать из бюджета колонии. Конечно, наверняка тебе пришлось приставлять пистолет к голове Донахью? *Мартан усмехается.* Однако, он сам не понимает, что сейчас мы не можем позволить себе торговлю обработанными ресурсами.;;;;
+;Повышение налогов одобрено. Всё в порядке.;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;Донахью подписал указание о повышении пошлин.;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+16;Плохо. *Мартан нахмурился и говорит отрывисто - признак упавшего настроя.* Мы думали, что хоть тебя-то он послушает? Чёрт! Как ты мог облажаться? Ладно? хватит. Что дальше?;;;;
+;Повышение налогов одобрено. Всё в порядке.;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;Донахью подписал указание о повышении пошлин.;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+17;Слушай, ты вообще понимаешь, насколько это важно? Поздравляю. В ближайшие несколько лет нам будет поступать меньше денег, и ответственность за это падёт? *Раскинув руки, Мартан картинно сводит их, указывая пальцами на себя.* Это не говоря уже о проблемах, которые ждут весь проект. Докладывай дальше.;;;;
+;Повышение налогов одобрено. Всё в порядке.;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;Донахью подписал указание о повышении пошлин.;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+18;Плохо. Коммерсанты на контракте с Авророй продавали излишки. Пока что мы не можем позволить сотрудничество частных торговцев с инопланетянами? Тебе не удалось - это очень плохо. Продолжай доклад.;;;;
+;Повышение налогов одобрено. Всё в порядке.;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;Донахью подписал указание о повышении пошлин.;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+19;"Ха. Пообещал? Ну, что же? *Усмехнувшись, Мартан состраивает самое бесстрастное лицо, которое только может, и говорит.* ""В данный момент мы не можем позволить увеличить финансирование"". Так ему и передай.";;;;
+;Хм. А если бы тебя спросил я, а не он? Для себя?;20;;;
+20;Для себя? Я бы ответил, что Авроре, в данный момент, не выгодно позволять колонии расти. Ограничение финансирования - часть стратегии заморозки развития. Донахью, если он не дурак, сам это прекрасно понимает. Наверняка понимает. Тогда зачем он тебя об этом попросил?.. *Мартан резко встряхивает головой.* Давай в другой раз об этом. Нам ещё есть что обсудить.;;;;
+;Повышение налогов одобрено. Всё в порядке.;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;Донахью подписал указание о повышении пошлин.;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+21;Да? Ну, что поделаешь. Он же не попал?;;;;
+;Ты издеваешься?;22;;;
+22;Если бы попал - я бы лично купил тебе новый мундир? Ха-ха! Шучу. Тебе бы выдали его бесплатно. Зачем ты забиваешь голову такой чепухой? ;;;;
+;Повышение налогов одобрено. Всё в порядке.;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;Донахью подписал указание о повышении пошлин.;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+23;Конечно. Куда же без контрабандистов в таком удалённом от метрополии месте, да? Это, конечно, проблема, но с ней Аврора пока что ещё готова мириться. Поверь мне: как только мы разберёмся с зорсанами и с Опустошителем? *Мартан покачивает головой.* Всей это швали в колонии будет мало места.;;;;
+;Повышение налогов одобрено. Всё в порядке.;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;Донахью подписал указание о повышении пошлин.;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+24;Аугментированы? А что, в колонии? *Твой начальник хмурит лоб и что-то ищет в своём планшете.* Странно. Туда таких систем не посылали. Пока что это закрытая разработка.;;;;
+;Мне кажется, это аугментации бродяг. Какие-то особые. На самих бродягах я таких не видел.;25;;;
+25;Да? Я доложу об этом наверх. Информация интересная. ;;;;
+;Повышение налогов одобрено. Всё в порядке.;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;Донахью подписал указание о повышении пошлин.;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+26;Потому что Авроре это необходимо. *Голос у Мартана сейчас очень едкий, он говорит издевательски, с сарказмом.* Потому что если ты не заметил, у нас тут кризис полезных ископаемых на планете. И ещё какая-то космическая империя захотела с нами воевать. Это уже не говоря о том, что какой-то огромный космический корабль, хтоническая штука, хочет уничтожить наше Солнце. Да, и как это мы осмеливаемся забирать ресурсы оттуда, куда мы пришли за ресурсами?;;;;
+;Но ведь там тоже живут люди. Им из-за этого очень нелегко.;27;;;
+27;Эти люди сами согласились туда лететь. Это их обязанность. И если они недовольны - это их проблемы, ведь они знали на что идут, нет? *Аргументация железная. Тем не менее, голос у Мартана немного теплеет.* Я понимаю, дружище. Ты обеспокоен. Всё в порядке. В верхушке Авроры не садисты и не тираны сидят. Поверь, как только мы разберёмся хотя бы с чем-нибудь, то умерим пыл с колонией. Но сейчас иначе попросту нельзя.;;;;
+;Повышение налогов одобрено. Всё в порядке.;13;!reply_taxes_used && metropole_burden.taxes_signed=true;;reply_taxes_used
+;Донахью подписал указание о повышении пошлин.;14;!reply_dues_used && metropole_burden.dues_signed=true;;reply_dues_used
+;Заморозка торговли с инопланетянами продлена, всё как ты мне сказал.;15;!reply_embargo_used && metropole_burden.embargo_signed=true;;reply_embargo_used
+;Секретарь отказался поставить подпись. Налоги не повышены.;16;!reply_taxes_used && metropole_burden.taxes_signed=false;;reply_taxes_used
+;С пошлинами не удалось. Я не смог его уговорить.;17;!reply_dues_used && metropole_burden.dues_signed=false;;reply_dues_used
+;Торговля с инопланетянами заморожена? но продлить её Рич отказался.;18;!reply_embargo_used && metropole_burden.embargo_signed=false;;reply_embargo_used
+;Слушай, я обещал Донахью узнать? почему вы режете его запросы? Запросы на повышение медицинского и военного финансирования были отклонены. В чём дело?;19;!reply_colony_request_used && metropole_burden.bring_colony_requests;;reply_colony_request_used
+;Хочешь комментарий не по теме? Нас там не очень любят. Какой-то местный активист попытался кинуть в меня куском глины, облитой кровью!;21;!reply_agressive_end_used && metropole_burden.agressive_end;;reply_agressive_end_used
+;А ты знаешь, что колонисты всё равно торгуют с инопланетянами?;23;!reply_document_found_used && metropole_burden.documents_found;;reply_document_found_used
+;Я не знаю, важно ли это? некоторые из солдат, проходящих службу в колонии, аугментированы. Ты знал об этом?;24;!reply_augmentation;;reply_augmentation
+;Колония - очень суровое место. Людям там нелегко. Аврора пытается тянуть с них все соки.;26;!reply_opinion;;reply_opinion
+;Кажется, с этим закончили? Слушай, а к чему эти подписи? Аврора же может просто приказать и всё.;28;reply_taxes_used && reply_dues_used && reply_embargo_used;;
+28;Разобрались. Я передам отчёты наверх? У нас что-то ещё?;;;;
+;"Я доставил Джозефа на ""Единство"" и поговорил со всеми послами.";2;!reply_unity_used;;reply_unity_used
+;По поводу колонии?;12;!reply_colony_used;;reply_colony_used
+;Это всё. ;29;reply_colony_used && reply_unity_used;;
+29;Хорошо. Значит пока что ты свободен. *После некоторой паузы, Мартан добавляет.* Относительно, конечно. Тебе по-прежнему нужно попытаться выяснить хотя бы что-то про Опустошитель. И, конечно, зорсаны?;;;;
+;"Я не понял, вы хотите послать меня воевать? ""Аврора-2"" - исследовательское судно.";30;;;
+30;Допускающее модификацию в военное. Так что, да. Если будет нужно - ты полетишь в бой. *Мартан улыбается.* Но сейчас это не требуется, пока что от тебя ничего такого не нужно. Командование запросило у тебя помощь в разведке. Просто слетай кое-куда и просканируй несколько планет. Тебе даже в бой вступать не надо в случае чего. Главное - поторопись. Это очень важно.;;;;
+;"Ладно. Пересылай всё на ""Аврору-2"", я просмотрю брифинг там.";31;;;
+31;"Как скажешь. Что же, дружище? увидимся мы не скоро. До свидания. Не буду говорить ""прощай"".";;;;
+;Я тоже не буду. До свидания, Мартан.;32;;;
+32;Ты уж возвращайся. Будет грустно, если Земля потеряет своего героя. *Улыбнувшись, Мартан жмёт тебе руку и похлопывает по плечу.*;;;;
+;Я думаю, что мне, в таком случае, тоже будет несладко.;-1;;;

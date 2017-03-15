@@ -1,0 +1,81 @@
+{
+  "id": "metropole_burden_discussion_begin_instant",
+  "iconName": "colonist_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 1,
+          "targetStatementId": -1,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.documents_readed",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 2,
+          "targetStatementId": -1,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.documents_readed",
+              "type": "SET"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.documents_readed",
+              "type": "NOT_SET"
+            }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 3,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

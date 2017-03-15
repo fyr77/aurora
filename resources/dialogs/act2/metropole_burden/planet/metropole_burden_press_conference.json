@@ -1,0 +1,514 @@
+{
+  "id": "metropole_burden_press_conference",
+  "iconName": "colonist_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "1"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "0"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.taxes_signed",
+              "value": "true",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.taxes_signed",
+              "value": "false",
+              "type": "EQUAL"
+            }
+          ],
+          "flags": {
+            "result": "result+1"
+          }
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.dues_signed",
+              "value": "true",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.dues_signed",
+              "value": "false",
+              "type": "EQUAL"
+            }
+          ],
+          "flags": {
+            "result": "result+1"
+          }
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.dues_signed",
+              "value": "true",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.dues_signed",
+              "value": "false",
+              "type": "EQUAL"
+            }
+          ],
+          "flags": {
+            "result": "result+1"
+          }
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "2"
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 9,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 10,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 11,
+          "replyText": "2"
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "1"
+        }
+      ]
+    },
+    "10": {
+      "id": 10,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "1"
+        }
+      ]
+    },
+    "11": {
+      "id": 11,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 12,
+          "replyText": "1"
+        }
+      ]
+    },
+    "12": {
+      "id": 12,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 13,
+          "replyText": "0"
+        }
+      ]
+    },
+    "13": {
+      "id": 13,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.embargo_signed",
+              "value": "false",
+              "type": "EQUAL"
+            }
+          ],
+          "flags": {
+            "result": "result+1"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 14,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.embargo_signed",
+              "value": "true",
+              "type": "EQUAL"
+            }
+          ]
+        }
+      ]
+    },
+    "14": {
+      "id": 14,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.bring_colony_requests",
+              "value": "true",
+              "type": "EQUAL"
+            }
+          ],
+          "flags": {
+            "result": "result+1"
+          }
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 15,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "metropole_burden.bring_colony_requests",
+              "value": "false",
+              "type": "EQUAL"
+            }
+          ]
+        }
+      ]
+    },
+    "15": {
+      "id": 15,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 16,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "result",
+              "value": "4",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 17,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "result",
+              "value": "0",
+              "type": "GREATER"
+            },
+            {
+              "name": "result",
+              "value": "4",
+              "type": "LESS"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 18,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "result",
+              "value": "0",
+              "type": "EQUAL"
+            }
+          ]
+        }
+      ]
+    },
+    "16": {
+      "id": 16,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "17": {
+      "id": 17,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "18": {
+      "id": 18,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 19,
+          "replyText": "0"
+        }
+      ]
+    },
+    "19": {
+      "id": 19,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 20,
+          "replyText": "0"
+        }
+      ]
+    },
+    "20": {
+      "id": 20,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "2"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "3"
+        }
+      ]
+    },
+    "21": {
+      "id": 21,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 22,
+          "replyText": "0"
+        }
+      ]
+    },
+    "22": {
+      "id": 22,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "2"
+        }
+      ]
+    },
+    "23": {
+      "id": 23,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 24,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "2"
+        }
+      ]
+    },
+    "24": {
+      "id": 24,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 21,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 23,
+          "replyText": "1"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 25,
+          "replyText": "2"
+        }
+      ]
+    },
+    "25": {
+      "id": 25,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 26,
+          "replyText": "0"
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "1"
+        }
+      ]
+    },
+    "26": {
+      "id": 26,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

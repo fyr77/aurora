@@ -26,7 +26,7 @@ import ru.game.aurora.steam.AchievementManager;
 import ru.game.aurora.world.Updatable;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.nature.AnimalGenerator;
-import ru.game.aurora.world.quest.SecondPartStarter;
+import ru.game.aurora.world.quest.act2.SecondPartStarter;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
