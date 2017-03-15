@@ -285,6 +285,21 @@
           "flags": {
             "colony_info_dumped": "true"
           }
+        },
+        {
+          "returnValue": 81,
+          "targetStatementId": -1,
+          "replyText": "18",
+          "replyConditions": [
+            {
+              "name": "unity_done",
+              "type": "SET"
+            },
+            {
+              "name": "metropole_burden_done",
+              "type": "SET"
+            }
+          ]
         }
       ]
     },

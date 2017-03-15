@@ -126,8 +126,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
                 new UnityQuest().updateWorld(world);
                 new MetropoleBurdenQuest().updateWorld(world);
             }
-        }
-        );
+        });
         world.addOverlayWindow(startDialog);
     }
 }

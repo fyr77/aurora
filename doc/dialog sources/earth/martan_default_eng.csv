@@ -17,6 +17,7 @@
 ;I've finished the diplomatic mission.;69;diplomacy.all_done=0 && !diplomacy_report;;diplomacy_report
 ;I have nothing to make you happy. I have a trouble with the main scientific terminal.;79;energy_sphere.communicated;;
 ;We've found an excellent planet for a future colonization.;90;colony_search.explored;;colony_info_dumped
+;;-1;unity_done && metropole_burden_done;81;
 4;Yeah, you're right. Scientists want you to help them in some things.;;;;
 ;I'm all ears.;6;;;
 6;Well, there's almost nothing to say. There are three neutron stars that have extremely unusual rays. The only thing you need is to explore its influence over the systems of their navigation. Make an observation in the space, explore any planet... No need in doing your best, just the needful minimum, and then you may return.;;;;

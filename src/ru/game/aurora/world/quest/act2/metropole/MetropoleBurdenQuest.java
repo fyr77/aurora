@@ -50,9 +50,10 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
 
     @Override
     public void updateWorld(final World world) {
-        ColonyFounder.foundColony(world, getColonyDialog(world));
+        ColonyFounder.foundColony(world);
         getColonyData(world);
 
+        colonyPlanet.setDialog(getColonyDialog(world));
         addStartJornalEntries(world);
         addLeaderFamily(world);
         addAliensStations(world);
@@ -148,7 +149,7 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
         world.getPlayer().getJournal().addQuestEntries("metropole_burden", "document_embargo");
     }
 
-    public Dialog getColonyDialog(final World world) {
+    private Dialog getColonyDialog(final World world) {
         final Dialog landing = Dialog.loadFromFile("dialogs/act2/metropole_burden/planet/metropole_burden_landing.json");
         final Dialog afterLanding = Dialog.loadFromFile("dialogs/act2/metropole_burden/planet/metropole_burden_leader_after_landing.json");
         final Dialog discussionBeginNormal = Dialog.loadFromFile("dialogs/act2/metropole_burden/planet/metropole_burden_discussion_begin_normal.json");
@@ -270,7 +271,7 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
                 }
                 else if(returnCode == 3){
                     world.getPlayer().getJournal().addQuestEntries("metropole_burden", "colony_failed");
-                    endQuest(world, "failed");
+                    endQuest(world, flags);
                 }
             }
         });
@@ -470,11 +471,33 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
                     world.getGlobalVariables().put("metropole_burden.documents_found", true);
                 }
 
-                endQuest(world, "done");
+                endQuest(world, flags);
             }
         });
 
         return landing;
+    }
+
+    private void endQuest(World world, Map<String, String> flags) {
+        logger.info("Quest metropole_burden complete");
+
+        world.getGlobalVariables().put("metropole_burden_done", true);
+        recordFlags(world, flags, "metropole_burden.taxes_signed");
+        recordFlags(world, flags, "metropole_burden.dues_signed");
+        recordFlags(world, flags, "metropole_burden.embargo_signed");
+        recordFlags(world, flags, "metropole_burden.embargo_signed");
+
+        // todo: rebuild default dialogue to DialogListener methods(?)
+        colonyPlanet.setDialog(Dialog.loadFromFile("dialogs/act2/metropole_burden/planet/metropole_burden_after_discussion.json"));
+    }
+
+    private void recordFlags(World world, Map<String, String> flags, String key){
+        if(flags.containsKey(key)){
+            world.getGlobalVariables().put(key, Boolean.parseBoolean(flags.get(key)));
+        }
+        else{
+            world.getGlobalVariables().put(key, false);
+        }
     }
 
     private void setEmbargoDialogConditions(Dialog dialog, boolean colonyHelp, boolean stationsVisited, boolean terminalUsed) {
@@ -529,11 +552,5 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
                 family.setDialog(dialogBusy);
             }
         });
-    }
-
-    public void endQuest(World world, String result) {
-        world.getGlobalVariables().put("metropole_burden_done", result);
-        // todo: block default dialog
-        logger.info("Quest metropole_burden complete with result '{}'", result);
     }
 }

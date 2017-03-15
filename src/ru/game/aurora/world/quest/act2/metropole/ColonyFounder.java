@@ -1,7 +1,6 @@
 package ru.game.aurora.world.quest.act2.metropole;
 
 import org.slf4j.LoggerFactory;
-import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.BasePlanet;
@@ -21,18 +20,18 @@ class ColonyFounder {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ColonyFounder.class);
 
-    public static void foundColony(World world, Dialog colonyDialog){
+    public static void foundColony(World world){
         // Replaces colony planet with a dialog planet like Earth (which can not be landed)
         if(world.getGlobalVariables().containsKey("colony_established")){
-            colonyReplace(world, colonyDialog);
+            colonyReplace(world);
         }
         else{
             // Create colony as AlienHomeworld
-            colonyFound(world, colonyDialog);
+            colonyFound(world);
         }
     }
 
-    private static void colonyReplace(World world, Dialog colonyDialog) {
+    private static void colonyReplace(World world) {
         // Change colony planet type to AlienHomeworld
         if(!world.getGlobalVariables().containsKey("colony_search.coords")) {
             logger.error("Colony data not found, but global variable 'colony_established' exist");
@@ -47,7 +46,7 @@ class ColonyFounder {
 
         if(obj instanceof Planet){
             Planet colonyPlanet = (Planet)obj;
-            AlienHomeworld newColonyPlanet = buildColonyPlanet(world, colonyPlanet, colonyDialog);
+            AlienHomeworld newColonyPlanet = buildColonyPlanet(world, colonyPlanet);
 
             // replace old colony planet
             BasePlanet[] planets = colonyPlanet.getOwner().getPlanets();
@@ -65,7 +64,7 @@ class ColonyFounder {
         }
     }
 
-    private static void colonyFound(World world, Dialog colonyDialog) {
+    private static void colonyFound(World world) {
         int x = 0;
         int y = 0;
 
@@ -94,8 +93,9 @@ class ColonyFounder {
             for(int i = 0; i < planets.length; ++i){
                 if(planets[i] != null && planets[i].getSize() == 3 && planets[i].getAtmosphere() == PlanetAtmosphere.BREATHABLE_ATMOSPHERE){
                     // create colony here
-                    AlienHomeworld newColonyPlanet = buildColonyPlanet(world, planets[i], colonyDialog);
-                    planets[i] = buildColonyPlanet(world, planets[i], colonyDialog);
+                    AlienHomeworld newColonyPlanet = buildColonyPlanet(world, planets[i]);
+
+                    planets[i] = newColonyPlanet;
                     world.getGlobalVariables().put("colony_established", true);
                     world.getGlobalVariables().put("colony_search.coords", newColonyPlanet);
                     logger.info("Colony found in star system " + colonyStarSystem.getCoordsString());
@@ -108,11 +108,11 @@ class ColonyFounder {
         }
     }
 
-    private static AlienHomeworld buildColonyPlanet(World world, BasePlanet sourcePlanet, Dialog colonyDialog){
+    private static AlienHomeworld buildColonyPlanet(World world, BasePlanet sourcePlanet){
         return new AlienHomeworld(
                 null,
                 ((AlienRace) world.getFactions().get("Humanity")),
-                colonyDialog,
+                null,
                 sourcePlanet.getSize(),
                 sourcePlanet.getY(),
                 sourcePlanet.getOwner(),

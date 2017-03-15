@@ -146,6 +146,15 @@ public class EarthDialogListener implements DialogListener {
             // start ambush quests = zorsans want revenge!
             world.addListener(new AmbushQuest());
         }
+        else if(returnCode == 81){
+            // End of 'Unity' and 'The burden of the metropolis' quests
+            final Dialog reportDialog = Dialog.loadFromFile("dialogs/act2/act2_unity_and_metropolis_done_main.json");
+            world.addOverlayWindow(reportDialog);
+            world.getGlobalVariables().remove("metropole_burden_done");
+            world.getGlobalVariables().remove("unity_done");
+            world.getGlobalVariables().put("act2_unty_done", true);
+            world.getGlobalVariables().put("act2_metropole_burden_done", true);
+        }
 
         // quest stuff
         if (flags.containsKey("diplomacy_report")) {
