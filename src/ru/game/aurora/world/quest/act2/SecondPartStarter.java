@@ -117,7 +117,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
     }
 
     private void startUnityAndMetropoleQuests(final World world) {
-        final Dialog startDialog = Dialog.loadFromFile("dialogs/act2/quest_union/act_2_begin_martan.json");
+        final Dialog startDialog = Dialog.loadFromFile("dialogs/act2/act2_begin_martan.json");
 
         startDialog.addListener(new DialogListener() {
             private static final long serialVersionUID = 4488508909100895730L;

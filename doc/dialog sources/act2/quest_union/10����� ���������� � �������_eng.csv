@@ -1,80 +1,80 @@
 0;*That's it. How was it? You wonder if people who do this for a living feel the same way.*;;;
 ;The hero's burden. So this is what it's like.;1;;0
-1;*Although, as soon as you come back out to the main hall and take a look at space through its transparent top… Do you feel a little better?*;;;
+1;*Although, as soon as you come back out to the main hall and take a look at space through its transparent topâ€¦ Do you feel a little better?*;;;
 ;I guess.;2;;0
 2;*Seems like you're done here. You can fly home, it's a long way to Earth.*;;;
 ;I should pay Joseph a visit. After all these conversations with the ambassadors, we're going to have things to talk about.;3;;0
 ;"That's it. Cras ingens interabimus aequor! Except by ""tomorrow"" I mean ""now"".";-1;;0
-3;*The Earth embassy is guarded by humans, which is to be expected. Two tough guards stand at the entrance and look a bit confused by seeing so many aliens around. One of them spots you and really stands at attention, even though it didn't seem possible before.* Captain! A pleasure to greet you!;;;
-;*nod silently and enter the embassy*;5;;0
-;Where are you from? How's serving at your new posting?;4;;0
-5;"*It's a bit empty inside, visitors haven't had the time to fill the embassy. That gives you a great opportunity to look around... The unknown architect tried to decorate this section in ""Earth style"", and the result is peculiar. The color palette being dark purple (a little heavy on the eyes) and in absence of a round main hall that all other embassies have, the Earth embassy does have something that makes it stand out: Earth flora. Some sections of the walls are literally covered in ivy! It looks unusual, but rather pretty than not. You can see the door to the ambassador's office right away. In front of it a secretary sits behind a small desk, she's doing something with a tablet.*";;;
+3;*The Earth embassy is guarded by humans, which is to be expected. Two tough guards stand at the entrance and look a bit confused by seeing so many aliens around. One of them spots you and really stands at attention, even though it didn't seem possible before.* Captain! A pleasure to greet you!;etf_cap_3_dialog;;
+;*nod silently and enter the embassy*;4;;0
+;Where are you from? How's serving at your new posting?;5;;0
+4;"*It's a bit empty inside, visitors haven't had the time to fill the embassy. That gives you a great opportunity to look around... The unknown architect tried to decorate this section in ""Earth style"", and the result is peculiar. The color palette being dark purple (a little heavy on the eyes) and in absence of a round main hall that all other embassies have, the Earth embassy does have something that makes it stand out: Earth flora. Some sections of the walls are literally covered in ivy! It looks unusual, but rather pretty than not. You can see the door to the ambassador's office right away. In front of it a secretary sits behind a small desk, she's doing something with a tablet.*";;;
 ;*take a look around*;6;;0
 ;*to the ambassador*;7;;0
-4;*The same one who greeted you answers, an Asian with sharp features and a narrow jawline.* We're both from the Aurora! From the Voyager! *He shoots some glances from side to side.* There's a lot of aliens, but it's okay. We're used to it. *His partner, a blue eyed man with black hair, nods and adds.* We were trained for this. Coming to see the ambassador, Captain?;;;
-;*nod silently and enter the embassy*;5;;0
+5;*The same one who greeted you answers, an Asian with sharp features and a narrow jawline.* We're both from the Aurora! From the Voyager! *He shoots some glances from side to side.* There's a lot of aliens, but it's okay. We're used to it. *His partner, a blue eyed man with black hair, nods and adds.* We were trained for this. Coming to see the ambassador, Captain?;etf_cap_3_dialog;;
+;*nod silently and enter the embassy*;4;;0
 6;*There's not much to look at after all. Because of the absence of a round hall the embassy doesn't look as grand and impressive as the others, it's more businesslike and dry. Maybe that was the architect's intention?*;;;
 ;*to the ambassador*;7;;0
-7;How can- Oh! It's you! Captain, the ambassador ordered me to let you through as soon as you come! *The secretary gives you a dazzling smile and presses the communicator button.* Captain of the Aurora 2 here to see you... he's coming in already.;;;
+7;How can- Oh! It's you! Captain, the ambassador ordered me to let you through as soon as you come! *The secretary gives you a dazzling smile and presses the communicator button.* Captain of the Aurora 2 here to see you... he's coming in already.;etf_cap_3_dialog;;
 ;*enter*;8;;0
-8;*The palette inside is the same purple, but with a generous serving of dark green. As if a soft night had descended onto a meadow.* Captain?  Did you get carried away? *Joseph is behind a bulky carved wood desk and looks at you with curiosity.*;;;
+8;*The palette inside is the same purple, but with a generous serving of dark green. As if a soft night had descended onto a meadow.* Captain?  Did you get carried away? *Joseph is behind a bulky carved wood desk and looks at you with curiosity.*;earth_diplomat_dialog;;
 ;Sorry, Joseph. The view here is very unusual. Yeah, I got carried away.;9;;0
-9;It's okay. *Joseph nods and leans back in his chair.* Took me a long time to get used to it too... I still haven't. I'm glad you paid me a visit. I know you've visited the Rogue, Bork and Klisk ambassadors. We have things to discuss.;;;
-;The Klisk ambassador gave me some kind of mission…;11;klisk_pirate.started;0
-;You know, the Bork ambassador was an old grizzled veteran. We talked about a lot of things. Even about our colony.;15;;0
-;The Rogues' embassy is very unusual. You do know Firshe isn't the ambassador?;17;;0
-;I tried to visit the Zorsan one. They didn't let me in.;10;unity_zorsan_ambassador_visited;0
-;I wonder how the Gardeners made that recording.;21;;0
-;I came to say goodbye. It's time for me to leave.;23;;0
-11;Go on. *Joseph listens carefully as your tell him about the conversation with the Klisk ambassador.* I'll be. You know, Captain... I have a bad feeling about this. *The Earth ambassador ticks off the points on his fingers one by one.* If his offer is serious, then it was unofficially sanctioned by the Klisk government, and that's not as good as you may think. You can do your part of the deal, but will they do theirs? They could put pressure on you. But can you put it on them?;;;
-;That was one. What's two?;12;;0
-15;Really? *After he hears about your conversation with the Bork ambassador, Joseph smiles sarcastically.* A honey tongue, a heart of gall. The worst kind of politician. Or the best, for those he works for. Think about it, Captain: if he thought it necessary to show you they're so well-versed in our internal affairs, how well informed are they in reality?;;;
-;Can you give me some advice?;16;;0
-17;I only found out recently when I visited the Rogues' ambassador. I don't even know what to call him since he doesn't introduce himself…;;;
+9;It's okay. *Joseph nods and leans back in his chair.* Took me a long time to get used to it too... I still haven't. I'm glad you paid me a visit. I know you've visited the Rogue, Bork and Klisk ambassadors. We have things to discuss.;earth_diplomat_dialog;;
+;The Klisk ambassador gave me some kind of missionâ€¦;10;klisk_pirate.started;0
+;You know, the Bork ambassador was an old grizzled veteran. We talked about a lot of things. Even about our colony.;11;;0
+;The Rogues' embassy is very unusual. You do know Firshe isn't the ambassador?;12;unity_zorsan_ambassador_visited;0
+;I tried to visit the Zorsan one. They didn't let me in.;13;unity_zorsan_ambassador_visited;0
+;I wonder how the Gardeners made that recording.;14;;0
+;I came to say goodbye. It's time for me to leave.;15;;0
+10;Go on. *Joseph listens carefully as your tell him about the conversation with the Klisk ambassador.* I'll be. You know, Captain... I have a bad feeling about this. *The Earth ambassador ticks off the points on his fingers one by one.* If his offer is serious, then it was unofficially sanctioned by the Klisk government, and that's not as good as you may think. You can do your part of the deal, but will they do theirs? They could put pressure on you. But can you put it on them?;earth_diplomat_dialog;;
+;That was one. What's two?;16;;0
+11;Really? *After he hears about your conversation with the Bork ambassador, Joseph smiles sarcastically.* A honey tongue, a heart of gall. The worst kind of politician. Or the best, for those he works for. Think about it, Captain: if he thought it necessary to show you they're so well-versed in our internal affairs, how well informed are they in reality?;earth_diplomat_dialog;;
+;Can you give me some advice?;17;;0
+12;I only found out recently when I visited the Rogues' ambassador. I don't even know what to call him since he doesn't introduce himselfâ€¦;earth_diplomat_dialog;;
 ;True. What could it mean?;18;;0
-;That doesn't matter. What can you tell me about the data he transferred?;20;;0
-10;Not surprising. *Joseph shrugs.* My Zorsan colleague can be pretty difficult. Although they tell me that's the national trait of his people... Don't worry, Captain. Luckily, or maybe unfortunately, we're going to have to deal with him in the future.;;;
-;The Klisk ambassador gave me some kind of mission…;11;;0
-;You know, the Bork ambassador was an old grizzled veteran. We talked about a lot of things. Even about our colony.;15;;0
-;The Rogues' embassy is very unusual. You do know Firshe isn't the ambassador?;17;;0
-;I wonder how the Gardeners made that recording.;21;;0
-;I came to say goodbye. It's time for me to leave.;23;;0
-21;I'm definitely not the person to ask that, Captain. The only thing I can say is, if those people are capable of that, and they thought it necessary to demonstrate it... what else can they do? I think it was a blatant show of force.;;;
-;And if we don't follow the convention…;22;;0
-23;Sure, you have plenty of other business. The colony, the Obliterator problem… *The ambassador looks embarrassed.* I hope you can handle it all, Captain.;;;
-;I hope so too. Do you want me to pass on some message to Earth?;24;;0
-12;*The ambassador bends his second finger.* Two. Could your actions be construed as an attempt to break the convention?;;;
-;Not until I do anything serious.;13;;0
-16;What he was saying is completely sensible, provided you retold them correctly, of course. I would have told you the same if we had had a conversation about it. *Joseph nods to his words.* But is he going to tell you sensible things in the future too, Captain? Keep that in mind.;;;
-;The Klisk ambassador gave me some kind of mission…;11;klisk_pirate.started;0
-;The Rogues' embassy is very unusual. You do know Firshe isn't the ambassador?;17;;0
-;I tried to visit the Zorsan one. They didn't let me in.;10;unity_zorsan_ambassador_visited;0
-;I wonder how the Gardeners made that recording.;21;;0
-;I came to say goodbye. It's time for me to leave.;23;;0
-18;The simplest explanation is that he really is more like part of the embassy than a living being, and he doesn't see the point in proper introductions. Or he's just difficult. Or he forgot. *After a thoughtful pause, Joseph adds.* Or maybe he's not a living being, he's... an artificial intelligence? What do you think, would the Rogues be capable of creating one?;;;
-;I don't know. I don't think I've ever seen an AI like that.;19;;0
-20;There's no catch. Who knows, maybe it really will help us… *He hesitates.* …save ourselves. Yeah…;;;
-;The Klisk ambassador gave me some kind of mission…;11;klisk_pirate.started;0
-;You know, the Bork ambassador was an old grizzled veteran. We talked about a lot of things. Even about our colony.;15;;0
-;I tried to visit the Zorsan one. They didn't let me in.;10;unity_zorsan_ambassador_visited;0
-;I wonder how the Gardeners made that recording.;21;;0
-;I came to say goodbye. It's time for me to leave.;23;;0
-22;Exactly. *Joseph nods. He gets what you were trying to say.* I'm glad it concerns the others, too. I tried to find something out about the Gardeners. I don't think they've been reported to give preferential treatment to any civilization.;;;
-;The Klisk ambassador gave me some kind of mission…;11;klisk_pirate.started;0
-;You know, the Bork ambassador was an old grizzled veteran. We talked about a lot of things. Even about our colony.;15;;0
-;The Rogues' embassy is very unusual. You do know Firshe isn't the ambassador?;17;;0
-;I tried to visit the Zorsan one. They didn't let me in.;10;unity_zorsan_ambassador_visited;0
-;I wonder how the Gardeners made that recording.;21;;0
-;I came to say goodbye. It's time for me to leave.;23;;0
-24;No need. I haven't been here that long, after all. A message from me wouldn't look good. Good luck. I think we're going to see each other soon, since you're going to have to come to the Unity a lot. *Joseph extends his hand.*;;;
+;That doesn't matter. What can you tell me about the data he transferred?;19;;0
+13;Not surprising. *Joseph shrugs.* My Zorsan colleague can be pretty difficult. Although they tell me that's the national trait of his people... Don't worry, Captain. Luckily, or maybe unfortunately, we're going to have to deal with him in the future.;earth_diplomat_dialog;;
+;The Klisk ambassador gave me some kind of missionâ€¦;10;klisk_pirate.started;0
+;You know, the Bork ambassador was an old grizzled veteran. We talked about a lot of things. Even about our colony.;11;;0
+;The Rogues' embassy is very unusual. You do know Firshe isn't the ambassador?;12;unity_zorsan_ambassador_visited;0
+;I wonder how the Gardeners made that recording.;14;;0
+;I came to say goodbye. It's time for me to leave.;15;;0
+14;I'm definitely not the person to ask that, Captain. The only thing I can say is, if those people are capable of that, and they thought it necessary to demonstrate it... what else can they do? I think it was a blatant show of force.;earth_diplomat_dialog;;
+;And if we don't follow the conventionâ€¦;20;;0
+15;Sure, you have plenty of other business. The colony, the Obliterator problemâ€¦ *The ambassador looks embarrassed.* I hope you can handle it all, Captain.;earth_diplomat_dialog;;
+;I hope so too. Do you want me to pass on some message to Earth?;21;;0
+16;*The ambassador bends his second finger.* Two. Could your actions be construed as an attempt to break the convention?;earth_diplomat_dialog;;
+;Not until I do anything serious.;22;;0
+17;What he was saying is completely sensible, provided you retold them correctly, of course. I would have told you the same if we had had a conversation about it. *Joseph nods to his words.* But is he going to tell you sensible things in the future too, Captain? Keep that in mind.;earth_diplomat_dialog;;
+;The Klisk ambassador gave me some kind of missionâ€¦;10;klisk_pirate.started;0
+;The Rogues' embassy is very unusual. You do know Firshe isn't the ambassador?;12;unity_zorsan_ambassador_visited;0
+;I tried to visit the Zorsan one. They didn't let me in.;13;unity_zorsan_ambassador_visited;0
+;I wonder how the Gardeners made that recording.;14;;0
+;I came to say goodbye. It's time for me to leave.;15;;0
+18;The simplest explanation is that he really is more like part of the embassy than a living being, and he doesn't see the point in proper introductions. Or he's just difficult. Or he forgot. *After a thoughtful pause, Joseph adds.* Or maybe he's not a living being, he's... an artificial intelligence? What do you think, would the Rogues be capable of creating one?;earth_diplomat_dialog;;
+;I don't know. I don't think I've ever seen an AI like that.;23;;0
+19;There's no catch. Who knows, maybe it really will help usâ€¦ *He hesitates.* â€¦save ourselves. Yeahâ€¦;earth_diplomat_dialog;;
+;The Klisk ambassador gave me some kind of missionâ€¦;10;klisk_pirate.started;0
+;You know, the Bork ambassador was an old grizzled veteran. We talked about a lot of things. Even about our colony.;11;;0
+;I tried to visit the Zorsan one. They didn't let me in.;13;unity_zorsan_ambassador_visited;0
+;I wonder how the Gardeners made that recording.;14;;0
+;I came to say goodbye. It's time for me to leave.;15;;0
+20;Exactly. *Joseph nods. He gets what you were trying to say.* I'm glad it concerns the others, too. I tried to find something out about the Gardeners. I don't think they've been reported to give preferential treatment to any civilization.;earth_diplomat_dialog;;
+;The Klisk ambassador gave me some kind of missionâ€¦;10;klisk_pirate.started;0
+;You know, the Bork ambassador was an old grizzled veteran. We talked about a lot of things. Even about our colony.;11;;0
+;The Rogues' embassy is very unusual. You do know Firshe isn't the ambassador?;12;unity_zorsan_ambassador_visited;0
+;I tried to visit the Zorsan one. They didn't let me in.;13;unity_zorsan_ambassador_visited;0
+;I wonder how the Gardeners made that recording.;14;;0
+;I came to say goodbye. It's time for me to leave.;15;;0
+21;No need. I haven't been here that long, after all. A message from me wouldn't look good. Good luck. I think we're going to see each other soon, since you're going to have to come to the Unity a lot. *Joseph extends his hand.*;earth_diplomat_dialog;;
 ;*shake his hand* In that case, see you, Joseph. And I have to get to the Aurora 2.;-1;;0
-13;They're the ones who decide what to consider serious. Although… you were probably right to agree. You don't say no to such propositions.;;;
-;So what do I do, Joseph?;14;;0
-19;*Joseph shrugs.*;;;
-;And what can you tell me about the data they transferred?;20;;0
-14;Act according to the situation, Captain. And be sure to report to me as much as possible.;;;
-;You know, the Bork ambassador was an old grizzled veteran. We talked about a lot of things. Even about our colony.;15;;0
-;The Rogues' embassy is very unusual. You do know Firshe isn't the ambassador?;17;;0
-;I tried to visit the Zorsan one. They didn't let me in.;10;unity_zorsan_ambassador_visited;0
-;I wonder how the Gardeners made that recording.;21;;0
-;I came to say goodbye. It's time for me to leave.;23;;0
+22;They're the ones who decide what to consider serious. Althoughâ€¦ you were probably right to agree. You don't say no to such propositions.;earth_diplomat_dialog;;
+;So what do I do, Joseph?;24;;0
+23;*Joseph shrugs.*;earth_diplomat_dialog;;
+;And what can you tell me about the data they transferred?;19;;0
+24;Act according to the situation, Captain. And be sure to report to me as much as possible.;earth_diplomat_dialog;;
+;You know, the Bork ambassador was an old grizzled veteran. We talked about a lot of things. Even about our colony.;11;;0
+;The Rogues' embassy is very unusual. You do know Firshe isn't the ambassador?;12;unity_zorsan_ambassador_visited;0
+;I tried to visit the Zorsan one. They didn't let me in.;13;unity_zorsan_ambassador_visited;0
+;I wonder how the Gardeners made that recording.;14;;0
+;I came to say goodbye. It's time for me to leave.;15;;0

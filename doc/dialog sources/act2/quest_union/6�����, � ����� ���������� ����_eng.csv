@@ -1,24 +1,24 @@
 0;*Who are you visiting?*;;;;
-;The Klisk ambassador.;3;;0;
-;The Rogue ambassador.;6;;0;
-;The Bork ambassador.;5;;0;
-;The Zorsan ambassador.;2;;0;
-;Stay in the hall for a little bit and look around.;1;;0;
-3;*The Klisk Embassy. Borks from the Unity staff are guarding the entrance and that's pretty logical: how could a people that isn't directly capable of violence guard itself? Upon verifying your ID, you are let in right away.*;;;;
-;*look around*;4;;0;
-;*to the ambassador*;-1;;0;
-6;*It's weird: the Rogues standing guard at their embassy are connected to the shiny metal walls with some cables. When you approach, the guards whose eyes were previously shut open them at the same time and say in unison.* Human captain. Please, come in. I've been expecting you.;;;;
-;*to the ambassador*;-1;;0;
-5;*It's logical that Borks would guard the Bork Embassy. You might have mistaken them for the support staff, among which there are plenty of Borks too, but these guards have their own uniforms that look more like tight overalls with metal parts protecting their torsos and crotches sewn on. One of the Borks waits for you to come up and gives out a friendly... yeah, probably a roar.* Human captain. Glad to see you. Mr Ambassador is waiting for you. Come through.;;;;
-;*to the ambassador*;-1;;0;
-2;"*You weren't invited there. But why not? The Zorsan Embassy, entrance from the main hall. As you approach the entrance... yeah, no wonder they simply don't let you in. One of the guards drums his fingers on his assault rifle; you think he'd be glad for an opportunity to use it.*";;;;
-;The Klisk ambassador.;3;;0;unity_zorsan_ambassador_visited
-;The Rogue ambassador.;6;;0;unity_zorsan_ambassador_visited
-;The Bork ambassador.;5;;0;unity_zorsan_ambassador_visited
-1;*Despite its size, this is a pretty cozy place. You don't know how the local architects managed that effect. The table is comfy and pleasant to sit at. A giant screen for news and announcements is showing some kind of PSA, but the volume is reasonable, it's not in-your-face. There are some peculiar alien plants here and there in the hall, but there are some Earth plants, too: a birch grows out of a big planter in the appropriate sector. By and large, you could spend a lot of time in this place, but right now you don't have it. It's time to leave.*;;;;
-;The Klisk ambassador.;3;;0;
-;The Rogue ambassador.;6;;0;
-;The Bork ambassador.;5;;0;
-;The Zorsan ambassador.;2;;0;
-4;*The lights are a bit dimmed compared to the previous hall. The walls are mostly violet, and the floor is covered with sand as per the Klisk custom. There are several little fountains on the floor that work without breaks: the air is pretty humid in the Klisk Embassy. As for the staff, there's not much of it. The secretary at his desk, three Bork guards idling here and there. You can see the door to the ambassador's office right away, it's right next to the secretary's desk.*;;;;
-;*to the ambassador*;-1;;0;
+;The Klisk ambassador.;1;!unity_klisk_ambassador_visited;;
+;The Rogue ambassador.;2;!unity_rogues_ambassador_visited;;
+;The Bork ambassador.;3;!unity_bork_ambassador_visited;;
+;The Zorsan ambassador.;4;!unity_zorsan_ambassador_visited;;unity_zorsan_ambassador_visited
+;Stay in the hall for a little bit and look around.;5;;;
+1;*The Klisk Embassy. Borks from the Unity staff are guarding the entrance and that's pretty logical: how could a people that isn't directly capable of violence guard itself? Upon verifying your ID, you are let in right away.*;bork_dialog;;;
+;*look around*;6;;;
+;*to the ambassador*;-1;;1;
+2;*It's weird: the Rogues standing guard at their embassy are connected to the shiny metal walls with some cables. When you approach, the guards whose eyes were previously shut open them at the same time and say in unison.* Human captain. Please, come in. I've been expecting you.;rogues_dialog;;;
+;*to the ambassador*;-1;;3;
+3;*It's logical that Borks would guard the Bork Embassy. You might have mistaken them for the support staff, among which there are plenty of Borks too, but these guards have their own uniforms that look more like tight overalls with metal parts protecting their torsos and crotches sewn on. One of the Borks waits for you to come up and gives out a friendly... yeah, probably a roar.* Human captain. Glad to see you. Mr Ambassador is waiting for you. Come through.;bork_dialog;;;
+;*to the ambassador*;-1;;2;
+4;"*You weren't invited there. But why not? The Zorsan Embassy, entrance from the main hall. As you approach the entrance... yeah, no wonder they simply don't let you in. One of the guards drums his fingers on his assault rifle: you think he'd be glad for an opportunity to use it.*";zorsan_dialog;;;
+;The Klisk ambassador.;1;!unity_klisk_ambassador_visited;;unity_zorsan_ambassador_visited
+;The Rogue ambassador.;2;!unity_rogues_ambassador_visited;;unity_zorsan_ambassador_visited
+;The Bork ambassador.;3;!unity_bork_ambassador_visited;;unity_zorsan_ambassador_visited
+5;*Despite its size, this is a pretty cozy place. You don't know how the local architects managed that effect. The table is comfy and pleasant to sit at. A giant screen for news and announcements is showing some kind of PSA, but the volume is reasonable, it's not in-your-face. There are some peculiar alien plants here and there in the hall, but there are some Earth plants, too: a birch grows out of a big planter in the appropriate sector. By and large, you could spend a lot of time in this place, but right now you don't have it. It's time to leave.*;;;;
+;The Klisk ambassador.;1;!unity_klisk_ambassador_visited;;
+;The Rogue ambassador.;2;!unity_rogues_ambassador_visited;;
+;The Bork ambassador.;3;!unity_bork_ambassador_visited;;
+;The Zorsan ambassador.;4;!unity_zorsan_ambassador_visited;;unity_zorsan_ambassador_visited
+6;*The lights are a bit dimmed compared to the previous hall. The walls are mostly violet, and the floor is covered with sand as per the Klisk custom. There are several little fountains on the floor that work without breaks: the air is pretty humid in the Klisk Embassy. As for the staff, there's not much of it. The secretary at his desk, three Bork guards idling here and there. You can see the door to the ambassador's office right away, it's right next to the secretary's desk.*;;;;
+;*to the ambassador*;-1;;1;
