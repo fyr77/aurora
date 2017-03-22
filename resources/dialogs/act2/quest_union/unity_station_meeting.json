@@ -1,6 +1,6 @@
 {
   "id": "unity_station_meeting",
-  "iconName": "gardener_dialog",
+  "iconName": "assembly_gardener",
   "statements": {
     "0": {
       "id": 0,
@@ -211,8 +211,7 @@
           "targetStatementId": 16,
           "replyText": "0"
         }
-      ],
-      "customIcon": "gardener_dialog"
+      ]
     },
     "16": {
       "id": 16,
