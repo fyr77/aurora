@@ -228,6 +228,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         if (spaceObjectAtPlayerShipPosition.isEmpty()) {
             return;
         }
+
+        setMode(MODE_MOVE); // reset aim mode
         if (spaceObjectAtPlayerShipPosition.size() == 1) {
             spaceObjectAtPlayerShipPosition.get(0).interact(world);
             return;
@@ -416,10 +418,18 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
                 return;
             }
 
-            mode = MODE_SHOOT;
-            GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(true);
+            setMode(MODE_SHOOT);
         } else {
-            mode = MODE_MOVE;
+            setMode(MODE_MOVE);
+        }
+    }
+
+    private void setMode(int mode){
+        this.mode = mode;
+        if(mode == MODE_SHOOT){
+            GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(true);
+        }
+        else{
             GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(false);
         }
     }

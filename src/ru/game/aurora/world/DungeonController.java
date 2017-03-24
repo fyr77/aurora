@@ -193,6 +193,7 @@ public class DungeonController extends Listenable implements Serializable {
     }
 
     public void interactWithObject(final World world) {
+        resetAimMode();
         int x = world.getPlayer().getLandingParty().getX();
         int y = world.getPlayer().getLandingParty().getY();
         // check if can pick up smth
@@ -784,5 +785,12 @@ public class DungeonController extends Listenable implements Serializable {
 
     public Room getPrevRoom() {
         return prevRoom;
+    }
+
+    private void resetAimMode() {
+        // close  window
+        if(mode == MODE_SHOOT){
+            changeMode();
+        }
     }
 }

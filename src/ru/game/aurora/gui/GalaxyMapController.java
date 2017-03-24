@@ -185,7 +185,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
                 // update hint
                 List<Effect> effects = buttonControl.getElement().getEffects(EffectEventId.onHover, CustomHint.class);
                 final String hintText = String.format(Localization.getText("gui", "space.weapon_tooltip")
-                        , Localization.getText("weapons", weaponDesc.getName())
+                        , weaponDesc.getName()
                         , weaponDesc.getDamage()
                         , weaponDesc.getRange()
                         , weaponDesc.getReloadTurns());
