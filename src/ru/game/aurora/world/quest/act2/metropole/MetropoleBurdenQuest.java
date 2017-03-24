@@ -489,6 +489,16 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
 
         // todo: rebuild default dialogue to DialogListener methods(?)
         colonyPlanet.setDialog(Dialog.loadFromFile("dialogs/act2/metropole_burden/planet/metropole_burden_after_discussion.json"));
+
+        if(world.getGlobalVariables().containsKey("unity_done")){
+            // if Unity branch done
+            world.getPlayer().getJournal().addQuestEntries("metropole_burden", "unity_and_metropole_burden_done");
+            world.getPlayer().getJournal().addQuestEntries("unity", "unity_and_metropole_burden_done");
+        }
+        else{
+            // if Metropole Burden branch done first
+            world.getPlayer().getJournal().addQuestEntries("metropole_burden", "done_first");
+        }
     }
 
     private void recordFlags(World world, Map<String, String> flags, String key){

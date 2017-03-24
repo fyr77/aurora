@@ -257,6 +257,16 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
                 if(flags.containsKey("unity_zorsan_ambassador_visited")){
                     world.getGlobalVariables().put("unity_zorsan_ambassador_visited", true);
                 }
+
+                if(world.getGlobalVariables().containsKey("metropole_burden_done")){
+                    // if Metropole Burden branch done
+                    world.getPlayer().getJournal().addQuestEntries("metropole_burden", "unity_and_metropole_burden_done");
+                    world.getPlayer().getJournal().addQuestEntries("unity", "unity_and_metropole_burden_done");
+                }
+                else{
+                    // if Unity branch done first
+                    world.getPlayer().getJournal().addQuestEntries("unity", "done_first");
+                }
             }
         });
 

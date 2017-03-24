@@ -154,9 +154,8 @@ public class EarthDialogListener implements DialogListener {
             world.getGlobalVariables().put("act2_unty_done", true);
             world.getGlobalVariables().put("act2_metropole_burden_done", true);
 
-            // todo: add journal entries
-            //world.getPlayer().getJournal().questCompleted("unity", "");
-            //world.getPlayer().getJournal().questCompleted("metropole_burden", "");
+            world.getPlayer().getJournal().questCompleted("unity");
+            world.getPlayer().getJournal().questCompleted("metropole_burden");
         }
 
         // quest stuff
