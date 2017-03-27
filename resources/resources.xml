@@ -27,6 +27,8 @@
     <!-- Player sprites -->
     <resource type="image" id="aurora">sprites/ships/player_ship.png</resource>
     <resource type="image" id="aurora_corrupted">sprites/ships/player_corrupted.png</resource>
+    <resource type="image" id="direct_arrow">sprites/ships/direct_arrow.png</resource>
+
     <resource type="image" id="voyager">sprites/ships/voyager.png</resource>
     <resource type="image" id="awayteam">sprites/ships/away_team.png</resource>
     <resource type="image" id="sci_team">sprites/planet_objects/sci_team.png</resource>

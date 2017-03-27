@@ -6,10 +6,7 @@ import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.*;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.InputBinding;
-import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Faction;
 import ru.game.aurora.player.research.ResearchProjectState;
@@ -62,12 +59,14 @@ public class StarMapController extends DefaultCloseableScreenController {
         galaxyMap = world.getGalaxyMap();
     }
 
-    private void mark(Graphics g, GalaxyMapObject obj) {
-        EngineUtils.drawDashedCircleCentered(g, myCamera.getXCoord(obj.getX()) + myCamera.getTileWidth() / 2, myCamera.getYCoord(obj.getY()) + myCamera.getTileHeight() / 2, (int) (myCamera.getTileHeight() * 4), Color.green, 10);
-    }
-
-    private void markAstroProbe(Graphics g, GalaxyMapObject obj) {
-        EngineUtils.drawDashedCircleCentered(g, myCamera.getXCoord(obj.getX()) + myCamera.getTileWidth() / 2, myCamera.getYCoord(obj.getY()) + myCamera.getTileHeight() / 2, (int) (myCamera.getTileHeight() * 3), Color.yellow, 14);
+    private void mark(Graphics g, GalaxyMapObject starSystem, int radius, Color color, int segments){
+        EngineUtils.drawDashedCircleCentered(
+                g,
+                myCamera.getXCoord(starSystem.getX()) + myCamera.getTileWidth() / 2,
+                myCamera.getYCoord(starSystem.getY()) + myCamera.getTileHeight() / 2,
+                (int) (myCamera.getTileHeight() * radius),
+                color,
+                segments);
     }
 
     public static void updateStarmapLabels(World world) {
@@ -131,19 +130,22 @@ public class StarMapController extends DefaultCloseableScreenController {
                 }
                 obj.drawOnGlobalMap(container, g, myCamera, j, i);
 
-
                 if(obj instanceof StarSystem){
                     StarSystem starSystem = (StarSystem)obj;
 
                     if(starSystem.getMessageForStarMap() != null){
-                        mark(g, starSystem);
+                        mark(g, starSystem, 4, Color.green, 10);
                     }
 
                     if(starSystem.isAstroProbeLaunched()){
-                        markAstroProbe(g, starSystem);
+                        mark(g, starSystem, 3, Color.yellow, 14);
                     }
                 }
             }
+        }
+
+        if(galaxyMap.getMapMark() != null){
+            mark(g, galaxyMap.getMapMark(), 5, Color.red, 14);
         }
 
         // draw alien areas
@@ -233,7 +235,11 @@ public class StarMapController extends DefaultCloseableScreenController {
     @Override
     public void onStartScreen() {
         myWindow.setVisible(true);
+        updateMapImage();
+        world.setPaused(true);
+    }
 
+    private void updateMapImage() {
         Image map;
         try {
             map = createGlobalMap();
@@ -241,8 +247,6 @@ public class StarMapController extends DefaultCloseableScreenController {
             throw new RuntimeException(e);
         }
         EngineUtils.setImageForGUIElement(mapPanel, map);
-
-        world.setPaused(true);
     }
 
     @Override
@@ -276,6 +280,35 @@ public class StarMapController extends DefaultCloseableScreenController {
         if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.MAP))){
             closeScreen();
             return;
+        }
+
+        if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
+            markUserTarget();
+            return;
+        }
+    }
+
+    private void markUserTarget() {
+        int x = GUI.getInstance().getNifty().getNiftyMouse().getX() - mapPanel.getX();
+        int y = GUI.getInstance().getNifty().getNiftyMouse().getY() - mapPanel.getY();
+        // check bounds
+        if (!myCamera.isInViewportScreen(x, y)) {
+            return;
+        }
+
+        // find selected object
+        StarMapController starMapController = (StarMapController) GUI.getInstance().getNifty().findScreenController(StarMapController.class.getCanonicalName());
+        GalaxyMapController galaxyMapController = (GalaxyMapController) GUI.getInstance().getNifty().findScreenController(GalaxyMapController.class.getCanonicalName());
+        GalaxyMapObject obj = GUI.getInstance().getNifty().getCurrentScreen().getScreenId().equals("star_map_screen")
+                ? starMapController.getGalaxyMapObjectAtMouseCoords() : galaxyMapController.getGalaxyMapObjectAtMouseCoords();
+
+        if(obj != null && obj instanceof StarSystem){
+            galaxyMap.setMapMark((StarSystem)obj);
+            updateMapImage();
+        }
+        else if(galaxyMap.getMapMark() != null){
+            galaxyMap.setMapMark(null);
+            updateMapImage();
         }
     }
 }

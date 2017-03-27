@@ -9,12 +9,14 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.InputBinding;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.StarMapController;
@@ -49,6 +51,8 @@ public class GalaxyMap extends BaseSpaceRoom {
 
     private World world;
 
+    private StarSystem playerMarkSystem;
+
     public GalaxyMap() {
     }
 
@@ -65,7 +69,7 @@ public class GalaxyMap extends BaseSpaceRoom {
         }
     }
 
-    public static double getDistance(StarSystem first, StarSystem second) {
+    public static double getDistance(Positionable first, Positionable second) {
         return Math.sqrt(Math.pow(first.getX() - second.getX(), 2) + Math.pow(first.getY() - second.getY(), 2));
     }
 
@@ -271,7 +275,36 @@ public class GalaxyMap extends BaseSpaceRoom {
                 }
             }
         }
-        super.draw(container, graphics, camera, world);
+
+        Ship ship = World.getWorld().getPlayer().getShip();
+        drawPlayerMarkDirection(ship, graphics, camera);
+        ship.draw(container, graphics, camera, world);
+    }
+
+    private void drawPlayerMarkDirection(Ship ship, Graphics graphics, Camera camera) {
+        if(ship.getHull() <= 0){
+            return;
+        }
+        if(playerMarkSystem == null){
+            return;
+        }
+        if(getDistance(ship, playerMarkSystem) < 2.0){
+            return;
+        }
+
+        Image img = ResourceManager.getInstance().getImage("direct_arrow");
+        if(img == null){
+            return;
+        }
+
+        final double x1 = playerMarkSystem.getX();
+        final double y1 = playerMarkSystem.getY();
+        final double x2 = ship.getX();
+        final double y2 = ship.getY();
+
+        float angle = (float)(360.0 - 180.0 / Math.PI * Math.atan2(x2 - x1, y2 - y1));
+        img.setRotation(angle);
+        graphics.drawImage(img, camera.getXCoord(ship.getX()) + ship.getOffsetX() - 16, camera.getYCoord(ship.getY()) + ship.getOffsetY() - 16);
     }
 
     @Override
@@ -353,5 +386,14 @@ public class GalaxyMap extends BaseSpaceRoom {
     @Override
     public int getHeightInTiles() {
         return tilesY;
+    }
+
+
+    public void setMapMark(StarSystem system){
+        playerMarkSystem = system;
+    }
+
+    public StarSystem getMapMark(){
+        return playerMarkSystem;
     }
 }
