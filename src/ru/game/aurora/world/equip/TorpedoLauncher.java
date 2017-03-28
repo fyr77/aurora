@@ -44,7 +44,8 @@ public class TorpedoLauncher extends WeaponDesc {
         private int damage;
 
         public Torpedo(int x, int y, GameObject target, Faction faction, int damage) {
-            super(x, y, "torpedo", faction, null, "torpedo", 4);
+            super("torpedo", x, y);
+            setFaction(faction);
             setSpeed(1);
             this.target = target;
             final LandAI ai = new LandAI(target);

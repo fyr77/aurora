@@ -259,7 +259,8 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         private static final long serialVersionUID = -8830393993027489642L;
 
         public KliskTradeProbe(int x, int y, Faction klisk) {
-            super(x, y, "klisk_drone", klisk, null, "Klisk trade probe", 7);
+            super("klisk_drone", x, y, "Klisk trade probe", 7);
+            setStationary(false);
 
             Dialog commDialog = Dialog.loadFromFile("dialogs/encounters/klisk_trade_probe_comm.json");
             commDialog.addListener(new DialogListener() {
@@ -341,7 +342,8 @@ public class EarthInvasionGenerator implements WorldGeneratorPart {
         private static boolean communicated = false;
 
         public BorkBlockadeShip(int x, int y, World world) {
-            super(x, y, "bork_ship", world.getFactions().get(BorkGenerator.NAME), new NPC(Dialog.loadFromFile("dialogs/encounters/bork_blockade_contact.json")), "Bork ship", 5);
+            super("bork_ship", x, y);
+            setCaptain(new NPC(Dialog.loadFromFile("dialogs/encounters/bork_blockade_contact.json")));
             setWeapons(ResourceManager.getInstance().getWeapons().getEntity("bork_cannon"));
         }
 

@@ -1,0 +1,9 @@
+{
+  "id": "zorsan_transport",
+  "defaultName": "Zorsan transport",
+  "imageId": "zorsan_transport",
+  "race": "Zorsan",
+  "maxHp": 25,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

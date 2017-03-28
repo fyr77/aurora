@@ -1,0 +1,9 @@
+{
+  "id": "gardener_ship",
+  "defaultName": "Sequoia",
+  "imageId": "gardener_ship",
+  "race": "Gardeners",
+  "maxHp": 1000,
+  "dodgeChance": 100.0,
+  "isStationary": "true"
+}

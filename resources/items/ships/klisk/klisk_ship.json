@@ -1,0 +1,9 @@
+{
+  "id": "klisk_ship",
+  "defaultName": "Klisk Ship",
+  "imageId": "klisk_ship",
+  "race": "Klisk",
+  "maxHp": 15,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

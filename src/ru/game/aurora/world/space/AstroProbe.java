@@ -7,7 +7,6 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.npc.shipai.KeepOrbitAI;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 
 /**
  * Astro probe flies around the starsystem and collects astro data
@@ -22,7 +21,7 @@ public class AstroProbe extends NPCShip {
     private double cache = 0;
 
     public AstroProbe(World world) {
-        super(0, 0, "drone", world.getFactions().get(HumanityGenerator.NAME), null, "Astroprobe", 4);
+        super("drone", 0, 0);
         setAi(new KeepOrbitAI(false));
         lastCheckTurn = world.getDayCount();
     }

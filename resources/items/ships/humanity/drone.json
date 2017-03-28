@@ -1,0 +1,9 @@
+{
+  "id": "drone",
+  "defaultName": "Astroprobe",
+  "imageId": "drone",
+  "race": "Humanity",
+  "maxHp": 4,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

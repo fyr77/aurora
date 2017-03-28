@@ -1,0 +1,9 @@
+{
+  "id": "voyager",
+  "defaultName": "Voyager",
+  "imageId": "voyager",
+  "race": "Humanity",
+  "maxHp": 10,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

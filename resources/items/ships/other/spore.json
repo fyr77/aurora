@@ -1,0 +1,9 @@
+{
+  "id": "spore",
+  "defaultName": "Spore",
+  "imageId": "spore",
+  "race": "null",
+  "maxHp": 20,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

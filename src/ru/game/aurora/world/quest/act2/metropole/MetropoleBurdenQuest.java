@@ -132,7 +132,7 @@ public class MetropoleBurdenQuest extends GameEventListener implements WorldGene
     }
 
     private void addStation(Dialog dialog, String sprite, Faction faction, String name, int dx, int dy){
-        NPCShip station = new NPCShip(0, 0, sprite, faction, new NPC(dialog), name, 25);
+        NPCShip station = new NPCShip(sprite, dx, dy, name, 25, faction, new NPC(dialog));
         station.setStationary(true);
         station.setAi(null);
         station.setPos(colonyPlanet.getX() + dx, colonyPlanet.getY() + dy);

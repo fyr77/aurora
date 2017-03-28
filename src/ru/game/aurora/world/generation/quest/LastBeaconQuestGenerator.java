@@ -34,7 +34,7 @@ public class LastBeaconQuestGenerator implements WorldGeneratorPart {
         world.getGlobalVariables().put("last_beacon.coords", new Pair<>(lastBeaconLocation.getX(), lastBeaconLocation.getY()));
 
         AlienRace gardenerRace = (AlienRace) world.getFactions().get("Gardeners");
-        final GardenersShip gardenerShip = new GardenersShip(0, 0, gardenerRace.getShipSprite(), gardenerRace, null, "Sequoia");
+        final GardenersShip gardenerShip = new GardenersShip("gardener_ship");
         gardenerShip.setAi(null);
         final Dialog dialog = Dialog.loadFromFile("dialogs/gardener_1.json");
         dialog.addListener(new DialogListener() {

@@ -8,7 +8,6 @@ package ru.game.aurora.world;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.*;
-import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.ExplosionEffect;
 import ru.game.aurora.npc.CrewMember;
@@ -23,10 +22,12 @@ import ru.game.aurora.steam.AchievementNames;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.space.ships.ShipDesc;
+import ru.game.aurora.world.space.ships.ShipItem;
 
 import java.util.*;
 
-public class Ship extends BaseGameObject {
+public class Ship extends BaseGameObject implements ShipItem {
 
     public static final int BASE_SCIENTISTS = 5;
     public static final int BASE_ENGINEERS = 5;
@@ -49,17 +50,36 @@ public class Ship extends BaseGameObject {
 
     private int freeSpace;
 
+    private ShipDesc shipDesc;
+
     public Ship(World world, int x, int y) {
-        super(x, y, new Drawable("aurora"));
+        super();
+        shipDesc = ResourceManager.getInstance().getShipDescs().getEntity("aurora");
+        if(shipDesc == null){
+            throw new NullPointerException("Ship Description can not be null");
+        }
+
+        setPos(x, y);
+        setSprite(shipDesc.getDrawable());
         setFaction(world.getFactions().get(HumanityGenerator.NAME));
-        name = "Aurora-2";
-        hull = maxHull = 10;
+
+        name = shipDesc.getDefaultName();
+        hull = maxHull = shipDesc.getMaxHp();
+
         maxScientists = scientists = BASE_SCIENTISTS;
         maxMilitary = military = BASE_MILITARY;
         maxEngineers = engineers = BASE_ENGINEERS;
 
         freeSpace = Configuration.getIntProperty("upgrades.ship_free_space");
+    }
 
+    @Override
+    public ShipDesc getDesc() {
+        if(shipDesc == null) {
+            shipDesc = ResourceManager.getInstance().getShipDescs().getEntity("aurora");
+        }
+
+        return shipDesc;
     }
 
     public void addCrewMember(World world, CrewMember member) {

@@ -6,8 +6,6 @@ import ru.game.aurora.application.Camera;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.WarpEffect;
-import ru.game.aurora.npc.AlienRace;
-import ru.game.aurora.npc.NPC;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.World;
@@ -26,10 +24,9 @@ public class GardenersShip extends NPCShip {
 
     private boolean timeToLeave = false;
 
-    public GardenersShip(int x, int y, String sprite, AlienRace race, NPC captain, String name) {
-        super(x, y, sprite, race, captain, name, Integer.MAX_VALUE);
-        this.sprite = sprite;
-        this.setStationary(true);
+    public GardenersShip(String shipId) {
+        super(shipId);
+        this.sprite = getDesc().getDrawable().getId();
     }
 
     @Override

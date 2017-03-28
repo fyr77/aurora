@@ -1,0 +1,9 @@
+{
+  "id": "energy_sphere",
+  "defaultName": "Unknown",
+  "imageId": "energy_sphere",
+  "race": "null",
+  "maxHp": 1000,
+  "dodgeChance": 100.0,
+  "isStationary": "false"
+}

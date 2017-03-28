@@ -12,7 +12,6 @@ import ru.game.aurora.npc.NPC;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
-import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.NPCShip;
@@ -61,7 +60,7 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
         if(unityStarSystem != null){
             logger.info("Unity station founded in " + unityStarSystem.getCoordsString());
 
-            NPCShip spaceStation = new NPCShip(0, 0, "rogues_beacon", world.getFactions().get(RoguesGenerator.NAME), null, "Unity station", 90);
+            NPCShip spaceStation = new NPCShip("rogues_beacon", 0, 0, "Unity station", 90);
             setStationPosition(unityStarSystem.getPlanets(), spaceStation, unityStarSystem.getRadius()/2);
             spaceStation.setStationary(true);
             spaceStation.setAi(null);

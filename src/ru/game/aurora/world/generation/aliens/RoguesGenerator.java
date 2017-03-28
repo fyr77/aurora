@@ -86,8 +86,7 @@ public class RoguesGenerator implements WorldGeneratorPart {
         ss.setPlanets(planets);
         ss.setRadius(8);
 
-
-        NPCShip frame = new NPCShip(2, 2, "rogues_frame", roguesRace, null, "Rogues Frame", Integer.MAX_VALUE);
+        NPCShip frame = new NPCShip("rogues_frame", 2, 2);
         frame.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), ResourceManager.getInstance().getWeapons().getEntity("long_range_plasma_cannon"));
         frame.setCaptain(new NPC(createFrameDialog(frame)));
         frame.setScanDescription("races", "Rogues.mothership.description");
@@ -123,14 +122,13 @@ public class RoguesGenerator implements WorldGeneratorPart {
                 NPCShip ship;
                 switch (shipType) {
                     case SCOUT_SHIP: {
-                        ship = new NPCShip(0, 0, "rogues_scout", rogueRace, null, "Rogues scout", 14);
+                        ship = new NPCShip("rogues_scout");
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), ResourceManager.getInstance().getWeapons().getEntity("long_range_plasma_cannon"));
                         break;
                     }
                     case PROBE_SHIP: {
-                        ship = new NPCShip(0, 0, "rogues_probe", rogueRace, null, "Rogues probe", 6);
+                        ship = new NPCShip("rogues_probe");
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("long_range_plasma_cannon"));
-                        ship.setStationary(true);
                         ship.setCanBeHailed(false);
                         break;
                     }

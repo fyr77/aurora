@@ -31,7 +31,7 @@ public class EnergySphereEncounterGenerator extends GameEventListener implements
         private static final long serialVersionUID = -3650001508545188680L;
 
         public EnergySphere(Ship playerShip) {
-            super(0, 0, "energy_sphere", null, null, "Unknown", Integer.MAX_VALUE);
+            super("energy_sphere");
             setAi(new LandAI(playerShip));
             setSpeed(1);
         }

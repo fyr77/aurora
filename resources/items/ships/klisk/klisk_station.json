@@ -1,0 +1,9 @@
+{
+  "id": "klisk_station",
+  "defaultName": "Bork ship",
+  "imageId": "klisk_station",
+  "race": "Klisk",
+  "maxHp": 25,
+  "dodgeChance": 5.0,
+  "isStationary": "true"
+}

@@ -196,7 +196,8 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
         private boolean reloadTutorialShown = false;
 
         public TestTarget(Planet mars) {
-            super(0, 0, "earth_transport", null, null, "Space Rogue", 5);
+            super("earth_transport", 0, 0, "Space Rogue", 5);
+            setFaction(null);
             this.mars = mars;
             setSpeed(3);
             setStationary(true);

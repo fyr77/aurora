@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 import ru.game.aurora.music.Playlist;
 import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.planet.MonsterDesc;
+import ru.game.aurora.world.space.ships.ShipDesc;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -53,6 +54,7 @@ public class ResourceManager {
     );
 
     private final JsonConfigManager<MonsterDesc> monsterDescs = new JsonConfigManager<>(MonsterDesc.class, "resources/monsters");
+    private final JsonConfigManager<ShipDesc> shipDescs = new JsonConfigManager<>(ShipDesc.class, "resources/items/ships");
 
     private static final Logger logger = LoggerFactory.getLogger(ResourceManager.class);
 
@@ -398,6 +400,10 @@ public class ResourceManager {
 
     public JsonConfigManager<MonsterDesc> getMonsterDescs() {
         return monsterDescs;
+    }
+
+    public JsonConfigManager<ShipDesc> getShipDescs(){
+        return shipDescs;
     }
 
     public static Map<String, String> getOverridedResources() {

@@ -1,0 +1,9 @@
+{
+  "id": "klisk_drone",
+  "defaultName": "Klisk trade probe",
+  "imageId": "klisk_drone",
+  "race": "Klisk",
+  "maxHp": 7,
+  "dodgeChance": 5.0,
+  "isStationary": "true"
+}

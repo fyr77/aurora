@@ -1,0 +1,9 @@
+{
+  "id": "earth_station",
+  "defaultName": "Orbital Scaffold",
+  "imageId": "earth_station",
+  "race": "Humanity",
+  "maxHp": 25,
+  "dodgeChance": 5.0,
+  "isStationary": "true"
+}

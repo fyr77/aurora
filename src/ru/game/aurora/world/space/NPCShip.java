@@ -9,7 +9,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.*;
-import ru.game.aurora.common.Drawable;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.Effect;
 import ru.game.aurora.effects.ExplosionEffect;
@@ -28,14 +27,20 @@ import ru.game.aurora.world.equip.TorpedoLauncher;
 import ru.game.aurora.world.equip.WeaponDesc;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.planet.MonsterBehaviour;
+import ru.game.aurora.world.space.ships.ShipDesc;
+import ru.game.aurora.world.space.ships.ShipItem;
 
 import java.util.*;
 
-public class NPCShip extends BaseGameObject implements IMonster {
+public class NPCShip extends BaseGameObject implements IMonster, ShipItem {
 
     private static final long serialVersionUID = 2L;
-    protected final int maxHP;
-    protected final String name;
+
+    private ShipDesc shipDesc;
+
+    protected int maxHP;
+    protected String name;
+
     protected NPC captain;
     protected int hp;
     protected int speed = 3;
@@ -63,13 +68,50 @@ public class NPCShip extends BaseGameObject implements IMonster {
 
     private transient Map<GameObject, Integer> threatMap = new WeakHashMap<>();
 
-    public NPCShip(int x, int y, String sprite, Faction race, NPC captain, String name, int hp) {
-        super(x, y, new Drawable(sprite));
+    public NPCShip(String shipId){
+        super();
+        shipDesc = ResourceManager.getInstance().getShipDescs().getEntity(shipId);
+        if(shipDesc == null){
+            throw new NullPointerException("Ship Description can not be null");
+        }
+        setSprite(shipDesc.getDrawable());
+
+        this.name = shipDesc.getDefaultName();
+        this.maxHP = hp = shipDesc.getMaxHp();
+        this.faction = shipDesc.getRace();
+        this.isStationary = shipDesc.isStationary();
+    }
+
+    public NPCShip(String shipId, int x, int y){
+        this(shipId);
+        setPos(x, y);
+    }
+
+    public NPCShip(String shipId, int x, int y, String name){
+        this(shipId, x, y);
+        this.name = name;
+    }
+
+    public NPCShip(String shipId, int x, int y, String name, int maxHP){
+        this(shipId, x, y, name);
+        this.maxHP = this.hp = maxHP;
+    }
+
+    public NPCShip(String shipId, int x, int y, String name, int maxHP, Faction race, NPC captain) {
+        this(shipId, x, y, name, maxHP);
         this.faction = race;
         this.captain = captain;
-        this.name = name;
-        this.maxHP = this.hp = hp;
-        this.forceLootDrop = false;
+    }
+
+    @Override
+    public ShipDesc getDesc() {
+        if(shipDesc == null){ // This can happen when the game is loaded from a version less than 0.6.0
+            // hack: use sprite id for old ships names
+            // todo: fix the hack after the abolition of support for older saved games
+            shipDesc = ResourceManager.getInstance().getShipDescs().getEntity(drawable.getId());
+        }
+
+        return shipDesc;
     }
 
     public void setForceLootDrop(boolean forceLootDrop) {
@@ -159,6 +201,10 @@ public class NPCShip extends BaseGameObject implements IMonster {
 
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera, World world) {
+        if(drawable == null){
+            System.out.println(getDesc().getId());
+        }
+
         super.draw(container, g, camera, world);
         if (hp < 3) {
             g.setColor(Color.red);
@@ -495,6 +541,4 @@ public class NPCShip extends BaseGameObject implements IMonster {
     public boolean canBeAttacked() {
         return true;
     }
-
-
 }
