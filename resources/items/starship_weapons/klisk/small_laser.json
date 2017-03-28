@@ -1,8 +1,9 @@
 {
     "id": "klisk_small_laser",
     "damage": 2,
-    "name": "",
-    "desc": "",
+    "damageDeviation": 0.5,
+    "name": "klisk_small_laser.name",
+    "desc": "klisk_small_laser.desc",
     "shotImage": "blaster_shot",
     "shotSound": "laser_1",
     "range": 5,

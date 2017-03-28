@@ -36,7 +36,7 @@ public class NPCShip extends BaseGameObject implements IMonster, ShipItem {
 
     private static final long serialVersionUID = 2L;
 
-    private ShipDesc shipDesc;
+    private String shipId;
 
     protected int maxHP;
     protected String name;
@@ -70,8 +70,10 @@ public class NPCShip extends BaseGameObject implements IMonster, ShipItem {
 
     public NPCShip(String shipId){
         super();
-        shipDesc = ResourceManager.getInstance().getShipDescs().getEntity(shipId);
-        if(shipDesc == null){
+        this.shipId = shipId;
+
+        ShipDesc shipDesc = getDesc();
+        if(this.shipId == null){
             throw new NullPointerException("Ship Description can not be null");
         }
         setSprite(shipDesc.getDrawable());
@@ -105,13 +107,23 @@ public class NPCShip extends BaseGameObject implements IMonster, ShipItem {
 
     @Override
     public ShipDesc getDesc() {
-        if(shipDesc == null){ // This can happen when the game is loaded from a version less than 0.6.0
+        if(shipId == null){ // This can happen when the game is loaded from a version less than 0.6.0
             // hack: use sprite id for old ships names
             // todo: fix the hack after the abolition of support for older saved games
-            shipDesc = ResourceManager.getInstance().getShipDescs().getEntity(drawable.getId());
+            shipId = drawable.getId();
         }
 
-        return shipDesc;
+        return ResourceManager.getInstance().getShipDescs().getEntity(shipId);
+    }
+
+    @Override
+    public boolean isDodged() {
+        if(CommonRandom.getRandom().nextFloat() * 100.0f < getDesc().getDodgeChance()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public void setForceLootDrop(boolean forceLootDrop) {
@@ -299,7 +311,7 @@ public class NPCShip extends BaseGameObject implements IMonster, ShipItem {
         if (hp <= 0) {
             explode(currentStarSystem);
         }
-        super.onAttack(world, attacker, dmg);
+        world.onGameObjectAttacked(attacker, this, dmg);
 
         if (attacker != null) {
             changeThreat(world, attacker, dmg * 2);   //todo: balance
@@ -347,13 +359,7 @@ public class NPCShip extends BaseGameObject implements IMonster, ShipItem {
         final WeaponInstance weaponInstance = weapons.get(weaponIdx);
         weaponInstance.fire();
         final WeaponDesc weaponDesc = weaponInstance.getWeaponDesc();
-        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.attack")
-                , getName()
-                , target.getName()
-                , weaponDesc.getName()
-                , weaponDesc.getDamage()
-        ));
-
+        final int damage = weaponDesc.getDeviationDamage();
 
         Effect e = weaponDesc.createShotEffect(world, this, target, world.getCamera(), 800);
         if (e != null) {
@@ -362,7 +368,28 @@ public class NPCShip extends BaseGameObject implements IMonster, ShipItem {
 
                 @Override
                 public void stateChanged(World world) {
-                    target.onAttack(world, NPCShip.this, weaponDesc.getDamage());
+                    boolean dodge = false;
+                    if(target instanceof ShipItem){
+                        dodge = ((ShipItem)target).isDodged();
+                    }
+
+                    if(dodge){
+                        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.attack_dodge")
+                                ,getName()
+                                , target.getName()
+                                , weaponDesc.getName()
+                        ));
+                    }
+                    else{
+                        target.onAttack(world, NPCShip.this, damage);
+                        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.attack")
+                                , getName()
+                                , target.getName()
+                                , weaponDesc.getName()
+                                , damage
+                        ));
+                    }
+
                     if (!target.isAlive()) {
                         GameLogger.getInstance().logMessage(target.getName() + " " + Localization.getText("gui", "space.destroyed"));
                     }

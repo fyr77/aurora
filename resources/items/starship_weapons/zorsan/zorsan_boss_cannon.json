@@ -1,8 +1,9 @@
 {
     "id": "zorsan_boss_cannon",
     "damage": 6,
-    "name": "",
-    "desc": "",
+    "damageDeviation": 0.2,
+    "name": "zorsan_boss_cannon.name",
+    "desc": "zorsan_boss_cannon.desc",
     "shotImage": "blaster_shot_red",
     "range": 12,
     "shotSound": "autofire_1",

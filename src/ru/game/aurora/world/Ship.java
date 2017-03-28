@@ -50,11 +50,11 @@ public class Ship extends BaseGameObject implements ShipItem {
 
     private int freeSpace;
 
-    private ShipDesc shipDesc;
+    private String shipId;
 
     public Ship(World world, int x, int y) {
         super();
-        shipDesc = ResourceManager.getInstance().getShipDescs().getEntity("aurora");
+        ShipDesc shipDesc = getDesc();
         if(shipDesc == null){
             throw new NullPointerException("Ship Description can not be null");
         }
@@ -75,11 +75,20 @@ public class Ship extends BaseGameObject implements ShipItem {
 
     @Override
     public ShipDesc getDesc() {
-        if(shipDesc == null) {
-            shipDesc = ResourceManager.getInstance().getShipDescs().getEntity("aurora");
+        if(shipId == null) {
+            shipId = "aurora";
         }
+        return ResourceManager.getInstance().getShipDescs().getEntity("aurora");
+    }
 
-        return shipDesc;
+    @Override
+    public boolean isDodged() {
+        if(CommonRandom.getRandom().nextFloat() * 100.0f < getDesc().getDodgeChance()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public void addCrewMember(World world, CrewMember member) {
@@ -220,7 +229,6 @@ public class Ship extends BaseGameObject implements ShipItem {
         if (Configuration.getBooleanProperty("cheat.invulnerability")) {
             return;
         }
-
 
         int loseCrewChance = Configuration.getIntProperty("game.crew.lose_chance");
         int loseChanceReduce = MedBayUpgrade.getCrewDeathReduceValue();

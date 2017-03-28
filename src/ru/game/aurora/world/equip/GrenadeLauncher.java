@@ -23,8 +23,8 @@ public class GrenadeLauncher extends WeaponDesc {
 
     private static final long serialVersionUID = 1L;
 
-    public GrenadeLauncher(String id, Drawable drawable, int damage, int range, int price, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
-        super(id, drawable, damage, range, price, shotImage, shotSound, reloadTurns, explosionAnimation, particlesAnimation, size);
+    public GrenadeLauncher(String id, Drawable drawable, int damage, float damageDeviation, int range, int price, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
+        super(id, drawable, damage, damageDeviation, range, price, shotImage, shotSound, reloadTurns, explosionAnimation, particlesAnimation, size);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class GrenadeLauncher extends WeaponDesc {
                     }
                 }
                 final boolean wrapped = map.isWrapped();
-                int damage = getDamage();
+                int damage = getDeviationDamage();
                 if (shooter instanceof LandingParty) {
                     damage = ((LandingParty) shooter).calcDamage(world);
                 }

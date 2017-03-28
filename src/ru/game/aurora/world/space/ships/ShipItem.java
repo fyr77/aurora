@@ -6,4 +6,5 @@ package ru.game.aurora.world.space.ships;
 public interface ShipItem {
 
     ShipDesc getDesc();
+    boolean isDodged();
 }

@@ -55,7 +55,7 @@ public class WeaponUpgrade extends ShipUpgrade {
 
     @Override
     public String getLocalizedDescription() {
-        return super.getLocalizedDescription() + '\n' + '\n' + "RNG: " + weaponDesc.getRange() + ", DMG: " + weaponDesc.getDamage() + ", RLD:" + weaponDesc.getReloadTurns();
+        return super.getLocalizedDescription() + '\n' + '\n' + "RNG: " + weaponDesc.getRange() + ", DMG: " + weaponDesc.getDamageInfo() + ", RLD:" + weaponDesc.getReloadTurns();
     }
 
     @Override

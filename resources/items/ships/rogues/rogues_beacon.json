@@ -1,6 +1,6 @@
 {
   "id": "rogues_beacon",
-  "defaultName": "Bork ship",
+  "defaultName": "Rogues beacon",
   "imageId": "rogues_beacon",
   "race": "Rogues",
   "maxHp": 10,

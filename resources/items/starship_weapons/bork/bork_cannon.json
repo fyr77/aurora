@@ -1,6 +1,7 @@
 {
     "id": "bork_cannon",
     "damage": 1,
+    "damageDeviation": 0.66,
     "name": "simple_cannon.name",
     "desc": "simple_cannon.desc",
     "shotImage": "bullet_shot",

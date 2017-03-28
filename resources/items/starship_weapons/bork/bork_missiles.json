@@ -1,6 +1,7 @@
 {
     "id": "bork_missiles",
     "damage": 1,
+    "damageDeviation": 0.66,
     "name": "humanity_missiles.name",
     "desc": "humanity_missiles.desc",
     "shotImage": "missile_shot",

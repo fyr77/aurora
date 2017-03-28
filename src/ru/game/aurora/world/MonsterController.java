@@ -123,8 +123,9 @@ public class MonsterController implements Serializable {
 
                     @Override
                     public void stateChanged(World world) {
-                        party.subtractHp(world, weapon.getWeaponDesc().getDamage());
-                        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), myMonster.getName(), weapon.getWeaponDesc().getDamage(), party.getHp()));
+                        final int damage = weapon.getWeaponDesc().getDeviationDamage();
+                        party.subtractHp(world, damage);
+                        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "surface.animal_attack"), myMonster.getName(), damage, party.getHp()));
                     }
                 });
 
@@ -185,7 +186,7 @@ public class MonsterController implements Serializable {
 
                         @Override
                         public void stateChanged(World world) {
-                            po1.onAttack(world, myMonster, weapon.getWeaponDesc().getDamage());
+                            po1.onAttack(world, myMonster, weapon.getWeaponDesc().getDeviationDamage());
                         }
                     });
                     break;
