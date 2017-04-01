@@ -88,8 +88,7 @@ public class KliskTradeItems
 
         final String name;
 
-        public ScienceTheorySellItem(String name)
-        {
+        public ScienceTheorySellItem(String name) {
             super("research", "alien_" + name, name + "_theory", Configuration.getDoubleProperty("trade.theory_price"), true);
             this.name = name;
         }
@@ -101,7 +100,7 @@ public class KliskTradeItems
 
         @Override
         public void onReceived(World world, int amount) {
-            world.getPlayer().getResearchState().getCompletedProjects().add(new BaseResearchWithFixedProgress(name, "technology_research", 0, 150));
+            world.getPlayer().getResearchState().getCompletedProjects().add(new BaseResearchWithFixedProgress("alien_"+ name, "technology_research", 0, 150));
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/crew/gordon/science_theories/gordon_science_theories_" + name + ".json"));
             world.getPlayer().getShip().getCrewMembers().get("gordon").changeReputation(1);
 

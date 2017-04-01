@@ -33,7 +33,9 @@ import java.io.Serializable;
  * for v0.6.0:
  * 1) damage without deviation = damage
  * 2) damage with deviation = [rand(damage - damage*deviation; damage + damage*deviation)]
+ * this calculation method for support backward compatibility with old versions
  */
+// todo: need change to simple [damageMin; damageMax] params
 public class WeaponDesc extends ItemWithTextAndImage implements Serializable, JsonConfigManager.EntityWithId, InventoryItem {
 
     private static final long serialVersionUID = 3L;
