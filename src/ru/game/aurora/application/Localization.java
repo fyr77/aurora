@@ -100,5 +100,6 @@ public class Localization {
         nifty.getResourceBundles().put("gui", ResourceBundle.getBundle(getBundleName("gui"), currentLocale, new UTF8Control()));
         nifty.getResourceBundles().put("crew", ResourceBundle.getBundle(getBundleName("crew"), currentLocale, new UTF8Control()));
         nifty.getResourceBundles().put("hints", ResourceBundle.getBundle(getBundleName("hints"), currentLocale, new UTF8Control()));
+        nifty.getResourceBundles().put("planets", ResourceBundle.getBundle(getBundleName("planets"), currentLocale, new UTF8Control()));
     }
 }
