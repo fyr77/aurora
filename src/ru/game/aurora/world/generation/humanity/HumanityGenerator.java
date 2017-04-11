@@ -158,7 +158,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
     {
 
         public TradeShip(Faction race) {
-            super("earth_transport", 0, 0);
+            super("earth_transport");
             setStationary(true);
         }
 

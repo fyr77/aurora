@@ -2,7 +2,7 @@ package ru.game.aurora.world.space.ships;
 
 import ru.game.aurora.application.JsonConfigManager;
 import ru.game.aurora.common.Drawable;
-import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.World;
 
 import java.io.Serializable;
@@ -45,12 +45,12 @@ public class ShipDesc implements JsonConfigManager.EntityWithId, Serializable {
         return defaultName;
     }
 
-    public AlienRace getRace(){
+    public Faction getRace(){
         if(!World.getWorld().getFactions().containsKey(race)){
             return null;
         }
         else{
-            return (AlienRace)World.getWorld().getFactions().get(race);
+            return World.getWorld().getFactions().get(race);
         }
     }
 

@@ -1,0 +1,9 @@
+{
+  "id": "rebels_agent",
+  "defaultName": "Unidentified spaceship",
+  "imageId": "zorsan_scout",
+  "race": "neutral",
+  "maxHp": 8,
+  "dodgeChance": 10.0,
+  "isStationary": "false"
+}

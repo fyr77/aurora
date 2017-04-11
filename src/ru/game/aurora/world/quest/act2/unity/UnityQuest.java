@@ -56,13 +56,11 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
         }
 
         StarSystem unityStarSystem = world.getGalaxyMap().getRandomNonQuestStarsystemInRange(solarSystem.getX(), solarSystem.getY(), 70, null);
-
         if(unityStarSystem != null){
             logger.info("Unity station founded in " + unityStarSystem.getCoordsString());
 
-            NPCShip spaceStation = new NPCShip("rogues_beacon", 0, 0, "Unity station", 90);
+            NPCShip spaceStation = new NPCShip("unity_station");
             setStationPosition(unityStarSystem.getPlanets(), spaceStation, unityStarSystem.getRadius()/2);
-            spaceStation.setStationary(true);
             spaceStation.setAi(null);
 
             NPC capitan = new NPC(getUnityStationDialog(spaceStation));
@@ -74,6 +72,8 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
             unityStarSystem.setQuestLocation(true);
 
             world.getGlobalVariables().put("unity_station_system", unityStarSystem);
+            world.getGlobalVariables().put("unity_station_ship", spaceStation);
+
             this.targetSystem = unityStarSystem; // for display quest mark on galaxy map
         }
         else{

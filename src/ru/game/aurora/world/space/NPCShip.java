@@ -214,7 +214,8 @@ public class NPCShip extends BaseGameObject implements IMonster, ShipItem {
     @Override
     public void draw(GameContainer container, Graphics g, Camera camera, World world) {
         if(drawable == null){
-            System.out.println(getDesc().getId());
+            // todo: need make drawable object transient
+            setSprite(getDesc().getDrawable());
         }
 
         super.draw(container, g, camera, world);
@@ -223,6 +224,7 @@ public class NPCShip extends BaseGameObject implements IMonster, ShipItem {
         } else {
             g.setColor(Color.white);
         }
+
         String hpText;
         if (hp < 100) {
             hpText = Integer.toString(Math.max(0, hp));

@@ -18,6 +18,7 @@ import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.ColonizationListener;
 import ru.game.aurora.world.generation.quest.ambush.AmbushQuest;
 import ru.game.aurora.world.quest.ZorsanFinalBattleGenerator;
+import ru.game.aurora.world.quest.act2.warline.war1_explore.WarLineExploreQuest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,6 @@ public class EarthDialogListener implements DialogListener {
 
     @Override
     public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-
         if (returnCode == 1) {
             // player has chosen to dump research info
 
@@ -130,9 +130,7 @@ public class EarthDialogListener implements DialogListener {
 
             final Dialog d = Dialog.loadFromFile("dialogs/diplomacy_quest_results.json");
             d.addListener(new DialogListener() {
-
                 private static final long serialVersionUID = -2200710202646449526L;
-
                 @Override
                 public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                     world.setCurrentRoom(earth.getOwner());
@@ -146,17 +144,43 @@ public class EarthDialogListener implements DialogListener {
             world.addListener(new AmbushQuest());
         }
         else if(returnCode == 81){
-            // End of 'Unity' and 'The burden of the metropolis' quests
             final Dialog reportDialog = Dialog.loadFromFile("dialogs/act2/act2_unity_and_metropolis_done_main.json");
-            world.addOverlayWindow(reportDialog);
-            world.getGlobalVariables().remove("metropole_burden_done");
-            world.getGlobalVariables().remove("unity_done");
-            world.getGlobalVariables().put("act2_unty_done", true);
-            world.getGlobalVariables().put("act2_metropole_burden_done", true);
+            reportDialog.addListener(new DialogListener() {
+                private static final long serialVersionUID = 532527922378808472L;
 
-            world.getPlayer().getJournal().questCompleted("unity");
-            world.getPlayer().getJournal().questCompleted("metropole_burden");
+                @Override
+                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                    // End of 'Unity' and 'The burden of the metropolis' quests
+                    world.getGlobalVariables().remove("metropole_burden_done");
+                    world.getGlobalVariables().remove("unity_done");
+                    world.getGlobalVariables().put("act2_unty_done", true);
+                    world.getGlobalVariables().put("act2_metropole_burden_done", true);
+
+                    world.getPlayer().getJournal().questCompleted("unity");
+                    world.getPlayer().getJournal().questCompleted("metropole_burden");
+
+                    // Start first warline quest
+                    new WarLineExploreQuest().updateWorld(world);
+                }
+            });
+
+            world.addOverlayWindow(reportDialog);
         }
+
+        /*
+        else if(returnCode == 82){
+            final Dialog choseScout = Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_chose_scout.json");
+            choseScout.addListener(new DialogListener() {
+                private static final long serialVersionUID = 869311722938411174L;
+                @Override
+                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                    new WarLineExploreQuest().choseShip(world);
+                }
+            });
+
+            world.addOverlayWindow(choseScout);
+        }
+        */
 
         // quest stuff
         if (flags.containsKey("diplomacy_report")) {
@@ -221,6 +245,5 @@ public class EarthDialogListener implements DialogListener {
         //reset dialog state
         earth.getEarthDialog().enter(world);
         world.getPlayer().getShip().fullRepair(world);
-
     }
 }
