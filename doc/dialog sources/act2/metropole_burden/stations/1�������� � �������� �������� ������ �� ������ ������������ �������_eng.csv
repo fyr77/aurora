@@ -1,14 +1,14 @@
-0;;;
-;;1;;0;;
-1;;;
-;;2;;0;;
-2;;;
-;;3;;0;;
-3;;;
-;;5;metropole_burden.trade_weapon;0;;
-;;4;;0;;
-5;;;
-;;4;;0;;
-4;;;
-;;5;metropole_burden.trade_weapon;0;;
-;;-1;;0;;
+0;*The speakers blow up in a cacophony of different sounds. Seems like te communications at this station are handled by a Bork who's not very smart.* Ar! Argh! R... *Is someone banging his head on the microphone?* Ha! Whozzat?! Whatchooneed?!;;;
+;Aurora 2, port of call Earth.;1;;0
+1;Argh! Ar! We no trade… don't! We don't trade! No... *The communication line switches with a click.* Aurora 2? THE Aurora 2? *This voice is still very rough and deep, but its owner is definitely smarter than the one before him.*;;;
+;Yeah. We've actually come to the colony, but we decided to contact you first.;2;;0
+2;Very flattered, human captain. And we're surprised to see you here, ha. Someone said you wouldn't go out into space again... glad to see it wasn't true. Human captain, we at this station don't trade with ships.;;;
+;Why not?;3;;0
+3;The station is small, built only for exchanging goods with your colony, that's for starters. And also we have an agreement, so we don't disturb your colony's trade.;;;
+;Do you sell weapons to the colonists?;5;metropole_burden.trade_weapon;0
+;Do they trade with outsider ships at the colony?;4;;0
+5;Of course. You didn't pick the best planet for colonization, haha! You can see all sorts of nasty critters down there! Only the Borks have reliable and powerful hand-carried weapons. Did you know that our beam weapons are capable of shooting even when half-disassemled?;;;
+;Do they trade with outsider ships at the colony?;4;;0
+4;Of course. That's why we don't trade with ships.;;;
+;Do you sell weapons to the colonists?;5;metropole_burden.trade_weapon;0
+;I see. Well, it's time for us to go. Over and out.;-1;;0

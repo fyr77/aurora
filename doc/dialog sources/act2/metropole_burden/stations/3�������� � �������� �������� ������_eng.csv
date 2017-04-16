@@ -1,9 +1,9 @@
-0;;;
-;;1;;0;;
-1;;;
-;;3;;0;;
-;;2;metropole_burden.trade_augmentation;0;;
-3;;;
-;;-1;;0;;
-2;;;
-;;3;;0;;
+0;Unidentified ship, you have contacted the Rogue trading station. Identify yourself. *The voice is cold, almost machine-like.* We have to warn you right away: we don't trade with ships.;;;
+;Aurora 2, port of call Earth.;1;;0
+1;The legendary Aurora… You're coming to the colony, aren't you? Why did you contact us?;;;
+;A visit of courtesy.;3;;0
+;Is it true that you sell augmentations to the colonists?;2;metropole_burden.trade_augmentation;0
+3;The entire personnel of the station is glad and flattered, but nonetheless, as per the agreement with your colony, we are banned from trading with other ships or servicing them. Therefore our conversation is pointless, human captain.;;;
+;Well, I see. In that case, over and out.;-1;;0
+2;Yes. *Not a single sign that he is bothered by it.* To be more precise, an obsolete augmentation technology of ours, bio augmentations. We cannot fully use them, the Rogue system is too rigid, too slow to adapt... but in humans the augmentation rises to its full potential. Why don't you ask the colonists about it? Why did you contact us?;;;
+;A visit of courtesy.;3;;0

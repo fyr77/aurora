@@ -1,6 +1,6 @@
-0;;;
-;;1;;0;;
-1;;;
-;;2;;0;;
-2;;;
-;;-1;;0;;
+0;*The connection isn't very good. Apparently the transmitters at the colony aren't new.* Ship with Earth signatures, we hear you. Report about yourself.;;;
+;Aurora 2, Earth. Request to land.;1;;0
+1;Aurora 2? I see… We have a small sandstorm, you'll have to wait about 30 minutes. Then land on the shuttle, head for the signal of our radio beacon. Or did you want to land the entire ship?;;;
+;No, just the shuttle.;2;;0
+2;Roger. Then we're waiting for you, Aurora 2.;;;
+;Over and out.;-1;;0

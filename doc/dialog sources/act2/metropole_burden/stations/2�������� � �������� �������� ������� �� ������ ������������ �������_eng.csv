@@ -1,14 +1,14 @@
-0;;;
-;;1;;0;;
-1;;;
-;;2;;0;;
-2;;;
-;;3;;0;metropole_burden.trade_weapon;
-;;4;;0;metropole_burden.trade_augmentation;
-;;-1;;0;;
-3;;;
-;;4;;0;metropole_burden.trade_augmentation;
-;;-1;;0;;
-4;;;
-;;3;;0;metropole_burden.trade_weapon;
-;;-1;;0;;
+0;Aurora 2, is that you? It's been a long time since somebody in outer space saw your ship's signatures... *The Klisk operator is clicking, but you can't make out the intonation.*;;;;
+;I'm pleased that someone still remembers us. We were going to the colony, but we saw three stations in its orbit. We decided to contact them.;1;;0;
+1;Yeah, these are trade stations, human captain. Nonetheless, we only trade with the colony, we're banned from trading with third-party ships.;;;;
+;Why is that?;2;;0;
+2;A couple years ago we had a... disagreement over it. The leader of your colony claimed that we were undercutting them and getting in the way of the colony's development. He threatened he would kick the stations out of orbit. The Borks and Rogues didn't mind, they were selling things that were important to the colony, weapons and augmentations. They didn't have to fear they'd be asked to leave. But we had to comply. Although, so did they.;;;;
+;Weapons?;3;;0;metropole_burden.trade_weapon
+;Augmentations?;4;;0;metropole_burden.trade_augmentation
+;I see. Well, in that case, we won't be taking any more of your time. Over and out.;-1;;0;
+3;Yes. Borks are selling weapons to your colony. Bork weapons are considered particularly useful by your colonists.;;;;
+;Augmentations?;4;;0;metropole_burden.trade_augmentation
+;I see. Well, in that case, we won't be taking any more of your time. Over and out.;-1;;0;
+4;I can't say anything about that. I only know that the Rogues sell augmentations to your colonists. Strange. No one except the Rogues can be augmented.;;;;
+;Weapons?;3;;0;metropole_burden.trade_weapon
+;I see. Well, in that case, we won't be taking any more of your time. Over and out.;-1;;0;

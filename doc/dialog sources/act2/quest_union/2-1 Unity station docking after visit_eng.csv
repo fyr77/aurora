@@ -1,4 +1,4 @@
-0;;;
-;;1;;0;;
-1;;;
-;;-1;;0;;
+0;"*It's some Rogue traffic controller.* Your signatures are known. Aurora 2, Earth.         Какой-то бродяга-диспетчер.* Ваши сигнатуры опознаны. ""Аврора-2"", Земля.";;;
+;That's right. Can we dock?;1;;0
+1;Please accept my apologies. According to the safety protocols, only participants of current sessions and special supply ships are to be allowed at the station. Unfortunately, your request to dock is denied.;;;
+;I understand, thank you. Over and out.;-1;;0
