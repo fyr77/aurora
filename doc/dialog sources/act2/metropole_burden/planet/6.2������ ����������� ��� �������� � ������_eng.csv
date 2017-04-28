@@ -1,11 +1,11 @@
-0;;;
-;;1;;0;;
-;;2;;0;;
-1;;;
-;;2;;0;;
-2;;;
-;;-1;metropole_burden.documents_readed;1;;
-;;-1;metropole_burden.documents_readed;2;;
-;;3;!metropole_burden.documents_readed;0;;
-3;;;
-;;-1;;3;;
+0;This is my office. *Rich opens the door with the plaque saying RICH DONAHUE, SECRETARY MANAGER.* Come in. *Rich doesn't walk in as much as he storms inside, takes a seat at his desk and gives you a look that is almost hostile.*;;;
+;*look around*;1;;0
+;Do you know why I'm here?;2;;0
+1;*Even a cursory glance is enough to see that Donahue's office is tasteless and provincial. Standard furniture, standard decoration, standard... absolutely everything. Even the massive wooden desk doesn't look imposing in these surroundings, more like goofy. The family picture, half-turned so both the person behind the desk and the visitor can see it, doesn't look sweet. It's a strange sight. Rich is still looking at you with clear hostility.*;;;
+;Do you know why I'm here?;2;;0
+2;*His answer is full of venomous sarcasm.* Oh, I know why you're here! First, to tell me I can't hold my wife and daughter! Second, to tighten the noose around this colony's neck even more! Captain, this couldn't have waited until tomorrow? Of course it couldn't have! I've read the documents that were sent over from your ship. Do you seriously think I could sign that?;;;
+;It's not the Aurora Project that needs it, it's Earth, Rich. I don't understand your motive.;-1;metropole_burden.documents_readed;1
+;Rich, to be quite honest with you, I'm sorry but I don't care. You have to sign these papers because that's what our bosses are telling you to do.;-1;metropole_burden.documents_readed;2
+;I'm embarrassed, but I haven't read the documents. What are we talking about?;3;!metropole_burden.documents_readed;0
+3;*Rich sits in his chair looking like someone took all the bones out of his body at once and he simply cannot move, he's so shocked.* What? *He repeats it again, louder this time, because before that he was almost whispering.* What? What did you say?! *He gets up from his chair, sets his hands against the desk, hanging over it, and speaks slowly and deliberately, as if he was trying to hammer in every word between himself and you.* You come to this colony... take me out of my meeting with my family for this conversation... and you don't even know what you're going to talk about?! You... are you... do you care this little about your objectives?! *Rich breathes in deeply, as if he's going to shout, but he speaks as loudly as he usually does, even if very agressively.* Get out of my office! And tell Earth to send someone more responsible next time! And you go back to doing to whatever it is that you usually do, killing aliens or screwing them, that's what a real space hero should be doing! *Giving you a final angry stare, Rich gets up from his desk and walks out. Right after that, Matthew walks into the office and takes you back to the armored carrier, which slowly moves towards the spaceport... Right. Are you embarrassed? Only you know that. You suppose that if there's any situation you could call an epic failure, it's this one.*;;;
+;…;-1;;3

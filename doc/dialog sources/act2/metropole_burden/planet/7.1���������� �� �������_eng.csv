@@ -1,84 +1,84 @@
-0;;;
-;;1;!colony_help_used && colony_help;0;colony_help_used;
-;;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used;
-;;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used;
-;;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used;
-;;7;!disagreement_used;0;disagreement_used;
-;;10;!pressure_used;0;pressure_used;
-;;11;!pressure_used;0;pressure_used;
-1;;;
-;;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used;
-;;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used;
-;;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used;
-;;7;!disagreement_used;0;disagreement_used;
-;;10;!pressure_used;0;pressure_used;
-;;11;!pressure_used;0;pressure_used;
-;;-1;replace_condition;0;;
-2;;;
-;;1;!colony_help_used && colony_help;0;colony_help_used;
-;;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used;
-;;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used;
-;;7;!disagreement_used;0;disagreement_used;
-;;10;!pressure_used;0;pressure_used;
-;;11;!pressure_used;0;pressure_used;
-;;-1;replace_condition;0;;
-3;;;
-;;5;;0;;
-4;;;
-;;6;;0;;
-7;;;
-;;8;;0;disagreement_minus;
-;;8;;0;disagreement_minus;
-;;8;;0;disagreement_minus;
-;;9;;0;disagreement_plus;
-10;;;
-;;1;!colony_help_used && colony_help;0;colony_help_used;
-;;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used;
-;;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used;
-;;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used;
-;;7;!disagreement_used;0;disagreement_used;
-;;11;!pressure_used;0;pressure_used;
-;;-1;replace_condition;0;;
-11;;;
-;;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used;
-;;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used;
-;;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used;
-;;7;!disagreement_used;0;disagreement_used;
-;;10;!pressure_used;0;pressure_used;
-;;-1;replace_condition;0;;
-5;;;
-;;1;!colony_help_used && colony_help;0;colony_help_used;
-;;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used;
-;;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used;
-;;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used;
-;;7;!disagreement_used;0;disagreement_used;
-;;10;!pressure_used;0;pressure_used;
-;;11;!pressure_used;0;pressure_used;
-;;-1;replace_condition;0;;
-6;;;
-;;1;!colony_help_used && colony_help;0;colony_help_used;
-;;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used;
-;;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used;
-;;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used;
-;;7;!disagreement_used;0;disagreement_used;
-;;10;!pressure_used;0;pressure_used;
-;;11;!pressure_used;0;pressure_used;
-;;-1;replace_condition;0;;
-8;;;
-;;1;!colony_help_used && colony_help;0;colony_help_used;
-;;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used;
-;;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used;
-;;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used;
-;;7;!disagreement_used;0;disagreement_used;
-;;10;!pressure_used;0;pressure_used;
-;;11;!pressure_used;0;pressure_used;
-;;-1;replace_condition;0;;
-9;;;
-;;1;!colony_help_used && colony_help;0;colony_help_used;
-;;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used;
-;;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used;
-;;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used;
-;;7;!disagreement_used;0;disagreement_used;
-;;10;!pressure_used;0;pressure_used;
-;;11;!pressure_used;0;pressure_used;
-;;-1;replace_condition;0;;
+0;We had it very hard when we had just founded the colony. *Secretary Manager drums his fingers on the desk and looks at you with some kind of superiority.* I'll be direct and honest: Earth abandoned us. And a big reason why we survived was our trade with the aliens. Klisks, Borks, Rogues... You could say they saved us. And now they want to ban us for selling them the surpluses of processed resources, even though we barely trade with the aliens already anyway... Earth wants to make us completely dependent on itself!;;;;
+;My people have helped you many times. I've sent them here personally.;1;!colony_help_used && colony_help;0;colony_help_used
+;You barely trade with them? At the trade stations in your planet's orbit they told me something completely different. Borks sell you weapons, the Rogues sell you augmentations.;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used
+;You're wrong.;7;!disagreement_used;0;disagreement_used
+;You do understand there's a reason they make decisions like that on Earth?;10;!pressure_used;0;pressure_used
+;Rich, you're forgetting yourself. I think you've forgotten who you are and what your place is.;11;!pressure_used;0;pressure_used
+1;*Rich is embarrassed.* Yeah. Looks like I... Yeah. I'm sorry, Captain. I... I wasn't being fair. You're right. *He stops talking, but only to begin talking quickly again in a couple seconds.* I was wrong, but Earth still wasn't helping us! You were, but not Earth! Although... I was still wrong.;;;;
+;You barely trade with them? At the trade stations in your planet's orbit they told me something completely different. Borks sell you weapons, the Rogues sell you augmentations.;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used
+;You're wrong.;7;!disagreement_used;0;disagreement_used
+;You do understand there's a reason they make decisions like that on Earth?;10;!pressure_used;0;pressure_used
+;Rich, you're forgetting yourself. I think you've forgotten who you are and what your place is.;11;!pressure_used;0;pressure_used
+;So what have you decided?;-1;replace_condition;0;
+2;That's what the word barely means! *Rich looks a bit shocked and aggravated.* Still... *He catches his breath a little bit.* Still, like I said, we trade with them because we need it. Because Earth is too far away and it can't supply us fully!;;;;
+;My people have helped you many times. I've sent them here personally.;1;!colony_help_used && colony_help;0;colony_help_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used
+;You're wrong.;7;!disagreement_used;0;disagreement_used
+;You do understand there's a reason they make decisions like that on Earth?;10;!pressure_used;0;pressure_used
+;Rich, you're forgetting yourself. I think you've forgotten who you are and what your place is.;11;!pressure_used;0;pressure_used
+;So what have you decided?;-1;replace_condition;0;
+3;*Now, Secretary Manager is shocked for real. You think that if you listen closely, you can hear him grinding his teeth.*;;;;
+;So I think that in this decision, Earth is actually right and it's being objective.;5;;0;
+4;Yes, I know you've been through my files. Obviously I shouldn't have set my daughter's name as the password... *Rich smirks, then grins nastily.* But you mixed up your dates, Captain. You saw an old report and cost sheet. They're almost two years old. Now we barely trade with the aliens, like I said. And it's not benefitting the colony at all.;;;;
+;Really? D-damn it… I guess… I was wrong… I'm sorry, Rich.;6;;0;
+7;Really? *He looks very sceptical. This is the perfect time to cut him down with an argument he can't deny!*;;;;
+;You're from Earth yourself! What are you talking about?;8;;0;disagreement_minus
+;Earth regularly sends you tools and other aid! Everything you see here was built thanks to Earth!;8;;0;disagreement_minus
+;Weapons, resources… everything you've got was given to you by Earth..;8;;0;disagreement_minus
+;Maybe Earth doesn't give you much, but it does give you people.;9;;0;disagreement_plus
+10;I know perfectly well what that reason is. Forcing me to resign and making the colony totally dependent on Earth. Don't ask me questions that have obvious answers, Captain.;;;;
+;My people have helped you many times. I've sent them here personally.;1;!colony_help_used && colony_help;0;colony_help_used
+;You barely trade with them? At the trade stations in your planet's orbit they told me something completely different. Borks sell you weapons, the Rogues sell you augmentations.;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used
+;You're wrong.;7;!disagreement_used;0;disagreement_used
+;Rich, you're forgetting yourself. I think you've forgotten who you are and what your place is.;11;!pressure_used;0;pressure_used
+;So what have you decided?;-1;replace_condition;0;
+11;With all due respect, what my place may be is none of your business. My business is managing the colony in a way that won't let it crumble. And the orders from Earth won't be good for the colony.;;;;
+;You barely trade with them? At the trade stations in your planet's orbit they told me something completely different. Borks sell you weapons, the Rogues sell you augmentations.;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used
+;You're wrong.;7;!disagreement_used;0;disagreement_used
+;You do understand there's a reason they make decisions like that on Earth?;10;!pressure_used;0;pressure_used
+;So what have you decided?;-1;replace_condition;0;
+5;We trade with them because we need it! *He looks like he's mad but keeping himself in check.*;;;;
+;My people have helped you many times. I've sent them here personally.;1;!colony_help_used && colony_help;0;colony_help_used
+;You barely trade with them? At the trade stations in your planet's orbit they told me something completely different. Borks sell you weapons, the Rogues sell you augmentations.;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used
+;You're wrong.;7;!disagreement_used;0;disagreement_used
+;You do understand there's a reason they make decisions like that on Earth?;10;!pressure_used;0;pressure_used
+;Rich, you're forgetting yourself. I think you've forgotten who you are and what your place is.;11;!pressure_used;0;pressure_used
+;So what have you decided?;-1;replace_condition;0;
+6;We all make mistakes, Captain. I understand. You were just doing your job. *Secretary Manager's eyes are cold and serious.*;;;;
+;My people have helped you many times. I've sent them here personally.;1;!colony_help_used && colony_help;0;colony_help_used
+;You barely trade with them? At the trade stations in your planet's orbit they told me something completely different. Borks sell you weapons, the Rogues sell you augmentations.;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used
+;You're wrong.;7;!disagreement_used;0;disagreement_used
+;You do understand there's a reason they make decisions like that on Earth?;10;!pressure_used;0;pressure_used
+;Rich, you're forgetting yourself. I think you've forgotten who you are and what your place is.;11;!pressure_used;0;pressure_used
+;So what have you decided?;-1;replace_condition;0;
+8;*Rich shakes his head, disappointed.* Captain... that's stupid. I repeat, almost everything we have we were forced to buy from the aliens. We can't survive without it. That's why we need to trade with them.;;;;
+;My people have helped you many times. I've sent them here personally.;1;!colony_help_used && colony_help;0;colony_help_used
+;You barely trade with them? At the trade stations in your planet's orbit they told me something completely different. Borks sell you weapons, the Rogues sell you augmentations.;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used
+;You're wrong.;7;!disagreement_used;0;disagreement_used
+;You do understand there's a reason they make decisions like that on Earth?;10;!pressure_used;0;pressure_used
+;Rich, you're forgetting yourself. I think you've forgotten who you are and what your place is.;11;!pressure_used;0;pressure_used
+;So what have you decided?;-1;replace_condition;0;
+9;People? Hah... Yeah. I have to admit you're right about this one. Without the military regulars from Earth, we'd have it much worse... But even they are forced to use what the aliens sell to us. Even though you're right, Captain, you're not completely right. But I'm still ready to admit I was wrong.;;;;
+;My people have helped you many times. I've sent them here personally.;1;!colony_help_used && colony_help;0;colony_help_used
+;You barely trade with them? At the trade stations in your planet's orbit they told me something completely different. Borks sell you weapons, the Rogues sell you augmentations.;2;!station_used && metropole_burden.klisk_station_visited && metropole_burden.rogue_station_visited && metropole_burden.bork_station_visited;0;station_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;3;!terminal_used && metropole_burden.documents_found && !metropole_burden.matthew_surname_reply;0;terminal_used
+;You know, I worked at one of the town hall service terminals last night accidentally... I know you're still selling processed materials under the table. And lots of them.;4;!terminal_used  && metropole_burden.documents_found && metropole_burden.matthew_surname_reply;0;terminal_used
+;You're wrong.;7;!disagreement_used;0;disagreement_used
+;You do understand there's a reason they make decisions like that on Earth?;10;!pressure_used;0;pressure_used
+;Rich, you're forgetting yourself. I think you've forgotten who you are and what your place is.;11;!pressure_used;0;pressure_used
+;So what have you decided?;-1;replace_condition;0;
