@@ -1,0 +1,141 @@
+{
+  "id": "war1_explore_earth_end_success",
+  "iconName": "earth_dialog",
+  "statements": {
+    "0": {
+      "id": 0,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 2,
+          "replyText": "0",
+          "replyConditions": [
+            {
+              "name": "result",
+              "value": "3",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 4,
+          "replyText": "1",
+          "replyConditions": [
+            {
+              "name": "result",
+              "value": "2",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 5,
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "result",
+              "value": "1",
+              "type": "EQUAL"
+            }
+          ]
+        },
+        {
+          "returnValue": 0,
+          "targetStatementId": 6,
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "result",
+              "value": "0",
+              "type": "EQUAL"
+            }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 3,
+          "replyText": "0"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 7,
+          "replyText": "0"
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": 8,
+          "replyText": "0"
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "replies": [
+        {
+          "returnValue": 0,
+          "targetStatementId": -1,
+          "replyText": "0"
+        }
+      ]
+    }
+  },
+  "flags": {},
+  "returnValue": 0
+}

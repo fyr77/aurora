@@ -183,7 +183,7 @@ public class ColonyPlanetSearchListener extends GameEventListener implements Wor
                 , true
                 , false
                 , 25
-                , new WeaponDesc("melee", null, 6, 1, 0, "", "melee_1", 0, "melee_1", null, 0)
+                , new WeaponDesc("melee", null, 6, 0.25f, 1, 0, "", "melee_1", 0, "melee_1", null, 0)
                 , 2
                 , MonsterBehaviour.AGGRESSIVE
                 , modifierSet

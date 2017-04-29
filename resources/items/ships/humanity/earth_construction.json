@@ -1,0 +1,9 @@
+{
+  "id": "earth_construction",
+  "defaultName": "Icarus #1",
+  "imageId": "earth_construction",
+  "race": "Humanity",
+  "maxHp": 25,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

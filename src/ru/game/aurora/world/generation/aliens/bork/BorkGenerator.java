@@ -131,7 +131,7 @@ public class BorkGenerator implements WorldGeneratorPart {
 
             @Override
             public NPCShip createShip(World world, int shipId) {
-                NPCShip ship = new NPCShip(0, 0, "bork_ship", borkRace, null, "Bork ship", 5);
+                NPCShip ship = new NPCShip("bork_ship");
                 if (CommonRandom.getRandom().nextInt(3) == 1) {
                     // some random bork ships carry a missile launcher
                     ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("bork_cannon"), ResourceManager.getInstance().getWeapons().getEntity("bork_missiles"));

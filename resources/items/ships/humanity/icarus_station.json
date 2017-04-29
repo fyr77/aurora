@@ -1,0 +1,9 @@
+{
+  "id": "icarus_station",
+  "defaultName": "Icarus #1",
+  "imageId": "icarus_station",
+  "race": "Humanity",
+  "maxHp": 25,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

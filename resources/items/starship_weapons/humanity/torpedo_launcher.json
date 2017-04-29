@@ -1,6 +1,7 @@
 {
   "id": "humanity_torpedoes",
   "damage": 6,
+  "damageDeviation": 0.1,
   "name": "humanity_torpedoes.name",
   "desc": "humanity_torpedoes.desc",
   "shotImage": "torpedo",

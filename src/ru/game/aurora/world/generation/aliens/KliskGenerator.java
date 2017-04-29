@@ -280,24 +280,22 @@ public class KliskGenerator implements WorldGeneratorPart {
                 NPCShip ship;
                 switch (shipType) {
                     case DEFAULT_SHIP:
-                        ship = new NPCShip(0, 0, "klisk_ship", kliskRace, null, "Klisk Ship", 15);
+                        ship = new NPCShip("klisk_ship");
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
                         ship.setSpeed(2);
                         break;
 
                     case TRADE_PROBE:
-                        ship = new NPCShip(0, 0, "klisk_drone", kliskRace, null, "Klisk drone", 7);
+                        ship = new NPCShip("klisk_drone");
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"));
-                        ship.setStationary(true);
                         ship.setCanBeHailed(false);
                         ship.setSpeed(2);
                         break;
                     case STATION:
-                        ship = new NPCShip(0, 0, "klisk_station", kliskRace, null, "Klisk station", 25);
+                        ship = new NPCShip("klisk_station");
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("klisk_small_laser"), ResourceManager.getInstance().getWeapons().getEntity("klisk_large_laser"));
                         ship.enableRepairs(3);
                         ship.setSpeed(2);
-                        ship.setStationary(true);
                         break;
                     default:
                         throw new IllegalArgumentException("Klisk race does not define ship of type " + shipType);

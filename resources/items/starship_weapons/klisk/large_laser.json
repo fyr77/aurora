@@ -1,8 +1,9 @@
 {
     "id": "klisk_large_laser",
     "damage": 4,
-    "name": "",
-    "desc": "",
+    "damageDeviation": 0.15,
+    "name": "klisk_large_laser.name",
+    "desc": "klisk_large_laser.desc",
     "shotImage": "blaster_shot",
     "shotSound": "laser_1",
     "range": 7,

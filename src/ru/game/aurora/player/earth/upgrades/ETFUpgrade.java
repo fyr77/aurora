@@ -12,7 +12,6 @@ import ru.game.aurora.player.earth.EarthUpgrade;
 import ru.game.aurora.util.CollectionUtils;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
@@ -90,15 +89,8 @@ public class ETFUpgrade extends EarthUpgrade {
 
             etfDialog.setIconName(CollectionUtils.selectRandomElement(captains));
 
-            generatedShip = new NPCShip(
-                    0
-                    , 0
-                    , "earth_freighter"
-                    , world.getFactions().get(HumanityGenerator.NAME)
-                    , new NPC(etfDialog)
-                    , "ETF Freighter"
-                    , 10
-            );
+            generatedShip = new NPCShip("earth_freighter");
+            generatedShip.setCaptain(new NPC(etfDialog));
             generatedShip.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"));
             ss.setRandomEmptyPosition(generatedShip);
             generatedShip.setAi(new LeaveSystemAI());

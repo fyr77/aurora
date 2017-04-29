@@ -1,6 +1,7 @@
 {
     "id": "simple_cannon",
     "damage": 1,
+    "damageDeviation": 0.5,
     "name": "simple_cannon.name",
     "desc": "simple_cannon.desc",
     "shotImage": "bullet_shot",
@@ -10,5 +11,4 @@
     "explosionAnimation": "rocket_explosion",
     "particlesAnimation": "rocket_particles",
     "size": 10
-
 }

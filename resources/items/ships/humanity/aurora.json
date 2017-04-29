@@ -1,0 +1,9 @@
+{
+  "id": "aurora",
+  "defaultName": "Aurora-2",
+  "imageId": "aurora",
+  "race": "Humanity",
+  "maxHp": 10,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

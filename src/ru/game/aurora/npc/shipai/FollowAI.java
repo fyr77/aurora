@@ -13,7 +13,7 @@ import ru.game.aurora.world.space.StarSystem;
 public class FollowAI implements NPCShipAI {
     private static final long serialVersionUID = 1;
 
-    private final Positionable target;
+    protected final Positionable target;
 
     private boolean isOverridable = true;
 

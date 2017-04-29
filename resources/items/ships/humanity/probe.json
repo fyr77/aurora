@@ -1,0 +1,9 @@
+{
+  "id": "probe",
+  "defaultName": "Probe-X513M",
+  "imageId": "probe",
+  "race": "Humanity",
+  "maxHp": 5,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

@@ -77,7 +77,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 ));
 
 
-                construction = new NPCShip(0, 1, "earth_construction", humanity, null, "Icarus #1", 25);
+                construction = new NPCShip("earth_construction", 0, 1);
                 construction.setStationary(true);
                 construction.setAi(null);
                 humanity.getHomeworld().getShips().add(construction);
@@ -90,7 +90,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
                 // finish construction
                 // replace station sprite
                 humanity.getHomeworld().getShips().remove(construction);
-                construction = new NPCShip(0, 1, "icarus_station", humanity, null, "Icarus #1", 25);
+                construction = new NPCShip("icarus_station", 0, 1);
                 construction.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("humanity_missiles"));
                 construction.setStationary(true);
                 construction.setAi(null);

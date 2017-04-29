@@ -1,6 +1,7 @@
 {
     "id": "zorsan_small_cannon",
     "damage": 1,
+    "damageDeviation": 0.5,
     "name": "",
     "desc": "",
     "shotImage": "blaster_shot_red",

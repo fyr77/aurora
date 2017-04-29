@@ -1,0 +1,9 @@
+{
+  "id": "torpedo",
+  "defaultName": "torpedo",
+  "imageId": "torpedo",
+  "race": "Humanity",
+  "maxHp": 4,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

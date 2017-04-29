@@ -1,6 +1,6 @@
 2Связь со станцией Единства в космосе, перед стыковской.csv;unity_station_docking;rogues_dialog;act2\quest_union\
 3В Единстве.csv;unity_station_inside;bork_dialog;act2\quest_union\
-4Совещание.csv;unity_station_meeting;gardener_dialog;act2\quest_union\
+4Совещание.csv;unity_station_meeting;assembly_gardener;act2\quest_union\
 5После отдыха в столовой, момент выбора к кому из послов идти.csv;unity_station_intermission;interior_dialog;act2\quest_union\
 6Выбор, в какое посольство идти.csv;unity_station_embassy_choice;interior_dialog;act2\quest_union\
 7Посольство клисков.csv;unity_station_embassy_klisk;klisk_vip_dialog;act2\quest_union\

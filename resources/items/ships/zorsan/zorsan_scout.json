@@ -1,0 +1,9 @@
+{
+  "id": "zorsan_scout",
+  "defaultName": "Zorsan scout",
+  "imageId": "zorsan_scout",
+  "race": "Zorsan",
+  "maxHp": 10,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

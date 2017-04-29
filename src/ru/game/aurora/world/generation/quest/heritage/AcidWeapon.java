@@ -18,27 +18,13 @@ import ru.game.aurora.world.planet.LandingParty;
  */
 public class AcidWeapon extends WeaponDesc
 {
-    public AcidWeapon(String id, Drawable drawable, int damage, int range, int price, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
-        super("acid"
-                , null, 5
-                , 10
-                , 0
-                , "acid_shot"
-                , "melee_1"
-                , 2
-                , null
-                , null
-                , 1);
+    public AcidWeapon(String id, Drawable drawable, int damage, float damageDeviation, int range, int price, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
+        super("acid", null, 5, 0.25f, 10, 0, "acid_shot", "melee_1", 2, null, null, 1);
     }
 
     @Override
     public Effect createShotEffect(World world, GameObject shooter, GameObject target, Camera camera, int moveSpeed) {
-        return new AcidShot(shooter
-                , target
-                , camera
-                , moveSpeed
-                , this
-        );
+        return new AcidShot(shooter, target, camera, moveSpeed, this);
     }
 
     @Override

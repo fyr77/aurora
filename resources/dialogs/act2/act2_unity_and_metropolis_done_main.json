@@ -7,6 +7,16 @@
       "replies": [
         {
           "returnValue": 0,
+          "targetStatementId": 1,
+          "replyText": "0"
+        }
+      ]
+    },
+    "1": {
+      "id": 1,
+      "replies": [
+        {
+          "returnValue": 0,
           "targetStatementId": 2,
           "replyText": "0",
           "replyConditions": [
@@ -3359,26 +3369,6 @@
     },
     "30": {
       "id": 30,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 31,
-          "replyText": "0"
-        }
-      ]
-    },
-    "31": {
-      "id": 31,
-      "replies": [
-        {
-          "returnValue": 0,
-          "targetStatementId": 32,
-          "replyText": "0"
-        }
-      ]
-    },
-    "32": {
-      "id": 32,
       "replies": [
         {
           "returnValue": 0,

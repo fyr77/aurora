@@ -109,7 +109,7 @@ class ColonyFounder {
     }
 
     private static AlienHomeworld buildColonyPlanet(World world, BasePlanet sourcePlanet){
-        return new AlienHomeworld(
+        AlienHomeworld colony = new AlienHomeworld(
                 null,
                 ((AlienRace) world.getFactions().get("Humanity")),
                 null,
@@ -119,5 +119,9 @@ class ColonyFounder {
                 PlanetAtmosphere.BREATHABLE_ATMOSPHERE,
                 sourcePlanet.getX(),
                 PlanetCategory.PLANET_ROCK);
+
+        colony.setCustomScanDescription("Humans.colony.description");
+
+        return colony;
     }
 }

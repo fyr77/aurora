@@ -1,6 +1,7 @@
 {
     "id" : "plasma_cannon",
     "damage" : 4,
+    "damageDeviation": 0.2,
     "name": "plasma_cannon.name",
     "desc": "plasma_cannon.desc",
     "shotImage": "plasma_shot",

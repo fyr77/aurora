@@ -5,7 +5,6 @@ import ru.game.aurora.npc.shipai.KeepOrbitAI;
 import ru.game.aurora.player.earth.EarthUpgrade;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.World;
-import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 
@@ -20,7 +19,7 @@ public class EDFUpgrade extends EarthUpgrade {
         world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "edf_2.sender", "edf_2", "mail"));
         StarSystem solarSystem = ((StarSystem) world.getGlobalVariables().get("solar_system"));
         for (int i = 0; i < 2; ++i) {
-            NPCShip ship = new NPCShip(0, 0, "earth_destroyer", world.getFactions().get(HumanityGenerator.NAME), null, "Patrol Ship", 8);
+            NPCShip ship = new NPCShip("earth_destroyer");
             ship.setSpeed(2);
             ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"));
             ship.setAi(new KeepOrbitAI(true));

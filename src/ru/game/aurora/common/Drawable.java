@@ -60,6 +60,10 @@ public class Drawable implements Serializable {
         this.isAnimation = isAnimation;
     }
 
+    public String getId(){
+        return id;
+    }
+
     private void loadImage() {
         if (!isAnimation) {
             if (tx == -1) {

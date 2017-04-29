@@ -1,0 +1,9 @@
+{
+  "id": "earth_destroyer",
+  "defaultName": "Patrol Ship",
+  "imageId": "earth_destroyer",
+  "race": "Humanity",
+  "maxHp": 8,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

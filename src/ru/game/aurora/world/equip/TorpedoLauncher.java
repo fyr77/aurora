@@ -21,12 +21,12 @@ import ru.game.aurora.world.space.NPCShip;
 public class TorpedoLauncher extends WeaponDesc {
 
     public TorpedoLauncher(String id, Drawable drawable, int damage, int range, int price, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
-        super(id, drawable, damage, range, price, shotImage, shotSound, reloadTurns, explosionAnimation, particlesAnimation, size);
+        super(id, drawable, damage, 0.25f, range, price, shotImage, shotSound, reloadTurns, explosionAnimation, particlesAnimation, size);
     }
 
     @Override
     public Effect createShotEffect(World world, GameObject shooter, GameObject target, Camera camera, int moveSpeed) {
-        Torpedo t = new Torpedo(shooter.getTargetX(), shooter.getTargetY(), target, shooter.getFaction(), getDamage());
+        Torpedo t = new Torpedo(shooter.getTargetX(), shooter.getTargetY(), target, shooter.getFaction(), getDeviationDamage());
         world.getCurrentRoom().getMap().getObjects().add(t);
         // dummy attack for 0 damage to make targeted ship hostile and to enable its Combat AI so that it could shot down torpedoes
         target.onAttack(world, shooter, 0);
@@ -44,7 +44,8 @@ public class TorpedoLauncher extends WeaponDesc {
         private int damage;
 
         public Torpedo(int x, int y, GameObject target, Faction faction, int damage) {
-            super(x, y, "torpedo", faction, null, "torpedo", 4);
+            super("torpedo", x, y);
+            setFaction(faction);
             setSpeed(1);
             this.target = target;
             final LandAI ai = new LandAI(target);

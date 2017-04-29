@@ -90,7 +90,6 @@ public abstract class BaseSpaceRoom implements Room, ITileMap {
         player.getShip().draw(container, g, camera, world);
     }
 
-
     @Override
     public void draw(GameContainer container, Graphics graphics, Camera camera) {
 

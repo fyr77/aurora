@@ -166,7 +166,7 @@ public class RedMeatEncounterGenerator implements WorldGeneratorPart, DialogList
         private static final long serialVersionUID = -4429790645902806562L;
 
         public Spore(World world) {
-            super(0, 0, "spore", null, null, "Spore", 20);
+            super("spore");
             setStationary(true);
             setAi(new LandAI(world.getPlayer().getShip()));
             enableRepairs(1);

@@ -39,8 +39,8 @@ public class RogueBaseEncounter extends GameEventListener
         setGroups(EventGroup.ENCOUNTER_SPAWN);
         chance = Configuration.getDoubleProperty("quest.zorsan_rebels.rogue_base_chance");
 
-        station = new NPCShip(3, 3, "zorsan_station", null, new NPC(dialog), "Rebel station", 20);
-        station.setStationary(true);
+        station = new NPCShip("zorsan_station", 3, 3);
+        station.setCaptain(new NPC(dialog));
         dialog.addListener(new DialogListener() {
 
             private static final long serialVersionUID = 5916617109003619719L;

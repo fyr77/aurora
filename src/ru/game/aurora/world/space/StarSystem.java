@@ -21,6 +21,7 @@ import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.quest.asteroidbelt.AsteroidBeltQuestGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
+import ru.game.aurora.world.space.ships.ShipItem;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -149,6 +150,10 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
                 //g.drawString(messageForStarMap,   camera.getXCoord(tileX) + (camera.getTileWidth() - g.getFont().getWidth(messageForStarMap)) / 2, camera.getYCoord(tileY) + star.getImage().getHeight() / 2 + AuroraGame.tileSize);
                 EngineUtils.drawDashedCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, (int) (star.getImage().getHeight() * 0.8), Color.green, 20);
             }
+
+            if(this.equals(World.getWorld().getGalaxyMap().getMapMark())){
+                EngineUtils.drawDashedCircleCentered(g, camera.getXCoord(tileX) + camera.getTileWidth() / 2, camera.getYCoord(tileY) + camera.getTileHeight() / 2, (int) (star.getImage().getHeight() * 1.0), Color.red, 20);
+            }
         }
     }
 
@@ -228,6 +233,8 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         if (spaceObjectAtPlayerShipPosition.isEmpty()) {
             return;
         }
+
+        setMode(MODE_MOVE); // reset aim mode
         if (spaceObjectAtPlayerShipPosition.size() == 1) {
             spaceObjectAtPlayerShipPosition.get(0).interact(world);
             return;
@@ -334,7 +341,7 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
             }
 
             // firing
-            final int damage = weapon.getWeaponDesc().getDamage();
+            final int damage = weapon.getWeaponDesc().getDeviationDamage();
 
             List<GameObject> targetsAtSamePosition = getGameObjectsAtPosition(target);
 
@@ -370,15 +377,26 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     }
 
     public void doFire(World world, final GameObject targetObject, final Ship playerShip, WeaponInstance weapon, final int damage) {
+        boolean dodge = false;
+        if(target instanceof ShipItem){
+            dodge = ((ShipItem)target).isDodged();
+        }
+
+        if(dodge){
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack_dodge")));
+        }
+        else{
+            targetObject.onAttack(world, playerShip, damage);
+            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, targetObject.getName()));
+        }
+
         Effect e = weapon.getWeaponDesc().createShotEffect(world, playerShip, targetObject, world.getCamera(), 800);
         if (e != null) {
-            GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_attack"), damage, targetObject.getName()));
             e.setEndListener(new IStateChangeListener<World>() {
                 private static final long serialVersionUID = 8150717419595750398L;
 
                 @Override
                 public void stateChanged(World world) {
-                    targetObject.onAttack(world, playerShip, damage);
                     if (!targetObject.isAlive()) {
                         GameLogger.getInstance().logMessage(targetObject.getName() + " " + Localization.getText("gui", "space.destroyed"));
                         target = null;
@@ -416,10 +434,18 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
                 return;
             }
 
-            mode = MODE_SHOOT;
-            GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(true);
+            setMode(MODE_SHOOT);
         } else {
-            mode = MODE_MOVE;
+            setMode(MODE_MOVE);
+        }
+    }
+
+    private void setMode(int mode){
+        this.mode = mode;
+        if(mode == MODE_SHOOT){
+            GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(true);
+        }
+        else{
             GUI.getInstance().getNifty().getCurrentScreen().findElementByName("shoot_panel").setVisible(false);
         }
     }

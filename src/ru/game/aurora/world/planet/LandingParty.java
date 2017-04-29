@@ -120,7 +120,7 @@ public class LandingParty extends BaseGameObject {
     }
 
     public int calcDamage(World world) {
-        double baseValue = (weapon.getDamage() * (1.0 / 3 * (science + engineers) + military));
+        double baseValue = (weapon.getDeviationDamage() * (1.0 / 3 * (science + engineers) + military));
         if (world.getPlayer().getMainCountry() == EarthCountry.AMERICA) {
             baseValue *= Configuration.getDoubleProperty("player.america.damageMultiplier");
         }

@@ -1,6 +1,7 @@
 {
     "id": "laser_cannon2",
     "damage": 3,
+    "damageDeviation": 0.25,
     "name": "laser_cannon2.name",
     "desc": "laser_cannon2.desc",
     "shotImage": "blaster_shot",

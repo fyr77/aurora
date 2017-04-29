@@ -1,0 +1,9 @@
+{
+  "id": "zorsan_cruiser",
+  "defaultName": "Zorsan cruiser",
+  "imageId": "zorsan_cruiser",
+  "race": "Zorsan",
+  "maxHp": 15,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

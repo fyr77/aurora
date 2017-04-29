@@ -12,7 +12,6 @@ import ru.game.aurora.npc.NPC;
 import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
-import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.NPCShip;
@@ -57,13 +56,11 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
         }
 
         StarSystem unityStarSystem = world.getGalaxyMap().getRandomNonQuestStarsystemInRange(solarSystem.getX(), solarSystem.getY(), 70, null);
-
         if(unityStarSystem != null){
             logger.info("Unity station founded in " + unityStarSystem.getCoordsString());
 
-            NPCShip spaceStation = new NPCShip(0, 0, "rogues_beacon", world.getFactions().get(RoguesGenerator.NAME), null, "Unity station", 90);
+            NPCShip spaceStation = new NPCShip("unity_station");
             setStationPosition(unityStarSystem.getPlanets(), spaceStation, unityStarSystem.getRadius()/2);
-            spaceStation.setStationary(true);
             spaceStation.setAi(null);
 
             NPC capitan = new NPC(getUnityStationDialog(spaceStation));
@@ -75,6 +72,8 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
             unityStarSystem.setQuestLocation(true);
 
             world.getGlobalVariables().put("unity_station_system", unityStarSystem);
+            world.getGlobalVariables().put("unity_station_ship", spaceStation);
+
             this.targetSystem = unityStarSystem; // for display quest mark on galaxy map
         }
         else{
@@ -256,6 +255,16 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
 
                 if(flags.containsKey("unity_zorsan_ambassador_visited")){
                     world.getGlobalVariables().put("unity_zorsan_ambassador_visited", true);
+                }
+
+                if(world.getGlobalVariables().containsKey("metropole_burden_done")){
+                    // if Metropole Burden branch done
+                    world.getPlayer().getJournal().addQuestEntries("metropole_burden", "unity_and_metropole_burden_done");
+                    world.getPlayer().getJournal().addQuestEntries("unity", "unity_and_metropole_burden_done");
+                }
+                else{
+                    // if Unity branch done first
+                    world.getPlayer().getJournal().addQuestEntries("unity", "done_first");
                 }
             }
         });

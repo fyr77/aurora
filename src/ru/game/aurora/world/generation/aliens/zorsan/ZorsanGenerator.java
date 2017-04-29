@@ -239,13 +239,13 @@ public class ZorsanGenerator implements WorldGeneratorPart {
                 NPCShip ship;
                 switch (shipType) {
                     case SCOUT_SHIP: {
-                        ship = new NPCShip(0, 0, "zorsan_scout", race, null, "Zorsan scout", 10);
+                        ship = new NPCShip("zorsan_scout");
                         ship.setSpeed(1);
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"));
                         break;
                     }
                     case CRUISER_SHIP: {
-                        ship = new NPCShip(0, 0, "zorsan_cruiser", race, null, "Zorsan cruiser", 15);
+                        ship = new NPCShip("zorsan_cruiser");
                         ship.setSpeed(2);
                         ship.enableRepairs(5);
                         ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_small_cannon"));

@@ -84,7 +84,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
 
             @Override
             public NPCShip createShip(World world, int shipType) {
-                NPCShip ship = new NPCShip(0, 0, "earth_transport", humans, null, "Humanity ship", 8);
+                NPCShip ship = new NPCShip("earth_transport");
                 if (world.getGlobalVariables().containsKey("earth.advanced_lasers")) {
                     ship.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon2"));
                 } else {
@@ -158,7 +158,7 @@ public class HumanityGenerator implements WorldGeneratorPart {
     {
 
         public TradeShip(Faction race) {
-            super(0, 0, "earth_transport", race, null, "", 5);
+            super("earth_transport");
             setStationary(true);
         }
 

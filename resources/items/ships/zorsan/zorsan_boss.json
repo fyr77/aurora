@@ -1,0 +1,9 @@
+{
+  "id": "zorsan_boss",
+  "defaultName": "Zorsan Planet Killer",
+  "imageId": "zorsan_boss",
+  "race": "Zorsan",
+  "maxHp": 30,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "rogues_scout_damaged",
+  "defaultName": "Rogue scout",
+  "imageId": "rogues_scout_damaged",
+  "race": "Rogues",
+  "maxHp": 2,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

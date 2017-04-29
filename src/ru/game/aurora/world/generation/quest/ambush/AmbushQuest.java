@@ -119,11 +119,10 @@ public class AmbushQuest extends GameEventListener implements DialogListener {
             Dialog borkDialog = Dialog.loadFromFile("dialogs/encounters/ambush_bork.json");
             borkDialog.addListener(this);
 
-            borkShip = new NPCShip(
-                    world.getPlayer().getShip().getX() + 4
-                    , world.getPlayer().getShip().getY() + 3
-                    , "bork_ship_large"
-                    , world.getFactions().get(NeutralFaction.NAME), new NPC(borkDialog), "Bork Ship", 15);
+            borkShip = new NPCShip("bork_ship_large",  world.getPlayer().getShip().getX() + 4, world.getPlayer().getShip().getY() + 3);
+            borkShip.setFaction( world.getFactions().get(NeutralFaction.NAME));
+            borkShip.setCaptain(new NPC(borkDialog));
+
             borkShip.setSpeed(1);
             borkShip.setWeapons(
                     ResourceManager.getInstance().getWeapons().getEntity("bork_cannon")

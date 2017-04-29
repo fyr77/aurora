@@ -126,6 +126,11 @@ public abstract class GameEventListener implements Serializable {
         Collections.addAll(this.groups, g);
     }
 
+    public void removeListener(World world){
+        this.isAlive = false;
+        world.getListeners().remove(this);
+    }
+
     public enum EventGroup {
         ENCOUNTER_SPAWN,
     }

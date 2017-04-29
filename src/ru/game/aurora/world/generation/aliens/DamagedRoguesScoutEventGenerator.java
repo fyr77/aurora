@@ -116,7 +116,7 @@ public class DamagedRoguesScoutEventGenerator implements WorldGeneratorPart {
 
         final AlienRace rogueRace = (AlienRace) world.getFactions().get(RoguesGenerator.NAME);
 
-        final NPCShip damagedRogueScout = new NPCShip(0, 0, "rogues_scout_damaged", rogueRace, null, "Rogue scout", 2);
+        final NPCShip damagedRogueScout = new NPCShip("rogues_scout_damaged");
         // event with meeting a damaged rogue ship asking for help
         final Dialog initialDialog = Dialog.loadFromFile("dialogs/rogues/rogues_damaged_scout.json");
         final Dialog saveByResourceDialog = Dialog.loadFromFile("dialogs/rogues/rogues_damaged_scout_repaired.json");

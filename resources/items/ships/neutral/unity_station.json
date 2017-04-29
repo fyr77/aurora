@@ -1,0 +1,9 @@
+{
+  "id": "unity_station",
+  "defaultName": "Unity station",
+  "imageId": "rogues_beacon",
+  "race": "Rogues",
+  "maxHp": 90,
+  "dodgeChance": 1.0,
+  "isStationary": "true"
+}

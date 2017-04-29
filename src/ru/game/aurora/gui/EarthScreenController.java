@@ -201,7 +201,7 @@ public class EarthScreenController extends DefaultCloseableScreenController {
         world.getPlayer().getShip().refillCrew(world);
     }
 
-    private void updateShipyardLabels() {
+    public void updateShipyardLabels() {
         Element sciCountElement = shipYardTab.findElementByName("sci_count").findElementByName("#count");
         Element engiCountElement = shipYardTab.findElementByName("engi_count").findElementByName("#count");
         Element milCountElement = shipYardTab.findElementByName("mil_count").findElementByName("#count");
@@ -221,7 +221,7 @@ public class EarthScreenController extends DefaultCloseableScreenController {
         } else {
             EngineUtils.setTextForGUIElement(upgradeText, "");
             EngineUtils.setTextForGUIElement(shipYardTab.findElementByName("upgrade_name"), "");
-            EngineUtils.setImageForGUIElement(upgradeImage, "no_image");
+            EngineUtils.setImageForGUIElement(upgradeImage, "no_image_transparent");
         }
 
         final int freeSpace1 = world.getPlayer().getShip().getFreeSpace();

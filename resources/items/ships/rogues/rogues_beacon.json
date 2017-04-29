@@ -1,0 +1,9 @@
+{
+  "id": "rogues_beacon",
+  "defaultName": "Rogues beacon",
+  "imageId": "rogues_beacon",
+  "race": "Rogues",
+  "maxHp": 10,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

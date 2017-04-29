@@ -9,6 +9,7 @@ package ru.game.aurora.world.equip;
 
 import org.newdawn.slick.Image;
 import ru.game.aurora.application.Camera;
+import ru.game.aurora.application.CommonRandom;
 import ru.game.aurora.application.JsonConfigManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
@@ -28,7 +29,13 @@ import java.io.Serializable;
  * Weapon specifies damage and shooting range
  * Damage is calculated as [party combat strength] * [weapon damage],
  * where combat strength is 1 * number of military + 1/3 * (number of engineers and scientists)
+ *
+ * for v0.6.0:
+ * 1) damage without deviation = damage
+ * 2) damage with deviation = [rand(damage - damage*deviation; damage + damage*deviation)]
+ * this calculation method for support backward compatibility with old versions
  */
+// todo: need change to simple [damageMin; damageMax] params
 public class WeaponDesc extends ItemWithTextAndImage implements Serializable, JsonConfigManager.EntityWithId, InventoryItem {
 
     private static final long serialVersionUID = 3L;
@@ -37,14 +44,16 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
     public final String particlesAnimation;
     public final int size;
     private final int damage;
+    private final float damageDeviation;
     private final int range;
     private final int price;
     private final String shotImage;
     private final int reloadTurns;
 
-    public WeaponDesc(String id, Drawable drawable, int damage, int range, int price, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
+    public WeaponDesc(String id, Drawable drawable, int damage, float damageDeviation, int range, int price, String shotImage, String shotSound, int reloadTurns, String explosionAnimation, String particlesAnimation, int size) {
         super(id, drawable);
         this.damage = damage;
+        this.damageDeviation = damageDeviation;
         this.range = range;
         this.price = price;
         this.shotImage = shotImage;
@@ -55,8 +64,39 @@ public class WeaponDesc extends ItemWithTextAndImage implements Serializable, Js
         this.size = size;
     }
 
-    public int getDamage() {
+    public int getDamage(){
         return damage;
+    }
+
+    public int getDeviationDamage() {
+        final float min = getDamageMin();
+        final float max = getDamageMax();
+        return Math.round(CommonRandom.getRandom().nextFloat() * (max - min) + min);
+    }
+
+    public String getDamageInfo(){
+        if(Float.compare(damageDeviation, 0.0f) == 0){
+            return Integer.toString(damage);
+        }
+        else{
+            if(Float.compare(Math.round(getDamageMin()), Math.round(getDamageMax())) == 0){
+                return Integer.toString(damage);
+            }
+            else{
+                return Math.round(getDamageMin()) + "-" + Math.round(getDamageMax());
+            }
+        }
+    }
+
+    private float getDamageMin(){
+        return Math.min(damage - damage*damageDeviation, damage + damageDeviation*damageDeviation);
+    }
+    private float getDamageMax(){
+        return Math.max(damage - damage*damageDeviation, damage + damageDeviation*damageDeviation);
+    }
+
+    protected float getDamageDeviation(){
+        return damageDeviation;
     }
 
     public int getRange() {

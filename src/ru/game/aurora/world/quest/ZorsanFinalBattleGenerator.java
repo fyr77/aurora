@@ -407,7 +407,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             solarSystem.getShips().add(warship);
         }
 
-        NPCShip bigBoss = new NPCShip(0, 0, "zorsan_boss", zorsan, null, "Zorsan Planet Killer", 30);
+        NPCShip bigBoss = new NPCShip("zorsan_boss");
         currentWave.add(bigBoss);
         solarSystem.getShips().add(bigBoss);
         bigBoss.setWeapons(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon"), ResourceManager.getInstance().getWeapons().getEntity("zorsan_boss_cannon"));
@@ -446,7 +446,9 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
             weapons.add(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"));
         }
 
-        NPCShip ship = new NPCShip(0, 0, "voyager", humanity, new NPC(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_voyager.json")), "Voyager", hp);
+        NPCShip ship = new NPCShip("voyager");
+        ship.setCaptain(new NPC(Dialog.loadFromFile("dialogs/zorsan/final_battle/zorsan_battle_voyager.json")));
+        ship.setHp(hp);
         ship.setSpeed(2);
         ship.setPos(earth.getX() + CommonRandom.getRandom().nextInt(8) - 2, earth.getY() + CommonRandom.getRandom().nextInt(6) - 3);
         ship.enableRepairs(4);
@@ -575,7 +577,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
 
         public ZorsanTroopTransport(int x, int y, Positionable target) {
-            super(x, y, "zorsan_transport", zorsan, null, "Zorsan transport", 25);
+            super("zorsan_transport", x, y);
             setSpeed(1);
             setAi(new LandAI(target));
             setLoot(zorsan.getDefaultLootTable());

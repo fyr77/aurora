@@ -6,9 +6,13 @@
  */
 package ru.game.aurora.player.earth;
 
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.gui.EarthScreenController;
+import ru.game.aurora.gui.GUI;
 import ru.game.aurora.player.earth.EarthUpgrade.Type;
+import ru.game.aurora.player.earth.upgrades.ShipSpaceUpgrade;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.player.engineering.upgrades.*;
 import ru.game.aurora.world.World;
@@ -102,6 +106,17 @@ public class EarthState implements Serializable
                 break;
             }
             upgrade.unlock(world);
+
+            // need update data in Shipyard tab
+            if(type == Type.SHIP){
+                EarthScreenController shipyardTab = (EarthScreenController) GUI.getInstance().getNifty().findScreenController(EarthScreenController.class.getCanonicalName());
+                if(shipyardTab != null){
+                    shipyardTab.updateShipyardLabels();
+                }
+                else{
+                    LoggerFactory.getLogger(ShipSpaceUpgrade.class).error("Shipyard tab controller not be found");
+                }
+            }
         }
         progress.put(type, newValue);
         undistributedProgress -= amount;

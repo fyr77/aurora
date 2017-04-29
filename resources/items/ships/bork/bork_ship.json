@@ -1,0 +1,9 @@
+{
+  "id": "bork_ship",
+  "defaultName": "Bork ship",
+  "imageId": "bork_ship",
+  "race": "Bork",
+  "maxHp": 5,
+  "dodgeChance": 5.0,
+  "isStationary": "false"
+}

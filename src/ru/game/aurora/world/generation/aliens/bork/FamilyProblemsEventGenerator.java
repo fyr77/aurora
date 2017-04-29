@@ -60,7 +60,7 @@ public class FamilyProblemsEventGenerator extends GameEventListener implements W
         smartBrotherShip.setPos(-1, 2);
         stupidBrotherShip = ((AlienRace) world.getFactions().get(BorkGenerator.NAME)).getDefaultFactory().createShip(world, 0);
         stupidBrotherShip.setPos(-1, 4);
-        fatherShip = new BorkFatherShip(1, 3, "bork_ship_large", "Fathers ship", 20);
+        fatherShip = new BorkFatherShip("bork_ship_large", 1, 3, "Fathers ship", 20);
         fatherShip.setStationary(true);
         ss.getShips().add(smartBrotherShip);
         ss.getShips().add(stupidBrotherShip);
@@ -98,8 +98,8 @@ public class FamilyProblemsEventGenerator extends GameEventListener implements W
 
         private boolean communicated = false;
 
-        public BorkFatherShip(int x, int y, String sprite, String name, int hp) {
-            super(x, y, sprite, null, null, name, hp);
+        public BorkFatherShip(String shipId, int x, int y, String name, int maxHP) {
+            super(shipId, x, y, name, maxHP);
             Dialog d = Dialog.loadFromFile("dialogs/encounters/family_problems_ship.json");
             d.addListener(this);
             setCaptain(new NPC(d));
