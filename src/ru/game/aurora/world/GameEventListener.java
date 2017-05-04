@@ -75,6 +75,8 @@ public abstract class GameEventListener implements Serializable {
         return false;
     }
 
+    public boolean onMoved(World world, Movable obj) { return false; }
+
     // should be called after hp is reduced, so in case target was killed its isAlive() should return false here
     public boolean onGameObjectAttacked(World world, GameObject attacker, GameObject target, int damage) {return false;}
 

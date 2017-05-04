@@ -53,16 +53,6 @@
 
                     <!-- tabs -->
                     <control id="ship_tabs" name="tabGroup" buttonWidth="30%" buttonHeight="30px" height="650px">
-                        <control id="crew" name="tab" caption="${gui.ship.crew.title}" childLayout="center">
-                            <control id="officers" name="listBox" vertical="optional" horizontal="off"
-                                     selection="Single"
-                                     displayItems="4"
-                                     viewConverterClass="ru.game.aurora.gui.CrewMemberViewConverter">
-                                <control name="officer-line"
-                                         controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
-                            </control>
-                        </control>
-
                         <control id="inventory" name="tab" caption="${gui.ship.inventory.title}" childLayout="center">
                             <panel childLayout="vertical" width="100%" height="100%">
                                 <panel height="80px" width="100%" childLayout="horizontal">
@@ -130,4 +120,40 @@
         </layer>
     </screen>
 
+    <screen id="crew_screen" controller="ru.game.aurora.gui.CrewScreenController">
+        <layer childLayout="absolute">
+            <control id="crew_window" name="window" hideOnClose="true" title="${gui.ship.crew.title}" width="80%"
+                     height="80%" x="10%" y="10px">
+                <panel childLayout="vertical">
+
+                    <!-- tabs -->
+                        <control id="crew" name="tab" caption="${gui.ship.crew.title}" childLayout="center">
+                            <control id="officers" name="listBox" vertical="optional" horizontal="off"
+                                     selection="Single"
+                                     displayItems="4"
+                                     viewConverterClass="ru.game.aurora.gui.CrewMemberViewConverter">
+                                <control name="officer-line" controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController"/>
+                            </control>
+                        </control>
+
+                    <!-- close button panel -->
+                    <panel height="10px"/>
+                    <panel childLayout="horizontal" height="50px">
+                        <panel width="80%"/>
+                        <control id="close_button" name="button" label="${gui.close}" width="150px" height="45px">
+                            <interact onClick="closeScreen()"/>
+                        </control>
+                    </panel>
+                </panel>
+            </control>
+        </layer>
+
+        <layer childLayout="absolute">
+            <panel id="hint-panel" width="200" visible="false" childLayout="vertical" padding="5px,25px,5px,25px"
+                   backgroundColor="#aa7f4dff">
+                <text id="content" style="button-font" width="90%" wrap="true" text="empty" align="center"
+                      valign="center"/>
+            </panel>
+        </layer>
+    </screen>
 </nifty>

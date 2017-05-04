@@ -71,7 +71,12 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
      * False if this is some kind of quest location that can not be actually landed on (like alien homeworld)
      */
     public boolean canBeLanded() {
-        return true;
+        if(World.getWorld().getPlayer().getShip().isShipLandingBlocked()){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     public PlanetCategory getCategory() {
@@ -156,10 +161,10 @@ public abstract class BasePlanet extends BaseGameObject implements Room, GalaxyM
             GameLogger.getInstance().logMessage(Localization.getText("gui", "space.can_not_land"));
             return false;
         }
+
         GameLogger.getInstance().logMessage(Localization.getText("gui", "landing"));
         world.setCurrentRoom(this);
         enter(world);
-        
         return true;
     }
 

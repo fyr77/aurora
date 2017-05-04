@@ -7,6 +7,7 @@ package ru.game.aurora.player;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.npc.AlienRace;
@@ -70,6 +71,16 @@ public class Player implements Serializable {
 
         engineeringState.addNewEngineeringProject(new MedpacksCraft(3));  //добавим проекты для крафта аптечек и баллонов
         engineeringState.addNewEngineeringProject(new CylindersCraft(3));
+    }
+
+    public void setSetCustomShip(World world, Ship ship) {
+        if(ship == null){
+            LoggerFactory.getLogger(Player.class).error("Try to set null custom ship");
+        }
+        else{
+            this.ship = ship;
+            world.getCamera().setTarget(this.ship);
+        }
     }
 
     public Ship getShip() {

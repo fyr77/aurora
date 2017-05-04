@@ -466,6 +466,13 @@ public class World implements Serializable, ResolutionChangeListener {
         }
     }
 
+    public void onMoved(Movable obj){
+        List<GameEventListener> newList = new ArrayList<>(listeners);
+        for(GameEventListener l: newList){
+            l.onMoved(this, obj);
+        }
+    }
+
     public void addListener(GameEventListener listener) {
         listeners.add(listener);
     }

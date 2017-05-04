@@ -17,6 +17,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
+import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.GameLogger;
 import ru.game.aurora.application.InputBinding;
 import ru.game.aurora.application.Localization;
@@ -67,6 +68,7 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         topPanelController = myScreen.findControl("top_panel", TopPanelController.class);
         updateStats();
         updateWeapons();
+        updateBlockedElements();
 
         logList = myScreen.findNiftyControl("log_list", ListBox.class);
         if (logList != null) {
@@ -80,29 +82,91 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         }
     }
 
+    private void updateBlockedElements() {
+        final Ship ship = World.getWorld().getPlayer().getShip();
+
+        if(myScreen.getScreenId().equals("star_system_gui")){
+            // 'galaxy_map_gui' not have landing party button
+            updateGuiElementBlock(ship.isShipLandingBlocked(), "landing_party_equip_button");
+        }
+
+        updateGuiElementBlock(ship.isShipEngineeringBlock(), "engineering_button");
+        updateGuiElementBlock(ship.isShipResearchBlocked(), "research_button");
+        updateGuiElementBlock(ship.isShipInventoryBlocked(), "ship_button");
+        updateGuiElementBlock(ship.isShipCrewMembersBlocked(), "crew_button");
+    }
+
+    public void updateGuiElementBlock(boolean value, String guiElement) {
+        final Element element = myScreen.findElementByName(guiElement);
+        if(element == null){
+            LoggerFactory.getLogger(GalaxyMapController.class).error("Try to update null gui element '{}'", guiElement);
+            return;
+        }
+
+        if(value) {
+            element.disable();
+        }
+        else{
+            element.enable();
+        }
+    }
+
     @Override
     public void onEndScreen() {
 
     }
 
-    public void openStarMap()  { openScreen("star_map_screen"); }
-
-    public void openResearchScreen() { openScreen("research_screen"); }
-
-    public void openEngineeringScreen() {
-        openScreen("engineering_screen");
-    }
-
-    public void openShipScreen() {
-        openScreen("ship_screen");
+    public void openStarMap()  {
+        openScreen("star_map_screen");
     }
 
     public void openJournal() {
         openScreen("journal_screen");
     }
 
+    public void openResearchScreen() {
+        if(World.getWorld().getPlayer().getShip().isShipResearchBlocked()){
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "space.research_menu_blocked"));
+        }
+        else{
+            openScreen("research_screen");
+        }
+    }
+
+    public void openEngineeringScreen() {
+        if(World.getWorld().getPlayer().getShip().isShipEngineeringBlock()){
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "space.engineering_menu_blocked"));
+        }
+        else{
+            openScreen("engineering_screen");
+        }
+    }
+
+    public void openShipScreen() {
+        if(World.getWorld().getPlayer().getShip().isShipInventoryBlocked()){
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "space.inventory_menu_blocked"));
+        }
+        else{
+            openScreen("ship_screen");
+        }
+    }
+
+    public void openCrewScreen(){
+        if(World.getWorld().getPlayer().getShip().isShipCrewMembersBlocked()){
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "space.crew_menu_blocked"));
+        }
+        else{
+            openScreen("crew_screen");
+        }
+    }
+
     public void openLandingPartyScreen() {
-        openScreen("landing_party_equip_screen");
+        if(World.getWorld().getPlayer().getShip().isShipLandingBlocked()){
+            GameLogger.getInstance().logMessage(Localization.getText("gui", "space.landing_party_menu_blocked"));
+        }
+        else{
+            openScreen("landing_party_equip_screen");
+        }
     }
 
     private void openScreen(String screenId){
@@ -123,7 +187,6 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
     }
 
     public void updateStats() {
-
         final Ship ship = world.getPlayer().getShip();
         topPanelController.setProgress(String.format(Localization.getText("gui", "space.hull"), ship.getHull(), ship.getMaxHull()), ship.getHull() / (float) ship.getMaxHull());
         topPanelController.setCrewStats(ship.getScientists(), ship.getEngineers(), ship.getMilitary());
@@ -365,6 +428,10 @@ public class GalaxyMapController extends GameEventListener implements ScreenCont
         }
         else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.INVENTORY))){
             openShipScreen();
+            return;
+        }
+        else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.CREW))){
+            openCrewScreen();
             return;
         }
         else if(input.isKeyPressed(InputBinding.keyBinding.get(InputBinding.Action.JOURNAL))){

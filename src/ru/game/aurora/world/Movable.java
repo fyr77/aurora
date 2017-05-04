@@ -130,6 +130,7 @@ public class Movable extends BasePositionable implements IMovable, Updatable {
 
     private void setMovementEnd() {
         isMovingEndAtPreviousUpdate = true;
+        World.getWorld().onMoved(this);
     }
 
     public boolean isMovingEndAtPreviousUpdate(){

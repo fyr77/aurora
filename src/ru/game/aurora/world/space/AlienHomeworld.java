@@ -45,6 +45,7 @@ public class AlienHomeworld extends BasePlanet {
     private transient Image planetImage = null;
 
     private String customScanDescription;
+    private String customPlanetNameKey;
 
     public AlienHomeworld(String spriteName, AlienRace ownerRace, Dialog customDialog, int size, int y, StarSystem owner, PlanetAtmosphere atmosphere, int x, PlanetCategory cat) {
         super(x, y, size, owner, atmosphere, cat);
@@ -126,6 +127,10 @@ public class AlienHomeworld extends BasePlanet {
         this.customScanDescription = key;
     }
 
+    public void setCustomPlanetNameKey(String key){
+        this.customPlanetNameKey = key;
+    }
+
     public void setDialog(Dialog dialog) {
         this.dialog = dialog;
     }
@@ -141,7 +146,12 @@ public class AlienHomeworld extends BasePlanet {
 
     @Override
     public String getName() {
-        return getFaction().getName() + " homeworld";
+        if(customPlanetNameKey == null){
+            return getFaction().getName() + " homeworld";
+        }
+        else {
+            return Localization.getText("races", customPlanetNameKey);
+        }
     }
     
     @Override

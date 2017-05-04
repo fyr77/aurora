@@ -10,10 +10,8 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.Input;
 import ru.game.aurora.application.InputBinding;
-import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.player.engineering.ShipUpgrade;
 import ru.game.aurora.util.EngineUtils;
-import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.planet.InventoryItem;
 
@@ -21,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShipScreenController extends DefaultCloseableScreenController {
-    private ListBox<CrewMember> crewMemberListBox;
 
     private ListBox<ShipUpgrade> modulesListBox;
 
@@ -43,7 +40,6 @@ public class ShipScreenController extends DefaultCloseableScreenController {
 
     @Override
     public void bind(Nifty nifty, Screen screen) {
-        crewMemberListBox = screen.findNiftyControl("crew", ListBox.class);
         modulesListBox = screen.findNiftyControl("modules", ListBox.class);
         inventory = screen.findNiftyControl("items", ListBox.class);
         myScreen = screen;
@@ -51,33 +47,6 @@ public class ShipScreenController extends DefaultCloseableScreenController {
 
         credCountElement = myScreen.findElementByName("cred_count").findElementByName("#count");
         resCountElement = myScreen.findElementByName("res_count").findElementByName("#count");
-
-    }
-
-    public void refresh() {
-        if (crewMemberListBox == null) {
-            //rare case - refresh() is called before this screen was opened for first time
-            return;
-        }
-        crewMemberListBox.clear();
-        List<CrewMember> l = new ArrayList<>();
-        final Ship ship = world.getPlayer().getShip();
-        l.addAll(ship.getCrewMembers().values());
-        crewMemberListBox.addAllItems(l);
-
-        modulesListBox.clear();
-        modulesListBox.addAllItems(ship.getUpgrades());
-
-        inventory.clear();
-        List<Multiset.Entry<InventoryItem>> ll = new ArrayList<>();
-        for (Multiset.Entry<InventoryItem> e : world.getPlayer().getInventory().entrySet()) {
-            if (e.getElement().isVisibleInInventory()) {
-                ll.add(e);
-            }
-        }
-
-        inventory.addAllItems(ll);
-
     }
 
     @Override
@@ -91,20 +60,24 @@ public class ShipScreenController extends DefaultCloseableScreenController {
         EngineUtils.setTextForGUIElement(credCountElement, String.valueOf(world.getPlayer().getCredits()));
     }
 
+    private void refresh() {
+        modulesListBox.clear();
+        modulesListBox.addAllItems(World.getWorld().getPlayer().getShip().getUpgrades());
+
+        inventory.clear();
+        List<Multiset.Entry<InventoryItem>> ll = new ArrayList<>();
+        for (Multiset.Entry<InventoryItem> e : world.getPlayer().getInventory().entrySet()) {
+            if (e.getElement().isVisibleInInventory()) {
+                ll.add(e);
+            }
+        }
+
+        inventory.addAllItems(ll);
+    }
+
     @Override
     public void onEndScreen() {
         world.setPaused(false);
-    }
-
-    public void callOfficerPressed() {
-        crewMemberListBox.getFocusItem().interact(world);
-        myScreen.layoutLayers();
-        crewMemberListBox.refresh();
-    }
-
-    @NiftyEventSubscriber(pattern = ".*callButton")
-    public void onCallButtonClicked(String id, ButtonClickedEvent event) {
-        crewMemberListBox.setFocusItem((CrewMember) event.getButton().getElement().getParent().getUserData());
     }
 
     @NiftyEventSubscriber(pattern = ".*use_button")

@@ -164,6 +164,7 @@ public class GUI {
         nifty.registerScreenController(new JournalScreenController(world));
         nifty.registerScreenController(new PlanetScanController(world));
         nifty.registerScreenController(new ShipScreenController(world));
+        nifty.registerScreenController(new CrewScreenController());
         nifty.registerScreenController(new SurfaceMapController(world));
         nifty.registerScreenController(new StarMapController(world));
 

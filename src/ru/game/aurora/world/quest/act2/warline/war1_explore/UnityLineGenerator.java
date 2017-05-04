@@ -81,7 +81,7 @@ class UnityLineGenerator implements WorldGeneratorPart {
                 }
 
                 // set default dialogue
-                setDefaultUnityDialog(world);
+                disposeQuestLine(world);
             }
         });
 
@@ -89,7 +89,7 @@ class UnityLineGenerator implements WorldGeneratorPart {
         logger.info("Unity line successful generated");
     }
 
-    public static void setDefaultUnityDialog(World world) {
+    public static void disposeQuestLine(World world) {
         NPCShip spaceStation = (NPCShip)world.getGlobalVariables().get("unity_station_ship");
         spaceStation.setCaptain(new NPC(Dialog.loadFromFile("dialogs/act2/quest_union/unity_station_docking_visited.json")));
         logger.info("Unity station set default dialogue");
@@ -105,7 +105,7 @@ class UnityLineGenerator implements WorldGeneratorPart {
                 world.getPlayer().getJournal().addQuestEntries("war1_explore", "success_uinty");
                 world.addDays(3);
 
-                RebelsLineGenerator.despawnRebelsStation(world);
+                RebelsLineGenerator.disposeQuestLine(world);
             }
         });
     }

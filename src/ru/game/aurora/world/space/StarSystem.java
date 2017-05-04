@@ -211,12 +211,16 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         // if user ship is at planet, show additional gui panel
         final Element scanLandPanel = GUI.getInstance().getNifty().getScreen("star_system_gui").findElementByName("interactPanel");
         if (scanLandPanel != null) {
-            boolean landPanelVisible = scanLandPanel.isVisible();
-            if (landPanelVisible && spaceObjectAtPlayerShipPosition.isEmpty()) {
+            final boolean isPanelVisible = scanLandPanel.isVisible();
+
+            if (isPanelVisible && spaceObjectAtPlayerShipPosition.isEmpty()) {
                 scanLandPanel.setVisible(false);
-            } else if (!landPanelVisible && !spaceObjectAtPlayerShipPosition.isEmpty()) {
-                Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
-                leftButton.setText(spaceObjectAtPlayerShipPosition.get(0).getInteractMessage());
+            }
+            else if (!isPanelVisible && !spaceObjectAtPlayerShipPosition.isEmpty()) {
+                final Button leftButton = scanLandPanel.findNiftyControl("left_button", Button.class);
+                final String interactMessage = spaceObjectAtPlayerShipPosition.get(0).getInteractMessage();
+
+                leftButton.setText(interactMessage);
                 scanLandPanel.setVisible(true);
             }
         }

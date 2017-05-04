@@ -93,8 +93,8 @@ class RebelsLineGenerator implements WorldGeneratorPart {
 
         StarSystem targetSystem = world.getGalaxyMap().getRandomNonQuestStarsystemInRange(alienRace.getHomeworld().getX(), alienRace.getHomeworld().getY(), alienRace.getTravelDistance(), new StarSystemListFilter() {
             @Override
-            public boolean filter(StarSystem ss) {
-                if(ss.getStar().color.equals(Color.red)){
+            public boolean filter(StarSystem starSystem) {
+                if(starSystem.getStar().color.equals(Color.red)){
                     return true;
                 }
                 else{
@@ -104,6 +104,7 @@ class RebelsLineGenerator implements WorldGeneratorPart {
         });
 
         if(targetSystem == null){
+            // todo: test generation
             targetSystem = WorldGenerator.generateRandomStarSystem(new Star(1, Color.red), world, 10, 10, 3);
             world.getGalaxyMap().addObjectAtDistance(targetSystem, alienRace.getHomeworld(), alienRace.getTravelDistance() - CommonRandom.getRandom().nextInt(alienRace.getTravelDistance() / 2));
         }
@@ -143,13 +144,13 @@ class RebelsLineGenerator implements WorldGeneratorPart {
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 // remove rebels stations after left star system
-                despawnRebelsStation(world);
+                disposeQuestLine(world);
 
                 if(returnCode == 1){ // accept rebels help
                     world.getGlobalVariables().put("war1_explore.intelligence_get", true);
                     world.getGlobalVariables().put("war1_explore.rebels_help", true);
 
-                    UnityLineGenerator.setDefaultUnityDialog(world); // todo: check future dialogues collisions
+                    UnityLineGenerator.disposeQuestLine(world); // todo: check future dialogues collisions
                 }
                 else if(returnCode == 2) { // reject
                     world.getGlobalVariables().put("war1_explore.rebels_help_reject", true);
@@ -162,7 +163,7 @@ class RebelsLineGenerator implements WorldGeneratorPart {
         return docking;
     }
 
-    public static void despawnRebelsStation(final World world){
+    public static void disposeQuestLine(final World world){
         if(world.getGlobalVariables().containsKey("war1_explore_rebels_invite_accepted")){
             StarSystem starSystem = (StarSystem)world.getGlobalVariables().get("war1_explore.rebels_star_system");
             NPCShip rebelsStation = (NPCShip) world.getGlobalVariables().get("war1_explore.rebels_station");

@@ -572,6 +572,8 @@ public class AuroraGame extends NiftyOverlayGame {
             }
 
             lastFrameTime = gameContainer.getTime();
+
+            gameContainer.getDefaultFont().drawString(10.0F, 22.0F, Version.VERSION); // show current game version
         } catch (Exception ex) {
             logger.error("Exception in renderGame()", ex);
             throw ex;

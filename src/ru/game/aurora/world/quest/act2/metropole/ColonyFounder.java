@@ -2,7 +2,9 @@ package ru.game.aurora.world.quest.act2.metropole;
 
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.planet.Planet;
 import ru.game.aurora.world.planet.PlanetAtmosphere;
@@ -109,9 +111,10 @@ class ColonyFounder {
     }
 
     private static AlienHomeworld buildColonyPlanet(World world, BasePlanet sourcePlanet){
+        Faction faction = world.getFactions().get(HumanityGenerator.NAME);
         AlienHomeworld colony = new AlienHomeworld(
                 null,
-                ((AlienRace) world.getFactions().get("Humanity")),
+                ((AlienRace)faction),
                 null,
                 sourcePlanet.getSize(),
                 sourcePlanet.getY(),
@@ -120,7 +123,9 @@ class ColonyFounder {
                 sourcePlanet.getX(),
                 PlanetCategory.PLANET_ROCK);
 
+        colony.setFaction(faction);
         colony.setCustomScanDescription("Humans.colony.description");
+        colony.setCustomPlanetNameKey("Humans.colony.title");
 
         return colony;
     }

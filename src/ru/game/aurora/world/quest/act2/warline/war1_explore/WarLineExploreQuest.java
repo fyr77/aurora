@@ -1,18 +1,30 @@
 package ru.game.aurora.world.quest.act2.warline.war1_explore;
 
 import org.slf4j.LoggerFactory;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.CrewMember;
+import ru.game.aurora.npc.Faction;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.KliskGenerator;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
+import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.StarSystem;
+import ru.game.aurora.world.space.StarSystemListFilter;
 import ru.game.aurora.world.space.earth.Earth;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by di Grigio on 01.04.2017.
@@ -66,6 +78,88 @@ public class WarLineExploreQuest extends GameEventListener implements WorldGener
         logger.info("Player select the zorsan scout way");
         world.getPlayer().getJournal().addQuestEntries("war1_explore", "chose_ship");
         world.getGlobalVariables().put("war1_explore.chose_ship", true);
+
+        resetAlternativeLines(world);
+        generateTargetStarSystems(world);
+        switchAurora(world);
+    }
+
+    private static void resetAlternativeLines(final World world) {
+        UnityLineGenerator.disposeQuestLine(world);
+        RebelsLineGenerator.disposeQuestLine(world);
+    }
+
+    private static void generateTargetStarSystems(final World world) {
+        final AlienRace alienRace = (AlienRace) world.getFactions().get(ZorsanGenerator.NAME);
+        final Set<StarSystem> systems = new HashSet<>();
+
+        // find 3 star systems near zorsan homeworld
+        for(int i = 0; i < 3; ++i){
+            StarSystem targetSystem = world.getGalaxyMap().getRandomNonQuestStarsystemInRange(
+                    alienRace.getHomeworld().getX(),
+                    alienRace.getHomeworld().getY(),
+                    alienRace.getTravelDistance(),
+
+                    new StarSystemListFilter() {
+                        @Override
+                        public boolean filter(StarSystem starSystem) {
+                            if(systems.contains(starSystem)){
+                                // need 3 unique star systems
+                                return false;
+                            }
+                            else{
+                                return true;
+                            }
+                        }
+                    });
+
+            if(targetSystem != null){
+                systems.add(targetSystem);
+            }
+            else{
+                // todo: generate starsystem
+                logger.error("Fail to get random star system near zorsan homeworld");
+            }
+        }
+
+        for(StarSystem starSystem: systems){
+            prepareStarSystem(starSystem);
+        }
+    }
+
+    private static void prepareStarSystem(final StarSystem starSystem) {
+        starSystem.setQuestLocation(true);
+    }
+
+    private static void switchAurora(final World world) {
+        final Ship aurora = world.getPlayer().getShip();
+        world.getGlobalVariables().put("war1_explore_aurora_backup", aurora);
+
+        final Ship zorsanScout = new Ship(world, "zorsan_scout", aurora.getX(), aurora.getY());
+        zorsanScout.setBaseCrew(5, 5, 0);
+
+        // move aurora crew memebers to zorsan scout
+        for(CrewMember member: aurora.getCrewMembers().values()){
+            zorsanScout.addCrewMember(world, member);
+        }
+
+        // Set specific faction: all aliens (no zorsans) is hostile to zorsan scouts
+        final Faction scoutFaction = new ZorsanScoutFaction();
+        world.getReputation().setHostile(ZorsanScoutFaction.NAME, KliskGenerator.NAME);
+        world.getReputation().setHostile(ZorsanScoutFaction.NAME, RoguesGenerator.NAME);
+        world.getReputation().setHostile(ZorsanScoutFaction.NAME, BorkGenerator.NAME);
+
+        zorsanScout.setFaction(scoutFaction);
+
+        zorsanScout.setLandingPartyBlock(true);
+        zorsanScout.setResearchBlock(true);
+        zorsanScout.setEngineeringBlock(true);
+        zorsanScout.setInventoryBlock(true);
+
+        zorsanScout.getWeapons().add(new WeaponInstance(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon")));
+
+        // set zorsan scout ship to player
+        world.getPlayer().setSetCustomShip(world, zorsanScout);
     }
 
     private void choseAlternative(final World world) {
