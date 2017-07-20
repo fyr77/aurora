@@ -21,6 +21,7 @@ import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.quest.asteroidbelt.AsteroidBeltQuestGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
+import ru.game.aurora.world.quest.act2.warline.war1_explore.WarLineExploreQuest;
 import ru.game.aurora.world.space.ships.ShipItem;
 
 import java.io.IOException;
@@ -338,7 +339,6 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
         target = availableTargets.get(targetIdx);
 
         if (shoot) {
-
             if (weapon.getReloadTimeLeft() > 0) {
                 GameLogger.getInstance().logMessage(Localization.getText("gui", "space.weapon_not_reloaded"));
                 return;
@@ -372,12 +372,30 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     }
 
     private void checkIsFriendlyAndFire(World world, final GameObject targetObject, final Ship playerShip, WeaponInstance weapon, final int damage) {
+        // special weapon attack effect for id='scanner' (quest: Act 2, War Line, Explore)
+        if(weapon.getWeaponDesc().getId().equals("scanner")){
+            doScan(world, targetObject);
+            return;
+        }
+
         if ((targetObject instanceof NPCShip && ((NPCShip) targetObject).isHostile) || (targetObject.getFaction() == null || targetObject.getFaction().isHostileTo(world, world.getPlayer().getShip()))) {
             doFire(world, targetObject, playerShip, weapon, damage);
             return;
         }
+
         // show confirmation popup
         FriendlyAttackConfirmationController.open(world, targetObject, weapon, damage);
+    }
+
+    private void doScan(World world, GameObject targetObject) {
+        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_scan"), targetObject.getName()));
+
+        if(targetObject instanceof NPCShip){
+            NPCShip ship = (NPCShip)targetObject;
+            if(ship.getDesc().getId().equals("quest_zorsan_station")){
+                WarLineExploreQuest.scanStation(world);
+            }
+        }
     }
 
     public void doFire(World world, final GameObject targetObject, final Ship playerShip, WeaponInstance weapon, final int damage) {

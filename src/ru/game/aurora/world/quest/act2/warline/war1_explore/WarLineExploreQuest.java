@@ -16,15 +16,11 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
-import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.space.StarSystem;
-import ru.game.aurora.world.space.StarSystemListFilter;
 import ru.game.aurora.world.space.earth.Earth;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by di Grigio on 01.04.2017.
@@ -80,7 +76,6 @@ public class WarLineExploreQuest extends GameEventListener implements WorldGener
         world.getGlobalVariables().put("war1_explore.chose_ship", true);
 
         resetAlternativeLines(world);
-        generateTargetStarSystems(world);
         switchAurora(world);
     }
 
@@ -89,48 +84,7 @@ public class WarLineExploreQuest extends GameEventListener implements WorldGener
         RebelsLineGenerator.disposeQuestLine(world);
     }
 
-    private static void generateTargetStarSystems(final World world) {
-        final AlienRace alienRace = (AlienRace) world.getFactions().get(ZorsanGenerator.NAME);
-        final Set<StarSystem> systems = new HashSet<>();
-
-        // find 3 star systems near zorsan homeworld
-        for(int i = 0; i < 3; ++i){
-            StarSystem targetSystem = world.getGalaxyMap().getRandomNonQuestStarsystemInRange(
-                    alienRace.getHomeworld().getX(),
-                    alienRace.getHomeworld().getY(),
-                    alienRace.getTravelDistance(),
-
-                    new StarSystemListFilter() {
-                        @Override
-                        public boolean filter(StarSystem starSystem) {
-                            if(systems.contains(starSystem)){
-                                // need 3 unique star systems
-                                return false;
-                            }
-                            else{
-                                return true;
-                            }
-                        }
-                    });
-
-            if(targetSystem != null){
-                systems.add(targetSystem);
-            }
-            else{
-                // todo: generate starsystem
-                logger.error("Fail to get random star system near zorsan homeworld");
-            }
-        }
-
-        for(StarSystem starSystem: systems){
-            prepareStarSystem(starSystem);
-        }
-    }
-
-    private static void prepareStarSystem(final StarSystem starSystem) {
-        starSystem.setQuestLocation(true);
-    }
-
+    // change Aurora to Zorsan scout ship
     private static void switchAurora(final World world) {
         final Ship aurora = world.getPlayer().getShip();
         world.getGlobalVariables().put("war1_explore_aurora_backup", aurora);
@@ -157,12 +111,32 @@ public class WarLineExploreQuest extends GameEventListener implements WorldGener
         zorsanScout.setInventoryBlock(true);
 
         zorsanScout.getWeapons().add(new WeaponInstance(ResourceManager.getInstance().getWeapons().getEntity("zorsan_cannon")));
+        zorsanScout.getWeapons().add(new WeaponInstance(ResourceManager.getInstance().getWeapons().getEntity("scanner")));
 
         // set zorsan scout ship to player
         world.getPlayer().setSetCustomShip(world, zorsanScout);
+        world.getGlobalVariables().put("war1_explore_stations_scanned", 0);
+
+        // generate encounter star systems
+        final QuestStarSystemEncounter encounterListener = new QuestStarSystemEncounter();
+        encounterListener.updateWorld(world);
+
+        // start encounter if player enter to the generated quest zorsan star systems
+        world.addListener(encounterListener);
     }
 
-    private void choseAlternative(final World world) {
+    public static void scanStation(World world) {
+        world.addListener(new GameEventListener() {
+            private static final long serialVersionUID = 5301829116104880081L;
+            @Override
+            public boolean onPlayerLeftStarSystem(World world, StarSystem ss) {
+                this.removeListener(world);
+                return false;
+            }
+        });
+    }
+
+    private static void choseAlternative(final World world) {
         logger.info("Player select the alternative way");
         world.getPlayer().getJournal().addQuestEntries("war1_explore", "chose_alternative");
 
@@ -173,28 +147,19 @@ public class WarLineExploreQuest extends GameEventListener implements WorldGener
         }
     }
 
-    {
-        /*
-            world.getPlayer().getJournal().addQuestEntries("war1_explore", "system1_success");
-            world.getPlayer().getJournal().addQuestEntries("war1_explore", "system1_failed");
-            world.getPlayer().getJournal().addQuestEntries("war1_explore", "system2_success");
-            world.getPlayer().getJournal().addQuestEntries("war1_explore", "system2_failed");
-            world.getPlayer().getJournal().addQuestEntries("war1_explore", "system3_success");
-            world.getPlayer().getJournal().addQuestEntries("war1_explore", "system3_failed");
-            world.getPlayer().getJournal().addQuestEntries("war1_explore", "timeout_failed");
-            world.getPlayer().getJournal().questCompleted("war1_explore");
-        */
+    /*
+    world.getPlayer().getJournal().addQuestEntries("war1_explore", "timeout_failed");
+    world.getPlayer().getJournal().questCompleted("war1_explore");
+    */
 
-        /*
-            Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_start.json");
-            Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_end_success.json");
-            Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_end_failed.json");
+    /*
+    Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_start.json");
+    Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_end_success.json");
+    Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_end_failed.json");
 
-            Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_sarah.json");
-            Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_genry.json");
-            Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_scanning_done.json");
-            Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_scientist.json");
-            Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_gordon_after_return.json");
-         */
-    }
+    Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_sarah.json");
+    Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_genry.json");
+    Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_scientist.json");
+    Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_gordon_after_return.json");
+    */
 }

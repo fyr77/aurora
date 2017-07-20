@@ -1,0 +1,20 @@
+{
+  "id": "scanner",
+  "damage": 0,
+  "damageDeviation": 0,
+  "name": "humanity_scanner.name",
+  "desc": "humanity_scanner.desc",
+  "shotImage": "missile_shot",
+  "shotSound": "missile_1",
+  "range": 5,
+  "drawable": {
+    "id": "scanner_ico",
+    "tx": -1,
+    "ty": -1
+  },
+  "reloadTurns": 1,
+  "explosionAnimation": "rocket_explosion",
+  "particlesAnimation": "rocket_particles",
+  "size": 10,
+  "customClass": "ru.game.aurora.world.equip.Scanner"
+}
