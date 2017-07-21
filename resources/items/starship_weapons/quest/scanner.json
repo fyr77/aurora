@@ -6,7 +6,7 @@
   "desc": "humanity_scanner.desc",
   "shotImage": "missile_shot",
   "shotSound": "missile_1",
-  "range": 5,
+  "range": 2,
   "drawable": {
     "id": "scanner_ico",
     "tx": -1,

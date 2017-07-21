@@ -288,7 +288,10 @@ public class NPCShip extends BaseGameObject implements IMonster, ShipItem {
                 captain.getCustomDialog().addListener(captain.getMusicListener());
             }
 
-            world.addOverlayWindow(captain.getCustomDialog());
+
+            if(captain.getCustomDialog() != null){
+                world.addOverlayWindow(captain.getCustomDialog());
+            }
             return true;
         }
 

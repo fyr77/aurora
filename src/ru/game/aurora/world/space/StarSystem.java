@@ -21,7 +21,7 @@ import ru.game.aurora.world.*;
 import ru.game.aurora.world.equip.WeaponInstance;
 import ru.game.aurora.world.generation.quest.asteroidbelt.AsteroidBeltQuestGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
-import ru.game.aurora.world.quest.act2.warline.war1_explore.WarLineExploreQuest;
+import ru.game.aurora.world.quest.act2.warline.war1_explore.QuestStarSystemEncounter;
 import ru.game.aurora.world.space.ships.ShipItem;
 
 import java.io.IOException;
@@ -388,12 +388,12 @@ public class StarSystem extends BaseSpaceRoom implements GalaxyMapObject, ITileM
     }
 
     private void doScan(World world, GameObject targetObject) {
-        GameLogger.getInstance().logMessage(String.format(Localization.getText("gui", "space.player_scan"), targetObject.getName()));
-
         if(targetObject instanceof NPCShip){
-            NPCShip ship = (NPCShip)targetObject;
-            if(ship.getDesc().getId().equals("quest_zorsan_station")){
-                WarLineExploreQuest.scanStation(world);
+            // notfy event listener
+            for(GameEventListener listener: world.getListeners()){
+                if(listener instanceof QuestStarSystemEncounter){
+                    ((QuestStarSystemEncounter)listener).scanStation(world, (NPCShip)targetObject);
+                }
             }
         }
     }

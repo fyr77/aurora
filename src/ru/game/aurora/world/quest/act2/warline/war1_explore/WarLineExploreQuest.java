@@ -125,17 +125,6 @@ public class WarLineExploreQuest extends GameEventListener implements WorldGener
         world.addListener(encounterListener);
     }
 
-    public static void scanStation(World world) {
-        world.addListener(new GameEventListener() {
-            private static final long serialVersionUID = 5301829116104880081L;
-            @Override
-            public boolean onPlayerLeftStarSystem(World world, StarSystem ss) {
-                this.removeListener(world);
-                return false;
-            }
-        });
-    }
-
     private static void choseAlternative(final World world) {
         logger.info("Player select the alternative way");
         world.getPlayer().getJournal().addQuestEntries("war1_explore", "chose_alternative");
