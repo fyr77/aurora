@@ -14,6 +14,7 @@ import ru.game.aurora.world.GameEventListener;
 import ru.game.aurora.world.GameObject;
 import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
+import ru.game.aurora.world.generation.WorldGenerator;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.quest.Journal;
@@ -52,7 +53,7 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
         final Set<StarSystem> systems = new HashSet<>();
 
         // find 3 star systems near zorsan homeworld
-        for(int i = 0; i < 3; ++i){
+        for(int i = 0; i < Configuration.getIntProperty("war1_explore.star_systems_to_explore"); ++i){
             StarSystem targetSystem = world.getGalaxyMap().getRandomNonQuestStarsystemInRange(
                     alienRace.getHomeworld().getX(),
                     alienRace.getHomeworld().getY(),
@@ -65,19 +66,21 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
                                 // need 3 unique star systems
                                 return false;
                             }
-                            else{
-                                return true;
+
+                            if(starSystem.isQuestLocation()){
+                                return false;
                             }
+
+                            return true;
                         }
                     });
 
-            if(targetSystem != null){
-                systems.add(targetSystem);
+            if(targetSystem == null){
+                targetSystem = generateStarSystem(world, alienRace);
+                logger.error("Fail to get random star system near zorsan homeworld, generate new star system at {}", targetSystem.getCoordsString());
             }
-            else{
-                // todo: generate starsystem
-                logger.error("Fail to get random star system near zorsan homeworld");
-            }
+
+            systems.add(targetSystem);
         }
 
         for(StarSystem starSystem: systems){
@@ -85,6 +88,12 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
         }
 
         return systems;
+    }
+
+    private StarSystem generateStarSystem(final World world, final AlienRace alienRace) {
+        final StarSystem starSystem = WorldGenerator.generateRandomStarSystem(world, 0, 0);
+        world.getGalaxyMap().addObjectAtDistance(starSystem, alienRace.getHomeworld(), alienRace.getTravelDistance());
+        return starSystem;
     }
 
     private void prepareStarSystem(final StarSystem starSystem) {
@@ -100,8 +109,8 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
         this.scanStatus.put(starSystem, stationsScanStatus);
 
         for(int i = 0; i < Configuration.getIntProperty("war1_explore.stations_in_star_system"); ++i){
-            final int x = CommonRandom.nextInt(3, starSystem.getWidthInTiles()/2 - 3);
-            final int y = CommonRandom.nextInt(3, starSystem.getHeightInTiles()/2 - 3);
+            final int x = CommonRandom.nextInt(4, starSystem.getWidthInTiles()/2 - 4);
+            final int y = CommonRandom.nextInt(4, starSystem.getHeightInTiles()/2 - 4);
 
             final NPCShip station = new NPCShip("quest_zorsan_station", x, y);
             station.setStationary(true);
@@ -312,25 +321,39 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
     }
 
     private boolean detectPlayerShip(final NPCShip ship, final World world, final StarSystem currentSystem) {
+        final int detectDist = Configuration.getIntProperty("war1_explore.player_detect_distance");
         final Ship playerShip = world.getPlayer().getShip();
+        final double dist = ship.getDistance(playerShip);
 
-        if(ship.getDistance(playerShip) <= Configuration.getIntProperty("war1_explore.player_detect_distance")){
-            notifyZorsanFleet(currentSystem, playerShip);
-
-            // TODO: add fail dialog with Liszkiewicz
-            /*
-            final Dialog dialog = Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_scanning_done.json");
-            world.addOverlayWindow(dialog);
-            */
-            return true;
+        if(playerShip.getX() == ship.getX() || playerShip.getY() == ship.getY()){
+            // straight (distance=2)
+            if(dist <= detectDist){
+                notifyZorsanFleet(currentSystem, playerShip);
+                return true;
+            }
+        }
+        else{
+            // diagonal (distance=2.82)
+            if(dist <= Math.sqrt(2*detectDist*detectDist)){
+                notifyZorsanFleet(currentSystem, playerShip);
+                return true;
+            }
         }
 
         return false;
     }
 
     private void notifyZorsanFleet(final StarSystem currentSystem, final Ship playerShip) {
-        // quest part failed
-        warningStatus.put(currentSystem, true);
+        if(!warningStatus.get(warningStatus)){
+            // encounter failed
+            warningStatus.put(currentSystem, true);
+
+            // TODO: add fail dialog with Liszkiewicz
+            /*
+            final Dialog dialog = Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_scanning_done.json");
+            world.addOverlayWindow(dialog);
+            */
+        }
 
         // notify other zorsan ships in current star system
         for(GameObject obj: currentSystem.getShips()){
