@@ -9,7 +9,7 @@ import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 /**
  * Created by di Grigio on 01.05.2017.
  */
-class ZorsanScoutFaction implements Faction {
+public class ZorsanScoutFaction implements Faction {
 
     private static final long serialVersionUID = 8020092476024601126L;
     public static final String NAME = "Humanity zorsan scout";
