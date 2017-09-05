@@ -5,8 +5,8 @@ import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.common.Drawable;
 import ru.game.aurora.common.ItemWithTextAndImage;
 import ru.game.aurora.dialog.Dialog;
+import ru.game.aurora.gui.CrewScreenController;
 import ru.game.aurora.gui.GUI;
-import ru.game.aurora.gui.ShipScreenController;
 import ru.game.aurora.music.MusicDialogListener;
 import ru.game.aurora.music.Playlist;
 import ru.game.aurora.world.Ship;
@@ -103,7 +103,7 @@ public class CrewMember extends ItemWithTextAndImage {
     public void setDialog(Dialog dialog) {
         this.dialog = dialog;
         // reload crew member list, so that buttons are refreshed
-        ((ShipScreenController) GUI.getInstance().getNifty().findScreenController(ShipScreenController.class.getCanonicalName())).refresh();
+        ((CrewScreenController) GUI.getInstance().getNifty().findScreenController(CrewScreenController.class.getCanonicalName())).refresh();
     }
 
     public int getReputation() {

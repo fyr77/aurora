@@ -10,6 +10,8 @@ import org.newdawn.slick.Graphics;
 import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.effects.ExplosionEffect;
+import ru.game.aurora.gui.GUI;
+import ru.game.aurora.gui.GalaxyMapController;
 import ru.game.aurora.npc.CrewMember;
 import ru.game.aurora.npc.crew.GordonMainDialogListener;
 import ru.game.aurora.npc.crew.HenryMainDialogListener;
@@ -52,6 +54,13 @@ public class Ship extends BaseGameObject implements ShipItem {
 
     private String shipId;
 
+    // custom blocked params
+    private boolean blockedLanding;
+    private boolean blockedEngineering;
+    private boolean blockedResearch;
+    private boolean blockedInventory;
+    private boolean blockedCrewMembers;
+
     public Ship(World world, int x, int y) {
         super();
         ShipDesc shipDesc = getDesc();
@@ -66,11 +75,33 @@ public class Ship extends BaseGameObject implements ShipItem {
         name = shipDesc.getDefaultName();
         hull = maxHull = shipDesc.getMaxHp();
 
-        maxScientists = scientists = BASE_SCIENTISTS;
-        maxMilitary = military = BASE_MILITARY;
-        maxEngineers = engineers = BASE_ENGINEERS;
-
+        setBaseCrew(BASE_MILITARY, BASE_ENGINEERS, BASE_SCIENTISTS);
         freeSpace = Configuration.getIntProperty("upgrades.ship_free_space");
+    }
+
+    public Ship(World world, String shipId, int x, int y){
+        super();
+        this.shipId = shipId;
+
+        ShipDesc shipDesc = getDesc();
+        if(shipDesc == null){
+            throw new NullPointerException("Ship Description can not be null");
+        }
+
+        setPos(x, y);
+        setSprite(shipDesc.getDrawable());
+        setFaction(world.getFactions().get(HumanityGenerator.NAME));
+
+        name = shipDesc.getDefaultName();
+        hull = maxHull = shipDesc.getMaxHp();
+        setBaseCrew(BASE_MILITARY, BASE_ENGINEERS, BASE_SCIENTISTS);
+        freeSpace = Configuration.getIntProperty("upgrades.ship_free_space");
+    }
+
+    public void setBaseCrew(final int military, final int engineers, final int scientists) {
+        this.maxMilitary = this.military = military;
+        this.maxEngineers = this.engineers = engineers;
+        this.maxScientists = this.scientists = scientists;
     }
 
     @Override
@@ -78,7 +109,7 @@ public class Ship extends BaseGameObject implements ShipItem {
         if(shipId == null) {
             shipId = "aurora";
         }
-        return ResourceManager.getInstance().getShipDescs().getEntity("aurora");
+        return ResourceManager.getInstance().getShipDescs().getEntity(shipId);
     }
 
     @Override
@@ -94,7 +125,7 @@ public class Ship extends BaseGameObject implements ShipItem {
     public void addCrewMember(World world, CrewMember member) {
         crewMembers.put(member.getId(), member);
         member.onAdded(world);
-        if (crewMembers.size() == 6) {
+        if (crewMembers.size() == 6) { //todo: change condition
             AchievementManager.getInstance().achievementUnlocked(AchievementNames.catchEmAll);
         }
     }
@@ -323,7 +354,6 @@ public class Ship extends BaseGameObject implements ShipItem {
     public void fullRepair(World world) {
         hull = maxHull;
         world.getPlayer().getEngineeringState().getHullRepairs().cancel(world);
-
     }
 
     private void setHenryDefaultDialog()
@@ -406,5 +436,60 @@ public class Ship extends BaseGameObject implements ShipItem {
 
     public void changeRangeBuff(int delta) {
         this.rangeBuff += delta;
+    }
+
+    // if true -> Ship cannot landing to any planet (only contact)
+    public void setLandingPartyBlock(boolean value){
+        this.blockedLanding = value;
+        updateGuiBlock(value, "landing_party_equip_button");
+    }
+
+    // if true -> Ship cannot self repair
+    public void setEngineeringBlock(boolean value){
+        this.blockedEngineering = value;
+        updateGuiBlock(value, "engineering_button");
+    }
+
+    // if true -> Ship crew cannot do any research, research menu is not avaible
+    public void setResearchBlock(boolean value){
+        this.blockedResearch = value;
+        updateGuiBlock(value, "research_button");
+    }
+
+    // if true -> Blocked inventory view menu, in Earth ship upgrades menu not avaible
+    public void setInventoryBlock(boolean value){
+        this.blockedInventory = value;
+        updateGuiBlock(value, "ship_button");
+    }
+
+    // if true -> All crew members be unavaible
+    public void setCrewMembersBlock(boolean value){
+        this.blockedCrewMembers = value;
+        updateGuiBlock(value, "crew_button");
+    }
+
+    private void updateGuiBlock(boolean value, String guiElement) {
+        final GalaxyMapController galaxyMapGui = (GalaxyMapController) GUI.getInstance().getNifty().findScreenController(GalaxyMapController.class.getCanonicalName());
+        galaxyMapGui.updateGuiElementBlock(value, guiElement);
+    }
+
+    public boolean isShipLandingBlocked(){
+        return blockedLanding;
+    }
+
+    public boolean isShipEngineeringBlock(){
+        return blockedEngineering;
+    }
+
+    public boolean isShipResearchBlocked(){
+        return blockedResearch;
+    }
+
+    public boolean isShipInventoryBlocked(){
+        return blockedInventory;
+    }
+
+    public boolean isShipCrewMembersBlocked(){
+        return blockedCrewMembers;
     }
 }

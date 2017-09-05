@@ -38,7 +38,8 @@ public class InputBinding {
         MAP,
         INVENTORY,
         JOURNAL,
-        SCAN;
+        SCAN,
+        CREW;
 
         @Override
         public String toString() {
@@ -76,6 +77,7 @@ public class InputBinding {
         defaultBinding.put(Action.INVENTORY, Input.KEY_I);
         defaultBinding.put(Action.JOURNAL, Input.KEY_J);
         defaultBinding.put(Action.SCAN, Input.KEY_C);
+        defaultBinding.put(Action.CREW, Input.KEY_Q);
         return defaultBinding;
     }
 

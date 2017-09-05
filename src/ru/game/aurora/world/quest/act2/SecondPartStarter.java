@@ -13,6 +13,7 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.quest.act2.metropole.MetropoleBurdenQuest;
 import ru.game.aurora.world.quest.act2.unity.UnityQuest;
+import ru.game.aurora.world.quest.act2.warline.war1_explore.WarLineExploreQuest;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.earth.Earth;
 

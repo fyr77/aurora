@@ -42,7 +42,7 @@
                 <panel width="*"/>
                 <panel width="216px" childLayout="vertical">
                     <panel height="*"/>
-                    <panel height="340px" childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
+                    <panel height="390px" childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
                            padding="20,20,20,20" imageMode="resize:74,100,100,96,74,100,100,68,74,100,100,85">
                         <control id="research_button" name="button" label="${gui.space.research}" width="90%"
                                  height="50px">
@@ -55,6 +55,10 @@
                         <control id="ship_button" name="button" label="${gui.ship.title}" width="90%"
                                  height="50px">
                             <interact onRelease="openShipScreen()"/>
+                        </control>
+                        <control id="crew_button" name="button" label="${gui.crew.title}" width="90%"
+                                 height="50px">
+                            <interact onRelease="openCrewScreen()"/>
                         </control>
                         <control id="journal_button" name="button" label="${gui.journal.title}"
                                  width="90%"
@@ -154,7 +158,7 @@
                 <panel width="*"/>
                 <panel width="216px" childLayout="vertical">
                     <panel height="*"/>
-                    <panel height="340px" childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
+                    <panel height="390px" childLayout="vertical" backgroundImage="resources/sprites/gui/side_panel.png"
                            padding="20,20,20,20" imageMode="resize:74,100,100,96,74,100,100,68,74,100,100,85">
                         <control id="research_button" name="button" label="${gui.space.research}" width="90%"
                                  height="50px">
@@ -175,6 +179,10 @@
                         <control id="ship_button" name="button" label="${gui.ship.title}" width="90%"
                                  height="50px">
                             <interact onRelease="openShipScreen()"/>
+                        </control>
+                        <control id="crew_button" name="button" label="${gui.crew.title}" width="90%"
+                                 height="50px">
+                            <interact onRelease="openCrewScreen()"/>
                         </control>
                         <control id="journal_button" name="button" label="${gui.journal.title}"
                                  width="90%"

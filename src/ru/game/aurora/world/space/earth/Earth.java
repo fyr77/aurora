@@ -9,10 +9,7 @@ package ru.game.aurora.world.space.earth;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import ru.game.aurora.application.Camera;
-import ru.game.aurora.application.Configuration;
-import ru.game.aurora.application.Localization;
-import ru.game.aurora.application.ResourceManager;
+import ru.game.aurora.application.*;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.gui.StoryScreen;
@@ -227,5 +224,5 @@ public class Earth extends BasePlanet {
     @Override
     public boolean canBeCommunicated() {
         return true;
-    } 
+    }
 }

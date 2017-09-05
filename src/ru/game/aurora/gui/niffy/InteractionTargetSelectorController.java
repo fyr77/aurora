@@ -42,7 +42,6 @@ public class InteractionTargetSelectorController implements Controller {
         controller.setCallback(selectionListener);
         controller.setObjects(so);
         nifty.showPopup(nifty.getCurrentScreen(), popupId, null);
-
     }
 
     public void setObjects(List<GameObject> objects) {
@@ -55,7 +54,6 @@ public class InteractionTargetSelectorController implements Controller {
     public void bind(Nifty nifty, Screen screen, Element element, Properties parameter, Attributes controlDefinitionAttributes) {
         myWindow = element.findControl("#target_selection_window", WindowControl.class).getElement();
         listBox = element.findNiftyControl("#objects", ListBox.class);
-
     }
 
     @Override

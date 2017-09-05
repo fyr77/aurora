@@ -1,3 +1,9 @@
 war1_explore_crew_genry.csv;war1_explore_crew_genry;marine_dialog;act2\warline\war1_explore\crew\
 war1_explore_crew_gordon.csv;war1_explore_crew_gordon;scientist_dialog;act2\warline\war1_explore\crew\
 war1_explore_crew_sarah.csv;war1_explore_crew_sarah;engineer_dialog_puzzled;act2\warline\war1_explore\crew\
+war1_explore_scanning_done_1.csv;war1_explore_scanning_done_1;marine_dialog;act2\warline\war1_explore\crew\
+war1_explore_scanning_done_2.csv;war1_explore_scanning_done_2;marine_dialog;act2\warline\war1_explore\crew\
+war1_explore_scanning_done_3.csv;war1_explore_scanning_done_3;marine_dialog;act2\warline\war1_explore\crew\
+war1_explore_scanning_fail_1.csv;war1_explore_scanning_fail_1;marine_dialog;act2\warline\war1_explore\crew\
+war1_explore_scanning_fail_2.csv;war1_explore_scanning_fail_2;marine_dialog;act2\warline\war1_explore\crew\
+war1_explore_scanning_fail_3.csv;war1_explore_scanning_fail_3;marine_dialog;act2\warline\war1_explore\crew\

@@ -163,8 +163,6 @@ public class EngineeringScreenController extends DefaultCloseableScreenControlle
 
     @NiftyEventSubscriber(id = "itemsList")
     public void onListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent event) {
-
-
         if (event.getSelection().isEmpty()) {
             EngineUtils.setTextForGUIElement(textElement, Localization.getText("gui", "no_item_selected"));
             imagePanel.getRenderer(ImageRenderer.class).setImage(new NiftyImage(GUI.getInstance().getNifty().getRenderEngine(), new ImageSlickRenderImage(ResourceManager.getInstance().getImage("no_image"))));
@@ -246,7 +244,6 @@ public class EngineeringScreenController extends DefaultCloseableScreenControlle
     // works for increase/decrease scientists buttons, makes item in list selected (by default clicking on button does not select item in list)
     @NiftyEventSubscriber(pattern = ".*crease_engineers")
     public void onClicked(String id, ButtonClickedEvent event) {
-
         projectsList.selectItem(event.getButton().getElement().getParent().getUserData());
     }
 
