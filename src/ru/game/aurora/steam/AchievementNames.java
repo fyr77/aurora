@@ -13,7 +13,7 @@ public interface AchievementNames {
     /**
      * Kill spore in a red meat quest before it attaches to the ship
      */
-    String quickOrDead = "QUCK_OR_DEAD";
+    String quickOrDead = "QUICK_OR_DEAD";
 
     /**
      * Destroy all zorsan ships when escaping from zorsan embassy
