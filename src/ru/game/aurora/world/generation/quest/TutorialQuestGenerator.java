@@ -201,6 +201,7 @@ public class TutorialQuestGenerator extends GameEventListener implements WorldGe
             this.mars = mars;
             setSpeed(3);
             setStationary(true);
+            setCanBeHailed(false);
             setWeapons(ResourceManager.getInstance().getWeapons().getEntity("laser_cannon"));
         }
 
