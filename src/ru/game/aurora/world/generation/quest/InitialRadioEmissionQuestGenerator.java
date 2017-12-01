@@ -262,6 +262,7 @@ public class InitialRadioEmissionQuestGenerator implements WorldGeneratorPart {
         // initial research projects and their star system
         StarSystem brownStar = WorldGenerator.generateRandomStarSystem(world, 6, 7);
         brownStar.setStar(new Star(6, new Color(128, 0, 0)));
+        brownStar.setQuestLocation(true);
         world.getGalaxyMap().addObjectAtDistance(brownStar, (Positionable) world.getGlobalVariables().get("solar_system"), 10);
 
         ResearchProjectDesc starInitialResearch = new StarResearchProject(brownStar);
