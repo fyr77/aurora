@@ -143,16 +143,10 @@ public class Camera implements Serializable {
     }
 
     public int getPointTileX(int x) {
-        if (x < viewportX || x > viewportX + viewportTilesX * tileWidth) {
-            return -1;
-        }
         return Math.round(target.getX() - getNumTilesX() / 2 + (x - viewportX) / tileWidth);
     }
 
     public int getPointTileY(int y) {
-        if (y < viewportY || y > viewportY + viewportTilesY * tileHeight) {
-            return -1;
-        }
         return Math.round(target.getY() - getNumTilesY() / 2 + (y - viewportY) / tileHeight);
     }
 
