@@ -6,5 +6,6 @@
   },
   "customClass": "ru.game.aurora.player.earth.upgrades.DiplomacyUpgrade",
   "value": 1000,
+  "reputationChange": 1,
   "type": "SPACE"
 }

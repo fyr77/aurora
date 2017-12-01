@@ -6,6 +6,5 @@
   },
   "customClass": "ru.game.aurora.player.earth.upgrades.ETFUpgrade",
   "value": 2500,
-  "reputationChange": 1,
   "type": "SPACE"
 }
