@@ -11,7 +11,7 @@
 ;"Well, get that ""something"" off, then, Gordon! Can't you do anything yourselves?";4;;;
 4;It won't come off! *Gordon looks wounded. Apparently, you'll have to go Research Deck after all.*;;;;
 ;All right, wait for me. But know this: if you distracted me for nothing…;5;;;
-5;"*Gordon was right. It's not just an alien, it's a blue faintly glowing sphere about two meters in diameter. And it didn't ""attach"" itself to just any computer, it's the main computing terminal of the Aurora! Oh wow.*";engergy_sphere_dialog;;;
+5;"*Gordon was right. It's not just an alien, it's a blue faintly glowing sphere about two meters in diameter. And it didn't ""attach"" itself to just any computer, it's the main computing terminal of the Aurora! Oh wow.*";energy_sphere_dialog;;;
 ;All right, my dear scientists, would you kindly explain to me what this is?;6;;;
 6;*The white coats are silent. Gordon steps forward.* It's an alien. And it's… *He grabs his head.* It's here!;;;;
 ;And what do we do with it?;9;;;
