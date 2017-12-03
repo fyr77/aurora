@@ -27,6 +27,7 @@ import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
+import ru.game.aurora.world.quest.act2.SecondPartStarter;
 import ru.game.aurora.world.space.GalaxyMapObject;
 import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
@@ -346,8 +347,7 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
                 @Override
                 public void stateChanged(World world) {
-                    world.addOverlayWindow(new StoryScreen("story/alpha_completed.json"));
-                    AchievementManager.getInstance().achievementUnlocked(AchievementNames.alphaCompleted);
+                    new SecondPartStarter().updateWorld(world);
                 }
             });
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/obliterator_arrival.json"));
