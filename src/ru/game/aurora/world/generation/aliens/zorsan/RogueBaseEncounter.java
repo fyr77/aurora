@@ -55,6 +55,9 @@ public class RogueBaseEncounter extends GameEventListener
 
     @Override
     public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
+        if (ss.isQuestLocation()) {
+            return false;
+        }
         if (!ss.getStar().color.equals(Color.red) || ss.getStar().size != 1) {
             return false;
         }
