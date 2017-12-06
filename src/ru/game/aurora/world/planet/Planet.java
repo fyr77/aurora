@@ -110,6 +110,10 @@ public class Planet extends BasePlanet implements IDungeon {
         }
         controller = new DungeonController(world, owner, this);
     }
+    public void addQuestObject (GameObject planetObject) {
+        getPlanetObjects().add(planetObject);
+        environment = environment & (~Environment.METEORS);
+    }
 
     // re-generate planet surface untill it has a width x height passable rectangle
     public void ensureFreeSpace(int width, int height)
