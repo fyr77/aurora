@@ -113,7 +113,7 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
 
         artifact = new AlienArtifact(10, 20, "builders_pyramid", new ArtifactResearch(new ResearchReport("builders_ruins", "builder_ruins.report")));
         ((Planet) ss.getPlanets()[0]).setNearestFreePoint(artifact, 10, 20);
-        ((Planet) ss.getPlanets()[0]).getPlanetObjects().add(artifact);
+        ((Planet) ss.getPlanets()[0]).addQuestObject(artifact);
 
         Dialog planetDialog = Dialog.loadFromFile("dialogs/zorsan/rebels/intro/planet_dialog.json");
         planetDialog.addListener(this);
