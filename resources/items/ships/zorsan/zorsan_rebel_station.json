@@ -1,8 +1,8 @@
 {
-  "id": "zorsan_station",
-  "defaultName": "Zorsan station",
+  "id": "zorsan_rebel_station",
+  "defaultName": "Rebel station",
   "imageId": "zorsan_station",
-  "race": "Zorsan",
+  "race": "neutral",
   "maxHp": 20,
   "dodgeChance": 5.0,
   "isStationary": "true"
