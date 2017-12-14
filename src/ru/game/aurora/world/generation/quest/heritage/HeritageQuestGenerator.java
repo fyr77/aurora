@@ -60,7 +60,7 @@ public class HeritageQuestGenerator extends GameEventListener implements WorldGe
             dungeon.getController().addListener(this);
             DungeonEntrance entrance = new DungeonEntrance(p, 0, 0, "cavern", dungeon);
             p.setNearestFreePoint(entrance, CommonRandom.getRandom().nextInt(p.getWidth()), CommonRandom.getRandom().nextInt(p.getHeight()));
-            p.getPlanetObjects().add(entrance);
+            p.addQuestObject(entrance);
 
         }
         for (StarSystem ss : starSystems) {

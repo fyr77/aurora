@@ -273,8 +273,9 @@ public class SentientStonesQuestGenerator extends GameEventListener implements W
             final SentientStone sentient_stone = new SentientStone(go.getX(), go.getY());
             stones.add(sentient_stone);
         }
-
-        planet.getPlanetObjects().addAll(stones);
+        for (GameObject s : stones) {
+            planet.addQuestObject(s);
+        }
 
         return true;
     }
