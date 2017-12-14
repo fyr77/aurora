@@ -98,7 +98,7 @@ public class AmbushQuest extends GameEventListener implements DialogListener {
 
     @Override
     public boolean onPlayerEnterStarSystem(World world, StarSystem ss) {
-        if (ss.isQuestLocation() || ss.isVisited()) {
+        if (state < 2 && (ss.isQuestLocation() || ss.isVisited())) {
             return false;
         }
         if (state == 1 && CommonRandom.getRandom().nextDouble() < Configuration.getDoubleProperty("quest.ambush.chance")) {
