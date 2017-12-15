@@ -347,7 +347,8 @@ public class ZorsanFinalBattleGenerator extends GameEventListener implements Dia
 
                 @Override
                 public void stateChanged(World world) {
-                    new SecondPartStarter().updateWorld(world);
+                    final SecondPartStarter secondPartStarter = new SecondPartStarter();
+                    secondPartStarter.start(world);
                 }
             });
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/quest/main/obliterator_arrival.json"));

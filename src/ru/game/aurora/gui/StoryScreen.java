@@ -21,6 +21,10 @@ import java.io.Serializable;
 public class StoryScreen implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public IStateChangeListener getListener() {
+        return listener;
+    }
+
     public static class StoryElement implements Serializable {
         private static final long serialVersionUID = 3916693966824352564L;
 
@@ -63,9 +67,6 @@ public class StoryScreen implements Serializable {
     public boolean next(World world) {
         if (currentScreen < screens.length) {
             ++currentScreen;
-            if (isOver() && listener != null) {
-                listener.stateChanged(world);
-            }
             return true;
         }
         return false;

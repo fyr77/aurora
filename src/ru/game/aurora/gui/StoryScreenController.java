@@ -79,6 +79,9 @@ public class StoryScreenController implements ScreenController, Updatable {
         if (story.next(world)) {
             if (story.isOver()) {
                 GUI.getInstance().getNifty().gotoScreen(GUI.getInstance().popScreen());
+                if (story.getListener() != null) {
+                    story.getListener().stateChanged(world);
+                }
             }
             update();
         }
