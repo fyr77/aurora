@@ -8,6 +8,7 @@ import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.gui.FadeOutScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.IntroDialogController;
+import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.IStateChangeListener;
 import ru.game.aurora.world.Reputation;
@@ -80,6 +81,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
         // Apply Act II world changes
         updateYear(world);
         fixDiplomacy(world);
+        setResources(world);
         removeObliteratorBackground(world);
         movePlayerShipToEarth(world);
         world.getGlobalVariables().remove("autosave_disabled");
@@ -175,5 +177,11 @@ public class SecondPartStarter implements WorldGeneratorPart {
         }
 
 
+    }
+
+    // reset resources and credits to default values
+    private void setResources(World world) {
+        world.getPlayer().setResourceUnits(10);
+        world.getPlayer().getInventory().setCount(Resources.CREDITS, 20);
     }
 }
