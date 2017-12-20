@@ -68,6 +68,8 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
 
             spaceStation.setCaptain(capitan);
 
+            // ensure no ships are left here
+            unityStarSystem.getShips().clear();
             unityStarSystem.getShips().add(spaceStation);
             unityStarSystem.setQuestLocation(true);
 
@@ -126,8 +128,8 @@ public class UnityQuest extends GameEventListener implements WorldGeneratorPart 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 if(world.getGlobalVariables().containsKey("zorsan_escape_victims")){
-                    String victims = (String) world.getGlobalVariables().get("zorsan_escape_victims");
-                    flags.put("zorsan_escape_victims", victims);
+                    Integer victims = (Integer) world.getGlobalVariables().get("zorsan_escape_victims");
+                    flags.put("zorsan_escape_victims", String.valueOf(victims));
                     logger.info("flag 'zorsan_escape_victims'=" + victims);
                 }
 
