@@ -78,7 +78,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
 
         if (!world.getGlobalVariables().containsKey("colony_established")) {
             // player did not establish a colony, force finish a colony quest
-            world.getPlayer().getJournal().questCompleted("colony_search", "colony_search.colony_created_for_act_2");
+            world.getPlayer().getJournal().questCompleted("colony_search", "colony_created_for_act_2");
         }
 
         startUnityAndMetropoleQuests(world);
