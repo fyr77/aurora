@@ -8,9 +8,15 @@ import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.gui.FadeOutScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.IntroDialogController;
+import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.IStateChangeListener;
+import ru.game.aurora.world.Reputation;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.WorldGeneratorPart;
+import ru.game.aurora.world.generation.aliens.KliskGenerator;
+import ru.game.aurora.world.generation.aliens.RoguesGenerator;
+import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
+import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.quest.act2.metropole.MetropoleBurdenQuest;
 import ru.game.aurora.world.quest.act2.unity.UnityQuest;
@@ -73,6 +79,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
         world.getGlobalVariables().put("autosave_disabled", true);
         // Apply Act II world changes
         updateYear(world);
+        fixDiplomacy(world);
         removeObliteratorBackground(world);
         movePlayerShipToEarth(world);
         world.getGlobalVariables().remove("autosave_disabled");
@@ -84,9 +91,6 @@ public class SecondPartStarter implements WorldGeneratorPart {
 
         startUnityAndMetropoleQuests(world);
 
-        if (!world.getGlobalVariables().containsKey("autosave_disabled")) {
-            SaveGameManager.saveGame(SaveGameManager.getAutosaveSlot(), world);
-        }
     }
 
     private void updateYear(final World world) {
@@ -135,8 +139,41 @@ public class SecondPartStarter implements WorldGeneratorPart {
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
                 new UnityQuest().updateWorld(world);
                 new MetropoleBurdenQuest().updateWorld(world);
+
+                if (!world.getGlobalVariables().containsKey("autosave_disabled")) {
+                    SaveGameManager.saveGame(SaveGameManager.getAutosaveSlot(), world);
+                }
             }
         });
         world.addOverlayWindow(startDialog);
+    }
+
+    // fix hostile relations with all races except zorsan
+    // as it will be impossible to pass main quests with hostile alien races
+    private void fixDiplomacy(World world) {
+        boolean atLeastOneRaceHostile = false;
+        if (world.getReputation().isHostile(BorkGenerator.NAME, HumanityGenerator.NAME)) {
+            world.getReputation().setReputation(BorkGenerator.NAME, HumanityGenerator.NAME, Reputation.NEUTRAL_REPUTATION);
+            world.getReputation().setReputation(HumanityGenerator.NAME, BorkGenerator.NAME, Reputation.NEUTRAL_REPUTATION);
+            atLeastOneRaceHostile = true;
+        }
+
+        if (world.getReputation().isHostile(KliskGenerator.NAME, HumanityGenerator.NAME)) {
+            world.getReputation().setReputation(KliskGenerator.NAME, HumanityGenerator.NAME, Reputation.NEUTRAL_REPUTATION);
+            world.getReputation().setReputation(HumanityGenerator.NAME, KliskGenerator.NAME, Reputation.NEUTRAL_REPUTATION);
+            atLeastOneRaceHostile = true;
+        }
+
+        if (world.getReputation().isHostile(RoguesGenerator.NAME, HumanityGenerator.NAME)) {
+            world.getReputation().setReputation(RoguesGenerator.NAME, HumanityGenerator.NAME, Reputation.NEUTRAL_REPUTATION);
+            world.getReputation().setReputation(HumanityGenerator.NAME, RoguesGenerator.NAME, Reputation.NEUTRAL_REPUTATION);
+            atLeastOneRaceHostile = true;
+        }
+
+        if (atLeastOneRaceHostile) {
+            world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "act2_diplomacy_fix", "message"));
+        }
+
+
     }
 }
