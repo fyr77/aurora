@@ -1,6 +1,7 @@
 package ru.game.aurora.world.quest.act2;
 
 import org.slf4j.LoggerFactory;
+import ru.game.aurora.application.SaveGameManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
 import ru.game.aurora.dialog.IntroDialog;
@@ -82,6 +83,10 @@ public class SecondPartStarter implements WorldGeneratorPart {
         }
 
         startUnityAndMetropoleQuests(world);
+
+        if (!world.getGlobalVariables().containsKey("autosave_disabled")) {
+            SaveGameManager.saveGame(SaveGameManager.getAutosaveSlot(), world);
+        }
     }
 
     private void updateYear(final World world) {
