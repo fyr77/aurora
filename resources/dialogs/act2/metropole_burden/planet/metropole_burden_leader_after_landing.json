@@ -83,7 +83,13 @@
         {
           "returnValue": 0,
           "targetStatementId": 8,
-          "replyText": "3"
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "colony_established",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
@@ -123,7 +129,13 @@
         {
           "returnValue": 0,
           "targetStatementId": 8,
-          "replyText": "2"
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "colony_established",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
@@ -163,7 +175,13 @@
         {
           "returnValue": 0,
           "targetStatementId": 8,
-          "replyText": "2"
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "colony_established",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
@@ -203,7 +221,13 @@
         {
           "returnValue": 0,
           "targetStatementId": 8,
-          "replyText": "2"
+          "replyText": "2",
+          "replyConditions": [
+            {
+              "name": "colony_established",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
@@ -258,7 +282,13 @@
         {
           "returnValue": 0,
           "targetStatementId": 8,
-          "replyText": "3"
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "colony_established",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
@@ -303,7 +333,13 @@
         {
           "returnValue": 0,
           "targetStatementId": 8,
-          "replyText": "3"
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "colony_established",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
@@ -343,7 +379,13 @@
         {
           "returnValue": 0,
           "targetStatementId": 8,
-          "replyText": "3"
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "colony_established",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,
@@ -383,7 +425,13 @@
         {
           "returnValue": 0,
           "targetStatementId": 8,
-          "replyText": "3"
+          "replyText": "3",
+          "replyConditions": [
+            {
+              "name": "colony_established",
+              "type": "SET"
+            }
+          ]
         },
         {
           "returnValue": 0,

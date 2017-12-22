@@ -14,7 +14,7 @@
 ;Who are you?;5;;0;
 ;Why was our request to land approved in such a storm?;6;;0;
 ;Are you sure nothing is going to happen to our shuttle?;7;;0;
-;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;;0;
+;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;colony_established;0;
 ;Wow. An armored transport.;10;;0;
 ;*look around*;11;;0;
 ;*look out the window*;12;;0;
@@ -22,7 +22,7 @@
 5;I'm something like Mr Rich's secretary. *The man smiles and wipes the sweat off his forehead with a glove.*;;;;
 ;Why was our request to land approved in such a storm?;6;;0;
 ;Are you sure nothing is going to happen to our shuttle?;7;;0;
-;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;;0;
+;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;colony_established;0;
 ;Wow. An armored transport.;10;;0;
 ;*look around*;11;;0;
 ;*look out the window*;12;;0;
@@ -30,7 +30,7 @@
 6;That's nothing, sir, it's more or less let up. Half an hour I wouldn't be able to leave the building, it'd pick me up and carry me away. *Matthew guffaws.* And I'm serious, sir. Six months ago, a soldier in full combat gear swept up. It threw him up one kilometer, and then the wind let up and he fell down. I'm sorry about talking about all this in front of the girl, ma'am, but... *He shrugs.*;;;;
 ;Who are you?;5;;0;
 ;Are you sure nothing is going to happen to our shuttle?;7;;0;
-;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;;0;
+;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;colony_established;0;
 ;Wow. An armored transport.;10;;0;
 ;*look around*;11;;0;
 ;*look out the window*;12;;0;
@@ -38,7 +38,7 @@
 7;They locked it in, so it shouldn't. Earth vehicles can take these storms. Our magnet anchors, too. However, I have to warn you that if the wind reaches superstorm strength, our anchors will still hold, but your shuttle will get its wings and nose torn off. But don't worry, superstorms aren't common here. The last one was three years ago, but back then we had earthquakes, too. Terrible times, they were!;;;;
 ;Who are you?;5;;0;
 ;Why was our request to land approved in such a storm?;6;;0;
-;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;;0;
+;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;colony_established;0;
 ;Wow. An armored transport.;10;;0;
 ;*look around*;11;;0;
 ;*look out the window*;12;;0;
@@ -49,7 +49,7 @@
 ;Who are you?;5;;0;
 ;Why was our request to land approved in such a storm?;6;;0;
 ;Are you sure nothing is going to happen to our shuttle?;7;;0;
-;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;;0;
+;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;colony_established;0;
 ;*look around*;11;;0;
 ;*look out the window*;12;;0;
 ;We almost there?;13;;0;
@@ -57,7 +57,7 @@
 ;Who are you?;5;;0;
 ;Why was our request to land approved in such a storm?;6;;0;
 ;Are you sure nothing is going to happen to our shuttle?;7;;0;
-;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;;0;
+;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;colony_established;0;
 ;Wow. An armored transport.;10;;0;
 ;*look out the window*;12;;0;
 ;We almost there?;13;;0;
@@ -65,7 +65,7 @@
 ;Who are you?;5;;0;
 ;Why was our request to land approved in such a storm?;6;;0;
 ;Are you sure nothing is going to happen to our shuttle?;7;;0;
-;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;;0;
+;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;colony_established;0;
 ;Wow. An armored transport.;10;;0;
 ;*look around*;11;;0;
 ;We almost there?;13;;0;
@@ -75,7 +75,7 @@
 ;Who are you?;5;;0;
 ;Why was our request to land approved in such a storm?;6;;0;
 ;Are you sure nothing is going to happen to our shuttle?;7;;0;
-;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;;0;
+;I haven't been to the colony in a long time… How are you doing? What's changed in these five years?;8;colony_established;0;
 ;Wow. An armored transport.;10;;0;
 ;*look around*;11;;0;
 ;*look out the window*;12;;0;
