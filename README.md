@@ -36,9 +36,12 @@ java serialization) World objects.
 
 World contains information about Player (ship status, journal with quests, state of Earth and humanity research)
 
-Game locations are represented as Room subclasse. Room knows how to draw itself and update. There is one current room that is stored in World (the one seen on screen),
+Game locations are represented as Room subclasses. Room knows how to draw itself and update. There is one current room that is stored in World (the one seen on screen),
 but rooms can form a stack-like structure. E.g. a Galaxy Map is a room, where every star leads to a StarSystem room, where each planet is a Planet room, and on the 
-surface there may be entrances to Dungeon rooms.
+surface there may be entrances to Dungeon rooms. 
+
+Rooms are highly extensible, actually you may implement any arbitrary mini-game as a Room. You may see AsteroidBeltEncounter which is a simple side-scroller, or a ParallelWorld where
+enemies move in real-time instead of waiting for their turns.
 
 Most game logic is written as GameEventListeners. Listeners are stored in the World and listen to specific game events like 'player entered room' or 'player ship was attacked'.
 E.g. a typical random encounter listens for 'enter star system' event and with some probability spawns a quest spaceship in that star system.
