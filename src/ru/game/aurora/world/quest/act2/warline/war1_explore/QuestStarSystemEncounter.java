@@ -254,7 +254,7 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
         }
         else if(!globalVariables.containsKey("war1_explore.system3")){
             globalVariables.put("war1_explore.system3", result);
-            journal.addQuestEntries("war1_explore", "system3_" + result);
+            journal.questCompleted("war1_explore", "system3_" + result);
         }
 
         starSystem.setQuestLocation(false);

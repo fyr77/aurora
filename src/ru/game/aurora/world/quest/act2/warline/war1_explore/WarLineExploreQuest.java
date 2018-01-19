@@ -43,7 +43,7 @@ public class WarLineExploreQuest extends GameEventListener implements WorldGener
             private static final long serialVersionUID = 532527922378808472L;
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                world.getPlayer().getJournal().addQuestEntries("war1_explore", "desription");
+                world.getPlayer().getJournal().addQuestEntries("war1_explore", "description");
                 if(returnCode == 0){
                     choseAlternative(world);
                 }
@@ -93,8 +93,21 @@ public class WarLineExploreQuest extends GameEventListener implements WorldGener
         zorsanScout.setBaseCrew(5, 5, 0);
 
         // move aurora crew memebers to zorsan scout
+
         for(CrewMember member: aurora.getCrewMembers().values()){
             zorsanScout.addCrewMember(world, member);
+            switch (member.getId()) {
+                case "gordon":
+                    member.setDialog(Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_scientist.json"));
+                    break;
+                case "sarah":
+                    Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_sarah.json");
+                    break;
+                case "henry":
+                    Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_genry.json");
+                    break;
+            }
+
         }
 
         // Set specific faction: all aliens (no zorsans) is hostile to zorsan scouts
