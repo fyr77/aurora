@@ -1,6 +1,7 @@
 package ru.game.aurora.world.quest.act2;
 
 import org.slf4j.LoggerFactory;
+import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.SaveGameManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.dialog.DialogListener;
@@ -8,6 +9,8 @@ import ru.game.aurora.dialog.IntroDialog;
 import ru.game.aurora.gui.FadeOutScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.gui.IntroDialogController;
+import ru.game.aurora.npc.AlienRace;
+import ru.game.aurora.npc.ZorsanFightEvent;
 import ru.game.aurora.player.Resources;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.GameEventListener;
@@ -18,14 +21,17 @@ import ru.game.aurora.world.generation.WorldGeneratorPart;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
+import ru.game.aurora.world.generation.aliens.zorsan.ZorsanGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.ColonyPlanetSearchListener;
 import ru.game.aurora.world.planet.BasePlanet;
 import ru.game.aurora.world.quest.act2.metropole.MetropoleBurdenQuest;
 import ru.game.aurora.world.quest.act2.unity.UnityQuest;
+import ru.game.aurora.world.space.NPCShip;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.earth.Earth;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -85,6 +91,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
         updateYear(world);
         fixDiplomacy(world);
         setResources(world);
+        startZorsanFightEvent(world);
         removeObliteratorBackground(world);
         movePlayerShipToEarth(world);
         world.getGlobalVariables().remove("autosave_disabled");
@@ -101,6 +108,21 @@ public class SecondPartStarter implements WorldGeneratorPart {
         }
 
         startUnityAndMetropoleQuests(world);
+
+    }
+
+    private void startZorsanFightEvent(final World world){
+
+        ArrayList<NPCShip> ships= new ArrayList<>();
+
+        for (int i = 0; i < 2; i++) {
+            ships.add(((AlienRace) world.getFactions().get(ZorsanGenerator.NAME)).getDefaultFactory().createShip(world, ZorsanGenerator.SCOUT_SHIP));
+        }
+        for (int i = 0; i < 3; i++) {
+            ships.add(((AlienRace) world.getFactions().get(HumanityGenerator.NAME)).getDefaultFactory().createShip(world, 0));
+        }
+
+        world.addListener(new ZorsanFightEvent(Configuration.getDoubleProperty("quest.zorsan_event.chance"), ships));
 
     }
 
