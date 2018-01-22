@@ -122,7 +122,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
             ships.add(((AlienRace) world.getFactions().get(HumanityGenerator.NAME)).getDefaultFactory().createShip(world, 0));
         }
 
-        world.addListener(new ZorsanFightEvent(Configuration.getDoubleProperty("quest.zorsan_event.chance"), ships));
+        world.addListener(new ZorsanFightEvent(Configuration.getDoubleProperty("quest.zorsan_skirmish_encounter.chance"), ships));
 
     }
 

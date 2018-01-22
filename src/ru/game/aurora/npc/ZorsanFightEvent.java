@@ -28,23 +28,10 @@ public class ZorsanFightEvent extends GameEventListener {
         this.ships = ships;
     }
 
-//    public ZorsanEvent(double chance, ArrayList<NPCShip> ships, Dialog starsystemEnterDialog) {
-//        this.chance = chance;
-//        this.ships = ships;
-//        this.starsystemEnterDialog = starsystemEnterDialog;
-//    }
-
-    private void fireAtTarget(NPCShip ship, World world, StarSystem currentSystem, NPCShip target) {
-        if (ship.getWeapons() == null) {
-            return;
-        }
-        for (int i = 0; i < ship.getWeapons().size(); ++i) {
-            final WeaponInstance weapon = ship.getWeapons().get(i);
-            if (weapon.getReloadTimeLeft() <= 0) {
-                ship.fire(world, currentSystem, i, target);
-                return;
-            }
-        }
+    public ZorsanFightEvent(double chance, ArrayList<NPCShip> ships, Dialog starsystemEnterDialog) {
+        this.chance = chance;
+        this.ships = ships;
+        this.starsystemEnterDialog = starsystemEnterDialog;
     }
 
     @Override
@@ -55,6 +42,10 @@ public class ZorsanFightEvent extends GameEventListener {
         }
 
         if (CommonRandom.getRandom().nextDouble() < chance) {
+
+            if (starsystemEnterDialog != null) {
+                world.addOverlayWindow(starsystemEnterDialog);
+            }
 
             for (int i = 0; i < 2; i++) {
                 ships.get(i).setPos(-1 + i, 1 + i);
@@ -69,18 +60,10 @@ public class ZorsanFightEvent extends GameEventListener {
                 ss.getShips().add(ships.get(i));
             }
 
-            fireAtTarget(ships.get(0), world, ss, ships.get(3));
+            isAlive = false;
 
-            if (starsystemEnterDialog != null) {
-                world.addOverlayWindow(starsystemEnterDialog);
-            }
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean isAlive() {
-        return ships != null;
     }
 }
