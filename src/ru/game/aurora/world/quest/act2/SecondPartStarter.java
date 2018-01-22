@@ -203,8 +203,7 @@ public class SecondPartStarter implements WorldGeneratorPart {
             atLeastOneRaceHostile = true;
         }
 
-        int prop;
-        prop = Configuration.getIntProperty("debug.startAct");
+        int prop = Configuration.getIntProperty("debug.startAct");
         if(prop == 2){world.getReputation().setReputation(ZorsanGenerator.NAME, HumanityGenerator.NAME, Reputation.HOSTILE_REPUTATION);
         world.getReputation().setReputation(HumanityGenerator.NAME, ZorsanGenerator.NAME, Reputation.HOSTILE_REPUTATION);}
 
