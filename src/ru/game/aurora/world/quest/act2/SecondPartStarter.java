@@ -204,8 +204,10 @@ public class SecondPartStarter implements WorldGeneratorPart {
         }
 
         int prop = Configuration.getIntProperty("debug.startAct");
-        if(prop == 2){world.getReputation().setReputation(ZorsanGenerator.NAME, HumanityGenerator.NAME, Reputation.HOSTILE_REPUTATION);
-        world.getReputation().setReputation(HumanityGenerator.NAME, ZorsanGenerator.NAME, Reputation.HOSTILE_REPUTATION);}
+        if(prop == 2){
+            world.getReputation().setReputation(ZorsanGenerator.NAME, HumanityGenerator.NAME, Reputation.HOSTILE_REPUTATION);
+            world.getReputation().setReputation(HumanityGenerator.NAME, ZorsanGenerator.NAME, Reputation.HOSTILE_REPUTATION);
+        }
 
         if (atLeastOneRaceHostile) {
             world.getPlayer().getEarthState().getMessages().add(new PrivateMessage(world, "act2_diplomacy_fix", "message"));
