@@ -31,6 +31,7 @@ import java.util.Map;
  */
 
 public class EarthDialogListener implements DialogListener {
+
     private static final long serialVersionUID = 6653410057967364076L;
 
     private final Earth earth;
@@ -167,6 +168,17 @@ public class EarthDialogListener implements DialogListener {
             world.addOverlayWindow(reportDialog);
         }
 
+        world.addListener(new GameEventListener() {
+            @Override
+            public boolean onTurnEnded(World world) {
+                if(world.getGlobalVariables().containsKey("warlineResult")){
+                    Dialog warlineSucces = Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_end_success.json");
+                    world.getPlayer().getEarthState().getEarthSpecialDialogs().add(warlineSucces);
+                    isAlive = false;
+                }
+                return false;
+            }
+        });
         /*
         else if(returnCode == 82){
             final Dialog choseScout = Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_chose_scout.json");

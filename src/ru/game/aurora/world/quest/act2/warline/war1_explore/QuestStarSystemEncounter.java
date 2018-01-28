@@ -219,6 +219,7 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
 
             // update result after star system left
             updateProgress(world, starSystem);
+            world.getGlobalVariables().put("warlineResult", exploredSystems.size());
         }
         return false;
     }
@@ -254,7 +255,7 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
         }
         else if(!globalVariables.containsKey("war1_explore.system3")){
             globalVariables.put("war1_explore.system3", result);
-            journal.questCompleted("war1_explore", "system3_" + result);
+            journal.addQuestEntries("war1_explore", "system3_" + result);
         }
 
         starSystem.setQuestLocation(false);
