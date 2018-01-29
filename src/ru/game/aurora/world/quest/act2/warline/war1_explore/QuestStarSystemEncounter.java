@@ -219,7 +219,9 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
 
             // update result after star system left
             updateProgress(world, starSystem);
-            world.getGlobalVariables().put("warlineResult", exploredSystems.size());
+            if(exploredSystems.size()+failedStatus.size()==3) {
+                world.getGlobalVariables().put("warlineResult", exploredSystems.size());
+            }
         }
         return false;
     }

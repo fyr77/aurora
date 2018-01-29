@@ -129,7 +129,7 @@
       "id": 8,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 1,
           "targetStatementId": -1,
           "replyText": "0"
         }
