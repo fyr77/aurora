@@ -184,6 +184,7 @@ public class EarthDialogListener implements DialogListener {
                                 world.getPlayer().setSetCustomShip(world, aurora);
                                 Journal journal = world.getPlayer().getJournal();
                                 journal.questCompleted("war1_explore");
+                                world.getGlobalVariables().remove("warlineResult");
                             }
                         }
                     });

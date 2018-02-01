@@ -219,6 +219,8 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
 
             // update result after star system left
             updateProgress(world, starSystem);
+            questSystems.remove(starSystem);
+            starSystem.setQuestLocation(false);
             if(exploredSystems.size()+failedStatus.size()==3) {
                 world.getGlobalVariables().put("warlineResult", exploredSystems.size());
             }
@@ -247,15 +249,15 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
         final Map<String, Serializable> globalVariables = world.getGlobalVariables();
         final Journal journal = world.getPlayer().getJournal();
 
-        if(!globalVariables.containsKey("war1_explore.system1")){
+        if(!globalVariables.containsKey("war1_explore.system1") && result!=null){
             globalVariables.put("war1_explore.system1", result);
             journal.addQuestEntries("war1_explore", "system1_" + result);
         }
-        else if(!globalVariables.containsKey("war1_explore.system2")){
+        else if(!globalVariables.containsKey("war1_explore.system2") && result!=null){
             globalVariables.put("war1_explore.system2", result);
             journal.addQuestEntries("war1_explore", "system2_" + result);
         }
-        else if(!globalVariables.containsKey("war1_explore.system3")){
+        else if(!globalVariables.containsKey("war1_explore.system3") && result!=null){
             globalVariables.put("war1_explore.system3", result);
             journal.addQuestEntries("war1_explore", "system3_" + result);
         }
