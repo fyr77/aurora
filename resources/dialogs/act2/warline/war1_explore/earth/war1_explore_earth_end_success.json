@@ -21,7 +21,7 @@
           "replyText": "0",
           "replyConditions": [
             {
-              "name": "result",
+              "name": "warlineResult",
               "value": "3",
               "type": "EQUAL"
             }
@@ -33,7 +33,7 @@
           "replyText": "1",
           "replyConditions": [
             {
-              "name": "result",
+              "name": "warlineResult",
               "value": "2",
               "type": "EQUAL"
             }
@@ -45,7 +45,7 @@
           "replyText": "2",
           "replyConditions": [
             {
-              "name": "result",
+              "name": "warlineResult",
               "value": "1",
               "type": "EQUAL"
             }
@@ -57,7 +57,7 @@
           "replyText": "3",
           "replyConditions": [
             {
-              "name": "result",
+              "name": "warlineResult",
               "value": "0",
               "type": "EQUAL"
             }
@@ -129,7 +129,7 @@
       "id": 8,
       "replies": [
         {
-          "returnValue": 0,
+          "returnValue": 1,
           "targetStatementId": -1,
           "replyText": "0"
         }

@@ -17,6 +17,7 @@ import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
 import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
+import ru.game.aurora.world.quest.Journal;
 import ru.game.aurora.world.space.StarSystem;
 import ru.game.aurora.world.space.earth.Earth;
 
@@ -98,7 +99,7 @@ public class WarLineExploreQuest extends GameEventListener implements WorldGener
             zorsanScout.addCrewMember(world, member);
             switch (member.getId()) {
                 case "gordon":
-                    member.setDialog(Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_scientist.json"));
+                    member.setDialog(Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_gordon.json"));
                     break;
                 case "sarah":
                     Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_sarah.json");
