@@ -98,7 +98,7 @@ public class WarLineExploreQuest extends GameEventListener implements WorldGener
             zorsanScout.addCrewMember(world, member);
             switch (member.getId()) {
                 case "gordon":
-                    member.setDialog(Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_scientist.json"));
+                    member.setDialog(Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_gordon.json"));
                     break;
                 case "sarah":
                     Dialog.loadFromFile("dialogs/act2/warline/war1_explore/crew/war1_explore_crew_sarah.json");
