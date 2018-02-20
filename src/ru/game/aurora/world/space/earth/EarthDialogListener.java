@@ -10,6 +10,7 @@ import ru.game.aurora.gui.EarthProgressScreenController;
 import ru.game.aurora.gui.GUI;
 import ru.game.aurora.player.earth.PrivateMessage;
 import ru.game.aurora.world.GameEventListener;
+import ru.game.aurora.world.Ship;
 import ru.game.aurora.world.World;
 import ru.game.aurora.world.generation.aliens.KliskGenerator;
 import ru.game.aurora.world.generation.aliens.RoguesGenerator;
@@ -17,6 +18,7 @@ import ru.game.aurora.world.generation.aliens.bork.BorkGenerator;
 import ru.game.aurora.world.generation.humanity.HumanityGenerator;
 import ru.game.aurora.world.generation.quest.ColonizationListener;
 import ru.game.aurora.world.generation.quest.ambush.AmbushQuest;
+import ru.game.aurora.world.quest.Journal;
 import ru.game.aurora.world.quest.ZorsanFinalBattleGenerator;
 import ru.game.aurora.world.quest.act2.warline.war1_explore.WarLineExploreQuest;
 
@@ -31,6 +33,7 @@ import java.util.Map;
  */
 
 public class EarthDialogListener implements DialogListener {
+
     private static final long serialVersionUID = 6653410057967364076L;
 
     private final Earth earth;
@@ -167,6 +170,29 @@ public class EarthDialogListener implements DialogListener {
             world.addOverlayWindow(reportDialog);
         }
 
+        world.addListener(new GameEventListener() {
+            @Override
+            public boolean onTurnEnded(World world) {
+                if(world.getGlobalVariables().containsKey("warlineResult")){
+                    Dialog warlineSucces = Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_end_success.json");
+                    world.getPlayer().getEarthState().getEarthSpecialDialogs().add(warlineSucces);
+                    warlineSucces.addListener(new DialogListener() {
+                        @Override
+                        public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                            if(returnCode==1){
+                                Ship aurora = (Ship)world.getGlobalVariables().get("war1_explore_aurora_backup");
+                                world.getPlayer().setSetCustomShip(world, aurora);
+                                Journal journal = world.getPlayer().getJournal();
+                                journal.questCompleted("war1_explore");
+                                world.getGlobalVariables().remove("warlineResult");
+                            }
+                        }
+                    });
+                    isAlive = false;
+                }
+                return false;
+            }
+        });
         /*
         else if(returnCode == 82){
             final Dialog choseScout = Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_chose_scout.json");

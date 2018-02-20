@@ -90,6 +90,9 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
 
             @Override
             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                Dialog planetDialog = Dialog.loadFromFile("dialogs/zorsan/rebels/intro/planet_dialog.json");
+                planetDialog.addListener(this);
+                artifact.setFirstUseDialog(planetDialog);
                 world.getPlayer().getJournal().addQuestEntries("zorsan_rebels", "start");
                 ship.setAi(new LeaveSystemAI());
                 ship.setCanBeHailed(false);
@@ -115,9 +118,6 @@ public class ZorsanRebelsFirstQuestGenerator extends GameEventListener implement
         ((Planet) ss.getPlanets()[0]).setNearestFreePoint(artifact, 10, 20);
         ((Planet) ss.getPlanets()[0]).addQuestObject(artifact);
 
-        Dialog planetDialog = Dialog.loadFromFile("dialogs/zorsan/rebels/intro/planet_dialog.json");
-        planetDialog.addListener(this);
-        artifact.setFirstUseDialog(planetDialog);
         world.getGlobalVariables().put("zorsan_rebels.start_coords", ss.getCoordsString());
     }
 
