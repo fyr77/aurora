@@ -45,7 +45,8 @@
           "targetStatementId": 4,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "4": {
       "id": 4,
@@ -300,7 +301,8 @@
             }
           ]
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "15": {
       "id": 15,
@@ -346,7 +348,8 @@
             }
           ]
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "16": {
       "id": 16,
@@ -386,7 +389,8 @@
           "targetStatementId": 20,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "20": {
       "id": 20,
@@ -496,7 +500,8 @@
           "targetStatementId": -1,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "26": {
       "id": 26,
@@ -506,7 +511,8 @@
           "targetStatementId": -1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     }
   },
   "flags": {},

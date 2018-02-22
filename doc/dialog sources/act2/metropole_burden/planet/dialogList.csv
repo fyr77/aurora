@@ -1,10 +1,10 @@
-4Колония диалог перед приземлением.csv;metropole_burden_landing;colonist_dialog;act2\metropole_burden\planet\
+4Колония диалог перед приземлением.csv;metropole_burden_landing;sandstorm_dialog;act2\metropole_burden\planet\
 5Колония приземление и диалог с лидером.csv;metropole_burden_leader_after_landing;colonist_dialog;act2\metropole_burden\planet\
 6.1Начало переговоров на следующий день.csv;metropole_burden_discussion_begin_normal;colonist_dialog;act2\metropole_burden\planet\
-6.2Начало переговоров без свидания с семьёй.csv;metropole_burden_discussion_begin_instant;colonist_dialog;act2\metropole_burden\planet\
-7.0Переговоры.csv;metropole_burden_discussion;colonist_dialog;act2\metropole_burden\planet\
-7.1Переговоры по эмбарго.csv;metropole_burden_embargo_discussion;colonist_dialog;act2\metropole_burden\planet\
-7.2Подписание эмбарго.csv;metropole_burden_embargo_signing;colonist_dialog;act2\metropole_burden\planet\
-8Конец переговоров.csv;metropole_burden_discussion_end;colonist_dialog;act2\metropole_burden\planet\
+6.2Начало переговоров без свидания с семьёй.csv;metropole_burden_discussion_begin_instant;colony_leader_dialog;act2\metropole_burden\planet\
+7.0Переговоры.csv;metropole_burden_discussion;colony_leader_dialog;act2\metropole_burden\planet\
+7.1Переговоры по эмбарго.csv;metropole_burden_embargo_discussion;colony_leader_dialog;act2\metropole_burden\planet\
+7.2Подписание эмбарго.csv;metropole_burden_embargo_signing;colony_leader_dialog;act2\metropole_burden\planet\
+8Конец переговоров.csv;metropole_burden_discussion_end;colony_leader_dialog;act2\metropole_burden\planet\
 9Пресс-конференция.csv;metropole_burden_press_conference;colonist_dialog;act2\metropole_burden\planet\
 metropole_burden_after_discussion.csv;metropole_burden_after_discussion;alien_city_dialog;act2\metropole_burden\planet\

@@ -122,6 +122,7 @@
     <resource type="image" id="asteroid_encounter_obj_2">sprites/space_objects/asteroid_encounter_obj_2.png</resource>
     <resource type="image" id="asteroid_encounter_obj_3">sprites/space_objects/asteroid_encounter_obj_3.png</resource>
     <resource type="image" id="tablet">sprites/portraits/tablet.png</resource>
+    <resource type="image" id="sandstorm_dialog">sprites/portraits/sandstorm.png</resource>
 
     <!-- earth -->
     <resource type="image" id="usa_leader">sprites/portraits/am_leader.png</resource>
@@ -158,6 +159,10 @@
     <resource type="image" id="colony_tent">sprites/planet_objects/tent.png</resource>
     <resource type="image" id="colony_smalltent">sprites/planet_objects/smalltent.png</resource>
     <resource type="image" id="colony_tractor">sprites/planet_objects/mach.png</resource>
+
+    <resource type="image" id="colony_wife_dialog">sprites/portraits/SinD.png</resource>
+    <resource type="image" id="colony_leader_dialog">sprites/portraits/RichD.png</resource>
+    <resource type="image" id="colony_daughter_dialog">sprites/portraits/JodieD.png</resource>
 
 
     <!-- research icons -->

@@ -20,7 +20,8 @@
           "targetStatementId": 3,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "sandstorm_dialog"
     },
     "1": {
       "id": 1,
@@ -35,7 +36,8 @@
           "targetStatementId": 3,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "sandstorm_dialog"
     },
     "2": {
       "id": 2,
@@ -50,7 +52,8 @@
           "targetStatementId": 3,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "sandstorm_dialog"
     },
     "3": {
       "id": 3,
@@ -60,7 +63,8 @@
           "targetStatementId": 4,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "sandstorm_dialog"
     },
     "4": {
       "id": 4,
@@ -531,7 +535,8 @@
             "metropole_burden.knowledge_proof": "true"
           }
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "19": {
       "id": 19,
@@ -546,7 +551,8 @@
           "targetStatementId": 21,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "20": {
       "id": 20,
@@ -561,7 +567,8 @@
           "targetStatementId": 21,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "21": {
       "id": 21,
@@ -574,7 +581,8 @@
             "metropole_burden.instant": "true"
           }
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "22": {
       "id": 22,
@@ -584,7 +592,8 @@
           "targetStatementId": 23,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "23": {
       "id": 23,

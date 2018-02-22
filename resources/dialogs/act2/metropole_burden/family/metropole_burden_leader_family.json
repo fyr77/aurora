@@ -1,6 +1,6 @@
 {
   "id": "metropole_burden_leader_family",
-  "iconName": "colonist_dialog",
+  "iconName": "colony_wife_dialog",
   "statements": {
     "0": {
       "id": 0,
@@ -10,7 +10,8 @@
           "targetStatementId": 1,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "colony_daughter_dialog"
     },
     "1": {
       "id": 1,
@@ -20,7 +21,8 @@
           "targetStatementId": 2,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "colony_daughter_dialog"
     },
     "2": {
       "id": 2,
@@ -71,7 +73,7 @@
           "replyText": "0",
           "replyConditions": [
             {
-              "name": "Видна, если игрок выполнил первый квест с \"Единством\"",
+              "name": "\"Видна, если игрок выполнил первый квест с \"\"Единством\"\"\"",
               "type": "SET"
             }
           ]
@@ -82,7 +84,7 @@
           "replyText": "1",
           "replyConditions": [
             {
-              "name": "Видна, если квест \"Единство\" ещё в процессе выполнения",
+              "name": "\"Видна, если квест \"\"Единство\"\" ещё в процессе выполнения\"",
               "type": "SET"
             }
           ]
