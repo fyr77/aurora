@@ -15,7 +15,8 @@
           "targetStatementId": 2,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "colony_mattew_dialog"
     },
     "1": {
       "id": 1,
@@ -25,7 +26,8 @@
           "targetStatementId": 2,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "colony_mattew_dialog"
     },
     "2": {
       "id": 2,
@@ -35,7 +37,8 @@
           "targetStatementId": 3,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "3": {
       "id": 3,
@@ -415,7 +418,8 @@
           "targetStatementId": 25,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "colony_mattew_dialog"
     },
     "21": {
       "id": 21,
@@ -425,7 +429,8 @@
           "targetStatementId": 22,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "colony_mattew_dialog"
     },
     "22": {
       "id": 22,
@@ -465,7 +470,8 @@
           "targetStatementId": 25,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "colony_mattew_dialog"
     },
     "24": {
       "id": 24,
