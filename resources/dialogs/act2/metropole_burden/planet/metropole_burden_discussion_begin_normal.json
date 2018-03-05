@@ -1,6 +1,6 @@
 {
   "id": "metropole_burden_discussion_begin_normal",
-  "iconName": "colonist_dialog",
+  "iconName": "colony_mattew_dialog",
   "statements": {
     "0": {
       "id": 0,
@@ -189,7 +189,8 @@
           "targetStatementId": 10,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "9": {
       "id": 9,
@@ -199,7 +200,8 @@
           "targetStatementId": 10,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     },
     "10": {
       "id": 10,
@@ -237,7 +239,8 @@
             }
           ]
         }
-      ]
+      ],
+      "customIcon": "colony_leader_dialog"
     }
   },
   "flags": {},

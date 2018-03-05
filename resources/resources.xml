@@ -163,6 +163,10 @@
     <resource type="image" id="colony_wife_dialog">sprites/portraits/SinD.png</resource>
     <resource type="image" id="colony_leader_dialog">sprites/portraits/RichD.png</resource>
     <resource type="image" id="colony_daughter_dialog">sprites/portraits/JodieD.png</resource>
+    <resource type="image" id="colony_mattew_dialog">sprites/portraits/MattewW2.png</resource>
+    <resource type="image" id="nosignal_dialog">sprites/portraits/nosignal.png</resource>
+    <resource type="image" id="pc_dialog">sprites/portraits/pc.png</resource>
+    <resource type="image" id="colony_stukov_dialog">sprites/portraits/Stukov2.png</resource>
 
 
     <!-- research icons -->

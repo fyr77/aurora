@@ -1,6 +1,6 @@
 {
   "id": "metropole_burden_leader_after_landing",
-  "iconName": "colonist_dialog",
+  "iconName": "colony_mattew_dialog",
   "statements": {
     "0": {
       "id": 0,
@@ -512,7 +512,8 @@
           "targetStatementId": 18,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "colony_stukov_dialog"
     },
     "18": {
       "id": 18,
@@ -683,7 +684,8 @@
           "targetStatementId": 45,
           "replyText": "4"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "27": {
       "id": 27,
@@ -713,7 +715,8 @@
           "targetStatementId": 45,
           "replyText": "4"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "28": {
       "id": 28,
@@ -743,7 +746,8 @@
           "targetStatementId": 45,
           "replyText": "4"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "29": {
       "id": 29,
@@ -773,7 +777,8 @@
           "targetStatementId": 45,
           "replyText": "4"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "30": {
       "id": 30,
@@ -793,7 +798,8 @@
           "targetStatementId": 44,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "31": {
       "id": 31,
@@ -823,7 +829,8 @@
           "targetStatementId": 36,
           "replyText": "4"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "32": {
       "id": 32,
@@ -848,7 +855,8 @@
           "targetStatementId": 36,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "33": {
       "id": 33,
@@ -873,7 +881,8 @@
           "targetStatementId": 36,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "34": {
       "id": 34,
@@ -898,7 +907,8 @@
           "targetStatementId": 36,
           "replyText": "3"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "35": {
       "id": 35,
@@ -935,7 +945,8 @@
             "metropole_burden.travel_price": "true"
           }
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "36": {
       "id": 36,
@@ -955,7 +966,8 @@
           "targetStatementId": 44,
           "replyText": "2"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "37": {
       "id": 37,
@@ -1013,7 +1025,8 @@
           "targetStatementId": 36,
           "replyText": "9"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "38": {
       "id": 38,
@@ -1071,7 +1084,8 @@
           "targetStatementId": 36,
           "replyText": "9"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "39": {
       "id": 39,
@@ -1129,7 +1143,8 @@
           "targetStatementId": 36,
           "replyText": "9"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "40": {
       "id": 40,
@@ -1144,7 +1159,8 @@
           "targetStatementId": 37,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "41": {
       "id": 41,
@@ -1154,7 +1170,8 @@
           "targetStatementId": 42,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "42": {
       "id": 42,
@@ -1164,7 +1181,8 @@
           "targetStatementId": 37,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "43": {
       "id": 43,
@@ -1242,7 +1260,8 @@
           "targetStatementId": 36,
           "replyText": "10"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "44": {
       "id": 44,
@@ -1277,7 +1296,8 @@
           "targetStatementId": 45,
           "replyText": "5"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "45": {
       "id": 45,
@@ -1292,7 +1312,8 @@
           "targetStatementId": 44,
           "replyText": "1"
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     },
     "46": {
       "id": 46,
@@ -1305,7 +1326,8 @@
             "metropole_burden.leader_profile_logged": "true"
           }
         }
-      ]
+      ],
+      "customIcon": "pc_dialog"
     }
   },
   "flags": {},
