@@ -49,7 +49,8 @@
             }
           ]
         }
-      ]
+      ],
+      "customIcon": "klisk_int"
     },
     "3": {
       "id": 3,

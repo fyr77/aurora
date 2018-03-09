@@ -21,7 +21,7 @@
           "replyText": "2"
         }
       ],
-      "customIcon": "interior_dialog"
+      "customIcon": "rogues_int"
     },
     "1": {
       "id": 1,
@@ -37,7 +37,7 @@
           "replyText": "1"
         }
       ],
-      "customIcon": "interior_dialog"
+      "customIcon": "rogues_int"
     },
     "2": {
       "id": 2,
@@ -53,7 +53,7 @@
           "replyText": "1"
         }
       ],
-      "customIcon": "interior_dialog"
+      "customIcon": "rogues_int"
     },
     "3": {
       "id": 3,

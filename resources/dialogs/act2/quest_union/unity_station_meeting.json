@@ -31,7 +31,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "zorsan_dialog"
+      "customIcon": "debates"
     },
     "3": {
       "id": 3,
@@ -71,7 +71,7 @@
           "replyText": "3"
         }
       ],
-      "customIcon": "zorsan_dialog"
+      "customIcon": "debates"
     },
     "4": {
       "id": 4,
@@ -82,7 +82,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "zorsan_dialog"
+      "customIcon": "debates"
     },
     "5": {
       "id": 5,
@@ -93,7 +93,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "zorsan_dialog"
+      "customIcon": "debates"
     },
     "6": {
       "id": 6,
@@ -104,7 +104,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "zorsan_dialog"
+      "customIcon": "debates"
     },
     "7": {
       "id": 7,
@@ -115,7 +115,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "zorsan_dialog"
+      "customIcon": "debates"
     },
     "8": {
       "id": 8,
@@ -126,7 +126,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "zorsan_dialog"
+      "customIcon": "debates"
     },
     "9": {
       "id": 9,

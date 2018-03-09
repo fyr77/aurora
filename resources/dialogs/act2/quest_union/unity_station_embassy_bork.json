@@ -16,7 +16,7 @@
           "replyText": "1"
         }
       ],
-      "customIcon": "interior_dialog"
+      "customIcon": "bork_int"
     },
     "1": {
       "id": 1,
@@ -27,7 +27,7 @@
           "replyText": "0"
         }
       ],
-      "customIcon": "interior_dialog"
+      "customIcon": "bork_int"
     },
     "2": {
       "id": 2,
@@ -37,7 +37,8 @@
           "targetStatementId": 3,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "bork_int"
     },
     "3": {
       "id": 3,
@@ -47,7 +48,8 @@
           "targetStatementId": 4,
           "replyText": "0"
         }
-      ]
+      ],
+      "customIcon": "bork_int"
     },
     "4": {
       "id": 4,

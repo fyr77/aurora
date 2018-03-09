@@ -1,11 +1,11 @@
-0;*Another big hall, although it's smaller than the previous one. At the center is a big metal obelisk with a few Rogues standing around it, thick cables going from the back of their heads to the obelisk. All the staff Rogues are connected to their posts with cables, other Rogues don't have that. You wonder if they can disconnect those cables. Meanwhile, you can't see the ambassador's office right away. Looks like you're going to have to ask one of the Rogues standing around the obelisk.*;interior_dialog;;;
+0;*Another big hall, although it's smaller than the previous one. At the center is a big metal obelisk with a few Rogues standing around it, thick cables going from the back of their heads to the obelisk. All the staff Rogues are connected to their posts with cables, other Rogues don't have that. You wonder if they can disconnect those cables. Meanwhile, you can't see the ambassador's office right away. Looks like you're going to have to ask one of the Rogues standing around the obelisk.*;rogues_int;;;
 ;*look around*;1;;0;
 ;*obelisk*;2;;0;
 ;*walk up to the obelisk*;3;;0;
-1;*A round hall that looks a lot like the central part of the station. The only differences are the size and the absence of the transparent ceiling: you can't see outer space from this embassy. In general, the Rogue embassy looks a bit... unfit for life, that's exactly how you could describe it. Any creature except the Rogues connected to the walls with cables probably feels a bit out of its element here. Maybe that's why there are so few visitors here?*;interior_dialog;;;
+1;*A round hall that looks a lot like the central part of the station. The only differences are the size and the absence of the transparent ceiling: you can't see outer space from this embassy. In general, the Rogue embassy looks a bit... unfit for life, that's exactly how you could describe it. Any creature except the Rogues connected to the walls with cables probably feels a bit out of its element here. Maybe that's why there are so few visitors here?*;rogues_int;;;
 ;*obelisk*;2;;0;
 ;*walk up to the obelisk*;3;;0;
-2;*After you take a closer look you see that the slightly curved pillar isn't here for decoration, its purpose is completely utilitarian. You can see ports for connecting the cables here in there. But at the same time, there is some kind of aesthetics to it, even if unusual for a human.*;interior_dialog;;;
+2;*After you take a closer look you see that the slightly curved pillar isn't here for decoration, its purpose is completely utilitarian. You can see ports for connecting the cables here in there. But at the same time, there is some kind of aesthetics to it, even if unusual for a human.*;rogues_int;;;
 ;*look around*;1;;0;
 ;*walk up to the obelisk*;3;;0;
 3;*The Rogue you walk up to opens his eyes immediately. They're glassy, but you can see rational thought in them. It's a very, very strange combination.* Human captain. You want to know the way to me?;;;;

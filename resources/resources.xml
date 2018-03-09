@@ -86,6 +86,7 @@
     <resource type="image" id="klisk_vip_dialog">sprites/portraits/klisk_vip.png</resource>
     <resource type="image" id="klisk_mutant">sprites/planet_objects/klisk_m_sprite.png</resource>
     <resource type="image" id="klisk_mutant_dead">sprites/planet_objects/klisk_m_dead.png</resource>
+    <resource type="image" id="klisk_int">sprites/portraits/kli_int.png</resource>
 
     <!-- zorsan -->
     <resource type="image" id="zorsan_scout">sprites/ships/zorsan_scout.png</resource>
@@ -97,6 +98,7 @@
     <resource type="image" id="zorsan_dialog">sprites/portraits/zorsan.png</resource>
     <resource type="image" id="zorsan_leader_dialog">sprites/portraits/zorsan_leader.png</resource>
     <resource type="image" id="zorsan_rebel_dialog">sprites/portraits/zorguevara.png</resource>
+    <resource type="image" id="zorsan_int">sprites/portraits/zor_int.png</resource>
 
     <!-- rogues -->
     <resource type="image" id="rogues_probe">sprites/ships/rogues_probe.png</resource>
@@ -109,12 +111,14 @@
     <resource type="image" id="rogues_scout_damaged">sprites/ships/rogues_scout_damaged.png</resource>
     <resource type="image" id="rogues_soldier">sprites/planet_objects/rogue_c.png</resource>
     <resource type="image" id="rogues_altar">sprites/planet_objects/rogue_entrance.png</resource>
+    <resource type="image" id="rogues_int">sprites/portraits/rog_int.png</resource>
 
     <!-- swarm -->
     <resource type="image" id="bork_ship">sprites/ships/swarm.png</resource>
     <resource type="image" id="bork_ship_large">sprites/ships/bork_large.png</resource>
     <resource type="image" id="bork_dialog">sprites/portraits/swarm.png</resource>
     <resource type="image" id="bork_vip_dialog">sprites/portraits/bork_vip_dialog.png</resource>
+    <resource type="image" id="bork_int">sprites/portraits/bork_int.png</resource>
 
     <!-- other -->
     <resource type="image" id="stone_dialog">sprites/portraits/stone_portrait.png</resource>
@@ -123,6 +127,7 @@
     <resource type="image" id="asteroid_encounter_obj_3">sprites/space_objects/asteroid_encounter_obj_3.png</resource>
     <resource type="image" id="tablet">sprites/portraits/tablet.png</resource>
     <resource type="image" id="sandstorm_dialog">sprites/portraits/sandstorm.png</resource>
+    <resource type="image" id="unity_station">sprites/ships/unity.png</resource>
 
     <!-- earth -->
     <resource type="image" id="usa_leader">sprites/portraits/am_leader.png</resource>
@@ -167,6 +172,7 @@
     <resource type="image" id="nosignal_dialog">sprites/portraits/nosignal.png</resource>
     <resource type="image" id="pc_dialog">sprites/portraits/pc.png</resource>
     <resource type="image" id="colony_stukov_dialog">sprites/portraits/Stukov2.png</resource>
+    <resource type="image" id="debates">sprites/portraits/debates.png</resource>
 
 
     <!-- research icons -->

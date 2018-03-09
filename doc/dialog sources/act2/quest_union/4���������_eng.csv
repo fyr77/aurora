@@ -2,22 +2,22 @@
 ;*what a piece of technology. You don't know where he is, but transmitting video even from the neighboring system…*;1;;0
 1;You all know why I've gathered you here. With humans going out into open space, we've entered into a completely new age. Be it complicated or simple, we simply cannot go on living like we did before.;;;
 ;*looks like the Zorsan wants to say something*;2;;0
-2;*the Zorsan ambassador interrupts the Guardian.* Simple?! These creatures took advantage of our hospitality! They attacked us! *The Guardian keeps silent, offering no comment for the Zorsan's words.*;zorsan_dialog;;
+2;*the Zorsan ambassador interrupts the Guardian.* Simple?! These creatures took advantage of our hospitality! They attacked us! *The Guardian keeps silent, offering no comment for the Zorsan's words.*;debates;;
 ;*you have to whisper or it would be awkard* Joseph!;3;;0
-3;*Joseph waits a few seconds and responds.* Of course, the relationship between Earth and Zorsan is tense, and we, from our side, are ready to do a lot to mend it. However, we are not going to admit our guilt. From our point of view, it was a provocation from the Zorsan side which targeted our representative personally. *Joseph nods your way.* And of course, he could say a lot about what really happened. And provide data. *The Zorsan ambassador's answer is short.* Lies! Fabricated data!;zorsan_dialog;;
+3;*Joseph waits a few seconds and responds.* Of course, the relationship between Earth and Zorsan is tense, and we, from our side, are ready to do a lot to mend it. However, we are not going to admit our guilt. From our point of view, it was a provocation from the Zorsan side which targeted our representative personally. *Joseph nods your way.* And of course, he could say a lot about what really happened. And provide data. *The Zorsan ambassador's answer is short.* Lies! Fabricated data!;debates;;
 ;Lies?! We barely made it off your planet alive! You almost killed us!;4;zorsan_escape_victims=0;0
 ;Lies?! We barely made it off your planet alive! We had casualties.;5;zorsan_escape_victims > 0;0
 ;I'm not going to lie.;6;;0
 ;*keep silent*;7;;0
-4;*The Zorsan ambassador snorts angrily.* Lies! Are you trying to say you went through the best of our guards and didn't get a single scratch?! I knew you were dishonest creatures, but not that dishonest... You tried to kill our diplomatic representative sneakily, and then you ran away in shame! There were no confrontations with the guards!;zorsan_dialog;;
+4;*The Zorsan ambassador snorts angrily.* Lies! Are you trying to say you went through the best of our guards and didn't get a single scratch?! I knew you were dishonest creatures, but not that dishonest... You tried to kill our diplomatic representative sneakily, and then you ran away in shame! There were no confrontations with the guards!;debates;;
 ;*whisper* Joseph, shut that loudmouth up.;8;;0
-5;*The Zorsan ambassador smiles smugly.* At least you know your limits when you lie. For your information: if you really had a run in with our military guards, you'd be dead.;zorsan_dialog;;
+5;*The Zorsan ambassador smiles smugly.* At least you know your limits when you lie. For your information: if you really had a run in with our military guards, you'd be dead.;debates;;
 ;I'm not going to argue with you. Joseph?;8;;0
-6;But that's exactly what you're doing!;zorsan_dialog;;
+6;But that's exactly what you're doing!;debates;;
 ;Joseph, have we come here to make a scene?;8;;0
-7;Ha! *The Zorsan chortles.* Your lies won't let you speak up. You have nothing to say!;zorsan_dialog;;
+7;Ha! *The Zorsan chortles.* Your lies won't let you speak up. You have nothing to say!;debates;;
 ;Won't let it go, that one… Joseph, say something?;8;;0
-8;*Joseph raises his voice a little.* I repeat, we have recordings. And we have already provided them. *The Zorsan barely keeps from interrupting Joseph.* And we have our own evidence, too. Who?! Who are you going to trust?! Us, or... *Coming from him, it sounds very derisive.* ...or them?!;zorsan_dialog;;
+8;*Joseph raises his voice a little.* I repeat, we have recordings. And we have already provided them. *The Zorsan barely keeps from interrupting Joseph.* And we have our own evidence, too. Who?! Who are you going to trust?! Us, or... *Coming from him, it sounds very derisive.* ...or them?!;debates;;
 ;[NEXT];9;;0
 9;And now, I'm asking you to keep silent. Yes, both of you have relevant evidence. Even if one of you is right... will it stop the war? *The Gardener shakes his hood silently.* The war goes on. And I'm not against that. War is a natural stage of development of any normal species, everything is going the way it goes. *Joseph is a little stunned. The Zorsan is, too. The others are silent, waiting for what happens next. Only the Klisk is clicking very quietly, satisfaction clearly audible in those sounds.* But now that you are at war, you have to go about it reasonably. With that goal I... Mr Fshiir?;;;
 ;[NEXT];10;;0

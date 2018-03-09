@@ -2,7 +2,7 @@
 ;I'm the captain of the Aurora 2. I have an appointment with the ambassador.;1;;0;
 1;Of course. *The secretary clicks affirmatively.* The ambassador is waiting for you. Come in.;klisk_dialog;;;
 ;*to the ambassador's office*;2;;0;
-2;*It doesn't look very different from the embassy in terms of decoration. First, the layer of sand on the floor is thicker. Second, the fountain in the center of the room is much bigger. Otherwise, nothing is different. The owner of the office has his back turned to you looking out onto outer space, but as soon as you come in he turns around.* Human captain! *Click click click.*;;;;
+2;*It doesn't look very different from the embassy in terms of decoration. First, the layer of sand on the floor is thicker. Second, the fountain in the center of the room is much bigger. Otherwise, nothing is different. The owner of the office has his back turned to you looking out onto outer space, but as soon as you come in he turns around.* Human captain! *Click click click.*;klisk_int;;;
 ;Hello. I was told you wanted to see me.;3;!unity_look_around;0;
 ;Hello. I was told you wanted to see me. I'm sorry for being late.;4;unity_look_around;0;
 3;Of course. Some things you sort out with the ambassador, some things you sort out with someone else. *clicks of laughter* What is your job called these days?;;;;

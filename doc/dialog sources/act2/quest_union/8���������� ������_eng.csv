@@ -1,11 +1,11 @@
-0;*Inside, the Bork Embassy is... big. A big round hall with hallways leading from it to the offices. The architect seems to have gone overboard with gigantomania, there's too much empty space. You can see the ambassador's office door all the way from the entrance.*;interior_dialog;;;
+0;*Inside, the Bork Embassy is... big. A big round hall with hallways leading from it to the offices. The architect seems to have gone overboard with gigantomania, there's too much empty space. You can see the ambassador's office door all the way from the entrance.*;bork_int;;;
 ;*take a better look around*;1;;;
 ;*to the ambassador*;2;;;
-1;"*The paint on the walls is a pleasant orange hue, and the roof is transparent, like in the main hall. It's a beautiful, magestic sight. There is some kind of obelisk in the center of this room. If you walk up closer, you can read the plaque on it: ""Straight and unbending.""*";interior_dialog;;;
+1;"*The paint on the walls is a pleasant orange hue, and the roof is transparent, like in the main hall. It's a beautiful, magestic sight. There is some kind of obelisk in the center of this room. If you walk up closer, you can read the plaque on it: ""Straight and unbending.""*";bork_int;;;
 ;*to the ambassador*;2;;;
-2;*You're going to have to knock, there's no secretary next to the office. However, that's not a problem: the lock clicks after the first knock. You can come in.*;;;;
+2;*You're going to have to knock, there's no secretary next to the office. However, that's not a problem: the lock clicks after the first knock. You can come in.*;bork_int;;;
 ;*inside*;3;;;
-3;*Like the entire embassy, the Bork ambassador's office is big, but this time it's justified: most of it is taken up by an enormous holographic map of the inhabited Universe. Hey, you can make out the Solar system!* A breathtaking sight, isn't it? *The Bork ambassador is old and beaten up by life: he's missing two eyes and almost half of his teeth. His face is disfigured, if you can say that about a Bork mug, by an old burn.* I really wanted to meet you, human captain. *When he moves, you can tell right away that one of his legs is prosthetic.* Come in.;;;;
+3;*Like the entire embassy, the Bork ambassador's office is big, but this time it's justified: most of it is taken up by an enormous holographic map of the inhabited Universe. Hey, you can make out the Solar system!* A breathtaking sight, isn't it? *The Bork ambassador is old and beaten up by life: he's missing two eyes and almost half of his teeth. His face is disfigured, if you can say that about a Bork mug, by an old burn.* I really wanted to meet you, human captain. *When he moves, you can tell right away that one of his legs is prosthetic.* Come in.;bork_int;;;
 ;Hello. It really does look great.;4;;;
 4;I like to stay informed about the situation at the fronts… *The Bork ambassador shakes his head.*;;;;
 ;And what is the situation?;5;;;
