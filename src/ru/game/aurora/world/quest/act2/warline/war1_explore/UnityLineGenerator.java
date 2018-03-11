@@ -104,6 +104,7 @@ class UnityLineGenerator implements WorldGeneratorPart {
                 world.getGlobalVariables().put("war1_explore.intelligence_get", true);
                 world.getPlayer().getJournal().addQuestEntries("war1_explore", "success_uinty");
                 world.addDays(3);
+                world.getGlobalVariables().put("warlineResult", 3);
 
                 RebelsLineGenerator.disposeQuestLine(world);
             }
