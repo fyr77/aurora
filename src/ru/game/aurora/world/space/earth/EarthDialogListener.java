@@ -169,11 +169,30 @@ public class EarthDialogListener implements DialogListener {
 
             world.addOverlayWindow(reportDialog);
         }
+        world.addListener(new GameEventListener() {
+            @Override
+            public boolean onTurnEnded(World world) {
+                if(!world.getGlobalVariables().containsKey("warlineResult") ||
+                   !world.getGlobalVariables().containsKey("war1_explore.rebels_help") ||
+                   !world.getGlobalVariables().containsKey("war1_explore.rebels_help_reject")){
+                        Dialog choseScout = Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_chose_scout.json");
+                        world.getPlayer().getEarthState().getEarthSpecialDialogs().add(choseScout);
+                        choseScout.addListener(new DialogListener() {
+                            @Override
+                            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                                new WarLineExploreQuest().choseShip(world);
+                            }
+                        });
+                }
+                return false;
+            }
+        });
 
         world.addListener(new GameEventListener() {
             @Override
             public boolean onTurnEnded(World world) {
-                if(world.getGlobalVariables().containsKey("warlineResult")){
+                if(world.getGlobalVariables().containsKey("warlineResult") ||
+                   world.getGlobalVariables().containsKey("war1_explore.rebels_help")){
                     Dialog warlineSucces = Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_end_success.json");
                     world.getPlayer().getEarthState().getEarthSpecialDialogs().add(warlineSucces);
                     warlineSucces.addListener(new DialogListener() {
@@ -193,20 +212,6 @@ public class EarthDialogListener implements DialogListener {
                 return false;
             }
         });
-        /*
-        else if(returnCode == 82){
-            final Dialog choseScout = Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_chose_scout.json");
-            choseScout.addListener(new DialogListener() {
-                private static final long serialVersionUID = 869311722938411174L;
-                @Override
-                public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                    new WarLineExploreQuest().choseShip(world);
-                }
-            });
-
-            world.addOverlayWindow(choseScout);
-        }
-        */
 
         // quest stuff
         if (flags.containsKey("diplomacy_report")) {
