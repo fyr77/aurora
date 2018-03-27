@@ -80,7 +80,7 @@ public class AuroraGame extends NiftyOverlayGame {
                 if (!mode.isFullscreenCapable() || mode.getBitsPerPixel() < 24) {
                     continue;
                 }
-                if (mode.getWidth() < 1024) {
+                if ((mode.getWidth() < 1024) || (mode.getHeight() < 768)){
                     continue;
                 }
                 if (resolutionset.contains((long) mode.getWidth() * mode.getHeight())) {
