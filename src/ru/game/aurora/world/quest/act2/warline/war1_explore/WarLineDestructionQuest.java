@@ -33,51 +33,53 @@ public class WarLineDestructionQuest extends GameEventListener implements WorldG
 
     }
 
-    private Set<StarSystem> QuestSystems;
+    private ArrayList<StarSystem> QuestSystems;
     private ArrayList SystemNumber;
     private ArrayList<NPCShip> Navy;
     private ArrayList<GameObject> Ships;
+    private ArrayList<GameObject> ZorsanStations;
 
     @Override
     public void updateWorld(final World world){
-        this.QuestSystems = new HashSet<StarSystem>();
+        this.QuestSystems = new ArrayList<>();
         this.SystemNumber = new ArrayList();
         this.Navy = new ArrayList<>();
         this.SystemNumber = new ArrayList<>();
         this.Ships = new ArrayList<>();
+        this.ZorsanStations = new ArrayList<>();
         int num=1;
         SystemNumber.add(num);
         world.getPlayer().getJournal().addQuestEntries("war1_destruction", "description");
         for (int i = 0; i < Configuration.getIntProperty("war1_explore.star_systems_to_explore"); i++) {
-            targetSystem = (StarSystem)world.getGlobalVariables().get("WarLineStation"+Integer.toString(i));
-            targetSystem.setQuestLocation(true);
+            targetSystem = (StarSystem) world.getGlobalVariables().get("WarLineStation" + Integer.toString(i));
             QuestSystems.add(targetSystem);
         }
+        for(StarSystem starSystem: QuestSystems){
+            SetNav(starSystem);
+        }
+    }
+
+    private void SetNav(final StarSystem starSystem){
+        starSystem.setQuestLocation(true);
     }
 
     @Override
     public boolean onPlayerEnterStarSystem(World world, StarSystem starSystem){
-        logger.info("Entering to quest star starsystem: {}", starSystem.getCoordsString());
+        for (int i = 0; i < 10; i++) {
+            Navy.add(((AlienRace) world.getFactions().get(HumanityGenerator.NAME)).getDefaultFactory().createShip(world, 0));
+        }
         if(QuestSystems.contains(starSystem) && SystemNumber.size()==1){
-            setNavy(world);
+            logger.info("Entering to quest star starsystem: {}", starSystem.getCoordsString());
+//            setNavy(world);
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/act2/warline/war1_destruction/destruction_first_system.json"));
             for (int i = 0; i < 10; i++) {
-                Navy.get(i).setPos(-1+i, 1+i);
+                Navy.get(i).setPos(world.getPlayer().getShip().getX(), world.getPlayer().getShip().getY());
                 Navy.get(i).setAi(new FollowAI(world.getPlayer().getShip()));
             }
         }
         return  false;
     }
-
-    @Override
-    public boolean onTurnEnded(World world){
-        if(zorsansChek(world)){
-            Dialog manyShipsDialog = Dialog.loadFromFile("dialogs/act2/warline/war1_destruction/destruction_many_ships.json");
-            world.addOverlayWindow(manyShipsDialog);
-            world.getPlayer().getJournal().addQuestEntries("war1_destruction", "many_ships");
-        }
-        return false;
-    }
+    
 
     private boolean zorsansChek(final World world){
         Ships.addAll(world.getCurrentStarSystem().getShips());

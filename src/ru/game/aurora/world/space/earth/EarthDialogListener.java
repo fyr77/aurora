@@ -225,7 +225,9 @@ public class EarthDialogListener implements DialogListener {
                         attackStart.addListener(new DialogListener() {
                             @Override
                             public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                                new WarLineDestructionQuest().updateWorld(world);
+                                final WarLineDestructionQuest warLineDestruction = new WarLineDestructionQuest();
+                                warLineDestruction.updateWorld(world);
+                                world.addListener(warLineDestruction);
                             }
                         });
                         isAlive = false;
