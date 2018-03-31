@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.game.aurora.application.Configuration;
 import ru.game.aurora.application.Localization;
+import ru.game.aurora.application.ResourceManager;
 import ru.game.aurora.dialog.Dialog;
 import ru.game.aurora.npc.AlienRace;
 import ru.game.aurora.npc.Faction;
@@ -36,30 +37,29 @@ public class WarLineDestructionQuest extends GameEventListener implements WorldG
 
     }
 
-    private ArrayList<StarSystem> QuestSystems;
-    private ArrayList SystemNumber;
-    private ArrayList<NPCShip> Navy;
-    private ArrayList<GameObject> Ships;
-    private ArrayList<GameObject> ZorsanStations;
-    private ArrayList<GameObject> HumanityShips;
+    private ArrayList<StarSystem> questSystems;
+    private ArrayList systemNumber;
+    private ArrayList<NPCShip> navy;
+    private ArrayList<GameObject> ships;
+    private ArrayList<GameObject> humanityShips;
+    private ArrayList<GameObject> zorsanStations;
 
     @Override
     public void updateWorld(final World world){
-        this.QuestSystems = new ArrayList<>();
-        this.HumanityShips = new ArrayList<>();
-        this.SystemNumber = new ArrayList();
-        this.Navy = new ArrayList<>();
-        this.SystemNumber = new ArrayList<>();
-        this.Ships = new ArrayList<>();
-        this.ZorsanStations = new ArrayList<>();
+        this.questSystems = new ArrayList<>();
+        this.humanityShips = new ArrayList<>();
+        this.navy = new ArrayList<>();
+        this.systemNumber = new ArrayList<>();
+        this.zorsanStations = new ArrayList<>();
+        this.ships = new ArrayList<>();
         int num=1;
-        SystemNumber.add(num);
+        systemNumber.add(num);
         world.getPlayer().getJournal().addQuestEntries("war1_destruction", "description");
         for (int i = 0; i < Configuration.getIntProperty("war1_explore.star_systems_to_explore"); i++) {
             targetSystem = (StarSystem) world.getGlobalVariables().get("WarLineStation" + Integer.toString(i));
-            QuestSystems.add(targetSystem);
+            questSystems.add(targetSystem);
         }
-        for(StarSystem starSystem: QuestSystems){
+        for(StarSystem starSystem: questSystems){
             SetNav(starSystem);
         }
     }
@@ -67,7 +67,7 @@ public class WarLineDestructionQuest extends GameEventListener implements WorldG
     @Override
     public String getLocalizedMessageForStarSystem(World world, GalaxyMapObject galaxyMapObject){
         for(int i=0; i < Configuration.getIntProperty("war1_explore.star_systems_to_explore"); i++) {
-            if (galaxyMapObject == QuestSystems.get(i)) {
+            if (galaxyMapObject == questSystems.get(i)) {
                 return Localization.getText("journal", "war1_destruction.title");
             }
         }
@@ -80,61 +80,34 @@ public class WarLineDestructionQuest extends GameEventListener implements WorldG
 
     @Override
     public boolean onPlayerEnterStarSystem(World world, StarSystem starSystem){
-        if(QuestSystems.contains(starSystem) && SystemNumber.size()==1){
+        if(questSystems.contains(starSystem) && systemNumber.size()==1){
             logger.info("Entering to quest star starsystem: {}", starSystem.getCoordsString());
             world.addOverlayWindow(Dialog.loadFromFile("dialogs/act2/warline/war1_destruction/destruction_first_system.json"));
             setNavy(world);
-//            for(int i=0; i==Navy.size(); i++){
-//                starSystem.setRandomEmptyPosition(Navy.get(i));
-//                starSystem.getShips().add(Navy.get(i));
-//            }
-                starSystem.setRandomEmptyPosition(Navy.get(0));
-                starSystem.setRandomEmptyPosition(Navy.get(1));
-                starSystem.setRandomEmptyPosition(Navy.get(2));
-                starSystem.setRandomEmptyPosition(Navy.get(3));
-                starSystem.setRandomEmptyPosition(Navy.get(4));
-                starSystem.setRandomEmptyPosition(Navy.get(5));
-                starSystem.setRandomEmptyPosition(Navy.get(6));
-                starSystem.setRandomEmptyPosition(Navy.get(7));
-                starSystem.setRandomEmptyPosition(Navy.get(8));
-                starSystem.setRandomEmptyPosition(Navy.get(9));
-                starSystem.setRandomEmptyPosition(Navy.get(10));
-                starSystem.setRandomEmptyPosition(Navy.get(11));
-                starSystem.setRandomEmptyPosition(Navy.get(12));
-                starSystem.setRandomEmptyPosition(Navy.get(13));
-                starSystem.setRandomEmptyPosition(Navy.get(14));
-                starSystem.getShips().add(Navy.get(0));
-                starSystem.getShips().add(Navy.get(1));
-                starSystem.getShips().add(Navy.get(2));
-                starSystem.getShips().add(Navy.get(3));
-                starSystem.getShips().add(Navy.get(4));
-                starSystem.getShips().add(Navy.get(5));
-                starSystem.getShips().add(Navy.get(6));
-                starSystem.getShips().add(Navy.get(7));
-                starSystem.getShips().add(Navy.get(8));
-                starSystem.getShips().add(Navy.get(9));
-                starSystem.getShips().add(Navy.get(10));
-                starSystem.getShips().add(Navy.get(11));
-                starSystem.getShips().add(Navy.get(12));
-                starSystem.getShips().add(Navy.get(13));
-                starSystem.getShips().add(Navy.get(14));
+            for(int i=0; i==navy.size(); i++){
+                starSystem.setRandomEmptyPosition(navy.get(i));
+                navy.get(i).setAi(new FollowAI(world.getPlayer().getShip()));
+                starSystem.getShips().add(navy.get(i));
+            }
         }
         return  false;
     }
 
     @Override
     public boolean onTurnEnded(World world){
-        if (QuestSystems.contains(world.getCurrentStarSystem())){
+        if (questSystems.contains(world.getCurrentStarSystem())){
             if(zorsansChek(world)){
-                for(int i=1; i==Ships.size(); i++){
-                    if(Ships.get(i).getName().equals("Humanity ship")){
-                        HumanityShips.add(Ships.get(i));
+                for(int i=1; i==ships.size(); i++){
+                    if(ships.get(i).getName().equals("Humanity ship")){
+                        humanityShips.add(ships.get(i));
                     };
-                    if(HumanityShips.size()>7){
+                    if(humanityShips.size()>7){
                         world.addOverlayWindow(Dialog.loadFromFile("dialogs/act2/warline/war1_destruction/destruction_many_ships.json"));
+                        systemNumber.add(2);
                     }
-                    if(HumanityShips.size()<=7){
+                    if(humanityShips.size()<=7){
                         world.addOverlayWindow(Dialog.loadFromFile("dialogs/act2/warline/war1_destruction/destruction_few_ships.json"));
+                        systemNumber.add(2);
                     }
                 }
             };
@@ -144,10 +117,13 @@ public class WarLineDestructionQuest extends GameEventListener implements WorldG
 
 
     private boolean zorsansChek(final World world){
-        Ships.clear();
-        Ships.addAll(world.getCurrentStarSystem().getShips());
-        for(int i=0; i==Ships.size(); i++){
-            if(Ships.get(i).getName().equals("Zorsan station") && Ships.size()==1){
+        ships.clear();
+        ships.addAll(world.getCurrentStarSystem().getShips());
+        for(int i=0; i==ships.size(); i++){
+            if(ships.get(i).getName().equals("Zorsan station")){
+                zorsanStations.add(ships.get(i));
+            }
+            if(zorsanStations.size()==1){
                 return true;
             }
         }
@@ -156,8 +132,9 @@ public class WarLineDestructionQuest extends GameEventListener implements WorldG
 
     private void setNavy(World world){
         for (int i = 0; i < 15; i++) {
-            Navy.add(((AlienRace) world.getFactions().get(HumanityGenerator.NAME)).getDefaultFactory().createShip(world, 0));
-            Navy.get(i).setAi(new FollowAI(world.getPlayer().getShip()));
+            navy.add(((AlienRace) world.getFactions().get(HumanityGenerator.NAME)).getDefaultFactory().createShip(world, 0));
+            navy.get(i).setAi(new FollowAI(world.getPlayer().getShip()));
+            navy.get(i).setWeapons(ResourceManager.getInstance().getWeapons().getEntity("plasma_cannon"), ResourceManager.getInstance().getWeapons().getEntity("long_range_plasma_cannon"));
         }
     }
 }
