@@ -83,6 +83,7 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
                 logger.error("Fail to get random star system near zorsan homeworld, generate new star system at {}", targetSystem.getCoordsString());
             }
 
+            world.getGlobalVariables().put("WarLineStation"+Integer.toString(i), targetSystem);
             systems.add(targetSystem);
         }
 
@@ -262,7 +263,7 @@ public class QuestStarSystemEncounter extends GameEventListener implements World
             journal.addQuestEntries("war1_explore", "system3_" + result);
         }
 
-        starSystem.setQuestLocation(false);
+       // starSystem.setQuestLocation(false);
     }
 
     @Override
