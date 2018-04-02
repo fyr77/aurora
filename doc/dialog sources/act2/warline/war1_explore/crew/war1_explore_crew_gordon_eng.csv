@@ -1,14 +1,14 @@
-0;;
-;;1
-;;2
-1;;
-;;3
-;;2
-3;;
-;;2
-2;;
-;;4
-4;;
-;;5
-5;;
-;;-1
+0;"Yes? What? K?capita? Capitan! Did I miss "n"? Sorry! *Right now Gordon's very nervous. He looks into camera with only one halif of his face, holding it close to the lens and slightly shaking, he's squinting with the second eye, it's nearly closed.*";
+;Gordon, what do you think about the ship?;1
+;Gordon, what's wrong with you?;2
+1;Eh? W-what? Should I think something about it?;
+;I was just wondering what's your opinion. We are on the zorsan scout after all!;3
+;Gordon, what's wrong with you?;2
+3;Zorsan? We? Are we on the Aurora?;
+;Well. What the hell is going on with you?;2
+2;*Gordon flinches and blinks nervously.* U-um? eh? Experiment. Very important. I? i haven't selpt for five days. Haven't selpt for day. Haven't sel? *Gordon coughs.* Haven't slept for day! So. I've took some medicine, I? I'm working, capitan, I'm working, capitan.;
+;Medicine? What kind of medicine?;4
+4;Medicine. To keep me awake. *Gordon's pupils are huge*;
+;Ok. Don't abuse it, Grodon. I need you sane. Have a rest as soon as you end your experiment.;5
+5;Certanly. Nly-nly. *Gordon is going to over, but, awkwardly waving hand, drops? oh, no. He falls and pulls the camera off, grubbing it. So, he's over and out anyway.*;
+;I shouls send there a repairman and? a doctor, maybe? He doesn't take care of himself at all!;-1
