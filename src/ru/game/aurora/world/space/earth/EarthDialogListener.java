@@ -20,6 +20,7 @@ import ru.game.aurora.world.generation.quest.ColonizationListener;
 import ru.game.aurora.world.generation.quest.ambush.AmbushQuest;
 import ru.game.aurora.world.quest.Journal;
 import ru.game.aurora.world.quest.ZorsanFinalBattleGenerator;
+import ru.game.aurora.world.quest.act2.warline.war1_explore.WarLineDestructionQuest;
 import ru.game.aurora.world.quest.act2.warline.war1_explore.WarLineExploreQuest;
 
 import java.util.HashMap;
@@ -43,7 +44,7 @@ public class EarthDialogListener implements DialogListener {
     }
 
     @Override
-    public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+    public void onDialogEnded(World world, final Dialog dialog, int returnCode, Map<String, String> flags) {
         if (returnCode == 1) {
             // player has chosen to dump research info
 
@@ -169,24 +170,7 @@ public class EarthDialogListener implements DialogListener {
 
             world.addOverlayWindow(reportDialog);
         }
-        world.addListener(new GameEventListener() {
-            @Override
-            public boolean onTurnEnded(World world) {
-                if(!world.getGlobalVariables().containsKey("warlineResult") ||
-                   !world.getGlobalVariables().containsKey("war1_explore.rebels_help") ||
-                   !world.getGlobalVariables().containsKey("war1_explore.rebels_help_reject")){
-                        Dialog choseScout = Dialog.loadFromFile("dialogs/act2/warline/war1_explore/earth/war1_explore_earth_chose_scout.json");
-                        world.getPlayer().getEarthState().getEarthSpecialDialogs().add(choseScout);
-                        choseScout.addListener(new DialogListener() {
-                            @Override
-                            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
-                                new WarLineExploreQuest().choseShip(world);
-                            }
-                        });
-                }
-                return false;
-            }
-        });
+
 
         world.addListener(new GameEventListener() {
             @Override
@@ -204,10 +188,33 @@ public class EarthDialogListener implements DialogListener {
                                 Journal journal = world.getPlayer().getJournal();
                                 journal.questCompleted("war1_explore");
                                 world.getGlobalVariables().remove("warlineResult");
+                                world.getGlobalVariables().put("warlineExploreCompleted", true);
                             }
                         }
                     });
                     isAlive = false;
+                }
+                return false;
+            }
+        });
+
+        world.addListener(new GameEventListener() {
+            @Override
+            public boolean onTurnEnded(World world) {
+                if(world.getGlobalVariables().containsKey("warlineExploreCompleted")) {
+                    Dialog attackStart = Dialog.loadFromFile("dialogs/act2/warline/war1_destruction/warline_destruction_start.json");
+                    world.getPlayer().getEarthState().getEarthSpecialDialogs().add(attackStart);
+                    if (world.getGlobalVariables().containsKey("warlineExploreCompleted")) {
+                        attackStart.addListener(new DialogListener() {
+                            @Override
+                            public void onDialogEnded(World world, Dialog dialog, int returnCode, Map<String, String> flags) {
+                                final WarLineDestructionQuest warLineDestruction = new WarLineDestructionQuest();
+                                warLineDestruction.updateWorld(world);
+                                world.addListener(warLineDestruction);
+                            }
+                        });
+                        isAlive = false;
+                    }
                 }
                 return false;
             }
