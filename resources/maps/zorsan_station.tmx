@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="31">
+<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="32">
  <tileset firstgid="1" source="zorsan_tileset.tsx"/>
  <layer name="flor" width="100" height="100">
   <data encoding="csv">
@@ -162,6 +162,7 @@
   <object id="24" type="entryPoint" x="1599" y="2538" width="60" height="52"/>
   <object id="25" name="firstDialogTrigger" type="ru.game.aurora.world.dungeon.DungeonTrigger" x="1407" y="1761" width="322" height="189"/>
   <object id="26" name="secondDialogTrigger" type="ru.game.aurora.world.dungeon.DungeonTrigger" x="1990" y="488" width="129" height="124"/>
+  <object id="31" type="ru.game.aurora.world.dungeon.DungeonTrigger" x="1593" y="1046" width="146" height="75.5"/>
  </objectgroup>
  <layer name="walls" width="100" height="100">
   <properties>
