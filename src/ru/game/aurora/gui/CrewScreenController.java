@@ -4,6 +4,7 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
+import de.lessvoid.nifty.controls.WindowClosedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import org.newdawn.slick.Input;
@@ -64,6 +65,11 @@ public class CrewScreenController extends DefaultCloseableScreenController {
     @NiftyEventSubscriber(pattern = ".*callButton")
     public void onCallButtonClicked(String id, ButtonClickedEvent event) {
         crewMemberListBox.setFocusItem((CrewMember) event.getButton().getElement().getParent().getUserData());
+    }
+
+    @NiftyEventSubscriber(id = "crew_window")
+    public void onClose(final String id, final WindowClosedEvent event) {
+        closeScreen();
     }
 
     @Override
