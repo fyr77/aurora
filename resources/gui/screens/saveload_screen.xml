@@ -15,7 +15,7 @@
             <control id="#saveButton" name="button" label="${gui.saveload.save}" width="150px" height="100px">
                 <interact onRelease="savePressed()"/>
             </control>
-            <panel width="50px" height="138px"/>
+            <panel width="25px" height="138px"/>
         </panel>
 
     </controlDefinition>
