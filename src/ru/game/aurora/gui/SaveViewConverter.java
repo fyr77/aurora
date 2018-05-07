@@ -14,6 +14,7 @@ import ru.game.aurora.application.Localization;
 import ru.game.aurora.application.SaveGameManager;
 import ru.game.aurora.util.EngineUtils;
 
+import java.text.SimpleDateFormat;
 
 public class SaveViewConverter implements ListBox.ListBoxViewConverter<SaveGameManager.SaveGameSlot> {
 
@@ -22,8 +23,16 @@ public class SaveViewConverter implements ListBox.ListBoxViewConverter<SaveGameM
             return item.isAutosave ? Localization.getText("gui", "saveload.autosave") + "\n" : ""
                     + Localization.getText("gui", "saveload.empty_slot");
         }
+
+        SimpleDateFormat format1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss");
+        SimpleDateFormat format2 = new SimpleDateFormat("z yyyy");
+
+        String dateStr1 = format1.format(item.date);
+        String dateStr2 = format2.format(item.date);
+
         return (item.isAutosave ? Localization.getText("gui", "saveload.autosave") + "\n" : "")
-                + item.date.toString() + "\n"
+                + dateStr1 + "\n"
+                + dateStr2 + "\n"
                 + item.gameLocation + "\n"
                 + item.gameDate;
     }
@@ -52,7 +61,7 @@ public class SaveViewConverter implements ListBox.ListBoxViewConverter<SaveGameM
 
     @Override
     public int getWidth(Element element, SaveGameManager.SaveGameSlot item) {
-        return SaveGameManager.SCREEN_SIZE + 400 + 2 * 150 + 20 + 100;
+        return element.getWidth();
     }
 
     @Override
